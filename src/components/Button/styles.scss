@@ -1,0 +1,15 @@
+@use "../../assets/styles/" as *;
+
+.button {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    border:none;
+    //margin-left: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    @include button(15px, 200, 10px, 10px, $primary-color, $primary-color, $color-white-0, $color-white-0);
+    .button__icon{
+        margin-right: 10px
+    }
+}

@@ -1,0 +1,24 @@
+@use "../../assets/styles" as *;
+
+.admin-navbar {
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    background-color: $primary-color-1;
+    border-radius: 20px;
+    .admin-navbar__avatar {
+        width: 26px;
+        height: 26px;
+        margin-right: 12px;
+    }
+
+    .admin-navbar__icon {
+        color: $primary-color;
+
+        &:hover {
+            transform: rotate(180deg);
+            transition: all 0.5s ease;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@use "../../assets/styles" as *;
+
+.search {
+    background-color: $color-white-0;
+    padding: 0px 10px 0px 20px;
+    border-radius: 20px;
+    .search__input {
+        font-size: 16px;
+        padding: 15px 0px;
+        margin-right: 20px;
+        border: none !important;
+        width: 90%;
+        &:focus{
+            outline: none;
+        }
+    }
+}

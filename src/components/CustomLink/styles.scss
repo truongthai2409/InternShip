@@ -1,0 +1,33 @@
+@use "../../assets/styles" as *;
+
+
+li {
+    padding: 15px 40px;
+    margin: 20px 0;
+    font-family: $f-family;
+    color: #000;
+    list-style: none;
+    border-radius: 10px;
+    background-color: $color-gray;
+    .custom-link {
+        text-decoration: none; 
+        font-size: 17px;
+        font-weight: 400;  
+    }
+    &:hover {
+        transition: all 0.5s ease;
+        background-color: $primary-color;
+        .custom-link{
+            color: $color-white-0;
+        }
+    }
+}
+
+
+
+.active {
+    background-color: $primary-color;
+    .custom-link{
+        color: $color-white-0;
+    }
+}

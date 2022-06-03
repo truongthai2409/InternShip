@@ -1,0 +1,22 @@
+@use "../../assets/styles/" as *;
+
+.admin-layout__logo {
+    padding: 10px 40px;
+    h2 {
+        font-size: 30px;
+        font-family: $f-family;
+        font-weight: $fw-bold;
+    }
+}
+.admin-layout__header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 40px;
+    background-color: $color-white-0;
+}
+.admin-layout__main {
+    border-top-left-radius: 20px;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: $primary-color-1;
+}

@@ -1,0 +1,9 @@
+@use "../../assets/styles/" as *;
+
+.data-table{
+    border-radius: 10px;
+    margin-top:30px;
+    background-color: $color-white-0;
+    height: 400px;
+    width: 100%
+}

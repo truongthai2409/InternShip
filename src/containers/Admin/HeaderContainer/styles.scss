@@ -1,0 +1,14 @@
+@use "../../../assets/styles/" as *;
+ 
+.header-container{
+
+    .header-container__title{
+        margin-bottom: 20px;
+    }
+
+    h1{
+        font-family: $f-family;
+        font-size: 33px;
+        font-weight: 400
+    }
+}

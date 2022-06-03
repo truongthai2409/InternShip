@@ -1,0 +1,19 @@
+@use "../../assets/styles" as *;
+
+.sidebar {
+    ul{
+        margin-top: 40px;
+        padding: 0 40px;
+
+        .sidebar__link {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: center;
+
+            .sidebar__icon {
+                margin-right: 20px;
+            }
+        }
+    }
+}
