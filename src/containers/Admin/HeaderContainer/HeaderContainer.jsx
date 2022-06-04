@@ -14,6 +14,7 @@ export default function HeaderContainer({
   selectOptions,
   btnName,
   BtnIcon,
+  onClick,
 }) {
   return (
     <div className="header-container">
@@ -30,7 +31,7 @@ export default function HeaderContainer({
               <Select selectName={selectName} selectOptions={selectOptions} />
             </Grid>
             <Grid item md={4}>
-              <Button name={btnName} IconBtnMui={BtnIcon} />
+              <Button name={btnName} IconBtnMui={BtnIcon} onClick={onClick} />
             </Grid>
           </Grid>
         </Grid>

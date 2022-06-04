@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
+import "./styles.scss";
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import DataTable from "../../../components/Table";
+import Modal from "../../../components/Modal";
+import UserTable from "./UserTable";
+import UserForm from "./UserForm";
 
 const selectOptions = [
   {
@@ -24,8 +27,14 @@ const selectOptions = [
 ];
 
 export default function User() {
+  const [open, setOpen] = useState(false);
+
   const handleSearch = (e) => {
     console.log(e.target.value);
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
   };
 
   return (
@@ -38,8 +47,12 @@ export default function User() {
         selectOptions={selectOptions}
         btnName="Thêm User"
         BtnIcon={AddOutlinedIcon}
+        onClick={handleOpenModal}
       />
-      <DataTable />
+      <UserTable />
+      <Modal modalTitle="Thêm người dùng" open={open} setOpen={setOpen}>
+        <UserForm />
+      </Modal>
     </>
   );
 }

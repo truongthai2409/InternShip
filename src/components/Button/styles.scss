@@ -6,7 +6,7 @@
     align-content: center;
     border:none;
     //margin-left: 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
     @include button(15px, 200, 10px, 10px, $primary-color, $primary-color, $color-white-0, $color-white-0);
     .button__icon{

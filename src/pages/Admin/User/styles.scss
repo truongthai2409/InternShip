@@ -1,0 +1,9 @@
+@use "../../../assets/styles/" as *;
+
+.user-edit__button{
+    color: $primary-color !important;
+}
+
+.user-delete__button{
+    color: $color-red !important;
+}

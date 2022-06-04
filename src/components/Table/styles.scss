@@ -2,8 +2,14 @@
 
 .data-table{
     border-radius: 10px;
-    margin-top:30px;
+    margin-top:50px;
     background-color: $color-white-0;
-    height: 400px;
-    width: 100%
+    height: 640px;
+    width: 100%;
+    .MuiDataGrid-columnHeaders {
+        background-color: $primary-color;
+        color: $color-white-0;
+        font-size: 16;
+      }
+
 }
