@@ -8,6 +8,8 @@ import {
   DialogContent,
 } from "@mui/material";
 
+import "./styles.scss";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
@@ -23,12 +25,10 @@ const Modal = ({ modalTitle, open, setOpen, children }) => {
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
+        className="dialog"
       >
         <DialogTitle>{modalTitle}</DialogTitle>
         <DialogContent>{children}</DialogContent>
-        <DialogActions>
-          <Button>Thêm</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

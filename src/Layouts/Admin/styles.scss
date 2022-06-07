@@ -1,7 +1,9 @@
 @use "../../assets/styles/" as *;
 
 .admin-layout__sidebar {
-    
+    position: sticky;
+    top: 0px;
+    left: 0px;
 
     .admin-layout__logo {
         padding: 10px 40px;
@@ -14,16 +16,14 @@
 }
 
 .admin-layout__content{
-    
 
     .admin-layout__header {
-        display: flex;
-        justify-content: flex-end;
-        padding: 20px 40px;
         background-color: $color-white-0;
     }
     .admin-layout__main {
+        margin-right: 20px;
         border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
         padding: 20px;
         min-height: 100vh;
         background-color: $primary-color-1;

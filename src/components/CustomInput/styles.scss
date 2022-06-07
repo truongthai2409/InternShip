@@ -1,0 +1,50 @@
+@use "../../assets/styles/" as *;
+
+.custom-input {
+    margin: 20px 0;
+    .custom-input__label {
+        font-family: $f-family;
+        font-size: $fs-13;
+        font-weight: $fw-bold-0;
+        margin-left: 5px;
+        color: rgb(145, 158, 171);
+    }
+
+    .custom-input__textfield {
+        margin-top: 7px;
+        height: 62px;
+        input {
+            border: 2px solid rgb(145, 158, 171);
+            border-radius: 5px;
+            width: 100%;
+            padding: 15px 10px;
+
+            &:hover {
+                border: 1px solid $primary-color;
+                box-shadow: $primary-color-1 0px 3px 8px; 
+                &::placeholder {
+                    
+                    color: $primary-color;
+                }
+            }
+
+            &:focus {
+                outline: $primary-color;
+                border: 1.5px solid $primary-color;
+                box-shadow: $primary-color-1 0px 3px 8px;
+                &::placeholder {
+                    
+                    color: $primary-color;
+                }
+            }
+            &::placeholder {
+                font-family: $f-family;
+            }
+        }
+
+        .custom-input__error {
+            color: $color-red;
+            font-size: $fs-13;
+        }
+    }
+}

@@ -1,6 +1,10 @@
 // variable color
-$primary-color: #00b074;
-$primary-color-1: #bef3e1;
+$primary-color: #56c596;
+$primary-color-1: #eaffec;
+// $primary-color-2: #56c596;
+// $primary-color-3: #329d9c;
+// $primary-color: #3949ab;
+// $primary-color-1: #e8eaf6;
 $color-black-0: #29303b; // default
 $color-white-0: #fff; //default
 $color-red: #FF5C58;
@@ -24,11 +28,11 @@ $color-blue:#007791;
 $color-trans:transparent;
 
 // variable font-size
-$fs-0: 15px; //default
-$fs-1: 13px;
-$fs-2: 20px;
-$fs-3: 24px;
-$fs-4: 40px;
+$fs-16: 16px; //default
+$fs-13: 13px;
+$fs-20: 20px;
+$fs-24: 24px;
+$fs-40: 40px;
 
 //variable margin
 $mg-0: 2px;
@@ -47,7 +51,9 @@ $pd-2: 20px;
 //variable line-height
 $line-height-0: 1.43; //default
 
-$f-family: 'Poppins', sans-serif;
+$f-family: 'Open Sans', sans-serif;
+$f-family-0: 'Poppins', sans-serif;
+$f-family-1: 'Inter', sans-serif;
 
 //variable font-weight
 $fw-normal: normal;

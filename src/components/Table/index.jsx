@@ -13,7 +13,6 @@ export default function DataTable({ rows, columns }) {
         rowsPerPageOptions={[10]}
         getRowId={(row) => row.stt}
         loading={!rows.length}
-        checkboxSelection
       />
     </div>
   );

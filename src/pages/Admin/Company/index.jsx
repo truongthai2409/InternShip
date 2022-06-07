@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import StickyTable from "../../../components/StickyTable";
+import Modal from "../../../components/Modal";
+import CompanyForm from "./CompanyForm";
+import CompanyTable from "./CompanyTable";
 
 const selectOptions = [
   {
@@ -24,8 +26,14 @@ const selectOptions = [
 ];
 
 export default function Company() {
+  const [open, setOpen] = useState(false);
+
   const handleSearch = (e) => {
     console.log(e.target.value);
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
   };
 
   return (
@@ -38,8 +46,12 @@ export default function Company() {
         selectOptions={selectOptions}
         btnName="Thêm Com"
         BtnIcon={AddOutlinedIcon}
+        onClick={handleOpenModal}
       />
-      <StickyTable />
+      <CompanyTable />
+      <Modal modalTitle="Thêm Công Ty" open={open} setOpen={setOpen}>
+        <CompanyForm />
+      </Modal>
     </>
   );
 }

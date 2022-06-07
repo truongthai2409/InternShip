@@ -1,0 +1,36 @@
+@use "../../assets/styles/" as *;
+
+.custom-textarea {
+    .custom-textarea__label {
+        font-family: $f-family;
+        font-size: $fs-13;
+        font-weight: $fw-bold-0;
+        margin-left: 5px;
+        color: $primary-color;
+    }
+
+    .custom-textarea__textfield {
+        margin-top: 7px;
+        textarea {
+            border: 1px solid $primary-color;
+            border-radius: 5px;
+            width: 100%;
+            padding: 15px 10px;
+
+            &:hover {
+                border: 1px solid $primary-color;
+                box-shadow: $primary-color-1 0px 3px 8px; 
+            }
+
+            &:focus {
+                outline: $primary-color;
+                border: 1px solid $primary-color;
+                box-shadow: $primary-color-1 0px 3px 8px;
+            }
+
+            &::placeholder {
+                font-family: $f-family;
+            }
+        }
+    }
+}

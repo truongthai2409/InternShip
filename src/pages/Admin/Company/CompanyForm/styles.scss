@@ -1,0 +1,70 @@
+@use "../../../../assets/styles/" as *;
+
+.company-form {
+    width: auto;
+    .company-form__container{
+        display: flex;
+        justify-content: space-between;
+        
+        .company-form__logo{
+            padding: 30px;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            align-items: center;
+            align-content: center;
+            .css-12bapnq-MuiAvatar-root {
+                border: 2px solid rgb(145, 158, 171) !important;
+            }
+            .company-form__avatar {
+                margin-bottom: 20px;
+                width: 250px;
+                height: 250px;
+                cursor: pointer;
+            }
+
+            // input {
+            //     // visibility: hidden;
+            //     // display: none;
+            // }
+        }
+    
+        .company-form__input{
+            padding: 10px;
+            margin: 20px 0px;
+            min-width: 300px !important;
+
+            .company-form__checkbox {
+                .company-form__checkbox-label {
+                    font-family: $f-family;
+                    font-size: $fs-13;
+                    font-weight: $fw-bold-0;
+                    margin-left: 5px;
+                    color: rgb(145, 158, 171);
+                    margin-bottom: 20px;
+                }
+                input {
+                    margin-right: 5px
+                }
+
+                label {
+                    margin-right: 30px
+                }
+            }
+    
+        }
+    }
+
+    .company-form__submit {
+        padding:10px; 
+        float: right
+    }
+    
+}
+
+.company-form__error {
+    margin-top: 20px;
+    color: $color-red;
+    font-size: $fs-13;
+}
