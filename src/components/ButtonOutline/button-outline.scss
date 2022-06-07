@@ -1,6 +1,5 @@
-@use "../../assets/styles/" as *;
-
-.button {
+@use '../../assets/styles/' as *;
+.btn-outline {
     display: flex;
     align-items: center;
     align-content: center;
@@ -10,7 +9,8 @@
     border-radius: 4px;
     font-family: $f-family;
     cursor: pointer;
-    @include button(13px, 700, 12px, 32px, $primary-color, $primary-color, $color-white-0, $color-white-0);
+    @include button(13px, 700, 12px, 32px, $color-white-0, $color-white-0, $primary-color, $primary-color);
+    outline: 2px solid $primary-color;
     .button__icon{
         margin-right: 10px
     }
