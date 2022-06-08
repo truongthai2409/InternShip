@@ -2,25 +2,29 @@
 
 .custom-input {
     margin: 20px 0;
+    width: 100%;
+    text-align: left;
     .custom-input__label {
         font-family: $f-family;
-        font-size: $fs-13;
-        font-weight: $fw-bold-0;
-        margin-left: 5px;
-        color: rgb(145, 158, 171);
+        font-size: 14px;
+        font-weight: $fw-bold-1;
+        // color: rgb(145, 158, 171);
+        color: $color-black-0;
     }
 
     .custom-input__textfield {
         margin-top: 7px;
-        height: 62px;
+        height: fit-content;
         input {
-            border: 2px solid rgb(145, 158, 171);
+            // border: 2px solid rgb(145, 158, 171);
+            font-family: $f-family;
+            border: 1.6px solid $primary-color;
             border-radius: 5px;
             width: 100%;
-            padding: 15px 10px;
+            padding: 15px 12px;
 
             &:hover {
-                border: 1px solid $primary-color;
+                border: 1.6px solid $primary-color;
                 box-shadow: $primary-color-1 0px 3px 8px; 
                 &::placeholder {
                     
@@ -30,10 +34,9 @@
 
             &:focus {
                 outline: $primary-color;
-                border: 1.5px solid $primary-color;
+                border: 1.6px solid $color-black-0;
                 box-shadow: $primary-color-1 0px 3px 8px;
                 &::placeholder {
-                    
                     color: $primary-color;
                 }
             }

@@ -3,12 +3,9 @@ import User from "../pages/Admin/User";
 import Company from "../pages/Admin/Company";
 import University from "../pages/Admin/University";
 import NotFound from "../pages/NotFound";
-<<<<<<< HEAD
 import CompanyDetail from "../pages/Admin/CompanyDetail";
 
-=======
 import { RegisterStep1, RegisterStep2 } from '../pages/Register/index'
->>>>>>> 709795478e58cca20432b07193ad166188045bb6
 export const adminRouter = [
   {
     path: "dashboard",

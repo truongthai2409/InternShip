@@ -4,24 +4,24 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup";
 
-import { Link, useParams } from "react-router-dom"
+import axios from "axios";
+
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 import ArrowButton from "../../../components/ArrowButton/ArrowButton"
 import Button from '../../../components/Button/index'
 import CustomInput from "../../../components/CustomInput"
 
 const schema = yup.object({
-  username: yup.string().required("Bạn phải nhập tài khoản"),
-  email: yup
-      .string(" Email không hợp lệ.")
-      .required(" Bạn phải nhập email công ty."),
-  // email: yup.string().required("Bạn phải nhập email").matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Vui lòng nhập lại email"),
-  password: yup.string().required("Bạn phải nhập password").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, "Vui lòng nhập lại mật khẩu"),
-  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu chưa đúng')
+  username: yup.string().required("Bạn phải nhập tài khoản").min(6, "Tài khoản cần phải có ít nhất 6 ký tự"),
+  email: yup.string().required("Bạn phải nhập email").matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Vui lòng nhập lại email"),
+  password: yup.string().required("Bạn phải nhập password").min(6, "Mật khẩu cần phải có ít nhất 6 ký tự").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/, "Vui lòng nhập lại mật khẩu"),
+  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu chưa khớp')
 }).required()
 
-export default function RegisterStep2(props) {
+export default function RegisterStep2() {
   let { roleId } = useParams()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,57 +31,73 @@ export default function RegisterStep2(props) {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+  const onSubmit = (data) => {
+    axios.post("https://6287218e7864d2883e7efbd1.mockapi.io/user",{roleId, ...data})
+    .then(res => {
+      console.log(res.data)
+      if(res.data) {
+        alert("Đăng ký thành công")
+      }
+    })
+    .catch(err => console.log(err))
+  };
+  
+  const handleBackClick = (e) => {
+    e.preventDefault()
+    navigate(-1)
+  } 
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-      <CustomInput
-        label="Tài khoản"
-        id="username"
-        type="text"
-        placeholder="Tài khoản..."
-        register={register}
-      >
-        {errors.username?.message}
-      </CustomInput>
-      <CustomInput
-        label="Email"
-        id="email"
-        type="email"
-        placeholder="Email..."
-        register={register}
-      >
-        {errors.email?.message}
-      </CustomInput>
-      <CustomInput
-        label="Mật khẩu"
-        id="password"
-        type="password"
-        placeholder=""
-        register={register}
-      >
-        {errors.password?.message}
-      </CustomInput>
+    <div className="register-step2">
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' className="register-step2__form">
+        <CustomInput
+          label="Tài khoản"
+          id="username"
+          type="text"
+          placeholder="Tài khoản..."
+          register={register}
+        >
+          {errors.username?.message}
+        </CustomInput>
+        <CustomInput
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="Email..."
+          register={register}
+        >
+          {errors.email?.message}
+        </CustomInput>
+        <CustomInput
+          label="Mật khẩu"
+          id="password"
+          type="password"
+          placeholder="Mật khẩu"
+          register={register}
+        >
+          {errors.password?.message}
+        </CustomInput>
 
-      <CustomInput
-        label="Xác nhận mật khẩu"
-        id="passwordConfirmation"
-        type="password"
-        placeholder=""
-        register={register}
-      >
-        {errors.passwordConfirmation?.message}
-      </CustomInput>
+        <CustomInput
+          label="Xác nhận mật khẩu"
+          id="passwordConfirmation"
+          type="password"
+          placeholder="Xác nhận mật khẩu"
+          register={register}
+        >
+          {errors.passwordConfirmation?.message}
+        </CustomInput>
 
-      <div className="register-step2__btns">
-        <Link to='/register' className="register-step2__btns--back">
-          <ArrowButton text="Trở lại" direction="left"/>
-        </Link>
-        <button type="submit" className="register-step2__btns--submit">
-          {/* <Button name="ĐĂNG KÝ"/> */}
-          Dang ky
-        </button>
-      </div>
-    </form>
+        <div className="register-step2__btns">
+          <div className="register-step2__btns--item" onClick={handleBackClick}>
+            <ArrowButton text="Trở lại" direction="left"/>
+          </div>
+          <div className="register-step2__btns--item">
+            <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)}/>
+          </div>
+        </div>
+      </form>
+    </div>
+    
   )
 }

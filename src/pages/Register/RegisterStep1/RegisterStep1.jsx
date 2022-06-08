@@ -12,15 +12,15 @@ export default function RegisterStep1() {
 
   const roleList = [
     {
-      id: 1,
+      id: 3,
       name: "ỨNG VIÊN"
     },
     {
-      id: 2,
+      id: 1,
       name: "NHÀ TUYỂN DỤNG"
     },
     {
-      id: 3,
+      id: 4,
       name: "CỘNG TÁC VIÊN TRƯỜNG"
     }
   ]

@@ -1,6 +1,5 @@
 @use '../../assets/styles/' as *;
 .arrow-button {
-    margin: 40px auto 0;
     @include button(13px, 700, 12px, 32px, transparent, transparent, $primary-color, $primary-color);
     display: flex;
     justify-content: center;
