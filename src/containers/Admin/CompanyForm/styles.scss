@@ -1,0 +1,90 @@
+@use "../../../assets/styles/" as *;
+
+.company-form {
+    padding: 0px 20px;
+    height: auto;
+    .company-form__container{        
+        .company-form__logo{
+            padding: 30px 30px 10px 30px;
+            margin: 20px 20px 10px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            align-items: center;
+            align-content: center;
+            .css-12bapnq-MuiAvatar-root {
+                border: 2px solid rgb(145, 158, 171) !important;
+            }
+            .company-form__avatar {
+                border: 2px solid rgb(145, 158, 171);
+                margin-bottom: 20px;
+                width: 200px;
+                height: 200px;
+                cursor: pointer;
+            }
+            .company-form__control {
+                width: 100%;
+                ul {
+                    li {
+                        margin: 10px;
+                        list-style: none;
+                        .link {
+                            font-family: $f-family;
+                            font-size: $fs-13;
+                            color: #000;
+                            text-decoration: none;
+                        }
+                    }
+                }
+                .company-form__block {
+                    font-family: $f-family;
+                    font-size: $fs-13;
+                    margin-left: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    align-content: center;
+                }
+            }
+            input {
+                visibility: hidden;
+                // display: none;
+            }
+        }
+    
+        .company-form__input{
+            padding: 0px 20px;
+
+            .company-form__checkbox {
+                .company-form__checkbox-label {
+                    font-family: $f-family;
+                    font-size: $fs-13;
+                    font-weight: $fw-bold-0;
+                    margin-left: 5px;
+                    color: rgb(145, 158, 171);
+                    margin-bottom: 20px;
+                }
+                input {
+                    margin-right: 5px
+                }
+
+                label {
+                    margin-right: 30px
+                }
+            }
+    
+        }
+    }
+
+    .company-form__submit {
+        padding:10px; 
+        float: right
+    }
+    
+}
+
+.company-form__error {
+    margin-top: 20px;
+    color: $color-red;
+    font-size: $fs-13;
+}

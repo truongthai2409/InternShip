@@ -3,7 +3,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
 import Modal from "../../../components/Modal";
-import CompanyForm from "./CompanyForm";
+import CompanyForm from "../../../containers/Admin/CompanyForm";
 import CompanyTable from "./CompanyTable";
 
 const selectOptions = [
@@ -50,7 +50,7 @@ export default function Company() {
       />
       <CompanyTable />
       <Modal modalTitle="Thêm Công Ty" open={open} setOpen={setOpen}>
-        <CompanyForm />
+        <CompanyForm isAdd={true} />
       </Modal>
     </>
   );
