@@ -1,0 +1,25 @@
+@use "../../../assets/styles/" as *;
+
+.company-detail {
+    .company-detail__title-container{
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .company-detail__content-container{
+        padding: 20px 0px;
+        height: 100% !important;
+        .MuiPaper-root{
+            height: 100% !important;
+        }
+        .company-detail__control{
+            li {
+                list-style: none;
+                color: #000;
+                
+            }
+        }
+    }
+    
+    
+}

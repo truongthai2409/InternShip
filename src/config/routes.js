@@ -3,6 +3,7 @@ import User from "../pages/Admin/User";
 import Company from "../pages/Admin/Company";
 import University from "../pages/Admin/University";
 import NotFound from "../pages/NotFound";
+import CompanyDetail from "../pages/Admin/CompanyDetail";
 
 export const adminRouter = [
   {
@@ -20,6 +21,10 @@ export const adminRouter = [
   {
     path: "company",
     Component: Company,
+  },
+  {
+    path: "/admin/company/:comid",
+    Component: CompanyDetail,
   },
   {
     path: "*",

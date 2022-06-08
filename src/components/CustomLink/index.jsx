@@ -7,7 +7,7 @@ const CustomLink = ({ children, to, ...props }) => {
   let match = useMatch({ path: resolved.pathname, end: true });
 
   return (
-    <li className={`${match && "active"}`}>
+    <li className={`custom-li ${match && "active"}`}>
       <Link className="custom-link" to={to} {...props}>
         {children}
       </Link>

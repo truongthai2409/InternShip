@@ -22,7 +22,7 @@ const CustomTextarea = ({
           {...register(id)}
           rows={5}
         />
-        <p>{children}</p>
+        <p className="custom-textarea__error">{children}</p>
       </div>
     </div>
   );
