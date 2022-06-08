@@ -2,38 +2,102 @@ import React, {useEffect} from 'react'
 import './register-step2.scss'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import * as yup from "yup";
 
-import { Link, useParams } from "react-router-dom"
+import axios from "axios";
+
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 import ArrowButton from "../../../components/ArrowButton/ArrowButton"
 import Button from '../../../components/Button/index'
 import CustomInput from "../../../components/CustomInput"
 
 const schema = yup.object({
-  username: yup.string().required("Bạn phải nhập tài khoản").matches(/^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/,  "Vui lòng nhập lại tài khoản"),
+  username: yup.string().required("Bạn phải nhập tài khoản").min(6, "Tài khoản cần phải có ít nhất 6 ký tự"),
   email: yup.string().required("Bạn phải nhập email").matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Vui lòng nhập lại email"),
-  password: yup.string().required("Bạn phải nhập password").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, "Vui lòng nhập lại mật khẩu"),
-  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu chưa đúng')
+  password: yup.string().required("Bạn phải nhập password").min(6, "Mật khẩu cần phải có ít nhất 6 ký tự").matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/, "Vui lòng nhập lại mật khẩu"),
+  passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Mật khẩu chưa khớp')
 }).required()
 
-export default function RegisterStep2(props) {
+export default function RegisterStep2() {
   let { roleId } = useParams()
+  const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(schema)})
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data) => {
+    axios.post("https://6287218e7864d2883e7efbd1.mockapi.io/user",{roleId, ...data})
+    .then(res => {
+      console.log(res.data)
+      if(res.data) {
+        alert("Đăng ký thành công")
+      }
+    })
+    .catch(err => console.log(err))
+  };
+  
+  const handleBackClick = (e) => {
+    e.preventDefault()
+    navigate(-1)
+  } 
 
   return (
-    <div>
-    RegisterStep2
+    <div className="register-step2">
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' className="register-step2__form">
+        <CustomInput
+          label="Tài khoản"
+          id="username"
+          type="text"
+          placeholder="Tài khoản..."
+          register={register}
+        >
+          {errors.username?.message}
+        </CustomInput>
+        <CustomInput
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="Email..."
+          register={register}
+        >
+          {errors.email?.message}
+        </CustomInput>
+        <CustomInput
+          label="Mật khẩu"
+          id="password"
+          type="password"
+          placeholder="Mật khẩu"
+          register={register}
+        >
+          {errors.password?.message}
+        </CustomInput>
 
-    <div className="register-step2__btns">
-      <Link to='/register' className="register-step2__btns--back">
-        <ArrowButton text="Trở lại" direction="left"/>
-      </Link>
-      <div className="register-step2__btns--submit">
-        <Button name="ĐĂNG KÝ"/>
-      </div>
+        <CustomInput
+          label="Xác nhận mật khẩu"
+          id="passwordConfirmation"
+          type="password"
+          placeholder="Xác nhận mật khẩu"
+          register={register}
+        >
+          {errors.passwordConfirmation?.message}
+        </CustomInput>
+
+        <div className="register-step2__btns">
+          <div className="register-step2__btns--item" onClick={handleBackClick}>
+            <ArrowButton text="Trở lại" direction="left"/>
+          </div>
+          <div className="register-step2__btns--item">
+            <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)}/>
+          </div>
+        </div>
+      </form>
     </div>
-    </div>
+    
   )
 }
