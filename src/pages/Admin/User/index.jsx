@@ -5,7 +5,7 @@ import "./styles.scss";
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
 import Modal from "../../../components/Modal";
 import UserTable from "./UserTable";
-import UserForm from "./UserForm";
+import UserForm from "../../../containers/Admin/UserForm";
 
 const selectOptions = [
   {
@@ -51,7 +51,7 @@ export default function User() {
       />
       <UserTable />
       <Modal modalTitle="Thêm người dùng" open={open} setOpen={setOpen}>
-        <UserForm />
+        <UserForm isAdd={true} />
       </Modal>
     </>
   );

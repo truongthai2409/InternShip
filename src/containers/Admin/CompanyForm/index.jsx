@@ -55,16 +55,16 @@ export default function CompanyForm(props) {
                 // variant="rounded"
                 alt="company-logo"
                 className="company-form__avatar"
-                onClick={() => fileInput.current.click()}
+                // onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
                 id="logo"
                 type="file"
                 name="logo"
-                // {...register("logo")}
+                {...register("logo")}
                 onChange={showPreviewImage}
-                ref={fileInput}
+                // ref={fileInput}
               />
               <p className="company-form__error">{errors.logo?.message}</p>
 
@@ -89,8 +89,6 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
-                    check={!isAdd}
-                    value="abc"
                   >
                     {errors.name?.message}
                   </CustomInput>

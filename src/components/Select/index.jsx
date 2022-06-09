@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.scss";
 
-const Select = ({ selectName, selectOptions, onChange }) => {
+const Select = ({ selectName, selectOptions }) => {
   // render option
   const renderSelectOption = () => {
     return selectOptions.map((item) => {

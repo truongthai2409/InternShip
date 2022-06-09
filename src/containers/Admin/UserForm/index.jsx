@@ -8,7 +8,8 @@ import CustomInput from "../../../components/CustomInput";
 import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
-import { schema, renderControlAction } from "./script.js";
+import Select from "../../../components/Select";
+import { schema, renderControlAction, roleOptions } from "./script.js";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -89,8 +90,7 @@ const UserForm = (props) => {
                     type="text"
                     placeholder="Tên đăng nhập..."
                     register={register}
-                    check={!isAdd}
-                    value="abc"
+                    // check={!isAdd}
                   >
                     {errors.tenDangNhap?.message}
                   </CustomInput>
@@ -136,22 +136,12 @@ const UserForm = (props) => {
                   </CustomInput>
                   <div className="user-form__checkbox">
                     <p className="user-form__checkbox-label">Type</p>
-
+                    <select {...register("isAdmin")}>
+                      <option value={true}>Admin</option>
+                      <option value={false}>Khach hang</option>
+                    </select>
                     <p className="user-form__error">{errors.type?.message}</p>
                   </div>
-                </div>
-              </Grid>
-              <Grid item md={12}>
-                <div className="user-form__input">
-                  <CustomTextarea
-                    label="Mô tả công ty"
-                    id="description"
-                    type="description"
-                    placeholder="Mô tả công ty..."
-                    register={register}
-                  >
-                    {errors.description?.message}
-                  </CustomTextarea>
                 </div>
               </Grid>
             </Grid>
@@ -161,7 +151,7 @@ const UserForm = (props) => {
 
       {isAdd ? (
         <div className="user-form__submit">
-          <Button name="Thêm công ty" onClick={handleSubmit(onSubmit)} />
+          <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>

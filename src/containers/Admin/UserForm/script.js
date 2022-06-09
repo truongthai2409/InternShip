@@ -18,7 +18,7 @@ export const schema = yup
       .required(" * Bạn phải nhập mật khẩu cho người dùng")
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự")
       .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]$/,
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/,
         "Vui lòng nhập lại mật khẩu"
       ),
     email: yup
@@ -72,3 +72,15 @@ export const renderControlAction = () => {
     );
   });
 };
+
+// role selectOptions
+export const roleOptions = [
+  {
+    name: "Quan Tri",
+    value: true,
+  },
+  {
+    name: "Khach Hang",
+    value: false,
+  },
+];
