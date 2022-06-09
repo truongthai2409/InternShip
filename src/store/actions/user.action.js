@@ -24,10 +24,35 @@ export const getUserList = () => {
 
 //Add user
 
+export const checkUser = (data, navigate) => {
+  return (dispatch) => {
+    axios
+      // .post("http://localhost:8085/api/user", data)
+      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      .then((response) => {
+        const notification = {
+          open: true,
+          severity: "success",
+          message: "Thành công",
+        };
+        console.log(response);
+
+        sessionStorage.setItem("account", JSON.stringify(data));
+        dispatch(action(ADD_USER_SUCCESS, notification));
+        navigate(`/register/step3`);
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(action(ADD_USER_FAIL, err))
+      });
+  };
+};
+
 export const registerUser = (data, navigate) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8085/api/user", data)
+      // .post("http://localhost:8085/api/user", data)
+      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,
@@ -36,16 +61,9 @@ export const registerUser = (data, navigate) => {
         };
         //console.log(response);
         dispatch(action(ADD_USER_SUCCESS, notification));
-        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        const notification = {
-          open: true,
-          severity: "error",
-          message: err.response.data.message,
-        };
-        dispatch(action(ADD_USER_FAIL, notification));
       });
   };
 };

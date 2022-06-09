@@ -23,6 +23,7 @@ const CustomInput = ({
           placeholder={placeholder}
           disabled={check}
           value={value}
+          
           {...register(id)}
         />
         <p className="custom-input__error">{children}</p>
