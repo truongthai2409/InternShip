@@ -43,7 +43,7 @@ export const registerUser = (data, navigate) => {
         const notification = {
           open: true,
           severity: "error",
-          message: "Đăng ký thành công",
+          message: "Đăng ký không thành công",
         };
         dispatch(action(ADD_USER_FAIL, notification));
       });
