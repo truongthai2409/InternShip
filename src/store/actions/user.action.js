@@ -21,7 +21,7 @@ export const getUserList = () => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(action("GET_USER_LIST_FAIL", err));
+        dispatch(action("GET_USER_LIST_FAIL", err.response.data.message));
       });
   };
 };
@@ -31,8 +31,8 @@ export const getUserList = () => {
 export const checkUser = (data, navigate) => {
   return (dispatch) => {
     axios
-      // .post("http://localhost:8085/api/user", data)
-      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      .post("http://localhost:8085/api/user", data)
+      // .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,
@@ -47,7 +47,12 @@ export const checkUser = (data, navigate) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(action(ADD_USER_FAIL, err))
+        const notification = {
+          open: true,
+          severity: "error",
+          message: err.response.data.message,
+        };
+        dispatch(action(ADD_USER_FAIL, notification))
       });
   };
 };
@@ -60,9 +65,10 @@ export const checkUser = (data, navigate) => {
  */
 export const registerUser = (data, navigate) => {
   return (dispatch) => {
+    console.log(data);
     axios
-      // .post("http://localhost:8085/api/user", data)
-      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      .post("http://localhost:8085/api/candidate", data)
+      // .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,

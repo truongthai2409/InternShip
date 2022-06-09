@@ -39,6 +39,7 @@ const CandidateInfo = () => {
                 lastName: data.lastname,
                 firstName: data.firstname,
                 phone: data.phone,
+                email: step2Data.email,
                 role: {
                     id: parseInt(step2Data.role.id)
                 }
