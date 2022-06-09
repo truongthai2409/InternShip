@@ -98,7 +98,7 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
-                    value="abc sdasd"
+                    // value="abc sdasd"
                     check={!isEdit}
                   >
                     {errors.name?.message}
