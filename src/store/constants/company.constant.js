@@ -1,3 +1,8 @@
 // add company
 export const ADD_COMPANY_SUCCESS = "ADD_COMPANY_SUCCESS";
 export const ADD_COMPANY_FAIL = "ADD_COMPANY_FAIL";
+
+
+//get company list 
+export const GET_COMPANY_LIST_SUCCESS = "GET_COMPANY_LIST_SUCCESS"
+export const GET_COMPANY_LIST_FAIL = "GET_COMPANY_LIST_FAIL"

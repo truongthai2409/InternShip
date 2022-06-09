@@ -5,7 +5,7 @@ import University from "../pages/Admin/University";
 import NotFound from "../pages/NotFound";
 import CompanyDetail from "../pages/Admin/CompanyDetail";
 
-import { RegisterStep1, RegisterStep2 } from "../pages/Register/index";
+import { RegisterStep1, RegisterStep2, RegisterStep3 } from "../pages/Register/index";
 export const adminRouter = [
   {
     path: "dashboard",
@@ -46,4 +46,8 @@ export const registerRouter = [
     path: "step2/:roleId",
     Component: RegisterStep2,
   },
+  {
+    path: "step3",
+    Component: RegisterStep3
+  }
 ];

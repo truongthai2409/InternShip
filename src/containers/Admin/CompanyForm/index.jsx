@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid, Switch } from "@mui/material";
@@ -45,8 +45,18 @@ export default function CompanyForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
-    console.log(data);
-    dispatch(addCompany(data));
+    
+    const companyData = {
+      description: data.description,
+      email: data.email,
+      logo: null,
+      name: data.name,
+      phone: data.phone,
+      tax: data.tax,
+      website: data.website
+  }
+
+    dispatch(addCompany(companyData));
   };
 
   return (

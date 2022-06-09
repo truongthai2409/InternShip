@@ -5,24 +5,24 @@ import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import DataTable from "../../../../components/Table";
-import { getUserList } from "../../../../store/actions/user.action";
+import { getCompany } from "../../../../store/actions/company.action";
 
 const CompanyTable = () => {
   const dispatch = useDispatch();
 
-  const { userList } = useSelector((state) => state.user);
+  const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getUserList());
+    dispatch(getCompany());
   }, []);
-
+  console.log(companyList);
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
-    { field: "hoTen", headerName: "Họ tên", width: 170 },
-    { field: "taiKhoan", headerName: "Tài khoản", width: 170 },
+    { field: "name", headerName: "Tên công ty", width: 170 },
+    { field: "website", headerName: "Website", width: 170 },
     { field: "email", headerName: "Email", width: 270 },
-    { field: "maLoaiNguoiDung", headerName: "Role", width: 100 },
-    { field: "soDt", headerName: "Số điện thoại", width: 130 },
+    { field: "tax", headerName: "Tax", width: 100 },
+    { field: "phone", headerName: "Số điện thoại", width: 130 },
     {
       field: "action",
       headerName: "Action",
@@ -44,14 +44,14 @@ const CompanyTable = () => {
   ];
 
   const rows = [];
-  for (let i = 0; i < userList.length; i++) {
+  for (let i = 0; i < companyList.length; i++) {
     rows.push({
       stt: i + 1,
-      hoTen: userList[i].hoTen,
-      taiKhoan: userList[i].taiKhoan,
-      email: userList[i].email,
-      maLoaiNguoiDung: userList[i].maLoaiNguoiDung,
-      soDt: userList[i].soDt,
+      name: companyList[i].name,
+      website: companyList[i].website,
+      email: companyList[i].email,
+      tax: companyList[i].tax,
+      phone: companyList[i].phone,
     });
   }
   return (

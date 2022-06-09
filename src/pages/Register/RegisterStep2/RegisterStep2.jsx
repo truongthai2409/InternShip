@@ -6,12 +6,11 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
 
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import ArrowButton from "../../../components/ArrowButton/ArrowButton";
-import Button from "../../../components/Button/index";
 import CustomInput from "../../../components/CustomInput";
-import { registerUser } from "../../../store/actions/user.action";
+import { checkUser } from "../../../store/actions/user.action";
 
 const schema = yup
   .object({
@@ -63,12 +62,9 @@ export default function RegisterStep2() {
       },
       email: data.email,
     }
-    console.log(userRegister);
+    console.log(userRegister);  
 
-    // const userRegister = { roleId, ...data };
-    console.log(userRegister);
-
-    dispatch(registerUser(userRegister, navigate));
+    dispatch(checkUser(userRegister, navigate));
   };
 
   const handleBackClick = (e) => {
@@ -126,7 +122,7 @@ export default function RegisterStep2() {
             <ArrowButton text="Trở lại" direction="left" />
           </div>
           <div className="register-step2__btns--item">
-            <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)} />
+            <ArrowButton text="Tiếp theo" direction="right" onClick={handleSubmit(onSubmit)} />
           </div>
         </div>
       </form>
