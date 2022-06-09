@@ -54,17 +54,18 @@ export default function RegisterStep2() {
   });
 
   const onSubmit = (data) => {
-    // const userRegister = {
-    //   username: data.username,
-    //   password: data.password,
-    //   comfirmPassword: data.passwordConfirmation,
-    //   role: {
-    //     id: parseInt(roleId)
-    //   },
-    //   email: data.email,
-    // }
+    const userRegister = {
+      username: data.username,
+      password: data.password,
+      confirmPassword: data.passwordConfirmation,
+      role: {
+        id: parseInt(roleId)
+      },
+      email: data.email,
+    }
+    console.log(userRegister);
 
-    const userRegister = { roleId, ...data };
+    // const userRegister = { roleId, ...data };
     console.log(userRegister);
 
     dispatch(registerUser(userRegister, navigate));

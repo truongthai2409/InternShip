@@ -13,7 +13,7 @@ const userReducer = (state = initialState, { type, payload }) => {
     case ADD_USER_SUCCESS:
       return { ...state, notification: payload };
     case ADD_USER_FAIL:
-      return { ...state, error: payload };
+      return { ...state, notification: payload };
     case "CLOSE_NOTIFICATION": {
       state.notification.open = payload;
       return { ...state };

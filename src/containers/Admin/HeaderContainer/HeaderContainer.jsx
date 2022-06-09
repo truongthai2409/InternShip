@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, IconButton, Tooltip } from "@mui/material";
+
+import AddIcon from "@mui/icons-material/Add";
 
 import "./styles.scss";
 import Search from "../../../components/Search";
@@ -12,8 +14,6 @@ export default function HeaderContainer({
   onChange,
   selectName,
   selectOptions,
-  btnName,
-  BtnIcon,
   onClick,
 }) {
   return (
@@ -21,19 +21,17 @@ export default function HeaderContainer({
       <Grid container spacing={2}>
         <Grid item xs={12} className="header-container__title">
           <h1>{headerName}</h1>
+          <Tooltip title="Thêm">
+            <IconButton onClick={onClick}>
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
         </Grid>
-        <Grid item md={7}>
+        <Grid item md={8}>
           <Search placeholder={placeholder} onChange={onChange} />
         </Grid>
-        <Grid item md={5}>
-          <Grid container spacing={2}>
-            <Grid item md={8}>
-              <Select selectName={selectName} selectOptions={selectOptions} />
-            </Grid>
-            <Grid item md={4}>
-              <Button name={btnName} IconBtnMui={BtnIcon} onClick={onClick} />
-            </Grid>
-          </Grid>
+        <Grid item md={4}>
+          <Select selectName={selectName} selectOptions={selectOptions} />
         </Grid>
       </Grid>
     </div>

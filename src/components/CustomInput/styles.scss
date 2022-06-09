@@ -14,7 +14,7 @@
 
     .custom-input__textfield {
         margin-top: 7px;
-        height: fit-content;
+        // height: fit-content;
         input {
             // border: 2px solid rgb(145, 158, 171);
             font-family: $f-family;
@@ -49,5 +49,22 @@
             color: $color-red;
             font-size: $fs-13;
         }
+    }
+}
+
+
+.custom-input__textfield-disabled {
+    margin-top: 7px;
+    // height: fit-content;
+    input {
+        // border: 2px solid rgb(145, 158, 171);
+        background-color: transparent;
+        font-family: $f-family;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        padding: 15px 12px;
+        font-size: $fs-16;
+
     }
 }

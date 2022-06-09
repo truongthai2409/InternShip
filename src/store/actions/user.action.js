@@ -3,6 +3,10 @@ import action from "./action";
 
 import { ADD_USER_SUCCESS, ADD_USER_FAIL } from "../constants/user.constant";
 
+/**
+ * Get user List
+ * output: user list
+ */
 export const getUserList = () => {
   return (dispatch) => {
     //dispatch(startLoading());
@@ -22,12 +26,16 @@ export const getUserList = () => {
   };
 };
 
-//Add user
-
+/**
+ * User register
+ * @param {*} data
+ * @param {*} navigate
+ * @returns notification
+ */
 export const registerUser = (data, navigate) => {
   return (dispatch) => {
     axios
-      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      .post("http://localhost:8085/api/user", data)
       .then((response) => {
         const notification = {
           open: true,
@@ -43,7 +51,7 @@ export const registerUser = (data, navigate) => {
         const notification = {
           open: true,
           severity: "error",
-          message: "Đăng ký không thành công",
+          message: err.response.data.message,
         };
         dispatch(action(ADD_USER_FAIL, notification));
       });

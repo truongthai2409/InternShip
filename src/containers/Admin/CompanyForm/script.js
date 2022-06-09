@@ -27,11 +27,11 @@ export const schema = yup
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         " * Số điện thoại không đúng."
       ),
-    type: yup
-      .array()
-      .nullable()
-      .min(1, " * Bạn phải chọn Type của công ty")
-      .required(" * Bạn phải chọn Type của công ty"),
+    // type: yup
+    //   .array()
+    //   .nullable()
+    //   .min(1, " * Bạn phải chọn Type của công ty")
+    //   .required(" * Bạn phải chọn Type của công ty"),
     tax: yup
       .string()
       .required(" * Bạn phải nhập mã số thuế.")
