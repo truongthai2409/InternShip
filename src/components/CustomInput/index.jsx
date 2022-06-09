@@ -16,7 +16,11 @@ const CustomInput = ({
       <label htmlFor={id} className="custom-input__label">
         {label}
       </label>
-      <div className="custom-input__textfield">
+      <div
+        className={
+          check ? "custom-input__textfield-disabled" : `custom-input__textfield`
+        }
+      >
         <input
           type={type}
           id={id}

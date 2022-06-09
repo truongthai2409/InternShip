@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid, Switch } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
@@ -9,6 +10,7 @@ import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
+import { addCompany } from "../../../store/actions/company.action";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -16,7 +18,10 @@ export default function CompanyForm(props) {
   const { isAdd } = props;
 
   const [image, setImage] = useState(cameraLogo);
+  const [isEdit, setIsEdit] = useState(isAdd);
+
   const fileInput = useRef(null);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -38,7 +43,11 @@ export default function CompanyForm(props) {
     }
   };
 
-  const onSubmit = (data) => console.log(data);
+  // handle Submit form
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(addCompany(data));
+  };
 
   return (
     <form
@@ -89,6 +98,8 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
+                    value="abc sdasd"
+                    check={!isEdit}
                   >
                     {errors.name?.message}
                   </CustomInput>
@@ -98,6 +109,7 @@ export default function CompanyForm(props) {
                     type="email"
                     placeholder="email..."
                     register={register}
+                    check={!isEdit}
                   >
                     {errors.email?.message}
                   </CustomInput>
@@ -107,6 +119,7 @@ export default function CompanyForm(props) {
                     type="tel"
                     placeholder="Số điện thoại..."
                     register={register}
+                    check={!isEdit}
                   >
                     {errors.phone?.message}
                   </CustomInput>
@@ -120,6 +133,7 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Website..."
                     register={register}
+                    check={!isEdit}
                   >
                     {errors.website?.message}
                   </CustomInput>
@@ -129,32 +143,10 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Mã số thuế..."
                     register={register}
+                    check={!isEdit}
                   >
                     {errors.tax?.message}
                   </CustomInput>
-                  <div className="company-form__checkbox">
-                    <p className="company-form__checkbox-label">Type</p>
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="type"
-                      value="OutSource"
-                      {...register("type")}
-                    />
-                    <label htmlFor="type">OutSource</label>
-
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="type"
-                      value="Product"
-                      {...register("type")}
-                    />
-                    <label htmlFor="type">Product</label>
-                    <p className="company-form__error">
-                      {errors.type?.message}
-                    </p>
-                  </div>
                 </div>
               </Grid>
               <Grid item md={12}>
@@ -165,6 +157,7 @@ export default function CompanyForm(props) {
                     type="description"
                     placeholder="Mô tả công ty..."
                     register={register}
+                    check={!isEdit}
                   >
                     {errors.description?.message}
                   </CustomTextarea>
@@ -174,10 +167,15 @@ export default function CompanyForm(props) {
           </Grid>
         </Grid>
       </div>
-
       {isAdd ? (
         <div className="company-form__submit">
           <Button name="Thêm công ty" onClick={handleSubmit(onSubmit)} />
+        </div>
+      ) : null}
+
+      {isEdit ? (
+        <div className="company-form__submit">
+          <Button name="Cập nhật" onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>

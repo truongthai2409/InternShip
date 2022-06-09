@@ -44,7 +44,7 @@ export default function Company() {
         onchange={handleSearch}
         selectName="role"
         selectOptions={selectOptions}
-        btnName="Thêm Com"
+        btnName=""
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
       />

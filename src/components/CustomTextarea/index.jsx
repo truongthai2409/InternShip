@@ -8,16 +8,24 @@ const CustomTextarea = ({
   placeholder,
   children,
   register,
+  check = false,
 }) => {
   return (
     <div className="custom-textarea">
       <label htmlFor={id} className="custom-textarea__label">
         {label}
       </label>
-      <div className="custom-textarea__textfield">
+      <div
+        className={
+          check
+            ? "custom-input__textarea-disabled"
+            : "custom-textarea__textfield"
+        }
+      >
         <textarea
           type={type}
           id={id}
+          disabled={check}
           placeholder={placeholder}
           {...register(id)}
           rows={5}
