@@ -32,7 +32,16 @@ export default function RegisterStep2() {
   });
 
   const onSubmit = (data) => {
-    axios.post("https://6287218e7864d2883e7efbd1.mockapi.io/user",{roleId, ...data})
+    console.log(data)
+    axios.post("http://localhost:8085/user",{
+      username: data.username,
+      password: data.password,
+      confirmPassword: data.passwordConfirmation,
+      role:{
+        id: parseInt(roleId)
+      },
+      email: data.email
+      })
     .then(res => {
       console.log(res.data)
       if(res.data) {
