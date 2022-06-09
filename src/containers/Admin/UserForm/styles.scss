@@ -1,10 +1,10 @@
 @use "../../../assets/styles/" as *;
 
-.company-form {
+.user-form {
     padding: 0px 20px;
     height: auto;
-    .company-form__container{        
-        .company-form__logo{
+    .user-form__container{        
+        .user-form__logo{
             padding: 30px 30px 10px 30px;
             margin: 20px 20px 10px 20px;
             display: flex;
@@ -15,14 +15,14 @@
             .css-12bapnq-MuiAvatar-root {
                 border: 2px solid rgb(145, 158, 171) !important;
             }
-            .company-form__avatar {
+            .user-form__avatar {
                 border: 2px solid rgb(145, 158, 171);
                 margin-bottom: 20px;
                 width: 200px;
                 height: 200px;
                 cursor: pointer;
             }
-            .company-form__control {
+            .user-form__control {
                 width: 100%;
                 ul {
                     li {
@@ -36,7 +36,7 @@
                         }
                     }
                 }
-                .company-form__block {
+                .user-form__block {
                     font-family: $f-family;
                     font-size: $fs-13;
                     margin-left: 10px;
@@ -46,17 +46,17 @@
                     align-content: center;
                 }
             }
-            // input {
-            //     visibility: hidden;
-            //     // display: none;
-            // }
+            input {
+                visibility: hidden;
+                // display: none;
+            }
         }
     
-        .company-form__input{
+        .user-form__input{
             padding: 0px 20px;
 
-            .company-form__checkbox {
-                .company-form__checkbox-label {
+            .user-form__checkbox {
+                .user-form__checkbox-label {
                     font-family: $f-family;
                     font-size: $fs-13;
                     font-weight: $fw-bold-0;
@@ -76,14 +76,14 @@
         }
     }
 
-    .company-form__submit {
+    .user-form__submit {
         padding:10px; 
         float: right
     }
     
 }
 
-.company-form__error {
+.user-form__error {
     margin-top: 20px;
     color: $color-red;
     font-size: $fs-13;

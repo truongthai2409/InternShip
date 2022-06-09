@@ -8,11 +8,12 @@ import CustomInput from "../../../components/CustomInput";
 import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
-import { schema, renderControlAction } from "./script.js";
+import Select from "../../../components/Select";
+import { schema, renderControlAction, roleOptions } from "./script.js";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-export default function CompanyForm(props) {
+const UserForm = (props) => {
   const { isAdd } = props;
 
   const [image, setImage] = useState(cameraLogo);
@@ -44,34 +45,34 @@ export default function CompanyForm(props) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
-      className="company-form"
+      className="user-form"
     >
-      <div className="company-form__container">
+      <div className="user-form__container">
         <Grid container>
           <Grid item md={3}>
-            <div className="company-form__logo">
+            <div className="user-form__logo">
               <Avatar
                 src={image}
                 // variant="rounded"
-                alt="company-logo"
-                className="company-form__avatar"
-                // onClick={() => fileInput.current.click()}
+                alt="user-logo"
+                className="user-form__avatar"
+                onClick={() => fileInput.current.click()}
               />
-              {/* <h3>Company Name</h3> */}
+              {/* <h3>user Name</h3> */}
               <input
                 id="logo"
                 type="file"
                 name="logo"
-                {...register("logo")}
+                // {...register("logo")}
                 onChange={showPreviewImage}
-                // ref={fileInput}
+                ref={fileInput}
               />
-              <p className="company-form__error">{errors.logo?.message}</p>
+              <p className="user-form__error">{errors.logo?.message}</p>
 
               {!isAdd ? (
-                <div className="company-form__control">
+                <div className="user-form__control">
                   <ul>{renderControlAction()}</ul>
-                  <div className="company-form__block">
+                  <div className="user-form__block">
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
@@ -82,92 +83,65 @@ export default function CompanyForm(props) {
           <Grid item md={9}>
             <Grid container>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className="user-form__input">
                   <CustomInput
-                    label="Tên công ty"
-                    id="name"
+                    label="Tên đăng nhập"
+                    id="tenDangNhap"
                     type="text"
-                    placeholder="Tên công ty..."
+                    placeholder="Tên đăng nhập..."
                     register={register}
+                    // check={!isAdd}
                   >
-                    {errors.name?.message}
+                    {errors.tenDangNhap?.message}
                   </CustomInput>
                   <CustomInput
                     label="Email"
                     id="email"
                     type="email"
-                    placeholder="email..."
+                    placeholder="hoangvubg@gmail.com..."
                     register={register}
                   >
                     {errors.email?.message}
                   </CustomInput>
                   <CustomInput
                     label="Số điện thoại"
-                    id="phone"
+                    id="sDT"
                     type="tel"
                     placeholder="Số điện thoại..."
                     register={register}
                   >
-                    {errors.phone?.message}
+                    {errors.sDT?.message}
                   </CustomInput>
                 </div>
               </Grid>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className="user-form__input">
                   <CustomInput
-                    label="Website"
-                    id="website"
-                    type="text"
-                    placeholder="Website..."
+                    label="Mật khẩu"
+                    id="matKhau"
+                    type="password"
+                    placeholder="Mật khẩu..."
                     register={register}
                   >
-                    {errors.website?.message}
+                    {errors.matKhau?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Mã số thuế"
-                    id="tax"
+                    label="Họ tên"
+                    id="ten"
                     type="text"
-                    placeholder="Mã số thuế..."
+                    placeholder="Họ tên..."
                     register={register}
                   >
-                    {errors.tax?.message}
+                    {errors.ten?.message}
                   </CustomInput>
-                  <div className="company-form__checkbox">
-                    <p className="company-form__checkbox-label">Type</p>
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="type"
-                      value="OutSource"
-                      {...register("type")}
-                    />
-                    <label htmlFor="type">OutSource</label>
-
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="type"
-                      value="Product"
-                      {...register("type")}
-                    />
-                    <label htmlFor="type">Product</label>
-                    <p className="company-form__error">
-                      {errors.type?.message}
-                    </p>
+                  <div className="user-form__checkbox">
+                    <p className="user-form__checkbox-label">Type</p>
+                    <select {...register("isAdmin")}>
+                      <option value={true}>Admin</option>
+                      <option value={false}>Khach hang</option>
+                    </select>
+                    <p className="user-form__error">{errors.type?.message}</p>
                   </div>
-                </div>
-              </Grid>
-              <Grid item md={12}>
-                <div className="company-form__input">
-                  <CustomTextarea
-                    label="Mô tả công ty"
-                    id="description"
-                    type="description"
-                    placeholder="Mô tả công ty..."
-                    register={register}
-                  >
-                    {errors.description?.message}
-                  </CustomTextarea>
                 </div>
               </Grid>
             </Grid>
@@ -176,10 +150,12 @@ export default function CompanyForm(props) {
       </div>
 
       {isAdd ? (
-        <div className="company-form__submit">
-          <Button name="Thêm công ty" onClick={handleSubmit(onSubmit)} />
+        <div className="user-form__submit">
+          <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>
   );
-}
+};
+
+export default UserForm;
