@@ -5,6 +5,7 @@ import './candidate-info.scss'
 import ArrowButton from "../../../../components/ArrowButton/ArrowButton";
 import Button from "../../../../components/Button";
 import CustomInput from '../../../../components/CustomInput/index'
+import Select from "../../../../components/Select";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import { registerUser } from "../../../../store/actions/user.action";
 import { useDispatch } from "react-redux";
 
-import { majorList, schema } from "./data";
+import { majorList, genderList, schema } from "./data";
 
 const CandidateInfo = () => {
     const navigate = useNavigate()
@@ -92,20 +93,16 @@ const CandidateInfo = () => {
                     >
                         {errors.phone?.message}
                 </CustomInput>
-                
-                <label className="reg-candidate__form--label" htmlFor="gender">Giới tính</label>
-                <select {...register("gender")} id="gender" className="reg-candidate__form--select">
-                    <option value="0">Nam</option>
-                    <option value="1">Nữ</option>
-                    <option value="2">LGBT</option>
-                </select>
 
-                <label className="reg-candidate__form--label" htmlFor="gender">Chuyên ngành</label>
+                <Select selectName="Chuyên ngành" selectOptions={majorList} id="major" register={register}/>
+                <Select selectName="Giới tính" selectOptions={genderList} id="gender" register={register}/>                
+
+                {/* <label className="reg-candidate__form--label" htmlFor="gender">Chuyên ngành</label>
                 <select {...register("major")} id="major" className="reg-candidate__form--select">
                     {
                         majorList.map((major) => <option value={major.id} key={major.id}>{major.name}</option>)
                     }
-                </select>
+                </select> */}
 
                 <CustomInput
                     label="Avatar"

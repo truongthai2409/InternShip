@@ -31,8 +31,8 @@ export const getUserList = () => {
 export const checkUser = (data, navigate) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8085/api/user", data)
-      // .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      // .post("http://localhost:8085/api/user", data)
+      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,
@@ -67,8 +67,8 @@ export const registerUser = (data, navigate) => {
   return (dispatch) => {
     console.log(data);
     axios
-      .post("http://localhost:8085/api/candidate", data)
-      // .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
+      // .post("http://localhost:8085/api/candidate", data)
+      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,
