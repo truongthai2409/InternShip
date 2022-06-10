@@ -1,10 +1,10 @@
 @use "../../../assets/styles/" as *;
 
-.company-form {
+.university-form {
     padding: 0px 20px;
     // height: 100%;
-    .company-form__container{        
-        .company-form__logo{
+    .university-form__container{        
+        .university-form__logo{
             padding: 30px 30px 10px 30px;
             margin: 20px 20px 10px 20px;
             display: flex;
@@ -15,14 +15,14 @@
             .css-12bapnq-MuiAvatar-root {
                 border: 2px solid rgb(145, 158, 171) !important;
             }
-            .company-form__avatar {
+            .university-form__avatar {
                 border: 2px solid rgb(145, 158, 171);
                 margin-bottom: 20px;
                 width: 200px;
                 height: 200px;
                 cursor: pointer;
             }
-            .company-form__control {
+            .university-form__control {
                 width: 100%;
                 ul {
                     li {
@@ -36,7 +36,7 @@
                         }
                     }
                 }
-                .company-form__block {
+                .university-form__block {
                     font-family: $f-family;
                     font-size: $fs-13;
                     margin-left: 10px;
@@ -52,11 +52,11 @@
             }
         }
     
-        .company-form__input{
+        .university-form__input{
             padding: 0px 20px;
 
-            .company-form__checkbox {
-                .company-form__checkbox-label {
+            .university-form__checkbox {
+                .university-form__checkbox-label {
                     font-family: $f-family;
                     font-size: $fs-13;
                     font-weight: $fw-bold-0;
@@ -76,7 +76,7 @@
         }
     }
 
-    .company-form__submit {
+    .university-form__submit {
         margin-top: 20px;
         padding:10px; 
         // float: right
@@ -86,7 +86,7 @@
     
 }
 
-.company-form__error {
+.university-form__error {
     margin-top: 20px;
     color: $color-red;
     font-size: $fs-13;

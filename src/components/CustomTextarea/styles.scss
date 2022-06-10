@@ -3,10 +3,10 @@
 .custom-textarea {
     .custom-textarea__label {
         font-family: $f-family;
-        font-size: $fs-13;
+        font-size: $fs-16;
         font-weight: $fw-bold-0;
-        margin-left: 5px;
-        color: rgb(145, 158, 171);
+        // margin-left: 5px;
+        color: #000;;
     }
 
     .custom-textarea__textfield {
@@ -48,15 +48,16 @@
 
 .custom-input__textarea-disabled {
     margin-top: 7px;
-    height: fit-content;
-    input {
+    // height: fit-content;
+    textarea {
         // border: 2px solid rgb(145, 158, 171);
         background-color: transparent;
         font-family: $f-family;
         border: none;
         border-radius: 5px;
         width: 100%;
-        padding: 15px 12px;
+        color: #000;
+        // padding: 15px 12px;
         font-size: $fs-16;
 
     }

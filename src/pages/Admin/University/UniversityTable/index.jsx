@@ -5,25 +5,25 @@ import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import DataTable from "../../../../components/Table";
-import { getUserList } from "../../../../store/actions/user.action";
+import { getCompany } from "../../../../store/actions/company.action";
 
-const UserTable = () => {
+const UniversityTable = () => {
   const dispatch = useDispatch();
 
-  const { userList } = useSelector((state) => state.user);
+  const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getUserList());
+    dispatch(getCompany());
   }, []);
-
+  console.log(companyList);
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
-    { field: "username", headerName: "Tài khoản", width: 170 },
-    { field: "role", headerName: "Quyền truy cập", width: 160 },
-    { field: "gender", headerName: "Giới tính", width: 100 },
-    // { field: "phone", headerName: "Số điện thoại", width: 150 },
-    { field: "email", headerName: "Email", width: 320 },
-    { field: "status", headerName: "Trạng thái", width: 130 },
+    { field: "name", headerName: "Tên công ty", width: 170 },
+    { field: "shortName", headerName: "Tên viết tắt", width: 100 },
+    // { field: "website", headerName: "Website", width: 170 },
+    { field: "email", headerName: "Email", width: 270 },
+    { field: "majors", headerName: "Chuyên ngành", width: 130 },
+    // { field: "phone", headerName: "Số điện thoại", width: 130 },
     {
       field: "action",
       headerName: "Action",
@@ -45,15 +45,15 @@ const UserTable = () => {
   ];
 
   const rows = [];
-  for (let i = 0; i < userList.length; i++) {
+  for (let i = 0; i < companyList.length; i++) {
     rows.push({
       stt: i + 1,
-      username: userList[i].username,
-      role: userList[i].role ? userList[i].role.name : null,
-      gender: userList[i].gender,
-      // phone: userList[i].phone,
-      email: userList[i].email,
-      status: userList[i].status,
+      name: companyList[i].name,
+      shortName: companyList[i].shortName,
+      // website: companyList[i].website,
+      email: companyList[i].email,
+      majors: companyList[i].majors,
+      // phone: companyList[i].phone,
     });
   }
   return (
@@ -63,4 +63,4 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+export default UniversityTable;

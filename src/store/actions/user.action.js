@@ -1,7 +1,14 @@
 import axios from "axios";
 import action from "./action";
 
-import { ADD_USER_SUCCESS, ADD_USER_FAIL } from "../constants/user.constant";
+import {
+  ADD_USER_SUCCESS,
+  ADD_USER_FAIL,
+  GET_FIRST_USER_SUCCESS,
+  GET_FIRST_USER_FAIL,
+  GET_USER_LIST_PAGING_SUCCESS,
+  GET_USER_LIST_PAGING_FAIL,
+} from "../constants/user.constant";
 
 /**
  * Get user List
@@ -12,16 +19,43 @@ export const getUserList = () => {
     //dispatch(startLoading());
 
     axios
-      .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01"
-      )
+      .get("http://localhost:8085/api/user")
       .then((response) => {
-        //console.log(response);
-        dispatch(action("GET_USER_LIST_SUCCESS", response.data));
+        console.log(response);
+        dispatch(action(GET_FIRST_USER_SUCCESS, response.data));
       })
       .catch((err) => {
-        console.log(err);
-        dispatch(action("GET_USER_LIST_FAIL", err.response.data.message));
+        const notification = {
+          open: true,
+          severity: "error",
+          message: "Không tải được danh sách users",
+        };
+        dispatch(action(GET_FIRST_USER_FAIL, notification));
+      });
+  };
+};
+
+/**
+ * Get user List paging
+ * output: user list
+ */
+export const getUserListPaging = (page) => {
+  return (dispatch) => {
+    //dispatch(startLoading());
+
+    axios
+      .get(`http://localhost:8085/api/user?no=${page}`)
+      .then((response) => {
+        //console.log(response);
+        dispatch(action(GET_USER_LIST_PAGING_SUCCESS, response.data));
+      })
+      .catch((err) => {
+        const notification = {
+          open: true,
+          severity: "error",
+          message: "Không tải được danh sách users",
+        };
+        dispatch(action(GET_USER_LIST_PAGING_FAIL, notification));
       });
   };
 };
@@ -52,7 +86,7 @@ export const checkUser = (data, navigate) => {
           severity: "error",
           message: err.response.data.message,
         };
-        dispatch(action(ADD_USER_FAIL, notification))
+        dispatch(action(ADD_USER_FAIL, notification));
       });
   };
 };

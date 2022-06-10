@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
+import Modal from "../../../components/Modal";
+import UniversityTable from "./UniversityTable";
+import UniversityForm from "../../../containers/Admin/UniversityForm";
 
 const selectOptions = [
   {
@@ -24,8 +27,14 @@ const selectOptions = [
 ];
 
 export default function University() {
+  const [open, setOpen] = useState(false);
+
   const handleSearch = (e) => {
     console.log(e.target.value);
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
   };
 
   return (
@@ -38,7 +47,12 @@ export default function University() {
         selectOptions={selectOptions}
         btnName="Thêm Uni"
         BtnIcon={AddOutlinedIcon}
+        onClick={handleOpenModal}
       />
+      <UniversityTable />
+      <Modal modalTitle="Thêm trường" open={open} setOpen={setOpen}>
+        <UniversityForm isAdd={true} />
+      </Modal>
     </>
   );
 }

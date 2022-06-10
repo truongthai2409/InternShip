@@ -10,11 +10,10 @@ import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
-import { addCompany } from "../../../store/actions/company.action";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-export default function CompanyForm(props) {
+export default function UniversityForm(props) {
   const { isAdd } = props;
 
   const [image, setImage] = useState(cameraLogo);
@@ -45,7 +44,7 @@ export default function CompanyForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
-    const companyData = {
+    const universityData = {
       description: data.description,
       email: data.email,
       logo: null,
@@ -55,7 +54,9 @@ export default function CompanyForm(props) {
       website: data.website,
     };
 
-    dispatch(addCompany(companyData));
+    console.log(universityData);
+
+    // dispatch(adduniversity(universityData));
   };
 
   // Click to Edit
@@ -67,20 +68,20 @@ export default function CompanyForm(props) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
-      className="company-form"
+      className="university-form"
     >
-      <div className="company-form__container">
+      <div className="university-form__container">
         <Grid container>
           <Grid item md={3}>
-            <div className="company-form__logo">
+            <div className="university-form__logo">
               <Avatar
                 src={image}
                 // variant="rounded"
-                alt="company-logo"
-                className="company-form__avatar"
+                alt="university-logo"
+                className="university-form__avatar"
                 onClick={() => fileInput.current.click()}
               />
-              {/* <h3>Company Name</h3> */}
+              {/* <h3>university Name</h3> */}
               <input
                 id="logo"
                 type="file"
@@ -89,12 +90,12 @@ export default function CompanyForm(props) {
                 onChange={showPreviewImage}
                 ref={fileInput}
               />
-              <p className="company-form__error">{errors.logo?.message}</p>
+              <p className="university-form__error">{errors.logo?.message}</p>
 
               {!isAdd ? (
-                <div className="company-form__control">
+                <div className="university-form__control">
                   <ul>{renderControlAction()}</ul>
-                  <div className="company-form__block">
+                  <div className="university-form__block">
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
@@ -110,12 +111,12 @@ export default function CompanyForm(props) {
           <Grid item md={9}>
             <Grid container>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className="university-form__input">
                   <CustomInput
-                    label="Tên công ty"
+                    label="Tên trường"
                     id="name"
                     type="text"
-                    placeholder="Tên công ty..."
+                    placeholder="Tên trường..."
                     register={register}
                     defaultValue="name"
                     check={!isEdit}
@@ -126,7 +127,7 @@ export default function CompanyForm(props) {
                     label="Email"
                     id="email"
                     type="email"
-                    placeholder="email..."
+                    placeholder="VD: hoangvubg6262125@gmail.com..."
                     register={register}
                     check={!isEdit}
                   >
@@ -145,7 +146,7 @@ export default function CompanyForm(props) {
                 </div>
               </Grid>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className="university-form__input">
                   <CustomInput
                     label="Website"
                     id="website"
@@ -157,10 +158,10 @@ export default function CompanyForm(props) {
                     {errors.website?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Mã số thuế"
+                    label="Tên viết tắt"
                     id="tax"
                     type="text"
-                    placeholder="Mã số thuế..."
+                    placeholder="VD: UTE..."
                     register={register}
                     check={!isEdit}
                   >
@@ -169,12 +170,12 @@ export default function CompanyForm(props) {
                 </div>
               </Grid>
               <Grid item md={12}>
-                <div className="company-form__input">
+                <div className="university-form__input">
                   <CustomTextarea
-                    label="Mô tả công ty"
+                    label="Mô tả trường"
                     id="description"
                     type="description"
-                    placeholder="Mô tả công ty..."
+                    placeholder="Mô tả trường..."
                     register={register}
                     check={!isEdit}
                   >
@@ -187,13 +188,13 @@ export default function CompanyForm(props) {
         </Grid>
       </div>
       {isAdd ? (
-        <div className="company-form__submit">
-          <Button name="Thêm công ty" onClick={handleSubmit(onSubmit)} />
+        <div className="university-form__submit">
+          <Button name="Thêm trường" onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
 
       {isEdit & !isAdd ? (
-        <div className="company-form__submit">
+        <div className="university-form__submit">
           <Button name="Cập nhật" onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}

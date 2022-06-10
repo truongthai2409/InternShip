@@ -10,6 +10,7 @@ const CustomInput = ({
   register,
   check = false,
   value,
+  defaultValue,
 }) => {
   return (
     <div className="custom-input">
@@ -18,7 +19,7 @@ const CustomInput = ({
       </label>
       <div
         className={
-          check ? "custom-input__textfield-disabled" : `custom-input__textfield`
+          check ? "custom-input__textfield-disabled" : "custom-input__textfield"
         }
       >
         <input
@@ -27,10 +28,10 @@ const CustomInput = ({
           placeholder={placeholder}
           disabled={check}
           value={value}
-          
+          defaultValue={defaultValue}
           {...register(id)}
         />
-        <p className="custom-input__error">{children}</p>
+        {check ? null : <p className="custom-input__error">{children}</p>}
       </div>
     </div>
   );
