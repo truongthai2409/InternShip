@@ -27,6 +27,21 @@ export const majorList = [
         }
     ]
 
+export const genderList = [
+    {
+        id: 0,
+        name: "Nam"
+    },
+    {
+        id: 1,
+        name: "Nữ"
+    },
+    {
+        id: 2,
+        name: "Khác"
+    }
+]
+
 export const schema = yup
   .object({
     firstname: yup.string().required("* Bạn phải nhập tên"),
