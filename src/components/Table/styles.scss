@@ -3,21 +3,37 @@
 .data-table{
   padding:10px;
   border-radius: 10px;
-  margin-top:50px;
-  background-color: $color-white-0;
-  height: 400px;
-  width: 100%;
-  .css-imf0nl-MuiDataGrid-root{
-    border: none !important;
-    font-family: $f-family-1;
-    font-size: 15px;
-  }
+  margin-top:30px;
   
-  .MuiDataGrid-columnHeaders {
-    // border-radius: 10px;
-    background-color: $primary-color;
-    color: $color-white-0;
-    font-size: 16;
+  
+  .data-table_container {
+    background-color: $color-white-0;
+    // height: 650px;
+    width: 100%;
+    .css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root {
+      color: $color-white-0;
+    }
+    .css-imf0nl-MuiDataGrid-root{
+      border: none !important;
+      font-family: $f-family-1;
+      font-size: 15px;
+    }
+    
+    .MuiDataGrid-columnHeaders {
+      border-radius: 5px;
+      background-color: $primary-color;
+      color: $color-white-0;
+      font-size: 16;
+    }
   }
+
+  h2 {
+    padding: 20px 0px;
+    font-family: $f-family;
+    font-size: $fs-24;
+    font-weight: 400;
+  }
+
+  
 
 }

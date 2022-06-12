@@ -6,17 +6,33 @@
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    .admin-navbar_show{
-        padding: 5px 7px;
-        border-radius: 5px;
-        background-color: $primary-color-1;
-        color: $primary-color;
-        &:hover {
-            background-color: $primary-color;
-            color: $color-white-0
+    .admin-navbar__left{
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        .admin-navbar_show{
+            margin-left: 15px;
+            padding: 5px 7px;
+            border-radius: 5px;
+            background-color: $primary-color-1;
+            color: $primary-color;
+            &:hover {
+                background-color: $primary-color;
+                color: $color-white-0
+            }
         }
-    }
-    .admin-navbar__control {
+
+        .admin-navbar__logo {
+            padding: 0px 60px 0px 40px;
+            h2 {
+                font-size: 30px;
+                font-family: $f-family;
+                font-weight: $fw-bold;
+            }
+        }
+    }   
+    
+    .admin-navbar__right {
         display: flex;
         align-items: center;
         align-content: center;
@@ -52,3 +68,4 @@
         transition: all 0.5s ease;
     }
 }
+

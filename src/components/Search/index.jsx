@@ -12,9 +12,11 @@ const Search = ({ placeholder, onChange }) => {
         placeholder={`${placeholder}...`}
         onChange={onChange}
       />
-      <IconButton>
-        <SearchOutlinedIcon />
-      </IconButton>
+      <div>
+        <IconButton className="search__icon">
+          <SearchOutlinedIcon />
+        </IconButton>
+      </div>
     </div>
   );
 };

@@ -22,17 +22,20 @@ export default function HeaderContainer({
         <Grid item xs={12} className="header-container__title">
           <h1>{headerName}</h1>
           <Tooltip title="Thêm">
-            <IconButton onClick={onClick}>
+            <IconButton
+              onClick={onClick}
+              className="header-container__add-button"
+            >
               <AddIcon />
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item md={8}>
+        <Grid item md={12}>
           <Search placeholder={placeholder} onChange={onChange} />
         </Grid>
-        <Grid item md={4}>
+        {/* <Grid item md={4}>
           <Select selectName={selectName} selectOptions={selectOptions} />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );

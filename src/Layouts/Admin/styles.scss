@@ -1,31 +1,34 @@
 @use "../../assets/styles/" as *;
 
-.admin-layout__sidebar {
-    position: sticky;
-    top: 0px;
-    left: 0px;
-
-    .admin-layout__logo {
-        padding: 10px 40px;
-        h2 {
-            font-size: 30px;
-            font-family: $f-family;
-            font-weight: $fw-bold;
+.admin-layout {
+    // width: 100%;
+    .admin-layout__sidebar {
+        position: fixed;
+        top: 86px;
+        left: 0px;
+        height: 100%;
+        
+    }
+    
+    .admin-layout__content{
+    
+        .admin-layout__header {
+            background-color: $color-white-0;
+            position: fixed;
+            top: 0px;
+            
+            width: 100%;
+            margin-right: 20px;
+            z-index: 1;
+        }
+        .admin-layout__main {
+            margin: 86px 20px 0px 343px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 20px;
+            min-height: 90vh;
+            background-color: $primary-color-1;
         }
     }
 }
 
-.admin-layout__content{
-
-    .admin-layout__header {
-        background-color: $color-white-0;
-    }
-    .admin-layout__main {
-        margin-right: 20px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        padding: 20px;
-        min-height: 100vh;
-        background-color: $primary-color-1;
-    }
-}

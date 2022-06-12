@@ -8,25 +8,20 @@ import AdminNav from "../../components/AdminNav";
 
 const AdminLayout = () => {
   return (
-    <div>
-      <Grid container>
-        <Grid item md={3} className="admin-layout__sidebar">
-          <div className="admin-layout__logo">
-            <h2>ITInternshipJob</h2>
-          </div>
-          <Sidebar />
-        </Grid>
-        <Grid item md={9} className="admin-layout__content">
-          <header className="admin-layout__header">
-            <AdminNav />
-          </header>
-          <main className="admin-layout__main">
-            <section>
-              <Outlet />
-            </section>
-          </main>
-        </Grid>
-      </Grid>
+    <div className="admin-layout">
+      <div className="admin-layout__sidebar">
+        <Sidebar />
+      </div>
+      <div className="admin-layout__content">
+        <header className="admin-layout__header">
+          <AdminNav />
+        </header>
+        <main className="admin-layout__main">
+          <section>
+            <Outlet />
+          </section>
+        </main>
+      </div>
     </div>
   );
 };

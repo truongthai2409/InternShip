@@ -10,13 +10,18 @@ const AdminNav = () => {
   return (
     <>
       <div className="admin-navbar">
-        <div className="admin-navbar_show">
-          <Tooltip title="Show sidebar">
-            <ViewQuiltOutlinedIcon />
-          </Tooltip>
+        <div className="admin-navbar__left">
+          <div className="admin-navbar__logo">
+            <h2>ITInternshipJob</h2>
+          </div>
+          <div className="admin-navbar_show">
+            <Tooltip title="Show sidebar">
+              <ViewQuiltOutlinedIcon />
+            </Tooltip>
+          </div>
         </div>
 
-        <div className="admin-navbar__control">
+        <div className="admin-navbar__right">
           <Tooltip title="Thông báo">
             <IconButton className="admin-navbar__icon-notification">
               <Badge badgeContent={4} color="error">

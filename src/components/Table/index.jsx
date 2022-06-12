@@ -1,19 +1,26 @@
 import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Paper } from "@mui/material";
 
 import "./styles.scss";
 
 export default function DataTable({ rows, columns }) {
   return (
-    <div className="data-table">
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        getRowId={(row) => row.stt}
-        loading={!rows.length}
-      />
-    </div>
+    <Paper className="data-table">
+      <h2>List</h2>
+      <div className="data-table_container">
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          getRowId={(row) => row.stt}
+          loading={!rows.length}
+          components={{ Toolbar: GridToolbar }}
+          disableSelectionOnClick
+          autoHeight
+        />
+      </div>
+    </Paper>
   );
 }
