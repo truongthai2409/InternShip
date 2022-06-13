@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./register-step2.scss";
+import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import ArrowButton from "../../../components/ArrowButton/ArrowButton";
+import ArrowButton from "../../../components/ArrowButton/index";
 import CustomInput from "../../../components/CustomInput";
 import { checkUser } from "../../../store/actions/user.action";
 

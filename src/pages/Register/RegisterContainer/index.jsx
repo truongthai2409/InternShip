@@ -1,10 +1,10 @@
 import React from "react";
-import "./register-container.scss";
+import "./styles.scss";
 import { useSelector } from "react-redux";
 
-import RegisterStep1 from "./RegisterStep1/RegisterStep1";
-import Logo from "../../components/Logo/Logo";
-import Notification from "../../components/Notification";
+import RegisterStep1 from "../RegisterStep1/index";
+import Logo from "../../../components/Logo/index";
+import Notification from "../../../components/Notification";
 
 import { Outlet, Link } from "react-router-dom";
 

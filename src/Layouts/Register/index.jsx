@@ -1,6 +1,6 @@
 import React from 'react'
-import RegisterContainer from "../../pages/Register/RegisterContainer"
-import './register-layout.scss'
+import RegisterContainer from "../../pages/Register/RegisterContainer/index"
+import './styles.scss'
 import { Outlet } from "react-router-dom"
 
 export default function RegisterLayout() {

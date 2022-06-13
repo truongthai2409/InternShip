@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './candidate-info.scss'
+import './styles.scss'
 
-import ArrowButton from "../../../../components/ArrowButton/ArrowButton";
+import ArrowButton from "../../../../components/ArrowButton/index";
 import Button from "../../../../components/Button";
 import CustomInput from '../../../../components/CustomInput/index'
 import Select from "../../../../components/Select";

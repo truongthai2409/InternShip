@@ -1,5 +1,5 @@
 import React from 'react'
-import CandidateInfo from "./CandidateInfo/CandidateInfo"
+import CandidateInfo from "./CandidateInfo/index"
 
 
 export default function RegisterStep3() {

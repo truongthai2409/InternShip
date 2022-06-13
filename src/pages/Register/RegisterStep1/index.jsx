@@ -3,7 +3,7 @@ import Button from "../../../components/Button"
 
 import { useNavigate } from "react-router-dom"
 
-import './register-step-1.scss'
+import './styles.scss'
 
 export default function RegisterStep1() {
 
