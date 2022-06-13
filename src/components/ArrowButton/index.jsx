@@ -1,5 +1,5 @@
 import React from 'react'
-import './arrow-button.scss'
+import './styles.scss'
 
 export default function ArrowButton({text, direction}) {
   return (

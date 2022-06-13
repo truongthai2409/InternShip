@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import AdminRouterLayout from "./Layouts/Admin/index";
-import RegisterLayout from "./Layouts/Register/RegisterLayout";
+import RegisterLayout from "./Layouts/Register/index";
 import MainLayout from "./Layouts/Main";
 import { adminRouter, registerRouter } from "./config/routes";
 
