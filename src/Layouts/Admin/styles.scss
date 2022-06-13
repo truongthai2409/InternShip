@@ -7,7 +7,15 @@
         top: 86px;
         left: 0px;
         height: 100%;
-        
+
+        .admin-layout__sidebar-block {
+            .MuiDrawer-paper {
+                // width: 100%;
+                margin-top: 86px;
+                border: none;
+            }
+        }
+
     }
     
     .admin-layout__content{
@@ -30,5 +38,20 @@
             background-color: $primary-color-1;
         }
     }
+}
+
+@media (max-width: $large) {
+    .admin-layout {
+        // width: 100%;
+        
+        .admin-layout__content{
+        
+            .admin-layout__main {
+                margin: 86px 20px 0px 20px;
+            
+            }
+        }
+    }
+    
 }
 

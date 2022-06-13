@@ -1,24 +1,33 @@
 import React from "react";
-import { Avatar, Tooltip, IconButton, Badge } from "@mui/material";
+import { Avatar, Tooltip, IconButton, Badge, Hidden } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 
 import "./styles.scss";
 
-const AdminNav = () => {
+const AdminNav = ({ openDrawer, setOpenDrawer }) => {
+  //
+  const handleOpenDrawer = () => {
+    setOpenDrawer(!openDrawer);
+  };
+
   return (
     <>
       <div className="admin-navbar">
         <div className="admin-navbar__left">
-          <div className="admin-navbar__logo">
-            <h2>ITInternshipJob</h2>
-          </div>
-          <div className="admin-navbar_show">
-            <Tooltip title="Show sidebar">
-              <ViewQuiltOutlinedIcon />
-            </Tooltip>
-          </div>
+          <Hidden mdDown>
+            <div className="admin-navbar__logo">
+              <h2>ITInternshipJob</h2>
+            </div>
+          </Hidden>
+          <Hidden mdUp>
+            <div className="admin-navbar_show">
+              <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
+                <ViewQuiltOutlinedIcon />
+              </Tooltip>
+            </div>
+          </Hidden>
         </div>
 
         <div className="admin-navbar__right">

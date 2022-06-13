@@ -3,12 +3,14 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../../../components/Table";
 import { getUserList } from "../../../../store/actions/user.action";
 
 const UserTable = () => {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const { userList } = useSelector((state) => state.user);
 
@@ -29,10 +31,15 @@ const UserTable = () => {
       headerName: "Action",
       width: 150,
       sortable: false,
-      renderCell: () => {
+      renderCell: (params) => {
+        const { row } = params;
+        const handleOnClick = () => {
+          console.log(row.username);
+          navigate(`/admin/user/${row.username}`);
+        };
         return (
           <>
-            <IconButton className="user-edit__button">
+            <IconButton className="user-edit__button" onClick={handleOnClick}>
               <EditOutlinedIcon />
             </IconButton>
             <IconButton className="user-delete__button">

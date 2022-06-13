@@ -1,8 +1,16 @@
 @use "../../assets/styles" as *;
 
 .sidebar {
+    .sidebar-logo{
+        padding: 20px 60px;
+            h2 {
+                font-size: 30px;
+                font-family: $f-family;
+                font-weight: $fw-bold;
+            }
+    }
     ul{
-        margin-top: 40px;
+        // margin-top: 40px;
         padding: 0 40px;
 
         .sidebar__link {

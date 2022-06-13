@@ -1,19 +1,19 @@
 @use "../../../assets/styles/" as *;
 
-.user-detail {
+.company-detail {
     
-    .user-detail__title-container{
+    .company-detail__title-container{
         padding: 20px;
         margin-bottom: 30px;
     }
     
-    .user-detail__content-container{
+    .company-detail__content-container{
         padding: 20px 0px;
         
         h2 {
             padding: 0px 20px 20px 20px;
         }
-        .user-detail__control{
+        .company-detail__control{
             li {
                 list-style: none;
                 color: #000;
