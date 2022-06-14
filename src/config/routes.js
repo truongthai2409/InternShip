@@ -4,11 +4,16 @@ import Company from "../pages/Admin/Company";
 import University from "../pages/Admin/University";
 import NotFound from "../pages/NotFound";
 import CompanyDetail from "../pages/Admin/CompanyDetail";
+import UserDetail from "../pages/Admin/UserDetail";
 
-import { RegisterStep1, RegisterStep2, RegisterStep3 } from "../pages/Register/index";
+import {
+  RegisterStep1,
+  RegisterStep2,
+  RegisterStep3,
+} from "../pages/Register/index";
 export const adminRouter = [
   {
-    path: "dashboard",
+    path: "",
     Component: Dashboard,
   },
   {
@@ -31,6 +36,10 @@ export const adminRouter = [
     path: "*",
     Component: NotFound,
   },
+  {
+    path: "/admin/user/:username",
+    Component: UserDetail,
+  },
 ];
 
 // main router
@@ -48,6 +57,6 @@ export const registerRouter = [
   },
   {
     path: "step3",
-    Component: RegisterStep3
-  }
+    Component: RegisterStep3,
+  },
 ];

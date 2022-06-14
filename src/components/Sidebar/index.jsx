@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import { Hidden } from "@mui/material";
 
 import "./styles.scss";
 import CustomLink from "../CustomLink";
@@ -11,7 +12,7 @@ import CustomLink from "../CustomLink";
 const sidebarLink = [
   {
     id: 1,
-    to: "dashboard",
+    to: "",
     name: "Dashboard",
     icon: AppsOutlinedIcon,
   },
@@ -58,6 +59,11 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
+      <Hidden mdUp>
+        <div className="sidebar-logo">
+          <h2>ITInternshipJob</h2>
+        </div>
+      </Hidden>
       <ul>{renderSideberLink()}</ul>
     </div>
   );
