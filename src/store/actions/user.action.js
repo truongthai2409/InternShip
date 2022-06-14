@@ -65,8 +65,8 @@ export const getUserListPaging = (page) => {
 export const checkUser = (data, navigate) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8085/api/user", data)
-      // .post("", data)
+      // .post("http://localhost:8085/api/user", data)
+      .post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
       .then((response) => {
         const notification = {
           open: true,
@@ -81,12 +81,7 @@ export const checkUser = (data, navigate) => {
       })
       .catch((err) => {
         console.log(err);
-        const notification = {
-          open: true,
-          severity: "error",
-          message: err.response.data.message,
-        };
-        dispatch(action(ADD_USER_FAIL, notification));
+        dispatch(action(ADD_USER_FAIL, err.response.data));
       });
   };
 };

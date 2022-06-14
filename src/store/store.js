@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./reducers/root.reducer";
-import thunk from "redux-thunk";
+import { configureStore } from '@reduxjs/toolkit';
+import registerSlice from "./slices/register/registerSlice";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
-
+const store = configureStore({
+  reducer: {
+    register: registerSlice.reducer,
+  },
+});
 export default store;

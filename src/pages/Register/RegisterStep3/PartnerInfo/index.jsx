@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './styles.scss'
 
 import ArrowButton from "../../../../components/ArrowButton/index";
@@ -12,12 +11,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { useNavigate } from 'react-router-dom'
-import { registerUser } from '../../../../store/slices/register/registerSlice'
+import { registerUser } from "../../../../store/actions/user.action";
 import { useDispatch } from "react-redux";
 
-import { majorList, genderList, schema } from "./data";
+import { genderList, schoolList, schema } from "./data";
 
-const CandidateInfo = () => {
+const PartnerInfo = () => {
+
+
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -25,14 +27,11 @@ const CandidateInfo = () => {
         e.preventDefault();
         navigate(-1)
     }
-
     const onSubmit = (data) => {
         const step2Data = JSON.parse(sessionStorage.getItem("account"))
         const userData= {
-            major: {
-                id: parseInt(data.major)
-            },
-            CV: data.cv,
+            school: data.school,
+            position: data.position,
             createUser: {
                 username: step2Data.username,
                 password: step2Data.password,
@@ -49,8 +48,7 @@ const CandidateInfo = () => {
         }
         
         console.log(userData)
-        
-        dispatch(registerUser(userData))
+        dispatch(registerUser(userData, navigate))
     }
 
     const {
@@ -62,9 +60,9 @@ const CandidateInfo = () => {
       });
 
     return (
-        <div className="reg-candidate">
-            <form className="reg-candidate__form" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-                <div className="reg-candidate__form--name">
+        <div className="reg-partner">
+            <form className="reg-partner__form" onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+                <div className="reg-partner__form--name">
                     <CustomInput
                         label="Họ"
                         id="lastname"
@@ -96,15 +94,7 @@ const CandidateInfo = () => {
                         {errors.phone?.message}
                 </CustomInput>
 
-                <Select selectName="Chuyên ngành" selectOptions={majorList} id="major" register={register}/>
                 <Select selectName="Giới tính" selectOptions={genderList} id="gender" register={register}/>                
-
-                {/* <label className="reg-candidate__form--label" htmlFor="gender">Chuyên ngành</label>
-                <select {...register("major")} id="major" className="reg-candidate__form--select">
-                    {
-                        majorList.map((major) => <option value={major.id} key={major.id}>{major.name}</option>)
-                    }
-                </select> */}
 
                 <CustomInput
                     label="Avatar"
@@ -116,21 +106,23 @@ const CandidateInfo = () => {
                         {errors.avatar?.message}
                 </CustomInput>
 
+                <Select selectName="Trường" selectOptions={schoolList} id="school" register={register}/>                
+
                 <CustomInput
-                    label="CV"
-                    id="cv"
-                    type="file"
-                    register={register}
-                    check={true}
-                >
-                        {errors.cv?.message}
+                        label="Vị trí"
+                        id="position"
+                        type="text"
+                        placeholder="Vị trí"
+                        register={register}
+                    >
+                        {errors.position?.message}
                 </CustomInput>
 
-                <div className="reg-candidate__btns">
-                    <div className="reg-candidate__btns--item" onClick={handleBackClick}>
+                <div className="reg-partner__btns">
+                    <div className="reg-partner__btns--item" onClick={handleBackClick}>
                         <ArrowButton text="Trở lại" direction="left" />
                     </div>
-                    <div className="reg-candidate__btns--item">
+                    <div className="reg-partner__btns--item">
                         <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)}/>
                     </div>
                 </div>
@@ -139,4 +131,4 @@ const CandidateInfo = () => {
     );
 }
 
-export default CandidateInfo;
+export default PartnerInfo;

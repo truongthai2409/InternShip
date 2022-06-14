@@ -1,0 +1,1 @@
+export const navigatingSelector = (state) => state.register.status;

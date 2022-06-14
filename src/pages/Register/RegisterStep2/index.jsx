@@ -4,45 +4,27 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import {navigatingSelector} from '../../../store/selectors/registerSelectors'
 // import axios from "axios";
 
 import { useParams, useNavigate } from "react-router-dom";
 
 import ArrowButton from "../../../components/ArrowButton/index";
 import CustomInput from "../../../components/CustomInput";
-import { checkUser } from "../../../store/actions/user.action";
+import { checkUser } from '../../../store/slices/register/registerSlice'
 
-const schema = yup
-  .object({
-    username: yup
-      .string()
-      .required("Bạn phải nhập tài khoản")
-      .min(6, "Tài khoản cần phải có ít nhất 6 ký tự"),
-    email: yup
-      .string()
-      .required("Bạn phải nhập email")
-      .matches(
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        "Vui lòng nhập lại email"
-      ),
-    password: yup
-      .string()
-      .required("Bạn phải nhập password")
-      .min(6, "Mật khẩu cần phải có ít nhất 6 ký tự")
-      .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
-        "Vui lòng nhập lại mật khẩu"
-      ),
-    passwordConfirmation: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Mật khẩu chưa khớp"),
-  })
-  .required();
+import { schema } from "./data";
 
 export default function RegisterStep2() {
   let { roleId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const registerStatus = useSelector(navigatingSelector)
+  
+  if (registerStatus === "navigating") {
+    navigate("/register/step3")
+  }
 
   const {
     register,
@@ -64,7 +46,7 @@ export default function RegisterStep2() {
     }
     console.log(userRegister);  
 
-    dispatch(checkUser(userRegister, navigate));
+    dispatch(checkUser(userRegister));
   };
 
   const handleBackClick = (e) => {

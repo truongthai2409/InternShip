@@ -11,7 +11,7 @@ const initialState = {
   userList: [],
   notification: {},
   page: 0,
-  error: {},
+  error: [],
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
@@ -29,7 +29,7 @@ const userReducer = (state = initialState, { type, payload }) => {
     case ADD_USER_SUCCESS:
       return { ...state, notification: payload };
     case ADD_USER_FAIL:
-      return { ...state, notification: payload };
+      return { ...state, error: payload };
     case "CLOSE_NOTIFICATION": {
       state.notification.open = payload;
       return { ...state };
