@@ -3,31 +3,18 @@ import { Link } from "react-router-dom"
 import './styles.scss'
 
 export default function Logo({ id }) {
-  const roleList = [
-    {
-      id: 3,
-      name: "Ứng viên"
-    },
-    {
-      id: 1,
-      name: "Nhà tuyển dụng"
-    },
-    {
-      id: 4,
-      name: "Cộng tác viên"
-    }
-  ]
 
-  const getRole = (id) => {
-    const filter = roleList.filter((role) => role.id === id);
-    return filter[0].name
+  const roleList ={
+    3: "Ứng viên",
+    1: "Nhà tuyển dụng",
+    4: "Cộng tác viên"
   }
 
 
   return (
     <Link to="/" className="logo">
         <h1>ITInternshipJob</h1>
-        <span>{id ? getRole(id): ""}</span>
+        <span>{id ? roleList[id] : ""}</span>
     </Link>
   )
 }

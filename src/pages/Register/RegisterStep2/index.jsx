@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import {navigatingSelector} from '../../../store/selectors/registerSelectors'
-// import axios from "axios";
+import {errorSelector, statusSelector} from '../../../store/selectors/registerSelectors'
 
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -20,11 +19,12 @@ export default function RegisterStep2() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  const registerStatus = useSelector(navigatingSelector)
+  const registerStatus = useSelector(statusSelector)
+  const errorMessage = useSelector(errorSelector)
   
-  if (registerStatus === "navigating") {
+  if (registerStatus === "success step 2") {
     navigate("/register/step3")
-  }
+  } 
 
   const {
     register,
@@ -69,6 +69,7 @@ export default function RegisterStep2() {
           register={register}
         >
           {errors.username?.message}
+          {errorMessage?.Username}
         </CustomInput>
         <CustomInput
           label="Email"
@@ -78,6 +79,7 @@ export default function RegisterStep2() {
           register={register}
         >
           {errors.email?.message}
+          {errorMessage?.Email}
         </CustomInput>
         <CustomInput
           label="Mật khẩu"
@@ -87,6 +89,7 @@ export default function RegisterStep2() {
           register={register}
         >
           {errors.password?.message}
+          {errorMessage?.Password}
         </CustomInput>
 
         <CustomInput
