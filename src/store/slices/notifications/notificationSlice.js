@@ -6,7 +6,9 @@ const notificationSlice = createSlice({
     initialState: {
 
     },
-    reducers: {}
+    reducers: {
+        
+    }
 })
 
 export default notificationSlice
