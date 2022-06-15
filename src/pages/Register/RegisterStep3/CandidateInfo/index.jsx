@@ -12,8 +12,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { useNavigate } from 'react-router-dom'
-import { registerUser } from '../../../../store/slices/register/registerSlice'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { registerUser } from '../../../../store/slices/main/register/registerSlice'
+import notificationSlice from '../../../../store/slices/notifications/notificationSlice'
+import { statusSelector } from '../../../../store/selectors/main/registerSelectors'
 
 import { majorList, genderList, schema } from "./data";
 
@@ -24,6 +27,14 @@ const CandidateInfo = () => {
     const handleBackClick = (e) => {
         e.preventDefault();
         navigate(-1)
+    }
+
+    const status = useSelector(statusSelector);
+
+    if (status === "success") {
+        dispatch(notificationSlice.actions.successMess("Đăng ký thành công"))
+    } else if (status === "fail") {
+        dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"))
     }
 
     const onSubmit = (data) => {

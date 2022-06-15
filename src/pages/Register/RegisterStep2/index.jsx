@@ -4,13 +4,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import {errorSelector, statusSelector} from '../../../store/selectors/registerSelectors'
-
 import { useParams, useNavigate } from "react-router-dom";
+
+import notificationSlice from '../../../store/slices/notifications/notificationSlice'
+import {errorSelector, statusSelector} from '../../../store/selectors/main/registerSelectors'
 
 import ArrowButton from "../../../components/ArrowButton/index";
 import CustomInput from "../../../components/CustomInput";
-import { checkUser } from '../../../store/slices/register/registerSlice'
+import { checkUser } from '../../../store/slices/main/register/registerSlice'
 
 import { schema } from "./data";
 
@@ -24,7 +25,10 @@ export default function RegisterStep2() {
   
   if (registerStatus === "success step 2") {
     navigate("/register/step3")
-  } 
+    dispatch(notificationSlice.actions.successMess("Thành công"))
+  } else if (registerStatus === "fail") {
+    dispatch(notificationSlice.actions.errorMess("Đã có lỗi"))
+  }
 
   const {
     register,

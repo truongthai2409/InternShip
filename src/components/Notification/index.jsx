@@ -1,6 +1,7 @@
 ﻿import React from "react";
 import { Snackbar, Alert } from "@mui/material";
 import { useDispatch } from "react-redux";
+import notificationSlice from "../../store/slices/notifications/notificationSlice";
 
 const Notification = (props) => {
   const { notifyAlert, ...other } = props;
@@ -8,10 +9,12 @@ const Notification = (props) => {
   const dispatch = useDispatch();
 
   const handleCloseNotification = () => {
-    dispatch({
-      type: "CLOSE_NOTIFICATION",
-      payload: false,
-    });
+    // dispatch({
+    //   type: "CLOSE_NOTIFICATION",
+    //   payload: false,
+    // });
+    dispatch(notificationSlice.actions.close())
+    console.log("Close");
   };
 
   return (
