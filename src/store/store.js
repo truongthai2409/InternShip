@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 import registerSlice from "./slices/register/registerSlice";
 
 const store = configureStore({
