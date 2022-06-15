@@ -11,6 +11,7 @@ import {
   RegisterStep2,
   RegisterStep3,
 } from "../pages/Register/index";
+
 export const adminRouter = [
   {
     path: "",
