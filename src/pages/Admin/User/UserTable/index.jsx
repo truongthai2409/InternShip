@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../../../components/Table";
-// import { getUserList } from "../../../../store/actions/user.action";
+import { getUserList } from "../../../../store/slices/Admin/user/userSlice";
 
 const UserTable = () => {
   const dispatch = useDispatch();
@@ -14,9 +14,11 @@ const UserTable = () => {
 
   const { userList } = useSelector((state) => state.user);
 
-  // useEffect(() => {
-  //   dispatch(getUserList());
-  // }, []);
+  useEffect(() => {
+    dispatch(getUserList());
+  }, []);
+
+  console.log(userList);
 
   const columns = [
     { field: "stt", headerName: "STT", width: 100 },
