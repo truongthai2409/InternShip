@@ -2,7 +2,6 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: "http://localhost:8085",
-    // baseURL: "https://6287218e7864d2883e7efbd1.mockapi.io/",
 });
 
 api.interceptors.request.use(async (config) => config);

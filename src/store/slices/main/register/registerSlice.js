@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../../config/api/apiConfig";
+import api from "../../../../config/api/apiConfig";
 
 const registerSlice = createSlice({
     name: "register",
@@ -26,8 +26,14 @@ const registerSlice = createSlice({
                 state.status = "loading"
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                console.log("Success");
-                state.user = action.payload
+                if (action.payload?.user) {
+                    state.user = action.payload
+                    state.status = "success"
+                    state.error = {}
+                } else {
+                    state.status = "fail"
+                    state.error = action.payload
+                }
             })
     }
 })
@@ -38,13 +44,7 @@ export default registerSlice
 export const checkUser = createAsyncThunk("register/checkUser", async (data) => {
     const res = await api.post("http://localhost:8085/api/user", data)
         .then((res) => {
-            // const notification = {
-            //     open: true,
-            //     severity: "success",
-            //     message: "Thành công",
-            //   };
             sessionStorage.setItem("account", JSON.stringify(data));
-            //   dispatch(action(ADD_USER_SUCCESS, notification));
             return res
         })
         .catch(error => {
@@ -64,19 +64,11 @@ export const registerUser = createAsyncThunk("register/registerUser", async (dat
     const role = rolePath[data.createUser.role.id]
     console.log(role);
     const res = await api.post(`http://localhost:8085/api/${role}`, data)
-    .then((res) => {
-        // const notification = {
-        //   open: true,
-        //   severity: "success",
-        //   message: "Đăng ký thành công",
-        // };
-        //console.log(response);
-        // dispatch(action(ADD_USER_SUCCESS, notification));
-        console.log(res)
-      })
-    // .catch((err) => {
-    //     console.log(err);
-    // });
-
+        .then((res) => {
+            return res
+        })
+        .catch((err) => {
+            return err.response.data
+        });
     return res
 })
