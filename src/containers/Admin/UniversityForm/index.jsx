@@ -47,7 +47,7 @@ export default function UniversityForm(props) {
     const universityData = {
       description: data.description,
       email: data.email,
-      logo: null,
+      // logo: null,
       name: data.name,
       phone: data.phone,
       tax: data.tax,

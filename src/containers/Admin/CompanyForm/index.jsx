@@ -10,7 +10,7 @@ import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
-import { addCompany } from "../../../store/actions/company.action";
+import { addCompany } from "../../../store/slices/Admin/company/companySlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -18,6 +18,7 @@ export default function CompanyForm(props) {
   const { isAdd } = props;
 
   const [image, setImage] = useState(cameraLogo);
+  const [imageFile, setImageFile] = useState(null);
   const [isEdit, setIsEdit] = useState(isAdd);
 
   const fileInput = useRef(null);
@@ -37,6 +38,7 @@ export default function CompanyForm(props) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (x) => {
+        setImageFile(imageFile);
         setImage(x.target.result);
       };
       reader.readAsDataURL(imageFile);
@@ -48,12 +50,14 @@ export default function CompanyForm(props) {
     const companyData = {
       description: data.description,
       email: data.email,
-      logo: null,
+      logo: imageFile,
       name: data.name,
       phone: data.phone,
       tax: data.tax,
       website: data.website,
     };
+
+    console.log(imageFile);
 
     dispatch(addCompany(companyData));
   };
@@ -78,7 +82,7 @@ export default function CompanyForm(props) {
                 // variant="rounded"
                 alt="company-logo"
                 className="company-form__avatar"
-                onClick={() => fileInput.current.click()}
+                // onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
@@ -87,7 +91,7 @@ export default function CompanyForm(props) {
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                ref={fileInput}
+                // ref={fileInput}
               />
               <p className="company-form__error">{errors.logo?.message}</p>
 
@@ -117,7 +121,7 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
-                    defaultValue="name"
+                    // defaultValue="name"
                     check={!isEdit}
                   >
                     {errors.name?.message}

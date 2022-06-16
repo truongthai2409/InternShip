@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import DataTable from "../../../../components/Table";
-import { getCompany } from "../../../../store/actions/company.action";
+import { getCompanyList } from "../../../../store/slices/Admin/company/companySlice";
 
 const CompanyTable = () => {
   const dispatch = useDispatch();
@@ -13,9 +13,11 @@ const CompanyTable = () => {
   const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getCompany());
+    dispatch(getCompanyList());
   }, []);
+
   console.log(companyList);
+
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
     { field: "name", headerName: "Tên công ty", width: 170 },
