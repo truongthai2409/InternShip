@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './styles.scss'
 
@@ -24,6 +24,8 @@ const CandidateInfo = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const [file, setFile] = useState()
+
     const handleBackClick = (e) => {
         e.preventDefault();
         navigate(-1)
@@ -39,11 +41,12 @@ const CandidateInfo = () => {
 
     const onSubmit = (data) => {
         const step2Data = JSON.parse(sessionStorage.getItem("account"))
+
         const userData= {
             major: {
                 id: parseInt(data.major)
             },
-            CV: data.cv,
+            fileCV: data.cv[0],
             createUser: {
                 username: step2Data.username,
                 password: step2Data.password,
@@ -53,6 +56,7 @@ const CandidateInfo = () => {
                 firstName: data.firstname,
                 phone: data.phone,
                 email: step2Data.email,
+                avatar: data.avatar[0],
                 role: {
                     id: parseInt(step2Data.role.id)
                 }
@@ -110,19 +114,11 @@ const CandidateInfo = () => {
                 <Select selectName="Chuyên ngành" selectOptions={majorList} id="major" register={register}/>
                 <Select selectName="Giới tính" selectOptions={genderList} id="gender" register={register}/>                
 
-                {/* <label className="reg-candidate__form--label" htmlFor="gender">Chuyên ngành</label>
-                <select {...register("major")} id="major" className="reg-candidate__form--select">
-                    {
-                        majorList.map((major) => <option value={major.id} key={major.id}>{major.name}</option>)
-                    }
-                </select> */}
-
                 <CustomInput
                     label="Avatar"
                     id="avatar"
                     type="file"
                     register={register}
-                    check={true}
                 >
                         {errors.avatar?.message}
                 </CustomInput>
@@ -132,7 +128,6 @@ const CandidateInfo = () => {
                     id="cv"
                     type="file"
                     register={register}
-                    check={true}
                 >
                         {errors.cv?.message}
                 </CustomInput>
