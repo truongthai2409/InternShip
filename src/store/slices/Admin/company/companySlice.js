@@ -5,6 +5,7 @@ const companySlice = createSlice({
   name: "Company",
   initialState: {
     companyList: [],
+    companyDetail: {},
     notification: {},
     error: [],
   },
@@ -14,6 +15,12 @@ const companySlice = createSlice({
       state.companyList = payload;
     });
     builder.addCase(addCompany.fulfilled, (state, { payload }) => {});
+    builder.addCase(getCompanyDetail.fulfilled, (state, { payload }) => {
+      state.companyDetail = payload;
+    });
+    builder.addCase(updateCompanyInfo.rejected, (state, { payload }) => {
+      state.error = payload;
+    });
   },
 });
 
@@ -32,7 +39,7 @@ export const getCompanyList = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        return error;
+        return error.response.data;
       });
   }
 );
@@ -52,7 +59,49 @@ export const addCompany = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        return error;
+        return error.response.data;
+      });
+  }
+);
+
+/**
+ * get company detail by comId
+ * @params comId
+ * @return company detail
+ */
+export const getCompanyDetail = createAsyncThunk(
+  "company/getCompanyDetail",
+  async (comId) => {
+    return await axios
+      .get(`http://localhost:8085/api/company/${comId}`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+/**
+ * @params comId updateData
+ * @return
+ * success => notification
+ * error => error.response.data
+ */
+export const updateCompanyInfo = createAsyncThunk(
+  "company/updateCompanyInfo",
+  async (comId, updateData, setIsEdit) => {
+    console.log(comId, updateData);
+    return axios
+      .put(`http://localhost:8085/api/company/${comId}`, updateData)
+      .then((response) => {
+        setIsEdit(false);
+        console.log("cap nhat thanh cong");
+      })
+      .catch((error) => {
+        console.log("cap nhat khong thanh cong");
+        return error.response.data;
       });
   }
 );
