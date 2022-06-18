@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid, Switch } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
@@ -10,26 +11,70 @@ import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
-import { addCompany } from "../../../store/actions/company.action";
+import {
+  addCompany,
+  getCompanyDetail,
+  updateCompanyInfo,
+} from "../../../store/slices/Admin/company/companySlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function CompanyForm(props) {
   const { isAdd } = props;
 
-  const [image, setImage] = useState(cameraLogo);
-  const [isEdit, setIsEdit] = useState(isAdd);
-
-  const fileInput = useRef(null);
-  const dispatch = useDispatch();
+  // get global state from redux store
+  const { companyDetail, error } = useSelector((state) => state.company);
+  // console.log(companyDetail);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  // local state
+  const [image, setImage] = useState(cameraLogo);
+  const [imageFile, setImageFile] = useState(null);
+  const [isEdit, setIsEdit] = useState(isAdd);
+  const [companyValue, setCompanyValue] = useState({
+    description: "",
+    email: "",
+    // logo: image,
+    name: "",
+    phone: "",
+    tax: "",
+    website: "",
+  });
+
+  const fileInput = useRef(null);
+  const dispatch = useDispatch();
+
+  // get params from URL
+  const { comid } = useParams();
+
+  /**
+   * get company details
+   * @dependency  comid
+   */
+  useEffect(() => {
+    if (!isAdd) {
+      dispatch(getCompanyDetail(comid));
+    }
+  }, []);
+
+  useEffect(() => {
+    setValue("name", isAdd ? "" : companyDetail.name);
+    setValue("description", isAdd ? "" : companyDetail.description);
+    setValue("email", isAdd ? "" : companyDetail.email);
+    setValue("phone", isAdd ? "" : companyDetail.phone);
+    setValue("tax", isAdd ? "" : companyDetail.tax);
+    setValue("website", isAdd ? "" : companyDetail.website);
+  }, [companyDetail]);
+
+  // console.log(error);
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -37,6 +82,8 @@ export default function CompanyForm(props) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (x) => {
+        console.log(x.target.result);
+        setImageFile(imageFile);
         setImage(x.target.result);
       };
       reader.readAsDataURL(imageFile);
@@ -48,14 +95,20 @@ export default function CompanyForm(props) {
     const companyData = {
       description: data.description,
       email: data.email,
-      logo: null,
+      // logo: image,
       name: data.name,
       phone: data.phone,
       tax: data.tax,
       website: data.website,
     };
-
-    dispatch(addCompany(companyData));
+    if (isAdd) {
+      dispatch(addCompany(companyData));
+    } else {
+      // console.log({ ...companyData, id: parseInt(comid) });
+      const updateData = { ...companyData, id: parseInt(comid) };
+      console.log(updateData);
+      dispatch(updateCompanyInfo(comid, updateData, setIsEdit));
+    }
   };
 
   // Click to Edit
@@ -66,7 +119,7 @@ export default function CompanyForm(props) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      autoComplete="off"
+      // autoComplete="off"
       className="company-form"
     >
       <div className="company-form__container">
@@ -78,7 +131,7 @@ export default function CompanyForm(props) {
                 // variant="rounded"
                 alt="company-logo"
                 className="company-form__avatar"
-                onClick={() => fileInput.current.click()}
+                // onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
@@ -87,7 +140,7 @@ export default function CompanyForm(props) {
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                ref={fileInput}
+                // ref={fileInput}
               />
               <p className="company-form__error">{errors.logo?.message}</p>
 
@@ -117,7 +170,7 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
-                    defaultValue="name"
+                    // defaultValue={companyValue.name}
                     check={!isEdit}
                   >
                     {errors.name?.message}

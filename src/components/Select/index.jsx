@@ -1,7 +1,6 @@
 import React from "react";
 
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { FormControl, Select, MenuItem } from "@mui/material";
 
 import "./styles.scss";
 
@@ -11,7 +10,7 @@ import "./styles.scss";
   const renderSelectOption = () => {
     return selectOptions.map((item) => {
       return (
-        <MenuItem value={item.id}>{item.name}</MenuItem>
+        <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
       );
     });
   };
@@ -21,9 +20,9 @@ import "./styles.scss";
         <h1 className="select-title">{selectName}</h1>
         <FormControl fullWidth>
             <Select
-              {...register(id)}
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
+              {...register(id)}
             >
               {renderSelectOption()}
             </Select>

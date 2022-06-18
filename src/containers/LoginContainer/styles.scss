@@ -1,6 +1,6 @@
-@use '../../../assets/styles/' as *;
+@use '../../assets/styles/' as *;
 
-.register-container {
+.login-container {
     @include formContainer(480px);
     &__title{
         font-size: $fs-16;
@@ -14,9 +14,11 @@
         p {
             font-size: $fs-13;
             color: $color-black-0;
-            a {
-                color: $primary-color;
-            }
+        }
+        a {
+            font-size: $fs-13;
+            color: $primary-color;
+            text-decoration: underline;
         }
     }
 }

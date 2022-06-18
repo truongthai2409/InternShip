@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import api from "../../../../config/api/apiConfig";
 
 const registerSlice = createSlice({
@@ -42,7 +43,7 @@ export default registerSlice
 
 
 export const checkUser = createAsyncThunk("register/checkUser", async (data) => {
-    const res = await api.post("http://localhost:8085/api/user", data)
+    const res = await api.post("http://localhost:8085/api/user/", data)
         .then((res) => {
             sessionStorage.setItem("account", JSON.stringify(data));
             return res
@@ -50,7 +51,6 @@ export const checkUser = createAsyncThunk("register/checkUser", async (data) => 
         .catch(error => {
             return error.response.data
         })
-        console.log(res);
     return res
 })
 
@@ -64,6 +64,7 @@ export const registerUser = createAsyncThunk("register/registerUser", async (dat
     const role = rolePath[data.createUser.role.id]
     console.log(role);
     const res = await api.post(`http://localhost:8085/api/${role}`, data)
+    // const res = await api.post("https://6287218e7864d2883e7efbd1.mockapi.io/user", data)
         .then((res) => {
             return res
         })

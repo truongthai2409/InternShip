@@ -51,14 +51,12 @@ export const schema = yup
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         " * Số điện thoại không đúng."),
     gender: yup.string().required("* Bạn phải chọn giới tính"),
-    // avatar: yup.mixed().test('type', "Đây không phải file hình ảnh", value => validateImageType(value)),
     avatar: yup.mixed().test("type", "Only the following formats are accepted: .jpeg, .jpg, .bmp, .pdf and .doc", (value) => {
         return value && IMAGE_FORMATS.includes(value[0].type)
-    }),
+    }).nullable(),
     major: yup.string().required("* Bạn phải chọn chuyên ngành"),
-    // cv: yup.mixed().test('type', "Đây không phải file hình ảnh", value => validateImageType(value)),
     cv: yup.mixed().test("type", "Only the following formats are accepted: .jpeg, .jpg, .bmp, .pdf and .doc", (value) => {
         return value && CV_FORMATS.includes(value[0].type)
-    }),
+    }).nullable(),
   })
   .required();

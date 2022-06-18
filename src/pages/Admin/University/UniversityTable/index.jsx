@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import DataTable from "../../../../components/Table";
-import { getCompany } from "../../../../store/actions/company.action";
+import { getCompanyList } from "../../../../store/slices/Admin/company/companySlice";
 
 const UniversityTable = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const UniversityTable = () => {
   const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getCompany());
+    dispatch(getCompanyList());
   }, []);
   console.log(companyList);
   const columns = [

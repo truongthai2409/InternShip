@@ -4,6 +4,7 @@ import "./App.css";
 import AdminRouterLayout from "./Layouts/Admin/index";
 import RegisterLayout from "./Layouts/Register/index";
 import MainLayout from "./Layouts/Main";
+import LoginLayout from './Layouts/Login/index'
 import Dashboard from "./pages/Admin/Dashboard";
 import { adminRouter, registerRouter } from "./config/routes";
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/register" element={<RegisterLayout />}>
             {renderRegisterRouter()}
           </Route>
+          <Route path="/login" element={<LoginLayout/>}></Route>
           <Route path="/" element={<MainLayout />}></Route>
         </Routes>
       </Router>
