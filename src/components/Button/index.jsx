@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.scss";
 
-const Button = ({ name, IconBtnMui, onClick, bwidth }) => {
+const Button = ({ name, IconBtnMui, onClick, bwidth, children }) => {
   //console.log(iconBtn);
 
   return (
@@ -14,6 +14,7 @@ const Button = ({ name, IconBtnMui, onClick, bwidth }) => {
       >
         {IconBtnMui ? <IconBtnMui className="button__icon" /> : null}
         <p>{name}</p>
+        {children}
       </button>
     </>
   );

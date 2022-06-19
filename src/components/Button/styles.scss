@@ -14,4 +14,12 @@
     .button__icon{
         margin-right: 10px
     }
+
+    i {
+        margin-left: 10px;
+    }
+
+    &:hover {
+        opacity: 0.9;
+    }
 }
