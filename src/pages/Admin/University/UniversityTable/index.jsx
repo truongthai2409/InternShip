@@ -21,8 +21,34 @@ const UniversityTable = () => {
     { field: "name", headerName: "Tên công ty", width: 170 },
     { field: "shortName", headerName: "Tên viết tắt", width: 100 },
     // { field: "website", headerName: "Website", width: 170 },
-    { field: "email", headerName: "Email", width: 270 },
-    { field: "majors", headerName: "Chuyên ngành", width: 130 },
+    {
+      field: "website",
+      headerName: "Website",
+      flex: 1,
+      renderCell: (params) => {
+        const { row } = params;
+        return (
+          <a href={row.website} className="company-table__hyperlink">
+            {row.website}
+          </a>
+        );
+      },
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      renderCell: (params) => {
+        const { row } = params;
+        // console.log(row.email);
+        return (
+          <a href={`mailto:${row.email}`} className="company-table__hyperlink">
+            {row.email}
+          </a>
+        );
+      },
+    },
+    // { field: "majors", headerName: "Chuyên ngành", width: 130 },
     // { field: "phone", headerName: "Số điện thoại", width: 130 },
     {
       field: "action",
@@ -47,10 +73,11 @@ const UniversityTable = () => {
   const rows = [];
   for (let i = 0; i < companyList.length; i++) {
     rows.push({
+      id: companyList[i].id,
       stt: i + 1,
       name: companyList[i].name,
       shortName: companyList[i].shortName,
-      // website: companyList[i].website,
+      website: companyList[i].website,
       email: companyList[i].email,
       majors: companyList[i].majors,
       // phone: companyList[i].phone,

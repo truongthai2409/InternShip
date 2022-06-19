@@ -58,22 +58,6 @@ export const checkUser = createAsyncThunk(
   }
 );
 
-export const checkUser = createAsyncThunk(
-  "register/checkUser",
-  async (data) => {
-    const res = await api
-      .post("http://localhost:8085/api/user/", data)
-      .then((res) => {
-        sessionStorage.setItem("account", JSON.stringify(data));
-        return res;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-    return res;
-  }
-);
-
 export const registerUser = createAsyncThunk(
   "register/registerUser",
   async (data) => {
