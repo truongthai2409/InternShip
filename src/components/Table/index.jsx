@@ -7,7 +7,7 @@ import "./styles.scss";
 export default function DataTable({ rows, columns }) {
   return (
     <Paper className="data-table">
-      <h2>List</h2>
+      <h2>Danh sách</h2>
       <div className="data-table_container">
         <DataGrid
           rows={rows}

@@ -24,13 +24,14 @@ export default function CompanyForm(props) {
 
   // get global state from redux store
   const { companyDetail, error } = useSelector((state) => state.company);
-  // console.log(companyDetail);
+  // console.log(error);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -39,15 +40,6 @@ export default function CompanyForm(props) {
   const [image, setImage] = useState(cameraLogo);
   const [imageFile, setImageFile] = useState(null);
   const [isEdit, setIsEdit] = useState(isAdd);
-  const [companyValue, setCompanyValue] = useState({
-    description: "",
-    email: "",
-    // logo: image,
-    name: "",
-    phone: "",
-    tax: "",
-    website: "",
-  });
 
   const fileInput = useRef(null);
   const dispatch = useDispatch();
@@ -65,6 +57,10 @@ export default function CompanyForm(props) {
     }
   }, []);
 
+  /**
+   * @dependency companyDetail
+   * isAdd ? "" : companyDetail
+   */
   useEffect(() => {
     setValue("name", isAdd ? "" : companyDetail.name);
     setValue("description", isAdd ? "" : companyDetail.description);
@@ -102,12 +98,20 @@ export default function CompanyForm(props) {
       website: data.website,
     };
     if (isAdd) {
-      dispatch(addCompany(companyData));
+      const addData = { companyData, reset };
+      dispatch(addCompany(addData));
     } else {
       // console.log({ ...companyData, id: parseInt(comid) });
-      const updateData = { ...companyData, id: parseInt(comid) };
+      const updateData = {
+        companyData: {
+          ...companyData,
+          id: parseInt(comid),
+        },
+
+        setIsEdit,
+      };
       console.log(updateData);
-      dispatch(updateCompanyInfo(comid, updateData, setIsEdit));
+      dispatch(updateCompanyInfo(updateData));
     }
   };
 
@@ -131,7 +135,7 @@ export default function CompanyForm(props) {
                 // variant="rounded"
                 alt="company-logo"
                 className="company-form__avatar"
-                // onClick={() => fileInput.current.click()}
+                onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
@@ -140,7 +144,7 @@ export default function CompanyForm(props) {
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                // ref={fileInput}
+                ref={fileInput}
               />
               <p className="company-form__error">{errors.logo?.message}</p>
 
@@ -151,11 +155,13 @@ export default function CompanyForm(props) {
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
-                  {!isEdit ? (
-                    <button type="button" onClick={handleOnClickEdit}>
-                      Edit
-                    </button>
-                  ) : null}
+                  <button
+                    type="button"
+                    className="company-form__button-edit"
+                    onClick={handleOnClickEdit}
+                  >
+                    Sửa
+                  </button>
                 </div>
               ) : null}
             </div>
@@ -174,6 +180,7 @@ export default function CompanyForm(props) {
                     check={!isEdit}
                   >
                     {errors.name?.message}
+                    {error?.Name}
                   </CustomInput>
                   <CustomInput
                     label="Email"
@@ -183,6 +190,7 @@ export default function CompanyForm(props) {
                     register={register}
                     check={!isEdit}
                   >
+                    {error?.Email}
                     {errors.email?.message}
                   </CustomInput>
                   <CustomInput
@@ -207,6 +215,7 @@ export default function CompanyForm(props) {
                     register={register}
                     check={!isEdit}
                   >
+                    {error?.Website}
                     {errors.website?.message}
                   </CustomInput>
                   <CustomInput

@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import notificationSlice from "../../notifications/notificationSlice";
+// import { useDispatch } from "react-redux";
 
 const companySlice = createSlice({
   name: "Company",
   initialState: {
     companyList: [],
     companyDetail: {},
-    notification: {},
     error: [],
   },
   reducer: {},
@@ -14,12 +15,18 @@ const companySlice = createSlice({
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
       state.companyList = payload;
     });
-    builder.addCase(addCompany.fulfilled, (state, { payload }) => {});
+    builder.addCase(addCompany.fulfilled, (state, { payload }) => {
+      if (!payload?.data) {
+        state.error = payload;
+      }
+    });
     builder.addCase(getCompanyDetail.fulfilled, (state, { payload }) => {
       state.companyDetail = payload;
     });
-    builder.addCase(updateCompanyInfo.rejected, (state, { payload }) => {
-      state.error = payload;
+    builder.addCase(updateCompanyInfo.fulfilled, (state, { payload }) => {
+      if (!payload?.data) {
+        state.error = payload;
+      }
     });
   },
 });
@@ -52,11 +59,24 @@ export const getCompanyList = createAsyncThunk(
 
 export const addCompany = createAsyncThunk(
   "company/addCompany",
-  async (data) => {
+  async (data, thunkAPI) => {
+    const { companyData, reset } = data;
     return axios
-      .post("http://localhost:8085/api/company", data)
+      .post("http://localhost:8085/api/company", companyData)
       .then((response) => {
-        return response.data;
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Thêm công ty thành công")
+        );
+        reset({
+          description: "",
+          email: "",
+          // logo: image,
+          name: "",
+          phone: "",
+          tax: "",
+          website: "",
+        });
+        // return response.data;
       })
       .catch((error) => {
         return error.response.data;
@@ -91,16 +111,21 @@ export const getCompanyDetail = createAsyncThunk(
  */
 export const updateCompanyInfo = createAsyncThunk(
   "company/updateCompanyInfo",
-  async (comId, updateData, setIsEdit) => {
-    console.log(comId, updateData);
+  async (updateData, thunkAPI) => {
+    const { companyData, setIsEdit } = updateData;
+    console.log(companyData);
     return axios
-      .put(`http://localhost:8085/api/company/${comId}`, updateData)
+      .put(`http://localhost:8085/api/company/${companyData.id}`, companyData)
       .then((response) => {
-        setIsEdit(false);
-        console.log("cap nhat thanh cong");
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Cập nhật công ty thành công")
+        );
+        if (setIsEdit) {
+          setIsEdit(false);
+        }
       })
       .catch((error) => {
-        console.log("cap nhat khong thanh cong");
+        console.error(error.response.data);
         return error.response.data;
       });
   }

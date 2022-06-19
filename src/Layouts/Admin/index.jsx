@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Drawer, Hidden } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import "./styles.scss";
 import Sidebar from "../../components/Sidebar";
 import AdminNav from "../../components/AdminNav";
+import Notification from "../../components/Notification";
+import { notificationSelector } from "../../store/selectors/notificationSelectors";
 
 const AdminLayout = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const notification = useSelector(notificationSelector);
+  // console.log(notification);
 
   /**
    * handle Close drawer
@@ -54,6 +60,7 @@ const AdminLayout = () => {
           </section>
         </main>
       </div>
+      <Notification notifyAlert={notification} />
     </div>
   );
 };

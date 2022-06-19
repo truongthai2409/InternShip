@@ -39,29 +39,44 @@ const CandidateInfo = () => {
 
   const onSubmit = (data) => {
     const step2Data = JSON.parse(sessionStorage.getItem("account"));
-    const userData = {
-      major: {
-        id: parseInt(data.major),
+    const newData = new FormData();
+    newData.append("file", data.avatar[0]);
+    newData.append("user", {
+      username: step2Data.username,
+      password: step2Data.password,
+      confirmPassword: step2Data.confirmPassword,
+      gender: parseInt(data.gender),
+      lastName: data.lastname,
+      firstName: data.firstname,
+      phone: data.phone,
+      email: step2Data.email,
+      role: {
+        id: parseInt(step2Data.role.id),
       },
-      CV: data.cv,
-      createUser: {
-        username: step2Data.username,
-        password: step2Data.password,
-        confirmPassword: step2Data.confirmPassword,
-        gender: parseInt(data.gender),
-        lastName: data.lastname,
-        firstName: data.firstname,
-        phone: data.phone,
-        email: step2Data.email,
-        role: {
-          id: parseInt(step2Data.role.id),
-        },
-      },
-    };
+    });
+    // const userData = {
+    //   major: {
+    //     id: parseInt(data.major),
+    //   },
+    //   CV: data.cv,
+    //   createUser: {
+    //     username: step2Data.username,
+    //     password: step2Data.password,
+    //     confirmPassword: step2Data.confirmPassword,
+    //     gender: parseInt(data.gender),
+    //     lastName: data.lastname,
+    //     firstName: data.firstname,
+    //     phone: data.phone,
+    //     email: step2Data.email,
+    //     role: {
+    //       id: parseInt(step2Data.role.id),
+    //     },
+    //   },
+    // };
 
-    console.log(userData);
+    console.log(newData);
 
-    dispatch(registerUser(userData));
+    dispatch(registerUser(newData));
   };
 
   const {
@@ -136,7 +151,7 @@ const CandidateInfo = () => {
           id="avatar"
           type="file"
           register={register}
-          check={true}
+          // check={true}
         >
           {errors.avatar?.message}
         </CustomInput>

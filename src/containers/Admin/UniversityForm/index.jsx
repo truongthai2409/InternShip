@@ -101,7 +101,7 @@ export default function UniversityForm(props) {
                   </div>
                   {!isEdit ? (
                     <button type="button" onClick={handleOnClickEdit}>
-                      Edit
+                      Sửa
                     </button>
                   ) : null}
                 </div>
