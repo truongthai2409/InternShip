@@ -9,7 +9,7 @@ import Select from "../../../../components/Select";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import api from "../../../../config/api/apiConfig";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,7 @@ import notificationSlice from "../../../../store/slices/notifications/notificati
 import { statusSelector } from "../../../../store/selectors/main/registerSelectors";
 
 import { majorList, genderList, schema } from "./data";
+import axios from "axios";
 
 const CandidateInfo = () => {
   const navigate = useNavigate();
@@ -37,34 +38,44 @@ const CandidateInfo = () => {
     dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"));
   }
 
-  const onSubmit = (data) => {
-    const step2Data = JSON.parse(sessionStorage.getItem("account"));
-    // console.log(data.avatar[0])
-    const userData = {
-      major: {
-        id: parseInt(data.major),
-      },
-      // fileCV: data.cv[0],
-      createUser: {
-        username: step2Data.username,
-        password: step2Data.password,
-        confirmPassword: step2Data.confirmPassword,
-        gender: parseInt(data.gender),
-        lastName: data.lastname,
-        firstName: data.firstname,
-        phone: data.phone,
-        email: step2Data.email,
-        // fileAvatar: data.avatar[0],
-        role: {
-          id: parseInt(step2Data.role.id),
-        },
-      },
-    };
+  const onSubmit = async (data) => {
+        const step2Data = JSON.parse(sessionStorage.getItem("account"))
+        // console.log(data.avatar[0])
+        // const userData= {
+        //     major: {
+        //         id: parseInt(data.major)
+        //     },
+        //     // fileCV: data.cv[0],
+        //     createUser: {
+        //         username: step2Data.username,
+        //         password: step2Data.password,
+        //         confirmPassword: step2Data.confirmPassword,
+        //         gender: parseInt(data.gender),
+        //         lastName: data.lastname,
+        //         firstName: data.firstname,
+        //         phone: data.phone,
+        //         email: step2Data.email,
+        //         // fileAvatar: data.avatar[0],
+        //         role: {
+        //             id: parseInt(step2Data.role.id)
+        //         }
+        //     }
+        // }
 
-    console.log(userData);
-
-    dispatch(registerUser(userData));
-  };
+        const userData = {
+          file: data.avatar[0],
+          user: JSON.stringify({
+              username: step2Data.username,
+              password: step2Data.password,
+              confirmPassword: step2Data.confirmPassword,
+              email: step2Data.email,
+              role: {
+                id: parseInt(step2Data.role.id)
+              }
+          })
+        }
+        dispatch(registerUser(userData))
+    }
 
   const {
     register,
@@ -80,6 +91,7 @@ const CandidateInfo = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="reg-candidate__form"
         autoComplete="off"
+        encType='multipart/form-data'
       >
         <div className="reg-candidate__form--name">
           <CustomInput
