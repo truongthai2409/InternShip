@@ -6,12 +6,15 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 
-import notificationSlice from '../../../store/slices/notifications/notificationSlice'
-import {errorSelector, statusSelector} from '../../../store/selectors/main/registerSelectors'
+import notificationSlice from "../../../store/slices/notifications/notificationSlice";
+import {
+  errorSelector,
+  statusSelector,
+} from "../../../store/selectors/main/registerSelectors";
 
 import ArrowButton from "../../../components/ArrowButton/index";
 import CustomInput from "../../../components/CustomInput";
-import { checkUser } from '../../../store/slices/main/register/registerSlice'
+import { checkUser } from "../../../store/slices/main/register/registerSlice";
 
 import { schema } from "./data";
 
@@ -19,15 +22,15 @@ export default function RegisterStep2() {
   let { roleId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  const registerStatus = useSelector(statusSelector)
-  const errorMessage = useSelector(errorSelector)
-  
+
+  const registerStatus = useSelector(statusSelector);
+  const errorMessage = useSelector(errorSelector);
+
   if (registerStatus === "success step 2") {
-    navigate("/register/step3")
-    dispatch(notificationSlice.actions.successMess("Thành công"))
+    navigate("/register/step3");
+    dispatch(notificationSlice.actions.successMess("Thành công"));
   } else if (registerStatus === "fail") {
-    dispatch(notificationSlice.actions.errorMess("Đã có lỗi"))
+    dispatch(notificationSlice.actions.errorMess("Đã có lỗi"));
   }
 
   const {
@@ -44,11 +47,11 @@ export default function RegisterStep2() {
       password: data.password,
       confirmPassword: data.passwordConfirmation,
       role: {
-        id: parseInt(roleId)
+        id: parseInt(roleId),
       },
       email: data.email,
-    }
-    console.log(userRegister);  
+    };
+    console.log(userRegister);
 
     dispatch(checkUser(userRegister));
   };
@@ -111,7 +114,11 @@ export default function RegisterStep2() {
             <ArrowButton text="Trở lại" direction="left" />
           </div>
           <div className="register-step2__btns--item">
-            <ArrowButton text="Tiếp theo" direction="right" onClick={handleSubmit(onSubmit)} />
+            <ArrowButton
+              text="Tiếp theo"
+              direction="right"
+              onClick={handleSubmit(onSubmit)}
+            />
           </div>
         </div>
       </form>

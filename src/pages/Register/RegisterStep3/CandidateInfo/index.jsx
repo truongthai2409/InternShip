@@ -9,7 +9,6 @@ import Select from "../../../../components/Select";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from 'yup'
 import api from "../../../../config/api/apiConfig";
 
 import { useNavigate } from "react-router-dom";
@@ -163,13 +162,12 @@ const CandidateInfo = () => {
           <div className="reg-candidate__btns--item" onClick={handleBackClick}>
             <ArrowButton text="Trở lại" direction="left" />
           </div>
-          <div className="reg-candidate__btns--item" >
-            <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)}/>
+          <div className="reg-candidate__btns--item">
+            <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)} />
           </div>
         </div>
       </form>
     </div>
-  ) 
-
-}
+  );
+};
 export default CandidateInfo;
