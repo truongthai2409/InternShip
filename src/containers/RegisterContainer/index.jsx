@@ -2,12 +2,12 @@ import React, {useEffect} from "react";
 import "./styles.scss";
 import { useSelector, useDispatch } from "react-redux";
 
-import Logo from "../../../components/Logo/index";
-import Notification from "../../../components/Notification";
-import { userSelector } from '../../../store/selectors/main/registerSelectors'
+import Logo from "../../components/Logo/index";
+import Notification from "../../components/Notification";
+import { userSelector } from '../../store/selectors/main/registerSelectors'
 
-import notificationSlice from "../../../store/slices/notifications/notificationSlice";
-import {notificationSelector} from "../../../store/selectors/notificationSelectors"
+import notificationSlice from "../../store/slices/notifications/notificationSlice";
+import {notificationSelector} from "../../store/selectors/notificationSelectors"
 
 import { Outlet, Link } from "react-router-dom";
 

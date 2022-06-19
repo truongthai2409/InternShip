@@ -10,15 +10,15 @@ export default function RegisterStep3() {
   const roleInfo = [
     {
       id: 3,
-      compo: <CandidateInfo/>
+      compo: <CandidateInfo key={3}/>
     },
     {
       id: 1,
-      compo: <HRInfo/>
+      compo: <HRInfo key={1}/>
     },
     {
       id: 4,
-      compo: <PartnerInfo/>
+      compo: <PartnerInfo key={4}/>
     }
   ]
 

@@ -39,44 +39,31 @@ const CandidateInfo = () => {
 
   const onSubmit = (data) => {
     const step2Data = JSON.parse(sessionStorage.getItem("account"));
-    const newData = new FormData();
-    newData.append("file", data.avatar[0]);
-    newData.append("user", {
-      username: step2Data.username,
-      password: step2Data.password,
-      confirmPassword: step2Data.confirmPassword,
-      gender: parseInt(data.gender),
-      lastName: data.lastname,
-      firstName: data.firstname,
-      phone: data.phone,
-      email: step2Data.email,
-      role: {
-        id: parseInt(step2Data.role.id),
+    // console.log(data.avatar[0])
+    const userData = {
+      major: {
+        id: parseInt(data.major),
       },
-    });
-    // const userData = {
-    //   major: {
-    //     id: parseInt(data.major),
-    //   },
-    //   CV: data.cv,
-    //   createUser: {
-    //     username: step2Data.username,
-    //     password: step2Data.password,
-    //     confirmPassword: step2Data.confirmPassword,
-    //     gender: parseInt(data.gender),
-    //     lastName: data.lastname,
-    //     firstName: data.firstname,
-    //     phone: data.phone,
-    //     email: step2Data.email,
-    //     role: {
-    //       id: parseInt(step2Data.role.id),
-    //     },
-    //   },
-    // };
+      // fileCV: data.cv[0],
+      createUser: {
+        username: step2Data.username,
+        password: step2Data.password,
+        confirmPassword: step2Data.confirmPassword,
+        gender: parseInt(data.gender),
+        lastName: data.lastname,
+        firstName: data.firstname,
+        phone: data.phone,
+        email: step2Data.email,
+        // fileAvatar: data.avatar[0],
+        role: {
+          id: parseInt(step2Data.role.id),
+        },
+      },
+    };
 
-    console.log(newData);
+    console.log(userData);
 
-    dispatch(registerUser(newData));
+    dispatch(registerUser(userData));
   };
 
   const {
@@ -90,8 +77,8 @@ const CandidateInfo = () => {
   return (
     <div className="reg-candidate">
       <form
-        className="reg-candidate__form"
         onSubmit={handleSubmit(onSubmit)}
+        className="reg-candidate__form"
         autoComplete="off"
       >
         <div className="reg-candidate__form--name">
@@ -112,7 +99,7 @@ const CandidateInfo = () => {
             placeholder="Tên..."
             register={register}
           >
-            {errors.firstname?.message}
+            {errors?.firstname?.message}
           </CustomInput>
         </div>
 
@@ -139,13 +126,6 @@ const CandidateInfo = () => {
           register={register}
         />
 
-        {/* <label className="reg-candidate__form--label" htmlFor="gender">Chuyên ngành</label>
-                <select {...register("major")} id="major" className="reg-candidate__form--select">
-                    {
-                        majorList.map((major) => <option value={major.id} key={major.id}>{major.name}</option>)
-                    }
-                </select> */}
-
         <CustomInput
           label="Avatar"
           id="avatar"
@@ -161,7 +141,7 @@ const CandidateInfo = () => {
           id="cv"
           type="file"
           register={register}
-          check={true}
+          // check={true}
         >
           {errors.cv?.message}
         </CustomInput>
@@ -178,5 +158,4 @@ const CandidateInfo = () => {
     </div>
   );
 };
-
 export default CandidateInfo;
