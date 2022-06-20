@@ -7,7 +7,7 @@ import "./styles.scss";
 // import CustomInput from "../../../components/CustomInput";
 import UniversityForm from "../../../containers/Admin/UniversityForm";
 
-const CompanyDetail = () => {
+const UniversityDetail = () => {
   return (
     <div className="company-detail">
       <Paper className="company-detail__title-container">
@@ -23,4 +23,4 @@ const CompanyDetail = () => {
   );
 };
 
-export default CompanyDetail;
+export default UniversityDetail;

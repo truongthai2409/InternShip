@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Avatar, Grid, Switch } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
@@ -10,11 +11,18 @@ import CustomTextarea from "../../../components/CustomTextarea";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
+import {
+  addUniversity,
+  getUniversityDetail,
+} from "../../../store/slices/Admin/university/unversitySlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function UniversityForm(props) {
   const { isAdd } = props;
+
+  const { universityDetail } = useSelector((state) => state.university);
+  // console.log(universityDetail);
 
   const [image, setImage] = useState(cameraLogo);
   const [isEdit, setIsEdit] = useState(isAdd);
@@ -22,13 +30,47 @@ export default function UniversityForm(props) {
   const fileInput = useRef(null);
   const dispatch = useDispatch();
 
+  // get params from URL
+  const { uniId } = useParams();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  /**
+   * get company details
+   */
+  useEffect(() => {
+    if (!isAdd) {
+      setImage(cameraLogo);
+      dispatch(getUniversityDetail(uniId));
+    }
+  }, [isAdd]);
+
+  /**
+   * @dependency universityDetail
+   * isAdd ? "" : universityDetail
+   */
+  useEffect(() => {
+    if (universityDetail) {
+      if (!isAdd) {
+        setImage(`http://localhost:8085${universityDetail.avatar}`);
+      }
+      setValue("logo", isAdd ? "" : universityDetail.avatar);
+      setValue("name", isAdd ? "" : universityDetail.name);
+      setValue("description", isAdd ? "" : universityDetail.description);
+      setValue("email", isAdd ? "" : universityDetail.email);
+      setValue("phone", isAdd ? "" : universityDetail.phone);
+      setValue("shortName", isAdd ? "" : universityDetail.shortName);
+      setValue("website", isAdd ? "" : universityDetail.website);
+    }
+  }, [universityDetail, isAdd]);
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -45,18 +87,35 @@ export default function UniversityForm(props) {
   // handle Submit form
   const onSubmit = (data) => {
     const universityData = {
-      description: data.description,
-      email: data.email,
-      // logo: null,
-      name: data.name,
-      phone: data.phone,
-      tax: data.tax,
-      website: data.website,
+      logo: data.logo[0],
+      university: JSON.stringify({
+        description: data.description,
+        email: data.email,
+        // logo: null,
+        name: data.name,
+        phone: data.phone,
+        shortName: data.shortName,
+        website: data.website,
+      }),
     };
 
     console.log(universityData);
 
-    // dispatch(adduniversity(universityData));
+    dispatch(
+      addUniversity({
+        universityData,
+        reset: reset({
+          description: "",
+          email: "",
+          logo: "",
+          name: "",
+          phone: "",
+          shortName: "",
+          website: "",
+        }),
+        setImage: setImage(cameraLogo),
+      })
+    );
   };
 
   // Click to Edit
@@ -69,6 +128,7 @@ export default function UniversityForm(props) {
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="off"
       className="university-form"
+      encType="multipart/form-data"
     >
       <div className="university-form__container">
         <Grid container>
@@ -79,7 +139,7 @@ export default function UniversityForm(props) {
                 // variant="rounded"
                 alt="university-logo"
                 className="university-form__avatar"
-                onClick={() => fileInput.current.click()}
+                // onClick={() => fileInput.current.click()}
               />
               {/* <h3>university Name</h3> */}
               <input
@@ -88,7 +148,7 @@ export default function UniversityForm(props) {
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                ref={fileInput}
+                // ref={fileInput}
               />
               <p className="university-form__error">{errors.logo?.message}</p>
 
@@ -99,11 +159,13 @@ export default function UniversityForm(props) {
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
-                  {!isEdit ? (
-                    <button type="button" onClick={handleOnClickEdit}>
-                      Sửa
-                    </button>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={handleOnClickEdit}
+                    className="university-form__button-edit"
+                  >
+                    Sửa
+                  </button>
                 </div>
               ) : null}
             </div>
@@ -118,7 +180,7 @@ export default function UniversityForm(props) {
                     type="text"
                     placeholder="Tên trường..."
                     register={register}
-                    defaultValue="name"
+                    // defaultValue="name"
                     check={!isEdit}
                   >
                     {errors.name?.message}
@@ -159,7 +221,7 @@ export default function UniversityForm(props) {
                   </CustomInput>
                   <CustomInput
                     label="Tên viết tắt"
-                    id="tax"
+                    id="shortName"
                     type="text"
                     placeholder="VD: UTE..."
                     register={register}

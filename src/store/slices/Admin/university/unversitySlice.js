@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import notificationSlice from "../../notifications/notificationSlice";
+import api from "../../../../config/api/apiConfig";
 // import { useDispatch } from "react-redux";
 
-const companySlice = createSlice({
-  name: "Company",
+const universitySlice = createSlice({
+  name: "university",
   initialState: {
     universityList: [],
     universityDetail: {},
@@ -13,7 +14,7 @@ const companySlice = createSlice({
   reducer: {},
   extraReducers: (builder) => {
     builder.addCase(getUniversityList.fulfilled, (state, { payload }) => {
-      state.companyList = payload;
+      state.universityList = payload;
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
@@ -21,7 +22,7 @@ const companySlice = createSlice({
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {
-      state.companyDetail = payload;
+      state.universityDetail = payload;
     });
     builder.addCase(updateUniversityInfo.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
@@ -31,14 +32,14 @@ const companySlice = createSlice({
   },
 });
 
-export default companySlice;
+export default universitySlice;
 
 /**
  * get company list
  * @returns company list
  */
 export const getUniversityList = createAsyncThunk(
-  "company/getUniversityList",
+  "university/getUniversityList",
   async () => {
     return await axios
       .get("http://localhost:8085/api/university")
@@ -58,27 +59,26 @@ export const getUniversityList = createAsyncThunk(
  */
 
 export const addUniversity = createAsyncThunk(
-  "company/addCompany",
+  "university/addUniversity",
   async (data, thunkAPI) => {
-    const { companyData, reset } = data;
-    return axios
-      .post("http://localhost:8085/api/company", companyData)
+    const { universityData, reset, setImage } = data;
+    console.log(reset);
+    return api
+      .post("http://localhost:8085/api/university/add", universityData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Thêm công ty thành công")
+          notificationSlice.actions.successMess("Thêm trường thành công")
         );
-        reset({
-          description: "",
-          email: "",
-          // logo: image,
-          name: "",
-          phone: "",
-          shortName: "",
-          website: "",
-        });
+        setImage();
+        reset();
         // return response.data;
       })
       .catch((error) => {
+        console.log(error.response);
         return error.response.data;
       });
   }
@@ -90,10 +90,10 @@ export const addUniversity = createAsyncThunk(
  * @return company detail
  */
 export const getUniversityDetail = createAsyncThunk(
-  "company/getUniversityDetail",
-  async (comId) => {
+  "university/getUniversityDetail",
+  async (uniId) => {
     return await axios
-      .get(`http://localhost:8085/api/university/${comId}`)
+      .get(`http://localhost:8085/api/university/${uniId}`)
       .then((response) => {
         return response.data;
       })
@@ -110,7 +110,7 @@ export const getUniversityDetail = createAsyncThunk(
  * error => error.response.data
  */
 export const updateUniversityInfo = createAsyncThunk(
-  "company/updateUniversityInfo",
+  "university/updateUniversityInfo",
   async (updateData, thunkAPI) => {
     const { universityData, setIsEdit } = updateData;
     // console.log(companyData);
