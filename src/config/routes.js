@@ -5,6 +5,7 @@ import University from "../pages/Admin/University";
 import NotFound from "../pages/NotFound";
 import CompanyDetail from "../pages/Admin/CompanyDetail";
 import UserDetail from "../pages/Admin/UserDetail";
+import UniversityDetail from "../pages/Admin/UniversityDetail";
 
 import {
   RegisterStep1,
@@ -24,6 +25,10 @@ export const adminRouter = [
   {
     path: "university",
     Component: University,
+  },
+  {
+    path: "/admin/university/:uniId",
+    Component: UniversityDetail,
   },
   {
     path: "company",

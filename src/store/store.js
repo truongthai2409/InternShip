@@ -4,6 +4,7 @@ import notificationSlice from "./slices/notifications/notificationSlice";
 import userSlice from "./slices/Admin/user/userSlice";
 import companySlice from "./slices/Admin/company/companySlice";
 import loginSlice from "./slices/main/login/loginSlice";
+import universitySlice from "./slices/Admin/university/unversitySlice";
 
 const store = configureStore({
   reducer: {
@@ -11,12 +12,13 @@ const store = configureStore({
     notification: notificationSlice.reducer,
     user: userSlice.reducer,
     company: companySlice.reducer,
-    authentication: loginSlice.reducer
+    authentication: loginSlice.reducer,
+    university: universitySlice.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       serializableCheck: false,
     }),
 });
-
 
 export default store;
