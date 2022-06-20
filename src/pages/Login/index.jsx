@@ -3,16 +3,26 @@ import './styles.scss'
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
 
 import CustomCheckbox from "../../components/CustomCheckbox";
 
 import CustomInput from '../../components/CustomInput/index'
 import Button from '../../components/Button/index'
 
+import {loginUser} from "../../store/slices/main/login/loginSlice";
+import { authenticationSelector } from '../../store/selectors/main/loginSelectors'
+
 import { schema } from "./data";
 
 const Login = () => {
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const status = useSelector(authenticationSelector)
+    if (status === "success") {
+        navigate("/")
+    }
     const {
     register,
     handleSubmit,
@@ -22,7 +32,13 @@ const Login = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        const userData = {
+            username: data.username,
+            password: data.password
+        }
+
+        console.log(userData);
+        dispatch(loginUser(userData))
     }
 
     return (
