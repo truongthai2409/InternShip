@@ -27,7 +27,19 @@ const CompanyTable = () => {
 
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
-    { field: "name", headerName: "Tên công ty", flex: 1 },
+    {
+      field: "name",
+      headerName: "Tên công ty",
+      flex: 1,
+      renderCell: (params) => {
+        const { row } = params;
+        return (
+          <Tooltip title={row.name}>
+            <p>{row.name}</p>
+          </Tooltip>
+        );
+      },
+    },
     {
       field: "website",
       headerName: "Website",
@@ -55,7 +67,23 @@ const CompanyTable = () => {
         );
       },
     },
-    { field: "tax", headerName: "Mã số thuế", width: 110 },
+    {
+      field: "tax",
+      headerName: "Mã số thuế",
+      width: 110,
+      renderCell: (params) => {
+        const { row } = params;
+        // console.log(row.email);
+        return (
+          <a
+            href={`https://www.google.com/search?q=ma+so+thue+${row.tax}`}
+            className="company-table__hyperlink"
+          >
+            {row.tax}
+          </a>
+        );
+      },
+    },
     { field: "date", headerName: "Ngày tạo", width: 110 },
     {
       field: "status",

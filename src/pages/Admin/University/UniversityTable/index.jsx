@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,19 @@ const UniversityTable = () => {
   // console.log(universityList);
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
-    { field: "name", headerName: "Tên công ty", flex: 1 },
+    {
+      field: "name",
+      headerName: "Tên công ty",
+      flex: 1,
+      renderCell: (params) => {
+        const { row } = params;
+        return (
+          <Tooltip title={row.name}>
+            <p>{row.name}</p>
+          </Tooltip>
+        );
+      },
+    },
     { field: "shortName", headerName: "Tên viết tắt", width: 100 },
     // { field: "website", headerName: "Website", width: 170 },
     {
