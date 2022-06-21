@@ -9,7 +9,6 @@ import Select from "../../../../components/Select";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../../../config/api/apiConfig";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +18,6 @@ import notificationSlice from "../../../../store/slices/notifications/notificati
 import { statusSelector } from "../../../../store/selectors/main/registerSelectors";
 
 import { majorList, genderList, schema } from "./data";
-import axios from "axios";
 
 const CandidateInfo = () => {
   const navigate = useNavigate();
@@ -40,39 +38,27 @@ const CandidateInfo = () => {
 
   const onSubmit = async (data) => {
         const step2Data = JSON.parse(sessionStorage.getItem("account"))
-        // console.log(data.avatar[0])
-        // const userData= {
-        //     major: {
-        //         id: parseInt(data.major)
-        //     },
-        //     // fileCV: data.cv[0],
-        //     createUser: {
-        //         username: step2Data.username,
-        //         password: step2Data.password,
-        //         confirmPassword: step2Data.confirmPassword,
-        //         gender: parseInt(data.gender),
-        //         lastName: data.lastname,
-        //         firstName: data.firstname,
-        //         phone: data.phone,
-        //         email: step2Data.email,
-        //         // fileAvatar: data.avatar[0],
-        //         role: {
-        //             id: parseInt(step2Data.role.id)
-        //         }
-        //     }
-        // }
-
-        const userData = {
-          file: data.avatar[0],
-          user: JSON.stringify({
-              username: step2Data.username,
-              password: step2Data.password,
-              confirmPassword: step2Data.confirmPassword,
-              email: step2Data.email,
-              role: {
-                id: parseInt(step2Data.role.id)
-              }
-          })
+        const userData= {
+            fileCV: data.cv[0],
+            fileAvatar: data.avatar[0],
+            candidate: JSON.stringify({
+              createUser: {
+                username: step2Data.username,
+                password: step2Data.password,
+                confirmPassword: step2Data.confirmPassword,
+                gender: parseInt(data.gender),
+                lastName: data.lastname,
+                firstName: data.firstname,
+                phone: data.phone,
+                email: step2Data.email,
+                role: {
+                    id: parseInt(step2Data.role.id)
+                }
+              },
+              major: {
+                id: parseInt(data.major)
+              },
+            })
         }
         dispatch(registerUser(userData))
     }
