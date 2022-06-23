@@ -44,6 +44,7 @@ export const getUniversityList = createAsyncThunk(
     return await axios
       .get("http://localhost:8085/api/university")
       .then((response) => {
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {

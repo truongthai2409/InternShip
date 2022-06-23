@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import "./styles.scss";
 
@@ -12,21 +12,30 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import api from "../../../../config/api/apiConfig";
 
 import { registerUser } from "../../../../store/slices/main/register/registerSlice";
 import notificationSlice from "../../../../store/slices/notifications/notificationSlice";
 import { statusSelector } from "../../../../store/selectors/main/registerSelectors";
 
-import { majorList, genderList, schema } from "./data";
+import { genderList, schema } from "./data";
 
 const CandidateInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [majorList, setMajorList] = useState([])
 
   const handleBackClick = (e) => {
     e.preventDefault();
     navigate(-1);
   };
+
+  useEffect(() => {
+    api.get("http://localhost:8085/api/major")
+      .then((res) => {
+        setMajorList(res)
+      })
+  }, []);
 
   const status = useSelector(statusSelector);
 
