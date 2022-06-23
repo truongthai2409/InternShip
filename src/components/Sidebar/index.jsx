@@ -5,7 +5,7 @@ import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
 import { Hidden } from "@mui/material";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./styles.scss";
 import CustomLink from "../CustomLink";
 
@@ -36,10 +36,17 @@ const sidebarLink = [
   },
   {
     id: 5,
+    to: "major",
+    name: "Quản lý Major",
+    icon: AccountCircleIcon,
+  },
+  {
+    id: 6,
     to: "statistical",
     name: "Thống kê",
     icon: AnalyticsOutlinedIcon,
   },
+  
 ];
 
 const Sidebar = () => {

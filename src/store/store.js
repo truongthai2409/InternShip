@@ -4,6 +4,7 @@ import notificationSlice from "./slices/notifications/notificationSlice";
 import userSlice from "./slices/Admin/user/userSlice";
 import companySlice from "./slices/Admin/company/companySlice";
 import universitySlice from "./slices/Admin/university/unversitySlice";
+import majorSlice from "./slices/Admin/major/majorSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userSlice.reducer,
     company: companySlice.reducer,
     university: universitySlice.reducer,
+    major: majorSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
