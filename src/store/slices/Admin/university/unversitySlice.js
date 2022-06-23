@@ -64,7 +64,7 @@ export const addUniversity = createAsyncThunk(
     const { universityData, reset, setImage } = data;
     console.log(reset);
     return api
-      .post("http://localhost:8085/api/university/add", universityData, {
+      .post("http://localhost:8085/api/university", universityData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

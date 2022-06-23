@@ -1,27 +1,26 @@
 import React, {useEffect} from "react";
 import "./styles.scss";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Logo from "../../components/Logo/index";
 import Notification from "../../components/Notification";
-import { userSelector } from '../../store/selectors/main/registerSelectors'
+import { userSelector, statusSelector } from '../../store/selectors/main/registerSelectors'
 
-import notificationSlice from "../../store/slices/notifications/notificationSlice";
 import {notificationSelector} from "../../store/selectors/notificationSelectors"
 
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 export default function RegisterContainer() {
   const notification  = useSelector(notificationSelector);
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   console.log("Notification");
-  //   dispatch(notificationSlice.actions.successMess("Success"))
-  // }, []);
-  // Lấy ra role id để làm subtitle cho logo
+  const status = useSelector(statusSelector)
 
-  // const roleID = JSON.parse(sessionStorage.getItem("account"))?.role.id
+  if (status === "success") {
+    setTimeout(() => {
+      navigate("/login")
+    }, 1000)
+  }
 
   const roleID = useSelector(userSelector)?.role?.id
   return (
@@ -31,7 +30,7 @@ export default function RegisterContainer() {
       <Outlet />
       <div className="register-container__footer">
         <p>
-          Bạn đã có tài khoản? <Link to="/">Đăng nhập</Link>
+          Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
         </p>
       </div>
       <Notification notifyAlert={notification} />

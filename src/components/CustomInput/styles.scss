@@ -6,7 +6,7 @@
     text-align: left;
     .custom-input__label {
         font-family: $f-family;
-        font-size: 14px;
+        font-size: $fs-14;
         font-weight: $fw-bold-1;
         // color: rgb(145, 158, 171);
         color: $color-black-0;
@@ -21,7 +21,7 @@
             border: 1.6px solid $primary-color;
             border-radius: 5px;
             width: 100%;
-            padding: 15px 12px;
+            padding: 21px 12px;
 
             &:hover {
                 border: 1.6px solid $primary-color;

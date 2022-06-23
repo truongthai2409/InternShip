@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
 import CustomTextarea from "../../../components/CustomTextarea";
+import CustomSelect from "../../../components/CustomSelect";
+import SelectCustom from "../../../components/Select";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
@@ -16,6 +18,10 @@ import {
   getCompanyDetail,
   updateCompanyInfo,
 } from "../../../store/slices/Admin/company/companySlice";
+import {
+  getProviceList,
+  getDistrictList,
+} from "../../../store/slices/location/locationSlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -24,7 +30,8 @@ export default function CompanyForm(props) {
 
   // get global state from redux store
   const { companyDetail, error } = useSelector((state) => state.company);
-  // console.log(error);
+  const { provinceList, districtList } = useSelector((state) => state.location);
+  console.log(provinceList, districtList);
 
   const {
     register,
@@ -48,6 +55,11 @@ export default function CompanyForm(props) {
   const { comid } = useParams();
   
 
+  useEffect(() => {
+    dispatch(getProviceList());
+    // dispatch(getDistrictList(1));
+  }, []);
+
   /**
    * get company details
    * @dependency  comid
@@ -56,7 +68,7 @@ export default function CompanyForm(props) {
     if (!isAdd) {
       dispatch(getCompanyDetail(comid));
     }
-  }, []);
+  }, [isAdd]);
 
   /**
    * @dependency companyDetail
@@ -120,6 +132,12 @@ export default function CompanyForm(props) {
   const handleOnClickEdit = () => {
     setIsEdit(!isEdit);
   };
+
+  // handle change district
+  // const handleChangeDistrict = (e) => {
+  //   console.log(e.target.value);
+  //   dispatch(getDistrictList(e.target.value));
+  // };
 
   return (
     <form
@@ -229,6 +247,20 @@ export default function CompanyForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
+                  {/* <CustomSelect
+                    name="Tỉnh/Thành phố"
+                    label="Tỉnh/Thành phố"
+                    dispatch={dispatch}
+                    getDistrictList={getDistrictList}
+                    selectOptions={provinceList}
+                  />
+                  <CustomSelect
+                    name="Quận/Huyện"
+                    label="Quận/Huyện"
+                    // dispatch={dispatch}
+                    // getDistrictList={getDistrictList}
+                    selectOptions={districtList}
+                  /> */}
                 </div>
               </Grid>
               <Grid item md={12}>

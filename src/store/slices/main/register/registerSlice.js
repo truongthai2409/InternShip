@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom"
 import api from "../../../../config/api/apiConfig";
 
 const registerSlice = createSlice({
@@ -26,7 +27,7 @@ const registerSlice = createSlice({
         state.status = "loading";
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        if (action.payload?.user) {
+        if (action.payload?.id) {
           state.user = action.payload;
           state.status = "success";
           state.error = {};
@@ -67,20 +68,17 @@ export const registerUser = createAsyncThunk(
     }
     
     console.log(data);
-    // const res = await api.post(`http://localhost:8085/api/${role}`, data)
-    const res = await api.post(`http://localhost:8085/api/user/uploadFile`, data, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-          }
+    const res = await api.post(`http://localhost:8085/api/candidate`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
     })
     .then((res) => {
-        console.log(res);
         return res
         })
     .catch((err) => {
-        console.log(err);
         return err
     });
     console.log(res);
-    return data
+    return res
 })
