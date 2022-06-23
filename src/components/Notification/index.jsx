@@ -9,10 +9,6 @@ const Notification = (props) => {
   const dispatch = useDispatch();
 
   const handleCloseNotification = () => {
-    // dispatch({
-    //   type: "CLOSE_NOTIFICATION",
-    //   payload: false,
-    // });
     dispatch(notificationSlice.actions.close())
     console.log("Close");
   };

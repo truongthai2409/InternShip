@@ -35,8 +35,9 @@ const UserTable = () => {
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
+        // console.log(row)
+
         const handleOnClick = () => {
-          console.log(row.username);
           navigate(`/admin/user/${row.username}`);
         };
         return (

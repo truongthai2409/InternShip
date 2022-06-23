@@ -7,23 +7,49 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../../../components/Table";
-import { getUniversityList } from "../../../../store/slices/Admin/university/unversitySlice";
 
-const UniversityTable = () => {
+const DemandTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const { universityList } = useSelector((state) => state.university);
 
-  useEffect(() => {
-    dispatch(getUniversityList());
-  }, []);
-  // console.log(universityList);
+  const draftText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices feugiat tincidunt. Vestibulum rhoncus, leo sed fringilla aliquam, lectus enim ornare urna, ut iaculis lorem ex ac ipsum. Curabitur eget mauris varius, aliquet neque id, commodo arcu. Nam quis pharetra quam. Duis luctus sapien eu nisi interdum, sed semper erat porta."
+
+//   const { DemandList } = useSelector((state) => state.Demand);
+    const demandList = [
+        {
+            id: 1,
+            name: "Kỳ thực tập tháng 6/2022",
+            description: draftText,
+            requirement: draftText,
+            otherInfo: draftText,
+            status: "Not verified",
+            students: [],
+            major: [],
+            partner: 1,
+            start: "",
+            end: "",
+            createDate: ""
+        },
+        {
+            id: 2,
+            name: "Kỳ thực tập tháng 8/2022",
+            description: draftText,
+            requirement: draftText,
+            otherInfo: draftText,
+            status: "Not verified",
+            students: [],
+            major: [],
+            partner: 10,
+            start: "",
+            end: "",
+            createDate: "",
+        },
+    ]
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
     {
       field: "name",
-      headerName: "Tên công ty",
+      headerName: "Tiêu đề bài đăng",
       flex: 1,
       renderCell: (params) => {
         const { row } = params;
@@ -34,37 +60,10 @@ const UniversityTable = () => {
         );
       },
     },
-    { field: "shortName", headerName: "Tên viết tắt", width: 100 },
-    // { field: "website", headerName: "Website", width: 170 },
-    {
-      field: "website",
-      headerName: "Website",
-      width: 200,
-      renderCell: (params) => {
-        const { row } = params;
-        return (
-          <a href={row.website} className="company-table__hyperlink">
-            {row.website}
-          </a>
-        );
-      },
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 220,
-      renderCell: (params) => {
-        const { row } = params;
-        // console.log(row.email);
-        return (
-          <a href={`mailto:${row.email}`} className="company-table__hyperlink">
-            {row.email}
-          </a>
-        );
-      },
-    },
-    // { field: "majors", headerName: "Chuyên ngành", width: 130 },
+    { field: "partner", headerName: "Cộng tác viên", width: 150 },
+    { field: "major", headerName: "Chuyên ngành", width: 100 },
     { field: "createDate", headerName: "Ngày tạo", width: 150 },
+    { field: "students", headerName: "Danh sách sinh viên", width: 150 },
     {
       field: "status",
       headerName: "Trạng thái",
@@ -99,7 +98,7 @@ const UniversityTable = () => {
         const { row } = params;
         const handleClick = () => {
           // console.log(row);
-          navigate(`/admin/university/${row.id}`);
+          navigate(`/admin/Demand/${row.id}`);
         };
         return (
           <>
@@ -116,17 +115,16 @@ const UniversityTable = () => {
   ];
 
   const rows = [];
-  for (let i = 0; i < universityList.length; i++) {
+  for (let i = 0; i < demandList.length; i++) {
     rows.push({
-      id: universityList[i].id,
+      id: demandList[i].id,
       stt: i + 1,
-      name: universityList[i].name,
-      shortName: universityList[i].shortName,
-      website: universityList[i].website,
-      email: universityList[i].email,
-      // majors: universityList[i].majors,
-      createDate: universityList[i].createDate,
-      status: universityList[i].status,
+      name: demandList[i].name,
+      major: demandList[i].major,
+      partner: demandList[i].partner,
+      createDate: demandList[i].createDate,
+      status: demandList[i].status,
+      students: demandList[i].students,
     });
   }
   return (
@@ -136,4 +134,4 @@ const UniversityTable = () => {
   );
 };
 
-export default UniversityTable;
+export default DemandTable;

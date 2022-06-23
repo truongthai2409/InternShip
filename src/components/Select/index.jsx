@@ -4,7 +4,7 @@ import { FormControl, Select, MenuItem } from "@mui/material";
 
 import "./styles.scss";
 
-const SelectCustom = ({ selectName, selectOptions, register, id }) => {
+const SelectCustom = ({ selectName, selectOptions, register, id, check }) => {
   // render option
   const renderSelectOption = () => {
     return selectOptions.map((item) => {
@@ -25,6 +25,7 @@ const SelectCustom = ({ selectName, selectOptions, register, id }) => {
           inputProps={{ "aria-label": "Without label" }}
           defaultValue={""}
           {...register(id)}
+          disabled={check}
         >
           <MenuItem value="">
             <em>None</em>

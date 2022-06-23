@@ -53,6 +53,7 @@ export default function CompanyForm(props) {
 
   // get params from URL
   const { comid } = useParams();
+  
 
   useEffect(() => {
     dispatch(getProviceList());

@@ -1,32 +1,5 @@
 import * as yup from "yup"
 
-export const majorList = [
-        {
-            id: 1,
-            name: "Khoa học máy tính"
-        },
-        {
-            id: 2,
-            name: "Công nghệ phần mềm"
-        },
-        {
-            id: 3,
-            name: "Kỹ thuật máy tính"
-        },
-        {
-            id: 4,
-            name: "Trí tuệ nhân tạo"
-        },
-        {
-            id: 5,
-            name: "Kỹ thuật mạng"
-        },
-        {
-            id: 6,
-            name: "Hệ thống quản lý thông tin"
-        }
-    ]
-
 export const genderList = [
     {
         id: 0,

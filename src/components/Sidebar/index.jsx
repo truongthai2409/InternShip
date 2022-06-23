@@ -4,8 +4,9 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { Hidden } from "@mui/material";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./styles.scss";
 import CustomLink from "../CustomLink";
 
@@ -36,10 +37,23 @@ const sidebarLink = [
   },
   {
     id: 5,
+    to: "demand",
+    name: "Quản lý nhu cầu",
+    icon: ArticleOutlinedIcon,
+  },
+  {
+    id: 6,
     to: "statistical",
     name: "Thống kê",
     icon: AnalyticsOutlinedIcon,
   },
+  {
+    id: 7,
+    to: "major",
+    name: "Quản lý Major",
+    icon: AccountCircleIcon,
+  }
+  
 ];
 
 const Sidebar = () => {
