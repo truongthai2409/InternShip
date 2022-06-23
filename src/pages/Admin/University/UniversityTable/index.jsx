@@ -12,7 +12,7 @@ import { getUniversityList } from "../../../../store/slices/Admin/university/unv
 const UniversityTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  
   const { universityList } = useSelector((state) => state.university);
 
   useEffect(() => {

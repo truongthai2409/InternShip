@@ -14,6 +14,8 @@ import {
   RegisterStep3,
 } from "../pages/Register/index";
 import DemandDetail from "../pages/Admin/DemandDetail";
+import Major from "../pages/Admin/Major";
+import MajorDetail from "../pages/Admin/MajorDetail";
 
 export const adminRouter = [
   {
@@ -36,9 +38,18 @@ export const adminRouter = [
     path: "company",
     Component: Company,
   },
+  
   {
     path: "/admin/company/:comid",
     Component: CompanyDetail,
+  },
+  {
+    path: "major",
+    Component: Major,
+  },
+  {
+    path: "/admin/major/:id",
+    Component: MajorDetail,
   },
   {
     path: "/admin/user/:username",
