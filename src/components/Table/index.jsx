@@ -19,6 +19,7 @@ export default function DataTable({ rows, columns }) {
           components={{ Toolbar: GridToolbar }}
           disableSelectionOnClick
           autoHeight
+          hideFooterPagination
         />
       </div>
     </Paper>

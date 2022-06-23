@@ -246,7 +246,7 @@ export default function CompanyForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
-                  {/* <CustomSelect
+                  <CustomSelect
                     name="Tỉnh/Thành phố"
                     label="Tỉnh/Thành phố"
                     dispatch={dispatch}
@@ -259,7 +259,7 @@ export default function CompanyForm(props) {
                     // dispatch={dispatch}
                     // getDistrictList={getDistrictList}
                     selectOptions={districtList}
-                  /> */}
+                  />
                 </div>
               </Grid>
               <Grid item md={12}>
