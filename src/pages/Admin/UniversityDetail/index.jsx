@@ -9,13 +9,13 @@ import UniversityForm from "../../../containers/Admin/UniversityForm";
 
 const UniversityDetail = () => {
   return (
-    <div className="company-detail">
-      <Paper className="company-detail__title-container">
-        <div className="company-detail__title">
+    <div className="university-detail">
+      <Paper className="university-detail__title-container">
+        <div className="university-detail__title">
           <h2>Quản lý trường</h2>
         </div>
       </Paper>
-      <Paper className="company-detail__content-container">
+      <Paper className="university-detail__content-container">
         <h2>Thông tin chi tiết trường</h2>
         <UniversityForm isAdd={false} />
       </Paper>

@@ -2,6 +2,7 @@ import Dashboard from "../pages/Admin/Dashboard";
 import User from "../pages/Admin/User";
 import Company from "../pages/Admin/Company";
 import University from "../pages/Admin/University";
+import Demand from "../pages/Admin/Demand";
 import NotFound from "../pages/NotFound";
 import CompanyDetail from "../pages/Admin/CompanyDetail";
 import UserDetail from "../pages/Admin/UserDetail";
@@ -12,6 +13,7 @@ import {
   RegisterStep2,
   RegisterStep3,
 } from "../pages/Register/index";
+import DemandDetail from "../pages/Admin/DemandDetail";
 import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
@@ -50,6 +52,7 @@ export const adminRouter = [
     path: "/admin/major/:id",
     Component: MajorDetail,
   },
+<<<<<<< HEAD
   {
     path: "location",
     Component: Location,
@@ -62,9 +65,23 @@ export const adminRouter = [
     path: "*",
     Component: NotFound,
   },
+=======
+>>>>>>> 0a76715dfeb76ebfb3cd60f49f9bf6f486e30e0e
   {
     path: "/admin/user/:username",
     Component: UserDetail,
+  },
+  {
+    path: "demand",
+    Component: Demand,
+  },
+  {
+    path: "demand/:demandId",
+    Component: DemandDetail,
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ];
 
