@@ -35,12 +35,6 @@ const sidebarLink = [
     icon: BusinessOutlinedIcon,
   },
   {
-    id: 5,
-    to: "major",
-    name: "Quản lý major",
-    icon: AccountCircleIcon,
-  },
-  {
     id: 6,
     to: "location",
     name: "Quản lý location",
