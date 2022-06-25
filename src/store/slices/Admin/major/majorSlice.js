@@ -67,7 +67,6 @@ export const getMajorList = createAsyncThunk(
 export const addMajor = createAsyncThunk(
   "major/addMajor",
   async (data, thunkAPI) => {
-    const {name} = data
     return api
       .post(`http://localhost:8085/api/major`,data )
       .then((response) => {
@@ -112,7 +111,6 @@ export const updateMajorInfo = createAsyncThunk(
   "major/updateMajorInfo",
   async (updateData, thunkAPI) => {
     const { majorData, setIsEdit } = updateData;
-    console.log(majorData);
     return axios
       .put(
         `http://localhost:8085/api/major/${majorData.id}`,
@@ -135,7 +133,6 @@ export const updateMajorInfo = createAsyncThunk(
 export const deleteMajor= createAsyncThunk(
   "major/deleteMajorInfo",
   async (data, thunkAPI) => {
-    console.log(data);
     return axios
       .delete(
         `http://localhost:8085/api/major/${data}`

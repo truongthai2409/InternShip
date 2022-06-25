@@ -37,11 +37,17 @@ const sidebarLink = [
   {
     id: 5,
     to: "major",
-    name: "Quản lý Major",
+    name: "Quản lý major",
     icon: AccountCircleIcon,
   },
   {
     id: 6,
+    to: "location",
+    name: "Quản lý location",
+    icon: AccountCircleIcon,
+  },
+  {
+    id: 7,
     to: "statistical",
     name: "Thống kê",
     icon: AnalyticsOutlinedIcon,

@@ -14,6 +14,7 @@ import {
 } from "../pages/Register/index";
 import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
+import Location from "../pages/Admin/Location";
 
 export const adminRouter = [
   {
@@ -49,7 +50,14 @@ export const adminRouter = [
     path: "/admin/major/:id",
     Component: MajorDetail,
   },
-  
+  {
+    path: "location",
+    Component: Location,
+  },
+  {
+    path: "/admin/location/:id",
+    // Component: LocationDetail,
+  },
   {
     path: "*",
     Component: NotFound,
