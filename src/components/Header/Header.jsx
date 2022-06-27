@@ -10,7 +10,7 @@ function Header(props) {
     <div className="container">
       <Logo/>
       <div className="login__home">
-        <a href="/login" className="login">Đăng nhập</a>
+        <Link to="/login" className="login">Đăng nhập</Link>
         <Button name="Đăng ký" />
       </div>
     </div>

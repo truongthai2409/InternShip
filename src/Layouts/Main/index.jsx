@@ -2,9 +2,9 @@ import React from "react";
 import Button from "../../components/Button";
 import {  Grid } from "@mui/material";
 import Header from "../../components/Header/Header";
-
+import "./styles.scss"
 const MainLayout = () => {
-  return <div>
+  return <div className="main__layout">
     <Header/>
     <Grid container>
       <Grid item md={2}>

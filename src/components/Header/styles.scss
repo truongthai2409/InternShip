@@ -16,7 +16,13 @@
     padding: 12px 32px;
     text-align: none;
     .login{
-      margin-right:32px;
+      font-family: $f-family-0;
+      width: fit-content;
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+      color: $color-black-0;
+      margin-right: 15px;
     }
   }
 }
