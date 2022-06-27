@@ -17,6 +17,7 @@ import DemandDetail from "../pages/Admin/DemandDetail";
 import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
+import MainPage from "../pages/Main";
 
 export const adminRouter = [
   {
@@ -71,7 +72,12 @@ export const adminRouter = [
 ];
 
 // main router
-export const mainRouter = [];
+export const mainRouter = [
+  {
+    path: "",
+    Component: MainPage,
+  },
+];
 
 // register router
 export const registerRouter = [

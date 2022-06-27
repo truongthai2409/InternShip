@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "../../components/Button";
 import {  Grid } from "@mui/material";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 
-const MainLayout = () => {
+const MainPage = () => {
   return <div>
     <Header/>
     <Grid container>
@@ -20,4 +20,4 @@ const MainLayout = () => {
   </div>;
 };
 
-export default MainLayout;
+export default MainPage;

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AdminRouterLayout from "./Layouts/Admin/index";
 import RegisterLayout from "./Layouts/Register/index";
-import MainLayout from "./Layouts/Main";
+import MainPage from "./pages/Main";
 import LoginLayout from './Layouts/Login/index'
 import Dashboard from "./pages/Admin/Dashboard";
 import { adminRouter, registerRouter } from "./config/routes";
@@ -33,7 +33,7 @@ function App() {
             {renderRegisterRouter()}
           </Route>
           <Route path="/login" element={<LoginLayout/>}></Route>
-          <Route path="/" element={<MainLayout />}></Route>
+          <Route path="/" element={<MainPage />}></Route>
         </Routes>
       </Router>
     </>
