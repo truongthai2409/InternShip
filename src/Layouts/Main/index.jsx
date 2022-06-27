@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import {  Grid } from "@mui/material";
 import Header from "../../components/Header/Header";
 
-const MainPage = () => {
+const MainLayout = () => {
   return <div>
     <Header/>
     <Grid container>
@@ -20,4 +20,4 @@ const MainPage = () => {
   </div>;
 };
 
-export default MainPage;
+export default MainLayout;
