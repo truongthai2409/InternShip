@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/Button";
 import {  Grid } from "@mui/material";
-import Header from "../../components/Header/Header";
+import Header from "../../components/Header";
 
 const MainLayout = () => {
   return <div>
