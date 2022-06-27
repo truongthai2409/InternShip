@@ -52,21 +52,6 @@ export const adminRouter = [
     path: "/admin/major/:id",
     Component: MajorDetail,
   },
-<<<<<<< HEAD
-  {
-    path: "location",
-    Component: Location,
-  },
-  {
-    path: "/admin/location/:id",
-    // Component: LocationDetail,
-  },
-  {
-    path: "*",
-    Component: NotFound,
-  },
-=======
->>>>>>> 0a76715dfeb76ebfb3cd60f49f9bf6f486e30e0e
   {
     path: "/admin/user/:username",
     Component: UserDetail,
