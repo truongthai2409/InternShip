@@ -1,103 +1,122 @@
 @use "../../assets/styles/" as *;
 
 .detail__card {
-  background-color: $color-white-0;
-  border: solid 1px solid;
-  border-radius: 5px;
-  padding: $pd-2;
-  margin-right: 30px;
-  overflow-y: scroll;
-  height: 80vh;
-  .detail__card-1 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    // padding: 0 20px;
-    // padding-right: 39px;
-    .detail__card-intro {
-      display: flex;
-      align-items: center;
-      .name-company {
-        font-size: $fs-20;
-      }
-      .detail__card__logo {
-        margin-right: 15px;
-        width: 72px;
-        height: 60px;
-        left: 30px;
-        top: 30px;
-      }
-    }
-  }
+    background-color: $color-white-0;
+    border-radius: 6px;
+    border: 0.5px solid #dedede;
+    padding: $pd-2;
+    overflow-y: scroll;
+    height: 72vh;
 
-  .detail__card-2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 28px;
-    .tag-name {
-      display: flex;
-      padding: 6px 10px;
-      &__name {
-        font-size: $fs-16;
-      }
-    }
-  }
+    .detail__card-1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // padding: 0 20px;
+        // padding-right: 39px;
+        .detail__card-intro {
+            display: flex;
+            align-items: center;
 
-  .detail__card-3 {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-size: 21px;
-    &-item {
-      padding-bottom: 8px;
-      font-size: $fs-20;
-      &-name {
+            div {
+                h2 {
+                    font-size: 21px;
+                }
+                .name-company {
+                    font-size: 13px;
+                }
+            }
+            .detail__card__logo {
+                margin-right: 15px;
+                width: 72px;
+                height: 60px;
+                left: 30px;
+                top: 30px;
+            }
+        }
+    }
+
+    .detail__card-2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 14px 0px;
+        .tag-name {
+            display: flex;
+            &__name {
+                font-size: $fs-16;
+            }
+        }
+    }
+
+    .detail__card-3 {
         font-family: "Open Sans";
         font-style: normal;
-        font-weight: 700;
-        line-height: 22px;
-        padding-bottom: 16px;
-      }
+        font-size: 21px;
+
+        &-item {
+            font-size: 16px;
+            margin-bottom: 24px;
+
+            &-name {
+                font-family: "Open Sans";
+                font-style: normal;
+                font-weight: 700;
+                line-height: 22px;
+                padding-bottom: 20px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
     }
-  }
 
-  .line::after {
-    background-color: $color-gray-3;
-    content: "";
-    display: inline-block;
-    height: 1px;
-    position: relative;
-    vertical-align: middle;
-    width: 100%;
-  }
-
-  .detail__card-4 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    margin: 20px;
-    &-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      &-icon {
-        color: $primary-color;
-      }
-      &-info {
-        margin-left: 15px;
-      }
+    .line::after {
+        background-color: $color-gray-3;
+        content: "";
+        display: inline-block;
+        height: 1px;
+        position: relative;
+        vertical-align: middle;
+        width: 100%;
     }
-  }
 
-  .detail__card-5 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 20px;
-  }
+    .detail__card-4 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0px;
+        &-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &-icon {
+                color: $primary-color;
+            }
+            &-info {
+                margin-left: 12px;
+                font-size: 15px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .detail__card-5 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+
+            p {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+        }
+    }
 }
 
 .detail__card::-webkit-scrollbar {
-  display: none;
+    display: none;
 }

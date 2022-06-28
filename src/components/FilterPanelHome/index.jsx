@@ -41,7 +41,7 @@ export default function FilterPanelHome() {
 
     return (
         <Box sx={{ width: "100%", paddingLeft: "30px" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "24px" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "24px", height: "66px" }}>
                 <Tabs value={value} onChange={handleChange}>
                     <Tab label="Mới nhất" {...a11yProps(0)} />
                     <Tab label="Đánh giá" {...a11yProps(1)} />

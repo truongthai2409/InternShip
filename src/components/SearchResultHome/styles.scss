@@ -1,7 +1,6 @@
 @use "../../assets/styles/" as *;
 
 .header__with-search {
-  padding-bottom: 6px;
 }
 
 .header__with-search-search {
@@ -10,12 +9,11 @@
   gap: 12px;
   align-items: center;
   justify-content: space-between;
-  margin: 15px;
-  transform: translateX(-14px);
   background: white;
   border: 0.5px solid #dedede;
   border-radius: 6px;
-  height: 60px;
+  height: 66px;
+  margin-bottom: 24px;
 
   .header__with-search-search-wrap {
     .search__icon {

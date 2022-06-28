@@ -1,1 +1,8 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
+
+.formControlLabel {
+    span {
+        font-size: 13px;
+        font-weight: 600;
+    }
+}

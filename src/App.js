@@ -7,6 +7,7 @@ import LoginLayout from './Layouts/Login/index'
 import Dashboard from "./pages/Admin/Dashboard";
 import { adminRouter, registerRouter } from "./config/routes";
 import MainLayout from "./Layouts/Main";
+import Home from './pages/Main/Home/index';
 
 function App() {
   const renderAdminRouter = () => {
@@ -33,7 +34,9 @@ function App() {
             {renderRegisterRouter()}
           </Route>
           <Route path="/login" element={<LoginLayout/>}></Route>
-          <Route path="/" element={<MainLayout />}></Route>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+          </Route>
         </Routes>
       </Router>
     </>
