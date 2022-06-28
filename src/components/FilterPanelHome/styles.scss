@@ -1,0 +1,9 @@
+.tabPanel {
+    height: 80vh;
+    overflow-y: scroll;
+
+}
+
+.tabPanel::-webkit-scrollbar {
+    display: none;
+}

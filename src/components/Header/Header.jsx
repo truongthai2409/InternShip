@@ -1,5 +1,5 @@
-import { Link } from '@mui/material';
 import React from 'react'
+import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types'
 import Button from '../Button'
 import Logo from '../Logo';
@@ -10,8 +10,10 @@ function Header(props) {
     <div className="container">
       <Logo/>
       <div className="login__home">
-        <Link to="/login" className="login">Đăng nhập</Link>
-        <Button name="Đăng ký" />
+        <Link to="/login" className="login">
+          <h5>Đăng Nhập</h5>
+        </Link>
+        <Button name="Đăng Ký" />
       </div>
     </div>
   )
