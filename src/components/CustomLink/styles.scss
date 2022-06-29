@@ -2,17 +2,17 @@
 
 
 .custom-li {
-    padding: 15px 40px;
-    margin: 20px 0;
+    padding: 13px 40px;
+    margin: 12px 0;
     font-family: $f-family;
     
     list-style: none;
     border-radius: 10px;
-    background-color: $color-gray;
+    // background-color: $color-gray;
     .custom-link {
         // padding: 15px 40px;
         text-decoration: none; 
-        font-size: 17px;
+        font-size: 15.5px;
         font-weight: 400;  
         color: rgb(97, 97, 97);
         width: 100%;
@@ -20,10 +20,11 @@
     }
     &:hover {
         transition: all 0.5s ease;
-        background-color: $primary-color;
-        color: $color-white-0;
+        background-color: $primary-color-1;
+        color: $primary-color-2;
         .custom-link{
-            color: $color-white-0;
+            color: $primary-color-2;
+            background-color: $primary-color-1;
         }
     }
 }
@@ -31,8 +32,8 @@
 
 
 .active {
-    background-color: $primary-color;
+    background-color: $primary-color-1;
     .custom-link{
-        color: $color-white-0 !important;
+        color: $primary-color-2;
     }
 }

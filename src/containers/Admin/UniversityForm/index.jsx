@@ -14,6 +14,7 @@ import { schema, renderControlAction } from "./script.js";
 import {
   addUniversity,
   getUniversityDetail,
+  updateUniversityInfo,
 } from "../../../store/slices/Admin/university/unversitySlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -32,7 +33,7 @@ export default function UniversityForm(props) {
 
   // get params from URL
   const { uniId } = useParams();
-  console.log(uniId);
+  // console.log(uniId);
 
   const {
     register,
@@ -63,7 +64,7 @@ export default function UniversityForm(props) {
       if (!isAdd) {
         setImage(`http://localhost:8085${universityDetail.avatar}`);
       }
-      setValue("logo", isAdd ? "" : universityDetail.avatar);
+      // setValue("logo", isAdd ? "" : universityDetail.avatar);
       setValue("name", isAdd ? "" : universityDetail.name);
       setValue("description", isAdd ? "" : universityDetail.description);
       setValue("email", isAdd ? "" : universityDetail.email);
@@ -71,7 +72,7 @@ export default function UniversityForm(props) {
       setValue("shortName", isAdd ? "" : universityDetail.shortName);
       setValue("website", isAdd ? "" : universityDetail.website);
     }
-  }, [universityDetail, isAdd]);
+  }, [universityDetail]);
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -88,7 +89,7 @@ export default function UniversityForm(props) {
   // handle Submit form
   const onSubmit = (data) => {
     const universityData = {
-      logo: data.logo[0],
+      file: data.logo[0],
       university: JSON.stringify({
         description: data.description,
         email: data.email,
@@ -100,23 +101,30 @@ export default function UniversityForm(props) {
       }),
     };
 
-    console.log(universityData);
-
-    dispatch(
-      addUniversity({
+    // console.log(universityData);
+    if (isAdd) {
+      dispatch(
+        addUniversity({
+          universityData,
+          reset: reset({
+            description: "",
+            email: "",
+            logo: "",
+            name: "",
+            phone: "",
+            shortName: "",
+            website: "",
+          }),
+          setImage: setImage(cameraLogo),
+        })
+      );
+    } else {
+      const updateData = {
         universityData,
-        reset: reset({
-          description: "",
-          email: "",
-          logo: "",
-          name: "",
-          phone: "",
-          shortName: "",
-          website: "",
-        }),
-        setImage: setImage(cameraLogo),
-      })
-    );
+        uniId,
+      };
+      dispatch(updateUniversityInfo(updateData));
+    }
   };
 
   // Click to Edit

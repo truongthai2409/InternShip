@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // yup validation for company table
 export const schema = yup
   .object({
-    // logo: yup.mixed().nullable().required("Bạn phải chọn ảnh cho công ty"),
+    logo: yup.mixed().nullable().required("Bạn phải chọn ảnh cho công ty"),
     // .test(
     //   "FILE_SIZE",
     //   "Uploaded file is too bid!",

@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../../../components/Table";
 import { getUniversityList } from "../../../../store/slices/Admin/university/unversitySlice";
+import ProfileTable from "../../../../components/ProfileTable";
 
 const UniversityTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const { universityList } = useSelector((state) => state.university);
 
   useEffect(() => {
@@ -23,46 +24,15 @@ const UniversityTable = () => {
     { field: "stt", headerName: "STT", width: 70 },
     {
       field: "name",
-      headerName: "Tên công ty",
+      headerName: "Trường học",
       flex: 1,
       renderCell: (params) => {
         const { row } = params;
-        return (
-          <Tooltip title={row.name}>
-            <p>{row.name}</p>
-          </Tooltip>
-        );
+        return <ProfileTable row={row} />;
       },
     },
     { field: "shortName", headerName: "Tên viết tắt", width: 100 },
-    // { field: "website", headerName: "Website", width: 170 },
-    {
-      field: "website",
-      headerName: "Website",
-      width: 200,
-      renderCell: (params) => {
-        const { row } = params;
-        return (
-          <a href={row.website} className="company-table__hyperlink">
-            {row.website}
-          </a>
-        );
-      },
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 220,
-      renderCell: (params) => {
-        const { row } = params;
-        // console.log(row.email);
-        return (
-          <a href={`mailto:${row.email}`} className="company-table__hyperlink">
-            {row.email}
-          </a>
-        );
-      },
-    },
+
     // { field: "majors", headerName: "Chuyên ngành", width: 130 },
     { field: "createDate", headerName: "Ngày tạo", width: 150 },
     {

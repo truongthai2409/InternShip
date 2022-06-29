@@ -4,62 +4,76 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import { Hidden } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./styles.scss";
 import CustomLink from "../CustomLink";
 
 const sidebarLink = [
   {
-    id: 1,
-    to: "",
-    name: "Dashboard",
-    icon: AppsOutlinedIcon,
+    title: "Tổng quan",
+    list: [
+      {
+        id: 1,
+        to: "",
+        name: "Dashboard",
+        icon: AppsOutlinedIcon,
+      },
+      {
+        id: 2,
+        to: "statistical",
+        name: "Thống kê",
+        icon: AnalyticsOutlinedIcon,
+      },
+    ],
   },
   {
-    id: 2,
-    to: "user",
-    name: "Quản lý tài khoản",
-    icon: AccountCircleOutlinedIcon,
+    title: "Quản lý chung",
+    list: [
+      {
+        id: 3,
+        to: "user",
+        name: "Tài khoản",
+        icon: AccountCircleOutlinedIcon,
+      },
+      {
+        id: 4,
+        to: "university",
+        name: "Trường học",
+        icon: SchoolOutlinedIcon,
+      },
+      {
+        id: 5,
+        to: "company",
+        name: "Công ty",
+        icon: BusinessOutlinedIcon,
+      },
+      {
+        id: 6,
+        to: "demand",
+        name: "Nhu cầu",
+        icon: ArticleOutlinedIcon,
+      },
+    ],
   },
   {
-    id: 3,
-    to: "university",
-    name: "Quản lý trường",
-    icon: SchoolOutlinedIcon,
+    title: "Khác",
+    list: [
+      {
+        id: 7,
+        to: "major",
+        name: "Chuyên ngành",
+        icon: AccountCircleIcon,
+      },
+    ],
   },
-  {
-    id: 4,
-    to: "company",
-    name: "Quản lý công ty",
-    icon: BusinessOutlinedIcon,
-  },
-  {
-    id: 5,
-    to: "demand",
-    name: "Quản lý nhu cầu",
-    icon: ArticleOutlinedIcon,
-  },
-  {
-    id: 6,
-    to: "statistical",
-    name: "Thống kê",
-    icon: AnalyticsOutlinedIcon,
-  },
-  {
-    id: 7,
-    to: "major",
-    name: "Quản lý Major",
-    icon: AccountCircleIcon,
-  }
-  
 ];
 
 const Sidebar = () => {
-  // render sidebar link
-  const renderSideberLink = () => {
-    return sidebarLink.map((item) => {
+  // render list link
+  const renderListLink = (list) => {
+    return list.map((item) => {
       return (
         <CustomLink to={item.to} key={item.id}>
           <div className="sidebar__link">
@@ -67,6 +81,19 @@ const Sidebar = () => {
             <p>{item.name}</p>
           </div>
         </CustomLink>
+      );
+    });
+  };
+
+  // render sidebar item
+  const renderSideberLink = () => {
+    return sidebarLink.map((item) => {
+      const { title, list } = item;
+      return (
+        <div key={title}>
+          <h5>{title}</h5>
+          {renderListLink(list)}
+        </div>
       );
     });
   };

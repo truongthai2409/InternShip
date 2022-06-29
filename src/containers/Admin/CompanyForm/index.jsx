@@ -31,7 +31,7 @@ export default function CompanyForm(props) {
   // get global state from redux store
   const { companyDetail, error } = useSelector((state) => state.company);
   const { provinceList, districtList } = useSelector((state) => state.location);
-  console.log(provinceList, districtList);
+  // console.log(provinceList, districtList);
 
   const {
     register,
@@ -48,12 +48,11 @@ export default function CompanyForm(props) {
   const [imageFile, setImageFile] = useState(null);
   const [isEdit, setIsEdit] = useState(isAdd);
 
-  const fileInput = useRef(null);
+  const fileInput = useRef();
   const dispatch = useDispatch();
 
   // get params from URL
   const { comid } = useParams();
-  
 
   useEffect(() => {
     dispatch(getProvinceList());
@@ -75,6 +74,9 @@ export default function CompanyForm(props) {
    * isAdd ? "" : companyDetail
    */
   useEffect(() => {
+    if (!isAdd) {
+      setImage(`http://localhost:8085${companyDetail.logo}`);
+    }
     setValue("name", isAdd ? "" : companyDetail.name);
     setValue("description", isAdd ? "" : companyDetail.description);
     setValue("email", isAdd ? "" : companyDetail.email);
@@ -91,7 +93,7 @@ export default function CompanyForm(props) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (x) => {
-        console.log(x.target.result);
+        // console.log(x.target.result);
         setImageFile(imageFile);
         setImage(x.target.result);
       };
@@ -102,26 +104,39 @@ export default function CompanyForm(props) {
   // handle Submit form
   const onSubmit = (data) => {
     const companyData = {
-      description: data.description,
-      email: data.email,
-      // logo: image,
-      name: data.name,
-      phone: data.phone,
-      tax: data.tax,
-      website: data.website,
+      company: JSON.stringify({
+        description: data.description,
+        email: data.email,
+        // logo: image,
+        name: data.name,
+        phone: data.phone,
+        tax: data.tax,
+        website: data.website,
+      }),
+      fileLogo: data.logo[0],
     };
     if (isAdd) {
       const addData = { companyData, reset };
       dispatch(addCompany(addData));
     } else {
-      // console.log({ ...companyData, id: parseInt(comid) });
       const updateData = {
         companyData: {
-          ...companyData,
-          id: parseInt(comid),
+          company: JSON.stringify({
+            description: data.description,
+            email: data.email,
+            // logo: image,
+            name: data.name,
+            phone: data.phone,
+            tax: data.tax,
+            website: data.website,
+            status: {
+              id: 1,
+            },
+          }),
+          fileLogo: data.logo[0],
         },
-
         setIsEdit,
+        comid,
       };
       console.log(updateData);
       dispatch(updateCompanyInfo(updateData));
@@ -154,7 +169,7 @@ export default function CompanyForm(props) {
                 // variant="rounded"
                 alt="company-logo"
                 className="company-form__avatar"
-                onClick={() => fileInput.current.click()}
+                // onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
@@ -163,7 +178,7 @@ export default function CompanyForm(props) {
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                ref={fileInput}
+                // ref={fileInput}
               />
               <p className="company-form__error">{errors.logo?.message}</p>
 
@@ -195,7 +210,6 @@ export default function CompanyForm(props) {
                     type="text"
                     placeholder="Tên công ty..."
                     register={register}
-                    // defaultValue={companyValue.name}
                     check={!isEdit}
                   >
                     {errors.name?.message}

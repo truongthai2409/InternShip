@@ -1,10 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
 // variable color
-$primary-color: #00B074;
-// $primary-color-1: #eaffec;
-// $primary-color-2: #56c596;
+$primary-color-1: #fde8ef;
+$primary-color-2: #ea3a72;
+$primary-color: #ea3a72;
+// $primary-color: #00B074;
+// $primary-color-1: rgba(0, 171, 85, 0.08);
+// $primary-color-2: rgb(0, 171, 85);
 // $primary-color-3: #329d9c;
 // $primary-color: #3949ab;
-$primary-color-1: #e8eaf6;
+// $primary-color-1: #e8eaf6;
 $color-black-0: #29303b; // default
 $color-white-0: #fff; //default
 $color-red: #FF5C58;
@@ -29,6 +36,10 @@ $color-yellow: #ffbb33;
 $color-yellow-1: #F4C150;
 $color-blue:#007791;
 $color-trans:transparent;
+
+//text color
+$text-color: #212121;
+$text-color-1: #868585;
 
 // variable font-size
 $fs-16: 16px; //default
@@ -56,13 +67,13 @@ $pd-2: 20px;
 //variable line-height
 $line-height-0: 1.43; //default
 
-$f-family: 'Inter', sans-serif;
+$f-family: "Public Sans", sans-serif;
 $f-family-0: 'Poppins', sans-serif;
 $f-family-1: 'Inter', sans-serif;
 // Roboto, sans-serif
 
 // Sidebar width
-$sb-width: auto;
+$sb-width: 280px;
 
 //variable font-weight
 $fw-normal: normal;

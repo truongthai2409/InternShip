@@ -30,12 +30,12 @@
             z-index: 1;
         }
         .admin-layout__main {
-            margin: 86px 20px 0px 343px;
+            margin: 86px 20px 0px $sb-width;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            padding: 20px;
+            padding: 20px 30px;
             min-height: 90vh;
-            background-color: $primary-color-1;
+            background-color: #e8eaf6;
         }
     }
 }
