@@ -1,9 +1,9 @@
 @use '../../assets/styles/' as *;
 
 .tabPanel {
-    height: 72vh;
+    height: 600px;
     overflow-y: scroll;
-
+    border-radius: 6px;
 }
 
 .tabPanel::-webkit-scrollbar {
