@@ -24,11 +24,15 @@
         }
 
         .admin-navbar__logo {
-            padding: 0px 60px 0px 40px;
-            h2 {
-                font-size: 30px;
-                font-family: $f-family;
-                font-weight: $fw-bold;
+            padding: 0px 60px 0px 10px;
+            // h2 {
+            //     font-size: 30px;
+            //     font-family: $f-family;
+            //     font-weight: $fw-bold;
+            // }
+            img {
+                // border-radius: 10px;
+                width: 240px;
             }
         }
     }   

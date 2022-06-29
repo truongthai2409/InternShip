@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import DoDisturbAltIcon from "@mui/icons-material/DoDisturbAlt";
 import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,9 @@ import DataTable from "../../../../components/Table";
 import {
   getCompanyList,
   updateCompanyInfo,
+  deleteCompany,
 } from "../../../../store/slices/Admin/company/companySlice";
+import ProfileTable from "../../../../components/ProfileTable";
 
 const CompanyTable = () => {
   const dispatch = useDispatch();
@@ -23,54 +25,23 @@ const CompanyTable = () => {
     dispatch(getCompanyList());
   }, []);
 
-  // console.log(companyList);
+  console.log(companyList);
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 70 },
+    { field: "stt", headerName: "#", width: 70 },
     {
       field: "name",
-      headerName: "Tên công ty",
-      flex: 1,
+      headerName: "Công ty",
+      width: 380,
       renderCell: (params) => {
         const { row } = params;
-        return (
-          <Tooltip title={row.name}>
-            <p>{row.name}</p>
-          </Tooltip>
-        );
-      },
-    },
-    {
-      field: "website",
-      headerName: "Website",
-      flex: 1,
-      renderCell: (params) => {
-        const { row } = params;
-        return (
-          <a href={row.website} className="company-table__hyperlink">
-            {row.website}
-          </a>
-        );
-      },
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      flex: 1,
-      renderCell: (params) => {
-        const { row } = params;
-        // console.log(row.email);
-        return (
-          <a href={`mailto:${row.email}`} className="company-table__hyperlink">
-            {row.email}
-          </a>
-        );
+        return <ProfileTable row={row} />;
       },
     },
     {
       field: "tax",
       headerName: "Mã số thuế",
-      width: 110,
+      flex: 1,
       renderCell: (params) => {
         const { row } = params;
         // console.log(row.email);
@@ -84,41 +55,53 @@ const CompanyTable = () => {
         );
       },
     },
-    { field: "date", headerName: "Ngày tạo", width: 110 },
+    { field: "date", headerName: "Ngày tạo", flex: 1 },
     {
       field: "status",
       headerName: "Trạng thái",
-      width: 120,
+      flex: 1,
       renderCell: (params) => {
         const { row } = params;
         const handleChangeStatus = (e) => {
           const updateData = {
             companyData: {
-              ...row,
-              status: parseInt(e.target.value),
+              company: JSON.stringify({
+                description: row.description,
+                email: row.email,
+                // logo: image,
+                name: row.name,
+                phone: row.phone,
+                tax: row.tax,
+                website: row.website,
+                status: {
+                  id: parseInt(e.target.value),
+                },
+              }),
+              fileLogo: null,
             },
+            comid: row.id,
           };
           dispatch(updateCompanyInfo(updateData));
         };
         return (
           <select
-            name={row.status}
-            id={row.status}
-            value={row.status}
+            name="status"
+            id="status"
+            value={row.status ? row.status.id : 1}
             onChange={(e) => handleChangeStatus(e)}
             className="company-table__select"
           >
-            <option value={0}>Not verified</option>
+            <option value={2}>Not verified</option>
             <option value={1}>Active</option>
-            <option value={2}>Block</option>
-            <option value={3}>Disable</option>
+            <option value={3}>Block</option>
+            <option value={4}>Disable</option>
           </select>
         );
       },
     },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Actions",
       width: 120,
       sortable: false,
       renderCell: (params) => {
@@ -126,6 +109,10 @@ const CompanyTable = () => {
         const handleClick = () => {
           // console.log(row);
           navigate(`/admin/company/${row.id}`);
+        };
+
+        const handleDelete = () => {
+          dispatch(deleteCompany(row.id));
         };
         return (
           <>
@@ -135,8 +122,11 @@ const CompanyTable = () => {
               </IconButton>
             </Tooltip>
             <Tooltip title="Xóa">
-              <IconButton className="user-delete__button">
-                <DeleteForeverOutlinedIcon />
+              <IconButton
+                className="user-delete__button"
+                onClick={handleDelete}
+              >
+                <DoDisturbAltIcon />
               </IconButton>
             </Tooltip>
           </>
@@ -157,6 +147,7 @@ const CompanyTable = () => {
       date: companyList[i].date,
       status: companyList[i].status,
       description: companyList[i].description,
+      logo: companyList[i].logo,
     });
   }
   return (

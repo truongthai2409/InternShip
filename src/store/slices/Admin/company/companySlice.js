@@ -61,8 +61,13 @@ export const addCompany = createAsyncThunk(
   "company/addCompany",
   async (data, thunkAPI) => {
     const { companyData, reset } = data;
+    console.log(companyData);
     return axios
-      .post("http://localhost:8085/api/company", companyData)
+      .post("http://localhost:8085/api/company", companyData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Thêm công ty thành công")
@@ -79,6 +84,10 @@ export const addCompany = createAsyncThunk(
         // return response.data;
       })
       .catch((error) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.errorMess("Thêm công ty khoong thành công")
+        );
+        console.log(error.response);
         return error.response.data;
       });
   }
@@ -112,10 +121,14 @@ export const getCompanyDetail = createAsyncThunk(
 export const updateCompanyInfo = createAsyncThunk(
   "company/updateCompanyInfo",
   async (updateData, thunkAPI) => {
-    const { companyData, setIsEdit } = updateData;
+    const { companyData, setIsEdit, comid } = updateData;
     console.log(companyData);
     return axios
-      .put(`http://localhost:8085/api/company/${companyData.id}`, companyData)
+      .put(`http://localhost:8085/api/company/${comid}`, companyData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật công ty thành công")
@@ -125,7 +138,33 @@ export const updateCompanyInfo = createAsyncThunk(
         }
       })
       .catch((error) => {
-        console.error(error.response.data);
+        thunkAPI.dispatch(
+          notificationSlice.actions.errorMess(
+            "Cập nhật công ty Không thành công"
+          )
+        );
+        console.log(error.response);
+        return error.response.data;
+      });
+  }
+);
+
+export const deleteCompany = createAsyncThunk(
+  "university/deleteCompany",
+  async (id, thunkAPI) => {
+    return await axios
+      .delete(`http://localhost:8085/api/company/${id}`)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Xóa công ty thành công.")
+        );
+        return response.data;
+      })
+      .catch((error) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.errorMess("Xóa công ty không thành công.")
+        );
+        console.log(error.response);
         return error.response.data;
       });
   }

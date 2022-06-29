@@ -113,23 +113,24 @@ export const getUniversityDetail = createAsyncThunk(
 export const updateUniversityInfo = createAsyncThunk(
   "university/updateUniversityInfo",
   async (updateData, thunkAPI) => {
-    const { universityData, setIsEdit } = updateData;
-    // console.log(companyData);
-    return axios
-      .put(
-        `http://localhost:8085/api/university/${universityData.id}`,
-        universityData
-      )
+    const { universityData, uniId } = updateData;
+    console.log(updateData);
+    return await axios
+      .put(`http://localhost:8085/api/university/${uniId}`, universityData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật Trường thành công")
         );
-        if (setIsEdit) {
-          setIsEdit(false);
-        }
+        // if (setIsEdit) {
+        //   setIsEdit(false);
+        // }
       })
       .catch((error) => {
-        console.error(error.response.data);
+        console.log(error.response);
         return error.response.data;
       });
   }

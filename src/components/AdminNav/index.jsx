@@ -5,6 +5,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 
 import "./styles.scss";
+import adminLogo from "../../assets/img/logo_admin.png";
 
 const AdminNav = ({ openDrawer, setOpenDrawer }) => {
   //
@@ -18,7 +19,7 @@ const AdminNav = ({ openDrawer, setOpenDrawer }) => {
         <div className="admin-navbar__left">
           <Hidden mdDown>
             <div className="admin-navbar__logo">
-              <h2>ITInternshipJob</h2>
+              <img src={adminLogo} alt="admin-logo" />
             </div>
           </Hidden>
           <Hidden mdUp>
