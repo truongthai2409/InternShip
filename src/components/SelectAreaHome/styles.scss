@@ -1,11 +1,24 @@
 @use "../../assets/styles/" as *;
 
-.select__area {
+.select-area {
   display: inline-flex;
   align-items: center;
-  outline: none;
   background: transparent;
   border: none;
   color: $primary-color;
-  padding: 0 2px;
+  padding: 0 2px !important;
+}
+
+.MuiSelect-outlined {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: $primary-color;
+  outline: none !important;
+  padding-right: 0px;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-color: transparent !important;
 }
