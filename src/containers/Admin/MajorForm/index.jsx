@@ -21,7 +21,8 @@ export default function MajorForm({isAdd,setOpen}) {
 
   const dispatch = useDispatch();
   // get params from URL
-  // const uniId = useParams();
+  const uniId = useParams();
+  // console.log(uniId)
   const location = useLocation();
   // console.log(location.pathname.slice(13));
   const {

@@ -1,9 +1,15 @@
 import React from "react";
-import Button from "../../components/Button";
+import Header from "../../components/Header/Header";
+import "./styles.scss";
+import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
-  return <div>MainLayout
-  </div>;
+  return (
+    <div className="main__layout">
+      <Header />
+      <Outlet />
+    </div>
+  );
 };
 
 export default MainLayout;

@@ -19,7 +19,7 @@ import {
   updateCompanyInfo,
 } from "../../../store/slices/Admin/company/companySlice";
 import {
-  getProviceList,
+  getProvinceList,
   getDistrictList,
 } from "../../../store/slices/location/locationSlice";
 
@@ -55,7 +55,7 @@ export default function CompanyForm(props) {
   const { comid } = useParams();
 
   useEffect(() => {
-    dispatch(getProviceList());
+    dispatch(getProvinceList());
     // dispatch(getDistrictList(1));
   }, []);
 

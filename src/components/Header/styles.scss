@@ -1,0 +1,33 @@
+@use "../../assets/styles/" as *;
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+
+    .logo__home {
+        text-align: none;
+        color: black;
+    }
+    .login__home {
+        display: flex;
+        align-items: center;
+        // padding: 12px 32px;
+        text-align: none;
+        .login {
+            font-family: $f-family-0;
+            width: fit-content;
+            display: flex;
+            align-items: flex-end;
+            text-decoration: none;
+            color: $color-black-0;
+            margin-right: 15px;
+
+            h5{
+              font-size: 16px;
+            }
+        }
+    }
+}

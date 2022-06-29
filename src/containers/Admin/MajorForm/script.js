@@ -11,21 +11,11 @@ export const schemaMajor = yup
   
 // controll action
 const controlAction = [
-  {
-    id: 0,
-    name: "Quản lý bài đăng",
-    to: "#",
-  },
-  {
-    id: 1,
-    name: "Xem bài đăng",
-    to: "#",
-  },
-  {
-    id: 2,
-    name: "Thêm bài đăng",
-    to: "#",
-  },
+  // {
+  //   id: 0,
+  //   name: "Quản lý Major",
+  //   to: "#",
+  // },
 ];
 
 // render control action

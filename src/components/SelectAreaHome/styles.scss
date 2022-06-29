@@ -1,0 +1,11 @@
+@use "../../assets/styles/" as *;
+
+.select__area {
+  display: inline-flex;
+  align-items: center;
+  outline: none;
+  background: transparent;
+  border: none;
+  color: $primary-color;
+  padding: 0 2px;
+}
