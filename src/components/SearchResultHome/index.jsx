@@ -34,7 +34,7 @@ function SearchResultHome(props) {
             <AddLocationIcon />
           </IconButton>
           {/* <CustomSelect></CustomSelect> */}
-          <SelectAreaHome label="Khu vực:" selectOptions={listTypeJobs} />
+          <SelectAreaHome />
           {/* <IconButton className="select__icon-arrow-drop">
             <ArrowDropDownIcon />
           </IconButton> */}

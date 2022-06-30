@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import AdminRouterLayout from "./Layouts/Admin/index";
 import RegisterLayout from "./Layouts/Register/index";
-import LoginLayout from './Layouts/Login/index'
+import LoginLayout from "./Layouts/Login/index";
 import Dashboard from "./pages/Admin/Dashboard";
-import { adminRouter, registerRouter } from "./config/routes";
+import { adminRouter, mainRouter, registerRouter } from "./config/routes";
 import MainLayout from "./Layouts/Main";
-import Home from './pages/Main/Home/index';
+import Home from "./pages/Main/Home/index";
 
 function App() {
   const renderAdminRouter = () => {
@@ -18,6 +18,12 @@ function App() {
 
   const renderRegisterRouter = () => {
     return registerRouter.map(({ path, Component }, index) => {
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
+
+  const renderMainRouter = () => {
+    return mainRouter.map(({ path, Component }, index) => {
       return <Route path={path} element={<Component />} key={index} />;
     });
   };
@@ -33,9 +39,10 @@ function App() {
           <Route path="/register" element={<RegisterLayout />}>
             {renderRegisterRouter()}
           </Route>
-          <Route path="/login" element={<LoginLayout/>}></Route>
+          <Route path="/login" element={<LoginLayout />}></Route>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
+            {renderMainRouter()}
           </Route>
         </Routes>
       </Router>
