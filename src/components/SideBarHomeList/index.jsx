@@ -17,8 +17,6 @@ function SideBarHomeList() {
         dispatch(getMajorList());
     }, []);
 
-    console.log(majorList);
-
     return (
         <div className="slideBarHome__wrapper">
             <ListCollapse title="Loại việc" list = {listTypeJobs} spacing={3} />
