@@ -39,10 +39,10 @@ const ListCollapse = (props) => {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 {props.list.map((item, index) => (
-                    <List key={index} component="div" disablePadding>
+                    <List key={item.id || index} component="div" disablePadding>
                         <ListItemButton sx={{ pl: spacing }}>
                             <ListItemIcon>
-                                <CustomCheckbox label={item} />
+                                <CustomCheckbox key={item.id || index} label={item.name} />
                             </ListItemIcon>
                         </ListItemButton>
                     </List>

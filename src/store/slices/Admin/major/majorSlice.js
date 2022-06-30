@@ -50,6 +50,7 @@ export const getMajorList = createAsyncThunk(
     return await axios
       .get("http://localhost:8085/api/major")
       .then((response) => {
+        console.log(response.data)
         return response.data;
       })
       .catch((error) => {
