@@ -10,7 +10,7 @@ function DetailHome(props) {
   return (
     <div>
       <Grid className="wrapper" container>
-        <Grid item md={8}>
+        <Grid item lg={8} md={6} sm={12}>
           <div className="containerDetailCard">
             <DetailCard
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
@@ -36,7 +36,7 @@ function DetailHome(props) {
             </div>
           </div>
         </Grid>
-        <Grid item md={4}>
+        <Grid item lg={4} md={6} sm={12}>
           <CardVisit
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
             nameCompany="Công Ty R2S "
