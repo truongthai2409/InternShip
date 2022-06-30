@@ -8,9 +8,9 @@ import "./styles.scss";
 import { Link } from "react-router-dom";
 function DetailHome(props) {
   return (
-    <div>
+    <>
       <Grid className="wrapper" container>
-        <Grid item lg={8} md={6} sm={12}>
+        <Grid item lg={8} md={8} sm={12}>
           <div className="containerDetailCard">
             <DetailCard
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
@@ -28,15 +28,15 @@ function DetailHome(props) {
               location={"TPHCM"}
               rating={"5.0 trong 48 lượt đánh giá"}
             />
-            <div className="config__arow-back">
-              <Link to="/" className="config__arow-back">
+            <div className="config__arow-back-desktop">
+              <Link to="/" className="config__arow-back-desktop">
                 <ArrowBackIcon></ArrowBackIcon>
                 Trở lại
               </Link>
             </div>
           </div>
         </Grid>
-        <Grid item lg={4} md={6} sm={12}>
+        <Grid item lg={4} md={4} sm={12}>
           <CardVisit
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
             nameCompany="Công Ty R2S "
@@ -45,9 +45,60 @@ function DetailHome(props) {
             website="https://r2s.edu.vn/"
             location="1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP.HCM"
           />
+          <div className="config__arow-back">
+            <Link to="/" className="config__arow-back">
+              <ArrowBackIcon></ArrowBackIcon>
+              Trở lại
+            </Link>
+          </div>
         </Grid>
       </Grid>
-    </div>
+
+      <Grid className="wrapper hide__on-tablet" container>
+        <Grid item lg={8} md={8} sm={12}>
+          <div className="containerDetailCard">
+            <DetailCard
+              logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+              star={4.5}
+              nameMajor="React-Js"
+              nameCompany="R2S"
+              detailJob={
+                "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque inventore pariatur tenetur fugiat laboriosam voluptas, ea accusamus facilis ut, sunt optio! Expedita beatae voluptates assumenda fugiat nam rerum autem deleniti?"
+              }
+              requireJob={
+                "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque inventore pariatur tenetur fugiat laboriosam voluptas, ea accusamus facilis ut, sunt optio! Expedita beatae voluptates assumenda fugiat nam rerum autem deleniti?"
+              }
+              timeJob={"10/6/2022-10/8/2022"}
+              salary={"5.000.000"}
+              location={"TPHCM"}
+              rating={"5.0 trong 48 lượt đánh giá"}
+            />
+            <div className="config__arow-back-desktop">
+              <Link to="/" className="config__arow-back-desktop">
+                <ArrowBackIcon></ArrowBackIcon>
+                Trở lại
+              </Link>
+            </div>
+          </div>
+        </Grid>
+        <Grid item lg={4} md={4} sm={12}>
+          <CardVisit
+            logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+            nameCompany="Công Ty R2S "
+            emailCompany="tuyendung@r2s.edu.vn"
+            phoneCompany="0902394324"
+            website="https://r2s.edu.vn/"
+            location="1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP.HCM"
+          />
+          <div className="config__arow-back">
+            <Link to="/" className="config__arow-back">
+              <ArrowBackIcon></ArrowBackIcon>
+              Trở lại
+            </Link>
+          </div>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 

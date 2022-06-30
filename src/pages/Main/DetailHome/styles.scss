@@ -1,10 +1,23 @@
 @use "../../../assets/styles/" as *;
 
-.config__arow-back {
+.config__arow-back-desktop {
   display: flex;
   color: $primary-color;
   margin-top: 16px;
   :hover {
     color: $color-black-light;
+  }
+}
+
+//responsive
+@media screen and (min-width: 740px) and(max-width:1000px) {
+  .config__arow-back-desktop {
+    display: none;
+  }
+  .hide__on-tablet {
+    display: none;
+  }
+  .detail__card {
+    overflow-y: hidden;
   }
 }

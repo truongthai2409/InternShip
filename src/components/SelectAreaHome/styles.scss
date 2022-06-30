@@ -17,8 +17,24 @@
   color: $primary-color;
   outline: none !important;
   padding-right: 0px;
+  margin-left: 25px;
 }
 
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border-color: transparent !important;
+  margin-left: 25px !important;
+}
+.config-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuiOutlinedInput-root
+  .MuiInputBase-root
+  .MuiInputBase-colorPrimary
+  .MuiInputBase-formControl
+  .css-e9o3qh-MuiInputBase-root-MuiOutlinedInput-root
+  .config-select {
+  padding: 0 10px;
+  margin-left: 25px !important;
 }

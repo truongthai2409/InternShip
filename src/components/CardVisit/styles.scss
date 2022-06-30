@@ -41,7 +41,6 @@
   }
 
   &-detail {
-    width: 362px;
     left: 32px;
     top: 183px;
 
@@ -81,4 +80,8 @@
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+.css-178svwk-MuiTypography-root {
+  min-width: none !important;
 }
