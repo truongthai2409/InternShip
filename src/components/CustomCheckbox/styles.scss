@@ -5,4 +5,11 @@
         font-size: 13px;
         font-weight: 600;
     }
+    
+    .checkBoxColor {
+
+        &.Mui-checked {
+            color: $primary-color;
+        }
+    }
 }

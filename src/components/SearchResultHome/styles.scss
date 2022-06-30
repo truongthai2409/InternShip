@@ -33,6 +33,9 @@
   }
 
   .header__with-search-search-select {
+    display: flex;
+    background-color: transparent;
+    border: none;
     .select__icon-location {
       color: $primary-color;
     }
