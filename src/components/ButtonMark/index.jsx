@@ -16,8 +16,13 @@ const ButtonMark = (props) => {
             style={{ border: "1px solid #F1F1F1", borderRadius: "4px", width: `${props.width}`, height: `${props.height}` }}
             aria-label="mark"
             onClick={handleClick}
+            className="buttonMark__wrapper"
         >
-            {mark ? <BookmarkBorderIcon style={{fontSize: `${props.fontSize}`}} /> : <BookmarkIcon style={{ color: "#00B074" , fontSize: `${props.fontSize}`}} />}
+            {mark ? (
+                <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+            ) : (
+                <BookmarkIcon className="buttonMark__isChecking" style={{ fontSize: `${props.fontSize}` }} />
+            )}
         </IconButton>
     );
 };

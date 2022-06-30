@@ -51,7 +51,7 @@ export default function CompanyForm(props) {
   const fileInput = useRef();
   const dispatch = useDispatch();
 
-  // get params from URL
+  // get params from URL 
   const { comid } = useParams();
 
   useEffect(() => {
