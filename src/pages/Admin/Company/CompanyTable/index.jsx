@@ -5,6 +5,7 @@ import DoDisturbAltIcon from "@mui/icons-material/DoDisturbAlt";
 import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 import "./styles.scss";
 import DataTable from "../../../../components/Table";
@@ -87,7 +88,7 @@ const CompanyTable = () => {
           <select
             name="status"
             id="status"
-            value={row.status ? row.status.id : 1}
+            value={row.status ? row.status.id : 2}
             onChange={(e) => handleChangeStatus(e)}
             className="company-table__select"
           >
@@ -144,7 +145,9 @@ const CompanyTable = () => {
       website: companyList[i].website,
       email: companyList[i].email,
       tax: companyList[i].tax,
-      date: companyList[i].date,
+      date: companyList[i].date
+        ? moment(companyList[i].date).format("DD/MM/YYYY")
+        : moment().format("DD/MM/YYYY"),
       status: companyList[i].status,
       description: companyList[i].description,
       logo: companyList[i].logo,

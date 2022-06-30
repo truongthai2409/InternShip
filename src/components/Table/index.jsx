@@ -14,7 +14,7 @@ export default function DataTable({ rows, columns }) {
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
-          getRowId={(row) => row.id}
+          getRowId={(row) => row.stt}
           // loading={!rows.length}
           components={{ Toolbar: GridToolbar }}
           disableSelectionOnClick

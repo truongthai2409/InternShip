@@ -51,7 +51,7 @@ export default function CompanyForm(props) {
   const fileInput = useRef();
   const dispatch = useDispatch();
 
-  // get params from URL
+  // get company ID params from URL
   const { comid } = useParams();
 
   useEffect(() => {
@@ -261,7 +261,7 @@ export default function CompanyForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
-                  {/* <CustomSelect
+                  <CustomSelect
                     name="Tỉnh/Thành phố"
                     label="Tỉnh/Thành phố"
                     dispatch={dispatch}
@@ -274,7 +274,7 @@ export default function CompanyForm(props) {
                     // dispatch={dispatch}
                     // getDistrictList={getDistrictList}
                     selectOptions={districtList}
-                  /> */}
+                  />
                 </div>
               </Grid>
               <Grid item md={12}>

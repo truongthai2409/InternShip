@@ -5,6 +5,7 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 import DataTable from "../../../../components/Table";
 import { getUniversityList } from "../../../../store/slices/Admin/university/unversitySlice";
@@ -95,7 +96,9 @@ const UniversityTable = () => {
       website: universityList[i].website,
       email: universityList[i].email,
       // majors: universityList[i].majors,
-      createDate: universityList[i].createDate,
+      createDate: universityList[i].createDate
+        ? moment(universityList[i].createDate).format("DD/MM/YYYY")
+        : moment().format("DD/MM/YYYY"),
       status: universityList[i].status,
     });
   }

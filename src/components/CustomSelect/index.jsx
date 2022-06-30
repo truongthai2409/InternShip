@@ -4,13 +4,15 @@ const CustomSelect = React.forwardRef(
   ({ onBlur, name, label, selectOptions, getDistrictList, dispatch }, ref) => {
     // render option
     const renderSelectOption = () => {
-      return selectOptions.map((item) => {
-        return (
-          <option value={item.id} key={item.id}>
-            {item.name}
-          </option>
-        );
-      });
+      if (selectOptions) {
+        return selectOptions.map((item) => {
+          return (
+            <option value={item.id} key={item.id}>
+              {item.name}
+            </option>
+          );
+        });
+      }
     };
 
     // handle change district
