@@ -1,16 +1,22 @@
-import React from 'react';
-import './styles.scss';
+import React from "react";
+import "./styles.scss";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
-const CustomCheckbox = ({label}) => {
+const CustomCheckbox = ({ label }) => {
     return (
-        <FormControlLabel className="formControlLabel" control={<Checkbox sx={{
-            color: "dedede",
-            '&.Mui-checked': {
-            color: "#00b074"
-            },
-        }}/>} label={label} />
+        <FormControlLabel
+            className="formControlLabel"
+            control={
+                <Checkbox
+                    className="checkBoxColor"
+                    sx={{
+                        color: "dedede",
+                    }}
+                />
+            }
+            label={label}
+        />
     );
-}
+};
 
 export default CustomCheckbox;

@@ -40,8 +40,8 @@ export default function FilterPanelHome() {
     const handleChange = (event, newValue) => setValue(newValue);
 
     return (
-        <Box sx={{ width: "100%", paddingLeft: "30px" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "24px", height: "66px" }}>
+        <Box className="filter-panel-home__wrapper" sx={{}}>
+            <Box className="filter-panel-home__filterPanel" sx={{}}>
                 <Tabs value={value} onChange={handleChange}>
                     <Tab label="Mới nhất" {...a11yProps(0)} />
                     <Tab label="Đánh giá" {...a11yProps(1)} />

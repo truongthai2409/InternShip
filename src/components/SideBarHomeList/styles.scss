@@ -2,14 +2,9 @@
 
 
 .slideBarHome__wrapper {
-    height: inherit;
+    height: 690px;
     overflow-y: scroll;
-    // margin-bottom: 5vh;
-
-    .slideBarHome__title {
-        color: $primary-color;
-        font-size: 16px;
-    }
+    border-radius: 6px;
 
     .slideBarHome__container {
         width: 100%;
