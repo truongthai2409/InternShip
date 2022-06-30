@@ -16,6 +16,7 @@ import {
   getUniversityDetail,
   updateUniversityInfo,
 } from "../../../store/slices/Admin/university/unversitySlice";
+import MultiSelect from "../../../components/MultiSelect";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -23,7 +24,7 @@ export default function UniversityForm(props) {
   const { isAdd } = props;
 
   const { universityDetail } = useSelector((state) => state.university);
-  // console.log(universityDetail);
+  console.log(universityDetail);
 
   const [image, setImage] = useState(cameraLogo);
   const [isEdit, setIsEdit] = useState(isAdd);
@@ -238,6 +239,7 @@ export default function UniversityForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
+                  <MultiSelect />
                 </div>
               </Grid>
               <Grid item md={12}>

@@ -12,7 +12,7 @@ const locationSlice = createSlice({
     districtList: [],
     locationList: [],
     error: [],
-    districtById:[],
+    districtById: [],
   },
   reducer: {},
   extraReducers: (builder) => {
@@ -47,7 +47,7 @@ export default locationSlice;
  */
 export const getProvinceList = createAsyncThunk(
   "location/getProviceList",
-  async (countryId) => {
+  async (countryId = 231) => {
     // console.log(countryId);
     return axios
       .get(`http://localhost:8085/api/province/country/${countryId}`)
@@ -66,6 +66,7 @@ export const getDistrictList = createAsyncThunk(
     return axios
       .get(`http://localhost:8085/api/district/province/${provinceId}`)
       .then((response) => {
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {
@@ -101,12 +102,11 @@ export const getLocationList = createAsyncThunk(
   }
 );
 
-
 export const addLocation = createAsyncThunk(
   "location/addLocation",
   async (data, thunkAPI) => {
     return api
-      .post(`http://localhost:8085/api/location`,data )
+      .post(`http://localhost:8085/api/location`, data)
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Thêm location thành công")

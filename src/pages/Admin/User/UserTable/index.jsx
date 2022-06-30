@@ -35,7 +35,7 @@ const UserTable = () => {
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
-        // console.log(row)
+        // console.log(row);
 
         const handleOnClick = () => {
           navigate(`/admin/user/${row.username}`);
@@ -73,6 +73,7 @@ const UserTable = () => {
   const rows = [];
   for (let i = 0; i < userList.length; i++) {
     rows.push({
+      id: userList[i].id,
       stt: i + 1,
       username: userList[i].username,
       role: userList[i].role ? userList[i].role.name : null,
