@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -58,7 +58,7 @@ export default function SelectAreaHome() {
       <FormControl sx={{ m: 1, width: 100, pl: 1 }}>
         {/* <h6>Khu vực</h6> */}
         <InputLabel id="demo-multiple-name-label">Khu Vực </InputLabel>
-        <Fragment className="config-select">
+        <React.Fragment className="config-select">
           <Select
             labelId="demo-multiple-name-label"
             // id="demo-multiple-name"
@@ -83,7 +83,7 @@ export default function SelectAreaHome() {
               </MenuItem>
             ))}
           </Select>
-        </Fragment>
+        </React.Fragment>
       </FormControl>
     </div>
   );

@@ -1,12 +1,13 @@
 @use "../../assets/styles/" as *;
 
 .detail__card {
-    background-color: $color-white-0;
-    border-radius: 6px;
-    border: 0.5px solid #dedede;
-    padding: $pd-2;
-    overflow-y: scroll;
-    height: 600px;
+  background-color: $color-white-0;
+  border-radius: 6px;
+  border: 0.5px solid #dedede;
+  padding: $pd-2;
+  overflow-y: scroll;
+  height: 600px;
+  margin-bottom: 15px;
 
   .detail__card-1 {
     display: flex;
@@ -118,4 +119,37 @@
 
 .detail__card::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 740px) and (max-width: 1024px) {
+  .detail__card-ontablet {
+    background-color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 20px;
+    overflow-y: hidden;
+    height: fit-content;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 740px) {
+  .detail__card-ontablet {
+    background-color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 20px;
+    overflow-y: hidden;
+    height: fit-content;
+    margin-bottom: 15px;
+  }
+  .button__candidate-onMobile {
+    display: none !important;
+  }
+  .detail__card .detail__card-4 {
+    display: block !important;
+    &-item {
+      justify-content: start !important;
+    }
+  }
 }

@@ -14,8 +14,8 @@ import PropTypes from "prop-types";
 
 export default function CardVisit(props) {
   return (
-    <div className="scroll">
-      <Card sx={{ minWidth: 275, ml: 3.5 }} className="visit__card">
+    <div className="scroll scroll__onTablet-hide ">
+      <Card className="visit__card visit__card__onTablet">
         <CardContent>
           <img
             className="visit__card-logo"

@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+import Button from "../../components/Button/";
+import CustomSelect from "../CustomSelect";
 import "./styles.scss";
 import SelectAreaHome from "../SelectAreaHome";
-import Button from "../Button";
+
+const listTypeJobs = ["TPHCM", "HN", "Đà Nẵng"];
 
 function SearchResultHome(props) {
   return (

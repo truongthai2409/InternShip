@@ -1,18 +1,18 @@
 @use "../../assets/styles/" as *;
 
 .main__layout {
-    background-color: $primary-color-1;
-    padding: 42px 30px;
-    box-sizing: border-box;
-    height: 1000px;
-    overflow: hidden;
+  background-color: $primary-color-1;
+  padding: 42px 30px;
+  box-sizing: border-box;
+  height: auto;
+  overflow: hidden;
 
-    .containerDetailCard {
-        padding-left: 32px;
-        height: 100%;
-    }
+  .containerDetailCard {
+    padding-left: 32px;
+    height: 100%;
+  }
 
-    .MuiGrid-root.MuiGrid-item {
-      height: inherit;
-    }
+  .MuiGrid-root.MuiGrid-item {
+    height: inherit;
+  }
 }

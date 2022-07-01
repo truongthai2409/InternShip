@@ -7,7 +7,7 @@ import "./styles.scss";
 
 function Header(props) {
   return (
-    <div className="container">
+    <div className="container onMobile">
       <Logo />
       <div className="login__home">
         <Link to="/login" className="login">

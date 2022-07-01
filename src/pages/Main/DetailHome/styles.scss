@@ -1,6 +1,6 @@
 @use "../../../assets/styles/" as *;
 
-.config__arow-back-desktop {
+.config__arow-back {
   display: flex;
   color: $primary-color;
   margin-top: 16px;
@@ -8,16 +8,35 @@
     color: $color-black-light;
   }
 }
+.hide-on-desktop {
+  display: none;
+}
+// responsive detail_home
 
-//responsive
-@media screen and (min-width: 740px) and(max-width:1000px) {
-  .config__arow-back-desktop {
+@media (min-width: 740px) and (max-width: 1024px) {
+  .config__arow-back-ontablet {
+    display: flex;
+    color: $primary-color;
+    margin-top: 16px;
+    :hover {
+      color: $color-black-light;
+    }
+  }
+  .hide-on-table {
     display: none;
   }
-  .hide__on-tablet {
-    display: none;
+}
+
+@media (max-width: 740px) {
+  .config__arow-back-ontablet {
+    display: flex;
+    color: $primary-color;
+    margin-top: 16px;
+    :hover {
+      color: $color-black-light;
+    }
   }
-  .detail__card {
-    overflow-y: hidden;
+  .hide-on-table {
+    display: none;
   }
 }
