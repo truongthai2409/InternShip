@@ -40,6 +40,9 @@ export const schema = yup
         " * Mã số thuế không đúng."
       ),
     description: yup.string().required(" * Bạn phải nhập mô tả công ty."),
+    address: yup.string().required(" * Bạn phải nhập chi tiết địa chỉ."),
+    // district: yup.string().required(" * Bạn phải nhập quận/huyện."),
+    // province: yup.string().required(" * Bạn phải nhập tỉnh/thành phố.")
   })
   .required();
 
@@ -74,3 +77,4 @@ export const renderControlAction = () => {
     );
   });
 };
+

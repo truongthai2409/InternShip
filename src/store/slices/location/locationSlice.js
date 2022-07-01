@@ -28,7 +28,7 @@ const locationSlice = createSlice({
     builder.addCase(getDistrictById.fulfilled, (state, { payload }) => {
       state.districtById = payload;
     });
-
+    // builder.addCase(getAddress)
     builder.addCase(addLocation.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;

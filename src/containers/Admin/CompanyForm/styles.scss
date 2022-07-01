@@ -3,13 +3,13 @@
 .company-form {
     padding: 0px 20px;
     // height: 100%;
-    .company-form__container{        
-        .company-form__logo{
+    .company-form__container {
+        .company-form__logo {
             padding: 30px 30px 10px 30px;
             margin: 20px 20px 10px 20px;
             display: flex;
             flex-direction: column;
-            justify-content:center;
+            justify-content: center;
             align-items: center;
             align-content: center;
             .css-12bapnq-MuiAvatar-root {
@@ -48,7 +48,7 @@
                     font-weight: 600;
                 }
 
-                .company-form__button-edit{
+                .company-form__button-edit {
                     margin-top: 10px;
                     margin-left: 30px;
                     padding: 10px 20px;
@@ -63,8 +63,8 @@
             //     display: none;
             // }
         }
-    
-        .company-form__input{
+
+        .company-form__input {
             padding: 0px 20px;
 
             .company-form__checkbox {
@@ -77,25 +77,67 @@
                     margin-bottom: 20px;
                 }
                 input {
-                    margin-right: 5px
+                    margin-right: 5px;
                 }
 
                 label {
-                    margin-right: 30px
+                    margin-right: 30px;
                 }
             }
-    
+
+            .company-form__selector {
+                display: flex;
+                justify-content: space-between;
+                margin: 20px 0;
+                width: 100%;
+
+                .company-form__selector-item {
+                    display: flex;
+                    flex-direction: column;
+                    width: 45%;
+                    color: #ff5c58;
+                    font-size: 13px;
+
+                    label {
+                        font-family: "Public Sans", sans-serif;
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: #29303b;
+                        margin-top: 7px;
+                    }
+
+                    select {
+                        box-sizing: border-box;
+                        margin-top: 7px;
+                        font-family: "Public Sans", sans-serif;
+                        border: 1.6px solid $primary-color;
+                        border-radius: 5px;
+                        width: 100%;
+                        padding: 21px 12px;
+
+                        &:hover {
+                            border: 1.6px solid $primary-color;
+                            box-shadow: #fde8ef 0px 3px 8px;
+                        }
+
+                        &:focus {
+                            outline: $primary-color;
+                            border: 1.6px solid #29303b;
+                            box-shadow: #fde8ef 0px 3px 8px;
+                        }
+                    }
+                }
+            }
         }
     }
 
     .company-form__submit {
         margin-top: 20px;
-        padding:10px; 
+        padding: 10px;
         // float: right
         display: flex;
         justify-content: flex-end;
     }
-    
 }
 
 .company-form__error {
