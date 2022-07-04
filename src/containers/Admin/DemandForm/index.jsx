@@ -21,8 +21,8 @@ const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function DemandForm(props) {
   const { isAdd } = props;
-  const [majorList, setMajorList] = useState([])
-//   const { DemandDetail } = useSelector((state) => state.demand);
+  const [majorList, setMajorList] = useState([]);
+  //   const { DemandDetail } = useSelector((state) => state.demand);
   // console.log(demandDetail);
   const [isEdit, setIsEdit] = useState(isAdd);
   const dispatch = useDispatch();
@@ -31,10 +31,9 @@ export default function DemandForm(props) {
   const { demandId } = useParams();
 
   useEffect(() => {
-    api.get("http://localhost:8085/api/major")
-      .then((res) => {
-        setMajorList(res)
-      })
+    api.get("http://localhost:8085/api/major").then((res) => {
+      setMajorList(res);
+    });
   }, []);
   const {
     register,
@@ -53,28 +52,26 @@ export default function DemandForm(props) {
    * @dependency demandDetail
    * isAdd ? "" : demandDetail
    */
-//   useEffect(() => {
-//     if (demandDetail) {
-//       if (!isAdd) {
-//         setImage(`http://localhost:8085${demandDetail.avatar}`);
-//       }
-//       setValue("logo", isAdd ? "" : demandDetail.avatar);
-//       setValue("name", isAdd ? "" : demandDetail.name);
-//       setValue("description", isAdd ? "" : demandDetail.description);
-//       setValue("email", isAdd ? "" : demandDetail.email);
-//       setValue("phone", isAdd ? "" : demandDetail.phone);
-//       setValue("shortName", isAdd ? "" : demandDetail.shortName);
-//       setValue("website", isAdd ? "" : demandDetail.website);
-//     }
-//   }, [demandDetail, isAdd]);
+  //   useEffect(() => {
+  //     if (demandDetail) {
+  //       if (!isAdd) {
+  //         setImage(`http://localhost:8085${demandDetail.avatar}`);
+  //       }
+  //       setValue("logo", isAdd ? "" : demandDetail.avatar);
+  //       setValue("name", isAdd ? "" : demandDetail.name);
+  //       setValue("description", isAdd ? "" : demandDetail.description);
+  //       setValue("email", isAdd ? "" : demandDetail.email);
+  //       setValue("phone", isAdd ? "" : demandDetail.phone);
+  //       setValue("shortName", isAdd ? "" : demandDetail.shortName);
+  //       setValue("website", isAdd ? "" : demandDetail.website);
+  //     }
+  //   }, [demandDetail, isAdd]);
 
   // handle Submit form
   const onSubmit = (data) => {
-    const demandData = {
-      
-    };
+    const demandData = {};
 
-    console.log(data);
+    // console.log(data);
 
     // dispatch(
     //   addDemand({
@@ -108,24 +105,24 @@ export default function DemandForm(props) {
       <div className="demand-form__container">
         <Grid container>
           <Grid item md={3}>
-              <div className="demand-form__logo">
-                {!isAdd ? (
-                  <div className="demand-form__control">
-                    <ul>{renderControlAction()}</ul>
-                    <div className="demand-form__block">
-                      <p>Khóa tài khoản</p>
-                      <Switch {...label} defaultChecked />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleOnClickEdit}
-                      className="demand-form__button-edit"
-                    >
-                      Sửa
-                    </button>
+            <div className="demand-form__logo">
+              {!isAdd ? (
+                <div className="demand-form__control">
+                  <ul>{renderControlAction()}</ul>
+                  <div className="demand-form__block">
+                    <p>Khóa tài khoản</p>
+                    <Switch {...label} defaultChecked />
                   </div>
-                ) : null}
-              </div>
+                  <button
+                    type="button"
+                    onClick={handleOnClickEdit}
+                    className="demand-form__button-edit"
+                  >
+                    Sửa
+                  </button>
+                </div>
+              ) : null}
+            </div>
           </Grid>
           <Grid item md={9}>
             <Grid container>
@@ -160,12 +157,11 @@ export default function DemandForm(props) {
                   >
                     {errors.start?.message}
                   </CustomInput>
-                  
                 </div>
               </Grid>
               <Grid item md={6}>
                 <div className="demand-form__input">
-                <CustomInput
+                  <CustomInput
                     label="Cộng tác viên"
                     id="partner"
                     type="number"

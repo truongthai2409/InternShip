@@ -1,12 +1,9 @@
 @use "../../assets/styles/" as *;
 
-.header__with-search {
-}
-
 .header__with-search-search {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  // gap: 12px;
   align-items: center;
   justify-content: space-between;
   background: white;
@@ -29,6 +26,7 @@
       border: none;
       border-radius: 2px;
       outline: none;
+      width: 100px;
     }
   }
 
@@ -48,5 +46,25 @@
 
   .header__with-search-button-search {
     transform: translateX(-10px);
+  }
+}
+//tablet
+@media (min-width: 740px) and (max-width: 1024px) {
+  .onTable {
+    padding-left: 30px;
+  }
+  .header__with-search-search-1 {
+  }
+}
+//mobile
+@media (max-width: 740px) {
+  .onMobile {
+    padding-left: 0px;
+  }
+  .header__with-search-search-1 {
+    width: 100px !important;
+  }
+  .header__with-search-search-select-onMobile {
+    display: none !important;
   }
 }

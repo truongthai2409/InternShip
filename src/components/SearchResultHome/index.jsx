@@ -15,7 +15,7 @@ const listTypeJobs = ["TPHCM", "HN", "Đà Nẵng"];
 
 function SearchResultHome(props) {
   return (
-    <div className="header__with-search">
+    <div className="header__with-search onMobile onTable">
       <div className="header__with-search-search">
         <div className="header__with-search-search-wrap">
           <IconButton className="search__icon">
@@ -29,7 +29,7 @@ function SearchResultHome(props) {
             placeholder="Tìm Kiếm"
           />
         </div>
-        <div className="header__with-search-search-select">
+        <div className="header__with-search-search-select header__with-search-search-select-onMobile">
           <IconButton className="select__icon-location">
             <AddLocationIcon />
           </IconButton>

@@ -18,17 +18,7 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "TPHCM",
-  "Đà Nẵng",
-  "Hà Nội",
-  "TPHCM",
-  "Đà Nẵng",
-  "Hà Nội",
-  "TPHCM",
-  "Đà Nẵng",
-  "Hà Nội",
-];
+const names = ["TPHCM", "Đà Nẵng", "Hà Nội"];
 
 function getStyles(name, personName, theme) {
   return {
@@ -55,19 +45,20 @@ export default function SelectAreaHome() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 100, pl: 1 }}>
+      <FormControl sx={{ m: 1, width: 170, pl: 1 }}>
         {/* <h6>Khu vực</h6> */}
         <InputLabel id="demo-multiple-name-label">Khu Vực </InputLabel>
-        <React.Fragment className="config-select">
+        <div className="config-select">
           <Select
             labelId="demo-multiple-name-label"
             // id="demo-multiple-name"
             value={personName}
+            defaultValue="TPHCM"
             onChange={handleChange}
             input={<OutlinedInput label="Khu vực" />}
             MenuProps={MenuProps}
             sx={{
-              mr: -5,
+              mr: 0,
             }}
             // className={hideIconPadding}
             multiple={false}
@@ -83,7 +74,7 @@ export default function SelectAreaHome() {
               </MenuItem>
             ))}
           </Select>
-        </React.Fragment>
+        </div>
       </FormControl>
     </div>
   );

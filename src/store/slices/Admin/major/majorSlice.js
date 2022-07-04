@@ -30,11 +30,11 @@ const majorSlice = createSlice({
         state.error = payload;
       }
     });
-    builder.addCase(deleteMajor.fulfilled, (state, { payload })=>{
+    builder.addCase(deleteMajor.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;
       }
-    })
+    });
   },
 });
 
@@ -44,20 +44,16 @@ export default majorSlice;
  * get major list
  * @returns major list
  */
-export const getMajorList = createAsyncThunk(
-  "major/getMajorList",
-  async () => {
-    return await axios
-      .get("http://localhost:8085/api/major")
-      .then((response) => {
-        console.log(response.data)
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+export const getMajorList = createAsyncThunk("major/getMajorList", async () => {
+  return await axios
+    .get("http://localhost:8085/api/major")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
 /**
  * Add major
@@ -69,7 +65,7 @@ export const addMajor = createAsyncThunk(
   "major/addMajor",
   async (data, thunkAPI) => {
     return api
-      .post(`http://localhost:8085/api/major`,data )
+      .post(`http://localhost:8085/api/major`, data)
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Thêm chuyên ngành thành công")
@@ -113,13 +109,12 @@ export const updateMajorInfo = createAsyncThunk(
   async (updateData, thunkAPI) => {
     const { majorData, setIsEdit } = updateData;
     return axios
-      .put(
-        `http://localhost:8085/api/major/${majorData.id}`,
-        majorData
-      )
+      .put(`http://localhost:8085/api/major/${majorData.id}`, majorData)
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Cập nhật chuyên ngành thành công")
+          notificationSlice.actions.successMess(
+            "Cập nhật chuyên ngành thành công"
+          )
         );
         if (setIsEdit) {
           setIsEdit(false);
@@ -131,21 +126,18 @@ export const updateMajorInfo = createAsyncThunk(
   }
 );
 
-export const deleteMajor= createAsyncThunk(
+export const deleteMajor = createAsyncThunk(
   "major/deleteMajorInfo",
   async (data, thunkAPI) => {
     return axios
-      .delete(
-        `http://localhost:8085/api/major/${data}`
-      )
+      .delete(`http://localhost:8085/api/major/${data}`)
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Xóa chuyên ngành thành công")
         );
       })
       .catch((error) => {
-        return thunkAPI.rejectWithValue(error)
+        return thunkAPI.rejectWithValue(error);
       });
   }
 );
-

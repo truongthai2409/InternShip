@@ -1,0 +1,29 @@
+@use "../../assets/styles/" as *;
+
+.header__hr {
+  // margin-top: 28px;
+  background-color: $primary-color-1;
+
+  &-post {
+    display: inline-flex;
+    margin-right: 22px;
+    &-post {
+      display: flex;
+      margin-left: 10px;
+      font-size: $fs-16;
+      align-items: center;
+    }
+  }
+  &-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-config {
+      margin-right: 14px;
+    }
+  }
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+  color: $primary-color;
+}

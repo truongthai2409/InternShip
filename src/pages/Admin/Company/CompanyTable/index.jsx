@@ -26,7 +26,7 @@ const CompanyTable = () => {
     dispatch(getCompanyList());
   }, []);
 
-  console.log(companyList);
+  // console.log(companyList);
 
   const columns = [
     { field: "stt", headerName: "#", width: 70 },
