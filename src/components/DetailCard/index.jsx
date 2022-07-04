@@ -36,7 +36,7 @@ function DetailCard(props) {
 
 
   return (
-    <div className="detail__card">
+    <div className="detail__card detail__card-ontablet containerDetailCard-home">
       <div className="detail__card-1">
         <div className="detail__card-intro">
           <img
@@ -59,7 +59,7 @@ function DetailCard(props) {
             </div>
           ))}
         </div>
-        <div>
+        <div className="button__candidate-onMobile">
           <Button name="Ứng Tuyển"></Button>
         </div>
       </div>

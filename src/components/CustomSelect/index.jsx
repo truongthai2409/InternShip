@@ -17,7 +17,7 @@ const CustomSelect = React.forwardRef(
 
     // handle change district
     const handleChangeDistrict = (e) => {
-      console.log(e.target.value);
+      // console.log(e.target.value);
       dispatch(getDistrictList(e.target.value));
     };
 

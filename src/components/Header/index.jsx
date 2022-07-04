@@ -7,8 +7,8 @@ import "./styles.scss";
 
 function Header(props) {
   return (
-    <div className="container">
-      <Logo />
+    <div className="container onMobile">
+      <Logo id={4} />
       <div className="login__home">
         <Link to="/login" className="login">
           <h5>Đăng Nhập</h5>

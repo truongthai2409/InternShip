@@ -22,3 +22,18 @@
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border-color: transparent !important;
 }
+.css-yf8vq0-MuiSelect-nativeInput {
+  position: relative !important;
+}
+.config-select {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  display: none;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+  text-overflow: unset !important;
+}

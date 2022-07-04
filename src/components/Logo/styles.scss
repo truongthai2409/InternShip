@@ -1,6 +1,26 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .logo {
+  font-family: $f-family-0;
+  width: fit-content;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  color: $color-black-0;
+  h1 {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  span {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+@media (max-width: 740px) {
+  .logo {
     font-family: $f-family-0;
     width: fit-content;
     display: flex;
@@ -8,13 +28,14 @@
     text-decoration: none;
     color: $color-black-0;
     h1 {
-        font-size: 24px;
-        font-weight: 900;
-        line-height: 1;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1;
     }
-    span{
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
+    span {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
     }
+  }
 }

@@ -19,6 +19,7 @@ import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
 import DetailHome from "../pages/Main/DetailHome";
+import HR from "../pages/Main/HR";
 
 export const adminRouter = [
   {
@@ -81,6 +82,10 @@ export const mainRouter = [
   {
     path: "/detail",
     Component: DetailHome,
+  },
+  {
+    path: "/hr",
+    Component: HR,
   },
 ];
 

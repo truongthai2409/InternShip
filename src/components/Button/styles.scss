@@ -1,25 +1,39 @@
 @use "../../assets/styles/" as *;
 
 .button {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    border:none;
-    //margin-left: 20px;
-    border-radius: 4px;
-    font-family: $f-family;
-    cursor: pointer;
-    @include button(13px, 700, 12px, 32px, $primary-color, $primary-color, $color-white-0, $color-white-0);
-    .button__icon{
-        margin-right: 10px
-    }
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border: none;
+  //margin-left: 20px;
+  border-radius: 4px;
+  font-family: $f-family;
+  cursor: pointer;
+  @include button(
+    13px,
+    700,
+    12px,
+    32px,
+    $primary-color,
+    $primary-color,
+    $color-white-0,
+    $color-white-0
+  );
+  .button__icon {
+    margin-right: 10px;
+  }
 
-    i {
-        margin-left: 10px;
-    }
+  i {
+    margin-left: 10px;
+  }
 
-    &:hover {
-        opacity: 0.9;
-    }
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: 740px) {
+  .button {
+  }
 }

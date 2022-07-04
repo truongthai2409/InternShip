@@ -3,17 +3,21 @@ import SearchResultHome from "../../../components/SearchResultHome";
 import DetailCard from "../../../components/DetailCard";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import FilterPanelHome from "../../../components/FilterPanelHome";
-
+import "./styles.scss";
 const Home = () => {
   return (
     <Grid className="wrapper" container>
-      <Grid item md={2}>
+      <Grid item lg={2} md={2} sm={2} xs={12}>
         <SideBarHomeList />
       </Grid>
-      <Grid item md={4}>
+      <Grid item lg={4} md={10} sm={10} xs={12}>
+        <div className="onDesktop">
+          <SearchResultHome />
+        </div>
+
         <FilterPanelHome />
       </Grid>
-      <Grid item md={6}>
+      <Grid item lg={6} className="onTablet">
         <div className="containerDetailCard">
           <SearchResultHome />
           <DetailCard

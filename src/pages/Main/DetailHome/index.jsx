@@ -9,9 +9,9 @@ import { Link } from "react-router-dom";
 function DetailHome(props) {
   return (
     <div>
-      <Grid className="wrapper" container>
-        <Grid item md={8}>
-          <div className="containerDetailCard">
+      <Grid className="wrapper" container spacing={4}>
+        <Grid item md={8} sm={12} xs={12}>
+          <div className="">
             <DetailCard
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
               star={4.5}
@@ -28,7 +28,7 @@ function DetailHome(props) {
               location={"TPHCM"}
               rating={"5.0 trong 48 lượt đánh giá"}
             />
-            <div className="config__arow-back">
+            <div className="config__arow-back hide-on-table">
               <Link to="/" className="config__arow-back">
                 <ArrowBackIcon></ArrowBackIcon>
                 Trở lại
@@ -36,7 +36,7 @@ function DetailHome(props) {
             </div>
           </div>
         </Grid>
-        <Grid item md={4}>
+        <Grid item md={4} sm={12} xs={12}>
           <CardVisit
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
             nameCompany="Công Ty R2S "
@@ -46,6 +46,12 @@ function DetailHome(props) {
             location="1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP.HCM"
           />
         </Grid>
+        <div className="config__arow-back hide-on-desktop ">
+          <Link to="/" className="config__arow-back">
+            <ArrowBackIcon></ArrowBackIcon>
+            Trở lại
+          </Link>
+        </div>
       </Grid>
     </div>
   );

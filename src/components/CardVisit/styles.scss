@@ -6,6 +6,8 @@
 }
 
 .visit__card {
+  // margin-left: 32px;
+
   &-logo {
     display: block;
     margin-left: auto;
@@ -41,7 +43,6 @@
   }
 
   &-detail {
-    width: 362px;
     left: 32px;
     top: 183px;
 
@@ -81,4 +82,32 @@
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+// responsive detail_home
+
+@media (min-width: 740px) and (max-width: 1024px) {
+  .config__arow-back {
+    display: none;
+  }
+  .scroll__onTablet-hide {
+    overflow-y: hidden;
+    height: fit-content;
+  }
+  .visit__card__onTablet {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 740px) {
+  .config__arow-back {
+    display: none;
+  }
+  .scroll__onTablet-hide {
+    overflow-y: hidden !important;
+    height: auto !important;
+  }
+  .visit__card__onTablet {
+    margin-left: 0;
+  }
 }
