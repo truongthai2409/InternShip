@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
 import ButtonMark from "../ButtonMark";
@@ -7,13 +7,34 @@ import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import WorkIcon from "@mui/icons-material/Work";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import Rating from "@mui/material/Rating";
+import { useSelector, useDispatch } from "react-redux";
+import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 
 import "./styles.scss";
 import { Icon } from "@mui/material";
 
 const listMajors = ["HTML", "CSS", "JS", "ReactJS"];
 
+
 function DetailCard(props) {
+  const { jobList, idJobActive, indexCardActive } = useSelector((state) => state.job)
+  const dispatch = useDispatch();
+  const [detailCard, setDetailCard] = useState({})
+  const [jobLists, setJobLists] = useState([])
+  
+
+  React.useEffect(() => {
+    dispatch(getJobList())
+    setJobLists(jobList)
+  }, [])
+  
+  // React.useEffect(() => {
+  //   setDetailCard(jobList[indexCardActive])
+  // }, [indexCardActive])
+
+  console.log("joblist day",jobLists)
+
+
   return (
     <div className="detail__card">
       <div className="detail__card-1">
@@ -24,8 +45,8 @@ function DetailCard(props) {
             src={props.logo}
           />
           <div>
-            <h2>{props.nameMajor}</h2>
-            <p className="name-company">{props.nameCompany}</p>
+            <h2>{"ascsac"}</h2>
+            <p className="name-company">{'qq'}</p>
           </div>
         </div>
         <ButtonMark></ButtonMark>

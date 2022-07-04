@@ -5,7 +5,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 
 import "./styles.scss";
-import adminLogo from "../../assets/img/logo_admin.png";
+import adminLogo from "../../assets/img/logo_admin_green.png";
 
 const AdminNav = ({ openDrawer, setOpenDrawer }) => {
   //

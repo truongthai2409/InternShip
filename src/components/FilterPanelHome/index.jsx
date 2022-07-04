@@ -2,9 +2,13 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
+import { getJobList } from "../../store/slices/main/home/job/jobSlice";
+import moment from "moment";
+
+
+import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 
 function TabPanel(props) {
@@ -37,6 +41,18 @@ function a11yProps(index) {
 export default function FilterPanelHome() {
     const [value, setValue] = React.useState(0);
 
+    const dispatch = useDispatch();
+
+    // get global state from redux store
+    const { jobList, idJobActive, indexCardActive } = useSelector((state) => state.job);
+
+    React.useEffect(() => {
+        dispatch(getJobList());
+    }, []);
+    
+    // console.log(jobList)
+    // console.log(idJobActive)
+
     const handleChange = (event, newValue) => setValue(newValue);
 
     return (
@@ -49,69 +65,21 @@ export default function FilterPanelHome() {
                 </Tabs>
             </Box>
             <TabPanel className="tabPanel" value={value} index={0}>
-                <CardHome
-                    title="Thực tập ReactJS"
+                {jobList.map((job, index) =>
+                    <CardHome
+                    id={job.id}
+                    active = {indexCardActive}
+                    index={index}
+                    key={job.id}
+                    title= {job.name}
                     fontSize={10}
                     nameCompany="Công ty R2S"
-                    tagName={["Front end", "Full time"]}
+                    tagName={[job.jobposition.name, "Full time"]}
                     start={4.5}
                     location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
+                    time={[moment(job.timeStartStr).format("DD/MM/YYYY"), moment(job.timeEndStr).format("DD/MM/YYYY")]}
                 />
-                <CardHome
-                    title="Thực tập Java"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Back end", "Full time"]}
-                    start={4}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
-                <CardHome
-                    title="Thực tập Flutter"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Mobile", "Full time"]}
-                    start={4}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
-                <CardHome
-                    title="Thực tập .Net"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Mobile", "Full time"]}
-                    start={4.5}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
-                <CardHome
-                    title="Thực tập React Native"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Front end", "Full time"]}
-                    start={5}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
-                <CardHome
-                    title="Thực tập React Native"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Front end", "Full time"]}
-                    start={5}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
-                <CardHome
-                    title="Thực tập React Native"
-                    fontSize={10}
-                    nameCompany="Công ty R2S"
-                    tagName={["Front end", "Full time"]}
-                    start={5}
-                    location="Hồ Chí Minh"
-                    time={["09/06/2022", "09/08/2022"]}
-                />
+                )}               
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {/* <CardHome /> */}

@@ -14,7 +14,7 @@ import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
 import { addCompany, getCompanyDetail, updateCompanyInfo } from "../../../store/slices/Admin/company/companySlice";
-import { getProvinceList, getDistrictList } from "../../../store/slices/location/locationSlice";
+import { getProvinceList, getDistrictList, addLocation } from "../../../store/slices/location/locationSlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -107,11 +107,15 @@ export default function CompanyForm(props) {
                 website: data.website,
             }),
             fileLogo: data.logo[0],
+            location: JSON.stringify({
+                address: data.address,
+                note: "note"
+            }),
         };
+
         if (isAdd) {
             const addData = { companyData, reset };
             dispatch(addCompany(addData));
-
         } else {
             const updateData = {
                 companyData: {
@@ -124,7 +128,7 @@ export default function CompanyForm(props) {
                         tax: data.tax,
                         website: data.website,
                         status: {
-                            id: 1,
+                            id: 4,
                         },
                     }),
                     fileLogo: data.logo[0],
@@ -298,7 +302,7 @@ export default function CompanyForm(props) {
                                         <CustomTextarea
                                             label="Chi tiết địa chỉ"
                                             id="address"
-                                            type="address"
+                                            type="description"
                                             placeholder="Chi tiết địa chỉ..."
                                             register={register}
                                             check={!isEdit}

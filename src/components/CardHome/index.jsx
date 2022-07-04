@@ -1,14 +1,30 @@
-import React from "react";
+import * as React from 'react';
 import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
 import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import clsx from "clsx";
+import { useDispatch } from "react-redux";
+import { updateIdJobActive, updateIndexCardActive } from "../../store/slices/main/home/job/jobSlice";
 
 function CardHome(props) {
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        if(props.index === 0) {
+            dispatch(updateIdJobActive(props.id))
+        }
+    }, [])
+
+    const handleClick = () => {
+        dispatch(updateIndexCardActive(props.index))
+        dispatch(updateIdJobActive(props.id))
+    }
+
     return (
-        <div className="cardHome__container">
+        <div onClick = {handleClick} className={clsx('cardHome__container', (props.active === props.index ? 'active' : ''))}>
             <div className="cardHome__col1">
                 <div className="cardHome__aboutCompany">
                     <img className="cardHome__img" src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png" alt="" />

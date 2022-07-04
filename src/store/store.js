@@ -7,6 +7,8 @@ import loginSlice from "./slices/main/login/loginSlice";
 import universitySlice from "./slices/Admin/university/unversitySlice";
 import locationSlice from "./slices/location/locationSlice";
 import majorSlice from "./slices/Admin/major/majorSlice";
+import jobSlice from "./slices/main/home/job/jobSlice";
+
 
 const store = configureStore({
   reducer: {
@@ -18,6 +20,7 @@ const store = configureStore({
     university: universitySlice.reducer,
     location: locationSlice.reducer,
     major: majorSlice.reducer,
+    job: jobSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
