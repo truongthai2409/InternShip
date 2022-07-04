@@ -7,7 +7,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const ButtonMark = (props) => {
     const [mark, setMark] = useState(true);
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.stopPropagation();
         setMark(!mark);
     };
 

@@ -7,6 +7,8 @@ import FormControl from "@mui/material/FormControl";
 
 import "./styles.scss";
 import { Select } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getProvinceList } from "../../store/slices/location/locationSlice";
 const ITEM_HEIGHT = 30;
 const ITEM_PADDING_TOP = 0;
 const MenuProps = {
@@ -18,7 +20,7 @@ const MenuProps = {
   },
 };
 
-const names = ["TPHCM", "Đà Nẵng", "Hà Nội"];
+const names = [];
 
 function getStyles(name, personName, theme) {
   return {
@@ -43,6 +45,16 @@ export default function SelectAreaHome() {
     );
   };
 
+  const dispatch = useDispatch()
+  const { provinceList } = useSelector((state) => state.location)
+
+  React.useEffect(() => {
+    dispatch(getProvinceList())
+  }, [])
+
+  // console.log(provinceList)
+
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 170, pl: 1 }}>
@@ -64,13 +76,13 @@ export default function SelectAreaHome() {
             multiple={false}
             // disabled
           >
-            {names.map((name) => (
+            {provinceList.map((province) => (
               <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, personName, theme)}
+                key={province.id}
+                value={province.id}
+                // style={getStyles(province.id, personName, theme)}
               >
-                {name}
+                {province.name}
               </MenuItem>
             ))}
           </Select>

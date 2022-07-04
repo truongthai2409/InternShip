@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -45,19 +45,16 @@ function a11yProps(index) {
 }
 
 export default function FilterPanelHome() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
     const dispatch = useDispatch();
 
     // get global state from redux store
-    const { jobList, idJobActive, indexCardActive } = useSelector((state) => state.job);
+    const { jobList, indexCardActive, jobDetail } = useSelector((state) => state.job);
 
-    React.useEffect(() => {
-        dispatch(getJobList());
+    useEffect(() => {
+        dispatch(getJobList(jobDetail));
     }, []);
-    
-    // console.log(jobList)
-    // console.log(idJobActive)
 
     const handleChange = (event, newValue) => setValue(newValue);
 
