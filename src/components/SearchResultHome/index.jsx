@@ -25,9 +25,7 @@ function SearchResultHome(props) {
           />
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">
-          <IconButton className="select__icon-location">
-            <AddLocationIcon />
-          </IconButton>
+        <AddLocationIcon />
           {/* <CustomSelect></CustomSelect> */}
           <SelectAreaHome />
           {/* <IconButton className="select__icon-arrow-drop">

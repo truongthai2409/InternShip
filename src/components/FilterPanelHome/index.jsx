@@ -76,7 +76,7 @@ export default function FilterPanelHome() {
                     key={job.id}
                     title= {job.name}
                     fontSize={10}
-                    nameCompany="Công ty R2S"
+                    nameCompany={job.hr.company.name}
                     tagName={[job.jobposition.name, "Full time"]}
                     start={4.5}
                     location="Hồ Chí Minh"

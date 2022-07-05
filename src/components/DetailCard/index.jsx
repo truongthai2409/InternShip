@@ -16,14 +16,20 @@ import { Icon } from "@mui/material";
 
 const listMajors = ["HTML", "CSS", "JS", "ReactJS"];
 
-function DetailCard(props) {
-  const dispatch = useDispatch();
+const formatSalary = (salary = "") => {
+    return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 
-  // get global state from redux store
-  const { indexCardActive, jobDetail } = useSelector((state) => state.job);
-  useEffect(() => {
-      dispatch(getJobList());
-  }, []);
+function DetailCard(props) {
+    const dispatch = useDispatch();
+
+    // get global state from redux store
+    const { indexCardActive, jobDetail } = useSelector((state) => state.job);
+    useEffect(() => {
+        dispatch(getJobList());
+    }, []);
+
+    console.log(jobDetail);
 
     return (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
@@ -32,7 +38,7 @@ function DetailCard(props) {
                     <img className="detail__card__logo" alt="detail-card-logo" src={props.logo} />
                     <div>
                         <h2>{jobDetail.name}</h2>
-                        <p className="name-company">{"qq"}</p>
+                        <p className="name-company">{jobDetail.name}</p>
                     </div>
                 </div>
                 <ButtonMark></ButtonMark>
@@ -60,7 +66,9 @@ function DetailCard(props) {
                 </div>
                 <div className="detail__card-3-item">
                     <h4 className="detail__card-3-item-name">Thời hạn ứng tuyển:</h4>
-                    <p>{moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} - {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}</p>
+                    <p>
+                        {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} - {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
+                    </p>
                 </div>
             </div>
             <div className="line"></div>
@@ -69,7 +77,9 @@ function DetailCard(props) {
                     <Icon className="detail__card-4-item-icon">
                         <CurrencyExchangeIcon />
                     </Icon>
-                    <h6 className="detail__card-4-item-info">{jobDetail.salaryMin} - {jobDetail.salaryMax}</h6>
+                    <h6 className="detail__card-4-item-info">
+                        {formatSalary(jobDetail.salaryMin)} - {formatSalary(jobDetail.salaryMax)}
+                    </h6>
                 </div>
                 <div className="detail__card-4-item">
                     <Icon className="detail__card-4-item-icon">

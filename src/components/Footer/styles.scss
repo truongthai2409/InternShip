@@ -2,7 +2,9 @@
 
 .elementor-section {
   width: 100%;
+  position: absolute;
   left: 0;
+  right: 0;
   background-color: $primary-color;
 }
 
@@ -90,8 +92,6 @@
 }
 
 .elementor-section {
-  margin-top: 10px;
-  margin-bottom: 0px;
 
   & .elementor-container {
     max-width: 1140px;
