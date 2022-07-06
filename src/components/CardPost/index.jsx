@@ -4,12 +4,13 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DoorFrontIcon from "@mui/icons-material/DoorFront";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
+import moment from "moment";
 
 const CardPost = (props) => {
     return (
         <div className="card-post__container">
             <PostStatus status={props.status} />
-            <h3 className="card-post__job-name">ReactJS Intern</h3>
+            <h3 className="card-post__job-name">{props.jobName}</h3>
             <div className="card-post__company-info-detail">
                 <img
                     className="company-info-detail__img"
@@ -17,12 +18,13 @@ const CardPost = (props) => {
                     alt="Ảnh của công ty"
                 />
                 <div className="company-info-detail__content">
-                    <p className="company__name">Công ty R2S</p>
-                    <p className="company__location">1164 Phạm Văn Đồng, TP Thủ Đức, TPHCM</p>
+                    <p className="company__name">{props.companyName}</p>
+                    <p className="company__location">{props.companyLocation}</p>
                 </div>
             </div>
-            <p className="card-post__amount">Số lượng: 100</p>
-            <p className="card-post__time">05/06/2022 - 30/06/2022</p>
+            <p className="card-post__amount">Số lượng: {props.amount}</p>
+            <p className="card-post__time"><b>Thời gian tuyển dụng:</b> {moment(props.timeStart).format("DD/MM/YYYY")} - {moment(props.timeEnd).format("DD/MM/YYYY")}</p>
+            <p className="card-post__created"><b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}</p>
             <div className="card-post__action">
                 <ButtonAction
                     height="50px"

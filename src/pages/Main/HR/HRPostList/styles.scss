@@ -2,8 +2,10 @@
 
 .hrpost__list {
     display: flex;
+    min-height: 500px;
     flex-direction: column;
     align-items: center;
+    margin-top: 55px;
     margin-bottom: 40px;
 
     .hrpost__list-bt {

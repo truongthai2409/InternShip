@@ -3,9 +3,7 @@ import Home from "../Home";
 
 const HR = (props) => {
   return (
-    <div className="main__layout">
       <Home></Home>
-    </div>
   );
 };
 
