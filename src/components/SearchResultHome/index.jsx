@@ -8,10 +8,9 @@ import "./styles.scss";
 import SelectAreaHome from "../SelectAreaHome";
 
 function SearchResultHome(props) {
-
   return (
-    <div className="header__with-search onMobile onTable">
-      <div className="header__with-search-search">
+    <div className="header__with-search onMobile onTablet ">
+      <div className="header__with-search-search ">
         <div className="header__with-search-search-wrap">
           <IconButton className="search__icon">
             <SearchOutlinedIcon />
@@ -25,7 +24,7 @@ function SearchResultHome(props) {
           />
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">
-        <AddLocationIcon />
+          <AddLocationIcon />
           {/* <CustomSelect></CustomSelect> */}
           <SelectAreaHome />
           {/* <IconButton className="select__icon-arrow-drop">
