@@ -20,6 +20,8 @@ import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
 import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
+import HRPost from "../pages/Main/HR/HRPost";
+import HRPostList from "../pages/Main/HR/HRPostList";
 
 export const adminRouter = [
   {
@@ -83,9 +85,20 @@ export const mainRouter = [
     path: "/detail",
     Component: DetailHome,
   },
+];
+
+export const hrRouter = [
   {
     path: "/hr",
     Component: HR,
+  },
+  {
+    path: "/hr/post",
+    Component: HRPost,
+  },
+  {
+    path: "/hr/post/list",
+    Component: HRPostList,
   },
 ];
 

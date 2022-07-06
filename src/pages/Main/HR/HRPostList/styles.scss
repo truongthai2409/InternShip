@@ -1,0 +1,49 @@
+@use "../../../../assets/styles/" as *;
+
+.hrpost__list {
+  &-bt {
+    display: flex;
+    justify-content: right;
+    margin: 20px 20px;
+  }
+
+  &-info {
+    background-color: $color-white-0;
+    padding: 30px;
+    &-detail {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      &-detail {
+        margin-left: 20px;
+        font-size: 20px;
+      }
+
+      &-candidate {
+        margin-left: 20px;
+      }
+
+      &-logo {
+        margin: 20px 0;
+      }
+    }
+  }
+}
+
+.main__layout .MuiGrid-root.MuiGrid-item {
+  display: flex;
+  align-items: center;
+}
+.css-11lq3yg-MuiGrid-root {
+  margin-top: 20px;
+}
+.css-i4bv87-MuiSvgIcon-root {
+  // margin-right: 20px;
+}
+
+.main__layout .MuiGrid-root.MuiGrid-item {
+  padding: 20px;
+}
+.line {
+  border: 0.5px solid #dedede;
+}

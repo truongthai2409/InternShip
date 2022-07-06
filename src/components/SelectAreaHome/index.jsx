@@ -20,19 +20,7 @@ const MenuProps = {
   },
 };
 
-const names = [];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
 export default function SelectAreaHome() {
-  const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -45,15 +33,14 @@ export default function SelectAreaHome() {
     );
   };
 
-  const dispatch = useDispatch()
-  const { provinceList } = useSelector((state) => state.location)
+  const dispatch = useDispatch();
+  const { provinceList } = useSelector((state) => state.location);
 
   React.useEffect(() => {
-    dispatch(getProvinceList())
-  }, [])
+    dispatch(getProvinceList());
+  }, []);
 
   // console.log(provinceList)
-
 
   return (
     <div>
