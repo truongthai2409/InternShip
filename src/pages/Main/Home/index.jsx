@@ -18,8 +18,10 @@ const Home = () => {
         <FilterPanelHome />
       </Grid>
       <Grid item lg={6} className="onTablet">
-        <div className="containerDetailCard">
-          <SearchResultHome />
+        <div className="containerDetailCard containerDetailCard-none">
+          <div className="none__res">
+            <SearchResultHome />
+          </div>
           <DetailCard
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
             star={4.5}

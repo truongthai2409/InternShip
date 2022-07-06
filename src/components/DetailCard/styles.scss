@@ -121,9 +121,9 @@
   display: none;
 }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 360px) and (max-width: 1200px) {
   .containerDetailCard-home {
-    display: none;
+    // display: none;
   }
 }
 

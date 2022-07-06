@@ -14,7 +14,7 @@ import "./styles.scss";
 
 function HeaderWithHR(props) {
   return (
-    <div className="container-header__hr header__hr">
+    <div className="container-header__hr header__hr config">
       <Logo id={1} />
       <div className="header__hr">
         <Link to="/hr" className="header__hr-post">
