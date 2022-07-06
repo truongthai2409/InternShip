@@ -13,7 +13,7 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
-      state.userList = payload;
+      state.userList = payload.users;
     });
   },
 });

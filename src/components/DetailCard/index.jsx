@@ -24,12 +24,12 @@ function DetailCard(props) {
     const dispatch = useDispatch();
 
     // get global state from redux store
-    const { indexCardActive, jobDetail } = useSelector((state) => state.job);
+    const { jobDetail } = useSelector((state) => state.job);
     useEffect(() => {
         dispatch(getJobList());
     }, []);
 
-    console.log(jobDetail);
+    // console.log(jobDetail);
 
     return (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
@@ -38,7 +38,7 @@ function DetailCard(props) {
                     <img className="detail__card__logo" alt="detail-card-logo" src={props.logo} />
                     <div>
                         <h2>{jobDetail.name}</h2>
-                        <p className="name-company">{jobDetail.name}</p>
+                        <p className="name-company">{jobDetail.hr?.company?.name}</p>
                     </div>
                 </div>
                 <ButtonMark></ButtonMark>

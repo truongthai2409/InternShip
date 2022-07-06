@@ -1,8 +1,9 @@
 @use "../../assets/styles/" as *;
 
 .tagName__container {
-  width: 64px;
+  width: auto;
   height: 22px;
+  padding: 0 10px;
   border-radius: 2px;
   background-color: $color-gray-9;
   display: flex;

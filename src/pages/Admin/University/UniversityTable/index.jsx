@@ -20,7 +20,7 @@ const UniversityTable = () => {
   useEffect(() => {
     dispatch(getUniversityList());
   }, []);
-  // console.log(universityList);
+  console.log(universityList);
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
     {
