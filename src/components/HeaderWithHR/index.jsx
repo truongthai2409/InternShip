@@ -7,45 +7,66 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
-import ButtonMark from "../ButtonMark";
 
 function HeaderWithHR(props) {
   return (
-    <div className="container header__hr">
-      <Logo id={4} />
+    <div className="container-header__hr header__hr">
+      <Logo id={1} />
       <div className="header__hr-post">
-        <Link to="/" className="header__hr-post">
+        <Link to="/hr" className="header__hr-post">
           <AddCardIcon></AddCardIcon>
           <span className="header__hr-post-post">Đăng bài</span>
         </Link>
-        <div className="header__hr-post">
-          <Link to="/">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
-            <span className="header__hr-post-post">Danh sách bài đăng</span>
-          </Link>
-        </div>
+        <Link to="/hr/post/list" className="header__hr-post">
+          <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+          <span className="header__hr-post-post">Danh sách bài đăng</span>
+        </Link>
       </div>
       <div className="header__hr-icon">
         <div className="header__hr-icon-config">
-          <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
+          <Link to="/hr">
+            <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
+            {props.idMark ? (
+              <FiberManualRecordIcon
+                fontSize="inherit"
+                color="warning"
+              ></FiberManualRecordIcon>
+            ) : null}
+          </Link>
         </div>
         <div className="header__hr-icon-config">
           <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
+          <Link to="/hr">
+            {props.idNoti ? (
+              <FiberManualRecordIcon
+                fontSize="inherit"
+                color="warning"
+              ></FiberManualRecordIcon>
+            ) : null}
+          </Link>
         </div>
         <div className="header__hr-icon-config">
-          <SettingsIcon></SettingsIcon>
+          <Link to="/hr">
+            <SettingsIcon></SettingsIcon>
+          </Link>
         </div>
         <div>
-          <AccountCircleIcon></AccountCircleIcon>
+          <Link to="/hr">
+            <AccountCircleIcon></AccountCircleIcon>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-HeaderWithHR.propTypes = {};
+HeaderWithHR.propTypes = {
+  idMark: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  idNoti: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
 export default HeaderWithHR;

@@ -7,7 +7,7 @@ import Home from "../Home";
 const HR = (props) => {
   return (
     <div className="main__layout">
-      <HeaderWithHR />
+      {/* <HeaderWithHR /> */}
       <Home></Home>
     </div>
   );
