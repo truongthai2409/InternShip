@@ -29,6 +29,8 @@ function DetailCard(props) {
     dispatch(getJobList());
   }, []);
 
+  // console.log(jobDetail);
+
   return (
     <div className="detail__card detail__card-ontablet containerDetailCard-home">
       <div className="detail__card-1">
@@ -40,7 +42,7 @@ function DetailCard(props) {
           />
           <div>
             <h2>{jobDetail.name}</h2>
-            <p className="name-company">{jobDetail.name}</p>
+            <p className="name-company">{jobDetail.hr?.company?.name}</p>
           </div>
         </div>
         <ButtonMark></ButtonMark>
