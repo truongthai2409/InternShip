@@ -9,6 +9,9 @@ import { adminRouter, mainRouter, registerRouter } from "./config/routes";
 import MainLayout from "./Layouts/Main";
 import Home from "./pages/Main/Home/index";
 import HR from "./pages/Main/HR";
+import HRPost from "./pages/Main/HRPost";
+import HRPostList from "./pages/Main/HR/HRPostList";
+import CompanyForm from "./containers/Admin/CompanyForm";
 
 function App() {
   const renderAdminRouter = () => {
@@ -42,6 +45,8 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginLayout />}></Route>
           <Route path="/hr" element={<HR />}></Route>
+          <Route path="/hr-post" element={<HRPost />}></Route>
+          <Route path="/hr-post-list" element={<HRPostList />}></Route>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             {renderMainRouter()}

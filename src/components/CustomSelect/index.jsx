@@ -1,7 +1,10 @@
 import React from "react";
 
 const CustomSelect = React.forwardRef(
-  ({ onBlur, name, label, selectOptions, getDistrictList, dispatch }, ref) => {
+  (
+    { onBlur, name, label, selectOptions, getDistrictList, dispatch, id },
+    ref
+  ) => {
     // render option
     const renderSelectOption = () => {
       if (selectOptions) {
@@ -21,18 +24,25 @@ const CustomSelect = React.forwardRef(
       dispatch(getDistrictList(e.target.value));
     };
 
+    const handleChange = () => {
+      console.log("Changed");
+    };
+
     return (
       <>
         <label>{label}</label>
-        <select
-          name={name}
-          ref={ref}
-          onChange={handleChangeDistrict}
-          onBlur={onBlur}
-        >
-          <option value="">none</option>
-          {renderSelectOption()}
-        </select>
+        <div className="custom-select__textfield">
+          <select
+            name={name}
+            ref={ref}
+            onChange={handleChange || handleChangeDistrict}
+            onBlur={onBlur}
+            id={id}
+          >
+            <option value="">Vui lòng chọn</option>
+            {renderSelectOption()}
+          </select>
+        </div>
       </>
     );
   }
