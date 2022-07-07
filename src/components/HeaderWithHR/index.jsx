@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import AddAlertIcon from "@mui/icons-material/AddAlert";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddCardIcon from "@mui/icons-material/AddCard";
@@ -11,11 +10,20 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
+import { Tooltip, IconButton, Badge, Hidden } from "@mui/material";
 
+import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 function HeaderWithHR(props) {
   return (
     <div className="container-header__hr header__hr config">
       <Logo id={1} />
+      <Hidden mdUp>
+        <div className="admin-navbar_show">
+          <Tooltip title="Show sidebar">
+            <ViewQuiltOutlinedIcon />
+          </Tooltip>
+        </div>
+      </Hidden>
       <div className="header__hr-post">
         <Link to="/hr" className="header__hr-post">
           <AddCardIcon></AddCardIcon>
