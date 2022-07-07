@@ -20,11 +20,7 @@ import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
 import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
-<<<<<<< HEAD
-import HRPost from "../pages/Main/HR/HRPost/index";
-=======
 import HRPost from "../pages/Main/HRPost";
->>>>>>> 7b317fb19cb5fe3301a09a8356cc1cd65307180d
 import HRPostList from "../pages/Main/HR/HRPostList";
 
 export const adminRouter = [
