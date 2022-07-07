@@ -12,8 +12,6 @@ import {
   registerRouter,
 } from "./config/routes";
 import MainLayout from "./Layouts/Main";
-import Home from "./pages/Main/Home/index";
-import HR from "./pages/Main/HR";
 import HRLayOut from "./Layouts/HR";
 
 function App() {

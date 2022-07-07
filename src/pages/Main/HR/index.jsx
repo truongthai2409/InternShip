@@ -3,10 +3,7 @@ import Home from "../Home";
 
 const HR = (props) => {
   return (
-    <div className="main__layout">
-      {/* <HeaderWithHR /> */}
       <Home></Home>
-    </div>
   );
 };
 

@@ -17,6 +17,7 @@ function HeaderWithHR(props) {
   return (
     <div className="container-header__hr header__hr config">
       <Logo id={1} />
+<<<<<<< HEAD
       <Hidden mdUp>
         <div className="admin-navbar_show">
           <Tooltip title="Show sidebar">
@@ -25,6 +26,9 @@ function HeaderWithHR(props) {
         </div>
       </Hidden>
       <div className="header__hr-post">
+=======
+      <div className="header__hr">
+>>>>>>> c8d4a6dc7f4c0299e3d216ee876cb91303fc8717
         <Link to="/hr" className="header__hr-post">
           <AddCardIcon></AddCardIcon>
           <span className="header__hr-post-post">Đăng bài</span>

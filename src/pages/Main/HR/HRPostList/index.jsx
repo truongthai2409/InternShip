@@ -1,55 +1,46 @@
-import React from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Grid } from "@mui/material";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import HandymanOutlinedIcon from "@mui/icons-material/HandymanOutlined";
-import BlindsClosedOutlinedIcon from "@mui/icons-material/BlindsClosedOutlined";
 import Button from "../../../../components/Button";
-import Logo from "../../../../components/Logo";
 import "./styles.scss";
+import CardPost from "../../../../components/CardPost";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobList } from "../../../../store/slices/main/home/job/jobSlice"
+
+
+const formatLocation = (location) => {
+    return `${location.address}, ${location.district?.name}, ${location.district?.province?.name}`
+}
+
 const HRPostList = (props) => {
-  return (
-    <div className="hrpost__list">
-      <div className="hrpost__list-bt">
-        <Button name="Đăng bài"></Button>
-      </div>
-      <div className="hrpost__list-info">
-        <div className="hrpost__list-info-detail">
-          <Button name="Đang đăng tuyển"></Button>
+    const dispatch = useDispatch();
+    const { jobList } = useSelector((state) => state.job);
+
+    useEffect(() => {
+        dispatch(getJobList());
+    }, []);
+
+    // console.log(jobList);
+
+    return (
+        <div className="hrpost__list">
+            <div className="hrpost__list-bt">
+                <Button name="ĐĂNG BÀI"></Button>
+            </div>
+            {jobList.map((job) => (
+                <CardPost 
+                    key={job.id}
+                    status={job.status.id}
+                    jobName={job.name}
+                    amount={job.amount}
+                    timeStart={job.timeStartStr}
+                    timeEnd={job.timeEndStr}
+                    timeCreated={job.created}
+                    companyName={job.hr.company?.name}
+                    companyLocation={formatLocation(job.locationjob)}
+                />
+            ))}
         </div>
-        <h3 className="hrpost__list-info-detail">ReactJS Intern</h3>
-        <div className="hrpost__list-info-detail">
-          <Logo></Logo>
-          <div className="hrpost__list-info-detail-detail">
-            <h4>Công ty R2S</h4>
-            <p>1164 Phạm Văn Đồng, TP Thủ Đức, TPHCM</p>
-          </div>
-        </div>
-        <h4 className="hrpost__list-info-detail">Số lượng: 100</h4>
-        <p className="hrpost__list-info-detail">05/06/2022 - 30/06/2022</p>
-        <Grid className="wrapper " container spacing={0}>
-          <Grid item lg={4} md={2} sm={2} xs={12} className="line">
-            <AccountCircleOutlinedIcon></AccountCircleOutlinedIcon>
-            <span className="hrpost__list-info-detail-candidate">
-              10 Ứng viên
-            </span>
-          </Grid>
-          <Grid item lg={4} md={10} sm={10} xs={12} className="line">
-            <HandymanOutlinedIcon></HandymanOutlinedIcon>
-            <span className="hrpost__list-info-detail-candidate">
-              Chỉnh sửa
-            </span>
-          </Grid>
-          <Grid item lg={4} className="">
-            <BlindsClosedOutlinedIcon></BlindsClosedOutlinedIcon>
-            <span className="hrpost__list-info-detail-candidate">
-              Đóng việc
-            </span>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
-  );
+    );
 };
 
 HRPostList.propTypes = {};
