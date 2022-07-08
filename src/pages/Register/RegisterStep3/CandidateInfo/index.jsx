@@ -1,84 +1,82 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react'
 
-import "./styles.scss";
+import './styles.scss'
 
-import ArrowButton from "../../../../components/ArrowButton/index";
-import Button from "../../../../components/Button";
-import CustomInput from "../../../../components/CustomInput/index";
-import Select from "../../../../components/Select";
+import ArrowButton from '../../../../components/ArrowButton/index'
+import Button from '../../../../components/Button'
+import CustomInput from '../../../../components/CustomInput/index'
+import Select from '../../../../components/Select'
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import api from "../../../../config/api/apiConfig";
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import api from '../../../../config/api/apiConfig'
 
-import { registerUser } from "../../../../store/slices/main/register/registerSlice";
-import notificationSlice from "../../../../store/slices/notifications/notificationSlice";
-import { statusSelector } from "../../../../store/selectors/main/registerSelectors";
+import { registerUser } from '../../../../store/slices/main/register/registerSlice'
+import notificationSlice from '../../../../store/slices/notifications/notificationSlice'
+import { statusSelector } from '../../../../store/selectors/main/registerSelectors'
 
-import { genderList, schema } from "./data";
+import { genderList, schema } from './data'
+import { getMajorList } from 'src/store/slices/Admin/major/majorSlice'
 
 const CandidateInfo = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [majorList, setMajorList] = useState([])
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { majorList } = useSelector(state => state.major)
 
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
-
-  useEffect(() => {
-    api.get("http://localhost:8085/api/major")
-      .then((res) => {
-        setMajorList(res)
-      })
-  }, []);
-
-  const status = useSelector(statusSelector);
-
-  if (status === "success") {
-    dispatch(notificationSlice.actions.successMess("Đăng ký thành công"));
-  } else if (status === "fail") {
-    dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"));
+  const handleBackClick = e => {
+    e.preventDefault()
+    navigate(-1)
   }
 
-  const onSubmit = async (data) => {
-        const step2Data = JSON.parse(sessionStorage.getItem("account"))
-        const userData= {
-            fileCV: data.cv[0],
-            fileAvatar: data.avatar[0],
-            candidate: JSON.stringify({
-              createUser: {
-                username: step2Data.username,
-                password: step2Data.password,
-                confirmPassword: step2Data.confirmPassword,
-                gender: parseInt(data.gender),
-                lastName: data.lastname,
-                firstName: data.firstname,
-                phone: data.phone,
-                email: step2Data.email,
-                role: {
-                    id: parseInt(step2Data.role.id)
-                }
-              },
-              major: {
-                id: parseInt(data.major)
-              },
-            })
+  useEffect(() => {
+    dispatch(getMajorList())
+  }, [])
+
+  const status = useSelector(statusSelector)
+
+  if (status === 'success') {
+    dispatch(notificationSlice.actions.successMess('Đăng ký thành công'))
+  } else if (status === 'fail') {
+    dispatch(notificationSlice.actions.errorMess('Có lỗi xảy ra'))
+  }
+
+  const onSubmit = async data => {
+    const step2Data = JSON.parse(sessionStorage.getItem('account'))
+    const userData = {
+      fileCV: data.cv[0],
+      fileAvatar: data.avatar[0],
+      candidate: JSON.stringify({
+        createUser: {
+          username: step2Data.username,
+          password: step2Data.password,
+          confirmPassword: step2Data.confirmPassword,
+          gender: parseInt(data.gender),
+          lastName: data.lastname,
+          firstName: data.firstname,
+          phone: data.phone,
+          email: step2Data.email,
+          role: {
+            id: parseInt(step2Data.role.id)
+          }
+        },
+        major: {
+          id: parseInt(data.major)
         }
-        dispatch(registerUser(userData))
+      })
     }
+    dispatch(registerUser(userData))
+  }
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
   return (
     <div className="reg-candidate">
@@ -86,7 +84,7 @@ const CandidateInfo = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="reg-candidate__form"
         autoComplete="off"
-        encType='multipart/form-data'
+        encType="multipart/form-data"
       >
         <div className="reg-candidate__form--name">
           <CustomInput
@@ -163,6 +161,6 @@ const CandidateInfo = () => {
         </div>
       </form>
     </div>
-  );
-};
-export default CandidateInfo;
+  )
+}
+export default CandidateInfo

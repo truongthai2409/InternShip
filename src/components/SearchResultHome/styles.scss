@@ -13,6 +13,9 @@
   margin-bottom: 24px;
 
   .header__with-search-search-wrap {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
     .search__icon {
       font-size: $fs-13;
       color: $primary-color;

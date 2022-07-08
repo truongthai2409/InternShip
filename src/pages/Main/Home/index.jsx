@@ -27,15 +27,14 @@ const Home = () => {
 
   const handleSearch = (value) => {
     setValueSearch(value);
-    if (valueSearch) {
-      dispatch(getJobByName(valueSearch));
+    if (value) {
+      dispatch(getJobByName(value));
     }
-    if (valueSearch === "") {
+    if (value === "") {
       dispatch(getJobByName(""));
     }
   };
-  // console.log("valueSearch", valueSearch);
-  console.log("jobList", jobListName);
+
   return (
     <Grid className="wrapper" container>
       <Grid item lg={2} md={2} sm={2} xs={12}>
@@ -43,7 +42,7 @@ const Home = () => {
       </Grid>
       <Grid item lg={4} md={10} sm={10} xs={12}>
         <div className="onDesktop">
-          <SearchResultHome onSubmit={handleSearch} />
+          <SearchResultHome onClick={handleSearch} />
         </div>
 
         <FilterPanelHome
@@ -54,7 +53,7 @@ const Home = () => {
       <Grid item lg={6} className="onTablet">
         <div className="containerDetailCard containerDetailCard-none">
           <div className="none__res">
-            <SearchResultHome onSubmit={handleSearch} />
+            <SearchResultHome onClick={handleSearch} />
           </div>
           <DetailCard
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"

@@ -29,8 +29,6 @@ function DetailCard(props) {
     dispatch(getJobList());
   }, []);
 
-  console.log(jobDetail);
-
   return (
     <div>
       {props.jobListName.length > 0 ? (
