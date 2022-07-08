@@ -34,7 +34,7 @@ const HRPostList = (props) => {
                     amount={job.amount}
                     timeStart={job.timeStartStr}
                     timeEnd={job.timeEndStr}
-                    timeCreated={job.created}
+                    timeCreated={job.createDate}
                     companyName={job.hr.company?.name}
                     companyLocation={formatLocation(job.locationjob)}
                 />

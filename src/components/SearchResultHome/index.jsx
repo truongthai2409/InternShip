@@ -8,23 +8,34 @@ import "./styles.scss";
 import SelectAreaHome from "../SelectAreaHome";
 import useQuery from "../../hooks/useQuery";
 
-function SearchResultHome(props) {
+function SearchResultHome({ onSubmit, onClick }) {
   const [searchValue, setSearchValue] = useState("");
   const query = useQuery();
-  const navigate = useNavigate();
-
   useEffect(() => {
     const { q = "" } = query;
     setSearchValue(q);
   }, [query]);
 
   const onChangeSearch = (event) => {
-    setSearchValue(event.target.value);
+    event.preventDefault();
+
+    const val = event.target.value;
+    setSearchValue(val);
+    onSubmit && onSubmit(val);
+    // setSearchValue("");
   };
 
   const search = (event) => {
     event.preventDefault();
-    navigate(`/search?q=${searchValue}`);
+    const val = event.target.value;
+    setSearchValue(val);
+    onSubmit && onSubmit(val);
+    // setSearchValue("");
+    // const val = event.target.value;
+    // dispatch(getJobByName("flutter"));
+    // onSubmit && onSubmit(val);
+    // onSubmit && onSubmit(searchValue);
+    // onClick && onClick(searchValue);
   };
   console.log(searchValue);
   return (
@@ -42,6 +53,7 @@ function SearchResultHome(props) {
             placeholder="Tìm Kiếm"
             value={searchValue}
             onChange={onChangeSearch}
+            onSubmit={search}
           />
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">

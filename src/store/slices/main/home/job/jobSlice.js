@@ -5,6 +5,7 @@ const jobSlice = createSlice({
   name: "job",
   initialState: {
     jobList: [],
+    jobListName: [],
     indexCardActive: 0,
     jobDetail: {},
     jobPosition: [],
@@ -21,11 +22,15 @@ const jobSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
       state.jobList = payload;
-      state.jobDetail = payload[0];
+      // state.jobDetail = payload[0];
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
-      state.jobList = payload;
-      state.jobDetail = payload[0];
+      state.jobListName = payload;
+      if (payload.length > 0) {
+        state.jobDetail = payload[0];
+      } else {
+        console.log("không có job");
+      }
     });
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
       state.jobActive = payload;
@@ -65,11 +70,10 @@ export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
 export const getJobByName = createAsyncThunk(
   "job/getJobByName",
   async (jobName) => {
-    console.log("jobName", jobName);
     return axios
-      .get(`http://localhost:8085/api/job/search${jobName}`)
+      .get(`http://localhost:8085/api/job/search?q=${jobName}`)
       .then((response) => {
-        console.log(response.data);
+        console.log("data job by name", response.data);
         return response.data;
       })
       .catch((error) => {

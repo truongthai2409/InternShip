@@ -12,11 +12,6 @@ import {
   registerRouter,
 } from "./config/routes";
 import MainLayout from "./Layouts/Main";
-import Home from "./pages/Main/Home/index";
-import HR from "./pages/Main/HR";
-import HRPost from "./pages/Main/HRPost";
-import HRPostList from "./pages/Main/HR/HRPostList";
-import CompanyForm from "./containers/Admin/CompanyForm";
 import HRLayOut from "./Layouts/HR";
 
 function App() {
