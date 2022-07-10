@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/index.scss" as *;
+@use "../../../assets/styles/index.scss" as *;
 
 .form__container {
     margin: auto;
@@ -23,6 +23,7 @@
             border-radius: 2px;
             width: 100%;
             padding: 20px 12px;
+            height: 45px;
 
             &:hover {
                 border: 1.6px solid $primary-color;

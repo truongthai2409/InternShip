@@ -51,9 +51,9 @@ function DetailCard(props) {
                         </div>
                     ))}
                 </div>
-                <div className="button__candidate-onMobile">
+                {/* <div className="button__candidate-onMobile">
                     <Button name="Ứng Tuyển"></Button>
-                </div>
+                </div> */}
             </div>
             <div className="detail__card-3">
                 <div className="detail__card-3-item">
