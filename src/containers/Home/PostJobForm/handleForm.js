@@ -7,8 +7,8 @@ export const schema = yup
         name: yup.string().required(" * Bạn phải điền chức danh!"),
         workingFormat: yup.string().required("Bạn phải chọn hình thúc làm việc!"),
         amount: yup
-            .number()
-            .nullable(),
+            .string()
+            .required(" * Bạn phải nhập số ứng viên cần tuyển."),
         jobDescription: yup.string().required(" * Bạn phải nhập mô tả công việc."),
         jobRequirement: yup.string().required(" * Bạn phải nhập mô tả công việc."),
         benefits: yup.string().required(" * Bạn phải nhập quyền lợi của ứng viên."),

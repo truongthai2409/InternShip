@@ -1,33 +1,32 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../../../config/api/apiConfig";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+const baseURL = process.env.REACT_APP_API
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     userList: [],
     notification: {},
     page: 0,
-    error: [],
+    error: []
   },
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
-      state.userList = payload.users;
-    });
-  },
-});
-
-export default userSlice;
-
-export const getUserList = createAsyncThunk("user/getUserList", async () => {
-  return await axios
-    .get("http://localhost:8085/api/user")
-    .then((response) => {
-      console.log(response.data);
-      return response.data;
+      state.userList = payload.users
     })
-    .catch((error) => {
-      return error;
-    });
-});
+  }
+})
+
+export default userSlice
+
+export const getUserList = createAsyncThunk('user/getUserList', async () => {
+  return await axios
+    .get(`${baseURL}/api/user`)
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      return error
+    })
+})

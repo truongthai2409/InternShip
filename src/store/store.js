@@ -9,7 +9,6 @@ import locationSlice from "./slices/location/locationSlice";
 import majorSlice from "./slices/Admin/major/majorSlice";
 import jobSlice from "./slices/main/home/job/jobSlice";
 
-
 const store = configureStore({
   reducer: {
     register: registerSlice.reducer,
