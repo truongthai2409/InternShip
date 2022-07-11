@@ -7,10 +7,11 @@ const Button = ({ name, IconBtnMui, onClick, bwidth, children }) => {
 
   return (
     <>
-      <button 
-        className="button" 
-        onClick={onClick} 
-        style={{width: bwidth ? `${bwidth}` : ''}}
+      <button
+        className="button"
+        onClick={onClick}
+        style={{ width: bwidth ? `${bwidth}` : "" }}
+        type="submit"
       >
         {IconBtnMui ? <IconBtnMui className="button__icon" /> : null}
         <p>{name}</p>

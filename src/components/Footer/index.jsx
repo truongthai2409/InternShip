@@ -14,9 +14,13 @@ const Footer = () => {
           <div className="footer-wrapper">
             <section className="footer__first-section">
               <div id="first-section" className="elementor-row">
+              <div className="elementor-row-first-element">
                 <Contact />
-                <Policy />
-                <Category />
+              </div>
+                <div className="elementor-row-two-element">
+                  <Policy />
+                  <Category />
+                </div>
               </div>
             </section>
             <section className="footer__second-section">

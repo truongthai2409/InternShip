@@ -8,6 +8,7 @@ import CompanyDetail from "../pages/Admin/CompanyDetail";
 import UserDetail from "../pages/Admin/UserDetail";
 import UniversityDetail from "../pages/Admin/UniversityDetail";
 import Home from "../pages/Main/Home";
+import CandidateList from "../pages/Main/HR/CandidateList/CandidateList";
 
 import {
   RegisterStep1,
@@ -20,7 +21,7 @@ import MajorDetail from "../pages/Admin/MajorDetail";
 import Location from "../pages/Admin/Location";
 import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
-import HRPost from "../pages/Main/HRPost";
+import HRPost from "../pages/Main/HR/HRPost";
 import HRPostList from "../pages/Main/HR/HRPostList";
 
 export const adminRouter = [
@@ -39,10 +40,6 @@ export const adminRouter = [
   {
     path: "/admin/university/:uniId",
     Component: UniversityDetail,
-  },
-  {
-    path: "company",
-    Component: Company,
   },
 
   {
@@ -87,6 +84,7 @@ export const mainRouter = [
   },
 ];
 
+// hr router
 export const hrRouter = [
   {
     path: "/hr",
@@ -100,6 +98,10 @@ export const hrRouter = [
     path: "/hr/post/list",
     Component: HRPostList,
   },
+  {
+    path: "/hr/candidate/list",
+    Component: CandidateList,
+  }
 ];
 
 // register router
