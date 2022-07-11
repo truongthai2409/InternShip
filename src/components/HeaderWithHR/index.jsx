@@ -10,19 +10,17 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
-import { Tooltip, IconButton, Badge, Hidden } from "@mui/material";
 
-import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 function HeaderWithHR(props) {
   return (
     <div className="container-header__hr header__hr config">
       <Logo id={1} />
       <div className="header__hr">
-        <Link to="/hr" className="header__hr-post">
+        <Link to="/hr/post/" className="header__hr-post">
           <AddCardIcon></AddCardIcon>
           <span className="header__hr-post-post">Đăng bài</span>
         </Link>
-        <Link to="/hr/post/list" className="header__hr-post">
+        <Link to="/hr/post/list/" className="header__hr-post">
           <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
           <span className="header__hr-post-post">Danh sách bài đăng</span>
         </Link>

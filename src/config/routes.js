@@ -18,7 +18,6 @@ import {
 import DemandDetail from "../pages/Admin/DemandDetail";
 import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
-import Location from "../pages/Admin/Location";
 import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
 import HRPost from "../pages/Main/HR/HRPost";

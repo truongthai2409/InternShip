@@ -1,9 +1,10 @@
-import React from "react";
-import { Tooltip, Avatar } from "@mui/material";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import React from 'react'
+import { Tooltip, Avatar } from '@mui/material'
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded'
 
-import "./styles.scss";
+import './styles.scss'
 
+const baseURL = process.env.REACT_APP_API
 const ProfileTable = ({ row }) => {
   //   console.log(row.status);
   //   console.log(row.status ?? row.status.id == 1);
@@ -13,8 +14,8 @@ const ProfileTable = ({ row }) => {
         <Avatar
           src={
             row.logo
-              ? `http://localhost:8085${row.logo}`
-              : "https://minimal-assets-api-dev.vercel.app/assets/images/avatars/avatar_21.jpg"
+              ? `${baseURL}${row.logo}`
+              : 'https://minimal-assets-api-dev.vercel.app/assets/images/avatars/avatar_21.jpg'
           }
           className="profile-table__logo-img"
           alt="profile-table-log"
@@ -22,22 +23,22 @@ const ProfileTable = ({ row }) => {
       </div>
       <div className="profile-table__content">
         <div className="profile-table__content-title">
-          <Tooltip title={row ? row.name : ""}>
-            <h4>{row ? row.name : ""}</h4>
+          <Tooltip title={row ? row.name : ''}>
+            <h4>{row ? row.name : ''}</h4>
           </Tooltip>
           {row.status && row.status.id == 1 ? (
             <CheckCircleRoundedIcon className="profile-table__active" />
           ) : null}
         </div>
 
-        <a href={row ? row.website : ""}>website: {row ? row.website : ""}</a>
-        <a href={`mailto:${row ? row.email : ""}`}>
-          {" "}
-          email: {row ? row.email : ""}
+        <a href={row ? row.website : ''}>website: {row ? row.website : ''}</a>
+        <a href={`mailto:${row ? row.email : ''}`}>
+          {' '}
+          email: {row ? row.email : ''}
         </a>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProfileTable;
+export default ProfileTable

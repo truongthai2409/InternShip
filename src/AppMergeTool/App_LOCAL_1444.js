@@ -5,14 +5,13 @@ import AdminRouterLayout from "./Layouts/Admin/index";
 import RegisterLayout from "./Layouts/Register/index";
 import LoginLayout from "./Layouts/Login/index";
 import Dashboard from "./pages/Admin/Dashboard";
-import {
-  adminRouter,
-  hrRouter,
-  mainRouter,
-  registerRouter,
-} from "./config/routes";
+import { adminRouter, mainRouter, registerRouter } from "./config/routes";
 import MainLayout from "./Layouts/Main";
-import HRLayOut from "./Layouts/HR";
+import Home from "./pages/Main/Home/index";
+import HR from "./pages/Main/HR";
+import HRPost from "./pages/Main/HRPost";
+import HRPostList from "./pages/Main/HR/HRPostList";
+import CompanyForm from "./containers/Admin/CompanyForm";
 
 function App() {
   const renderAdminRouter = () => {
@@ -33,11 +32,6 @@ function App() {
     });
   };
 
-  const renderHrRouter = () => {
-    return hrRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />;
-    });
-  };
   return (
     <>
       <Router>
@@ -50,12 +44,11 @@ function App() {
             {renderRegisterRouter()}
           </Route>
           <Route path="/login" element={<LoginLayout />}></Route>
-          <Route path="/hr" element={<HRLayOut />}>
-            {/* <Route index element={<HR />} /> */}
-            {renderHrRouter()}
-          </Route>
+          <Route path="/hr" element={<HR />}></Route>
+          <Route path="/hr-post" element={<HRPost />}></Route>
+          <Route path="/hr-post-list" element={<HRPostList />}></Route>
           <Route path="/" element={<MainLayout />}>
-            {/* <Route index element={<Home />} /> */}
+            <Route index element={<Home />} />
             {renderMainRouter()}
           </Route>
         </Routes>

@@ -2,7 +2,7 @@ import React from "react";
 
 const CustomSelect = React.forwardRef(
   (
-    { onBlur, name, label, selectOptions, getDistrictList, dispatch, id },
+    { onBlur, name, label, selectOptions, getDistrictList, dispatch=()=>{}, id },
     ref
   ) => {
     // render option

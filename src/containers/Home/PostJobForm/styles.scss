@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/index.scss" as *;
+@use "../../../assets/styles/index.scss" as *;
 
 .form__container {
     margin: auto;
@@ -23,6 +23,7 @@
             border-radius: 2px;
             width: 100%;
             padding: 20px 12px;
+            height: 45px;
 
             &:hover {
                 border: 1.6px solid $primary-color;
@@ -178,17 +179,6 @@ label {
 
 
 
-@media only screen and (min-width: 200px) and (max-width: 500px) {
-  .hr-post {
-    &__container {
-      width: 100%;
-    }
-    &__form {
-      width: 100%;
-    }
-  }
-}
-
 // Reponsive
 @media only screen and (min-width: 500px) and (max-width: 740px) {
     .hr-post {
@@ -207,10 +197,4 @@ label {
     #max-salary {
         margin-left: 35px;
     }
-}
-
-@media only screen and (min-width: 500px) and (max-width: 740px){
-  .hr-post__container, .form__container, .hr-post__form {
-    width: 100%;
-  }
 }

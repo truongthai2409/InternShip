@@ -1,49 +1,44 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid, Switch } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Grid, Switch } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import CustomTextarea from "../../../components/CustomTextarea";
-import Button from "../../../components/Button";
-import Select from "../../../components/Select";
-import { schema, renderControlAction } from "./script.js";
-import api from "../../../config/api/apiConfig";
-// import {
-//   addDemand,
-//   getDemandDetail,
-// } from "../../../store/slices/Admin/Demand/unversitySlice";
+import './styles.scss'
+import CustomInput from '../../../components/CustomInput'
+import CustomTextarea from '../../../components/CustomTextarea'
+import Button from '../../../components/Button'
+import Select from '../../../components/Select'
+import { schema, renderControlAction } from './script.js'
+import api from '../../../config/api/apiConfig'
+import { getMajorList } from '../../../store/slices/Admin/major/majorSlice'
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
 export default function DemandForm(props) {
-  const { isAdd } = props;
-  const [majorList, setMajorList] = useState([]);
-  //   const { DemandDetail } = useSelector((state) => state.demand);
+  const { isAdd } = props
+  // const [majorList, setMajorList] = useState([])
+  const { majorList } = useSelector(state => state.major)
   // console.log(demandDetail);
-  const [isEdit, setIsEdit] = useState(isAdd);
-  const dispatch = useDispatch();
+  const [isEdit, setIsEdit] = useState(isAdd)
+  const dispatch = useDispatch()
 
   // get params from URL
-  const { demandId } = useParams();
+  const { demandId } = useParams()
 
   useEffect(() => {
-    api.get("http://localhost:8085/api/major").then((res) => {
-      setMajorList(res);
-    });
-  }, []);
+    dispatch(getMajorList())
+  }, [])
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+    setValue
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
   /**
    * get company details
@@ -55,7 +50,7 @@ export default function DemandForm(props) {
   //   useEffect(() => {
   //     if (demandDetail) {
   //       if (!isAdd) {
-  //         setImage(`http://localhost:8085${demandDetail.avatar}`);
+  //         setImage(`baseURL${demandDetail.avatar}`);
   //       }
   //       setValue("logo", isAdd ? "" : demandDetail.avatar);
   //       setValue("name", isAdd ? "" : demandDetail.name);
@@ -68,8 +63,8 @@ export default function DemandForm(props) {
   //   }, [demandDetail, isAdd]);
 
   // handle Submit form
-  const onSubmit = (data) => {
-    const demandData = {};
+  const onSubmit = data => {
+    const demandData = {}
 
     // console.log(data);
 
@@ -88,12 +83,12 @@ export default function DemandForm(props) {
     //     setImage: setImage(cameraLogo),
     //   })
     // );
-  };
+  }
 
   // Click to Edit
   const handleOnClickEdit = () => {
-    setIsEdit(!isEdit);
-  };
+    setIsEdit(!isEdit)
+  }
 
   return (
     <form
@@ -243,5 +238,5 @@ export default function DemandForm(props) {
         </div>
       ) : null}
     </form>
-  );
+  )
 }

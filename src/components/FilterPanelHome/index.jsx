@@ -4,18 +4,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
-import {
-  getJobByName,
-  getJobList,
-} from "../../store/slices/main/home/job/jobSlice";
+import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 import moment from "moment";
 
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
-import useQuery from "../../hooks/useQuery";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index, jobList, ...other } = props;
 
   return (
     <div
@@ -47,39 +43,8 @@ function a11yProps(index) {
   };
 }
 
-export default function FilterPanelHome() {
+export default function FilterPanelHome({ jobList, indexCardActive }) {
   const [value, setValue] = useState(0);
-  const [jobLists, setJobList] = useState({
-    jobLists: [],
-  });
-  const dispatch = useDispatch();
-  const [filters, setFilters] = useState({});
-  const query = useQuery();
-
-  // get global state from redux store
-  const { jobList, indexCardActive, jobDetail } = useSelector(
-    (state) => state.job
-  );
-
-  useEffect(() => {
-    const _filters = {
-      ...query,
-    };
-    setFilters(_filters);
-    const params = {
-      q: _filters,
-    };
-    const _getListJob = async () => {
-      const data = await dispatch(getJobByName({ params }));
-      setJobList(data);
-    };
-    _getListJob();
-  }, [query, dispatch]);
-
-  useEffect(() => {
-    dispatch(getJobList(jobDetail));
-  }, []);
-
   const handleChange = (event, newValue) => setValue(newValue);
 
   return (
