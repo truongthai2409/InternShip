@@ -22,6 +22,8 @@ import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
 import HRPost from "../pages/Main/HR/HRPost";
 import HRPostList from "../pages/Main/HR/HRPostList";
+import CandidateHome from "src/pages/Main/Candidate copy/Home";
+import CandidateInformationCompany from "src/pages/Main/Candidate copy/InformationCompany";
 
 export const adminRouter = [
   {
@@ -100,7 +102,23 @@ export const hrRouter = [
   {
     path: "/hr/candidate/list",
     Component: CandidateList,
-  }
+  },
+];
+
+// hr router
+export const candidateRouter = [
+  {
+    path: "/candidate",
+    Component: CandidateHome,
+  },
+  {
+    path: "/candidate/list",
+    Component: CandidateList,
+  },
+  {
+    path: "/candidate/information_company",
+    Component: CandidateInformationCompany,
+  },
 ];
 
 // register router
