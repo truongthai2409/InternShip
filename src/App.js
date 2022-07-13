@@ -13,6 +13,8 @@ import {
 } from "./config/routes";
 import MainLayout from "./Layouts/Main";
 import HRLayOut from "./Layouts/HR";
+import ViewList from "./pages/Main/Candidate/ViewList";
+import SaveProfile from "./pages/Main/Candidate/SaveProfile";
 
 function App() {
   const renderAdminRouter = () => {
@@ -54,6 +56,8 @@ function App() {
             {/* <Route index element={<HR />} /> */}
             {renderHrRouter()}
           </Route>
+          <Route path="/candidate/view-list" element={<ViewList />}></Route>
+          <Route path="/candidate/save-profile" element={<SaveProfile />}></Route>
           <Route path="/" element={<MainLayout />}>
             {/* <Route index element={<Home />} /> */}
             {renderMainRouter()}
