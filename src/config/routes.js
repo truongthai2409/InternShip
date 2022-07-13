@@ -114,10 +114,6 @@ export const candidateRouter = [
     Component: CandidateHome,
   },
   {
-    path: "/candidate/list",
-    Component: CandidateList,
-  },
-  {
     path: "/candidate/view-list",
     Component: CandidateViewList,
   },
