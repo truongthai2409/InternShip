@@ -71,7 +71,7 @@ const PostJobForm = (props) => {
     const jobData = {
       name: data.name,
       hr: {
-        id: 1,
+        id: 2,
       },
       desciption: data.jobDescription,
       major: {
@@ -83,7 +83,13 @@ const PostJobForm = (props) => {
       jobposition: {
         id: parseInt(data.jobPosition),
       },
-      locationjob: 5,
+      // locationjob: {
+      //   district: {
+      //     id: data.district,
+      //   },
+      //   address: data.address,
+      //   note: "Không có",
+      // },
       amount: parseInt(data.amount),
       salaryMin: data.salaryMin,
       salaryMax: data.salaryMax,

@@ -1,6 +1,5 @@
 import Dashboard from "../pages/Admin/Dashboard";
 import User from "../pages/Admin/User";
-import Company from "../pages/Admin/Company";
 import University from "../pages/Admin/University";
 import Demand from "../pages/Admin/Demand";
 import NotFound from "../pages/NotFound";
@@ -9,12 +8,6 @@ import UserDetail from "../pages/Admin/UserDetail";
 import UniversityDetail from "../pages/Admin/UniversityDetail";
 import Home from "../pages/Main/Home";
 import CandidateList from "../pages/Main/HR/CandidateList/CandidateList";
-
-import {
-  RegisterStep1,
-  RegisterStep2,
-  RegisterStep3,
-} from "../pages/Register/index";
 import DemandDetail from "../pages/Admin/DemandDetail";
 import Major from "../pages/Admin/Major";
 import MajorDetail from "../pages/Admin/MajorDetail";
@@ -29,6 +22,8 @@ import CandidateHome from "src/pages/Main/Candidate copy/Home";
 import CandidateInformationCompany from "src/pages/Main/Candidate copy/InformationCompany";
 import CandidateViewList from "src/pages/Main/Candidate/ViewList";
 import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
+
+
 
 export const adminRouter = [
   {
