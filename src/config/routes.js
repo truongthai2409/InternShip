@@ -22,6 +22,9 @@ import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
 import HRPost from "../pages/Main/HR/HRPost";
 import HRPostList from "../pages/Main/HR/HRPostList";
+import CandidateInfo from "src/pages/Register/RegisterStep3/CandidateInfo";
+import HRInfo from "src/pages/Register/RegisterStep3/HRInfo";
+import PartnerInfo from "src/pages/Register/RegisterStep3/PartnerInfo";
 
 export const adminRouter = [
   {
@@ -106,15 +109,15 @@ export const hrRouter = [
 // register router
 export const registerRouter = [
   {
-    path: "",
-    Component: RegisterStep1,
+    path: "candidate",
+    Component: CandidateInfo,
   },
   {
-    path: "step2/:roleId",
-    Component: RegisterStep2,
+    path: "hr",
+    Component: HRInfo,
   },
   {
-    path: "step3",
-    Component: RegisterStep3,
-  },
+    path: "partner",
+    Component: PartnerInfo,
+  }
 ];

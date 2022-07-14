@@ -1,38 +1,41 @@
 import React, {useState} from 'react'
 import Button from "../../../components/Button"
-
 import { useNavigate } from "react-router-dom"
-
 import './styles.scss'
+
+
 
 export default function RegisterStep1() {
 
   const roleList = [
     {
       id: 3,
-      name: "ỨNG VIÊN"
+      name: "ỨNG VIÊN",
+      path: "/register/candidate"
     },
     {
       id: 1,
-      name: "NHÀ TUYỂN DỤNG"
+      name: "NHÀ TUYỂN DỤNG",
+      path: "/register/hr"
     },
     {
       id: 4,
-      name: "CỘNG TÁC VIÊN TRƯỜNG"
+      name: "CỘNG TÁC VIÊN TRƯỜNG",
+      path: "/register/partner"
     }
   ]
 
   const navigate = useNavigate();
 
-  const handleClick = async (id) => {
-      await navigate(`step2/${id}`)
+  const handleClick = (path) => {
+      navigate(path)
   }
 
   return (
     <div className="register-step1">
       <div className="register-step1__choices">
         {roleList.map((role, i) => 
-            <div className="register-step1__choices--btn" key={i} onClick={()=> handleClick(role.id)}>
+            <div className="register-step1__choices--btn" key={i} onClick={()=> handleClick(role.path)}>
               {<Button name={role.name} bwidth="285px"/>}
             </div>
         )}

@@ -1,91 +1,131 @@
-import React, { useEffect, useState } from 'react'
-
-import './styles.scss'
-
-import ArrowButton from '../../../../components/ArrowButton/index'
-import Button from '../../../../components/Button'
-import CustomInput from '../../../../components/CustomInput/index'
-import Select from '../../../../components/Select'
-
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import api from '../../../../config/api/apiConfig'
-
-import { registerUser } from '../../../../store/slices/main/register/registerSlice'
-import notificationSlice from '../../../../store/slices/notifications/notificationSlice'
-import { statusSelector } from '../../../../store/selectors/main/registerSelectors'
-
-import { genderList, schema } from './data'
-import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice';
+import React, { useEffect } from "react";
+import "./styles.scss";
+import ArrowButton from "../../../../components/ArrowButton/index";
+import Button from "../../../../components/Button";
+import CustomInput from "../../../../components/CustomInput/index";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import notificationSlice from "../../../../store/slices/notifications/notificationSlice";
+import {
+  errorSelector,
+  statusSelector,
+} from "../../../../store/selectors/main/registerSelectors";
+import { genderList, schema } from "./data";
+import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
+import SelectCustom from "../../../../components/Select";
 
 const CandidateInfo = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { majorList } = useSelector(state => state.major)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { majorList } = useSelector((state) => state.major);
+  const errorMessage = useSelector(errorSelector);
 
-  const handleBackClick = e => {
-    e.preventDefault()
-    navigate(-1)
-  }
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
   useEffect(() => {
-    dispatch(getMajorList())
-  }, [])
+    dispatch(getMajorList());
+  }, []);
 
-  const status = useSelector(statusSelector)
+  const status = useSelector(statusSelector);
 
-  if (status === 'success') {
-    dispatch(notificationSlice.actions.successMess('Đăng ký thành công'))
-  } else if (status === 'fail') {
-    dispatch(notificationSlice.actions.errorMess('Có lỗi xảy ra'))
-  }
-
-  const onSubmit = async data => {
-    const step2Data = JSON.parse(sessionStorage.getItem('account'))
-    const userData = {
-      fileCV: data.cv[0],
-      fileAvatar: data.avatar[0],
-      candidate: JSON.stringify({
-        createUser: {
-          username: step2Data.username,
-          password: step2Data.password,
-          confirmPassword: step2Data.confirmPassword,
-          gender: parseInt(data.gender),
-          lastName: data.lastname,
-          firstName: data.firstname,
-          phone: data.phone,
-          email: step2Data.email,
-          role: {
-            id: parseInt(step2Data.role.id)
-          }
-        },
-        major: {
-          id: parseInt(data.major)
-        }
-      })
-    }
-    dispatch(registerUser(userData))
+  if (status === "success") {
+    dispatch(notificationSlice.actions.successMess("Đăng ký thành công"));
+  } else if (status === "fail") {
+    dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"));
   }
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
+
+  // const onSubmit = async (data) => {
+  //   const step2Data = JSON.parse(sessionStorage.getItem("account"));
+  //   const userData = {
+  //     fileCV: data.cv[0],
+  //     fileAvatar: data.avatar[0],
+  //     candidate: JSON.stringify({
+  //       createUser: {
+  //         username: step2Data.username,
+  //         password: step2Data.password,
+  //         confirmPassword: step2Data.confirmPassword,
+  //         gender: parseInt(data.gender),
+  //         lastName: data.lastname,
+  //         firstName: data.firstname,
+  //         phone: data.phone,
+  //         email: step2Data.email,
+  //         role: {
+  //           id: parseInt(step2Data.role.id),
+  //         },
+  //       },
+  //       major: {
+  //         id: parseInt(data.major),
+  //       },
+  //     }),
+  //   };
+  //   dispatch(registerUser(userData));
+  // };
+  const onSubmit = (data) => {
+    console.log(data)
+  }
 
   return (
     <div className="reg-candidate">
       <form
-        onSubmit={handleSubmit(onSubmit)}
         className="reg-candidate__form"
         autoComplete="off"
         encType="multipart/form-data"
       >
+        <CustomInput
+          label="Tài khoản"
+          id="username"
+          type="text"
+          placeholder="Tài khoản..."
+          register={register}
+        >
+          {errors.username?.message}
+          {errorMessage?.Username}
+        </CustomInput>
+        <CustomInput
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="Email..."
+          register={register}
+        >
+          {errors.email?.message}
+          {errorMessage?.Email}
+        </CustomInput>
+        <CustomInput
+          label="Mật khẩu"
+          id="password"
+          type="password"
+          placeholder="Mật khẩu"
+          register={register}
+        >
+          {errors.password?.message}
+          {errorMessage?.Password}
+        </CustomInput>
+
+        <CustomInput
+          label="Xác nhận mật khẩu"
+          id="passwordConfirmation"
+          type="password"
+          placeholder="Xác nhận mật khẩu"
+          register={register}
+        >
+          {errors.passwordConfirmation?.message}
+        </CustomInput>
+
+        <p className="reg-candidate__title-infor">Cập nhật thông tin</p>
         <div className="reg-candidate__form--name">
           <CustomInput
             label="Họ"
@@ -117,37 +157,29 @@ const CandidateInfo = () => {
         >
           {errors.phone?.message}
         </CustomInput>
-
-        <Select
-          selectName="Chuyên ngành"
-          selectOptions={majorList}
-          id="major"
-          register={register}
-        />
-        <Select
-          selectName="Giới tính"
-          selectOptions={genderList}
+        <SelectCustom
+          label="Giới tính"
+          placeholder="Vui lòng chọn..."
+          options={genderList}
           id="gender"
           register={register}
-        />
-
-        <CustomInput
-          label="Avatar"
-          id="avatar"
-          type="file"
-          register={register}
-          // check={true}
         >
+          {errors.phone?.message}
+        </SelectCustom>
+        <SelectCustom
+          label="Chuyên ngành"
+          placeholder="Vui lòng chọn..."
+          options={majorList}
+          id="major"
+          register={register}
+        >
+          {errors.major?.message}
+        </SelectCustom>
+        <CustomInput label="Ảnh đại diện" id="avatar" type="file" register={register}>
           {errors.avatar?.message}
         </CustomInput>
 
-        <CustomInput
-          label="CV"
-          id="cv"
-          type="file"
-          register={register}
-          // check={true}
-        >
+        <CustomInput label="CV" id="cv" type="file" register={register}>
           {errors.cv?.message}
         </CustomInput>
 
@@ -161,6 +193,6 @@ const CandidateInfo = () => {
         </div>
       </form>
     </div>
-  )
-}
-export default CandidateInfo
+  );
+};
+export default CandidateInfo;

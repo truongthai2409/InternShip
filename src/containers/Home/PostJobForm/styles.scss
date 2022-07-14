@@ -1,200 +1,198 @@
 @use "../../../assets/styles/index.scss" as *;
 
 .form__container {
-    margin: auto;
-    padding: 30px;
-    width: 60%;
-    background-color: $color-white-0;
-    border: 0.5px solid #dedede;
+  margin: auto;
+  padding: 30px;
+  width: 60%;
+  background-color: $color-white-0;
+  border: 0.5px solid #dedede;
 }
 
 .hr-post {
-    &__container {
-        width: 100%;
-        min-height: 100vh;
-        padding: 20px;
-        height: max-content;
-        margin-top: 80px;
-        margin-bottom: 200px;
+  &__container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    height: max-content;
+    margin-top: 80px;
+    margin-bottom: 200px;
 
-        .custom-input .custom-input__textfield input {
-            font-family: "Public Sans", sans-serif;
-            border: 1.6px solid #666;
-            border-radius: 2px;
-            width: 100%;
-            padding: 20px 12px;
-            height: 45px;
+    .custom-input .custom-input__textfield input {
+      font-family: "Public Sans", sans-serif;
+      border: 1.6px solid #666;
+      border-radius: 2px;
+      width: 100%;
+      padding: 20px 12px;
+      height: 45px;
+      color: #444444;
 
-            &:hover {
-                border: 1.6px solid $primary-color;
-                box-shadow: $primary-color-1 0 3px 8px;
-            }
-        }
-
-        .custom-input .custom-input__textfield textarea {
-            font-family: "Public Sans", sans-serif;
-            border: 1.6px solid #666 !important;
-            border-radius: 2px;
-            width: 100%;
-            padding: 20px 12px;
-
-            &:hover {
-                border: 1.6px solid $primary-color;
-                box-shadow: $primary-color-1 0 3px 8px;
-            }
-        }
-    }
-    &__form {
-        margin: auto;
-        background-color: $color-white-0;
-        width: 80%;
-
-        .row-3-col {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            margin-top: 35px;
-
-            div {
-                flex-basis: 33%;
-            }
-            
-            div.custom-input {
-                margin-top: 0;
-                flex-basis: 28%;
-                
-                input {
-                    height: 45px !important;
-                }
-            }
-        }
-
-        .row-2-col {
-            display: flex;
-            justify-content: space-between;
-            
-            div.custom-input {
-                flex-basis: 49%;
-                margin: 0 0 35px 0;
-                
-                input {
-                    height: 45px;
-                }
-            }
-
-        }
-
-        .hr-post__select {
-            margin-bottom: 35px;
-
-            select {
-                height: 45px;
-                font-family: "Public Sans", sans-serif;
-                border: 1.6px solid #666;
-                border-radius: 2px;
-                width: 100%;
-                text-indent: 6px;
-                color: #777777;
-                outline: none;
-
-                &:hover {
-                    border: 1.6px solid $primary-color;
-                    box-shadow: $primary-color-1 0 3px 8px;
-                    color: $primary-color;
-                }
-            }
-
-        }
-
-        .hr-post__textarea {
-            margin-bottom: 35px;
-
-            textarea {
-                font-family: "Public Sans", sans-serif;
-                border: 1.6px solid #666;
-                border-radius: 2px;
-                height: 150px;
-            }
-        }
-
-        .hr-post__action {
-            display: flex;
-            justify-content: right;
-        }
+      &:hover {
+        border: 1.6px solid $primary-color;
+        box-shadow: $primary-color-1 0 3px 8px;
+      }
     }
 
-    &__heading {
-        display: flex;
+    .custom-input .custom-input__textfield textarea {
+      font-family: "Public Sans", sans-serif;
+      border: 1.6px solid #666 !important;
+      border-radius: 2px;
+      width: 100%;
+      padding: 20px 12px;
+
+      &:hover {
+        border: 1.6px solid $primary-color;
+        box-shadow: $primary-color-1 0 3px 8px;
+      }
     }
+  }
 
-    &__heading
-    {
-        margin-top: 25px;
-    }
+  &__form {
+    margin: auto;
+    background-color: $color-white-0;
+    width: 80%;
 
-    &__salary-range {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
+    .row-3-col {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 35px;
 
-        .custom-input {
-            width: 47%;
-            margin: 0;
+      .hr-post__select-location {
+        flex-basis: 32%;
+      }
 
-            &__textfield {
-                input {
-                    height: 45px;
-                }
-            }
+      div.custom-input {
+        margin-top: 0;
+        flex-basis: 28%;
+
+        input {
+          height: 45px !important;
         }
+      }
+
+      > .custom-input {
+        margin: 0;
+      }
     }
 
+    .hr-post-title {
+      margin-bottom: 35px;
+    }
+
+    .row-2-col {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 35px;
+
+      > .hr-post__select {
+        flex-basis: 49%;
+      }
+
+      >div.custom-input {
+        flex-basis: 49%;
+        margin: 0 !important;
+
+        input {
+          height: 45px;
+        }
+      }
+    }
+
+    .hr-post__select {
+      flex-basis: 33.33%;
+
+      > .custom-input {
+        margin: 0 0 35px 0;
+      }
+    }
+
+    .hr-post__textarea {
+      margin-bottom: 35px;
+
+      textarea {
+        font-family: "Public Sans", sans-serif;
+        border: 1.6px solid #666;
+        border-radius: 2px;
+        height: 150px;
+      }
+    }
+
+    .hr-post__action {
+      display: flex;
+      justify-content: right;
+    }
+  }
+
+  &__heading {
+    display: flex;
+  }
+
+  &__heading {
+    margin-top: 25px;
+  }
+
+  &__salary-range {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .custom-input {
+      width: 49%;
+      margin: 0;
+
+      &__textfield {
+        input {
+          height: 45px;
+        }
+      }
+    }
+  }
 }
 
 .hr-post__sub-description {
-    margin-top: 2px;
-    font-size: 12px;
-    font-style: italic;
-    color: #999;
+  margin-top: 2px;
+  font-size: 12px;
+  font-style: italic;
+  color: #999;
 }
 
 input#title {
-    height: 20px;
+  height: 20px;
 }
 
 .custom-select__textfield {
-    margin-top: 7px;
+  margin-top: 7px;
 }
 
 label {
-    font-family: "Public Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: #29303b;
+  font-family: "Public Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #29303b;
 }
 
 .salary-select-field {
-    width: 100%;
+  width: 100%;
 }
-
-
 
 // Reponsive
 @media only screen and (min-width: 500px) and (max-width: 740px) {
-    .hr-post {
-        &__form {
-            width: 100%;
-        }
+  .hr-post {
+    &__form {
+      width: 100%;
     }
+  }
 }
 
 @media only screen and (min-width: 740px) and (max-width: 1260px) {
-    .hr-post {
-        &__form {
-            width: 100%;
-        }
+  .hr-post {
+    &__form {
+      width: 100%;
     }
-    #max-salary {
-        margin-left: 35px;
-    }
+  }
+  #max-salary {
+    margin-left: 35px;
+  }
 }

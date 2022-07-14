@@ -5,7 +5,7 @@ import notificationSlice from '../../notifications/notificationSlice'
 const baseURL = process.env.REACT_APP_API
 
 const companySlice = createSlice({
-  name: 'Company',
+  name: 'company',
   initialState: {
     companyList: [],
     companyDetail: {},

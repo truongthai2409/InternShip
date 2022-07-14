@@ -1,0 +1,8 @@
+@use "../../assets/styles/" as *;
+
+.custom-select__textfield {
+  .custom-input__error {
+    color: $color-red;
+    font-size: $fs-13;
+  }
+}

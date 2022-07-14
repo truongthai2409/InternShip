@@ -51,11 +51,7 @@ function SearchResultHome({ onSubmit, onClick }) {
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">
           <AddLocationIcon />
-          {/* <CustomSelect></CustomSelect> */}
           <SelectAreaHome />
-          {/* <IconButton className="select__icon-arrow-drop">
-            <ArrowDropDownIcon />
-          </IconButton> */}
         </div>
         <div className="header__with-search-button-search" onClick={search}>
           <Button name="Tìm kiếm"></Button>

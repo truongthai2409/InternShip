@@ -1,39 +1,59 @@
-import React from "react";
-
-import { FormControl, Select, MenuItem } from "@mui/material";
-
+import * as React from "react";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import "./styles.scss";
 
-const SelectCustom = ({ selectName, selectOptions, register, id, check }) => {
-  // render option
+export default function SelectCustom({
+  label,
+  id,
+  children,
+  register,
+  options=[],
+  placeholder,
+  dispatch = () => {},
+  action = () => {},
+}) {
+  
   const renderSelectOption = () => {
-    return selectOptions.map((item) => {
+    return options.map((item) => {
       return (
-        <MenuItem value={item.id} key={item.id}>
+      
+        <MenuItem onClick={() => {
+          handleChangeLocation(item.id)
+        }} value={item.id} key={item.id}>
           {item.name}
         </MenuItem>
+        
       );
     });
   };
 
+  // handle change district
+  const handleChangeLocation = (id) => {
+    dispatch(action(id));
+  };
+
+
   return (
-    <div className="select">
-      <h1 className="select-title">{selectName}</h1>
-      <FormControl fullWidth>
-        <Select
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-          defaultValue={""}
-          {...register(id)}
-          disabled={check}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {renderSelectOption()}
-        </Select>
-      </FormControl>
-    </div>
+    <>
+      <div className="select-form">
+        <h1 className="select-label">{label}</h1>
+        <FormControl fullWidth>
+          <Select
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+            defaultValue={""}
+            {...register(id)}
+          >
+            <MenuItem value="">
+              <p className="select-placeholder">{placeholder}</p>
+            </MenuItem>
+            {renderSelectOption()}
+          </Select>
+        </FormControl>
+        <p className="select-error">{children}</p>
+      </div>
+    </>
   );
-};
-export default SelectCustom;
+}

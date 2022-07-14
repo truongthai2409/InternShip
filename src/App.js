@@ -13,6 +13,9 @@ import {
 } from "./config/routes";
 import MainLayout from "./Layouts/Main";
 import HRLayOut from "./Layouts/HR";
+import { RegisterStep1 } from "./pages/Register";
+import CandidateInfo from "./pages/Register/RegisterStep3/CandidateInfo";
+import HRInfo from "./pages/Register/RegisterStep3/HRInfo";
 
 function App() {
   const renderAdminRouter = () => {
@@ -47,15 +50,14 @@ function App() {
             {renderAdminRouter()}
           </Route>
           <Route path="/register" element={<RegisterLayout />}>
+            <Route index element={<RegisterStep1 />} />
             {renderRegisterRouter()}
           </Route>
           <Route path="/login" element={<LoginLayout />}></Route>
           <Route path="/hr" element={<HRLayOut />}>
-            {/* <Route index element={<HR />} /> */}
             {renderHrRouter()}
           </Route>
           <Route path="/" element={<MainLayout />}>
-            {/* <Route index element={<Home />} /> */}
             {renderMainRouter()}
           </Route>
         </Routes>

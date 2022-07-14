@@ -1,26 +1,58 @@
 @use "../../assets/styles/" as *;
 
 .select {
-    
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
+  &-label {
+    font-size: $fs-14;
+    margin-bottom: 7px;
+    font-family: $f-family;
+    color: #29303b;
+    font-weight: 700;
+    text-align: left;
+  }
 
-    &-title {
-        font-size: $fs-14;
-        margin-bottom: 10px;
-        font-family: $f-family;
-    }
-    .MuiSelect-select {
-        border: 1.5px solid $primary-color;
-        display: flex;
-        justify-content: flex-start;
-    }
-    .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root .Mui-selected {
-        color: $primary-color;
-    }
+  &-error {
+    text-align: left;
+    color: $color-red;
+    font-size: $fs-13;
+  }
+
+  &-placeholder {
+    text-align: left;
+    color: #777777;
+  }
+}
+
+.MuiFormControl-root.MuiFormControl-fullWidth.css-q8hpuo-MuiFormControl-root {
+  border: 1.6px solid #777777;
+  border-radius: 2px;
+  height: 45px !important;
+
+  &:hover {
+    box-shadow: $primary-color-1 0 3px 8px;
+    border: 1.6px solid $primary-color;
+    color: $primary-color;
+  }
+
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+    height: 100%;
+  }
+
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    color: #111111;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .css-yf8vq0-MuiSelect-nativeInput {
+    width: 0%;
+  }
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiMenu-paper.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  width: 200px !important;
 }

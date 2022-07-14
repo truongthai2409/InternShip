@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./styles.scss";
 import { useSelector } from "react-redux";
 
@@ -8,9 +8,9 @@ import { userSelector, statusSelector } from '../../store/selectors/main/registe
 
 import {notificationSelector} from "../../store/selectors/notificationSelectors"
 
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function RegisterContainer() {
+export default function RegisterContainer({Outlet}) {
   const notification  = useSelector(notificationSelector);
   const navigate = useNavigate()
 

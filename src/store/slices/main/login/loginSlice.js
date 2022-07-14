@@ -20,6 +20,7 @@ const loginSlice = createSlice({
         if (action.payload.token) {
           state.status = 'success'
           state.user = action.payload
+          localStorage.setItem('userPresent', JSON.stringify(action.payload))
         } else {
           state.status = 'fail'
           state.error = action.payload
@@ -32,7 +33,6 @@ export const loginUser = createAsyncThunk('login/loginUser', async data => {
   const res = await api
     .post(`${baseURL}/api/signin`, data)
     .then(res => {
-      localStorage.setItem('auth', JSON.stringify(res))
       return res
     })
     .catch(error => {
