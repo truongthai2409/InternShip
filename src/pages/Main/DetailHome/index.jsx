@@ -6,7 +6,17 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@mui/material";
 import "./styles.scss";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobByName } from "../../../store/slices/main/home/job/jobSlice";
 function DetailHome(props) {
+  const { jobListName, jobDetail, indexCardActive } = useSelector(
+    (state) => state.job
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getJobByName(""));
+  }, []);
   return (
     <div>
       <Grid className="wrapper" container spacing={4}>
@@ -27,6 +37,8 @@ function DetailHome(props) {
               salary={"5.000.000"}
               location={"TPHCM"}
               rating={"5.0 trong 48 lượt đánh giá"}
+              jobDetail={jobDetail}
+              jobListName={jobListName}
             />
             <div className="config__arow-back hide-on-table">
               <Link to="/" className="config__arow-back">

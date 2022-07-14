@@ -25,6 +25,10 @@ import HRPostList from "../pages/Main/HR/HRPostList";
 import CandidateInfo from "src/pages/Register/RegisterStep3/CandidateInfo";
 import HRInfo from "src/pages/Register/RegisterStep3/HRInfo";
 import PartnerInfo from "src/pages/Register/RegisterStep3/PartnerInfo";
+import CandidateHome from "src/pages/Main/Candidate copy/Home";
+import CandidateInformationCompany from "src/pages/Main/Candidate copy/InformationCompany";
+import CandidateViewList from "src/pages/Main/Candidate/ViewList";
+import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
 
 export const adminRouter = [
   {
@@ -103,7 +107,27 @@ export const hrRouter = [
   {
     path: "/hr/candidate/list",
     Component: CandidateList,
-  }
+  },
+];
+
+// hr router
+export const candidateRouter = [
+  {
+    path: "/candidate",
+    Component: CandidateHome,
+  },
+  {
+    path: "/candidate/view-list",
+    Component: CandidateViewList,
+  },
+  {
+    path: "/candidate/save-profile",
+    Component: CandidateSaveProfile,
+  },
+  {
+    path: "/candidate/information_company",
+    Component: CandidateInformationCompany,
+  },
 ];
 
 // register router

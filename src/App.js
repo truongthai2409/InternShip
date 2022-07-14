@@ -7,6 +7,7 @@ import LoginLayout from "./Layouts/Login/index";
 import Dashboard from "./pages/Admin/Dashboard";
 import {
   adminRouter,
+  candidateRouter,
   hrRouter,
   mainRouter,
   registerRouter,
@@ -16,6 +17,9 @@ import HRLayOut from "./Layouts/HR";
 import { RegisterStep1 } from "./pages/Register";
 import CandidateInfo from "./pages/Register/RegisterStep3/CandidateInfo";
 import HRInfo from "./pages/Register/RegisterStep3/HRInfo";
+import ViewList from "./pages/Main/Candidate/ViewList";
+import SaveProfile from "./pages/Main/Candidate/SaveProfile";
+import CandidateLayOut from "./Layouts/Candidate";
 
 function App() {
   const renderAdminRouter = () => {
@@ -41,6 +45,12 @@ function App() {
       return <Route path={path} element={<Component />} key={index} />;
     });
   };
+
+  const renderCandidateRouter = () => {
+    return candidateRouter.map(({ path, Component }, index) => {
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
   return (
     <>
       <Router>
@@ -56,6 +66,10 @@ function App() {
           <Route path="/login" element={<LoginLayout />}></Route>
           <Route path="/hr" element={<HRLayOut />}>
             {renderHrRouter()}
+          </Route>
+          <Route path="/candidate" element={<CandidateLayOut />}>
+            {/* <Route index element={<HR />} /> */}
+            {renderCandidateRouter()}
           </Route>
           <Route path="/" element={<MainLayout />}>
             {renderMainRouter()}

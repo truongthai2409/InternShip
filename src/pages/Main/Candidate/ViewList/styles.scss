@@ -1,0 +1,79 @@
+@use "../../../../assets/styles/Helper/variables" as *;
+
+.view-list {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  background-color: $primary-color;
+  display: flex;
+
+  &__container {
+      display: flex;
+      margin: 10px 10px 10px 30px;
+  }
+
+  &__job-card {
+    width: 60%;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__job-user-card {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .view-list {
+    width: 100%;
+
+    &__container {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    &__job-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .user-card__container {
+    min-height: 60vh;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 920px) {
+  .view-list {
+    width: 100%;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
+    &__job-card{
+      width: 100%;
+    }
+    &__job-user-card {
+      width: 80%;
+    } 
+  }
+
+  .user-card__container {
+    min-height: 60vh;
+  }
+}

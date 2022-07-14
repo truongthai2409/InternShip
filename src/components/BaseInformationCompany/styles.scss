@@ -1,0 +1,84 @@
+@use "../../assets/styles/" as *;
+
+.base__information {
+  background-color: $primary-color;
+  padding: 3px;
+  border-radius: 6px;
+  .company-name {
+    text-align: center;
+    width: auto;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 33px;
+  }
+  .base__information-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .img-logo {
+      width: 115px;
+      height: 115px;
+      border-radius: 4px;
+      margin-left: 35px;
+      margin-right: 23px;
+      transform: translateY(-8px);
+    }
+
+    &-detail {
+      width: fit-content;
+      height: fit-content;
+      margin: 11px;
+      div {
+        @include flex(center, null);
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.intro__company {
+  &-title {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 29px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+  }
+
+  &-detail {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+  }
+}
+
+.button-card {
+  @include flex(center, space-around);
+  margin-top: 26px;
+}
+
+.base__information-card-detail-location {
+  h5 {
+    white-space: nowrap;
+  }
+  align-items: baseline !important;
+}
+
+.appreciate {
+  @include flex(center, space-between);
+}

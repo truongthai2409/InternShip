@@ -1,32 +1,61 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
-import ButtonMark from "../ButtonMark";
-import Button from "../Button";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import WorkIcon from "@mui/icons-material/Work";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import Rating from "@mui/material/Rating";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 import moment from "moment";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
 import "./styles.scss";
-import { Icon } from "@mui/material";
+import InformationCompany from "../InformationComapny";
+import BaseInformationCompany from "../BaseInformationCompany";
 
 const listMajors = ["HTML", "CSS", "JS", "ReactJS"];
 
-const formatSalary = (salary = "") => {
-  return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-};
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-function DetailCard(props) {
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 2 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+const DetailCard = (props) => {
+  const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const jobDetail = props.jobDetail;
   useEffect(() => {
     dispatch(getJobList());
   }, []);
-
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div>
       {props.jobListName.length > 0 ? (
@@ -53,76 +82,68 @@ function DetailCard(props) {
               </div>
             </div>
           </div>
-          <div className="detail__card-3">
-            <div className="detail__card-3-item">
-              <h4 className="detail__card-3-item-name">Mô tả công việc:</h4>
-              <p>{jobDetail.desciption}</p>
-            </div>
-            <div className="detail__card-3-item">
-              <h4 className="detail__card-3-item-name">Yêu cầu công việc:</h4>
-              <p>{jobDetail.requirement}</p>
-            </div>
-            <div className="detail__card-3-item">
-              <h4 className="detail__card-3-item-name">Thời hạn ứng tuyển:</h4>
-              <p>
-                {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
-                {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
-              </p>
-            </div>
-          </div>
-          <div className="line"></div>
-          <div className="detail__card-4">
-            <div className="detail__card-4-item">
-              <Icon className="detail__card-4-item-icon">
-                <CurrencyExchangeIcon />
-              </Icon>
-              <h6 className="detail__card-4-item-info">
-                {formatSalary(jobDetail.salaryMin)} -{" "}
-                {formatSalary(jobDetail.salaryMax)}
-              </h6>
-            </div>
-            <div className="detail__card-4-item">
-              <Icon className="detail__card-4-item-icon">
-                <WorkIcon />
-              </Icon>
-              <h6 className="detail__card-4-item-info">Fulltime/Parttime</h6>
-            </div>
-            <div className="detail__card-4-item">
-              <AddLocationIcon className="detail__card-4-item-icon">
-                <WorkIcon />
-              </AddLocationIcon>
-              <h6 className="detail__card-4-item-info">{props.location}</h6>
-            </div>
-          </div>
-          <div className="detail__card-5">
+          {props.candidate ? (
             <div>
-              <p>{props.rating}</p>
-              <Rating
-                name="read-only"
-                precision={0.5}
-                readOnly
-                defaultValue={props.star}
-              />
+              <Box sx={{ width: "100%" }}>
+                <Box
+                  sx={{
+                    borderBottom: 1,
+                    borderColor: "divider",
+                    mt: 1,
+                    fontSize: 3,
+                  }}
+                >
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                    textColor="primary"
+                    scrollButtons
+                  >
+                    <Tab
+                      label="Chi tiết"
+                      {...a11yProps(0)}
+                      textColor="inherit"
+                      sx={{ fontSize: 12 }}
+                    />
+                    <Tab
+                      label="Tổng quan công ty"
+                      {...a11yProps(1)}
+                      textColor="inherit"
+                      sx={{ fontSize: 12 }}
+                    />
+                  </Tabs>
+                </Box>
+                <TabPanel value={value} index={0}>
+                  <InformationCompany
+                    jobDetail={jobDetail}
+                  ></InformationCompany>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <BaseInformationCompany />
+                </TabPanel>
+              </Box>
             </div>
-            <Button name="Ứng tuyển"></Button>
-          </div>
+          ) : (
+            ""
+          )}
+          {props.candidate ? null : (
+            <InformationCompany jobDetail={jobDetail}></InformationCompany>
+          )}
         </div>
       ) : null}
     </div>
   );
-}
+};
 
 DetailCard.propTypes = {
   logo: PropTypes.string.isRequired,
-  star: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   nameMajor: PropTypes.string,
   nameCompany: PropTypes.string,
   detailJob: PropTypes.string,
   requireJob: PropTypes.string,
   timeJob: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   salary: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  location: PropTypes.string.isRequired,
-  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default DetailCard;

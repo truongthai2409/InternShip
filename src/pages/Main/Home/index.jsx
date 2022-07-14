@@ -6,14 +6,10 @@ import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobByName,
-  getJobList,
-} from "../../../store/slices/main/home/job/jobSlice";
+import { getJobByName } from "../../../store/slices/main/home/job/jobSlice";
 
-const Home = () => {
+const Home = (props) => {
   const [valueSearch, setValueSearch] = useState("");
-  const [filteredResults, setFilteredResults] = useState([]);
   const dispatch = useDispatch();
 
   // get global state from redux store
@@ -70,6 +66,7 @@ const Home = () => {
             rating={"5.0 trong 48 lượt đánh giá"}
             jobDetail={jobDetail}
             jobListName={jobListName}
+            candidate={props.candidate}
           />
         </div>
       </Grid>
