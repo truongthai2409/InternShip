@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import "./styles.scss";
 import JobCandidate from "../Job";
@@ -14,17 +14,19 @@ function BaseInformationCompany(props) {
   const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
   const idCompany = props.jobDetail?.hr?.company.id;
-  console.log(jobListCompany);
+  console.log("jobList", jobListCompany);
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
   }, [idCompany, dispatch]);
 
+  console.log(jobListCompany);
+
   return (
     <div className="">
       <div className="base__information">
         <h3 className="company-name">
-          Công ty R2S - Cung cấp phương pháp giải quyết phần mềm
+          {}
         </h3>
         <div className="base__information-card">
           <img
@@ -79,7 +81,7 @@ function BaseInformationCompany(props) {
           sunt.
         </p>
       </div>
-      <div>
+      <div className="job-applying-container">
         <h5 className="intro__company-title">Việc làm đang tuyển</h5>
         <Grid
           container
@@ -91,16 +93,20 @@ function BaseInformationCompany(props) {
               <JobCandidate job={job} />
             </Grid>;
           })} */}
-
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
+          <div className="company-job-detail__card">
+            <Grid item lg="auto" md="auto" xs={6}>
+              <JobCandidate />
+            </Grid>
+            <Grid item lg="auto" md="auto" xs={6}>
+              <JobCandidate />
+            </Grid>
+            <Grid item lg="auto" md="auto" xs={6}>
+              <JobCandidate />
+            </Grid>
+            <Grid item lg="auto" md="auto" xs={6}>
+              <JobCandidate />
+            </Grid>
+          </div>
         </Grid>
       </div>
       <div className="button-card">

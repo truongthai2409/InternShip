@@ -7,7 +7,8 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import Box from "@mui/material/Box";
 import { Icon } from "@mui/material";
 import "./styles.scss";
-const JobCandidate = ({ job }) => {
+const JobCandidate = ( job ) => {
+  console.log(job);
   return (
     <Box
       sx={{
