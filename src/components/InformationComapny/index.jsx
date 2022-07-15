@@ -13,7 +13,7 @@ const formatSalary = (salary = "") => {
   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
-const InformationCompany = ({ jobDetail, location, rating, star }) => {
+const InformationCompany = ({ jobDetail, star }) => {
   return (
     <div>
       <div className="detail__card-3">
@@ -63,12 +63,12 @@ const InformationCompany = ({ jobDetail, location, rating, star }) => {
           <AddLocationIcon className="detail__card-4-item-icon">
             <WorkIcon />
           </AddLocationIcon>
-          <h6 className="detail__card-4-item-info">{location}</h6>
+          <h6 className="detail__card-4-item-info">{`${jobDetail.locationjob?.address},${jobDetail.locationjob?.district?.name},${jobDetail.locationjob?.district?.province?.name}`}</h6>
         </div>
       </div>
       <div className="detail__card-5">
         <div>
-          <p>{rating}</p>
+          <p>{jobDetail.company?.rates?.length}</p>
           <Rating
             name="read-only"
             precision={0.5}

@@ -35,6 +35,7 @@ function HeaderWithHR(props) {
           bwidthInput="fit-content"
           bheightInput="fit-content"
           mb="0"
+          candidate_infomation={true}
         />
       ) : null}
       <div className="header__hr-icon">

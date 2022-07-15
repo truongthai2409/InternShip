@@ -7,11 +7,11 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import Box from "@mui/material/Box";
 import { Icon } from "@mui/material";
 import "./styles.scss";
-const JobCandidate = (props) => {
+const JobCandidate = ({ job }) => {
   return (
     <Box
       sx={{
-        width: 256,
+        width: 250,
         height: 147,
         border: 1,
         borderColor: "#DEDEDE",

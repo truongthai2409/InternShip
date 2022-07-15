@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Rating from "@mui/material/Rating";
 import "./styles.scss";
 import JobCandidate from "../Job";
 import Grid from "@mui/material/Grid";
 import Button from "../Button";
-import Appreciate from "../Appreciate";
+import { useSelector, useDispatch } from "react-redux";
+import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
+import { Link } from "react-router-dom";
+import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 
 function BaseInformationCompany(props) {
+  const dispatch = useDispatch();
+  const { rating } = useSelector((state) => state.rating);
+  const { jobListCompany } = useSelector((state) => state.job);
+  const idCompany = props.jobDetail?.hr?.company.id;
+  console.log(jobListCompany);
+  useEffect(() => {
+    dispatch(getRatingCompany(idCompany));
+    dispatch(getJobByCompany(idCompany));
+  }, [idCompany, dispatch]);
+
   return (
     <div className="">
       <div className="base__information">
@@ -48,7 +61,7 @@ function BaseInformationCompany(props) {
                 name="read-only"
                 precision={0.5}
                 readOnly
-                defaultValue={5}
+                defaultValue={rating}
               />
               <p>5.0 trong 48 lượt đánh giá</p>
             </div>
@@ -73,9 +86,12 @@ function BaseInformationCompany(props) {
           spacing={3}
           sx={{ paddingLeft: `${props.pl}`, paddingRight: `${props.pr}` }}
         >
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
+          {/* {jobListCompany.map((job) => {
+            <Grid item lg="auto" md="auto" xs={6}>
+              <JobCandidate job={job} />
+            </Grid>;
+          })} */}
+
           <Grid item lg="auto" md="auto" xs={6}>
             <JobCandidate />
           </Grid>
@@ -88,7 +104,9 @@ function BaseInformationCompany(props) {
         </Grid>
       </div>
       <div className="button-card">
-        <Button name="Xem thêm"></Button>
+        <Link to="/candidate/information_company">
+          <Button name="Xem thêm"></Button>
+        </Link>
       </div>
     </div>
   );

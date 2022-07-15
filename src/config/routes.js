@@ -22,10 +22,10 @@ import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
 import HRPost from "../pages/Main/HR/HRPost";
 import HRPostList from "../pages/Main/HR/HRPostList";
-import CandidateHome from "src/pages/Main/Candidate copy/Home";
-import CandidateInformationCompany from "src/pages/Main/Candidate copy/InformationCompany";
+import CandidateHome from "src/pages/Main/Candidate/Home";
 import CandidateViewList from "src/pages/Main/Candidate/ViewList";
 import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
+import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
 
 export const adminRouter = [
   {

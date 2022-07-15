@@ -8,6 +8,8 @@ import universitySlice from "./slices/Admin/university/unversitySlice";
 import locationSlice from "./slices/location/locationSlice";
 import majorSlice from "./slices/Admin/major/majorSlice";
 import jobSlice from "./slices/main/home/job/jobSlice";
+import ratingSlice from "./slices/main/home/rating/rating";
+import markJobSlice from "./slices/main/mark/markSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ const store = configureStore({
     location: locationSlice.reducer,
     major: majorSlice.reducer,
     job: jobSlice.reducer,
+    rating: ratingSlice.reducer,
+    mark: markJobSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

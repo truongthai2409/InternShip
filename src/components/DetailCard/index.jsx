@@ -50,9 +50,11 @@ const DetailCard = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const jobDetail = props.jobDetail;
+
   useEffect(() => {
     dispatch(getJobList());
   }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -120,7 +122,7 @@ const DetailCard = (props) => {
                   ></InformationCompany>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                  <BaseInformationCompany />
+                  <BaseInformationCompany jobDetail={jobDetail} />
                 </TabPanel>
               </Box>
             </div>

@@ -16,6 +16,7 @@ function SearchResultHome({
   bwidthInput,
   bheightInput,
   mb,
+  candidate_infomation,
 }) {
   const [searchValue, setSearchValue] = useState("");
   const query = useQuery();
@@ -31,12 +32,6 @@ function SearchResultHome({
   const search = (event) => {
     event.preventDefault();
     onClick && onClick(searchValue);
-    // setSearchValue("");
-    // const val = event.target.value;
-    // dispatch(getJobByName("flutter"));
-    // onSubmit && onSubmit(val);
-    // onSubmit && onSubmit(searchValue);
-    // onClick && onClick(searchValue);
   };
   // console.log(searchValue);
   return (
@@ -77,7 +72,11 @@ function SearchResultHome({
           </IconButton> */}
         </div>
         <div className="header__with-search-button-search" onClick={search}>
-          <Button name="Tìm kiếm" bheight="25px" bwidth="121px"></Button>
+          {candidate_infomation ? (
+            <Button name="Tìm kiếm" bwidth="140px" bheight="14px" />
+          ) : (
+            <Button name="Tìm kiếm"></Button>
+          )}
         </div>
       </form>
     </div>
