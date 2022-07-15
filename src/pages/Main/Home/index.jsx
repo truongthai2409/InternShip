@@ -16,11 +16,11 @@ const Home = (props) => {
   const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-
+  
   useEffect(() => {
     dispatch(getJobByName(""));
   }, []);
-
+  
   const handleSearch = (value) => {
     setValueSearch(value);
     if (value) {

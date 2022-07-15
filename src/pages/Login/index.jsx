@@ -1,20 +1,17 @@
 import React from 'react';
 import './styles.scss'
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
-
 import CustomCheckbox from "../../components/CustomCheckbox";
-
 import CustomInput from '../../components/CustomInput/index'
 import Button from '../../components/Button/index'
-
 import {loginUser} from "../../store/slices/main/login/loginSlice";
 import { authenticationSelector } from '../../store/selectors/main/loginSelectors'
-
 import { schema } from "./data";
+
+
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -49,6 +46,7 @@ const Login = () => {
             >
                 <CustomInput
                     label="Tài khoản"
+                    
                     id="username"
                     type="text"
                     placeholder="Tài khoản..."

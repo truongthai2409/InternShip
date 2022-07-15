@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -12,6 +13,7 @@ const jobSlice = createSlice({
     indexCardActive: 0,
     jobDetail: {},
     jobPosition: [],
+    status: "fail",
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -30,6 +32,9 @@ const jobSlice = createSlice({
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
     });
+    builder.addCase(getJobListByUsername.fulfilled, (state, { payload }) => {
+      state.jobList = payload;
+    });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.length > 0) {
@@ -42,6 +47,9 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobPositionList.fulfilled, (state, { payload }) => {
       state.jobPosition = payload;
+    });
+    builder.addCase(addJob.fulfilled, (state, { payload }) => {
+      state.status = "success";
     });
   },
 });
@@ -85,11 +93,11 @@ export const getJobByName = createAsyncThunk(
   }
 );
 
-export const getJobPositionList = createAsyncThunk(
-  "job/getJobPositionList",
-  async () => {
+export const getJobListByUsername = createAsyncThunk(
+  "job/getJobListByUser",
+  async (username) => {
     return axios
-      .get(`${baseURL}/api/JobPosition`)
+      .get(`${baseURL}/api/r2s/job/username?username=${username}`)
       .then((response) => {
         return response.data;
       })
@@ -98,6 +106,31 @@ export const getJobPositionList = createAsyncThunk(
       });
   }
 );
+
+export const getJobPositionList = createAsyncThunk(
+  "job/getJobPositionList",
+  async () => {
+    return axios
+      .get(`${baseURL}/api/r2s/JobPosition`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const addJob = createAsyncThunk("job/addJob", async (jobData) => {
+  return axios
+    .post(`${baseURL}/api/r2s/job`, jobData)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
 export const getJobByCompany = createAsyncThunk(
   "job/getJobByCompany",

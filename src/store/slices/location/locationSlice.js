@@ -48,7 +48,6 @@ export default locationSlice
 export const getProvinceList = createAsyncThunk(
   'location/getProviceList',
   async (countryId = 231) => {
-    // console.log(countryId);
     return axios
       .get(`${baseURL}/api/province/country/${countryId}`)
       .then(response => {
@@ -66,7 +65,6 @@ export const getDistrictList = createAsyncThunk(
     return axios
       .get(`${baseURL}/api/district/province/${provinceId}`)
       .then(response => {
-        console.log(response.data)
         return response.data
       })
       .catch(error => {

@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import Button from "../../../../components/Button";
 import "./styles.scss";
 import CardPost from "../../../../components/CardPost";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobList } from "../../../../store/slices/main/home/job/jobSlice";
+import { getJobList, getJobListByUsername } from "../../../../store/slices/main/home/job/jobSlice";
 
 
 const formatLocation = (location) => {
@@ -15,12 +14,11 @@ const formatLocation = (location) => {
 const HRPostList = (props) => {
     const dispatch = useDispatch();
     const { jobList } = useSelector((state) => state.job);
+    const userPresent = JSON.parse(localStorage.getItem('userPresent'));
 
     useEffect(() => {
-        dispatch(getJobList());
+        dispatch(getJobListByUsername(userPresent.username));
     }, []);
-
-    // console.log(jobList);
 
     return (
         <div className="hrpost__list">
@@ -30,20 +28,18 @@ const HRPostList = (props) => {
             {jobList.map((job) => (
                 <CardPost 
                     key={job.id}
-                    status={job.status.id}
+                    status={job.status}
                     jobName={job.name}
                     amount={job.amount}
                     timeStart={job.timeStartStr}
                     timeEnd={job.timeEndStr}
                     timeCreated={job.createDate}
-                    companyName={job.hr.company?.name}
-                    companyLocation={formatLocation(job.locationjob)}
+                    companyName={job.hr?.company?.name}
+                    companyLocation={job.locationjob}
                 />
             ))}
         </div>
     );
 };
-
-HRPostList.propTypes = {};
 
 export default HRPostList;

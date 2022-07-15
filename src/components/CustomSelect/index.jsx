@@ -1,8 +1,9 @@
 import React from "react";
+import "./styles.scss";
 
 const CustomSelect = React.forwardRef(
   (
-    { onBlur, name, label, selectOptions, getDistrictList, dispatch=()=>{}, id },
+    { onBlur, register, name, label, selectOptions, getDistrictList, dispatch=()=>{}, id, children },
     ref
   ) => {
     // render option
@@ -24,8 +25,8 @@ const CustomSelect = React.forwardRef(
       dispatch(getDistrictList(e.target.value));
     };
 
-    const handleChange = () => {
-      console.log("Changed");
+    const handleChange = (e) => {
+      console.log(e.target.value);
     };
 
     return (
@@ -38,10 +39,12 @@ const CustomSelect = React.forwardRef(
             onChange={handleChange || handleChangeDistrict}
             onBlur={onBlur}
             id={id}
+            className="select__item"
           >
             <option value="">Vui lòng chọn</option>
             {renderSelectOption()}
           </select>
+          <p className="custom-input__error">{children}</p>
         </div>
       </>
     );

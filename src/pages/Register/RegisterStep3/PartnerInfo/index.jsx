@@ -1,24 +1,24 @@
 import React from "react";
 import "./styles.scss";
-
 import ArrowButton from "../../../../components/ArrowButton/index";
 import Button from "../../../../components/Button";
 import CustomInput from "../../../../components/CustomInput/index";
 import Select from "../../../../components/Select";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../../../store/slices/main/register/registerSlice";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import { genderList, schoolList, schema } from "./data";
+import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import SelectCustom from "../../../../components/Select";
+
+
 
 const PartnerInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const errorMessage = useSelector(errorSelector);
 
   const handleBackClick = (e) => {
     e.preventDefault();
@@ -63,6 +63,48 @@ const PartnerInfo = () => {
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
       >
+        <CustomInput
+          label="Tài khoản"
+          id="username"
+          type="text"
+          placeholder="Tài khoản..."
+          register={register}
+        >
+          {errors.username?.message}
+          {errorMessage?.Username}
+        </CustomInput>
+        <CustomInput
+          label="Email"
+          id="email"
+          type="email"
+          placeholder="Email..."
+          register={register}
+        >
+          {errors.email?.message}
+          {errorMessage?.Email}
+        </CustomInput>
+        <CustomInput
+          label="Mật khẩu"
+          id="password"
+          type="password"
+          placeholder="Mật khẩu"
+          register={register}
+        >
+          {errors.password?.message}
+          {errorMessage?.Password}
+        </CustomInput>
+
+        <CustomInput
+          label="Xác nhận mật khẩu"
+          id="passwordConfirmation"
+          type="password"
+          placeholder="Xác nhận mật khẩu"
+          register={register}
+        >
+          {errors.passwordConfirmation?.message}
+        </CustomInput>
+
+        <p className="reg-partner__title-infor">Cập nhật thông tin</p>
         <div className="reg-partner__form--name">
           <CustomInput
             label="Họ"
@@ -96,14 +138,15 @@ const PartnerInfo = () => {
         </CustomInput>
 
         <Select
-          selectName="Giới tính"
-          selectOptions={genderList}
+          label="Giới tính"
+          placeholder="Vui lòng chọn..."
+          options={genderList}
           id="gender"
           register={register}
         />
 
         <CustomInput
-          label="Avatar"
+          label="Ảnh đại diện"
           id="avatar"
           type="file"
           register={register}
@@ -112,22 +155,22 @@ const PartnerInfo = () => {
           {errors.avatar?.message}
         </CustomInput>
 
-        <Select
-          selectName="Trường"
+        <SelectCustom
+          label="Trường"
           selectOptions={schoolList}
           id="school"
           register={register}
         />
 
-        <CustomInput
-          label="Vị trí"
+        <SelectCustom
+          label="Vai trò tại trường"
           id="position"
           type="text"
           placeholder="Vị trí"
           register={register}
         >
           {errors.position?.message}
-        </CustomInput>
+        </SelectCustom>
 
         <div className="reg-partner__btns">
           <div className="reg-partner__btns--item" onClick={handleBackClick}>

@@ -64,10 +64,10 @@ export const registerUser = createAsyncThunk(
       1: 'hr',
       4: 'partner'
     }
-
-    console.log(data)
+    console.log("data", data)
+    const {hrData, navigate} = data
     const res = await api
-      .post(`${baseURL}/api/candidate`, data, {
+      .post(`${baseURL}/api/r2s/hr`, hrData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -78,7 +78,6 @@ export const registerUser = createAsyncThunk(
       .catch(err => {
         return err
       })
-    console.log(res)
     return res
   }
 )

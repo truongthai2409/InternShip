@@ -12,7 +12,7 @@ const CustomTextarea = ({ label, id, type, placeholder, children, register, chec
                 {check ? null : (
                     <p className="custom-textarea__error">
                         {children || (
-                            <span style={{ marginTop: "2px", fontSize: "12px", fontStyle: "italic", color: "#999" }}>(Tối đa 8000 ký tự)</span>
+                            <span style={{ marginTop: "2px", fontSize: "12px", fontStyle: "italic", color: "#999" }}>(Tối đa 1500 ký tự)</span>
                         )}
                         {/* {children} */}
                     </p>

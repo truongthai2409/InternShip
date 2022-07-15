@@ -47,7 +47,7 @@ export default majorSlice
  */
 export const getMajorList = createAsyncThunk("major/getMajorList", async () => {
   return await axios
-    .get(`${baseURL}/api/major`)
+    .get(`${baseURL}/api/r2s/admin/major`)
     .then(response => {
       return response.data
     })
