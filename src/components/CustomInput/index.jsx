@@ -1,5 +1,8 @@
 import React from "react";
 import "./styles.scss";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useState } from "react";
 
 const CustomInput = ({
   label,
@@ -11,12 +14,21 @@ const CustomInput = ({
   check = false,
   value,
   defaultValue,
-  requirementField = true
+  requirementField = true,
+  visibility = false,
 }) => {
+
+  const [isHide, setIsHide] = useState(false)
+  const [typeInput, setTypeInput] = useState(type)
+  const handleHide = () => {
+      setIsHide(!isHide)
+  };
+
   return (
     <div className="custom-input">
       <label htmlFor={id} className="custom-input__label">
-        {label}{requirementField && <span className="field-requirment">*</span>}
+        {label}
+        {requirementField && <span className="field-requirment">*</span>}
       </label>
       <div
         className={
@@ -24,7 +36,7 @@ const CustomInput = ({
         }
       >
         <input
-          type={type}
+          type={ isHide || (isHide ? "text" : "password")}
           id={id}
           placeholder={placeholder}
           disabled={check}
@@ -33,6 +45,11 @@ const CustomInput = ({
           {...register(id)}
         />
         {check ? null : <p className="custom-input__error">{children}</p>}
+        {visibility && (
+          <div className="visibility-icon" onClick={handleHide} style={{cursor: "pointer"}}>
+            {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          </div>
+        )}
       </div>
     </div>
   );
