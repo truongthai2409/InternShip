@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 
 function BaseInformationCompany(props) {
+  console.log(props.ml);
   const dispatch = useDispatch();
   const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
@@ -83,22 +84,24 @@ function BaseInformationCompany(props) {
         <Grid
           container
           spacing={3}
-          sx={{ paddingLeft: `${props.pl}`, paddingRight: `${props.pr}` }}
+          sx={{
+            paddingLeft: `${props.pl}px`,
+            paddingRight: `${props.pr}px`,
+            marginLeft: `${props.ml}px`,
+          }}
         >
           {/* {jobListCompany.map((job) => {
             <Grid item lg="auto" md="auto" xs={6}>
               <JobCandidate job={job} />
             </Grid>;
           })} */}
-          <div className="company-job-detail__card">
-            {jobListCompany.length > 0
-              ? jobListCompany.map((job) => (
-                  <Grid key={job.id} item lg="auto" md="auto" xs={6}>
-                    <JobCandidate job={job} />
-                  </Grid>
-                ))
-              : ""}
-          </div>
+          {jobListCompany.length > 0
+            ? jobListCompany.map((job) => (
+                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                  <JobCandidate job={job} />
+                </Grid>
+              ))
+            : ""}
         </Grid>
       </div>
       <div className="button-card">
