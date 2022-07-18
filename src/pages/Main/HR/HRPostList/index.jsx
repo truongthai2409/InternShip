@@ -3,7 +3,7 @@ import Button from "../../../../components/Button";
 import "./styles.scss";
 import CardPost from "../../../../components/CardPost";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobList, getJobListByUsername } from "../../../../store/slices/main/home/job/jobSlice";
+import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
 
 
 const formatLocation = (location) => {
@@ -17,8 +17,10 @@ const HRPostList = (props) => {
     const userPresent = JSON.parse(localStorage.getItem('userPresent'));
 
     useEffect(() => {
-        dispatch(getJobListByUsername(userPresent.username));
+        dispatch(getJobListByUserId(userPresent.idUser));
     }, []);
+
+    // console.log(userPresent.idUser)
 
     return (
         <div className="hrpost__list">

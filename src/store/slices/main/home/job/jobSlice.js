@@ -32,7 +32,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
     });
-    builder.addCase(getJobListByUsername.fulfilled, (state, { payload }) => {
+    builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
       state.jobList = payload;
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
@@ -93,11 +93,11 @@ export const getJobByName = createAsyncThunk(
   }
 );
 
-export const getJobListByUsername = createAsyncThunk(
+export const getJobListByUserId = createAsyncThunk(
   "job/getJobListByUser",
-  async (username) => {
+  async (userId) => {
     return axios
-      .get(`${baseURL}/api/r2s/job/username?username=${username}`)
+      .get(`${baseURL}/api/r2s/job/user/${userId}`)
       .then((response) => {
         return response.data;
       })
@@ -122,8 +122,14 @@ export const getJobPositionList = createAsyncThunk(
 );
 
 export const addJob = createAsyncThunk("job/addJob", async (jobData) => {
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
   return axios
-    .post(`${baseURL}/api/r2s/job`, jobData)
+    .post(`${baseURL}/api/r2s/job`, jobData, axiosConfig)
     .then((response) => {
       return response.data;
     })
