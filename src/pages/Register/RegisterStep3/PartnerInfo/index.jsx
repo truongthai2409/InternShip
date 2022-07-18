@@ -58,6 +58,7 @@ const PartnerInfo = () => {
 
   return (
     <div className="reg-partner">
+      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
       <form
         className="reg-partner__form"
         onSubmit={handleSubmit(onSubmit)}

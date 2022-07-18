@@ -48,7 +48,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobPositionList.fulfilled, (state, { payload }) => {
       state.jobPosition = payload;
     });
-    builder.addCase(addJob.fulfilled, (state, { payload }) => {
+    builder.addCase(addJob.fulfilled, (state) => {
       state.status = "success";
     });
   },

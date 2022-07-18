@@ -41,6 +41,17 @@
             font-weight: 400;
         }
     }
+
+    .avatar_img {
+        height: 43px;
+        border-radius: 50%;
+        border: 3px solid $primary-color;
+        
+        &:hover {
+            border: 1.6px solid $primary-color;
+            transition: border 0.1s;
+        }
+    }
 }
 
 .css-i4bv87-MuiSvgIcon-root {

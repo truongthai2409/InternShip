@@ -22,6 +22,8 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 
+
+
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
@@ -120,6 +122,7 @@ const PostJobForm = (props) => {
                 <WorkIcon style={{ margin: "5px 5px 0 0" }} />
                 <h2>Mô tả công việc</h2>
               </div>
+              <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
               <div className="hr-post-title">
                 <CustomInput
                   label="Tên công việc"
@@ -236,10 +239,10 @@ const PostJobForm = (props) => {
               </div>
               <div className={"hr-post__select"}>
                 <CustomInput
-                  label="Số nhà/Tên đường"
+                  label="Địa chỉ"
                   id="address"
                   type="text"
-                  placeholder="Nhập số nhà, tên đường"
+                  placeholder="Vd. 254, Dương Đình Hội"
                   register={register}
                 >
                   {errors.address?.message}
@@ -281,26 +284,28 @@ const PostJobForm = (props) => {
                 </CustomTextarea>
               </div>
               <div className="hr-post__salary">
-                <label htmlFor="">Mức lương</label>
+                <label htmlFor="">Trợ cấp<span className="field-requirment">*</span></label>
                 <div className="hr-post__salary-range">
                   <CustomInput
                     id="salaryMin"
                     type="number"
-                    placeholder="Nhập mức lương tối thiểu"
+                    placeholder="Nhập số tiền tối thiểu"
                     register={register}
+                    requirementField={false}
                   >
                     {errors.salaryMin?.message}
                   </CustomInput>
                   <CustomInput
                     id="salaryMax"
                     type="number"
-                    placeholder="Nhập mức lương tối đa"
+                    placeholder="Nhập số tiền tối đa"
                     register={register}
+                    requirementField={false}
                   >
                     {errors.salaryMax?.message}
                   </CustomInput>
                 </div>
-                <SwitchButton label="Lương thỏa thuận" fontSize="13px" />
+                <SwitchButton label="Không có trợ cấp" fontSize="13px" />
               </div>
               <div className="hr-post__action">
                 <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
