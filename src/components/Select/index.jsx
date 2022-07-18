@@ -8,9 +8,10 @@ export default function SelectCustom({
   label,
   id,
   children,
-  register,
+  register= false,
   options=[],
   placeholder,
+  requirementField = true,
   dispatch = () => {},
   action = () => {},
 }) {
@@ -38,7 +39,7 @@ export default function SelectCustom({
   return (
     <>
       <div className="select-form">
-        <h1 className="select-label">{label}</h1>
+        <h1 className="select-label">{label}{requirementField && <span className="field-requirment">*</span>}</h1>
         <FormControl fullWidth>
           <Select
             displayEmpty

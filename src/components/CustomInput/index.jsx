@@ -11,11 +11,12 @@ const CustomInput = ({
   check = false,
   value,
   defaultValue,
+  requirementField = true
 }) => {
   return (
     <div className="custom-input">
       <label htmlFor={id} className="custom-input__label">
-        {label}
+        {label}{requirementField && <span className="field-requirment">*</span>}
       </label>
       <div
         className={
