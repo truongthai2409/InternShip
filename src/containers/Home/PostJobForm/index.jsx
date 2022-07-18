@@ -29,6 +29,7 @@ const PostJobForm = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -71,7 +72,7 @@ const PostJobForm = (props) => {
     const jobData = {
       name: data.name,
       hr: {
-        id: 2,
+        id: userPresent.idUser,
       },
       desciption: data.jobDescription,
       major: {
@@ -80,16 +81,6 @@ const PostJobForm = (props) => {
       jobType: {
         id: parseInt(data.jobType),
       },
-      jobposition: {
-        id: parseInt(data.jobPosition),
-      },
-      // locationjob: {
-      //   district: {
-      //     id: data.district,
-      //   },
-      //   address: data.address,
-      //   note: "Không có",
-      // },
       amount: parseInt(data.amount),
       salaryMin: data.salaryMin,
       salaryMax: data.salaryMax,
@@ -97,11 +88,20 @@ const PostJobForm = (props) => {
       otherInfo: data.benefits,
       timeStartStr: data.timeStart,
       timeEndStr: data.timeEnd,
+      jobposition: {
+        id: data.jobPosition
+      },
+      locationjob: {
+        district: {
+          id: data.district,
+        },
+        address: data.address,
+        note: "Không có",
+      },
     };
     dispatch(addJob(jobData));
   };
 
-  console.log("status:::", status);
   if (status === "success") {
     navigate("/hr/post/list");
   }
@@ -122,7 +122,7 @@ const PostJobForm = (props) => {
               </div>
               <div className="hr-post-title">
                 <CustomInput
-                  label="Chức danh"
+                  label="Tên công việc"
                   id="name"
                   type="text"
                   placeholder="Vd. Thực tập thiết kế UI-UX"
@@ -236,10 +236,10 @@ const PostJobForm = (props) => {
               </div>
               <div className={"hr-post__select"}>
                 <CustomInput
-                  label="Chi tiết địa chỉ"
+                  label="Số nhà/Tên đường"
                   id="address"
                   type="text"
-                  placeholder="Nhập chi tiết địa chỉ(số nhà, tên đường)"
+                  placeholder="Nhập số nhà, tên đường"
                   register={register}
                 >
                   {errors.address?.message}

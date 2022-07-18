@@ -14,7 +14,6 @@ const ButtonMark = (props) => {
   const [jobs, setJobs] = useState([]);
   // get global state from redux store
   const { jobListName } = useSelector((state) => state.job);
-  console.log(jobListName);
 
   useEffect(() => {
     dispatch(getJobByName(""));

@@ -14,7 +14,6 @@ function BaseInformationCompany(props) {
   const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
   const idCompany = props.jobDetail?.hr?.company.id;
-  console.log(jobListCompany);
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
