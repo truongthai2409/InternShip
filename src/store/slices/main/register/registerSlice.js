@@ -64,8 +64,8 @@ export const registerUser = createAsyncThunk(
       1: 'hr',
       4: 'partner'
     }
-    console.log("data", data)
-    const {hrData, navigate} = data
+    const { hrData, navigate } = data
+    console.log("HRdata tatata", hrData)
     const res = await api
       .post(`${baseURL}/api/r2s/hr`, hrData, {
         headers: {

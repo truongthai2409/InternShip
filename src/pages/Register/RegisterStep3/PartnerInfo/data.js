@@ -17,10 +17,25 @@ export const genderList = [
 
 export const schoolList = [
   {
+    id: 1,
+    name: "FPT",
+  },
+  {
+    id: 2,
+    name: "HCMUT",
+  },
+  {
+    id: 3,
+    name: "UIT"
+  }
+];
+
+export const roleAtSchool = [
+  {
     id: 100,
     name: "Khác",
-  },
-];
+  }
+]
 
 export const schema = yup
   .object({

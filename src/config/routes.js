@@ -22,6 +22,7 @@ import CandidateViewList from "src/pages/Main/Candidate/ViewList";
 import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
 import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
 import CandidateHome from "src/pages/Main/Candidate/Home";
+import PartnerHome from "src/pages/Main/Partner/Home";
 
 export const adminRouter = [
   {
@@ -122,6 +123,16 @@ export const candidateRouter = [
     Component: CandidateInformationCompany,
   },
 ];
+
+//partner router
+export const partnerRouter = [
+  {
+    path: '/partner',
+    Component: PartnerHome,
+  },
+
+]
+
 
 // register router
 export const registerRouter = [
