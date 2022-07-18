@@ -60,7 +60,12 @@ function CardHome(props) {
         />
       </div>
       <div className="cardHome__col2">
-        <ButtonMark height="32px" width="32px" fontSize="18px" />
+        <ButtonMark
+          height="32px"
+          width="32px"
+          fontSize="18px"
+          mark={props.active}
+        />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon

@@ -84,51 +84,45 @@ const DetailCard = (props) => {
               </div>
             </div>
           </div>
-          {props.candidate ? (
-            <div>
-              <Box sx={{ width: "100%" }}>
-                <Box
-                  sx={{
-                    borderBottom: 1,
-                    borderColor: "divider",
-                    mt: 1,
-                    fontSize: 3,
-                  }}
+          <div>
+            <Box sx={{ width: "100%" }}>
+              <Box
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  mt: 1,
+                  fontSize: 3,
+                }}
+              >
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                  textColor="primary"
+                  scrollButtons
                 >
-                  <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="basic tabs example"
-                    textColor="primary"
-                    scrollButtons
-                  >
-                    <Tab
-                      label="Chi tiết"
-                      {...a11yProps(0)}
-                      textColor="inherit"
-                      sx={{ fontSize: 12 }}
-                    />
-                    <Tab
-                      label="Tổng quan công ty"
-                      {...a11yProps(1)}
-                      textColor="inherit"
-                      sx={{ fontSize: 12 }}
-                    />
-                  </Tabs>
-                </Box>
-                <TabPanel value={value} index={0}>
-                  <InformationCompany
-                    jobDetail={jobDetail}
-                  ></InformationCompany>
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <BaseInformationCompany jobDetail={jobDetail} />
-                </TabPanel>
+                  <Tab
+                    label="Chi tiết"
+                    {...a11yProps(0)}
+                    textColor="inherit"
+                    sx={{ fontSize: 12 }}
+                  />
+                  <Tab
+                    label="Tổng quan công ty"
+                    {...a11yProps(1)}
+                    textColor="inherit"
+                    sx={{ fontSize: 12 }}
+                  />
+                </Tabs>
               </Box>
-            </div>
-          ) : (
-            ""
-          )}
+              <TabPanel value={value} index={0}>
+                <InformationCompany jobDetail={jobDetail}></InformationCompany>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <BaseInformationCompany jobDetail={jobDetail} />
+              </TabPanel>
+            </Box>
+          </div>
           {props.candidate ? null : (
             <InformationCompany jobDetail={jobDetail}></InformationCompany>
           )}

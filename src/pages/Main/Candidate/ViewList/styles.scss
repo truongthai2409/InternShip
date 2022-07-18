@@ -6,10 +6,11 @@
   padding: 30px;
   background-color: $primary-color;
   display: flex;
+  border-radius: 5px;
 
   &__container {
-      display: flex;
-      margin: 10px 10px 10px 30px;
+    display: flex;
+    margin: 10px 10px 10px 30px;
   }
 
   &__job-card {
@@ -65,12 +66,12 @@
       gap: 30px;
     }
 
-    &__job-card{
+    &__job-card {
       width: 100%;
     }
     &__job-user-card {
       width: 80%;
-    } 
+    }
   }
 
   .user-card__container {

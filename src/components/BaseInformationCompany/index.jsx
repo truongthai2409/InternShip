@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 
 function BaseInformationCompany(props) {
+  console.log(props.ml);
   const dispatch = useDispatch();
   const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
@@ -19,12 +20,12 @@ function BaseInformationCompany(props) {
     dispatch(getJobByCompany(idCompany));
   }, [idCompany, dispatch]);
 
+  console.log("jobList", jobListCompany);
+
   return (
     <div className="">
       <div className="base__information">
-        <h3 className="company-name">
-          Công ty R2S - Cung cấp phương pháp giải quyết phần mềm
-        </h3>
+        <h3 className="company-name">{}</h3>
         <div className="base__information-card">
           <img
             className="img-logo"
@@ -78,28 +79,29 @@ function BaseInformationCompany(props) {
           sunt.
         </p>
       </div>
-      <div>
+      <div className="job-applying-container">
         <h5 className="intro__company-title">Việc làm đang tuyển</h5>
         <Grid
           container
           spacing={3}
-          sx={{ paddingLeft: `${props.pl}`, paddingRight: `${props.pr}` }}
+          sx={{
+            paddingLeft: `${props.pl}px`,
+            paddingRight: `${props.pr}px`,
+            marginLeft: `${props.ml}px`,
+          }}
         >
           {/* {jobListCompany.map((job) => {
             <Grid item lg="auto" md="auto" xs={6}>
               <JobCandidate job={job} />
             </Grid>;
           })} */}
-
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
+          {jobListCompany.length > 0
+            ? jobListCompany.map((job) => (
+                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                  <JobCandidate job={job} />
+                </Grid>
+              ))
+            : ""}
         </Grid>
       </div>
       <div className="button-card">

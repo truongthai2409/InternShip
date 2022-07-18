@@ -9,8 +9,12 @@ import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
 import { addJob, removeJob } from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
 const ButtonMark = (props) => {
+  let markProps = props.mark;
   const dispatch = useDispatch();
   const { markJob } = useSelector((state) => state);
+  const [mark, setMark] = useState(true);
+
+  // console.log(markJob);
   const [jobs, setJobs] = useState([]);
   // get global state from redux store
   const { jobListName } = useSelector((state) => state.job);
@@ -25,17 +29,17 @@ const ButtonMark = (props) => {
     const clickedJobId = e.target
       .closest(".cardHome__container")
       .getAttribute("dataset");
-
     const clickedJobIndex = jobListName.findIndex(
       (job) => job.id === clickedJobId
     );
 
     const newJobListName = [...jobListName];
+
     const isMarked = markJob.find((job) => job.id === clickedJobIndex);
     if (isMarked) {
       newJobListName.splice(clickedJobIndex, 1, {
         ...jobListName[clickedJobIndex],
-        mark: false,
+        markProps: false,
       });
       setJobs(newJobListName);
       dispatch(removeJob(jobListName[clickedJobIndex]));
@@ -43,15 +47,14 @@ const ButtonMark = (props) => {
     } else {
       newJobListName.splice(clickedJobIndex, 1, {
         ...jobListName[clickedJobIndex],
-        mark: true,
+        markProps: true,
       });
       setJobs(newJobListName);
       dispatch(addJob(jobListName[clickedJobIndex]));
       toast.success("Đã thêm đánh dấu");
     }
+    console.log(isMarked);
   };
-
-  const [mark, setMark] = useState(true);
 
   const handleClick = (e) => {
     e.stopPropagation();
