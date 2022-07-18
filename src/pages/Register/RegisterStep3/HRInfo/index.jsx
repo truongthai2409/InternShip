@@ -50,6 +50,7 @@ const HRInfo = () => {
       // fileAvatar: null,
     };
 
+    console.log(hrData);
     dispatch(registerUser({ hrData, navigate }));
   };
 

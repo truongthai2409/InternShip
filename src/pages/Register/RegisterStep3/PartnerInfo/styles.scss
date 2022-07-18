@@ -52,3 +52,13 @@
   }
 
 }
+
+.section-input__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+
+.gender-container-partner-page {
+  margin-top: 5px;
+}
