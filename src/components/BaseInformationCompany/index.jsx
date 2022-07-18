@@ -19,12 +19,12 @@ function BaseInformationCompany(props) {
     dispatch(getJobByCompany(idCompany));
   }, [idCompany, dispatch]);
 
+  console.log("jobList", jobListCompany);
+
   return (
     <div className="">
       <div className="base__information">
-        <h3 className="company-name">
-          Công ty R2S - Cung cấp phương pháp giải quyết phần mềm
-        </h3>
+        <h3 className="company-name">{}</h3>
         <div className="base__information-card">
           <img
             className="img-logo"
@@ -78,7 +78,7 @@ function BaseInformationCompany(props) {
           sunt.
         </p>
       </div>
-      <div>
+      <div className="job-applying-container">
         <h5 className="intro__company-title">Việc làm đang tuyển</h5>
         <Grid
           container
@@ -90,16 +90,15 @@ function BaseInformationCompany(props) {
               <JobCandidate job={job} />
             </Grid>;
           })} */}
-
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
-          <Grid item lg="auto" md="auto" xs={6}>
-            <JobCandidate />
-          </Grid>
+          <div className="company-job-detail__card">
+            {jobListCompany.length > 0
+              ? jobListCompany.map((job) => (
+                  <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                    <JobCandidate job={job} />
+                  </Grid>
+                ))
+              : ""}
+          </div>
         </Grid>
       </div>
       <div className="button-card">

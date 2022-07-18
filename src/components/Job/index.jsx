@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { Icon } from "@mui/material";
 import "./styles.scss";
 const JobCandidate = ({ job }) => {
+  console.log(job.name);
   return (
     <Box
       sx={{
@@ -25,34 +26,34 @@ const JobCandidate = ({ job }) => {
       }}
     >
       <div className="job__candidate">
-        <h4 className="job__candidate-infor job__candidate-infor-name-job">
-          Thực tập Java
+        <h4 id="job__candidate-infor-name" className="job__candidate-infor job__candidate-infor-name-job">
+          {job.name}
         </h4>
         <div className="job__candidate-infor job__candidate-infor-time">
           <Icon className="job__candidate-info-item-icon">
             <AccessTimeIcon fontSize="small" />
           </Icon>
-          <p>09/06/2022-09/08/2022</p>
+          <p>{job.timeStartStr + "-" + job.timeEndStr}</p>
         </div>
 
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <WorkIcon fontSize="small" />
           </Icon>
-          <h6>Full time / Part time </h6>
+          <h6>{job.jobType.name}</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <CurrencyExchangeIcon fontSize="small" />
           </Icon>
 
-          <h6>5,000,000 VNĐ </h6>
+          <h6>{job.salaryMin} $</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <AddLocationIcon fontSize="small" />
           </Icon>
-          <h6>Thủ Đức, Hồ Chí Minh</h6>
+          <h6>{job.locationjob.address + ', ' + job.locationjob.district.province.name}</h6>
         </div>
       </div>
     </Box>

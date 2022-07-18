@@ -16,6 +16,7 @@ const Home = (props) => {
   const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
+
   useEffect(() => {
     dispatch(getJobByName(""));
   }, [dispatch]);
@@ -31,11 +32,11 @@ const Home = (props) => {
   };
 
   return (
-    <Grid className="wrapper" container>
-      <Grid item lg={2} md={2} sm={2} xs={12}>
+    <Grid className="wrapper" spacing={{ xs: 2 }} container>
+      <Grid item lg={2} md={3} sm={4} xs={12}>
         <SideBarHomeList />
       </Grid>
-      <Grid item lg={4} md={10} sm={10} xs={12}>
+      <Grid item lg={4} md={8} sm={8} xs={12}>
         <div className="onDesktop">
           <SearchResultHome onClick={handleSearch} />
         </div>

@@ -27,7 +27,7 @@ const jobSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
       state.jobList = payload;
-      // state.jobDetail = payload[0];
+      state.jobDetail = payload[0];
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
