@@ -97,7 +97,7 @@ function BaseInformationCompany(props) {
           })} */}
           {jobListCompany.length > 0
             ? jobListCompany.map((job) => (
-                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                <Grid key={job.id} item lg="auto" md="auto" sm="auto" xs="auto">
                   <JobCandidate job={job} />
                 </Grid>
               ))

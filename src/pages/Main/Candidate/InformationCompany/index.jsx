@@ -18,7 +18,7 @@ function CandidateInformationCompany(props) {
   }, [dispatch]);
   return (
     <div className="information-company__container">
-      <BaseInformationCompany jobDetail={jobDetail} information pl={6} pr={6} ml={50} />
+      <BaseInformationCompany jobDetail={jobDetail} information pl={6} pr={6} ml={10} />
       <div className="appreciate">
         <h5 style={{marginTop : '0px',}} className="intro__company-title">Đánh giá về công ty* </h5>
         <Button name="Tạo đánh giá"></Button>

@@ -13,7 +13,7 @@ const JobCandidate = ({ job }) => {
     <Box
       sx={{
         width: 250,
-        height: 147,
+        minHeight: 160,
         border: 1,
         borderColor: "#DEDEDE",
         borderRadius: 2,
@@ -26,34 +26,43 @@ const JobCandidate = ({ job }) => {
       }}
     >
       <div className="job__candidate">
-        <h4 id="job__candidate-infor-name" className="job__candidate-infor job__candidate-infor-name-job">
+        <h4
+          id="job__candidate-infor-name"
+          className="job__candidate-infor job__candidate-infor-name-job"
+        >
           {job.name}
         </h4>
         <div className="job__candidate-infor job__candidate-infor-time">
           <Icon className="job__candidate-info-item-icon">
             <AccessTimeIcon fontSize="small" />
           </Icon>
-          <p>{job.timeStartStr + "-" + job.timeEndStr}</p>
+          <h6 className="card-content-job-candidate">
+            {job.timeStartStr + "-" + job.timeEndStr}
+          </h6>
         </div>
 
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <WorkIcon fontSize="small" />
           </Icon>
-          <h6>{job.jobType.name}</h6>
+          <h6 className="card-content-job-candidate">{job.jobType.name}</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <CurrencyExchangeIcon fontSize="small" />
           </Icon>
 
-          <h6>{job.salaryMin} $</h6>
+          <h6 className="card-content-job-candidate">{job.salaryMin} $</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <AddLocationIcon fontSize="small" />
           </Icon>
-          <h6>{job.locationjob.address + ', ' + job.locationjob.district.province.name}</h6>
+          <h6 className="card-content-job-candidate">
+            {job.locationjob.address +
+              ", " +
+              job.locationjob.district.province.name}
+          </h6>
         </div>
       </div>
     </Box>
