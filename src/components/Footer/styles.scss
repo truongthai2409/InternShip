@@ -2,12 +2,14 @@
 
 .elementor-section {
   width: 100%;
-  position: absolute;
+  // position: fixed;
   left: 0;
   right: 0;
   background-color: $primary-color;
+  margin-top: 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
-
 
 .footer-container {
   width: 100%;
@@ -17,9 +19,12 @@
   position: relative;
 }
 
-.footer-wrapper, .footer__first-section,
-#first-section, #second-section,
-.elementor-row, .elementor-column {
+.footer-wrapper,
+.footer__first-section,
+#first-section,
+#second-section,
+.elementor-row,
+.elementor-column {
   width: 100%;
 }
 
@@ -71,7 +76,6 @@
 }
 
 #first-section {
-
   & .contact__container,
   .policy__container,
   .category__container {
@@ -197,19 +201,21 @@ a {
 }
 
 @media only screen and (min-width: 740px) and (max-width: 1340px) {
-
   .footer-wrapper {
     width: 100%;
   }
 
   .elementor-row-first-element {
     width: 100%;
+    padding: 10px;
+    margin-left: auto;
   }
 
   .elementor-row-two-element {
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+    padding: 10px;
   }
 
   .elementor-section {

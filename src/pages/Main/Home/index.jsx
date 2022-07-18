@@ -13,14 +13,13 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
+  const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-  
   useEffect(() => {
     dispatch(getJobByName(""));
-  }, []);
-  
+  }, [dispatch]);
+
   const handleSearch = (value) => {
     setValueSearch(value);
     if (value) {
