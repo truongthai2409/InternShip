@@ -1,7 +1,6 @@
 @use "../../assets/styles" as *;
 
 .slideBarHome__wrapper {
-  height: 690px;
   overflow-y: scroll;
   border-radius: 6px;
 
@@ -21,9 +20,4 @@
 .slideBarHome__wrapper::-webkit-scrollbar {
   display: none;
 }
-@media (max-width: 740px) {
-  .css-1eyyxxn-MuiList-root-middle {
-    margin-right: 30px !important;
-    margin-left: 30px !important;
-  }
-}
+

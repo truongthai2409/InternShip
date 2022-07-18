@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Rating from "@mui/material/Rating";
 import "./styles.scss";
 import JobCandidate from "../Job";
@@ -14,13 +14,13 @@ function BaseInformationCompany(props) {
   const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
   const idCompany = props.jobDetail?.hr?.company.id;
-  console.log("jobList", jobListCompany);
+  console.log(idCompany);
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
   }, [idCompany, dispatch]);
 
-  console.log(jobListCompany);
+  console.log("jobList", jobListCompany);
 
   return (
     <div className="">
@@ -94,18 +94,13 @@ function BaseInformationCompany(props) {
             </Grid>;
           })} */}
           <div className="company-job-detail__card">
-            <Grid item lg="auto" md="auto" xs={6}>
-              <JobCandidate />
-            </Grid>
-            <Grid item lg="auto" md="auto" xs={6}>
-              <JobCandidate />
-            </Grid>
-            <Grid item lg="auto" md="auto" xs={6}>
-              <JobCandidate />
-            </Grid>
-            <Grid item lg="auto" md="auto" xs={6}>
-              <JobCandidate />
-            </Grid>
+            {
+              jobListCompany.length > 0 ? jobListCompany.map((job) => (
+                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                  <JobCandidate job={job} />
+                </Grid>
+              )) : ""
+            }
           </div>
         </Grid>
       </div>

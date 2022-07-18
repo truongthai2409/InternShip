@@ -52,8 +52,10 @@
     padding-left: 0px;
   }
   .slideBarHome__wrapper {
-    height: auto;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .css-1eyyxxn-MuiList-root {
     height: fit-content !important;
@@ -62,3 +64,4 @@
     padding: 0;
   }
 }
+

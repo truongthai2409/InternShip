@@ -27,9 +27,7 @@ function SideBarHomeList() {
     return (
         <div className="slideBarHome__wrapper">
             <ListCollapse title="Hình thức làm việc" list={listWorkingFormat} spacing={3} />
-            <div className="css-1eyyxxn-MuiList-root-middle">
-                <ListCollapse title="Vị trí làm việc" list={jobPosition} spacing={3} />
-            </div>
+            <ListCollapse title="Vị trí làm việc" list={jobPosition} spacing={3} />
             <ListCollapse title="Chuyên ngành" list={majorList} spacing={3} />
         </div>
     );
