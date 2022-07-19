@@ -63,12 +63,21 @@ export const registerUser = createAsyncThunk(
   "register/registerUser",
   async (data) => {
     const rolePath = {
+<<<<<<< HEAD
       3: "candidate",
       1: "hr",
       4: "partner",
     };
     console.log("data", data);
     const { hrData, navigate } = data;
+=======
+      3: 'candidate',
+      1: 'hr',
+      4: 'partner'
+    }
+    const { hrData, navigate } = data
+    console.log("HRdata tatata", hrData)
+>>>>>>> e719ad28efb6e063abe043fa5cd4700d108629b3
     const res = await api
       .post(`${baseURL}/api/r2s/hr`, hrData, {
         headers: {

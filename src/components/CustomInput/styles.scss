@@ -1,71 +1,81 @@
 @use "../../assets/styles/" as *;
 
 .custom-input {
-    margin: 20px 0;
-    width: 100%;
-    text-align: left;
-    .custom-input__label {
+  margin: 20px 0;
+  width: 100%;
+  text-align: left;
+  .custom-input__label {
+    font-family: $f-family;
+    font-size: $fs-14;
+    font-weight: $fw-bold-1;
+    // color: rgb(145, 158, 171);
+    color: $color-black-0;
+  }
+
+  .custom-input__textfield {
+    margin-top: 7px;
+    position: relative;
+
+    input {
+      // border: 2px solid rgb(145, 158, 171);
+      font-family: $f-family;
+      border: 1.6px solid $primary-color;
+      border-radius: 5px;
+      width: 100%;
+      padding: 21px 12px;
+
+      &:hover {
+        border: 1.6px solid $primary-color;
+        box-shadow: $primary-color-1 0px 3px 8px;
+        &::placeholder {
+          color: $primary-color;
+        }
+      }
+
+      &:focus {
+        outline: $primary-color;
+        border: 1.6px solid $color-black-0;
+        box-shadow: $primary-color-1 0px 3px 8px;
+        &::placeholder {
+          color: $primary-color;
+        }
+      }
+      &::placeholder {
         font-family: $f-family;
-        font-size: $fs-14;
-        font-weight: $fw-bold-1;
-        // color: rgb(145, 158, 171);
-        color: $color-black-0;
+      }
     }
 
-    .custom-input__textfield {
-        margin-top: 7px;
-        // height: fit-content;
-        input {
-            // border: 2px solid rgb(145, 158, 171);
-            font-family: $f-family;
-            border: 1.6px solid $primary-color;
-            border-radius: 5px;
-            width: 100%;
-            padding: 21px 12px;
-
-            &:hover {
-                border: 1.6px solid $primary-color;
-                box-shadow: $primary-color-1 0px 3px 8px; 
-                &::placeholder {
-                    
-                    color: $primary-color;
-                }
-            }
-
-            &:focus {
-                outline: $primary-color;
-                border: 1.6px solid $color-black-0;
-                box-shadow: $primary-color-1 0px 3px 8px;
-                &::placeholder {
-                    color: $primary-color;
-                }
-            }
-            &::placeholder {
-                font-family: $f-family;
-            }
-        }
-
-        .custom-input__error {
-            color: $color-red;
-            font-size: $fs-13;
-        }
+    .custom-input__error {
+      color: $color-red;
+      font-size: $fs-13;
     }
+  }
+
+  .field-requirment {
+    color: red;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .visibility-icon {
+    position: absolute;
+    right: 8px;
+    top: 32%;
+  }
 }
 
-
 .custom-input__textfield-disabled {
-    margin-top: 7px;
-    // height: fit-content;
-    input {
-        // border: 2px solid rgb(145, 158, 171);
-        background-color: transparent;
-        font-family: $f-family;
-        border: none;
-        border-radius: 5px;
-        width: 100%;
-        // padding: 15px 12px;
-        font-size: $fs-16;
-        color: #000;
-
-    }
+  margin-top: 7px;
+  // height: fit-content;
+  input {
+    // border: 2px solid rgb(145, 158, 171);
+    background-color: transparent;
+    font-family: $f-family;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    // padding: 15px 12px;
+    font-size: $fs-16;
+    color: #000;
+  }
 }

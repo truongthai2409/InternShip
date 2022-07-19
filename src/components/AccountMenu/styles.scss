@@ -1,0 +1,11 @@
+@use "../../assets/styles" as *;
+
+.avatar_img {
+    height: 100%;
+    border-radius: 50%;
+    
+    &:hover {
+        border: 4px solid $primary-color;
+        transition: border 0.3s;
+    }
+}

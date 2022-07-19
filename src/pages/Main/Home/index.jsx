@@ -7,6 +7,7 @@ import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobByName } from "../../../store/slices/main/home/job/jobSlice";
+import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const Home = (props) => {
   const [valueSearch, setValueSearch] = useState("");
@@ -16,6 +17,7 @@ const Home = (props) => {
   const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
+  const { provinceList } = useSelector((state) => state.location)
 
   useEffect(() => {
     dispatch(getJobByName(""));
@@ -53,17 +55,6 @@ const Home = (props) => {
           </div>
           <DetailCard
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-            star={4.5}
-            nameMajor="React-Js"
-            nameCompany="R2S"
-            detailJob="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque inventore pariatur tenetur fugiat laboriosam voluptas, ea accusamus facilis ut, sunt optio! Expedita beatae voluptates assumenda fugiat nam rerum autem deleniti?"
-            requireJob={
-              "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque inventore pariatur tenetur fugiat laboriosam voluptas, ea accusamus facilis ut, sunt optio! Expedita beatae voluptates assumenda fugiat nam rerum autem deleniti?"
-            }
-            timeJob={"10/6/2022-10/8/2022"}
-            salary={"5.000.000"}
-            location={"TPHCM"}
-            rating={"5.0 trong 48 lượt đánh giá"}
             jobDetail={jobDetail}
             jobListName={jobListName}
             candidate={props.candidate}

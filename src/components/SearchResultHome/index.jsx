@@ -48,7 +48,6 @@ function SearchResultHome({
           <span className="search__icon">
             <SearchOutlinedIcon />
           </span>
-          {/* <IconButton className="search__icon"></IconButton> */}
           <input
             type="text"
             className="header__with-search-search-1"

@@ -7,13 +7,17 @@ import Select from "../../../../components/Select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../../../store/slices/main/register/registerSlice";
+import { addUniversity } from "src/store/slices/Admin/university/unversitySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { genderList, schoolList, schema } from "./data";
+import { genderList, schoolList, schema, roleAtSchool } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
 
-
+const schoolName = {
+  HCMUT: "Trường Đại học Bách Khoa - Đại học Quốc gia Thành phố Hồ Chí Minh",
+  FPT: "Trường Đại học FPT",
+  UIT: "Trường Đại học Công nghệ thông tin",
+};
 
 const PartnerInfo = () => {
   const navigate = useNavigate();
@@ -24,28 +28,32 @@ const PartnerInfo = () => {
     e.preventDefault();
     navigate(-1);
   };
+
   const onSubmit = (data) => {
-    const step2Data = JSON.parse(sessionStorage.getItem("account"));
-    const userData = {
-      school: data.school,
-      position: data.position,
-      createUser: {
-        username: step2Data.username,
-        password: step2Data.password,
-        confirmPassword: step2Data.confirmPassword,
-        gender: parseInt(data.gender),
-        lastName: data.lastname,
-        firstName: data.firstname,
-        phone: data.phone,
-        email: step2Data.email,
-        role: {
-          id: parseInt(step2Data.role.id),
+    // const data = JSON.parse(sessionStorage.getItem("account"));
+    console.log(data);
+    const partnerData = {
+      partner: JSON.stringify({
+        university: {
+          name: "Truong ĐH TP HCM 124",
+          shortName: "ABC",
+          email: "ABC@gmail.com",
+          description: "String",
+          website: "String",
+          phone: "0991231",
+          type: 0,
+          createDate: null,
+          status: {
+            id: 2,
+            name: "Not available"
+          },
+          majors: [],
+          address: null
         },
-      },
+      }),
     };
 
-    console.log(userData);
-    dispatch(registerUser(userData, navigate));
+    dispatch(addUniversity({ partnerData }));
   };
 
   const {
@@ -58,51 +66,54 @@ const PartnerInfo = () => {
 
   return (
     <div className="reg-partner">
+      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
       <form
         className="reg-partner__form"
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
       >
-        <CustomInput
-          label="Tài khoản"
-          id="username"
-          type="text"
-          placeholder="Tài khoản..."
-          register={register}
-        >
-          {errors.username?.message}
-          {errorMessage?.Username}
-        </CustomInput>
-        <CustomInput
-          label="Email"
-          id="email"
-          type="email"
-          placeholder="Email..."
-          register={register}
-        >
-          {errors.email?.message}
-          {errorMessage?.Email}
-        </CustomInput>
-        <CustomInput
-          label="Mật khẩu"
-          id="password"
-          type="password"
-          placeholder="Mật khẩu"
-          register={register}
-        >
-          {errors.password?.message}
-          {errorMessage?.Password}
-        </CustomInput>
+        <div className="section-input__container">
+          <CustomInput
+            label="Tài khoản"
+            id="username"
+            type="text"
+            placeholder="Tài khoản..."
+            register={register}
+          >
+            {errors.username?.message}
+            {errorMessage?.Username}
+          </CustomInput>
+          <CustomInput
+            label="Email"
+            id="email"
+            type="email"
+            placeholder="Email..."
+            register={register}
+          >
+            {errors.email?.message}
+            {errorMessage?.Email}
+          </CustomInput>
+          <CustomInput
+            label="Mật khẩu"
+            id="password"
+            type="password"
+            placeholder="Mật khẩu"
+            register={register}
+          >
+            {errors.password?.message}
+            {errorMessage?.Password}
+          </CustomInput>
 
-        <CustomInput
-          label="Xác nhận mật khẩu"
-          id="passwordConfirmation"
-          type="password"
-          placeholder="Xác nhận mật khẩu"
-          register={register}
-        >
-          {errors.passwordConfirmation?.message}
-        </CustomInput>
+          <CustomInput
+            label="Xác nhận mật khẩu"
+            id="passwordConfirmation"
+            type="password"
+            placeholder="Xác nhận mật khẩu"
+            register={register}
+          >
+            {errors.passwordConfirmation?.message}
+          </CustomInput>
+        </div>
 
         <p className="reg-partner__title-infor">Cập nhật thông tin</p>
         <div className="reg-partner__form--name">
@@ -127,23 +138,27 @@ const PartnerInfo = () => {
           </CustomInput>
         </div>
 
-        <CustomInput
-          label="Số điện thoại"
-          id="phone"
-          type="phone"
-          placeholder="Số điện thoại"
-          register={register}
-        >
-          {errors.phone?.message}
-        </CustomInput>
+        <div className="section-input__container">
+          <CustomInput
+            label="Số điện thoại"
+            id="phone"
+            type="phone"
+            placeholder="Số điện thoại"
+            register={register}
+          >
+            {errors.phone?.message}
+          </CustomInput>
 
-        <Select
-          label="Giới tính"
-          placeholder="Vui lòng chọn..."
-          options={genderList}
-          id="gender"
-          register={register}
-        />
+          <div className="gender-container-partner-page">
+            <Select
+              label="Giới tính"
+              placeholder="Vui lòng chọn..."
+              options={genderList}
+              id="gender"
+              register={register}
+            />
+          </div>
+        </div>
 
         <CustomInput
           label="Ảnh đại diện"
@@ -155,23 +170,24 @@ const PartnerInfo = () => {
           {errors.avatar?.message}
         </CustomInput>
 
-        <SelectCustom
-          label="Trường"
-          selectOptions={schoolList}
-          id="school"
-          register={register}
-        />
+        <div className="section-input__container">
+          <SelectCustom
+            label="Trường"
+            options={schoolList}
+            id="school"
+            register={register}
+          />
 
-        <SelectCustom
-          label="Vai trò tại trường"
-          id="position"
-          type="text"
-          placeholder="Vị trí"
-          register={register}
-        >
-          {errors.position?.message}
-        </SelectCustom>
-
+          <SelectCustom
+            label="Vai trò tại trường"
+            id="position"
+            options={roleAtSchool}
+            placeholder="Vị trí"
+            register={register}
+          >
+            {errors.position?.message}
+          </SelectCustom>
+        </div>
         <div className="reg-partner__btns">
           <div className="reg-partner__btns--item" onClick={handleBackClick}>
             <ArrowButton text="Trở lại" direction="left" />

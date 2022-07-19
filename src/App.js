@@ -12,6 +12,7 @@ import {
   hrRouter,
   mainRouter,
   registerRouter,
+  partnerRouter,
 } from "./config/routes";
 import MainLayout from "./Layouts/Main";
 import HRLayOut from "./Layouts/HR";
@@ -21,6 +22,7 @@ import HRInfo from "./pages/Register/RegisterStep3/HRInfo";
 import ViewList from "./pages/Main/Candidate/ViewList";
 import SaveProfile from "./pages/Main/Candidate/SaveProfile";
 import CandidateLayOut from "./Layouts/Candidate";
+import PartnerLayout from "./Layouts/Partner";
 
 function App() {
   const renderAdminRouter = () => {
@@ -52,6 +54,12 @@ function App() {
       return <Route path={path} element={<Component />} key={index} />;
     });
   };
+
+  const renderPartnerRouter = () => {
+    return partnerRouter.map(({ path, Component }, index) => {
+      return <Route path={path} element={<Component />} key={index} />;
+    })
+  }
   return (
     <>
       <Router>
@@ -71,6 +79,9 @@ function App() {
           <Route path="/candidate" element={<CandidateLayOut />}>
             {/* <Route index element={<HR />} /> */}
             {renderCandidateRouter()}
+          </Route>
+          <Route path="/partner" element={<PartnerLayout />}>
+            {renderPartnerRouter()}
           </Route>
           <Route path="/" element={<MainLayout />}>
             {renderMainRouter()}

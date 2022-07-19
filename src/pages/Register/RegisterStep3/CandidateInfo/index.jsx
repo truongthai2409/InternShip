@@ -79,6 +79,7 @@ const CandidateInfo = () => {
 
   return (
     <div className="reg-candidate">
+      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
       <form
         className="reg-candidate__form"
         autoComplete="off"

@@ -22,6 +22,8 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 
+
+
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
@@ -29,6 +31,7 @@ const PostJobForm = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -71,7 +74,7 @@ const PostJobForm = (props) => {
     const jobData = {
       name: data.name,
       hr: {
-        id: 2,
+        id: userPresent.idUser,
       },
       desciption: data.jobDescription,
       major: {
@@ -80,16 +83,6 @@ const PostJobForm = (props) => {
       jobType: {
         id: parseInt(data.jobType),
       },
-      jobposition: {
-        id: parseInt(data.jobPosition),
-      },
-      // locationjob: {
-      //   district: {
-      //     id: data.district,
-      //   },
-      //   address: data.address,
-      //   note: "Không có",
-      // },
       amount: parseInt(data.amount),
       salaryMin: data.salaryMin,
       salaryMax: data.salaryMax,
@@ -97,6 +90,16 @@ const PostJobForm = (props) => {
       otherInfo: data.benefits,
       timeStartStr: data.timeStart,
       timeEndStr: data.timeEnd,
+      jobposition: {
+        id: data.jobPosition
+      },
+      locationjob: {
+        district: {
+          id: data.district,
+        },
+        address: data.address,
+        note: "Không có",
+      },
     };
     dispatch(addJob(jobData));
   };
@@ -119,9 +122,10 @@ const PostJobForm = (props) => {
                 <WorkIcon style={{ margin: "5px 5px 0 0" }} />
                 <h2>Mô tả công việc</h2>
               </div>
+              <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
               <div className="hr-post-title">
                 <CustomInput
-                  label="Chức danh"
+                  label="Tên công việc"
                   id="name"
                   type="text"
                   placeholder="Vd. Thực tập thiết kế UI-UX"
@@ -235,10 +239,10 @@ const PostJobForm = (props) => {
               </div>
               <div className={"hr-post__select"}>
                 <CustomInput
-                  label="Chi tiết địa chỉ"
+                  label="Địa chỉ"
                   id="address"
                   type="text"
-                  placeholder="Nhập chi tiết địa chỉ(số nhà, tên đường)"
+                  placeholder="Vd. 254, Dương Đình Hội"
                   register={register}
                 >
                   {errors.address?.message}
@@ -280,26 +284,28 @@ const PostJobForm = (props) => {
                 </CustomTextarea>
               </div>
               <div className="hr-post__salary">
-                <label htmlFor="">Mức lương</label>
+                <label htmlFor="">Trợ cấp<span className="field-requirment">*</span></label>
                 <div className="hr-post__salary-range">
                   <CustomInput
                     id="salaryMin"
                     type="number"
-                    placeholder="Nhập mức lương tối thiểu"
+                    placeholder="Nhập số tiền tối thiểu"
                     register={register}
+                    requirementField={false}
                   >
                     {errors.salaryMin?.message}
                   </CustomInput>
                   <CustomInput
                     id="salaryMax"
                     type="number"
-                    placeholder="Nhập mức lương tối đa"
+                    placeholder="Nhập số tiền tối đa"
                     register={register}
+                    requirementField={false}
                   >
                     {errors.salaryMax?.message}
                   </CustomInput>
                 </div>
-                <SwitchButton label="Lương thỏa thuận" fontSize="13px" />
+                <SwitchButton label="Không có trợ cấp" fontSize="13px" />
               </div>
               <div className="hr-post__action">
                 <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />

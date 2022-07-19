@@ -53,6 +53,7 @@ const Login = () => {
           type="password"
           placeholder="Mật khẩu"
           register={register}
+          visibility={true}
         >
           {errors.password?.message}
         </CustomInput>
