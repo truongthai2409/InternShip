@@ -6,21 +6,34 @@ import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import clsx from "clsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   updateIdJobActive,
   updateIndexCardActive,
 } from "../../store/slices/main/home/job/jobSlice";
+import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
+import { getMark } from "src/store/slices/main/mark/markSlice";
 
 function CardHome(props) {
   const dispatch = useDispatch();
-
+  const { rating } = useSelector((state) => state.rating);
+  const { careListCandidate } = useSelector((state) => state.mark);
+  let isMark;
+  React.useEffect(() => {
+    dispatch(getMark());
+  }, [dispatch]);
+  React.useEffect(() => {
+    isMark = careListCandidate.includes((job) => job.jobCare.id === props.id);
+  }, []);
   React.useEffect(() => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
-  }, []);
+  }, [dispatch]);
 
+  React.useEffect(() => {
+    dispatch(getRatingCompany(props.idCompany));
+  }, [dispatch]);
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
@@ -56,7 +69,7 @@ function CardHome(props) {
           name="read-only"
           precision={0.5}
           readOnly
-          defaultValue={props.start}
+          defaultValue={rating}
         />
       </div>
       <div className="cardHome__col2">
@@ -64,7 +77,8 @@ function CardHome(props) {
           height="32px"
           width="32px"
           fontSize="18px"
-          mark={props.active}
+          jobId={props.id}
+          isMark={isMark}
         />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">

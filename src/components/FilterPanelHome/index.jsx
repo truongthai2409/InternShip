@@ -66,6 +66,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
             title={job.name}
             fontSize={10}
             nameCompany={job.hr.company.name}
+            idCompany={job.hr.company.id}
             tagName={[job.jobposition.name, "Full time"]}
             start={4.5}
             location="Hồ Chí Minh"

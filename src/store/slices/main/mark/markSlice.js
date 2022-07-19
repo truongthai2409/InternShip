@@ -1,22 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import api from "src/config/api/apiConfig";
+
+const baseURL = process.env.REACT_APP_API;
 
 const markJobSlice = createSlice({
   name: "mark",
-  initialState: [],
-  reducers: {
-    addJob: (state, action) => {
-      state.push(action.payload);
-      return state;
-    },
-    removeJob: (state, action) => {
-      const indexRemoveJob = state.findIndex(
-        (job) => job.id === action.payload
-      );
-      state.splice(indexRemoveJob, 1);
-      return state;
-    },
+  initialState: {
+    status: "",
+    careListCandidate: [],
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createMark.fulfilled, (state, action) => {
+      state.status = "success";
+      // state.careListCandidate = action.payload;
+    });
+    builder.addCase(getMark.fulfilled, (state, { payload }) => {
+      state.careListCandidate = payload;
+    });
   },
 });
 
-export const { addJob, removeJob } = markJobSlice.actions;
+export const getMark = createAsyncThunk("mark/getMark", async () => {
+  return axios
+    .get(`${baseURL}/api/r2s/care-list`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
+
+export const createMark = createAsyncThunk("mark/createMark", async (data) => {
+  const res = await api
+    .post(`${baseURL}/api/r2s/care-list`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+  return res;
+});
+
+// export const { addJob, removeJob } = markJobSlice.actions;
 export default markJobSlice;
