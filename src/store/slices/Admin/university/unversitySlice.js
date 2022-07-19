@@ -64,18 +64,15 @@ export const addUniversity = createAsyncThunk(
     console.log(data);
     const { partnerData } = data;
     console.log("univerSity", partnerData);
-    return api
-      .post(`${baseURL}/api/university/`, partnerData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        return response.data;
+    const res = await api
+      .post(`${baseURL}/api/r2s/partner/university/create`, partnerData)
+      .then((res) => {
+        return res;
       })
       .catch((error) => {
-        return error.response.data;
+        return error;
       });
+    return res;
   }
 );
 

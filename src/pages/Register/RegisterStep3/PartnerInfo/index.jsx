@@ -12,12 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { genderList, schoolList, schema, roleAtSchool } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
-
-const schoolName = {
-  HCMUT: "Trường Đại học Bách Khoa - Đại học Quốc gia Thành phố Hồ Chí Minh",
-  FPT: "Trường Đại học FPT",
-  UIT: "Trường Đại học Công nghệ thông tin",
-};
+import CustomTextarea from "src/components/CustomTextarea";
 
 const PartnerInfo = () => {
   const navigate = useNavigate();
@@ -32,29 +27,54 @@ const PartnerInfo = () => {
   const onSubmit = (data) => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
     console.log(data);
+    console.log("test");
+    console.log(data.avatar[0].File);
+    console.log(JSON.stringify(data.avatar[0]));
     const partnerData = {
-      partner: {
+      avatarUser: data.avatar[0],
+      logo: data.logo[0],
+      university: {
         university: {
-          name: "Truong ĐH TP HCM 124",
-          shortName: "ABC",
-          email: "ABC@gmail.com",
-          description: "String",
-          website: "String",
-          phone: "0991231",
-          type: 0,
-          createDate: null,
-          status: {
-            id: 2,
-            name: "Not available"
-          },
+          name: "Truong Dai hoc Bach Khoa Ho Chi Minh",
+          shortName: "HCMUT",
+          email: data.email,
+          description: data.description,
+          website: "hcmut.uthcm",
+          phone: data.phone,
           majors: [],
-          address: null
+          location: [
+            {
+              district: {
+                id: 2,
+              },
+              address: "HCM",
+              note: "Truong Top 1 VN",
+            },
+          ],
         },
-        logo: null,
+      },
+      partner: {
+        partner: {
+          position: "quản lý",
+          userCreationDTO: {
+            username: data.username,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phone: data.phone,
+            gender: parseInt(data.gender),
+            email: data.email,
+            role: {
+              id: 4,
+            },
+          },
+        },
       },
     };
+    console.log(partnerData);
 
-    dispatch(addUniversity({ partnerData }));
+    dispatch(addUniversity({ partnerData, navigate }));
   };
 
   const {
@@ -67,7 +87,9 @@ const PartnerInfo = () => {
 
   return (
     <div className="reg-partner">
-      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
+      <p className="title-requirement">
+        (<span className="field-requirment"> * </span>)Trường bắt buộc
+      </p>
       <form
         className="reg-partner__form"
         onSubmit={handleSubmit(onSubmit)}
@@ -166,18 +188,29 @@ const PartnerInfo = () => {
           id="avatar"
           type="file"
           register={register}
-          check={true}
+          // check={true}
         >
           {errors.avatar?.message}
+        </CustomInput>
+
+        <CustomInput
+          label="LOGO Trường"
+          id="logo"
+          type="file"
+          register={register}
+          // check={true}
+        >
+          {errors.logo?.message}
         </CustomInput>
 
         <div className="section-input__container">
           <SelectCustom
             label="Trường"
             options={schoolList}
-            id="school"
+            id="shortName"
             register={register}
           />
+          {errors.shortName?.message}
 
           <SelectCustom
             label="Vai trò tại trường"
@@ -189,11 +222,49 @@ const PartnerInfo = () => {
             {errors.position?.message}
           </SelectCustom>
         </div>
-        <div className="reg-partner__btns">
-          <div className="reg-partner__btns--item" onClick={handleBackClick}>
+
+        <div className="section-input__container">
+          <CustomInput
+            label="Email của Trường"
+            id="emailSchool"
+            type="email"
+            placeholder="Email"
+            register={register}
+          >
+            {errors.emailSchool?.message}
+          </CustomInput>
+          <CustomInput
+            label="Số điện thoại của Trường"
+            id="phoneSchool"
+            type="text"
+            placeholder="Phone"
+            register={register}
+          >
+            {errors.phoneSchool?.message}
+          </CustomInput>
+        </div>
+        <CustomTextarea
+          label="Mô tả"
+          id="description"
+          type="textarea"
+          placeholder="Mô tả Trường"
+          children=""
+          register={register}
+        />
+        <CustomInput
+          label="Website"
+          id="website"
+          type="text"
+          register={register}
+        >
+          {errors.website?.message}
+        </CustomInput>
+
+        <div className="reg-hr__btns">
+          <div className="reg-hr__btns--item" onClick={handleBackClick}>
             <ArrowButton text="Trở lại" direction="left" />
           </div>
-          <div className="reg-partner__btns--item">
+          <div className="reg-hr__btns--item">
             <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)} />
           </div>
         </div>

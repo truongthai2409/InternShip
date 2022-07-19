@@ -32,6 +32,14 @@ export const schoolList = [
 
 export const roleAtSchool = [
   {
+    id: 1,
+    name: "Quản lý"
+  },
+  {
+    id: 2,
+    name: "Cộng tác viên"
+  },
+  {
     id: 100,
     name: "Khác",
   }
