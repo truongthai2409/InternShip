@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import AdminRouterLayout from "./Layouts/Admin/index";
 import RegisterLayout from "./Layouts/Register/index";
@@ -76,6 +77,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 }

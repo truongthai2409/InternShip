@@ -1,77 +1,70 @@
-import React from 'react';
-import './styles.scss'
+import React from "react";
+import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import CustomCheckbox from "../../components/CustomCheckbox";
-import CustomInput from '../../components/CustomInput/index'
-import Button from '../../components/Button/index'
-import {loginUser} from "../../store/slices/main/login/loginSlice";
-import { authenticationSelector } from '../../store/selectors/main/loginSelectors'
+import CustomInput from "../../components/CustomInput/index";
+import Button from "../../components/Button/index";
+import { loginUser } from "../../store/slices/main/login/loginSlice";
+import { authenticationSelector } from "../../store/selectors/main/loginSelectors";
 import { schema } from "./data";
 
-
-
 const Login = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const status = useSelector(authenticationSelector)
-    if (status === "success") {
-        navigate("/")
-    }
-    const {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const status = useSelector(authenticationSelector);
+  if (status === "success") {
+    navigate("/");
+  }
+  const {
     register,
     handleSubmit,
     formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schema),
-    });
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    const onSubmit = (data) => {
-        const userData = {
-            username: data.username,
-            password: data.password
-        }
+  const onSubmit = (data) => {
+    const userData = {
+      username: data.username,
+      password: data.password,
+    };
 
-        console.log(userData);
-        dispatch(loginUser(userData))
-    }
+    dispatch(loginUser(userData));
+  };
 
-    return (
-        <div className="login-form__container">
-            <form
-            onSubmit={handleSubmit(onSubmit)}
-            autoComplete="off"
-            >
-                <CustomInput
-                    label="Tài khoản"
-                    
-                    id="username"
-                    type="text"
-                    placeholder="Tài khoản..."
-                    register={register}
-                >
-                    {errors.username?.message}
-                </CustomInput>
-                <CustomInput
-                    label="Mật khẩu"
-                    id="password"
-                    type="password"
-                    placeholder="Mật khẩu"
-                    register={register}
-                >
-                    {errors.password?.message}
-                </CustomInput>
-                <div className="login-form__save-pass">
-                    <CustomCheckbox label="Lưu mật khẩu"/>
-                </div>
-                <div className="login-form__btn">
-                    <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>
-                </div>
-            </form>
+  return (
+    <div className="login-form__container">
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+        <CustomInput
+          label="Tài khoản"
+          id="username"
+          type="text"
+          placeholder="Tài khoản..."
+          register={register}
+        >
+          {errors.username?.message}
+        </CustomInput>
+        <CustomInput
+          label="Mật khẩu"
+          id="password"
+          type="password"
+          placeholder="Mật khẩu"
+          register={register}
+        >
+          {errors.password?.message}
+        </CustomInput>
+        <div className="login-form__save-pass">
+          <CustomCheckbox label="Lưu mật khẩu" />
         </div>
-    );
-}
+        <div className="login-form__btn">
+          <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default Login;

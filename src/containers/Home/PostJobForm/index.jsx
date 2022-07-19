@@ -101,7 +101,6 @@ const PostJobForm = (props) => {
     dispatch(addJob(jobData));
   };
 
-  console.log("status:::", status);
   if (status === "success") {
     navigate("/hr/post/list");
   }

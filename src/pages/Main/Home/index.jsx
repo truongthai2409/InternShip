@@ -13,7 +13,7 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   // get global state from redux store
-  const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
+  const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
 

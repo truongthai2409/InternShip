@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -13,6 +13,8 @@ import "./styles.scss";
 import SearchResultHome from "../SearchResultHome";
 
 function HeaderWithHR(props) {
+  const location = useLocation();
+  const pathUrl = location.pathname;
   return (
     <div className="container-header__hr header__hr config">
       {props.hr ? <Logo id={1} /> : <Logo id={3} />}
@@ -40,9 +42,9 @@ function HeaderWithHR(props) {
       ) : null}
       <div className="header__hr-icon">
         <div className="header__hr-icon-config">
-          <Link to="/hr">
+          <Link to={`${pathUrl}/view-list`}>
             <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
-            {props.idMark ? (
+            {props.isMark ? (
               <FiberManualRecordIcon
                 fontSize="inherit"
                 color="warning"
@@ -51,9 +53,9 @@ function HeaderWithHR(props) {
           </Link>
         </div>
         <div className="header__hr-icon-config">
-          <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
-          <Link to="/hr">
-            {props.idNoti ? (
+          <Link to={`${pathUrl}/`}>
+            <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
+            {props.isNoti ? (
               <FiberManualRecordIcon
                 fontSize="inherit"
                 color="warning"
@@ -62,12 +64,12 @@ function HeaderWithHR(props) {
           </Link>
         </div>
         <div className="header__hr-icon-config">
-          <Link to="/hr">
+          <Link to={`${pathUrl}/`}>
             <SettingsIcon></SettingsIcon>
           </Link>
         </div>
         <div>
-          <Link to="/hr">
+          <Link to={`${pathUrl}/`}>
             <AccountCircleIcon></AccountCircleIcon>
           </Link>
         </div>

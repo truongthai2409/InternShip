@@ -6,59 +6,44 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
-import { addJob, removeJob } from "src/store/slices/main/mark/markSlice";
+import { createMark, getMark } from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
 const ButtonMark = (props) => {
-  let markProps = props.mark;
   const dispatch = useDispatch();
-  const { markJob } = useSelector((state) => state);
-  const [mark, setMark] = useState(true);
+  const [mark, setMark] = useState(false);
 
-  // console.log(markJob);
-  const [jobs, setJobs] = useState([]);
   // get global state from redux store
-  const { jobListName } = useSelector((state) => state.job);
+  const { careListCandidate } = useSelector((state) => state.mark);
 
   useEffect(() => {
     dispatch(getJobByName(""));
+    dispatch(getMark());
   }, [dispatch]);
 
   const handleClickMarkJob = (e) => {
     e.stopPropagation();
     setMark(!mark);
-    const clickedJobId = e.target
-      .closest(".cardHome__container")
-      .getAttribute("dataset");
-    const clickedJobIndex = jobListName.findIndex(
-      (job) => job.id === clickedJobId
+    const isMark = careListCandidate.find(
+      (job) => job.jobCare.id === props.jobId
     );
 
-    const newJobListName = [...jobListName];
+    if (isMark === undefined) {
+      const dataCareList = {
+        candidateCare: {
+          id: 1,
+        },
+        jobCare: {
+          id: props.jobId,
+        },
+        note: "Đây là công việc ưa thích của mình",
+      };
 
-    const isMarked = markJob.find((job) => job.id === clickedJobIndex);
-    if (isMarked) {
-      newJobListName.splice(clickedJobIndex, 1, {
-        ...jobListName[clickedJobIndex],
-        markProps: false,
-      });
-      setJobs(newJobListName);
-      dispatch(removeJob(jobListName[clickedJobIndex]));
-      toast.success("Đã xóa đánh dấu");
+      dispatch(createMark(dataCareList));
+      setMark(false);
+      toast.success("Đã mark");
     } else {
-      newJobListName.splice(clickedJobIndex, 1, {
-        ...jobListName[clickedJobIndex],
-        markProps: true,
-      });
-      setJobs(newJobListName);
-      dispatch(addJob(jobListName[clickedJobIndex]));
-      toast.success("Đã thêm đánh dấu");
+      toast.success("Mỗi candidate chỉ có thể quan tâm đến công việc một lần");
     }
-    console.log(isMarked);
-  };
-
-  const handleClick = (e) => {
-    e.stopPropagation();
-    setMark(!mark);
   };
 
   return (
@@ -73,7 +58,7 @@ const ButtonMark = (props) => {
       className="buttonMark__wrapper"
       onClick={handleClickMarkJob}
     >
-      {mark ? (
+      {props.isMark ? (
         <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
       ) : (
         <BookmarkIcon

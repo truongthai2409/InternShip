@@ -29,7 +29,7 @@ const CandidateInfo = () => {
 
   useEffect(() => {
     dispatch(getMajorList());
-  }, []);
+  }, [dispatch]);
 
   const status = useSelector(statusSelector);
 
@@ -47,35 +47,35 @@ const CandidateInfo = () => {
     resolver: yupResolver(schema),
   });
 
-  // const onSubmit = async (data) => {
-  //   const step2Data = JSON.parse(sessionStorage.getItem("account"));
-  //   const userData = {
-  //     fileCV: data.cv[0],
-  //     fileAvatar: data.avatar[0],
-  //     candidate: JSON.stringify({
-  //       createUser: {
-  //         username: step2Data.username,
-  //         password: step2Data.password,
-  //         confirmPassword: step2Data.confirmPassword,
-  //         gender: parseInt(data.gender),
-  //         lastName: data.lastname,
-  //         firstName: data.firstname,
-  //         phone: data.phone,
-  //         email: step2Data.email,
-  //         role: {
-  //           id: parseInt(step2Data.role.id),
-  //         },
-  //       },
-  //       major: {
-  //         id: parseInt(data.major),
-  //       },
-  //     }),
-  //   };
-  //   dispatch(registerUser(userData));
+  const onSubmit = async (data) => {
+    const step2Data = JSON.parse(sessionStorage.getItem("account"));
+    const userData = {
+      fileCV: data.cv[0],
+      fileAvatar: data.avatar[0],
+      candidate: JSON.stringify({
+        createUser: {
+          username: step2Data.username,
+          password: step2Data.password,
+          confirmPassword: step2Data.confirmPassword,
+          gender: parseInt(data.gender),
+          lastName: data.lastname,
+          firstName: data.firstname,
+          phone: data.phone,
+          email: step2Data.email,
+          role: {
+            id: parseInt(step2Data.role.id),
+          },
+        },
+        major: {
+          id: parseInt(data.major),
+        },
+      }),
+    };
+    // dispatch(registerUser(userData));
+  };
+  // const onSubmit = (data) => {
+  //   console.log(data);
   // };
-  const onSubmit = (data) => {
-    console.log(data)
-  }
 
   return (
     <div className="reg-candidate">
@@ -175,7 +175,12 @@ const CandidateInfo = () => {
         >
           {errors.major?.message}
         </SelectCustom>
-        <CustomInput label="Ảnh đại diện" id="avatar" type="file" register={register}>
+        <CustomInput
+          label="Ảnh đại diện"
+          id="avatar"
+          type="file"
+          register={register}
+        >
           {errors.avatar?.message}
         </CustomInput>
 

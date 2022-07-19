@@ -123,9 +123,6 @@ const DetailCard = (props) => {
               </TabPanel>
             </Box>
           </div>
-          {props.candidate ? null : (
-            <InformationCompany jobDetail={jobDetail}></InformationCompany>
-          )}
         </div>
       ) : null}
     </div>
