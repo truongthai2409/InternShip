@@ -7,7 +7,7 @@ import { useState } from "react";
 const CustomInput = ({
   label,
   id,
-  type = "text",
+  type,
   placeholder,
   children,
   register,
@@ -19,7 +19,6 @@ const CustomInput = ({
 }) => {
 
   const [isHide, setIsHide] = useState(false)
-  const [typeInput, setTypeInput] = useState(type)
   const handleHide = () => {
       setIsHide(!isHide)
   };
@@ -36,7 +35,7 @@ const CustomInput = ({
         }
       >
         <input
-          type={ isHide || (isHide ? "text" : "password")}
+          type={ (type=="password") ? (isHide ? "text" : "password") : type}
           id={id}
           placeholder={placeholder}
           disabled={check}

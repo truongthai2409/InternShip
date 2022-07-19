@@ -70,11 +70,7 @@ export const registerUser = createAsyncThunk(
     const { hrData, navigate } = data
     console.log("HRdata tatata", hrData)
     const res = await api
-      .post(`${baseURL}/api/r2s/hr`, hrData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(`${baseURL}/api/r2s/hr`, hrData)
       .then((res) => {
         return res;
       })
