@@ -20,6 +20,8 @@ const HRInfo = () => {
 
   const { companyList } = useSelector((state) => state.company);
 
+  console.log(companyList);
+
   useEffect(() => {
     dispatch(getCompanyList());
   }, []);
@@ -63,7 +65,9 @@ const HRInfo = () => {
 
   return (
     <div className="reg-hr">
-      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
+      <p className="title-requirement">
+        (<span className="field-requirment"> * </span>)Trường bắt buộc
+      </p>
       <form className="reg-hr__form" autoComplete="off">
         <CustomInput
           label="Tài khoản"
