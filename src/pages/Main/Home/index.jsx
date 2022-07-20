@@ -6,7 +6,10 @@ import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByName } from "../../../store/slices/main/home/job/jobSlice";
+import {
+  getJobByName,
+  getJobList,
+} from "../../../store/slices/main/home/job/jobSlice";
 import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const Home = (props) => {
@@ -14,13 +17,14 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
+  const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-  const { provinceList } = useSelector((state) => state.location)
+  const { provinceList } = useSelector((state) => state.location);
 
   useEffect(() => {
     dispatch(getJobByName(""));
+    dispatch(getJobList());
   }, [dispatch]);
 
   const handleSearch = (value) => {
@@ -66,3 +70,5 @@ const Home = (props) => {
 };
 
 export default Home;
+
+

@@ -15,6 +15,7 @@ import {
 import { genderList, schema } from "./data";
 import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
 import SelectCustom from "../../../../components/Select";
+import { registerCandidate } from "src/store/slices/main/register/registerSlice";
 
 const CandidateInfo = () => {
   const navigate = useNavigate();
@@ -48,30 +49,28 @@ const CandidateInfo = () => {
   });
 
   const onSubmit = async (data) => {
-    const step2Data = JSON.parse(sessionStorage.getItem("account"));
+    // const step2Data = JSON.parse(sessionStorage.getItem("account"));
     const userData = {
       fileCV: data.cv[0],
       fileAvatar: data.avatar[0],
       candidate: JSON.stringify({
         createUser: {
-          username: step2Data.username,
-          password: step2Data.password,
-          confirmPassword: step2Data.confirmPassword,
+          username: data.username,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
           gender: parseInt(data.gender),
           lastName: data.lastname,
           firstName: data.firstname,
           phone: data.phone,
-          email: step2Data.email,
-          role: {
-            id: parseInt(step2Data.role.id),
-          },
+          email: data.email,
         },
         major: {
           id: parseInt(data.major),
         },
       }),
     };
-    // dispatch(registerUser(userData));
+    console.log(userData);
+    dispatch(registerCandidate(userData));
   };
   // const onSubmit = (data) => {
   //   console.log(data);
@@ -79,7 +78,9 @@ const CandidateInfo = () => {
 
   return (
     <div className="reg-candidate">
-      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
+      <p className="title-requirement">
+        (<span className="field-requirment"> * </span>)Trường bắt buộc
+      </p>
       <form
         className="reg-candidate__form"
         autoComplete="off"
@@ -111,6 +112,7 @@ const CandidateInfo = () => {
           type="password"
           placeholder="Mật khẩu"
           register={register}
+          visibility
         >
           {errors.password?.message}
           {errorMessage?.Password}
@@ -118,12 +120,13 @@ const CandidateInfo = () => {
 
         <CustomInput
           label="Xác nhận mật khẩu"
-          id="passwordConfirmation"
+          id="confirmPassword"
           type="password"
           placeholder="Xác nhận mật khẩu"
           register={register}
+          visibility
         >
-          {errors.passwordConfirmation?.message}
+          {errors.confirmPassword?.message}
         </CustomInput>
 
         <p className="reg-candidate__title-infor">Cập nhật thông tin</p>

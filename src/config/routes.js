@@ -24,6 +24,7 @@ import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCom
 import CandidateHome from "src/pages/Main/Candidate/Home";
 import PartnerHome from "src/pages/Main/Partner/Home";
 import Profile from "src/components/Profile";
+import PartnerPost from "src/pages/Main/Partner/Post";
 
 export const adminRouter = [
   {
@@ -96,7 +97,7 @@ export const hrRouter = [
     Component: Profile,
   },
   {
-    path: "post",
+    path: "/hr/post",
     Component: HRPost,
   },
   {
@@ -133,6 +134,14 @@ export const candidateRouter = [
 export const partnerRouter = [
   {
     path: "/partner",
+    Component: PartnerHome,
+  },
+  {
+    path: "/partner/post",
+    Component: PartnerPost,
+  },
+  {
+    path: "/partner/post-list",
     Component: PartnerHome,
   },
 ];

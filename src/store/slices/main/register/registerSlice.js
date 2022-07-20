@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import api from "src/config/api/apiConfig";
 
 const baseURL = process.env.REACT_APP_API;
@@ -24,10 +25,23 @@ const registerSlice = createSlice({
           state.error = action.payload;
         }
       })
-      .addCase(registerUser.pending, (state, action) => {
+      .addCase(registerHr.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerHr.fulfilled, (state, action) => {
+        if (action.payload?.id) {
+          state.user = action.payload;
+          state.status = "success";
+          state.error = {};
+        } else {
+          state.status = "fail";
+          state.error = action.payload;
+        }
+      })
+      .addCase(registerCandidate.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(registerCandidate.fulfilled, (state, action) => {
         if (action.payload?.id) {
           state.user = action.payload;
           state.status = "success";
@@ -59,23 +73,82 @@ export const checkUser = createAsyncThunk(
   }
 );
 
-export const registerUser = createAsyncThunk(
-  "register/registerUser",
+// export const registerUser = createAsyncThunk(
+//   "register/registerUser",
+//   async (data, role) => {
+//     let res;
+//     switch (role) {
+//       case "hr":
+//         console.log("dataRes", data.hrData);
+
+//         res = await api
+//           .post(`${baseURL}/api/r2s/hr`, data.hrData, {
+//             headers: {
+//               "Content-Type": "multipart/form-data",
+//             },
+//           })
+//           .then((res) => {
+//             return res;
+//           })
+//           .catch((err) => {
+//             return err;
+//           });
+//         return res;
+//       case "candidate":
+//         console.log("dataRes", data.userData);
+//         res = await api
+//           .post(`${baseURL}/api/r2s/${role}`, data.userData, {
+//             headers: {
+//               "Content-Type": "multipart/form-data",
+//             },
+//           })
+//           .then((res) => {
+//             return res;
+//           })
+//           .catch((err) => {
+//             return err;
+//           });
+//         return res;
+//       default:
+//         break;
+//     }
+//   }
+// );
+
+export const registerHr = createAsyncThunk(
+  "register/registerHr",
   async (data) => {
-    const rolePath = {
-      3: 'candidate',
-      1: 'hr',
-      4: 'partner'
-    }
-    const { hrData, navigate } = data
-    console.log("HRdata tatata", hrData)
     const res = await api
-      .post(`${baseURL}/api/r2s/hr`, hrData)
+      .post(`${baseURL}/api/r2s/hr`, data.hrData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         return res;
       })
       .catch((err) => {
-        return err;
+        console.log(err.response.data);
+        return err.response.data;
+      });
+    return res;
+  }
+);
+
+export const registerCandidate = createAsyncThunk(
+  "register/registerCandidate",
+  async (data) => {
+    const res = await axios
+      .post(`${baseURL}/api/r2s/candidate`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response.data;
       });
     return res;
   }

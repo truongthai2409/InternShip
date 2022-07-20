@@ -6,7 +6,11 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
-import { createMark, getMark } from "src/store/slices/main/mark/markSlice";
+import {
+  createMark,
+  deleteMark,
+  getMark,
+} from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
 const ButtonMark = (props) => {
   const dispatch = useDispatch();
@@ -14,20 +18,18 @@ const ButtonMark = (props) => {
 
   // get global state from redux store
   const { careListCandidate } = useSelector((state) => state.mark);
-
   useEffect(() => {
     dispatch(getJobByName(""));
     dispatch(getMark());
-  }, [dispatch]);
+  }, []);
 
-  const handleClickMarkJob = (e) => {
+  const handleClickMarkJob = async (e) => {
     e.stopPropagation();
-    setMark(!mark);
-    const isMark = careListCandidate.find(
-      (job) => job.jobCare.id === props.jobId
-    );
+    // const isMark = careListCandidate.includes(
+    //   (job) => job.jobCare.id === props.jobId
+    // );
 
-    if (isMark === undefined) {
+    if (props.isMark === false) {
       const dataCareList = {
         candidateCare: {
           id: 1,
@@ -37,13 +39,14 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-
       dispatch(createMark(dataCareList));
-      setMark(false);
-      toast.success("Đã mark");
+      toast.success("Đã mark thành công");
     } else {
-      toast.success("Mỗi candidate chỉ có thể quan tâm đến công việc một lần");
+      dispatch(deleteMark(props.jobId));
+      toast.success("Đã xóa mark thành công");
+      // setMark(!mark);
     }
+    console.log(careListCandidate);
   };
 
   return (
@@ -58,7 +61,7 @@ const ButtonMark = (props) => {
       className="buttonMark__wrapper"
       onClick={handleClickMarkJob}
     >
-      {props.isMark ? (
+      {props.isMark === true ? (
         <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
       ) : (
         <BookmarkIcon

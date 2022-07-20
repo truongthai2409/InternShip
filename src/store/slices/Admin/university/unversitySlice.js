@@ -10,15 +10,25 @@ const universitySlice = createSlice({
     universityList: [],
     universityDetail: {},
     error: [],
+    status: "idle",
+    user: {},
   },
   reducer: {},
   extraReducers: (builder) => {
     builder.addCase(getUniversityList.fulfilled, (state, { payload }) => {
       state.universityList = payload;
     });
+    builder.addCase(addUniversity.pending, (state, { payload }) => {
+      state.status = "loading";
+    })
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;
+      }
+      else {
+        state.user = payload;
+        state.status = "success";
+        state.error = {};
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {
@@ -61,21 +71,24 @@ export const getUniversityList = createAsyncThunk(
 export const addUniversity = createAsyncThunk(
   "university/addUniversity",
   async (data) => {
-    console.log(data);
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
     const { partnerData } = data;
-    console.log("univerSity", partnerData);
-    return api
-      .post(`${baseURL}/api/university/`, partnerData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        return response.data;
+    const res = await axios
+      .post(`${baseURL}/api/r2s/partner/university/create`, partnerData, axiosConfig)
+      .then((res) => {
+        console.log(res);
+        return res;
       })
       .catch((error) => {
-        return error.response.data;
+        console.log(error);
+        return error;
       });
+    return res;
   }
 );
 
@@ -107,13 +120,15 @@ export const getUniversityDetail = createAsyncThunk(
 export const updateUniversityInfo = createAsyncThunk(
   "university/updateUniversityInfo",
   async (updateData, thunkAPI) => {
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
     const { universityData, uniId } = updateData;
     return await axios
-      .put(`${baseURL}/api/university/${uniId}`, universityData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(`${baseURL}/api/university/${uniId}`, universityData, axiosConfig)
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật Trường thành công")

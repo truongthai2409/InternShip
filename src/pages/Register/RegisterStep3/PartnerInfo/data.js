@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+const IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
+
 export const genderList = [
   {
     id: 0,
@@ -32,6 +34,14 @@ export const schoolList = [
 
 export const roleAtSchool = [
   {
+    id: 1,
+    name: "Quản lý"
+  },
+  {
+    id: 2,
+    name: "Cộng tác viên"
+  },
+  {
     id: 100,
     name: "Khác",
   }
@@ -61,8 +71,8 @@ export const schema = yup
     passwordConfirmation: yup
       .string()
       .oneOf([yup.ref("password"), null], " * Mật khẩu chưa khớp"),
-    firstname: yup.string().required("* Bạn phải nhập tên"),
-    lastname: yup.string().required("* Bạn phải nhập họ"),
+    firstName: yup.string().required("* Bạn phải nhập tên"),
+    lastName: yup.string().required("* Bạn phải nhập họ"),
     phone: yup
       .string()
       .required(" * Bạn phải nhập tên số điện thoại.")
@@ -71,8 +81,50 @@ export const schema = yup
         " * Số điện thoại không đúng."
       ),
     gender: yup.string().required("* Bạn phải chọn giới tính"),
-    avatar: yup.mixed().nullable(),
-    school: yup.string().required("* Bạn phải chọn chuyên ngành"),
-    postion: yup.string(),
+    position: yup.string(),
+    shortName: yup.string(),
+    emailSchool: 
+      yup.string()
+      .required(" * Bạn phải nhập email")
+      .matches(
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      " * Vui lòng nhập lại email"
+    ),
+    phoneSchool: yup
+    .string()
+    .required(" * Bạn phải nhập tên số điện thoại.")
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+      " * Số điện thoại không đúng."
+    ),
+    description: yup.string(),
+    website: yup.string(),
+    avatar: yup
+    .mixed()
+    .test(
+      "type",
+      " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif",
+      (value) => {
+        return value && IMAGE_FORMATS.includes(value[0]?.type);
+      }
+    )
+    .test("fileSize", " * Ảnh vượt quá kích thước 128kb", (value) => {
+      return value && value[0]?.size <= 131072;
+    })
+    .required("Bạn phải tải avatar"),
+    logo: yup
+    .mixed()
+    .test(
+      "type",
+      " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif",
+      (value) => {
+        return value && IMAGE_FORMATS.includes(value[0]?.type);
+      }
+    )
+    .test("fileSize", " * Ảnh vượt quá kích thước 128kb", (value) => {
+      return value && value[0]?.size <= 131072;
+    })
+    .required("Bạn phải tải logo"),
+
   })
   .required();
