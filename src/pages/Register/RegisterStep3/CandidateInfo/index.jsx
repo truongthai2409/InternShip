@@ -69,6 +69,7 @@ const CandidateInfo = () => {
         },
       }),
     };
+    console.log(userData);
     dispatch(registerCandidate(userData));
   };
   // const onSubmit = (data) => {

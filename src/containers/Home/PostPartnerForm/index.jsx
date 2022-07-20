@@ -21,12 +21,10 @@ import {
   getProvinceList,
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
-
-
+import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
 
 const PostPartnerForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
-  const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
 
   const dispatch = useDispatch();
@@ -39,28 +37,6 @@ const PostPartnerForm = (props) => {
     dispatch(getJobPositionList());
   }, []);
 
-  const jobTypeList = [
-    {
-      id: 1,
-      name: "Full time",
-    },
-    {
-      id: 2,
-      name: "Part time",
-    },
-    {
-      id: 3,
-      name: "Remote",
-    },
-  ];
-
-  const countryList = [
-    {
-      id: 84,
-      name: "Việt Nam",
-    },
-  ];
-
   const {
     register,
     handleSubmit,
@@ -72,40 +48,32 @@ const PostPartnerForm = (props) => {
 
   const onSubmit = (data) => {
     const jobData = {
-      name: data.name,
-      hr: {
-        id: userPresent.idUser,
-      },
-      desciption: data.jobDescription,
-      major: {
-        id: parseInt(data.major),
-      },
-      jobType: {
-        id: parseInt(data.jobType),
-      },
-      amount: parseInt(data.amount),
-      salaryMin: data.salaryMin,
-      salaryMax: data.salaryMax,
-      requirement: data.jobRequirement,
-      otherInfo: data.benefits,
-      timeStartStr: data.timeStart,
-      timeEndStr: data.timeEnd,
-      jobposition: {
-        id: data.jobPosition
-      },
-      locationjob: {
-        district: {
-          id: data.district,
+      demand: JSON.stringify({
+        name: data.name,
+        description: data.jobDescription,
+        requirement: data.jobRequirement,
+        ortherInfo: data.otherInfo,
+        startStr: data.timeStart,
+        endStr: data.timeEnd,
+        partner: {
+          id: 1,
         },
-        address: data.address,
-        note: "Không có",
-      },
+        major: {
+          id: parseInt(data.major),
+        },
+        position: {
+          id: parseInt(data.jobPosition),
+        },
+      }),
+      fileSV: data.fileSV[0],
     };
-    dispatch(addJob(jobData));
+    console.log(jobData);
+
+    dispatch(addDemand(jobData));
   };
 
   if (status === "success") {
-    navigate("/hr/post/list");
+    navigate("/partner/post/list");
   }
 
   return (
@@ -115,15 +83,17 @@ const PostPartnerForm = (props) => {
         autoComplete="off"
         encType="multipart/form-data"
       >
-        <div className="hr-post__container">
+        <div className="partner-post__container">
           <div className="form__container">
-            <div className="hr-post__form">
-              <div className="hr-post__heading">
+            <div className="partner-post__form">
+              <div className="partner-post__heading">
                 <WorkIcon style={{ margin: "5px 5px 0 0" }} />
                 <h2>Bản tin ứng tuyển</h2>
               </div>
-              <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
-              <div className="hr-post-title">
+              <p className="title-requirement">
+                (<span className="field-requirment"> * </span>)Trường bắt buộc
+              </p>
+              <div className="partner-post-title">
                 <CustomInput
                   label="Tên công việc"
                   id="name"
@@ -135,18 +105,18 @@ const PostPartnerForm = (props) => {
                 </CustomInput>
               </div>
               <div className="row-2-col">
-                <div className="hr-post__select">
+                <div className="partner-post__select">
                   <SelectCustom
-                    id="jobType"
-                    label="Hình thức làm việc"
+                    id="jobPosition"
+                    label="Vị trí công việc"
                     placeholder="Vui lòng chọn"
-                    options={jobTypeList}
+                    options={jobPosition}
                     register={register}
                   >
-                    {errors.jobType?.message}
+                    {errors.jobPosition?.message}
                   </SelectCustom>
                 </div>
-                <div className="hr-post__select">
+                <div className="partner-post__select">
                   <SelectCustom
                     id="major"
                     label="Chuyên ngành"
@@ -157,28 +127,6 @@ const PostPartnerForm = (props) => {
                     {errors.major?.message}
                   </SelectCustom>
                 </div>
-              </div>
-              <div className="row-2-col">
-                <div className="hr-post__select">
-                  <SelectCustom
-                    id="jobPosition"
-                    label="Vị trí"
-                    placeholder="Vui lòng chọn"
-                    options={jobPosition}
-                    register={register}
-                  >
-                    {errors.jobPosition?.message}
-                  </SelectCustom>
-                </div>
-                <CustomInput
-                  label="Số lượng cần tuyển"
-                  id="amount"
-                  type="number"
-                  placeholder="Nhập số lượng"
-                  register={register}
-                >
-                  {errors.amount?.message}
-                </CustomInput>
               </div>
               <div className="row-2-col">
                 <CustomInput
@@ -200,55 +148,7 @@ const PostPartnerForm = (props) => {
                   {errors.timeEnd?.message}
                 </CustomInput>
               </div>
-              <div className={"row-3-col"}>
-                <div className={"hr-post__select-location"}>
-                  <SelectCustom
-                    id="country"
-                    label="Quốc gia"
-                    placeholder="Vui lòng chọn"
-                    options={countryList}
-                    register={register}
-                  >
-                    {errors.country?.message}
-                  </SelectCustom>
-                </div>
-                <div className={"hr-post__select-location"}>
-                  <SelectCustom
-                    id="province"
-                    label="Tỉnh/Thành phố"
-                    placeholder="Vui lòng chọn"
-                    dispatch={dispatch}
-                    action={getDistrictList}
-                    options={provinceList}
-                    register={register}
-                  >
-                    {errors.province?.message}
-                  </SelectCustom>
-                </div>
-                <div className={"hr-post__select-location"}>
-                  <SelectCustom
-                    id="district"
-                    label="Quận/Huyện"
-                    placeholder="Vui lòng chọn"
-                    options={districtList}
-                    register={register}
-                  >
-                    {errors.district?.message}
-                  </SelectCustom>
-                </div>
-              </div>
-              <div className={"hr-post__select"}>
-                <CustomInput
-                  label="Địa chỉ"
-                  id="address"
-                  type="text"
-                  placeholder="Vd. 254, Dương Đình Hội"
-                  register={register}
-                >
-                  {errors.address?.message}
-                </CustomInput>
-              </div>
-              <div className="hr-post__textarea">
+              <div className="partner-post__textarea">
                 <CustomTextarea
                   label="Mô tả công việc"
                   id="jobDescription"
@@ -259,7 +159,7 @@ const PostPartnerForm = (props) => {
                   {errors.jobDescription?.message}
                 </CustomTextarea>
               </div>
-              <div className="hr-post__textarea">
+              <div className="partner-post__textarea">
                 <CustomTextarea
                   label="Yêu cầu công việc"
                   id="jobRequirement"
@@ -271,43 +171,28 @@ const PostPartnerForm = (props) => {
                   {errors.jobRequirement?.message}
                 </CustomTextarea>
               </div>
-              <div className="hr-post__textarea">
+              <div className="partner-post__textarea">
                 <CustomTextarea
-                  label="Quyền lợi của ứng viên"
-                  id="benefits"
+                  label="Thông tin khác"
+                  id="otherInfo"
                   type="desciption"
-                  placeholder="Nhập quyền lợi của ứng viên"
+                  placeholder="Thông tin khác"
                   register={register}
                   check={false}
                 >
-                  {errors.benefits?.message}
+                  {errors.otherInfo?.message}
                 </CustomTextarea>
               </div>
-              <div className="hr-post__salary">
-                <label htmlFor="">Trợ cấp<span className="field-requirment">*</span></label>
-                <div className="hr-post__salary-range">
-                  <CustomInput
-                    id="salaryMin"
-                    type="number"
-                    placeholder="Nhập số tiền tối thiểu"
-                    register={register}
-                    requirementField={false}
-                  >
-                    {errors.salaryMin?.message}
-                  </CustomInput>
-                  <CustomInput
-                    id="salaryMax"
-                    type="number"
-                    placeholder="Nhập số tiền tối đa"
-                    register={register}
-                    requirementField={false}
-                  >
-                    {errors.salaryMax?.message}
-                  </CustomInput>
-                </div>
-                <SwitchButton label="Không có trợ cấp" fontSize="13px" />
-              </div>
-              <div className="hr-post__action">
+              <CustomInput
+                  label="Danh sách sinh viên"
+                  id="fileSV"
+                  type="file"
+                  placeholder=""
+                  register={register}
+                >
+                  {errors.fileSV?.message}
+                </CustomInput>
+              <div className="partner-post__action">
                 <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
               </div>
             </div>

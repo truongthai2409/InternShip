@@ -13,6 +13,7 @@ import { genderList, schoolList, schema, roleAtSchool } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
 import CustomTextarea from "src/components/CustomTextarea";
+import axios from "axios";
 
 const PartnerInfo = () => {
   const navigate = useNavigate();
@@ -33,11 +34,15 @@ const PartnerInfo = () => {
       university: JSON.stringify({
         name: "Truong Dai hoc Bach Khoa Ho Chi Minh",
         shortName: "HCMUT",
-        email: data.email,
+        email: data.emailSchool,
         description: data.description,
-        website: "hcmut.uthcm",
-        phone: data.phone,
-        majors: [],
+        website: data.website,
+        phone: data.phoneSchool,
+        majors: [
+          {
+            id: 1,
+          }
+        ],
         location: [
           {
             district: {
@@ -62,8 +67,8 @@ const PartnerInfo = () => {
           gender: parseInt(data.gender),
           email: data.email,
           role: {
-            id: 4,
-          },
+            id: 4
+          }
         },
       }),
     };
