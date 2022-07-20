@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicationsSharp';
 
 const AccountMenu = ({ linkImg }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -90,7 +91,7 @@ const AccountMenu = ({ linkImg }) => {
           </MenuItem>
         </Link>
         <MenuItem>
-          <Avatar /> Tài khoản của tôi
+        <SettingsApplicationsSharpIcon className="profile-icon" /> Tài khoản
         </MenuItem>
         <Divider />
         <Link style={{ color: "#111111" }} to="/" replace={true}>
