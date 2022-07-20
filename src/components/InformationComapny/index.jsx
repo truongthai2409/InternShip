@@ -13,7 +13,7 @@ const formatSalary = (salary = "") => {
   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
 
-const InformationCompany = ({ jobDetail, star }) => {
+const InformationCompany = ({ jobDetail }) => {
   return (
     <div>
       <div className="detail__card-3">
@@ -57,7 +57,7 @@ const InformationCompany = ({ jobDetail, star }) => {
           <Icon className="detail__card-4-item-icon">
             <WorkIcon />
           </Icon>
-          <h6 className="detail__card-4-item-info">Fulltime/Parttime</h6>
+          <h6 className="detail__card-4-item-info">{jobDetail.jobType.name}</h6>
         </div>
         <div className="detail__card-4-item">
           <AddLocationIcon className="detail__card-4-item-icon">
@@ -73,7 +73,7 @@ const InformationCompany = ({ jobDetail, star }) => {
             name="read-only"
             precision={0.5}
             readOnly
-            defaultValue={star}
+            defaultValue={jobDetail.company?.rates?.length}
           />
         </div>
         <Button name="Ứng tuyển"></Button>

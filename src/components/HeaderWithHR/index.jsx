@@ -17,15 +17,14 @@ function HeaderWithHR(props) {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user)
-  
+  const { user } = useSelector((state) => state.user);
+
   const username = JSON.parse(localStorage.getItem("userPresent")).username;
 
   useEffect(() => {
-    dispatch(getUserByUserName(username))
-  }, [])
+    dispatch(getUserByUserName(username));
+  }, []);
 
-  
   return (
     <div className="container-header__hr header__hr config">
       {props.hr ? <Logo id={1} /> : <Logo id={3} />}
@@ -80,7 +79,7 @@ function HeaderWithHR(props) {
             backgroundColor: "#FFFFFF",
             display: "flex",
             alignItems: "center",
-            paddingLeft: "6px"
+            paddingLeft: "6px",
           }}
         >
           <h4 className="name">Chào, {`${user.lastName} ${user.firstName}`}</h4>

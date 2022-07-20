@@ -17,10 +17,9 @@ const CustomInput = ({
   requirementField = true,
   visibility = false,
 }) => {
-
-  const [isHide, setIsHide] = useState(false)
+  const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
-      setIsHide(!isHide)
+    setIsHide(!isHide);
   };
 
   return (
@@ -36,6 +35,7 @@ const CustomInput = ({
       >
         <input
           type={ type }
+          // type={type == "password" ? (isHide ? "text" : "password") : type}
           id={id}
           placeholder={placeholder}
           disabled={check}
@@ -45,7 +45,11 @@ const CustomInput = ({
         />
         {check ? null : <p className="custom-input__error">{children}</p>}
         {visibility && (
-          <div className="visibility-icon" onClick={handleHide} style={{cursor: "pointer"}}>
+          <div
+            className="visibility-icon"
+            onClick={handleHide}
+            style={{ cursor: "pointer" }}
+          >
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </div>
         )}
