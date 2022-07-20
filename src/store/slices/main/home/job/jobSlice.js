@@ -124,9 +124,9 @@ export const getJobPositionList = createAsyncThunk(
 export const addJob = createAsyncThunk("job/addJob", async (jobData) => {
   let axiosConfig = {
     headers: {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-    }
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
   };
   return axios
     .post(`${baseURL}/api/r2s/job`, jobData, axiosConfig)

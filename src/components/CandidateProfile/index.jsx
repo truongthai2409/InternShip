@@ -9,27 +9,34 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DownloadIcon from "@mui/icons-material/Download";
 import Button from "../Button";
 
-const CandidateProfile = () => {
+const CandidateProfile = ({ candidateInfo }) => {
   return (
     <div className="candidate-profile__container">
       <div className="candidate-profile__card-container">
         <div className="candidate-profile__card-info">
           <div className="candidate-profile__card-heading">
             <div className="candidate-profile__card-name">
-              <h3 id="candidate-name">Yasuo</h3>
+              <h3 id="candidate-name">{candidateInfo.userDTO?.username}</h3>
             </div>
             <div className="candidate-profile__card-avatar">
-              <div className="candidate-avatar"></div>
+              <div className="candidate-avatar">
+                <img src={candidateInfo.userDTO?.avatar} alt="avatar" />
+              </div>
             </div>
           </div>
           <div className="candidate-profile__card-detail-info">
             <div className="candidate-profile__card-email">
               <MailOutlineIcon />
-              <span className="candidate-info-text">yasuo@gmail.com</span>
+              <span className="candidate-info-text">
+                {candidateInfo.userDTO?.email}
+              </span>
             </div>
             <div className="candidate-profile__card-phone">
               <LocalPhoneIcon />
-              <span className="candidate-info-text">0293012840</span>
+              <span className="candidate-info-text">
+                {" "}
+                {candidateInfo.userDTO?.phone}
+              </span>
             </div>
             <div className="candidate-profile__card-gender">
               <ManIcon />
@@ -37,7 +44,10 @@ const CandidateProfile = () => {
             </div>
             <div className="candidate-profile__card-major">
               <SubjectIcon />
-              <span className="candidate-info-text">Front-end Developer</span>
+              <span className="candidate-info-text">
+                {" "}
+                {candidateInfo.userDTO?.careJobs}
+              </span>
             </div>
             <div className="candidate-profile__card-auth-btm">
               <Button name="Tài khoản đã xác thực" />
@@ -45,7 +55,6 @@ const CandidateProfile = () => {
           </div>
         </div>
         <div className="candidate-profile__card-footer">
-
           <button className="candidate-profile__card-update-profile btn-candidate">
             <EditIcon />
             <span className="candidate-profile-footer-text">

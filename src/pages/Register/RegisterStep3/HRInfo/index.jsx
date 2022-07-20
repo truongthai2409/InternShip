@@ -6,7 +6,10 @@ import CustomInput from "../../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../../../store/slices/main/register/registerSlice";
+import {
+  registerHr,
+  registerUser,
+} from "../../../../store/slices/main/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { genderList, schema } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
@@ -18,11 +21,18 @@ const HRInfo = () => {
   const dispatch = useDispatch();
   const errorMessage = useSelector(errorSelector);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
     dispatch(getCompanyList());
-  }, []);
+  }, [dispatch]);
 
   const handleBackClick = (e) => {
     e.preventDefault();
@@ -49,21 +59,14 @@ const HRInfo = () => {
       // fileAvatar: null,
     };
 
-    console.log(hrData);
-    dispatch(registerUser({ hrData, navigate }));
+    dispatch(registerHr({ hrData, navigate }));
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
 
   return (
     <div className="reg-hr">
-      <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
+      <p className="title-requirement">
+        (<span className="field-requirment"> * </span>)Trường bắt buộc
+      </p>
       <form className="reg-hr__form" autoComplete="off">
         <CustomInput
           label="Tài khoản"

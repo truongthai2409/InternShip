@@ -34,7 +34,7 @@ export const schema = yup.object({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
       " * Vui lòng nhập lại mật khẩu"
     ),
-  passwordConfirmation: yup
+  confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], " * Mật khẩu chưa khớp"),
   firstname: yup.string().required("* Bạn phải nhập tên"),

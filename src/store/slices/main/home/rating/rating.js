@@ -21,7 +21,7 @@ export const getRatingCompany = createAsyncThunk(
   "rating/getRatingCompany",
   async (idCompany) => {
     return axios
-      .get(`${baseURL}/api/r2s/rate/?id=${idCompany}`)
+      .get(`${baseURL}/api/r2s/rate/company/${idCompany}`)
       .then((res) => {
         return res.data.score;
       })

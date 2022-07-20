@@ -46,7 +46,6 @@ function a11yProps(index) {
 export default function FilterPanelHome({ jobList, indexCardActive }) {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
-
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>

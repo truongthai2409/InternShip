@@ -53,7 +53,7 @@ const DetailCard = (props) => {
 
   useEffect(() => {
     dispatch(getJobList());
-  }, []);
+  }, [dispatch]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

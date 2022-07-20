@@ -7,10 +7,9 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import Box from "@mui/material/Box";
 import { Icon } from "@mui/material";
 import "./styles.scss";
-
+import moment from "moment";
 
 const JobCandidate = ({ job }) => {
-  console.log(job.name);
   return (
     <Box
       sx={{
@@ -32,14 +31,15 @@ const JobCandidate = ({ job }) => {
           id="job__candidate-infor-name"
           className="job__candidate-infor job__candidate-infor-name-job"
         >
-          {job.name}
+          {job?.name}
         </h4>
         <div className="job__candidate-infor job__candidate-infor-time">
           <Icon className="job__candidate-info-item-icon">
             <AccessTimeIcon fontSize="small" />
           </Icon>
           <h6 className="card-content-job-candidate">
-            {job.timeStartStr + "-" + job.timeEndStr}
+            {moment(job.timeStartStr).format("DD/MM/YYYY")} -{" "}
+            {moment(job.timeEndStr).format("DD/MM/YYYY")}
           </h6>
         </div>
 
@@ -47,24 +47,20 @@ const JobCandidate = ({ job }) => {
           <Icon className="job__candidate-info-item-icon">
             <WorkIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">{job.jobType.name}</h6>
+          <h6 className="card-content-job-candidate">{job.jobType}</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <CurrencyExchangeIcon fontSize="small" />
           </Icon>
 
-          <h6 className="card-content-job-candidate">{job.salaryMin} $</h6>
+          <h6 className="card-content-job-candidate">{job?.salaryMin} $</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <AddLocationIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">
-            {job.locationjob.address +
-              ", " +
-              job.locationjob.district.province.name}
-          </h6>
+          <h6 className="card-content-job-candidate">{job.locationjob}</h6>
         </div>
       </div>
     </Box>

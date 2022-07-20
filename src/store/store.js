@@ -10,6 +10,8 @@ import majorSlice from "./slices/Admin/major/majorSlice";
 import jobSlice from "./slices/main/home/job/jobSlice";
 import ratingSlice from "./slices/main/home/rating/rating";
 import markJobSlice from "./slices/main/mark/markSlice";
+import applySlice from "./slices/main/candidate/apply/applySlice";
+import infoCandidateSlice from "./slices/main/candidate/info/infoCandidateSlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +26,8 @@ const store = configureStore({
     job: jobSlice.reducer,
     rating: ratingSlice.reducer,
     mark: markJobSlice.reducer,
+    apply: applySlice.reducer,
+    infoCandidate: infoCandidateSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
