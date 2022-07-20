@@ -7,7 +7,7 @@ import { useState } from "react";
 const CustomInput = ({
   label,
   id,
-  type = "text",
+  type,
   placeholder,
   children,
   register,
@@ -19,7 +19,6 @@ const CustomInput = ({
 }) => {
 
   const [isHide, setIsHide] = useState(false)
-  const [typeInput, setTypeInput] = useState(type)
   const handleHide = () => {
       setIsHide(!isHide)
   };

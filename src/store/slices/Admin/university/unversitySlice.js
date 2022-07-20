@@ -64,8 +64,12 @@ export const addUniversity = createAsyncThunk(
     console.log(data);
     const { partnerData } = data;
     console.log("univerSity", partnerData);
-    const res = await api
-      .post(`${baseURL}/api/r2s/partner/university/create`, partnerData)
+    const res = await axios
+      .post(`${baseURL}/api/r2s/partner/university/create`, partnerData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         return res;
       })

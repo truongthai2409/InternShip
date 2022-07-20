@@ -17,10 +17,6 @@ import {
 import MainLayout from "./Layouts/Main";
 import HRLayOut from "./Layouts/HR";
 import { RegisterStep1 } from "./pages/Register";
-import CandidateInfo from "./pages/Register/RegisterStep3/CandidateInfo";
-import HRInfo from "./pages/Register/RegisterStep3/HRInfo";
-import ViewList from "./pages/Main/Candidate/ViewList";
-import SaveProfile from "./pages/Main/Candidate/SaveProfile";
 import CandidateLayOut from "./Layouts/Candidate";
 import PartnerLayout from "./Layouts/Partner";
 

@@ -28,49 +28,44 @@ const PartnerInfo = () => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
     console.log(data);
     console.log("test");
-    console.log(data.avatar[0].File);
-    console.log(JSON.stringify(data.avatar[0]));
+    console.log(data.avatar[0]);
     const partnerData = {
+      university: JSON.stringify({
+        name: "Truong Dai hoc Bach Khoa Ho Chi Minh",
+        shortName: "HCMUT",
+        email: data.email,
+        description: data.description,
+        website: "hcmut.uthcm",
+        phone: data.phone,
+        majors: [],
+        location: [
+          {
+            district: {
+              id: 2,
+            },
+            address: "HCM",
+            note: "Truong Top 1 VN",
+          },
+        ],
+      }),
       avatarUser: data.avatar[0],
       logo: data.logo[0],
-      university: {
-        university: {
-          name: "Truong Dai hoc Bach Khoa Ho Chi Minh",
-          shortName: "HCMUT",
-          email: data.email,
-          description: data.description,
-          website: "hcmut.uthcm",
+      partner: JSON.stringify({
+        position: "quản lý",
+        userCreationDTO: {
+          username: data.username,
+          password: data.password,
+          confirmPassword: data.passwordConfirmation,
+          firstName: data.firstName,
+          lastName: data.lastName,
           phone: data.phone,
-          majors: [],
-          location: [
-            {
-              district: {
-                id: 2,
-              },
-              address: "HCM",
-              note: "Truong Top 1 VN",
-            },
-          ],
-        },
-      },
-      partner: {
-        partner: {
-          position: "quản lý",
-          userCreationDTO: {
-            username: data.username,
-            password: data.password,
-            confirmPassword: data.confirmPassword,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-            gender: parseInt(data.gender),
-            email: data.email,
-            role: {
-              id: 4,
-            },
+          gender: parseInt(data.gender),
+          email: data.email,
+          role: {
+            id: 4,
           },
         },
-      },
+      }),
     };
     console.log(partnerData);
 
@@ -142,22 +137,22 @@ const PartnerInfo = () => {
         <div className="reg-partner__form--name">
           <CustomInput
             label="Họ"
-            id="lastname"
+            id="lastName"
             type="text"
             placeholder="Họ..."
             register={register}
           >
-            {errors.lastname?.message}
+            {errors.lastName?.message}
           </CustomInput>
 
           <CustomInput
             label="Tên"
-            id="firstname"
+            id="firstName"
             type="text"
             placeholder="Tên..."
             register={register}
           >
-            {errors.firstname?.message}
+            {errors.firstName?.message}
           </CustomInput>
         </div>
 

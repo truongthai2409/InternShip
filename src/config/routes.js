@@ -23,6 +23,8 @@ import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
 import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
 import CandidateHome from "src/pages/Main/Candidate/Home";
 import PartnerHome from "src/pages/Main/Partner/Home";
+import Profile from "src/components/Profile";
+import PartnerPost from "src/pages/Main/Partner/Post";
 
 export const adminRouter = [
   {
@@ -87,15 +89,19 @@ export const mainRouter = [
 // hr router
 export const hrRouter = [
   {
-    path: "/hr",
+    path: "",
     Component: HR,
+  },
+  {
+    path: "profile",
+    Component: Profile,
   },
   {
     path: "/hr/post",
     Component: HRPost,
   },
   {
-    path: "/hr/post/list",
+    path: "list",
     Component: HRPostList,
   },
   {
@@ -104,7 +110,7 @@ export const hrRouter = [
   },
 ];
 
-// hr router
+// candidate router
 export const candidateRouter = [
   {
     path: "/candidate",
@@ -127,12 +133,18 @@ export const candidateRouter = [
 //partner router
 export const partnerRouter = [
   {
-    path: '/partner',
+    path: "/partner",
     Component: PartnerHome,
   },
-
-]
-
+  {
+    path: "/partner/post",
+    Component: PartnerPost,
+  },
+  {
+    path: "/partner/post-list",
+    Component: PartnerHome,
+  },
+];
 
 // register router
 export const registerRouter = [

@@ -15,9 +15,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
+
   if (status === "success") {
-    navigate("/");
+    const role = JSON.parse(localStorage.getItem("userPresent")).role
+    switch(role){
+      case "HR":
+        navigate(`/hr`, {replace:true});
+        break;
+      default:
+        navigate(`/candidate`, {replace:true});
+    }
   }
+
   const {
     register,
     handleSubmit,
