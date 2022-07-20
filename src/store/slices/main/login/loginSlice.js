@@ -8,7 +8,7 @@ const loginSlice = createSlice({
   initialState: {
     status: "idle",
     user: {},
-    error: {},
+    error: {}
   },
   reducers: {},
   extraReducers: (builder) => {

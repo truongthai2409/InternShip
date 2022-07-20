@@ -8,7 +8,8 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 const AccountMenu = ({ linkImg }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,9 +21,10 @@ const AccountMenu = ({ linkImg }) => {
     setAnchorEl(null);
   };
 
-  const navigate = useNavigate();
+  const username = JSON.parse(localStorage.getItem("userPresent")).username;
+
   const handleLogout = () => {
-    localStorage.removeItem("userPresent")
+    localStorage.removeItem("userPresent");
   };
 
   return (
@@ -78,20 +80,28 @@ const AccountMenu = ({ linkImg }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar /> Thông tin cá nhân
-        </MenuItem>
+        <h4 className="title-signed">
+          Đã đăng nhập với <span>{username}</span>
+        </h4>
+        <Divider />
+        <Link style={{ color: "#111111" }} to="profile">
+          <MenuItem>
+            <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
+          </MenuItem>
+        </Link>
         <MenuItem>
           <Avatar /> Tài khoản của tôi
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleLogout}>
-          <Logout
-            fontSize="small"
-            sx={{ marginRight: "16px", color: "#888" }}
-          />
-          Đăng xuất
-        </MenuItem>
+        <Link style={{ color: "#111111" }} to="/" replace={true}>
+          <MenuItem onClick={handleLogout}>
+            <Logout
+              fontSize="small"
+              sx={{ marginRight: "16px", color: "#888" }}
+            />
+            Đăng xuất
+          </MenuItem>
+        </Link>
       </Menu>
     </React.Fragment>
   );

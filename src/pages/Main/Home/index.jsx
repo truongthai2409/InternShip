@@ -38,7 +38,7 @@ const Home = (props) => {
   };
 
   return (
-    <Grid className="wrapper" spacing={{ xs: 2 }} container>
+    <Grid className="wrapper" spacing={{ xs: 1 }} sx={{padding: "18px"}} container>
       <Grid item lg={2} md={3} sm={4} xs={12}>
         <SideBarHomeList />
       </Grid>

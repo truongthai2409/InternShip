@@ -30,6 +30,8 @@ const HRInfo = () => {
   });
   const { companyList } = useSelector((state) => state.company);
 
+  console.log(companyList);
+
   useEffect(() => {
     dispatch(getCompanyList());
   }, [dispatch]);

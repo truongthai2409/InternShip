@@ -33,7 +33,7 @@ const PartnerInfo = () => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
     console.log(data);
     const partnerData = {
-      partner: JSON.stringify({
+      partner: {
         university: {
           name: "Truong ĐH TP HCM 124",
           shortName: "ABC",
@@ -50,7 +50,8 @@ const PartnerInfo = () => {
           majors: [],
           address: null
         },
-      }),
+        logo: null,
+      },
     };
 
     dispatch(addUniversity({ partnerData }));
