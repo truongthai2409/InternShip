@@ -2,17 +2,27 @@ import React from "react";
 
 import "./styles.scss";
 
-const Button = ({ name, IconBtnMui, onClick, bwidth, bheight, children }) => {
-  //console.log(iconBtn);
-
+const Button = ({
+  className,
+  name,
+  IconBtnMui,
+  onClick,
+  bwidth,
+  bheight,
+  fz,
+  children,
+  outline
+}) => {
   return (
     <>
       <button
-        className="button"
+        className={`button ${className ? className : ""}`}
         onClick={onClick}
         style={{
           width: bwidth ? `${bwidth}` : "",
           height: bheight ? `${bheight}` : "",
+          fontSize: fz ? fz : "",
+          outline: outline ? outline : ""
         }}
         type="submit"
       >

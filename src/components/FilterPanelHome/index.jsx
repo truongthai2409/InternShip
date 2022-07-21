@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
-import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 import moment from "moment";
-
-import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 
 function TabPanel(props) {
@@ -62,10 +59,10 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
             active={indexCardActive}
             index={index}
             key={job.id}
-            title={job.name}
+            title={job?.name}
             fontSize={10}
-            nameCompany={job.hr.company.name}
-            idCompany={job.hr.company.id}
+            nameCompany={job.hr.company?.name}
+            idCompany={job.hr.company?.id}
             tagName={[job.jobposition.name, "Full time"]}
             start={4.5}
             location="Hồ Chí Minh"

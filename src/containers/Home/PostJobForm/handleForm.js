@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { Link } from "react-router-dom";
 
 // yup validate form post job form
 export const schema = yup
