@@ -4,9 +4,11 @@ import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
 import UserCard from "src/components/UserCard";
 import { getMark } from "src/store/slices/main/mark/markSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 import "./styles.scss";
 
 const CandidateViewList = () => {
+  TabTitle("Danh sách ứng viên")
   const dispatch = useDispatch();
 
   const { careListCandidate } = useSelector((state) => state.mark);

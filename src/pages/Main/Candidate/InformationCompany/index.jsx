@@ -6,8 +6,10 @@ import Appreciate from "src/components/Appreciate";
 import { useSelector, useDispatch } from "react-redux";
 import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
 import './styles.scss';
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 function CandidateInformationCompany(props) {
+  TabTitle("Thông tin Công ty")
   const dispatch = useDispatch();
 
   // get global state from redux store

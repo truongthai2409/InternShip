@@ -4,6 +4,7 @@ import "./styles.scss";
 import CardPost from "../../../../components/CardPost";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const formatLocation = (location) => {
   return `${location.address}, ${location.district?.name}, 
@@ -11,6 +12,7 @@ const formatLocation = (location) => {
 };
 
 const HRPostList = (props) => {
+  TabTitle("Danh sách bài đăng | IT Internship JOBS")
   const dispatch = useDispatch();
   const { jobList } = useSelector((state) => state.job);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));

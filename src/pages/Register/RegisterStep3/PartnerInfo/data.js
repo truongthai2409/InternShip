@@ -82,6 +82,7 @@ export const schema = yup
       ),
     gender: yup.string().required("* Bạn phải chọn giới tính"),
     position: yup.string(),
+    schoolName: yup.string(),
     shortName: yup.string(),
     emailSchool: 
       yup.string()

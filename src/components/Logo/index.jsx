@@ -10,7 +10,6 @@ export default function Logo({ id }) {
     4: "Cộng tác viên"
   }
 
-
   return (
     <Link to="/" className="logo">
         <h1>ITInternshipJob</h1>

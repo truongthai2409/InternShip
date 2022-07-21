@@ -93,7 +93,7 @@ export const hrRouter = [
     Component: HR,
   },
   {
-    path: "profile",
+    path: "/hr/profile",
     Component: Profile,
   },
   {
@@ -101,7 +101,7 @@ export const hrRouter = [
     Component: HRPost,
   },
   {
-    path: "list",
+    path: "/hr/list",
     Component: HRPostList,
   },
   {

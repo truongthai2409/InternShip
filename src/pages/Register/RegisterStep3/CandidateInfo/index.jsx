@@ -16,8 +16,10 @@ import { genderList, schema } from "./data";
 import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
 import SelectCustom from "../../../../components/Select";
 import { registerCandidate } from "src/store/slices/main/register/registerSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const CandidateInfo = () => {
+  TabTitle("Đăng ký - Ứng viên")
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);

@@ -15,8 +15,10 @@ import { genderList, schema } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const HRInfo = () => {
+  TabTitle("Đăng ký - Nhà tuyển dụng")
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const errorMessage = useSelector(errorSelector);
