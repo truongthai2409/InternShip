@@ -9,6 +9,7 @@ const markJobSlice = createSlice({
   initialState: {
     status: "",
     careListCandidate: [],
+    careListOfPrivate: [],
   },
   extraReducers: (builder) => {
     builder.addCase(createMark.fulfilled, (state, action) => {
@@ -17,6 +18,9 @@ const markJobSlice = createSlice({
     });
     builder.addCase(getMark.fulfilled, (state, { payload }) => {
       state.careListCandidate = payload;
+    });
+    builder.addCase(getMarkByUserAndJob.fulfilled, (state, { payload }) => {
+      state.careListOfPrivate = payload;
     });
     builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
@@ -37,8 +41,22 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
     });
 });
 
+export const getMarkByUserAndJob = createAsyncThunk(
+  "mark/getMarkByUserAndJob",
+  async (userName) => {
+    return axios
+      .get(`${baseURL}/api/r2s/care-list/user/${userName}/`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
 export const createMark = createAsyncThunk("mark/createMark", async (data) => {
-  const res = await api
+  const res = await axios
     .post(`${baseURL}/api/r2s/care-list`, data)
     .then((res) => {
       return res;
@@ -50,12 +68,15 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
 });
 
 export const deleteMark = createAsyncThunk("mark/deleteMark", async (id) => {
-  const res = await api
-    .delete(`${baseURL}/api/r2s/care-list/${id}`)
+  const res = await axios
+    .delete(`http://localhost:8085/api/r2s/care-list/${id}`)
     .then((res) => {
+      console.log(res);
       return res;
     })
     .catch((error) => {
+      console.log(error);
+
       return error.response.data;
     });
   return res;

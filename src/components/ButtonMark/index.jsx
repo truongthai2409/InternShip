@@ -21,15 +21,15 @@ const ButtonMark = (props) => {
   useEffect(() => {
     dispatch(getJobByName(""));
     dispatch(getMark());
-  }, []);
+  }, [dispatch]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
-    // const isMark = careListCandidate.includes(
-    //   (job) => job.jobCare.id === props.jobId
-    // );
-
-    if (props.isMark === false) {
+    setMark(!mark);
+    if (props.isMark === true) {
+      await dispatch(deleteMark(props.jobId));
+      toast.success("Đã xóa mark thành công");
+    } else {
       const dataCareList = {
         candidateCare: {
           id: 1,
@@ -39,14 +39,9 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-      dispatch(createMark(dataCareList));
-      toast.success("Đã mark thành công");
-    } else {
-      dispatch(deleteMark(props.jobId));
-      toast.success("Đã xóa mark thành công");
-      // setMark(!mark);
+      await dispatch(createMark(dataCareList));
+      await toast.success("Đã mark thành công");
     }
-    console.log(careListCandidate);
   };
 
   return (
@@ -61,7 +56,7 @@ const ButtonMark = (props) => {
       className="buttonMark__wrapper"
       onClick={handleClickMarkJob}
     >
-      {props.isMark === true ? (
+      {props.isMark === false && mark === false ? (
         <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
       ) : (
         <BookmarkIcon

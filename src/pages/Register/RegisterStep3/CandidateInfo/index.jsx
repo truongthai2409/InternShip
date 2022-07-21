@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
+
 import "./styles.scss";
 import ArrowButton from "../../../../components/ArrowButton/index";
 import Button from "../../../../components/Button";
@@ -34,12 +36,6 @@ const CandidateInfo = () => {
 
   const status = useSelector(statusSelector);
 
-  if (status === "success") {
-    dispatch(notificationSlice.actions.successMess("Đăng ký thành công"));
-  } else if (status === "fail") {
-    dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"));
-  }
-
   const {
     register,
     handleSubmit,
@@ -69,11 +65,15 @@ const CandidateInfo = () => {
         },
       }),
     };
-    dispatch(registerCandidate(userData));
+    dispatch(registerCandidate({ userData, navigate }));
+
+    if (status === "success") {
+      toast.success("Đã đăng ký thành công");
+      navigate("/login");
+    } else if (status === "fail") {
+      toast.success("Có lỗi, vui lòng kiểm tra lại thông tin");
+    }
   };
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
 
   return (
     <div className="reg-candidate">

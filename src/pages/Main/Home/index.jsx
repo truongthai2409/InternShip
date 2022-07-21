@@ -10,7 +10,6 @@ import {
   getJobByName,
   getJobList,
 } from "../../../store/slices/main/home/job/jobSlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const Home = (props) => {
   const [valueSearch, setValueSearch] = useState("");
@@ -20,7 +19,6 @@ const Home = (props) => {
   const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-  const { provinceList } = useSelector((state) => state.location);
 
   useEffect(() => {
     dispatch(getJobByName(""));
@@ -38,7 +36,12 @@ const Home = (props) => {
   };
 
   return (
-    <Grid className="wrapper" spacing={{ xs: 1 }} sx={{padding: "18px"}} container>
+    <Grid
+      className="wrapper"
+      spacing={{ xs: 1 }}
+      sx={{ padding: "18px" }}
+      container
+    >
       <Grid item lg={2} md={3} sm={4} xs={12}>
         <SideBarHomeList />
       </Grid>

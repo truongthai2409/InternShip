@@ -12,19 +12,24 @@ import {
   updateIndexCardActive,
 } from "../../store/slices/main/home/job/jobSlice";
 import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
-import { getMark } from "src/store/slices/main/mark/markSlice";
+import {
+  getMark,
+  getMarkByUserAndJob,
+} from "src/store/slices/main/mark/markSlice";
 
 function CardHome(props) {
   const dispatch = useDispatch();
   const { rating } = useSelector((state) => state.rating);
-  const { careListCandidate } = useSelector((state) => state.mark);
-  let isMark;
+  const { careListCandidate, careListOfPrivate } = useSelector(
+    (state) => state.mark
+  );
+  var isMark = careListOfPrivate.filter((job) => job.jobCare.id === props.id);
+  const isMarkLength = isMark.length > 0 ? true : false;
   React.useEffect(() => {
     dispatch(getMark());
-  }, [dispatch]);
-  React.useEffect(() => {
-    isMark = careListCandidate.includes((job) => job.jobCare.id === props.id);
-  }, []);
+    dispatch(getMarkByUserAndJob("hoangtrungnhat"));
+  }, [dispatch, props.id]);
+
   React.useEffect(() => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
@@ -34,11 +39,11 @@ function CardHome(props) {
   React.useEffect(() => {
     dispatch(getRatingCompany(props.idCompany));
   }, [dispatch]);
+
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
   };
-
   return (
     <div
       onClick={handleClick}
@@ -78,7 +83,7 @@ function CardHome(props) {
           width="32px"
           fontSize="18px"
           jobId={props.id}
-          isMark={isMark}
+          isMark={isMarkLength}
         />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">
