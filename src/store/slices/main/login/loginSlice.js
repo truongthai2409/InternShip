@@ -8,7 +8,8 @@ const loginSlice = createSlice({
   initialState: {
     status: "idle",
     user: {},
-    error: {}
+    error: {},
+    profile: JSON.parse(localStorage.getItem("userPresent")) || {},
   },
   reducers: {},
   extraReducers: (builder) => {

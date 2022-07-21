@@ -11,6 +11,7 @@ const jobSlice = createSlice({
     jobListCompany: [],
     jobListName: [],
     indexCardActive: 0,
+    idJobActive: 0,
     jobDetail: {},
     jobPosition: [],
     status: "fail",

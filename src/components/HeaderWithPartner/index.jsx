@@ -15,7 +15,7 @@ import SearchResultHome from "../SearchResultHome";
 function HeaderWithPartner(props) {
   return (
     <div className="container-header__partner header__partner config">
-      {props.partner ? <Logo id={4} /> : <Logo id={3} />}
+      {props.partner ? <Logo id={4} /> : <Logo id={4} />}
       {props.partner ? (
         <div className="header__partner">
           <Link to="/partner/post/" className="header__partner-post">

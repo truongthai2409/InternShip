@@ -1,6 +1,5 @@
 import "./styles.scss";
 import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
 import { IconButton } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -10,29 +9,38 @@ import {
   createMark,
   deleteMark,
   getMark,
+  getMarkByUserAndJob,
 } from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 const ButtonMark = (props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const [mark, setMark] = useState(false);
 
   // get global state from redux store
-  const { careListCandidate } = useSelector((state) => state.mark);
+  const { careJob } = useSelector((state) => state.mark);
+  const { candidateInfoByUsername } = useSelector(
+    (state) => state.infoCandidate
+  );
+  const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
     dispatch(getJobByName(""));
     dispatch(getMark());
-  }, [dispatch]);
+    dispatch(getCandidateByUserName(profile.username));
+  }, [dispatch, profile.username]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
     setMark(!mark);
-    if (props.isMark === true) {
-      await dispatch(deleteMark(props.jobId));
-      toast.success("Đã xóa mark thành công");
-    } else {
+
+    if (props.isMark === false) {
       const dataCareList = {
         candidateCare: {
-          id: 1,
+          id: candidateInfoByUsername.id,
         },
         jobCare: {
           id: props.jobId,
@@ -40,10 +48,26 @@ const ButtonMark = (props) => {
         note: "Đây là công việc ưa thích của mình",
       };
       await dispatch(createMark(dataCareList));
-      await toast.success("Đã mark thành công");
+      toast.success("Đã mark thành công");
+    } else {
+      const dataByUserAndJob = {
+        userName: profile.username,
+        idJob: Number(props.jobId),
+      };
+      await dispatch(getMarkByUserAndJob(dataByUserAndJob));
+      await dispatch(deleteMark(careJob.id));
+      toast.success("Đã xóa mark thành công");
     }
   };
 
+  const handleLogin = async () => {
+    if (profile === {}) {
+      toast.success("Bạn cần đăng nhập để đánh dấu công việc");
+      await navigate("/");
+    } else {
+      await navigate("/candidate");
+    }
+  };
   return (
     <IconButton
       style={{
@@ -56,12 +80,19 @@ const ButtonMark = (props) => {
       className="buttonMark__wrapper"
       onClick={handleClickMarkJob}
     >
-      {props.isMark === false && mark === false ? (
-        <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+      {pathUrl === "/candidate" ? (
+        props.isMark === false && mark === false ? (
+          <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+        ) : (
+          <BookmarkIcon
+            className="buttonMark__isChecking"
+            style={{ fontSize: `${props.fontSize}` }}
+          />
+        )
       ) : (
-        <BookmarkIcon
-          className="buttonMark__isChecking"
+        <BookmarkBorderIcon
           style={{ fontSize: `${props.fontSize}` }}
+          onClick={handleLogin}
         />
       )}
     </IconButton>

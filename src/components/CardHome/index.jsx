@@ -14,6 +14,7 @@ import {
 import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
 import {
   getMark,
+  getMarkByUser,
   getMarkByUserAndJob,
 } from "src/store/slices/main/mark/markSlice";
 
@@ -23,11 +24,13 @@ function CardHome(props) {
   const { careListCandidate, careListOfPrivate } = useSelector(
     (state) => state.mark
   );
+  const { profile } = useSelector((state) => state.authentication);
+
   var isMark = careListOfPrivate.filter((job) => job.jobCare.id === props.id);
   const isMarkLength = isMark.length > 0 ? true : false;
   React.useEffect(() => {
     dispatch(getMark());
-    dispatch(getMarkByUserAndJob("hoangtrungnhat"));
+    dispatch(getMarkByUser(profile.username));
   }, [dispatch, props.id]);
 
   React.useEffect(() => {

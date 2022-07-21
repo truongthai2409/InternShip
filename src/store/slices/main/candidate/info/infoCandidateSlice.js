@@ -7,7 +7,8 @@ const baseURL = process.env.REACT_APP_API;
 const infoCandidateSlice = createSlice({
   name: "info_candidate",
   initialState: {
-    candidateInfo: {},
+    candidateInfoById: {},
+    candidateInfoByUsername: {},
   },
   extraReducers: (builder) => {
     // builder.addCase(createMark.fulfilled, (state, action) => {
@@ -15,7 +16,10 @@ const infoCandidateSlice = createSlice({
     //   // state.careListCandidate = action.payload;
     // });
     builder.addCase(getCandidateById.fulfilled, (state, { payload }) => {
-      state.candidateInfo = payload;
+      state.candidateInfoById = payload;
+    });
+    builder.addCase(getCandidateByUserName.fulfilled, (state, { payload }) => {
+      state.candidateInfoByUsername = payload;
     });
     // builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
     //   if (!payload?.data) {
@@ -30,6 +34,20 @@ export const getCandidateById = createAsyncThunk(
   async (id) => {
     return axios
       .get(`${baseURL}/api/r2s/admin/candidate/${id}`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getCandidateByUserName = createAsyncThunk(
+  "info_candidate/getCandidateByUserName",
+  async (name) => {
+    return axios
+      .get(`${baseURL}/api/r2s/admin/candidate/u/${name}`)
       .then((response) => {
         return response.data;
       })

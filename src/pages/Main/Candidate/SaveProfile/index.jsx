@@ -8,17 +8,17 @@ import { getCandidateById } from "src/store/slices/main/candidate/info/infoCandi
 const CandidateSaveProfile = () => {
   const dispatch = useDispatch();
 
-  const { candidateInfo } = useSelector((state) => state.infoCandidate);
+  const { candidateInfoById } = useSelector((state) => state.infoCandidate);
   useEffect(() => {
     dispatch(getCandidateById(1));
   }, [dispatch]);
 
-  console.log("candidate", candidateInfo);
+  console.log("candidate", candidateInfoById);
   return (
     <div className="candidate-save-profile__container">
       <div className="candidate-card-profile-container">
-        <CandidateProfile candidateInfo={candidateInfo} />
-        <ContactCandidate candidateInfo={candidateInfo} />
+        <CandidateProfile candidateInfoById={candidateInfoById} />
+        <ContactCandidate candidateInfoById={candidateInfoById} />
       </div>
     </div>
   );

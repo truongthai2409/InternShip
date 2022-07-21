@@ -18,11 +18,15 @@ import HRLayOut from "./Layouts/HR";
 import { RegisterStep1 } from "./pages/Register";
 import CandidateLayOut from "./Layouts/Candidate";
 import PartnerLayout from "./Layouts/Partner";
-import { lazy, Suspense } from "react";
-import Fallback from "./Fallback/Fallback";
+// import { lazy, Suspense } from "react";
+import Loading from "./Loading";
+import UnAuthenticatedGuard from "./guards/UnAuthenticatedGuard";
+import AuthenticatedGuard from "./guards/AuthenticatedGuard";
+import RegisterLayout from "./Layouts/Register";
+import LoginLayout from "./Layouts/Login";
 
-const RegisterLayout = lazy(() => import("./Layouts/Register/index"));
-const LoginLayout = lazy(() => import("./Layouts/Login/index"));
+// const RegisterLayout = lazy(() => import("./Layouts/Register/index"));
+// const LoginLayout = lazy(() => import("./Layouts/Login/index"));
 function App() {
   const renderAdminRouter = () => {
     return adminRouter.map(({ path, Component }, index) => {
@@ -81,12 +85,25 @@ function App() {
             <Route index element={<RegisterStep1 />} />
             {renderRegisterRouter()}
           </Route>
-
-          <Route path="/login" element={<LoginLayout />}></Route>
+          <Route
+            path="/login"
+            element={
+              <UnAuthenticatedGuard>
+                <LoginLayout />
+              </UnAuthenticatedGuard>
+            }
+          ></Route>
           <Route path="/hr" element={<HRLayOut />}>
             {renderHrRouter()}
           </Route>
-          <Route path="/candidate" element={<CandidateLayOut />}>
+          <Route
+            path="/candidate"
+            element={
+              <AuthenticatedGuard>
+                <CandidateLayOut />
+              </AuthenticatedGuard>
+            }
+          >
             {/* <Route index element={<HR />} /> */}
             {renderCandidateRouter()}
           </Route>
@@ -98,6 +115,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <Loading />
       <ToastContainer />
     </>
   );
