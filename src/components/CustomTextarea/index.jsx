@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react'
+import './styles.scss'
 
 const CustomTextarea = ({
   label,
@@ -9,7 +9,7 @@ const CustomTextarea = ({
   children,
   register,
   check = false,
-  requirementField = true,
+  requirementField = true
 }) => {
   return (
     <div className="custom-textarea">
@@ -20,8 +20,8 @@ const CustomTextarea = ({
       <div
         className={
           check
-            ? "custom-input__textarea-disabled"
-            : "custom-textarea__textfield"
+            ? 'custom-input__textarea-disabled'
+            : 'custom-textarea__textfield'
         }
       >
         <textarea
@@ -37,10 +37,10 @@ const CustomTextarea = ({
             {children || (
               <span
                 style={{
-                  marginTop: "2px",
-                  fontSize: "12px",
-                  fontStyle: "italic",
-                  color: "#999",
+                  marginTop: '2px',
+                  fontSize: '12px',
+                  fontStyle: 'italic',
+                  color: '#999'
                 }}
               >
                 (Tối đa 1500 ký tự)
@@ -51,7 +51,7 @@ const CustomTextarea = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CustomTextarea;
+export default CustomTextarea

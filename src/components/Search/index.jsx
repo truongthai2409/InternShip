@@ -1,7 +1,7 @@
-import React from "react";
-import { IconButton } from "@mui/material";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import "./styles.scss";
+import React from 'react'
+import { IconButton } from '@mui/material'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import './styles.scss'
 
 const Search = ({ placeholder, onChange }) => {
   return (
@@ -18,7 +18,7 @@ const Search = ({ placeholder, onChange }) => {
         </IconButton>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

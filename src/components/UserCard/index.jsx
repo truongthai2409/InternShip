@@ -1,6 +1,6 @@
-import React from "react";
-import Button from "../Button";
-import "./styles.scss";
+import React from 'react'
+import Button from '../Button'
+import './styles.scss'
 
 const UserCard = () => {
   return (
@@ -16,7 +16,7 @@ const UserCard = () => {
       <div className="user-card__info">
         <span>Việc làm đã lưu</span>
         <span>
-          {" "}
+          {' '}
           Xem lại danh sách những việc làm mà bạn đã lưu trước đó. Ứng tuyển
           ngay để không bỏ lỡ cơ hội nghề nghiệp dành cho bạn.
         </span>
@@ -30,7 +30,7 @@ const UserCard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserCard;
+export default UserCard

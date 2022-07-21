@@ -1,12 +1,12 @@
-import React from "react";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import React from 'react'
+import FacebookIcon from '@mui/icons-material/Facebook'
 
 const Contact = () => {
   const tabContents = [
-    "Trụ sở: Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, P.25, Quận Bình Thạnh, TP HCM",
-    "Văn phòng: A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP HCM",
-    "Hotline: 0919 365 363",
-  ];
+    'Trụ sở: Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, P.25, Quận Bình Thạnh, TP HCM',
+    'Văn phòng: A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP HCM',
+    'Hotline: 0919 365 363'
+  ]
   return (
     <div className="contact__container">
       <div>
@@ -63,7 +63,7 @@ const Contact = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

@@ -1,23 +1,23 @@
-import { useEffect } from "react";
-import Button from "../../../../components/Button";
-import "./styles.scss";
-import CardPost from "../../../../components/CardPost";
-import { useDispatch, useSelector } from "react-redux";
-import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
+import { useEffect } from 'react'
+import Button from '../../../../components/Button'
+import './styles.scss'
+import CardPost from '../../../../components/CardPost'
+import { useDispatch, useSelector } from 'react-redux'
+import { getJobListByUserId } from '../../../../store/slices/main/home/job/jobSlice'
 
-const formatLocation = (location) => {
+const formatLocation = location => {
   return `${location.address}, ${location.district?.name}, 
-    ${location.district?.province?.name}`;
-};
+    ${location.district?.province?.name}`
+}
 
-const HRPostList = (props) => {
-  const dispatch = useDispatch();
-  const { jobList } = useSelector((state) => state.job);
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+const HRPostList = props => {
+  const dispatch = useDispatch()
+  const { jobList } = useSelector(state => state.job)
+  const userPresent = JSON.parse(localStorage.getItem('userPresent'))
 
   useEffect(() => {
-    dispatch(getJobListByUserId(userPresent.idUser));
-  }, []);
+    dispatch(getJobListByUserId(userPresent.idUser))
+  }, [])
 
   // console.log(userPresent.idUser)
 
@@ -26,7 +26,7 @@ const HRPostList = (props) => {
       <div className="hrpost__list-bt">
         <Button name="ĐĂNG BÀI"></Button>
       </div>
-      {jobList.map((job) => (
+      {jobList.map(job => (
         <CardPost
           key={job.id}
           status={job.status}
@@ -40,7 +40,7 @@ const HRPostList = (props) => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default HRPostList;
+export default HRPostList

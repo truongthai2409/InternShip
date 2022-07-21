@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .reg-partner {
   width: 100%;
@@ -25,7 +25,7 @@
       border-radius: 6px;
     }
     .select-form {
-        margin: 20px 0;
+      margin: 20px 0;
     }
   }
 
@@ -45,12 +45,11 @@
   }
 
   .MuiFormControl-root.MuiFormControl-fullWidth.css-q8hpuo-MuiFormControl-root {
-    font-family: "Public Sans", sans-serif;
+    font-family: 'Public Sans', sans-serif;
     border: 1.6px solid $primary-color;
     border-radius: 5px;
     height: 60.5px !important;
   }
-
 }
 
 .section-input__container {

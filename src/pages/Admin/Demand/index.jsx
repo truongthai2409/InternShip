@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
-import DemandTable from "./DemandTable";
-import DemandForm from "../../../containers/Admin/DemandForm";
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
+import Modal from '../../../components/Modal'
+import DemandTable from './DemandTable'
+import DemandForm from '../../../containers/Admin/DemandForm'
 
 export default function Demand() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const handleSearch = (e) => {
-    console.log(e.target.value);
-  };
+  const handleSearch = e => {
+    console.log(e.target.value)
+  }
 
   const handleOpenModal = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   return (
     <>
@@ -34,6 +34,5 @@ export default function Demand() {
         <DemandForm isAdd={true} />
       </Modal>
     </>
-  );
+  )
 }
-

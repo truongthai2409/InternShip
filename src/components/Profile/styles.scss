@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .profile__wrapper {
   padding: 32px 200px 0 200px;
@@ -66,25 +66,25 @@
           font-size: 35px;
         }
 
-        >span {
-            margin-left: 8px; 
-            font-size: 18px;
-            font-weight: 300;
+        > span {
+          margin-left: 8px;
+          font-size: 18px;
+          font-weight: 300;
         }
       }
     }
 
     .profile__actions {
-        display: flex;
-        margin-top: 50px;
+      display: flex;
+      margin-top: 50px;
 
-        &-item {
-            display: flex;
-            align-items: center;
-            background-color: #DEDEDE;
-            padding: 4px 12px;
-            margin-right: 16px;
-        }
+      &-item {
+        display: flex;
+        align-items: center;
+        background-color: #dedede;
+        padding: 4px 12px;
+        margin-right: 16px;
+      }
     }
   }
 }

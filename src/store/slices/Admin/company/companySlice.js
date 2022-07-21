@@ -1,61 +1,61 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import notificationSlice from "../../notifications/notificationSlice";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import notificationSlice from '../../notifications/notificationSlice'
 
-const baseURL = process.env.REACT_APP_API;
+const baseURL = process.env.REACT_APP_API
 
 const companySlice = createSlice({
-  name: "company",
+  name: 'company',
   initialState: {
     companyList: [],
     companyDetail: {},
     companyDetail1: {},
-    error: [],
+    error: []
   },
   reducer: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
-      state.companyList = payload;
+      state.companyList = payload
       if (payload.length > 0) {
-        state.companyDetail1 = payload[0];
+        state.companyDetail1 = payload[0]
       } else {
       }
-    });
+    })
     builder.addCase(addCompany.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
-        state.error = payload;
+        state.error = payload
       }
-    });
+    })
     builder.addCase(getCompanyDetail.fulfilled, (state, { payload }) => {
-      state.companyDetail = payload;
-    });
+      state.companyDetail = payload
+    })
     builder.addCase(updateCompanyInfo.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
-        state.error = payload;
+        state.error = payload
       }
-    });
-  },
-});
+    })
+  }
+})
 
-export default companySlice;
+export default companySlice
 
 /**
  * get company list
  * @returns company list
  */
 export const getCompanyList = createAsyncThunk(
-  "company/getCompanyList",
+  'company/getCompanyList',
   async () => {
     return await axios
       .get(`${baseURL}/api/company`)
-      .then((response) => {
-        return response.data;
+      .then(response => {
+        return response.data
       })
-      .catch((error) => {
-        return error.response.data;
-      });
+      .catch(error => {
+        return error.response.data
+      })
   }
-);
+)
 
 /**
  * Add company
@@ -64,38 +64,38 @@ export const getCompanyList = createAsyncThunk(
  */
 
 export const addCompany = createAsyncThunk(
-  "company/addCompany",
+  'company/addCompany',
   async (data, thunkAPI) => {
-    const { companyData, reset } = data;
+    const { companyData, reset } = data
     return axios
       .post(`${baseURL}/api/company`, companyData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
+          'Content-Type': 'multipart/form-data'
+        }
       })
-      .then((response) => {
+      .then(response => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Thêm công ty thành công")
-        );
+          notificationSlice.actions.successMess('Thêm công ty thành công')
+        )
         reset({
-          description: "",
-          email: "",
+          description: '',
+          email: '',
           // logo: image,
-          name: "",
-          phone: "",
-          tax: "",
-          website: "",
-        });
+          name: '',
+          phone: '',
+          tax: '',
+          website: ''
+        })
         // return response.data;
       })
-      .catch((error) => {
+      .catch(error => {
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Thêm công ty khoong thành công")
-        );
-        return error.response.data;
-      });
+          notificationSlice.actions.errorMess('Thêm công ty khoong thành công')
+        )
+        return error.response.data
+      })
   }
-);
+)
 
 /**
  * get company detail by comId
@@ -103,18 +103,18 @@ export const addCompany = createAsyncThunk(
  * @return company detail
  */
 export const getCompanyDetail = createAsyncThunk(
-  "company/getCompanyDetail",
-  async (comId) => {
+  'company/getCompanyDetail',
+  async comId => {
     return await axios
       .get(`${baseURL}/api/company/${comId}`)
-      .then((response) => {
-        return response.data;
+      .then(response => {
+        return response.data
       })
-      .catch((error) => {
-        return error.response.data;
-      });
+      .catch(error => {
+        return error.response.data
+      })
   }
-);
+)
 
 /**
  * @params comId updateData
@@ -123,53 +123,53 @@ export const getCompanyDetail = createAsyncThunk(
  * error => error.response.data
  */
 export const updateCompanyInfo = createAsyncThunk(
-  "company/updateCompanyInfo",
+  'company/updateCompanyInfo',
   async (updateData, thunkAPI) => {
-    const { companyData, setIsEdit, comid } = updateData;
-    console.log(companyData);
+    const { companyData, setIsEdit, comid } = updateData
+    console.log(companyData)
     return axios
       .put(`${baseURL}/api/company/${comid}`, companyData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => {
-        thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Cập nhật công ty thành công")
-        );
-        if (setIsEdit) {
-          setIsEdit(false);
+          'Content-Type': 'multipart/form-data'
         }
       })
-      .catch((error) => {
+      .then(response => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess('Cập nhật công ty thành công')
+        )
+        if (setIsEdit) {
+          setIsEdit(false)
+        }
+      })
+      .catch(error => {
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess(
-            "Cập nhật công ty Không thành công"
+            'Cập nhật công ty Không thành công'
           )
-        );
-        console.log(error.response);
-        return error.response.data;
-      });
+        )
+        console.log(error.response)
+        return error.response.data
+      })
   }
-);
+)
 
 export const deleteCompany = createAsyncThunk(
-  "university/deleteCompany",
+  'university/deleteCompany',
   async (id, thunkAPI) => {
     return await axios
       .delete(`${baseURL}/api/company/${id}`)
-      .then((response) => {
+      .then(response => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Xóa công ty thành công.")
-        );
-        return response.data;
+          notificationSlice.actions.successMess('Xóa công ty thành công.')
+        )
+        return response.data
       })
-      .catch((error) => {
+      .catch(error => {
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Xóa công ty không thành công.")
-        );
-        console.log(error.response);
-        return error.response.data;
-      });
+          notificationSlice.actions.errorMess('Xóa công ty không thành công.')
+        )
+        console.log(error.response)
+        return error.response.data
+      })
   }
-);
+)

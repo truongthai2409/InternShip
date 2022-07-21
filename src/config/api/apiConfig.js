@@ -1,22 +1,22 @@
-import axios from "axios";
+import axios from 'axios'
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API,
-});
+  baseURL: process.env.REACT_APP_API
+})
 
-api.interceptors.request.use(async (config) => config);
+api.interceptors.request.use(async config => config)
 
 api.interceptors.response.use(
-  (response) => {
+  response => {
     if (response && response.data) {
-      return response.data;
+      return response.data
     }
 
-    return response;
+    return response
   },
-  (error) => {
-    throw error;
+  error => {
+    throw error
   }
-);
+)
 
-export default api;
+export default api

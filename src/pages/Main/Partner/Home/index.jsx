@@ -1,6 +1,6 @@
 import React from 'react'
-import Home from '../../Home';
-import './styles.scss';
+import Home from '../../Home'
+import './styles.scss'
 
 const PartnerHome = () => {
   return (

@@ -1,45 +1,45 @@
-import React, { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Avatar, Grid, Switch } from "@mui/material";
+import React, { useState, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Avatar, Grid, Switch } from '@mui/material'
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import CustomTextarea from "../../../components/CustomTextarea";
-import Button from "../../../components/Button";
-import cameraLogo from "../../../assets/img/camera.png";
-import Select from "../../../components/Select";
-import { schema, renderControlAction, roleOptions } from "./script.js";
+import './styles.scss'
+import CustomInput from '../../../components/CustomInput'
+import CustomTextarea from '../../../components/CustomTextarea'
+import Button from '../../../components/Button'
+import cameraLogo from '../../../assets/img/camera.png'
+import Select from '../../../components/Select'
+import { schema, renderControlAction, roleOptions } from './script.js'
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
-const LocationForm = (props) => {
-  const { isAdd } = props;
+const LocationForm = props => {
+  const { isAdd } = props
 
-  const [image, setImage] = useState(cameraLogo);
-  const fileInput = useRef(null);
+  const [image, setImage] = useState(cameraLogo)
+  const fileInput = useRef(null)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
   // show preview image
-  const showPreviewImage = (e) => {
+  const showPreviewImage = e => {
     if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setImage(x.target.result);
-      };
-      reader.readAsDataURL(imageFile);
+      let imageFile = e.target.files[0]
+      const reader = new FileReader()
+      reader.onload = x => {
+        setImage(x.target.result)
+      }
+      reader.readAsDataURL(imageFile)
     }
-  };
+  }
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const universityData = {
       logo: data.logo[0],
       university: JSON.stringify({
@@ -49,9 +49,9 @@ const LocationForm = (props) => {
         name: data.name,
         phone: data.phone,
         shortName: data.shortName,
-        website: data.website,
-      }),
-    };
+        website: data.website
+      })
+    }
 
     // dispatch(
     //   addUniversity({
@@ -68,7 +68,7 @@ const LocationForm = (props) => {
     //     setImage: setImage(cameraLogo),
     //   })
     // );
-  };
+  }
 
   return (
     <form
@@ -140,7 +140,7 @@ const LocationForm = (props) => {
         </div>
       ) : null}
     </form>
-  );
-};
+  )
+}
 
-export default LocationForm;
+export default LocationForm

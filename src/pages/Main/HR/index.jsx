@@ -1,12 +1,10 @@
-import React from "react";
-import Home from "../Home";
+import React from 'react'
+import Home from '../Home'
 
-const HR = (props) => {
-  return (
-      <Home></Home>
-  );
-};
+const HR = props => {
+  return <Home></Home>
+}
 
-HR.propTypes = {};
+HR.propTypes = {}
 
-export default HR;
+export default HR

@@ -1,58 +1,52 @@
-import * as React from "react";
-import TagName from "../TagName";
-import "./styles.scss";
-import Rating from "@mui/material/Rating";
-import ButtonMark from "../ButtonMark";
-import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
-import clsx from "clsx";
-import { useDispatch, useSelector } from "react-redux";
+import * as React from 'react'
+import TagName from '../TagName'
+import './styles.scss'
+import Rating from '@mui/material/Rating'
+import ButtonMark from '../ButtonMark'
+import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded'
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined'
+import clsx from 'clsx'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   updateIdJobActive,
-  updateIndexCardActive,
-} from "../../store/slices/main/home/job/jobSlice";
-import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
-import {
-  getMark,
-  getMarkByUser,
-  getMarkByUserAndJob,
-} from "src/store/slices/main/mark/markSlice";
+  updateIndexCardActive
+} from '../../store/slices/main/home/job/jobSlice'
+import { getRatingCompany } from 'src/store/slices/main/home/rating/rating'
+import { getMark, getMarkByUser } from 'src/store/slices/main/mark/markSlice'
 
 function CardHome(props) {
-  const dispatch = useDispatch();
-  const { rating } = useSelector((state) => state.rating);
-  const { careListCandidate, careListOfPrivate } = useSelector(
-    (state) => state.mark
-  );
-  const { profile } = useSelector((state) => state.authentication);
+  const dispatch = useDispatch()
+  const { rating } = useSelector(state => state.rating)
+  const { careListOfPrivate } = useSelector(state => state.mark)
+  const { profile } = useSelector(state => state.authentication)
 
-  var isMark = careListOfPrivate.filter((job) => job.jobCare.id === props.id);
-  const isMarkLength = isMark.length > 0 ? true : false;
+  var isMark = careListOfPrivate.filter(job => job.jobCare.id === props.id)
+  const isMarkLength = isMark.length > 0 ? true : false
   React.useEffect(() => {
-    dispatch(getMark());
-    dispatch(getMarkByUser(profile.username));
-  }, [dispatch, props.id]);
+    dispatch(getMark())
+    dispatch(getMarkByUser(profile.username))
+  }, [dispatch, profile.username])
 
   React.useEffect(() => {
     if (props.index === 0) {
-      dispatch(updateIdJobActive(props.id));
+      dispatch(updateIdJobActive(props.id))
     }
-  }, [dispatch]);
+  }, [dispatch])
 
   React.useEffect(() => {
-    dispatch(getRatingCompany(props.idCompany));
-  }, [dispatch]);
+    dispatch(getRatingCompany(props.idCompany))
+  }, [dispatch])
 
   const handleClick = () => {
-    dispatch(updateIndexCardActive(props.index));
-    dispatch(updateIdJobActive(props.id));
-  };
+    dispatch(updateIndexCardActive(props.index))
+    dispatch(updateIdJobActive(props.id))
+  }
   return (
     <div
       onClick={handleClick}
       className={clsx(
-        "cardHome__container",
-        props.active === props.index ? "active" : ""
+        'cardHome__container',
+        props.active === props.index ? 'active' : ''
       )}
       dataset={props.id}
     >
@@ -69,7 +63,7 @@ function CardHome(props) {
           </div>
         </div>
         <div className="cardHome__tagName">
-          {props.tagName.map((tag) => (
+          {props.tagName.map(tag => (
             <TagName key={tag} title={tag} />
           ))}
         </div>
@@ -106,7 +100,7 @@ function CardHome(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CardHome;
+export default CardHome

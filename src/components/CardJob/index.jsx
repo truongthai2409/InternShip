@@ -1,17 +1,17 @@
-import React from "react";
-import WorkIcon from "@mui/icons-material/Work";
-import PaymentsIcon from "@mui/icons-material/Payments";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import moment from "moment";
+import React from 'react'
+import WorkIcon from '@mui/icons-material/Work'
+import PaymentsIcon from '@mui/icons-material/Payments'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import moment from 'moment'
 
-import ButtonOutline from "../ButtonOutline";
-import "./styles.scss";
+import ButtonOutline from '../ButtonOutline'
+import './styles.scss'
 
 const CardJob = ({ jobCare }) => {
-  const formatSalary = (salary = "") => {
-    return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  };
+  const formatSalary = (salary = '') => {
+    return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
   return (
     <div className="card-job__container">
       <div className="card-job__info">
@@ -33,8 +33,8 @@ const CardJob = ({ jobCare }) => {
             <div className="card-job__company-salary">
               <PaymentsIcon />
               <span className="card-job-text">
-                {" "}
-                {formatSalary(jobCare.jobCare.salaryMin)} -{" "}
+                {' '}
+                {formatSalary(jobCare.jobCare.salaryMin)} -{' '}
                 {formatSalary(jobCare.jobCare.salaryMax)}
               </span>
             </div>
@@ -51,8 +51,8 @@ const CardJob = ({ jobCare }) => {
         <div className="card-job__deadline">
           <AccessTimeIcon />
           <span>
-            {moment(jobCare.jobCare.timeStartStr).format("DD/MM/YYYY")} -{" "}
-            {moment(jobCare.jobCare.timeEndStr).format("DD/MM/YYYY")}
+            {moment(jobCare.jobCare.timeStartStr).format('DD/MM/YYYY')} -{' '}
+            {moment(jobCare.jobCare.timeEndStr).format('DD/MM/YYYY')}
           </span>
         </div>
         <div className="card-job__send-cv">
@@ -60,7 +60,7 @@ const CardJob = ({ jobCare }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardJob;
+export default CardJob

@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
-import Button from "../Button";
-import Logo from "../Logo";
-import SearchResultHome from "../SearchResultHome";
-import "./styles.scss";
+import Button from '../Button'
+import Logo from '../Logo'
+import SearchResultHome from '../SearchResultHome'
+import './styles.scss'
 
 function Header(props) {
   return (
@@ -19,9 +19,9 @@ function Header(props) {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-Header.propTypes = {};
+Header.propTypes = {}
 
-export default Header;
+export default Header

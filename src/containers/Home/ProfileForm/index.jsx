@@ -1,23 +1,21 @@
-import "./styles.scss";
-import Button from "src/components/Button";
-import ButtonOutline from "src/components/ButtonOutline";
-import CustomInput from "src/components/CustomInput";
-import { useForm } from "react-hook-form";
-import { schema } from "./validateForm";
-import { yupResolver } from "@hookform/resolvers/yup";
-import SelectCustom from "src/components/Select";
+import './styles.scss'
+import Button from 'src/components/Button'
+import ButtonOutline from 'src/components/ButtonOutline'
+import CustomInput from 'src/components/CustomInput'
+import { useForm } from 'react-hook-form'
+import { schema } from './validateForm'
+import { yupResolver } from '@hookform/resolvers/yup'
+import SelectCustom from 'src/components/Select'
 
 const ProfileForm = ({ onClick }) => {
-  const options = [{ id: 1, name: "chê" }];
+  const options = [{ id: 1, name: 'chê' }]
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    formState: { errors }
+  } = useForm({ resolver: yupResolver(schema) })
 
-  const onSubmit = (data) => {
-    
-  };
+  const onSubmit = data => {}
 
   return (
     <>
@@ -69,7 +67,7 @@ const ProfileForm = ({ onClick }) => {
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />
-          <span style={{ margin: "0 4px" }}></span>
+          <span style={{ margin: '0 4px' }}></span>
           <ButtonOutline
             name="Hủy"
             onClick={onClick}
@@ -82,7 +80,7 @@ const ProfileForm = ({ onClick }) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default ProfileForm;
+export default ProfileForm

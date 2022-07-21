@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import CardJob from "src/components/CardJob";
-import FeedBack from "src/components/FeedBack";
-import UserCard from "src/components/UserCard";
-import { getMark } from "src/store/slices/main/mark/markSlice";
-import "./styles.scss";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import CardJob from 'src/components/CardJob'
+import FeedBack from 'src/components/FeedBack'
+import UserCard from 'src/components/UserCard'
+import { getMark } from 'src/store/slices/main/mark/markSlice'
+import './styles.scss'
 
 const CandidateViewList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { careListCandidate } = useSelector((state) => state.mark);
+  const { careListCandidate } = useSelector(state => state.mark)
   useEffect(() => {
-    dispatch(getMark());
-  }, [dispatch]);
+    dispatch(getMark())
+  }, [dispatch])
   return (
     <div className="view-list">
       <div className="view-list__container">
         <div className="view-list__job-card">
-          {careListCandidate.map((jobCare) => (
+          {careListCandidate.map(jobCare => (
             <CardJob key={jobCare.id} jobCare={jobCare} />
           ))}
         </div>
@@ -27,7 +27,7 @@ const CandidateViewList = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CandidateViewList;
+export default CandidateViewList

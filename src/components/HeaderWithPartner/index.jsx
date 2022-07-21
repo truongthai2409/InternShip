@@ -1,16 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import AddCardIcon from "@mui/icons-material/AddCard";
-import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import PropTypes from "prop-types";
-import Logo from "../Logo";
-import "./styles.scss";
-import SearchResultHome from "../SearchResultHome";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined'
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify'
+import SettingsIcon from '@mui/icons-material/Settings'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AddCardIcon from '@mui/icons-material/AddCard'
+import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined'
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
+import PropTypes from 'prop-types'
+import Logo from '../Logo'
+import './styles.scss'
+import SearchResultHome from '../SearchResultHome'
 
 function HeaderWithPartner(props) {
   return (
@@ -24,7 +24,9 @@ function HeaderWithPartner(props) {
           </Link>
           <Link to="/partner/post/list/" className="header__partner-post">
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
-            <span className="header__partner-post-post">Danh sách bài đăng</span>
+            <span className="header__partner-post-post">
+              Danh sách bài đăng
+            </span>
           </Link>
         </div>
       ) : null}
@@ -73,12 +75,12 @@ function HeaderWithPartner(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 HeaderWithPartner.propTypes = {
   idMark: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  idNoti: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+  idNoti: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
 
-export default HeaderWithPartner;
+export default HeaderWithPartner

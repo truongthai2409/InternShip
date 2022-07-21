@@ -1,1 +1,1 @@
-export const notificationSelector = (state) => state.notification;
+export const notificationSelector = state => state.notification

@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .select {
   width: 100%;
@@ -59,6 +59,6 @@
 
 .field-requirment {
   color: red;
-  font-weight:700;
+  font-weight: 700;
   font-size: 16px;
 }

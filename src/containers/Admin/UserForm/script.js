@@ -1,5 +1,5 @@
-import * as yup from "yup";
-import { Link } from "react-router-dom";
+import * as yup from 'yup'
+import { Link } from 'react-router-dom'
 
 // yup validation for company table
 export const schema = yup
@@ -12,75 +12,75 @@ export const schema = yup
     // ),
     tenDangNhap: yup
       .string()
-      .required(" * Bạn phải nhập tên đăng nhập cho người dùng"),
+      .required(' * Bạn phải nhập tên đăng nhập cho người dùng'),
     matKhau: yup
       .string()
-      .required(" * Bạn phải nhập mật khẩu cho người dùng")
-      .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự")
+      .required(' * Bạn phải nhập mật khẩu cho người dùng')
+      .min(6, ' * Mật khẩu cần phải có ít nhất 6 ký tự')
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/,
-        "Vui lòng nhập lại mật khẩu"
+        'Vui lòng nhập lại mật khẩu'
       ),
     email: yup
-      .string(" * email không hợp lệ.")
+      .string(' * email không hợp lệ.')
       // .email(" * Ban nhap email khong dung")
       .matches(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-        " * Email khong hop le"
+        ' * Email khong hop le'
       )
-      .required(" * Bạn phải nhập email cho người dùng."),
+      .required(' * Bạn phải nhập email cho người dùng.'),
     sDT: yup
       .string()
-      .required(" * Bạn phải nhập tên số điện thoại cho người dùng.")
+      .required(' * Bạn phải nhập tên số điện thoại cho người dùng.')
       .matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        " * Số điện thoại không đúng."
+        ' * Số điện thoại không đúng.'
       ),
-    ten: yup.string().required(" * Bạn phải nhập tên."),
-    isAdmin: yup.boolean().required(" * Bạn phải chọn quyền cho người dùng."),
+    ten: yup.string().required(' * Bạn phải nhập tên.'),
+    isAdmin: yup.boolean().required(' * Bạn phải chọn quyền cho người dùng.')
   })
-  .required();
+  .required()
 
 // controll action
 const controlAction = [
   {
     id: 0,
-    name: "Quản lý bài đăng",
-    to: "#",
+    name: 'Quản lý bài đăng',
+    to: '#'
   },
   {
     id: 1,
-    name: "Xem bài đăng",
-    to: "#",
+    name: 'Xem bài đăng',
+    to: '#'
   },
   {
     id: 2,
-    name: "Thêm bài đăng",
-    to: "#",
-  },
-];
+    name: 'Thêm bài đăng',
+    to: '#'
+  }
+]
 
 // render control action
 export const renderControlAction = () => {
-  return controlAction.map((item) => {
+  return controlAction.map(item => {
     return (
       <li key={item.id}>
         <Link to={item.to} className="link">
           {item.name}
         </Link>
       </li>
-    );
-  });
-};
+    )
+  })
+}
 
 // role selectOptions
 export const roleOptions = [
   {
-    name: "Quan Tri",
-    value: true,
+    name: 'Quan Tri',
+    value: true
   },
   {
-    name: "Khach Hang",
-    value: false,
-  },
-];
+    name: 'Khach Hang',
+    value: false
+  }
+]

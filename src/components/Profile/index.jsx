@@ -1,23 +1,23 @@
-import "./styles.scss";
-import { Divider } from "@mui/material";
-import { useState } from "react";
-import ButtonOutline from "../ButtonOutline";
-import ProfileForm from "src/containers/Home/ProfileForm";
-import AttachEmailIcon from "@mui/icons-material/AttachEmail";
-import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
-import TransgenderIcon from "@mui/icons-material/Transgender";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import CustomInput from "../CustomInput";
+import './styles.scss'
+import { Divider } from '@mui/material'
+import { useState } from 'react'
+import ButtonOutline from '../ButtonOutline'
+import ProfileForm from 'src/containers/Home/ProfileForm'
+import AttachEmailIcon from '@mui/icons-material/AttachEmail'
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
+import TransgenderIcon from '@mui/icons-material/Transgender'
+import HandshakeIcon from '@mui/icons-material/Handshake'
+import SyncAltIcon from '@mui/icons-material/SyncAlt'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+import CustomInput from '../CustomInput'
 
 const Profile = () => {
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false)
 
   const handleShow = () => {
-    setIsUpdate(!isUpdate);
-  };
+    setIsUpdate(!isUpdate)
+  }
 
   const Infor = () => {
     return (
@@ -34,8 +34,8 @@ const Profile = () => {
           fz="14px"
         />
       </>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -85,21 +85,21 @@ const Profile = () => {
             </div>
           </div>
           <div className="profile__actions">
-            <ButtonOutline 
+            <ButtonOutline
               className="profile__actions-item"
               name="Cập nhật CV"
               icon={<SyncAltIcon />}
               outline="1.5px solid #DEDEDE"
               bg="#FFFFFF"
             />
-            <ButtonOutline 
+            <ButtonOutline
               className="profile__actions-item"
               name="Xem CV"
               icon={<RemoveRedEyeIcon />}
               outline="1.5px solid #DEDEDE"
               bg="#FFFFFF"
             />
-            <ButtonOutline 
+            <ButtonOutline
               className="profile__actions-item"
               name="Tải CV"
               icon={<FileDownloadIcon />}
@@ -110,7 +110,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

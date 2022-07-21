@@ -1,33 +1,33 @@
-import React from "react";
-import "./styles.scss";
-import CustomCheckbox from "../CustomCheckbox";
+import React from 'react'
+import './styles.scss'
+import CustomCheckbox from '../CustomCheckbox'
 
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import List from '@mui/material/List'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Collapse from '@mui/material/Collapse'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
 
-const ListCollapse = (props) => {
-  const [open, setOpen] = React.useState(false);
+const ListCollapse = props => {
+  const [open, setOpen] = React.useState(false)
 
   const handleClick = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
 
-  const spacing = props.spacing;
+  const spacing = props.spacing
 
   return (
     <List
       sx={{
-        width: "100%",
+        width: '100%',
         maxWidth: 360,
-        bgcolor: "background.paper",
-        borderRadius: "6px",
-        border: "0.5px solid #DEDEDE",
-        marginBottom: "20px",
+        bgcolor: 'background.paper',
+        borderRadius: '6px',
+        border: '0.5px solid #DEDEDE',
+        marginBottom: '20px'
       }}
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -47,10 +47,10 @@ const ListCollapse = (props) => {
                 </ListItemButton>
               </List>
             ))
-          : ""}
+          : ''}
       </Collapse>
     </List>
-  );
-};
+  )
+}
 
-export default ListCollapse;
+export default ListCollapse

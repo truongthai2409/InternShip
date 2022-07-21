@@ -1,11 +1,11 @@
-import React from "react";
-import { Paper } from "@mui/material";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Paper } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-import "./styles.scss";
+import './styles.scss'
 // import userLogo from "../../../assets/img/camera.png";
 // import CustomInput from "../../../components/CustomInput";
-import MajorForm from "../../../containers/Admin/MajorForm";
+import MajorForm from '../../../containers/Admin/MajorForm'
 
 const MajorDetail = () => {
   return (
@@ -20,7 +20,7 @@ const MajorDetail = () => {
         <MajorForm isAdd={false} />
       </Paper>
     </div>
-  );
-};
+  )
+}
 
-export default MajorDetail;
+export default MajorDetail

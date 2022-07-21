@@ -1,79 +1,79 @@
-import React, { useState } from "react";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
-import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
-import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
-import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import { Hidden } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import "./styles.scss";
-import CustomLink from "../CustomLink";
+import React, { useState } from 'react'
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'
+import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined'
+import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
+import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined'
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined'
+import { Hidden } from '@mui/material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import './styles.scss'
+import CustomLink from '../CustomLink'
 
 const sidebarLink = [
   {
-    title: "Tổng quan",
+    title: 'Tổng quan',
     list: [
       {
         id: 1,
-        to: "",
-        name: "Dashboard",
-        icon: AppsOutlinedIcon,
+        to: '',
+        name: 'Dashboard',
+        icon: AppsOutlinedIcon
       },
       {
         id: 2,
-        to: "statistical",
-        name: "Thống kê",
-        icon: AnalyticsOutlinedIcon,
-      },
-    ],
+        to: 'statistical',
+        name: 'Thống kê',
+        icon: AnalyticsOutlinedIcon
+      }
+    ]
   },
   {
-    title: "Quản lý chung",
+    title: 'Quản lý chung',
     list: [
       {
         id: 3,
-        to: "user",
-        name: "Tài khoản",
-        icon: AccountCircleOutlinedIcon,
+        to: 'user',
+        name: 'Tài khoản',
+        icon: AccountCircleOutlinedIcon
       },
       {
         id: 4,
-        to: "university",
-        name: "Trường học",
-        icon: SchoolOutlinedIcon,
+        to: 'university',
+        name: 'Trường học',
+        icon: SchoolOutlinedIcon
       },
       {
         id: 5,
-        to: "company",
-        name: "Công ty",
-        icon: BusinessOutlinedIcon,
+        to: 'company',
+        name: 'Công ty',
+        icon: BusinessOutlinedIcon
       },
       {
         id: 6,
-        to: "demand",
-        name: "Nhu cầu",
-        icon: ArticleOutlinedIcon,
-      },
-    ],
+        to: 'demand',
+        name: 'Nhu cầu',
+        icon: ArticleOutlinedIcon
+      }
+    ]
   },
   {
-    title: "Khác",
+    title: 'Khác',
     list: [
       {
         id: 7,
-        to: "major",
-        name: "Chuyên ngành",
-        icon: AccountCircleIcon,
-      },
-    ],
-  },
-];
+        to: 'major',
+        name: 'Chuyên ngành',
+        icon: AccountCircleIcon
+      }
+    ]
+  }
+]
 
 const Sidebar = () => {
   // render list link
-  const renderListLink = (list) => {
-    return list.map((item) => {
+  const renderListLink = list => {
+    return list.map(item => {
       return (
         <CustomLink to={item.to} key={item.id}>
           <div className="sidebar__link">
@@ -81,22 +81,22 @@ const Sidebar = () => {
             <p>{item.name}</p>
           </div>
         </CustomLink>
-      );
-    });
-  };
+      )
+    })
+  }
 
   // render sidebar item
   const renderSideberLink = () => {
-    return sidebarLink.map((item) => {
-      const { title, list } = item;
+    return sidebarLink.map(item => {
+      const { title, list } = item
       return (
         <div key={title}>
           <h5>{title}</h5>
           {renderListLink(list)}
         </div>
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <div className="sidebar">
@@ -107,7 +107,7 @@ const Sidebar = () => {
       </Hidden>
       <ul>{renderSideberLink()}</ul>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

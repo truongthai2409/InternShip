@@ -1,44 +1,44 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import api from "src/config/api/apiConfig";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
+import api from 'src/config/api/apiConfig'
 
-const baseURL = process.env.REACT_APP_API;
+const baseURL = process.env.REACT_APP_API
 
 const applySlice = createSlice({
-  name: "apply_candidate",
+  name: 'apply_candidate',
   initialState: {
-    status: "",
-    applyList: [],
+    status: '',
+    applyList: []
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // builder.addCase(createMark.fulfilled, (state, action) => {
     //   state.status = "success";
     //   // state.careListCandidate = action.payload;
     // });
     builder.addCase(getApplyList.fulfilled, (state, { payload }) => {
-      state.applyList = payload;
-    });
+      state.applyList = payload
+    })
     // builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
     //   if (!payload?.data) {
     //     state.error = payload;
     //   }
     // });
-  },
-});
+  }
+})
 
 export const getApplyList = createAsyncThunk(
-  "apply_candidate/getApply",
+  'apply_candidate/getApply',
   async () => {
     return axios
       .get(`${baseURL}/api/r2s/applylist`)
-      .then((response) => {
-        return response.data;
+      .then(response => {
+        return response.data
       })
-      .catch((error) => {
-        return error.response.data;
-      });
+      .catch(error => {
+        return error.response.data
+      })
   }
-);
+)
 
 // export const createMark = createAsyncThunk("mark/createMark", async (data) => {
 //   const res = await api
@@ -65,4 +65,4 @@ export const getApplyList = createAsyncThunk(
 // });
 
 // export const { addJob, removeJob } = markJobSlice.actions;
-export default applySlice;
+export default applySlice

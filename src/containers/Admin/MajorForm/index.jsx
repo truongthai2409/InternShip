@@ -1,69 +1,71 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Avatar, Grid, Switch } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Avatar, Grid, Switch } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation, useParams } from 'react-router-dom'
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import Button from "../../../components/Button";
-import { schemaMajor, renderControlAction } from "./script.js";
-import { addMajor, getMajorDetail, updateMajorInfo } from "../../../store/slices/Admin/major/majorSlice";
+import './styles.scss'
+import CustomInput from '../../../components/CustomInput'
+import Button from '../../../components/Button'
+import { schemaMajor, renderControlAction } from './script.js'
+import {
+  addMajor,
+  getMajorDetail,
+  updateMajorInfo
+} from '../../../store/slices/Admin/major/majorSlice'
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
-export default function MajorForm({isAdd,setOpen}) {
+export default function MajorForm({ isAdd, setOpen }) {
+  const { majorDetail } = useSelector(state => state.major)
+  const [isEdit, setIsEdit] = useState(isAdd)
+  const [nameMajor, setNameMajor] = useState('')
 
-  const { majorDetail } = useSelector((state) => state.major);
-  const [isEdit, setIsEdit] = useState(isAdd);
-  const [nameMajor, setNameMajor] = useState("");
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // get params from URL
-  const uniId = useParams();
+  const uniId = useParams()
   // console.log(uniId)
-  const location = useLocation();
+  const location = useLocation()
   // console.log(location.pathname.slice(13));
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+    setValue
   } = useForm({
-    resolver: yupResolver(schemaMajor),
-  });
+    resolver: yupResolver(schemaMajor)
+  })
 
-   const onSubmit = (data) => {
+  const onSubmit = data => {
     const majorData = {
-      name:data.name
+      name: data.name
     }
     if (isAdd) {
       dispatch(addMajor(majorData))
       setOpen(false)
-
     } else {
       const updateData = {
         majorData: {
           ...majorData,
-          id: parseInt(location.pathname.slice(13)),
+          id: parseInt(location.pathname.slice(13))
         },
 
-        setIsEdit,
-      };
-      dispatch(updateMajorInfo(updateData));
+        setIsEdit
+      }
+      dispatch(updateMajorInfo(updateData))
     }
-  };
-  
+  }
+
   /**
    * get major details
    */
   useEffect(() => {
     if (!isAdd) {
-      dispatch(getMajorDetail(location.pathname.slice(7)));
+      dispatch(getMajorDetail(location.pathname.slice(7)))
     }
-  }, [isAdd]);
+  }, [isAdd])
 
   /**
    * @dependency universityDetail
@@ -71,17 +73,16 @@ export default function MajorForm({isAdd,setOpen}) {
    */
   useEffect(() => {
     if (majorDetail) {
-      setValue("name", isAdd ? "" : majorDetail.name);
+      setValue('name', isAdd ? '' : majorDetail.name)
     }
-  }, [majorDetail]);
+  }, [majorDetail])
 
   // handle Submit form
-  
 
   // Click to Edit
   const handleOnClickEdit = () => {
-    setIsEdit(!isEdit);
-  };
+    setIsEdit(!isEdit)
+  }
 
   return (
     <form
@@ -142,5 +143,5 @@ export default function MajorForm({isAdd,setOpen}) {
         </div>
       ) : null}
     </form>
-  );
+  )
 }

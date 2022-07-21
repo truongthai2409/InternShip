@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
-import Rating from "@mui/material/Rating";
-import "./styles.scss";
-import JobCandidate from "../Job";
-import Grid from "@mui/material/Grid";
-import Button from "../Button";
-import { useSelector, useDispatch } from "react-redux";
-import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
-import { Link } from "react-router-dom";
-import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import React, { useEffect } from 'react'
+import Rating from '@mui/material/Rating'
+import './styles.scss'
+import JobCandidate from '../Job'
+import Grid from '@mui/material/Grid'
+import Button from '../Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { getRatingCompany } from 'src/store/slices/main/home/rating/rating'
+import { Link } from 'react-router-dom'
+import { getJobByCompany } from 'src/store/slices/main/home/job/jobSlice'
 
 function BaseInformationCompany(props) {
-  console.log(props.ml);
-  const dispatch = useDispatch();
-  const { rating } = useSelector((state) => state.rating);
-  const { jobListCompany } = useSelector((state) => state.job);
-  const idCompany = props.jobDetail?.hr?.company.id;
+  console.log(props.ml)
+  const dispatch = useDispatch()
+  const { rating } = useSelector(state => state.rating)
+  const { jobListCompany } = useSelector(state => state.job)
+  const idCompany = props.jobDetail?.hr?.company.id
   useEffect(() => {
-    dispatch(getRatingCompany(idCompany));
-    dispatch(getJobByCompany(idCompany));
-  }, [idCompany, dispatch]);
+    dispatch(getRatingCompany(idCompany))
+    dispatch(getJobByCompany(idCompany))
+  }, [idCompany, dispatch])
 
-  console.log("jobList", jobListCompany);
+  console.log('jobList', jobListCompany)
 
   return (
     <div className="">
@@ -66,7 +66,7 @@ function BaseInformationCompany(props) {
               <p>5.0 trong 48 lượt đánh giá</p>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>
@@ -87,7 +87,7 @@ function BaseInformationCompany(props) {
           sx={{
             paddingLeft: `${props.pl}px`,
             paddingRight: `${props.pr}px`,
-            marginLeft: `${props.ml}px`,
+            marginLeft: `${props.ml}px`
           }}
         >
           {/* {jobListCompany.map((job) => {
@@ -96,12 +96,12 @@ function BaseInformationCompany(props) {
             </Grid>;
           })} */}
           {jobListCompany.length > 0
-            ? jobListCompany.map((job) => (
+            ? jobListCompany.map(job => (
                 <Grid key={job.id} item lg="auto" md="auto" sm="auto" xs="auto">
                   <JobCandidate job={job} />
                 </Grid>
               ))
-            : ""}
+            : ''}
         </Grid>
       </div>
       <div className="button-card">
@@ -110,9 +110,9 @@ function BaseInformationCompany(props) {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-BaseInformationCompany.propTypes = {};
+BaseInformationCompany.propTypes = {}
 
-export default BaseInformationCompany;
+export default BaseInformationCompany

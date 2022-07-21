@@ -1,11 +1,8 @@
-import React from "react";
-import PostJobForm from "../../../../containers/Home/PostJobForm"
-
+import React from 'react'
+import PostJobForm from '../../../../containers/Home/PostJobForm'
 
 const HRPost = () => {
-    return (
-        <PostJobForm />
-    )
-};
+  return <PostJobForm />
+}
 
-export default HRPost;
+export default HRPost

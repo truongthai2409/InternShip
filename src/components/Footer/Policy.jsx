@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Policy = () => {
   return (
@@ -51,7 +51,7 @@ const Policy = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Policy;
+export default Policy

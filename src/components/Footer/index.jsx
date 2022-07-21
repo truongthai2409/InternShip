@@ -1,10 +1,10 @@
-import React from "react";
-import Contact from "./Contact";
-import Policy from "./Policy";
-import Category from "./Category";
-import CopyRight from "./CopyRight";
+import React from 'react'
+import Contact from './Contact'
+import Policy from './Policy'
+import Category from './Category'
+import CopyRight from './CopyRight'
 
-import "./styles.scss";
+import './styles.scss'
 
 const Footer = () => {
   return (
@@ -14,9 +14,9 @@ const Footer = () => {
           <div className="footer-wrapper">
             <section className="footer__first-section">
               <div id="first-section" className="elementor-row">
-              <div className="elementor-row-first-element">
-                <Contact />
-              </div>
+                <div className="elementor-row-first-element">
+                  <Contact />
+                </div>
                 <div className="elementor-row-two-element">
                   <Policy />
                   <Category />
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

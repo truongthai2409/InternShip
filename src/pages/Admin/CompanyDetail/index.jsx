@@ -1,11 +1,11 @@
-import React from "react";
-import { Paper, Grid, Avatar, Switch } from "@mui/material";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Paper, Grid, Avatar, Switch } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-import "./styles.scss";
+import './styles.scss'
 // import companyLogo from "../../../assets/img/camera.png";
 // import CustomInput from "../../../components/CustomInput";
-import CompanyForm from "../../../containers/Admin/CompanyForm";
+import CompanyForm from '../../../containers/Admin/CompanyForm'
 
 const CompanyDetail = () => {
   return (
@@ -20,7 +20,7 @@ const CompanyDetail = () => {
         <CompanyForm isAdd={false} />
       </Paper>
     </div>
-  );
-};
+  )
+}
 
-export default CompanyDetail;
+export default CompanyDetail

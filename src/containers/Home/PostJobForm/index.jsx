@@ -1,87 +1,85 @@
-import "./styles.scss";
-import WorkIcon from "@mui/icons-material/Work";
-import CustomInput from "../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import CustomTextarea from "../../../components/CustomTextarea";
-import "./styles.scss";
-import SwitchButton from "../../../components/SwitchButton";
-import Button from "../../../components/Button";
-import { schema } from "./handleForm";
-import SelectCustom from "../../../components/Select";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import './styles.scss'
+import WorkIcon from '@mui/icons-material/Work'
+import CustomInput from '../../../components/CustomInput/index'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import CustomTextarea from '../../../components/CustomTextarea'
+import './styles.scss'
+import SwitchButton from '../../../components/SwitchButton'
+import Button from '../../../components/Button'
+import { schema } from './handleForm'
+import SelectCustom from '../../../components/Select'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getMajorList } from 'src/store/slices/Admin/major/majorSlice'
 import {
   addJob,
-  getJobPositionList,
-} from "src/store/slices/main/home/job/jobSlice";
+  getJobPositionList
+} from 'src/store/slices/main/home/job/jobSlice'
 import {
   getDistrictList,
-  getProvinceList,
-} from "src/store/slices/location/locationSlice";
-import { useNavigate } from "react-router-dom";
+  getProvinceList
+} from 'src/store/slices/location/locationSlice'
+import { useNavigate } from 'react-router-dom'
 
+const PostJobForm = props => {
+  const { majorList } = useSelector(state => state.major)
+  const { provinceList, districtList } = useSelector(state => state.location)
+  const { jobPosition, status } = useSelector(state => state.job)
 
-
-const PostJobForm = (props) => {
-  const { majorList } = useSelector((state) => state.major);
-  const { provinceList, districtList } = useSelector((state) => state.location);
-  const { jobPosition, status } = useSelector((state) => state.job);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const userPresent = JSON.parse(localStorage.getItem('userPresent'))
 
   useEffect(() => {
-    dispatch(getMajorList());
-    dispatch(getProvinceList());
-    dispatch(getJobPositionList());
-  }, []);
+    dispatch(getMajorList())
+    dispatch(getProvinceList())
+    dispatch(getJobPositionList())
+  }, [])
 
   const jobTypeList = [
     {
       id: 1,
-      name: "Full time",
+      name: 'Full time'
     },
     {
       id: 2,
-      name: "Part time",
+      name: 'Part time'
     },
     {
       id: 3,
-      name: "Remote",
-    },
-  ];
+      name: 'Remote'
+    }
+  ]
 
   const countryList = [
     {
       id: 84,
-      name: "Việt Nam",
-    },
-  ];
+      name: 'Việt Nam'
+    }
+  ]
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const jobData = {
       name: data.name,
       hr: {
-        id: userPresent.idUser,
+        id: userPresent.idUser
       },
       desciption: data.jobDescription,
       major: {
-        id: parseInt(data.major),
+        id: parseInt(data.major)
       },
       jobType: {
-        id: parseInt(data.jobType),
+        id: parseInt(data.jobType)
       },
       amount: parseInt(data.amount),
       salaryMin: data.salaryMin,
@@ -95,17 +93,17 @@ const PostJobForm = (props) => {
       },
       locationjob: {
         district: {
-          id: data.district,
+          id: data.district
         },
         address: data.address,
-        note: "Không có",
-      },
-    };
-    dispatch(addJob(jobData));
-  };
+        note: 'Không có'
+      }
+    }
+    dispatch(addJob(jobData))
+  }
 
-  if (status === "success") {
-    navigate("/hr/post/list");
+  if (status === 'success') {
+    navigate('/hr/post/list')
   }
 
   return (
@@ -119,10 +117,12 @@ const PostJobForm = (props) => {
           <div className="form__container">
             <div className="hr-post__form">
               <div className="hr-post__heading">
-                <WorkIcon style={{ margin: "5px 5px 0 0" }} />
+                <WorkIcon style={{ margin: '5px 5px 0 0' }} />
                 <h2>Mô tả công việc</h2>
               </div>
-              <p className="title-requirement">(<span className="field-requirment"> * </span>)Trường bắt buộc</p>
+              <p className="title-requirement">
+                (<span className="field-requirment"> * </span>)Trường bắt buộc
+              </p>
               <div className="hr-post-title">
                 <CustomInput
                   label="Tên công việc"
@@ -200,8 +200,8 @@ const PostJobForm = (props) => {
                   {errors.timeEnd?.message}
                 </CustomInput>
               </div>
-              <div className={"row-3-col"}>
-                <div className={"hr-post__select-location"}>
+              <div className={'row-3-col'}>
+                <div className={'hr-post__select-location'}>
                   <SelectCustom
                     id="country"
                     label="Quốc gia"
@@ -212,7 +212,7 @@ const PostJobForm = (props) => {
                     {errors.country?.message}
                   </SelectCustom>
                 </div>
-                <div className={"hr-post__select-location"}>
+                <div className={'hr-post__select-location'}>
                   <SelectCustom
                     id="province"
                     label="Tỉnh/Thành phố"
@@ -225,7 +225,7 @@ const PostJobForm = (props) => {
                     {errors.province?.message}
                   </SelectCustom>
                 </div>
-                <div className={"hr-post__select-location"}>
+                <div className={'hr-post__select-location'}>
                   <SelectCustom
                     id="district"
                     label="Quận/Huyện"
@@ -237,7 +237,7 @@ const PostJobForm = (props) => {
                   </SelectCustom>
                 </div>
               </div>
-              <div className={"hr-post__select"}>
+              <div className={'hr-post__select'}>
                 <CustomInput
                   label="Địa chỉ"
                   id="address"
@@ -284,7 +284,9 @@ const PostJobForm = (props) => {
                 </CustomTextarea>
               </div>
               <div className="hr-post__salary">
-                <label htmlFor="">Trợ cấp<span className="field-requirment">*</span></label>
+                <label htmlFor="">
+                  Trợ cấp<span className="field-requirment">*</span>
+                </label>
                 <div className="hr-post__salary-range">
                   <CustomInput
                     id="salaryMin"
@@ -315,7 +317,7 @@ const PostJobForm = (props) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default PostJobForm;
+export default PostJobForm

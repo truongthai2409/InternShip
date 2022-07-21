@@ -1,4 +1,4 @@
-@use "../../../assets/styles/index.scss" as *;
+@use '../../../assets/styles/index.scss' as *;
 
 .form__container {
   margin: auto;
@@ -18,7 +18,7 @@
     margin-bottom: 200px;
 
     .custom-input .custom-input__textfield input {
-      font-family: "Public Sans", sans-serif;
+      font-family: 'Public Sans', sans-serif;
       border: 1.6px solid #666;
       border-radius: 2px;
       width: 100%;
@@ -33,7 +33,7 @@
     }
 
     .custom-input .custom-input__textfield textarea {
-      font-family: "Public Sans", sans-serif;
+      font-family: 'Public Sans', sans-serif;
       border: 1.6px solid #666 !important;
       border-radius: 2px;
       width: 100%;
@@ -90,7 +90,7 @@
         flex-basis: 49%;
       }
 
-      >div.custom-input {
+      > div.custom-input {
         flex-basis: 49%;
         margin: 0 !important;
 
@@ -112,7 +112,7 @@
       margin-bottom: 35px;
 
       textarea {
-        font-family: "Public Sans", sans-serif;
+        font-family: 'Public Sans', sans-serif;
         border: 1.6px solid #666;
         border-radius: 2px;
         height: 150px;
@@ -167,7 +167,7 @@ input#title {
 }
 
 label {
-  font-family: "Public Sans", sans-serif;
+  font-family: 'Public Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #29303b;
@@ -207,6 +207,6 @@ label {
 
 .field-requirment {
   color: red;
-  font-weight:700;
+  font-weight: 700;
   font-size: 16px;
 }

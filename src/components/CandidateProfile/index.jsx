@@ -1,13 +1,13 @@
-import React from "react";
-import "./styles.scss";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import ManIcon from "@mui/icons-material/Man";
-import SubjectIcon from "@mui/icons-material/Subject";
-import EditIcon from "@mui/icons-material/Edit";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import DownloadIcon from "@mui/icons-material/Download";
-import Button from "../Button";
+import React from 'react'
+import './styles.scss'
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
+import ManIcon from '@mui/icons-material/Man'
+import SubjectIcon from '@mui/icons-material/Subject'
+import EditIcon from '@mui/icons-material/Edit'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import DownloadIcon from '@mui/icons-material/Download'
+import Button from '../Button'
 
 const CandidateProfile = ({ candidateInfoById }) => {
   return (
@@ -34,7 +34,7 @@ const CandidateProfile = ({ candidateInfoById }) => {
             <div className="candidate-profile__card-phone">
               <LocalPhoneIcon />
               <span className="candidate-info-text">
-                {" "}
+                {' '}
                 {candidateInfoById.userDTO?.phone}
               </span>
             </div>
@@ -45,7 +45,7 @@ const CandidateProfile = ({ candidateInfoById }) => {
             <div className="candidate-profile__card-major">
               <SubjectIcon />
               <span className="candidate-info-text">
-                {" "}
+                {' '}
                 {candidateInfoById.userDTO?.careJobs}
               </span>
             </div>
@@ -74,7 +74,7 @@ const CandidateProfile = ({ candidateInfoById }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CandidateProfile;
+export default CandidateProfile

@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Button from "../Button";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import WorkIcon from "@mui/icons-material/Work";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import Rating from "@mui/material/Rating";
-import { Icon } from "@mui/material";
-import moment from "moment";
-import { Typography } from "@mui/material";
-const formatSalary = (salary = "") => {
-  return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-};
+import Button from '../Button'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
+import WorkIcon from '@mui/icons-material/Work'
+import AddLocationIcon from '@mui/icons-material/AddLocation'
+import Rating from '@mui/material/Rating'
+import { Icon } from '@mui/material'
+import moment from 'moment'
+import { Typography } from '@mui/material'
+const formatSalary = (salary = '') => {
+  return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+}
 
 const InformationCompany = ({ jobDetail }) => {
   return (
@@ -20,25 +20,25 @@ const InformationCompany = ({ jobDetail }) => {
         <div className="detail__card-3-item">
           <Typography
             variant="span"
-            sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+            sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
           >
             Mô tả công việc:
           </Typography>
           <p>{jobDetail.desciption}</p>
         </div>
         <div className="detail__card-3-item">
-          <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
+          <Typography variant="span" sx={{ fontSize: 16, fontWeight: '700' }}>
             Yêu cầu công việc:
           </Typography>
           <p>{jobDetail.requirement}</p>
         </div>
         <div className="detail__card-3-item">
-          <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
+          <Typography variant="span" sx={{ fontSize: 16, fontWeight: '700' }}>
             Thời hạn ứng tuyển:
           </Typography>
           <p>
-            {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
-            {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
+            {moment(jobDetail.timeStartStr).format('DD/MM/YYYY')} -{' '}
+            {moment(jobDetail.timeEndStr).format('DD/MM/YYYY')}
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@ const InformationCompany = ({ jobDetail }) => {
             <CurrencyExchangeIcon />
           </Icon>
           <h6 className="detail__card-4-item-info">
-            {formatSalary(jobDetail.salaryMin)} -{" "}
+            {formatSalary(jobDetail.salaryMin)} -{' '}
             {formatSalary(jobDetail.salaryMax)}
           </h6>
         </div>
@@ -79,13 +79,13 @@ const InformationCompany = ({ jobDetail }) => {
         <Button name="Ứng tuyển"></Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 InformationCompany.propTypes = {
   star: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   detailJob: PropTypes.string,
-  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
+  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
 
-export default InformationCompany;
+export default InformationCompany

@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import "./styles.scss";
+import React, { useState } from 'react'
+import './styles.scss'
 
 const ContactCandidate = () => {
-
-  const [checked, setChecked] = useState(1);
+  const [checked, setChecked] = useState(1)
   const listCV = [
     {
       id: 1,
-      value: "CV Online"
+      value: 'CV Online'
     },
     {
       id: 2,
-      value: "TopCV Profile"
+      value: 'TopCV Profile'
     }
   ]
   return (
@@ -25,25 +24,28 @@ const ContactCandidate = () => {
       <div className="accept-contact">
         <h3>Cho phép NTD liên hệ bạn qua</h3>
         <div className="select-contact">
-          {
-            listCV.map((list) => (
-              <div className="select-cv">
-                <input type="radio"
-                  checked={checked === list.id}
-                  onChange={() => setChecked(list.id)}
-                  className="input-contact-candidate"
-                />
-                {list.value}
-              </div>
-            ))
-          }
+          {listCV.map(list => (
+            <div className="select-cv">
+              <input
+                type="radio"
+                checked={checked === list.id}
+                onChange={() => setChecked(list.id)}
+                className="input-contact-candidate"
+              />
+              {list.value}
+            </div>
+          ))}
         </div>
         <div className="notice-mark">
-          <p>TopCV Profile của bạn đang hoàn thiện dưới 70% vui lòng cập nhật thêm thông tin hoặc chọn CV Online để nhà tuyển dụng có thể tiếp cận bạn</p>
+          <p>
+            TopCV Profile của bạn đang hoàn thiện dưới 70% vui lòng cập nhật
+            thêm thông tin hoặc chọn CV Online để nhà tuyển dụng có thể tiếp cận
+            bạn
+          </p>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ContactCandidate;
+export default ContactCandidate
