@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import api from 'src/config/api/apiConfig'
 
 const baseURL = process.env.REACT_APP_API
 
@@ -102,11 +101,9 @@ export const deleteMark = createAsyncThunk('mark/deleteMark', async data => {
   const res = await axios
     .delete(`${baseURL}/api/r2s/care-list/${data}`)
     .then(res => {
-      console.log(res)
       return res.data
     })
     .catch(error => {
-      console.log(error.response)
       return error.response.data
     })
   return res

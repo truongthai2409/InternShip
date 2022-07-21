@@ -10,17 +10,23 @@ import Button from '../../components/Button/index'
 import { loginUser } from '../../store/slices/main/login/loginSlice'
 import { authenticationSelector } from '../../store/selectors/main/loginSelectors'
 import { schema } from './data'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const Login = () => {
+  TabTitle('Login')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const status = useSelector(authenticationSelector)
 
   if (status === 'success') {
     const role = JSON.parse(localStorage.getItem('userPresent')).role
+    console.log(role)
     switch (role) {
-      case 'HR':
+      case 'Role_HR':
         navigate(`/hr`, { replace: true })
+        break
+      case 'Role_Partner':
+        navigate(`/partner`, { replace: true })
         break
       default:
         navigate(`/candidate`, { replace: true })

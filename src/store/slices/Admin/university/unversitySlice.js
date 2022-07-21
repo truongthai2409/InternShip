@@ -76,20 +76,10 @@ export const addUniversity = createAsyncThunk(
         'Access-Control-Allow-Origin': '*'
       }
     }
-    const { partnerData } = data
     const res = await axios
-      .post(
-        `${baseURL}/api/r2s/partner/university/create`,
-        partnerData,
-        axiosConfig
-      )
+      .post(`${baseURL}/api/r2s/partner/university/create`, data, axiosConfig)
       .then(res => {
-        console.log(res)
         return res
-      })
-      .catch(error => {
-        console.log(error)
-        return error
       })
     return res
   }

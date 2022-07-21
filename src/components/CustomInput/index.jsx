@@ -35,7 +35,8 @@ const CustomInput = ({
         }
       >
         <input
-          type={type == 'password' ? (isHide ? 'text' : 'password') : type}
+          // type={type === "password" ? (isHide ? "text" : "password") : type}
+          type={type}
           id={id}
           placeholder={placeholder}
           disabled={check}

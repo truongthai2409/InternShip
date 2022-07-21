@@ -62,8 +62,8 @@ const PostJobForm = props => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset
+    formState: { errors }
+    // reset,
   } = useForm({
     resolver: yupResolver(schema)
   })

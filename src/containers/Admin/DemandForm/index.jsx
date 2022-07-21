@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Grid, Switch } from '@mui/material'
@@ -11,7 +11,6 @@ import CustomTextarea from '../../../components/CustomTextarea'
 import Button from '../../../components/Button'
 import Select from '../../../components/Select'
 import { schema, renderControlAction } from './script.js'
-import api from '../../../config/api/apiConfig'
 import { getMajorList } from '../../../store/slices/Admin/major/majorSlice'
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
@@ -25,7 +24,7 @@ export default function DemandForm(props) {
   const dispatch = useDispatch()
 
   // get params from URL
-  const { demandId } = useParams()
+  // const { demandId } = useParams()
 
   useEffect(() => {
     dispatch(getMajorList())
@@ -33,9 +32,9 @@ export default function DemandForm(props) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
-    setValue
+    formState: { errors }
+    // reset,
+    // setValue
   } = useForm({
     resolver: yupResolver(schema)
   })
@@ -64,10 +63,8 @@ export default function DemandForm(props) {
 
   // handle Submit form
   const onSubmit = data => {
-    const demandData = {}
-
+    // const demandData = {}
     // console.log(data);
-
     // dispatch(
     //   addDemand({
     //     demandData,

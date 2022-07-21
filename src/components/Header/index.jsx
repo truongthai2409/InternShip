@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 import Button from '../Button'
 import Logo from '../Logo'
-import SearchResultHome from '../SearchResultHome'
 import './styles.scss'
 
 function Header(props) {

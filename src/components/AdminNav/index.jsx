@@ -12,7 +12,6 @@ const AdminNav = ({ openDrawer, setOpenDrawer }) => {
   const handleOpenDrawer = () => {
     setOpenDrawer(!openDrawer)
   }
-
   return (
     <>
       <div className="admin-navbar">

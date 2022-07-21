@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import api from 'src/config/api/apiConfig'
 
-const baseURL = process.env.REACT_APP_API
+// const baseURL = process.env.REACT_APP_API
 
 const ratingSlice = createSlice({
   name: 'rating',

@@ -6,17 +6,16 @@ import CustomInput from '../../../../components/CustomInput/index'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
-import {
-  registerHr,
-  registerUser
-} from '../../../../store/slices/main/register/registerSlice'
+import { registerHr } from '../../../../store/slices/main/register/registerSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { genderList, schema } from './data'
 import { errorSelector } from 'src/store/selectors/main/registerSelectors'
 import SelectCustom from '../../../../components/Select'
 import { getCompanyList } from 'src/store/slices/Admin/company/companySlice'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const HRInfo = () => {
+  TabTitle('Đăng ký - Nhà tuyển dụng')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const errorMessage = useSelector(errorSelector)

@@ -9,13 +9,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { addUniversity } from 'src/store/slices/Admin/university/unversitySlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { genderList, schoolList, schema, roleAtSchool } from './data'
+import { genderList, schema } from './data'
 import { errorSelector } from 'src/store/selectors/main/registerSelectors'
-import SelectCustom from '../../../../components/Select'
 import CustomTextarea from 'src/components/CustomTextarea'
-import axios from 'axios'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const PartnerInfo = () => {
+  TabTitle('Đăng ký - Cộng tác viên trường')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const errorMessage = useSelector(errorSelector)
@@ -32,8 +32,8 @@ const PartnerInfo = () => {
     console.log(data.avatar[0])
     const partnerData = {
       university: JSON.stringify({
-        name: 'Truong Dai hoc Bach Khoa Ho Chi Minh',
-        shortName: 'HCMUT',
+        name: data.schoolName,
+        shortName: data.shortName,
         email: data.emailSchool,
         description: data.description,
         website: data.website,
@@ -56,7 +56,7 @@ const PartnerInfo = () => {
       avatarUser: data.avatar[0],
       logo: data.logo[0],
       partner: JSON.stringify({
-        position: 'quản lý',
+        position: data.position,
         userCreationDTO: {
           username: data.username,
           password: data.password,
@@ -72,9 +72,7 @@ const PartnerInfo = () => {
         }
       })
     }
-    console.log(partnerData)
-
-    dispatch(addUniversity({ partnerData, navigate }))
+    dispatch(addUniversity(partnerData))
   }
 
   const {
@@ -204,25 +202,33 @@ const PartnerInfo = () => {
         </CustomInput>
 
         <div className="section-input__container">
-          <SelectCustom
-            label="Trường"
-            options={schoolList}
-            id="shortName"
-            register={register}
-          />
-          {errors.shortName?.message}
-
-          <SelectCustom
-            label="Vai trò tại trường"
-            id="position"
-            options={roleAtSchool}
-            placeholder="Vị trí"
+          <CustomInput
+            label="Tên trường"
+            type="text"
+            id="schoolName"
             register={register}
           >
-            {errors.position?.message}
-          </SelectCustom>
+            {errors.schoolName?.message}
+          </CustomInput>
+          <CustomInput
+            label="Tên viết tắc của trường"
+            type="text"
+            id="shortName"
+            register={register}
+          >
+            {errors.shortName?.message}
+          </CustomInput>
         </div>
 
+        <CustomInput
+          label="Vai trò tại trường"
+          id="position"
+          type="text"
+          placeholder="Vai trò tại trường"
+          register={register}
+        >
+          {errors.position?.message}
+        </CustomInput>
         <div className="section-input__container">
           <CustomInput
             label="Email của Trường"

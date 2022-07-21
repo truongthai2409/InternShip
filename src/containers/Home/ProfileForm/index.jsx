@@ -28,7 +28,9 @@ const ProfileForm = ({ onClick }) => {
               label="Họ"
               requirementField={false}
               className="profile-form__input"
-            />
+            >
+              {errors?.lastName.message}
+            </CustomInput>
           </div>
           <div className="profile-form__content-item">
             <CustomInput

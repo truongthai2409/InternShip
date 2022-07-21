@@ -5,11 +5,11 @@ import { Avatar, Grid, Switch } from '@mui/material'
 
 import './styles.scss'
 import CustomInput from '../../../components/CustomInput'
-import CustomTextarea from '../../../components/CustomTextarea'
+// import CustomTextarea from "../../../components/CustomTextarea";
 import Button from '../../../components/Button'
 import cameraLogo from '../../../assets/img/camera.png'
-import Select from '../../../components/Select'
-import { schema, renderControlAction, roleOptions } from './script.js'
+// import Select from "../../../components/Select";
+import { schema, renderControlAction } from './script.js'
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
 

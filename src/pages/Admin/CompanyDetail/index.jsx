@@ -1,6 +1,5 @@
 import React from 'react'
-import { Paper, Grid, Avatar, Switch } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Paper } from '@mui/material'
 
 import './styles.scss'
 // import companyLogo from "../../../assets/img/camera.png";

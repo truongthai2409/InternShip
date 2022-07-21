@@ -1,22 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from "prop-types";
 import DetailCard from '../../../components/DetailCard'
 import CardVisit from '../../../components/CardVisit'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Grid } from '@mui/material'
 import './styles.scss'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getJobByName } from '../../../store/slices/main/home/job/jobSlice'
 function DetailHome(props) {
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
-    state => state.job
-  )
+  const { jobListName, jobDetail } = useSelector(state => state.job)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getJobByName(''))
-  }, [])
+  }, [dispatch])
   return (
     <div>
       <Grid className="wrapper" container spacing={4}>

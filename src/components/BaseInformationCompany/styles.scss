@@ -35,6 +35,12 @@
         @include flex(center, null);
         font-size: 18px;
       }
+      p {
+        padding-left: 5px;
+      }
+      a {
+        padding-left: 5px;
+      }
     }
   }
 }
@@ -101,4 +107,12 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+.detail-website {
+  display: block !important;
+}
+
+.fix-fontSize {
+  font-size: 17px !important;
 }

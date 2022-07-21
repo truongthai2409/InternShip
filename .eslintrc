@@ -8,7 +8,7 @@
         "arrowParens": "avoid",
         "semi": false,
         "trailingComma": "none",
-        "endOfLine": "lf",
+        "endOfLine": "auto",
         "tabWidth": 2,
         "useTabs": false,
         "singleQuote": true,
@@ -19,3 +19,4 @@
     "no-console": "warn"
   }
 }
+

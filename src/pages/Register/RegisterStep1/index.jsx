@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '../../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import './styles.scss'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 export default function RegisterStep1() {
+  TabTitle('Đăng ký')
+
   const roleList = [
     {
       id: 3,
