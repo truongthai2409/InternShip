@@ -11,7 +11,8 @@
 
   .detail__card-1 {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
     // padding: 0 20px;
     // padding-right: 39px;
@@ -44,7 +45,9 @@
     .tag-name {
       display: flex;
       &__name {
-        font-size: $fs-16;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }

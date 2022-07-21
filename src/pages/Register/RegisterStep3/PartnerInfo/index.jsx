@@ -9,11 +9,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { addUniversity } from "src/store/slices/Admin/university/unversitySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { genderList, schoolList, schema, roleAtSchool } from "./data";
+import { genderList, schema } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
-import SelectCustom from "../../../../components/Select";
 import CustomTextarea from "src/components/CustomTextarea";
-import axios from "axios";
 import { TabTitle } from "src/utils/GeneralFunctions";
 
 const PartnerInfo = () => {

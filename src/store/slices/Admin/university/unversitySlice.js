@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import notificationSlice from "../../notifications/notificationSlice";
-import api from "../../../../config/api/apiConfig";
 const baseURL = process.env.REACT_APP_API;
 
 const universitySlice = createSlice({

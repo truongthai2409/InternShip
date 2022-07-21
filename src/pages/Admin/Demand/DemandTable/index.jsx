@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { IconButton, Tooltip } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import DataTable from "../../../../components/Table";
 
 const DemandTable = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const draftText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices feugiat tincidunt. Vestibulum rhoncus, leo sed fringilla aliquam, lectus enim ornare urna, ut iaculis lorem ex ac ipsum. Curabitur eget mauris varius, aliquet neque id, commodo arcu. Nam quis pharetra quam. Duis luctus sapien eu nisi interdum, sed semper erat porta."

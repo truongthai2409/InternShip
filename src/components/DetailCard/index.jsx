@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
 
-import { useSelector, useDispatch } from "react-redux";
+import { 
+  // useSelector, 
+  useDispatch 
+} from "react-redux";
 import { getJobList } from "../../store/slices/main/home/job/jobSlice";
-import moment from "moment";
+// import moment from "moment";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
@@ -13,8 +16,6 @@ import Box from "@mui/material/Box";
 import "./styles.scss";
 import InformationCompany from "../InformationComapny";
 import BaseInformationCompany from "../BaseInformationCompany";
-
-const listMajors = ["HTML", "CSS", "JS", "ReactJS"];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +51,19 @@ const DetailCard = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const jobDetail = props.jobDetail;
+  const [jobType, setJobType] = useState({});
+  const [jobPosition, setJobPosition] = useState({});
+  const [major, setMajor] = useState({});
+  let listTagName = [];
+
+  useEffect(() => {
+    setJobType(jobDetail?.jobType);
+    setJobPosition(jobDetail?.jobposition);
+    setMajor(jobDetail.major);
+  }, [jobDetail]);
+
+  console.log(jobType, jobPosition, major);
+  console.log(listTagName);
 
   useEffect(() => {
     dispatch(getJobList());
@@ -76,11 +90,11 @@ const DetailCard = (props) => {
             </div>
             <div className="detail__card-2">
               <div className="tag-name">
-                {listMajors.map((listMajor, index) => (
-                  <div className="tag-name__name" key={index}>
-                    <TagName title={listMajor} />
-                  </div>
-                ))}
+                <div className="tag-name__name">
+                  <TagName title={jobType.name} />
+                  <TagName title={jobPosition.name} />
+                  <TagName title={major.name} />
+                </div>
               </div>
             </div>
           </div>

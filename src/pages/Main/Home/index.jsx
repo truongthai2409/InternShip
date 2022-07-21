@@ -10,18 +10,17 @@ import {
   getJobByName,
   getJobList,
 } from "../../../store/slices/main/home/job/jobSlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const Home = (props) => {
   const [valueSearch, setValueSearch] = useState("");
-  const [listTagName, setListTagName] = useState([]);
   const dispatch = useDispatch();
 
+
   // get global state from redux store
-  const { jobListName, jobList, jobDetail, indexCardActive } = useSelector(
+  const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-  const { provinceList } = useSelector((state) => state.location);
+  // const { provinceList } = useSelector((state) => state.location);
 
   useEffect(() => {
     dispatch(getJobByName(""));
@@ -30,10 +29,10 @@ const Home = (props) => {
 
   const handleSearch = (value) => {
     setValueSearch(value);
-    if (value) {
-      dispatch(getJobByName(value));
+    if (valueSearch) {
+      dispatch(getJobByName(valueSearch));
     }
-    if (value === "") {
+    if (valueSearch === "") {
       dispatch(getJobByName(""));
     }
   };

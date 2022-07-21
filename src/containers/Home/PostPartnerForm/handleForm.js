@@ -1,8 +1,6 @@
 import * as yup from "yup";
-import { Link } from "react-router-dom";
 
 // yup validate form post job form
-const XLSX_FORMATS = ["application/xlsx"];
 export const schema = yup
   .object({
     name: yup.string().required(" * Bạn phải điền chức danh."),

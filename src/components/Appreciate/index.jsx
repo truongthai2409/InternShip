@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Appreciate(props) {
-  const [value, setValue] = React.useState(2);
+  // const [value, setValue] = React.useState(2);
   return (
     <Box
       sx={{

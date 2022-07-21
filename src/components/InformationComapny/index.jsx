@@ -63,7 +63,7 @@ const InformationCompany = ({ jobDetail }) => {
           <AddLocationIcon className="detail__card-4-item-icon">
             <WorkIcon />
           </AddLocationIcon>
-          <h6 className="detail__card-4-item-info">{`${jobDetail.locationjob?.address},${jobDetail.locationjob?.district?.name},${jobDetail.locationjob?.district?.province?.name}`}</h6>
+          <h6 className="detail__card-4-item-info">{`${jobDetail.locationjob?.address}, ${jobDetail.locationjob?.district?.name}, ${jobDetail.locationjob?.district?.province?.name}`}</h6>
         </div>
       </div>
       <div className="detail__card-5">

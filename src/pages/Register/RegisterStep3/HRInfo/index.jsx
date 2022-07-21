@@ -8,7 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import {
   registerHr,
-  registerUser,
 } from "../../../../store/slices/main/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { genderList, schema } from "./data";
