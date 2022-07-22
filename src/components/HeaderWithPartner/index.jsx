@@ -18,6 +18,7 @@ function HeaderWithPartner(props) {
   const pathUrl = location.pathname
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
+  console.log(props);
 
   const idUser = JSON.parse(localStorage.getItem('userPresent'))?.idUser
 
@@ -34,7 +35,7 @@ function HeaderWithPartner(props) {
             <AddCardIcon></AddCardIcon>
             <span className="header__partner-post-post">Đăng bài</span>
           </Link>
-          <Link to="list" className="header__partner-post">
+          <Link to="post-list" className="header__partner-post">
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__partner-post-post">
               Danh sách bài đăng

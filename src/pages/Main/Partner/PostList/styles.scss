@@ -1,0 +1,31 @@
+@use '../../../../assets/styles/Helper/variables' as *;
+
+.statistical-box {
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    width: 100%;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: white;
+    padding: 30px;
+
+    &__card {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__heading {
+        font-size: 18px;
+        font-weight: 700;
+    }
+}
+
+.post-list {
+}
