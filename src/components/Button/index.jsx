@@ -17,7 +17,7 @@ const Button = ({
     <>
       <button
         className={`button ${className ? className : ""}`}
-        onClick={onClick}
+        onClick={onClick || (() => {console.log("first")})}
         style={{
           width: bwidth ? `${bwidth}` : "",
           height: bheight ? `${bheight}` : "",

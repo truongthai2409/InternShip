@@ -105,7 +105,7 @@ const PostJobForm = (props) => {
   };
 
   if (status === "success") {
-    navigate("/hr/post/list");
+    navigate("/hr/list");
   }
 
   return (

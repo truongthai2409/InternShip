@@ -19,8 +19,6 @@ const HRPostList = (props) => {
     dispatch(getJobListByUserId(userPresent.idUser));
   }, []);
 
-  // console.log(userPresent.idUser)
-
   return (
     <div className="hrpost__list">
       <div className="hrpost__list-bt">
@@ -36,7 +34,7 @@ const HRPostList = (props) => {
           timeEnd={job.timeEndStr}
           timeCreated={job.createDate}
           companyName={job.hr?.company?.name}
-          companyLocation={job.locationjob}
+          companyLocation={formatLocation(job.locationjob)}
         />
       ))}
     </div>

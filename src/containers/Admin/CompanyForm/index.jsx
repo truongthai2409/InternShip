@@ -145,7 +145,6 @@ export default function CompanyForm(props) {
         setIsEdit,
         comid
       }
-      console.log(updateData)
       dispatch(updateCompanyInfo(updateData))
     }
   }

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
 
 const userSlice = createSlice({
@@ -16,9 +17,13 @@ const userSlice = createSlice({
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
       state.userList = payload.users;
     });
-    builder.addCase(getUserByUserName.fulfilled, (state, { payload }) => {
+    builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
-    })
+    });
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      state.user = payload;
+      notificationSlice.actions.successMess("Chỉnh sửa thành công");
+    });
   },
 });
 
@@ -35,11 +40,11 @@ export const getUserList = createAsyncThunk("user/getUserList", async () => {
     });
 });
 
-export const getUserByUserName = createAsyncThunk(
-  "user/getUserByUserName",
-  async (username) => {
+export const getUserById = createAsyncThunk(
+  "user/getUserById",
+  async (id) => {
     return await axios
-      .get(`${baseURL}/api/r2s/admin/user/${username}`)
+      .get(`${baseURL}/api/r2s/hr/${id}`)
       .then((response) => {
         return response.data;
       })
@@ -48,3 +53,18 @@ export const getUserByUserName = createAsyncThunk(
       });
   }
 );
+
+export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
+  return await axios
+    .put(`${baseURL}/api/r2s/hr/${args[1]}`, args[0], {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});

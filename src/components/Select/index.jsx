@@ -8,6 +8,7 @@ export default function SelectCustom({
   label,
   id,
   children,
+  defaultValue,
   register= false,
   options=[],
   placeholder,
@@ -44,7 +45,7 @@ export default function SelectCustom({
           <Select
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
-            defaultValue={""}
+            defaultValue={defaultValue>=0 ? defaultValue : ""}
             {...register(id)}
           >
             <MenuItem value="">

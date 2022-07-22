@@ -9,7 +9,7 @@ import moment from "moment";
 const CardPost = (props) => {
     return (
         <div className="card-post__container">
-            <PostStatus status={props.status} />
+            <PostStatus status={props.status.id} />
             <h3 className="card-post__job-name">{props.jobName}</h3>
             <div className="card-post__company-info-detail">
                 <img
