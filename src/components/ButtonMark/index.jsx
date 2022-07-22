@@ -14,12 +14,14 @@ import {
 import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getCandidateByUserName } from 'src/store/slices/main/candidate/info/infoCandidateSlice'
+
 const ButtonMark = props => {
   const location = useLocation()
   const navigate = useNavigate()
   const pathUrl = location.pathname
   const dispatch = useDispatch()
   const [mark, setMark] = useState(false)
+  const [careJobId, setCareJobId] = useState();
 
   // get global state from redux store
   const { careJob } = useSelector(state => state.mark)
@@ -45,15 +47,18 @@ const ButtonMark = props => {
         },
         note: 'Đây là công việc ưa thích của mình'
       }
-      await dispatch(createMark(dataCareList))
+      dispatch(createMark(dataCareList))
       toast.success('Đã mark thành công')
     } else {
       const dataByUserAndJob = {
         userName: profile.username,
         idJob: Number(props.jobId)
       }
-      await dispatch(getMarkByUserAndJob(dataByUserAndJob))
-      await dispatch(deleteMark(careJob.id))
+      dispatch(getMarkByUserAndJob(dataByUserAndJob));
+      if (careJob.id) {
+        setCareJobId(careJob.id);
+        dispatch(deleteMark(careJobId));  
+      }
       toast.success('Đã xóa mark thành công')
     }
   }

@@ -3,9 +3,9 @@ import { IconButton } from '@mui/material'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import './styles.scss'
 
-const Search = ({ placeholder, onChange }) => {
+const Search = ({ placeholder, onChange, width }) => {
   return (
-    <div className="search">
+    <div style={{width: width}} className="search">
       <input
         className="search__input"
         type="search"

@@ -48,7 +48,7 @@ const JobCandidate = ({ job }) => {
           <Icon className="job__candidate-info-item-icon">
             <WorkIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">{job.jobType}</h6>
+          <h6 className="card-content-job-candidate">{job?.jobType.name}</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
@@ -61,7 +61,7 @@ const JobCandidate = ({ job }) => {
           <Icon className="job__candidate-info-item-icon">
             <AddLocationIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">{job?.locationjob}</h6>
+          <h6 className="card-content-job-candidate">{job?.locationjob.address}</h6>
         </div>
       </div>
     </Box>

@@ -35,7 +35,7 @@ const markJobSlice = createSlice({
 
 export const getMark = createAsyncThunk('mark/getMark', async () => {
   return axios
-    .get(`${baseURL}/api/r2s/care-list`)
+    .get(`${baseURL}/api/r2s/carelist`)
     .then(response => {
       return response.data
     })
@@ -48,7 +48,7 @@ export const getMarkByUser = createAsyncThunk(
   'mark/getMarkByUser',
   async userName => {
     return axios
-      .get(`${baseURL}/api/r2s/care-list/user/${userName}/`)
+      .get(`${baseURL}/api/r2s/carelist/user/${userName}/`)
       .then(response => {
         return response.data
       })
@@ -62,7 +62,7 @@ export const getMarkByUserAndJob = createAsyncThunk(
   'mark/getMarkByUserAndJob',
   async data => {
     const { userName, idJob } = data
-    console.log(userName, idJob)
+    // console.log(userName, idJob)
     let axiosConfig = {
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export const getMarkByUserAndJob = createAsyncThunk(
     }
     return axios
       .get(
-        `http://localhost:8085/api/r2s/care-list/user/${userName}/job/${idJob}`,
+        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}`,
         axiosConfig
       )
       .then(response => {
@@ -87,7 +87,7 @@ export const getMarkByUserAndJob = createAsyncThunk(
 
 export const createMark = createAsyncThunk('mark/createMark', async data => {
   const res = await axios
-    .post(`${baseURL}/api/r2s/care-list`, data)
+    .post(`${baseURL}/api/r2s/carelist`, data)
     .then(res => {
       return res
     })
@@ -99,7 +99,7 @@ export const createMark = createAsyncThunk('mark/createMark', async data => {
 
 export const deleteMark = createAsyncThunk('mark/deleteMark', async data => {
   const res = await axios
-    .delete(`${baseURL}/api/r2s/care-list/${data}`)
+    .delete(`${baseURL}/api/r2s/carelist/${data}`)
     .then(res => {
       return res.data
     })

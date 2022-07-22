@@ -1,0 +1,40 @@
+@use '../../../../assets/styles/Helper/variables' as *;
+
+.post-card {    
+    
+    &__container {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        min-height: 10vh;
+    }
+
+    &__info-header {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__school-info {
+        display: flex;
+        flex-direction: column;
+    }   
+}
+
+.post-card-btns {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 0;
+    justify-content: space-between;
+}
+
+.post-card-span-text {
+    margin-left: 5px;
+    color: $color-black-0;
+}

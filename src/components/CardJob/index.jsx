@@ -16,19 +16,19 @@ const CardJob = ({ jobCare }) => {
     <div className="card-job__container">
       <div className="card-job__info">
         <div className="card-job__title">
-          <h3 className="card-job__name">{jobCare.jobCare.name}</h3>
+          <h3 className="card-job__name">{jobCare.jobCare?.name}</h3>
         </div>
         <div className="card-job__content">
           <div className="card-job__img">
-            <img src={jobCare.jobCare.company.logo} alt="logo-company" />
+            <img src={jobCare.jobCare.company?.logo} alt="logo-company" />
           </div>
           <div className="card-job__content-detail">
             <h5 className="card-job__company-name">
-              {jobCare.jobCare.company.name}
+              {jobCare.jobCare.company?.name}
             </h5>
             <div className="card-job__company-work-time">
               <WorkIcon />
-              <span className="card-job-text">{jobCare.jobCare.jobType}</span>
+              <span className="card-job-text">{jobCare.jobCare.jobType?.name}</span>
             </div>
             <div className="card-job__company-salary">
               <PaymentsIcon />
@@ -41,7 +41,7 @@ const CardJob = ({ jobCare }) => {
             <div className="card-job__company-location">
               <LocationOnIcon />
               <span className="card-job-text">
-                {jobCare.jobCare.locationjob}
+                {jobCare.jobCare.locationjob?.name}
               </span>
             </div>
           </div>

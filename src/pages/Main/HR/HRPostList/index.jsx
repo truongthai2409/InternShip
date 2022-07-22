@@ -21,6 +21,8 @@ const HRPostList = props => {
     dispatch(getJobListByUserId(userPresent.idUser))
   }, [dispatch])
 
+  console.log(jobList);
+
   // console.log(userPresent.idUser)
 
   return (

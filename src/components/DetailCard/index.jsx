@@ -17,7 +17,7 @@ import './styles.scss'
 import InformationCompany from '../InformationComapny'
 import BaseInformationCompany from '../BaseInformationCompany'
 
-function TabPanel(props) {
+export function TabPanel(props) {
   const { children, value, index, ...other } = props
 
   return (
@@ -41,12 +41,14 @@ TabPanel.propTypes = {
   index: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired
 }
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`
   }
 }
+
 const DetailCard = props => {
   const [value, setValue] = useState(0)
   const dispatch = useDispatch()
@@ -54,7 +56,6 @@ const DetailCard = props => {
   const [jobType, setJobType] = useState({})
   const [jobPosition, setJobPosition] = useState({})
   const [major, setMajor] = useState({})
-  let listTagName = []
 
   useEffect(() => {
     setJobType(jobDetail?.jobType)

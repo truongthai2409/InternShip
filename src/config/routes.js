@@ -25,6 +25,7 @@ import CandidateHome from 'src/pages/Main/Candidate/Home'
 import PartnerHome from 'src/pages/Main/Partner/Home'
 import Profile from 'src/components/Profile'
 import PartnerPost from 'src/pages/Main/Partner/Post'
+import PartnerPostList from 'src/pages/Main/Partner/PostList'
 
 export const adminRouter = [
   {
@@ -142,7 +143,7 @@ export const partnerRouter = [
   },
   {
     path: '/partner/post-list',
-    Component: PartnerHome
+    Component: PartnerPostList
   }
 ]
 
