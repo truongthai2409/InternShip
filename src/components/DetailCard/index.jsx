@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import TagName from '../TagName'
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import TagName from "../TagName";
 
 import {
   // useSelector,
-  useDispatch
-} from 'react-redux'
-import { getJobList } from '../../store/slices/main/home/job/jobSlice'
+  useDispatch,
+} from "react-redux";
+import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 // import moment from "moment";
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
-import './styles.scss'
-import InformationCompany from '../InformationComapny'
-import BaseInformationCompany from '../BaseInformationCompany'
+import "./styles.scss";
+import InformationCompany from "../InformationComapny";
+import BaseInformationCompany from "../BaseInformationCompany";
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props
+  const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -34,41 +34,41 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  )
+  );
 }
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired
-}
+  value: PropTypes.number.isRequired,
+};
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  }
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
 }
-const DetailCard = props => {
-  const [value, setValue] = useState(0)
-  const dispatch = useDispatch()
-  const jobDetail = props.jobDetail
-  const [jobType, setJobType] = useState({})
-  const [jobPosition, setJobPosition] = useState({})
-  const [major, setMajor] = useState({})
-  let listTagName = []
+const DetailCard = (props) => {
+  const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+  const jobDetail = props.jobDetail;
+  const [jobType, setJobType] = useState({});
+  const [jobPosition, setJobPosition] = useState({});
+  const [major, setMajor] = useState({});
+  let listTagName = [];
 
   useEffect(() => {
-    setJobType(jobDetail?.jobType)
-    setJobPosition(jobDetail?.jobposition)
-    setMajor(jobDetail.major)
-  }, [jobDetail])
+    setJobType(jobDetail?.jobType);
+    setJobPosition(jobDetail?.jobposition);
+    setMajor(jobDetail.major);
+  }, [jobDetail]);
 
   useEffect(() => {
-    dispatch(getJobList())
-  }, [dispatch])
+    dispatch(getJobList());
+  }, [dispatch]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
+    setValue(newValue);
+  };
   return (
     <div>
       {props.jobListName.length > 0 ? (
@@ -88,21 +88,21 @@ const DetailCard = props => {
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobType.name} />
-                  <TagName title={jobPosition.name} />
-                  <TagName title={major.name} />
+                  <TagName title={jobType?.name} />
+                  <TagName title={jobPosition?.name} />
+                  <TagName title={major?.name} />
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ width: "100%" }}>
               <Box
                 sx={{
                   borderBottom: 1,
-                  borderColor: 'divider',
+                  borderColor: "divider",
                   mt: 1,
-                  fontSize: 3
+                  fontSize: 3,
                 }}
               >
                 <Tabs
@@ -137,8 +137,8 @@ const DetailCard = props => {
         </div>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
 DetailCard.propTypes = {
   logo: PropTypes.string.isRequired,
@@ -147,7 +147,7 @@ DetailCard.propTypes = {
   detailJob: PropTypes.string,
   requireJob: PropTypes.string,
   timeJob: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  salary: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
+  salary: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
-export default DetailCard
+export default DetailCard;

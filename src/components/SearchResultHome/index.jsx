@@ -1,12 +1,12 @@
-import { IconButton } from '@mui/material'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import AddLocationIcon from '@mui/icons-material/AddLocation'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Button from '../../components/Button/'
-import './styles.scss'
-import SelectAreaHome from '../SelectAreaHome'
-import useQuery from '../../hooks/useQuery'
+import { IconButton } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/Button/";
+import "./styles.scss";
+import SelectAreaHome from "../SelectAreaHome";
+import useQuery from "../../hooks/useQuery";
 
 function SearchResultHome({
   onSubmit,
@@ -16,32 +16,31 @@ function SearchResultHome({
   bwidthInput,
   bheightInput,
   mb,
-  candidate_infomation
+  candidate_infomation,
 }) {
-  const [searchValue, setSearchValue] = useState('')
-  const query = useQuery()
-  useEffect(() => {
-    const { q = '' } = query
-    setSearchValue(q)
-  }, [query])
+  const [searchValue, setSearchValue] = useState("");
+  const query = useQuery();
+  // useEffect(() => {
+  //   const { name = "", location = "" } = query;
+  //   setSearchValue(name, location);
+  // }, [query]);
 
-  const onChangeSearch = event => {
-    setSearchValue(event.target.value)
-  }
+  const onChangeSearch = (event) => {
+    setSearchValue(event.target.value);
+  };
 
-  const search = event => {
-    event.preventDefault()
-    onClick && onClick(searchValue)
-  }
-  // console.log(searchValue);
+  const search = (event) => {
+    event.preventDefault();
+    onClick && onClick(searchValue);
+  };
   return (
     <div className="header__with-search onMobile onTablet">
       <form
         className="header__with-search-search "
         style={{
-          width: bwidth ? `${bwidth}` : '',
-          height: bheight ? `${bheight}` : '',
-          marginBottom: mb ? `${mb}` : ''
+          width: bwidth ? `${bwidth}` : "",
+          height: bheight ? `${bheight}` : "",
+          marginBottom: mb ? `${mb}` : "",
         }}
       >
         <div className="header__with-search-search-wrap">
@@ -57,8 +56,8 @@ function SearchResultHome({
             value={searchValue}
             onChange={onChangeSearch}
             style={{
-              width: bwidthInput ? `${bwidthInput}` : '',
-              height: bheightInput ? `${bheightInput}` : ''
+              width: bwidthInput ? `${bwidthInput}` : "",
+              height: bheightInput ? `${bheightInput}` : "",
             }}
           />
         </div>
@@ -75,9 +74,9 @@ function SearchResultHome({
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-SearchResultHome.propTypes = {}
+SearchResultHome.propTypes = {};
 
-export default SearchResultHome
+export default SearchResultHome;

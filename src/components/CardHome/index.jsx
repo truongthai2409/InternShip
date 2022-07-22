@@ -20,7 +20,9 @@ function CardHome(props) {
   const { careListOfPrivate } = useSelector(state => state.mark)
   const { profile } = useSelector(state => state.authentication)
 
-  var isMark = careListOfPrivate.filter(job => job.jobCare.id === props.id)
+  var isMark =
+    careListOfPrivate.length > 0 &&
+    careListOfPrivate.filter(job => job.jobCare.id === props.id)
   const isMarkLength = isMark.length > 0 ? true : false
   React.useEffect(() => {
     dispatch(getMark())
