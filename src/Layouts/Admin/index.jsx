@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { Drawer, Hidden } from "@mui/material";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { Drawer, Hidden } from '@mui/material'
+import { useSelector } from 'react-redux'
 
-import "./styles.scss";
-import Sidebar from "../../components/Sidebar";
-import AdminNav from "../../components/AdminNav";
-import Notification from "../../components/Notification";
-import { notificationSelector } from "../../store/selectors/notificationSelectors";
+import './styles.scss'
+import Sidebar from '../../components/Sidebar'
+import AdminNav from '../../components/AdminNav'
+import Notification from '../../components/Notification'
+import { notificationSelector } from '../../store/selectors/notificationSelectors'
 
 const AdminLayout = () => {
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false)
 
-  const notification = useSelector(notificationSelector);
+  const notification = useSelector(notificationSelector)
   // console.log(notification);
 
   /**
@@ -20,8 +20,8 @@ const AdminLayout = () => {
    * setOpenDrawer(false);
    */
   const handleCloseDrawer = () => {
-    setOpenDrawer(false);
-  };
+    setOpenDrawer(false)
+  }
 
   // console.log(openDrawer);
 
@@ -43,7 +43,7 @@ const AdminLayout = () => {
           open={openDrawer}
           onClose={handleCloseDrawer}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
           className="admin-layout__sidebar-hide"
         >
@@ -62,7 +62,7 @@ const AdminLayout = () => {
       </div>
       <Notification notifyAlert={notification} />
     </div>
-  );
-};
+  )
+}
 
-export default AdminLayout;
+export default AdminLayout

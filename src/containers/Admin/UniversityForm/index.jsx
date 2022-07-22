@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, {
+  useState,
+  // useRef,
+  useEffect
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Avatar, Grid, Switch } from '@mui/material'
@@ -30,7 +34,7 @@ export default function UniversityForm(props) {
   const [image, setImage] = useState(cameraLogo)
   const [isEdit, setIsEdit] = useState(isAdd)
 
-  const fileInput = useRef(null)
+  // const fileInput = useRef(null)
   const dispatch = useDispatch()
 
   // get params from URL

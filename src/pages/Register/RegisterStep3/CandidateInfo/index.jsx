@@ -1,54 +1,52 @@
-import React, { useEffect } from "react";
-import "./styles.scss";
-import ArrowButton from "../../../../components/ArrowButton/index";
-import Button from "../../../../components/Button";
-import CustomInput from "../../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import notificationSlice from "../../../../store/slices/notifications/notificationSlice";
+import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
+
+import './styles.scss'
+import ArrowButton from '../../../../components/ArrowButton/index'
+import Button from '../../../../components/Button'
+import CustomInput from '../../../../components/CustomInput/index'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import notificationSlice from '../../../../store/slices/notifications/notificationSlice'
 import {
   errorSelector,
-  statusSelector,
-} from "../../../../store/selectors/main/registerSelectors";
-import { genderList, schema } from "./data";
-import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
-import SelectCustom from "../../../../components/Select";
-import { registerCandidate } from "src/store/slices/main/register/registerSlice";
+  statusSelector
+} from '../../../../store/selectors/main/registerSelectors'
+import { genderList, schema } from './data'
+import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
+import SelectCustom from '../../../../components/Select'
+import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const CandidateInfo = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { majorList } = useSelector((state) => state.major);
-  const errorMessage = useSelector(errorSelector);
+  TabTitle('Đăng ký - Ứng viên')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { majorList } = useSelector(state => state.major)
+  const errorMessage = useSelector(errorSelector)
 
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  const handleBackClick = e => {
+    e.preventDefault()
+    navigate(-1)
+  }
 
   useEffect(() => {
-    dispatch(getMajorList());
-  }, [dispatch]);
+    dispatch(getMajorList())
+  }, [dispatch])
 
-  const status = useSelector(statusSelector);
-
-  if (status === "success") {
-    dispatch(notificationSlice.actions.successMess("Đăng ký thành công"));
-  } else if (status === "fail") {
-    dispatch(notificationSlice.actions.errorMess("Có lỗi xảy ra"));
-  }
+  const status = useSelector(statusSelector)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     // const step2Data = JSON.parse(sessionStorage.getItem("account"));
     const userData = {
       fileCV: data.cv[0],
@@ -62,19 +60,22 @@ const CandidateInfo = () => {
           lastName: data.lastname,
           firstName: data.firstname,
           phone: data.phone,
-          email: data.email,
+          email: data.email
         },
         major: {
-          id: parseInt(data.major),
-        },
-      }),
-    };
-    console.log(userData);
-    dispatch(registerCandidate(userData));
-  };
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  // };
+          id: parseInt(data.major)
+        }
+      })
+    }
+    dispatch(registerCandidate({ userData, navigate }))
+
+    if (status === 'success') {
+      toast.success('Đã đăng ký thành công')
+      navigate('/login')
+    } else if (status === 'fail') {
+      toast.success('Có lỗi, vui lòng kiểm tra lại thông tin')
+    }
+  }
 
   return (
     <div className="reg-candidate">
@@ -202,6 +203,6 @@ const CandidateInfo = () => {
         </div>
       </form>
     </div>
-  );
-};
-export default CandidateInfo;
+  )
+}
+export default CandidateInfo

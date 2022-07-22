@@ -1,83 +1,85 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .candidate-card {
-    &__container {
-        position: relative;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        padding: 50px;
+  &__container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 50px;
+  }
+
+  &__detail {
+    width: 50%;
+    min-width: 100vh;
+    display: flex;
+    overflow: hidden;
+    padding: 10px;
+    background-color: $color-white-0;
+  }
+
+  &__avatar {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid $primary-color;
+    margin: 5px 50px 10px 10px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    & p {
+      font-size: 13px;
     }
 
-    &__detail {
-        width: 50%;
-        min-width: 100vh;
-        display: flex;
-        overflow: hidden;
-        padding: 10px;
-        background-color: $color-white-0;
+    & h2 {
+      color: $primary-color;
+    }
+  }
+
+  &__extra {
+    position: relative;
+    margin: 10px 0px 0px 50px;
+    display: flex;
+    flex-direction: column;
+    width: 27%;
+    gap: 45px;
+
+    & span {
+      font-size: 12px;
     }
 
-    &__avatar {
-        position: relative;
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        border: 1px solid $primary-color;
-        margin: 5px 50px 10px 10px;
+    & svg {
+      font-size: 18px;
     }
-    
-    &__info {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+  }
 
-        & p {
-            font-size: 13px;
-        }
+  &__review {
+    display: flex;
+  }
 
-        & h2 {
-            color: $primary-color;
-        }
+  &__bookmark {
+    position: absolute;
+    right: 0;
+  }
+
+  &__cv-viewer,
+  &__apply-date {
+    display: flex;
+
+    & span {
+      margin-left: 8px;
     }
-
-    &__extra {
-        position: relative;
-        margin: 10px 0px 0px 50px;
-        display: flex;
-        flex-direction: column;
-        width: 27%;
-        gap: 45px;
-
-        & span {
-            font-size: 12px;
-        }
-
-        & svg {
-            font-size: 18px;
-        }
-    }
-
-    &__review {
-        display: flex;
-    }
-
-    &__bookmark {
-        position: absolute;
-        right: 0;
-    }
-    
-    &__cv-viewer, &__apply-date {
-        display: flex;
-
-        & span {
-            margin-left: 8px;
-        }
-    }
+  }
 }
 
-p, span {
-    overflow: hidden;
+p,
+span {
+  overflow: hidden;
 }

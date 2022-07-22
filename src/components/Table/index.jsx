@@ -1,8 +1,8 @@
-import * as React from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Paper } from "@mui/material";
+import * as React from 'react'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { Paper } from '@mui/material'
 
-import "./styles.scss";
+import './styles.scss'
 
 export default function DataTable({ rows, columns }) {
   return (
@@ -14,7 +14,7 @@ export default function DataTable({ rows, columns }) {
           columns={columns}
           pageSize={10}
           rowsPerPageOptions={[10]}
-          getRowId={(row) => row.stt}
+          getRowId={row => row.stt}
           loading={!rows.length}
           components={{ Toolbar: GridToolbar }}
           disableSelectionOnClick
@@ -29,5 +29,5 @@ export default function DataTable({ rows, columns }) {
         />
       </div>
     </Paper>
-  );
+  )
 }

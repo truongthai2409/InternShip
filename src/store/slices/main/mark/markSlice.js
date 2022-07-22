@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import api from "src/config/api/apiConfig";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -9,6 +8,8 @@ const markJobSlice = createSlice({
   initialState: {
     status: "",
     careListCandidate: [],
+    careListOfPrivate: [],
+    careJob: {},
   },
   extraReducers: (builder) => {
     builder.addCase(createMark.fulfilled, (state, action) => {
@@ -17,6 +18,12 @@ const markJobSlice = createSlice({
     });
     builder.addCase(getMark.fulfilled, (state, { payload }) => {
       state.careListCandidate = payload;
+    });
+    builder.addCase(getMarkByUser.fulfilled, (state, { payload }) => {
+      state.careListOfPrivate = payload;
+    });
+    builder.addCase(getMarkByUserAndJob.fulfilled, (state, { payload }) => {
+      state.careJob = payload;
     });
     builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
@@ -28,7 +35,7 @@ const markJobSlice = createSlice({
 
 export const getMark = createAsyncThunk("mark/getMark", async () => {
   return axios
-    .get(`${baseURL}/api/r2s/care-list`)
+    .get(`${baseURL}/api/r2s/carelist`)
     .then((response) => {
       return response.data;
     })
@@ -37,9 +44,50 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
     });
 });
 
+export const getMarkByUser = createAsyncThunk(
+  "mark/getMarkByUser",
+  async (userName) => {
+    return axios
+      .get(`${baseURL}/api/r2s/carelist/user/${userName}/`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getMarkByUserAndJob = createAsyncThunk(
+  "mark/getMarkByUserAndJob",
+  async (data) => {
+    const { userName, idJob } = data;
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type",
+      },
+    };
+    return axios
+      .get(
+        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}`,
+        axiosConfig
+      )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
 export const createMark = createAsyncThunk("mark/createMark", async (data) => {
-  const res = await api
-    .post(`${baseURL}/api/r2s/care-list`, data)
+  const res = await axios
+    .post(`${baseURL}/api/r2s/carelist`, data)
     .then((res) => {
       return res;
     })
@@ -49,11 +97,11 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
   return res;
 });
 
-export const deleteMark = createAsyncThunk("mark/deleteMark", async (id) => {
-  const res = await api
-    .delete(`${baseURL}/api/r2s/care-list/${id}`)
+export const deleteMark = createAsyncThunk("mark/deleteMark", async (data) => {
+  const res = await axios
+    .delete(`${baseURL}/api/r2s/carelist/${data}`)
     .then((res) => {
-      return res;
+      return res.data;
     })
     .catch((error) => {
       return error.response.data;

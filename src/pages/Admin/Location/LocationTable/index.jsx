@@ -1,73 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { IconButton, Tooltip } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import {  useNavigate } from "react-router-dom";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import { IconButton } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
-import "./styles.scss";
-import DataTable from "../../../../components/Table";
-import { getProviceList,getLocationList, getDistrictById } from "../../../../store/slices/location/locationSlice";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
-import axios from "axios";
+import './styles.scss'
+import DataTable from '../../../../components/Table'
+import { getLocationList } from '../../../../store/slices/location/locationSlice'
 
 const LocationTable = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { districtById,locationList} = useSelector((state) => state.location)
-  useEffect(() => { 
-    dispatch(getLocationList());
-  }, []);
-  
+  const { locationList } = useSelector(state => state.location)
+  useEffect(() => {
+    dispatch(getLocationList())
+  }, [])
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 70 },
-    { field: "District", headerName: "Quận", width: 100 },
-    { field: "Country", headerName: "Quốc gia", width: 100 },
-    { field: "StreetName", headerName: "Tên đường",width: 250 },
-    { field: "Province", headerName: "Tỉnh/Thành Phố",width: 150 },
-    { field: "NoteAddress", headerName: "Ghi chú thêm của địa chỉ",width: 250 },
+    { field: 'stt', headerName: 'STT', width: 70 },
+    { field: 'District', headerName: 'Quận', width: 100 },
+    { field: 'Country', headerName: 'Quốc gia', width: 100 },
+    { field: 'StreetName', headerName: 'Tên đường', width: 250 },
+    { field: 'Province', headerName: 'Tỉnh/Thành Phố', width: 150 },
     {
-      field: "action",
-      headerName: "Action",
+      field: 'NoteAddress',
+      headerName: 'Ghi chú thêm của địa chỉ',
+      width: 250
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
       width: 100,
       sortable: false,
-      renderCell: (params) => {
-        const { row } = params;
+      renderCell: params => {
+        const { row } = params
         const handleOnClick = () => {
-          navigate(`/admin/major/${row.id}`);
-        };
-        const deleteMajorr = async() =>{
+          navigate(`/admin/major/${row.id}`)
+        }
+        const deleteMajorr = async () => {
           // const res = await dispatch(deleteMajor(row.id))
           // unwrapResult(res)
         }
         return (
           <>
-            <IconButton className="user-edit__button" onClick={handleOnClick} >
+            <IconButton className="user-edit__button" onClick={handleOnClick}>
               <EditOutlinedIcon />
             </IconButton>
             <IconButton className="user-delete__button" onClick={deleteMajorr}>
               <DeleteForeverOutlinedIcon />
             </IconButton>
           </>
-        );
-      },
-    },
-  ];
-  const rows = [];
+        )
+      }
+    }
+  ]
+  const rows = []
   for (let i = 0; i < locationList.length; i++) {
     rows.push({
       stt: i + 1,
       District: locationList[i].district.name,
       Province: locationList[i].district.province.name,
       Country: locationList[i].district.province.countries.name,
-      StreetName:locationList[i].address,
-      NoteAddress:locationList[i].note,
-    });
+      StreetName: locationList[i].address,
+      NoteAddress: locationList[i].note
+    })
   }
-  console.log(locationList)
   // const idDistrict = [];
   // for (let i = 0; i < locationList.length; i++) {
   //   idDistrict.push(locationList[i].district.id)
@@ -83,7 +83,7 @@ const LocationTable = () => {
     <>
       <DataTable rows={rows} columns={columns} />
     </>
-  );
-};
+  )
+}
 
-export default LocationTable;
+export default LocationTable

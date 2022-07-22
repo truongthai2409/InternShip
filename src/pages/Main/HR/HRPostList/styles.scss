@@ -1,17 +1,17 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .hrpost__list {
-    display: flex;
-    min-height: 500px;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 55px;
-    margin-bottom: 40px;
+  display: flex;
+  min-height: 500px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 55px;
+  margin-bottom: 40px;
 
-    .hrpost__list-bt {
-        display: flex;
-        width: 50%;
-        justify-content: right;
-        margin-bottom: 24px;
-    }
+  .hrpost__list-bt {
+    display: flex;
+    width: 50%;
+    justify-content: right;
+    margin-bottom: 24px;
+  }
 }

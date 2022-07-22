@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -11,6 +10,7 @@ const jobSlice = createSlice({
     jobListCompany: [],
     jobListName: [],
     indexCardActive: 0,
+    idJobActive: 0,
     jobDetail: {},
     jobPosition: [],
     status: "fail",
@@ -27,7 +27,10 @@ const jobSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
       state.jobList = payload;
-      state.jobDetail = payload[0];
+      if (payload.length > 0) {
+        state.jobDetail = payload[0];
+      } else {
+      }
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
@@ -37,6 +40,13 @@ const jobSlice = createSlice({
       state.jobList = payload;
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
+      state.jobListName = payload;
+      if (payload.length > 0) {
+        state.jobDetail = payload[0];
+      } else {
+      }
+    });
+    builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.length > 0) {
         state.jobDetail = payload[0];
@@ -84,7 +94,21 @@ export const getJobByName = createAsyncThunk(
   "job/getJobByName",
   async (jobName) => {
     return axios
-      .get(`${baseURL}/api/job/search?q=${jobName}`)
+      .get(`${baseURL}/api/r2s/job/search?name=${jobName}`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getJobByNameAndLocation = createAsyncThunk(
+  "job/getJobByNameAndLocation",
+  async (jobName, location) => {
+    return axios
+      .get(`${baseURL}/api/job/search?name=${jobName}&location=${location}`)
       .then((response) => {
         return response.data;
       })

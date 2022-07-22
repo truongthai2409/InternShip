@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Button from "../Button";
@@ -57,13 +57,15 @@ const InformationCompany = ({ jobDetail }) => {
           <Icon className="detail__card-4-item-icon">
             <WorkIcon />
           </Icon>
-          <h6 className="detail__card-4-item-info">{jobDetail.jobType.name}</h6>
+          <h6 className="detail__card-4-item-info">
+            {jobDetail.jobType?.name}
+          </h6>
         </div>
         <div className="detail__card-4-item">
           <AddLocationIcon className="detail__card-4-item-icon">
             <WorkIcon />
           </AddLocationIcon>
-          <h6 className="detail__card-4-item-info">{`${jobDetail.locationjob?.address},${jobDetail.locationjob?.district?.name},${jobDetail.locationjob?.district?.province?.name}`}</h6>
+          <h6 className="detail__card-4-item-info">{`${jobDetail.locationjob?.address}, ${jobDetail.locationjob?.district?.name}, ${jobDetail.locationjob?.district?.province?.name}`}</h6>
         </div>
       </div>
       <div className="detail__card-5">

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import WorkIcon from "@mui/icons-material/Work";
@@ -31,7 +30,7 @@ const JobCandidate = ({ job }) => {
           id="job__candidate-infor-name"
           className="job__candidate-infor job__candidate-infor-name-job"
         >
-          {job?.name}
+          {job.name}
         </h4>
         <div className="job__candidate-infor job__candidate-infor-time">
           <Icon className="job__candidate-info-item-icon">
@@ -42,25 +41,26 @@ const JobCandidate = ({ job }) => {
             {moment(job.timeEndStr).format("DD/MM/YYYY")}
           </h6>
         </div>
-
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <WorkIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">{job.jobType}</h6>
+          <h6 className="card-content-job-candidate">{job.jobType.name}</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <CurrencyExchangeIcon fontSize="small" />
           </Icon>
 
-          <h6 className="card-content-job-candidate">{job?.salaryMin} $</h6>
+          <h6 className="card-content-job-candidate">{job.salaryMin} $</h6>
         </div>
         <div className="job__candidate-infor">
           <Icon className="job__candidate-info-item-icon">
             <AddLocationIcon fontSize="small" />
           </Icon>
-          <h6 className="card-content-job-candidate">{job.locationjob}</h6>
+          <h6 className="card-content-job-candidate">
+            {job.locationjob.address}
+          </h6>
         </div>
       </div>
     </Box>

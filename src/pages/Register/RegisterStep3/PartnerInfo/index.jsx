@@ -1,62 +1,62 @@
-import React from "react";
-import "./styles.scss";
-import ArrowButton from "../../../../components/ArrowButton/index";
-import Button from "../../../../components/Button";
-import CustomInput from "../../../../components/CustomInput/index";
-import Select from "../../../../components/Select";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { addUniversity } from "src/store/slices/Admin/university/unversitySlice";
-import { useDispatch, useSelector } from "react-redux";
-import { genderList, schoolList, schema, roleAtSchool } from "./data";
-import { errorSelector } from "src/store/selectors/main/registerSelectors";
-import SelectCustom from "../../../../components/Select";
-import CustomTextarea from "src/components/CustomTextarea";
-import axios from "axios";
+import React from 'react'
+import './styles.scss'
+import ArrowButton from '../../../../components/ArrowButton/index'
+import Button from '../../../../components/Button'
+import CustomInput from '../../../../components/CustomInput/index'
+import Select from '../../../../components/Select'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { addUniversity } from 'src/store/slices/Admin/university/unversitySlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { genderList, schema } from './data'
+import { errorSelector } from 'src/store/selectors/main/registerSelectors'
+import CustomTextarea from 'src/components/CustomTextarea'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const PartnerInfo = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const errorMessage = useSelector(errorSelector);
+  TabTitle('Đăng ký - Cộng tác viên trường')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const errorMessage = useSelector(errorSelector)
 
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  const handleBackClick = e => {
+    e.preventDefault()
+    navigate(-1)
+  }
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
-    console.log(data);
-    console.log("test");
-    console.log(data.avatar[0]);
+    console.log(data)
+    console.log('test')
+    console.log(data.avatar[0])
     const partnerData = {
       university: JSON.stringify({
-        name: "Truong Dai hoc Bach Khoa Ho Chi Minh",
-        shortName: "HCMUT",
+        name: data.schoolName,
+        shortName: data.shortName,
         email: data.emailSchool,
         description: data.description,
         website: data.website,
         phone: data.phoneSchool,
         majors: [
           {
-            id: 1,
+            id: 1
           }
         ],
         location: [
           {
             district: {
-              id: 2,
+              id: 2
             },
-            address: "HCM",
-            note: "Truong Top 1 VN",
-          },
-        ],
+            address: 'HCM',
+            note: 'Truong Top 1 VN'
+          }
+        ]
       }),
       avatarUser: data.avatar[0],
       logo: data.logo[0],
       partner: JSON.stringify({
-        position: "quản lý",
+        position: data.position,
         userCreationDTO: {
           username: data.username,
           password: data.password,
@@ -69,21 +69,19 @@ const PartnerInfo = () => {
           role: {
             id: 4
           }
-        },
-      }),
-    };
-    console.log(partnerData);
-
-    dispatch(addUniversity({ partnerData, navigate }));
-  };
+        }
+      })
+    }
+    dispatch(addUniversity(partnerData))
+  }
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
   return (
     <div className="reg-partner">
@@ -204,25 +202,33 @@ const PartnerInfo = () => {
         </CustomInput>
 
         <div className="section-input__container">
-          <SelectCustom
-            label="Trường"
-            options={schoolList}
-            id="shortName"
-            register={register}
-          />
-          {errors.shortName?.message}
-
-          <SelectCustom
-            label="Vai trò tại trường"
-            id="position"
-            options={roleAtSchool}
-            placeholder="Vị trí"
+          <CustomInput
+            label="Tên trường"
+            type="text"
+            id="schoolName"
             register={register}
           >
-            {errors.position?.message}
-          </SelectCustom>
+            {errors.schoolName?.message}
+          </CustomInput>
+          <CustomInput
+            label="Tên viết tắc của trường"
+            type="text"
+            id="shortName"
+            register={register}
+          >
+            {errors.shortName?.message}
+          </CustomInput>
         </div>
 
+        <CustomInput
+          label="Vai trò tại trường"
+          id="position"
+          type="text"
+          placeholder="Vai trò tại trường"
+          register={register}
+        >
+          {errors.position?.message}
+        </CustomInput>
         <div className="section-input__container">
           <CustomInput
             label="Email của Trường"
@@ -270,7 +276,7 @@ const PartnerInfo = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default PartnerInfo;
+export default PartnerInfo

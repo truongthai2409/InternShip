@@ -1,11 +1,10 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
-.data-table{
-  padding:10px;
+.data-table {
+  padding: 10px;
   border-radius: 10px;
-  margin-top:30px;
-  
-  
+  margin-top: 30px;
+
   .data-table_container {
     background-color: $color-white-0;
     // height: 650px;
@@ -14,15 +13,15 @@
       color: $color-white-0;
       font-size: 17;
       // &:hover{
-      //   background-color: rgb(244, 246, 248); 
+      //   background-color: rgb(244, 246, 248);
       // }
     }
-    .css-imf0nl-MuiDataGrid-root{
+    .css-imf0nl-MuiDataGrid-root {
       border: none !important;
       font-family: $f-family-1;
       font-size: 15px;
     }
-    
+
     .MuiDataGrid-columnHeaders {
       border-radius: 5px;
       // background-color: rgb(244, 246, 248);
@@ -40,11 +39,8 @@
     font-size: $fs-24;
     font-weight: 400;
   }
-
-  
-
 }
 
-.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
   color: $primary-color !important;
 }

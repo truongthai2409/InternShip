@@ -1,18 +1,17 @@
-import React from "react";
-import { Avatar, Tooltip, IconButton, Badge, Hidden } from "@mui/material";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
+import React from 'react'
+import { Avatar, Tooltip, IconButton, Badge, Hidden } from '@mui/material'
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
+import ViewQuiltOutlinedIcon from '@mui/icons-material/ViewQuiltOutlined'
 
-import "./styles.scss";
-import adminLogo from "../../assets/img/logo_admin_green.png";
+import './styles.scss'
+import adminLogo from '../../assets/img/logo_admin_green.png'
 
 const AdminNav = ({ openDrawer, setOpenDrawer }) => {
   //
   const handleOpenDrawer = () => {
-    setOpenDrawer(!openDrawer);
-  };
-
+    setOpenDrawer(!openDrawer)
+  }
   return (
     <>
       <div className="admin-navbar">
@@ -56,7 +55,7 @@ const AdminNav = ({ openDrawer, setOpenDrawer }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AdminNav;
+export default AdminNav

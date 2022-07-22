@@ -55,11 +55,11 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const handleShow = () => {
-    setIsUpdate(!isUpdate);
-  };
+    setIsUpdate(!isUpdate)
+  }
 
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getUserById(idUser));
   }, []);
 
@@ -78,8 +78,8 @@ const Profile = () => {
           fz="14px"
         />
       </>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -157,7 +157,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

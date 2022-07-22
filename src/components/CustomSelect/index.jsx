@@ -1,33 +1,43 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react'
+import './styles.scss'
 
 const CustomSelect = React.forwardRef(
   (
-    { onBlur, register, name, label, selectOptions, getDistrictList, dispatch=()=>{}, id, children },
+    {
+      onBlur,
+      register,
+      name,
+      label,
+      selectOptions,
+      getDistrictList,
+      dispatch = () => {},
+      id,
+      children
+    },
     ref
   ) => {
     // render option
     const renderSelectOption = () => {
       if (selectOptions) {
-        return selectOptions.map((item) => {
+        return selectOptions.map(item => {
           return (
             <option value={item.id} key={item.id}>
               {item.name}
             </option>
-          );
-        });
+          )
+        })
       }
-    };
+    }
 
     // handle change district
-    const handleChangeDistrict = (e) => {
+    const handleChangeDistrict = e => {
       // console.log(e.target.value);
-      dispatch(getDistrictList(e.target.value));
-    };
+      dispatch(getDistrictList(e.target.value))
+    }
 
-    const handleChange = (e) => {
-      console.log(e.target.value);
-    };
+    const handleChange = e => {
+      console.log(e.target.value)
+    }
 
     return (
       <>
@@ -47,8 +57,8 @@ const CustomSelect = React.forwardRef(
           <p className="custom-input__error">{children}</p>
         </div>
       </>
-    );
+    )
   }
-);
+)
 
-export default CustomSelect;
+export default CustomSelect

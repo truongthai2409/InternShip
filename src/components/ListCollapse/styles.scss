@@ -1,31 +1,29 @@
-@use "../../assets/styles" as *;
-
-
+@use '../../assets/styles' as *;
 
 .listTitle {
-    .css-10hburv-MuiTypography-root {
-        font-size: 16px;
-        color: $primary-color;
-        font-weight: 700;
-    }
+  .css-10hburv-MuiTypography-root {
+    font-size: 16px;
+    color: $primary-color;
+    font-weight: 700;
+  }
 }
 
 .css-cveggr-MuiListItemIcon-root {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .css-j204z7-MuiFormControlLabel-root {
-    width: 100%;
-    margin: 0;
+  width: 100%;
+  margin: 0;
 }
 
 .css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root {
-    height: 65px !important;
-} 
+  height: 65px !important;
+}
 
 .css-1eyyxxn-MuiList-root {
-    padding: 0 !important;
-    margin-bottom: 24px !important;
+  padding: 0 !important;
+  margin-bottom: 24px !important;
 }

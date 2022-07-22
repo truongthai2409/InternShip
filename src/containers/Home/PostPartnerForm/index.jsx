@@ -67,7 +67,6 @@ const PostPartnerForm = (props) => {
       }),
       fileSV: data.fileSV[0],
     };
-    console.log(jobData);
 
     dispatch(addDemand(jobData));
   };
@@ -184,14 +183,14 @@ const PostPartnerForm = (props) => {
                 </CustomTextarea>
               </div>
               <CustomInput
-                  label="Danh sách sinh viên"
-                  id="fileSV"
-                  type="file"
-                  placeholder=""
-                  register={register}
-                >
-                  {errors.fileSV?.message}
-                </CustomInput>
+                label="Danh sách sinh viên"
+                id="fileSV"
+                type="file"
+                placeholder=""
+                register={register}
+              >
+                {errors.fileSV?.message}
+              </CustomInput>
               <div className="partner-post__action">
                 <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
               </div>

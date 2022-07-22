@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react'
+import './styles.scss'
 
 export default function ButtonOutline({
   className,
@@ -17,7 +17,7 @@ export default function ButtonOutline({
   return (
     <button
       onClick={onClick || (() => {})}
-      className={`btn-outline ${className ? className : ""}`}
+      className={`btn-outline ${className ? className : ''}`}
       style={{
         width: width ? width : "",
         height: height ? height : "",
@@ -28,8 +28,8 @@ export default function ButtonOutline({
         borderRadius: radius ? radius : "",
       }}
     >
-      {icon ? icon : ""}
+      {icon ? icon : ''}
       {name}
     </button>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-@use "../../assets/styles" as *;
+@use '../../assets/styles' as *;
 
 .avatar_img {
   height: 100%;
@@ -15,7 +15,7 @@
   font-size: 16px;
   font-weight: normal;
 
-  >span {
+  > span {
     font-weight: 700;
   }
 }

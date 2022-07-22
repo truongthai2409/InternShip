@@ -1,11 +1,10 @@
-import React from "react";
-import PostJobForm from "../../../../containers/Home/PostJobForm"
-
+import React from 'react'
+import { TabTitle } from 'src/utils/GeneralFunctions'
+import PostJobForm from '../../../../containers/Home/PostJobForm'
 
 const HRPost = () => {
-    return (
-        <PostJobForm />
-    )
-};
+  TabTitle('Đăng bài | IT Internship JOBS')
+  return <PostJobForm />
+}
 
-export default HRPost;
+export default HRPost

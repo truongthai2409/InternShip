@@ -4,16 +4,16 @@ import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     userList: [],
     user: {},
     notification: {},
     page: 0,
-    error: [],
+    error: []
   },
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
       state.userList = payload.users;
     });
@@ -27,18 +27,18 @@ const userSlice = createSlice({
   },
 });
 
-export default userSlice;
+export default userSlice
 
-export const getUserList = createAsyncThunk("user/getUserList", async () => {
+export const getUserList = createAsyncThunk('user/getUserList', async () => {
   return await axios
     .get(`${baseURL}/api/user`)
-    .then((response) => {
-      return response.data;
+    .then(response => {
+      return response.data
     })
-    .catch((error) => {
-      return error;
-    });
-});
+    .catch(error => {
+      return error
+    })
+})
 
 export const getUserById = createAsyncThunk(
   "user/getUserById",
@@ -48,9 +48,6 @@ export const getUserById = createAsyncThunk(
       .then((response) => {
         return response.data;
       })
-      .catch((error) => {
-        return error;
-      });
   }
 );
 

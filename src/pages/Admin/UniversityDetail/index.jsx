@@ -1,11 +1,11 @@
-import React from "react";
-import { Paper } from "@mui/material";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Paper } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-import "./styles.scss";
+import './styles.scss'
 // import companyLogo from "../../../assets/img/camera.png";
 // import CustomInput from "../../../components/CustomInput";
-import UniversityForm from "../../../containers/Admin/UniversityForm";
+import UniversityForm from '../../../containers/Admin/UniversityForm'
 
 const UniversityDetail = () => {
   return (
@@ -20,7 +20,7 @@ const UniversityDetail = () => {
         <UniversityForm isAdd={false} />
       </Paper>
     </div>
-  );
-};
+  )
+}
 
-export default UniversityDetail;
+export default UniversityDetail

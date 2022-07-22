@@ -20,10 +20,10 @@ function SearchResultHome({
 }) {
   const [searchValue, setSearchValue] = useState("");
   const query = useQuery();
-  useEffect(() => {
-    const { q = "" } = query;
-    setSearchValue(q);
-  }, [query]);
+  // useEffect(() => {
+  //   const { name = "", location = "" } = query;
+  //   setSearchValue(name, location);
+  // }, [query]);
 
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
@@ -33,7 +33,6 @@ function SearchResultHome({
     event.preventDefault();
     onClick && onClick(searchValue);
   };
-  // console.log(searchValue);
   return (
     <div className="header__with-search onMobile onTablet">
       <form

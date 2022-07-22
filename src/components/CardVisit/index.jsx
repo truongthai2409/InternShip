@@ -1,16 +1,16 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import "./styles.scss";
-import Button from "../Button";
-import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
-import { Link } from "react-router-dom";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import LanguageIcon from "@mui/icons-material/Language";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import PropTypes from "prop-types";
+import * as React from 'react'
+import Card from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+import './styles.scss'
+import Button from '../Button'
+import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice'
+import { Link } from 'react-router-dom'
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk'
+import LanguageIcon from '@mui/icons-material/Language'
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
+import PropTypes from 'prop-types'
 
 export default function CardVisit(props) {
   return (
@@ -64,7 +64,7 @@ export default function CardVisit(props) {
         </CardActions>
       </Card>
     </div>
-  );
+  )
 }
 
 CardVisit.propTypes = {
@@ -73,5 +73,5 @@ CardVisit.propTypes = {
   emailCompany: PropTypes.string.isRequired,
   phoneCompany: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   website: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-};
+  location: PropTypes.string.isRequired
+}

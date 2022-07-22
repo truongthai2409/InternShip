@@ -1,50 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import DoDisturbAltIcon from "@mui/icons-material/DoDisturbAlt";
-import { IconButton, Tooltip } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt'
+import { IconButton, Tooltip } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
 
-import "./styles.scss";
-import DataTable from "../../../../components/Table";
+import './styles.scss'
+import DataTable from '../../../../components/Table'
 import {
   getCompanyList,
   updateCompanyInfo,
-  deleteCompany,
-} from "../../../../store/slices/Admin/company/companySlice";
-import ProfileTable from "../../../../components/ProfileTable";
+  deleteCompany
+} from '../../../../store/slices/Admin/company/companySlice'
+import ProfileTable from '../../../../components/ProfileTable'
 
 const CompanyTable = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const { companyList } = useSelector((state) => state.company);
+  const { companyList } = useSelector(state => state.company)
 
   useEffect(() => {
-    dispatch(getCompanyList());
-  }, []);
+    dispatch(getCompanyList())
+  }, [])
 
   // console.log(companyList);
 
   const columns = [
-    { field: "stt", headerName: "#", width: 70 },
+    { field: 'stt', headerName: '#', width: 70 },
     {
-      field: "name",
-      headerName: "Công ty",
+      field: 'name',
+      headerName: 'Công ty',
       width: 380,
-      renderCell: (params) => {
-        const { row } = params;
-        return <ProfileTable row={row} />;
-      },
+      renderCell: params => {
+        const { row } = params
+        return <ProfileTable row={row} />
+      }
     },
     {
-      field: "tax",
-      headerName: "Mã số thuế",
+      field: 'tax',
+      headerName: 'Mã số thuế',
       flex: 1,
-      renderCell: (params) => {
-        const { row } = params;
+      renderCell: params => {
+        const { row } = params
         // console.log(row.email);
         return (
           <a
@@ -53,17 +53,17 @@ const CompanyTable = () => {
           >
             {row.tax}
           </a>
-        );
-      },
+        )
+      }
     },
-    { field: "date", headerName: "Ngày tạo", flex: 1 },
+    { field: 'date', headerName: 'Ngày tạo', flex: 1 },
     {
-      field: "status",
-      headerName: "Trạng thái",
+      field: 'status',
+      headerName: 'Trạng thái',
       flex: 1,
-      renderCell: (params) => {
-        const { row } = params;
-        const handleChangeStatus = (e) => {
+      renderCell: params => {
+        const { row } = params
+        const handleChangeStatus = e => {
           const updateData = {
             companyData: {
               company: JSON.stringify({
@@ -75,21 +75,21 @@ const CompanyTable = () => {
                 tax: row.tax,
                 website: row.website,
                 status: {
-                  id: parseInt(e.target.value),
-                },
+                  id: parseInt(e.target.value)
+                }
               }),
-              fileLogo: null,
+              fileLogo: null
             },
-            comid: row.id,
-          };
-          dispatch(updateCompanyInfo(updateData));
-        };
+            comid: row.id
+          }
+          dispatch(updateCompanyInfo(updateData))
+        }
         return (
           <select
             name="status"
             id="status"
             value={row.status ? row.status.id : 2}
-            onChange={(e) => handleChangeStatus(e)}
+            onChange={e => handleChangeStatus(e)}
             className="company-table__select"
           >
             <option value={2}>Not verified</option>
@@ -97,24 +97,24 @@ const CompanyTable = () => {
             <option value={3}>Block</option>
             <option value={4}>Disable</option>
           </select>
-        );
-      },
+        )
+      }
     },
     {
-      field: "action",
-      headerName: "Actions",
+      field: 'action',
+      headerName: 'Actions',
       width: 120,
       sortable: false,
-      renderCell: (params) => {
-        const { row } = params;
+      renderCell: params => {
+        const { row } = params
         const handleClick = () => {
           // console.log(row);
-          navigate(`/admin/company/${row.id}`);
-        };
+          navigate(`/admin/company/${row.id}`)
+        }
 
         const handleDelete = () => {
-          dispatch(deleteCompany(row.id));
-        };
+          dispatch(deleteCompany(row.id))
+        }
         return (
           <>
             <Tooltip title="Chi tiết">
@@ -131,12 +131,12 @@ const CompanyTable = () => {
               </IconButton>
             </Tooltip>
           </>
-        );
-      },
-    },
-  ];
+        )
+      }
+    }
+  ]
 
-  const rows = [];
+  const rows = []
   for (let i = 0; i < companyList.length; i++) {
     rows.push({
       id: companyList[i].id,
@@ -146,18 +146,18 @@ const CompanyTable = () => {
       email: companyList[i].email,
       tax: companyList[i].tax,
       date: companyList[i].date
-        ? moment(companyList[i].date).format("DD/MM/YYYY")
-        : moment().format("DD/MM/YYYY"),
+        ? moment(companyList[i].date).format('DD/MM/YYYY')
+        : moment().format('DD/MM/YYYY'),
       status: companyList[i].status,
       description: companyList[i].description,
-      logo: companyList[i].logo,
-    });
+      logo: companyList[i].logo
+    })
   }
   return (
     <>
       <DataTable rows={rows} columns={columns} />
     </>
-  );
-};
+  )
+}
 
-export default CompanyTable;
+export default CompanyTable

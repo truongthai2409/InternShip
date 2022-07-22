@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import "./styles.scss";
+import './styles.scss'
 
 const Button = ({
   className,
@@ -17,12 +17,12 @@ const Button = ({
     <>
       <button
         className={`button ${className ? className : ""}`}
-        onClick={onClick || (() => {console.log("first")})}
+        onClick={onClick || (() => {console.log()})}
         style={{
-          width: bwidth ? `${bwidth}` : "",
-          height: bheight ? `${bheight}` : "",
-          fontSize: fz ? fz : "",
-          outline: outline ? outline : ""
+          width: bwidth ? `${bwidth}` : '',
+          height: bheight ? `${bheight}` : '',
+          fontSize: fz ? fz : '',
+          outline: outline ? outline : ''
         }}
         type="submit"
       >
@@ -31,7 +31,7 @@ const Button = ({
         {children}
       </button>
     </>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

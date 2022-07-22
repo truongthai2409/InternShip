@@ -1,40 +1,40 @@
-import React, { useState } from "react";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import React, { useState } from 'react'
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
-import CompanyForm from "../../../containers/Admin/CompanyForm";
-import CompanyTable from "./CompanyTable";
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
+import Modal from '../../../components/Modal'
+import CompanyForm from '../../../containers/Admin/CompanyForm'
+import CompanyTable from './CompanyTable'
 
 const selectOptions = [
   {
-    value: "All",
-    name: "All",
+    value: 'All',
+    name: 'All'
   },
   {
-    value: "HR",
-    name: "HR",
+    value: 'HR',
+    name: 'HR'
   },
   {
-    value: "Candidate",
-    name: "Candidate",
+    value: 'Candidate',
+    name: 'Candidate'
   },
   {
-    value: "Partner",
-    name: "Partner",
-  },
-];
+    value: 'Partner',
+    name: 'Partner'
+  }
+]
 
 export default function Company() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const handleSearch = (e) => {
+  const handleSearch = e => {
     // console.log(e.target.value);
-  };
+  }
 
   const handleOpenModal = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   return (
     <>
@@ -53,5 +53,5 @@ export default function Company() {
         <CompanyForm isAdd={true} />
       </Modal>
     </>
-  );
+  )
 }

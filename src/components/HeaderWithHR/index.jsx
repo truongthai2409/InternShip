@@ -19,9 +19,10 @@ function HeaderWithHR(props) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
-
+  // console.log(idUser)
+  
   useEffect(() => {
+    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getUserById(idUser));
   }, []);
 
@@ -63,7 +64,7 @@ function HeaderWithHR(props) {
           </Link>
         </div>
         <div className="header__hr-icon-config">
-          <Link to={`${pathUrl}/`}>
+          <Link to={`${pathUrl}`}>
             <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
             {props.isNoti ? (
               <FiberManualRecordIcon
@@ -80,7 +81,7 @@ function HeaderWithHR(props) {
             display: "flex",
             alignItems: "center",
             paddingLeft: "12px",
-            paddingRight: "12px"
+            paddingRight: "12px",
           }}
         >
           <h4 className="name">Chào, {user.user?.firstName}</h4>

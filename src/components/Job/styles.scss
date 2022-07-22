@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .job__candidate {
   margin-top: 12px;
@@ -12,7 +12,7 @@
     }
 
     &-name-job {
-      font-family: "Open Sans";
+      font-family: 'Open Sans';
       font-style: normal;
       font-weight: 700;
       font-size: 16px;

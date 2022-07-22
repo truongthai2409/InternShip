@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .reg-hr {
   width: 100%;
@@ -41,7 +41,7 @@
   }
 
   .MuiFormControl-root.MuiFormControl-fullWidth.css-q8hpuo-MuiFormControl-root {
-    font-family: "Public Sans", sans-serif;
+    font-family: 'Public Sans', sans-serif;
     border: 1.6px solid $primary-color;
     border-radius: 5px;
     height: 60.5px !important;

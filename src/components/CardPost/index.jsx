@@ -1,10 +1,10 @@
-import "./styles.scss";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DoorFrontIcon from "@mui/icons-material/DoorFront";
-import PostStatus from "../PostStatus";
-import ButtonAction from "../ButtonAction";
-import moment from "moment";
+import './styles.scss'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
+import DoorFrontIcon from '@mui/icons-material/DoorFront'
+import PostStatus from '../PostStatus'
+import ButtonAction from '../ButtonAction'
+import moment from 'moment'
 
 const CardPost = (props) => {
     return (
@@ -55,7 +55,7 @@ const CardPost = (props) => {
                 />
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default CardPost;
+export default CardPost

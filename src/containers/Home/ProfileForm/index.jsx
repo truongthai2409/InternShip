@@ -111,7 +111,7 @@ const ProfileForm = ({ onClick }) => {
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />
-          <span style={{ margin: "0 4px" }}></span>
+          <span style={{ margin: '0 4px' }}></span>
           <ButtonOutline
             name="Hủy"
             onClick={onClick}
@@ -124,7 +124,7 @@ const ProfileForm = ({ onClick }) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default ProfileForm;
+export default ProfileForm

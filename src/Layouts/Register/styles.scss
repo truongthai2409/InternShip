@@ -1,15 +1,15 @@
 @use '../../assets/styles/' as *;
 
 .register-layout {
-    width: 100%;
-    min-height: 100vh;
-    height: max-content;
-    background-color: $primary-color;
-    padding: 36px;
-    text-align: center;
-    padding-top: 50px;
+  width: 100%;
+  min-height: 100vh;
+  height: max-content;
+  background-color: $primary-color;
+  padding: 36px;
+  text-align: center;
+  padding-top: 50px;
 
-    .register-container {
-        width: 80%;
-    }
+  .register-container {
+    width: 80%;
+  }
 }
