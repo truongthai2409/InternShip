@@ -1,65 +1,64 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Avatar, Grid, Switch } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Avatar, Grid, Switch } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import './styles.scss'
-import CustomInput from '../../../components/CustomInput'
-import CustomTextarea from '../../../components/CustomTextarea'
-import CustomSelect from '../../../components/CustomSelect'
-import SelectCustom from '../../../components/Select'
-import Button from '../../../components/Button'
-import cameraLogo from '../../../assets/img/camera.png'
-import { schema, renderControlAction } from './script.js'
+import "./styles.scss";
+import CustomInput from "../../../components/CustomInput";
+import CustomTextarea from "../../../components/CustomTextarea";
+import CustomSelect from "../../../components/CustomSelect";
+import SelectCustom from "../../../components/Select";
+import Button from "../../../components/Button";
+import cameraLogo from "../../../assets/img/camera.png";
+import { schema, renderControlAction } from "./script.js";
 import {
   addCompany,
   getCompanyDetail,
-  updateCompanyInfo
-} from '../../../store/slices/Admin/company/companySlice'
+  updateCompanyInfo,
+} from "../../../store/slices/Admin/company/companySlice";
 import {
   getProvinceList,
   getDistrictList,
-  addLocation
-} from '../../../store/slices/location/locationSlice'
+  addLocation,
+} from "../../../store/slices/location/locationSlice";
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } }
-const baseURL = process.env.REACT_APP_API
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const baseURL = process.env.REACT_APP_API;
 
 export default function CompanyForm(props) {
-  const { isAdd } = props
+  const { isAdd } = props;
 
   // get global state from redux store
-  const { companyDetail, error } = useSelector(state => state.company)
-  const { provinceList, districtList } = useSelector(state => state.location)
-  console.log(provinceList, districtList)
+  const { companyDetail, error } = useSelector((state) => state.company);
+  const { provinceList, districtList } = useSelector((state) => state.location);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    reset
+    reset,
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
   // local state
-  const [image, setImage] = useState(cameraLogo)
-  const [imageFile, setImageFile] = useState(null)
-  const [isEdit, setIsEdit] = useState(isAdd)
+  const [image, setImage] = useState(cameraLogo);
+  const [imageFile, setImageFile] = useState(null);
+  const [isEdit, setIsEdit] = useState(isAdd);
 
-  const fileInput = useRef()
-  const dispatch = useDispatch()
+  const fileInput = useRef();
+  const dispatch = useDispatch();
 
   // get company ID params from URL
-  const { comid } = useParams()
+  const { comid } = useParams();
 
   useEffect(() => {
-    dispatch(getProvinceList())
+    dispatch(getProvinceList());
     // dispatch(getDistrictList(1));
-  }, [])
+  }, []);
 
   /**
    * get company details
@@ -67,9 +66,9 @@ export default function CompanyForm(props) {
    */
   useEffect(() => {
     if (!isAdd) {
-      dispatch(getCompanyDetail(comid))
+      dispatch(getCompanyDetail(comid));
     }
-  }, [isAdd])
+  }, [isAdd]);
 
   /**
    * @dependency companyDetail
@@ -77,34 +76,34 @@ export default function CompanyForm(props) {
    */
   useEffect(() => {
     if (!isAdd) {
-      setImage(`${baseURL}${companyDetail.logo}`)
+      setImage(`${baseURL}${companyDetail.logo}`);
     }
-    setValue('name', isAdd ? '' : companyDetail.name)
-    setValue('description', isAdd ? '' : companyDetail.description)
-    setValue('email', isAdd ? '' : companyDetail.email)
-    setValue('phone', isAdd ? '' : companyDetail.phone)
-    setValue('tax', isAdd ? '' : companyDetail.tax)
-    setValue('website', isAdd ? '' : companyDetail.website)
-  }, [companyDetail])
+    setValue("name", isAdd ? "" : companyDetail.name);
+    setValue("description", isAdd ? "" : companyDetail.description);
+    setValue("email", isAdd ? "" : companyDetail.email);
+    setValue("phone", isAdd ? "" : companyDetail.phone);
+    setValue("tax", isAdd ? "" : companyDetail.tax);
+    setValue("website", isAdd ? "" : companyDetail.website);
+  }, [companyDetail]);
 
   // console.log(error);
 
   // show preview image
-  const showPreviewImage = e => {
+  const showPreviewImage = (e) => {
     if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0]
-      const reader = new FileReader()
-      reader.onload = x => {
+      let imageFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (x) => {
         // console.log(x.target.result);
-        setImageFile(imageFile)
-        setImage(x.target.result)
-      }
-      reader.readAsDataURL(imageFile)
+        setImageFile(imageFile);
+        setImage(x.target.result);
+      };
+      reader.readAsDataURL(imageFile);
     }
-  }
+  };
 
   // handle Submit form
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const companyData = {
       company: JSON.stringify({
         description: data.description,
@@ -113,18 +112,18 @@ export default function CompanyForm(props) {
         name: data.name,
         phone: data.phone,
         tax: data.tax,
-        website: data.website
+        website: data.website,
       }),
       fileLogo: data.logo[0],
       location: JSON.stringify({
         address: data.address,
-        note: 'note'
-      })
-    }
+        note: "note",
+      }),
+    };
 
     if (isAdd) {
-      const addData = { companyData, reset }
-      dispatch(addCompany(addData))
+      const addData = { companyData, reset };
+      dispatch(addCompany(addData));
     } else {
       const updateData = {
         companyData: {
@@ -137,23 +136,23 @@ export default function CompanyForm(props) {
             tax: data.tax,
             website: data.website,
             status: {
-              id: 4
-            }
+              id: 4,
+            },
           }),
-          fileLogo: data.logo[0]
+          fileLogo: data.logo[0],
         },
         setIsEdit,
-        comid
-      }
-      console.log(updateData)
-      dispatch(updateCompanyInfo(updateData))
+        comid,
+      };
+      console.log(updateData);
+      dispatch(updateCompanyInfo(updateData));
     }
-  }
+  };
 
   // Click to Edit
   const handleOnClickEdit = () => {
-    setIsEdit(!isEdit)
-  }
+    setIsEdit(!isEdit);
+  };
 
   // handle change district
   // const handleChangeDistrict = (e) => {
@@ -183,7 +182,7 @@ export default function CompanyForm(props) {
                 id="logo"
                 type="file"
                 name="logo"
-                {...register('logo')}
+                {...register("logo")}
                 onChange={showPreviewImage}
                 // ref={fileInput}
               />
@@ -341,5 +340,5 @@ export default function CompanyForm(props) {
         </div>
       ) : null}
     </form>
-  )
+  );
 }

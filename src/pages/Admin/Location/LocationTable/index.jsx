@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from 'react'
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
-import { IconButton, Tooltip } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
 import './styles.scss'
 import DataTable from '../../../../components/Table'
-import {
-  getProviceList,
-  getLocationList,
-  getDistrictById
-} from '../../../../store/slices/location/locationSlice'
-import { isDisabled } from '@testing-library/user-event/dist/utils'
-import axios from 'axios'
+import { getLocationList } from '../../../../store/slices/location/locationSlice'
 
 const LocationTable = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { districtById, locationList } = useSelector(state => state.location)
+  const { locationList } = useSelector(state => state.location)
   useEffect(() => {
     dispatch(getLocationList())
   }, [])
@@ -74,7 +68,6 @@ const LocationTable = () => {
       NoteAddress: locationList[i].note
     })
   }
-  console.log(locationList)
   // const idDistrict = [];
   // for (let i = 0; i < locationList.length; i++) {
   //   idDistrict.push(locationList[i].district.id)

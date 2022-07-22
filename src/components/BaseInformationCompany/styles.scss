@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .base__information {
   padding: 3px;
@@ -6,7 +6,7 @@
   .company-name {
     text-align: center;
     width: auto;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -47,7 +47,7 @@
 
 .intro__company {
   &-title {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -62,7 +62,7 @@
   }
 
   &-detail {
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
