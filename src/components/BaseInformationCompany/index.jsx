@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
 import { Link } from "react-router-dom";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import { Typography } from "@mui/material";
 
 function BaseInformationCompany(props) {
   const dispatch = useDispatch();
@@ -32,11 +33,31 @@ function BaseInformationCompany(props) {
           <div className="base__information-card-detail">
             <div className="">
               <h5>Mã số thuế: </h5>
-              <p>{jobDetail?.hr?.company.tax}</p>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                }}
+              >
+                {jobDetail?.hr?.company.tax}
+              </Typography>
             </div>
             <div className="">
               <h5>Số điện thoại: </h5>
-              <p>{jobDetail?.hr?.company.phone}</p>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                }}
+              >
+                {jobDetail?.hr?.company.phone}
+              </Typography>
             </div>
             <div className="">
               <h5>
@@ -59,7 +80,17 @@ function BaseInformationCompany(props) {
 
               <div className=" base__information-card-detail-location">
                 <h5 className="">Địa điểm:</h5>
-                <p className="">{`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}</p>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontSize: 17,
+                    fontWeight: "400",
+                    transform: "translate(5px,5px)",
+                  }}
+                >
+                  {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
+                </Typography>
               </div>
             </div>
 
@@ -71,7 +102,17 @@ function BaseInformationCompany(props) {
                   readOnly
                   defaultValue={jobDetail?.hr?.company.rates.length}
                 />
-                <p>5.0 trong 48 lượt đánh giá</p>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontSize: 17,
+                    fontWeight: "400",
+                    transform: "translate(5px,5px)",
+                  }}
+                >
+                  5.0 trong 48 lượt đánh giá
+                </Typography>
               </div>
             ) : (
               ""
@@ -80,9 +121,17 @@ function BaseInformationCompany(props) {
         </div>
         <div className="intro__company">
           <h5 className="intro__company-title">Giới thiệu về công ty</h5>
-          <p className="intro__company-detail">
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              fontSize: 17,
+              fontWeight: "400",
+              transform: "translate(5px,5px)",
+            }}
+          >
             {jobDetail?.hr?.company.description}
-          </p>
+          </Typography>
         </div>
         <div className="job-applying-container">
           <h5 className="intro__company-title">Việc làm đang tuyển</h5>
@@ -100,7 +149,7 @@ function BaseInformationCompany(props) {
                 <JobCandidate job={job} />
               </Grid>;
             })} */}
-            {jobListCompany.map((job) => (
+            {jobListCompany?.map((job) => (
               <Grid item lg="auto" md="auto" sm="auto" xs="auto">
                 <JobCandidate job={job} key={job.id} />
               </Grid>

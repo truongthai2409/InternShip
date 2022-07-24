@@ -1,7 +1,8 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .feedback {
   &__container {
+    border-radius: 5px;
     background-color: $color-white-0;
     width: 100%;
     min-height: 30vh;
@@ -15,6 +16,7 @@
 
     &-title {
       color: $primary-color;
+      font-size: 22px;
     }
 
     &-content {
@@ -29,6 +31,11 @@
     margin: 20px;
     grid-template-columns: auto auto;
     grid-gap: 20px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   &-chart {
@@ -54,5 +61,6 @@
     justify-content: center;
     align-items: center;
     margin: 20px;
+    transform: translateX(-8px);
   }
 }

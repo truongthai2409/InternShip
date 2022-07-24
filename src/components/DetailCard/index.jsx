@@ -54,7 +54,6 @@ const DetailCard = (props) => {
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  let listTagName = [];
 
   useEffect(() => {
     setJobType(jobDetail?.jobType);

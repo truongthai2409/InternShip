@@ -1,8 +1,6 @@
-import { IconButton } from "@mui/material";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/";
 import "./styles.scss";
 import SelectAreaHome from "../SelectAreaHome";
@@ -20,10 +18,10 @@ function SearchResultHome({
 }) {
   const [searchValue, setSearchValue] = useState("");
   const query = useQuery();
-  // useEffect(() => {
-  //   const { name = "", location = "" } = query;
-  //   setSearchValue(name, location);
-  // }, [query]);
+  useEffect(() => {
+    const { name = "" } = query;
+    setSearchValue(name);
+  }, [query]);
 
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
@@ -33,6 +31,7 @@ function SearchResultHome({
     event.preventDefault();
     onClick && onClick(searchValue);
   };
+
   return (
     <div className="header__with-search onMobile onTablet">
       <form

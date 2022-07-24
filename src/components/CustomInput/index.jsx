@@ -1,8 +1,8 @@
-import React from 'react'
-import './styles.scss'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import { useState } from 'react'
+import React from "react";
+import "./styles.scss";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useState } from "react";
 
 const CustomInput = ({
   label,
@@ -16,27 +16,26 @@ const CustomInput = ({
   defaultValue,
   requirementField = true,
   visibility = false,
-  className
+  className,
 }) => {
-  const [isHide, setIsHide] = useState(false)
+  const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
-    setIsHide(!isHide)
-  }
+    setIsHide(!isHide);
+  };
 
   return (
-    <div className={`custom-input ${className ? className : ''}`}>
+    <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}
       </label>
       <div
         className={
-          check ? 'custom-input__textfield-disabled' : 'custom-input__textfield'
+          check ? "custom-input__textfield-disabled" : "custom-input__textfield"
         }
       >
         <input
-          // type={type === "password" ? (isHide ? "text" : "password") : type}
-          type={type}
+          type={type === "password" ? (isHide ? "text" : "password") : type}
           id={id}
           placeholder={placeholder}
           disabled={check}
@@ -49,14 +48,14 @@ const CustomInput = ({
           <div
             className="visibility-icon"
             onClick={handleHide}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           >
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </div>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CustomInput
+export default CustomInput;

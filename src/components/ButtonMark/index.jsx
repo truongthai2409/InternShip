@@ -8,7 +8,6 @@ import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
 import {
   createMark,
   deleteMark,
-  getMark,
   getMarkByUserAndJob,
 } from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
@@ -18,25 +17,22 @@ const ButtonMark = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathUrl = location.pathname;
-  const [id, setId] = useState();
   const dispatch = useDispatch();
   const [mark, setMark] = useState(false);
 
   // get global state from redux store
-  const { careJob } = useSelector((state) => state.mark);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
     dispatch(getJobByName(""));
-    dispatch(getMark());
-    dispatch(getCandidateByUserName(profile.username));
+    profile.username !== undefined &&
+      dispatch(getCandidateByUserName(profile.username));
   }, [dispatch, profile.username]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
-    setMark(!mark);
 
     if (props.isMark === false) {
       const dataCareList = {
@@ -48,27 +44,29 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-      await dispatch(createMark(dataCareList)).then(
-        toast.success("Đã mark thành công")
-      );
+      await dispatch(createMark(dataCareList))
+        .then(setMark(!mark))
+        .then(toast.success("Đã mark thành công"));
     } else {
-      const dataByUserAndJob = {
-        userName: profile.username,
-        idJob: Number(props.jobId),
-      };
-      await dispatch(getMarkByUserAndJob(dataByUserAndJob));
-      setId(careJob.id);
-      if (id) {
-        dispatch(deleteMark(id));
+      if (profile.role !== undefined && profile.role === "Role_Candidate") {
+        const dataByUserAndJob = {
+          userName: profile.username,
+          idJob: Number(props.jobId),
+        };
+        const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
+        await dispatch(deleteMark(res.payload.id))
+          .then(setMark(!mark))
+          .then(toast.success("Đã xóa mark thành công"));
+        // .then(props.onClick && props.onClick(res.payload.id));
       }
-      toast.success("Đã xóa mark thành công");
     }
   };
 
-  const handleLogin = async () => {
-    if (profile === {}) {
-      toast.success("Bạn cần đăng nhập để đánh dấu công việc");
-      await navigate("/");
+  const handleLogin = async (e) => {
+    e.stopPropagation();
+    if (profile.username === undefined) {
+      toast.success("Bạn cần đăng nhập với candidate để đánh dấu công việc");
+      await navigate("/login");
     } else {
       await navigate("/candidate");
     }

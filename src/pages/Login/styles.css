@@ -1,0 +1,24 @@
+@use '../../assets/styles/' as *;
+.login-form__container {
+  width: 100%;
+}
+
+.login-form__save-pass {
+  width: 100%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  text-align: left;
+}
+
+.login-form__btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 40px;
+}
+/*# sourceMappingURL=styles.css.map */

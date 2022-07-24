@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .elementor-section {
   width: 100%;
@@ -6,9 +6,11 @@
   left: 0;
   right: 0;
   background-color: $primary-color;
+  border-radius: 5px;
 }
 
 #page-footer-wrapper {
+  padding: 32px;
   width: 100%;
 }
 
@@ -66,7 +68,7 @@
   }
 
   & .text {
-    font-size: $fs-14;
+    font-size: $fs-16;
     font-weight: $fw-normal;
     margin-bottom: 0;
     color: rgb(255, 255, 255);
@@ -141,7 +143,7 @@
   .heading-primary-wrap {
     margin-bottom: 10px;
     line-height: 1;
-    font-size: $fs-30;
+    font-size: $fs-24;
 
     & .elementor-heading-title {
       color: #ffffff;

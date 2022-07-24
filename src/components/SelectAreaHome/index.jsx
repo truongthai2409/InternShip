@@ -1,46 +1,43 @@
-import * as React from 'react'
-import { useTheme } from '@mui/material/styles'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
+import * as React from "react";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
-import './styles.scss'
-import { Select } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProvinceList } from '../../store/slices/location/locationSlice'
-const ITEM_HEIGHT = 30
-const ITEM_PADDING_TOP = 0
+import "./styles.scss";
+import { Select } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getProvinceList } from "../../store/slices/location/locationSlice";
+const ITEM_HEIGHT = 30;
+const ITEM_PADDING_TOP = 0;
 const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 70
-    }
-  }
-}
+      width: 70,
+    },
+  },
+};
 
-export default function SelectAreaHome() {
-  const [personName, setPersonName] = React.useState([])
+export default function SelectAreaHome({ onChange }) {
+  const [personName, setPersonName] = React.useState([]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const {
-      target: { value }
-    } = event
+      target: { value },
+    } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    )
-  }
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
-  const dispatch = useDispatch()
-  const { provinceList } = useSelector(state => state.location)
+  const dispatch = useDispatch();
+  const { provinceList } = useSelector((state) => state.location);
 
   React.useEffect(() => {
-    dispatch(getProvinceList())
-  }, [])
-
-  // console.log(provinceList)
+    dispatch(getProvinceList());
+  }, [dispatch]);
 
   return (
     <div>
@@ -52,18 +49,17 @@ export default function SelectAreaHome() {
             labelId="demo-multiple-name-label"
             // id="demo-multiple-name"
             value={personName}
-            defaultValue="TPHCM"
             onChange={handleChange}
             input={<OutlinedInput label="Khu vực" />}
             MenuProps={MenuProps}
             sx={{
-              mr: 0
+              mr: 0,
             }}
             // className={hideIconPadding}
             multiple={false}
             // disabled
           >
-            {provinceList.map(province => (
+            {provinceList.map((province) => (
               <MenuItem
                 key={province.id}
                 value={province.id}
@@ -76,5 +72,5 @@ export default function SelectAreaHome() {
         </div>
       </FormControl>
     </div>
-  )
+  );
 }

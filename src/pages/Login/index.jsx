@@ -1,54 +1,50 @@
-import React from 'react'
-import './styles.scss'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import CustomCheckbox from '../../components/CustomCheckbox'
-import CustomInput from '../../components/CustomInput/index'
-import Button from '../../components/Button/index'
-import { loginUser } from '../../store/slices/main/login/loginSlice'
-import { authenticationSelector } from '../../store/selectors/main/loginSelectors'
-import { schema } from './data'
-import { TabTitle } from 'src/utils/GeneralFunctions'
+import React from "react";
+import "./styles.scss";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import CustomCheckbox from "../../components/CustomCheckbox";
+import CustomInput from "../../components/CustomInput/index";
+import Button from "../../components/Button/index";
+import { loginUser } from "../../store/slices/main/login/loginSlice";
+import { schema } from "./data";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const Login = () => {
-  TabTitle('Login')
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const status = useSelector(authenticationSelector)
-
-  if (status === 'success') {
-    const role = JSON.parse(localStorage.getItem('userPresent')).role
-    console.log(role)
-    switch (role) {
-      case 'Role_HR':
-        navigate(`/hr`, { replace: true })
-        break
-      case 'Role_Partner':
-        navigate(`/partner`, { replace: true })
-        break
-      default:
-        navigate(`/candidate`, { replace: true })
-    }
-  }
+  TabTitle("Login");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { profile } = useSelector((state) => state.authentication);
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     const userData = {
       username: data.username,
-      password: data.password
+      password: data.password,
+    };
+    const res = await dispatch(loginUser(userData));
+    if (res.type === "login/loginUser/fulfilled") {
+      const role = profile.role;
+      switch (role) {
+        case "Role_HR":
+          navigate(`/hr`, { replace: true });
+          break;
+        case "Role_Partner":
+          navigate(`/partner`, { replace: true });
+          break;
+        default:
+          navigate(`/candidate`, { replace: true });
+      }
     }
-
-    dispatch(loginUser(userData))
-  }
+  };
 
   return (
     <div className="login-form__container">
@@ -80,7 +76,7 @@ const Login = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
