@@ -3,7 +3,6 @@ import './styles.scss'
 import { Outlet } from 'react-router-dom'
 import HeaderWithHR from '../../components/HeaderWithHR'
 import Footer from '../../components/Footer'
-import HRPostList from '../../pages/Main/HR/HRPostList'
 
 const HRLayOut = () => {
   return (

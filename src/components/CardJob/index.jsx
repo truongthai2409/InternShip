@@ -56,7 +56,7 @@ const CardJob = ({ jobCare }) => {
     <div className="card-job__container">
       <div className="card-job__info">
         <div className="card-job__title">
-          <h3 className="card-job__name">{jobCare.jobCare.name}</h3>
+          <h3 className="card-job__name">{jobCare.jobCare?.name}</h3>
         </div>
         <div className="card-job__content">
           <div className="card-job__img">

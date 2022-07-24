@@ -22,7 +22,7 @@ const AccountMenu = ({ linkImg }) => {
     setAnchorEl(null)
   }
 
-  const username = JSON.parse(localStorage.getItem('userPresent')).username
+  const username = JSON.parse(localStorage.getItem('userPresent'))?.username
 
   const handleLogout = () => {
     localStorage.removeItem('userPresent')

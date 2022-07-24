@@ -10,9 +10,9 @@ const PartnerLayout = () => {
   return (
     <div className="main__layout">
       {location.pathname === '/partner' ? (
-        <HeaderWithPartner id={3} partner />
+        <HeaderWithPartner id={4} partner />
       ) : (
-        <HeaderWithPartner id={3} search />
+        <HeaderWithPartner id={4} partner />
       )}
       <Outlet />
       <Footer />

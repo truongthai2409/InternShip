@@ -102,8 +102,8 @@ const PostJobForm = props => {
     dispatch(addJob(jobData))
   }
 
-  if (status === 'success') {
-    navigate('/hr/post/list')
+  if (status === "success") {
+    navigate("/hr/list");
   }
 
   return (

@@ -32,6 +32,7 @@ const jobSlice = createSlice({
       state.jobListCompany = payload;
     });
     builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
+      console.log("payload nè",payload)
       state.jobList = payload;
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {

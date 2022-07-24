@@ -142,10 +142,9 @@ export default function CompanyForm(props) {
           fileLogo: data.logo[0],
         },
         setIsEdit,
-        comid,
-      };
-      console.log(updateData);
-      dispatch(updateCompanyInfo(updateData));
+        comid
+      }
+      dispatch(updateCompanyInfo(updateData))
     }
   };
 

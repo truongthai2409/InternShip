@@ -11,18 +11,21 @@ const Button = ({
   bheight,
   fz,
   children,
-  outline
+  outline,
+  backgroundColor
 }) => {
   return (
     <>
       <button
-        className={`button ${className ? className : ''}`}
-        onClick={onClick}
+        className={`button ${className ? className : ""}`}
+        onClick={onClick || (() => {console.log()})}
         style={{
           width: bwidth ? `${bwidth}` : '',
           height: bheight ? `${bheight}` : '',
           fontSize: fz ? fz : '',
-          outline: outline ? outline : ''
+          outline: outline ? outline : '',
+          backgroundColor: backgroundColor,
+          border: '1px solid black'
         }}
         type="submit"
       >

@@ -1,0 +1,12 @@
+// ------------------------------------
+Key : "userPresent",
+Value : {
+    avatar,
+    email,
+    idUser,
+    role,
+    token,
+    type,
+    username,
+}
+// ------------------------------------

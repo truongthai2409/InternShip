@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJobListByUserId } from '../../../../store/slices/main/home/job/jobSlice'
 import { TabTitle } from 'src/utils/GeneralFunctions'
 
-// const formatLocation = (location) => {
-//   return `${location.address}, ${location.district?.name},
-//     ${location.district?.province?.name}`;
-// };
+const formatLocation = (location) => {
+  return `${location.address}, ${location.district?.name},
+    ${location.district?.province?.name}`;
+};
 
 const HRPostList = props => {
   TabTitle('Danh sách bài đăng | IT Internship JOBS')
@@ -20,8 +20,6 @@ const HRPostList = props => {
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser))
   }, [dispatch])
-
-  // console.log(userPresent.idUser)
 
   return (
     <div className="hrpost__list">
@@ -38,7 +36,7 @@ const HRPostList = props => {
           timeEnd={job.timeEndStr}
           timeCreated={job.createDate}
           companyName={job.hr?.company?.name}
-          companyLocation={job.locationjob}
+          companyLocation={formatLocation(job.locationjob)}
         />
       ))}
     </div>

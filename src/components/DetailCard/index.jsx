@@ -17,7 +17,7 @@ import "./styles.scss";
 import InformationCompany from "../InformationComapny";
 import BaseInformationCompany from "../BaseInformationCompany";
 
-function TabPanel(props) {
+export function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
