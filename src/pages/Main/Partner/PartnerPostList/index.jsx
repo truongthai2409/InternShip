@@ -12,7 +12,7 @@ const formatLocation = (location) => {
 };
 
 const PartnerPostList = props => {
-  TabTitle('Danh sách bài đăng | IT Internship JOBS')
+  TabTitle('Danh sách đợt thực tập | IT Internship JOBS')
   const dispatch = useDispatch()
   const { jobList } = useSelector(state => state.job)
   const userPresent = JSON.parse(localStorage.getItem('userPresent'))

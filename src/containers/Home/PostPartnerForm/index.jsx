@@ -13,11 +13,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
-  addJob,
+  // addJob,
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
 import {
-  getDistrictList,
+  // getDistrictList,
   getProvinceList,
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,7 @@ const PostPartnerForm = (props) => {
               </p>
               <div className="partner-post-title">
                 <CustomInput
-                  label="Tên công việc"
+                  label="Chức danh"
                   id="name"
                   type="text"
                   placeholder="Vd. Thực tập thiết kế UI-UX"
@@ -149,10 +149,10 @@ const PostPartnerForm = (props) => {
               </div>
               <div className="partner-post__textarea">
                 <CustomTextarea
-                  label="Mô tả công việc"
+                  label="Mô tả"
                   id="jobDescription"
                   type="description"
-                  placeholder="Nhập mô tả công việc"
+                  placeholder="Nhập mô tả"
                   register={register}
                 >
                   {errors.jobDescription?.message}
@@ -160,10 +160,10 @@ const PostPartnerForm = (props) => {
               </div>
               <div className="partner-post__textarea">
                 <CustomTextarea
-                  label="Yêu cầu công việc"
+                  label="Yêu cầu"
                   id="jobRequirement"
                   type="description"
-                  placeholder="Nhập yêu cầu công việc"
+                  placeholder="Nhập yêu cầu"
                   register={register}
                   check={false}
                 >

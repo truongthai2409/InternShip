@@ -2,7 +2,6 @@
 
 .base__information {
   padding: 3px;
-  border-radius: 6px;
   .company-name {
     text-align: center;
     width: auto;
@@ -17,6 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 6px;
 
     .img-logo {
       width: 115px;

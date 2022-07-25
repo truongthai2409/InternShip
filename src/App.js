@@ -1,68 +1,68 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import 'react-toastify/dist/ReactToastify.css'
-import { ToastContainer } from 'react-toastify'
-import './App.css'
-import AdminRouterLayout from './Layouts/Admin/index'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import "./App.css";
+import AdminRouterLayout from "./Layouts/Admin/index";
 
-import Dashboard from './pages/Admin/Dashboard'
+import Dashboard from "./pages/Admin/Dashboard";
 import {
   adminRouter,
   candidateRouter,
   hrRouter,
   mainRouter,
   registerRouter,
-  partnerRouter
-} from './config/routes'
-import MainLayout from './Layouts/Main'
-import HRLayOut from './Layouts/HR'
-import { RegisterStep1 } from './pages/Register'
-import CandidateLayOut from './Layouts/Candidate'
-import PartnerLayout from './Layouts/Partner'
+  partnerRouter,
+} from "./config/routes";
+import MainLayout from "./Layouts/Main";
+import HRLayOut from "./Layouts/HR";
+import { RegisterStep1 } from "./pages/Register";
+import CandidateLayOut from "./Layouts/Candidate";
+import PartnerLayout from "./Layouts/Partner";
 // import { lazy, Suspense } from "react";
-import Loading from './Loading'
-import UnAuthenticatedGuard from './guards/UnAuthenticatedGuard'
-import AuthenticatedGuard from './guards/AuthenticatedGuard'
-import RegisterLayout from './Layouts/Register'
-import LoginLayout from './Layouts/Login'
+import Loading from "./Loading";
+import AuthenticatedGuard from "./guards/AuthenticatedGuard";
+import RegisterLayout from "./Layouts/Register";
+import LoginLayout from "./Layouts/Login";
+import UnAuthenticatedGuard from "./guards/UnAuthenticatedGuard";
 
 // const RegisterLayout = lazy(() => import("./Layouts/Register/index"));
 // const LoginLayout = lazy(() => import("./Layouts/Login/index"));
 function App() {
   const renderAdminRouter = () => {
     return adminRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
 
   const renderRegisterRouter = () => {
     return registerRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
 
   const renderMainRouter = () => {
     return mainRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
 
   const renderHrRouter = () => {
     return hrRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
 
   const renderCandidateRouter = () => {
     return candidateRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
 
   const renderPartnerRouter = () => {
     return partnerRouter.map(({ path, Component }, index) => {
-      return <Route path={path} element={<Component />} key={index} />
-    })
-  }
+      return <Route path={path} element={<Component />} key={index} />;
+    });
+  };
   return (
     <>
       <Router>
@@ -85,13 +85,15 @@ function App() {
             <Route index element={<RegisterStep1 />} />
             {renderRegisterRouter()}
           </Route>
+          <Route path="/login" element={<LoginLayout />}></Route>
           <Route
-            path="/login"
+            path="/hr"
             element={
-                <LoginLayout />
+              <AuthenticatedGuard>
+                <HRLayOut />
+              </AuthenticatedGuard>
             }
-          ></Route>
-          <Route path="/hr" element={<HRLayOut />}>
+          >
             {renderHrRouter()}
           </Route>
           <Route
@@ -105,7 +107,14 @@ function App() {
             {/* <Route index element={<HR />} /> */}
             {renderCandidateRouter()}
           </Route>
-          <Route path="/partner" element={<PartnerLayout />}>
+          <Route
+            path="/partner"
+            element={
+              <AuthenticatedGuard>
+                <PartnerLayout />
+              </AuthenticatedGuard>
+            }
+          >
             {renderPartnerRouter()}
           </Route>
           <Route path="/" element={<MainLayout />}>
@@ -116,7 +125,7 @@ function App() {
       <Loading />
       <ToastContainer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,108 @@
+@use '../../assets/styles/' as *;
+.profile__wrapper {
+  padding: 32px 200px 0 200px;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile__wrapper .profile__col-1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 40%;
+  position: relative;
+}
+
+.profile__wrapper .profile__col-1 .profile__title {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.profile__wrapper .profile__col-1 .profile__avatar {
+  height: 280px;
+  width: 280px;
+  border-radius: 50%;
+  border: 2.5px solid #dedede;
+  margin-bottom: 14px;
+}
+
+.profile__wrapper .profile__col-1 .profile__name {
+  font-weight: 600;
+}
+
+.profile__wrapper .profile__col-1 .profile__edit-img {
+  position: absolute;
+  top: 260px;
+}
+
+.profile__wrapper .profile__col-1 .profile__edit-img .profile__edit-btn {
+  padding: 8px 16px;
+}
+
+.profile__wrapper .profile__col-1 .profile__username {
+  color: #777;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 26px;
+}
+
+.profile__wrapper .profile__col-2 {
+  width: 60%;
+}
+
+.profile__wrapper .profile__col-2 .profile__infor {
+  margin-top: 60px;
+}
+
+.profile__wrapper .profile__col-2 .profile__infor-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile__wrapper .profile__col-2 .profile__infor-item .profile__infor-text {
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.profile__wrapper .profile__col-2 .profile__infor-item > .css-i4bv87-MuiSvgIcon-root {
+  font-size: 35px;
+}
+
+.profile__wrapper .profile__col-2 .profile__infor-item > span {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.profile__wrapper .profile__col-2 .profile__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 50px;
+}
+
+.profile__wrapper .profile__col-2 .profile__actions-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #dedede;
+  padding: 4px 12px;
+  margin-right: 16px;
+}
+/*# sourceMappingURL=styles.css.map */

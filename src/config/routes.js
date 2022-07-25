@@ -134,6 +134,10 @@ export const candidateRouter = [
 //partner router
 export const partnerRouter = [
   {
+    path: '',
+    Component: PartnerHome
+  },
+  {
     path: '/partner',
     Component: PartnerHome
   },

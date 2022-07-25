@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .card-job {
   &__container {
@@ -24,11 +24,15 @@
   &__title {
     width: 100%;
     min-height: 5vh;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   &__content {
     display: grid;
     grid-template-columns: auto auto;
+    margin-top: 10px;
   }
 
   &__company-work-time,
@@ -53,6 +57,8 @@
       justify-content: center;
       align-items: center;
       margin-left: $mg-1;
+      font-size: 15px;
+      margin-right: 10px;
     }
   }
 

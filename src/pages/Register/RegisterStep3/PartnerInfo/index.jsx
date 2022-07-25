@@ -1,36 +1,39 @@
-import React from 'react'
-import './styles.scss'
-import ArrowButton from '../../../../components/ArrowButton/index'
-import Button from '../../../../components/Button'
-import CustomInput from '../../../../components/CustomInput/index'
-import Select from '../../../../components/Select'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import { addUniversity } from 'src/store/slices/Admin/university/unversitySlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { genderList, schema } from './data'
-import { errorSelector } from 'src/store/selectors/main/registerSelectors'
-import CustomTextarea from 'src/components/CustomTextarea'
-import { TabTitle } from 'src/utils/GeneralFunctions'
+import React from "react";
+import "./styles.scss";
+import ArrowButton from "../../../../components/ArrowButton/index";
+import Button from "../../../../components/Button";
+import CustomInput from "../../../../components/CustomInput/index";
+import Select from "../../../../components/Select";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
+import { addUniversity } from "src/store/slices/Admin/university/unversitySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { genderList, schema } from "./data";
+import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import CustomTextarea from "src/components/CustomTextarea";
+import { TabTitle } from "src/utils/GeneralFunctions";
+import { toast } from "react-toastify";
 
 const PartnerInfo = () => {
-  TabTitle('Đăng ký - Cộng tác viên trường')
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const errorMessage = useSelector(errorSelector)
+  TabTitle("Đăng ký - Cộng tác viên trường");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const errorMessage = useSelector(errorSelector);
 
-  const handleBackClick = e => {
-    e.preventDefault()
-    navigate(-1)
-  }
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
-    console.log(data)
-    console.log('test')
-    console.log(data.avatar[0])
+    console.log(data);
+    console.log("test");
+    console.log(data.avatar[0]);
     const partnerData = {
+      avatarUser: data.avatar[0],
+      logo: data.logo[0],
       university: JSON.stringify({
         name: data.schoolName,
         shortName: data.shortName,
@@ -40,18 +43,18 @@ const PartnerInfo = () => {
         phone: data.phoneSchool,
         majors: [
           {
-            id: 1
-          }
+            id: 1,
+          },
         ],
         location: [
           {
             district: {
-              id: 2
+              id: 2,
             },
-            address: 'HCM',
-            note: 'Truong Top 1 VN'
-          }
-        ]
+            address: data.address,
+            note: "Truong Top 1 VN",
+          },
+        ],
       }),
       partner: JSON.stringify({
         position: data.position,
@@ -65,24 +68,29 @@ const PartnerInfo = () => {
           gender: parseInt(data.gender),
           email: data.email,
           role: {
-            id: 4
-          }
-        }
+            id: 4,
+          },
+        },
       }),
-      avatarUser: data.avatar[0],
-      logo: data.logo[0],
+    };
+    try {
+      const res = await dispatch(addUniversity(partnerData));
+      console.log(res);
+      if (res.type === "university/addUniversity/fulfilled") {
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error(error);
     }
-    console.log(partnerData);
-    dispatch(addUniversity(partnerData))
-  }
+  };
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
   return (
     <div className="reg-partner">
@@ -258,14 +266,33 @@ const PartnerInfo = () => {
           children=""
           register={register}
         />
-        <CustomInput
-          label="Website"
-          id="website"
-          type="text"
+        <div className="section-input__container">
+          <CustomInput
+            label="Website"
+            id="website"
+            type="text"
+            register={register}
+          >
+            {errors.website?.message}
+          </CustomInput>
+
+          <CustomInput
+            label="địa chỉ"
+            id="address"
+            type="text"
+            register={register}
+          >
+            {errors.address?.message}
+          </CustomInput>
+        </div>
+        <CustomTextarea
+          label="Ghi chú"
+          id="note"
+          type="textarea"
+          placeholder="Ghi chú"
+          children=""
           register={register}
-        >
-          {errors.website?.message}
-        </CustomInput>
+        />
 
         <div className="reg-hr__btns">
           <div className="reg-hr__btns--item" onClick={handleBackClick}>
@@ -277,7 +304,7 @@ const PartnerInfo = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PartnerInfo
+export default PartnerInfo;

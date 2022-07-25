@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 export function useAuthenticated() {
-  return useSelector(state => Boolean(state.authentication.profile.idUser))
+  const { profile } = useSelector((state) => state.authentication);
+  return (profile.idUser && true) || false;
 }

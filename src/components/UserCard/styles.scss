@@ -1,8 +1,8 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 4px;
   border: 1px solid $color-black-0;
 }
@@ -25,6 +25,11 @@
     align-items: flex-start;
     margin-right: 10px;
     margin-left: 20px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   &__heading-name {

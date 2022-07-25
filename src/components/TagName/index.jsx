@@ -1,11 +1,11 @@
-import './styles.scss'
+import "./styles.scss";
 
-const TagName = props => {
+const TagName = (props) => {
   return (
     <div className="tagName__container">
       <p>{props.title}</p>
     </div>
-  )
-}
+  );
+};
 
-export default TagName
+export default TagName;
