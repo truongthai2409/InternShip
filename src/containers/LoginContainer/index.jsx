@@ -1,11 +1,11 @@
-import React from "react";
-import "./styles.scss";
-import { Link } from "react-router-dom";
+import React from 'react'
+import './styles.scss'
+import { Link } from 'react-router-dom'
 
-import Logo from "../../components/Logo";
-import Login from "../../pages/Login";
-import Button from "../../components/Button/index";
-import { Typography } from "@mui/material";
+import Logo from '../../components/Logo'
+import Login from '../../pages/Login'
+import Button from '../../components/Button/index'
+import { Typography } from '@mui/material'
 
 const LoginContainer = () => {
   return (
@@ -31,15 +31,15 @@ const LoginContainer = () => {
           component="div"
           sx={{
             fontSize: 17,
-            fontWeight: "400",
-            transform: "translate(5px,5px)",
+            fontWeight: '400',
+            transform: 'translate(5px,5px)'
           }}
         >
           Bạn chưa có tài khoản? <Link to="/register">Đăng ký</Link>
         </Typography>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginContainer;
+export default LoginContainer

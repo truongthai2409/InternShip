@@ -13,7 +13,7 @@ import markJobSlice from './slices/main/mark/markSlice'
 import applySlice from './slices/main/candidate/apply/applySlice'
 import infoCandidateSlice from './slices/main/candidate/info/infoCandidateSlice'
 import appSlice from 'src/app.slice'
-import demandSlice from './slices/main/home/demand/demandSlice';
+import demandSlice from './slices/main/home/demand/demandSlice'
 
 const store = configureStore({
   reducer: {
@@ -31,7 +31,7 @@ const store = configureStore({
     apply: applySlice.reducer,
     infoCandidate: infoCandidateSlice.reducer,
     app: appSlice.reducer,
-    demandList: demandSlice.reducer,
+    demandList: demandSlice.reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

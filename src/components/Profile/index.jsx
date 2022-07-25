@@ -11,7 +11,6 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import CustomInput from "../CustomInput";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
@@ -55,8 +54,8 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const handleShow = () => {
-    setIsUpdate(!isUpdate)
-  }
+    setIsUpdate(!isUpdate);
+  };
 
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
@@ -78,8 +77,8 @@ const Profile = () => {
           fz="14px"
         />
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -123,12 +122,16 @@ const Profile = () => {
             <div className="profile__infor-item">
               <TransgenderIcon />
               <span> Giới tính:</span>
-              <h3 className="profile__infor-text">{gender(user.user?.gender)}</h3>
+              <h3 className="profile__infor-text">
+                {gender(user.user?.gender)}
+              </h3>
             </div>
             <div className="profile__infor-item">
               <HandshakeIcon />
               <span> Vai trò:</span>
-              <h3 className="profile__infor-text">{role(user.user?.role?.id)}</h3>
+              <h3 className="profile__infor-text">
+                {role(user.user?.role?.id)}
+              </h3>
             </div>
           </div>
           <div className="profile__actions">
@@ -157,7 +160,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

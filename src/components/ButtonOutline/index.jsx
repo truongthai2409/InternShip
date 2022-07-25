@@ -19,13 +19,13 @@ export default function ButtonOutline({
       onClick={onClick || (() => {})}
       className={`btn-outline ${className ? className : ''}`}
       style={{
-        width: width ? width : "",
-        height: height ? height : "",
-        backgroundColor: bg ? bg : "",
-        outline: outline ? outline : "",
-        color: color ? color : "",
-        fontSize: fz ? fz : "",
-        borderRadius: radius ? radius : "",
+        width: width ? width : '',
+        height: height ? height : '',
+        backgroundColor: bg ? bg : '',
+        outline: outline ? outline : '',
+        color: color ? color : '',
+        fontSize: fz ? fz : '',
+        borderRadius: radius ? radius : ''
       }}
     >
       {icon ? icon : ''}

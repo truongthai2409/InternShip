@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
-import { IconButton, Tooltip } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
@@ -20,7 +20,6 @@ const UniversityTable = () => {
   useEffect(() => {
     dispatch(getUniversityList())
   }, [])
-  console.log(universityList)
   const columns = [
     { field: 'stt', headerName: 'STT', width: 70 },
     {
@@ -42,9 +41,7 @@ const UniversityTable = () => {
       width: 120,
       renderCell: params => {
         const { row } = params
-        const handleChangeStatus = e => {
-          console.log(e.target.value)
-        }
+        const handleChangeStatus = e => {}
         return (
           <select
             name={row.status}

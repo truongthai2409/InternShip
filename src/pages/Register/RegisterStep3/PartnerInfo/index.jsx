@@ -27,9 +27,6 @@ const PartnerInfo = () => {
 
   const onSubmit = data => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
-    console.log(data)
-    console.log('test')
-    console.log(data.avatar[0])
     const partnerData = {
       university: JSON.stringify({
         name: data.schoolName,

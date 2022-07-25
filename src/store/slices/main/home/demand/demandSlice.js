@@ -17,18 +17,15 @@ const demandSlice = createSlice({
   }
 })
 
-export const getDemandList = createAsyncThunk(
-  'job/getDemandList',
-  async () => {
-    return axios
-      .get(`${baseURL}/api/demand`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        return error.response.data
-      })
-  }
-)
+export const getDemandList = createAsyncThunk('job/getDemandList', async () => {
+  return axios
+    .get(`${baseURL}/api/demand`)
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      return error.response.data
+    })
+})
 
 export default demandSlice

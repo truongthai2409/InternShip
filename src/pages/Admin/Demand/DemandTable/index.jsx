@@ -71,9 +71,7 @@ const DemandTable = () => {
       width: 120,
       renderCell: (params) => {
         const { row } = params;
-        const handleChangeStatus = (e) => {
-          console.log(e.target.value);
-        };
+        const handleChangeStatus = (e) => {};
         return (
           <select
             name={row.status}

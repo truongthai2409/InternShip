@@ -1,34 +1,34 @@
-import "./styles.scss";
-import Button from "src/components/Button";
-import ButtonOutline from "src/components/ButtonOutline";
-import CustomInput from "src/components/CustomInput";
-import { useForm } from "react-hook-form";
-import { schema } from "./validateForm";
-import { yupResolver } from "@hookform/resolvers/yup";
-import SelectCustom from "src/components/Select";
-import { useEffect, useState } from "react";
-import { genderList } from "./validateForm";
-import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import './styles.scss'
+import Button from 'src/components/Button'
+import ButtonOutline from 'src/components/ButtonOutline'
+import CustomInput from 'src/components/CustomInput'
+import { useForm } from 'react-hook-form'
+import { schema } from './validateForm'
+import { yupResolver } from '@hookform/resolvers/yup'
+import SelectCustom from 'src/components/Select'
+import { useEffect } from 'react'
+import { genderList } from './validateForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser } from 'src/store/slices/Admin/user/userSlice'
 
 const ProfileForm = ({ onClick }) => {
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    formState: { errors }
+  } = useForm({ resolver: yupResolver(schema) })
 
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.user)
 
   useEffect(() => {
-    setValue("firstName", user.user.firstName);
-    setValue("lastName", user.user.lastName);
-    setValue("phone", user.user.phone);
-  }, []);
+    setValue('firstName', user.user.firstName)
+    setValue('lastName', user.user.lastName)
+    setValue('phone', user.user.phone)
+  }, [user])
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const profileData = {
       hr: JSON.stringify({
         user: {
@@ -38,15 +38,15 @@ const ProfileForm = ({ onClick }) => {
           email: user.user.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          role: user.user.role,
+          role: user.user.role
         },
         position: user.position,
-        company: { id: user.company?.id },
-      }),
-    };
-    dispatch(updateUser([profileData, user?.id]));
-    onClick();
-  };
+        company: { id: user.company?.id }
+      })
+    }
+    dispatch(updateUser([profileData, user?.id]))
+    onClick()
+  }
 
   return (
     <>

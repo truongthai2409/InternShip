@@ -1,50 +1,48 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const baseURL = process.env.REACT_APP_API
+const baseURL = process.env.REACT_APP_API;
 
 const demandSlice = createSlice({
-  name: 'demand',
+  name: "demand",
   initialState: {
     demandList: [],
     jobListName: [],
     indexCardActive: 0,
     jobDetail: {},
     jobPosition: [],
-    status: 'fail',
-    demand: {}
+    status: "fail",
+    demand: {},
   },
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(addDemand.pending, state => {
-        state.status = 'loading'
+      .addCase(addDemand.pending, (state) => {
+        state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
-        state.status = 'success'
-        state.demand = payload
-      })
-  }
-})
+        state.status = "success";
+        state.demand = payload;
+      });
+  },
+});
 
-export const addDemand = createAsyncThunk('demand/addDemand', async data => {
+export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
   let axiosConfig = {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
   return axios
     .post(`${baseURL}/api/r2s/partner/demand`, data, axiosConfig)
-    .then(res => {
-      console.log(res)
-      return res.data
+    .then((res) => {
+      return res.data;
     })
-    .catch(error => {
-      console.log(error)
-      return error.response.data
-    })
-})
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
-export const { updateIdJobActive, updateIndexCardActive } = demandSlice.actions
-export default demandSlice
+export const { updateIdJobActive, updateIndexCardActive } = demandSlice.actions;
+export default demandSlice;

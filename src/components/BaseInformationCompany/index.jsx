@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import Rating from "@mui/material/Rating";
-import "./styles.scss";
-import JobCandidate from "../Job";
-import Grid from "@mui/material/Grid";
-import Button from "../Button";
-import { useSelector, useDispatch } from "react-redux";
-import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
-import { Link } from "react-router-dom";
-import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
-import { Typography } from "@mui/material";
+import React, { useEffect } from 'react'
+import Rating from '@mui/material/Rating'
+import './styles.scss'
+import JobCandidate from '../Job'
+import Grid from '@mui/material/Grid'
+import Button from '../Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { getRatingCompany } from 'src/store/slices/main/home/rating/rating'
+import { Link } from 'react-router-dom'
+import { getJobByCompany } from 'src/store/slices/main/home/job/jobSlice'
+import { Typography } from '@mui/material'
 
 function BaseInformationCompany(props) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // const { rating } = useSelector(state => state.rating)
-  const { jobListCompany } = useSelector((state) => state.job);
-  const idCompany = props.jobDetail?.hr?.company.id;
-  const jobDetail = props.jobDetail;
+  const { jobListCompany } = useSelector(state => state.job)
+  const idCompany = props.jobDetail?.hr?.company.id
+  const jobDetail = props.jobDetail
   useEffect(() => {
-    dispatch(getRatingCompany(idCompany));
-    dispatch(getJobByCompany(idCompany));
-  }, [idCompany, dispatch]);
+    dispatch(getRatingCompany(idCompany))
+    dispatch(getJobByCompany(idCompany))
+  }, [idCompany, dispatch])
   return (
     <div className="">
       <div className="base__information">
@@ -38,8 +38,8 @@ function BaseInformationCompany(props) {
                 component="div"
                 sx={{
                   fontSize: 17,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  fontWeight: '400',
+                  transform: 'translate(5px,5px)'
                 }}
               >
                 {jobDetail?.hr?.company.tax}
@@ -52,8 +52,8 @@ function BaseInformationCompany(props) {
                 component="div"
                 sx={{
                   fontSize: 17,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  fontWeight: '400',
+                  transform: 'translate(5px,5px)'
                 }}
               >
                 {jobDetail?.hr?.company.phone}
@@ -85,8 +85,8 @@ function BaseInformationCompany(props) {
                   component="div"
                   sx={{
                     fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
+                    fontWeight: '400',
+                    transform: 'translate(5px,5px)'
                   }}
                 >
                   {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
@@ -107,15 +107,15 @@ function BaseInformationCompany(props) {
                   component="div"
                   sx={{
                     fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
+                    fontWeight: '400',
+                    transform: 'translate(5px,5px)'
                   }}
                 >
                   5.0 trong 48 lượt đánh giá
                 </Typography>
               </div>
             ) : (
-              ""
+              ''
             )}
           </div>
         </div>
@@ -126,8 +126,8 @@ function BaseInformationCompany(props) {
             component="div"
             sx={{
               fontSize: 17,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
+              fontWeight: '400',
+              transform: 'translate(5px,5px)'
             }}
           >
             {jobDetail?.hr?.company.description}
@@ -141,7 +141,7 @@ function BaseInformationCompany(props) {
             sx={{
               paddingLeft: `${props.pl}px`,
               paddingRight: `${props.pr}px`,
-              marginLeft: `${props.ml}px`,
+              marginLeft: `${props.ml}px`
             }}
           >
             {/* {jobListCompany.map((job, index) => {
@@ -149,7 +149,7 @@ function BaseInformationCompany(props) {
                 <JobCandidate job={job} />
               </Grid>;
             })} */}
-            {jobListCompany?.map((job) => (
+            {jobListCompany?.map(job => (
               <Grid item lg="auto" md="auto" sm="auto" xs="auto">
                 <JobCandidate job={job} key={job.id} />
               </Grid>
@@ -163,9 +163,9 @@ function BaseInformationCompany(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-BaseInformationCompany.propTypes = {};
+BaseInformationCompany.propTypes = {}
 
-export default BaseInformationCompany;
+export default BaseInformationCompany

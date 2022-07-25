@@ -9,7 +9,6 @@ import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
 import CustomTextarea from "../../../components/CustomTextarea";
 import CustomSelect from "../../../components/CustomSelect";
-import SelectCustom from "../../../components/Select";
 import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
@@ -21,7 +20,6 @@ import {
 import {
   getProvinceList,
   getDistrictList,
-  addLocation,
 } from "../../../store/slices/location/locationSlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
@@ -49,7 +47,7 @@ export default function CompanyForm(props) {
   const [imageFile, setImageFile] = useState(null);
   const [isEdit, setIsEdit] = useState(isAdd);
 
-  const fileInput = useRef();
+  // const fileInput = useRef()
   const dispatch = useDispatch();
 
   // get company ID params from URL
@@ -58,7 +56,7 @@ export default function CompanyForm(props) {
   useEffect(() => {
     dispatch(getProvinceList());
     // dispatch(getDistrictList(1));
-  }, []);
+  }, [dispatch]);
 
   /**
    * get company details
@@ -68,7 +66,7 @@ export default function CompanyForm(props) {
     if (!isAdd) {
       dispatch(getCompanyDetail(comid));
     }
-  }, [isAdd]);
+  }, [isAdd, dispatch, comid]);
 
   /**
    * @dependency companyDetail
@@ -142,9 +140,9 @@ export default function CompanyForm(props) {
           fileLogo: data.logo[0],
         },
         setIsEdit,
-        comid
-      }
-      dispatch(updateCompanyInfo(updateData))
+        comid,
+      };
+      dispatch(updateCompanyInfo(updateData));
     }
   };
 

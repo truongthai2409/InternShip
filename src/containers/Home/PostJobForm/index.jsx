@@ -35,7 +35,7 @@ const PostJobForm = props => {
     dispatch(getMajorList())
     dispatch(getProvinceList())
     dispatch(getJobPositionList())
-  }, [])
+  }, [dispatch])
 
   const jobTypeList = [
     {
@@ -102,8 +102,8 @@ const PostJobForm = props => {
     dispatch(addJob(jobData))
   }
 
-  if (status === "success") {
-    navigate("/hr/list");
+  if (status === 'success') {
+    navigate('/hr/list')
   }
 
   return (

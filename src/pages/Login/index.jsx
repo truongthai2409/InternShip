@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomCheckbox from "../../components/CustomCheckbox";
 import CustomInput from "../../components/CustomInput/index";
@@ -15,7 +15,7 @@ const Login = () => {
   TabTitle("Login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { profile } = useSelector((state) => state.authentication);
+  // const { profile } = useSelector(state => state.authentication)
 
   const {
     register,
@@ -32,8 +32,7 @@ const Login = () => {
     };
     const res = await dispatch(loginUser(userData));
     if (res.type === "login/loginUser/fulfilled") {
-      const role = profile.role;
-      switch (role) {
+      switch (res.payload.role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
           break;

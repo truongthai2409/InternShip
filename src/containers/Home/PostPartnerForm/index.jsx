@@ -1,52 +1,45 @@
-import "./styles.scss";
-import WorkIcon from "@mui/icons-material/Work";
-import CustomInput from "../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import CustomTextarea from "../../../components/CustomTextarea";
-import "./styles.scss";
-import SwitchButton from "../../../components/SwitchButton";
-import Button from "../../../components/Button";
-import { schema } from "./handleForm";
-import SelectCustom from "../../../components/Select";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import {
-  addJob,
-  getJobPositionList,
-} from "src/store/slices/main/home/job/jobSlice";
-import {
-  getDistrictList,
-  getProvinceList,
-} from "src/store/slices/location/locationSlice";
-import { useNavigate } from "react-router-dom";
-import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
+import './styles.scss'
+import WorkIcon from '@mui/icons-material/Work'
+import CustomInput from '../../../components/CustomInput/index'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import CustomTextarea from '../../../components/CustomTextarea'
+import './styles.scss'
+import Button from '../../../components/Button'
+import { schema } from './handleForm'
+import SelectCustom from '../../../components/Select'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getMajorList } from 'src/store/slices/Admin/major/majorSlice'
+import { getJobPositionList } from 'src/store/slices/main/home/job/jobSlice'
+import { getProvinceList } from 'src/store/slices/location/locationSlice'
+import { useNavigate } from 'react-router-dom'
+import { addDemand } from 'src/store/slices/Admin/demand/demandSlice'
 
-const PostPartnerForm = (props) => {
-  const { majorList } = useSelector((state) => state.major);
-  const { jobPosition, status } = useSelector((state) => state.job);
+const PostPartnerForm = props => {
+  const { majorList } = useSelector(state => state.major)
+  const { jobPosition, status } = useSelector(state => state.job)
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  // const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
-    dispatch(getMajorList());
-    dispatch(getProvinceList());
-    dispatch(getJobPositionList());
-  }, []);
+    dispatch(getMajorList())
+    dispatch(getProvinceList())
+    dispatch(getJobPositionList())
+  }, [])
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     const jobData = {
       demand: JSON.stringify({
         name: data.name,
@@ -56,23 +49,23 @@ const PostPartnerForm = (props) => {
         startStr: data.timeStart,
         endStr: data.timeEnd,
         partner: {
-          id: 1,
+          id: 1
         },
         major: {
-          id: parseInt(data.major),
+          id: parseInt(data.major)
         },
         position: {
-          id: parseInt(data.jobPosition),
-        },
+          id: parseInt(data.jobPosition)
+        }
       }),
-      fileSV: data.fileSV[0],
-    };
+      fileSV: data.fileSV[0]
+    }
 
-    dispatch(addDemand(jobData));
-  };
+    dispatch(addDemand(jobData))
+  }
 
-  if (status === "success") {
-    navigate("/partner/post/list");
+  if (status === 'success') {
+    navigate('/partner/post/list')
   }
 
   return (
@@ -86,7 +79,7 @@ const PostPartnerForm = (props) => {
           <div className="form__container">
             <div className="partner-post__form">
               <div className="partner-post__heading">
-                <WorkIcon style={{ margin: "5px 5px 0 0" }} />
+                <WorkIcon style={{ margin: '5px 5px 0 0' }} />
                 <h2>Bản tin ứng tuyển</h2>
               </div>
               <p className="title-requirement">
@@ -199,7 +192,7 @@ const PostPartnerForm = (props) => {
         </div>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default PostPartnerForm;
+export default PostPartnerForm

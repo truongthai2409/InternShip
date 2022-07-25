@@ -12,7 +12,6 @@ const PartnerPostList = () => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const { demandList } = useSelector((state) => state.demandList);
-  console.log(demandList);
 
   function a11yProps(index) {
     return {

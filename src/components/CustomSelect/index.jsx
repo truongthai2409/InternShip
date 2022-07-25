@@ -35,9 +35,7 @@ const CustomSelect = React.forwardRef(
       dispatch(getDistrictList(e.target.value))
     }
 
-    const handleChange = e => {
-      console.log(e.target.value)
-    }
+    const handleChange = e => {}
 
     return (
       <>

@@ -1,12 +1,12 @@
-import React from "react";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import WorkIcon from "@mui/icons-material/Work";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import Box from "@mui/material/Box";
-import { Icon } from "@mui/material";
-import "./styles.scss";
-import moment from "moment";
+import React from 'react'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
+import WorkIcon from '@mui/icons-material/Work'
+import AddLocationIcon from '@mui/icons-material/AddLocation'
+import Box from '@mui/material/Box'
+import { Icon } from '@mui/material'
+import './styles.scss'
+import moment from 'moment'
 
 const JobCandidate = ({ job }) => {
   return (
@@ -15,14 +15,14 @@ const JobCandidate = ({ job }) => {
         width: 250,
         minHeight: 160,
         border: 1,
-        borderColor: "#DEDEDE",
+        borderColor: '#DEDEDE',
         borderRadius: 2,
         mt: 2,
-        cursor: "pointer",
-        "&:hover": {
-          backgroundColor: "DEDEDE",
-          opacity: [0.9, 0.8, 0.7],
-        },
+        cursor: 'pointer',
+        '&:hover': {
+          backgroundColor: 'DEDEDE',
+          opacity: [0.9, 0.8, 0.7]
+        }
       }}
     >
       <div className="job__candidate">
@@ -37,8 +37,8 @@ const JobCandidate = ({ job }) => {
             <AccessTimeIcon fontSize="small" />
           </Icon>
           <h6 className="card-content-job-candidate">
-            {moment(job.timeStartStr).format("DD/MM/YYYY")} -{" "}
-            {moment(job.timeEndStr).format("DD/MM/YYYY")}
+            {moment(job.timeStartStr).format('DD/MM/YYYY')} -{' '}
+            {moment(job.timeEndStr).format('DD/MM/YYYY')}
           </h6>
         </div>
         <div className="job__candidate-infor">
@@ -64,9 +64,9 @@ const JobCandidate = ({ job }) => {
         </div>
       </div>
     </Box>
-  );
-};
+  )
+}
 
-JobCandidate.propTypes = {};
+JobCandidate.propTypes = {}
 
-export default JobCandidate;
+export default JobCandidate
