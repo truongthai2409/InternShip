@@ -53,8 +53,6 @@ const PartnerInfo = () => {
           }
         ]
       }),
-      avatarUser: data.avatar[0],
-      logo: data.logo[0],
       partner: JSON.stringify({
         position: data.position,
         userCreationDTO: {
@@ -70,8 +68,11 @@ const PartnerInfo = () => {
             id: 4
           }
         }
-      })
+      }),
+      avatarUser: data.avatar[0],
+      logo: data.logo[0],
     }
+    console.log(partnerData);
     dispatch(addUniversity(partnerData))
   }
 

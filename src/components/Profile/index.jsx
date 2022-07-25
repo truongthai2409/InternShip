@@ -66,8 +66,8 @@ const Profile = () => {
   const Infor = () => {
     return (
       <>
-        <h2 className="profile__name">{`${user.user?.lastName} ${user.user?.firstName}`}</h2>
-        <p className="profile__username">{user.user?.username}</p>
+        <h2 className="profile__name">{`${user?.lastName} ${user?.firstName}`}</h2>
+        <p className="profile__username">{user?.username}</p>
         <ButtonOutline
           onClick={handleShow}
           width="280px"
@@ -89,7 +89,7 @@ const Profile = () => {
           <img
             className="profile__avatar"
             alt="Ảnh đại diện"
-            src="https://avatars.githubusercontent.com/u/93117817?v=4"
+            src={user?.avatar !== "" ? user?.avatar : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"}
           />
           <div className="profile__edit-img">
             <ButtonOutline
@@ -113,22 +113,22 @@ const Profile = () => {
             <div className="profile__infor-item">
               <AttachEmailIcon />
               <span>Email:</span>
-              <h3 className="profile__infor-text">{user.user?.email}</h3>
+              <h3 className="profile__infor-text">{user?.email}</h3>
             </div>
             <div className="profile__infor-item">
               <ContactPhoneIcon />
               <span>Phone number:</span>
-              <h3 className="profile__infor-text">{user.user?.phone}</h3>
+              <h3 className="profile__infor-text">{user?.phone}</h3>
             </div>
             <div className="profile__infor-item">
               <TransgenderIcon />
               <span> Giới tính:</span>
-              <h3 className="profile__infor-text">{gender(user.user?.gender)}</h3>
+              <h3 className="profile__infor-text">{gender(user?.gender)}</h3>
             </div>
             <div className="profile__infor-item">
               <HandshakeIcon />
               <span> Vai trò:</span>
-              <h3 className="profile__infor-text">{role(user.user?.role?.id)}</h3>
+              <h3 className="profile__infor-text">{role(user?.role?.id)}</h3>
             </div>
           </div>
           <div className="profile__actions">

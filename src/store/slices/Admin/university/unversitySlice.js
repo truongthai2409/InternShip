@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import api from 'src/config/api/apiConfig'
 import notificationSlice from '../../notifications/notificationSlice'
 const baseURL = process.env.REACT_APP_API
 
@@ -75,8 +76,8 @@ export const addUniversity = createAsyncThunk(
         'Access-Control-Allow-Origin': '*'
       }
     }
-    const res = await axios
-      .post(`${baseURL}/api/r2s/partner/university/create`, data, axiosConfig)
+    const res = await api
+      .post(`/api/r2s/partner/university/create`, data, axiosConfig)
       .then(res => {
         return res
       })

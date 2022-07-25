@@ -24,7 +24,6 @@ function CardHome(props) {
     careListOfPrivate.length > 0 &&
     careListOfPrivate.filter(job => job.jobCare.id === props.id)
   const isMarkLength = isMark.length > 0 ? true : false
-  console.log(isMarkLength);
   React.useEffect(() => {
     dispatch(getMark())
     dispatch(getMarkByUser(profile.username))

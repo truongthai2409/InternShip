@@ -44,7 +44,7 @@ export const getUserById = createAsyncThunk(
   "user/getUserById",
   async (id) => {
     return await axios
-      .get(`${baseURL}/api/r2s/hr/${id}`)
+      .get(`${baseURL}/api/r2s/admin/user/get-id/${id}`)
       .then((response) => {
         return response.data;
       })
