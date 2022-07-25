@@ -32,7 +32,8 @@ const Login = () => {
     };
     const res = await dispatch(loginUser(userData));
     if (res.type === "login/loginUser/fulfilled") {
-      switch (res.payload.role) {
+      const role = res.payload.role;
+      switch (role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
           break;
