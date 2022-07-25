@@ -23,22 +23,22 @@ const ProfileForm = ({ onClick }) => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setValue("firstName", user.user.firstName);
-    setValue("lastName", user.user.lastName);
-    setValue("phone", user.user.phone);
+    setValue("firstName", user.firstName);
+    setValue("lastName", user.lastName);
+    setValue("phone", user.phone);
   }, []);
 
   const onSubmit = (data) => {
     const profileData = {
       hr: JSON.stringify({
         user: {
-          username: user?.user.username,
+          username: user.username,
           gender: parseInt(data.gender),
           phone: data.phone,
-          email: user.user.email,
+          email: user.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          role: user.user.role,
+          role: user.role,
         },
         position: user.position,
         company: { id: user.company?.id },
@@ -83,7 +83,7 @@ const ProfileForm = ({ onClick }) => {
               register={register}
               id="gender"
               label="Giới tính"
-              defaultValue={user.user.gender}
+              defaultValue={user.gender}
               requirementField={false}
               options={genderList}
             >

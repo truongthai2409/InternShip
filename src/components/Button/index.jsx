@@ -25,7 +25,7 @@ const Button = ({
           fontSize: fz ? fz : '',
           outline: outline ? outline : '',
           backgroundColor: backgroundColor,
-          border: '1px solid black'
+          // border: '1px solid black'
         }}
         type="submit"
       >

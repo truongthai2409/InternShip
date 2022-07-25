@@ -11,6 +11,7 @@ import Logout from '@mui/icons-material/Logout'
 import { Link } from 'react-router-dom'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicationsSharp'
+import { toast } from 'react-toastify'
 
 const AccountMenu = ({ linkImg }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -26,6 +27,9 @@ const AccountMenu = ({ linkImg }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('userPresent')
+    toast.warning("Bạn vừa đăng xuất!", {
+      theme: "dark"
+    })
   }
 
   return (

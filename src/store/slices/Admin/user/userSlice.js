@@ -40,11 +40,22 @@ export const getUserList = createAsyncThunk('user/getUserList', async () => {
     })
 })
 
+// export const getUserById = createAsyncThunk(
+//   "user/getUserById",
+//   async (id) => {
+//     return await axios
+//       .get(`${baseURL}/api/r2s/hr/${id}`)
+//       .then((response) => {
+//         return response.data;
+//       })
+//   }
+// );
+
 export const getUserById = createAsyncThunk(
   "user/getUserById",
   async (id) => {
     return await axios
-      .get(`${baseURL}/api/r2s/hr/${id}`)
+      .get(`${baseURL}/api/r2s/admin/user/get-id/${id}`)
       .then((response) => {
         return response.data;
       })

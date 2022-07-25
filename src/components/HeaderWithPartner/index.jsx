@@ -18,13 +18,15 @@ function HeaderWithPartner(props) {
   const pathUrl = location.pathname
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
-  console.log(props);
 
-  const idUser = JSON.parse(localStorage.getItem('userPresent'))?.idUser
+  const idUser = JSON.parse(localStorage.getItem('userPresent')).idUser
 
   useEffect(() => {
     dispatch(getUserById(idUser))
   }, [])
+
+console.log("first", idUser)
+console.log("user", user);
 
   return (
     <div className="container-header__partner header__partner config">

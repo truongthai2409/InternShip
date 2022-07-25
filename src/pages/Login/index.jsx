@@ -12,15 +12,16 @@ import { authenticationSelector } from '../../store/selectors/main/loginSelector
 import { schema } from './data'
 import { TabTitle } from 'src/utils/GeneralFunctions'
 
+
 const Login = () => {
   TabTitle('Login')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const status = useSelector(authenticationSelector)
-  // let loginDirection = ""
 
   if (status === 'success') {
-    const role = JSON.parse(localStorage.getItem('userPresent')).role
+    const role = JSON.parse(localStorage.getItem('userPresent'))?.role
+    navigate("/hr", { replace: true })
     // switch (role) {
     //   case 'Role_HR':
     //     loginDirection = "/hr"
@@ -48,7 +49,6 @@ const Login = () => {
       password: data.password
     }
 
-    navigate("/hr", { replace: true })
     dispatch(loginUser(userData))
   }
 

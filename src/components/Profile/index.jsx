@@ -13,7 +13,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CustomInput from "../CustomInput";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
-import { getUserById } from "src/store/slices/Admin/user/userSlice";
+import { getUserByUserName } from "src/store/slices/Admin/user/userSlice";
 
 const role = (id) => {
   let role = "";
@@ -58,16 +58,11 @@ const Profile = () => {
     setIsUpdate(!isUpdate)
   }
 
-  useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
-    dispatch(getUserById(idUser));
-  }, []);
-
   const Infor = () => {
     return (
       <>
-        <h2 className="profile__name">{`${user.user?.lastName} ${user.user?.firstName}`}</h2>
-        <p className="profile__username">{user.user?.username}</p>
+        <h2 className="profile__name">{`${user.lastName} ${user.firstName}`}</h2>
+        <p className="profile__username">{user.username}</p>
         <ButtonOutline
           onClick={handleShow}
           width="280px"
@@ -113,22 +108,22 @@ const Profile = () => {
             <div className="profile__infor-item">
               <AttachEmailIcon />
               <span>Email:</span>
-              <h3 className="profile__infor-text">{user.user?.email}</h3>
+              <h3 className="profile__infor-text">{user.email}</h3>
             </div>
             <div className="profile__infor-item">
               <ContactPhoneIcon />
               <span>Phone number:</span>
-              <h3 className="profile__infor-text">{user.user?.phone}</h3>
+              <h3 className="profile__infor-text">{user.phone}</h3>
             </div>
             <div className="profile__infor-item">
               <TransgenderIcon />
               <span> Giới tính:</span>
-              <h3 className="profile__infor-text">{gender(user.user?.gender)}</h3>
+              <h3 className="profile__infor-text">{gender(user?.gender)}</h3>
             </div>
             <div className="profile__infor-item">
               <HandshakeIcon />
               <span> Vai trò:</span>
-              <h3 className="profile__infor-text">{role(user.user?.role?.id)}</h3>
+              <h3 className="profile__infor-text">{role(user.role?.id)}</h3>
             </div>
           </div>
           <div className="profile__actions">

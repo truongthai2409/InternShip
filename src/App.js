@@ -20,7 +20,6 @@ import CandidateLayOut from './Layouts/Candidate'
 import PartnerLayout from './Layouts/Partner'
 // import { lazy, Suspense } from "react";
 import Loading from './Loading'
-import UnAuthenticatedGuard from './guards/UnAuthenticatedGuard'
 import AuthenticatedGuard from './guards/AuthenticatedGuard'
 import RegisterLayout from './Layouts/Register'
 import LoginLayout from './Layouts/Login'

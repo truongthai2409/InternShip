@@ -1,16 +1,37 @@
-import React from "react";
-import "./styles.scss";;
+import "./styles.scss";
+import React, { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const CustomTextarea = ({
+const Textarea = ({
   label,
   id,
   type,
   placeholder,
-  children,
+  children=null,
   register,
   check = false,
   requirementField = true,
+  setValue,
 }) => {
+  useEffect(() => {
+    register(id);
+  }, [register]);
+
+  const [showError1, setShowError1] = useState(false);
+  const [showError2, setShowError2] = useState(true);
+  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên."
+  
+  const handleOnChange = (content, delta, source, editor) => {
+    if (editor.getText().length <= 1) {
+      setShowError1(true);
+      setShowError2(true);
+    } else {
+      setShowError1(false);
+      setShowError2(false);
+    }
+    setValue(`${id}`, content);
+  };
 
   return (
     <div className="custom-textarea">
@@ -19,24 +40,21 @@ const CustomTextarea = ({
         {requirementField && <span className="field-requirment">*</span>}
       </label>
       <div
-        style={{height:"150px"}}
+        id={id}
         className={
           check
             ? "custom-input__textarea-disabled"
             : "custom-textarea__textfield"
         }
       >
-        <textarea
-          type={type}
-          id={id}
-          disabled={check}
+        <ReactQuill
+          theme="snow"
+          onChange={handleOnChange}
           placeholder={placeholder}
-          {...register(id)}
-          rows={5}
         />
         {check ? null : (
           <p className="custom-textarea__error">
-            {children || (
+            {((children===null) ? (showError1 ? errorMessage : '') : (showError2 ? children : '')) || (
               <span
                 style={{
                   marginTop: "2px",
@@ -55,4 +73,4 @@ const CustomTextarea = ({
   );
 };
 
-export default CustomTextarea;
+export default Textarea;
