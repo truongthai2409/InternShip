@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,11 +8,13 @@ import CustomCheckbox from "../../components/CustomCheckbox";
 import CustomInput from "../../components/CustomInput/index";
 import Button from "../../components/Button/index";
 import { loginUser } from "../../store/slices/main/login/loginSlice";
-import { schema } from "./data";
+import { schema } from "./validate";
 import { TabTitle } from "src/utils/GeneralFunctions";
+import { toast } from "react-toastify";
 
 const Login = () => {
   TabTitle("Login");
+  const [isCheck, setIsCheck] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const { profile } = useSelector(state => state.authentication)
@@ -30,22 +32,32 @@ const Login = () => {
       username: data.username,
       password: data.password,
     };
-    const res = await dispatch(loginUser(userData));
-    if (res.type === "login/loginUser/fulfilled") {
-      const role = res.payload.role;
-      switch (role) {
-        case "Role_HR":
-          navigate(`/hr`, { replace: true });
-          break;
-        case "Role_Partner":
-          navigate(`/partner`, { replace: true });
-          break;
-        default:
-          navigate(`/candidate`, { replace: true });
+    try {
+      const res = await dispatch(loginUser(userData));
+      if (res.payload.token) {
+        const role = res.payload.role;
+        if (isCheck === true) {
+          localStorage.setItem("userPresent", JSON.stringify(res.payload));
+        }
+        switch (role) {
+          case "Role_HR":
+            navigate(`/hr`, { replace: true });
+            break;
+          case "Role_Partner":
+            navigate(`/partner`, { replace: true });
+            break;
+          default:
+            navigate(`/candidate`, { replace: true });
+        }
       }
+    } catch (error) {
+      toast.error(error);
     }
   };
-
+  const handleSaveLogin = (e) => {
+    const check = e.target.checked;
+    setIsCheck(check);
+  };
   return (
     <div className="login-form__container">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -68,7 +80,10 @@ const Login = () => {
         >
           {errors.password?.message}
         </CustomInput>
-        <div className="login-form__save-pass">
+        <div
+          className="login-form__save-pass"
+          onChange={(e) => handleSaveLogin(e)}
+        >
           <CustomCheckbox label="Lưu mật khẩu" />
         </div>
         <div className="login-form__btn">

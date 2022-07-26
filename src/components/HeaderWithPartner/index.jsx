@@ -33,12 +33,12 @@ function HeaderWithPartner(props) {
         <div className="header__partner">
           <Link to="/partner/post" className="header__partner-post">
             <AddCardIcon></AddCardIcon>
-            <span className="header__partner-post-post">Đăng bài</span>
+            <span className="header__partner-post-post">Đăng công việc</span>
           </Link>
           <Link to="/partner/post-list" className="header__partner-post">
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__partner-post-post">
-              Danh sách bài đăng
+              Danh sách công việc đã đăng
             </span>
           </Link>
         </div>

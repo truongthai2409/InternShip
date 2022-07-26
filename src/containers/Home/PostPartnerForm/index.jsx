@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomTextarea from "../../../components/CustomTextarea";
 import "./styles.scss";
+import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
@@ -15,7 +16,10 @@ import {
   // addJob,
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
+import {
+  // getDistrictList,
+  getProvinceList,
+} from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
 
@@ -37,6 +41,7 @@ const PostPartnerForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
