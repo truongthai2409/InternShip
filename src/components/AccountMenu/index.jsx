@@ -11,8 +11,9 @@ import Logout from '@mui/icons-material/Logout'
 import { Link } from 'react-router-dom'
 import AccountBoxIcon from '@mui/icons-material/AccountBox'
 import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicationsSharp'
+import avatarDefault from '../../assets/img/avatar-default.png';
 
-const AccountMenu = ({ linkImg }) => {
+const AccountMenu = ({ linkImg = avatarDefault }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = event => {

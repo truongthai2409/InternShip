@@ -33,16 +33,17 @@ const Login = () => {
     const res = await dispatch(loginUser(userData));
     if (res.type === "login/loginUser/fulfilled") {
       const role = res.payload.role;
-      switch (role) {
-        case "Role_HR":
-          navigate(`/hr`, { replace: true });
-          break;
-        case "Role_Partner":
-          navigate(`/partner`, { replace: true });
-          break;
-        default:
-          navigate(`/candidate`, { replace: true });
-      }
+      // switch (role) {
+      //   case "Role_HR":
+      //     navigate(`/hr`, { replace: true });
+      //     break;
+      //   case "Role_Partner":
+      //     navigate(`/partner`, { replace: true });
+      //     break;
+      //   default:
+      //     navigate(`/candidate`, { replace: true });
+      // }
+      navigate(`/`, {replace: true });
     }
   };
 

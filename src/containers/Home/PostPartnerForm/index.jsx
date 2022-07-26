@@ -10,7 +10,7 @@ import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   // addJob,
@@ -22,14 +22,17 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
+import { format } from "date-fns";
+import DescriptionForm from "src/components/DescriptionForm";
 
 const PostPartnerForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition, status } = useSelector((state) => state.job);
+  const [openForm, setOpenForm] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  // const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -45,6 +48,10 @@ const PostPartnerForm = (props) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const handleToggle = () => {
+    setOpenForm(!openForm);
+  };
 
   const onSubmit = (data) => {
     const jobData = {
@@ -87,7 +94,7 @@ const PostPartnerForm = (props) => {
             <div className="partner-post__form">
               <div className="partner-post__heading">
                 <WorkIcon style={{ margin: "5px 5px 0 0" }} />
-                <h2>Bản tin ứng tuyển</h2>
+                <h2>Đợt thực tập của trường</h2>
               </div>
               <p className="title-requirement">
                 (<span className="field-requirment"> * </span>)Trường bắt buộc
@@ -132,22 +139,25 @@ const PostPartnerForm = (props) => {
                   label="Ngày bắt đầu tuyển"
                   id="timeStart"
                   type="date"
+                  min={format(new Date(), "yyyy-MM-dd")}
                   placeholder=""
                   register={register}
                 >
                   {errors.timeStart?.message}
                 </CustomInput>
+
                 <CustomInput
                   label="Ngày hết hạn tuyển"
                   id="timeEnd"
                   type="date"
+                  min={format(new Date(), "yyyy-MM-dd")}
                   placeholder=""
                   register={register}
                 >
                   {errors.timeEnd?.message}
                 </CustomInput>
               </div>
-              <div className="partner-post__textarea">
+              <div className="partner-post__textarea-description">
                 <CustomTextarea
                   label="Mô tả"
                   id="jobDescription"
@@ -157,6 +167,11 @@ const PostPartnerForm = (props) => {
                 >
                   {errors.jobDescription?.message}
                 </CustomTextarea>
+                {openForm && (
+                  <>
+                    <DescriptionForm />
+                  </>
+                )}
               </div>
               <div className="partner-post__textarea">
                 <CustomTextarea
@@ -198,6 +213,16 @@ const PostPartnerForm = (props) => {
           </div>
         </div>
       </form>
+
+      <div className="description-btn-post-partner-container">
+        <button className="description-btn-post-partner" onClick={handleToggle}>
+        {
+          openForm == false ? 
+          '(Xem mô tả mẫu)'
+          : '(Đóng)'
+        }  
+        </button>
+      </div>
     </>
   );
 };
