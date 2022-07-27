@@ -1,6 +1,4 @@
 import * as React from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
@@ -55,7 +53,7 @@ export default function SelectAreaHome({ onChange }) {
             renderValue={(selected) => {
               if (selected.length === 0) {
                 return (
-                  <p id="demo-multiple-name-label" class="text-location">
+                  <p id="demo-multiple-name-label" className="text-location">
                     Khu vực
                   </p>
                 );

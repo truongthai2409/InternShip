@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import api from "../../../../config/api/apiConfig";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import api from '../../../../config/api/apiConfig'
+import { toast } from "react-toastify";
+import axios from 'axios';
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -19,13 +20,15 @@ const loginSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload.token) {
-          state.status = "success";
-          state.user = action.payload;
-          localStorage.setItem("userPresent", JSON.stringify(action.payload));
-        } else {
-          state.status = "fail";
-          state.error = action.payload;
+        if(action.payload.status > 200)
+        {
+          state.status = 'fail'
+          toast.error("Tài khoản hoặc mật khẩu không đúng!")
+        }
+        else {
+          state.status = 'success'
+          toast.success("Bạn đã đăng nhập thành công!")
+          localStorage.setItem('userPresent', JSON.stringify(action.payload))
         }
       })
       .addCase(updateUserPassword.fulfilled, (state, action) => {

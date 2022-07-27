@@ -14,17 +14,19 @@ import AccountMenu from "../AccountMenu";
 import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
 function HeaderWithPartner(props) {
-  const location = useLocation();
-  const pathUrl = location.pathname;
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  // console.log(user);
+  const location = useLocation()
+  const pathUrl = location.pathname
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.user)
 
-  const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
+  const idUser = JSON.parse(localStorage.getItem('userPresent')).idUser
 
   useEffect(() => {
     dispatch(getUserById(idUser));
   }, []);
+
+console.log("first", idUser)
+console.log("user", user);
 
   return (
     <div className="container-header__partner header__partner config">

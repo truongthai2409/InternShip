@@ -1,12 +1,15 @@
-import './styles.scss'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
-import DoorFrontIcon from '@mui/icons-material/DoorFront'
-import PostStatus from '../PostStatus'
-import ButtonAction from '../ButtonAction'
-import moment from 'moment'
+import "./styles.scss";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DoorFrontIcon from "@mui/icons-material/DoorFront";
+import PostStatus from "../PostStatus";
+import ButtonAction from "../ButtonAction";
+import moment from "moment";
+import { useState } from "react";
 
-const CardPost = props => {
+const CardPost = (props) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -24,12 +27,12 @@ const CardPost = props => {
       </div>
       <p className="card-post__amount">Số lượng: {props.amount}</p>
       <p className="card-post__time">
-        <b>Thời gian tuyển dụng:</b>{' '}
-        {moment(props.timeStart).format('DD/MM/YYYY')} -{' '}
-        {moment(props.timeEnd).format('DD/MM/YYYY')}
+        <b>Thời gian tuyển dụng:</b>{" "}
+        {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
+        {moment(props.timeEnd).format("DD/MM/YYYY")}
       </p>
       <p className="card-post__created">
-        <b>Ngày đăng:</b> {moment(props.timeCreated).format('DD/MM/YYYY')}
+        <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
       </p>
       <div className="card-post__action">
         <ButtonAction
@@ -40,6 +43,9 @@ const CardPost = props => {
           color="#111"
           name="Ứng viên"
           fontSize="13px"
+          onClick={handleOpen}
+          open={open}
+          setOpen={setOpen}
         />
         <ButtonAction
           height="50px"
@@ -61,7 +67,7 @@ const CardPost = props => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CardPost
+export default CardPost;

@@ -20,13 +20,14 @@ const jobSlice = createSlice({
       state.idJobActive = action.payload.contents;
     },
     updateIndexCardActive: (state, action) => {
-      state.indexCardActive = action.payload.contents;
-      state.jobDetail = state.jobListName[action.payload.contents];
+      state.indexCardActive = action.payload;
+      state.jobDetail = state?.jobList[action.payload];
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      state.jobList = payload;
+      console.log("2-jobList:", state.jobList);
+      state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
@@ -60,19 +61,19 @@ const jobSlice = createSlice({
   },
 });
 
-export const getJobList = createAsyncThunk(
-  "job/getJobList",
-  async (jobDetail) => {
-    return axios
-      .get(`${baseURL}/api/job`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
+  return axios
+    .get(`${baseURL}/api/r2s/job?no=${args[0] - 1}&limit=${args[1]}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
   return axios

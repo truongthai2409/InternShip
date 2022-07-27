@@ -18,7 +18,6 @@ function CardHome(props) {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-  const [id, setId] = React.useState();
   var isMark =
     careListOfPrivate.length > 0 &&
     careListOfPrivate.filter((job) => job.jobCare.id === props.id);

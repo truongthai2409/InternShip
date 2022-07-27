@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomCheckbox from "../../components/CustomCheckbox";
 import CustomInput from "../../components/CustomInput/index";
@@ -10,14 +10,31 @@ import Button from "../../components/Button/index";
 import { loginUser } from "../../store/slices/main/login/loginSlice";
 import { schema } from "./validate";
 import { TabTitle } from "src/utils/GeneralFunctions";
+import { authenticationSelector } from "src/store/selectors/main/loginSelectors";
 import { toast } from "react-toastify";
+
 
 const Login = () => {
   TabTitle("Login");
   const [isCheck, setIsCheck] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { profile } = useSelector(state => state.authentication)
+  const status = useSelector(authenticationSelector);
+
+  if (status === "success") {
+    const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
+    navigate("/hr", { replace: true });
+    switch (role) {
+      case "Role_HR":
+        navigate("/hr", { replace: true });
+        break;
+      case "Role_Partner":
+        navigate("/partner", { replace: true });
+        break;
+      default:
+        navigate("/candidate", { replace: true });
+    }
+  }
 
   const {
     register,
@@ -67,6 +84,7 @@ const Login = () => {
           type="text"
           placeholder="Tài khoản..."
           register={register}
+          requirementField={false}
         >
           {errors.username?.message}
         </CustomInput>
@@ -77,6 +95,7 @@ const Login = () => {
           placeholder="Mật khẩu"
           register={register}
           visibility={true}
+          requirementField={false}
         >
           {errors.password?.message}
         </CustomInput>

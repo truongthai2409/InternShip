@@ -1,6 +1,9 @@
-@use '../../../assets/styles/' as *;
+@use "../../../assets/styles/" as *;
 
 .profile-form__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .profile-form__content {
     .profile-form__content-item {
       .custom-input .custom-input__textfield input {

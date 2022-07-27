@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import api from 'src/config/api/apiConfig'
 
 const baseURL = process.env.REACT_APP_API
@@ -33,6 +34,7 @@ const registerSlice = createSlice({
           state.user = action.payload
           state.status = 'success'
           state.error = {}
+          toast.success("Bạn đã đăng ký tài khoản thành công!")
         } else {
           state.status = 'fail'
           state.error = action.payload

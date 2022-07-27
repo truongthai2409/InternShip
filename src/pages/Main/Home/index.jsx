@@ -20,10 +20,9 @@ const Home = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
+  const { jobList, jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-
   useEffect(() => {
     const dataSearch = {
       name: "",
@@ -32,7 +31,7 @@ const Home = (props) => {
       limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
-    dispatch(getJobList());
+    dispatch(getJobList([1, 10]));
   }, [dispatch]);
 
   // const generateNameId = (name) => {
@@ -66,6 +65,7 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
+
   return (
     <>
       {jobDetail && (

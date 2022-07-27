@@ -60,7 +60,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               active={indexCardActive}
               index={index}
               key={job.id}
-              title={job?.name}
+              title={job.name}
               fontSize={10}
               nameCompany={job.hr.company?.name}
               idCompany={job.hr.company?.id}

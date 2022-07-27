@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
-
 import {
   // useSelector,
   useDispatch,
@@ -12,7 +11,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
 import "./styles.scss";
 import InformationCompany from "../InformationComapny";
 import BaseInformationCompany from "../BaseInformationCompany";
@@ -47,6 +45,8 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+
+
 const DetailCard = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();

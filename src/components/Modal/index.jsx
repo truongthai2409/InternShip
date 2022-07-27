@@ -1,23 +1,23 @@
-import * as React from 'react'
+import * as React from "react";
 import {
   // Button,
   Slide,
   Dialog,
   DialogTitle,
   // DialogActions,
-  DialogContent
-} from '@mui/material'
+  DialogContent,
+} from "@mui/material";
 
-import './styles.scss'
+import "./styles.scss";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />
-})
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
-const Modal = ({ modalTitle, open, setOpen, children }) => {
+const Modal = ({ modalTitle, open, setOpen, children, name }) => {
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -27,11 +27,11 @@ const Modal = ({ modalTitle, open, setOpen, children }) => {
         TransitionComponent={Transition}
         className="dialog"
       >
-        <DialogTitle>{modalTitle}</DialogTitle>
+        <DialogTitle className={`dialog-title__${name}`}>{modalTitle}</DialogTitle>
         <DialogContent>{children}</DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

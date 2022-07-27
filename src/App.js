@@ -88,9 +88,9 @@ function App() {
           <Route
             path="/hr"
             element={
-              <AuthenticatedGuard>
+              // <AuthenticatedGuard>
                 <HRLayOut />
-              </AuthenticatedGuard>
+              // </AuthenticatedGuard>
             }
           >
             {renderHrRouter()}

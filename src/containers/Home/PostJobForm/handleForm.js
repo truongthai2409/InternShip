@@ -32,7 +32,15 @@ export const schema = yup
     jobDescription: yup.string().required(" * Bạn phải nhập mô tả công việc."),
     jobRequirement: yup.string().required(" * Bạn phải nhập mô tả công việc."),
     benefits: yup.string().required(" * Bạn phải nhập quyền lợi của ứng viên."),
-    salaryMin: yup.string().required(" * Bạn phải nhập mức lương tối thiểu."),
-    salaryMax: yup.string().required(" * Bạn phải nhập mức lương tối đa."),
+    salaryMin: yup
+      .number()
+      .required(" * Bạn phải nhập mức lương tối thiểu.")
+      .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
+      .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
+    salaryMax: yup
+      .number()
+      .required(" * Bạn phải nhập mức lương tối đa.")
+      .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
+      .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
   })
   .required();

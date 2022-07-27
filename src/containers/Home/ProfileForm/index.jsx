@@ -1,52 +1,52 @@
-import './styles.scss'
-import Button from 'src/components/Button'
-import ButtonOutline from 'src/components/ButtonOutline'
-import CustomInput from 'src/components/CustomInput'
-import { useForm } from 'react-hook-form'
-import { schema } from './validateForm'
-import { yupResolver } from '@hookform/resolvers/yup'
-import SelectCustom from 'src/components/Select'
-import { useEffect } from 'react'
-import { genderList } from './validateForm'
-import { useDispatch, useSelector } from 'react-redux'
-import { updateUser } from 'src/store/slices/Admin/user/userSlice'
+import "./styles.scss";
+import Button from "src/components/Button";
+import ButtonOutline from "src/components/ButtonOutline";
+import CustomInput from "src/components/CustomInput";
+import { useForm } from "react-hook-form";
+import { schema } from "./validateForm";
+import { yupResolver } from "@hookform/resolvers/yup";
+import SelectCustom from "src/components/Select";
+import { useEffect } from "react";
+import { genderList } from "./validateForm";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "src/store/slices/Admin/user/userSlice";
 
 const ProfileForm = ({ onClick }) => {
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors }
-  } = useForm({ resolver: yupResolver(schema) })
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
-  const dispatch = useDispatch()
-  const { user } = useSelector(state => state.user)
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setValue('firstName', user.user.firstName)
-    setValue('lastName', user.user.lastName)
-    setValue('phone', user.user.phone)
-  }, [user])
+    setValue("firstName", user.firstName);
+    setValue("lastName", user.lastName);
+    setValue("phone", user.phone);
+  }, []);
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const profileData = {
       hr: JSON.stringify({
         user: {
-          username: user?.user.username,
+          username: user.username,
           gender: parseInt(data.gender),
           phone: data.phone,
-          email: user.user.email,
+          email: user.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          role: user.user.role
+          role: user.role,
         },
         position: user.position,
-        company: { id: user.company?.id }
-      })
-    }
-    dispatch(updateUser([profileData, user?.id]))
-    onClick()
-  }
+        company: { id: user.company?.id },
+      }),
+    };
+    dispatch(updateUser([profileData, user?.id]));
+    onClick();
+  };
 
   return (
     <>
@@ -83,7 +83,7 @@ const ProfileForm = ({ onClick }) => {
               register={register}
               id="gender"
               label="Giới tính"
-              defaultValue={user.user.gender}
+              defaultValue={user.gender}
               requirementField={false}
               options={genderList}
             >
@@ -111,7 +111,7 @@ const ProfileForm = ({ onClick }) => {
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />
-          <span style={{ margin: '0 4px' }}></span>
+          <span style={{ margin: "0 4px" }}></span>
           <ButtonOutline
             name="Hủy"
             onClick={onClick}
@@ -124,7 +124,7 @@ const ProfileForm = ({ onClick }) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default ProfileForm
+export default ProfileForm;

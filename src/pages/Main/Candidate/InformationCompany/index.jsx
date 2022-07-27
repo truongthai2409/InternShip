@@ -16,7 +16,7 @@ function CandidateInformationCompany(props) {
   const { jobDetail } = useSelector(state => state.job)
 
   useEffect(() => {
-    dispatch(getJobList())
+    dispatch(getJobList([1,10]))
   }, [dispatch])
   return (
     <div className="information-company__container">
