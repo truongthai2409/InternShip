@@ -17,7 +17,7 @@ const jobSlice = createSlice({
   },
   reducers: {
     updateIdJobActive: (state, action) => {
-      state.idJobActive = action.payload;
+      state.idJobActive = action.payload.contents;
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
@@ -47,7 +47,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.length > 0) {
-        state.jobDetail = payload[0];
+        state.jobDetail = payload.contents[0];
       } else {
       }
     });
@@ -63,22 +63,19 @@ const jobSlice = createSlice({
   },
 });
 
-export const getJobList = createAsyncThunk(
-  'job/getJobList',
-  async (args) => {
-    return axios
-      .get(`${baseURL}/api/r2s/job?no=${args[0]-1}&limit=${args[1]}`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => {
-        return error.response.data
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
+  return axios
+    .get(`${baseURL}/api/r2s/job?no=${args[0] - 1}&limit=${args[1]}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
   return axios
@@ -104,15 +101,13 @@ export const getJobByName = createAsyncThunk(
       });
   }
 );
-
 export const getJobByNameAndLocation = createAsyncThunk(
   "job/getJobByNameAndLocation",
   async (dataSearch) => {
-    const { jobName, location } = dataSearch;
     return axios
-      .get(
-        `${baseURL}/api/job/search?name=${jobName}&province=${location}&no=0&limit=10`
-      )
+      .get(`${baseURL}/api/r2s/job/search`, {
+        params: dataSearch,
+      })
       .then((response) => {
         return response.data;
       })
