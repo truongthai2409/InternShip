@@ -18,19 +18,24 @@ const Home = (props) => {
 
   const dispatch = useDispatch();
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
-    state => state.job
-  )
+  const { jobList, jobListName, jobDetail, indexCardActive } = useSelector(
+    (state) => state.job
+  );
   useEffect(() => {
-    dispatch(getJobByName(''))
-    dispatch(getJobList([1,10]))
-  }, [dispatch])
+    dispatch(getJobByName(""));
+    dispatch(getJobList([1, 10]));
+  }, []);
 
+  const handleSearchLocation = (value) => {
+    var raw = value;
+    raw.search = raw.search.replace("%20", "+");
+    window.history.replaceState("", document.title, raw);
+  };
   const handleSearch = (value) => {
     setValueSearch(value);
     const dataSearch = {
       jobName: valueSearch,
-      location: locationValue,
+      location: handleSearchLocation(locationValue),
     };
     if (valueSearch && value) {
       dispatch(getJobByNameAndLocation(dataSearch));
@@ -43,9 +48,9 @@ const Home = (props) => {
     }
   };
 
-  const getValueLocationAndHandle = value => {
-    setLocationValue(value)
-  }
+  const getValueLocationAndHandle = (value) => {
+    setLocationValue(value);
+  };
 
   return (
     <>

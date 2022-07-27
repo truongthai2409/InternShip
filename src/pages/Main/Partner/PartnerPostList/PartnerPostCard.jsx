@@ -1,10 +1,10 @@
-import './styles.scss'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
-import DoorFrontIcon from '@mui/icons-material/DoorFront'
-import PostStatus from 'src/components/PostStatus'
-import ButtonAction from 'src/components/ButtonAction'
-import moment from 'moment'
+import "./styles.scss";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DoorFrontIcon from "@mui/icons-material/DoorFront";
+import PostStatus from "src/components/PostStatus";
+import ButtonAction from "src/components/ButtonAction";
+import moment from "moment";
 
 const PartnerPostCard = ({ status,jobName, schoolName, address, amount, timeCreated, timeStart,timeEnd }) => {
   return (
@@ -61,7 +61,7 @@ const PartnerPostCard = ({ status,jobName, schoolName, address, amount, timeCrea
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PartnerPostCard
+export default PartnerPostCard;

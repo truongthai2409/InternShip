@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
-
 import {
   // useSelector,
   useDispatch,
@@ -12,7 +11,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
 import "./styles.scss";
 import InformationCompany from "../InformationComapny";
 import BaseInformationCompany from "../BaseInformationCompany";
@@ -47,9 +45,12 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-const DetailCard = ({ jobListName, jobDetail, logo }) => {
+
+
+const DetailCard = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
+  const jobDetail = props.jobDetail;
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
@@ -67,16 +68,17 @@ const DetailCard = ({ jobListName, jobDetail, logo }) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <div>
-      {jobListName && (
+      {props.jobListName && props.jobListName.length > 0 ? (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
           <div className="detail__card-1">
             <div className="detail__card-intro">
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={logo}
+                src={jobDetail.logo}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -133,7 +135,7 @@ const DetailCard = ({ jobListName, jobDetail, logo }) => {
             </Box>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

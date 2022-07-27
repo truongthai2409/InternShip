@@ -16,7 +16,6 @@ const CustomInput = ({
   requirementField = true,
   visibility = false,
   className,
-  min = "",
 }) => {
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -40,7 +39,6 @@ const CustomInput = ({
           placeholder={placeholder}
           disabled={check}
           defaultValue={defaultValue}
-          min={min}
           {...register(id)}
         />
         {check ? null : <p className="custom-input__error">{children}</p>}

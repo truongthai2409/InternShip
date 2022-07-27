@@ -53,7 +53,7 @@ export default function SelectAreaHome({ onChange }) {
             renderValue={(selected) => {
               if (selected.length === 0) {
                 return (
-                  <p id="demo-multiple-name-label" class="text-location">
+                  <p id="demo-multiple-name-label" className="text-location">
                     Khu vực
                   </p>
                 );

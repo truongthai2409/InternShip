@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomTextarea from "../../../components/CustomTextarea";
 import "./styles.scss";
-import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
@@ -35,8 +34,6 @@ const PostPartnerForm = (props) => {
   const navigate = useNavigate();
   const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
 
-  console.log(activeUser);
-
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
@@ -48,7 +45,6 @@ const PostPartnerForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -154,7 +150,6 @@ const PostPartnerForm = (props) => {
                   label="Ngày hết hạn tuyển"
                   id="timeEnd"
                   type="date"
-                  min={format(new Date(), "yyyy-MM-dd")}
                   placeholder=""
                   register={register}
                 >
@@ -220,11 +215,7 @@ const PostPartnerForm = (props) => {
 
       <div className="description-btn-post-partner-container">
         <button className="description-btn-post-partner" onClick={handleToggle}>
-        {
-          openForm == false ? 
-          '(Xem mô tả mẫu)'
-          : '(Đóng)'
-        }  
+          {openForm == false ? "(Xem mô tả mẫu)" : "(Đóng)"}
         </button>
       </div>
     </>
