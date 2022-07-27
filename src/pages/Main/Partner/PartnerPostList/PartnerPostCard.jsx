@@ -2,11 +2,11 @@ import './styles.scss'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
 import DoorFrontIcon from '@mui/icons-material/DoorFront'
-import PostStatus from '../PostStatus'
-import ButtonAction from '../ButtonAction'
+import PostStatus from 'src/components/PostStatus'
+import ButtonAction from 'src/components/ButtonAction'
 import moment from 'moment'
 
-const CardPost = props => {
+const PartnerPostCard = ({ jobName, schoolName, address, amount, timeCreate, timeEnd }) => {
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -64,4 +64,4 @@ const CardPost = props => {
   )
 }
 
-export default CardPost
+export default PartnerPostCard

@@ -21,6 +21,7 @@ const Home = (props) => {
   const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
+
   useEffect(() => {
     dispatch(getJobByName(""));
     dispatch(getJobList());

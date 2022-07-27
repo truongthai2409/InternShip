@@ -27,5 +27,9 @@
     }
 }
 
-.post-list {
+.partner-post-list__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
