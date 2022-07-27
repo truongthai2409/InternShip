@@ -1,19 +1,16 @@
-import "./styles.scss";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DoorFrontIcon from "@mui/icons-material/DoorFront";
-import PostStatus from "../PostStatus";
-import ButtonAction from "../ButtonAction";
-import moment from "moment";
-import { useState } from "react";
+import './styles.scss'
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
+import DoorFrontIcon from '@mui/icons-material/DoorFront'
+import PostStatus from 'src/components/PostStatus'
+import ButtonAction from 'src/components/ButtonAction'
+import moment from 'moment'
 
-const CardPost = (props) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+const PartnerPostCard = ({ status,jobName, schoolName, address, amount, timeCreated, timeStart,timeEnd }) => {
   return (
     <div className="card-post__container">
-      <PostStatus status={props.status?.id} />
-      <h3 className="card-post__job-name">{props.jobName}</h3>
+      <PostStatus status={status} />
+      <h3 className="card-post__job-name">{jobName}</h3>
       <div className="card-post__company-info-detail">
         <img
           className="company-info-detail__img"
@@ -21,18 +18,18 @@ const CardPost = (props) => {
           alt="Ảnh của công ty"
         />
         <div className="company-info-detail__content">
-          <p className="company__name">{props.companyName}</p>
-          <p className="company__location">{props.companyLocation}</p>
+          <p className="company__name">{schoolName}</p>
+          <p className="company__location">{address}</p>
         </div>
       </div>
-      <p className="card-post__amount">Số lượng: {props.amount}</p>
+      <p className="card-post__amount">Số lượng: {amount}</p>
       <p className="card-post__time">
-        <b>Thời gian tuyển dụng:</b>{" "}
-        {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
-        {moment(props.timeEnd).format("DD/MM/YYYY")}
+        <b>Thời gian tuyển dụng:</b>{' '}
+        {moment(timeStart).format('DD/MM/YYYY')} -{' '}
+        {moment(timeEnd).format('DD/MM/YYYY')}
       </p>
       <p className="card-post__created">
-        <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
+        <b>Ngày đăng:</b> {moment(timeCreated).format('DD/MM/YYYY')}
       </p>
       <div className="card-post__action">
         <ButtonAction
@@ -43,9 +40,6 @@ const CardPost = (props) => {
           color="#111"
           name="Ứng viên"
           fontSize="13px"
-          onClick={handleOpen}
-          open={open}
-          setOpen={setOpen}
         />
         <ButtonAction
           height="50px"
@@ -67,7 +61,7 @@ const CardPost = (props) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardPost;
+export default PartnerPostCard

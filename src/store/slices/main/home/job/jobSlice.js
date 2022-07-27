@@ -36,10 +36,7 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload
-      if (payload.length > 0) {
-        state.jobDetail = payload[0]
-      } else {
-      }
+      state.jobDetail = payload.contents[0]
     })
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload
@@ -91,8 +88,6 @@ export const getJobByName = createAsyncThunk(
     return axios
       .get(`${baseURL}/api/r2s/job/search?name=${jobName}`)
       .then(response => {
-        console.log(response)
-
         return response.data
       })
       .catch(error => {

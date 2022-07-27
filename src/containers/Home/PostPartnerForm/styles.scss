@@ -22,8 +22,7 @@
       border: 1.6px solid #666;
       border-radius: 2px;
       width: 100%;
-      padding: 20px 12px;
-      height: 45px;
+      padding: 21px 12px;
       color: #444444;
 
       &:hover {
@@ -109,7 +108,7 @@
     }
 
     .partner-post__textarea {
-      margin-bottom: 35px;
+      margin: 25px 0px;
 
       textarea {
         font-family: 'Public Sans', sans-serif;
@@ -175,6 +174,26 @@ label {
 
 .salary-select-field {
   width: 100%;
+}
+
+.description-btn-post-partner {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: flex-end;
+  font-style: italic;
+  color: $primary-color;
+
+  &:hover {
+    color: #000;
+    cursor: pointer;
+  }
+}
+
+.description-btn-post-partner-container {
+  position: absolute;
+  right: 29%;
+  top: 132%;
 }
 
 // Reponsive

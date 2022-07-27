@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined'
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify'
-import AddCardIcon from '@mui/icons-material/AddCard'
-import AddAlertOutlinedIcon from '@mui/icons-material/AddAlertOutlined'
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import PropTypes from 'prop-types'
-import Logo from '../Logo'
-import './styles.scss'
-import SearchResultHome from '../SearchResultHome'
-import AccountMenu from '../AccountMenu'
-import { getUserById } from 'src/store/slices/Admin/user/userSlice'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
+import AddCardIcon from "@mui/icons-material/AddCard";
+import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import PropTypes from "prop-types";
+import Logo from "../Logo";
+import "./styles.scss";
+import SearchResultHome from "../SearchResultHome";
+import AccountMenu from "../AccountMenu";
+import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
 function HeaderWithHR(props) {
-  const location = useLocation()
-  const pathUrl = location.pathname
-  const dispatch = useDispatch()
-  const { user } = useSelector(state => state.user)
+  const location = useLocation();
+  const pathUrl = location.pathname;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   // console.log(user)
   
@@ -76,12 +76,12 @@ function HeaderWithHR(props) {
         </div>
         <div
           style={{
-            borderRadius: '20px',
-            backgroundColor: '#FFFFFF',
-            display: 'flex',
-            alignItems: 'center',
-            paddingLeft: '12px',
-            paddingRight: '12px'
+            borderRadius: "20px",
+            backgroundColor: "#FFFFFF",
+            display: "flex",
+            alignItems: "center",
+            paddingLeft: "12px",
+            paddingRight: "12px",
           }}
         >
           <h4 className="name">Chào, {user.firstName}</h4>
@@ -89,12 +89,12 @@ function HeaderWithHR(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 HeaderWithHR.propTypes = {
   idMark: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  idNoti: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
+  idNoti: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
-export default HeaderWithHR
+export default HeaderWithHR;

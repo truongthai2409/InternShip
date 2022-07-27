@@ -53,11 +53,11 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList.contents.map((job, index) => (
+        {jobList && jobList.map((job) => ( 
           <CardHome
             id={job.id}
             active={indexCardActive}
-            index={index}
+            index={job.id}
             key={job.id}
             title={job?.name}
             fontSize={10}

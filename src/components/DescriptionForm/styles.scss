@@ -1,0 +1,22 @@
+@use "../../assets/styles/" as *;
+
+.description-form {
+  &__container {
+    border: 1px solid gainsboro;
+    margin: 15px 0px;
+  }
+
+  &__content, &__header {
+    padding: 15px;
+  }
+}
+
+.description-form__header {
+  width: 100%;
+  background-color: gainsboro;
+}
+
+.description-text {
+  font-size: 14px;
+  line-height: 1.5rem;
+}

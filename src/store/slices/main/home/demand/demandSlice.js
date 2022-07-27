@@ -11,21 +11,24 @@ const demandSlice = createSlice({
   },
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getDemandList.fulfilled, (state, { payload }) => {
+    builder.addCase(getDemandListByUniId.fulfilled, (state, { payload }) => {
       state.demandList = payload
-    })
+    });
   }
 })
 
-export const getDemandList = createAsyncThunk('job/getDemandList', async () => {
-  return axios
-    .get(`${baseURL}/api/demand`)
-    .then(response => {
-      return response.data
+export const getDemandListByUniId = createAsyncThunk(
+  "university/getDemandListByUniId",
+  async (uniId) => {
+    return await axios
+    .get(`${baseURL}/api/demand/filter-university/${uniId}`)
+    .then((response) => {
+      return response.data;
     })
-    .catch(error => {
-      return error.response.data
+    .catch((err) => {
+      return err.response.data;
     })
-})
+  }
+)
 
 export default demandSlice
