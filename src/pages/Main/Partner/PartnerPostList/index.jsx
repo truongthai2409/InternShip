@@ -11,10 +11,10 @@ const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const dispatch = useDispatch();
   const { activeUser } = useSelector((state) => state.university);
-  const { demandList } = useSelector((state) => state.demandList);
+  const { demandList } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   // console.log(activeUser?.universityDTO?.id);
-  // console.log(demandList);
+  console.log(demandList.contents);
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
@@ -30,7 +30,8 @@ const PartnerPostList = (props) => {
         demandList?.contents.map((demand) => (
           <div className="partner-post-list__container" key={demand.id}>
             <PartnerPostCard
-              demandName={demand.name}
+              jobName={demand.name}
+              schoolName={demand.universityDTO.name}
               description={demand.description}
               timeStart={demand.createDate}
               timeEnd={demand.end}

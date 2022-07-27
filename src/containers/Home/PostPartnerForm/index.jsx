@@ -14,21 +14,20 @@ import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
-import {
-  // getDistrictList,
-  getProvinceList,
-} from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
-import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
+import { addDemand } from "src/store/slices/main/home/demand/demandSlice";
 import { format } from "date-fns";
 import DescriptionForm from "src/components/DescriptionForm";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 
 const PostPartnerForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
-  const { jobPosition, status } = useSelector((state) => state.job);
+  const { jobPosition } = useSelector((state) => state.job);
+  const { status } = useSelector((state) => state.demand);
   const { activeUser } = useSelector((state) => state.university);
   const [openForm, setOpenForm] = useState(false);
+
+  console.log(status);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +35,6 @@ const PostPartnerForm = (props) => {
 
   useEffect(() => {
     dispatch(getMajorList());
-    dispatch(getProvinceList());
     dispatch(getJobPositionList());
     dispatch(getPartnerByUserID(idUser));
   }, [idUser]);
@@ -79,7 +77,7 @@ const PostPartnerForm = (props) => {
   };
 
   if (status === "success") {
-    navigate("/partner/post/list");
+    navigate("/partner/post-list");
   }
 
   return (
@@ -197,17 +195,125 @@ const PostPartnerForm = (props) => {
                 </CustomTextarea>
               </div>
               <CustomInput
-                label="Danh sách sinh viên"
-                id="fileSV"
-                type="file"
+                label="Chức danh"
+                id="name"
+                type="text"
+                placeholder="Vd. Thực tập thiết kế UI-UX"
+                register={register}
+              >
+                {errors.name?.message}
+              </CustomInput>
+            </div>
+            <div className="row-2-col">
+              <div className="partner-post__select">
+                <SelectCustom
+                  id="jobPosition"
+                  label="Vị trí công việc"
+                  placeholder="Vui lòng chọn"
+                  options={jobPosition}
+                  register={register}
+                >
+                  {errors.jobPosition?.message}
+                </SelectCustom>
+              </div>
+              <div className="partner-post__select">
+                <SelectCustom
+                  id="major"
+                  label="Chuyên ngành"
+                  placeholder="Vui lòng chọn"
+                  options={majorList}
+                  register={register}
+                >
+                  {errors.major?.message}
+                </SelectCustom>
+              </div>
+            </div>
+            <div className="row-2-col">
+              <CustomInput
+                label="Ngày bắt đầu tuyển"
+                id="timeStart"
+                type="date"
+                min={format(new Date(), "yyyy-MM-dd")}
                 placeholder=""
                 register={register}
               >
-                {errors.fileSV?.message}
+                {errors.timeStart?.message}
               </CustomInput>
-              <div className="partner-post__action">
-                <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
+
+              <CustomInput
+                label="Ngày hết hạn tuyển"
+                id="timeEnd"
+                type="date"
+                min={format(
+                  new Date().setDate(new Date().getDate() + 1),
+                  "yyyy-MM-dd"
+                )}
+                placeholder=""
+                register={register}
+              >
+                {errors.timeEnd?.message}
+              </CustomInput>
+            </div>
+            <div className="partner-post__textarea-description">
+              <CustomTextarea
+                label="Mô tả"
+                id="jobDescription"
+                type="description"
+                placeholder="Nhập mô tả"
+                register={register}
+              >
+                {errors.jobDescription?.message}
+              </CustomTextarea>
+
+              <div className="description-btn-post-partner-container">
+                <button
+                  className="description-btn-post-partner"
+                  onClick={handleToggle}
+                >
+                  {openForm == false ? "(Xem mô tả mẫu)" : "(Đóng)"}
+                </button>
               </div>
+              {openForm && (
+                <>
+                  <DescriptionForm />
+                </>
+              )}
+            </div>
+            <div className="partner-post__textarea">
+              <CustomTextarea
+                label="Yêu cầu"
+                id="jobRequirement"
+                type="description"
+                placeholder="Nhập yêu cầu"
+                register={register}
+                check={false}
+              >
+                {errors.jobRequirement?.message}
+              </CustomTextarea>
+            </div>
+            <div className="partner-post__textarea">
+              <CustomTextarea
+                label="Thông tin khác"
+                id="otherInfo"
+                type="desciption"
+                placeholder="Thông tin khác"
+                register={register}
+                check={false}
+              >
+                {errors.otherInfo?.message}
+              </CustomTextarea>
+            </div>
+            <CustomInput
+              label="Danh sách sinh viên"
+              id="fileSV"
+              type="file"
+              placeholder=""
+              register={register}
+            >
+              {errors.fileSV?.message}
+            </CustomInput>
+            <div className="partner-post__action">
+              <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
             </div>
           </div>
         </div>

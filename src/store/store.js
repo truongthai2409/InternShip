@@ -31,7 +31,7 @@ const store = configureStore({
     apply: applySlice.reducer,
     infoCandidate: infoCandidateSlice.reducer,
     app: appSlice.reducer,
-    demandList: demandSlice.reducer
+    demand: demandSlice.reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
