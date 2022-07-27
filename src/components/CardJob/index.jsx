@@ -1,57 +1,55 @@
-import React from "react";
-import WorkIcon from "@mui/icons-material/Work";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import moment from "moment";
+import React from 'react'
+import WorkIcon from '@mui/icons-material/Work'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import moment from 'moment'
 
-import ButtonOutline from "../ButtonOutline";
-import "./styles.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import {
-  deleteMark,
-  getMarkByUser,
-} from "src/store/slices/main/mark/markSlice";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+import ButtonOutline from '../ButtonOutline'
+import './styles.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { deleteMark, getMarkByUser } from 'src/store/slices/main/mark/markSlice'
+import Button from '@mui/material/Button'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { addApply } from 'src/store/slices/main/candidate/apply/applySlice'
+import { getCandidateByUserName } from 'src/store/slices/main/candidate/info/infoCandidateSlice'
 const CardJob = ({ jobCare }) => {
   // const navigate = useNavigate();
-  const { profile } = useSelector((state) => state.authentication);
-  const { candidateInfoByUsername } = useSelector(
-    (state) => state.infoCandidate
-  );
-  const dispatch = useDispatch();
-  const handleDeleteJobCare = async (e) => {
-    e.stopPropagation();
+  const { profile } = useSelector(state => state.authentication)
+  // const { candidateInfoByUsername } = useSelector(state => state.infoCandidate)
+  const dispatch = useDispatch()
+  const handleDeleteJobCare = async e => {
+    e.stopPropagation()
     await dispatch(deleteMark(jobCare.id)).then(
-      toast.success("Đã xóa mark thành công")
-    );
-    await dispatch(getMarkByUser(profile.username));
-  };
+      toast.success('Đã xóa mark thành công')
+    )
+    await dispatch(getMarkByUser(profile.username))
+  }
 
-  const handleAddJob = async (e) => {
-    e.stopPropagation();
-    await dispatch(getCandidateByUserName(profile.username));
-    if (!candidateInfoByUsername.cv) {
-      toast.error("Bạn chưa có CV, vui lòng cập nhật");
+  const handleAddJob = async e => {
+    e.stopPropagation()
+    const res = await dispatch(getCandidateByUserName(profile.username))
+    if (!res.payload.cv) {
+      toast.error('Bạn chưa có CV, vui lòng cập nhật')
     } else {
       const applyData = {
         apply: JSON.stringify({
           jobApp: {
-            id: jobCare.jobCare.id,
+            id: jobCare.jobCare.id
           },
           candidate: {
-            id: profile.idUser,
+            id: res.payload.id
           },
-          referenceLetter: `Đơn ứng tuyển ${profile.username}`,
+          referenceLetter: `Đơn ứng tuyển ${profile.username}`
         }),
-        fileCV: candidateInfoByUsername.cv,
-      };
-      await dispatch(addApply(applyData)).then(toast.success("Đã nộp CV"));
+        fileCV: res.cv
+      }
+      const resApply = await dispatch(addApply(applyData))
+      if (resApply.type === 'apply_candidate/addApply/fulfilled') {
+        toast.success('Đã nộp CV thành công')
+      }
     }
-  };
+  }
   return (
     <div className="card-job__container">
       <div className="card-job__info">
@@ -93,8 +91,8 @@ const CardJob = ({ jobCare }) => {
         <div className="card-job__deadline">
           <AccessTimeIcon />
           <span>
-            {moment(jobCare.jobCare?.timeStartStr).format("DD/MM/YYYY")} -{" "}
-            {moment(jobCare.jobCare?.timeEndStr).format("DD/MM/YYYY")}
+            {moment(jobCare.jobCare?.timeStartStr).format('DD/MM/YYYY')} -{' '}
+            {moment(jobCare.jobCare?.timeEndStr).format('DD/MM/YYYY')}
           </span>
           <Button
             variant="outlined"
@@ -110,7 +108,7 @@ const CardJob = ({ jobCare }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CardJob;
+export default CardJob

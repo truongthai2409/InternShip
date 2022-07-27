@@ -1,8 +1,8 @@
-import React from "react";
-import "./styles.scss";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import React from 'react'
+import './styles.scss'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined'
 
 const CandidateCard = () => {
   return (
@@ -43,7 +43,7 @@ const CandidateCard = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CandidateCard;
+export default CandidateCard

@@ -3,7 +3,7 @@ import './styles.scss'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import WorkOffOutlinedIcon from '@mui/icons-material/WorkOffOutlined'
-import Button from '../../../../components/Button/index';
+import Button from '../../../../components/Button/index'
 
 const PostCard = ({
   jobPosition,
@@ -12,7 +12,7 @@ const PostCard = ({
   address,
   dateStartStr,
   dateEndStr,
-  candidateAmount,
+  candidateAmount
 }) => {
   return (
     <div className="post-card__container">
@@ -35,17 +35,29 @@ const PostCard = ({
             </p>
           </div>
           <div className="post-card-btns">
-            <Button bwidth="33%" backgroundColor="white" className="post-card-btn__user btn">
+            <Button
+              bwidth="33%"
+              backgroundColor="white"
+              className="post-card-btn__user btn"
+            >
               <PersonOutlineOutlinedIcon />
-              <span className='post-card-span-text'>{`${candidateAmount} ứng viên`}</span>
+              <span className="post-card-span-text">{`${candidateAmount} ứng viên`}</span>
             </Button>
-            <Button bwidth="33%" backgroundColor="white" className="post-card-btn__update btn">
+            <Button
+              bwidth="33%"
+              backgroundColor="white"
+              className="post-card-btn__update btn"
+            >
               <EditOutlinedIcon />
-              <span className='post-card-span-text'>Chỉnh sửa</span>
+              <span className="post-card-span-text">Chỉnh sửa</span>
             </Button>
-            <Button bwidth="33%" backgroundColor="white" className="post-card-btn__close-work btn">
+            <Button
+              bwidth="33%"
+              backgroundColor="white"
+              className="post-card-btn__close-work btn"
+            >
               <WorkOffOutlinedIcon />
-              <span className='post-card-span-text'>Đóng việc</span>
+              <span className="post-card-span-text">Đóng việc</span>
             </Button>
           </div>
         </div>

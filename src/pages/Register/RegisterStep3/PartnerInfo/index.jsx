@@ -28,9 +28,6 @@ const PartnerInfo = () => {
 
   const onSubmit = async (data) => {
     // const data = JSON.parse(sessionStorage.getItem("account"));
-    console.log(data);
-    console.log("test");
-    console.log(data.avatar[0]);
     const partnerData = {
       avatarUser: data.avatar[0],
       logo: data.logo[0],

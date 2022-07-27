@@ -1,46 +1,45 @@
-import { useEffect } from 'react'
-import Button from '../../../../components/Button'
-import './styles.scss'
-import CardPost from '../../../../components/CardPost'
-import { useDispatch, useSelector } from 'react-redux'
-import { getJobListByUserId } from '../../../../store/slices/main/home/job/jobSlice'
-import { TabTitle } from 'src/utils/GeneralFunctions'
+import { useEffect } from "react";
+import Button from "../../../../components/Button";
+import "./styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { TabTitle } from "src/utils/GeneralFunctions";
+import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
+import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import PartnerPostCard from "./PartnerPostCard";
 
-const formatLocation = (location) => {
-  return `${location.address}, ${location.district?.name},
-    ${location.district?.province?.name}`;
-};
-
-const PartnerPostList = props => {
-  TabTitle('Danh sách đợt thực tập | IT Internship JOBS')
-  const dispatch = useDispatch()
-  const { jobList } = useSelector(state => state.job)
-  const userPresent = JSON.parse(localStorage.getItem('userPresent'))
+const PartnerPostList = (props) => {
+  TabTitle("Danh sách bài đăng | IT Internship JOBS");
+  const dispatch = useDispatch();
+  const { activeUser } = useSelector((state) => state.university);
+  const { demandList } = useSelector((state) => state.demandList);
+  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  // console.log(activeUser?.universityDTO?.id);
+  // console.log(demandList);
 
   useEffect(() => {
-    dispatch(getJobListByUserId(userPresent.idUser))
-  }, [dispatch])
+    dispatch(getPartnerByUserID(userPresent.idUser));
+    dispatch(getDemandListByUniId(activeUser?.universityDTO?.id));
+  }, [activeUser?.universityDTO?.id]);
 
   return (
     <div className="hrpost__list">
       <div className="hrpost__list-bt">
         <Button name="ĐĂNG BÀI"></Button>
       </div>
-      {jobList.map(job => (
-        <CardPost
-          key={job.id}
-          status={job.status}
-          jobName={job.name}
-          amount={job.amount}
-          timeStart={job.timeStartStr}
-          timeEnd={job.timeEndStr}
-          timeCreated={job.createDate}
-          companyName={job.hr?.company?.name}
-          companyLocation={formatLocation(job.locationjob)}
-        />
-      ))}
+      {demandList?.contents &&
+        demandList?.contents.map((demand) => (
+          <div className="partner-post-list__container" key={demand.id}>
+            <PartnerPostCard
+              demandName={demand.name}
+              description={demand.description}
+              timeStart={demand.createDate}
+              timeEnd={demand.end}
+              timeCreated={demand.createDate}
+            />
+          </div>
+        ))}
     </div>
-  )
-}
+  );
+};
 
-export default PartnerPostList
+export default PartnerPostList;

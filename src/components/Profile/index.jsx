@@ -11,7 +11,6 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import CustomInput from "../CustomInput";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
@@ -55,8 +54,8 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const handleShow = () => {
-    setIsUpdate(!isUpdate)
-  }
+    setIsUpdate(!isUpdate);
+  };
 
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
@@ -78,8 +77,8 @@ const Profile = () => {
           fz="14px"
         />
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -89,7 +88,10 @@ const Profile = () => {
           <img
             className="profile__avatar"
             alt="Ảnh đại diện"
-            src={user?.avatar || "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"}
+            src={
+              user?.avatar ||
+              "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+            }
           />
           <div className="profile__edit-img">
             <ButtonOutline
@@ -157,7 +159,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

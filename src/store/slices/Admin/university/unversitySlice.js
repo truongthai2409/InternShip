@@ -12,6 +12,7 @@ const universitySlice = createSlice({
     error: [],
     status: "idle",
     user: {},
+    activeUser: {},
   },
   reducer: {},
   extraReducers: (builder) => {
@@ -22,7 +23,8 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      if (!payload?.data) {
+      if (!payload?.id) {
+        state.status = 'fail';
         state.error = payload;
       } else {
         state.user = payload;
@@ -38,6 +40,9 @@ const universitySlice = createSlice({
         state.error = payload;
       }
     });
+    builder.addCase(getPartnerByUserID.fulfilled, (state, { payload }) => {
+      state.activeUser = payload
+    })
   },
 });
 
@@ -101,6 +106,22 @@ export const getUniversityDetail = createAsyncThunk(
       });
   }
 );
+
+export const getPartnerByUserID = createAsyncThunk(
+  "university/getPartnerByUserID",
+  async (userId) => {
+    return await axios
+    .get(`${baseURL}/api/r2s/partner/get-iduser/${userId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      return err.response.data;
+    })
+  }
+)
+
+
 
 /**
  * @params comId updateData

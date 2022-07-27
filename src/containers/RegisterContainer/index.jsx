@@ -1,32 +1,32 @@
-import React from "react";
-import "./styles.scss";
-import { useSelector } from "react-redux";
+import React from 'react'
+import './styles.scss'
+import { useSelector } from 'react-redux'
 
-import Logo from "../../components/Logo/index";
-import Notification from "../../components/Notification";
+import Logo from '../../components/Logo/index'
+import Notification from '../../components/Notification'
 import {
   userSelector,
-  statusSelector,
-} from "../../store/selectors/main/registerSelectors";
+  statusSelector
+} from '../../store/selectors/main/registerSelectors'
 
-import { notificationSelector } from "../../store/selectors/notificationSelectors";
+import { notificationSelector } from '../../store/selectors/notificationSelectors'
 
-import { Link, useNavigate } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Link, useNavigate } from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 export default function RegisterContainer({ Outlet }) {
-  const notification = useSelector(notificationSelector);
-  const navigate = useNavigate();
+  const notification = useSelector(notificationSelector)
+  const navigate = useNavigate()
 
-  const status = useSelector(statusSelector);
+  const status = useSelector(statusSelector)
 
-  if (status === "success") {
+  if (status === 'success') {
     setTimeout(() => {
-      navigate("/login");
-    }, 1000);
+      navigate('/login')
+    }, 1000)
   }
 
-  const roleID = useSelector(userSelector)?.role?.id;
+  const roleID = useSelector(userSelector)?.role?.id
   return (
     <div className="register-container">
       <div className="logo-register-page">
@@ -40,8 +40,8 @@ export default function RegisterContainer({ Outlet }) {
           component="div"
           sx={{
             fontSize: 17,
-            fontWeight: "400",
-            transform: "translate(5px,5px)",
+            fontWeight: '400',
+            transform: 'translate(5px,5px)'
           }}
         >
           Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
@@ -49,5 +49,5 @@ export default function RegisterContainer({ Outlet }) {
       </div>
       <Notification notifyAlert={notification} />
     </div>
-  );
+  )
 }

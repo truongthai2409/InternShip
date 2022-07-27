@@ -16,13 +16,13 @@ const CustomInput = ({
   requirementField = true,
   visibility = false,
   className,
-  min
+  min = "",
 }) => {
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
     setIsHide(!isHide);
   };
-  
+
   return (
     <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">

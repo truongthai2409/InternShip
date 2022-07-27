@@ -1,47 +1,47 @@
-import React, { useEffect } from "react";
-import { toast } from "react-toastify";
+import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
-import "./styles.scss";
-import ArrowButton from "../../../../components/ArrowButton/index";
-import Button from "../../../../components/Button";
-import CustomInput from "../../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { errorSelector } from "../../../../store/selectors/main/registerSelectors";
-import { genderList, schema } from "./data";
-import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
-import SelectCustom from "../../../../components/Select";
-import { registerCandidate } from "src/store/slices/main/register/registerSlice";
-import { TabTitle } from "src/utils/GeneralFunctions";
+import './styles.scss'
+import ArrowButton from '../../../../components/ArrowButton/index'
+import Button from '../../../../components/Button'
+import CustomInput from '../../../../components/CustomInput/index'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { errorSelector } from '../../../../store/selectors/main/registerSelectors'
+import { genderList, schema } from './data'
+import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
+import SelectCustom from '../../../../components/Select'
+import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
+import { TabTitle } from 'src/utils/GeneralFunctions'
 
 const CandidateInfo = () => {
-  TabTitle("Đăng ký - Ứng viên");
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { majorList } = useSelector((state) => state.major);
-  const errorMessage = useSelector(errorSelector);
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+  TabTitle('Đăng ký - Ứng viên')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { majorList } = useSelector(state => state.major)
+  const errorMessage = useSelector(errorSelector)
+  const handleBackClick = e => {
+    e.preventDefault()
+    navigate(-1)
+  }
 
   useEffect(() => {
-    dispatch(getMajorList());
-  }, [dispatch]);
+    dispatch(getMajorList())
+  }, [dispatch])
 
   // const status = useSelector(statusSelector);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     // const step2Data = JSON.parse(sessionStorage.getItem("account"));
     const userData = {
       fileCV: data.cv[0],
@@ -55,23 +55,23 @@ const CandidateInfo = () => {
           lastName: data.lastname,
           firstName: data.firstname,
           phone: data.phone,
-          email: data.email,
+          email: data.email
         },
         major: {
-          id: parseInt(data.major),
-        },
-      }),
-    };
+          id: parseInt(data.major)
+        }
+      })
+    }
 
     try {
-      const res = await dispatch(registerCandidate(userData));
-      if (res.type === "register/registerCandidate/fulfilled") {
-        navigate("/login");
+      const res = await dispatch(registerCandidate(userData))
+      if (res.type === 'register/registerCandidate/fulfilled') {
+        navigate('/login')
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error)
     }
-  };
+  }
 
   return (
     <div className="reg-candidate">
@@ -205,6 +205,6 @@ const CandidateInfo = () => {
         </div>
       </form>
     </div>
-  );
-};
-export default CandidateInfo;
+  )
+}
+export default CandidateInfo

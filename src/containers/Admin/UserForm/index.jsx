@@ -1,45 +1,45 @@
-import React, { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Avatar, Grid, Switch } from "@mui/material";
+import React, { useState, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Avatar, Grid, Switch } from '@mui/material'
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
+import './styles.scss'
+import CustomInput from '../../../components/CustomInput'
 // import CustomTextarea from "../../../components/CustomTextarea";
-import Button from "../../../components/Button";
-import cameraLogo from "../../../assets/img/camera.png";
+import Button from '../../../components/Button'
+import cameraLogo from '../../../assets/img/camera.png'
 // import Select from "../../../components/Select";
-import { schema, renderControlAction } from "./script.js";
+import { schema, renderControlAction } from './script.js'
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
-const UserForm = (props) => {
-  const { isAdd } = props;
+const UserForm = props => {
+  const { isAdd } = props
 
-  const [image, setImage] = useState(cameraLogo);
-  const fileInput = useRef(null);
+  const [image, setImage] = useState(cameraLogo)
+  const fileInput = useRef(null)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-  });
+    resolver: yupResolver(schema)
+  })
 
   // show preview image
-  const showPreviewImage = (e) => {
+  const showPreviewImage = e => {
     if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (x) => {
-        setImage(x.target.result);
-      };
-      reader.readAsDataURL(imageFile);
+      let imageFile = e.target.files[0]
+      const reader = new FileReader()
+      reader.onload = x => {
+        setImage(x.target.result)
+      }
+      reader.readAsDataURL(imageFile)
     }
-  };
+  }
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = data => {}
 
   return (
     <form
@@ -136,7 +136,7 @@ const UserForm = (props) => {
                   </CustomInput>
                   <div className="user-form__checkbox">
                     <p className="user-form__checkbox-label">Type</p>
-                    <select {...register("isAdmin")}>
+                    <select {...register('isAdmin')}>
                       <option value={true}>Admin</option>
                       <option value={false}>Khach hang</option>
                     </select>
@@ -155,7 +155,7 @@ const UserForm = (props) => {
         </div>
       ) : null}
     </form>
-  );
-};
+  )
+}
 
-export default UserForm;
+export default UserForm

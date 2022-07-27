@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .header__with-search-search {
   display: flex;
@@ -29,7 +29,7 @@
       border: none;
       border-radius: 2px;
       outline: none;
-      width: 100px;
+      // width: 100px;
     }
   }
 

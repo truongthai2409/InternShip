@@ -47,13 +47,14 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-const DetailCard = (props) => {
+const DetailCard = ({ jobListName, jobDetail, logo }) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const jobDetail = props.jobDetail;
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
+  // console.log(jobListName, jobDetail);
+  // console.log(jobDetail);
 
   useEffect(() => {
     setJobType(jobDetail?.jobType);
@@ -70,14 +71,14 @@ const DetailCard = (props) => {
   };
   return (
     <div>
-      {props.jobListName.length > 0 ? (
+      {jobListName && (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
           <div className="detail__card-1">
             <div className="detail__card-intro">
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={props?.logo}
+                src={logo}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -134,7 +135,7 @@ const DetailCard = (props) => {
             </Box>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

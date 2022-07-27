@@ -24,21 +24,26 @@ import { useNavigate } from "react-router-dom";
 import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
 import { format } from "date-fns";
 import DescriptionForm from "src/components/DescriptionForm";
+import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 
 const PostPartnerForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition, status } = useSelector((state) => state.job);
+  const { activeUser } = useSelector((state) => state.university);
   const [openForm, setOpenForm] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+
+  console.log(activeUser);
 
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-  }, []);
+    dispatch(getPartnerByUserID(idUser));
+  }, [idUser]);
 
   const {
     register,
@@ -63,7 +68,7 @@ const PostPartnerForm = (props) => {
         startStr: data.timeStart,
         endStr: data.timeEnd,
         partner: {
-          id: 1,
+          id: parseInt(activeUser?.id),
         },
         major: {
           id: parseInt(data.major),

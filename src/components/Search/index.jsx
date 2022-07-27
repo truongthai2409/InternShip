@@ -5,7 +5,7 @@ import './styles.scss'
 
 const Search = ({ placeholder, onChange, width }) => {
   return (
-    <div style={{width: width}} className="search">
+    <div style={{ width: width }} className="search">
       <input
         className="search__input"
         type="search"

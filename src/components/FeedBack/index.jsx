@@ -1,6 +1,6 @@
-import React from "react";
-import Button from "../Button";
-import "./styles.scss";
+import React from 'react'
+import Button from '../Button'
+import './styles.scss'
 
 const FeedBack = () => {
   return (
@@ -35,7 +35,7 @@ const FeedBack = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FeedBack;
+export default FeedBack

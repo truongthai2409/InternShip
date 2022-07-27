@@ -1,14 +1,14 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import CardHome from "../CardHome";
-import moment from "moment";
-import "./styles.scss";
+import { useState } from 'react'
+import PropTypes from 'prop-types'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
+import CardHome from '../CardHome'
+import moment from 'moment'
+import './styles.scss'
 
 function TabPanel(props) {
-  const { children, value, index, jobList, ...other } = props;
+  const { children, value, index, jobList, ...other } = props
 
   return (
     <div
@@ -24,25 +24,25 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  );
+  )
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+  value: PropTypes.number.isRequired
+}
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
+    'aria-controls': `simple-tabpanel-${index}`
+  }
 }
 
 export default function FilterPanelHome({ jobList, indexCardActive }) {
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => setValue(newValue);
+  const [value, setValue] = useState(0)
+  const handleChange = (event, newValue) => setValue(newValue)
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
@@ -53,7 +53,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList.map((job, index) => (
+        {jobList && jobList.map((job, index) => ( 
           <CardHome
             id={job.id}
             active={indexCardActive}
@@ -63,12 +63,12 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
             fontSize={10}
             nameCompany={job.hr.company?.name}
             idCompany={job.hr.company?.id}
-            tagName={[job.jobposition.name, "Full time"]}
+            tagName={[job.jobposition.name, 'Full time']}
             star={job.hr.company?.rates.length}
             location="Hồ Chí Minh"
             time={[
-              moment(job.timeStartStr).format("DD/MM/YYYY"),
-              moment(job.timeEndStr).format("DD/MM/YYYY"),
+              moment(job.timeStartStr).format('DD/MM/YYYY'),
+              moment(job.timeEndStr).format('DD/MM/YYYY')
             ]}
           />
         ))}
@@ -80,5 +80,5 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         {/* <CardHome /> */}
       </TabPanel>
     </Box>
-  );
+  )
 }

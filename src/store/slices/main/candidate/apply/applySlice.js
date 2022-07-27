@@ -1,60 +1,64 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const baseURL = process.env.REACT_APP_API;
+const baseURL = process.env.REACT_APP_API
 
 const applySlice = createSlice({
-  name: "apply_candidate",
+  name: 'apply_candidate',
   initialState: {
-    applyList: [],
+    applyList: []
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(addApply.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = 'success'
       // state.careListCandidate = action.payload;
-    });
+    })
     builder.addCase(
       getApplyListByIdCandidate.fulfilled,
       (state, { payload }) => {
-        state.applyList = payload;
+        state.applyList = payload
       }
-    );
+    )
     // builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
     //   if (!payload?.data) {
     //     state.error = payload;
     //   }
     // });
-  },
-});
+  }
+})
 
 export const getApplyListByIdCandidate = createAsyncThunk(
-  "apply_candidate/getApplyListByIdCandidate",
-  async (id) => {
+  'apply_candidate/getApplyListByIdCandidate',
+  async id => {
     return axios
       .get(`${baseURL}/api/applylist/candidate/${id}`)
-      .then((response) => {
-        return response.data;
+      .then(response => {
+        return response.data
       })
-      .catch((error) => {
-        return error.response.data;
-      });
+      .catch(error => {
+        return error.response.data
+      })
   }
-);
+)
 
 export const addApply = createAsyncThunk(
-  "apply_candidate/addApply",
-  async (data) => {
+  'apply_candidate/addApply',
+  async data => {
     const res = await axios
-      .post(`${baseURL}/api/applylist/candidate`, data)
-      .then((res) => {
-        return res;
+      .post(`${baseURL}/api/applylist/`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
-      .catch((error) => {
-        return error.response.data;
-      });
-    return res;
+      .then(res => {
+        return res
+      })
+      .catch(error => {
+        return error.response.data
+      })
+    return res
   }
-);
+)
 
 // export const deleteMark = createAsyncThunk("mark/deleteMark", async (id) => {
 //   const res = await api
@@ -69,4 +73,4 @@ export const addApply = createAsyncThunk(
 // });
 
 // export const { addJob, removeJob } = markJobSlice.actions;
-export default applySlice;
+export default applySlice

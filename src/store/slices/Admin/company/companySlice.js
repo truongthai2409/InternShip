@@ -126,7 +126,6 @@ export const updateCompanyInfo = createAsyncThunk(
   'company/updateCompanyInfo',
   async (updateData, thunkAPI) => {
     const { companyData, setIsEdit, comid } = updateData
-    console.log(companyData)
     return axios
       .put(`${baseURL}/api/company/${comid}`, companyData, {
         headers: {
@@ -147,7 +146,6 @@ export const updateCompanyInfo = createAsyncThunk(
             'Cập nhật công ty Không thành công'
           )
         )
-        console.log(error.response)
         return error.response.data
       })
   }
@@ -168,7 +166,6 @@ export const deleteCompany = createAsyncThunk(
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess('Xóa công ty không thành công.')
         )
-        console.log(error.response)
         return error.response.data
       })
   }

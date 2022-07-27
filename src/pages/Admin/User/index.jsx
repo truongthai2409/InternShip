@@ -29,9 +29,7 @@ const selectOptions = [
 export default function User() {
   const [open, setOpen] = useState(false)
 
-  const handleSearch = e => {
-    console.log(e.target.value)
-  }
+  const handleSearch = e => {}
 
   const handleOpenModal = () => {
     setOpen(true)

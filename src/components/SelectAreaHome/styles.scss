@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .select-area {
   display: inline-flex;
@@ -42,4 +42,13 @@
   width: 130px !important;
   max-height: none !important;
   height: 200px;
+}
+
+.css-74kp6b-MuiFormControl-root {
+  margin: 0 !important;
+  padding-left: 0 !important;
+}
+.text-location {
+  margin-right: 10px;
+  width: 80px;
 }

@@ -20,7 +20,7 @@ const MenuProps = {
 };
 
 export default function SelectAreaHome({ onChange }) {
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState("");
 
   const handleChange = (event) => {
     const {
@@ -30,6 +30,7 @@ export default function SelectAreaHome({ onChange }) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    onChange && onChange(value);
   };
 
   const dispatch = useDispatch();
@@ -43,26 +44,39 @@ export default function SelectAreaHome({ onChange }) {
     <div>
       <FormControl sx={{ m: 1, width: 170, pl: 1 }}>
         {/* <h6>Khu vực</h6> */}
-        <InputLabel id="demo-multiple-name-label">Khu Vực </InputLabel>
+        {/* <InputLabel id="demo-multiple-name-label">Khu Vực </InputLabel> */}
         <div className="config-select">
           <Select
             labelId="demo-multiple-name-label"
             // id="demo-multiple-name"
             value={personName}
             onChange={handleChange}
-            input={<OutlinedInput label="Khu vực" />}
+            // input={<OutlinedInput />}
+            renderValue={(selected) => {
+              if (selected.length === 0) {
+                return (
+                  <p id="demo-multiple-name-label" class="text-location">
+                    Khu vực
+                  </p>
+                );
+              }
+
+              return selected;
+            }}
             MenuProps={MenuProps}
             sx={{
               mr: 0,
             }}
-            // className={hideIconPadding}
             multiple={false}
-            // disabled
+            displayEmpty
           >
+            {/* <MenuItem disabled value="">
+              <InputLabel id="demo-multiple-name-label">Khu vực</InputLabel>
+            </MenuItem> */}
             {provinceList.map((province) => (
               <MenuItem
                 key={province.id}
-                value={province.id}
+                value={province.name}
                 // style={getStyles(province.id, personName, theme)}
               >
                 {province.name}

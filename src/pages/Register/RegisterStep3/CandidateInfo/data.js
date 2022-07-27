@@ -12,7 +12,7 @@ export const genderList = [
 ];
 
 const IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
-// const CV_FORMATS = ["application/pdf"];
+// const CV_FORMATS = ['application/pdf']
 
 export const schema = yup.object({
   username: yup
@@ -29,7 +29,7 @@ export const schema = yup.object({
   password: yup
     .string()
     .required(" * Bạn phải nhập password")
-    .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự")
+    .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự bao gồm chữ hoa và số ")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
       " * Vui lòng nhập lại mật khẩu"

@@ -19,7 +19,7 @@ function SideBarHomeList() {
   useEffect(() => {
     dispatch(getMajorList())
     dispatch(getJobPositionList())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="slideBarHome__wrapper">

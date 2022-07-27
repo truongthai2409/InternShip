@@ -18,7 +18,7 @@ function HeaderWithPartner(props) {
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
 
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
 
@@ -86,7 +86,7 @@ function HeaderWithPartner(props) {
           }}
         >
           <h4 className="name">Chào, {user?.firstName || "User"}</h4>
-          <AccountMenu />
+          <AccountMenu linkImg="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg" />
         </div>
       </div>
     </div>
