@@ -78,7 +78,7 @@ const DetailCard = (props) => {
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={logo}
+                src={jobDetail.logo}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -135,7 +135,7 @@ const DetailCard = (props) => {
             </Box>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
