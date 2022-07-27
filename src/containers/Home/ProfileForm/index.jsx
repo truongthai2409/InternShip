@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { schema } from "./validateForm";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SelectCustom from "src/components/Select";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { genderList } from "./validateForm";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "src/store/slices/Admin/user/userSlice";
@@ -111,7 +111,7 @@ const ProfileForm = ({ onClick }) => {
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />
-          <span style={{ margin: '0 4px' }}></span>
+          <span style={{ margin: "0 4px" }}></span>
           <ButtonOutline
             name="Hủy"
             onClick={onClick}
@@ -124,7 +124,7 @@ const ProfileForm = ({ onClick }) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default ProfileForm
+export default ProfileForm;

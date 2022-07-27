@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .profile__wrapper {
   padding: 32px 200px 0 200px;
@@ -6,86 +6,79 @@
   min-height: 100vh;
   background-color: #ffffff;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 
-  .profile__col-1 {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    position: relative;
+  .profile__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
 
-    .profile__title {
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
+  .profile__avatar {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2.5px solid #dedede;
+    margin-bottom: 14px;
+  }
 
-    .profile__avatar {
-      height: 280px;
-      width: 280px;
-      border-radius: 50%;
-      border: 2.5px solid #dedede;
-      margin-bottom: 14px;
-    }
+  .profile__name {
+    font-weight: 600;
+    font-size: $fs-40;
+  }
 
-    .profile__name {
-      font-weight: 600;
-    }
+  .profile__edit-img {
+    position: absolute;
+    top: 180px;
+    margin-right: 70px;
 
-    .profile__edit-img {
-      position: absolute;
-      top: 260px;
-      left: 30px;
-
-      .profile__edit-btn {
-        padding: 8px 16px;
-      }
-    }
-
-    .profile__username {
-      color: #777;
-      font-size: 22px;
-      font-weight: 300;
-      margin-bottom: 26px;
+    .profile__edit-btn {
+      padding: 8px 16px;
     }
   }
 
-  .profile__col-2 {
-    width: 60%;
+  .profile__username {
+    color: #777;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 26px;
+  }
 
-    .profile__infor {
-      margin-top: 60px;
-      &-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
+  .profile__infor {
+    margin-top: 10px;
+    &-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
 
-        .profile__infor-text {
-          margin-left: 20px;
-          font-weight: 500;
-        }
+      .profile__infor-text {
+        margin-left: 20px;
+        font-weight: 500;
+      }
 
-        > .css-i4bv87-MuiSvgIcon-root {
-          font-size: 30px;
-        }
+      > .css-i4bv87-MuiSvgIcon-root {
+        font-size: 30px;
+      }
 
-        > span {
-          margin-left: 8px;
-          font-size: 18px;
-          font-weight: 300;
-        }
+      > span {
+        margin-left: 8px;
+        font-size: 18px;
+        font-weight: 300;
       }
     }
+  }
 
-    .profile__actions {
+  .profile__actions {
+    display: flex;
+    margin-top: 50px;
+
+    &-item {
       display: flex;
-      margin-top: 50px;
-
-      &-item {
-        display: flex;
-        align-items: center;
-        background-color: #dedede;
-        padding: 4px 12px;
-        margin-right: 16px;
-      }
+      align-items: center;
+      background-color: #dedede;
+      padding: 4px 12px;
+      margin-right: 16px;
     }
   }
 }

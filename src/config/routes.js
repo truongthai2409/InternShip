@@ -7,7 +7,7 @@ import CompanyDetail from '../pages/Admin/CompanyDetail'
 import UserDetail from '../pages/Admin/UserDetail'
 import UniversityDetail from '../pages/Admin/UniversityDetail'
 import Home from '../pages/Main/Home'
-import CandidateList from '../pages/Main/HR/CandidateList/CandidateList'
+import CandidateList from '../pages/Main/HR/CandidateList'
 import DemandDetail from '../pages/Admin/DemandDetail'
 import Major from '../pages/Admin/Major'
 import MajorDetail from '../pages/Admin/MajorDetail'
@@ -25,7 +25,7 @@ import CandidateHome from 'src/pages/Main/Candidate/Home'
 import PartnerHome from 'src/pages/Main/Partner/Home'
 import Profile from 'src/components/Profile'
 import PartnerPost from 'src/pages/Main/Partner/Post'
-import PartnerPostList from 'src/pages/Main/Partner/PostList'
+import PartnerPostList from 'src/pages/Main/Partner/PartnerPostList'
 
 export const adminRouter = [
   {
@@ -128,11 +128,15 @@ export const candidateRouter = [
   {
     path: '/candidate/information_company',
     Component: CandidateInformationCompany
-  }
+  },
 ]
 
 //partner router
 export const partnerRouter = [
+  {
+    path: '',
+    Component: PartnerHome
+  },
   {
     path: '/partner',
     Component: PartnerHome
@@ -144,6 +148,10 @@ export const partnerRouter = [
   {
     path: '/partner/post-list',
     Component: PartnerPostList
+  },
+  {
+    path: '/partner/profile',
+    Component: Profile
   }
 ]
 

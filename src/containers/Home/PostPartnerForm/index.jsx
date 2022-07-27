@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomTextarea from "../../../components/CustomTextarea";
 import "./styles.scss";
-import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
@@ -13,13 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
-  addJob,
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
-import {
-  getDistrictList,
-  getProvinceList,
-} from "src/store/slices/location/locationSlice";
+import { getProvinceList } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 import { addDemand } from "src/store/slices/Admin/demand/demandSlice";
 
@@ -29,7 +24,7 @@ const PostPartnerForm = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  // const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -41,7 +36,6 @@ const PostPartnerForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -94,7 +88,7 @@ const PostPartnerForm = (props) => {
               </p>
               <div className="partner-post-title">
                 <CustomInput
-                  label="Tên công việc"
+                  label="Chức danh"
                   id="name"
                   type="text"
                   placeholder="Vd. Thực tập thiết kế UI-UX"
@@ -149,10 +143,10 @@ const PostPartnerForm = (props) => {
               </div>
               <div className="partner-post__textarea">
                 <CustomTextarea
-                  label="Mô tả công việc"
+                  label="Mô tả"
                   id="jobDescription"
                   type="description"
-                  placeholder="Nhập mô tả công việc"
+                  placeholder="Nhập mô tả"
                   register={register}
                 >
                   {errors.jobDescription?.message}
@@ -160,10 +154,10 @@ const PostPartnerForm = (props) => {
               </div>
               <div className="partner-post__textarea">
                 <CustomTextarea
-                  label="Yêu cầu công việc"
+                  label="Yêu cầu"
                   id="jobRequirement"
                   type="description"
-                  placeholder="Nhập yêu cầu công việc"
+                  placeholder="Nhập yêu cầu"
                   register={register}
                   check={false}
                 >

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt'
@@ -24,7 +24,7 @@ const CompanyTable = () => {
 
   useEffect(() => {
     dispatch(getCompanyList())
-  }, [])
+  }, [dispatch])
 
   // console.log(companyList);
 

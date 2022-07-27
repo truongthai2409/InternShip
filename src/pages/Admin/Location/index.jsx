@@ -3,7 +3,6 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 
 import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
 import Modal from '../../../components/Modal'
-import MajorForm from '../../../containers/Admin/MajorForm'
 import LocationTable from './LocationTable'
 import LocationForm from '../../../containers/Admin/LocationForm'
 
@@ -29,9 +28,7 @@ const selectOptions = [
 export default function Location() {
   const [open, setOpen] = useState(false)
 
-  const handleSearch = e => {
-    console.log(e.target.value)
-  }
+  const handleSearch = e => {}
 
   const handleOpenModal = () => {
     setOpen(true)

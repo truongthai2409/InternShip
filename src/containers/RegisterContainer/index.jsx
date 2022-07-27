@@ -12,6 +12,7 @@ import {
 import { notificationSelector } from '../../store/selectors/notificationSelectors'
 
 import { Link, useNavigate } from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 export default function RegisterContainer({ Outlet }) {
   const notification = useSelector(notificationSelector)
@@ -28,13 +29,23 @@ export default function RegisterContainer({ Outlet }) {
   const roleID = useSelector(userSelector)?.role?.id
   return (
     <div className="register-container">
-      <Logo id={roleID ? roleID : false} />
+      <div className="logo-register-page">
+        <Logo id={roleID ? roleID : false} />
+      </div>
       <h1 className="register-container__title">Đăng ký</h1>
       <Outlet />
       <div className="register-container__footer">
-        <p>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            fontSize: 17,
+            fontWeight: '400',
+            transform: 'translate(5px,5px)'
+          }}
+        >
           Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
-        </p>
+        </Typography>
       </div>
       <Notification notifyAlert={notification} />
     </div>

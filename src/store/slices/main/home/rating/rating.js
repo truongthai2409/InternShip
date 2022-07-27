@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-// const baseURL = process.env.REACT_APP_API
+const baseURL = process.env.REACT_APP_API
 
 const ratingSlice = createSlice({
   name: 'rating',
@@ -20,9 +20,9 @@ export const getRatingCompany = createAsyncThunk(
   'rating/getRatingCompany',
   async idCompany => {
     return axios
-      .get(`http://103.48.192.239:8085/api/r2s/rate/company/${idCompany}`)
+      .get(`${baseURL}/api/r2s/rate/company/${idCompany}`)
       .then(res => {
-        return res.data.score
+        return res.data
       })
       .catch(error => {
         return error.response.data

@@ -12,23 +12,21 @@ import {
   updateIndexCardActive
 } from '../../store/slices/main/home/job/jobSlice'
 import { getRatingCompany } from 'src/store/slices/main/home/rating/rating'
-import { getMark, getMarkByUser } from 'src/store/slices/main/mark/markSlice'
+import { getMarkByUser } from 'src/store/slices/main/mark/markSlice'
 
 function CardHome(props) {
   const dispatch = useDispatch()
-  const { rating } = useSelector(state => state.rating)
   const { careListOfPrivate } = useSelector(state => state.mark)
   const { profile } = useSelector(state => state.authentication)
-
+  const [id, setId] = React.useState()
   var isMark =
     careListOfPrivate.length > 0 &&
     careListOfPrivate.filter(job => job.jobCare.id === props.id)
   const isMarkLength = isMark.length > 0 ? true : false
-  console.log(isMarkLength);
+
   React.useEffect(() => {
-    dispatch(getMark())
     dispatch(getMarkByUser(profile.username))
-  }, [dispatch, profile.username])
+  }, [dispatch, profile.username, id])
 
   React.useEffect(() => {
     if (props.index === 0) {
@@ -43,6 +41,13 @@ function CardHome(props) {
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index))
     dispatch(updateIdJobActive(props.id))
+  }
+
+  var handleRerender = async id => {
+    if (id) {
+      // setId(id);
+      // dispatch(getMarkByUser(profile.username));
+    }
   }
   return (
     <div
@@ -74,7 +79,7 @@ function CardHome(props) {
           name="read-only"
           precision={0.5}
           readOnly
-          defaultValue={rating}
+          value={props.star ?? ' '}
         />
       </div>
       <div className="cardHome__col2">
@@ -84,6 +89,7 @@ function CardHome(props) {
           fontSize="18px"
           jobId={props.id}
           isMark={isMarkLength}
+          onClick={handleRerender}
         />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">

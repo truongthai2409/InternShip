@@ -11,7 +11,6 @@ import Home from './pages/Main/Home/index'
 import HR from './pages/Main/HR'
 import HRPost from './pages/Main/HRPost'
 import HRPostList from './pages/Main/HR/HRPostList'
-import CompanyForm from './containers/Admin/CompanyForm'
 
 function App() {
   const renderAdminRouter = () => {

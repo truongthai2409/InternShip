@@ -84,27 +84,29 @@ function App() {
             <Route index element={<RegisterStep1 />} />
             {renderRegisterRouter()}
           </Route>
+          <Route path="/login" element={<LoginLayout />}></Route>
           <Route
-            path="/login"
+            path="/hr"
             element={
-                <LoginLayout />
-            }
-          ></Route>
-          <Route path="/hr" element={<HRLayOut />}>
-            {renderHrRouter()}
-          </Route>
-          <Route
-            path="/candidate"
-            element={
-              <AuthenticatedGuard>
-                <CandidateLayOut />
-              </AuthenticatedGuard>
+              // <AuthenticatedGuard>
+                <HRLayOut />
+              // </AuthenticatedGuard>
             }
           >
+            {renderHrRouter()}
+          </Route>
+          <Route path="/candidate" element={<CandidateLayOut />}>
             {/* <Route index element={<HR />} /> */}
             {renderCandidateRouter()}
           </Route>
-          <Route path="/partner" element={<PartnerLayout />}>
+          <Route
+            path="/partner"
+            element={
+              <AuthenticatedGuard>
+                <PartnerLayout />
+              </AuthenticatedGuard>
+            }
+          >
             {renderPartnerRouter()}
           </Route>
           <Route path="/" element={<MainLayout />}>

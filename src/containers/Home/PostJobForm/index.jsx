@@ -2,9 +2,7 @@ import "./styles.scss";
 import WorkIcon from "@mui/icons-material/Work";
 import CustomInput from "../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import CustomTextarea from "../../../components/CustomTextarea";
-import "./styles.scss";
+import './styles.scss'
 import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
@@ -13,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
-  addJob,
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
 import {
@@ -22,6 +19,7 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
 import Textarea from "src/components/Textarea";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);

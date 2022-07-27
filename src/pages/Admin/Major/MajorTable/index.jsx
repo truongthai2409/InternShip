@@ -23,7 +23,7 @@ const MajorTable = () => {
 
   useEffect(() => {
     dispatch(getMajorList())
-  }, [])
+  }, [dispatch])
 
   // console.log(companyList);
   const columns = [

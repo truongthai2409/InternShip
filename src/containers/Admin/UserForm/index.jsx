@@ -39,7 +39,7 @@ const UserForm = props => {
     }
   }
 
-  const onSubmit = data => console.log(data)
+  const onSubmit = data => {}
 
   return (
     <form

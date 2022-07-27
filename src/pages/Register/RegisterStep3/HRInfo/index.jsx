@@ -1,45 +1,43 @@
-import { useEffect } from 'react'
-import './styles.scss'
-import ArrowButton from '../../../../components/ArrowButton/index'
-import Button from '../../../../components/Button'
-import CustomInput from '../../../../components/CustomInput/index'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from 'react-router-dom'
-import { registerHr } from '../../../../store/slices/main/register/registerSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { genderList, schema } from './data'
-import { errorSelector } from 'src/store/selectors/main/registerSelectors'
-import SelectCustom from '../../../../components/Select'
-import { getCompanyList } from 'src/store/slices/Admin/company/companySlice'
-import { TabTitle } from 'src/utils/GeneralFunctions'
+import { useEffect } from "react";
+import "./styles.scss";
+import ArrowButton from "../../../../components/ArrowButton/index";
+import Button from "../../../../components/Button";
+import CustomInput from "../../../../components/CustomInput/index";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
+import { registerHr } from "../../../../store/slices/main/register/registerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { genderList, schema } from "./data";
+import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import SelectCustom from "../../../../components/Select";
+import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const HRInfo = () => {
-  TabTitle('Đăng ký - Nhà tuyển dụng')
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const errorMessage = useSelector(errorSelector)
+  TabTitle("Đăng ký - Nhà tuyển dụng");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const errorMessage = useSelector(errorSelector);
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
-  const { companyList } = useSelector(state => state.company)
-
-  console.log(companyList)
+    resolver: yupResolver(schema),
+  });
+  const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getCompanyList())
-  }, [dispatch])
+    dispatch(getCompanyList());
+  }, [dispatch]);
 
-  const handleBackClick = e => {
-    e.preventDefault()
-    navigate(-1)
-  }
-  const onSubmit = data => {
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
+  const onSubmit = (data) => {
     const hrData = {
       hr: JSON.stringify({
         user: {
@@ -50,18 +48,18 @@ const HRInfo = () => {
           firstName: data.firstname,
           lastName: data.lastname,
           password: data.password,
-          confirmPassword: data.confirmPassword
+          confirmPassword: data.confirmPassword,
         },
         position: data.position,
         company: {
-          id: parseInt(data.company)
-        }
-      })
+          id: parseInt(data.company),
+        },
+      }),
       // fileAvatar: null,
-    }
+    };
 
-    dispatch(registerHr({ hrData, navigate }))
-  }
+    dispatch(registerHr({ hrData, navigate }));
+  };
 
   return (
     <div className="reg-hr">
@@ -189,7 +187,7 @@ const HRInfo = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default HRInfo
+export default HRInfo;

@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJobListByUserId } from '../../../../store/slices/main/home/job/jobSlice'
 import { TabTitle } from 'src/utils/GeneralFunctions'
 
-const formatLocation = (location) => {
+const formatLocation = location => {
   return `${location.address}, ${location.district?.name},
-    ${location.district?.province?.name}`;
-};
+    ${location.district?.province?.name}`
+}
 
 const HRPostList = props => {
   TabTitle('Danh sách bài đăng | IT Internship JOBS')

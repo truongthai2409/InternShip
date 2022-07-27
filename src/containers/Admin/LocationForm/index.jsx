@@ -1,23 +1,23 @@
 import React, { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Avatar, Grid, Switch } from '@mui/material'
+import { Grid } from '@mui/material'
 
 import './styles.scss'
 import CustomInput from '../../../components/CustomInput'
-import CustomTextarea from '../../../components/CustomTextarea'
+// import CustomTextarea from "../../../components/CustomTextarea";
 import Button from '../../../components/Button'
 import cameraLogo from '../../../assets/img/camera.png'
-import Select from '../../../components/Select'
-import { schema, renderControlAction, roleOptions } from './script.js'
+// import Select from "../../../components/Select";
+import { schema } from './script.js'
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } }
+// const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const LocationForm = props => {
   const { isAdd } = props
 
   const [image, setImage] = useState(cameraLogo)
-  const fileInput = useRef(null)
+  // const fileInput = useRef(null);
 
   const {
     register,

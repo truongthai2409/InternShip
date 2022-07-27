@@ -9,8 +9,8 @@ export default function SelectCustom({
   id,
   children,
   defaultValue,
-  register= false,
-  options=[],
+  register = false,
+  options = [],
   placeholder,
   requirementField = true,
   dispatch = () => {},
@@ -47,8 +47,8 @@ export default function SelectCustom({
         <FormControl fullWidth>
           <Select
             displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-            defaultValue={defaultValue>=0 ? defaultValue : ""}
+            inputProps={{ 'aria-label': 'Without label' }}
+            defaultValue={defaultValue >= 0 ? defaultValue : ''}
             {...register(id)}
           >
             <MenuItem value="">

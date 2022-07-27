@@ -29,7 +29,6 @@ export default function UniversityForm(props) {
   const { isAdd } = props
 
   const { universityDetail } = useSelector(state => state.university)
-  console.log(universityDetail)
 
   const [image, setImage] = useState(cameraLogo)
   const [isEdit, setIsEdit] = useState(isAdd)
@@ -59,7 +58,7 @@ export default function UniversityForm(props) {
       setImage(cameraLogo)
       dispatch(getUniversityDetail(uniId))
     }
-  }, [isAdd])
+  }, [isAdd, dispatch])
 
   /**
    * @dependency universityDetail
@@ -78,7 +77,7 @@ export default function UniversityForm(props) {
       setValue('shortName', isAdd ? '' : universityDetail.shortName)
       setValue('website', isAdd ? '' : universityDetail.website)
     }
-  }, [universityDetail])
+  }, [universityDetail, isAdd])
 
   // show preview image
   const showPreviewImage = e => {

@@ -13,7 +13,6 @@ const CandidateSaveProfile = () => {
     dispatch(getCandidateById(1))
   }, [dispatch])
 
-  console.log('candidate', candidateInfoById)
   return (
     <div className="candidate-save-profile__container">
       <div className="candidate-card-profile-container">

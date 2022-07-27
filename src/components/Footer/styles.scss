@@ -1,11 +1,12 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .elementor-section {
   width: 100%;
   // position: fixed;
   left: 0;
   right: 0;
-  background-color: $primary-color;
+  background-color: #aaf6dd;
+  border-radius: 5px;
 }
 
 #page-footer-wrapper {
@@ -16,7 +17,7 @@
   width: 100%;
   display: flex;
   margin: 0px auto;
-  padding: 20px;
+  padding: 20px 50px;
   position: relative;
 }
 
@@ -25,23 +26,23 @@
 #first-section,
 #second-section,
 .elementor-row,
-.elementor-column {
+.elementor-column-footer {
   width: 100%;
 }
 
-.elementor-column {
+.elementor-column-footer {
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
 }
 
 #first-section {
   display: grid;
   margin-top: 20px;
   grid-template-columns: auto auto;
+  margin-bottom: 80px;
 }
 
 .elementor-row-two-element {
-  margin-top: 4px;
   display: flex;
   justify-content: space-around;
   overflow: hidden;
@@ -66,12 +67,12 @@
   }
 
   & .text {
-    font-size: $fs-14;
+    font-size: $fs-16;
     font-weight: $fw-normal;
     margin-bottom: 0;
-    color: rgb(255, 255, 255);
+    color: #000;
     &:hover {
-      color: black;
+      color: rgb(70, 190, 211);
     }
   }
 }
@@ -112,7 +113,7 @@
 
   & .heading-primary {
     font-size: $fs-18;
-    color: #ffffff;
+    color: #000;
   }
 }
 
@@ -121,13 +122,13 @@
     & > .elementor-row {
       align-items: stretch;
 
-      & .elementor-column,
+      & .elementor-column-footer,
       .elementor-column-wrap {
         position: relative;
         display: flex;
       }
 
-      & .elementor-column {
+      & .elementor-column-footer {
         min-height: 1px;
       }
     }
@@ -141,7 +142,7 @@
   .heading-primary-wrap {
     margin-bottom: 10px;
     line-height: 1;
-    font-size: $fs-30;
+    font-size: $fs-24;
 
     & .elementor-heading-title {
       color: #ffffff;
@@ -173,6 +174,28 @@ a {
   &:hover {
     color: black !important;
   }
+}
+
+.address__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.address-footer {
+  &-headquarters,
+  &-office,
+  &-hotline,
+  &-email,
+  &-worktime {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+.address__container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 @media only screen and (max-width: 740px) {

@@ -10,19 +10,24 @@ import { getMarkByUser } from 'src/store/slices/main/mark/markSlice'
 const CandidateLayOut = () => {
   let location = useLocation()
   const dispatch = useDispatch()
-  const { careListOfPrivate } = useSelector(state => state.mark)
+  // const { careListOfPrivate } = useSelector(state => state.mark)
   const { profile } = useSelector(state => state.authentication)
 
   useEffect(() => {
     dispatch(getMarkByUser(profile.username))
   }, [dispatch])
-
+  const handleRerender = async id => {
+    if (id) {
+      // dispatch(getMarkByUser(profile.username));
+    }
+  }
   return (
     <div className="main__layout">
-      {location.pathname === '/candidate/information_company' ? (
+      {location.pathname === '/candidate/information_company' ||
+      location.pathname === '/candidate/view-list' ? (
         <HeaderWithHR id={3} search />
       ) : (
-        <HeaderWithHR id={3} isMark={careListOfPrivate.length > 0} />
+        <HeaderWithHR id={3} />
       )}
       <Outlet />
       <Footer />

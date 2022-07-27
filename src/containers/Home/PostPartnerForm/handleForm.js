@@ -11,6 +11,9 @@ export const schema = yup
     jobDescription: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     otherInfo: yup.string(),
-    fileSV: yup.mixed().nullable().required('* Bạn phải gửi danh sách sinh viên')
+    fileSV: yup
+      .mixed()
+      .nullable()
+      .required('* Bạn phải gửi danh sách sinh viên')
   })
   .required()

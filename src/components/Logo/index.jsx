@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './styles.scss'
+import logo from './logo.png'
 
 export default function Logo({ id }) {
   const roleList = {
@@ -11,7 +12,7 @@ export default function Logo({ id }) {
 
   return (
     <Link to="/" className="logo">
-      <h1>ITInternshipJob</h1>
+      <img style={{width: "300px"}} src={logo} alt="" />
       <span>{id ? roleList[id] : ''}</span>
     </Link>
   )

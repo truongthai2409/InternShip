@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Avatar, Grid, Switch } from '@mui/material'
+import { Grid } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ import {
   updateMajorInfo
 } from '../../../store/slices/Admin/major/majorSlice'
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } }
+// const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function MajorForm({ isAdd, setOpen }) {
   const { majorDetail } = useSelector(state => state.major)
@@ -24,7 +24,7 @@ export default function MajorForm({ isAdd, setOpen }) {
 
   const dispatch = useDispatch()
   // get params from URL
-  const uniId = useParams()
+  // const uniId = useParams();
   // console.log(uniId)
   const location = useLocation()
   // console.log(location.pathname.slice(13));
@@ -32,7 +32,6 @@ export default function MajorForm({ isAdd, setOpen }) {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue
   } = useForm({
     resolver: yupResolver(schemaMajor)

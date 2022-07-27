@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Grid, Switch } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 import './styles.scss'
 import CustomInput from '../../../components/CustomInput'
@@ -28,7 +27,7 @@ export default function DemandForm(props) {
 
   useEffect(() => {
     dispatch(getMajorList())
-  }, [])
+  }, [dispatch])
   const {
     register,
     handleSubmit,

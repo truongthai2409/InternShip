@@ -100,6 +100,8 @@ export const schema = yup
       ),
     description: yup.string(),
     website: yup.string(),
+    address: yup.string(),
+    note: yup.string(),
     avatar: yup
       .mixed()
       .test(

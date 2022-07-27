@@ -9,11 +9,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import notificationSlice from '../../../../store/slices/notifications/notificationSlice'
-import {
-  errorSelector,
-  statusSelector
-} from '../../../../store/selectors/main/registerSelectors'
+import { errorSelector } from '../../../../store/selectors/main/registerSelectors'
 import { genderList, schema } from './data'
 import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
 import SelectCustom from '../../../../components/Select'
@@ -26,7 +22,6 @@ const CandidateInfo = () => {
   const dispatch = useDispatch()
   const { majorList } = useSelector(state => state.major)
   const errorMessage = useSelector(errorSelector)
-
   const handleBackClick = e => {
     e.preventDefault()
     navigate(-1)
@@ -36,7 +31,7 @@ const CandidateInfo = () => {
     dispatch(getMajorList())
   }, [dispatch])
 
-  const status = useSelector(statusSelector)
+  // const status = useSelector(statusSelector);
 
   const {
     register,
@@ -67,13 +62,14 @@ const CandidateInfo = () => {
         }
       })
     }
-    dispatch(registerCandidate({ userData, navigate }))
 
-    if (status === 'success') {
-      toast.success('Đã đăng ký thành công')
-      navigate('/login')
-    } else if (status === 'fail') {
-      toast.success('Có lỗi, vui lòng kiểm tra lại thông tin')
+    try {
+      const res = await dispatch(registerCandidate(userData))
+      if (res.type === 'register/registerCandidate/fulfilled') {
+        navigate('/login')
+      }
+    } catch (error) {
+      toast.error(error)
     }
   }
 
@@ -189,7 +185,13 @@ const CandidateInfo = () => {
           {errors.avatar?.message}
         </CustomInput>
 
-        <CustomInput label="CV" id="cv" type="file" register={register}>
+        <CustomInput
+          label="CV"
+          id="cv"
+          type="file"
+          register={register}
+          requirementField={false}
+        >
           {errors.cv?.message}
         </CustomInput>
 
