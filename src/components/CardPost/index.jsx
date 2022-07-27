@@ -55,6 +55,9 @@ const CardPost = (props) => {
           color="#111"
           name="Chỉnh sửa"
           fontSize="13px"
+          onClick={handleOpen}
+          open={open}
+          setOpen={setOpen}
         />
         <ButtonAction
           height="50px"
@@ -64,6 +67,9 @@ const CardPost = (props) => {
           color="#111"
           name="Đóng việc"
           fontSize="13px"
+          onClick={handleOpen}
+          open={open}
+          setOpen={setOpen}
         />
       </div>
     </div>

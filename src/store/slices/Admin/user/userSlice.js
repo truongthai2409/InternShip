@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
 
@@ -20,9 +21,12 @@ const userSlice = createSlice({
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
     });
+    builder.addCase(getHrByIdUser.fulfilled, (state, { payload }) =>{
+      state.user = payload;
+    })
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
-      notificationSlice.actions.successMess("Chỉnh sửa thành công");
+      toast.success("Chỉnh sửa thành công");
     });
   },
 });
@@ -40,13 +44,32 @@ export const getUserList = createAsyncThunk("user/getUserList", async () => {
     });
 });
 
+// function use for get basic information match to each role through idUser
 export const getUserById = createAsyncThunk("user/getUserById", async (id) => {
   return await axios
     .get(`${baseURL}/api/r2s/admin/user/get-id/${id}`)
     .then((response) => {
       return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
     });
 });
+
+// function use for get all of information match to role HR through idUser
+export const getHrByIdUser = createAsyncThunk(
+  "user/getHrByIdUser",
+  async (idUser) => {
+    return await axios
+      .get(`${baseURL}/api/r2s/hr/user/${idUser}`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
 
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
   return await axios

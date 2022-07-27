@@ -23,10 +23,12 @@ const jobSlice = createSlice({
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobList[action.payload];
     },
+    updateStatusAddJob: (state, action) => {
+      state.status = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      console.log("2-jobList:",state.jobList)
       state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
@@ -179,5 +181,5 @@ export const getJobByCompany = createAsyncThunk(
   }
 );
 
-export const { updateIdJobActive, updateIndexCardActive } = jobSlice.actions;
+export const { updateIdJobActive, updateIndexCardActive, updateStatusAddJob } = jobSlice.actions;
 export default jobSlice;
