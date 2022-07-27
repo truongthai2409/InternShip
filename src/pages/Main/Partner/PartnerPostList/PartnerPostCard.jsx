@@ -1,12 +1,21 @@
-import './styles.scss'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline'
-import DoorFrontIcon from '@mui/icons-material/DoorFront'
-import PostStatus from 'src/components/PostStatus'
-import ButtonAction from 'src/components/ButtonAction'
-import moment from 'moment'
+import "./styles.scss";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DoorFrontIcon from "@mui/icons-material/DoorFront";
+import PostStatus from "src/components/PostStatus";
+import ButtonAction from "src/components/ButtonAction";
+import moment from "moment";
 
-const PartnerPostCard = ({ status, jobName, schoolName, address, amount, timeCreated, timeStart, timeEnd }) => {
+const PartnerPostCard = ({
+  status,
+  jobName,
+  schoolName,
+  address,
+  amount,
+  timeCreated,
+  timeEnd,
+  timeStart,
+}) => {
   return (
     <div className="card-post__container">
       <PostStatus status={status?.id} />
@@ -24,12 +33,11 @@ const PartnerPostCard = ({ status, jobName, schoolName, address, amount, timeCre
       </div>
       <p className="card-post__amount">Số lượng: {amount}</p>
       <p className="card-post__time">
-        <b>Thời gian tuyển dụng:</b>{' '}
-        {moment(timeStart).format('DD/MM/YYYY')} -{' '}
-        {moment(timeEnd).format('DD/MM/YYYY')}
+        <b>Thời gian tuyển dụng:</b> {moment(timeStart).format("DD/MM/YYYY")} -{" "}
+        {moment(timeEnd).format("DD/MM/YYYY")}
       </p>
       <p className="card-post__created">
-        <b>Ngày đăng:</b> {moment(timeCreated).format('DD/MM/YYYY')}
+        <b>Ngày đăng:</b> {moment(timeCreated).format("DD/MM/YYYY")}
       </p>
       <div className="card-post__action">
         <ButtonAction
@@ -61,7 +69,7 @@ const PartnerPostCard = ({ status, jobName, schoolName, address, amount, timeCre
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PartnerPostCard
+export default PartnerPostCard;

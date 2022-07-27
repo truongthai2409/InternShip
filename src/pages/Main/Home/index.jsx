@@ -22,19 +22,23 @@ const Home = (props) => {
     (state) => state.job
   );
 
-  // console.log(jobDetail);
-
   useEffect(() => {
     dispatch(getJobByName(""));
     dispatch(getJobList());
   }, [dispatch]);
 
+  const handleSearchLocation = (value) => {
+    var raw = value;
+    raw.search = raw.search.replace("%20", "+"); // replace the `%20` with "+"
+    window.history.replaceState("", document.title, raw);
+  };
   const handleSearch = (value) => {
     setValueSearch(value);
     const dataSearch = {
       jobName: valueSearch,
-      location: locationValue,
+      location: handleSearchLocation(locationValue),
     };
+    console.log(locationValue);
     if (valueSearch && value) {
       dispatch(getJobByNameAndLocation(dataSearch));
       // } else if (valueSearch && value === "") {
