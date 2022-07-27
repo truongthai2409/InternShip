@@ -6,11 +6,11 @@ import PostStatus from 'src/components/PostStatus'
 import ButtonAction from 'src/components/ButtonAction'
 import moment from 'moment'
 
-const PartnerPostCard = ({ jobName, schoolName, address, amount, timeCreate, timeEnd }) => {
+const PartnerPostCard = ({ status, jobName, schoolName, address, amount, timeCreated, timeStart, timeEnd }) => {
   return (
     <div className="card-post__container">
-      <PostStatus status={props.status?.id} />
-      <h3 className="card-post__job-name">{props.jobName}</h3>
+      <PostStatus status={status?.id} />
+      <h3 className="card-post__job-name">{jobName}</h3>
       <div className="card-post__company-info-detail">
         <img
           className="company-info-detail__img"
@@ -18,18 +18,18 @@ const PartnerPostCard = ({ jobName, schoolName, address, amount, timeCreate, tim
           alt="Ảnh của công ty"
         />
         <div className="company-info-detail__content">
-          <p className="company__name">{props.companyName}</p>
-          <p className="company__location">{props.companyLocation}</p>
+          <p className="company__name">{schoolName}</p>
+          <p className="company__location">{address}</p>
         </div>
       </div>
-      <p className="card-post__amount">Số lượng: {props.amount}</p>
+      <p className="card-post__amount">Số lượng: {amount}</p>
       <p className="card-post__time">
         <b>Thời gian tuyển dụng:</b>{' '}
-        {moment(props.timeStart).format('DD/MM/YYYY')} -{' '}
-        {moment(props.timeEnd).format('DD/MM/YYYY')}
+        {moment(timeStart).format('DD/MM/YYYY')} -{' '}
+        {moment(timeEnd).format('DD/MM/YYYY')}
       </p>
       <p className="card-post__created">
-        <b>Ngày đăng:</b> {moment(props.timeCreated).format('DD/MM/YYYY')}
+        <b>Ngày đăng:</b> {moment(timeCreated).format('DD/MM/YYYY')}
       </p>
       <div className="card-post__action">
         <ButtonAction

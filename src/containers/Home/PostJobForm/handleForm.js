@@ -2,7 +2,7 @@ import moment from "moment";
 import * as yup from "yup";
 
 // yup validate form post job form
-const date = moment(Date.now()).format("DD/MM/YYYY").toString();
+const date = moment(Date.now()).format("MM/DD/YYYY").toString();
 export const schema = yup
   .object({
     name: yup.string().required(" * Bạn phải điền chức danh."),
