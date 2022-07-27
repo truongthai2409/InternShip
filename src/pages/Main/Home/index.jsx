@@ -11,11 +11,13 @@ import {
   getJobByNameAndLocation,
   getJobList,
 } from "../../../store/slices/main/home/job/jobSlice";
+import qs from "query-string";
+import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive } = useSelector(
@@ -23,30 +25,41 @@ const Home = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getJobByName(""));
+    const dataSearch = {
+      name: "",
+      province: "",
+      no: 0,
+      limit: 10,
+    };
+    dispatch(getJobByNameAndLocation(dataSearch));
     dispatch(getJobList());
   }, [dispatch]);
 
-  const handleSearchLocation = (value) => {
-    var raw = value;
-    raw.search = raw.search.replace("%20", "+"); // replace the `%20` with "+"
-    window.history.replaceState("", document.title, raw);
-  };
+  // const generateNameId = (name) => {
+  //   encodeURIComponent(name)
+  //     .replace(/\s/g, "-")
+  //     .replace(/%/g, "")
+  //     .replace("%20", "+");
+  // };
+
   const handleSearch = (value) => {
     setValueSearch(value);
     const dataSearch = {
-      jobName: valueSearch,
-      location: handleSearchLocation(locationValue),
+      name: valueSearch || "",
+      province: locationValue || "",
+      no: 0,
+      limit: 10,
     };
-    console.log(locationValue);
     if (valueSearch && value) {
       dispatch(getJobByNameAndLocation(dataSearch));
-      // } else if (valueSearch && value === "") {
-      //   dispatch(getJobByNameAndLocation(valueSearch, ""));
-      // } else if (valueSearch === "" && value) {
-      //   dispatch(getJobByNameAndLocation("", value));
-      // } else {
-      //   dispatch(getJobByNameAndLocation("", ""));
+      navigate(
+        `/` +
+          `?name=${valueSearch || ""}&province=${
+            encodeURIComponent(locationValue)
+              .replace(/%20/g, "+")
+              .replace(/\s/g, "-") || ""
+          }&no=0&limit=10`
+      );
     }
   };
 

@@ -2,13 +2,11 @@ import moment from "moment";
 import * as yup from "yup";
 
 const date = moment(Date.now()).format("MM-DD-YYYY").toString();
-console.log(moment(new Date(date)).format("DD/MM/YYYY"));
 const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
 const tomorow = new Date();
 const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
-console.log(tomorowFormat);
 export const schema = yup
   .object({
     name: yup.string().required(" * Bạn phải điền chức danh."),

@@ -17,11 +17,11 @@ const jobSlice = createSlice({
   },
   reducers: {
     updateIdJobActive: (state, action) => {
-      state.idJobActive = action.payload;
+      state.idJobActive = action.payload.contents;
     },
     updateIndexCardActive: (state, action) => {
-      state.indexCardActive = action.payload;
-      state.jobDetail = state.jobList[action.payload];
+      state.indexCardActive = action.payload.contents;
+      state.jobDetail = state.jobListName[action.payload.contents];
     },
   },
   extraReducers: (builder) => {
@@ -44,7 +44,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.length > 0) {
-        state.jobDetail = payload[0];
+        state.jobDetail = payload.contents[0];
       } else {
       }
     });
@@ -98,15 +98,13 @@ export const getJobByName = createAsyncThunk(
       });
   }
 );
-
 export const getJobByNameAndLocation = createAsyncThunk(
   "job/getJobByNameAndLocation",
   async (dataSearch) => {
-    const { jobName, location } = dataSearch;
     return axios
-      .get(
-        `${baseURL}/api/job/search?name=${jobName}&province=${location}&no=0&limit=10`
-      )
+      .get(`${baseURL}/api/r2s/job/search`, {
+        params: dataSearch,
+      })
       .then((response) => {
         return response.data;
       })
