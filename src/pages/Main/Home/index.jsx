@@ -1,40 +1,45 @@
-import { Grid } from '@mui/material'
-import SearchResultHome from '../../../components/SearchResultHome'
-import DetailCard from '../../../components/DetailCard'
-import SideBarHomeList from '../../../components/SideBarHomeList'
-import FilterPanelHome from '../../../components/FilterPanelHome'
-import './styles.scss'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { Grid } from "@mui/material";
+import SearchResultHome from "../../../components/SearchResultHome";
+import DetailCard from "../../../components/DetailCard";
+import SideBarHomeList from "../../../components/SideBarHomeList";
+import FilterPanelHome from "../../../components/FilterPanelHome";
+import "./styles.scss";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getJobByName,
   getJobByNameAndLocation,
-  getJobList
-} from '../../../store/slices/main/home/job/jobSlice'
+  getJobList,
+} from "../../../store/slices/main/home/job/jobSlice";
 
-const Home = props => {
-  const [valueSearch, setValueSearch] = useState('')
-  const [locationValue, setLocationValue] = useState('')
+const Home = (props) => {
+  const [valueSearch, setValueSearch] = useState("");
+  const [locationValue, setLocationValue] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive } = useSelector(
-    state => state.job
-  )
-
+    (state) => state.job
+  );
   useEffect(() => {
-    dispatch(getJobByName(''))
-    dispatch(getJobList())
-  }, [dispatch])
+    dispatch(getJobByName(""));
+    dispatch(getJobList());
+  }, [dispatch]);
 
-  const handleSearch = value => {
-    setValueSearch(value)
+  const handleSearchLocation = (value) => {
+    var raw = value;
+    raw.search = raw.search.replace("%20", "+"); // replace the `%20` with "+"
+    window.history.replaceState("", document.title, raw);
+  };
+  const handleSearch = (value) => {
+    setValueSearch(value);
     const dataSearch = {
       jobName: valueSearch,
-      location: locationValue
-    }
+      location: handleSearchLocation(locationValue),
+    };
+    console.log(locationValue);
     if (valueSearch && value) {
-      dispatch(getJobByNameAndLocation(dataSearch))
+      dispatch(getJobByNameAndLocation(dataSearch));
       // } else if (valueSearch && value === "") {
       //   dispatch(getJobByNameAndLocation(valueSearch, ""));
       // } else if (valueSearch === "" && value) {
@@ -42,18 +47,18 @@ const Home = props => {
       // } else {
       //   dispatch(getJobByNameAndLocation("", ""));
     }
-  }
+  };
 
-  const getValueLocationAndHandle = value => {
-    setLocationValue(value)
-  }
+  const getValueLocationAndHandle = (value) => {
+    setLocationValue(value);
+  };
   return (
     <>
       {jobDetail && (
         <Grid
           className="wrapper"
           spacing={{ xs: 1 }}
-          sx={{ padding: '18px' }}
+          sx={{ padding: "18px" }}
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
@@ -68,7 +73,7 @@ const Home = props => {
             </div>
 
             <FilterPanelHome
-              jobList={jobListName}
+              jobList={jobListName.contents}
               indexCardActive={indexCardActive}
             />
           </Grid>
@@ -83,7 +88,7 @@ const Home = props => {
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                 jobDetail={jobDetail}
-                jobListName={jobListName}
+                jobListName={jobListName.contents}
                 candidate={props.candidate}
               />
             </div>
@@ -91,7 +96,7 @@ const Home = props => {
         </Grid>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
