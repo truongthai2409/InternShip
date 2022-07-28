@@ -2,13 +2,11 @@ import moment from "moment";
 import * as yup from "yup";
 
 const date = moment(Date.now()).format("MM-DD-YYYY").toString();
-console.log(moment(new Date(date)).format("DD/MM/YYYY"));
 const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
 const tomorow = new Date();
 const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
-console.log(tomorowFormat);
 export const schema = yup
   .object({
     name: yup.string().required(" * Bạn phải điền chức danh."),
@@ -17,11 +15,12 @@ export const schema = yup
     jobPosition: yup.string().required(" * Bạn phải chọn vị trí công việc."),
     amount: yup
       .number()
+      .typeError(" * Số lượng ứng viên không được để trống hoặc không phải là số.")
       .min(1, " * Số lượng ứng viên phải lớn hơn 0. ")
       .integer(" * Số lượng ứng viên phải là số nguyên. "),
     timeStart: yup
       .date()
-      .min(`${date}`, ` * Bạn phải chọn ngày bắt đầu tuyển và sau ${dateNow}`)
+      .min(`${date}`, ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`)
       .required(),
     timeEnd: yup
       .date()

@@ -87,7 +87,7 @@ const DetailCard = ({
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={logo}
+                src={jobDetail.hr?.company.logo || "https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7901.jpg?w=2000"}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
