@@ -70,6 +70,12 @@
   }
 }
 
+.cardHome__amount-hr-apply {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .cardHome__container.active {
   border: 2px solid $primary-color;
 }
