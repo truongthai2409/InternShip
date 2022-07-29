@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
+import { useLocation } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, jobList, ...other } = props;
@@ -41,6 +42,9 @@ function a11yProps(index) {
 }
 
 export default function FilterPanelHome({ jobList, indexCardActive }) {
+  const location = useLocation();
+  console.log(location.pathname);
+  // console.log(jobList);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
   return (
@@ -62,15 +66,18 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               key={job.id}
               title={job.name}
               fontSize={10}
-              nameCompany={job.hr.company?.name}
-              idCompany={job.hr.company?.id}
-              tagName={[job.jobposition.name, "Full time"]}
-              star={job.hr.company?.rates.length}
+              nameCompany={job.hr?.company?.name || job?.universityDTO.name}
+              idCompany={job.hr?.company?.id || job?.universityDTO.id}
+              tagName={[job?.jobposition?.name || job?.position.name, "Full time"]}
+              star={job?.hr?.company?.rates.length || 4}
               location="Hồ Chí Minh"
+              amount="30"
+              demandPartner={true}
               time={[
-                moment(job.timeStartStr).format("DD/MM/YYYY"),
-                moment(job.timeEndStr).format("DD/MM/YYYY"),
+                moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
+                moment(job.timeEndStr|| job.end).format("DD/MM/YYYY"),
               ]}
+              locationPath={location.pathname}
             />
           ))}
       </TabPanel>
