@@ -25,9 +25,6 @@ function HeaderWithPartner(props) {
     dispatch(getUserById(idUser));
   }, []);
 
-console.log("first", idUser)
-console.log("user", user);
-
   return (
     <div className="container-header__partner header__partner config">
       {user.role ? <Logo id={4} /> : <Logo id={3} />}

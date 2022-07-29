@@ -25,8 +25,11 @@ const ProfileForm = ({ onClick }) => {
   useEffect(() => {
     setValue("firstName", user.firstName);
     setValue("lastName", user.lastName);
+    setValue("email", user.email);
     setValue("phone", user.phone);
   }, []);
+
+  console.log("userprofileform",user)
 
   const onSubmit = (data) => {
     const profileData = {
@@ -44,6 +47,7 @@ const ProfileForm = ({ onClick }) => {
         company: { id: user.company?.id },
       }),
     };
+    console.log("updateuser:", profileData)
     dispatch(updateUser([profileData, user?.id]));
     onClick();
   };
