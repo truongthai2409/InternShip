@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ButtonOutline from "../ButtonOutline";
 import Modal from "../Modal";
 import ProfileForm from "src/containers/Home/ProfileForm";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import AttachEmailIcon from '@mui/icons-material/AttachEmail';
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import HandshakeIcon from "@mui/icons-material/Handshake";
@@ -17,7 +17,7 @@ import {
   gender,
   role,
   UniversityInfo,
-} from "./componets";
+} from "./components";
 
 const Profile = ({ actions = false }) => {
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ const Profile = ({ actions = false }) => {
           </h4>
           <div className="profile__infor-item">
             <span>
-              <AlternateEmailIcon /> Email:
+              <AttachEmailIcon /> Email:
             </span>
             <h3>{profile?.user?.email}</h3>
           </div>
@@ -105,17 +105,16 @@ const Profile = ({ actions = false }) => {
             </span>
             <h3>{role(profile?.user?.role?.id)}</h3>
           </div>
+          {RelatedInfor}
         </div>
-        <Modal
+      </div>
+      <Modal
           modalTitle="Chỉnh sử thông tin cá nhân"
           children={<ProfileForm onClick={handleClose} />}
           open={open}
           setOpen={setOpen}
           name="profile"
         />
-        <br />
-        <div className="profile__infor"></div>
-      </div>
     </>
   );
 };
