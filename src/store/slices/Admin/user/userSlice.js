@@ -26,7 +26,7 @@ const userSlice = createSlice({
       state.profile = payload;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
+      state.profile = payload;
       toast.success("Chỉnh sửa thành công");
     });
   },

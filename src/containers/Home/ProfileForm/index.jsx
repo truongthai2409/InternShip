@@ -20,7 +20,7 @@ const ProfileForm = ({ onClick }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const { user, profile } = useSelector((state) => state.user);
 
   useEffect(() => {
     setValue("firstName", user.firstName);
@@ -29,23 +29,24 @@ const ProfileForm = ({ onClick }) => {
     setValue("phone", user.phone);
   }, []);
 
-  console.log("userprofileform",user)
+  console.log("userprofileform",profile)
 
   const onSubmit = (data) => {
     const profileData = {
       hr: JSON.stringify({
         user: {
-          username: user.username,
+          username: profile?.user?.username,
           gender: parseInt(data.gender),
           phone: data.phone,
-          email: user.email,
+          email: profile?.user?.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          role: user.role,
+          role: profile?.user?.role,
         },
-        position: user.position,
-        company: { id: user.company?.id },
+        position: profile.position,
+        company: { id: profile.company?.id },
       }),
+      // fileAvatar: data.fileAv
     };
     console.log("updateuser:", profileData)
     dispatch(updateUser([profileData, user?.id]));

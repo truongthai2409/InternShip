@@ -11,17 +11,17 @@ import Logo from "../Logo";
 import "./styles.scss";
 import SearchResultHome from "../SearchResultHome";
 import AccountMenu from "../AccountMenu";
-import { getUserById } from "src/store/slices/Admin/user/userSlice";
+import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 
 function HeaderWithHR(props) {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
-    dispatch(getUserById(idUser));
+    dispatch(getProfileByIdUser(idUser));
   }, []);
 
   return (
@@ -82,11 +82,11 @@ function HeaderWithHR(props) {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">Chào, {user.firstName}</h4>
+          <h4 className="name">Chào, {profile?.user?.firstName}</h4>
           <AccountMenu
             linkImg={
-              user?.avatar
-                ? `http://localhost:8085${user?.avatar}`
+              profile?.user?.avatar
+                ? `http://localhost:8085${profile?.user?.avatar}`
                 : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
             }
           />
