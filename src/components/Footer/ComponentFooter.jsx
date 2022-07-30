@@ -26,7 +26,7 @@ const ComponentFooter = ({header, tabContent}) => {
       <div>
         <div className="elementor-column-populated">
           <div className="heading-primary-wrap">
-            <h2 className="heading-primary elementor-heading-title">{header}</h2>
+            <h2 style={{textAlign: "left"}} className="heading-primary elementor-heading-title">{header}</h2>
           </div>
           <div className="contact__list">
             <div className="maxcoach-list">

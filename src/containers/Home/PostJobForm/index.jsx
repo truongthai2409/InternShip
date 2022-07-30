@@ -18,7 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getHrByIdUser } from "src/store/slices/Admin/user/userSlice";
+import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 import moment from "moment";
 
 
@@ -36,7 +36,7 @@ const PostJobForm = (props) => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-    dispatch(getHrByIdUser(userPresent.idUser))
+    dispatch(getProfileByIdUser(userPresent.idUser))
   }, []);
 
   const jobTypeList = [

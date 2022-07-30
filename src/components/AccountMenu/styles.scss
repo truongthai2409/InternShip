@@ -2,11 +2,13 @@
 
 .avatar_img {
   height: 100%;
-  border-radius: 50%;
+  width: 100%;
+  border-radius: 100%;
+  border: 2px solid $primary-color;
 
   &:hover {
-    border: 4px solid $primary-color;
-    transition: border 0.3s;
+    transform: scale(1.2);
+    transition: transform 0.3s;
   }
 }
 

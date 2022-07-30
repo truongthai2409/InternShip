@@ -96,11 +96,9 @@ const PostPartnerForm = (props) => {
         position: {
           id: parseInt(data.jobPosition),
         },
-        jobTypes: [
-          {
-            id: parseInt(data.jobType),
-          },
-        ],
+        jobType: {
+          id: parseInt(data.jobType),
+        },
       }),
       fileSV: data.fileSV[0],
     };

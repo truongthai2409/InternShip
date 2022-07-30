@@ -48,6 +48,7 @@ const Footer = () => {
       <section className="elementor-section">
         <section className="footer__first-section">
           <div id="first-section" className="elementor-row">
+            <AddressComponent />
             <ComponentFooter header="Về IT JOBS" tabContent={aboutUs} />
             <ComponentFooter header="Chính sách" tabContent={policy} />
             <div className="mobile-app-link-container">
@@ -61,6 +62,7 @@ const Footer = () => {
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
                       alt=""
                       style={{ width: "100px" }}
+                      className="mobile-app-link-chplay-img"
                     />
                   </a>
                 </div>
@@ -70,18 +72,10 @@ const Footer = () => {
                       src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png"
                       alt=""
                       style={{ width: "100px" }}
+                      className="mobile-app-link-appstore-img"
                     />
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="footer__second-section">
-          <div id="second-section" className="elementor-container">
-            <div className="elementor-row">
-              <div className="elementor-column-footer">
-                <AddressComponent />
               </div>
             </div>
           </div>
