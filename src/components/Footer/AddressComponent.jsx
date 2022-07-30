@@ -1,38 +1,50 @@
 import React from "react";
-import logo from "./logo-footer.png";
+import logo from "./logo.png";
+import "./styles.scss";
 
 const AddressComponent = () => {
   return (
-    <div className="address__container">
+    <div className="address__container-footer">
       <div className="logo">
-        <img style={{ width: "450px" }} src={logo} alt="" />
+        <img style={{ width: "160px" }} src={logo} alt="" />
       </div>
       <div className="address-footer-content">
         <div className="address-footer-headquarters">
-          <h4 className="heading">Trụ sở:</h4>
-          <span className="text-footer">
-            Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, P.25, Quận
-            Bình Thạnh, TP HCM
-          </span>
+          <div className="address-headquarters-content"></div>
+          <div className="text-footer">
+            <p>
+              Trụ sở: Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, Phường 25, Quận
+              Bình Thạnh, Thành Phố Hồ Chí Minh
+            </p>
+          </div>
         </div>
         <div className="address-footer-office">
-          <h4 className="heading">Văn phòng:</h4>
-          <span className="text-footer">
-            A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng, P.Linh
-            Đông, TP Thủ Đức, TP HCM
-          </span>
+          <div className="text-footer">
+            <p>
+              Văn phòng: A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng,
+              P.Linh Đông, TP Thủ Đức, Thành Phố Hồ Chí Minh
+            </p>
+          </div>
         </div>
         <div className="address-footer-hotline">
-          <h4 className="heading">Hotline:</h4>
-          <span className="text-footer">0919 365 363 </span>
+          <div className="text-footer">
+            <p>Hotline: 0919 365 363</p>{" "}
+          </div>
         </div>
         <div className="address-footer-email">
-          <h4 className="heading">Email:</h4>
-          <span className="text-footer"> tuyendung@r2s.com.vn</span>
+          <div className="text-footer">
+            <p>Email: tuyendung@r2s.com.vn</p>
+          </div>
         </div>
         <div className="address-footer-worktime">
-          <h4 className="heading">Giờ làm việc:</h4>
-          <span className="text-footer"> (8am - 22pm, Thứ 2 - Thứ 7) </span>
+          <div className="text-footer">
+            <p>Giờ làm: (8am - 22pm, Thứ 2 - Thứ 7)</p>{" "}
+          </div>
+        </div>
+        <div className="address-footer-copyright">
+          <div className="text-footer">
+            <p>Copyright: © 2022 R2S. All Rights Reserved</p>
+          </div>
         </div>
       </div>
     </div>

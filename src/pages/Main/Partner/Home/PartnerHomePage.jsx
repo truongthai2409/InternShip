@@ -22,7 +22,7 @@ const PartnerHomePage = (props) => {
   const { demandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
-  console.log("DemandList", demandList);
+  // console.log("DemandList", demandList);
 
   useEffect(() => {
     dispatch(getJobByName(""));
