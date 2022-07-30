@@ -15,7 +15,7 @@ const companySlice = createSlice({
   reducer: {},
   extraReducers: builder => {
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
-      state.companyList = payload
+      state.companyList = payload.contents
       if (payload.length > 0) {
         state.companyDetail1 = payload[0]
       } else {
@@ -41,13 +41,14 @@ export default companySlice
 
 /**
  * get company list
+ * @param args
  * @returns company list
  */
 export const getCompanyList = createAsyncThunk(
   'company/getCompanyList',
-  async () => {
+  async (args) => {
     return await axios
-      .get(`${baseURL}/api/company`)
+      .get(`${baseURL}/api/company?no=${args[0]-1}&limit=${args[1]}`)
       .then(response => {
         return response.data
       })

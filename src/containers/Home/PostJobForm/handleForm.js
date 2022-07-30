@@ -15,11 +15,12 @@ export const schema = yup
     jobPosition: yup.string().required(" * Bạn phải chọn vị trí công việc."),
     amount: yup
       .number()
+      .typeError(" * Số lượng ứng viên không được để trống hoặc không phải là số.")
       .min(1, " * Số lượng ứng viên phải lớn hơn 0. ")
       .integer(" * Số lượng ứng viên phải là số nguyên. "),
     timeStart: yup
       .date()
-      .min(`${date}`, ` * Bạn phải chọn ngày bắt đầu tuyển và sau ${dateNow}`)
+      .min(`${date}`, ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`)
       .required(),
     timeEnd: yup
       .date()

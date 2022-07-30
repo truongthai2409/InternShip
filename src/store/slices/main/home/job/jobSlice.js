@@ -27,6 +27,9 @@ const jobSlice = createSlice({
     updateStatusAddJob: (state, action) => {
       state.status = action.payload;
     },
+    updateStatusAddJob: (state, action) => {
+      state.status = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {

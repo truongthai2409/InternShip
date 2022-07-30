@@ -14,7 +14,7 @@ function Header(props) {
           <h5>Đăng nhập</h5>
         </Link>
         <Link to="/register" className="register">
-          <Button bwidth="120px" bheight="50px" name="Đăng ký" />
+          <Button bwidth="117px" bheight="45px" name="Đăng ký" />
         </Link>
       </div>
     </div>

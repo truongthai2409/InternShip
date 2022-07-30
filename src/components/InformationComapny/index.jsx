@@ -51,35 +51,39 @@ const InformationCompany = ({ jobDetail }) => {
         <Typography variant="span">
           <Typography
             variant="span"
-            sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+            sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
           >
             Mô tả công việc:
           </Typography>
           <Typography
             variant="body2"
             gutterBottom
-            sx={{ fontSize: 17, fontWeight: "400" }}
+            sx={{ fontSize: 16, fontWeight: "400" }}
           >
-            {jobDetail.desciption}
+            <div
+              dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+            ></div>
           </Typography>
         </Typography>
         <div className="detail__card-3-item">
           <Typography variant="span">
-            <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
+            <Typography variant="span" sx={{ fontSize: 18, fontWeight: "700" }}>
               Yêu cầu công việc:
             </Typography>
             <Typography
               variant="body2"
               gutterBottom
-              sx={{ fontSize: 17, fontWeight: "400" }}
+              sx={{ fontSize: 16, fontWeight: "400" }}
             >
-              {jobDetail.requirement}
+              <div
+                dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+              ></div>
             </Typography>
           </Typography>
         </div>
         <div className="detail__card-3-item">
           <Typography variant="span">
-            <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
+            <Typography variant="span" sx={{ fontSize: 18, fontWeight: "700" }}>
               Thời hạn ứng tuyển:
             </Typography>
             <Typography

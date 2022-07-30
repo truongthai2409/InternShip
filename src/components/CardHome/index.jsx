@@ -13,6 +13,8 @@ import {
 } from "../../store/slices/main/home/job/jobSlice";
 import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
+import PeopleIcon from "@mui/icons-material/People";
 
 function CardHome(props) {
   const dispatch = useDispatch();
@@ -41,6 +43,7 @@ function CardHome(props) {
 
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
+    dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
     console.log(props.id);
   };
@@ -76,12 +79,19 @@ function CardHome(props) {
             <TagName key={tag} title={tag} />
           ))}
         </div>
-        <Rating
-          name="read-only"
-          precision={0.5}
-          readOnly
-          value={props.star ?? " "}
-        />
+        {props.demandPartner ? (
+          <div className="cardHome__amount-hr-apply">
+            <PeopleIcon />
+            <span>Số lượng ứng viên: {props.amount}</span>
+          </div>
+        ) : (
+          <Rating
+            name="read-only"
+            precision={0.5}
+            readOnly
+            value={props.star ?? " "}
+          />
+        )}
       </div>
       <div className="cardHome__col2">
         <ButtonMark

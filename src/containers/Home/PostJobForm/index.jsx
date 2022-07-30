@@ -10,7 +10,10 @@ import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
+import {
+  addJob,
+  getJobPositionList,
+} from "src/store/slices/main/home/job/jobSlice";
 import {
   getDistrictList,
   getProvinceList,
@@ -18,11 +21,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
+import moment from "moment";
 
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
+  const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +38,8 @@ const PostJobForm = (props) => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-  }, [dispatch]);
+    dispatch(getProfileByIdUser(userPresent.idUser));
+  }, []);
 
   const jobTypeList = [
     {
@@ -69,7 +76,7 @@ const PostJobForm = (props) => {
     const jobData = {
       name: data.name,
       hr: {
-        id: userPresent.idUser,
+        id: user.id,
       },
       desciption: data.jobDescription,
       major: {
@@ -83,8 +90,8 @@ const PostJobForm = (props) => {
       salaryMax: data.salaryMax,
       requirement: data.jobRequirement,
       otherInfo: data.benefits,
-      timeStartStr: data.timeStart,
-      timeEndStr: data.timeEnd,
+      timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+      timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
       jobposition: {
         id: data.jobPosition,
       },
@@ -96,6 +103,7 @@ const PostJobForm = (props) => {
         note: "Không có",
       },
     };
+    dispatch(addJob(jobData));
   };
   if (status === "success") {
     navigate("/hr/list");

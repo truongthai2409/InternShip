@@ -20,18 +20,12 @@ const JobCandidate = ({ job, idJob }) => {
   const dispatch = useDispatch();
   const { jobDetailById, idJobActive } = useSelector((state) => state.job);
   const handleClick = () => {
-    // dispatch(updateIdJobActive(idJob))
-    //   .then(unwrapResult)
-    //   .then(dispatch(getJobById(idJobActive)));
-    // console.log(idJobActive);
     setIdJobNew(idJob);
     dispatch(getJobById(idJobNew));
-    console.log(idJobNew);
-    console.log(jobDetailById);
   };
   return (
     <div>
-      <Link to="/detail" onClick={handleClick}>
+      <Link to="/detail" onClick={handleClick} className="link__job-detail">
         <Box
           sx={{
             width: 250,

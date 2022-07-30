@@ -1,13 +1,13 @@
 import React from 'react'
 import { TabTitle } from 'src/utils/GeneralFunctions'
-import Home from '../../Home'
+import PartnerHomePage from './PartnerHomePage'
 import './styles.scss'
 
 const PartnerHome = () => {
-  TabTitle('IT Internship JOBS')
+  TabTitle('IT Internship JOBS | Trang chủ Cộng tác viên')
   return (
     <div>
-      <Home candidate={true}></Home>
+      <PartnerHomePage></PartnerHomePage>
     </div>
   )
 }

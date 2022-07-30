@@ -70,6 +70,14 @@
   }
 }
 
+.cardHome__amount-hr-apply {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
 .cardHome__container.active {
   border: 2px solid $primary-color;
 }

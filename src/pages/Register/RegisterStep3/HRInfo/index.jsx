@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { registerHr } from "../../../../store/slices/main/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { genderList, schema } from "./data";
+import { genderList, schema } from "./handForm";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
@@ -30,7 +30,7 @@ const HRInfo = () => {
   const { companyList } = useSelector((state) => state.company);
 
   useEffect(() => {
-    dispatch(getCompanyList());
+    dispatch(getCompanyList([1,20]));
   }, [dispatch]);
 
   const handleBackClick = (e) => {
@@ -55,9 +55,8 @@ const HRInfo = () => {
           id: parseInt(data.company),
         },
       }),
-      // fileAvatar: null,
+      fileAvatar: data.avatar[0] || null,
     };
-
     dispatch(registerHr({ hrData, navigate }));
   };
 
@@ -152,6 +151,7 @@ const HRInfo = () => {
           id="avatar"
           type="file"
           register={register}
+          requirementField={false}
           // check={true}
         >
           {errors.avatar?.message}

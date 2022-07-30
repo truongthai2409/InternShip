@@ -11,10 +11,10 @@ const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const dispatch = useDispatch();
   const { activeUser } = useSelector((state) => state.university);
-  const { demandList } = useSelector((state) => state.demand);
+  const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   // console.log(activeUser?.universityDTO?.id);
-  console.log(demandList.contents);
+  console.log(demandListUniversity.contents);
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
@@ -26,8 +26,8 @@ const PartnerPostList = (props) => {
       <div className="hrpost__list-bt">
         <Button name="ĐĂNG BÀI"></Button>
       </div>
-      {demandList?.contents &&
-        demandList?.contents.map((demand) => (
+      {demandListUniversity?.contents &&
+        demandListUniversity?.contents.map((demand) => (
           <div className="partner-post-list__container" key={demand.id}>
             <PartnerPostCard
               jobName={demand.name}
