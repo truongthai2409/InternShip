@@ -1,8 +1,8 @@
 import React from "react";
 import ComponentFooter from "./ComponentFooter";
 import "./styles.scss";
-import img from './mobile-app.png';
-import AddressComponent from './AddressComponent';
+import img from "./mobile-app.png";
+import AddressComponent from "./AddressComponent";
 
 const aboutUs = [
   {
@@ -46,38 +46,46 @@ const Footer = () => {
   return (
     <div id="page-footer-wrapper" className="page-footer-wrap">
       <section className="elementor-section">
-        <div className="footer-container">
-          <div className="footer-wrapper">
-            <section className="footer__first-section">
-              <div id="first-section" className="elementor-row">
-                <div className="elementor-row-first-element">
-                  <ComponentFooter
-                    header="Về IT JOBS"
-                    tabContent={aboutUs}
-                  />
+        <section className="footer__first-section">
+          <div id="first-section" className="elementor-row">
+            <ComponentFooter header="Về IT JOBS" tabContent={aboutUs} />
+            <ComponentFooter header="Chính sách" tabContent={policy} />
+            <div className="mobile-app-link-container">
+              <div className="mobile-app-link-header">
+                <h2>Ứng dụng di động</h2>
+              </div>
+              <div className="mobile-app-link-download">
+                <div className="mobile-app-link-chplay">
+                  <a href="#">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
+                      alt=""
+                      style={{ width: "100px" }}
+                    />
+                  </a>
                 </div>
-                <div className="elementor-row-two-element">
-                  <ComponentFooter 
-                    header="Chính sách"
-                    tabContent={policy}
-                  />
-                  <div className="">
-                    <img style={{width: "300px"}} src={img} alt="" />
-                  </div>
+                <div className="mobile-app-link-appstore">
+                  <a href="#">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png"
+                      alt=""
+                      style={{ width: "100px" }}
+                    />
+                  </a>
                 </div>
               </div>
-            </section>
-            <section className="footer__second-section">
-              <div id="second-section" className="elementor-container">
-                <div className="elementor-row">
-                  <div className="elementor-column-footer">
-                    <AddressComponent />
-                  </div>
-                </div>
-              </div>
-            </section>
+            </div>
           </div>
-        </div>
+        </section>
+        <section className="footer__second-section">
+          <div id="second-section" className="elementor-container">
+            <div className="elementor-row">
+              <div className="elementor-column-footer">
+                <AddressComponent />
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
     </div>
   );

@@ -8,7 +8,9 @@ const LoginLayout = () => {
   return (
     <div className="login-layout">
       <Header />
-      <LoginContainer />
+      <div className="login-container-wrapper">
+        <LoginContainer />
+      </div>
       <Footer />
     </div>
   );

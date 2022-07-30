@@ -43,7 +43,6 @@ function a11yProps(index) {
 
 export default function FilterPanelHome({ jobList, indexCardActive }) {
   const location = useLocation();
-  console.log(location.pathname);
   // console.log(jobList);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
@@ -57,7 +56,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList &&
+        {jobList && jobList.length > 0 ?
           jobList.map((job, index) => (
             <CardHome
               id={job.id}
@@ -79,7 +78,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               ]}
               locationPath={location.pathname}
             />
-          ))}
+          )) : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {/* <CardHome /> */}

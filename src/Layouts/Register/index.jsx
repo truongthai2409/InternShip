@@ -9,7 +9,9 @@ export default function RegisterLayout() {
   return (
     <div className="register-layout">
       <Header />
-      <RegisterContainer Outlet={Outlet} />
+      <div className="register-container-wrapper">
+        <RegisterContainer Outlet={Outlet} />
+      </div>
       <Footer />
     </div>
   );

@@ -52,10 +52,9 @@ const DetailCard = ({
   jobDetail,
   jobListName,
   candidate,
-  jobPostHR,
   demandPartner = false,
 }) => {
-  console.log(jobDetail);
+  // console.log(jobDetail);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const [jobType, setJobType] = useState({});

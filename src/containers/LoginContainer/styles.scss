@@ -1,5 +1,12 @@
 @use '../../assets/styles/' as *;
 
+.logo-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px
+}
+
 .login-container {
   @include formContainer(480px);
   &__google {

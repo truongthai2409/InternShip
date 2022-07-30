@@ -25,8 +25,8 @@ function HeaderWithPartner(props) {
     dispatch(getUserById(idUser));
   }, []);
 
-console.log("first", idUser)
-console.log("user", user);
+// console.log("first", idUser)
+// console.log("user", user);
 
   return (
     <div className="container-header__partner header__partner config">

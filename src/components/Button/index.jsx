@@ -12,7 +12,8 @@ const Button = ({
   fz,
   children,
   outline,
-  backgroundColor
+  backgroundColor,
+  color
 }) => {
   return (
     <>
@@ -30,6 +31,7 @@ const Button = ({
           fontSize: fz ? fz : '',
           outline: outline ? outline : '',
           backgroundColor: backgroundColor,
+          color: color
           // border: '1px solid black'
         }}
         type="submit"

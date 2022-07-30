@@ -10,8 +10,8 @@ function Header(props) {
     <div className="container onMobile config">
       <Logo id={props.id} />
       <div className="login__home">
-        <Link to="/login" className="login">
-          <h5>Đăng Nhập</h5>
+        <Link to="/login" className="register">
+          <Button backgroundColor="#fff" color="#000" name="Đăng nhập" />
         </Link>
         <Link to="/register" className="register">
           <Button name="Đăng Ký" />
