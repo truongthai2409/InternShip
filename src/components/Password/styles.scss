@@ -7,6 +7,21 @@
   align-items: center;
   justify-content: space-between;
   margin: auto;
-  background-color: $color-gray-1;
+  background-color: $primary-color-background-2;
   border-radius: 5px;
+  margin-bottom: 15px;
+  &-form {
+    @include flex(null, space-between);
+
+    img {
+      width: 280px;
+      height: 309px;
+      margin-top: 53px;
+      margin-right: 20px;
+      border-radius: 5px;
+    }
+  }
+}
+.button__change-password {
+  @include flex(null, space-between);
 }

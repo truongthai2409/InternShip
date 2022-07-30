@@ -6,23 +6,18 @@ import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobByName,
-  getJobByNameAndLocation,
-  getJobList,
-} from "../../../store/slices/main/home/job/jobSlice";
-import qs from "query-string";
+import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
 import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
-  const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // get global state from redux store
-  const { jobList, jobListName, jobDetail, indexCardActive } = useSelector(
+  const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
+
   useEffect(() => {
     const dataSearch = {
       name: "",
@@ -31,7 +26,7 @@ const Home = (props) => {
       limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
-    dispatch(getJobList([1, 10]));
+    // dispatch(getJobList([1, 10]));
   }, [dispatch]);
 
   // const generateNameId = (name) => {
@@ -42,24 +37,21 @@ const Home = (props) => {
   // };
 
   const handleSearch = (value) => {
-    setValueSearch(value);
     const dataSearch = {
-      name: valueSearch || "",
+      name: value || "",
       province: locationValue || "",
       no: 0,
       limit: 10,
     };
-    if (valueSearch && value) {
-      dispatch(getJobByNameAndLocation(dataSearch));
-      navigate(
-        `/` +
-          `?name=${valueSearch || ""}&province=${
-            encodeURIComponent(locationValue)
-              .replace(/%20/g, "+")
-              .replace(/\s/g, "-") || ""
-          }&no=0&limit=10`
-      );
-    }
+    dispatch(getJobByNameAndLocation(dataSearch));
+    // navigate(
+    //   `/candidate` +
+    //     `?name=${value || ""}&province=${
+    //       encodeURIComponent(locationValue)
+    //         .replace(/%20/g, "+")
+    //         .replace(/\s/g, "-") || ""
+    //     }&no=0&limit=10`
+    // );
   };
 
   const getValueLocationAndHandle = (value) => {
@@ -87,7 +79,7 @@ const Home = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={jobListName.contents}
+              jobList={jobListName}
               indexCardActive={indexCardActive}
             />
           </Grid>
@@ -102,7 +94,7 @@ const Home = (props) => {
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                 jobDetail={jobDetail}
-                jobListName={jobListName.contents}
+                jobListName={jobListName}
                 candidate={props.candidate}
               />
             </div>

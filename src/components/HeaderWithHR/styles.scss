@@ -1,10 +1,10 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 .container-header__hr {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 35px;
+  // margin-bottom: 35px;
 }
 .header__hr {
   // margin-top: 28px;

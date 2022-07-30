@@ -18,15 +18,12 @@ import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
 
 const InformationCompany = ({ jobDetail }) => {
   const { profile } = useSelector((state) => state.authentication);
-  const { candidateInfoByUsername } = useSelector(
-    (state) => state.infoCandidate
-  );
+
   const dispatch = useDispatch();
 
   const handleAddJob = async (e) => {
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));
-    console.log(res);
     if (!res.payload.cv) {
       toast.error("Bạn chưa có CV, vui lòng cập nhật");
     } else {
@@ -79,7 +76,7 @@ const InformationCompany = ({ jobDetail }) => {
               sx={{ fontSize: 16, fontWeight: "400" }}
             >
               <div
-                dangerouslySetInnerHTML={{ __html: jobDetail.requirement}}
+                dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
               ></div>
             </Typography>
           </Typography>
@@ -157,8 +154,13 @@ const InformationCompany = ({ jobDetail }) => {
             readOnly
             defaultValue={jobDetail.company?.rates?.length}
           />
-          <Button name="Ứng tuyển" onClick={handleAddJob}></Button>
         </Typography>
+        <Button
+          bwidth="115px"
+          bheight="50px"
+          name="Ứng tuyển"
+          onClick={handleAddJob}
+        ></Button>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ function HeaderWithHR(props) {
 
   return (
     <div className="container-header__hr header__hr config">
-      {props.hr ? <Logo id={1} /> : <Logo id={3} />}
+      {props.hr ? <Logo /> : <Logo />}
       {props.hr ? (
         <div className="header__hr">
           <Link to="post" className="header__hr-post">
@@ -36,6 +36,14 @@ function HeaderWithHR(props) {
           <Link to="list" className="header__hr-post">
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
+          </Link>
+        </div>
+      ) : null}
+      {props.candidate_view_list ? (
+        <div className="header__hr">
+          <Link to="list" className="header__hr-post">
+            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
           </Link>
         </div>
       ) : null}

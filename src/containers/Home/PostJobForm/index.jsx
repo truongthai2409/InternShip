@@ -10,7 +10,10 @@ import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import { addJob, getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
+import {
+  addJob,
+  getJobPositionList,
+} from "src/store/slices/main/home/job/jobSlice";
 import {
   getDistrictList,
   getProvinceList,
@@ -20,7 +23,6 @@ import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 import moment from "moment";
-
 
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
@@ -36,7 +38,7 @@ const PostJobForm = (props) => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-    dispatch(getProfileByIdUser(userPresent.idUser))
+    dispatch(getProfileByIdUser(userPresent.idUser));
   }, []);
 
   const jobTypeList = [
@@ -88,8 +90,8 @@ const PostJobForm = (props) => {
       salaryMax: data.salaryMax,
       requirement: data.jobRequirement,
       otherInfo: data.benefits,
-      timeStartStr: moment(data.timeStart).format('YYYY-MM-DD'),
-      timeEndStr: moment(data.timeEnd).format('YYYY-MM-DD'),
+      timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+      timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
       jobposition: {
         id: data.jobPosition,
       },
@@ -101,7 +103,7 @@ const PostJobForm = (props) => {
         note: "Không có",
       },
     };
-    dispatch(addJob(jobData))
+    dispatch(addJob(jobData));
   };
   if (status === "success") {
     navigate("/hr/list");

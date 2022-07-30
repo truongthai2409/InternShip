@@ -5,7 +5,7 @@
     border-radius: 5px;
     background-color: $color-white-0;
     width: 100%;
-    min-height: 30vh;
+    border: 0.5px solid #dedede;
   }
 
   &__heading {
@@ -16,7 +16,7 @@
 
     &-title {
       color: $primary-color;
-      font-size: 22px;
+      font-size: 16px;
     }
 
     &-content {

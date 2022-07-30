@@ -26,16 +26,16 @@ const AccountMenu = ({ linkImg }) => {
   const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
 
   const handleLogout = () => {
-    localStorage.removeItem('userPresent')
+    localStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất!", {
-      theme: "dark"
-    })
-  }
+      theme: "dark",
+    });
+  };
 
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Tài khoản">
+        <Tooltip title="Cài đặt tài khoản">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -96,7 +96,8 @@ const AccountMenu = ({ linkImg }) => {
         </Link>
         <Link style={{ color: "#111111" }} to="password">
           <MenuItem>
-            <SettingsApplicationsSharpIcon className="profile-icon" /> Tài khoản
+            <SettingsApplicationsSharpIcon className="profile-icon" />
+            Cài đặt tài khoản
           </MenuItem>
         </Link>
         <Divider />

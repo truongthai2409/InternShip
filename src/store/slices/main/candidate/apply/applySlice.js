@@ -16,7 +16,7 @@ const applySlice = createSlice({
     builder.addCase(
       getApplyListByIdCandidate.fulfilled,
       (state, { payload }) => {
-        state.applyList = payload;
+        state.applyList = payload.contents;
       }
     );
     // builder.addCase(deleteMark.fulfilled, (state, { payload }) => {

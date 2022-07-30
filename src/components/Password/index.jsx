@@ -62,50 +62,69 @@ const Password = () => {
       }
     }
   };
-
+  const handleClear = () => {
+    reset();
+  };
   return (
     <div className="container password">
       <h4>Đổi mật khẩu</h4>
       <Typography variant="subtitle2" component="div" sx={{ fontSize: 16 }}>
         Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CustomInput
-          label="Mật Khẩu Cũ"
-          id="passwordOld"
-          type="password"
-          placeholder="Mật Khẩu Cũ"
-          register={register}
-          visibility
-        >
-          {errors.passwordOld?.message}
-          {/* {errorMessage?.Password} */}
-        </CustomInput>
-        <CustomInput
-          label="Mật Khẩu Mới"
-          id="passwordNew"
-          type="password"
-          placeholder="Mật Khẩu Mới"
-          register={register}
-          visibility
-        >
-          {errors.passwordNew?.message}
-          {/* {errorMessage?.Password} */}
-        </CustomInput>
-        <CustomInput
-          label="Nhập Lại Mật Khẩu
+      <form onSubmit={handleSubmit(onSubmit)} className="password-form">
+        <img
+          src="https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7886.jpg?w=740&t=st=1659012076~exp=1659012676~hmac=0c16b61c2f92a4795b0868b298a5f7a6f00307787552adf106ae9d43752c9488"
+          alt="change-password"
+        />
+        <div>
+          <CustomInput
+            label="Mật Khẩu Cũ"
+            id="passwordOld"
+            type="password"
+            placeholder="Mật Khẩu Cũ"
+            register={register}
+            visibility
+          >
+            {errors.passwordOld?.message}
+            {/* {errorMessage?.Password} */}
+          </CustomInput>
+          <CustomInput
+            label="Mật Khẩu Mới"
+            id="passwordNew"
+            type="password"
+            placeholder="Mật Khẩu Mới"
+            register={register}
+            visibility
+          >
+            {errors.passwordNew?.message}
+            {/* {errorMessage?.Password} */}
+          </CustomInput>
+          <CustomInput
+            label="Nhập Lại Mật Khẩu
 "
-          id="confirmPasswordNew"
-          type="password"
-          placeholder="Nhập Lại Mật Khẩu
+            id="confirmPasswordNew"
+            type="password"
+            placeholder="Nhập Lại Mật Khẩu
 "
-          register={register}
-          visibility
-        >
-          {errors.confirmPasswordNew?.message}
-        </CustomInput>
-        <div className="">
-          <Button name="Lưu" onClick={handleSubmit(onSubmit)}></Button>
+            register={register}
+            visibility
+          >
+            {errors.confirmPasswordNew?.message}
+          </CustomInput>
+          <div className="button__change-password">
+            <Button
+              bwidth="100px"
+              bheight="40px"
+              name="Lưu"
+              onClick={handleSubmit(onSubmit)}
+            ></Button>
+            <Button
+              bwidth="100px"
+              bheight="40px"
+              name="Hủy"
+              onClick={handleClear}
+            ></Button>
+          </div>
         </div>
       </form>
     </div>
