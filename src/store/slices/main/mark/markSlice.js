@@ -20,7 +20,7 @@ const markJobSlice = createSlice({
       state.careListCandidate = payload;
     });
     builder.addCase(getMarkByUser.fulfilled, (state, { payload }) => {
-      state.careListOfPrivate = payload;
+      state.careListOfPrivate = payload.contents;
     });
     builder.addCase(getMarkByUserAndJob.fulfilled, (state, { payload }) => {
       state.careJob = payload;

@@ -12,11 +12,11 @@
     background-color: $color-white-0;
     width: 100%;
     position: relative;
-    min-height: 55vh;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
+    border: 0.5px solid #dedede;
   }
 
   &__info {

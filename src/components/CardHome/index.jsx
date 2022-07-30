@@ -19,9 +19,9 @@ function CardHome(props) {
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
   var isMark =
-    careListOfPrivate.length > 0 &&
+    careListOfPrivate &&
     careListOfPrivate.filter((job) => job.jobCare.id === props.id);
-  const isMarkLength = isMark.length > 0 ? true : false;
+  const isMarkLength = isMark && isMark.length > 0 ? true : false;
 
   React.useEffect(() => {
     if (profile.role) {
@@ -42,8 +42,8 @@ function CardHome(props) {
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
+    console.log(props.id);
   };
-
   var handleRerender = async (id) => {
     if (id) {
       // setId(id);

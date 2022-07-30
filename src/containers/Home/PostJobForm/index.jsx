@@ -2,7 +2,7 @@ import "./styles.scss";
 import WorkIcon from "@mui/icons-material/Work";
 import CustomInput from "../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
-import './styles.scss'
+import "./styles.scss";
 import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
@@ -10,9 +10,7 @@ import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import {
-  getJobPositionList,
-} from "src/store/slices/main/home/job/jobSlice";
+import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import {
   getDistrictList,
   getProvinceList,
@@ -34,7 +32,7 @@ const PostJobForm = (props) => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-  }, []);
+  }, [dispatch]);
 
   const jobTypeList = [
     {
@@ -98,8 +96,6 @@ const PostJobForm = (props) => {
         note: "Không có",
       },
     };
-    console.log("test:",jobData);
-    // dispatch(addJob(jobData))
   };
   if (status === "success") {
     navigate("/hr/list");

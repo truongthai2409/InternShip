@@ -9,6 +9,7 @@ const jobSlice = createSlice({
     jobList: [],
     jobListCompany: [],
     jobListName: [],
+    jobDetailById: {},
     indexCardActive: 0,
     idJobActive: 0,
     jobDetail: {},
@@ -21,12 +22,14 @@ const jobSlice = createSlice({
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
-      state.jobDetail = state?.jobList[action.payload];
+      state.jobDetail = state?.jobListName[action.payload];
+    },
+    updateStatusAddJob: (state, action) => {
+      state.status = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      console.log("2-jobList:", state.jobList);
       state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
@@ -43,14 +46,15 @@ const jobSlice = createSlice({
       }
     });
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
-      state.jobListName = payload;
-      if (payload.length > 0) {
+      state.jobListName = payload.contents;
+      if (payload.contents.length > 0) {
         state.jobDetail = payload.contents[0];
       } else {
       }
     });
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
       state.jobActive = payload;
+      state.jobDetailById = payload;
     });
     builder.addCase(getJobPositionList.fulfilled, (state, { payload }) => {
       state.jobPosition = payload;
@@ -77,7 +81,7 @@ export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
   return axios
-    .get(`${baseURL}/api/job/${jobId}`)
+    .get(`${baseURL}/api/r2s/job/${jobId}`)
     .then((response) => {
       return response.data;
     })
@@ -174,5 +178,6 @@ export const getJobByCompany = createAsyncThunk(
   }
 );
 
-export const { updateIdJobActive, updateIndexCardActive } = jobSlice.actions;
+export const { updateIdJobActive, updateIndexCardActive, updateStatusAddJob } =
+  jobSlice.actions;
 export default jobSlice;

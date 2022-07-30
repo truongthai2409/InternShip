@@ -14,23 +14,23 @@ import AccountMenu from "../AccountMenu";
 import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
 function HeaderWithPartner(props) {
-  const location = useLocation()
-  const pathUrl = location.pathname
-  const dispatch = useDispatch()
-  const { user } = useSelector(state => state.user)
+  const location = useLocation();
+  const pathUrl = location.pathname;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
-  const idUser = JSON.parse(localStorage.getItem('userPresent')).idUser
+  const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
 
   useEffect(() => {
     dispatch(getUserById(idUser));
   }, []);
 
-console.log("first", idUser)
-console.log("user", user);
+  console.log("first", idUser);
+  console.log("user", user);
 
   return (
     <div className="container-header__partner header__partner config">
-      {user.role ? <Logo id={4} /> : <Logo id={3} />}
+      {user.role ? <Logo /> : <Logo />}
       {user.role ? (
         <div className="header__partner">
           <Link to="/partner/post" className="header__partner-post">

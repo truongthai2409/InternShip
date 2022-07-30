@@ -46,7 +46,6 @@ function a11yProps(index) {
   };
 }
 
-
 const DetailCard = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
@@ -78,7 +77,7 @@ const DetailCard = (props) => {
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={jobDetail.logo}
+                src={props.logo}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -109,19 +108,22 @@ const DetailCard = (props) => {
                   value={value}
                   onChange={handleChange}
                   aria-label="basic tabs example"
-                  textColor="primary"
                   scrollButtons
+                  sx={{
+                    color: "#04bf8a",
+                    borderColor: "#04bf8a",
+                  }}
+                  textColor="#04bf8a"
+                  // indicatorColor="#04bf8a"
                 >
                   <Tab
                     label="Chi tiết"
                     {...a11yProps(0)}
-                    textColor="inherit"
                     sx={{ fontSize: 12 }}
                   />
                   <Tab
                     label="Tổng quan công ty"
                     {...a11yProps(1)}
-                    textColor="inherit"
                     sx={{ fontSize: 12 }}
                   />
                 </Tabs>
