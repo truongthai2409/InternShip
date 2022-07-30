@@ -71,7 +71,6 @@ export const Actions = () => {
 export const CompanyInfo = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
-  console.log("object:", profile);
 
   return (
     <div className="company-infor__wrapper">

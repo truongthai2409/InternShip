@@ -11,7 +11,7 @@ import { genderList } from "./validateForm";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "src/store/slices/Admin/user/userSlice";
 
-const ProfileForm = ({ onClick }) => {
+const ProfileForm = ({ handleClose }) => {
   const {
     register,
     handleSubmit,
@@ -20,16 +20,16 @@ const ProfileForm = ({ onClick }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const dispatch = useDispatch();
-  const { user, profile } = useSelector((state) => state.user);
+  const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setValue("firstName", user.firstName);
-    setValue("lastName", user.lastName);
-    setValue("email", user.email);
-    setValue("phone", user.phone);
+    setValue("firstName", profile?.user?.firstName);
+    setValue("lastName", profile?.user?.lastName);
+    setValue("email", profile?.user?.email);
+    setValue("phone", profile?.user?.phone);
   }, []);
 
-  console.log("userprofileform",profile)
+  console.log("userprofileform", profile);
 
   const onSubmit = (data) => {
     const profileData = {
@@ -48,26 +48,27 @@ const ProfileForm = ({ onClick }) => {
       }),
       // fileAvatar: data.fileAv
     };
-    console.log("updateuser:", profileData)
-    dispatch(updateUser([profileData, user?.id]));
-    onClick();
+    console.log("updateuser:", profileData);
+    dispatch(updateUser([profileData, profile.id]));
+    handleClose();
   };
 
   return (
     <>
-      <form
-        className="profile-form__wrapper"
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="profile-form__wrapper" autoComplete="off">
         <div className="profile-form__content">
+          <p className="title-requirement">
+            (<span className="field-requirment"> * </span>)Trường bắt buộc
+          </p>
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
               id="lastName"
               label="Họ"
-              requirementField={false}
               className="profile-form__input"
+              radius="2px"
+              height="45px"
+              border="1.6px solid #777777"
             >
               {errors.lastName?.message}
             </CustomInput>
@@ -77,8 +78,10 @@ const ProfileForm = ({ onClick }) => {
               register={register}
               id="firstName"
               label="Tên"
-              requirementField={false}
               className="profile-form__input"
+              radius="2px"
+              height="45px"
+              border="1.6px solid #777777"
             >
               {errors.firstName?.message}
             </CustomInput>
@@ -88,8 +91,7 @@ const ProfileForm = ({ onClick }) => {
               register={register}
               id="gender"
               label="Giới tính"
-              defaultValue={user.gender}
-              requirementField={false}
+              defaultValue={profile?.user?.gender}
               options={genderList}
             >
               {errors.gender?.message}
@@ -99,35 +101,38 @@ const ProfileForm = ({ onClick }) => {
             <CustomInput
               register={register}
               id="phone"
-              type="number"
+              type="text"
               label="Số điện thoại"
-              requirementField={false}
               className="profile-form__input"
+              radius="2px"
+              height="45px"
+              border="1.6px solid #777777"
             >
               {errors.phone?.message}
             </CustomInput>
           </div>
         </div>
-        <div className="profile-form__action">
-          <Button
-            name="Lưu"
-            onClick={handleSubmit(onSubmit)}
-            fz="14px"
-            outline="1.5px solid #DEDEDE"
-            className="profile-form__action-btn"
-          />
-          <span style={{ margin: "0 4px" }}></span>
-          <ButtonOutline
-            name="Hủy"
-            onClick={onClick}
-            bg="#F3F4F6"
-            outline="1.5px solid #DEDEDE"
-            color="#111111"
-            fz="14px"
-            className="profile-form__action-btn"
-          />
-        </div>
       </form>
+      <div className="profile-form__action">
+        <Button
+          name="Lưu"
+          onClick={handleSubmit(onSubmit)}
+          fz="14px"
+          outline="1.5px solid #DEDEDE"
+          className="profile-form__action-btn"
+        />
+        <span style={{ margin: "0 4px" }}></span>
+        <ButtonOutline
+          name="Hủy"
+          onClick={handleClose}
+          bg="#F3F4F6"
+          outline="1.5px solid #DEDEDE"
+          color="#111111"
+          fz="14px"
+          className="profile-form__action-btn"
+          radius="4px"
+        />
+      </div>
     </>
   );
 };

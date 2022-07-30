@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ButtonOutline from "../ButtonOutline";
 import Modal from "../Modal";
 import ProfileForm from "src/containers/Home/ProfileForm";
-import AttachEmailIcon from '@mui/icons-material/AttachEmail';
+import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import HandshakeIcon from "@mui/icons-material/Handshake";
@@ -19,15 +19,17 @@ import {
   UniversityInfo,
 } from "./components";
 
+
 const Profile = ({ actions = false }) => {
   const dispatch = useDispatch();
-  const { profile, user } = useSelector((state) => state.user);
+  const { profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
+
 
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));
@@ -48,19 +50,28 @@ const Profile = ({ actions = false }) => {
       RelatedInfor = null;
   }
 
-  console.log("user-info:", profile);
   return (
     <>
       <div className="profile__wrapper">
         <div className="profile__avatar">
-          <img
-            className="avatar-img"
-            src={
-              `http://localhost:8085${profile?.user?.avatar}` ||
-              "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-            }
-            alt="Ảnh đại diện"
-          />
+          <div>
+            <img
+              className="avatar__img"
+              src={
+                profile?.user?.avatar
+                  ? `http://localhost:8085${profile?.user?.avatar}`
+                  : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+              }
+              alt="Ảnh đại diện"
+            />
+            <ButtonOutline
+              className="avatar__edit-btn"
+              icon={<EditIcon />}
+              width="40px"
+              height="40px"
+              radius="50%"
+            />
+          </div>
           <ButtonOutline
             onClick={handleOpen}
             width="200px"
@@ -110,12 +121,12 @@ const Profile = ({ actions = false }) => {
         </div>
       </div>
       <Modal
-          modalTitle="Chỉnh sử thông tin cá nhân"
-          children={<ProfileForm onClick={handleClose} />}
-          open={open}
-          setOpen={setOpen}
-          name="profile"
-        />
+        modalTitle="Chỉnh sử thông tin cá nhân"
+        children={<ProfileForm handleClose={handleClose} />}
+        open={open}
+        setOpen={setOpen}
+        name="profile"
+      />
     </>
   );
 };

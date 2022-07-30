@@ -7,7 +7,6 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     userList: [],
-    user: {},
     profile: {},
     idRole: null,
     notification: {},
