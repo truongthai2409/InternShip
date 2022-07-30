@@ -35,7 +35,7 @@ export default function Logo({ id }) {
     <div onClick={handleClickGoHome}>
       <Link to="" className="logo">
         <div className="roleName__header">
-          <img style={{ width: "300px" }} src={logo} alt="" />
+          <img src={logo} alt="" />
           <span>{id ? roleList[id] : ""}</span>
         </div>
       </Link>

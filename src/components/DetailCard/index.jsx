@@ -86,7 +86,10 @@ const DetailCard = ({
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={jobDetail.hr?.company.logo || "https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7901.jpg?w=2000"}
+                src={
+                  jobDetail.hr?.company.logo ||
+                  "https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7901.jpg?w=2000"
+                }
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -158,8 +161,7 @@ const DetailCard = ({
                     mt: 1,
                     fontSize: 3,
                   }}
-                >
-                </Box>
+                ></Box>
                 <TabPanel value={value} index={0}>
                   <InformationUniversity
                     jobDetail={jobDetail}

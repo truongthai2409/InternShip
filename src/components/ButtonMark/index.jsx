@@ -26,9 +26,7 @@ const ButtonMark = (props) => {
   );
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
-    dispatch(getJobByName(""));
-    profile.username !== undefined &&
-      dispatch(getCandidateByUserName(profile.username));
+    profile?.username && dispatch(getCandidateByUserName(profile.username));
   }, [dispatch, profile.username]);
 
   const handleClickMarkJob = async (e) => {
