@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";;
 
 const CustomTextarea = ({
@@ -8,9 +8,12 @@ const CustomTextarea = ({
   placeholder,
   children,
   register,
+  contents,
   check = false,
   requirementField = true,
 }) => {
+
+  const [sampleFormActive, setSampleFormActive] = useState("")
 
   return (
     <div className="custom-textarea">
@@ -33,6 +36,8 @@ const CustomTextarea = ({
           placeholder={placeholder}
           {...register(id)}
           rows={5}
+          value={contents}
+          onChange={() => setSampleFormActive(contents)}
         />
         {check ? null : (
           <p className="custom-textarea__error">

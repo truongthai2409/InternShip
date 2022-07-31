@@ -6,15 +6,33 @@
   justify-content: center;
   width: 100%;
   min-height: 100vh;
+  position: relative;
+  margin-top: 150px;
 
   .profile__avatar {
     padding-right: 100px;
-    .avatar-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      object-fit: center;
+
+    > div {
+      position: relative;
+
+      .avatar__img {
+        width: 200px;
+        height: 200px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        object-fit: center;
+      }
+
+      .avatar__edit-btn {
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        transform: translateX(-50%);
+      }
+
+      .btn-outline {
+        padding: 0;
+      }
     }
   }
   .profile__infor {
@@ -108,7 +126,6 @@
         flex-basis: 70%;
 
         .company-infor__profile {
-
           .company-infor__row {
             display: flex;
             margin-bottom: 20px;
@@ -119,7 +136,7 @@
               flex-direction: column;
               font-size: 16px;
 
-              >span {
+              > span {
                 font-weight: 500;
                 font-size: 20px;
               }
@@ -128,7 +145,7 @@
 
           .company-infor__des-company {
             font-size: 16px;
-            >span {
+            > span {
               font-weight: 500;
               font-size: 20px;
             }

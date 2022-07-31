@@ -16,6 +16,10 @@ const CustomInput = ({
   requirementField = true,
   visibility = false,
   className,
+  radius,
+  height,
+  border,
+  icon
 }) => {
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -33,7 +37,13 @@ const CustomInput = ({
           check ? "custom-input__textfield-disabled" : "custom-input__textfield"
         }
       >
+        {icon}
         <input
+          style={{
+            borderRadius: radius ? radius : "",
+            height: height ? height : "",
+            border: border ? border : "",
+          }}
           type={type === "password" ? (isHide ? "text" : "password") : type}
           id={id}
           placeholder={placeholder}

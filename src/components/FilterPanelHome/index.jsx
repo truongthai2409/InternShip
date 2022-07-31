@@ -56,7 +56,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList &&
+        {jobList && jobList.length > 0 ?
           jobList.map((job, index) => (
             <CardHome
               id={job.id}
@@ -73,7 +73,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               ]}
               star={job?.hr?.company?.rates.length || 4}
               location="Hồ Chí Minh"
-              amount="30"
+              amount={job.amount || "30"}
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
@@ -81,7 +81,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               ]}
               locationPath={location.pathname}
             />
-          ))}
+          )) : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {/* <CardHome /> */}

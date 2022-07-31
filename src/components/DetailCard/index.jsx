@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  // useSelector,
-  useDispatch,
-} from "react-redux";
-import { getJobList } from "../../store/slices/main/home/job/jobSlice";
+import // useSelector,
+"react-redux";
+// import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 // import moment from "moment";
 import "./styles.scss";
 import Detail from "./component";

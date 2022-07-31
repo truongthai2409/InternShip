@@ -254,7 +254,7 @@ const PartnerInfo = () => {
             {errors.phoneSchool?.message}
           </CustomInput>
         </div>
-        <CustomTextarea
+        <CustomInput
           label="Mô tả"
           id="description"
           type="textarea"
@@ -281,7 +281,7 @@ const PartnerInfo = () => {
             {errors.address?.message}
           </CustomInput>
         </div>
-        <CustomTextarea
+        <CustomInput
           label="Ghi chú"
           id="note"
           type="textarea"

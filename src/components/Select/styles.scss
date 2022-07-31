@@ -1,12 +1,12 @@
 @use '../../assets/styles/' as *;
 
-.select {
+.select-form {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
-  &-label {
+  .select-label {
     font-size: $fs-14;
     margin-bottom: 7px;
     font-family: $f-family;
@@ -15,13 +15,13 @@
     text-align: left;
   }
 
-  &-error {
+  .select-error {
     text-align: left;
     color: $color-red;
     font-size: $fs-13;
   }
 
-  &-placeholder {
+  .select-placeholder {
     text-align: left;
     color: #777777;
   }
@@ -53,9 +53,9 @@
   }
 }
 
-.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiMenu-paper.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-  width: 200px !important;
-}
+// .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiMenu-paper.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+//   // width: 200px !important;
+// }
 
 .field-requirment {
   color: red;

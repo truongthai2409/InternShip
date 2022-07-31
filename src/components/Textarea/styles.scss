@@ -7,6 +7,10 @@
     font-weight: $fw-bold-0;
     color: #000;
   }
+  &__error, &__label {
+    width: 100%;
+    text-align: left;
+  }
 
   .ql-container.ql-snow {
     border: none;
@@ -28,5 +32,9 @@
     border-radius: 2px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+  }
+
+  .ql-editor.ql-blank::before {
+    font-style: normal;
   }
 }

@@ -2,10 +2,14 @@
 
 .container {
   width: 100%;
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin-bottom: 35px;
+  margin-bottom: 35px;
+  background-color: #f6f6f6;
+  z-index: 99;
+  box-shadow: 0 2px 2px -2px gray;
 
   .logo__home {
     text-align: none;
@@ -15,7 +19,6 @@
     display: flex;
     align-items: center;
     text-align: none;
-    // border: solid 1px $color-gray-4;
     border-radius: 5px;
 
     .login {
@@ -37,6 +40,8 @@
     }
   }
 }
+
+
 
 @media (max-width: 740px) {
   .login__home {

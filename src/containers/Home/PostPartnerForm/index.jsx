@@ -18,12 +18,41 @@ import { format } from "date-fns";
 import DescriptionForm from "src/components/DescriptionForm";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 
+const SAMPLEFORM = `Kính chào Quý Cơ quan/ Doanh nghiệp,
+
+
+Trường .................... vinh dự và tự hào là đối tác tuyển dụng của quý cơ quan, doanh nghiệp.
+
+Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuyển dụng thực tập, việc làm đến sinh viên/ cựu sinh viên Trường ................... Phía Trung tâm Hướng nghiệp - Tư vấn việc làm của Trường đã đăng tuyển và cung cấp thông tin ứng viên đến Quý đơn vị. Quý Cơ quan/ Doanh nghiệp vui lòng xem thông tin ứng viên bên dưới.
+
+
+Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.
+
+Trân trọng cảm ơn!`;
+
+const jobTypeList = [
+  {
+    id: 1,
+    name: "Full time",
+  },
+  {
+    id: 2,
+    name: "Part time",
+  },
+  {
+    id: 3,
+    name: "Remote",
+  },
+];
+
 const PostPartnerForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const { status } = useSelector((state) => state.demand);
   const { activeUser } = useSelector((state) => state.university);
   const [openForm, setOpenForm] = useState(false);
+
+  // console.log(status);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,17 +74,19 @@ const PostPartnerForm = (props) => {
 
   const handleToggle = () => {
     setOpenForm(!openForm);
+    console.log("isClicked");
   };
 
   const onSubmit = (data) => {
-    const jobData = {
+    const demandData = {
       demand: JSON.stringify({
         name: data.name,
-        description: data.jobDescription,
-        requirement: data.jobRequirement,
-        ortherInfo: data.otherInfo,
+        description: SAMPLEFORM,
+        requirement: "Không có yêu cầu",
+        ortherInfo: "Không có thông tin thêm",
         startStr: data.timeStart,
         endStr: data.timeEnd,
+        amount: data.amount,
         partner: {
           id: parseInt(activeUser?.id),
         },
@@ -65,11 +96,16 @@ const PostPartnerForm = (props) => {
         position: {
           id: parseInt(data.jobPosition),
         },
+        jobType: {
+          id: parseInt(data.jobType),
+        },
       }),
       fileSV: data.fileSV[0],
     };
 
-    dispatch(addDemand(jobData));
+    console.log(demandData);
+
+    dispatch(addDemand(demandData));
   };
 
   if (status === "success") {
@@ -124,6 +160,28 @@ const PostPartnerForm = (props) => {
               </div>
             </div>
             <div className="row-2-col">
+              <div className="partner-post__select">
+                <SelectCustom
+                  id="jobType"
+                  label="Vị trí công việc"
+                  placeholder="Vui lòng chọn"
+                  options={jobTypeList}
+                  register={register}
+                >
+                  {errors.jobType?.message}
+                </SelectCustom>
+              </div>
+              <CustomInput
+                label="Số lượng cần tuyển"
+                id="amount"
+                type="number"
+                placeholder="Nhập số lượng"
+                register={register}
+              >
+                {errors.amount?.message}
+              </CustomInput>
+            </div>
+            <div className="row-2-col">
               <CustomInput
                 label="Ngày bắt đầu tuyển"
                 id="timeStart"
@@ -147,10 +205,10 @@ const PostPartnerForm = (props) => {
             </div>
             <div className="partner-post__textarea-description">
               <CustomTextarea
-                label="Mô tả"
+                label="Thư giới thiệu"
                 id="jobDescription"
                 type="description"
-                placeholder="Nhập mô tả"
+                placeholder="Thư giới thiệu"
                 register={register}
               >
                 {errors.jobDescription?.message}
@@ -161,7 +219,7 @@ const PostPartnerForm = (props) => {
                   className="description-btn-post-partner"
                   onClick={handleToggle}
                 >
-                  {openForm == false ? "(Xem mô tả mẫu)" : "(Đóng)"}
+                  {openForm == false ? "(Xem thư mẫu)" : "(Đóng)"}
                 </button>
               </div>
               {openForm && (
@@ -169,30 +227,6 @@ const PostPartnerForm = (props) => {
                   <DescriptionForm />
                 </>
               )}
-            </div>
-            <div className="partner-post__textarea">
-              <CustomTextarea
-                label="Yêu cầu"
-                id="jobRequirement"
-                type="description"
-                placeholder="Nhập yêu cầu"
-                register={register}
-                check={false}
-              >
-                {errors.jobRequirement?.message}
-              </CustomTextarea>
-              <div className="partner-post__textarea">
-                <CustomTextarea
-                  label="Thông tin khác"
-                  id="otherInfo"
-                  type="desciption"
-                  placeholder="Thông tin khác"
-                  register={register}
-                  check={false}
-                >
-                  {errors.otherInfo?.message}
-                </CustomTextarea>
-              </div>
             </div>
             <div className="partner-post__textarea">
               <CustomInput
@@ -210,12 +244,6 @@ const PostPartnerForm = (props) => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="description-btn-post-partner-container">
-        <button className="description-btn-post-partner" onClick={handleToggle}>
-          {openForm == false ? "(Xem mô tả mẫu)" : "(Đóng)"}
-        </button>
       </div>
     </>
   );

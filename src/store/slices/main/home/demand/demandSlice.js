@@ -35,7 +35,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
-        state.status = "success";
         state.demandList = payload;
       });
   },

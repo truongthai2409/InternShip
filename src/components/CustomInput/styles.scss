@@ -17,7 +17,6 @@
     position: relative;
 
     input {
-      // border: 2px solid rgb(145, 158, 171);
       font-family: $f-family;
       border: 1.6px solid $primary-color;
       border-radius: 5px;
@@ -25,7 +24,7 @@
       padding: 21px 12px;
 
       &:hover {
-        border: 1.6px solid $primary-color;
+        border: 1.6px solid $primary-color !important;
         box-shadow: $primary-color-1 0px 3px 8px;
         &::placeholder {
           color: $primary-color;
@@ -34,7 +33,7 @@
 
       &:focus {
         outline: $primary-color;
-        border: 1.6px solid $color-black-0;
+        // border: 1.6px solid $color-black-0;
         box-shadow: $primary-color-1 0px 3px 8px;
         &::placeholder {
           color: $primary-color;

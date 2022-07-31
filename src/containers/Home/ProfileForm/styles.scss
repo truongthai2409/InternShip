@@ -4,26 +4,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   .profile-form__content {
+    width: 100%;
     .profile-form__content-item {
       .custom-input .custom-input__textfield input {
         padding: 8px 12px;
-        width: 280px;
       }
     }
   }
+}
+
+.MuiDialogContent-root.css-ypiqx9-MuiDialogContent-root {
   .profile-form__action {
-    width: 280px;
     display: flex;
+    flex-direction: row;
 
     .profile-form__action-btn {
       padding: 8px 16px;
     }
-  }
-  .MuiFormControl-root.MuiFormControl-fullWidth.css-q8hpuo-MuiFormControl-root {
-    border-radius: 5px;
-    width: 280px;
-    border: 1.6px solid #04bf8a;
-    height: 34.5px !important;
   }
 }

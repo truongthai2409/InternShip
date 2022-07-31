@@ -111,7 +111,7 @@ export const getPartnerByUserID = createAsyncThunk(
   "university/getPartnerByUserID",
   async (userId) => {
     return await axios
-    .get(`${baseURL}/api/r2s/partner/get-iduser/${userId}`)
+    .get(`${baseURL}/api/r2s/partner/user/${userId}`)
     .then((response) => {
       return response.data;
     })
