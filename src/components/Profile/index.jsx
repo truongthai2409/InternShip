@@ -64,13 +64,13 @@ const Profile = ({ actions = false }) => {
               }
               alt="Ảnh đại diện"
             />
-            <ButtonOutline
+            {/* <ButtonOutline
               className="avatar__edit-btn"
               icon={<EditIcon />}
               width="40px"
               height="40px"
               radius="50%"
-            />
+            /> */}
           </div>
           <ButtonOutline
             onClick={handleOpen}

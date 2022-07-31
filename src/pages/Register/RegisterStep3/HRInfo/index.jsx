@@ -57,6 +57,7 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar[0] || null,
     };
+    console.log(hrData)
     dispatch(registerHr({ hrData, navigate }));
   };
 

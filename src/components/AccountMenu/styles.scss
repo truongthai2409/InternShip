@@ -1,10 +1,11 @@
 @use '../../assets/styles' as *;
 
-.avatar_img {
+.avatar__image {
   height: 100%;
   width: 100%;
   border-radius: 100%;
   border: 2px solid $primary-color;
+  object-fit: cover;
 
   &:hover {
     transform: scale(1.2);

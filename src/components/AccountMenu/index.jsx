@@ -45,7 +45,7 @@ const AccountMenu = ({ linkImg }) => {
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar sx={{ width: 50, height: 50, background: "transparent" }}>
-              <img src={linkImg} alt="Ảnh đại diện" className="avatar_img" />
+              <img src={linkImg} alt="Ảnh đại diện" className="avatar__image" />
             </Avatar>
           </IconButton>
         </Tooltip>
