@@ -2,10 +2,14 @@
 .container-header__hr {
   width: 100%;
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
   // margin-bottom: 35px;
+  z-index: 99;
+  box-shadow: 0 2px 2px -2px gray;
 }
+
 .header__hr {
   // margin-top: 28px;
   background-color: $primary-color-1;

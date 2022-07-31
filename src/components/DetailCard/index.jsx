@@ -54,7 +54,6 @@ const DetailCard = ({
   candidate,
   demandPartner = false,
 }) => {
-  // console.log(jobDetail);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const [jobType, setJobType] = useState({});
@@ -72,6 +71,7 @@ const DetailCard = ({
   useEffect(() => {
     dispatch(getJobList());
   }, [dispatch]);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -102,11 +102,11 @@ const DetailCard = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobType?.name || "fulltime"} />
+                  <TagName title={jobType?.name || jobDetail?.jobType?.name || "Unknown"} />
                   <TagName
-                    title={jobPosition?.name || jobDetail?.position?.name}
+                    title={jobPosition?.name || jobDetail?.position?.name || "Unknown"}
                   />
-                  <TagName title={major?.name || "Công nghệ thông tin"} />
+                  <TagName title={major?.name || jobDetail?.universityDTO?.majors[0]?.name ||"Unknown"} />
                 </div>
               </div>
             </div>
@@ -161,11 +161,9 @@ const DetailCard = ({
                     mt: 1,
                     fontSize: 3,
                   }}
-                ></Box>
+                />
                 <TabPanel value={value} index={0}>
-                  <InformationUniversity
-                    jobDetail={jobDetail}
-                  ></InformationUniversity>
+                  <InformationUniversity jobDetail={jobDetail} />
                 </TabPanel>
               </Box>
             )}

@@ -9,6 +9,10 @@
   height: 600px;
   margin-bottom: 15px;
 
+  &-4-item {
+    max-width: 33%;
+  }
+
   .detail__card-1 {
     display: flex;
     flex-direction: column;
@@ -88,12 +92,11 @@
   .detail__card-4 {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin: 20px 0px;
     &-item {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       &-icon {
         color: $primary-color;
       }
