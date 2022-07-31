@@ -16,7 +16,7 @@ import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
 //   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 // };
 
-const InformationCompany = ({ jobDetail }) => {
+const InformationCompany = ({ jobDetail, jobDetailById }) => {
   const { profile } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
@@ -47,59 +47,67 @@ const InformationCompany = ({ jobDetail }) => {
   };
   return (
     <div>
-      <div className="detail__card-3">
-        <Typography variant="span">
-          <Typography
-            variant="span"
-            sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
-          >
-            Mô tả công việc:
-          </Typography>
-          <Typography
-            variant="body2"
-            gutterBottom
-            sx={{ fontSize: 16, fontWeight: "400" }}
-          >
-            <div
-              dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
-            ></div>
-          </Typography>
-        </Typography>
-        <div className="detail__card-3-item">
-          <Typography variant="span">
-            <Typography variant="span" sx={{ fontSize: 18, fontWeight: "700" }}>
-              Yêu cầu công việc:
+      {jobDetail && (
+        <>
+          <div className="detail__card-3">
+            <Typography variant="span">
+              <Typography
+                variant="span"
+                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+              >
+                Mô tả công việc:
+              </Typography>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: 16, fontWeight: "400" }}
+              >
+                <div
+                  dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+                ></div>
+              </Typography>
             </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              sx={{ fontSize: 16, fontWeight: "400" }}
-            >
-              <div
-                dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
-              ></div>
-            </Typography>
-          </Typography>
-        </div>
-        <div className="detail__card-3-item">
-          <Typography variant="span">
-            <Typography variant="span" sx={{ fontSize: 18, fontWeight: "700" }}>
-              Thời hạn ứng tuyển:
-            </Typography>
-            <Typography
-              variant="body2"
-              gutterBottom
-              sx={{ fontSize: 17, fontWeight: "400" }}
-            >
-              {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
-              {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
-            </Typography>
-          </Typography>
-        </div>
-      </div>
-      <div className="line"></div>
-      <div className="detail__card-4">
-        {/* <div className="detail__card-4-item">
+            <div className="detail__card-3-item">
+              <Typography variant="span">
+                <Typography
+                  variant="span"
+                  sx={{ fontSize: 18, fontWeight: "700" }}
+                >
+                  Yêu cầu công việc:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ fontSize: 16, fontWeight: "400" }}
+                >
+                  <div
+                    dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+                  ></div>
+                </Typography>
+              </Typography>
+            </div>
+            <div className="detail__card-3-item">
+              <Typography variant="span">
+                <Typography
+                  variant="span"
+                  sx={{ fontSize: 18, fontWeight: "700" }}
+                >
+                  Thời hạn ứng tuyển:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ fontSize: 17, fontWeight: "400" }}
+                >
+                  {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
+                  {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
+                </Typography>
+              </Typography>
+            </div>
+          </div>
+          <div className="line"></div>
+          <div className="detail__card-4">
+            {/* <div className="detail__card-4-item">
           <Icon className="detail__card-4-item-icon">
             <CurrencyExchangeIcon />
           </Icon>
@@ -108,58 +116,191 @@ const InformationCompany = ({ jobDetail }) => {
             {formatSalary(jobDetail.salaryMax)}
           </Typography>
         </div> */}
-        <div className="detail__card-4-item" sx={{ display: "flex" }}>
+            <div className="detail__card-4-item" sx={{ display: "flex" }}>
+              <Icon className="detail__card-4-item-icon">
+                <WorkIcon />
+              </Icon>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                }}
+              >
+                {jobDetail.jobType?.name}
+              </Typography>
+            </div>
+            <div className="detail__card-4-item">
+              <AddLocationIcon className="detail__card-4-item-icon">
+                <WorkIcon />
+              </AddLocationIcon>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {`${jobDetail.locationjob?.address}, ${jobDetail.locationjob?.district?.name}, ${jobDetail.locationjob?.district?.province?.name}`}
+              </Typography>
+            </div>
+          </div>
+          <div className="detail__card-5">
+            <Typography variant="span" gutterBottom component="div">
+              <Typography variant="button" display="block" gutterBottom>
+                {jobDetail.company?.rates?.length}
+              </Typography>
+              <Rating
+                name="read-only"
+                precision={0.5}
+                readOnly
+                defaultValue={jobDetail.company?.rates?.length}
+              />
+            </Typography>
+            <Button
+              bwidth="115px"
+              bheight="50px"
+              name="Ứng tuyển"
+              onClick={handleAddJob}
+            ></Button>
+          </div>
+        </>
+      )}
+      {jobDetailById && (
+        <>
+          <div className="detail__card-3">
+            <Typography variant="span">
+              <Typography
+                variant="span"
+                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+              >
+                Mô tả công việc:
+              </Typography>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: 16, fontWeight: "400" }}
+              >
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: jobDetailById.description,
+                  }}
+                ></div>
+              </Typography>
+            </Typography>
+            <div className="detail__card-3-item">
+              <Typography variant="span">
+                <Typography
+                  variant="span"
+                  sx={{ fontSize: 18, fontWeight: "700" }}
+                >
+                  Yêu cầu công việc:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ fontSize: 16, fontWeight: "400" }}
+                >
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: jobDetailById.requirement,
+                    }}
+                  ></div>
+                </Typography>
+              </Typography>
+            </div>
+            <div className="detail__card-3-item">
+              <Typography variant="span">
+                <Typography
+                  variant="span"
+                  sx={{ fontSize: 18, fontWeight: "700" }}
+                >
+                  Thời hạn ứng tuyển:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ fontSize: 17, fontWeight: "400" }}
+                >
+                  {moment(jobDetailById.timeStartStr).format("DD/MM/YYYY")} -{" "}
+                  {moment(jobDetailById.timeEndStr).format("DD/MM/YYYY")}
+                </Typography>
+              </Typography>
+            </div>
+          </div>
+          <div className="line"></div>
+          <div className="detail__card-4">
+            {/* <div className="detail__card-4-item">
           <Icon className="detail__card-4-item-icon">
-            <WorkIcon />
+            <CurrencyExchangeIcon />
           </Icon>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontSize: 17,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
-            }}
-          >
-            {jobDetail.jobType?.name}
+          <Typography variant="h6" gutterBottom component="div" >
+            {formatSalary(jobDetailById.salaryMin)} -{" "}
+            {formatSalary(jobDetailById.salaryMax)}
           </Typography>
-        </div>
-        <div className="detail__card-4-item">
-          <AddLocationIcon className="detail__card-4-item-icon">
-            <WorkIcon />
-          </AddLocationIcon>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontSize: 17,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            {`${jobDetail.locationjob?.address}, ${jobDetail.locationjob?.district?.name}, ${jobDetail.locationjob?.district?.province?.name}`}
-          </Typography>
-        </div>
-      </div>
-      <div className="detail__card-5">
-        <Typography variant="span" gutterBottom component="div">
-          <Typography variant="button" display="block" gutterBottom>
-            {jobDetail.company?.rates?.length}
-          </Typography>
-          <Rating
-            name="read-only"
-            precision={0.5}
-            readOnly
-            defaultValue={jobDetail.company?.rates?.length}
-          />
-        </Typography>
-        <Button
-          name="Ứng tuyển"
-          onClick={handleAddJob}
-        ></Button>
-      </div>
+        </div> */}
+            <div className="detail__card-4-item" sx={{ display: "flex" }}>
+              <Icon className="detail__card-4-item-icon">
+                <WorkIcon />
+              </Icon>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                }}
+              >
+                {jobDetailById.jobType}
+              </Typography>
+            </div>
+            <div className="detail__card-4-item">
+              <AddLocationIcon className="detail__card-4-item-icon">
+                <WorkIcon />
+              </AddLocationIcon>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  transform: "translate(5px,5px)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {`${jobDetailById.locationjob}`}
+              </Typography>
+            </div>
+          </div>
+          <div className="detail__card-5">
+            <Typography variant="span" gutterBottom component="div">
+              <Typography variant="button" display="block" gutterBottom>
+                {jobDetailById.company?.rates?.length}
+              </Typography>
+              <Rating
+                name="read-only"
+                precision={0.5}
+                readOnly
+                defaultValue={jobDetailById.company?.rates?.length}
+              />
+            </Typography>
+            <Button
+              bwidth="115px"
+              bheight="50px"
+              name="Ứng tuyển"
+              onClick={handleAddJob}
+            ></Button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

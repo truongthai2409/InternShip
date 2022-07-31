@@ -57,7 +57,6 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
-
   return (
     <>
       {jobDetail && (

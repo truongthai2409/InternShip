@@ -94,7 +94,7 @@ const AccountMenu = ({ linkImg }) => {
             <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
           </MenuItem>
         </Link>
-        <Link style={{ color: "#111111" }} to="password">
+        <Link style={{ color: "#111111" }} to="setting">
           <MenuItem>
             <SettingsApplicationsSharpIcon className="profile-icon" />
             Cài đặt tài khoản

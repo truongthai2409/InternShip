@@ -18,7 +18,7 @@ const jobSlice = createSlice({
   },
   reducers: {
     updateIdJobActive: (state, action) => {
-      state.idJobActive = action.payload.contents;
+      state.idJobActive = action.payload;
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
@@ -74,7 +74,7 @@ export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
     })
     .catch((error) => {
       return error.response.data;
-    })
+    });
 });
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {

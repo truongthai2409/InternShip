@@ -14,7 +14,6 @@ const PartnerPostList = (props) => {
   const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   // console.log(activeUser?.universityDTO?.id);
-  console.log(demandListUniversity.contents);
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));

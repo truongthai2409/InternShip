@@ -35,7 +35,7 @@ const markJobSlice = createSlice({
 
 export const getMark = createAsyncThunk("mark/getMark", async () => {
   return axios
-    .get(`${baseURL}/api/r2s/carelist`)
+    .get(`${baseURL}/api/r2s/carelist/?no=0&limit=10`)
     .then((response) => {
       return response.data;
     })
@@ -48,7 +48,7 @@ export const getMarkByUser = createAsyncThunk(
   "mark/getMarkByUser",
   async (userName) => {
     return axios
-      .get(`${baseURL}/api/r2s/carelist/user/${userName}/`)
+      .get(`${baseURL}/api/r2s/carelist/user/${userName}/?no=0&limit=10`)
       .then((response) => {
         return response.data;
       })
@@ -73,7 +73,7 @@ export const getMarkByUserAndJob = createAsyncThunk(
     };
     return axios
       .get(
-        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}`,
+        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}/?no=0&limit=10`,
         axiosConfig
       )
       .then((response) => {

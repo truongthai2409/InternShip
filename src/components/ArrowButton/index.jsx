@@ -1,20 +1,22 @@
-import React from 'react'
-import './styles.scss'
+import React from "react";
+import "./styles.scss";
 
-export default function ArrowButton({ text, direction }) {
+const ArrowButton = ({ text, direction }) => {
   return (
     <button className="arrow-button">
-      {direction === 'left' ? (
+      {direction === "left" ? (
         <i className="fa-solid fa-arrow-left-long"></i>
       ) : (
-        ''
+        ""
       )}
       {text}
-      {direction === 'right' ? (
+      {direction === "right" ? (
         <i className="fa-solid fa-arrow-right-long"></i>
       ) : (
-        ''
+        ""
       )}
     </button>
-  )
-}
+  );
+};
+
+export default ArrowButton;

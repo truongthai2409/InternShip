@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import './styles.scss'
+import "./styles.scss";
 
 const Button = ({
   className,
@@ -13,25 +13,20 @@ const Button = ({
   children,
   outline,
   backgroundColor,
-  color
+  color,
 }) => {
   return (
     <>
       <button
-        className={`button ${className ? className : ''}`}
-        onClick={
-          onClick ||
-          (() => {
-            console.log()
-          })
-        }
+        className={`button ${className ? className : ""}`}
+        onClick={onClick || (() => {})}
         style={{
-          width: bwidth ? `${bwidth}` : '',
-          height: bheight ? `${bheight}` : '',
-          fontSize: fz ? fz : '',
-          outline: outline ? outline : '',
+          width: bwidth ? `${bwidth}` : "",
+          height: bheight ? `${bheight}` : "",
+          fontSize: fz ? fz : "",
+          outline: outline ? outline : "",
           backgroundColor: backgroundColor,
-          color: color
+          color: color,
           // border: '1px solid black'
         }}
         type="submit"
@@ -41,7 +36,7 @@ const Button = ({
         {children}
       </button>
     </>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

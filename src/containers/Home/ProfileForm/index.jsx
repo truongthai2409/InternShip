@@ -29,8 +29,6 @@ const ProfileForm = ({ handleClose }) => {
     setValue("email", profile?.user?.email);
     setValue("phone", profile?.user?.phone);
   }, []);
-  
-  console.log("hr", profile);
 
   const onSubmit = (data) => {
     const profileData = {
@@ -49,7 +47,6 @@ const ProfileForm = ({ handleClose }) => {
       }),
       fileAvatar: data.avatar[0],
     };
-    console.log("profiledata", data.avatar)
     dispatch(updateUser([profileData, profile.id]));
     handleClose();
   };

@@ -19,7 +19,8 @@ const CustomInput = ({
   radius,
   height,
   border,
-  icon
+  icon,
+  top,
 }) => {
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -61,7 +62,7 @@ const CustomInput = ({
           <div
             className="visibility-icon"
             onClick={handleHide}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", top: `${top}` }}
           >
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </div>

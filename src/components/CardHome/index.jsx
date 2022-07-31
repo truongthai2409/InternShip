@@ -45,7 +45,6 @@ function CardHome(props) {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
-    console.log(props.id);
   };
   var handleRerender = async (id) => {
     if (id) {

@@ -66,7 +66,7 @@ const Password = () => {
     reset();
   };
   return (
-    <div className="container password">
+    <div className=" password">
       <h4>Đổi mật khẩu</h4>
       <Typography variant="subtitle2" component="div" sx={{ fontSize: 16 }}>
         Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
@@ -84,6 +84,8 @@ const Password = () => {
             placeholder="Mật Khẩu Cũ"
             register={register}
             visibility
+            height="20px"
+            top="20%"
           >
             {errors.passwordOld?.message}
             {/* {errorMessage?.Password} */}
@@ -95,6 +97,8 @@ const Password = () => {
             placeholder="Mật Khẩu Mới"
             register={register}
             visibility
+            height="20px"
+            top="20%"
           >
             {errors.passwordNew?.message}
             {/* {errorMessage?.Password} */}
@@ -108,6 +112,8 @@ const Password = () => {
 "
             register={register}
             visibility
+            height="20px"
+            top="20%"
           >
             {errors.confirmPasswordNew?.message}
           </CustomInput>

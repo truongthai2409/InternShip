@@ -19,7 +19,6 @@ import {
   UniversityInfo,
 } from "./components";
 
-
 const Profile = ({ actions = false }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
@@ -27,15 +26,12 @@ const Profile = ({ actions = false }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(profile);
-
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
 
-
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));
-  }, []);
+  }, [dispatch]);
 
   let RelatedInfor = "";
   switch (roleUser) {
