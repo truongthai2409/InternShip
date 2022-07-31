@@ -18,9 +18,11 @@ import {
   role,
   UniversityInfo,
 } from "./components";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 
 const Profile = ({ actions = false }) => {
+  TabTitle('IT Internship JOBS | Thông tin cá nhân')
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);

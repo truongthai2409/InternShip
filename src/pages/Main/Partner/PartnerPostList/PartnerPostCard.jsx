@@ -56,7 +56,7 @@ const PartnerPostCard = ({ status,jobName, schoolName, address, amount, timeCrea
           border="0.5px solid #DEDEDE"
           icon={<DoorFrontIcon></DoorFrontIcon>}
           color="#111"
-          name="Đóng việc"
+          name="Đóng"
           fontSize="13px"
         />
       </div>
