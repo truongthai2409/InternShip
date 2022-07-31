@@ -13,7 +13,6 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 import { authenticationSelector } from "src/store/selectors/main/loginSelectors";
 import { toast } from "react-toastify";
 
-
 const Login = () => {
   TabTitle("Login");
   const [isCheck, setIsCheck] = useState(false);
@@ -53,8 +52,8 @@ const Login = () => {
       const res = await dispatch(loginUser(userData));
       if (res.payload.token) {
         const role = res.payload.role;
-        if (isCheck === true) {
-          localStorage.setItem("userPresent", JSON.stringify(res.payload));
+        if (isCheck === false) {
+          localStorage.removeItem("userPresent");
         }
         switch (role) {
           case "Role_HR":

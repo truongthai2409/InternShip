@@ -17,6 +17,7 @@ function BaseInformationCompany({
   pl,
   pr,
   ml,
+  mt,
 }) {
   const dispatch = useDispatch();
   // const { rating } = useSelector(state => state.rating)
@@ -29,7 +30,13 @@ function BaseInformationCompany({
   return (
     <div className="">
       {jobDetail && (
-        <div className="base__information">
+        <div
+          className={`base__information`}
+          style={{
+            marginTop: mt ? `${mt}` : "",
+            // border: '1px solid black'
+          }}
+        >
           <div className="base__information-card">
             <img
               className="img-logo"
@@ -167,7 +174,7 @@ function BaseInformationCompany({
           </div>
           <div className="button-card">
             <Link to="/candidate/information_company">
-              <Button name="Xem thêm"></Button>
+              <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
             </Link>
           </div>
         </div>
@@ -288,7 +295,7 @@ function BaseInformationCompany({
           </div>
           <div className="job-applying-container">
             <h5 className="intro__company-title">Việc làm đang tuyển</h5>
-            <Grid
+            {/* <Grid
               container
               spacing={3}
               sx={{
@@ -297,21 +304,21 @@ function BaseInformationCompany({
                 marginLeft: `${ml}px`,
               }}
             >
-              {/* {jobListCompany.map((job, index) => {
-              <Grid key={job.id} item lg="auto" md="auto" xs={6}>
-                <JobCandidate job={job} />
-              </Grid>;
-            })} */}
-              {/* {jobListCompany?.map((job) => (
+              {jobListCompany.map((job, index) => {
+                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
+                  <JobCandidate job={job} />
+                </Grid>;
+              })}
+              {jobListCompany?.map((job) => (
                 <Grid item lg="auto" md="auto" sm="auto" xs="auto">
                   <JobCandidate job={job} key={job.id} idJob={job.id} />
                 </Grid>
-              ))} */}
-            </Grid>
+              ))}
+            </Grid> */}
           </div>
           <div className="button-card">
             <Link to="/candidate/information_company">
-              <Button name="Xem thêm"></Button>
+              <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
             </Link>
           </div>
         </div>

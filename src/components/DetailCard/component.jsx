@@ -60,7 +60,6 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  console.log(jobDetailById);
 
   useEffect(() => {
     if (jobDetail) {
@@ -76,7 +75,6 @@ const Detail = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(jobDetailById);
   return (
     <div>
       {jobDetail && (

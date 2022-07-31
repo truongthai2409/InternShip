@@ -26,8 +26,6 @@ const Profile = ({ actions = false }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(profile);
-
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
 

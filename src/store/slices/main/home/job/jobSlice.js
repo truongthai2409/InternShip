@@ -30,7 +30,6 @@ const jobSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      console.log("nè nè",payload.contents)
       state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
@@ -74,7 +73,7 @@ export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
     })
     .catch((error) => {
       return error.response.data;
-    })
+    });
 });
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {

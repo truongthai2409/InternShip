@@ -33,7 +33,16 @@ const DetailHome = (props) => {
   };
   return (
     <div>
-      <Grid className="wrapper" container spacing={4}>
+      <Grid
+        className="wrapper"
+        container
+        spacing={4}
+        sx={{
+          padding: 0,
+          paddingLeft: 3,
+          paddingRight: 3,
+        }}
+      >
         <Grid item md={8} sm={12} xs={12}>
           <div className="">
             <DetailCard

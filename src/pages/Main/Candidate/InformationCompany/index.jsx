@@ -31,7 +31,7 @@ const CandidateInformationCompany = () => {
         <h5 style={{ marginTop: "0px" }} className="intro__company-title">
           Đánh giá về công ty*{" "}
         </h5>
-        <Button name="Tạo đánh giá"></Button>
+        <Button name="Tạo đánh giá" bwidth="130px" bheight="40px"></Button>
       </div>
       <div>
         <Appreciate />

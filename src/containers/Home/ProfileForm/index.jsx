@@ -46,7 +46,6 @@ const ProfileForm = ({ handleClose }) => {
       }),
       // fileAvatar: data.fileAv
     };
-    console.log("updateuser:", profileData);
     dispatch(updateUser([profileData, profile.id]));
     handleClose();
   };

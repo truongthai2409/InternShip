@@ -110,6 +110,10 @@ export const hrRouter = [
     path: "/hr/candidate/list",
     Component: CandidateList,
   },
+  {
+    path: "/hr/setting",
+    Component: Password,
+  },
 ];
 
 // candidate router
@@ -169,6 +173,10 @@ export const partnerRouter = [
   {
     path: "/partner/profile",
     Component: Profile,
+  },
+  {
+    path: "/partner/setting",
+    Component: Password,
   },
 ];
 

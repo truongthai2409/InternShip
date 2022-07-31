@@ -24,11 +24,13 @@ const CandidateLayOut = () => {
   return (
     <div className="main__layout">
       {location.pathname === "/candidate/information_company" ? (
-        <HeaderWithHR id={3} search />
+        <HeaderWithHR id={3} search candidate_view_list />
       ) : (
-        <HeaderWithHR id={3} />
+        <HeaderWithHR id={3} candidate_view_list />
       )}
-      <Outlet />
+      <div className="candidate__layout-body-outlet">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

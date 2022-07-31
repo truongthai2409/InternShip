@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+// import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import AddCardIcon from "@mui/icons-material/AddCard";
-import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+// import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
+// import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
@@ -18,9 +18,10 @@ function HeaderWithHR(props) {
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
+  const nameUser = JSON.parse(localStorage.getItem("userPresent"))?.username;
 
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
 
@@ -39,11 +40,31 @@ function HeaderWithHR(props) {
           </Link>
         </div>
       ) : null}
-      {props.candidate_view_list ? (
+      {pathUrl === "/candidate" ? (
         <div className="header__hr">
-          <Link to="list" className="header__hr-post">
+          <Link to="view-list-apply" className="header__hr-post">
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
+          </Link>
+          <Link to="view-list-care" className="header__hr-post">
+            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <span className="header__hr-post-post">Công việc đã quan tâm</span>
+          </Link>
+        </div>
+      ) : null}
+      {pathUrl === "/candidate/view-list-care" ? (
+        <div className="header__hr">
+          <Link to="view-list-apply" className="header__hr-post">
+            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
+          </Link>
+        </div>
+      ) : null}
+      {pathUrl === "/candidate/view-list-apply" ? (
+        <div className="header__hr">
+          <Link to="view-list-care" className="header__hr-post">
+            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <span className="header__hr-post-post">Công việc đã quan tâm</span>
           </Link>
         </div>
       ) : null}
@@ -58,7 +79,7 @@ function HeaderWithHR(props) {
         />
       ) : null}
       <div className="header__hr-icon">
-        <div className="header__hr-icon-config">
+        {/* <div className="header__hr-icon-config">
           <Link to={`${pathUrl}/view-list-care`}>
             <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
             {props.isMark ? (
@@ -79,7 +100,7 @@ function HeaderWithHR(props) {
               ></FiberManualRecordIcon>
             ) : null}
           </Link>
-        </div>
+        </div> */}
         <div
           style={{
             borderRadius: "20px",
@@ -90,7 +111,7 @@ function HeaderWithHR(props) {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">Chào, {profile?.user?.firstName}</h4>
+          <h4 className="name">Chào, {profile?.user?.firstName || nameUser}</h4>
           <AccountMenu
             linkImg={
               profile?.user?.avatar

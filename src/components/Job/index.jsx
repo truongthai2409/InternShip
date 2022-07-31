@@ -22,7 +22,6 @@ const JobCandidate = ({ job, idJob }) => {
     // dispatch(getJobById(idJobNew));
     dispatch(updateIdJobActive(idJob));
   };
-  console.log(pathUrl);
   return (
     <div>
       <Link

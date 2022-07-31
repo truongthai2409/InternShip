@@ -132,8 +132,6 @@ export const UniversityInfo = () => {
 
   const { user, universityDTO } = profile;
 
-  console.log(user, universityDTO);
-
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
     dispatch(getProfileByIdUser(idUser));

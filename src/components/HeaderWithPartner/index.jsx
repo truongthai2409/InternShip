@@ -17,18 +17,16 @@ function HeaderWithPartner(props) {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-
-  const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+  const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUserById(idUser));
+    dispatch(getUserById(profile?.idUser));
   }, []);
 
   return (
     <div className="container-header__partner header__partner config">
-      {user.role ? <Logo /> : <Logo />}
-      {user.role ? (
+      {profile?.role ? <Logo /> : <Logo />}
+      {profile?.role ? (
         <div className="header__partner">
           <Link to="/partner/post" className="header__partner-post">
             <AddCardIcon></AddCardIcon>
@@ -64,7 +62,7 @@ function HeaderWithPartner(props) {
             ) : null}
           </Link>
         </div>
-        <div className="header__partner-icon-config">
+        {/* <div className="header__partner-icon-config">
           <Link to={`${pathUrl}/`}>
             <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
             {props.isNoti ? (
@@ -74,7 +72,7 @@ function HeaderWithPartner(props) {
               ></FiberManualRecordIcon>
             ) : null}
           </Link>
-        </div>
+        </div> */}
         <div
           style={{
             borderRadius: "14px",
@@ -84,7 +82,7 @@ function HeaderWithPartner(props) {
             paddingLeft: "6px",
           }}
         >
-          <h4 className="name">Chào, {user?.firstName || "User"}</h4>
+          <h4 className="name">Chào, {profile?.firstName || "User"}</h4>
           <AccountMenu linkImg="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg" />
         </div>
       </div>
