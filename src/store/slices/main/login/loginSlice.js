@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import api from '../../../../config/api/apiConfig'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import api from "../../../../config/api/apiConfig";
 import { toast } from "react-toastify";
-import axios from 'axios';
+import axios from "axios";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -20,15 +20,13 @@ const loginSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if(action.payload.status > 200)
-        {
-          state.status = 'fail'
-          toast.error("Tài khoản hoặc mật khẩu không đúng!")
-        }
-        else {
-          state.status = 'success'
-          toast.success("Bạn đã đăng nhập thành công!")
-          localStorage.setItem('userPresent', JSON.stringify(action.payload))
+        if (action.payload.status > 200) {
+          state.status = "fail";
+          toast.error("Tài khoản hoặc mật khẩu không đúng!");
+        } else {
+          state.status = "success";
+          toast.success("Bạn đã đăng nhập thành công!");
+          localStorage.setItem("userPresent", JSON.stringify(action.payload));
         }
       })
       .addCase(updateUserPassword.fulfilled, (state, action) => {
@@ -56,7 +54,6 @@ export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
 export const updateUserPassword = createAsyncThunk(
   "login/updateUserPassword",
   async (data) => {
-    console.log(data);
     const { token, dataChangePassword } = data;
     const res = await axios
       .put(`${baseURL}/api/user/changePassword`, dataChangePassword, {
@@ -66,13 +63,9 @@ export const updateUserPassword = createAsyncThunk(
       })
 
       .then((res) => {
-        console.log(res);
-
         return res;
       })
       .catch((error) => {
-        console.log(error.response);
-
         return error.response.data;
       });
     return res;

@@ -7,25 +7,29 @@ import Box from "@mui/material/Box";
 import { Icon } from "@mui/material";
 import "./styles.scss";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobById,
-  updateIdJobActive,
-} from "src/store/slices/main/home/job/jobSlice";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
 const JobCandidate = ({ job, idJob }) => {
-  const [idJobNew, setIdJobNew] = useState(idJob);
   const dispatch = useDispatch();
-  const { jobDetailById, idJobActive } = useSelector((state) => state.job);
-  const handleClick = () => {
-    setIdJobNew(idJob);
-    dispatch(getJobById(idJobNew));
+  // const { jobDetailById, idJobActive } = useSelector((state) => state.job);
+  const location = useLocation();
+  const pathUrl = location.pathname;
+
+  const handleClick = async () => {
+    // setIdJobNew(idJob);
+    // dispatch(getJobById(idJobNew));
+    dispatch(updateIdJobActive(idJob));
   };
+  console.log(pathUrl);
   return (
     <div>
-      <Link to="/detail" onClick={handleClick} className="link__job-detail">
+      <Link
+        to={`/detail_job`}
+        onClick={handleClick}
+        className="link__job-detail"
+      >
         <Box
           sx={{
             width: 250,

@@ -8,11 +8,16 @@ import "./styles.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
-function DetailHome(props) {
-  const { jobListName, jobDetail } = useSelector((state) => state.job);
+import {
+  getJobById,
+  getJobByNameAndLocation,
+} from "../../../store/slices/main/home/job/jobSlice";
+const DetailHome = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { jobDetailById, idJobActive } = useSelector((state) => state.job);
+
   useEffect(() => {
     const dataSearch = {
       name: "",
@@ -21,6 +26,7 @@ function DetailHome(props) {
       limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
+    dispatch(getJobById(idJobActive));
   }, [dispatch]);
   const handleBack = () => {
     navigate(-1);
@@ -32,8 +38,7 @@ function DetailHome(props) {
           <div className="">
             <DetailCard
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-              jobDetail={jobDetail}
-              jobListName={jobListName}
+              jobDetailById={jobDetailById}
             />
             <div className="config__arow-back hide-on-table">
               <Link to="" onClick={handleBack} className="config__arow-back">
@@ -51,6 +56,7 @@ function DetailHome(props) {
             phoneCompany="0902394324"
             website="https://r2s.edu.vn/"
             location="1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP.HCM"
+            jobDetailById={jobDetailById}
           />
         </Grid>
         <div className="config__arow-back hide-on-desktop ">
@@ -62,7 +68,7 @@ function DetailHome(props) {
       </Grid>
     </div>
   );
-}
+};
 
 DetailHome.propTypes = {};
 

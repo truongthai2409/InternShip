@@ -4,7 +4,7 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ButtonOutline from "../ButtonOutline";
 import { Divider } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export const role = (id) => {
   let role = "";
@@ -69,9 +69,7 @@ export const Actions = () => {
 };
 
 export const CompanyInfo = () => {
-  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
-  console.log("object:", profile);
 
   return (
     <div className="company-infor__wrapper">
@@ -101,14 +99,18 @@ export const CompanyInfo = () => {
             <div className="company-infor__row">
               <p className="company-infor__item">
                 <span>Website:</span>
-                <a style={{textDecoration:"underline", color:"blue"}} href={profile?.company?.website} target="_blank">
+                <a
+                  style={{ textDecoration: "underline", color: "blue" }}
+                  href={profile?.company?.website}
+                  target="_blank"
+                >
                   {profile?.company?.website}
                 </a>
               </p>
-            <p className="company-infor__item">
-              <span>Mã số thuế:</span>
-              {profile?.company?.tax}
-            </p>
+              <p className="company-infor__item">
+                <span>Mã số thuế:</span>
+                {profile?.company?.tax}
+              </p>
             </div>
             <p className="company-infor__des-company">
               <span>Mô tả công ty:</span>

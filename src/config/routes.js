@@ -79,11 +79,11 @@ export const adminRouter = [
 // main router
 export const mainRouter = [
   {
-    path: "",
+    path: "/",
     Component: Home,
   },
   {
-    path: "/detail",
+    path: "/detail_job",
     Component: DetailHome,
   },
 ];
@@ -119,7 +119,7 @@ export const candidateRouter = [
     Component: CandidateHome,
   },
   {
-    path: "/candidate/view-list",
+    path: "/candidate/view-list-care",
     Component: CandidateViewList,
   },
   {
@@ -135,8 +135,16 @@ export const candidateRouter = [
     Component: Profile,
   },
   {
-    path: "/candidate/password",
+    path: "/candidate/setting",
     Component: Password,
+  },
+  {
+    path: "/candidate/view-list-apply",
+    Component: CandidateViewList,
+  },
+  {
+    path: "/candidate/detail_job",
+    Component: DetailHome,
   },
 ];
 

@@ -18,14 +18,11 @@ const jobSlice = createSlice({
   },
   reducers: {
     updateIdJobActive: (state, action) => {
-      state.idJobActive = action.payload.contents;
+      state.idJobActive = action.payload;
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
-    },
-    updateStatusAddJob: (state, action) => {
-      state.status = action.payload;
     },
     updateStatusAddJob: (state, action) => {
       state.status = action.payload;

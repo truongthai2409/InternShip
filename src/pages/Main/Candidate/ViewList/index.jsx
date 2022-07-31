@@ -9,11 +9,14 @@ import "./styles.scss";
 import Box from "@mui/material/Box";
 import { getApplyListByIdCandidate } from "src/store/slices/main/candidate/apply/applySlice";
 import SearchResultHome from "src/components/SearchResultHome";
+import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CandidateViewList = () => {
   TabTitle("Danh sách ứng viên");
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const pathUrl = location.pathname;
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { applyList } = useSelector((state) => state.apply);
   const { profile } = useSelector((state) => state.authentication);
@@ -27,6 +30,21 @@ const CandidateViewList = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  if (
+    pathUrl === "/candidate/view-list-care" &&
+    careListOfPrivate &&
+    careListOfPrivate.length === 0
+  ) {
+    toast.success("Bạn chưa có công việc nào được thêm vào danh sách quan tâm");
+  }
+
+  if (
+    pathUrl === "/candidate/view-list-apply" &&
+    careListOfPrivate &&
+    careListOfPrivate.length === 0
+  ) {
+    toast.success("Bạn chưa ứng tuyển công việc nào");
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -45,9 +63,14 @@ const CandidateViewList = () => {
       <div className="view-list">
         <div className="view-list__container">
           <div className="view-list__job-card">
-            {careListOfPrivate?.map((jobCare) => (
-              <CardJob key={jobCare.id} jobCare={jobCare} />
-            ))}
+            {pathUrl === "/candidate/view-list-care" &&
+              careListOfPrivate?.map((jobCare) => (
+                <CardJob key={jobCare.id} jobCare={jobCare} />
+              ))}
+            {pathUrl === "/candidate/view-list-apply" &&
+              applyList?.map((jobCare) => (
+                <CardJob key={jobCare.id} jobCare={jobCare} />
+              ))}
           </div>
           <div className="view-list__job-user-card">
             <div className="">

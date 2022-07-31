@@ -59,7 +59,7 @@ function HeaderWithHR(props) {
       ) : null}
       <div className="header__hr-icon">
         <div className="header__hr-icon-config">
-          <Link to={`${pathUrl}/view-list`}>
+          <Link to={`${pathUrl}/view-list-care`}>
             <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
             {props.isMark ? (
               <FiberManualRecordIcon

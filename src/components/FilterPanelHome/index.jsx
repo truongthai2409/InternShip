@@ -43,7 +43,6 @@ function a11yProps(index) {
 
 export default function FilterPanelHome({ jobList, indexCardActive }) {
   const location = useLocation();
-  console.log(location.pathname);
   // console.log(jobList);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
@@ -68,14 +67,17 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               fontSize={10}
               nameCompany={job.hr?.company?.name || job?.universityDTO.name}
               idCompany={job.hr?.company?.id || job?.universityDTO.id}
-              tagName={[job?.jobposition?.name || job?.position.name, "Full time"]}
+              tagName={[
+                job?.jobposition?.name || job?.position.name,
+                "Full time",
+              ]}
               star={job?.hr?.company?.rates.length || 4}
               location="Hồ Chí Minh"
               amount="30"
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
-                moment(job.timeEndStr|| job.end).format("DD/MM/YYYY"),
+                moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
               ]}
               locationPath={location.pathname}
             />

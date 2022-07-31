@@ -6,21 +6,13 @@ import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { Icon } from "@mui/material";
 import moment from "moment";
 import { Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-// const formatSalary = (salary = "") => {
-//   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-// };
 
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail }) => {
-  const { profile } = useSelector((state) => state.authentication);
-  //   const { candidateInfoByUsername } = useSelector(state => state.infoCandidate)
-  const dispatch = useDispatch();
-
   return (
     <div>
       <div className="detail__card-3-partner">
@@ -60,7 +52,11 @@ const InformationUniversity = ({ jobDetail }) => {
               sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
             >
               <div className="detail__card-list-students-link">
-                <a className="list-students-file" href={`${baseURL}${jobDetail?.students}`} target="_blank">
+                <a
+                  className="list-students-file"
+                  href={`${baseURL}${jobDetail?.students}`}
+                  target="_blank"
+                >
                   Danh sách sinh viên
                 </a>
               </div>

@@ -25,8 +25,6 @@ const PostPartnerForm = (props) => {
   const { activeUser } = useSelector((state) => state.university);
   const [openForm, setOpenForm] = useState(false);
 
-  console.log(status);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;

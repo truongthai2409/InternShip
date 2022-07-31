@@ -29,8 +29,6 @@ const ProfileForm = ({ onClick }) => {
     setValue("phone", user.phone);
   }, []);
 
-  console.log("userprofileform",profile)
-
   const onSubmit = (data) => {
     const profileData = {
       hr: JSON.stringify({
@@ -48,7 +46,6 @@ const ProfileForm = ({ onClick }) => {
       }),
       // fileAvatar: data.fileAv
     };
-    console.log("updateuser:", profileData)
     dispatch(updateUser([profileData, user?.id]));
     onClick();
   };
