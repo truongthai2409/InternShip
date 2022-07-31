@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobListByUserId,
-} from "../../../../store/slices/main/home/job/jobSlice";
+import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
-import { ListJobActive } from "./ListJobActived";
-import { ListJobDisabled } from "./ListJobDisabled";
+import { ListJob } from "./ListJob";
 import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,49 +48,42 @@ const HRPostList = (props) => {
   TabTitle("Công việc đang tuyển | IT Internship JOBS");
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { jobList, jobDetail } = useSelector((state) => state.job);
+  const { jobDetail, error, jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
-
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
     // if (status === "success") dispatch(updateStatusAddJob("fail"));
   }, [jobDetail]);
 
-  const listJobActived = jobList.filter((job) => {
-    return job.status.id === 1;
-  });
-  const listJobDisabled = jobList.filter((job) => {
-    return job.status.id === 4;
-  });
-
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post__list-bt">
-        <Button name="ĐĂNG BÀI"></Button>
+        <Button onClick={() => {navigate("/hr/post")}} name="ĐĂNG BÀI"></Button>
       </div>
       <div className="hr-post-list__content">
         <div className="hr-post-list__statistic">
           <Statistic
             title="Điểm khả dụng"
             firstObject={{
-              score: listJobActived.length,
+              score: jobListActived.length,
               description: "Lượt đăng tuyển",
             }}
             secondObject={{
-              score: listJobActived.length,
+              score: jobListActived.length,
               description: "Lượt xem hồ sơ",
             }}
           />
           <Statistic
             title="Trạng thái tin đăng"
             firstObject={{
-              score: listJobActived.length,
+              score: jobListActived.length,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
-              score: listJobDisabled.length,
+              score: jobListDisabled.length,
               description: "Đã đóng",
             }}
           />
@@ -105,10 +96,10 @@ const HRPostList = (props) => {
             </Tabs>
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
-            <ListJobActive listJob={listJobActived} />
+            <ListJob listJob={jobListActived} />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
-            <ListJobDisabled listJob={listJobDisabled} />
+            <ListJob listJob={jobListDisabled} />
           </TabPanel>
         </Box>
       </div>

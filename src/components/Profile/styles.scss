@@ -10,27 +10,31 @@
   position: relative;
 
   .profile__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     > div {
       position: relative;
 
       .avatar__img {
-        width: 200px;
+        width: 300px;
         height: 200px;
         border-radius: 6px;
         margin-bottom: 20px;
         object-fit: cover;
       }
 
-      .avatar__edit-btn {
-        position: absolute;
-        left: 50%;
-        bottom: 10px;
-        transform: translateX(-50%);
-      }
+    }
+    .btn-outline {
+      padding: 10px 12px;
+      margin-bottom: 18px;
 
-      .btn-outline {
-        padding: 0;
+      &:hover {
+        background-color: $primary-color !important;
+        color: #FFFFFF !important;
+        opacity: 1;
+        transition: all 0.5s;
       }
     }
   }
@@ -123,6 +127,7 @@
           word-wrap: break-word;
           font-weight: 700;
           margin-top: 10px;
+          text-align: center;
         }
       }
 

@@ -164,8 +164,6 @@ const InformationCompany = ({ jobDetail, jobDetailById }) => {
               />
             </Typography>
             <Button
-              bwidth="115px"
-              bheight="50px"
               name="Ứng tuyển"
               onClick={handleAddJob}
             ></Button>

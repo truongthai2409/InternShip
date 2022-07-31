@@ -47,7 +47,7 @@ const Profile = ({ actions = false }) => {
     default:
       RelatedInfor = null;
   }
-
+console.log('avatar', `http://localhost:8085${profile?.user?.avatar}`)
   return (
     <>
       <div className="profile__wrapper">

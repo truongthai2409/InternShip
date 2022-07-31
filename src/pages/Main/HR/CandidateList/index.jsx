@@ -10,7 +10,6 @@ const CandidateList = () => {
     console.log(e.value)
   }
 
-  console.log("first")
   return (
     <div className="candidate-list__wrapper">
       <CandidateCard />

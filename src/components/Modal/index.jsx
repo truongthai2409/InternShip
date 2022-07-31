@@ -21,7 +21,6 @@ const Modal = ({ modalTitle, open, setOpen, name, children }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log("open:", open)
 
   return (
     <div>
