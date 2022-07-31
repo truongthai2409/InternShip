@@ -70,7 +70,7 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               tagName={[job?.jobposition?.name || job?.position.name, "Full time"]}
               star={job?.hr?.company?.rates.length || 4}
               location="Hồ Chí Minh"
-              amount="30"
+              amount={job.amount || "30"}
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),

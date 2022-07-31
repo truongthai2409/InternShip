@@ -47,10 +47,10 @@ const InformationUniversity = ({ jobDetail }) => {
             <Typography
               variant="body2"
               gutterBottom
-              sx={{ fontSize: 17, fontWeight: "400" }}
+              sx={{ fontSize: 16, fontWeight: "400" }}
             >
-              {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
-              {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
+              {moment(jobDetail.createDate).format("DD/MM/YYYY")} -{" "}
+              {moment(jobDetail.end).format("DD/MM/YYYY")}
             </Typography>
           </Typography>
 
@@ -87,7 +87,7 @@ const InformationUniversity = ({ jobDetail }) => {
             variant="h6"
             component="div"
             sx={{
-              fontSize: 17,
+              fontSize: 14,
               fontWeight: "400",
               transform: "translate(5px,5px)",
             }}
@@ -103,7 +103,7 @@ const InformationUniversity = ({ jobDetail }) => {
             variant="h6"
             component="div"
             sx={{
-              fontSize: 17,
+              fontSize: 14,
               fontWeight: "400",
               transform: "translate(5px,5px)",
             }}
@@ -117,7 +117,7 @@ const InformationUniversity = ({ jobDetail }) => {
             variant="h6"
             component="div"
             sx={{
-              fontSize: 17,
+              fontSize: 14,
               fontWeight: "400",
               transform: "translate(5px,5px)",
               overflow: "hidden",

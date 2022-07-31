@@ -8,6 +8,7 @@ const userSlice = createSlice({
   initialState: {
     userList: [],
     profile: {},
+    user: {},
     idRole: null,
     notification: {},
     page: 0,
@@ -72,7 +73,7 @@ export const getProfileByIdUser = createAsyncThunk(
           });
       case "Role_Partner":
         return await axios
-          .get(`${baseURL}/api/r2s/partner/get-iduser/${idUser}`)
+          .get(`${baseURL}/api/r2s/partner/user/${idUser}`)
           .then((response) => {
             return response.data;
           })
