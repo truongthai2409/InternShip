@@ -63,7 +63,7 @@ const ButtonMark = (props) => {
   const handleLogin = async (e) => {
     e.stopPropagation();
     if (profile.username === undefined) {
-      toast.success("Bạn cần đăng nhập với candidate để đánh dấu công việc");
+      toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
       await navigate("/login");
     } else {
       await navigate("/candidate");

@@ -22,7 +22,6 @@ const PartnerHomePage = (props) => {
   const { demandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
-  // console.log("DemandList", demandList);
 
   useEffect(() => {
     dispatch(getJobByName(""));
@@ -91,7 +90,9 @@ const PartnerHomePage = (props) => {
                   jobDetail={demandDetail}
                   demandPartner={true}
                 />
-              ) : <div>Nothing here</div>}
+              ) : (
+                <div>Nothing here</div>
+              )}
             </div>
           </Grid>
         </Grid>

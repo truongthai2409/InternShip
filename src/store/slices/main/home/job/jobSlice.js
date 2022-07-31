@@ -18,7 +18,7 @@ const jobSlice = createSlice({
   },
   reducers: {
     updateIdJobActive: (state, action) => {
-      state.idJobActive = action.payload.contents;
+      state.idJobActive = action.payload;
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
@@ -27,13 +27,9 @@ const jobSlice = createSlice({
     updateStatusAddJob: (state, action) => {
       state.status = action.payload;
     },
-    updateStatusAddJob: (state, action) => {
-      state.status = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      console.log("nè nè",payload.contents)
       state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
@@ -77,7 +73,7 @@ export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
     })
     .catch((error) => {
       return error.response.data;
-    })
+    });
 });
 
 export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {

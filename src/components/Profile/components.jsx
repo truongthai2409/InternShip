@@ -6,7 +6,7 @@ import ButtonOutline from "../ButtonOutline";
 import { Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getProfileByIdUser, getUserById } from "src/store/slices/Admin/user/userSlice";
+import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 
 export const role = (id) => {
   let role = "";
@@ -71,7 +71,6 @@ export const Actions = () => {
 };
 
 export const CompanyInfo = () => {
-  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
 
   return (
@@ -131,10 +130,7 @@ export const UniversityInfo = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
 
-
-  const {user, universityDTO} = profile;
-
-  console.log(user, universityDTO);
+  const { user, universityDTO } = profile;
 
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;

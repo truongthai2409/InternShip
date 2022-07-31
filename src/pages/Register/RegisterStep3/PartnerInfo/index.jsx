@@ -72,7 +72,6 @@ const PartnerInfo = () => {
     };
     try {
       const res = await dispatch(addUniversity(partnerData));
-      console.log(res);
       if (res.type === "university/addUniversity/fulfilled") {
         navigate("/login");
       }

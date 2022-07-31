@@ -20,7 +20,6 @@ import {
 } from "./components";
 import { TabTitle } from "src/utils/GeneralFunctions";
 
-
 const Profile = ({ actions = false }) => {
   TabTitle('IT Internship JOBS | Thông tin cá nhân')
   const dispatch = useDispatch();
@@ -29,15 +28,12 @@ const Profile = ({ actions = false }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(profile);
-
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
 
-
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));
-  }, []);
+  }, [dispatch]);
 
   let RelatedInfor = "";
   switch (roleUser) {

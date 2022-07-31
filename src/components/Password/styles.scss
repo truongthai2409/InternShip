@@ -12,7 +12,7 @@
   margin-bottom: 15px;
   &-form {
     @include flex(null, space-between);
-
+    padding-bottom: 20px;
     img {
       width: 280px;
       height: 309px;

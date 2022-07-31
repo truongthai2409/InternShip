@@ -9,55 +9,50 @@ import LocalPostOfficeIcon from "@mui/icons-material/LocalPostOffice";
 import { Link } from "react-router-dom";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import LanguageIcon from "@mui/icons-material/Language";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
+// import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PropTypes from "prop-types";
 
-export default function CardVisit(props) {
+const CardVisit = ({ jobDetailById, logo }) => {
   return (
     <div className="scroll scroll__onTablet-hide ">
       <Card className="visit__card visit__card__onTablet">
         <CardContent>
-          <img
-            className="visit__card-logo"
-            alt="visit__card-logo"
-            src={props.logo}
-          />
-          <h2 className="visit__card-nameComapy">{props.nameCompany}</h2>
+          <img className="visit__card-logo" alt="visit__card-logo" src={logo} />
+          <h2 className="visit__card-nameComapy">
+            {jobDetailById?.company?.name}
+          </h2>
           <Typography
             variant="body2"
             sx={{ ml: 1, mt: 3, mb: 3 }}
             className="visit__card-detail"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus cum
-            illum eaque exercitationem maxime quasi debitis! Obcaecati corporis,
-            esse minima illo labore vitae. Minus, dolore. Pariatur eum
-            repudiandae possimus sunt.
+            {jobDetailById?.company?.description}
           </Typography>
 
           <div className="config__info">
-            <Link to="/detail" className="config__info">
+            <Link to="/detail_job" className="config__info">
               <LocalPostOfficeIcon className="config__info-icon"></LocalPostOfficeIcon>
-              {props.emailCompany}
+              {jobDetailById?.company?.email}
             </Link>
           </div>
           <div className="config__info">
-            <Link to="/detail" className="config__info">
+            <Link to="/detail_job" className="config__info">
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
-              {props.phoneCompany}
+              {jobDetailById?.company?.phone}
             </Link>
           </div>
           <div className="config__info">
-            <Link to="/detail" className="config__info">
+            <Link to="/detail_job" className="config__info">
               <LanguageIcon className="config__info-icon"></LanguageIcon>
-              {props.website}
+              {jobDetailById?.company?.website}
             </Link>
           </div>
-          <div className="config__info">
-            <Link to="/detail" className="config__info">
+          {/* <div className="config__info">
+            <Link to="/detail_job" className="config__info">
               <AddLocationAltIcon className="config__info-icon"></AddLocationAltIcon>
-              {props.location}
+              {jobDetailById?.company.location}
             </Link>
-          </div>
+          </div> */}
         </CardContent>
         <CardActions className="config-button">
           <Button name="Về Chúng Tôi"></Button>
@@ -65,13 +60,9 @@ export default function CardVisit(props) {
       </Card>
     </div>
   );
-}
+};
 
 CardVisit.propTypes = {
   logo: PropTypes.string.isRequired,
-  nameCompany: PropTypes.string.isRequired,
-  emailCompany: PropTypes.string.isRequired,
-  phoneCompany: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  website: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
 };
+export default CardVisit;

@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 .arrow-button {
   @include button(
     13px,
@@ -18,6 +18,6 @@
     cursor: pointer;
   }
   &__icon {
-    font-size: $fs-13;
+    font-size: $fs-16;
   }
 }
