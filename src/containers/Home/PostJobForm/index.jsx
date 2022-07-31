@@ -21,24 +21,21 @@ import {
 import { useNavigate } from "react-router-dom";
 import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 import moment from "moment";
 
 const PostJobForm = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
-  const { user } = useSelector((state) => state.user);
+  const { profile } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
 
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-    dispatch(getProfileByIdUser(userPresent.idUser));
   }, []);
 
   const jobTypeList = [
@@ -76,7 +73,7 @@ const PostJobForm = (props) => {
     const jobData = {
       name: data.name,
       hr: {
-        id: user.id,
+        id: profile?.id,
       },
       desciption: data.jobDescription,
       major: {

@@ -6,6 +6,8 @@ import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
 import { useState } from "react";
+import Modal from "../Modal";
+import CandidateList from "src/pages/Main/HR/CandidateList";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
@@ -44,8 +46,7 @@ const CardPost = (props) => {
           name="Ứng viên"
           fontSize="13px"
           onClick={handleOpen}
-          open={open}
-          setOpen={setOpen}
+          type="read"
         />
         <ButtonAction
           height="50px"
@@ -56,8 +57,7 @@ const CardPost = (props) => {
           name="Chỉnh sửa"
           fontSize="13px"
           onClick={handleOpen}
-          open={open}
-          setOpen={setOpen}
+          type="update"
         />
         <ButtonAction
           height="50px"
@@ -68,8 +68,7 @@ const CardPost = (props) => {
           name="Đóng việc"
           fontSize="13px"
           onClick={handleOpen}
-          open={open}
-          setOpen={setOpen}
+          type="close"
         />
       </div>
     </div>

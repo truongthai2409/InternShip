@@ -1,3 +1,4 @@
+import { useState } from "react";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import Modal from "../Modal";
 import "./styles.scss";
@@ -12,16 +13,20 @@ const ButtonAction = ({
   icon,
   fontSize,
   color = "",
-  open,
-  setOpen,
+  type,
 }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
   return (
-    <>
-      <div
-        onClick={onClick}
-        style={{ width: width, height: height, border: border, color: color }}
-        className="button-action__container"
-      >
+    <div
+    onClick={handleOpen}
+      className="button-action__wrapper"
+      style={{ width: width, height: height, border: border, color: color }}
+    >
+      <div onClick={onClick} className="button-action__container">
         {icon}
         <p
           className="button-action__name"
@@ -35,7 +40,7 @@ const ButtonAction = ({
         children={<CandidateList />}
         name="list-candidate"
       />
-    </>
+    </div>
   );
 };
 

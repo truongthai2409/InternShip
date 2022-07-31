@@ -123,7 +123,7 @@ const Profile = ({ actions = false }) => {
         </div>
       </div>
       <Modal
-        modalTitle="Chỉnh sử thông tin cá nhân"
+        modalTitle="Chỉnh sửa thông tin cá nhân"
         children={<ProfileForm handleClose={handleClose} />}
         open={open}
         setOpen={setOpen}

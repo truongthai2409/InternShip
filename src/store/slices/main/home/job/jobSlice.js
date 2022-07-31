@@ -24,12 +24,9 @@ const jobSlice = createSlice({
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
     },
-    updateStatusAddJob: (state, action) => {
-      state.status = action.payload;
-    },
-    updateStatusAddJob: (state, action) => {
-      state.status = action.payload;
-    },
+    // updateStatusAddJob: (state, action) => {
+    //   state.status = action.payload;
+    // }
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
@@ -40,6 +37,7 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
       state.jobList = payload;
+      state.status = "fail"
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
