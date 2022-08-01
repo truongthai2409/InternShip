@@ -69,11 +69,11 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
               idCompany={job.hr?.company?.id || job?.universityDTO.id}
               tagName={[
                 job?.jobposition?.name || job?.position.name,
-                "Full time",
+                "Unknown",
               ]}
               star={job?.hr?.company?.rates.length || 4}
               location="Hồ Chí Minh"
-              amount={job.amount || "30"}
+              amount={job.amount || "Unknown"}
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
