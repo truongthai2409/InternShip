@@ -8,6 +8,7 @@ import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
 import {
   createMark,
   deleteMark,
+  getMarkByUser,
   getMarkByUserAndJob,
 } from "src/store/slices/main/mark/markSlice";
 import { toast } from "react-toastify";
@@ -42,9 +43,10 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-      await dispatch(createMark(dataCareList))
-        .then(setMark(!mark))
-        .then(toast.success("Đã mark thành công"));
+      await dispatch(createMark(dataCareList));
+      await dispatch(getMarkByUser(profile.username));
+      setMark(!mark);
+      toast.success("Đã mark thành công");
     } else {
       if (profile.role !== undefined && profile.role === "Role_Candidate") {
         const dataByUserAndJob = {
@@ -52,10 +54,10 @@ const ButtonMark = (props) => {
           idJob: Number(props.jobId),
         };
         const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
-        await dispatch(deleteMark(res.payload.id))
-          .then(setMark(!mark))
-          .then(toast.success("Đã xóa mark thành công"));
-        // .then(props.onClick && props.onClick(res.payload.id));
+        await dispatch(deleteMark(res.payload.id));
+        await dispatch(getMarkByUser(profile.username));
+        setMark(false);
+        toast.success("Đã xóa mark thành công");
       }
     }
   };

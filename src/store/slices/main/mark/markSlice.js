@@ -14,7 +14,7 @@ const markJobSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createMark.fulfilled, (state, action) => {
       state.status = "success";
-      // state.careListCandidate = action.payload;
+      state.careListCandidate = [...state.careListCandidate, action.payload];
     });
     builder.addCase(getMark.fulfilled, (state, { payload }) => {
       state.careListCandidate = payload;

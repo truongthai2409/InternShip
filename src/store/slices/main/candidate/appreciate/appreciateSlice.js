@@ -11,16 +11,19 @@ const appreciateSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addAppreciate.fulfilled, (state, action) => {
       state.status = "success";
-      // state.careListCandidate = action.payload;
+      state.appreciateList = [...state.appreciateList, action.payload];
     });
-    builder.addCase(getAppreciateByCompany.fulfilled, (state, { payload }) => {
-      state.appreciateList = payload.contents;
-    });
-    // builder.addCase(deleteApply.fulfilled, (state, { payload }) => {
-    //   if (!payload?.data) {
-    //     state.error = payload;
-    //   }
-    // });
+    builder
+      .addCase(getAppreciateByCompany.fulfilled, (state, { payload }) => {
+        state.appreciateList = payload.contents;
+      })
+      .addCase(updateAppreciate.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.status = "success";
+        } else {
+          state.status = "fail";
+        }
+      });
   },
 });
 
@@ -28,7 +31,7 @@ export const getAppreciateByCompany = createAsyncThunk(
   "appreciate/getAppreciateByCompany",
   async (idCompany) => {
     return axios
-      .get(`${baseURL}/api/r2s/rate/company/1/?no=0&limit=10`)
+      .get(`${baseURL}/api/r2s/rate/company/${idCompany}/?no=0&limit=10`)
       .then((response) => {
         return response.data;
       })
@@ -44,6 +47,23 @@ export const addAppreciate = createAsyncThunk(
     console.log(data);
     const res = await axios
       .post(`${baseURL}/api/r2s/rate`, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+    return res;
+  }
+);
+
+export const updateAppreciate = createAsyncThunk(
+  "appreciate/updateAppreciate",
+  async (data, id) => {
+    const { dataUpdateAppreciate } = data;
+    const res = await axios
+      .put(`${baseURL}/api/rate/${id}`, dataUpdateAppreciate)
+
       .then((res) => {
         return res;
       })
