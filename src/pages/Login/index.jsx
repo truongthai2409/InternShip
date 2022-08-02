@@ -19,10 +19,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
+  console.log(status);
 
   if (status === "success") {
     const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
-    navigate("/hr", { replace: true });
     switch (role) {
       case "Role_HR":
         navigate("/hr", { replace: true });
@@ -52,9 +52,9 @@ const Login = () => {
       const res = await dispatch(loginUser(userData));
       if (res.payload.token) {
         const role = res.payload.role;
-        if (isCheck === false) {
-          localStorage.removeItem("userPresent");
-        }
+        // if (isCheck === false) {
+        //   localStorage.removeItem("userPresent");
+        // }
         switch (role) {
           case "Role_HR":
             navigate(`/hr`, { replace: true });
@@ -62,7 +62,7 @@ const Login = () => {
           case "Role_Partner":
             navigate(`/partner`, { replace: true });
             break;
-          default:
+          case "Role_Candidate":
             navigate(`/candidate`, { replace: true });
         }
       }

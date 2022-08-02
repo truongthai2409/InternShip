@@ -20,13 +20,14 @@ const loginSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload.status > 200) {
-          state.status = "fail";
-          toast.error("Tài khoản hoặc mật khẩu không đúng!");
-        } else {
+        console.log(action.payload?.token);
+        if (action.payload?.token) {
           state.status = "success";
           toast.success("Bạn đã đăng nhập thành công!");
           localStorage.setItem("userPresent", JSON.stringify(action.payload));
+        } else {
+          state.status = "fail";
+          toast.error("Tài khoản hoặc mật khẩu không đúng!");
         }
       })
       .addCase(updateUserPassword.fulfilled, (state, action) => {

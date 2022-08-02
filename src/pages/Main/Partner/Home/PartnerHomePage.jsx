@@ -24,27 +24,25 @@ const PartnerHomePage = (props) => {
   );
 
   useEffect(() => {
-    dispatch(getJobByName(""));
-    dispatch(getJobList([1, 10]));
     dispatch(getDemandList());
   }, []);
 
-  const handleSearch = (value) => {
-    setValueSearch(value);
-    const dataSearch = {
-      jobName: valueSearch,
-      location: locationValue,
-    };
-    if (valueSearch && value) {
-      dispatch(getJobByNameAndLocation(dataSearch));
-      // } else if (valueSearch && value === "") {
-      //   dispatch(getJobByNameAndLocation(valueSearch, ""));
-      // } else if (valueSearch === "" && value) {
-      //   dispatch(getJobByNameAndLocation("", value));
-      // } else {
-      //   dispatch(getJobByNameAndLocation("", ""));
-    }
-  };
+  // const handleSearch = (value) => {
+  //   setValueSearch(value);
+  //   const dataSearch = {
+  //     jobName: valueSearch,
+  //     location: locationValue,
+  //   };
+  //   if (valueSearch && value) {
+  //     dispatch(getJobByNameAndLocation(dataSearch));
+  //     // } else if (valueSearch && value === "") {
+  //     //   dispatch(getJobByNameAndLocation(valueSearch, ""));
+  //     // } else if (valueSearch === "" && value) {
+  //     //   dispatch(getJobByNameAndLocation("", value));
+  //     // } else {
+  //     //   dispatch(getJobByNameAndLocation("", ""));
+  //   }
+  // };
 
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
@@ -65,7 +63,6 @@ const PartnerHomePage = (props) => {
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
               <SearchResultHome
-                onClick={handleSearch}
                 onChange={getValueLocationAndHandle}
               />
             </div>
@@ -79,7 +76,6 @@ const PartnerHomePage = (props) => {
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">
                 <SearchResultHome
-                  onClick={handleSearch}
                   onChange={getValueLocationAndHandle}
                 />
               </div>

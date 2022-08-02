@@ -17,29 +17,30 @@ function HeaderWithPartner(props) {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+
+  // console.log(user);
 
   useEffect(() => {
-    dispatch(getUserById(profile?.idUser));
+    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
+    dispatch(getUserById(idUser));
   }, []);
 
   return (
     <div className="container-header__partner header__partner config">
-      {profile?.role ? <Logo /> : <Logo />}
-      {profile?.role ? (
-        <div className="header__partner">
-          <Link to="/partner/post" className="header__partner-post">
-            <AddCardIcon></AddCardIcon>
-            <span className="header__partner-post-post">Đăng bài</span>
-          </Link>
-          <Link to="/partner/post-list" className="header__partner-post">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
-            <span className="header__partner-post-post">
-              Danh sách bài đăng
-            </span>
-          </Link>
-        </div>
-      ) : null}
+      <Logo />
+      <div className="header__partner">
+        <Link to="/partner/post" className="header__partner-post">
+          <AddCardIcon></AddCardIcon>
+          <span className="header__partner-post-post">Đăng bài</span>
+        </Link>
+        <Link to="/partner/post-list" className="header__partner-post">
+          <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+          <span className="header__partner-post-post">
+            Danh sách các đợt thực tập
+          </span>
+        </Link>
+      </div>
       {props.search ? (
         <SearchResultHome
           bwidth="681px"
@@ -82,7 +83,7 @@ function HeaderWithPartner(props) {
             paddingLeft: "6px",
           }}
         >
-          <h4 className="name">Chào, {profile?.firstName || "User"}</h4>
+          <h4 className="name">Chào {user?.lastName || "User"}</h4>
           <AccountMenu linkImg="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg" />
         </div>
       </div>

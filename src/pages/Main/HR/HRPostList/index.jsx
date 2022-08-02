@@ -1,48 +1,107 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../../components/Button";
 import "./styles.scss";
-import CardPost from "../../../../components/CardPost";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobListByUserId,
-  updateStatusAddJob,
-} from "../../../../store/slices/main/home/job/jobSlice";
+import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
+import { ListJob } from "./ListJob";
 import { TabTitle } from "src/utils/GeneralFunctions";
+import Box from "@mui/material/Box";
+import PropTypes from "prop-types";
+import { Tab, Tabs } from "@mui/material";
+import Statistic from "src/components/Statistic";
+import { useNavigate } from "react-router-dom";
 
-const formatLocation = (location) => {
-  return `${location.address}, ${location.district?.name},
-    ${location.district?.province?.name}`;
-};
-
-const HRPostList = (props) => {
-  TabTitle("Danh sách bài đăng | IT Internship JOBS");
-  const dispatch = useDispatch();
-  const { jobList, status } = useSelector((state) => state.job);
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
-
-  useEffect(() => {
-    dispatch(getJobListByUserId(userPresent.idUser));
-    if (status === "success") dispatch(updateStatusAddJob("fail"));
-  }, [dispatch]);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className="hrpost__list">
-      <div className="hrpost__list-bt">
-        <Button name="ĐĂNG BÀI"></Button>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3, padding: 0 }}>
+          <div>{children}</div>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+const HRPostList = (props) => {
+  TabTitle("Công việc đang tuyển | IT Internship JOBS");
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => setValue(newValue);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { jobDetail, error, jobListActived, jobListDisabled } = useSelector((state) => state.job);
+  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  useEffect(() => {
+    dispatch(getJobListByUserId(userPresent.idUser));
+    // if (status === "success") dispatch(updateStatusAddJob("fail"));
+  }, [jobDetail]);
+
+  return (
+    <div className="hr-post__wrapper">
+      <div className="hr-post__list-bt">
+        <Button onClick={() => {navigate("/hr/post")}} name="ĐĂNG BÀI"></Button>
       </div>
-      {jobList.map((job) => (
-        <CardPost
-          key={job.id}
-          status={job.status}
-          jobName={job.name}
-          amount={job.amount}
-          timeStart={job.timeStartStr}
-          timeEnd={job.timeEndStr}
-          timeCreated={job.createDate}
-          companyName={job.hr?.company?.name}
-          companyLocation={formatLocation(job.locationjob)}
-        />
-      ))}
+      <div className="hr-post-list__content">
+        <div className="hr-post-list__statistic">
+          <Statistic
+            title="Điểm khả dụng"
+            firstObject={{
+              score: jobListActived.length,
+              description: "Lượt đăng tuyển",
+            }}
+            secondObject={{
+              score: jobListActived.length,
+              description: "Lượt xem hồ sơ",
+            }}
+          />
+          <Statistic
+            title="Trạng thái tin đăng"
+            firstObject={{
+              score: jobListActived.length,
+              description: "Đang đăng tuyển",
+            }}
+            secondObject={{
+              score: jobListDisabled.length,
+              description: "Đã đóng",
+            }}
+          />
+        </div>
+        <Box className="filter-panel-home__wrapper" sx={{}}>
+          <Box className="filter-panel-home__filterPanel" sx={{}}>
+            <Tabs value={value} onChange={handleChange}>
+              <Tab label="Đang đăng tuyển" {...a11yProps(0)} />
+              <Tab label="Đã đóng" {...a11yProps(1)} />
+            </Tabs>
+          </Box>
+          <TabPanel className="tabPanel" value={value} index={0}>
+            <ListJob listJob={jobListActived} text="Không có công việc đăng tuyển." />
+          </TabPanel>
+          <TabPanel className="tabPanel" value={value} index={1}>
+            <ListJob listJob={jobListDisabled} text="Không có công việc đã đóng." />
+          </TabPanel>
+        </Box>
+      </div>
     </div>
   );
 };

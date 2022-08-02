@@ -131,6 +131,7 @@ export const UniversityInfo = () => {
   const { profile } = useSelector((state) => state.user);
 
   const { user, universityDTO } = profile;
+  // console.log(user, universityDTO);
 
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
@@ -138,7 +139,7 @@ export const UniversityInfo = () => {
   }, []);
   return (
     <div className="company-infor__wrapper">
-      <h2 className="company-infor__title">{universityDTO?.name}</h2>
+      <h2 className="company-infor__title">Trường</h2>
       <Divider />
       <div className="company-infor__content">
         <div className="company-infor__col-1">
@@ -147,7 +148,7 @@ export const UniversityInfo = () => {
             alt="Ảnh của trường"
             src="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
           />
-          <p className="company-infor__name"></p>
+          <p className="company-infor__name">{universityDTO?.name}</p>
         </div>
         <div className="company-infor__col-2">
           <div className="company-infor__profile">
@@ -178,7 +179,7 @@ export const UniversityInfo = () => {
               </p>
             </div>
             <p className="company-infor__des-company">
-              <span>Mô tả công ty:</span>
+              <span>Mô tả về trường:</span>
               <br />
               {universityDTO?.description}
             </p>

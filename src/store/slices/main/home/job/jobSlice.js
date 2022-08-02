@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -9,12 +10,15 @@ const jobSlice = createSlice({
     jobList: [],
     jobListCompany: [],
     jobListName: [],
+    jobListActived: [],
+    jobListDisabled: [],
     jobDetailById: {},
     indexCardActive: 0,
     idJobActive: 0,
     jobDetail: {},
     jobPosition: [],
     status: "fail",
+    error: "",
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -24,9 +28,9 @@ const jobSlice = createSlice({
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
     },
-    updateStatusAddJob: (state, action) => {
-      state.status = action.payload;
-    },
+    // updateStatusAddJob: (state, action) => {
+    //   state.status = action.payload;
+    // }
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
@@ -36,7 +40,17 @@ const jobSlice = createSlice({
       state.jobListCompany = payload;
     });
     builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
-      state.jobList = payload;
+      if (payload.httpCode === 404) {
+        state.error = 404;
+      } else {
+        state.jobListActived = payload.filter(job => {
+          return job.status.id === 1;
+        })
+        state.jobListDisabled = payload.filter(job => {
+          return job.status.id === 4;
+        })
+        state.status = "fail";
+      }
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
@@ -60,7 +74,7 @@ const jobSlice = createSlice({
       state.jobPosition = payload;
     });
     builder.addCase(addJob.fulfilled, (state) => {
-      state.status = "success";
+      toast.success("Đăng tuyển công việc thành công!")
     });
   },
 });

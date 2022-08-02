@@ -52,6 +52,31 @@
   }
 }
 
+.row-3-col {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 35px;
+
+  .university-register__select-location {
+    flex-basis: 32%;
+  }
+
+  div.custom-input {
+    margin-top: 0;
+    flex-basis: 28%;
+
+    input {
+      height: 45px !important;
+    }
+  }
+
+  > .custom-input {
+    margin: 0;
+  }
+}
+
 .section-input__container {
   display: grid;
   grid-template-columns: 1fr 1fr;

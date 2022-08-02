@@ -1,18 +1,21 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
-.button-action__container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+.button-action__wrapper {
+  .button-action__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
-  &:hover {
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
+    &:hover {
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
 
-  .button-action__name {
-    margin-left: 10px;
+    .button-action__name {
+      margin-left: 10px;
+    }
   }
 
 }

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import ArrowButton from "../../../../components/ArrowButton/index";
 import Button from "../../../../components/Button";
 import CustomInput from "../../../../components/CustomInput/index";
 import Select from "../../../../components/Select";
+import SelectCustom from "src/components/Select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
@@ -11,15 +12,34 @@ import { addUniversity } from "src/store/slices/Admin/university/unversitySlice"
 import { useDispatch, useSelector } from "react-redux";
 import { genderList, schema } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
-import CustomTextarea from "src/components/CustomTextarea";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { toast } from "react-toastify";
+import {
+  getProvinceList,
+  getDistrictList,
+} from "src/store/slices/location/locationSlice";
+import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import Textarea from "src/components/Textarea";
+
+const countryList = [
+  {
+    id: 84,
+    name: "Việt Nam",
+  },
+];
 
 const PartnerInfo = () => {
   TabTitle("Đăng ký - Cộng tác viên trường");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { districtList, provinceList } = useSelector((state) => state.location);
+  const { majorList } = useSelector((state) => state.major);
   const errorMessage = useSelector(errorSelector);
+
+  useEffect(() => {
+    dispatch(getMajorList());
+    dispatch(getProvinceList());
+  }, []);
 
   const handleBackClick = (e) => {
     e.preventDefault();
@@ -40,16 +60,16 @@ const PartnerInfo = () => {
         phone: data.phoneSchool,
         majors: [
           {
-            id: 1,
+            id: data.major,
           },
         ],
         location: [
           {
             district: {
-              id: 2,
+              id: data.district,
             },
             address: data.address,
-            note: "Truong Top 1 VN",
+            note: "",
           },
         ],
       }),
@@ -186,25 +206,27 @@ const PartnerInfo = () => {
           </div>
         </div>
 
-        <CustomInput
-          label="Ảnh đại diện"
-          id="avatar"
-          type="file"
-          register={register}
-          // check={true}
-        >
-          {errors.avatar?.message}
-        </CustomInput>
+        <div className="reg-partner__form--name">
+          <CustomInput
+            label="Ảnh đại diện"
+            id="avatar"
+            type="file"
+            register={register}
+            // check={true}
+          >
+            {errors.avatar?.message}
+          </CustomInput>
 
-        <CustomInput
-          label="LOGO Trường"
-          id="logo"
-          type="file"
-          register={register}
-          // check={true}
-        >
-          {errors.logo?.message}
-        </CustomInput>
+          <CustomInput
+            label="LOGO Trường"
+            id="logo"
+            type="file"
+            register={register}
+            // check={true}
+          >
+            {errors.logo?.message}
+          </CustomInput>
+        </div>
 
         <div className="section-input__container">
           <CustomInput
@@ -225,15 +247,27 @@ const PartnerInfo = () => {
           </CustomInput>
         </div>
 
-        <CustomInput
-          label="Vai trò tại trường"
-          id="position"
-          type="text"
-          placeholder="Vai trò tại trường"
-          register={register}
-        >
-          {errors.position?.message}
-        </CustomInput>
+        <div className="section-input__container">
+          <CustomInput
+            label="Vai trò tại trường"
+            id="position"
+            type="text"
+            placeholder="Vai trò tại trường"
+            register={register}
+          >
+            {errors.position?.message}
+          </CustomInput>
+
+          <CustomInput
+            label="Website"
+            id="website"
+            type="text"
+            register={register}
+          >
+            {errors.website?.message}
+          </CustomInput>
+        </div>
+
         <div className="section-input__container">
           <CustomInput
             label="Email của Trường"
@@ -254,7 +288,19 @@ const PartnerInfo = () => {
             {errors.phoneSchool?.message}
           </CustomInput>
         </div>
-        <CustomInput
+
+        <SelectCustom
+          id="major"
+          label="Chuyên ngành"
+          placeholder="Vui lòng chọn"
+          options={majorList}
+          register={register}
+        >
+          {errors.major?.message}
+        </SelectCustom>
+
+        <Textarea
+          textAlign="left"
           label="Mô tả"
           id="description"
           type="textarea"
@@ -262,33 +308,51 @@ const PartnerInfo = () => {
           children=""
           register={register}
         />
-        <div className="section-input__container">
-          <CustomInput
-            label="Website"
-            id="website"
-            type="text"
-            register={register}
-          >
-            {errors.website?.message}
-          </CustomInput>
-
-          <CustomInput
-            label="địa chỉ"
-            id="address"
-            type="text"
-            register={register}
-          >
-            {errors.address?.message}
-          </CustomInput>
+        <div className={"row-3-col"}>
+          <div className={"university-register__select-location"}>
+            <SelectCustom
+              id="country"
+              label="Quốc gia"
+              placeholder="Vui lòng chọn"
+              options={countryList}
+              register={register}
+            >
+              {errors.country?.message}
+            </SelectCustom>
+          </div>
+          <div className={"university-register__select-location"}>
+            <SelectCustom
+              id="province"
+              label="Tỉnh/Thành phố"
+              placeholder="Vui lòng chọn"
+              dispatch={dispatch}
+              action={getDistrictList}
+              options={provinceList}
+              register={register}
+            >
+              {errors.province?.message}
+            </SelectCustom>
+          </div>
+          <div className={"university-register__select-location"}>
+            <SelectCustom
+              id="district"
+              label="Quận/Huyện"
+              placeholder="Vui lòng chọn"
+              options={districtList}
+              register={register}
+            >
+              {errors.district?.message}
+            </SelectCustom>
+          </div>
         </div>
         <CustomInput
-          label="Ghi chú"
-          id="note"
-          type="textarea"
-          placeholder="Ghi chú"
-          children=""
+          label="địa chỉ"
+          id="address"
+          type="text"
           register={register}
-        />
+        >
+          {errors.address?.message}
+        </CustomInput>
 
         <div className="reg-hr__btns">
           <div className="reg-hr__btns--item" onClick={handleBackClick}>

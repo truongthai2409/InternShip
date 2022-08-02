@@ -10,7 +10,10 @@ import TransgenderIcon from "@mui/icons-material/Transgender";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import EditIcon from "@mui/icons-material/Edit";
 import NearMeIcon from "@mui/icons-material/NearMe";
-import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
+import {
+  getProfileByIdUser,
+  getUserById,
+} from "src/store/slices/Admin/user/userSlice";
 import {
   Actions,
   CompanyInfo,
@@ -21,9 +24,9 @@ import {
 import { TabTitle } from "src/utils/GeneralFunctions";
 
 const Profile = ({ actions = false }) => {
-  TabTitle('IT Internship JOBS | Thông tin cá nhân')
+  TabTitle("IT Internship JOBS | Thông tin cá nhân");
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.user);
+  const { user, profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -31,9 +34,11 @@ const Profile = ({ actions = false }) => {
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
 
+  console.log(user);
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));
-  }, [dispatch]);
+    dispatch(getUserById(idUser));
+  }, [idUser]);
 
   let RelatedInfor = "";
   switch (roleUser) {
@@ -49,7 +54,7 @@ const Profile = ({ actions = false }) => {
     default:
       RelatedInfor = null;
   }
-
+  console.log("avatar", `http://localhost:8085${profile?.user?.avatar}`);
   return (
     <>
       <div className="profile__wrapper">
@@ -64,13 +69,13 @@ const Profile = ({ actions = false }) => {
               }
               alt="Ảnh đại diện"
             />
-            <ButtonOutline
+            {/* <ButtonOutline
               className="avatar__edit-btn"
               icon={<EditIcon />}
               width="40px"
               height="40px"
               radius="50%"
-            />
+            /> */}
           </div>
           <ButtonOutline
             onClick={handleOpen}
@@ -85,7 +90,9 @@ const Profile = ({ actions = false }) => {
         </div>
         <div className="profile__infor">
           <h1 className="profile__infor-name">
-            {`${profile?.user?.lastName} ${profile?.user?.firstName}`}
+            {`${profile?.user?.lastName || user?.lastName} ${
+              profile?.user?.firstName || user?.firstName
+            }`}
             <span className="profile__infor-location">
               <NearMeIcon />
             </span>
@@ -121,7 +128,7 @@ const Profile = ({ actions = false }) => {
         </div>
       </div>
       <Modal
-        modalTitle="Chỉnh sử thông tin cá nhân"
+        modalTitle="Chỉnh sửa thông tin cá nhân"
         children={<ProfileForm handleClose={handleClose} />}
         open={open}
         setOpen={setOpen}

@@ -16,7 +16,7 @@ export const schema = yup
       .min(1, " * Số lượng ứng viên phải lớn hơn 0. ")
       .integer(" * Số lượng ứng viên phải là số nguyên. "),
     timeEnd: yup.string().required(" * Bạn phải chọn ngày hết hạn tuyển."),
-    jobDescription: yup.string().required(" * Bạn phải nhập mô tả công việc."),
+    jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
     // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     // otherInfo: yup.string(),
     fileSV: yup

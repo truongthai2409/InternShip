@@ -53,7 +53,7 @@ const Footer = () => {
             <ComponentFooter header="Chính sách" tabContent={policy} />
             <div className="mobile-app-link-container">
               <div className="mobile-app-link-header">
-                <h2>Ứng dụng di động</h2>
+                <h2 className="heading-primary elementor-heading-title">Ứng dụng di động</h2>
               </div>
               <div className="mobile-app-link-download">
                 <div className="mobile-app-link-chplay">
@@ -61,7 +61,7 @@ const Footer = () => {
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
                       alt=""
-                      style={{ width: "100px" }}
+                      style={{ width: "180px" }}
                       className="mobile-app-link-chplay-img"
                     />
                   </a>
@@ -71,7 +71,7 @@ const Footer = () => {
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png"
                       alt=""
-                      style={{ width: "100px" }}
+                      style={{ width: "180px" }}
                       className="mobile-app-link-appstore-img"
                     />
                   </a>
@@ -81,6 +81,12 @@ const Footer = () => {
           </div>
         </section>
       </section>
+
+      <div className="address-footer-copyright">
+        <div className="text-footer">
+          <p>Copyright: © 2022 R2S. All Rights Reserved</p>
+        </div>
+      </div>
     </div>
   );
 };

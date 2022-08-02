@@ -16,10 +16,11 @@ const DetailCard = ({
   jobDetailById,
   demandPartner = false,
 }) => {
+  // console.log(jobDetail);
   return (
     <div>
       {jobListName && jobListName.length > 0 ? (
-        <Detail jobDetail={jobDetail} />
+        <Detail jobDetail={jobDetail} demandPartner={demandPartner} />
       ) : (
         <Detail jobDetailById={jobDetailById} /> || null
       )}

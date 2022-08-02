@@ -13,6 +13,7 @@ const Textarea = ({
   check = false,
   requirementField = true,
   setValue,
+  textAlign,
 }) => {
   useEffect(() => {
     register(id);
@@ -34,7 +35,7 @@ const Textarea = ({
   };
 
   return (
-    <div className="custom-textarea">
+    <div style={{textAlign: textAlign}} className="custom-textarea">
       <label htmlFor={id} className="custom-textarea__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}

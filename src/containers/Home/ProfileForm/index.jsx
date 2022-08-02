@@ -23,6 +23,7 @@ const ProfileForm = ({ handleClose }) => {
   const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
+    setValue("avatar", profile?.user?.avatar);
     setValue("firstName", profile?.user?.firstName);
     setValue("lastName", profile?.user?.lastName);
     setValue("email", profile?.user?.email);
@@ -44,7 +45,7 @@ const ProfileForm = ({ handleClose }) => {
         position: profile.position,
         company: { id: profile.company?.id },
       }),
-      // fileAvatar: data.fileAv
+      fileAvatar: data.avatar[0],
     };
     dispatch(updateUser([profileData, profile.id]));
     handleClose();
@@ -57,6 +58,21 @@ const ProfileForm = ({ handleClose }) => {
           <p className="title-requirement">
             (<span className="field-requirment"> * </span>)Trường bắt buộc
           </p>
+          <div className="profile-form__content-item">
+            <CustomInput
+              register={register}
+              id="avatar"
+              label="Ảnh đại diện"
+              type="file"
+              requirementField={false}
+              className="profile-form__input"
+              radius="2px"
+              height="45px"
+              border="1.6px solid #777777"
+            >
+              {errors.avatar?.message}
+            </CustomInput>
+          </div>
           <div className="profile-form__content-item">
             <CustomInput
               register={register}

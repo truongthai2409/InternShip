@@ -17,6 +17,7 @@ import { addDemand } from "src/store/slices/main/home/demand/demandSlice";
 import { format } from "date-fns";
 import DescriptionForm from "src/components/DescriptionForm";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
+import Textarea from "src/components/Textarea";
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan/ Doanh nghiệp,
 
@@ -128,6 +129,7 @@ const PostPartnerForm = (props) => {
               <CustomInput
                 label="Chức danh"
                 id="name"
+                value="test"
                 type="text"
                 placeholder="Vd. Thực tập thiết kế UI-UX"
                 register={register}
@@ -204,7 +206,7 @@ const PostPartnerForm = (props) => {
               </CustomInput>
             </div>
             <div className="partner-post__textarea-description">
-              <CustomTextarea
+              <Textarea
                 label="Thư giới thiệu"
                 id="jobDescription"
                 type="description"
@@ -212,7 +214,7 @@ const PostPartnerForm = (props) => {
                 register={register}
               >
                 {errors.jobDescription?.message}
-              </CustomTextarea>
+              </Textarea>
 
               <div className="description-btn-post-partner-container">
                 <button

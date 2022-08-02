@@ -1,35 +1,55 @@
-@use '../../../../assets/styles/Helper/variables' as *;
+@use "../../../../assets/styles/" as *;
 
-.statistical-box {
-
-    &__container {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    width: 100%;
-    min-height: 20vh;
+.hr-post__wrapper {
+  min-height: 100vh;
+  .hr-post__list-bt {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background-color: white;
-    padding: 30px;
+    justify-content: right;
+    margin-right: 50px;
+    margin-bottom: 24px;
+  }
 
-    &__card {
-        display: flex;
-        gap: 15px;
-    }
-
-    &__heading {
-        font-size: 18px;
-        font-weight: 700;
-    }
-}
-
-.partner-post-list__container {
+  .hr-post-list__content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    padding: 0 50px;
+
+    .hr-post-list__statistic {
+      flex-basis: 40%;
+    }
+
+    .filter-panel-home__wrapper {
+      flex-basis: 60%;
+
+      .tabPanel {
+        height: 78vh !important;
+        border-radius: 0px !important;
+      }
+
+    }
+
+    .hrpost__list {
+      display: flex;
+      min-height: 500px;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+  }
+
+  .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+    max-width: none !important;
+  }
+  
+  .filter-panel-home__wrapper .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+    flex-basis: 50%;
+  }
+
+  .filter-panel-home__wrapper
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    flex-basis: 50%;
+
+    &#simple-tab-1 {
+      background-color: #666;
+    }
+  }
 }

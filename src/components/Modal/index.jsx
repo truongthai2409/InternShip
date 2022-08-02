@@ -9,12 +9,15 @@ import {
 } from "@mui/material";
 
 import "./styles.scss";
+import CandidateList from "src/pages/Main/HR/CandidateList";
+import Button from "../Button";
+import Null from "../Null";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const Modal = ({ modalTitle, open, setOpen, children, name }) => {
+const Modal = ({ modalTitle, open, setOpen, name, children }) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -27,7 +30,9 @@ const Modal = ({ modalTitle, open, setOpen, children, name }) => {
         TransitionComponent={Transition}
         className="dialog"
       >
-        <DialogTitle className={`dialog-title__${name}`}>{modalTitle}</DialogTitle>
+        <DialogTitle className={`dialog-title__${name}`}>
+          {modalTitle}
+        </DialogTitle>
         <DialogContent>{children}</DialogContent>
       </Dialog>
     </div>

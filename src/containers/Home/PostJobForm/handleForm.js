@@ -40,8 +40,7 @@ export const schema = yup
       .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
     salaryMax: yup
       .number()
-      .required(" * Bạn phải nhập mức lương tối đa.")
       .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
-      .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
+      .min(yup.ref("salaryMin"), " * Mức trợ cấp tối đa phải lớn hơn hoặc bằng mức tối thiểu."),
   })
   .required();

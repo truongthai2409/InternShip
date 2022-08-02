@@ -1,4 +1,4 @@
-@use "../../assets/styles/Helper/variables" as *;
+@use "../../assets/styles" as *;
 
 .login-layout {
   width: 100%;
@@ -11,4 +11,5 @@
 
 .login-container-wrapper {
   padding: 150px 0px;
+  background-color: $primary-color-background;
 }

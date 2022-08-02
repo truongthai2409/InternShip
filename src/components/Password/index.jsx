@@ -12,6 +12,7 @@ import { updateUserPassword } from "src/store/slices/main/login/loginSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Password = () => {
   const { profile } = useSelector((state) => state.authentication);
+  console.log(profile);
   const {
     handleSubmit,
     formState: { errors },
