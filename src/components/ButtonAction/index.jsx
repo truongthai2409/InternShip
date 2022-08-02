@@ -15,14 +15,9 @@ const ButtonAction = ({
   color = "",
   type,
 }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  }
   return (
     <div
-    onClick={handleOpen}
+      type="button"
       className="button-action__wrapper"
       style={{ width: width, height: height, border: border, color: color }}
     >
@@ -33,13 +28,6 @@ const ButtonAction = ({
           style={{ fontSize: fontSize }}
         >{`${amount} ${name}`}</p>
       </div>
-      <Modal
-        modalTitle="Danh sách ứng viên đã ứng tuyển"
-        open={open}
-        setOpen={setOpen}
-        children={<CandidateList />}
-        name="list-candidate"
-      />
     </div>
   );
 };

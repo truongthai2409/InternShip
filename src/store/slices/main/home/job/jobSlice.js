@@ -43,12 +43,12 @@ const jobSlice = createSlice({
       if (payload.httpCode === 404) {
         state.error = 404;
       } else {
-        state.jobListActived = payload.filter(job => {
+        state.jobListActived = payload.filter((job) => {
           return job.status.id === 1;
-        })
-        state.jobListDisabled = payload.filter(job => {
+        });
+        state.jobListDisabled = payload.filter((job) => {
           return job.status.id === 4;
-        })
+        });
         state.status = "fail";
       }
     });
@@ -74,7 +74,10 @@ const jobSlice = createSlice({
       state.jobPosition = payload;
     });
     builder.addCase(addJob.fulfilled, (state) => {
-      toast.success("Đăng tuyển công việc thành công!")
+      toast.success("Đăng tuyển công việc thành công!");
+    });
+    builder.addCase(disableJob.fulfilled, (state, { payload }) => {
+      toast.success("Đóng công việc thành công!");
     });
   },
 });
@@ -188,6 +191,17 @@ export const getJobByCompany = createAsyncThunk(
       });
   }
 );
+
+export const disableJob = createAsyncThunk("job/disableJob", async (jobId) => {
+  return axios
+    .put(`${baseURL}/api/r2s/job/${jobId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
 
 export const { updateIdJobActive, updateIndexCardActive, updateStatusAddJob } =
   jobSlice.actions;

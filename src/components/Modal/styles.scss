@@ -3,13 +3,17 @@
 .dialog {
   h2 {
     font-family: $f-family;
-    font-size: $fs-40;
+    // font-size: $fs-40;
     font-weight: 600;
     border-bottom: 1px solid $color-gray-2;
   }
 
   .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     max-width: none !important;
+  }
+
+  .form__container {
+    width: 100%;
   }
 }
 

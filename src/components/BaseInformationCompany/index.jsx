@@ -18,6 +18,8 @@ function BaseInformationCompany({
   pr,
   ml,
   mt,
+  rating,
+  appreciateList,
 }) {
   const dispatch = useDispatch();
   // const { rating } = useSelector(state => state.rating)
@@ -73,23 +75,23 @@ function BaseInformationCompany({
                   {jobDetail?.hr?.company.phone}
                 </Typography>
               </div>
-              <div className="">
+              <div className="fix__margin">
                 <h5>
                   Email:
                   <a
                     href={jobDetail?.hr?.company.email}
-                    className="fix-fontSize"
+                    className="fix-fontSize fix__margin"
                   >
                     {jobDetail?.hr?.company.email}
                   </a>
                 </h5>
               </div>
               <div className="detail-website">
-                <h5>
+                <h5 className="fix__margin">
                   Website:
                   <a
                     href={jobDetail?.hr?.company.website}
-                    className="fix-fontSize"
+                    className="fix-fontSize "
                   >
                     {jobDetail?.hr?.company.website}
                   </a>
@@ -117,7 +119,7 @@ function BaseInformationCompany({
                   name="read-only"
                   precision={0.5}
                   readOnly
-                  defaultValue={jobDetail?.hr?.company.rates.length}
+                  defaultValue={rating}
                 />
                 <Typography
                   variant="h6"
@@ -128,7 +130,7 @@ function BaseInformationCompany({
                     transform: "translate(5px,5px)",
                   }}
                 >
-                  {/* 5.0 trong 48 lượt đánh giá */}
+                  {`${rating} trong ${appreciateList.length} lượt đánh giá`}
                 </Typography>
               </div>
             ) : (
@@ -150,26 +152,24 @@ function BaseInformationCompany({
             </Typography>
           </div>
           <div className="job-applying-container">
-            <h5 className="intro__company-title">Việc làm đang tuyển</h5>
+            <h5 className="intro__company-title intro__company-title-appling">
+              Việc làm đang tuyển
+            </h5>
             <Grid
               container
-              spacing={3}
+              spacing={2}
               sx={{
                 paddingLeft: `${pl}px`,
                 paddingRight: `${pr}px`,
                 marginLeft: `${ml}px`,
               }}
             >
-              {/* {jobListCompany.map((job, index) => {
-              <Grid key={job.id} item lg="auto" md="auto" xs={6}>
-                <JobCandidate job={job} />
-              </Grid>;
-            })} */}
-              {jobListCompany?.map((job) => (
-                <Grid item lg="auto" md="auto" sm="auto" xs="auto">
-                  <JobCandidate job={job} key={job.id} idJob={job.id} />
-                </Grid>
-              ))}
+              {jobListCompany.length > 0 &&
+                jobListCompany?.map((job) => (
+                  <Grid item lg="auto" md="auto" sm="auto" xs="auto">
+                    <JobCandidate job={job} key={job.id} idJob={job.id} />
+                  </Grid>
+                ))}
             </Grid>
           </div>
           <div className="button-card">

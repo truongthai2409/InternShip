@@ -50,7 +50,9 @@ const HRPostList = (props) => {
   const handleChange = (event, newValue) => setValue(newValue);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { jobDetail, error, jobListActived, jobListDisabled } = useSelector((state) => state.job);
+  const { jobDetail, error, jobListActived, jobListDisabled } = useSelector(
+    (state) => state.job
+  );
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
@@ -60,7 +62,12 @@ const HRPostList = (props) => {
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post__list-bt">
-        <Button onClick={() => {navigate("/hr/post")}} name="ĐĂNG BÀI"></Button>
+        <Button
+          onClick={() => {
+            navigate("/hr/post");
+          }}
+          name="ĐĂNG BÀI"
+        ></Button>
       </div>
       <div className="hr-post-list__content">
         <div className="hr-post-list__statistic">
@@ -95,10 +102,16 @@ const HRPostList = (props) => {
             </Tabs>
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
-            <ListJob listJob={jobListActived} text="Không có công việc đăng tuyển." />
+            <ListJob
+              listJob={jobListActived}
+              message="Không có công việc nào đang đăng tuyển."
+            />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
-            <ListJob listJob={jobListDisabled} text="Không có công việc đã đóng." />
+            <ListJob
+              listJob={jobListDisabled}
+              message="Không có công việc đã đóng."
+            />
           </TabPanel>
         </Box>
       </div>

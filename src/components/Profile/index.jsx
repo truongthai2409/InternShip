@@ -8,7 +8,6 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import EditIcon from "@mui/icons-material/Edit";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import {
   getProfileByIdUser,
@@ -23,8 +22,7 @@ import {
 } from "./components";
 import { TabTitle } from "src/utils/GeneralFunctions";
 
-const Profile = ({ actions = false }) => {
-  TabTitle("IT Internship JOBS | Thông tin cá nhân");
+const Profile = () => {
   const dispatch = useDispatch();
   const { user, profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
@@ -69,13 +67,6 @@ const Profile = ({ actions = false }) => {
               }
               alt="Ảnh đại diện"
             />
-            {/* <ButtonOutline
-              className="avatar__edit-btn"
-              icon={<EditIcon />}
-              width="40px"
-              height="40px"
-              radius="50%"
-            /> */}
           </div>
           <ButtonOutline
             onClick={handleOpen}

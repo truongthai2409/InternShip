@@ -32,7 +32,7 @@ export const getApplyListByIdCandidate = createAsyncThunk(
   "apply_candidate/getApplyListByIdCandidate",
   async (id) => {
     return axios
-      .get(`${baseURL}/api/applylist/candidate/23/?no=0&limit=10`)
+      .get(`${baseURL}/api/applylist/candidate/${id}/?no=0&limit=10`)
       .then((response) => {
         return response.data;
       })
