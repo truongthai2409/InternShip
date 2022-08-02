@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-// import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import AddCardIcon from "@mui/icons-material/AddCard";
-// import AddAlertOutlinedIcon from "@mui/icons-material/AddAlertOutlined";
-// import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
@@ -24,6 +21,7 @@ function HeaderWithHR(props) {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
+  console.log("avatar:", `http://localhost:8085${profile?.user?.avatar}`)
 
   return (
     <div className="container-header__hr header__hr config">
@@ -70,8 +68,8 @@ function HeaderWithHR(props) {
       ) : null}
       {props.search ? (
         <SearchResultHome
-          bwidth="681px"
-          bheight="33px"
+          bwidth="630px"
+          bheight="50px"
           bwidthInput="fit-content"
           bheightInput="fit-content"
           mb="0"

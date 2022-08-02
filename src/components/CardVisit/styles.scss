@@ -1,8 +1,8 @@
 @use "../../assets/styles/" as *;
 
 .scroll {
-  overflow-y: scroll;
-  height: 63vh;
+  // overflow-y: scroll;
+  height: 70vh;
 }
 
 .visit__card {
@@ -81,7 +81,7 @@
 }
 
 .scroll::-webkit-scrollbar {
-  display: none;
+  // display: none;
 }
 
 // responsive detail_home

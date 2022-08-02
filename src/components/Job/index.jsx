@@ -13,17 +13,15 @@ import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
 const JobCandidate = ({ job, idJob }) => {
   const dispatch = useDispatch();
-  // const { jobDetailById, idJobActive } = useSelector((state) => state.job);
-  const location = useLocation();
-  const pathUrl = location.pathname;
-
   const handleClick = async () => {
-    // setIdJobNew(idJob);
-    // dispatch(getJobById(idJobNew));
     dispatch(updateIdJobActive(idJob));
   };
   return (
-    <div>
+    <div
+      style={{
+        marginRight: "15px",
+      }}
+    >
       <Link
         to={`/detail_job`}
         onClick={handleClick}
@@ -31,12 +29,12 @@ const JobCandidate = ({ job, idJob }) => {
       >
         <Box
           sx={{
-            width: 250,
+            width: 220,
             minHeight: 160,
             border: 1,
             borderColor: "#DEDEDE",
             borderRadius: 2,
-            mt: 2,
+            pd: 0,
             cursor: "pointer",
             "&:hover": {
               backgroundColor: "DEDEDE",

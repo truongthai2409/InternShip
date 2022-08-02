@@ -5,15 +5,28 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "transparent",
   ...theme.typography.body2,
   padding: theme.spacing(1),
 }));
+const labels = {
+  0.5: "Vô dụng",
+  1: "Vô dụng +",
+  1.5: "Kém",
+  2: "Kém +",
+  2.5: "Được",
+  3: "Ok +",
+  3.5: "Tốt",
+  4: "Tốt +",
+  4.5: "Xuất sắc",
+  5: "Xuất sắc +",
+};
+const Appreciate = ({ appreciate }) => {
+  const value = appreciate.score;
 
-function Appreciate(props) {
-  // const [value, setValue] = React.useState(2);
   return (
     <Box
       sx={{
@@ -29,26 +42,33 @@ function Appreciate(props) {
               <Typography
                 variant="subtitle2"
                 component="div"
-                sx={{ fontSize: 14 }}
+                sx={{ fontSize: 16 }}
               >
-                Cao Nguyên Khá
+                {appreciate.user.username}
               </Typography>
             </div>
             <div>
-              <Rating name="simple-controlled" value={5} />
+              <Rating
+                name="text-feedback"
+                value={value}
+                readOnly
+                precision={0.5}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+                sx={{ fontSize: 24 }}
+              />
+              <Box sx={{ ml: 2, fontSize: 16 }}>{labels[value]}</Box>
             </div>
           </div>
           <Typography variant="p" component="div" sx={{ fontSize: 16 }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
-            corporis minus, nisi nulla officia ratione cumque repellendus
-            ducimus accusantium necessitatibus modi, similique eius non
-            molestiae expedita est ipsam consectetur quam.
+            {appreciate.comment}
           </Typography>
         </Item>
       </Stack>
     </Box>
   );
-}
+};
 
 Appreciate.propTypes = {};
 

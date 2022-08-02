@@ -53,7 +53,7 @@ const Login = () => {
       if (res.payload.token) {
         const role = res.payload.role;
         if (isCheck === false) {
-          localStorage.removeItem("userPresent");
+          // localStorage.removeItem("userPresent");
         }
         switch (role) {
           case "Role_HR":
