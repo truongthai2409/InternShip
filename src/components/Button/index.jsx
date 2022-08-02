@@ -12,7 +12,7 @@ const Button = ({
   fz,
   children,
   outline,
-  backgroundColor,
+  bg,
   color,
 }) => {
   return (
@@ -25,7 +25,7 @@ const Button = ({
           height: bheight ? `${bheight}` : "",
           fontSize: fz ? fz : "",
           outline: outline ? outline : "",
-          backgroundColor: backgroundColor,
+          backgroundColor: bg ? bg : "",
           color: color,
           // border: '1px solid black'
         }}

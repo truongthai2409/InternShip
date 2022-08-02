@@ -8,10 +8,42 @@ import moment from "moment";
 import { useState } from "react";
 import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
+import PostJobForm from "src/containers/Home/PostJobForm";
+import Confirmation from "../Confirmation";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [component, setComponent] = useState(<CandidateList />);
+  const [title, setTitle] = useState("");
+  const handleOnClick = (e) => {
+    let arrayString = e.target.textContent.split(` `);
+    let type =
+      arrayString[arrayString.length - 2] +
+      " " +
+      arrayString[arrayString.length - 1];
+
+    switch (type) {
+      case "Chỉnh sửa":
+        setComponent(<PostJobForm isUpdate = { true } />);
+        setTitle("Chỉnh sửa công việc");
+        break;
+      case "Đóng việc":
+        setComponent(
+          <Confirmation
+            setOpen={setOpen}
+            text="Bạn có chắc muốn đóng việc?"
+            nameBtnYes="Đóng việc"
+            nameBtnNo="Hủy"
+          />
+        );
+        setTitle("Đóng việc");
+        break;
+      default:
+        setTitle("Danh sách ứng viên đã ứng tuyển");
+        setComponent(<CandidateList />);
+    }
+    setOpen(true);
+  };
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -38,6 +70,7 @@ const CardPost = (props) => {
       </p>
       <div className="card-post__action">
         <ButtonAction
+          onClick={handleOnClick}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -45,10 +78,10 @@ const CardPost = (props) => {
           color="#111"
           name="Ứng viên"
           fontSize="13px"
-          onClick={handleOpen}
           type="read"
         />
         <ButtonAction
+          onClick={handleOnClick}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -56,10 +89,10 @@ const CardPost = (props) => {
           color="#111"
           name="Chỉnh sửa"
           fontSize="13px"
-          onClick={handleOpen}
           type="update"
         />
         <ButtonAction
+          onClick={handleOnClick}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -67,10 +100,17 @@ const CardPost = (props) => {
           color="#111"
           name="Đóng việc"
           fontSize="13px"
-          onClick={handleOpen}
           type="close"
         />
       </div>
+      <Modal
+        modalTitle={title}
+        name="list-candidate"
+        open={open}
+        setOpen={setOpen}
+      >
+        {component}
+      </Modal>
     </div>
   );
 };

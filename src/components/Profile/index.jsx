@@ -8,7 +8,6 @@ import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import PermPhoneMsgIcon from "@mui/icons-material/PermPhoneMsg";
 import TransgenderIcon from "@mui/icons-material/Transgender";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import EditIcon from "@mui/icons-material/Edit";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 import {
@@ -19,7 +18,7 @@ import {
   UniversityInfo,
 } from "./components";
 
-const Profile = ({ actions = false }) => {
+const Profile = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
@@ -62,13 +61,6 @@ console.log('avatar', `http://localhost:8085${profile?.user?.avatar}`)
               }
               alt="Ảnh đại diện"
             />
-            {/* <ButtonOutline
-              className="avatar__edit-btn"
-              icon={<EditIcon />}
-              width="40px"
-              height="40px"
-              radius="50%"
-            /> */}
           </div>
           <ButtonOutline
             onClick={handleOpen}

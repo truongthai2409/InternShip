@@ -7,7 +7,7 @@ const formatLocation = (location) => {
       ${location.district?.province?.name}`;
 };
 
-export const ListJob = ({ listJob }) => {
+export const ListJob = ({ listJob, message }) => {
   return (
     <div className="hrpost__list">
       {listJob.length > 0 ? (listJob.map((job) => (
@@ -22,7 +22,7 @@ export const ListJob = ({ listJob }) => {
           companyName={job.hr?.company?.name}
           companyLocation={formatLocation(job.locationjob)}
         />
-      ))) : <Null text="Không có công việc đã đóng." />}
+      ))) : <Null text={message} />}
     </div>
   );
 };

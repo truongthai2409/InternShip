@@ -1,17 +1,12 @@
 import * as React from "react";
 import {
-  // Button,
   Slide,
   Dialog,
   DialogTitle,
-  // DialogActions,
   DialogContent,
 } from "@mui/material";
 
 import "./styles.scss";
-import CandidateList from "src/pages/Main/HR/CandidateList";
-import Button from "../Button";
-import Null from "../Null";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;

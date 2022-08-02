@@ -70,14 +70,15 @@
       display: flex;
       font-size: 26px;
       margin-bottom: 15px;
-      width: 30%;
+      width: 45%;
       justify-content: space-between;
 
       > span {
         display: flex;
         align-items: center;
         font-size: 22px;
-        font-weight: 400;
+        font-weight: 500;
+        font-family: $f-family-1;
 
         > svg {
           font-size: 30px;

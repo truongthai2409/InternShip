@@ -23,7 +23,7 @@ const ProfileForm = ({ handleClose }) => {
   const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setValue("avatar", profile?.user?.avatar);
+    setValue("avatar", profile?.user.avatar);
     setValue("firstName", profile?.user?.firstName);
     setValue("lastName", profile?.user?.lastName);
     setValue("email", profile?.user?.email);

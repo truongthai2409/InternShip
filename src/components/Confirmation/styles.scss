@@ -1,0 +1,25 @@
+@use "../../assets/styles/" as *;
+
+.confirmation__wrapper {
+  padding-top: 10px;
+  font-weight: 500;
+  > p {
+    margin-bottom: 40px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .confirmation__btns {
+    display: flex;
+    .button {
+      padding: 14px 8px;
+
+      p {
+        margin: 0;
+      }
+    }
+    .confirmation__btn-cancle {
+      margin-right: 6px;
+    }
+  }
+}

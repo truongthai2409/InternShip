@@ -23,7 +23,7 @@ import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 
-const PostJobForm = (props) => {
+const PostJobForm = ({ isUpdate = false }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
@@ -69,41 +69,48 @@ const PostJobForm = (props) => {
     resolver: yupResolver(schema),
   });
 
+  if (isUpdate) {
+  }
+
   const onSubmit = (data) => {
-    const jobData = {
-      name: data.name,
-      hr: {
-        id: profile?.id,
-      },
-      desciption: data.jobDescription,
-      major: {
-        id: parseInt(data.major),
-      },
-      jobType: {
-        id: parseInt(data.jobType),
-      },
-      amount: parseInt(data.amount),
-      salaryMin: data.salaryMin,
-      salaryMax: data.salaryMax,
-      requirement: data.jobRequirement,
-      otherInfo: data.benefits,
-      timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
-      timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
-      jobposition: {
-        id: data.jobPosition,
-      },
-      locationjob: {
-        district: {
-          id: data.district,
+    if (!isUpdate) {
+      const jobData = {
+        name: data.name,
+        hr: {
+          id: profile?.id,
         },
-        address: data.address,
-        note: "Không có",
-      },
-    };
-    dispatch(addJob(jobData));
+        desciption: data.jobDescription,
+        major: {
+          id: parseInt(data.major),
+        },
+        jobType: {
+          id: parseInt(data.jobType),
+        },
+        amount: parseInt(data.amount),
+        salaryMin: data.salaryMin,
+        salaryMax: data.salaryMax,
+        requirement: data.jobRequirement,
+        otherInfo: data.benefits,
+        timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+        timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
+        jobposition: {
+          id: data.jobPosition,
+        },
+        locationjob: {
+          district: {
+            id: data.district,
+          },
+          address: data.address,
+          note: "Không có",
+        },
+      };
+      dispatch(addJob(jobData));
+    }
   };
-  if (status === "success") {
-    navigate("/hr/list");
+  if (isUpdate) {
+    if (status === "success") {
+      navigate("/hr/list");
+    }
   }
 
   return (
@@ -118,7 +125,7 @@ const PostJobForm = (props) => {
             <div className="hr-post__form">
               <div className="hr-post__heading">
                 <WorkIcon style={{ margin: "5px 5px 0 0" }} />
-                <h2>Mô tả công việc</h2>
+                <h2 className="hr-post__title">Mô tả công việc</h2>
               </div>
               <p className="title-requirement">
                 (<span className="field-requirment"> * </span>)Trường bắt buộc
@@ -311,7 +318,7 @@ const PostJobForm = (props) => {
                 <SwitchButton label="Không có trợ cấp" fontSize="13px" />
               </div>
               <div className="hr-post__action">
-                <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
+                <Button onClick={handleSubmit(onSubmit)} name={isUpdate ? "Chỉnh sửa" : "Đăng tuyển"} />
               </div>
             </div>
           </div>
