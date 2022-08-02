@@ -66,7 +66,7 @@ function SearchResultHome({
         </div>
         <div className="header__with-search-button-search" onClick={search}>
           {candidate_infomation ? (
-            <Button name="Tìm kiếm" bwidth="140px" bheight="14px" />
+            <Button name="Tìm kiếm" bwidth="123px" bheight="38px" />
           ) : (
             <Button name="Tìm kiếm" bwidth="125px" bheight="50px"></Button>
           )}

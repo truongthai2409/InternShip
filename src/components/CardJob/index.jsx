@@ -30,6 +30,7 @@ const CardJob = ({ jobCare, jobApplied }) => {
     );
     await dispatch(getMarkByUser(profile.username));
   };
+
   const handleDeleteJobApply = async (e) => {
     e.stopPropagation();
     await dispatch(deleteApply(jobApplied.id)).then(
@@ -37,6 +38,7 @@ const CardJob = ({ jobCare, jobApplied }) => {
     );
     dispatch(getApplyListByIdCandidate(profile.idUser));
   };
+
   const handleAddJob = async (e) => {
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));

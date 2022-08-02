@@ -70,8 +70,8 @@ function HeaderWithHR(props) {
       ) : null}
       {props.search ? (
         <SearchResultHome
-          bwidth="681px"
-          bheight="33px"
+          bwidth="630px"
+          bheight="50px"
           bwidthInput="fit-content"
           bheightInput="fit-content"
           mb="0"

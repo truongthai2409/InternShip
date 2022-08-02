@@ -43,12 +43,12 @@ const jobSlice = createSlice({
       if (payload.httpCode === 404) {
         state.error = 404;
       } else {
-        state.jobListActived = payload.filter(job => {
+        state.jobListActived = payload.filter((job) => {
           return job.status.id === 1;
-        })
-        state.jobListDisabled = payload.filter(job => {
+        });
+        state.jobListDisabled = payload.filter((job) => {
           return job.status.id === 4;
-        })
+        });
         state.status = "fail";
       }
     });
@@ -74,7 +74,7 @@ const jobSlice = createSlice({
       state.jobPosition = payload;
     });
     builder.addCase(addJob.fulfilled, (state) => {
-      toast.success("Đăng tuyển công việc thành công!")
+      toast.success("Đăng tuyển công việc thành công!");
     });
   },
 });
