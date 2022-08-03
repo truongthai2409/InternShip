@@ -22,23 +22,24 @@ import Textarea from "src/components/Textarea";
 import { useForm } from "react-hook-form";
 import CustomInput from "src/components/CustomInput";
 import CustomCheckbox from "src/components/CustomCheckbox";
+import { toast } from "react-toastify";
 
 const labels = {
-  0.5: "Useless",
-  1: "Useless+",
-  1.5: "Poor",
-  2: "Poor+",
-  2.5: "Ok",
-  3: "Ok+",
-  3.5: "Good",
-  4: "Good+",
-  4.5: "Excellent",
-  5: "Excellent+",
+  0.5: "Vô dụng",
+  1: "Vô dụng +",
+  1.5: "Kém",
+  2: "Kém +",
+  2.5: "Được",
+  3: "Ok +",
+  3.5: "Tốt",
+  4: "Tốt +",
+  4.5: "Xuất sắc",
+  5: "Xuất sắc +",
 };
 
-function getLabelText(value) {
+const getLabelText = (value) => {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-}
+};
 
 const CandidateInformationCompany = () => {
   TabTitle("Thông tin Công ty");
@@ -47,7 +48,14 @@ const CandidateInformationCompany = () => {
   const [valueRating, setValueRating] = useState(2);
   const [hover, setHover] = useState(-1);
   const [isCheck, setIsCheck] = useState(false);
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm();
 
   const { appreciateList } = useSelector((state) => state.appreciate);
   const { jobDetail } = useSelector((state) => state.job);
@@ -55,7 +63,7 @@ const CandidateInformationCompany = () => {
   const idCompany = jobDetail?.hr?.company.id;
   React.useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
-  }, [dispatch]);
+  }, [dispatch, idCompany]);
 
   useEffect(() => {
     dispatch(getJobList([1, 10]));
@@ -79,10 +87,9 @@ const CandidateInformationCompany = () => {
   };
   const handleCheck = (e) => {
     const check = e.target.checked;
-    setIsCheck(check);
-    console.log(isCheck);
+    setIsCheck(!check);
   };
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
     const avaluateData = {
       comment: data.title,
@@ -91,36 +98,42 @@ const CandidateInformationCompany = () => {
         id: idCompany,
       },
       user: {
-        username: isCheck === true ? username : "Ẩn danh",
+        username: username,
       },
-      title: data.avaluate,
+      title: data.title,
       hide: isCheck,
     };
-    console.log(avaluateData);
-    dispatch(addAppreciate(avaluateData));
+
+    try {
+      const res = await dispatch(addAppreciate(avaluateData));
+      await dispatch(getAppreciateByCompany(idCompany));
+      if (res.payload.status === 200) {
+        toast.success("Đã đăng đánh giá", {
+          // position: "top-center",
+          // autoClose: 3000,
+        });
+      } else {
+        toast.success(
+          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
+          {
+            // position: "top-center",
+            // autoClose: 3000,
+          }
+        );
+      }
+    } catch (error) {
+      if (error.status === 400) {
+        for (const key in error.data) {
+          setError(key, {
+            type: "server",
+            message: error.data[key],
+          });
+        }
+      }
+    }
+
     reset();
     setOpen(false);
-    //   if (res.status === 200) {
-    //     toast.success("Đổi mật khẩu thành công", {
-    //       position: "top-center",
-    //       autoClose: 3000,
-    //     });
-    //   } else {
-    //     toast.success("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
-    //       position: "top-center",
-    //       autoClose: 3000,
-    //     });
-    //   }
-    // } catch (error) {
-    //   if (error.status === 400) {
-    //     for (const key in error.data) {
-    //       setError(key, {
-    //         type: "server",
-    //         message: error.data[key],
-    //       });
-    //     }
-    //   }
-    // }
   };
   return (
     <div className="information-company__container">
@@ -155,12 +168,14 @@ const CandidateInformationCompany = () => {
               />
               <Textarea
                 label="Viết đánh giá về công ty"
-                id="avaluate"
+                id="comment"
                 placeholder="Nhập vào đây"
                 register={register}
                 setValue={setValue}
                 check={true}
-              />
+              >
+                {errors.comment?.message}
+              </Textarea>
               <Box
                 sx={{
                   width: 200,
@@ -181,6 +196,7 @@ const CandidateInformationCompany = () => {
                   }}
                   sx={{
                     fontSize: "20px",
+                    color: "yellow",
                   }}
                   size="large"
                   emptyIcon={
@@ -193,7 +209,7 @@ const CandidateInformationCompany = () => {
                   </Box>
                 )}
               </Box>
-              <div onChange={(e) => handleCheck(e)}>
+              <div onChange={handleCheck}>
                 <CustomCheckbox label="Ẩn danh" />
               </div>
               <Button onClick={handleSubmit(onSubmit)} name="Đăng đánh giá" />

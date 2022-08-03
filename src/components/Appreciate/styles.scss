@@ -1,0 +1,8 @@
+@use "../../assets/styles/" as *;
+
+.appreciate__active {
+  border: 2px solid $primary-color;
+}
+.fix_display {
+  @include flex(center, flex-end);
+}

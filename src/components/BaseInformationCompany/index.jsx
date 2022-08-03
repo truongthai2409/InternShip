@@ -21,6 +21,7 @@ function BaseInformationCompany({
   rating,
   appreciateList,
 }) {
+  console.log(rating);
   const dispatch = useDispatch();
   // const { rating } = useSelector(state => state.rating)
   const { jobListCompany } = useSelector((state) => state.job);
@@ -119,8 +120,18 @@ function BaseInformationCompany({
                   name="read-only"
                   precision={0.5}
                   readOnly
-                  defaultValue={rating}
+                  value={rating}
                 />
+                {/* <Rating
+                  name="text-feedback"
+                  value={value}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                  sx={{ fontSize: 24 }}
+                /> */}
                 <Typography
                   variant="h6"
                   component="div"
