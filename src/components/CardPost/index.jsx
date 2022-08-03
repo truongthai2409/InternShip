@@ -5,16 +5,71 @@ import DoorFrontIcon from "@mui/icons-material/DoorFront";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
 import Confirmation from "../Confirmation";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  disableJob,
+} from "src/store/slices/main/home/job/jobSlice";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
+  const dispatch = useDispatch();
+  const { jobListActived } = useSelector((state) => state.job);
+
+  const handleCloseJob = () => {
+    const jobDetail = jobListActived.filter((job) => {
+      return job.id === props.idJob;
+    });
+    const jobData = {
+      name: jobDetail[0]?.name,
+      desciption: jobDetail[0]?.desciption,
+      amount: jobDetail[0]?.amount,
+      otherInfo: jobDetail[0]?.otherInfo,
+      salaryMin: jobDetail[0]?.salaryMin,
+      salaryMax: jobDetail[0]?.salaryMax,
+      requirement: jobDetail[0]?.requirement,
+      timeStartStr: jobDetail[0]?.timeStartStr,
+      timeEndStr: jobDetail[0]?.timeEndStr,
+      hr: {
+        id: jobDetail[0]?.hr?.id,
+      },
+      jobType: {
+        id: jobDetail[0]?.jobType?.id,
+      },
+      major: {
+        id: jobDetail[0]?.major?.id,
+      },
+      jobposition: {
+        id: jobDetail[0]?.jobposition?.id,
+      },
+      locationjob: {
+        id: jobDetail[0]?.locationjob?.id,
+        address: jobDetail[0]?.locationjob?.address,
+        district: {
+          id: jobDetail[0]?.locationjob?.district?.id,
+          province: {
+            id: jobDetail[0]?.locationjob?.district?.province?.id,
+            countries: {
+              id: jobDetail[0]?.locationjob?.district?.province?.countries?.id,
+            },
+          },
+        },
+      },
+      status: {
+        id: 4,
+      },
+    };
+    dispatch(disableJob([props.idJob, jobData]));
+
+    setOpen(false)
+  };
+
   const handleOnClick = (e) => {
     let arrayString = e.target.textContent.split(` `);
     let type =
@@ -24,19 +79,20 @@ const CardPost = (props) => {
 
     switch (type) {
       case "Chỉnh sửa":
-        setComponent(<PostJobForm isUpdate = { true } />);
+        setComponent(<PostJobForm isUpdate={true} jobList={jobListActived} idJob = {props.idJob}/>);
         setTitle("Chỉnh sửa công việc");
         break;
       case "Đóng việc":
+        setTitle("Đóng việc");
         setComponent(
           <Confirmation
+            func={handleCloseJob}
             setOpen={setOpen}
             text="Bạn có chắc muốn đóng việc?"
             nameBtnYes="Đóng việc"
             nameBtnNo="Hủy"
           />
         );
-        setTitle("Đóng việc");
         break;
       default:
         setTitle("Danh sách ứng viên đã ứng tuyển");
@@ -98,7 +154,7 @@ const CardPost = (props) => {
           border="0.5px solid #DEDEDE"
           icon={<DoorFrontIcon></DoorFrontIcon>}
           color="#111"
-          name="Đóng"
+          name="Đóng việc"
           fontSize="13px"
           type="close"
         />
