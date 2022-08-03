@@ -21,7 +21,6 @@ function HeaderWithHR(props) {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
-  console.log("avatar:", `http://localhost:8085${profile?.user?.avatar}`)
 
   return (
     <div className="container-header__hr header__hr config">

@@ -10,19 +10,24 @@ const formatLocation = (location) => {
 export const ListJob = ({ listJob, message }) => {
   return (
     <div className="hrpost__list">
-      {listJob.length > 0 ? (listJob.map((job) => (
-        <CardPost
-          key={job.id}
-          status={job.status}
-          jobName={job.name}
-          amount={job.amount}
-          timeStart={job.timeStartStr}
-          timeEnd={job.timeEndStr}
-          timeCreated={job.createDate}
-          companyName={job.hr?.company?.name}
-          companyLocation={formatLocation(job.locationjob)}
-        />
-      ))) : <Null text={message} />}
+      {listJob.length > 0 ? (
+        listJob.map((job) => (
+          <CardPost
+            idJob={job.id}
+            key={job.id}
+            status={job.status}
+            jobName={job.name}
+            amount={job.amount}
+            timeStart={job.timeStartStr}
+            timeEnd={job.timeEndStr}
+            timeCreated={job.createDate}
+            companyName={job.hr?.company?.name}
+            companyLocation={formatLocation(job.locationjob)}
+          />
+        ))
+      ) : (
+        <Null text={message} />
+      )}
     </div>
   );
 };
