@@ -20,6 +20,7 @@ function SearchResultHome({
   const query = useQuery();
   useEffect(() => {
     const { name = "" } = query;
+    console.log(name);
     setSearchValue(name);
   }, [query]);
 

@@ -111,8 +111,8 @@ export const schema = yup
           return value && IMAGE_FORMATS.includes(value[0]?.type);
         }
       )
-      .test("fileSize", " * Ảnh vượt quá kích thước 128kb", (value) => {
-        return value && value[0]?.size <= 131072;
+      .test("fileSize", " * Ảnh vượt quá kích thước 512kb", (value) => {
+        return value && value[0].size <= 512 * 1024;
       })
       .required("Bạn phải tải avatar"),
     district: yup.string().required(" * Bạn phải chọn quận/huyện."),

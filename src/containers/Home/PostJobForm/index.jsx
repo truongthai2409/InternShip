@@ -104,6 +104,7 @@ const PostJobForm = ({ isUpdate = false }) => {
           note: "Không có",
         },
       };
+      console.log(jobData);
       dispatch(addJob(jobData));
     }
   };

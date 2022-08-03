@@ -10,9 +10,11 @@ import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
 import Confirmation from "../Confirmation";
+import PostPartnerForm from "src/containers/Home/PostPartnerForm";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
+  // console.log(props.isDemandPost);
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
   const handleOnClick = (e) => {
@@ -22,27 +24,53 @@ const CardPost = (props) => {
       " " +
       arrayString[arrayString.length - 1];
 
-    switch (type) {
-      case "Chỉnh sửa":
-        setComponent(<PostJobForm isUpdate = { true } />);
-        setTitle("Chỉnh sửa công việc");
-        break;
-      case "Đóng việc":
-        setComponent(
-          <Confirmation
-            setOpen={setOpen}
-            text="Bạn có chắc muốn đóng việc?"
-            nameBtnYes="Đóng việc"
-            nameBtnNo="Hủy"
-          />
-        );
-        setTitle("Đóng việc");
-        break;
-      default:
-        setTitle("Danh sách ứng viên đã ứng tuyển");
-        setComponent(<CandidateList />);
+    // console.log(arrayString);
+
+    if (props.isDemandPost) {
+      switch (type) {
+        case "Chỉnh sửa":
+          setComponent(<PostPartnerForm idDemand={props.idDemand} isUpdate={true} />);
+          setTitle("Chỉnh sửa thông tin đợt thực tập");
+          break;
+        case "Đóng việc":
+          setComponent(
+            <Confirmation
+              setOpen={setOpen}
+              text="Bạn có chắc muốn đóng việc?"
+              nameBtnYes="Đóng việc"
+              nameBtnNo="Hủy"
+            />
+          );
+          setTitle("Đóng việc");
+          break;
+        default:
+          setTitle("Danh sách ứng viên đã ứng tuyển");
+          setComponent(<CandidateList />);
+      }
+      setOpen(true);
+    } else {
+      switch (type) {
+        case "Chỉnh sửa":
+          setComponent(<PostJobForm isUpdate={true} />);
+          setTitle("Chỉnh sửa công việc");
+          break;
+        case "Đóng việc":
+          setComponent(
+            <Confirmation
+              setOpen={setOpen}
+              text="Bạn có chắc muốn đóng việc?"
+              nameBtnYes="Đóng việc"
+              nameBtnNo="Hủy"
+            />
+          );
+          setTitle("Đóng việc");
+          break;
+        default:
+          setTitle("Danh sách ứng viên đã ứng tuyển");
+          setComponent(<CandidateList />);
+      }
+      setOpen(true);
     }
-    setOpen(true);
   };
   return (
     <div className="card-post__container">

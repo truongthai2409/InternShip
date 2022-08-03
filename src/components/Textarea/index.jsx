@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const Textarea = ({
+const   Textarea = ({
   label,
   id,
   type,
@@ -14,6 +14,7 @@ const Textarea = ({
   requirementField = true,
   setValue,
   textAlign,
+  defaultValue
 }) => {
   useEffect(() => {
     register(id);
