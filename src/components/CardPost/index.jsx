@@ -15,6 +15,7 @@ import {
   disableJob,
   getJobById,
 } from "src/store/slices/main/home/job/jobSlice";
+import PostPartnerForm from "src/containers/Home/PostPartnerForm";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,7 @@ const CardPost = (props) => {
     }
     callJob.current--;
   };
-
+console.log("visiting:", jobDetailById);
   const handleCloseJob = () => {
     const jobDetail = jobListActived.filter((job) => {
       return job.id === props.idJob;
@@ -93,8 +94,31 @@ const CardPost = (props) => {
       " " +
       arrayString[arrayString.length - 1];
 
-    switch (type) {
-      case "Chỉnh sửa":
+    if (props.isDemandPost) {
+      switch (type) {
+        case "Chỉnh sửa":
+          setComponent(<PostPartnerForm idDemand={props.idDemand} isUpdate={true} />);
+          setTitle("Chỉnh sửa thông tin đợt thực tập");
+          break;
+        case "Đóng việc":
+          setComponent(
+            <Confirmation
+              setOpen={setOpen}
+              text="Bạn có chắc muốn đóng việc?"
+              nameBtnYes="Đóng việc"
+              nameBtnNo="Hủy"
+            />
+          );
+          setTitle("Đóng việc");
+          break;
+        default:
+          setTitle("Danh sách ứng viên đã ứng tuyển");
+          setComponent(<CandidateList />);
+      }
+      setOpen(true);
+    } else {
+      switch (type) {
+        case "Chỉnh sửa":
         setComponent(
           <PostJobForm
             isUpdate={true}
@@ -119,8 +143,9 @@ const CardPost = (props) => {
       default:
         setTitle("Danh sách ứng viên đã ứng tuyển");
         setComponent(<CandidateList />);
+      }
+      setOpen(true);
     }
-    setOpen(true);
   };
   return (
     <div

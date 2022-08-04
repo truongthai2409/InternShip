@@ -139,6 +139,8 @@ const PartnerInfo = () => {
             {errors.email?.message}
             {errorMessage?.Email}
           </CustomInput>
+        </div>
+        <div className="section-input__container">
           <CustomInput
             label="Mật khẩu"
             id="password"
@@ -189,7 +191,7 @@ const PartnerInfo = () => {
             label="Số điện thoại"
             id="phone"
             type="phone"
-            placeholder="Số điện thoại"
+            placeholder="Vd. 999-999-9999"
             register={register}
           >
             {errors.phone?.message}
@@ -218,7 +220,7 @@ const PartnerInfo = () => {
           </CustomInput>
 
           <CustomInput
-            label="LOGO Trường"
+            label="Logo Trường"
             id="logo"
             type="file"
             register={register}
@@ -233,14 +235,16 @@ const PartnerInfo = () => {
             label="Tên trường"
             type="text"
             id="schoolName"
+            placeholder="Vd. Đại học Bách Khoa"
             register={register}
           >
             {errors.schoolName?.message}
           </CustomInput>
           <CustomInput
-            label="Tên viết tắc của trường"
+            label="Tên viết tắt của trường"
             type="text"
             id="shortName"
+            placeholder="Vd. hust"
             register={register}
           >
             {errors.shortName?.message}
@@ -262,6 +266,7 @@ const PartnerInfo = () => {
             label="Website"
             id="website"
             type="text"
+            placeholder="Vd. hust.edu.vn"
             register={register}
           >
             {errors.website?.message}
@@ -282,7 +287,7 @@ const PartnerInfo = () => {
             label="Số điện thoại của Trường"
             id="phoneSchool"
             type="text"
-            placeholder="Phone"
+            placeholder="Vd. 999-999-9999"
             register={register}
           >
             {errors.phoneSchool?.message}
@@ -346,9 +351,10 @@ const PartnerInfo = () => {
           </div>
         </div>
         <CustomInput
-          label="địa chỉ"
+          label="Địa chỉ"
           id="address"
           type="text"
+          placeholder="Vd. 254, Dương Đình Hội"
           register={register}
         >
           {errors.address?.message}
@@ -356,7 +362,7 @@ const PartnerInfo = () => {
 
         <div className="reg-hr__btns">
           <div className="reg-hr__btns--item" onClick={handleBackClick}>
-            <ArrowButton text="Trở lại" direction="left" />
+            <ArrowButton fontSize="16px" text="Trở lại" direction="left" />
           </div>
           <div className="reg-hr__btns--item">
             <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)} />

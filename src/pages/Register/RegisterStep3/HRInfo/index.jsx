@@ -180,7 +180,7 @@ const HRInfo = () => {
 
         <div className="reg-hr__btns">
           <div className="reg-hr__btns--item" onClick={handleBackClick}>
-            <ArrowButton text="Trở lại" direction="left" />
+            <ArrowButton fontSize="16px" text="Trở lại" direction="left" />
           </div>
           <div className="reg-hr__btns--item">
             <Button name="ĐĂNG KÝ" onClick={handleSubmit(onSubmit)} />

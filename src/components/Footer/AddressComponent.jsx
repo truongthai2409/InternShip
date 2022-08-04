@@ -33,7 +33,9 @@ const AddressComponent = () => {
         </div>
         <div className="address-footer-email">
           <div className="text-footer">
-            <p>Email: tuyendung@r2s.com.vn</p>
+            <a className="email-link__footer" href="mailto:tuyendung@r2s.com.vn">
+              <p>Email: tuyendung@r2s.com.vn</p>
+            </a>
           </div>
         </div>
       </div>

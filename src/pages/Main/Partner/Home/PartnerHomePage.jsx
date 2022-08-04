@@ -6,15 +6,15 @@ import FilterPanelHome from "src/components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobByName,
-  getJobByNameAndLocation,
-  getJobList,
-} from "src/store/slices/main/home/job/jobSlice";
+// import {
+//   getJobByName,
+//   getJobByNameAndLocation,
+//   getJobList,
+// } from "src/store/slices/main/home/job/jobSlice";
 import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 
 const PartnerHomePage = (props) => {
-  const [valueSearch, setValueSearch] = useState("");
+  // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
 
   const dispatch = useDispatch();
@@ -22,10 +22,13 @@ const PartnerHomePage = (props) => {
   const { demandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
+  // console.log(demandDetail, indexPartnerCardActive);
+
 
   useEffect(() => {
+    // console.log(demandList);
     dispatch(getDemandList());
-  }, []);
+  }, [demandList.length]);
 
   // const handleSearch = (value) => {
   //   setValueSearch(value);
@@ -62,9 +65,7 @@ const PartnerHomePage = (props) => {
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
-              <SearchResultHome
-                onChange={getValueLocationAndHandle}
-              />
+              <SearchResultHome onChange={getValueLocationAndHandle} />
             </div>
 
             <FilterPanelHome
@@ -75,9 +76,7 @@ const PartnerHomePage = (props) => {
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">
-                <SearchResultHome
-                  onChange={getValueLocationAndHandle}
-                />
+                <SearchResultHome onChange={getValueLocationAndHandle} />
               </div>
               {demandList ? (
                 <DetailCard

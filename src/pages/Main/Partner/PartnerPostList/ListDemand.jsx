@@ -7,12 +7,13 @@ const formatLocation = (location) => {
       ${location.district?.province?.name}`;
 };
 
-export const ListDemand = ({ demandList, text }) => {
+export const ListDemand = ({ demandList, message }) => {
   return (
     <div className="hrpost__list">
       {demandList && demandList.length > 0 ? (demandList.map((job) => (
         <CardPost
           key={job.id}
+          idDemand={job.id}
           status={job.status}
           jobName={job.name}
           amount={job.amount}
@@ -21,8 +22,9 @@ export const ListDemand = ({ demandList, text }) => {
           timeCreated={job.createDate}
           companyName={job.hr?.company?.name || job?.universityDTO?.name}
           companyLocation={job?.universityDTO?.address}
+          isDemandPost={true}
         />
-      ))) : <Null text={text} />}
+      ))) : <Null text={message} />}
     </div>
   );
 };

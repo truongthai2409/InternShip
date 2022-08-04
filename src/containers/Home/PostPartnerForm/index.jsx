@@ -3,7 +3,6 @@ import WorkIcon from "@mui/icons-material/Work";
 import CustomInput from "../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import CustomTextarea from "../../../components/CustomTextarea";
 import "./styles.scss";
 import Button from "../../../components/Button";
 import { schema } from "./handleForm";
@@ -13,11 +12,11 @@ import { useEffect, useState } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import { useNavigate } from "react-router-dom";
-import { addDemand } from "src/store/slices/main/home/demand/demandSlice";
-import { format } from "date-fns";
+import { addDemand, updateDemand, getDemandById } from "src/store/slices/main/home/demand/demandSlice";
 import DescriptionForm from "src/components/DescriptionForm";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import Textarea from "src/components/Textarea";
+import moment from "moment";
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan/ Doanh nghiệp,
 
@@ -30,6 +29,8 @@ Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuy�
 Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.
 
 Trân trọng cảm ơn!`;
+
+
 
 const jobTypeList = [
   {
@@ -46,14 +47,16 @@ const jobTypeList = [
   },
 ];
 
-const PostPartnerForm = (props) => {
+const PostPartnerForm = ({idDemand, isUpdate = false }) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const { status } = useSelector((state) => state.demand);
   const { activeUser } = useSelector((state) => state.university);
+  const { demandDetail } = useSelector((state) => state.demand);  
   const [openForm, setOpenForm] = useState(false);
+  console.log(demandDetail);
 
-  // console.log(status);
+  // console.log(activeUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,12 +65,15 @@ const PostPartnerForm = (props) => {
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getJobPositionList());
+    dispatch(getDemandById(idDemand))
     dispatch(getPartnerByUserID(idUser));
   }, [idUser]);
+
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -77,17 +83,24 @@ const PostPartnerForm = (props) => {
     setOpenForm(!openForm);
     console.log("isClicked");
   };
+  if (isUpdate) {
+    console.log(demandDetail?.desciption);
+    setValue("jobName", demandDetail?.name)
+    setValue("jobDescription", demandDetail?.desciption)
+    setValue("timeStart", demandDetail?.createDate)
+    setValue("timeEnd", demandDetail?.end)
+    setValue("amount", demandDetail?.amount)
+  }
 
   const onSubmit = (data) => {
     const demandData = {
       demand: JSON.stringify({
-        name: data.name,
-        description: SAMPLEFORM,
-        requirement: "Không có yêu cầu",
-        ortherInfo: "Không có thông tin thêm",
-        startStr: data.timeStart,
-        endStr: data.timeEnd,
-        amount: data.amount,
+        name: data.jobName,
+        description: data.jobDescription,
+        requirement: "",
+        ortherInfo: "",
+        startStr: moment(data.timeStart).format("YYYY-MM-DD"),
+        endStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         partner: {
           id: parseInt(activeUser?.id),
         },
@@ -100,13 +113,21 @@ const PostPartnerForm = (props) => {
         jobType: {
           id: parseInt(data.jobType),
         },
+        amount: parseInt(data.amount),
       }),
       fileSV: data.fileSV[0],
     };
+  
+    console.log(majorList, jobPosition);
 
     console.log(demandData);
 
-    dispatch(addDemand(demandData));
+    if(isUpdate) {
+      dispatch(updateDemand({ idDemand, demandData }))
+    }
+    else {
+      dispatch(addDemand(demandData));
+    }
   };
 
   if (status === "success") {
@@ -127,14 +148,14 @@ const PostPartnerForm = (props) => {
             </p>
             <div className="partner-post-title">
               <CustomInput
-                label="Chức danh"
-                id="name"
+                label="Tên công việc"
+                id="jobName"
                 value="test"
                 type="text"
                 placeholder="Vd. Thực tập thiết kế UI-UX"
                 register={register}
               >
-                {errors.name?.message}
+                {errors.jobName?.message}
               </CustomInput>
             </div>
             <div className="row-2-col">
@@ -165,7 +186,7 @@ const PostPartnerForm = (props) => {
               <div className="partner-post__select">
                 <SelectCustom
                   id="jobType"
-                  label="Vị trí công việc"
+                  label="Hình thức làm việc"
                   placeholder="Vui lòng chọn"
                   options={jobTypeList}
                   register={register}
@@ -174,7 +195,7 @@ const PostPartnerForm = (props) => {
                 </SelectCustom>
               </div>
               <CustomInput
-                label="Số lượng cần tuyển"
+                label="Số lượng ứng viên"
                 id="amount"
                 type="number"
                 placeholder="Nhập số lượng"
@@ -185,10 +206,9 @@ const PostPartnerForm = (props) => {
             </div>
             <div className="row-2-col">
               <CustomInput
-                label="Ngày bắt đầu tuyển"
+                label="Ngày bắt đầu ứng tuyển"
                 id="timeStart"
                 type="date"
-                min={format(new Date(), "yyyy-MM-dd")}
                 placeholder=""
                 register={register}
               >
@@ -196,7 +216,7 @@ const PostPartnerForm = (props) => {
               </CustomInput>
 
               <CustomInput
-                label="Ngày hết hạn tuyển"
+                label="Ngày hết hạn ứng tuyển"
                 id="timeEnd"
                 type="date"
                 placeholder=""
@@ -212,6 +232,7 @@ const PostPartnerForm = (props) => {
                 type="description"
                 placeholder="Thư giới thiệu"
                 register={register}
+                setValue={setValue}
               >
                 {errors.jobDescription?.message}
               </Textarea>
@@ -242,7 +263,9 @@ const PostPartnerForm = (props) => {
               </CustomInput>
             </div>
             <div className="partner-post__action">
-              <Button onClick={handleSubmit(onSubmit)} name="Đăng tuyển" />
+              <Button onClick={handleSubmit(onSubmit)} 
+                name={isUpdate ? "Chỉnh sửa" : "Đăng tuyển"}
+              />
             </div>
           </div>
         </div>

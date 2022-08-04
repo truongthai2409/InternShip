@@ -39,6 +39,10 @@
   max-width: 25%;
 }
 
+.contact__container {
+  margin-left: 30px;
+}
+
 .address-footer-headquarters,
 .address-footer-office {
   font-weight: 600;
@@ -60,7 +64,7 @@
   display: flex;
   align-items: flex-start;
   line-height: 30px;
-  color: $primary-color-background-2;
+  color: $color-black-3;
 
   & .text-footer {
     display: flex;
@@ -81,7 +85,8 @@
 .list-header {
   & .text-wrap {
     & .text {
-      color: $primary-color-background-2;
+      color: $color-black-3;
+      font-weight: 500;
       line-height: 30px;
 
       &:hover {
@@ -143,6 +148,13 @@
   .mobile-app-link-chplay-img,
   .mobile-app-link-appstore-img {
     width: 300px !important;
+  }
+}
+
+.email-link__footer {
+  color: $color-black-3;
+  &:hover {
+    color: rgb(87, 106, 126);
   }
 }
 

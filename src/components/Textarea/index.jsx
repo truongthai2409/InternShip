@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const Textarea = ({
+const   Textarea = ({
   label,
   id,
   type,
@@ -36,7 +36,7 @@ const Textarea = ({
   };
 
   return (
-    <div style={{textAlign: textAlign}} className="custom-textarea">
+    <div style={{textAlign: textAlign ? textAlign : ""}} className="custom-textarea">
       <label htmlFor={id} className="custom-textarea__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}

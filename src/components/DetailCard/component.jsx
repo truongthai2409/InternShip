@@ -100,9 +100,9 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobType?.name || "fulltime"} />
+                  <TagName title={jobType?.name || jobDetail?.jobType?.name || "Không có"} />
                   <TagName
-                    title={jobPosition?.name || jobDetail?.position?.name}
+                    title={jobPosition?.name || jobDetail?.position?.name || "Không có"}
                   />
                   <TagName title={major?.name || "Công nghệ thông tin"} />
                 </div>
