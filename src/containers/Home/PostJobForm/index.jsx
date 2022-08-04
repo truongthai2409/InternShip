@@ -23,16 +23,13 @@ import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 
-
-
-const PostJobForm = ({ isUpdate = false, idJob }) => {
+const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
-  const { jobPosition, status, jobDetailById } = useSelector(
-    (state) => state.job
-  );
+  const { jobPosition, status } = useSelector((state) => state.job);
   const { profile } = useSelector((state) => state.user);
 
+  console.log("jobDetail", jobDetail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -73,17 +70,14 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-
-  }, [])
   if (isUpdate) {
-    setValue("name", jobDetailById?.name);
-    setValue("amount", jobDetailById?.amount);
-    setValue("address", jobDetailById?.locationjob?.address);
-    setValue("salaryMin", jobDetailById?.salaryMin);
-    setValue("salaryMax", jobDetailById?.salaryMax);
-    setValue("timeStart", jobDetailById?.timeStartStr);
-    setValue("timeEnd", jobDetailById?.timeEndStr);
+    setValue("name", jobDetail?.name);
+    setValue("amount", jobDetail?.amount);
+    setValue("address", jobDetail?.locationjob?.address);
+    setValue("salaryMin", jobDetail?.salaryMin);
+    setValue("salaryMax", jobDetail?.salaryMax);
+    setValue("timeStart", jobDetail?.timeStartStr);
+    setValue("timeEnd", jobDetail?.timeEndStr);
   }
 
   const onSubmit = (data) => {
@@ -118,7 +112,6 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
           note: "Không có",
         },
       };
-      console.log(jobData);
       dispatch(addJob(jobData));
     }
   };
@@ -160,7 +153,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     id="jobType"
                     label="Hình thức làm việc"
                     placeholder="Vui lòng chọn"
-                    defaultValue={jobDetailById?.jobType?.id}
+                    defaultValue={jobDetail?.jobType?.id}
                     options={jobTypeList}
                     register={register}
                   >
@@ -172,7 +165,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     id="major"
                     label="Chuyên ngành"
                     placeholder="Vui lòng chọn"
-                    defaultValue={jobDetailById?.major?.id}
+                    defaultValue={jobDetail?.major?.id}
                     options={majorList}
                     register={register}
                   >
@@ -186,7 +179,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     id="jobPosition"
                     label="Vị trí"
                     placeholder="Vui lòng chọn"
-                    defaultValue={jobDetailById?.jobposition?.id}
+                    defaultValue={jobDetail?.jobposition?.id}
                     options={jobPosition}
                     register={register}
                   >
@@ -230,7 +223,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     label="Quốc gia"
                     placeholder="Vui lòng chọn"
                     defaultValue={
-                      jobDetailById?.locationjob?.district?.province?.countries
+                      jobDetail?.locationjob?.district?.province?.countries
                         ?.id
                     }
                     options={countryList}
@@ -246,9 +239,9 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     placeholder="Vui lòng chọn"
                     dispatch={dispatch}
                     defaultValue={
-                      isUpdate ? 
-                      jobDetailById?.locationjob?.district?.province?.id
-                      : ""
+                      isUpdate
+                        ? jobDetail?.locationjob?.district?.province?.id
+                        : ""
                     }
                     action={getDistrictList}
                     options={provinceList}
@@ -262,7 +255,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                     id="district"
                     label="Quận/Huyện"
                     placeholder="Vui lòng chọn"
-                    defaultValue={jobDetailById?.locationjob?.district?.id}
+                    defaultValue={jobDetail?.locationjob?.district?.id}
                     options={districtList}
                     register={register}
                   >
@@ -287,7 +280,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                   id="jobDescription"
                   placeholder="Nhập mô tả công việc"
                   register={register}
-                  defaultValue={isUpdate ? jobDetailById?.desciption : ""}
+                  defaultValue={isUpdate ? jobDetail?.desciption : ""}
                   setValue={setValue}
                   check={false}
                 >
@@ -299,7 +292,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                   label="Yêu cầu công việc"
                   id="jobRequirement"
                   placeholder="Nhập yêu cầu công việc"
-                  defaultValue={isUpdate ? jobDetailById?.requirement : ""}
+                  defaultValue={isUpdate ? jobDetail?.requirement : ""}
                   setValue={setValue}
                   register={register}
                   check={false}
@@ -312,7 +305,7 @@ const PostJobForm = ({ isUpdate = false, idJob }) => {
                   label="Quyền lợi của ứng viên"
                   id="benefits"
                   placeholder="Nhập quyền lợi của ứng viên"
-                  defaultValue={jobDetailById?.otherInfo}
+                  defaultValue={jobDetail?.otherInfo}
                   register={register}
                   setValue={setValue}
                   check={false}

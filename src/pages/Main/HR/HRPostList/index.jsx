@@ -102,6 +102,7 @@ const HRPostList = (props) => {
             <ListJob
               listJob={jobListDisabled}
               message="Không có công việc đã đóng."
+              isDisabled={true}
             />
           </TabPanel>
         </Box>

@@ -1,6 +1,11 @@
 @use "../../assets/styles/" as *;
 
 .button-action__wrapper {
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
   .button-action__container {
     height: 100%;
     display: flex;
@@ -17,5 +22,4 @@
       margin-left: 10px;
     }
   }
-
 }
