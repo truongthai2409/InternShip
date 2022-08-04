@@ -87,6 +87,10 @@ const jobSlice = createSlice({
           toast.error("Chỉnh sửa trạng thái công việc thất bại!");
       }
     });
+    builder.addCase(updateJob.fulfilled, (state, { payload }) => {
+      toast.success("Chỉnh sửa công việc thành công!");
+      
+    })
   },
 });
 
@@ -219,6 +223,26 @@ export const updateStatusJob = createAsyncThunk(
       });
   }
 );
+
+// function use for update infor of job by id job
+/**
+ * para
+ * args[0] : id job
+ * args[1] : infor of job
+ */
+export const updateJob = createAsyncThunk(
+  "job/updateJob",
+  async (args) => {
+    return axios
+    .put(`http://localhost:8085/api/r2s/job/${args[0]}`, args[1])
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    })
+  }
+)
 
 export const {
   updateIdJobActive,

@@ -18,13 +18,24 @@ const CardPost = (props) => {
   const [open, setOpen] = useState(false);
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
+  const action = useRef("");
   const dispatch = useDispatch();
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
 
-  const jobList = jobListActived.concat(jobListDisabled)
+  const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
   });
+
+  const update = () => {
+    action.current = "update"
+  }
+  const read = () => {
+    action.current = "read"
+  }
+  const close = () => {
+    action.current = "close"
+  }
 
   const handleCloseJob = () => {
     const jobData = {
@@ -33,20 +44,19 @@ const CardPost = (props) => {
       },
     };
     dispatch(updateStatusJob([props.idJob, jobData]));
-
     setOpen(false);
   };
 
-  const handleOnClick = (e) => {
-    let arrayString = e.target.textContent.split(` `);
-    let type =
-      arrayString[arrayString.length - 2] +
-      " " +
-      arrayString[arrayString.length - 1];
+  const handleOnClick = () => {
+    // let arrayString = e.target.textContent.split(` `);
+    // let type =
+    //   arrayString[arrayString.length - 2] +
+    //   " " +
+    //   arrayString[arrayString.length - 1];
 
     if (props.isDemandPost) {
-      switch (type) {
-        case "Chỉnh sửa":
+      switch (action.current) {
+        case "update":
           setComponent(
             <PostPartnerForm idDemand={props.idDemand} isUpdate={true} />
           );
@@ -66,21 +76,23 @@ const CardPost = (props) => {
         default:
           setTitle("Danh sách ứng viên đã ứng tuyển");
           setComponent(<CandidateList />);
-      }
-      setOpen(true);
+        }
+        setOpen(true);
     } else {
-      switch (type) {
-        case "Chỉnh sửa":
+      switch (action.current) {
+        case "update":
           setComponent(
             <PostJobForm
               isUpdate={true}
               jobDetail={jobDetail[0]}
               idJob={props.idJob}
+              disabled={props.isDisabled}
+              setOpen={setOpen}
             />
           );
           setTitle("Chỉnh sửa công việc");
           break;
-        case "Đóng việc":
+        case "close":
           setTitle("Đóng việc");
           setComponent(
             <Confirmation
@@ -126,6 +138,7 @@ const CardPost = (props) => {
       <div className="card-post__action">
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={read}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -137,6 +150,7 @@ const CardPost = (props) => {
         />
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={update}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -148,6 +162,7 @@ const CardPost = (props) => {
         />
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={close}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"

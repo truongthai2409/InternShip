@@ -13,6 +13,7 @@ import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   addJob,
   getJobPositionList,
+  updateJob,
 } from "src/store/slices/main/home/job/jobSlice";
 import {
   getDistrictList,
@@ -23,13 +24,39 @@ import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 
-const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
+const jobTypeList = [
+  {
+    id: 1,
+    name: "Full time",
+  },
+  {
+    id: 2,
+    name: "Part time",
+  },
+  {
+    id: 3,
+    name: "Remote",
+  },
+];
+
+const countryList = [
+  {
+    id: 231,
+    name: "Việt Nam",
+  },
+];
+
+const PostJobForm = ({
+  isUpdate = false,
+  jobDetail,
+  disabled = false,
+  setOpen,
+}) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
   const { profile } = useSelector((state) => state.user);
 
-  console.log("jobDetail", jobDetail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,27 +66,23 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
     dispatch(getJobPositionList());
   }, []);
 
-  const jobTypeList = [
-    {
-      id: 1,
-      name: "Full time",
-    },
-    {
-      id: 2,
-      name: "Part time",
-    },
-    {
-      id: 3,
-      name: "Remote",
-    },
-  ];
+  useEffect(() => {
+    if (isUpdate) {
+      dispatch(getDistrictList(jobDetail?.locationjob?.district?.province?.id));
+    }
+  }, []);
 
-  const countryList = [
-    {
-      id: 231,
-      name: "Việt Nam",
-    },
-  ];
+  useEffect(() => {
+    if (isUpdate) {
+      setValue("name", jobDetail?.name);
+      setValue("amount", jobDetail?.amount);
+      setValue("address", jobDetail?.locationjob?.address);
+      setValue("salaryMin", jobDetail?.salaryMin);
+      setValue("salaryMax", jobDetail?.salaryMax);
+      setValue("timeStart", jobDetail?.timeStartStr);
+      setValue("timeEnd", jobDetail?.timeEndStr);
+    }
+  }, []);
 
   const {
     register,
@@ -69,17 +92,7 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  if (isUpdate) {
-    setValue("name", jobDetail?.name);
-    setValue("amount", jobDetail?.amount);
-    setValue("address", jobDetail?.locationjob?.address);
-    setValue("salaryMin", jobDetail?.salaryMin);
-    setValue("salaryMax", jobDetail?.salaryMax);
-    setValue("timeStart", jobDetail?.timeStartStr);
-    setValue("timeEnd", jobDetail?.timeEndStr);
-  }
-
+  console.log("jobdetail:", jobDetail);
   const onSubmit = (data) => {
     if (!isUpdate) {
       const jobData = {
@@ -109,12 +122,55 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
             id: data.district,
           },
           address: data.address,
-          note: "Không có",
         },
       };
       dispatch(addJob(jobData));
+    } else {
+      const jobData = {
+        name: data.name,
+        hr: {
+          id: profile?.id,
+        },
+        desciption: data.jobDescription,
+        major: {
+          id: parseInt(data.major),
+        },
+        jobType: {
+          id: parseInt(data.jobType),
+        },
+        amount: parseInt(data.amount),
+        salaryMin: data.salaryMin,
+        salaryMax: data.salaryMax,
+        requirement: data.jobRequirement,
+        otherInfo: data.benefits,
+        timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+        timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
+        jobposition: {
+          id: parseInt(data.jobPosition),
+        },
+        locationjob: {
+          id: jobDetail.locationjob.id,
+          district: {
+            id: parseInt(data.district),
+            province: {
+              id: parseInt(data.province),
+              countries: {
+                id: jobDetail?.locationjob?.district?.province?.countries?.id,
+              },
+            },
+          },
+          address: data.address,
+        },
+        status: {
+          id: 1,
+        },
+      };
+      console.log("job update:", jobData);
+      dispatch(updateJob([jobDetail.id, jobData]));
+      setOpen(false);
     }
   };
+
   if (status === "success") {
     navigate("/hr/list");
   }
@@ -223,8 +279,7 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
                     label="Quốc gia"
                     placeholder="Vui lòng chọn"
                     defaultValue={
-                      jobDetail?.locationjob?.district?.province?.countries
-                        ?.id
+                      jobDetail?.locationjob?.district?.province?.countries?.id
                     }
                     options={countryList}
                     register={register}
@@ -239,9 +294,7 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
                     placeholder="Vui lòng chọn"
                     dispatch={dispatch}
                     defaultValue={
-                      isUpdate
-                        ? jobDetail?.locationjob?.district?.province?.id
-                        : ""
+                      jobDetail?.locationjob?.district?.province?.id
                     }
                     action={getDistrictList}
                     options={provinceList}
@@ -343,6 +396,7 @@ const PostJobForm = ({ isUpdate = false, idJob, jobDetail }) => {
                 <Button
                   onClick={handleSubmit(onSubmit)}
                   name={isUpdate ? "Chỉnh sửa" : "Đăng tuyển"}
+                  disabled={disabled}
                 />
               </div>
             </div>
