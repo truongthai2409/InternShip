@@ -16,7 +16,6 @@ const DetailCard = ({
   jobDetailById,
   demandPartner = false,
 }) => {
-  // console.log(jobDetail);
   return (
     <div>
       {jobListName && jobListName.length > 0 ? (

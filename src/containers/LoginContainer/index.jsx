@@ -27,7 +27,7 @@ const LoginContainer = () => {
       <h1 className="login-container__title">Đăng nhập</h1>
       <Login />
       <div className="login-container__footer">
-        <Link to="/">Quên mật khẩu?</Link>
+        <Link to="/forgot-password">Quên mật khẩu?</Link>
         <Typography
           variant="h6"
           component="div"

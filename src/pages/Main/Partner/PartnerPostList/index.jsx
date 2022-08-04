@@ -48,6 +48,7 @@ function a11yProps(index) {
 const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
+  const [partnerPostList, setPartnerPostList] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { activeUser } = useSelector((state) => state.university);
@@ -61,6 +62,7 @@ const PartnerPostList = (props) => {
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
     dispatch(getDemandListByUniId(activeUser?.universityDTO?.id));
+    setPartnerPostList(demandListUniversity)
   }, [activeUser?.universityDTO?.id]);
 
   return (
@@ -73,18 +75,18 @@ const PartnerPostList = (props) => {
           <Statistic
             title="Điểm khả dụng"
             firstObject={{
-              score: demandListUniversity?.contents.length,
+              score: demandListUniversity?.contents?.length,
               description: "Lượt đăng tuyển",
             }}
             secondObject={{
-              score: demandListUniversity?.contents.length,
+              score: 0,
               description: "Lượt xem hồ sơ",
             }}
           />
           <Statistic
             title="Trạng thái tin đăng"
             firstObject={{
-              score: demandListUniversity?.contents.length,
+              score: demandListUniversity?.contents?.length,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
@@ -101,10 +103,10 @@ const PartnerPostList = (props) => {
             </Tabs>
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
-            <ListDemand demandList={demandListUniversity.contents} text="Không có đợt thực tập đăng tuyển." />
+            <ListDemand demandList={demandListUniversity.contents} message="Không có đợt thực tập đăng tuyển." />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
-            <ListDemand demandList={undefined} text="Không có đợt thực tập đã đóng." />
+            <ListDemand demandList={undefined} message="Không có đợt thực tập đã đóng." />
           </TabPanel>
         </Box>
       </div>

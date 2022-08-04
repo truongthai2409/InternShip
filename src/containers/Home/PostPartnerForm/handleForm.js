@@ -1,13 +1,34 @@
+import moment from "moment";
 import * as yup from "yup";
+
+const date = moment(Date.now()).format("MM-DD-YYYY").toString();
+const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
+const tomorow = new Date();
+const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
+  "MM-DD-YYYY"
+);
 
 // yup validate form post job form
 export const schema = yup
   .object({
-    name: yup.string().required(" * Bạn phải điền chức danh."),
-    major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
+    jobName: yup.string().required(" * Bạn phải điền chức danh."),
     jobPosition: yup.string().required(" * Bạn phải chọn vị trí công việc."),
-    timeStart: yup.string().required(" * Bạn phải chọn ngày bắt đầu tuyển."),
+    major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
     jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
+    timeStart: yup
+      .date()
+      .min(
+        `${date}`,
+        ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`
+      )
+      .required(),
+    timeEnd: yup
+      .date()
+      .min(`${tomorowFormat}`, "Ngày hết hạn phải lớn hơn ngày bắt đầu")
+      .required(),
+    jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
+    // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
+    // otherInfo: yup.string(),
     amount: yup
       .number()
       .typeError(
@@ -15,13 +36,21 @@ export const schema = yup
       )
       .min(1, " * Số lượng ứng viên phải lớn hơn 0. ")
       .integer(" * Số lượng ứng viên phải là số nguyên. "),
-    timeEnd: yup.string().required(" * Bạn phải chọn ngày hết hạn tuyển."),
-    jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
-    // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
-    // otherInfo: yup.string(),
     fileSV: yup
       .mixed()
-      .nullable()
-      .required("* Bạn phải gửi danh sách sinh viên"),
+      .test(
+        "fileSize",
+        " * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
+        (value) => {
+          return value && value[0].size <= 512 * 1024;
+        }
+      )
+      .test("type", " * Chỉ hỗ trợ xlsx.", (value) => {
+        return (
+          value &&
+            value[0].type ===
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+      }),
   })
   .required();

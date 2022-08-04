@@ -50,25 +50,16 @@ const HRPostList = (props) => {
   const handleChange = (event, newValue) => setValue(newValue);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { jobDetail, error, jobListActived, jobListDisabled } = useSelector(
+  const { jobDetail, jobListActived, jobListDisabled } = useSelector(
     (state) => state.job
   );
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
-    // if (status === "success") dispatch(updateStatusAddJob("fail"));
   }, [jobDetail]);
 
   return (
     <div className="hr-post__wrapper">
-      <div className="hr-post__list-bt">
-        <Button
-          onClick={() => {
-            navigate("/hr/post");
-          }}
-          name="ĐĂNG BÀI"
-        ></Button>
-      </div>
       <div className="hr-post-list__content">
         <div className="hr-post-list__statistic">
           <Statistic

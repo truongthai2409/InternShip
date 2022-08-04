@@ -27,10 +27,7 @@ const jobSlice = createSlice({
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
-    },
-    // updateStatusAddJob: (state, action) => {
-    //   state.status = action.payload;
-    // }
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
@@ -192,9 +189,10 @@ export const getJobByCompany = createAsyncThunk(
   }
 );
 
-export const disableJob = createAsyncThunk("job/disableJob", async (jobId) => {
+export const disableJob = createAsyncThunk("job/disableJob", async (args) => {
+  console.log("args", args[0], args[1]);
   return axios
-    .put(`${baseURL}/api/r2s/job/${jobId}`)
+    .put(`http://localhost:8085/api/r2s/job/6`, args[1])
     .then((response) => {
       return response.data;
     })
@@ -203,6 +201,9 @@ export const disableJob = createAsyncThunk("job/disableJob", async (jobId) => {
     });
 });
 
-export const { updateIdJobActive, updateIndexCardActive, updateStatusAddJob } =
-  jobSlice.actions;
+export const {
+  updateIdJobActive,
+  updateIndexCardActive,
+  updateStatusAddJob,
+} = jobSlice.actions;
 export default jobSlice;

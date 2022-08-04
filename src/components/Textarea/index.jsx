@@ -13,6 +13,7 @@ const Textarea = ({
   check = false,
   requirementField = true,
   setValue,
+  defaultValue,
   textAlign,
 }) => {
   useEffect(() => {
@@ -35,7 +36,10 @@ const Textarea = ({
   };
 
   return (
-    <div style={{ textAlign: textAlign }} className="custom-textarea">
+    <div
+      style={{ textAlign: textAlign ? textAlign : "" }}
+      className="custom-textarea"
+    >
       <label htmlFor={id} className="custom-textarea__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}
@@ -52,6 +56,7 @@ const Textarea = ({
           theme="snow"
           onChange={handleOnChange}
           placeholder={placeholder}
+          value={defaultValue ? defaultValue : ""}
         />
         {check ? null : (
           <p className="custom-textarea__error">

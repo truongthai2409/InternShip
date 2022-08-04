@@ -21,7 +21,6 @@ function HeaderWithHR(props) {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
-  // console.log("avatar:", `http://localhost:8085${profile?.user?.avatar}`)
 
   return (
     <div className="container-header__hr header__hr config">
@@ -109,7 +108,7 @@ function HeaderWithHR(props) {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">Chào, {profile?.user?.firstName || nameUser}</h4>
+          <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           <AccountMenu
             linkImg={
               profile?.user?.avatar

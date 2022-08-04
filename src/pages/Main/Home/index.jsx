@@ -16,6 +16,7 @@ const Home = (props) => {
   const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
+  // console.log(jobDetail, indexCardActive);
 
   useEffect(() => {
     const dataSearch = {
