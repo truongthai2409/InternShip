@@ -56,7 +56,7 @@ const Textarea = ({
           theme="snow"
           onChange={handleOnChange}
           placeholder={placeholder}
-          value={defaultValue ? defaultValue : ""}
+          defaultValue={defaultValue}
         />
         {check ? null : (
           <p className="custom-textarea__error">

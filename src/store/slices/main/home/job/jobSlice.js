@@ -72,9 +72,20 @@ const jobSlice = createSlice({
     });
     builder.addCase(addJob.fulfilled, (state) => {
       toast.success("Đăng tuyển công việc thành công!");
+      state.status = "success"
     });
-    builder.addCase(disableJob.fulfilled, (state, { payload }) => {
-      toast.success("Đóng công việc thành công!");
+    builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
+      switch (payload.status.id) {
+        case 4:
+          state.jobListActived = state.jobListActived.filter(job => {
+            return job.id !== payload.id;
+          })
+          state.jobListDisabled.push(payload);
+          toast.success("Đóng công việc thành công!");
+          break;
+        default:
+          toast.error("Chỉnh sửa trạng thái công việc thất bại!");
+      }
     });
   },
 });
@@ -189,21 +200,28 @@ export const getJobByCompany = createAsyncThunk(
   }
 );
 
-export const disableJob = createAsyncThunk("job/disableJob", async (args) => {
-  console.log("args", args[0], args[1]);
-  return axios
-    .put(`http://localhost:8085/api/r2s/job/6`, args[1])
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return error.response.data;
-    });
-});
+// function use for update status of job by id job
+/**
+ * para
+ * args[0] : id job
+ * args[1] : status
+ */
+export const updateStatusJob = createAsyncThunk(
+  "job/updateStatusJob",
+  async (args) => {
+    return axios
+      .put(`http://localhost:8085/api/r2s/admin/job/status/${args[0]}`, args[1])
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
 
 export const {
   updateIdJobActive,
   updateIndexCardActive,
-  updateStatusAddJob,
 } = jobSlice.actions;
 export default jobSlice;

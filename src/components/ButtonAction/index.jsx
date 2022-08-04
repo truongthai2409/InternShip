@@ -1,6 +1,3 @@
-import { useState } from "react";
-import CandidateList from "src/pages/Main/HR/CandidateList";
-import Modal from "../Modal";
 import "./styles.scss";
 
 const ButtonAction = ({
@@ -13,12 +10,11 @@ const ButtonAction = ({
   icon,
   fontSize,
   color = "",
-  type,
+  disabled = false
 }) => {
   return (
     <div
-      type="button"
-      className="button-action__wrapper"
+      className={`button-action__wrapper ${disabled ? "disabled" : ""}`}
       style={{ width: width, height: height, border: border, color: color }}
     >
       <div onClick={onClick} className="button-action__container">
