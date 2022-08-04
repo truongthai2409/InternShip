@@ -8,7 +8,7 @@ const Textarea = ({
   id,
   type,
   placeholder,
-  children=null,
+  children = null,
   register,
   check = false,
   requirementField = true,
@@ -21,8 +21,8 @@ const Textarea = ({
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
-  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên."
-  
+  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên.";
+
   const handleOnChange = (content, delta, source, editor) => {
     if (editor.getText().length <= 1) {
       setShowError1(true);
@@ -35,7 +35,7 @@ const Textarea = ({
   };
 
   return (
-    <div style={{textAlign: textAlign}} className="custom-textarea">
+    <div style={{ textAlign: textAlign }} className="custom-textarea">
       <label htmlFor={id} className="custom-textarea__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}
@@ -55,7 +55,13 @@ const Textarea = ({
         />
         {check ? null : (
           <p className="custom-textarea__error">
-            {((children===null) ? (showError1 ? errorMessage : '') : (showError2 ? children : '')) || (
+            {(children === null
+              ? showError1
+                ? errorMessage
+                : ""
+              : showError2
+              ? children
+              : "") || (
               <span
                 style={{
                   marginTop: "2px",

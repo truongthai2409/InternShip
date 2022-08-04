@@ -20,8 +20,11 @@ import {
   getApplyListByIdCandidate,
 } from "src/store/slices/main/candidate/apply/applySlice";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
-const CardJob = ({ jobCare, jobApplied }) => {
+const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const { profile } = useSelector((state) => state.authentication);
+  const { candidateInfoByUsername } = useSelector(
+    (state) => state.infoCandidate
+  );
   const dispatch = useDispatch();
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
@@ -36,7 +39,8 @@ const CardJob = ({ jobCare, jobApplied }) => {
     await dispatch(deleteApply(jobApplied.id)).then(
       toast.success("Đã xóa job thành công")
     );
-    dispatch(getApplyListByIdCandidate(profile.idUser));
+    await dispatch(getCandidateByUserName(profile.username));
+    await dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
   };
 
   const handleAddJob = async (e) => {
@@ -45,6 +49,13 @@ const CardJob = ({ jobCare, jobApplied }) => {
     if (!res.payload.cv) {
       toast.error("Bạn chưa có CV, vui lòng cập nhật");
     } else {
+      // if (jobCare.jobCare.id) {
+      //   // for (let j = 0; j < eleDuplicate.length; j++) {
+      //   //   if (eleDuplicate[j].jobCare.id === jobCare.jobCare.id) {
+      //   //     toast.success("Bạn đã apply job này, vui lòng kiểm tra lại");
+      //   //   }
+      //   // }
+      // } else {
       const applyData = {
         apply: JSON.stringify({
           jobApp: {
@@ -57,10 +68,11 @@ const CardJob = ({ jobCare, jobApplied }) => {
         }),
         fileCV: res.cv,
       };
+
       const resApply = await dispatch(addApply(applyData));
-      console.log(resApply);
       if (resApply.type === "apply_candidate/addApply/fulfilled") {
         toast.success("Đã nộp CV thành công");
+        // }
       }
     }
   };

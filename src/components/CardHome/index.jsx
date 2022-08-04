@@ -16,13 +16,13 @@ import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
 
-function CardHome(props) {
+const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
   var isMark =
     careListOfPrivate &&
-    careListOfPrivate.filter((job) => job.jobCare.id === props.id);
+    careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
   const isMarkLength = isMark && isMark.length > 0 ? true : false;
 
   React.useEffect(() => {
@@ -46,12 +46,14 @@ function CardHome(props) {
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
   };
+
   var handleRerender = async (id) => {
     if (id) {
       // setId(id);
       // dispatch(getMarkByUser(profile.username));
     }
   };
+
   return (
     <div
       onClick={handleClick}
@@ -120,6 +122,6 @@ function CardHome(props) {
       </div>
     </div>
   );
-}
+};
 
 export default CardHome;

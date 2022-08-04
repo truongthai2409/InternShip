@@ -25,6 +25,9 @@ const markJobSlice = createSlice({
     builder.addCase(getMarkByUserAndJob.fulfilled, (state, { payload }) => {
       state.careJob = payload;
     });
+    builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
+      state.careListOfPrivate = payload.contents;
+    });
     builder.addCase(deleteMark.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;
@@ -49,6 +52,22 @@ export const getMarkByUser = createAsyncThunk(
   async (userName) => {
     return axios
       .get(`${baseURL}/api/r2s/carelist/user/${userName}/?no=0&limit=10`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getJobByNameAndLocation = createAsyncThunk(
+  "job/getJobByNameAndLocation",
+  async (dataSearch) => {
+    return axios
+      .get(`${baseURL}/api/r2s/job/search`, {
+        params: dataSearch,
+      })
       .then((response) => {
         return response.data;
       })

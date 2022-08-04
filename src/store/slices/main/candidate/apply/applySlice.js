@@ -46,7 +46,7 @@ export const addApply = createAsyncThunk(
   "apply_candidate/addApply",
   async (data) => {
     const res = await axios
-      .post(`${baseURL}/api/applylist/`, data, {
+      .post(`${baseURL}/api/applylist`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -55,6 +55,7 @@ export const addApply = createAsyncThunk(
         return res;
       })
       .catch((error) => {
+        console.log(error);
         return error.response.data;
       });
     return res;

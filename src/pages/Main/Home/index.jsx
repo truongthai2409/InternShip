@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive } = useSelector(

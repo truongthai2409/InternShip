@@ -7,12 +7,13 @@ import { styled } from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
-import Button from "../Button";
+import Button from "@mui/material/Button";
+import ButtonCustom from "../Button";
 import "./styles.scss";
 import Modal from "../Modal";
 import { useForm } from "react-hook-form";
 import {
+  deleteAppreciate,
   getAppreciateByCompany,
   updateAppreciate,
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
@@ -20,6 +21,10 @@ import { toast } from "react-toastify";
 import CustomInput from "../CustomInput";
 import Textarea from "../Textarea";
 import CustomCheckbox from "../CustomCheckbox";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Tooltip } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./validate";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "transparent",
@@ -45,49 +50,52 @@ const getLabelText = (value) => {
 const Appreciate = ({ appreciate }) => {
   const value = appreciate.score;
   const nameUser = "Ẩn danh";
+  var checked = false;
   const { profile } = useSelector((state) => state.authentication);
 
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
   const [hover, setHover] = useState(-1);
   const [isCheck, setIsCheck] = useState(false);
-  const { register, handleSubmit, setValue, reset, setError } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
   const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
   useEffect(() => {
     setValue("title", appreciate.title);
-    setValue("avaluate", "abcd");
-    setValue("value", value);
+    setValue("comment", appreciate.comment);
+    setValue("size-medium", appreciate.score);
     setValue("isCheck", appreciate.hide);
-  }, []);
+  }, [setValue]);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleCheck = (e) => {
     const check = e.target.checked;
-    setIsCheck(!check);
+    checked = check;
   };
   const onSubmit = async (data) => {
-    const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
-    const avaluateData = {
-      comment: data.title,
-      score: valueRating,
-      company: {
-        id: idCompany,
+    const dataUpdate = {
+      id: appreciate.id,
+      avaluateData: {
+        title: data.title,
+        comment: data.comment,
+        score: valueRating,
+        hide: checked,
       },
-      user: {
-        username: username,
-      },
-      title: data.avaluate,
-      hide: isCheck,
     };
 
     try {
-      const res = await dispatch(updateAppreciate(avaluateData));
+      const res = await dispatch(updateAppreciate(dataUpdate));
       await dispatch(getAppreciateByCompany(idCompany));
-      console.log(res);
       if (res.payload.status === 200) {
         toast.success("Đã đăng đánh giá", {
           // position: "top-center",
@@ -117,11 +125,18 @@ const Appreciate = ({ appreciate }) => {
     setOpen(false);
   };
 
+  const handleDeleteAppreciate = async (e) => {
+    e.stopPropagation();
+    await dispatch(deleteAppreciate(appreciate.id)).then(
+      toast.success("Đã xóa đánh giá thành công")
+    );
+    await dispatch(getAppreciateByCompany(idCompany));
+  };
   return (
     <Box
       sx={{
         width: "100%",
-        mb: 2,
+        mb: 1,
         borderRadius: 10,
       }}
     >
@@ -145,20 +160,59 @@ const Appreciate = ({ appreciate }) => {
                   appreciate?.user?.username}
               </Typography>
             </div>
-            <div>
-              <Rating
-                name="text-feedback"
-                value={value}
-                readOnly
-                precision={0.5}
-                emptyIcon={
-                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                }
-                sx={{ fontSize: 24 }}
-              />
-              <Box sx={{ ml: 2, fontSize: 16, transform: "translate(0,13px)" }}>
-                {labels[value]}
-              </Box>
+
+            <div className="fix_display">
+              <div
+                className=""
+                style={{
+                  marginTop: "12px",
+                  marginRight: "10px",
+                }}
+              >
+                {appreciate?.user?.username === profile.username && (
+                  <div className="fix_display">
+                    <Tooltip>
+                      <Button
+                        color="error"
+                        onClick={handleDeleteAppreciate}
+                        sx={{ fontSize: 12 }}
+                        startIcon={<DeleteIcon />}
+                      >
+                        Xóa
+                      </Button>
+                    </Tooltip>
+                  </div>
+                )}
+                {appreciate?.user?.username === profile.username && (
+                  <div className="fix_display">
+                    <Tooltip>
+                      <ButtonCustom
+                        name="Sửa đánh giá "
+                        onClick={handleOpen}
+                        bwidth="150px"
+                        bheight="40px"
+                      />
+                    </Tooltip>
+                  </div>
+                )}
+              </div>
+              <div>
+                <Rating
+                  name="text-feedback"
+                  value={value}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                  sx={{ fontSize: 24 }}
+                />
+                <Box
+                  sx={{ ml: 2, fontSize: 16, transform: "translate(0,13px)" }}
+                >
+                  {labels[value]}
+                </Box>
+              </div>
             </div>
           </div>
           <Typography
@@ -166,13 +220,11 @@ const Appreciate = ({ appreciate }) => {
             component="div"
             sx={{ fontSize: 16, transform: "translate(0,-10px)" }}
           >
-            {appreciate.comment}
+            {`${appreciate?.comment?.slice(
+              3,
+              appreciate?.comment?.length - 4
+            )}` || ""}
           </Typography>
-          {appreciate?.user?.username === profile.username && (
-            <div className="fix_display">
-              <Button name="Sửa đánh giá của bạn" onClick={handleOpen} />
-            </div>
-          )}
         </Item>
         <Modal
           modalTitle="Sửa đánh giá về công ty"
@@ -188,17 +240,18 @@ const Appreciate = ({ appreciate }) => {
                 register={register}
                 requirementField={false}
                 setValue={setValue}
-                value="abcde"
                 height="50px"
               />
               <Textarea
                 label="Sửa đánh giá về công ty"
-                id="avaluate"
+                id="comment"
                 placeholder="Nhập vào đây"
                 register={register}
                 setValue={setValue}
                 check={true}
-              />
+              >
+                {errors.comment?.message}
+              </Textarea>
               <Box
                 sx={{
                   width: 200,
@@ -208,7 +261,7 @@ const Appreciate = ({ appreciate }) => {
               >
                 <Rating
                   name="size-medium"
-                  value={valueRating}
+                  value={valueRating.toString()}
                   precision={0.5}
                   getLabelText={getLabelText}
                   onChange={(event, newValue) => {
@@ -233,9 +286,12 @@ const Appreciate = ({ appreciate }) => {
                 )}
               </Box>
               <div onChange={handleCheck}>
-                <CustomCheckbox label="Ẩn danh" />
+                <CustomCheckbox key="1" label="Ẩn danh" />
               </div>
-              <Button onClick={handleSubmit(onSubmit)} name="Đăng đánh giá" />
+              <ButtonCustom
+                onClick={handleSubmit(onSubmit)}
+                name="Đăng đánh giá"
+              />
             </div>
           }
           name="list-candidate"

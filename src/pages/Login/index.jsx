@@ -19,7 +19,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
-  console.log(status);
 
   if (status === "success") {
     const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
@@ -72,7 +71,7 @@ const Login = () => {
   };
   const handleSaveLogin = (e) => {
     const check = e.target.checked;
-    setIsCheck(check);
+    setIsCheck(!check);
   };
   return (
     <div className="login-form__container">
