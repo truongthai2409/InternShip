@@ -32,7 +32,6 @@ const Profile = () => {
   const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
   const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
 
-  console.log(user);
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));
     dispatch(getUserById(idUser));
@@ -52,7 +51,6 @@ const Profile = () => {
     default:
       RelatedInfor = null;
   }
-  console.log("avatar", `http://localhost:8085${profile?.user?.avatar}`);
   return (
     <>
       <div className="profile__wrapper">

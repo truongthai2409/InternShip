@@ -13,6 +13,7 @@ const Textarea = ({
   check = false,
   requirementField = true,
   setValue,
+  defaultValue,
   textAlign,
 }) => {
   useEffect(() => {
@@ -52,6 +53,7 @@ const Textarea = ({
           theme="snow"
           onChange={handleOnChange}
           placeholder={placeholder}
+          value={defaultValue ? defaultValue : ""}
         />
         {check ? null : (
           <p className="custom-textarea__error">

@@ -108,7 +108,7 @@ function HeaderWithHR(props) {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">Chào, {profile?.user?.firstName || nameUser}</h4>
+          <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           <AccountMenu
             linkImg={
               profile?.user?.avatar

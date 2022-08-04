@@ -8,11 +8,10 @@ import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   addJob,
-  getJobById,
   getJobPositionList,
 } from "src/store/slices/main/home/job/jobSlice";
 import {
@@ -24,7 +23,9 @@ import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 
-const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
+
+
+const PostJobForm = ({ isUpdate = false, idJob }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status, jobDetailById } = useSelector(
@@ -34,19 +35,11 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const jobType = useRef(jobDetailById.jobType);
 
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-  }, []);
-
-  useEffect(() => {
-    if (isUpdate) {
-      // dispatch(getDistrictList());
-      dispatch(getJobById(idJob));
-    }
   }, []);
 
   const jobTypeList = [
@@ -80,18 +73,13 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+
+  }, [])
   if (isUpdate) {
-    console.log("jobDetail", jobDetailById);
-    console.log("districtList", districtList);
-    jobType.current = jobDetailById?.jobType;
-    console.log("ref:", jobType.current);
-    // setJobType(jobDetailById?.jobType)
     setValue("name", jobDetailById?.name);
-    setValue("jobType", jobDetailById.jobType?.id);
-    setValue("major", jobDetailById.major?.id);
     setValue("amount", jobDetailById?.amount);
     setValue("address", jobDetailById?.locationjob?.address);
-    setValue("jobDescription", jobDetailById?.desciption);
     setValue("salaryMin", jobDetailById?.salaryMin);
     setValue("salaryMax", jobDetailById?.salaryMax);
     setValue("timeStart", jobDetailById?.timeStartStr);
@@ -171,7 +159,7 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                     id="jobType"
                     label="Hình thức làm việc"
                     placeholder="Vui lòng chọn"
-                    defaultValue={jobType.current?.id}
+                    defaultValue={jobDetailById?.jobType?.id}
                     options={jobTypeList}
                     register={register}
                   >
@@ -257,7 +245,9 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                     placeholder="Vui lòng chọn"
                     dispatch={dispatch}
                     defaultValue={
+                      isUpdate ? 
                       jobDetailById?.locationjob?.district?.province?.id
+                      : ""
                     }
                     action={getDistrictList}
                     options={provinceList}
@@ -271,7 +261,7 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                     id="district"
                     label="Quận/Huyện"
                     placeholder="Vui lòng chọn"
-                    defaultValue={1}
+                    defaultValue={jobDetailById?.locationjob?.district?.id}
                     options={districtList}
                     register={register}
                   >
@@ -296,6 +286,7 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                   id="jobDescription"
                   placeholder="Nhập mô tả công việc"
                   register={register}
+                  defaultValue={isUpdate ? jobDetailById?.desciption : ""}
                   setValue={setValue}
                   check={false}
                 >
@@ -307,6 +298,7 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                   label="Yêu cầu công việc"
                   id="jobRequirement"
                   placeholder="Nhập yêu cầu công việc"
+                  defaultValue={isUpdate ? jobDetailById?.requirement : ""}
                   setValue={setValue}
                   register={register}
                   check={false}
@@ -319,6 +311,7 @@ const PostJobForm = ({ isUpdate = false, jobList, idJob }) => {
                   label="Quyền lợi của ứng viên"
                   id="benefits"
                   placeholder="Nhập quyền lợi của ứng viên"
+                  defaultValue={jobDetailById?.otherInfo}
                   register={register}
                   setValue={setValue}
                   check={false}

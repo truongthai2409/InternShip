@@ -5,7 +5,7 @@ import DoorFrontIcon from "@mui/icons-material/DoorFront";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
@@ -13,6 +13,7 @@ import Confirmation from "../Confirmation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   disableJob,
+  getJobById,
 } from "src/store/slices/main/home/job/jobSlice";
 
 const CardPost = (props) => {
@@ -20,7 +21,22 @@ const CardPost = (props) => {
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
-  const { jobListActived } = useSelector((state) => state.job);
+  const { jobListActived, jobDetailById } = useSelector((state) => state.job);
+  const callJob = useRef(0);
+
+  const visiting = () => {
+    if (callJob.current === 1) {
+      return;
+    }
+    callJob.current++;
+    dispatch(getJobById(props.idJob));
+  };
+  const leaving = () => {
+    if (callJob.current === 0) {
+      return
+    }
+    callJob.current--;
+  };
 
   const handleCloseJob = () => {
     const jobDetail = jobListActived.filter((job) => {
@@ -67,7 +83,7 @@ const CardPost = (props) => {
     };
     dispatch(disableJob([props.idJob, jobData]));
 
-    setOpen(false)
+    setOpen(false);
   };
 
   const handleOnClick = (e) => {
@@ -79,7 +95,13 @@ const CardPost = (props) => {
 
     switch (type) {
       case "Chỉnh sửa":
-        setComponent(<PostJobForm isUpdate={true} jobList={jobListActived} idJob = {props.idJob}/>);
+        setComponent(
+          <PostJobForm
+            isUpdate={true}
+            jobDetail={jobDetailById}
+            idJob={props.idJob}
+          />
+        );
         setTitle("Chỉnh sửa công việc");
         break;
       case "Đóng việc":
@@ -101,7 +123,11 @@ const CardPost = (props) => {
     setOpen(true);
   };
   return (
-    <div className="card-post__container">
+    <div
+      onMouseMove={visiting}
+      onMouseLeave={leaving}
+      className="card-post__container"
+    >
       <PostStatus status={props.status?.id} />
       <h3 className="card-post__job-name">{props.jobName}</h3>
       <div className="card-post__company-info-detail">

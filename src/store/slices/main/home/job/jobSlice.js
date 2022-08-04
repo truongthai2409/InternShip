@@ -205,6 +205,5 @@ export const {
   updateIdJobActive,
   updateIndexCardActive,
   updateStatusAddJob,
-  getJobDetail,
 } = jobSlice.actions;
 export default jobSlice;
