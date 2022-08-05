@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
-import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,7 +47,6 @@ const HRPostList = (props) => {
   TabTitle("Công việc đang tuyển | IT Internship JOBS");
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { jobDetail, jobListActived, jobListDisabled } = useSelector(
     (state) => state.job

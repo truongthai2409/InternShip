@@ -14,11 +14,12 @@ const Button = ({
   outline,
   bg,
   color,
+  disabled,
 }) => {
   return (
     <>
       <button
-        className={`button ${className ? className : ""}`}
+        className={`button ${className ? className : ""} ${disabled && "disabled"}`}
         onClick={onClick || (() => {})}
         style={{
           width: bwidth ? `${bwidth}` : "",
