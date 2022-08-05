@@ -19,6 +19,8 @@ const jobSlice = createSlice({
     jobPosition: [],
     status: "fail",
     error: "",
+    listCandidatesApplied: [],
+    totalPages: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -27,7 +29,7 @@ const jobSlice = createSlice({
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
@@ -72,14 +74,14 @@ const jobSlice = createSlice({
     });
     builder.addCase(addJob.fulfilled, (state) => {
       toast.success("Đăng tuyển công việc thành công!");
-      state.status = "success"
+      state.status = "success";
     });
     builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
       switch (payload.status.id) {
         case 4:
-          state.jobListActived = state.jobListActived.filter(job => {
+          state.jobListActived = state.jobListActived.filter((job) => {
             return job.id !== payload.id;
-          })
+          });
           state.jobListDisabled.push(payload);
           toast.success("Đóng công việc thành công!");
           break;
@@ -89,8 +91,12 @@ const jobSlice = createSlice({
     });
     builder.addCase(updateJob.fulfilled, (state, { payload }) => {
       toast.success("Chỉnh sửa công việc thành công!");
-      
-    })
+    });
+    builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
+      console.log("payload:", payload);
+      state.listCandidatesApplied = payload.contents;
+      state.totalPages = payload.totalPages;
+    });
   },
 });
 
@@ -230,22 +236,41 @@ export const updateStatusJob = createAsyncThunk(
  * args[0] : id job
  * args[1] : infor of job
  */
-export const updateJob = createAsyncThunk(
-  "job/updateJob",
-  async (args) => {
-    return axios
+export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
+  return axios
     .put(`http://localhost:8085/api/r2s/job/${args[0]}`, args[1])
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
       return error.response.data;
-    })
-  }
-)
+    });
+});
 
-export const {
-  updateIdJobActive,
-  updateIndexCardActive,
-} = jobSlice.actions;
+// function use for get list of candidate who apply into job
+/**
+ * para
+ * args[0] : id job
+ * args[1] : page
+ * args[2] : amount of candidates in each time get
+ */
+export const getListCandidateApplied = createAsyncThunk(
+  "job/getListCandidateApply",
+  async (args) => {
+    return axios
+      .get(
+        `http://localhost:8085/api/r2s/admin/candidate/job/${args[0]}?no=${
+          args[1] - 1
+        }&limit=${args[2]}`
+      )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const { updateIdJobActive, updateIndexCardActive } = jobSlice.actions;
 export default jobSlice;

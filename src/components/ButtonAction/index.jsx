@@ -5,7 +5,8 @@ const ButtonAction = ({
   height,
   width,
   border,
-  amount = "",
+  amountDemands = "",
+  amountApplies = "",
   name,
   icon,
   fontSize,
@@ -23,7 +24,7 @@ const ButtonAction = ({
         <p
           className="button-action__name"
           style={{ fontSize: fontSize }}
-        >{`${amount} ${name}`}</p>
+        >{((amountApplies || amountDemands !=="") ? `${amountApplies}/${amountDemands} ` : "")}{`${name}`}</p>
       </div>
     </div>
   );

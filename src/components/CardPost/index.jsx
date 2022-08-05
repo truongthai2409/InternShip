@@ -28,14 +28,14 @@ const CardPost = (props) => {
   });
 
   const update = () => {
-    action.current = "update"
-  }
+    action.current = "update";
+  };
   const read = () => {
-    action.current = "read"
-  }
+    action.current = "read";
+  };
   const close = () => {
-    action.current = "close"
-  }
+    action.current = "close";
+  };
 
   const handleCloseJob = () => {
     const jobData = {
@@ -48,12 +48,6 @@ const CardPost = (props) => {
   };
 
   const handleOnClick = () => {
-    // let arrayString = e.target.textContent.split(` `);
-    // let type =
-    //   arrayString[arrayString.length - 2] +
-    //   " " +
-    //   arrayString[arrayString.length - 1];
-
     if (props.isDemandPost) {
       switch (action.current) {
         case "update":
@@ -75,9 +69,9 @@ const CardPost = (props) => {
           break;
         default:
           setTitle("Danh sách ứng viên đã ứng tuyển");
-          setComponent(<CandidateList />);
-        }
-        setOpen(true);
+          setComponent(<CandidateList idJob={props.idJob} />);
+      }
+      setOpen(true);
     } else {
       switch (action.current) {
         case "update":
@@ -106,11 +100,12 @@ const CardPost = (props) => {
           break;
         default:
           setTitle("Danh sách ứng viên đã ứng tuyển");
-          setComponent(<CandidateList />);
+          setComponent(<CandidateList idJob={props.idJob} />);
       }
       setOpen(true);
     }
   };
+
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -126,7 +121,7 @@ const CardPost = (props) => {
           <p className="company__location">{props.companyLocation}</p>
         </div>
       </div>
-      <p className="card-post__amount">Số lượng: {props.amount}</p>
+      {/* <p className="card-post__amount">Số lượng: {props.amount}</p> */}
       <p className="card-post__time">
         <b>Thời gian tuyển dụng:</b>{" "}
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
@@ -147,6 +142,7 @@ const CardPost = (props) => {
           name="Ứng viên"
           fontSize="13px"
           type="read"
+          amountDemands={props.amount}
         />
         <ButtonAction
           onClick={handleOnClick}

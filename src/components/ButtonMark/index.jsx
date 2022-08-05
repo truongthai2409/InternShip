@@ -4,7 +4,6 @@ import { IconButton } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByName } from "src/store/slices/main/home/job/jobSlice";
 import {
   createMark,
   deleteMark,
@@ -14,6 +13,7 @@ import {
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+
 const ButtonMark = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ const ButtonMark = (props) => {
   return (
     <IconButton
       style={{
-        border: "1px solid #F1F1F1",
+        border: props.border ? props.border : "1px solid #F1F1F1",
         borderRadius: "4px",
         width: `${props.width}`,
         height: `${props.height}`,
