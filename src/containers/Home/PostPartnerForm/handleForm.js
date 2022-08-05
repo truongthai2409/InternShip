@@ -49,7 +49,8 @@ export const schema = yup
         return (
           value &&
             value[0].type ===
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+              "application/pdf"
         );
       }),
   })

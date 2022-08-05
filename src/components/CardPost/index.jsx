@@ -20,6 +20,7 @@ const CardPost = (props) => {
   const [title, setTitle] = useState("");
   const action = useRef("");
   const dispatch = useDispatch();
+  // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
 
   const jobList = jobListActived.concat(jobListDisabled);
@@ -139,7 +140,7 @@ const CardPost = (props) => {
           border="0.5px solid #DEDEDE"
           icon={<PersonOutlineIcon></PersonOutlineIcon>}
           color="#111"
-          name="Ứng viên"
+          name={props.isDemandPost ? "Ứng tuyển" : "Ứng viên"}
           fontSize="13px"
           type="read"
           amountDemands={props.amount}
@@ -164,7 +165,7 @@ const CardPost = (props) => {
           border="0.5px solid #DEDEDE"
           icon={<DoorFrontIcon></DoorFrontIcon>}
           color="#111"
-          name="Đóng việc"
+          name={props.isDemandPost ? "Đóng" : "Đóng việc"}
           fontSize="13px"
           type="close"
           disabled={props.isDisabled}

@@ -34,6 +34,7 @@ const PartnerInfo = () => {
   const dispatch = useDispatch();
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { majorList } = useSelector((state) => state.major);
+  const { status } = useSelector(state => state.university);
   const errorMessage = useSelector(errorSelector);
 
   useEffect(() => {
@@ -90,18 +91,17 @@ const PartnerInfo = () => {
         },
       }),
     };
-    try {
-      const res = await dispatch(addUniversity(partnerData));
-      if (res.type === "university/addUniversity/fulfilled") {
-        navigate("/login");
-      }
-    } catch (error) {
-      toast.error(error);
+    console.log(partnerData);
+    dispatch(addUniversity(partnerData))
+
+    if (status === "success") {
+      navigate('/login')
     }
   };
 
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -147,6 +147,8 @@ const PartnerInfo = () => {
             type="password"
             placeholder="Mật khẩu"
             register={register}
+            visibility={true}
+            requirementField={false}
           >
             {errors.password?.message}
             {errorMessage?.Password}
@@ -158,6 +160,8 @@ const PartnerInfo = () => {
             type="password"
             placeholder="Xác nhận mật khẩu"
             register={register}
+            visibility={true}
+            requirementField={false}
           >
             {errors.passwordConfirmation?.message}
           </CustomInput>
@@ -310,6 +314,7 @@ const PartnerInfo = () => {
           id="description"
           type="textarea"
           placeholder="Mô tả Trường"
+          setValue={setValue}
           children=""
           register={register}
         />

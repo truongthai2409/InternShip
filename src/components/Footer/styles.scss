@@ -90,7 +90,8 @@
       line-height: 30px;
 
       &:hover {
-        color: rgb(87, 106, 126);
+        color: $color-white-0;
+        transition: 0.3s ease;
       }
     }
   }
@@ -137,8 +138,6 @@
     gap: 25px;
   }
 
-
-
   .address__container-footer,
   .contact__container,
   .mobile-app-link-download {
@@ -154,10 +153,10 @@
 .email-link__footer {
   color: $color-black-3;
   &:hover {
-    color: rgb(87, 106, 126);
+    color: $color-white-0;
+    transition: 0.3s ease;
   }
 }
-
 
 @media only screen and (max-width: 660px) {
   .mobile-app-link-download {

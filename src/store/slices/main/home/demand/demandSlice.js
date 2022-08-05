@@ -13,6 +13,7 @@ const demandSlice = createSlice({
     indexPartnerCardActive: 0,
     idPartnerCardActive: 0,
     demandDetail: {},
+    closeEditDemand: false,
   },
   reducers: {
     updateIdPartnerCardActive: (state, action) => {
@@ -32,6 +33,7 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
+        state.status = "success";
         toast.success("Đăng danh sách thực tập thành công!");
       });
     builder
@@ -58,6 +60,7 @@ const demandSlice = createSlice({
       })
       .addCase(updateDemand.fulfilled, (state, { payload }) => {
         toast.success("Cập nhật danh sách thực tập thành công!");
+        state.closeEditDemand = true;
       });
   },
 });
@@ -106,7 +109,8 @@ export const updateDemand = createAsyncThunk(
 
 export const getDemandListByUniId = createAsyncThunk(
   "university/getDemandListByUniId",
-  async (uniId) => {
+  async ({ uniId, currentPage, limit }) => {
+    // console.log(uniId, currentPage, limit);
     let axiosConfig = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -114,7 +118,10 @@ export const getDemandListByUniId = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${baseURL}/api/demand/filter-university/${uniId}`, axiosConfig)
+      .get(
+        `${baseURL}/api/demand/filter-university/${uniId}?no=${currentPage - 1}&limit=${limit}`,
+        axiosConfig
+      )
       .then((response) => {
         return response.data;
       })

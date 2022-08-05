@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   TabTitle("Login");
-  const [isCheck, setIsCheck] = useState(false);
+  // const [isCheck, setIsCheck] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
@@ -30,8 +30,9 @@ const Login = () => {
       case "Role_Partner":
         navigate("/partner", { replace: true });
         break;
-      default:
+      case "Role_Candidate":
         navigate("/candidate", { replace: true });
+        break;
     }
   }
 
@@ -56,11 +57,11 @@ const Login = () => {
         //   localStorage.removeItem("userPresent");
         // }
         switch (role) {
-          case "Role_HR":
-            navigate(`/hr`, { replace: true });
-            break;
           case "Role_Partner":
             navigate(`/partner`, { replace: true });
+            break;
+          case "Role_HR":
+            navigate(`/hr`, { replace: true });
             break;
           case "Role_Candidate":
             navigate(`/candidate`, { replace: true });
@@ -70,10 +71,10 @@ const Login = () => {
       toast.error(error);
     }
   };
-  const handleSaveLogin = (e) => {
-    const check = e.target.checked;
-    setIsCheck(check);
-  };
+  // const handleSaveLogin = (e) => {
+  //   const check = e.target.checked;
+  //   setIsCheck(check);
+  // };
   return (
     <div className="login-form__container">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -100,7 +101,7 @@ const Login = () => {
         </CustomInput>
         <div
           className="login-form__save-pass"
-          onChange={(e) => handleSaveLogin(e)}
+          // onChange={(e) => handleSaveLogin(e)}
         >
           <CustomCheckbox label="Lưu mật khẩu" />
         </div>

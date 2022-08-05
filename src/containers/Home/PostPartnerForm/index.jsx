@@ -87,7 +87,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
     console.log(demandDetail?.desciption);
     setValue("jobName", demandDetail?.name)
     setValue("jobDescription", demandDetail?.desciption)
-    setValue("timeStart", demandDetail?.createDate)
+    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate)
     setValue("timeEnd", demandDetail?.end)
     setValue("amount", demandDetail?.amount)
   }
