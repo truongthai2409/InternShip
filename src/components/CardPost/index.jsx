@@ -19,7 +19,10 @@ const CardPost = (props) => {
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
+  // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
+
+  // console.log(closeEditDemand);
 
   const jobList = jobListActived.concat(jobListDisabled)
   const jobDetail = jobList.filter((job) => {
@@ -131,7 +134,7 @@ const CardPost = (props) => {
           border="0.5px solid #DEDEDE"
           icon={<PersonOutlineIcon></PersonOutlineIcon>}
           color="#111"
-          name="Ứng viên"
+          name={props.isDemandPost ? "Ứng tuyển" : "Ứng viên"}
           fontSize="13px"
           type="read"
         />
@@ -153,7 +156,7 @@ const CardPost = (props) => {
           border="0.5px solid #DEDEDE"
           icon={<DoorFrontIcon></DoorFrontIcon>}
           color="#111"
-          name="Đóng việc"
+          name={props.isDemandPost ? "Đóng" : "Đóng việc"}
           fontSize="13px"
           type="close"
           disabled={props.isDisabled}
