@@ -15,14 +15,24 @@ const Textarea = ({
   setValue,
   defaultValue,
   textAlign,
+  isUpdate = true,
 }) => {
+  isUpdate = true;
   useEffect(() => {
-    register(id);
+    if (isUpdate) {
+      console.log("updateee");
+      register(id);
+    }
   }, [register]);
+
+  useEffect(() => {
+    console.log("test", register(id));
+  });
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
-  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên.";
+
+  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên...";
 
   const handleOnChange = (content, delta, source, editor) => {
     if (editor.getText().length <= 1) {
@@ -34,23 +44,11 @@ const Textarea = ({
     }
     setValue(`${id}`, content);
   };
-
   return (
-    <div
-      style={{ textAlign: textAlign ? textAlign : "" }}
-      className="custom-textarea"
-    >
-      <label htmlFor={id} className="custom-textarea__label">
-        {label}
-        {requirementField && <span className="field-requirment">*</span>}
-      </label>
+    <>
       <div
-        id={id}
-        className={
-          check
-            ? "custom-input__textarea-disabled"
-            : "custom-textarea__textfield"
-        }
+        style={{ textAlign: textAlign ? textAlign : "" }}
+        className="custom-textarea"
       >
         <ReactQuill
           theme="snow"
@@ -80,8 +78,52 @@ const Textarea = ({
             )}
           </p>
         )}
+        =======
+        <label htmlFor={id} className="custom-textarea__label">
+          {label}
+          {requirementField && <span className="field-requirment">*</span>}
+        </label>
+        <div
+          id={id}
+          className={
+            check
+              ? "custom-input__textarea-disabled"
+              : "custom-textarea__textfield"
+          }
+        >
+          <ReactQuill
+            {...register(id)}
+            id={id}
+            theme="snow"
+            onChange={handleOnChange}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+          />
+          {check ? null : (
+            <p className="custom-textarea__error">
+              {(children === null
+                ? showError1
+                  ? errorMessage
+                  : ""
+                : showError2
+                ? children
+                : "") || (
+                <span
+                  style={{
+                    marginTop: "2px",
+                    fontSize: "12px",
+                    fontStyle: "italic",
+                    color: "#999",
+                  }}
+                >
+                  (Tối đa 1500 ký tự)
+                </span>
+              )}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

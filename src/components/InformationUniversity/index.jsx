@@ -28,7 +28,9 @@ const InformationUniversity = ({ jobDetail }) => {
             gutterBottom
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
-            {jobDetail.desciption}
+            <div
+              dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+            ></div>
           </Typography>
         </Typography>
         <div className="detail__card-3-item-partner">

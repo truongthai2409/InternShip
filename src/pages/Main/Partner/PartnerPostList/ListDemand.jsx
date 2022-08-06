@@ -17,7 +17,7 @@ export const ListDemand = ({ demandList, message }) => {
           status={job.status}
           jobName={job.name}
           amount={job.amount}
-          timeStart={job?.createDate}
+          timeStart={job?.updateDate || job?.createDate}
           timeEnd={job?.end}
           timeCreated={job.createDate}
           companyName={job.hr?.company?.name || job?.universityDTO?.name}

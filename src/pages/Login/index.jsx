@@ -29,8 +29,9 @@ const Login = () => {
       case "Role_Partner":
         navigate("/partner", { replace: true });
         break;
-      default:
+      case "Role_Candidate":
         navigate("/candidate", { replace: true });
+        break;
     }
   }
 
@@ -55,11 +56,11 @@ const Login = () => {
         //   localStorage.removeItem("userPresent");
         // }
         switch (role) {
-          case "Role_HR":
-            navigate(`/hr`, { replace: true });
-            break;
           case "Role_Partner":
             navigate(`/partner`, { replace: true });
+            break;
+          case "Role_HR":
+            navigate(`/hr`, { replace: true });
             break;
           case "Role_Candidate":
             navigate(`/candidate`, { replace: true });
@@ -73,6 +74,7 @@ const Login = () => {
     const check = e.target.checked;
     setIsCheck(!check);
   };
+
   return (
     <div className="login-form__container">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -99,7 +101,7 @@ const Login = () => {
         </CustomInput>
         <div
           className="login-form__save-pass"
-          onChange={(e) => handleSaveLogin(e)}
+          // onChange={(e) => handleSaveLogin(e)}
         >
           <CustomCheckbox label="Lưu mật khẩu" />
         </div>

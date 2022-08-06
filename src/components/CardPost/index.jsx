@@ -18,13 +18,25 @@ const CardPost = (props) => {
   const [open, setOpen] = useState(false);
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
+  const action = useRef("");
   const dispatch = useDispatch();
+  // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
 
-  const jobList = jobListActived.concat(jobListDisabled)
+  const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
   });
+
+  const update = () => {
+    action.current = "update";
+  };
+  const read = () => {
+    action.current = "read";
+  };
+  const close = () => {
+    action.current = "close";
+  };
 
   const handleCloseJob = () => {
     const jobData = {
@@ -33,20 +45,13 @@ const CardPost = (props) => {
       },
     };
     dispatch(updateStatusJob([props.idJob, jobData]));
-
     setOpen(false);
   };
 
-  const handleOnClick = (e) => {
-    let arrayString = e.target.textContent.split(` `);
-    let type =
-      arrayString[arrayString.length - 2] +
-      " " +
-      arrayString[arrayString.length - 1];
-
+  const handleOnClick = () => {
     if (props.isDemandPost) {
-      switch (type) {
-        case "Chỉnh sửa":
+      switch (action.current) {
+        case "update":
           setComponent(
             <PostPartnerForm idDemand={props.idDemand} isUpdate={true} />
           );
@@ -65,22 +70,24 @@ const CardPost = (props) => {
           break;
         default:
           setTitle("Danh sách ứng viên đã ứng tuyển");
-          setComponent(<CandidateList />);
+          setComponent(<CandidateList idJob={props.idJob} />);
       }
       setOpen(true);
     } else {
-      switch (type) {
-        case "Chỉnh sửa":
+      switch (action.current) {
+        case "update":
           setComponent(
             <PostJobForm
               isUpdate={true}
               jobDetail={jobDetail[0]}
               idJob={props.idJob}
+              disabled={props.isDisabled}
+              setOpen={setOpen}
             />
           );
           setTitle("Chỉnh sửa công việc");
           break;
-        case "Đóng việc":
+        case "close":
           setTitle("Đóng việc");
           setComponent(
             <Confirmation
@@ -94,11 +101,12 @@ const CardPost = (props) => {
           break;
         default:
           setTitle("Danh sách ứng viên đã ứng tuyển");
-          setComponent(<CandidateList />);
+          setComponent(<CandidateList idJob={props.idJob} />);
       }
       setOpen(true);
     }
   };
+
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -114,7 +122,7 @@ const CardPost = (props) => {
           <p className="company__location">{props.companyLocation}</p>
         </div>
       </div>
-      <p className="card-post__amount">Số lượng: {props.amount}</p>
+      {/* <p className="card-post__amount">Số lượng: {props.amount}</p> */}
       <p className="card-post__time">
         <b>Thời gian tuyển dụng:</b>{" "}
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
@@ -126,17 +134,20 @@ const CardPost = (props) => {
       <div className="card-post__action">
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={read}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
           icon={<PersonOutlineIcon></PersonOutlineIcon>}
           color="#111"
-          name="Ứng viên"
+          name={props.isDemandPost ? "Ứng tuyển" : "Ứng viên"}
           fontSize="13px"
           type="read"
+          amountDemands={props.amount}
         />
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={update}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
@@ -148,12 +159,13 @@ const CardPost = (props) => {
         />
         <ButtonAction
           onClick={handleOnClick}
+          onMouseEnter={close}
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
           icon={<DoorFrontIcon></DoorFrontIcon>}
           color="#111"
-          name="Đóng việc"
+          name={props.isDemandPost ? "Đóng" : "Đóng việc"}
           fontSize="13px"
           type="close"
           disabled={props.isDisabled}

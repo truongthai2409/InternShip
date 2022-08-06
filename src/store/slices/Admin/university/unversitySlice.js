@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import api from "src/config/api/apiConfig";
 import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
@@ -26,10 +27,12 @@ const universitySlice = createSlice({
       if (!payload?.id) {
         state.status = 'fail';
         state.error = payload;
+        toast("Tạo tài khoản thất bại")
       } else {
         state.user = payload;
         state.status = "success";
         state.error = {};
+        toast("Tạo tài khoản thành công")
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {
@@ -83,6 +86,9 @@ export const addUniversity = createAsyncThunk(
       })
       .then((res) => {
         return res;
+      })
+      .catch((error) => {
+        return error.response.data;
       });
     return res;
   }

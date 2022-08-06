@@ -3,7 +3,7 @@ import ButtonOutline from "../ButtonOutline";
 import "./styles.scss";
 
 const Confirmation = ({ text, dispatch, nameBtnYes, nameBtnNo, setOpen, func }) => {
-  const handClose = () => setOpen(false);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className="confirmation__wrapper">
@@ -18,7 +18,7 @@ const Confirmation = ({ text, dispatch, nameBtnYes, nameBtnNo, setOpen, func }) 
         />
         <ButtonOutline
           className="confirmation__btn-cancel"
-          onClick={handClose}
+          onClick={handleClose}
           name="Huỷ"
           bg="#F3F4F6"
           color="#111111"

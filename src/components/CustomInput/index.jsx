@@ -30,7 +30,7 @@ const CustomInput = ({
   const showValue = (e) => {
     // console.log(e.target.value);
   };
-
+  
   return (
     <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">

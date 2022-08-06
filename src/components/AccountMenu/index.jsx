@@ -25,6 +25,9 @@ const AccountMenu = ({ linkImg }) => {
 
   const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
 
+  const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
+  console.log(role);
+
   const handleLogout = () => {
     localStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất!", {
@@ -89,7 +92,10 @@ const AccountMenu = ({ linkImg }) => {
           Đã đăng nhập với <span>{username}</span>
         </h4>
         <Divider />
-        <Link style={{ color: "#111111" }} to="profile">
+        <Link
+          style={{ color: "#111111" }}
+          to={role === "Role_Partner" ? "/partner/profile" : "profile"}
+        >
           <MenuItem>
             <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
           </MenuItem>

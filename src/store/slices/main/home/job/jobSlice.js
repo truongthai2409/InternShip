@@ -19,6 +19,8 @@ const jobSlice = createSlice({
     jobPosition: [],
     status: "fail",
     error: "",
+    listCandidatesApplied: [],
+    totalPages: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -87,6 +89,14 @@ const jobSlice = createSlice({
         default:
           toast.error("Chỉnh sửa trạng thái công việc thất bại!");
       }
+    });
+    builder.addCase(updateJob.fulfilled, (state, { payload }) => {
+      toast.success("Chỉnh sửa công việc thành công!");
+    });
+    builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
+      console.log("payload:", payload);
+      state.listCandidatesApplied = payload.contents;
+      state.totalPages = payload.totalPages;
     });
   },
 });
@@ -212,6 +222,48 @@ export const updateStatusJob = createAsyncThunk(
   async (args) => {
     return axios
       .put(`http://localhost:8085/api/r2s/admin/job/status/${args[0]}`, args[1])
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+// function use for update infor of job by id job
+/**
+ * para
+ * args[0] : id job
+ * args[1] : infor of job
+ */
+export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
+  return axios
+    .put(`http://localhost:8085/api/r2s/job/${args[0]}`, args[1])
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+});
+
+// function use for get list of candidate who apply into job
+/**
+ * para
+ * args[0] : id job
+ * args[1] : page
+ * args[2] : amount of candidates in each time get
+ */
+export const getListCandidateApplied = createAsyncThunk(
+  "job/getListCandidateApply",
+  async (args) => {
+    return axios
+      .get(
+        `http://localhost:8085/api/r2s/admin/candidate/job/${args[0]}?no=${
+          args[1] - 1
+        }&limit=${args[2]}`
+      )
       .then((response) => {
         return response.data;
       })

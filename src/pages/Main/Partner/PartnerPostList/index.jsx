@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
 import { useNavigate } from "react-router-dom";
+import Pagination from "@mui/material/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,6 +46,9 @@ function a11yProps(index) {
   };
 }
 
+const limit = 5;
+
+const page = 1;
 const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
@@ -55,27 +59,48 @@ const PartnerPostList = (props) => {
   const handleChange = (event, newValue) => setValue(newValue);
   const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
-  console.log(demandListUniversity.contents);
+  const [currentPage, setCurrentPage] = useState(page);
+  const [totalPage, setTotalPage] = useState();
+  // console.log(currentPage, totalPage);
+  // console.log(demandListUniversity?.totalPages);
   // console.log(activeUser?.universityDTO?.id);
+
+  
+  const handlePaginate = (page) => {
+    // console.log(typeof page);
+    setCurrentPage(parseInt(page))
+    window.scroll(0, 0);
+  }
 
 
   useEffect(() => {
+    let uniId = activeUser?.universityDTO?.id;
+    // console.log(currentPage);
     dispatch(getPartnerByUserID(userPresent.idUser));
-    dispatch(getDemandListByUniId(activeUser?.universityDTO?.id));
-    setPartnerPostList(demandListUniversity)
-  }, [activeUser?.universityDTO?.id]);
+    dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
+    setPartnerPostList(demandListUniversity);
+  }, [activeUser?.universityDTO?.id, currentPage]);
+
+  useEffect(() => {
+    setTotalPage(demandListUniversity?.totalPages);
+  })
 
   return (
-    <div className="hr-post__wrapper">
-      <div className="hr-post__list-bt">
-        <Button onClick={() => {navigate("/partner/post")}} name="ĐĂNG BÀI"></Button>
+    <div className="partner-post__wrapper">
+      <div className="partner-post__list-bt">
+        <Button
+          onClick={() => {
+            navigate("/partner/post");
+          }}
+          name="ĐĂNG BÀI"
+        ></Button>
       </div>
-      <div className="hr-post-list__content">
-        <div className="hr-post-list__statistic">
+      <div className="partner-post-list__content">
+        <div className="partner-post-list__statistic">
           <Statistic
             title="Điểm khả dụng"
             firstObject={{
-              score: demandListUniversity?.contents?.length,
+              score: demandListUniversity?.totalItems,
               description: "Lượt đăng tuyển",
             }}
             secondObject={{
@@ -86,7 +111,7 @@ const PartnerPostList = (props) => {
           <Statistic
             title="Trạng thái tin đăng"
             firstObject={{
-              score: demandListUniversity?.contents?.length,
+              score: demandListUniversity?.totalItems,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
@@ -103,11 +128,26 @@ const PartnerPostList = (props) => {
             </Tabs>
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
-            <ListDemand demandList={demandListUniversity.contents} message="Không có đợt thực tập đăng tuyển." />
+            <ListDemand
+              demandList={demandListUniversity.contents}
+              message="Không có đợt thực tập đăng tuyển."
+            />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
-            <ListDemand demandList={undefined} message="Không có đợt thực tập đã đóng." />
+            <ListDemand
+              demandList={undefined}
+              message="Không có đợt thực tập đã đóng."
+            />
           </TabPanel>
+          <div className="partner-postList__pagination">
+            <Pagination 
+            count={totalPage} 
+            shape="rounded"
+            variant="outlined" 
+            color="secondary"
+            onChange={(e) => handlePaginate(e.target.textContent)}
+            />
+          </div>
         </Box>
       </div>
     </div>
