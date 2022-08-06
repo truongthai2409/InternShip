@@ -27,7 +27,7 @@ const jobSlice = createSlice({
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
       state.jobDetail = state?.jobListName[action.payload];
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
@@ -41,10 +41,10 @@ const jobSlice = createSlice({
         state.error = 404;
       } else {
         state.jobListActived = payload.filter((job) => {
-          return job.status.id === 1;
+          return job?.status.id === 1;
         });
         state.jobListDisabled = payload.filter((job) => {
-          return job.status.id === 4;
+          return job?.status.id === 4;
         });
         state.status = "fail";
       }
@@ -58,11 +58,12 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload.contents;
-      if (payload.contents.length > 0) {
+      if (payload?.contents?.length > 0) {
         state.jobDetail = payload.contents[0];
       } else {
       }
     });
+
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
       state.jobActive = payload;
       state.jobDetailById = payload;
@@ -72,14 +73,14 @@ const jobSlice = createSlice({
     });
     builder.addCase(addJob.fulfilled, (state) => {
       toast.success("Đăng tuyển công việc thành công!");
-      state.status = "success"
+      state.status = "success";
     });
     builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
-      switch (payload.status.id) {
+      switch (payload?.status.id) {
         case 4:
-          state.jobListActived = state.jobListActived.filter(job => {
+          state.jobListActived = state.jobListActived.filter((job) => {
             return job.id !== payload.id;
-          })
+          });
           state.jobListDisabled.push(payload);
           toast.success("Đóng công việc thành công!");
           break;
@@ -200,7 +201,7 @@ export const getJobByCompany = createAsyncThunk(
   }
 );
 
-// function use for update status of job by id job
+// function use for update ?status of job by id job
 /**
  * para
  * args[0] : id job
@@ -220,8 +221,5 @@ export const updateStatusJob = createAsyncThunk(
   }
 );
 
-export const {
-  updateIdJobActive,
-  updateIndexCardActive,
-} = jobSlice.actions;
+export const { updateIdJobActive, updateIndexCardActive } = jobSlice.actions;
 export default jobSlice;

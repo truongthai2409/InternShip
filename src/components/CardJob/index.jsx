@@ -29,7 +29,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
     await dispatch(deleteMark(jobCare.id)).then(
-      toast.success("Đã xóa mark thành công")
+      toast.success("Đã xóa lưu thành công")
     );
     await dispatch(getMarkByUser(profile.username));
   };
@@ -37,10 +37,10 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const handleDeleteJobApply = async (e) => {
     e.stopPropagation();
     await dispatch(deleteApply(jobApplied.id)).then(
-      toast.success("Đã xóa job thành công")
+      toast.success("Đã xóa công việc thành công")
     );
     await dispatch(getCandidateByUserName(profile.username));
-    await dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
+    dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
   };
 
   const handleAddJob = async (e) => {

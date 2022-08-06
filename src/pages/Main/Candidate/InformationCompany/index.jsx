@@ -112,7 +112,7 @@ const CandidateInformationCompany = () => {
           // autoClose: 3000,
         });
       } else {
-        toast.success(
+        toast.error(
           "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
           {
             // position: "top-center",

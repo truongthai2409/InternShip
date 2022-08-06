@@ -56,7 +56,7 @@ const Appreciate = ({ appreciate }) => {
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
   const [hover, setHover] = useState(-1);
-  const [isCheck, setIsCheck] = useState(false);
+  // const [isCheck, setIsCheck] = useState(false);
   const {
     register,
     handleSubmit,
@@ -102,7 +102,7 @@ const Appreciate = ({ appreciate }) => {
           // autoClose: 3000,
         });
       } else {
-        toast.success(
+        toast.error(
           "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
           {
             // position: "top-center",
@@ -132,6 +132,7 @@ const Appreciate = ({ appreciate }) => {
     );
     await dispatch(getAppreciateByCompany(idCompany));
   };
+
   return (
     <Box
       sx={{

@@ -20,6 +20,12 @@ const applySlice = createSlice({
         state.applyList = payload.contents;
       }
     );
+    builder.addCase(
+      getJobCandidateAppliedByNameAndLocation.fulfilled,
+      (state, { payload }) => {
+        state.applyList = payload.contents;
+      }
+    );
     builder.addCase(deleteApply.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;
@@ -33,6 +39,24 @@ export const getApplyListByIdCandidate = createAsyncThunk(
   async (id) => {
     return axios
       .get(`${baseURL}/api/applylist/candidate/${id}/?no=0&limit=10`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+export const getJobCandidateAppliedByNameAndLocation = createAsyncThunk(
+  "apply_candidate/getJobCandidateAppliedByNameAndLocation",
+  async (dataSearch) => {
+    return axios
+      .get(
+        `${baseURL}/api/r2s/job/search/candidate-apply/${dataSearch.idCandidate}`,
+        {
+          params: dataSearch,
+        }
+      )
       .then((response) => {
         return response.data;
       })
@@ -55,7 +79,6 @@ export const addApply = createAsyncThunk(
         return res;
       })
       .catch((error) => {
-        console.log(error);
         return error.response.data;
       });
     return res;

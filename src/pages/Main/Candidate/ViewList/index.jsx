@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
 import UserCard from "src/components/UserCard";
-import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import {
+  getJobCandidateCaredByNameAndLocation,
+  getMarkByUser,
+} from "src/store/slices/main/mark/markSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import "./styles.scss";
 import Box from "@mui/material/Box";
 import { getApplyListByIdCandidate } from "src/store/slices/main/candidate/apply/applySlice";
 import SearchResultHome from "src/components/SearchResultHome";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowButton from "src/components/ArrowButton";
-import { getJobByNameAndLocation } from "src/store/slices/main/home/job/jobSlice";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 
 const CandidateViewList = () => {
@@ -24,14 +26,14 @@ const CandidateViewList = () => {
   const pathUrl = location.pathname;
   const [locationValue, setLocationValue] = useState("");
   let { careListOfPrivate } = useSelector((state) => state.mark);
-  let { jobListName } = useSelector((state) => state.job);
+  // let { jobListName } = useSelector((state) => state.job);
   const { applyList } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
   const eleDuplicate = [];
-  for (let i = 0; i < careListOfPrivate.length; i++) {
-    for (let j = 0; j < careListOfPrivate.length; j++) {
+  for (let i = 0; i < careListOfPrivate?.length; i++) {
+    for (let j = 0; j < careListOfPrivate?.length; j++) {
       if (careListOfPrivate[i] === careListOfPrivate[j]) {
         eleDuplicate.push(careListOfPrivate[i]);
       }
@@ -44,23 +46,23 @@ const CandidateViewList = () => {
       await dispatch(getMarkByUser(profile.username));
       await dispatch(getCandidateByUserName(profile.username));
       await dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
-      if (
-        pathUrl === "/candidate/view-list-care" &&
-        careListOfPrivate &&
-        careListOfPrivate.length === 0
-      ) {
-        toast.success(
-          "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
-        );
-      }
+      // if (
+      //   pathUrl === "/candidate/view-list-care" &&
+      //   careListOfPrivate &&
+      //   careListOfPrivate.length === 0
+      // ) {
+      //   toast.success(
+      //     "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
+      //   );
+      // }
 
-      if (
-        pathUrl === "/candidate/view-list-apply" &&
-        careListOfPrivate &&
-        careListOfPrivate.length === 0
-      ) {
-        toast.success("Bạn chưa ứng tuyển công việc nào");
-      }
+      // if (
+      //   pathUrl === "/candidate/view-list-apply" &&
+      //   careListOfPrivate &&
+      //   careListOfPrivate.length === 0
+      // ) {
+      //   toast.success("Bạn chưa ứng tuyển công việc nào");
+      // }
     };
     getValue();
   }, []);
@@ -74,13 +76,18 @@ const CandidateViewList = () => {
   };
 
   const handleSearch = async (value) => {
+    await dispatch(getCandidateByUserName(profile.username));
+    await dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
     const dataSearch = {
-      name: value || "",
-      province: locationValue || "",
-      no: 0,
-      limit: 10,
+      idCandidate: candidateInfoByUsername?.id,
+      valueSearch: {
+        name: value || "",
+        province: locationValue || "",
+        no: 0,
+        limit: 10,
+      },
     };
-    await dispatch(getJobByNameAndLocation(dataSearch));
+    dispatch(getJobCandidateCaredByNameAndLocation(dataSearch));
 
     // navigate(
     //   `/candidate` +

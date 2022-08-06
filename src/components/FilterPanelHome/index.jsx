@@ -41,10 +41,16 @@ function a11yProps(index) {
   };
 }
 
-export default function FilterPanelHome({ jobList, indexCardActive }) {
+const FilterPanelHome = ({
+  jobList,
+  indexCardActive,
+  positionJobValue,
+  positionValue,
+}) => {
   const location = useLocation();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
+  console.log(positionValue);
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
@@ -55,32 +61,36 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList && jobList.length > 0 ?
-          jobList.map((job, index) => (
-            <CardHome
-              id={job.id}
-              active={indexCardActive}
-              index={index}
-              key={job.id}
-              title={job.name}
-              fontSize={10}
-              nameCompany={job.hr?.company?.name || job?.universityDTO.name}
-              idCompany={job.hr?.company?.id || job?.universityDTO.id}
-              tagName={[
-                job?.jobposition?.name || job?.position.name || "Unknown",
-                job?.jobType?.name || "Unknown"
-              ]}
-              star={job?.hr?.company?.rates.length || 4}
-              location="Hồ Chí Minh"
-              amount={job.amount || "Unknown"}
-              demandPartner={true}
-              time={[
-                moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
-                moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
-              ]}
-              locationPath={location.pathname}
-            />
-          )) : null}
+        {jobList && jobList.length > 0
+          ? jobList.map((job, index) => (
+              <CardHome
+                positionValue={positionValue}
+                id={job.id}
+                active={indexCardActive}
+                index={index}
+                key={job.id}
+                title={job.name}
+                fontSize={10}
+                nameCompany={job.hr?.company?.name || job?.universityDTO.name}
+                idCompany={job.hr?.company?.id || job?.universityDTO.id}
+                tagName={[
+                  job?.jobposition?.name || job?.position.name || "Unknown",
+                  job?.jobType?.name || "Unknown",
+                ]}
+                star={job?.hr?.company?.rates.length || 4}
+                location="Hồ Chí Minh"
+                amount={job.amount || "Unknown"}
+                demandPartner={true}
+                time={[
+                  moment(job.timeStartStr || job.createDate).format(
+                    "DD/MM/YYYY"
+                  ),
+                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                ]}
+                locationPath={location.pathname}
+              />
+            ))
+          : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {/* <CardHome /> */}
@@ -90,4 +100,5 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
       </TabPanel>
     </Box>
   );
-}
+};
+export default FilterPanelHome;

@@ -46,7 +46,7 @@ const ButtonMark = (props) => {
       await dispatch(createMark(dataCareList));
       await dispatch(getMarkByUser(profile.username));
       setMark(!mark);
-      toast.success("Đã mark thành công");
+      toast.success("Đã lưu thành công");
     } else {
       if (profile.role !== undefined && profile.role === "Role_Candidate") {
         const dataByUserAndJob = {
@@ -57,7 +57,7 @@ const ButtonMark = (props) => {
         await dispatch(deleteMark(res.payload.id));
         await dispatch(getMarkByUser(profile.username));
         setMark(false);
-        toast.success("Đã xóa mark thành công");
+        toast.success("Đã hủy lưu thành công");
       }
     }
   };

@@ -7,17 +7,16 @@ import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
-import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
+  const [positionValue, setPositionValue] = useState("");
+  // let positionJobValue = "";
   const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive } = useSelector(
     (state) => state.job
   );
-  // console.log(jobDetail, indexCardActive);
-
   useEffect(() => {
     const dataSearch = {
       name: "",
@@ -57,6 +56,11 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
+
+  const handleCheck = (value) => {
+    // positionJobValue = value;
+    setPositionValue(value);
+  };
   return (
     <>
       {jobDetail && (
@@ -67,7 +71,7 @@ const Home = (props) => {
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
-            <SideBarHomeList />
+            <SideBarHomeList onChange={handleCheck} />
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
@@ -80,6 +84,8 @@ const Home = (props) => {
             <FilterPanelHome
               jobList={jobListName}
               indexCardActive={indexCardActive}
+              // positionJobValue={positionJobValue}
+              positionValue={positionValue}
             />
           </Grid>
           <Grid item lg={6} className="onTablet">

@@ -45,7 +45,7 @@ const Password = () => {
             autoClose: 3000,
           });
         } else {
-          toast.success("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
+          toast.error("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
             position: "top-center",
             autoClose: 3000,
           });

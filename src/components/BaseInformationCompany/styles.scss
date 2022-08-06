@@ -94,6 +94,13 @@
 .appreciate {
   // margin: 5px 0px 10px 0px;
   @include flex(center, space-between);
+
+  img {
+    width: 35px;
+    height: 35px;
+    margin-right: 16px;
+    border-radius: 50%;
+  }
 }
 
 .company-job-detail__card {

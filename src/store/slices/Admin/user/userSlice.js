@@ -82,7 +82,7 @@ export const getProfileByIdUser = createAsyncThunk(
           });
       case "Role_Candidate":
         return await axios
-          .get(`${baseURL}/api/r2s/hr/user/${idUser}`)
+          .get(`${baseURL}/api/r2s/candidate/user/${idUser}`)
           .then((response) => {
             return response.data;
           })
@@ -94,7 +94,6 @@ export const getProfileByIdUser = createAsyncThunk(
     }
   }
 );
-
 
 // function use for update profile of user
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
