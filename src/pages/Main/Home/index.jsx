@@ -11,22 +11,24 @@ import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/job
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [positionValue, setPositionValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  // const [totalPages, setTotalPages] = useState();
+
   // let positionJobValue = "";
   const dispatch = useDispatch();
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
-    (state) => state.job
-  );
+  const { jobListName, jobDetail, indexCardActive, jobListNameHavePages } =
+    useSelector((state) => state.job);
   useEffect(() => {
     const dataSearch = {
       name: "",
       province: "",
-      no: 0,
-      limit: 10,
+      no: currentPage,
+      limit: 4,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // dispatch(getJobList([1, 10]));
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
 
   // const generateNameId = (name) => {
   //   encodeURIComponent(name)
@@ -34,13 +36,16 @@ const Home = (props) => {
   //     .replace(/%/g, "")
   //     .replace("%20", "+");
   // };
+  useEffect(() => {
+    // setTotalPages(jobListName?.totalPages);
+  });
 
   const handleSearch = (value) => {
     const dataSearch = {
       name: value || "",
       province: locationValue || "",
       no: 0,
-      limit: 10,
+      limit: 5,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // navigate(
@@ -60,6 +65,11 @@ const Home = (props) => {
   const handleCheck = (value) => {
     // positionJobValue = value;
     setPositionValue(value);
+  };
+
+  const getValuePageAndHandle = (value) => {
+    setCurrentPage(value);
+    // window.scroll(0, 0);
   };
   return (
     <>
@@ -86,6 +96,8 @@ const Home = (props) => {
               indexCardActive={indexCardActive}
               // positionJobValue={positionJobValue}
               positionValue={positionValue}
+              jobListNameHavePages={jobListNameHavePages}
+              onChange={getValuePageAndHandle}
             />
           </Grid>
           <Grid item lg={6} className="onTablet">

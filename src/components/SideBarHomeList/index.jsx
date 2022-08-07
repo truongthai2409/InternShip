@@ -12,7 +12,7 @@ const listWorkingFormat = [
   { name: "Remote", id: 3 },
 ];
 
-function SideBarHomeList({ onChange }) {
+const SideBarHomeList = ({ onChange }) => {
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
@@ -20,9 +20,11 @@ function SideBarHomeList({ onChange }) {
     dispatch(getMajorList());
     dispatch(getJobPositionList());
   }, [dispatch]);
+
   const handleCheck = (value) => {
     onChange && onChange(value);
   };
+
   return (
     <div className="slideBarHome__wrapper">
       <ListCollapse
@@ -35,6 +37,6 @@ function SideBarHomeList({ onChange }) {
       <ListCollapse title="Chuyên ngành" list={majorList} spacing={3} />
     </div>
   );
-}
+};
 
 export default SideBarHomeList;

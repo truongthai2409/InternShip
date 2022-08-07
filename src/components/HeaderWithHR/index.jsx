@@ -9,8 +9,13 @@ import "./styles.scss";
 import SearchResultHome from "../SearchResultHome";
 import AccountMenu from "../AccountMenu";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
+import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 
-function HeaderWithHR(props) {
+const HeaderWithHR = (props) => {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
@@ -21,7 +26,18 @@ function HeaderWithHR(props) {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <div className="container-header__hr header__hr config">
       {props.hr ? <Logo /> : <Logo />}
@@ -40,11 +56,11 @@ function HeaderWithHR(props) {
       {pathUrl === "/candidate" ? (
         <div className="header__hr">
           <Link to="view-list-apply" className="header__hr-post">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <PlaylistAddCheckOutlinedIcon fontSize="large" />
             <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
           </Link>
           <Link to="view-list-care" className="header__hr-post">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <FormatAlignJustifyIcon />
             <span className="header__hr-post-post">Công việc đã quan tâm</span>
           </Link>
         </div>
@@ -52,7 +68,7 @@ function HeaderWithHR(props) {
       {pathUrl === "/candidate/view-list-care" ? (
         <div className="header__hr">
           <Link to="view-list-apply" className="header__hr-post">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <PlaylistAddCheckOutlinedIcon fontSize="large" />
             <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
           </Link>
         </div>
@@ -65,6 +81,41 @@ function HeaderWithHR(props) {
           </Link>
         </div>
       ) : null}
+      <div className="res__header_with_hr">
+        <Button aria-describedby={id} onClick={handleClick}>
+          <FormatListBulletedOutlinedIcon />
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          <Typography sx={{ p: 2 }}>
+            <Link to="view-list-apply" className="header__hr-post">
+              {/* <FormatAlignJustifyIcon></FormatAlignJustifyIcon> */}
+              <PlaylistAddCheckOutlinedIcon></PlaylistAddCheckOutlinedIcon>
+              <span className="header__hr-post-post">
+                Công việc đã ứng tuyển
+              </span>
+            </Link>
+            <Link to="view-list-care" className="header__hr-post">
+              <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+              <span className="header__hr-post-post">
+                Công việc đã quan tâm
+              </span>
+            </Link>
+          </Typography>
+        </Popover>
+      </div>
       {props.search ? (
         <SearchResultHome
           bwidth="630px"
@@ -120,7 +171,7 @@ function HeaderWithHR(props) {
       </div>
     </div>
   );
-}
+};
 
 HeaderWithHR.propTypes = {
   idMark: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

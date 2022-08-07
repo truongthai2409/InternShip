@@ -55,3 +55,32 @@
   position: absolute;
   transform: translate(-17px, -5px);
 }
+.css-tzssek-MuiSvgIcon-root {
+  color: $primary-color;
+  position: relative;
+}
+//mobile
+@media screen and (max-width: 767.98px) {
+  .header__hr-post {
+    display: none;
+  }
+  .res__header_with_hr {
+    display: flex;
+  }
+}
+//tablet
+@media screen and (min-width: 768px) and (max-width: 899px) {
+  .res__header_with_hr {
+    display: flex;
+  }
+  .header__hr-post {
+    display: none;
+  }
+}
+
+//desktop
+@media screen and (max-width: 3000.98px) and (min-width: 900px) {
+  .res__header_with_hr {
+    display: none;
+  }
+}

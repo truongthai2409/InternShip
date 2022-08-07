@@ -151,7 +151,12 @@ const Appreciate = ({ appreciate }) => {
           }
         >
           <div className="appreciate">
-            <div>
+            <div className="fix_display">
+              <img
+                className=""
+                alt=""
+                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+              />
               <Typography
                 variant="subtitle2"
                 component="div"
@@ -225,6 +230,10 @@ const Appreciate = ({ appreciate }) => {
               3,
               appreciate?.comment?.length - 4
             )}` || ""}
+            {/* dangerouslySetInnerHTML=
+            {{
+              __html: appreciate?.comment,
+            }} */}
           </Typography>
         </Item>
         <Modal
@@ -242,14 +251,16 @@ const Appreciate = ({ appreciate }) => {
                 requirementField={false}
                 setValue={setValue}
                 height="50px"
+                border="1px solid black"
               />
               <Textarea
                 label="Sửa đánh giá về công ty"
                 id="comment"
                 placeholder="Nhập vào đây"
                 register={register}
-                setValue={setValue}
+                defaultValue={appreciate?.comment}
                 check={true}
+                hover="1.6px solid green"
               >
                 {errors.comment?.message}
               </Textarea>
@@ -262,7 +273,7 @@ const Appreciate = ({ appreciate }) => {
               >
                 <Rating
                   name="size-medium"
-                  value={valueRating.toString()}
+                  defaultValue={valueRating.toString()}
                   precision={0.5}
                   getLabelText={getLabelText}
                   onChange={(event, newValue) => {

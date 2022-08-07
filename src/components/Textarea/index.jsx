@@ -16,6 +16,7 @@ const Textarea = ({
   defaultValue,
   textAlign,
   isUpdate = true,
+  hover,
 }) => {
   isUpdate = true;
   useEffect(() => {
@@ -47,10 +48,13 @@ const Textarea = ({
   return (
     <>
       <div
-        style={{ textAlign: textAlign ? textAlign : "" }}
+        style={{
+          textAlign: textAlign ? textAlign : "",
+          // hover: hover ? hover : "",
+        }}
         className="custom-textarea"
       >
-        <ReactQuill
+        {/* <ReactQuill
           theme="snow"
           onChange={handleOnChange}
           placeholder={placeholder}
@@ -78,7 +82,7 @@ const Textarea = ({
             )}
           </p>
         )}
-        =======
+        ======= */}
         <label htmlFor={id} className="custom-textarea__label">
           {label}
           {requirementField && <span className="field-requirment">*</span>}

@@ -41,12 +41,10 @@ const Password = () => {
         reset();
         if (res.status === 200) {
           toast.success("Đổi mật khẩu thành công", {
-            position: "top-center",
             autoClose: 3000,
           });
         } else {
           toast.error("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
-            position: "top-center",
             autoClose: 3000,
           });
         }

@@ -8,6 +8,7 @@ const applySlice = createSlice({
   name: "apply_candidate",
   initialState: {
     applyList: [],
+    applyListHavePage: [],
   },
   extraReducers: (builder) => {
     builder.addCase(addApply.fulfilled, (state, action) => {
@@ -18,6 +19,7 @@ const applySlice = createSlice({
       getApplyListByIdCandidate.fulfilled,
       (state, { payload }) => {
         state.applyList = payload.contents;
+        state.applyListHavePage = payload;
       }
     );
     builder.addCase(
@@ -36,9 +38,11 @@ const applySlice = createSlice({
 
 export const getApplyListByIdCandidate = createAsyncThunk(
   "apply_candidate/getApplyListByIdCandidate",
-  async (id) => {
+  async (data) => {
     return axios
-      .get(`${baseURL}/api/applylist/candidate/${id}/?no=0&limit=10`)
+      .get(`${baseURL}/api/applylist/candidate/${data.idCandidate}`, {
+        params: data.page,
+      })
       .then((response) => {
         return response.data;
       })
@@ -50,11 +54,13 @@ export const getApplyListByIdCandidate = createAsyncThunk(
 export const getJobCandidateAppliedByNameAndLocation = createAsyncThunk(
   "apply_candidate/getJobCandidateAppliedByNameAndLocation",
   async (dataSearch) => {
+    console.log(dataSearch);
+
     return axios
       .get(
         `${baseURL}/api/r2s/job/search/candidate-apply/${dataSearch.idCandidate}`,
         {
-          params: dataSearch,
+          params: dataSearch.valueSearch,
         }
       )
       .then((response) => {

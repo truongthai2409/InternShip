@@ -10,6 +10,7 @@ const jobSlice = createSlice({
     jobList: [],
     jobListCompany: [],
     jobListName: [],
+    jobListNameHavePages: [],
     jobListActived: [],
     jobListDisabled: [],
     jobDetailById: {},
@@ -60,6 +61,7 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
       state.jobListName = payload.contents;
+      state.jobListNameHavePages = payload;
       if (payload?.contents?.length > 0) {
         state.jobDetail = payload.contents[0];
       } else {

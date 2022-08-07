@@ -26,7 +26,6 @@ const AccountMenu = ({ linkImg }) => {
   const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
 
   const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
-  console.log(role);
 
   const handleLogout = () => {
     localStorage.removeItem("userPresent");

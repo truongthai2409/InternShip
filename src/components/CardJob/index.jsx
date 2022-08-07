@@ -31,7 +31,14 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     await dispatch(deleteMark(jobCare.id)).then(
       toast.success("Đã xóa lưu thành công")
     );
-    await dispatch(getMarkByUser(profile.username));
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: 0,
+        limit: 2,
+      },
+    };
+    await dispatch(getMarkByUser(dataGetMarkByUser));
   };
 
   const handleDeleteJobApply = async (e) => {
@@ -40,7 +47,14 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       toast.success("Đã xóa công việc thành công")
     );
     await dispatch(getCandidateByUserName(profile.username));
-    dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
+    const dataGetAppliedByCandidate = {
+      idCandidate: candidateInfoByUsername.id,
+      page: {
+        no: 0,
+        limit: 2,
+      },
+    };
+    dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
   };
 
   const handleAddJob = async (e) => {
@@ -94,7 +108,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
               />
               <div className="card-job__content-detail">
                 <h5 className="card-job__company-name">
-                  {jobCare.jobCare.hr?.company?.name}
+                  {jobCare.jobCare?.hr?.company?.name}
                 </h5>
                 <div className="card-job__company-work-time">
                   <WorkIcon />

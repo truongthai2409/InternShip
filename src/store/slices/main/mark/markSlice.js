@@ -9,6 +9,7 @@ const markJobSlice = createSlice({
     status: "",
     careListCandidate: [],
     careListOfPrivate: [],
+    careListOfPrivateHavePages: [],
     careJob: {},
   },
   extraReducers: (builder) => {
@@ -21,6 +22,7 @@ const markJobSlice = createSlice({
     });
     builder.addCase(getMarkByUser.fulfilled, (state, { payload }) => {
       state.careListOfPrivate = payload.contents;
+      state.careListOfPrivateHavePages = payload;
     });
     builder.addCase(getMarkByUserAndJob.fulfilled, (state, { payload }) => {
       state.careJob = payload;
@@ -55,9 +57,11 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
 
 export const getMarkByUser = createAsyncThunk(
   "mark/getMarkByUser",
-  async (userName) => {
+  async (data) => {
     return axios
-      .get(`${baseURL}/api/r2s/carelist/user/${userName}/?no=0&limit=10`)
+      .get(`${baseURL}/api/r2s/carelist/user/${data.userName}`, {
+        params: data.page,
+      })
       .then((response) => {
         return response.data;
       })
