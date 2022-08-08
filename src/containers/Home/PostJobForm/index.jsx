@@ -54,7 +54,7 @@ const PostJobForm = ({
 }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
-  const { jobPosition, status } = useSelector((state) => state.job);
+  const { jobPosition, status, jobListActived } = useSelector((state) => state.job);
   const { profile } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -88,11 +88,12 @@ const PostJobForm = ({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log("jobdetail:", jobDetail);
+  // console.log("jobdetail:", jobDetail);
   const onSubmit = (data) => {
     if (!isUpdate) {
       const jobData = {
@@ -126,6 +127,7 @@ const PostJobForm = ({
       };
       dispatch(addJob(jobData));
     } else {
+      console.log("job nè:", jobListActived)
       const jobData = {
         name: data.name,
         hr: {
@@ -166,7 +168,7 @@ const PostJobForm = ({
           id: 1,
         },
       };
-      console.log("job update:", jobData);
+      // console.log("job update:", jobData);
       dispatch(updateJob([jobDetail.id, jobData]));
       setOpen(false);
     }
@@ -336,6 +338,7 @@ const PostJobForm = ({
                   register={register}
                   defaultValue={isUpdate ? jobDetail?.desciption : ""}
                   setValue={setValue}
+                  watch={watch}
                   check={false}
                 >
                   {errors.jobDescription?.message}

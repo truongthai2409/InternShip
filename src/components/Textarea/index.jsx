@@ -17,34 +17,33 @@ const Textarea = ({
   textAlign,
   isUpdate = true,
   hover,
+  watch,
 }) => {
   isUpdate = true;
   useEffect(() => {
     if (isUpdate) {
-      console.log("updateee");
-      register(id);
+      register(id, { required: true, minLength: 3 });
     }
   }, [register]);
-
-  useEffect(() => {
-    console.log("test", register(id));
-  });
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
 
-  let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên...";
+  // let errorMessage = " * Bạn phải nhập quyền lợi của ứng viên...";
 
   const handleOnChange = (content, delta, source, editor) => {
-    if (editor.getText().length <= 1) {
+    if (editor.getText()?.length <= 1) {
       setShowError1(true);
       setShowError2(true);
     } else {
       setShowError1(false);
       setShowError2(false);
     }
-    setValue(`${id}`, content);
+    if (isUpdate) {
+      setValue(id, content);
+    }
   };
+  console.log("register::", register(id));
   return (
     <>
       <div
@@ -96,22 +95,15 @@ const Textarea = ({
           }
         >
           <ReactQuill
-            {...register(id)}
-            id={id}
+            // id={id}
             theme="snow"
-            onChange={handleOnChange}
+            // onChange={handleOnChange}
             placeholder={placeholder}
             defaultValue={defaultValue}
           />
           {check ? null : (
             <p className="custom-textarea__error">
-              {(children === null
-                ? showError1
-                  ? errorMessage
-                  : ""
-                : showError2
-                ? children
-                : "") || (
+              {children || (
                 <span
                   style={{
                     marginTop: "2px",
