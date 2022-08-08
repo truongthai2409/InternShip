@@ -90,7 +90,7 @@ export const getJobByNameAndLocation = createAsyncThunk(
 export const getMarkByUserAndJob = createAsyncThunk(
   "mark/getMarkByUserAndJob",
   async (data) => {
-    const { userName, idJob } = data;
+    const { userName, idJob, page } = data;
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -102,8 +102,11 @@ export const getMarkByUserAndJob = createAsyncThunk(
     };
     return axios
       .get(
-        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}/?no=0&limit=10`,
-        axiosConfig
+        `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}`,
+        axiosConfig,
+        {
+          params: page,
+        }
       )
       .then((response) => {
         return response.data;

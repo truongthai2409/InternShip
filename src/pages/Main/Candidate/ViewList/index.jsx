@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
@@ -21,6 +21,8 @@ import ArrowButton from "src/components/ArrowButton";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { Grid, Pagination, Stack } from "@mui/material";
 
+const limit = process.env.limit_of_page;
+
 const CandidateViewList = () => {
   TabTitle("Danh sách ứng viên");
 
@@ -29,7 +31,7 @@ const CandidateViewList = () => {
   const navigate = useNavigate();
   const pathUrl = location.pathname;
   const [locationValue, setLocationValue] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState();
   let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
     (state) => state.mark
@@ -53,16 +55,18 @@ const CandidateViewList = () => {
         userName: profile.username,
         page: {
           no: currentPage,
-          limit: 2,
+          limit: 10,
         },
       };
+
       await dispatch(getMarkByUser(dataGetMarkByUser));
       await dispatch(getCandidateByUserName(profile.username));
+
       const dataGetAppliedByCandidate = {
         idCandidate: candidateInfoByUsername.id,
         page: {
           no: currentPage,
-          limit: 2,
+          limit: 10,
         },
       };
       await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
@@ -86,7 +90,7 @@ const CandidateViewList = () => {
       // }
     };
     getValue();
-  }, [dispatch, currentPage]);
+  }, [dispatch, candidateInfoByUsername.id]);
 
   useEffect(() => {}, []);
   // const handleChange = (event, newValue) => {
@@ -196,22 +200,24 @@ const CandidateViewList = () => {
             </Grid>
           </Grid>
         </div>
-        <Stack spacing={2}>
-          <Pagination
-            page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
-            defaultPage={1}
-            onChange={(e) => handlePagination(e.target.textContent)}
-            count={totalPage || 1}
-            variant="outlined"
-            shape="rounded"
-            size="medium"
-            // disabled={
-            //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
-            //   jobListNameHavePages?.numberOfCurrentPage ===
-            //     jobListNameHavePages?.totalPages
-            // }
-          />
-        </Stack>
+        <div className="view-list-page">
+          <Stack spacing={2}>
+            <Pagination
+              page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
+              defaultPage={1}
+              onChange={(e) => handlePagination(e.target.textContent)}
+              count={totalPage || 1}
+              variant="outlined"
+              shape="rounded"
+              size="medium"
+              // disabled={
+              //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
+              //   jobListNameHavePages?.numberOfCurrentPage ===
+              //     jobListNameHavePages?.totalPages
+              // }
+            />
+          </Stack>
+        </div>
         <div className="demand-detail__back" onClick={handleBackClick}>
           <ArrowButton direction="left" text="Trở lại" fontSize="15px" />
         </div>

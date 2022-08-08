@@ -16,6 +16,9 @@ import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
 
+const no = process.env.NO_OF_PAGE;
+const limit = process.env.LIMIT_OF_PAGE;
+
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
@@ -26,10 +29,17 @@ const CardHome = (props) => {
   const isMarkLength = isMark && isMark.length > 0 ? true : false;
 
   React.useEffect(() => {
-    if (profile.role) {
-      dispatch(getMarkByUser(profile.username));
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: 0,
+        limit: 10,
+      },
+    };
+    if (profile.role === "Role_Candidate") {
+      dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, [dispatch, profile.username]);
+  }, []);
 
   React.useEffect(() => {
     if (props.index === 0) {
@@ -39,7 +49,7 @@ const CardHome = (props) => {
 
   React.useEffect(() => {
     dispatch(getRatingCompany(props.idCompany));
-  }, [dispatch]);
+  }, []);
 
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));

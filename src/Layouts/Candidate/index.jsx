@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
+const no = process.env.NO_OF_PAGE;
+const limit = process.env.limit_of_page;
+
 const CandidateLayOut = () => {
   let location = useLocation();
   const dispatch = useDispatch();
@@ -14,7 +17,14 @@ const CandidateLayOut = () => {
   const { profile } = useSelector((state) => state.authentication);
 
   useEffect(() => {
-    dispatch(getMarkByUser(profile.username));
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: 0,
+        limit: 10,
+      },
+    };
+    dispatch(getMarkByUser(dataGetMarkByUser));
   }, [dispatch]);
   const handleRerender = async (id) => {
     if (id) {
@@ -24,9 +34,9 @@ const CandidateLayOut = () => {
   return (
     <div className="main__layout">
       {location.pathname === "/candidate/information_company" ? (
-        <HeaderWithHR id={3} search candidate_view_list />
+        <HeaderWithHR id={3} search />
       ) : (
-        <HeaderWithHR id={3} candidate_view_list />
+        <HeaderWithHR id={3} candidate_res />
       )}
       <div className="candidate__layout-body-outlet">
         <Outlet />

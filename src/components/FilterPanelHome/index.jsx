@@ -104,7 +104,7 @@ const FilterPanelHome = ({
       <TabPanel value={value} index={2}>
         {/* <CardHome /> */}
       </TabPanel>
-      <Stack spacing={2}>
+      {/* <Stack spacing={2}>
         <Pagination
           page={jobListNameHavePages?.numberOfCurrentPage || 0}
           defaultPage={1}
@@ -119,7 +119,7 @@ const FilterPanelHome = ({
           //     jobListNameHavePages?.totalPages
           // }
         />
-      </Stack>
+      </Stack> */}
     </Box>
   );
 };

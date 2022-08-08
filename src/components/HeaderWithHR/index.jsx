@@ -81,41 +81,43 @@ const HeaderWithHR = (props) => {
           </Link>
         </div>
       ) : null}
-      <div className="res__header_with_hr">
-        <Button aria-describedby={id} onClick={handleClick}>
-          <FormatListBulletedOutlinedIcon />
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-        >
-          <Typography sx={{ p: 2 }}>
-            <Link to="view-list-apply" className="header__hr-post">
-              {/* <FormatAlignJustifyIcon></FormatAlignJustifyIcon> */}
-              <PlaylistAddCheckOutlinedIcon></PlaylistAddCheckOutlinedIcon>
-              <span className="header__hr-post-post">
-                Công việc đã ứng tuyển
-              </span>
-            </Link>
-            <Link to="view-list-care" className="header__hr-post">
-              <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
-              <span className="header__hr-post-post">
-                Công việc đã quan tâm
-              </span>
-            </Link>
-          </Typography>
-        </Popover>
-      </div>
+      {props.candidate_res && (
+        <div className="res__header_with_hr">
+          <Button aria-describedby={id} onClick={handleClick}>
+            <FormatListBulletedOutlinedIcon />
+          </Button>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <Typography sx={{ p: 2 }}>
+              <Link to="view-list-apply" className="header__hr-post">
+                {/* <FormatAlignJustifyIcon></FormatAlignJustifyIcon> */}
+                <PlaylistAddCheckOutlinedIcon></PlaylistAddCheckOutlinedIcon>
+                <span className="header__hr-post-post">
+                  Công việc đã ứng tuyển
+                </span>
+              </Link>
+              <Link to="view-list-care" className="header__hr-post">
+                <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+                <span className="header__hr-post-post">
+                  Công việc đã quan tâm
+                </span>
+              </Link>
+            </Typography>
+          </Popover>
+        </div>
+      )}
       {props.search ? (
         <SearchResultHome
           bwidth="630px"
