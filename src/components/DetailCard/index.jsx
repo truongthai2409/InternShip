@@ -6,6 +6,8 @@ import // useSelector,
 // import moment from "moment";
 import "./styles.scss";
 import Detail from "./component";
+import { useDispatch, useSelector } from "react-redux";
+import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 
 const DetailCard = ({
   logo,
@@ -16,12 +18,32 @@ const DetailCard = ({
   jobDetailById,
   demandPartner = false,
 }) => {
+  const { appreciateList } = useSelector((state) => state.appreciate);
+  const dispatch = useDispatch();
+  const idCompany = jobDetail?.hr?.company.id;
+  useEffect(() => {
+    dispatch(getAppreciateByCompany(idCompany));
+  }, [dispatch, idCompany]);
+
+  const data = [];
+  for (let i = 0; i < appreciateList?.length; i++) {
+    data.push(appreciateList[i].score);
+  }
+
+  const res = data?.reduce((total, currentValue) => {
+    return total + currentValue;
+  }, 0);
+  const rating = (res / data?.length).toFixed(2);
   return (
     <div>
       {jobListName && jobListName.length > 0 ? (
-        <Detail jobDetail={jobDetail} demandPartner={demandPartner} />
+        <Detail
+          jobDetail={jobDetail}
+          demandPartner={demandPartner}
+          rating={rating}
+        />
       ) : (
-        <Detail jobDetailById={jobDetailById} /> || null
+        <Detail jobDetailById={jobDetailById} rating={rating} /> || null
       )}
     </div>
   );

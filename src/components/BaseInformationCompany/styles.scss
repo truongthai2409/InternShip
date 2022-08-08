@@ -3,7 +3,7 @@
 .base__information {
   padding: 3px;
   .company-name {
-    text-align: center;
+    // text-align: center;
     width: auto;
     font-family: "Open Sans";
     font-style: normal;
@@ -20,7 +20,7 @@
 
     .img-logo {
       width: 115px;
-      height: 115px;
+      height: 119px;
       border-radius: 4px;
       margin-left: 35px;
       margin-right: 23px;
@@ -133,4 +133,7 @@
 
 .fix__margin {
   margin-bottom: 7px;
+}
+.css-1q7v9b9-MuiGrid-root > .MuiGrid-item {
+  padding-left: 0 !important;
 }

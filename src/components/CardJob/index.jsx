@@ -20,6 +20,10 @@ import {
   getApplyListByIdCandidate,
 } from "src/store/slices/main/candidate/apply/applySlice";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+
+const no = process.env.NO_OF_PAGE;
+const limit = process.env.LIMIT_OF_PAGE;
+
 const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const { profile } = useSelector((state) => state.authentication);
   const { candidateInfoByUsername } = useSelector(
@@ -35,7 +39,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 2,
+        limit: 10,
       },
     };
     await dispatch(getMarkByUser(dataGetMarkByUser));
@@ -48,13 +52,13 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     );
     await dispatch(getCandidateByUserName(profile.username));
     const dataGetAppliedByCandidate = {
-      idCandidate: candidateInfoByUsername.id,
+      idCandidate: candidateInfoByUsername?.id,
       page: {
         no: 0,
-        limit: 2,
+        limit: 10,
       },
     };
-    dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+    await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
   };
 
   const handleAddJob = async (e) => {
@@ -88,6 +92,14 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
         toast.success("Đã nộp CV thành công");
         // }
       }
+      const dataGetAppliedByCandidate = {
+        idCandidate: candidateInfoByUsername?.id,
+        page: {
+          no: 0,
+          limit: 10,
+        },
+      };
+      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
     }
   };
   return (

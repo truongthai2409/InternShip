@@ -14,6 +14,9 @@ import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 
+const no = process.env.NO_OF_PAGE;
+const limit = process.env.LIMIT_OF_PAGE;
+
 const ButtonMark = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +35,13 @@ const ButtonMark = (props) => {
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
-
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: 0,
+        limit: 10,
+      },
+    };
     if (props.isMark === false) {
       const dataCareList = {
         candidateCare: {
@@ -43,8 +52,9 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
+
       await dispatch(createMark(dataCareList));
-      await dispatch(getMarkByUser(profile.username));
+      await dispatch(getMarkByUser(dataGetMarkByUser));
       setMark(!mark);
       toast.success("Đã lưu thành công");
     } else {
@@ -52,10 +62,14 @@ const ButtonMark = (props) => {
         const dataByUserAndJob = {
           userName: profile.username,
           idJob: Number(props.jobId),
+          page: {
+            no: 0,
+            limit: 2,
+          },
         };
         const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
         await dispatch(deleteMark(res.payload.id));
-        await dispatch(getMarkByUser(profile.username));
+        await dispatch(getMarkByUser(dataGetMarkByUser));
         setMark(false);
         toast.success("Đã hủy lưu thành công");
       }
@@ -68,7 +82,7 @@ const ButtonMark = (props) => {
       toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
       await navigate("/login");
     } else {
-      await navigate("/candidate");
+      navigate("/candidate");
     }
   };
   return (

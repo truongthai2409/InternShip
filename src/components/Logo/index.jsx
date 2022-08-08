@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import logo from "./logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
-export default function Logo({ id }) {
+const Logo = ({ id }) => {
+  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.authentication);
   const navigate = useNavigate();
   const roleList = {
@@ -12,6 +14,19 @@ export default function Logo({ id }) {
     1: "Nhà tuyển dụng",
     4: "Cộng tác viên",
   };
+  const getMarkByUser = () => {
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: 0,
+        limit: 10,
+      },
+    };
+    if (profile.role === "Role_Candidate") {
+      dispatch(getMarkByUser(dataGetMarkByUser));
+    }
+  };
+  // useEffect(() => {}, []);
 
   const handleClickGoHome = () => {
     if (profile.role !== undefined) {
@@ -19,12 +34,15 @@ export default function Logo({ id }) {
       switch (role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
+          // getMarkByUser();
           break;
         case "Role_Partner":
           navigate(`/partner`, { replace: true });
+          // getMarkByUser();
           break;
         default:
           navigate(`/candidate`, { replace: true });
+          getMarkByUser();
           break;
       }
     } else {
@@ -41,4 +59,6 @@ export default function Logo({ id }) {
       </Link>
     </div>
   );
-}
+};
+
+export default Logo;

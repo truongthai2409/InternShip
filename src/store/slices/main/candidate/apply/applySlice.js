@@ -54,8 +54,6 @@ export const getApplyListByIdCandidate = createAsyncThunk(
 export const getJobCandidateAppliedByNameAndLocation = createAsyncThunk(
   "apply_candidate/getJobCandidateAppliedByNameAndLocation",
   async (dataSearch) => {
-    console.log(dataSearch);
-
     return axios
       .get(
         `${baseURL}/api/r2s/job/search/candidate-apply/${dataSearch.idCandidate}`,

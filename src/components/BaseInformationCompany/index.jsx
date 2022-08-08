@@ -22,7 +22,7 @@ function BaseInformationCompany({
   appreciateList,
 }) {
   const dispatch = useDispatch();
-  // const { rating } = useSelector(state => state.rating)
+  // const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
   const idCompany = jobDetail?.hr?.company.id;
   useEffect(() => {
@@ -79,7 +79,7 @@ function BaseInformationCompany({
                 <h5>
                   Email:
                   <a
-                    href={jobDetail?.hr?.company.email}
+                    href={`mailto:${jobDetail?.hr?.company.email}`}
                     className="fix-fontSize fix__margin"
                   >
                     {jobDetail?.hr?.company.email}
@@ -140,7 +140,7 @@ function BaseInformationCompany({
                     transform: "translate(5px,5px)",
                   }}
                 >
-                  {`${rating} trong ${appreciateList.length} lượt đánh giá`}
+                  {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
                 </Typography>
               </div>
             ) : (
@@ -167,12 +167,12 @@ function BaseInformationCompany({
             </h5>
             <Grid
               container
-              spacing={2}
-              sx={{
-                paddingLeft: `${pl}px`,
-                paddingRight: `${pr}px`,
-                marginLeft: `${ml}px`,
-              }}
+              spacing={3.6}
+              // sx={{
+              //   paddingLeft: `${pl}px`,
+              //   paddingRight: `${pr}px`,
+              //   marginLeft: `${ml}px`,
+              // }}
             >
               {jobListCompany.length > 0 &&
                 jobListCompany?.map((job) => (
@@ -183,6 +183,11 @@ function BaseInformationCompany({
                     sm="auto"
                     xs="auto"
                     key={job.id}
+                    sx={
+                      {
+                        // paddingLeft: `0px`,
+                      }
+                    }
                   >
                     <JobCandidate job={job} key={job.id} idJob={job.id} />
                   </Grid>

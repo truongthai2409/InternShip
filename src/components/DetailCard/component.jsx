@@ -54,6 +54,7 @@ const Detail = ({
   jobPostHR,
   jobDetailById,
   demandPartner = false,
+  rating,
 }) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
@@ -100,9 +101,17 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobType?.name || jobDetail?.jobType?.name || "Không có"} />
                   <TagName
-                    title={jobPosition?.name || jobDetail?.position?.name || "Không có"}
+                    title={
+                      jobType?.name || jobDetail?.jobType?.name || "Không có"
+                    }
+                  />
+                  <TagName
+                    title={
+                      jobPosition?.name ||
+                      jobDetail?.position?.name ||
+                      "Không có"
+                    }
                   />
                   <TagName title={major?.name || "Công nghệ thông tin"} />
                 </div>
@@ -144,6 +153,7 @@ const Detail = ({
                 <TabPanel value={value} index={0}>
                   <InformationCompany
                     jobDetail={jobDetail}
+                    rating={rating}
                   ></InformationCompany>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -163,6 +173,7 @@ const Detail = ({
                 <TabPanel value={value} index={0}>
                   <InformationUniversity
                     jobDetail={jobDetail}
+                    rating={rating}
                   ></InformationUniversity>
                 </TabPanel>
               </Box>
@@ -210,6 +221,7 @@ const Detail = ({
             <Box sx={{ width: "100%" }}>
               <InformationCompany
                 jobDetailById={jobDetailById}
+                rating={rating}
               ></InformationCompany>
             </Box>
           </div>
