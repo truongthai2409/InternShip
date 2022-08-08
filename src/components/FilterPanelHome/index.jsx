@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
 import moment from "moment";
+import { Pagination, Stack } from "@mui/material";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
 
@@ -41,10 +42,21 @@ function a11yProps(index) {
   };
 }
 
-export default function FilterPanelHome({ jobList, indexCardActive }) {
+const FilterPanelHome = ({
+  jobList,
+  indexCardActive,
+  positionJobValue,
+  positionValue,
+  onChange,
+  jobListNameHavePages,
+}) => {
   const location = useLocation();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
+
+  const handlePagination = (page) => {
+    onChange && onChange(page);
+  };
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
@@ -55,32 +67,36 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList && jobList.length > 0 ?
-          jobList.map((job, index) => (
-            <CardHome
-              id={job.id}
-              active={indexCardActive}
-              index={index}
-              key={job.id}
-              title={job.name}
-              fontSize={10}
-              nameCompany={job.hr?.company?.name || job?.universityDTO.name}
-              idCompany={job.hr?.company?.id || job?.universityDTO.id}
-              tagName={[
-                job?.jobposition?.name || job?.position.name || "Unknown",
-                job?.jobType?.name || "Unknown"
-              ]}
-              star={job?.hr?.company?.rates.length || 4}
-              location="Hồ Chí Minh"
-              amount={job.amount || "Unknown"}
-              demandPartner={true}
-              time={[
-                moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
-                moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
-              ]}
-              locationPath={location.pathname}
-            />
-          )) : null}
+        {jobList && jobList.length > 0
+          ? jobList.map((job, index) => (
+              <CardHome
+                positionValue={positionValue}
+                id={job.id}
+                active={indexCardActive}
+                index={index}
+                key={job.id}
+                title={job.name}
+                fontSize={10}
+                nameCompany={job.hr?.company?.name || job?.universityDTO.name}
+                idCompany={job.hr?.company?.id || job?.universityDTO.id}
+                tagName={[
+                  job?.jobposition?.name || job?.position.name || "Unknown",
+                  job?.jobType?.name || "Unknown",
+                ]}
+                star={job?.hr?.company?.rates.length || 4}
+                location="Hồ Chí Minh"
+                amount={job.amount || "Unknown"}
+                demandPartner={true}
+                time={[
+                  moment(job.timeStartStr || job.createDate).format(
+                    "DD/MM/YYYY"
+                  ),
+                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                ]}
+                locationPath={location.pathname}
+              />
+            ))
+          : null}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {/* <CardHome /> */}
@@ -88,6 +104,23 @@ export default function FilterPanelHome({ jobList, indexCardActive }) {
       <TabPanel value={value} index={2}>
         {/* <CardHome /> */}
       </TabPanel>
+      <Stack sx={{display: "flex", justifyContent: "center", alignItems: "center"}} spacing={2}>
+        <Pagination
+          page={jobListNameHavePages?.numberOfCurrentPage || 0}
+          defaultPage={1}
+          onChange={(e) => handlePagination(e.target.textContent)}
+          count={jobListNameHavePages?.totalPages || 1}
+          variant="outlined"
+          shape="rounded"
+          size="medium"
+          // disabled={
+          //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
+          //   jobListNameHavePages?.numberOfCurrentPage ===
+          //     jobListNameHavePages?.totalPages
+          // }
+        />
+      </Stack>
     </Box>
   );
-}
+};
+export default FilterPanelHome;

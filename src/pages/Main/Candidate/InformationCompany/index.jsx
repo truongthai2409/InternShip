@@ -16,13 +16,14 @@ import {
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 import ArrowButton from "src/components/ArrowButton";
 import { useNavigate } from "react-router-dom";
-import CandidateList from "../../HR/CandidateList";
 import Modal from "src/components/Modal";
 import Textarea from "src/components/Textarea";
 import { useForm } from "react-hook-form";
 import CustomInput from "src/components/CustomInput";
 import CustomCheckbox from "src/components/CustomCheckbox";
 import { toast } from "react-toastify";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./validate";
 
 const labels = {
   0.5: "Vô dụng",
@@ -47,7 +48,7 @@ const CandidateInformationCompany = () => {
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
   const [hover, setHover] = useState(-1);
-  const [isCheck, setIsCheck] = useState(false);
+  var checked = false;
   const {
     register,
     handleSubmit,
@@ -55,7 +56,7 @@ const CandidateInformationCompany = () => {
     reset,
     setError,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
 
   const { appreciateList } = useSelector((state) => state.appreciate);
   const { jobDetail } = useSelector((state) => state.job);
@@ -73,26 +74,24 @@ const CandidateInformationCompany = () => {
     navigate(-1);
   };
   const data = [];
-  for (let i = 0; i < appreciateList.length; i++) {
+  for (let i = 0; i < appreciateList?.length; i++) {
     data.push(appreciateList[i].score);
   }
 
   const res = data?.reduce((total, currentValue) => {
     return total + currentValue;
   }, 0);
-  const rating = res / data.length;
+  const rating = (res / data?.length).toFixed(2);
 
   const handleOpen = () => {
     setOpen(true);
+    reset();
   };
-  const handleCheck = (e) => {
-    const check = e.target.checked;
-    setIsCheck(!check);
-  };
+
   const onSubmit = async (data) => {
     const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
     const avaluateData = {
-      comment: data.title,
+      comment: data.comment,
       score: valueRating,
       company: {
         id: idCompany,
@@ -101,7 +100,7 @@ const CandidateInformationCompany = () => {
         username: username,
       },
       title: data.title,
-      hide: isCheck,
+      hide: checked,
     };
 
     try {
@@ -113,7 +112,7 @@ const CandidateInformationCompany = () => {
           // autoClose: 3000,
         });
       } else {
-        toast.success(
+        toast.error(
           "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
           {
             // position: "top-center",
@@ -135,6 +134,11 @@ const CandidateInformationCompany = () => {
     reset();
     setOpen(false);
   };
+
+  const handleCheck = async (e) => {
+    const check = e.target.checked;
+    checked = check;
+  };
   return (
     <div className="information-company__container">
       <BaseInformationCompany
@@ -146,8 +150,8 @@ const CandidateInformationCompany = () => {
         rating={rating}
         appreciateList={appreciateList}
       />
-      <div className="appreciate">
-        <h5 style={{ marginTop: "0px" }} className="intro__company-title">
+      <div className="appreciate intro__company-title">
+        <h5 style={{ marginTop: "0px" }} className="">
           Đánh giá về công ty*{" "}
         </h5>
         <Modal
@@ -164,7 +168,7 @@ const CandidateInformationCompany = () => {
                 register={register}
                 requirementField={false}
                 setValue={setValue}
-                height="50px"
+                height="45px"
               />
               <Textarea
                 label="Viết đánh giá về công ty"
@@ -173,6 +177,7 @@ const CandidateInformationCompany = () => {
                 register={register}
                 setValue={setValue}
                 check={true}
+                children="Bạn phải nhập trường này "
               >
                 {errors.comment?.message}
               </Textarea>
@@ -212,7 +217,11 @@ const CandidateInformationCompany = () => {
               <div onChange={handleCheck}>
                 <CustomCheckbox label="Ẩn danh" />
               </div>
-              <Button onClick={handleSubmit(onSubmit)} name="Đăng đánh giá" />
+              <Button
+                onClick={handleSubmit(onSubmit)}
+                onChange={handleCheck}
+                name="Đăng đánh giá"
+              />
             </div>
           }
           name="list-candidate"
@@ -225,7 +234,7 @@ const CandidateInformationCompany = () => {
         ></Button>
       </div>
       <div>
-        {appreciateList?.map((appreciate) => (
+        {appreciateList?.map((appreciate, index) => (
           <Appreciate appreciate={appreciate} key={appreciate.id} />
         ))}
       </div>

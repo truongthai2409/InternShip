@@ -2,7 +2,7 @@
 
 .card-job {
   &__container {
-    width: 90%;
+    width: 100%;
     padding: 20px 20px;
     background-color: $color-white-0;
     // min-height: 20vh;
@@ -59,6 +59,8 @@
       margin-left: $mg-1;
       font-size: 15px;
       margin-right: 10px;
+      width: max-content;
+      // transform: translateY(1px);
     }
   }
 

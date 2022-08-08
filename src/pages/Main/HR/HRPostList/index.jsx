@@ -72,7 +72,7 @@ const HRPostList = (props) => {
             }}
           />
           <Statistic
-            title="Trạng thái tin đăng"
+            title="Trạng thái đăng tuyển"
             firstObject={{
               score: jobListActived.length,
               description: "Đang đăng tuyển",

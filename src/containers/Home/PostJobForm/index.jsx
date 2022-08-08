@@ -145,6 +145,7 @@ const PostJobForm = ({
         otherInfo: data.benefits,
         timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
         timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
+        createDate: jobDetail.createDate,
         jobposition: {
           id: parseInt(data.jobPosition),
         },

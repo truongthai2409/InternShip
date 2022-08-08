@@ -44,7 +44,6 @@ export const getAppreciateByCompany = createAsyncThunk(
 export const addAppreciate = createAsyncThunk(
   "appreciate/addAppreciate",
   async (data) => {
-    console.log(data);
     const res = await axios
       .post(`${baseURL}/api/r2s/rate`, data)
       .then((res) => {
@@ -59,10 +58,10 @@ export const addAppreciate = createAsyncThunk(
 
 export const updateAppreciate = createAsyncThunk(
   "appreciate/updateAppreciate",
-  async (data, id) => {
-    const { dataUpdateAppreciate } = data;
+  async (data) => {
+    console.log(data);
     const res = await axios
-      .put(`${baseURL}/api/rate/${id}`, dataUpdateAppreciate)
+      .put(`${baseURL}/api/r2s/rate/${data.id}`, data.avaluateData)
 
       .then((res) => {
         return res;
@@ -74,20 +73,20 @@ export const updateAppreciate = createAsyncThunk(
   }
 );
 
-// export const deleteApply = createAsyncThunk(
-//   "apply_candidate/deleteApply",
-//   async (id) => {
-//     const res = await api
-//       .delete(`${baseURL}/api/applylist/${id}`)
-//       .then((res) => {
-//         return res;
-//       })
-//       .catch((error) => {
-//         return error.response.data;
-//       });
-//     return res;
-//   }
-// );
+export const deleteAppreciate = createAsyncThunk(
+  "appreciate/deleteAppreciate",
+  async (id) => {
+    const res = await axios
+      .delete(`${baseURL}/api/r2s/rate/${id}`)
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+    return res;
+  }
+);
 
 // export const { addJob, removeJob } = markJobSlice.actions;
 export default appreciateSlice;

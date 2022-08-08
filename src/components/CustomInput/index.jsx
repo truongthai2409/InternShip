@@ -28,7 +28,7 @@ const CustomInput = ({
   };
 
   const showValue = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   
   return (

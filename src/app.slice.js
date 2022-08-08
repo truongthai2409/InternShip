@@ -1,29 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const appSlice = createSlice({
-  name: 'app',
+  name: "app",
   initialState: {
     // status: 200,
-    loading: 0
+    loading: 0,
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addMatcher(
-        action => action.type.endsWith('/pending'),
-        state => {
-          state.loading = state.loading + 20
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.loading = state.loading + 5;
         }
       )
       .addMatcher(
-        action =>
-          action.type.endsWith('/fulfilled') ||
-          action.type.endsWith('/rejected'),
+        (action) =>
+          action.type.endsWith("/fulfilled") ||
+          action.type.endsWith("/rejected"),
         (state, action) => {
           // state.status = action.payload.status;
-          state.loading = state.loading - 20
+          state.loading = state.loading - 5;
         }
-      )
-  }
-})
+      );
+  },
+});
 
-export default appSlice
+export default appSlice;

@@ -21,7 +21,6 @@ function BaseInformationCompany({
   rating,
   appreciateList,
 }) {
-  console.log(rating);
   const dispatch = useDispatch();
   // const { rating } = useSelector(state => state.rating)
   const { jobListCompany } = useSelector((state) => state.job);
@@ -177,7 +176,14 @@ function BaseInformationCompany({
             >
               {jobListCompany.length > 0 &&
                 jobListCompany?.map((job) => (
-                  <Grid item lg="auto" md="auto" sm="auto" xs="auto">
+                  <Grid
+                    item
+                    lg="auto"
+                    md="auto"
+                    sm="auto"
+                    xs="auto"
+                    key={job.id}
+                  >
                     <JobCandidate job={job} key={job.id} idJob={job.id} />
                   </Grid>
                 ))}

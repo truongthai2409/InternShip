@@ -7,28 +7,28 @@ import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
-import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
-  const navigate = useNavigate();
+  const [positionValue, setPositionValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  // const [totalPages, setTotalPages] = useState();
+
+  // let positionJobValue = "";
   const dispatch = useDispatch();
   // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive } = useSelector(
-    (state) => state.job
-  );
-  // console.log(jobDetail, indexCardActive);
-
+  const { jobListName, jobDetail, indexCardActive, jobListNameHavePages } =
+    useSelector((state) => state.job);
   useEffect(() => {
     const dataSearch = {
       name: "",
       province: "",
-      no: 0,
-      limit: 10,
+      no: currentPage,
+      limit: 4,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // dispatch(getJobList([1, 10]));
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
 
   // const generateNameId = (name) => {
   //   encodeURIComponent(name)
@@ -36,13 +36,16 @@ const Home = (props) => {
   //     .replace(/%/g, "")
   //     .replace("%20", "+");
   // };
+  useEffect(() => {
+    // setTotalPages(jobListName?.totalPages);
+  });
 
   const handleSearch = (value) => {
     const dataSearch = {
       name: value || "",
       province: locationValue || "",
       no: 0,
-      limit: 10,
+      limit: 5,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // navigate(
@@ -58,6 +61,16 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
+
+  const handleCheck = (value) => {
+    // positionJobValue = value;
+    setPositionValue(value);
+  };
+
+  const getValuePageAndHandle = (value) => {
+    setCurrentPage(value);
+    // window.scroll(0, 0);
+  };
   return (
     <>
       {jobDetail && (
@@ -68,7 +81,7 @@ const Home = (props) => {
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
-            <SideBarHomeList />
+            <SideBarHomeList onChange={handleCheck} />
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
@@ -81,6 +94,10 @@ const Home = (props) => {
             <FilterPanelHome
               jobList={jobListName}
               indexCardActive={indexCardActive}
+              // positionJobValue={positionJobValue}
+              positionValue={positionValue}
+              jobListNameHavePages={jobListNameHavePages}
+              onChange={getValuePageAndHandle}
             />
           </Grid>
           <Grid item lg={6} className="onTablet">

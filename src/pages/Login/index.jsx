@@ -15,11 +15,10 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   TabTitle("Login");
-  // const [isCheck, setIsCheck] = useState(false);
+  const [isCheck, setIsCheck] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
-  console.log(status);
 
   if (status === "success") {
     const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
@@ -71,10 +70,11 @@ const Login = () => {
       toast.error(error);
     }
   };
-  // const handleSaveLogin = (e) => {
-  //   const check = e.target.checked;
-  //   setIsCheck(check);
-  // };
+  const handleSaveLogin = (e) => {
+    const check = e.target.checked;
+    setIsCheck(!check);
+  };
+
   return (
     <div className="login-form__container">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">

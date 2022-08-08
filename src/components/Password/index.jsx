@@ -12,7 +12,6 @@ import { updateUserPassword } from "src/store/slices/main/login/loginSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 const Password = () => {
   const { profile } = useSelector((state) => state.authentication);
-  console.log(profile);
   const {
     handleSubmit,
     formState: { errors },
@@ -42,12 +41,10 @@ const Password = () => {
         reset();
         if (res.status === 200) {
           toast.success("Đổi mật khẩu thành công", {
-            position: "top-center",
             autoClose: 3000,
           });
         } else {
-          toast.success("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
-            position: "top-center",
+          toast.error("Đổi mật khẩu thất bại vui lòng kiểm tra lại", {
             autoClose: 3000,
           });
         }
