@@ -22,7 +22,7 @@ const Textarea = ({
   isUpdate = true;
   useEffect(() => {
     if (isUpdate) {
-      register(id, { required: true, minLength: 3 });
+      register(id);
     }
   }, [register]);
 
@@ -95,9 +95,9 @@ const Textarea = ({
           }
         >
           <ReactQuill
-            // id={id}
+            id={id}
             theme="snow"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             placeholder={placeholder}
             defaultValue={defaultValue}
           />

@@ -88,7 +88,6 @@ const PostJobForm = ({
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -338,7 +337,6 @@ const PostJobForm = ({
                   register={register}
                   defaultValue={isUpdate ? jobDetail?.desciption : ""}
                   setValue={setValue}
-                  watch={watch}
                   check={false}
                 >
                   {errors.jobDescription?.message}
