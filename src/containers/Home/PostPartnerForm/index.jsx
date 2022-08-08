@@ -47,14 +47,14 @@ const jobTypeList = [
   },
 ];
 
-const PostPartnerForm = ({idDemand, isUpdate = false }) => {
+const PostPartnerForm = ({idDemand, isUpdate = false, setOpen }) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const { status } = useSelector((state) => state.demand);
   const { activeUser } = useSelector((state) => state.university);
   const { demandDetail } = useSelector((state) => state.demand);  
   const [openForm, setOpenForm] = useState(false);
-  console.log(demandDetail);
+  // console.log(demandDetail);
 
   // console.log(activeUser);
 
@@ -83,13 +83,16 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
     setOpenForm(!openForm);
     console.log("isClicked");
   };
+
+  console.log(demandDetail);
+
   if (isUpdate) {
     console.log(demandDetail?.desciption);
-    setValue("jobName", demandDetail?.name)
-    setValue("jobDescription", demandDetail?.desciption)
-    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate)
-    setValue("timeEnd", demandDetail?.end)
-    setValue("amount", demandDetail?.amount)
+    setValue("jobName", demandDetail?.name);
+    setValue("jobDescription", demandDetail?.desciption);
+    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
+    setValue("timeEnd", demandDetail?.end);
+    setValue("amount", demandDetail?.amount);
   }
 
   const onSubmit = (data) => {
@@ -124,6 +127,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
 
     if(isUpdate) {
       dispatch(updateDemand({ idDemand, demandData }))
+      setOpen(false)
     }
     else {
       dispatch(addDemand(demandData));
@@ -164,6 +168,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                   id="jobPosition"
                   label="Vị trí công việc"
                   placeholder="Vui lòng chọn"
+                  defaultValue={demandDetail?.position?.id}
                   options={jobPosition}
                   register={register}
                 >
@@ -188,6 +193,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                   id="jobType"
                   label="Hình thức làm việc"
                   placeholder="Vui lòng chọn"
+                  defaultValue={demandDetail?.jobType?.id}
                   options={jobTypeList}
                   register={register}
                 >
@@ -231,6 +237,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                 id="jobDescription"
                 type="description"
                 placeholder="Thư giới thiệu"
+                defaultValue={isUpdate ? demandDetail?.desciption : ""}
                 register={register}
                 setValue={setValue}
               >

@@ -60,17 +60,15 @@ const PartnerPostList = (props) => {
   const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(page);
-  const [totalPage, setTotalPage] = useState();
   // console.log(currentPage, totalPage);
   // console.log(demandListUniversity?.totalPages);
   // console.log(activeUser?.universityDTO?.id);
 
-  
   const handlePaginate = (page) => {
     // console.log(typeof page);
-    setCurrentPage(parseInt(page))
+    setCurrentPage(parseInt(page));
     window.scroll(0, 0);
-  }
+  };
 
 
   useEffect(() => {
@@ -78,13 +76,10 @@ const PartnerPostList = (props) => {
     // console.log(currentPage);
     dispatch(getPartnerByUserID(userPresent.idUser));
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-    setPartnerPostList(demandListUniversity);
   }, [activeUser?.universityDTO?.id, currentPage]);
 
-  useEffect(() => {
-    setTotalPage(demandListUniversity?.totalPages);
-  })
 
+  console.log(partnerPostList);
   return (
     <div className="partner-post__wrapper">
       <div className="partner-post__list-bt">
@@ -140,12 +135,12 @@ const PartnerPostList = (props) => {
             />
           </TabPanel>
           <div className="partner-postList__pagination">
-            <Pagination 
-            count={totalPage} 
-            shape="rounded"
-            variant="outlined" 
-            color="secondary"
-            onChange={(e) => handlePaginate(e.target.textContent)}
+            <Pagination
+              count={demandListUniversity?.totalPages}
+              shape="rounded"
+              variant="outlined"
+              color="secondary"
+              onChange={(e) => handlePaginate(e.target.textContent)}
             />
           </div>
         </Box>
