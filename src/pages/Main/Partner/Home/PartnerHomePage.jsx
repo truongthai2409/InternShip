@@ -12,10 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
 import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
+import Pagination from "@mui/material/Pagination";
+
+const limit = 5;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
   // get global state from redux store
@@ -24,10 +28,15 @@ const PartnerHomePage = (props) => {
   );
   // console.log(demandDetail, indexPartnerCardActive);
 
+  const handlePaginate = (page) => {
+    // console.log(typeof page);
+    setCurrentPage(parseInt(page));
+    window.scroll(0, 0);
+  };
 
   useEffect(() => {
     // console.log(demandList);
-    dispatch(getDemandList());
+    dispatch(getDemandList({ currentPage, limit }));
   }, [demandList.length]);
 
   // const handleSearch = (value) => {
@@ -69,9 +78,18 @@ const PartnerHomePage = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={demandList}
+              jobList={demandList?.contents}
               indexCardActive={indexPartnerCardActive}
             />
+            <div className="partner-postList__pagination">
+              <Pagination
+                count={demandList?.totalPages}
+                shape="rounded"
+                variant="outlined"
+                color="secondary"
+                onChange={(e) => handlePaginate(e.target.textContent)}
+              />
+            </div>
           </Grid>
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
@@ -81,7 +99,7 @@ const PartnerHomePage = (props) => {
               {demandList ? (
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobListName={demandList}
+                  jobListName={demandList?.content}
                   jobDetail={demandDetail}
                   demandPartner={true}
                 />

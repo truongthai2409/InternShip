@@ -47,8 +47,6 @@ function a11yProps(index) {
 }
 
 const limit = 5;
-
-const page = 1;
 const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
@@ -59,7 +57,7 @@ const PartnerPostList = (props) => {
   const handleChange = (event, newValue) => setValue(newValue);
   const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
-  const [currentPage, setCurrentPage] = useState(page);
+  const [currentPage, setCurrentPage] = useState(1);
   // console.log(currentPage, totalPage);
   // console.log(demandListUniversity?.totalPages);
   // console.log(activeUser?.universityDTO?.id);
@@ -74,9 +72,12 @@ const PartnerPostList = (props) => {
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     // console.log(currentPage);
-    dispatch(getPartnerByUserID(userPresent.idUser));
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [activeUser?.universityDTO?.id, currentPage]);
+
+  useEffect(() => {
+    dispatch(getPartnerByUserID(userPresent.idUser));
+  }, [])
 
 
   console.log(partnerPostList);

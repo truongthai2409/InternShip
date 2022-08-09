@@ -21,7 +21,7 @@ const demandSlice = createSlice({
     },
     updateIndexPartnerCardActive: (state, action) => {
       state.indexPartnerCardActive = action.payload;
-      state.demandDetail = state?.demandList[action.payload];
+      state.demandDetail = state?.demandList[action.payload]?.contents;
     },
   },
   extraReducers: (builder) => {
@@ -43,6 +43,7 @@ const demandSlice = createSlice({
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
         state.demandList = payload;
         if (payload.length > 0) {
+          console.log(payload[0]);
           state.demandDetail = payload[0];
         } else {
         }
@@ -153,7 +154,7 @@ export const getDemandById = createAsyncThunk(
 
 export const getDemandList = createAsyncThunk(
   "university/getDemandList",
-  async () => {
+  async ({ currentPage, limit }) => {
     let axiosConfig = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -161,7 +162,7 @@ export const getDemandList = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${baseURL}/api/demand`, axiosConfig)
+      .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`, axiosConfig)
       .then((response) => {
         return response.data;
       })
