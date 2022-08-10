@@ -14,7 +14,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { styled, alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
@@ -67,7 +66,6 @@ const HeaderWithHR = (props) => {
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
-  // const nameUser = JSON.parse(localStorage.getItem("userPresent"))?.username;
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
@@ -224,11 +222,11 @@ const HeaderWithHR = (props) => {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">{`${profile?.userDTO?.lastName} ${profile?.userDTO?.firstName}`}</h4>
+          <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           <AccountMenu
             linkImg={
-              profile?.userDTO?.avatar
-                ? `http://localhost:8085${profile?.userDTO?.avatar}`
+              profile?.user?.avatar
+                ? `http://localhost:8085${profile?.user?.avatar}`
                 : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
             }
           />
