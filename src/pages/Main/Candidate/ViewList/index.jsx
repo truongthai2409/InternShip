@@ -33,9 +33,11 @@ const CandidateViewList = () => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState();
+  // const jobCare = {};
   let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
     (state) => state.mark
   );
+  console.log(careListOfPrivate);
   let { applyList, applyListHavePage } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
@@ -90,7 +92,7 @@ const CandidateViewList = () => {
       // }
     };
     getValue();
-  }, [dispatch, candidateInfoByUsername.id]);
+  }, [dispatch]);
 
   useEffect(() => {}, []);
   // const handleChange = (event, newValue) => {
@@ -102,14 +104,14 @@ const CandidateViewList = () => {
 
   const handleSearch = async (value) => {
     await dispatch(getCandidateByUserName(profile.username));
-    await dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
+    dispatch(getApplyListByIdCandidate(candidateInfoByUsername.id));
     const dataSearch = {
       idCandidate: candidateInfoByUsername?.id,
       valueSearch: {
         name: value || "",
-        province: locationValue,
-        // .replace(/%20/g, "+")
-        // .replace(/\s/g, "-") || "",
+        // province: locationValue,
+        // // .replace(/%20/g, "+")
+        // // .replace(/\s/g, "-") || "",
         no: 0,
         limit: 10,
       },
@@ -129,7 +131,6 @@ const CandidateViewList = () => {
     if (pathUrl === "/candidate/view-list-apply") {
       dispatch(getJobCandidateAppliedByNameAndLocation(dataSearch));
     }
-
     // navigate(
     //   `/candidate` +
     //     `?name=${value || ""}&province=${

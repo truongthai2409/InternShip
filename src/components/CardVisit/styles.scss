@@ -2,7 +2,7 @@
 
 .scroll {
   // overflow-y: scroll;
-  height: 70vh;
+  height: 50vh;
 }
 
 .visit__card {
@@ -21,7 +21,7 @@
   &-nameComapy {
     display: block;
     margin: auto;
-    width: 35%;
+    width: fit-content;
     margin-top: 16px;
     height: 29px;
     left: 155px;
@@ -92,7 +92,7 @@
   }
   .scroll__onTablet-hide {
     overflow-y: hidden;
-    height: fit-content;
+    // height: fit-content;
   }
   .visit__card__onTablet {
     margin-left: 0;

@@ -21,13 +21,13 @@ const Textarea = ({
   isUpdate = true;
   useEffect(() => {
     if (isUpdate) {
-      console.log("updateee");
+      // console.log("updateee");
       register(id);
     }
   }, [register]);
 
   useEffect(() => {
-    console.log("test", register(id));
+    // console.log("test", register(id));
   });
 
   const [showError1, setShowError1] = useState(false);

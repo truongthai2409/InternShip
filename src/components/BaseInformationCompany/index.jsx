@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 import { Typography } from "@mui/material";
 
@@ -21,6 +21,8 @@ function BaseInformationCompany({
   rating,
   appreciateList,
 }) {
+  const location = useLocation();
+  const pathUrl = location.pathname;
   const dispatch = useDispatch();
   // const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
@@ -40,11 +42,51 @@ function BaseInformationCompany({
           }}
         >
           <div className="base__information-card">
-            <img
-              className="img-logo"
-              alt=""
-              src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-            />
+            <div
+              style={{
+                marginRight: "16px",
+              }}
+            >
+              <img
+                className="img-logo"
+                alt=""
+                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+              />
+              {information ? (
+                <div>
+                  <Rating
+                    name="read-only"
+                    precision={0.5}
+                    readOnly
+                    value={rating}
+                  />
+                  {/* <Rating
+                  name="text-feedback"
+                  value={value}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                  sx={{ fontSize: 24 }}
+                /> */}
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontSize: 17,
+                      fontWeight: "400",
+                      transform: "translate(5px,5px)",
+                    }}
+                  >
+                    {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
+                  </Typography>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+
             <div className="base__information-card-detail">
               <h3 className="company-name">{jobDetail?.hr?.company.name}</h3>
               <div className="">
@@ -113,39 +155,6 @@ function BaseInformationCompany({
                 </div>
               </div>
             </div>
-            {information ? (
-              <div>
-                <Rating
-                  name="read-only"
-                  precision={0.5}
-                  readOnly
-                  value={rating}
-                />
-                {/* <Rating
-                  name="text-feedback"
-                  value={value}
-                  readOnly
-                  precision={0.5}
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
-                  sx={{ fontSize: 24 }}
-                /> */}
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
-                  }}
-                >
-                  {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
-                </Typography>
-              </div>
-            ) : (
-              ""
-            )}
           </div>
           <div className="intro__company">
             <h5 className="intro__company-title">Giới thiệu về công ty</h5>
@@ -167,7 +176,7 @@ function BaseInformationCompany({
             </h5>
             <Grid
               container
-              spacing={3.6}
+              spacing={3}
               // sx={{
               //   paddingLeft: `${pl}px`,
               //   paddingRight: `${pr}px`,
@@ -194,11 +203,13 @@ function BaseInformationCompany({
                 ))}
             </Grid>
           </div>
-          <div className="button-card">
-            <Link to="/candidate/information_company">
-              <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
-            </Link>
-          </div>
+          {pathUrl !== "/information_company" ? (
+            <div className="button-card">
+              <Link to="/candidate/information_company">
+                <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       )}
       {jobDetailById && (
@@ -338,11 +349,13 @@ function BaseInformationCompany({
               ))}
             </Grid> */}
           </div>
-          <div className="button-card">
-            <Link to="/candidate/information_company">
-              <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
-            </Link>
-          </div>
+          {pathUrl !== "/information_company" ? (
+            <div className="button-card">
+              <Link to="/candidate/information_company">
+                <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       )}
     </div>

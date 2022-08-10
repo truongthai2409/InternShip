@@ -83,7 +83,7 @@ const FilterPanelHome = ({
                   job?.jobposition?.name || job?.position.name || "Unknown",
                   job?.jobType?.name || "Unknown",
                 ]}
-                star={job?.hr?.company?.rates.length || 4}
+                // star={job?.hr?.company?.rates.length || 4}
                 location="Hồ Chí Minh"
                 amount={job.amount || "Unknown"}
                 demandPartner={true}

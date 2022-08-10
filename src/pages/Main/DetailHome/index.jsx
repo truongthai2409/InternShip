@@ -12,6 +12,7 @@ import {
   getJobById,
   getJobByNameAndLocation,
 } from "../../../store/slices/main/home/job/jobSlice";
+import ArrowButton from "src/components/ArrowButton";
 const DetailHome = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const DetailHome = (props) => {
     dispatch(getJobByNameAndLocation(dataSearch));
     dispatch(getJobById(idJobActive));
   }, [dispatch]);
-  const handleBack = () => {
+  const handleBackClick = () => {
     navigate(-1);
   };
   return (
@@ -50,21 +51,15 @@ const DetailHome = (props) => {
               jobDetailById={jobDetailById}
             />
             <div className="config__arow-back hide-on-table">
-              <Link to="" onClick={handleBack} className="config__arow-back">
-                <ArrowBackIcon></ArrowBackIcon>
-                Trở lại
-              </Link>
+              <div className="demand-detail__back" onClick={handleBackClick}>
+                <ArrowButton direction="left" text="Trở lại" />
+              </div>
             </div>
           </div>
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           <CardVisit
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-            nameCompany="Công Ty R2S "
-            emailCompany="tuyendung@r2s.edu.vn"
-            phoneCompany="0902394324"
-            website="https://r2s.edu.vn/"
-            location="1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TP.HCM"
             jobDetailById={jobDetailById}
           />
         </Grid>

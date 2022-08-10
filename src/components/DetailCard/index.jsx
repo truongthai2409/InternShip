@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 
 const DetailCard = ({
-  logo,
   jobDetail,
   jobListName,
   candidate,
@@ -43,7 +42,7 @@ const DetailCard = ({
           rating={rating}
         />
       ) : (
-        <Detail jobDetailById={jobDetailById} rating={rating} /> || null
+        <Detail jobDetailById={jobDetailById} /> || null
       )}
     </div>
   );

@@ -51,6 +51,7 @@ const Profile = () => {
     default:
       RelatedInfor = null;
   }
+  console.log(profile);
   return (
     <>
       <div className="profile__wrapper">

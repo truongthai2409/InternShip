@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   TabTitle("Login");
-  const [isCheck, setIsCheck] = useState(false);
+  let checked = false;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
@@ -52,8 +52,9 @@ const Login = () => {
       const res = await dispatch(loginUser(userData));
       if (res.payload.token) {
         const role = res.payload.role;
-        // if (isCheck === false) {
-        //   localStorage.removeItem("userPresent");
+        // if (checked === false) {
+        //   console.log(localStorage.getItem("userPresent")?.token);
+        //   delete localStorage.getItem("userPresent")?.token;
         // }
         switch (role) {
           case "Role_Partner":
@@ -72,7 +73,8 @@ const Login = () => {
   };
   const handleSaveLogin = (e) => {
     const check = e.target.checked;
-    setIsCheck(!check);
+    checked = check;
+    console.log(checked);
   };
 
   return (
@@ -99,11 +101,8 @@ const Login = () => {
         >
           {errors.password?.message}
         </CustomInput>
-        <div
-          className="login-form__save-pass"
-          // onChange={(e) => handleSaveLogin(e)}
-        >
-          <CustomCheckbox label="Lưu mật khẩu" />
+        <div className="login-form__save-pass" onChange={handleSaveLogin}>
+          <CustomCheckbox label="Lưu phiên đăng nhập" />
         </div>
         <div className="login-form__btn">
           <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>

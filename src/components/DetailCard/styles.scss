@@ -92,11 +92,13 @@
   .detail__card-4 {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin: 20px 0px;
     &-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
       &-icon {
         color: $primary-color;
       }
