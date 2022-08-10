@@ -22,14 +22,16 @@ import CustomInput from "../CustomInput";
 import Textarea from "../Textarea";
 import CustomCheckbox from "../CustomCheckbox";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./validate";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import Popover from "@mui/material/Popover";
+import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "transparent",
+  backgroundColor: "transparent",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(1.2),
 }));
 const labels = {
   0.5: "Vô dụng",
@@ -54,7 +56,7 @@ const Appreciate = ({ appreciate }) => {
   const { profile } = useSelector((state) => state.authentication);
 
   const [open, setOpen] = useState(false);
-  const [valueRating, setValueRating] = useState(2);
+  const [valueRating, setValueRating] = useState(appreciate.score);
   const [hover, setHover] = useState(-1);
   // const [isCheck, setIsCheck] = useState(false);
   const {
@@ -128,10 +130,23 @@ const Appreciate = ({ appreciate }) => {
   const handleDeleteAppreciate = async (e) => {
     e.stopPropagation();
     await dispatch(deleteAppreciate(appreciate.id)).then(
-      toast.success("Đã xóa đánh giá thành công")
+      toast.success("Đã xóa đánh giá ")
     );
     await dispatch(getAppreciateByCompany(idCompany));
   };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openAnchorEl = Boolean(anchorEl);
+  const id = openAnchorEl ? "simple-popover" : undefined;
 
   return (
     <Box
@@ -157,14 +172,67 @@ const Appreciate = ({ appreciate }) => {
                 alt=""
                 src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
               />
-              <Typography
-                variant="subtitle2"
-                component="div"
-                sx={{ fontSize: 16 }}
-              >
-                {(appreciate.hide === true && nameUser) ||
-                  appreciate?.user?.username}
-              </Typography>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <div
+                    style={{
+                      marginRight: "10px",
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle2"
+                      component="div"
+                      sx={{ fontSize: 16 }}
+                    >
+                      {(appreciate.hide === true && nameUser) ||
+                        appreciate?.user?.username}
+                    </Typography>
+                  </div>
+                  <div>
+                    <Rating
+                      name="text-feedback"
+                      value={value}
+                      readOnly
+                      precision={0.5}
+                      emptyIcon={
+                        <StarIcon
+                          style={{ opacity: 0.55 }}
+                          fontSize="inherit"
+                        />
+                      }
+                      sx={{ fontSize: 24 }}
+                    />
+                    <Box
+                      sx={{
+                        ml: 2,
+                        fontSize: 16,
+                        transform: "translate(0,13px)",
+                      }}
+                    >
+                      {/* {labels[value]} */}
+                    </Box>
+                  </div>
+                </div>
+                <Typography
+                  variant="p"
+                  component="div"
+                  sx={{ fontSize: 16, transform: "translate(0,-10px)" }}
+                >
+                  {`${appreciate?.comment?.slice(
+                    3,
+                    appreciate?.comment?.length - 4
+                  )}` || ""}
+                  {/* dangerouslySetInnerHTML=
+            {{
+              __html: appreciate?.comment,
+            }} */}
+                </Typography>
+              </div>
             </div>
 
             <div className="fix_display">
@@ -177,74 +245,66 @@ const Appreciate = ({ appreciate }) => {
               >
                 {appreciate?.user?.username === profile.username && (
                   <div className="fix_display">
-                    <Tooltip>
-                      <Button
-                        color="error"
-                        onClick={handleDeleteAppreciate}
-                        sx={{ fontSize: 12 }}
-                        startIcon={<DeleteIcon />}
+                    <div>
+                      <div
+                        className="fix_display"
+                        onClick={handleClick}
+                        style={{
+                          cursor: "pointer",
+                        }}
                       >
-                        Xóa
-                      </Button>
-                    </Tooltip>
+                        <Tooltip title="Nhiều hơn">
+                          <IconButton sx={{ fontSize: 12 }}>
+                            <MoreVertOutlinedIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </div>
+                      <Popover
+                        id={id}
+                        open={openAnchorEl}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "left",
+                        }}
+                      >
+                        <Typography sx={{ p: 2 }}>
+                          <div
+                            className="fix_display"
+                            onClick={handleOpen}
+                            style={{
+                              cursor: "pointer",
+                            }}
+                          >
+                            <Tooltip title="Chỉnh sửa">
+                              <IconButton sx={{ fontSize: 12 }}>
+                                <EditOutlinedIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </div>
+                          <Tooltip title="Xóa" onClick={handleDeleteAppreciate}>
+                            <IconButton sx={{ fontSize: 12 }}>
+                              <DeleteIcon color="" />
+                            </IconButton>
+                          </Tooltip>
+                        </Typography>
+                      </Popover>
+                    </div>
                   </div>
                 )}
-                {appreciate?.user?.username === profile.username && (
-                  <div className="fix_display">
-                    <Tooltip>
-                      {/* <ModeEditOutlineIcon /> */}
-                      <ButtonCustom
-                        name="Sửa đánh giá "
-                        onClick={handleOpen}
-                        bwidth="150px"
-                        bheight="40px"
-                      />
-                    </Tooltip>
-                  </div>
-                )}
-              </div>
-              <div>
-                <Rating
-                  name="text-feedback"
-                  value={value}
-                  readOnly
-                  precision={0.5}
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
-                  sx={{ fontSize: 24 }}
-                />
-                <Box
-                  sx={{ ml: 2, fontSize: 16, transform: "translate(0,13px)" }}
-                >
-                  {labels[value]}
-                </Box>
               </div>
             </div>
           </div>
-          <Typography
-            variant="p"
-            component="div"
-            sx={{ fontSize: 16, transform: "translate(0,-10px)" }}
-          >
-            {`${appreciate?.comment?.slice(
-              3,
-              appreciate?.comment?.length - 4
-            )}` || ""}
-            {/* dangerouslySetInnerHTML=
-            {{
-              __html: appreciate?.comment,
-            }} */}
-          </Typography>
         </Item>
         <Modal
-          modalTitle="Sửa đánh giá về công ty"
+          modalTitle="Sửa đánh giá "
           open={open}
           setOpen={setOpen}
           children={
             <div>
               <CustomInput
-                label="Sửa tiêu đề hoặc để trống"
+                label="Sửa tiêu đề "
                 id="title"
                 type="text"
                 placeholder="Vd. Rất tuyệt"
@@ -255,11 +315,12 @@ const Appreciate = ({ appreciate }) => {
                 border="1px solid black"
               />
               <Textarea
-                label="Sửa đánh giá về công ty"
+                label="Sửa đánh giá "
                 id="comment"
                 placeholder="Nhập vào đây"
                 register={register}
                 defaultValue={appreciate?.comment}
+                setValue={setValue}
                 check={true}
                 hover="1.6px solid green"
               >
@@ -274,7 +335,7 @@ const Appreciate = ({ appreciate }) => {
               >
                 <Rating
                   name="size-medium"
-                  defaultValue={valueRating.toString()}
+                  defaultValue={valueRating}
                   precision={0.5}
                   getLabelText={getLabelText}
                   onChange={(event, newValue) => {

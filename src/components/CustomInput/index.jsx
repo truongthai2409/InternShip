@@ -35,7 +35,6 @@ const CustomInput = ({
   const handleHide = () => {
     setIsHide(!isHide);
   };
-
   return (
     <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">

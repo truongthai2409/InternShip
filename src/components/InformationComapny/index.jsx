@@ -24,25 +24,29 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
   const handleAddJob = async (e) => {
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));
-    if (!res.payload.cv) {
-      toast.error("Bạn chưa có CV, vui lòng cập nhật");
-    } else {
-      const applyData = {
-        apply: JSON.stringify({
-          jobApp: {
-            id: jobDetail.id,
-          },
-          candidate: {
-            id: res.payload.id,
-          },
-          referenceLetter: `Đơn ứng tuyển ${profile.username}`,
-        }),
-        fileCV: res.cv,
-      };
-      const resApply = await dispatch(addApply(applyData));
-      if (resApply.type === "apply_candidate/addApply/fulfilled") {
-        toast.success("Đã nộp CV thành công");
+    if (profile.token) {
+      if (!res.payload.cv) {
+        toast.error("Bạn chưa có CV, vui lòng cập nhật");
+      } else {
+        const applyData = {
+          apply: JSON.stringify({
+            jobApp: {
+              id: jobDetail.id,
+            },
+            candidate: {
+              id: res.payload.id,
+            },
+            referenceLetter: `Đơn ứng tuyển ${profile.username}`,
+          }),
+          fileCV: res.cv,
+        };
+        const resApply = await dispatch(addApply(applyData));
+        if (resApply.type === "apply_candidate/addApply/fulfilled") {
+          toast.success("Đã nộp CV thành công");
+        }
       }
+    } else {
+      toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
   return (
@@ -184,7 +188,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: jobDetailById.description,
+                    __html: jobDetailById.desciption,
                   }}
                 ></div>
               </Typography>
@@ -253,7 +257,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   transform: "translate(5px,5px)",
                 }}
               >
-                {jobDetailById.jobType}
+                {jobDetailById.jobType?.name}
               </Typography>
             </div>
             <div className="detail__card-4-item">
@@ -271,7 +275,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   textOverflow: "ellipsis",
                 }}
               >
-                {`${jobDetailById.locationjob}`}
+                {`${jobDetailById.locationjob?.address} ${jobDetailById.locationjob?.district?.name}`}
               </Typography>
             </div>
           </div>
@@ -287,12 +291,12 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 value={rating}
               /> */}
             </Typography>
-            <Button
+            {/* <Button
               bwidth="115px"
               bheight="50px"
               name="Ứng tuyển"
               onClick={handleAddJob}
-            ></Button>
+            ></Button> */}
           </div>
         </>
       )}

@@ -24,15 +24,15 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      if (!payload?.id) {
-        state.status = 'fail';
-        state.error = payload;
-        toast("Tạo tài khoản thất bại")
-      } else {
+      if (payload?.id) {
         state.user = payload;
         state.status = "success";
         state.error = {};
-        toast("Tạo tài khoản thành công")
+        toast.success("Bạn đã đăng ký tài khoản thành công!");
+      } else {
+        state.status = "fail";
+        state.error = payload;
+        toast.error("Đăng ký không thành công!");
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {
@@ -44,8 +44,8 @@ const universitySlice = createSlice({
       }
     });
     builder.addCase(getPartnerByUserID.fulfilled, (state, { payload }) => {
-      state.activeUser = payload
-    })
+      state.activeUser = payload;
+    });
   },
 });
 
@@ -117,17 +117,15 @@ export const getPartnerByUserID = createAsyncThunk(
   "university/getPartnerByUserID",
   async (userId) => {
     return await axios
-    .get(`${baseURL}/api/r2s/partner/user/${userId}`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((err) => {
-      return err.response.data;
-    })
+      .get(`${baseURL}/api/r2s/partner/user/${userId}`)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
   }
-)
-
-
+);
 
 /**
  * @params comId updateData

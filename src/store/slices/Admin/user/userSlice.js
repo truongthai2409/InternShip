@@ -9,6 +9,7 @@ const userSlice = createSlice({
     userList: [],
     profile: {},
     user: {},
+    forgotPassword: "",
     idRole: null,
     notification: {},
     page: 0,
@@ -17,7 +18,7 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
-      state.userList = payload.users;
+      state.userList = payload.data.contents;
     });
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
@@ -29,16 +30,19 @@ const userSlice = createSlice({
       state.profile = payload;
       toast.success("Chỉnh sửa thành công");
     });
+    builder.addCase(userForgotPassword.fulfilled, (state, { payload }) => {
+      state.forgotPassword = payload.data.message;
+    });
   },
 });
 
 export default userSlice;
 
-export const getUserList = createAsyncThunk("user/getUserList", async () => {
+export const getUserList = createAsyncThunk("user/getUserList", async (arg) => {
   return await axios
-    .get(`${baseURL}/api/user`)
+    .get(`${baseURL}/api/r2s/admin/user?no=${arg[0] - 1}&limit=${arg[1]}`)
     .then((response) => {
-      return response.data;
+      return response;
     })
     .catch((error) => {
       return error;
@@ -110,3 +114,18 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
       return error.response.data;
     });
 });
+
+// function use for feature forgot password
+export const userForgotPassword = createAsyncThunk(
+  "user/userForgotPassword",
+  async (emailUser) => {
+    return await axios
+      .get(`${baseURL}/api/user/forgotPassword/${emailUser}`)
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error;
+      });
+  }
+);

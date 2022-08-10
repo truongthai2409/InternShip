@@ -11,7 +11,7 @@ const appSlice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith("/pending"),
         (state) => {
-          state.loading = state.loading + 5;
+          state.loading = state.loading + 15;
         }
       )
       .addMatcher(
@@ -20,7 +20,7 @@ const appSlice = createSlice({
           action.type.endsWith("/rejected"),
         (state, action) => {
           // state.status = action.payload.status;
-          state.loading = state.loading - 5;
+          state.loading = state.loading - 15;
         }
       );
   },

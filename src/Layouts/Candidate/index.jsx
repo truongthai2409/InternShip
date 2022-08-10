@@ -15,7 +15,6 @@ const CandidateLayOut = () => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-
   useEffect(() => {
     const dataGetMarkByUser = {
       userName: profile.username,

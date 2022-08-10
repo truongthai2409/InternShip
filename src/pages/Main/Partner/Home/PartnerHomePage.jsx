@@ -12,23 +12,33 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
 import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
+import Pagination from "@mui/material/Pagination";
+
+const limit = 10;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
   // get global state from redux store
-  const { demandList, demandDetail, indexPartnerCardActive } = useSelector(
+  const { demandList, totalPagesofDemandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
-  // console.log(demandDetail, indexPartnerCardActive);
+  console.log(demandDetail, indexPartnerCardActive);
+  // console.log(totalPagesofDemandList);
 
+  const handlePaginate = (page) => {
+    console.log(page);
+    setCurrentPage(parseInt(page));
+    window.scroll(0, 0);
+  };
 
   useEffect(() => {
     // console.log(demandList);
-    dispatch(getDemandList());
-  }, [demandList.length]);
+    dispatch(getDemandList({ currentPage, limit }));
+  }, [demandList.length, currentPage]);
 
   // const handleSearch = (value) => {
   //   setValueSearch(value);
@@ -72,6 +82,15 @@ const PartnerHomePage = (props) => {
               jobList={demandList}
               indexCardActive={indexPartnerCardActive}
             />
+            <div className="partner-postList__pagination">
+              <Pagination
+                count={totalPagesofDemandList}
+                shape="rounded"
+                variant="outlined"
+                color="secondary"
+                onChange={(e) => handlePaginate(e.target.textContent)}
+              />
+            </div>
           </Grid>
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">

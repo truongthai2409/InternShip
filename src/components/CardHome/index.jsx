@@ -23,6 +23,7 @@ const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
+  // console.log(profile.username);
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);

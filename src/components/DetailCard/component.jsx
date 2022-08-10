@@ -181,7 +181,7 @@ const Detail = ({
           </div>
         </div>
       )}
-      {jobDetailById && jobDetailById !== undefined && (
+      {jobDetailById && jobDetailById !== {} && (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
           <div className="detail__card-1">
             <div className="detail__card-intro">
@@ -189,14 +189,14 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                  `${jobDetailById?.company?.logo} ` ||
+                  `${jobDetailById?.hr?.company?.logo} ` ||
                   "https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7901.jpg?w=2000"
                 }
               />
               <div>
-                <h2>{jobDetailById?.name}</h2>
+                <h2>{jobDetailById?.hr?.company?.name}</h2>
                 <p className="name-company">
-                  {jobDetailById?.company?.name ||
+                  {jobDetailById?.hr?.company?.name ||
                     jobDetailById?.universityDTO?.name}
                 </p>
               </div>
@@ -204,14 +204,10 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobDetailById?.jobType || "fulltime"} />
+                  <TagName title={jobDetailById?.jobType?.name || "fulltime"} />
+                  <TagName title={jobDetailById?.jobposition?.name} />
                   <TagName
-                    title={
-                      jobDetailById?.jobposition || jobDetailById?.position
-                    }
-                  />
-                  <TagName
-                    title={jobDetailById?.major || "Công nghệ thông tin"}
+                    title={jobDetailById?.major?.name || "Công nghệ thông tin"}
                   />
                 </div>
               </div>
@@ -221,7 +217,6 @@ const Detail = ({
             <Box sx={{ width: "100%" }}>
               <InformationCompany
                 jobDetailById={jobDetailById}
-                rating={rating}
               ></InformationCompany>
             </Box>
           </div>

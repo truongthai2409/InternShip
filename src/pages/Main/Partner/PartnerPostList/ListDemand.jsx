@@ -20,6 +20,7 @@ export const ListDemand = ({ demandList, message }) => {
           timeStart={job?.updateDate || job?.createDate}
           timeEnd={job?.end}
           timeCreated={job.createDate}
+          timeUpdated = {job.updateDate}
           companyName={job.hr?.company?.name || job?.universityDTO?.name}
           companyLocation={job?.universityDTO?.address}
           isDemandPost={true}
