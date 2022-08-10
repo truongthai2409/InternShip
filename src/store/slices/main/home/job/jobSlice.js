@@ -267,7 +267,7 @@ export const getListCandidateApplied = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `http://localhost:8085/api/r2s/admin/candidate/job/${args[0]}?no=${
+        `${baseURL}/api/r2s/admin/candidate/job/${args[0]}?no=${
           args[1] - 1
         }&limit=${args[2]}`
       )

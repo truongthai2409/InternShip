@@ -3,6 +3,7 @@ import "./styles.scss";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const CustomInput = ({
   label,
@@ -11,6 +12,7 @@ const CustomInput = ({
   placeholder,
   children,
   register,
+  unregister=null,
   check = false,
   defaultValue,
   requirementField = true,
@@ -22,15 +24,18 @@ const CustomInput = ({
   icon,
   top,
 }) => {
+  useEffect(() => {
+    if(check){
+      console.log("check", check)
+      unregister(id)
+    }
+  },[check])
+
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
     setIsHide(!isHide);
   };
 
-  const showValue = (e) => {
-    // console.log(e.target.value);
-  };
-  
   return (
     <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">
@@ -44,7 +49,6 @@ const CustomInput = ({
       >
         {icon}
         <input
-          onChange={showValue}
           style={{
             borderRadius: radius ? radius : "",
             height: height ? height : "",

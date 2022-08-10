@@ -15,25 +15,32 @@ const CandidateList = ({ idJob }) => {
   );
 
   useEffect(() => {
-    dispatch(getListCandidateApplied([idJob, 1, 5]));
-  }, []);
-
-  // console.log("CandidateList", listCandidatesApplied);
-  // console.log("CandidateList - lenght", listCandidatesApplied.length);
+    dispatch(getListCandidateApplied([idJob, page, 3]));
+    console.log("render nè")
+  }, [page]);
 
   const hanldeOnChange = (e, value) => {
-    console.log("value", value);
+    console.log("value",value)
+    setPage(value);
   };
 
   return (
     <div className="candidate-list__wrapper">
-      {listCandidatesApplied.length ? listCandidatesApplied.map((candidate) => {
-        return <CandidateCard candidate = {candidate}/>;
-      }) : <Null text="Chưa có ứng viên nào đang ứng tuyển." height="100px" fs="10px" fw="400"/>}
+      {listCandidatesApplied.length ? (
+        listCandidatesApplied.map((candidate) => {
+          return <CandidateCard candidate={candidate} />;
+        })
+      ) : (
+        <Null
+          text="Chưa có ứng viên nào đang ứng tuyển."
+          height="100px"
+          fs="10px"
+          fw="400"
+        />
+      )}
       <Stack spacing={2}>
         <Pagination
           page={page}
-          value={1}
           onChange={hanldeOnChange}
           count={totalPages}
           variant="outlined"

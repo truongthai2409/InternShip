@@ -91,17 +91,17 @@ const HRInfo = () => {
           label="Mật khẩu"
           id="password"
           type="password"
+          visibility={true}
           placeholder="Mật khẩu"
           register={register}
         >
           {errors.password?.message}
-          {errorMessage?.Password}
         </CustomInput>
-
         <CustomInput
           label="Xác nhận mật khẩu"
           id="confirmPassword"
           type="password"
+          visibility={true}
           placeholder="Xác nhận mật khẩu"
           register={register}
         >
