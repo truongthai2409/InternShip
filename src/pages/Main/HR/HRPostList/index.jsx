@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../components/Button";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
@@ -63,22 +62,22 @@ const HRPostList = (props) => {
           <Statistic
             title="Điểm khả dụng"
             firstObject={{
-              score: jobListActived.length,
+              score: jobListActived?.length,
               description: "Lượt đăng tuyển",
             }}
             secondObject={{
-              score: jobListActived.length,
+              score: jobListActived?.length,
               description: "Lượt xem hồ sơ",
             }}
           />
           <Statistic
             title="Trạng thái đăng tuyển"
             firstObject={{
-              score: jobListActived.length,
+              score: jobListActived?.length,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
-              score: jobListDisabled.length,
+              score: jobListDisabled?.length,
               description: "Đã đóng",
             }}
           />

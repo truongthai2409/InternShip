@@ -16,7 +16,7 @@ import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
 //   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 // };
 
-const InformationCompany = ({ jobDetail, jobDetailById }) => {
+const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
   const { profile } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
@@ -160,13 +160,10 @@ const InformationCompany = ({ jobDetail, jobDetailById }) => {
                 name="read-only"
                 precision={0.5}
                 readOnly
-                defaultValue={jobDetail.company?.rates?.length}
+                value={rating}
               />
             </Typography>
-            <Button
-              name="Ứng tuyển"
-              onClick={handleAddJob}
-            ></Button>
+            <Button name="Ứng tuyển" onClick={handleAddJob}></Button>
           </div>
         </>
       )}
@@ -280,15 +277,15 @@ const InformationCompany = ({ jobDetail, jobDetailById }) => {
           </div>
           <div className="detail__card-5">
             <Typography variant="span" gutterBottom component="div">
-              <Typography variant="button" display="block" gutterBottom>
-                {jobDetailById.company?.rates?.length}
-              </Typography>
-              <Rating
+              {/* <Typography variant="button" display="block" gutterBottom>
+                {rating}
+              </Typography> */}
+              {/* <Rating
                 name="read-only"
                 precision={0.5}
                 readOnly
-                defaultValue={jobDetailById.company?.rates?.length}
-              />
+                value={rating}
+              /> */}
             </Typography>
             <Button
               bwidth="115px"

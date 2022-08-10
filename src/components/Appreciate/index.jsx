@@ -25,7 +25,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Tooltip } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./validate";
-
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "transparent",
   ...theme.typography.body2,
@@ -192,6 +192,7 @@ const Appreciate = ({ appreciate }) => {
                 {appreciate?.user?.username === profile.username && (
                   <div className="fix_display">
                     <Tooltip>
+                      {/* <ModeEditOutlineIcon /> */}
                       <ButtonCustom
                         name="Sửa đánh giá "
                         onClick={handleOpen}

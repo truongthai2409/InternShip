@@ -77,10 +77,10 @@ const PartnerPostList = (props) => {
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
-  }, [])
+  }, [userPresent.idUser])
 
 
-  console.log(partnerPostList);
+  // console.log(partnerPostList);
   return (
     <div className="partner-post__wrapper">
       <div className="partner-post__list-bt">

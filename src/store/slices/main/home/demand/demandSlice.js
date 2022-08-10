@@ -14,14 +14,16 @@ const demandSlice = createSlice({
     idPartnerCardActive: 0,
     demandDetail: {},
     closeEditDemand: false,
+    totalPagesofDemandList: 0,
   },
   reducers: {
     updateIdPartnerCardActive: (state, action) => {
       state.idPartnerCardActive = action.payload;
     },
-    updateIndexPartnerCardActive: (state, action) => {
-      state.indexPartnerCardActive = action.payload;
-      state.demandDetail = state?.demandList[action.payload]?.contents;
+    updateIndexPartnerCardActive: (state, { payload }) => {
+      // console.log(state?.demandList);
+      state.indexPartnerCardActive = payload;
+      state.demandDetail = state?.demandList[payload];
     },
   },
   extraReducers: (builder) => {
@@ -41,10 +43,11 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
-        state.demandList = payload;
-        if (payload.length > 0) {
-          console.log(payload[0]);
-          state.demandDetail = payload[0];
+        // console.log(payload.demandList[0]);
+        state.demandList = payload.demandList;
+        state.totalPagesofDemandList = payload.totalPage;
+        if (payload.demandList.length > 0) {
+          state.demandDetail = payload.demandList[0];
         } else {
         }
       });
@@ -53,6 +56,7 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandById.fulfilled, (state, { payload }) => {
+        // console.log(payload);
         state.demandDetail = payload;
       });
     builder
@@ -109,7 +113,7 @@ export const updateDemand = createAsyncThunk(
 );
 
 export const getDemandListByUniId = createAsyncThunk(
-  "university/getDemandListByUniId",
+  "demand/getDemandListByUniId",
   async ({ uniId, currentPage, limit }) => {
     // console.log(uniId, currentPage, limit);
     let axiosConfig = {
@@ -133,7 +137,7 @@ export const getDemandListByUniId = createAsyncThunk(
 );
 
 export const getDemandById = createAsyncThunk(
-  "university/getDemandById",
+  "demand/getDemandById",
   async (id) => {
     let axiosConfig = {
       headers: {
@@ -153,7 +157,7 @@ export const getDemandById = createAsyncThunk(
 );
 
 export const getDemandList = createAsyncThunk(
-  "university/getDemandList",
+  "demand/getDemandList",
   async ({ currentPage, limit }) => {
     let axiosConfig = {
       headers: {
@@ -164,7 +168,7 @@ export const getDemandList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`, axiosConfig)
       .then((response) => {
-        return response.data;
+        return {demandList: response.data.contents, totalPage: response.data.totalPages};
       })
       .catch((err) => {
         return err.response.data;

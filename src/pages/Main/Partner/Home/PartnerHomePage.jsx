@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import Pagination from "@mui/material/Pagination";
 
-const limit = 5;
+const limit = 10;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
@@ -23,13 +23,14 @@ const PartnerHomePage = (props) => {
 
   const dispatch = useDispatch();
   // get global state from redux store
-  const { demandList, demandDetail, indexPartnerCardActive } = useSelector(
+  const { demandList, totalPagesofDemandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
-  // console.log(demandDetail, indexPartnerCardActive);
+  console.log(demandDetail, indexPartnerCardActive);
+  // console.log(totalPagesofDemandList);
 
   const handlePaginate = (page) => {
-    // console.log(typeof page);
+    console.log(page);
     setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
@@ -37,7 +38,7 @@ const PartnerHomePage = (props) => {
   useEffect(() => {
     // console.log(demandList);
     dispatch(getDemandList({ currentPage, limit }));
-  }, [demandList.length]);
+  }, [demandList.length, currentPage]);
 
   // const handleSearch = (value) => {
   //   setValueSearch(value);
@@ -78,12 +79,12 @@ const PartnerHomePage = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={demandList?.contents}
+              jobList={demandList}
               indexCardActive={indexPartnerCardActive}
             />
             <div className="partner-postList__pagination">
               <Pagination
-                count={demandList?.totalPages}
+                count={totalPagesofDemandList}
                 shape="rounded"
                 variant="outlined"
                 color="secondary"
@@ -99,7 +100,7 @@ const PartnerHomePage = (props) => {
               {demandList ? (
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobListName={demandList?.content}
+                  jobListName={demandList}
                   jobDetail={demandDetail}
                   demandPartner={true}
                 />

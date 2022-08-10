@@ -18,8 +18,8 @@ const CandidateList = ({ idJob }) => {
     dispatch(getListCandidateApplied([idJob, 1, 5]));
   }, []);
 
-  console.log("CandidateList", listCandidatesApplied);
-  console.log("CandidateList - lenght", listCandidatesApplied.length);
+  // console.log("CandidateList", listCandidatesApplied);
+  // console.log("CandidateList - lenght", listCandidatesApplied.length);
 
   const hanldeOnChange = (e, value) => {
     console.log("value", value);

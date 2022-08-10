@@ -67,7 +67,7 @@ const FilterPanelHome = ({
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList && jobList.length > 0
+        {jobList && jobList?.length > 0
           ? jobList.map((job, index) => (
               <CardHome
                 positionValue={positionValue}
@@ -83,7 +83,7 @@ const FilterPanelHome = ({
                   job?.jobposition?.name || job?.position.name || "Unknown",
                   job?.jobType?.name || "Unknown",
                 ]}
-                star={job?.hr?.company?.rates.length || 4}
+                star={job?.hr?.company?.rates?.length || 4}
                 location="Hồ Chí Minh"
                 amount={job.amount || "Unknown"}
                 demandPartner={true}
@@ -104,7 +104,7 @@ const FilterPanelHome = ({
       <TabPanel value={value} index={2}>
         {/* <CardHome /> */}
       </TabPanel>
-      <Stack sx={{display: "flex", justifyContent: "center", alignItems: "center"}} spacing={2}>
+      {/* <Stack spacing={2}>
         <Pagination
           page={jobListNameHavePages?.numberOfCurrentPage || 0}
           defaultPage={1}
@@ -119,7 +119,7 @@ const FilterPanelHome = ({
           //     jobListNameHavePages?.totalPages
           // }
         />
-      </Stack>
+      </Stack> */}
     </Box>
   );
 };

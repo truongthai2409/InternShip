@@ -30,10 +30,13 @@ const CardVisit = ({ jobDetailById, logo }) => {
           </Typography>
 
           <div className="config__info">
-            <Link to="/detail_job" className="config__info">
+            <a
+              href={`mailto:${jobDetailById?.company?.email}`}
+              className="config__info"
+            >
               <LocalPostOfficeIcon className="config__info-icon"></LocalPostOfficeIcon>
               {jobDetailById?.company?.email}
-            </Link>
+            </a>
           </div>
           <div className="config__info">
             <Link to="/detail_job" className="config__info">
@@ -42,10 +45,14 @@ const CardVisit = ({ jobDetailById, logo }) => {
             </Link>
           </div>
           <div className="config__info">
-            <Link to="/detail_job" className="config__info">
+            <a href={jobDetailById?.company?.website} className="config__info">
               <LanguageIcon className="config__info-icon"></LanguageIcon>
               {jobDetailById?.company?.website}
-            </Link>
+            </a>
+            {/* <Link to={jobDetailById?.company?.website} className="config__info">
+              <LanguageIcon className="config__info-icon"></LanguageIcon>
+              {jobDetailById?.company?.website}
+            </Link> */}
           </div>
           {/* <div className="config__info">
             <Link to="/detail_job" className="config__info">
