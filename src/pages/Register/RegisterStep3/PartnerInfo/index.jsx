@@ -56,7 +56,7 @@ const PartnerInfo = () => {
         name: data.schoolName,
         shortName: data.shortName,
         email: data.emailSchool,
-        description: data.description,
+        description: "mô tả",
         website: data.website,
         phone: data.phoneSchool,
         majors: [
@@ -307,17 +307,6 @@ const PartnerInfo = () => {
         >
           {errors.major?.message}
         </SelectCustom>
-
-        <Textarea
-          textAlign="left"
-          label="Mô tả"
-          id="description"
-          type="textarea"
-          placeholder="Mô tả Trường"
-          setValue={setValue}
-          children=""
-          register={register}
-        />
         <div className={"row-3-col"}>
           <div className={"university-register__select-location"}>
             <SelectCustom

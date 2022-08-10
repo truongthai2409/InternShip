@@ -20,6 +20,7 @@ const CardPost = (props) => {
   const [title, setTitle] = useState("");
   const action = useRef("");
   const dispatch = useDispatch();
+  // console.log(props.timeUpdated);
   // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
 
@@ -53,7 +54,11 @@ const CardPost = (props) => {
       switch (action.current) {
         case "update":
           setComponent(
-            <PostPartnerForm idDemand={props.idDemand} isUpdate={true} />
+            <PostPartnerForm
+              idDemand={props.idDemand}
+              isUpdate={true}
+              setOpen={setOpen}
+            />
           );
           setTitle("Chỉnh sửa thông tin đợt thực tập");
           break;
@@ -128,9 +133,16 @@ const CardPost = (props) => {
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
         {moment(props.timeEnd).format("DD/MM/YYYY")}
       </p>
-      <p className="card-post__created">
-        <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
-      </p>
+      {props.timeUpdated ? (
+        <p className="card-post__created">
+          <b>Ngày cập nhật:</b> {moment(props.timeUpdated).format("DD/MM/YYYY")}
+        </p>
+      ) : (
+        <p className="card-post__created">
+          <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
+        </p>
+      )}
+
       <div className="card-post__action">
         <ButtonAction
           onClick={handleOnClick}
@@ -143,7 +155,6 @@ const CardPost = (props) => {
           name={props.isDemandPost ? "Ứng tuyển" : "Ứng viên"}
           fontSize="13px"
           type="read"
-          amountDemands={props.amount}
         />
         <ButtonAction
           onClick={handleOnClick}

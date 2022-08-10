@@ -47,8 +47,6 @@ function a11yProps(index) {
 }
 
 const limit = 5;
-
-const page = 1;
 const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
@@ -59,32 +57,30 @@ const PartnerPostList = (props) => {
   const handleChange = (event, newValue) => setValue(newValue);
   const { demandListUniversity } = useSelector((state) => state.demand);
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
-  const [currentPage, setCurrentPage] = useState(page);
-  const [totalPage, setTotalPage] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   // console.log(currentPage, totalPage);
   // console.log(demandListUniversity?.totalPages);
   // console.log(activeUser?.universityDTO?.id);
 
-  
   const handlePaginate = (page) => {
     // console.log(typeof page);
-    setCurrentPage(parseInt(page))
+    setCurrentPage(parseInt(page));
     window.scroll(0, 0);
-  }
+  };
 
 
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     // console.log(currentPage);
-    dispatch(getPartnerByUserID(userPresent.idUser));
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-    setPartnerPostList(demandListUniversity);
   }, [activeUser?.universityDTO?.id, currentPage]);
 
   useEffect(() => {
-    setTotalPage(demandListUniversity?.totalPages);
-  })
+    dispatch(getPartnerByUserID(userPresent.idUser));
+  }, [userPresent.idUser])
 
+
+  // console.log(partnerPostList);
   return (
     <div className="partner-post__wrapper">
       <div className="partner-post__list-bt">
@@ -140,12 +136,12 @@ const PartnerPostList = (props) => {
             />
           </TabPanel>
           <div className="partner-postList__pagination">
-            <Pagination 
-            count={totalPage} 
-            shape="rounded"
-            variant="outlined" 
-            color="secondary"
-            onChange={(e) => handlePaginate(e.target.textContent)}
+            <Pagination
+              count={demandListUniversity?.totalPages}
+              shape="rounded"
+              variant="outlined"
+              color="secondary"
+              onChange={(e) => handlePaginate(e.target.textContent)}
             />
           </div>
         </Box>

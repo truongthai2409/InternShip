@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -67,7 +67,6 @@ const jobSlice = createSlice({
       } else {
       }
     });
-
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
       state.jobActive = payload;
       state.jobDetailById = payload;
@@ -93,10 +92,15 @@ const jobSlice = createSlice({
       }
     });
     builder.addCase(updateJob.fulfilled, (state, { payload }) => {
+      state.jobListActived = state.jobListActived.map((job) => {
+        if (job.id === payload.id) {
+          return payload;
+        }
+        return job;
+      });
       toast.success("Chỉnh sửa công việc thành công!");
     });
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
-      console.log("payload:", payload);
       state.listCandidatesApplied = payload.contents;
       state.totalPages = payload.totalPages;
     });
@@ -240,7 +244,7 @@ export const updateStatusJob = createAsyncThunk(
  * args[1] : infor of job
  */
 export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
-  return axios
+  const res = await axios
     .put(`http://localhost:8085/api/r2s/job/${args[0]}`, args[1])
     .then((response) => {
       return response.data;
@@ -248,6 +252,7 @@ export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
     .catch((error) => {
       return error.response.data;
     });
+  return res;
 });
 
 // function use for get list of candidate who apply into job

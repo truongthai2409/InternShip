@@ -67,7 +67,7 @@ const FilterPanelHome = ({
         </Tabs>
       </Box>
       <TabPanel className="tabPanel" value={value} index={0}>
-        {jobList && jobList.length > 0
+        {jobList && jobList?.length > 0
           ? jobList.map((job, index) => (
               <CardHome
                 positionValue={positionValue}
@@ -83,7 +83,6 @@ const FilterPanelHome = ({
                   job?.jobposition?.name || job?.position.name || "Unknown",
                   job?.jobType?.name || "Unknown",
                 ]}
-                // star={job?.hr?.company?.rates.length || 4}
                 location="Hồ Chí Minh"
                 amount={job.amount || "Unknown"}
                 demandPartner={true}

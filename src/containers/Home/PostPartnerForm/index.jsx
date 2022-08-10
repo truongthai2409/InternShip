@@ -12,11 +12,16 @@ import { useEffect, useState } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import { useNavigate } from "react-router-dom";
-import { addDemand, updateDemand, getDemandById } from "src/store/slices/main/home/demand/demandSlice";
+import {
+  addDemand,
+  updateDemand,
+  getDemandById,
+} from "src/store/slices/main/home/demand/demandSlice";
 import DescriptionForm from "src/components/DescriptionForm";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import Textarea from "src/components/Textarea";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan/ Doanh nghiệp,
 
@@ -29,8 +34,6 @@ Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuy�
 Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.
 
 Trân trọng cảm ơn!`;
-
-
 
 const jobTypeList = [
   {
@@ -47,14 +50,15 @@ const jobTypeList = [
   },
 ];
 
-const PostPartnerForm = ({idDemand, isUpdate = false }) => {
+const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const { status } = useSelector((state) => state.demand);
   const { activeUser } = useSelector((state) => state.university);
-  const { demandDetail } = useSelector((state) => state.demand);  
+  const { demandDetail } = useSelector((state) => state.demand);
   const [openForm, setOpenForm] = useState(false);
-  console.log(demandDetail);
+  const [loading, setLoading] = useState(false);
+  // console.log(demandDetail);
 
   // console.log(activeUser);
 
@@ -65,10 +69,9 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getJobPositionList());
-    dispatch(getDemandById(idDemand))
+    dispatch(getDemandById(idDemand));
     dispatch(getPartnerByUserID(idUser));
   }, [idUser]);
-
 
   const {
     register,
@@ -83,13 +86,40 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
     setOpenForm(!openForm);
     console.log("isClicked");
   };
+
+  console.log(demandDetail);
+
+  async function editDemand({ idDemand, demandData }) {
+    setLoading(true);
+    try {
+      await dispatch(updateDemand({ idDemand, demandData }));
+      setOpen(false);
+    } catch (error) {
+      toast.error("Chỉnh sửa bài ứng tuyển không thành công");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function postDemand(demandData) {
+    setLoading(true);
+
+    try {
+      await dispatch(addDemand(demandData));
+    } catch (error) {
+      toast.error("Đăng bài ứng tuyển không thành công");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   if (isUpdate) {
     console.log(demandDetail?.desciption);
-    setValue("jobName", demandDetail?.name)
-    setValue("jobDescription", demandDetail?.desciption)
-    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate)
-    setValue("timeEnd", demandDetail?.end)
-    setValue("amount", demandDetail?.amount)
+    setValue("jobName", demandDetail?.name);
+    setValue("jobDescription", demandDetail?.desciption);
+    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
+    setValue("timeEnd", demandDetail?.end);
+    setValue("amount", demandDetail?.amount);
   }
 
   const onSubmit = (data) => {
@@ -117,16 +147,12 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
       }),
       fileSV: data.fileSV[0],
     };
-  
-    console.log(majorList, jobPosition);
 
-    console.log(demandData);
-
-    if(isUpdate) {
-      dispatch(updateDemand({ idDemand, demandData }))
+    if (isUpdate) {
+      editDemand({ idDemand, demandData })
     }
     else {
-      dispatch(addDemand(demandData));
+      postDemand(demandData)
     }
   };
 
@@ -164,6 +190,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                   id="jobPosition"
                   label="Vị trí công việc"
                   placeholder="Vui lòng chọn"
+                  defaultValue={demandDetail?.position?.id}
                   options={jobPosition}
                   register={register}
                 >
@@ -188,6 +215,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                   id="jobType"
                   label="Hình thức làm việc"
                   placeholder="Vui lòng chọn"
+                  defaultValue={demandDetail?.jobType?.id}
                   options={jobTypeList}
                   register={register}
                 >
@@ -231,6 +259,7 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
                 id="jobDescription"
                 type="description"
                 placeholder="Thư giới thiệu"
+                defaultValue={isUpdate ? demandDetail?.desciption : ""}
                 register={register}
                 setValue={setValue}
               >
@@ -263,7 +292,8 @@ const PostPartnerForm = ({idDemand, isUpdate = false }) => {
               </CustomInput>
             </div>
             <div className="partner-post__action">
-              <Button onClick={handleSubmit(onSubmit)} 
+              <Button
+                onClick={handleSubmit(onSubmit)}
                 name={isUpdate ? "Chỉnh sửa" : "Đăng tuyển"}
               />
             </div>
