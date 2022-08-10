@@ -55,3 +55,13 @@
   position: absolute;
   transform: translate(-17px, -5px);
 }
+
+
+@media (min-width: 740px) and (max-width: 1024px) {
+  .container-header__partner {
+    display: flex;
+    .logo img {
+      width: 120px;
+    }
+  }
+}
