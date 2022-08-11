@@ -1,75 +1,78 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { toast } from 'react-toastify'
-import api from 'src/config/api/apiConfig'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { toast } from "react-toastify";
+import api from "src/config/api/apiConfig";
 
-const baseURL = process.env.REACT_APP_API
+const baseURL = process.env.REACT_APP_API;
 
 const registerSlice = createSlice({
-  name: 'register',
+  name: "register",
   initialState: {
-    status: 'idle',
+    status: "idle",
     user: {},
-    error: {}
+    error: {},
   },
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(checkUser.fulfilled, (state, action) => {
         if (action.payload?.username) {
-          state.status = 'success step 2'
-          state.user = action.payload
-          state.error = {}
+          state.status = "success step 2";
+          state.user = action.payload;
+          state.error = {};
         } else {
-          state.status = 'fail'
-          state.user = {}
-          state.error = action.payload
+          state.status = "fail";
+          state.user = {};
+          state.error = action.payload;
         }
       })
       .addCase(registerHr.pending, (state, action) => {
-        state.status = 'loading'
+        state.status = "loading";
       })
       .addCase(registerHr.fulfilled, (state, action) => {
         if (action.payload?.id) {
-          state.user = action.payload
-          state.status = 'success'
-          state.error = {}
-          toast.success("Bạn đã đăng ký tài khoản thành công!")
+          state.user = action.payload;
+          state.status = "success";
+          state.error = {};
+          toast.success("Bạn đã đăng ký tài khoản thành công!");
         } else {
-          state.status = 'fail'
-          state.error = action.payload
+          state.status = "fail";
+          state.error = action.payload;
         }
       })
       .addCase(registerCandidate.pending, (state, action) => {
-        state.status = 'loading'
+        state.status = "loading";
       })
       .addCase(registerCandidate.fulfilled, (state, action) => {
         if (action.payload?.id) {
-          state.user = action.payload
-          state.status = 'success'
-          state.error = {}
+          state.user = action.payload;
+          state.status = "success";
+          state.error = {};
         } else {
-          state.status = 'fail'
-          state.error = action.payload
+          state.status = "fail";
+          state.error = action.payload;
         }
+      });
+  },
+});
+
+export default registerSlice;
+
+export const checkUser = createAsyncThunk(
+  "register/checkUser",
+  async (data) => {
+    const res = await api
+      .post(`${baseURL}/api/user`, data)
+      .then((res) => {
+        sessionStorage.setItem("account", JSON.stringify(data));
+        return res;
       })
+      .catch((error) => {
+        return error.response.data;
+      });
+    return res;
   }
-})
-
-export default registerSlice
-
-export const checkUser = createAsyncThunk('register/checkUser', async data => {
-  const res = await api
-    .post(`${baseURL}/api/user`, data)
-    .then(res => {
-      sessionStorage.setItem('account', JSON.stringify(data))
-      return res
-    })
-    .catch(error => {
-      return error.response.data
-    })
-  return res
-})
+);
 
 // export const registerUser = createAsyncThunk(
 //   "register/registerUser",
@@ -114,39 +117,39 @@ export const checkUser = createAsyncThunk('register/checkUser', async data => {
 // );
 
 export const registerHr = createAsyncThunk(
-  'register/registerHr',
-  async data => {
+  "register/registerHr",
+  async (data) => {
     const res = await api
       .post(`${baseURL}/api/r2s/hr`, data.hrData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          "Content-Type": "multipart/form-data",
+        },
       })
-      .then(res => {
-        return res
+      .then((res) => {
+        return res;
       })
-      .catch(err => {
-        return err.response.data
-      })
-    return res
+      .catch((err) => {
+        return err.response.data;
+      });
+    return res;
   }
-)
+);
 
 export const registerCandidate = createAsyncThunk(
-  'register/registerCandidate',
-  async data => {
+  "register/registerCandidate",
+  async (data) => {
     const res = await axios
       .post(`${baseURL}/api/r2s/candidate`, data, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          "Content-Type": "multipart/form-data",
+        },
       })
-      .then(res => {
-        return res
+      .then((res) => {
+        return res;
       })
-      .catch(err => {
-        return err.response.data
-      })
-    return res
+      .catch((err) => {
+        return err.response.data;
+      });
+    return res;
   }
-)
+);
