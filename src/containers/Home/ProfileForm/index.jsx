@@ -23,7 +23,7 @@ const ProfileForm = ({ handleClose }) => {
   const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setValue("avatar", profile?.user.avatar);
+    // setValue("avatar", profile?.user.avatar);
     setValue("firstName", profile?.user?.firstName);
     setValue("lastName", profile?.user?.lastName);
     setValue("email", profile?.user?.email);
@@ -64,6 +64,8 @@ const ProfileForm = ({ handleClose }) => {
               id="avatar"
               label="Ảnh đại diện"
               type="file"
+              setValue={setValue}
+              file={profile?.user.avatar}
               requirementField={false}
               className="profile-form__input"
               radius="2px"

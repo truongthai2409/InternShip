@@ -67,6 +67,7 @@ const HRInfo = () => {
         (<span className="field-requirment"> * </span>)Trường bắt buộc
       </p>
       <form className="reg-hr__form" autoComplete="off">
+        <div className="reg-hr__form--name">
         <CustomInput
           label="Tài khoản"
           id="username"
@@ -87,6 +88,7 @@ const HRInfo = () => {
           {errors.email?.message}
           {errorMessage?.Email}
         </CustomInput>
+        </div>
         <CustomInput
           label="Mật khẩu"
           id="password"

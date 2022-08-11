@@ -54,9 +54,7 @@ const PostJobForm = ({
 }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
-  const { jobPosition, status } = useSelector(
-    (state) => state.job
-  );
+  const { jobPosition, status } = useSelector((state) => state.job);
   const { profile } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -128,8 +126,8 @@ const PostJobForm = ({
           address: data.address,
         },
       };
-      console.log("jobData", jobData)
-      // dispatch(addJob(jobData));
+      // console.log("jobData", jobData)
+      dispatch(addJob(jobData));
     } else {
       const jobData = {
         name: data.name,
@@ -148,7 +146,7 @@ const PostJobForm = ({
         salaryMax: data.salaryMax,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
-        timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+        timeStartStr: moment(data.timeStart_update).format("YYYY-MM-DD"),
         timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         createDate: jobDetail.createDate,
         jobposition: {
@@ -171,6 +169,7 @@ const PostJobForm = ({
           id: 1,
         },
       };
+      console.log("jobData", jobData);
       dispatch(updateJob([jobDetail.id, jobData]));
       setOpen(false);
     }
@@ -260,7 +259,7 @@ const PostJobForm = ({
               <div className="row-2-col">
                 <CustomInput
                   label="Ngày bắt đầu tuyển"
-                  id="timeStart"
+                  id={"timeStart"}
                   type="date"
                   placeholder=""
                   register={register}
@@ -269,12 +268,12 @@ const PostJobForm = ({
                 </CustomInput>
                 <CustomInput
                   label="Ngày hết hạn tuyển"
-                  id="timeEnd"
+                  id={"timeEnd"}
                   type="date"
                   placeholder=""
                   register={register}
                 >
-                  {errors.timeEnd?.message}
+                  {errors.timeEnd?.message} 
                 </CustomInput>
               </div>
               <div className={"row-3-col"}>
@@ -404,7 +403,7 @@ const PostJobForm = ({
                 </div>
                 <SwitchButton
                   state={noSalary}
-                  id={["salaryMin","salaryMax"]}
+                  id={["salaryMin", "salaryMax"]}
                   setState={setNoSalary}
                   label="Không có trợ cấp"
                   fontSize="13px"

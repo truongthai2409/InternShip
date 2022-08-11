@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Button from "../Button";
 import WorkIcon from "@mui/icons-material/Work";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
@@ -12,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
+import "./styles.scss";
 // const formatSalary = (salary = "") => {
 //   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 // };
@@ -59,7 +59,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                Mô tả công việc:
+                *Mô tả công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -71,13 +71,30 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 ></div>
               </Typography>
             </Typography>
+            <Typography variant="span">
+              <Typography
+                variant="span"
+                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+              >
+                *Yêu cầu công việc:
+              </Typography>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: 16, fontWeight: "400" }}
+              >
+                <div
+                  dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+                ></div>
+              </Typography>
+            </Typography>
             <div className="detail__card-3-item">
               <Typography variant="span">
                 <Typography
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  Yêu cầu công việc:
+                  *Quyền lợi:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -85,7 +102,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   sx={{ fontSize: 16, fontWeight: "400" }}
                 >
                   <div
-                    dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+                    dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
                   ></div>
                 </Typography>
               </Typography>
@@ -96,7 +113,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  Thời hạn ứng tuyển:
+                  *Thời hạn ứng tuyển:
                 </Typography>
                 <Typography
                   variant="body2"

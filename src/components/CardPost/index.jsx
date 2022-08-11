@@ -148,6 +148,7 @@ const CardPost = (props) => {
           onClick={handleOnClick}
           onMouseEnter={read}
           height="50px"
+          amountApplies={props.amount}
           width="33.33%"
           border="0.5px solid #DEDEDE"
           icon={<PersonOutlineIcon></PersonOutlineIcon>}

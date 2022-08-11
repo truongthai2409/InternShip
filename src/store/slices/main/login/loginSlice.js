@@ -62,7 +62,6 @@ export const updateUserPassword = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       })
-
       .then((res) => {
         return res;
       })

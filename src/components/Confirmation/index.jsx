@@ -1,12 +1,14 @@
 import Button from "../Button";
 import ButtonOutline from "../ButtonOutline";
 import "./styles.scss";
+import WorkOffIcon from '@mui/icons-material/WorkOff';
 
 const Confirmation = ({ text, dispatch, nameBtnYes, nameBtnNo, setOpen, func }) => {
   const handleClose = () => setOpen(false);
 
   return (
     <div className="confirmation__wrapper">
+      {/* <WorkOffIcon /> */}
       <p>{text}</p>
       <div className="confirmation__btns">
         <Button

@@ -6,7 +6,7 @@ import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
+import { getJobByNameAndLocation, getJobList } from "../../../store/slices/main/home/job/jobSlice";
 
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
@@ -14,7 +14,6 @@ const Home = (props) => {
   const [currentPage, setCurrentPage] = useState(0);
   // const [totalPages, setTotalPages] = useState();
 
-  // let positionJobValue = "";
   const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive, jobListNameHavePages } =
@@ -24,7 +23,7 @@ const Home = (props) => {
       name: "",
       province: "",
       no: currentPage,
-      limit: 4,
+      limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // dispatch(getJobList([1, 10]));

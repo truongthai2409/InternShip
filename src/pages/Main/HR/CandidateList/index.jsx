@@ -1,11 +1,10 @@
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import CandidateCard from "./CandidateCard";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import { getListCandidateApplied } from "src/store/slices/main/home/job/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Null from "src/components/Null";
+import PaginationCustome from "src/components/Pagination";
 
 const CandidateList = ({ idJob }) => {
   const [page, setPage] = useState(1);
@@ -16,11 +15,9 @@ const CandidateList = ({ idJob }) => {
 
   useEffect(() => {
     dispatch(getListCandidateApplied([idJob, page, 3]));
-    console.log("render nè")
   }, [page]);
 
   const hanldeOnChange = (e, value) => {
-    console.log("value",value)
     setPage(value);
   };
 
@@ -38,15 +35,11 @@ const CandidateList = ({ idJob }) => {
           fw="400"
         />
       )}
-      <Stack spacing={2}>
-        <Pagination
-          page={page}
-          onChange={hanldeOnChange}
-          count={totalPages}
-          variant="outlined"
-          shape="rounded"
-        />
-      </Stack>
+      <PaginationCustome 
+        page={page}
+        totalPages={totalPages}
+        hanldeOnChange={hanldeOnChange}
+      />
     </div>
   );
 };

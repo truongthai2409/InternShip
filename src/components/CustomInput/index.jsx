@@ -26,10 +26,11 @@ const CustomInput = ({
 }) => {
   useEffect(() => {
     if(check){
-      console.log("check", check)
       unregister(id)
     }
   },[check])
+
+  const accept = id === "avatar" ? ".png, .jpeg, .jpg" : ".pdf"
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -57,8 +58,8 @@ const CustomInput = ({
           id={id}
           placeholder={placeholder}
           disabled={check}
-          defaultValue={defaultValue}
           {...register(id)}
+          accept={accept}
         />
         {check ? null : <p className="custom-input__error">{children}</p>}
         {visibility && (
