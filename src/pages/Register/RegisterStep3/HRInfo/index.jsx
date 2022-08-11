@@ -19,6 +19,11 @@ const HRInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const errorMessage = useSelector(errorSelector);
+  const { companyList } = useSelector((state) => state.company);
+
+  useEffect(() => {
+    dispatch(getCompanyList([1, 20]));
+  }, [dispatch]);
 
   const {
     register,
@@ -27,16 +32,7 @@ const HRInfo = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { companyList } = useSelector((state) => state.company);
 
-  useEffect(() => {
-    dispatch(getCompanyList([1,20]));
-  }, [dispatch]);
-
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
   const onSubmit = (data) => {
     const hrData = {
       hr: JSON.stringify({
@@ -57,8 +53,12 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar[0] || null,
     };
-    console.log(hrData)
     dispatch(registerHr({ hrData, navigate }));
+  };
+
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
   };
 
   return (
