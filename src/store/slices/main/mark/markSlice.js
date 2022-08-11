@@ -58,8 +58,9 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
 export const getMarkByUser = createAsyncThunk(
   "mark/getMarkByUser",
   async (data) => {
+    console.log(data);
     return axios
-      .get(`${baseURL}/api/r2s/carelist/user/${data}`, {
+      .get(`${baseURL}/api/r2s/carelist/user/${data.userName}`, {
         params: data.page,
       })
       .then((response) => {
@@ -136,7 +137,9 @@ export const getJobCandidateCaredByNameAndLocation = createAsyncThunk(
 );
 
 export const createMark = createAsyncThunk("mark/createMark", async (data) => {
-  const res = await axios
+  const res = await axios;
+  console
+    .log(data)
     .post(`${baseURL}/api/r2s/carelist`, data)
     .then((res) => {
       return res;

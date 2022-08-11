@@ -28,6 +28,7 @@ const ButtonMark = (props) => {
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
+  console.log(candidateInfoByUsername);
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
     profile?.username && dispatch(getCandidateByUserName(profile.username));
@@ -53,7 +54,7 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-
+      console.log(dataCareList);
       await dispatch(createMark(dataCareList));
       await dispatch(getMarkByUser(dataGetMarkByUser));
       setMark(!mark);
