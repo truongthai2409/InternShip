@@ -223,14 +223,15 @@ const Appreciate = ({ appreciate }) => {
                   component="div"
                   sx={{ fontSize: 16, transform: "translate(0,-10px)" }}
                 >
-                  {`${appreciate?.comment?.slice(
+                  {/* {`${appreciate?.comment?.slice(
                     3,
                     appreciate?.comment?.length - 4
-                  )}` || ""}
-                  {/* dangerouslySetInnerHTML=
-            {{
-              __html: appreciate?.comment,
-            }} */}
+                  )}` || ""} */}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: appreciate?.comment,
+                    }}
+                  ></div>
                 </Typography>
               </div>
             </div>

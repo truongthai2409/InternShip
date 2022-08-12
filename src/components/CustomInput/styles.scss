@@ -73,3 +73,22 @@
     color: #000;
   }
 }
+
+.fileSV-container > input[type='file'] {
+  display: none;
+}
+
+.file--upload-content {
+  display: flex;
+  width: 145px;
+  height: 58px;
+  border: 1px solid $color-black-0;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary-color-1;
+  }
+}

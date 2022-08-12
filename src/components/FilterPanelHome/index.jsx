@@ -5,7 +5,6 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
 import moment from "moment";
-import { Pagination, Stack } from "@mui/material";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
 
@@ -80,11 +79,11 @@ const FilterPanelHome = ({
                 nameCompany={job.hr?.company?.name || job?.universityDTO.name}
                 idCompany={job.hr?.company?.id || job?.universityDTO.id}
                 tagName={[
-                  job?.jobposition?.name || job?.position.name || "Unknown",
-                  job?.jobType?.name || "Unknown",
+                  job?.jobposition?.name || job?.position.name || "Không có",
+                  job?.jobType?.name || "Không có",
                 ]}
                 location="Hồ Chí Minh"
-                amount={job.amount || "Unknown"}
+                amount={job.amount || "Không có"}
                 demandPartner={true}
                 time={[
                   moment(job.timeStartStr || job.createDate).format(

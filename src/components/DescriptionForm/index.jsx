@@ -10,7 +10,7 @@ const DescriptionForm = () => {
         </div>
         <div className="description-form__content">
           <p className="description-text">
-            Kính chào Quý Cơ quan/ Doanh nghiệp,{" "}
+            Kính chào Quý Cơ quan, Doanh nghiệp,{" "}
           </p>
           <br />
           <p className="description-text">
@@ -33,9 +33,6 @@ const DescriptionForm = () => {
           </p>
           <p className="description-text">Trân trọng cảm ơn!</p>
         </div>
-      </div>
-      <div className="description-confirm-sample-btn-container">
-        <button className="description-confirm-sample-btn">Sử dụng mẫu này</button>
       </div>
     </div>
   );

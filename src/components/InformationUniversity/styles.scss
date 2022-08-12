@@ -30,3 +30,16 @@
         color: rgba(255, 255, 255, 0.815) !important;
     }
 }
+
+.detail__card-5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    div {
+      p {
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+    }
+  }

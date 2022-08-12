@@ -1,7 +1,7 @@
 import { Pagination, Stack } from "@mui/material";
 import "./styles.scss";
 
-const PaginationCustome = ({totalPages, page, hanldeOnChange, variant="outlined", shape="rounded"}) => {
+const PaginationCustom = ({totalPages, page, hanldeOnChange, variant="outlined", shape}) => {
   return (
     <Stack spacing={2}>
       <Pagination
@@ -15,4 +15,4 @@ const PaginationCustome = ({totalPages, page, hanldeOnChange, variant="outlined"
   );
 };
 
-export default PaginationCustome;
+export default PaginationCustom;

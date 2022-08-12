@@ -25,12 +25,12 @@ const UserCard = () => {
         </span>
       </div>
       <div className="user-card__btns">
-        <div className="user-card__btns-auth-account">
+        {/* <div className="user-card__btns-auth-account">
           <Button name="Tài khoản đã xác thực" />
-        </div>
-        <div className="user-card__btns-update-profile">
+        </div> */}
+        {/* <div className="user-card__btns-update-profile">
           <Button name="Cập nhật thêm Profile" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

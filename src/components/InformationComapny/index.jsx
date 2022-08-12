@@ -181,7 +181,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 name="read-only"
                 precision={0.5}
                 readOnly
-                value={rating}
+                value={Number(rating)}
               />
             </Typography>
             <Button name="Ứng tuyển" onClick={handleAddJob}></Button>

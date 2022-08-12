@@ -18,7 +18,7 @@ const ratingSlice = createSlice({
 
 export const getRatingCompany = createAsyncThunk(
   "rating/getRatingCompany",
-  async (idCompany) => {
+  async (idCompany = 1) => {
     return axios
       .get(`${baseURL}/api/r2s/rate/company/${idCompany}?no=0&limit=5`)
       .then((res) => {

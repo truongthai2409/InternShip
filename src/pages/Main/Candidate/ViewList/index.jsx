@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
@@ -37,7 +37,6 @@ const CandidateViewList = () => {
   let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
     (state) => state.mark
   );
-  console.log(careListOfPrivate);
   let { applyList, applyListHavePage } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
@@ -71,7 +70,7 @@ const CandidateViewList = () => {
           limit: 10,
         },
       };
-      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+      dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
 
       // if (
       //   pathUrl === "/candidate/view-list-care" &&
@@ -92,7 +91,7 @@ const CandidateViewList = () => {
       // }
     };
     getValue();
-  }, [dispatch]);
+  }, [candidateInfoByUsername.id]);
 
   useEffect(() => {}, []);
   // const handleChange = (event, newValue) => {
@@ -181,6 +180,46 @@ const CandidateViewList = () => {
                     />
                   ))}
               </div>
+              <div
+                className="view-list-page"
+                style={{
+                  display: "flex",
+                  justifyContent: "start",
+                  flexDirection: "row-reverse",
+                  alignItems: "center",
+                }}
+              >
+                <Stack spacing={2}>
+                  <Pagination
+                    page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
+                    defaultPage={1}
+                    onChange={(e) => handlePagination(e.target.textContent)}
+                    count={totalPage || 1}
+                    variant="outlined"
+                    shape="rounded"
+                    size="medium"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "start",
+                      flexDirection: "row-reverse",
+                      alignItems: "center",
+                      marginLeft: "150px",
+                    }}
+                    // disabled={
+                    //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
+                    //   jobListNameHavePages?.numberOfCurrentPage ===
+                    //     jobListNameHavePages?.totalPages
+                    // }
+                  />
+                </Stack>
+                <div className="demand-detail__back" onClick={handleBackClick}>
+                  <ArrowButton
+                    direction="left"
+                    text="Trở lại"
+                    fontSize="15px"
+                  />
+                </div>
+              </div>
             </Grid>
             <Grid item xs={5}>
               <div className="view-list__job-user-card">
@@ -200,27 +239,6 @@ const CandidateViewList = () => {
               </div>
             </Grid>
           </Grid>
-        </div>
-        <div className="view-list-page">
-          <Stack spacing={2}>
-            <Pagination
-              page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
-              defaultPage={1}
-              onChange={(e) => handlePagination(e.target.textContent)}
-              count={totalPage || 1}
-              variant="outlined"
-              shape="rounded"
-              size="medium"
-              // disabled={
-              //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
-              //   jobListNameHavePages?.numberOfCurrentPage ===
-              //     jobListNameHavePages?.totalPages
-              // }
-            />
-          </Stack>
-        </div>
-        <div className="demand-detail__back" onClick={handleBackClick}>
-          <ArrowButton direction="left" text="Trở lại" fontSize="15px" />
         </div>
       </div>
     </Box>

@@ -1,43 +1,43 @@
 import React, {
   useState,
   // useRef,
-  useEffect
-} from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Avatar, Grid, Switch } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+  useEffect,
+} from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Avatar, Grid, Switch } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import './styles.scss'
-import CustomInput from '../../../components/CustomInput'
-import CustomTextarea from '../../../components/CustomTextarea'
-import Button from '../../../components/Button'
-import cameraLogo from '../../../assets/img/camera.png'
-import { schema, renderControlAction } from './script.js'
+import "./styles.scss";
+import CustomInput from "../../../components/CustomInput";
+import CustomTextarea from "../../../components/CustomTextarea";
+import Button from "../../../components/Button";
+import cameraLogo from "../../../assets/img/camera.png";
+import { schema, renderControlAction } from "./script.js";
 import {
   addUniversity,
   getUniversityDetail,
-  updateUniversityInfo
-} from '../../../store/slices/Admin/university/unversitySlice'
-import MultiSelect from '../../../components/MultiSelect'
+  updateUniversityInfo,
+} from "../../../store/slices/Admin/university/unversitySlice";
+import MultiSelect from "../../../components/MultiSelect";
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } }
-const baseURL = process.env.REACT_APP_API
+const label = { inputProps: { "aria-label": "Switch demo" } };
+const baseURL = process.env.REACT_APP_API;
 
 export default function UniversityForm(props) {
-  const { isAdd } = props
+  const { isAdd } = props;
 
-  const { universityDetail } = useSelector(state => state.university)
+  const { universityDetail } = useSelector((state) => state.university);
 
-  const [image, setImage] = useState(cameraLogo)
-  const [isEdit, setIsEdit] = useState(isAdd)
+  const [image, setImage] = useState(cameraLogo);
+  const [isEdit, setIsEdit] = useState(isAdd);
 
   // const fileInput = useRef(null)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // get params from URL
-  const { uniId } = useParams()
+  const { uniId } = useParams();
   // console.log(uniId);
 
   const {
@@ -45,20 +45,20 @@ export default function UniversityForm(props) {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue
+    setValue,
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
   /**
    * get company details
    */
   useEffect(() => {
     if (!isAdd) {
-      setImage(cameraLogo)
-      dispatch(getUniversityDetail(uniId))
+      setImage(cameraLogo);
+      dispatch(getUniversityDetail(uniId));
     }
-  }, [isAdd, dispatch])
+  }, [isAdd, dispatch]);
 
   /**
    * @dependency universityDetail
@@ -67,32 +67,32 @@ export default function UniversityForm(props) {
   useEffect(() => {
     if (universityDetail) {
       if (!isAdd) {
-        setImage(`${baseURL}${universityDetail.avatar}`)
+        setImage(`${baseURL}${universityDetail.avatar}`);
       }
       // setValue("logo", isAdd ? "" : universityDetail.avatar);
-      setValue('name', isAdd ? '' : universityDetail.name)
-      setValue('description', isAdd ? '' : universityDetail.description)
-      setValue('email', isAdd ? '' : universityDetail.email)
-      setValue('phone', isAdd ? '' : universityDetail.phone)
-      setValue('shortName', isAdd ? '' : universityDetail.shortName)
-      setValue('website', isAdd ? '' : universityDetail.website)
+      setValue("name", isAdd ? "" : universityDetail.name);
+      setValue("description", isAdd ? "" : universityDetail.description);
+      setValue("email", isAdd ? "" : universityDetail.email);
+      setValue("phone", isAdd ? "" : universityDetail.phone);
+      setValue("shortName", isAdd ? "" : universityDetail.shortName);
+      setValue("website", isAdd ? "" : universityDetail.website);
     }
-  }, [universityDetail, isAdd])
+  }, [universityDetail, isAdd]);
 
   // show preview image
-  const showPreviewImage = e => {
+  const showPreviewImage = (e) => {
     if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0]
-      const reader = new FileReader()
-      reader.onload = x => {
-        setImage(x.target.result)
-      }
-      reader.readAsDataURL(imageFile)
+      let imageFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (x) => {
+        setImage(x.target.result);
+      };
+      reader.readAsDataURL(imageFile);
     }
-  }
+  };
 
   // handle Submit form
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     const universityData = {
       file: data.logo[0],
       university: JSON.stringify({
@@ -102,40 +102,39 @@ export default function UniversityForm(props) {
         name: data.name,
         phone: data.phone,
         shortName: data.shortName,
-        website: data.website
-      })
-    }
+        website: data.website,
+      }),
+    };
 
-    // console.log(universityData);
     if (isAdd) {
       dispatch(
         addUniversity({
           universityData,
           reset: reset({
-            description: '',
-            email: '',
-            logo: '',
-            name: '',
-            phone: '',
-            shortName: '',
-            website: ''
+            description: "",
+            email: "",
+            logo: "",
+            name: "",
+            phone: "",
+            shortName: "",
+            website: "",
           }),
-          setImage: setImage(cameraLogo)
+          setImage: setImage(cameraLogo),
         })
-      )
+      );
     } else {
       const updateData = {
         universityData,
-        uniId
-      }
-      dispatch(updateUniversityInfo(updateData))
+        uniId,
+      };
+      dispatch(updateUniversityInfo(updateData));
     }
-  }
+  };
 
   // Click to Edit
   const handleOnClickEdit = () => {
-    setIsEdit(!isEdit)
-  }
+    setIsEdit(!isEdit);
+  };
 
   return (
     <form
@@ -160,7 +159,7 @@ export default function UniversityForm(props) {
                 id="logo"
                 type="file"
                 name="logo"
-                {...register('logo')}
+                {...register("logo")}
                 onChange={showPreviewImage}
                 // ref={fileInput}
               />
@@ -276,5 +275,5 @@ export default function UniversityForm(props) {
         </div>
       ) : null}
     </form>
-  )
+  );
 }

@@ -22,8 +22,9 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-const SAMPLEFORM = `Kính chào Quý Cơ quan/ Doanh nghiệp,
+const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
 
 Trường .................... vinh dự và tự hào là đối tác tuyển dụng của quý cơ quan, doanh nghiệp.
@@ -58,6 +59,8 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const { demandDetail } = useSelector((state) => state.demand);
   const [openForm, setOpenForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formSample, setFormSample] = useState("");
+  const [useSampleForm, setUseSampleForm] = useState(false);
   // console.log(demandDetail);
 
   // console.log(activeUser);
@@ -84,10 +87,12 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   const handleToggle = () => {
     setOpenForm(!openForm);
-    console.log("isClicked");
   };
 
-  console.log(demandDetail);
+  const handleUseForm = () => {
+    setUseSampleForm(!useSampleForm);
+    setFormSample(SAMPLEFORM);
+  };
 
   async function editDemand({ idDemand, demandData }) {
     setLoading(true);
@@ -132,7 +137,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         startStr: moment(data.timeStart).format("YYYY-MM-DD"),
         endStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         partner: {
-          id: parseInt(activeUser?.id),
+          id: 25,
         },
         major: {
           id: parseInt(data.major),
@@ -148,18 +153,19 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV[0],
     };
 
+    console.log(demandData);
+
     if (isUpdate) {
-      editDemand({ idDemand, demandData })
-    }
-    else {
-      postDemand(demandData)
+      editDemand({ idDemand, demandData });
+    } else {
+      postDemand(demandData);
     }
   };
 
   if (status === "success") {
     navigate("/partner/post-list");
   }
-
+  console.log("formSample", formSample);
   return (
     <>
       <div className="partner-post__container">
@@ -177,6 +183,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Tên công việc"
                 id="jobName"
                 value="test"
+                height={50}
                 type="text"
                 placeholder="Vd. Thực tập thiết kế UI-UX"
                 register={register}
@@ -259,7 +266,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 id="jobDescription"
                 type="description"
                 placeholder="Thư giới thiệu"
-                defaultValue={isUpdate ? demandDetail?.desciption : ""}
+                defaultValue={useSampleForm && formSample}
                 register={register}
                 setValue={setValue}
               >
@@ -275,9 +282,18 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 </button>
               </div>
               {openForm && (
-                <>
+                <div className="descriptionForm__partner">
                   <DescriptionForm />
-                </>
+
+                  <div className="description-confirm-sample-btn-container">
+                    <button
+                      onClick={handleUseForm}
+                      className="description-confirm-sample-btn"
+                    >
+                      {!useSampleForm ? "Sử dụng mẫu này" : "Không dùng thư mẫu"}
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
             <div className="partner-post__textarea">
@@ -287,6 +303,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 type="file"
                 placeholder=""
                 register={register}
+                studentList={true}
               >
                 {errors.fileSV?.message}
               </CustomInput>

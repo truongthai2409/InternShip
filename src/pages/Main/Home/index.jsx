@@ -6,12 +6,14 @@ import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByNameAndLocation, getJobList } from "../../../store/slices/main/home/job/jobSlice";
+import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
+import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
 const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [positionValue, setPositionValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  const { profile } = useSelector((state) => state.authentication);
   // const [totalPages, setTotalPages] = useState();
 
   const dispatch = useDispatch();
@@ -35,9 +37,18 @@ const Home = (props) => {
   //     .replace(/%/g, "")
   //     .replace("%20", "+");
   // };
+  const dataGetMarkByUser = {
+    userName: profile.username,
+    page: {
+      no: 0,
+      limit: 10,
+    },
+  };
   useEffect(() => {
-    // setTotalPages(jobListName?.totalPages);
-  });
+    if (profile.role === "Role_Candidate") {
+      dispatch(getMarkByUser(dataGetMarkByUser));
+    }
+  }, []);
 
   const handleSearch = (value) => {
     const dataSearch = {

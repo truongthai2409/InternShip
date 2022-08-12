@@ -12,6 +12,7 @@ import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
 import { useNavigate } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
+import PaginationCustom from "src/components/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,7 +69,6 @@ const PartnerPostList = (props) => {
     window.scroll(0, 0);
   };
 
-
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     // console.log(currentPage);
@@ -77,8 +77,7 @@ const PartnerPostList = (props) => {
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
-  }, [userPresent.idUser])
-
+  }, [userPresent.idUser]);
 
   // console.log(partnerPostList);
   return (
@@ -136,12 +135,10 @@ const PartnerPostList = (props) => {
             />
           </TabPanel>
           <div className="partner-postList__pagination">
-            <Pagination
-              count={demandListUniversity?.totalPages}
-              shape="rounded"
-              variant="outlined"
-              color="secondary"
-              onChange={(e) => handlePaginate(e.target.textContent)}
+            <PaginationCustom
+              page={currentPage}
+              totalPages={demandListUniversity?.totalPages}
+              hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
             />
           </div>
         </Box>

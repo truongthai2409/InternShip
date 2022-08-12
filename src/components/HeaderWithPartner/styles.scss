@@ -3,6 +3,8 @@
   width: 100%;
   position: fixed;
   display: flex;
+  overflow: hidden;
+  top: 0;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 35px;
@@ -54,14 +56,4 @@
 .css-bxzqik-MuiSvgIcon-root {
   position: absolute;
   transform: translate(-17px, -5px);
-}
-
-
-@media (min-width: 740px) and (max-width: 1024px) {
-  .container-header__partner {
-    display: flex;
-    .logo img {
-      width: 120px;
-    }
-  }
 }

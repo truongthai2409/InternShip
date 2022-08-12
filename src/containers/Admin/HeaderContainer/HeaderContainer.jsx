@@ -1,21 +1,19 @@
-import React from 'react'
-import { Grid, IconButton, Tooltip } from '@mui/material'
+import React from "react";
+import { Grid, IconButton, Tooltip } from "@mui/material";
 
-import AddIcon from '@mui/icons-material/Add'
+import AddIcon from "@mui/icons-material/Add";
 
-import './styles.scss'
-import Search from '../../../components/Search'
-// import Button from "../../../components/Button";
-// import Select from "../../../components/Select";
+import "./styles.scss";
+import Search from "../../../components/Search";
 
-export default function HeaderContainer({
+const HeaderContainer = ({
   headerName,
   placeholder,
   onChange,
   selectName,
   selectOptions,
-  onClick
-}) {
+  onClick,
+}) => {
   return (
     <div className="header-container">
       <Grid container spacing={2}>
@@ -38,5 +36,7 @@ export default function HeaderContainer({
         </Grid> */}
       </Grid>
     </div>
-  )
-}
+  );
+};
+
+export default HeaderContainer;

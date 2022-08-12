@@ -50,15 +50,6 @@ function HeaderWithPartner(props) {
       ) : null}
       <div className="header__partner-icon">
         <div className="header__partner-icon-config">
-          <Link to={`${pathUrl}/view-list-care`}>
-            <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
-            {props.isMark ? (
-              <FiberManualRecordIcon
-                fontSize="inherit"
-                color="warning"
-              ></FiberManualRecordIcon>
-            ) : null}
-          </Link>
         </div>
         <div
           style={{

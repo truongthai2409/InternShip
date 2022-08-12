@@ -59,7 +59,7 @@ export const getMarkByUser = createAsyncThunk(
   "mark/getMarkByUser",
   async (data) => {
     return axios
-      .get(`${baseURL}/api/r2s/carelist/user/${data}`, {
+      .get(`${baseURL}/api/r2s/carelist/user/${data.userName}`, {
         params: data.page,
       })
       .then((response) => {
