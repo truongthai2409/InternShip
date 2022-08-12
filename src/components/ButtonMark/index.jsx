@@ -30,8 +30,9 @@ const ButtonMark = (props) => {
   );
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
-    profile?.username && dispatch(getCandidateByUserName(profile.username));
-  }, [dispatch]);
+    profile.username !== undefined &&
+      dispatch(getCandidateByUserName(profile.username));
+  }, []);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
@@ -53,7 +54,6 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
-
       await dispatch(createMark(dataCareList));
       await dispatch(getMarkByUser(dataGetMarkByUser));
       setMark(!mark);

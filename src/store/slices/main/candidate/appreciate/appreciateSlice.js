@@ -29,7 +29,7 @@ const appreciateSlice = createSlice({
 
 export const getAppreciateByCompany = createAsyncThunk(
   "appreciate/getAppreciateByCompany",
-  async (idCompany) => {
+  async (idCompany = 1) => {
     return axios
       .get(`${baseURL}/api/r2s/rate/company/${idCompany}/?no=0&limit=10`)
       .then((response) => {

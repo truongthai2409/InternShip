@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import // useSelector,
 "react-redux";
@@ -20,9 +20,10 @@ const DetailCard = ({
   const { appreciateList } = useSelector((state) => state.appreciate);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
+
   useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
-  }, [dispatch, idCompany]);
+  }, []);
 
   const data = [];
   for (let i = 0; i < appreciateList?.length; i++) {

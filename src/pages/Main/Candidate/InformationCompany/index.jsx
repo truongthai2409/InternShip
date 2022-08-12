@@ -63,13 +63,14 @@ const CandidateInformationCompany = () => {
   const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
-  React.useEffect(() => {
+
+  useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
-  }, [dispatch, idCompany]);
+  }, []);
 
   useEffect(() => {
     dispatch(getJobList([1, 10]));
-  }, [dispatch]);
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);

@@ -30,7 +30,7 @@ function BaseInformationCompany({
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
-  }, [idCompany, dispatch]);
+  }, []);
   return (
     <div className="">
       {jobDetail && (
@@ -58,7 +58,7 @@ function BaseInformationCompany({
                     name="read-only"
                     precision={0.5}
                     readOnly
-                    value={rating}
+                    value={Number(rating)}
                   />
                   {/* <Rating
                   name="text-feedback"
