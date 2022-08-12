@@ -16,7 +16,6 @@ const Home = (props) => {
   const { profile } = useSelector((state) => state.authentication);
   // const [totalPages, setTotalPages] = useState();
 
-  // let positionJobValue = "";
   const dispatch = useDispatch();
   // get global state from redux store
   const { jobListName, jobDetail, indexCardActive, jobListNameHavePages } =
@@ -26,7 +25,7 @@ const Home = (props) => {
       name: "",
       province: "",
       no: currentPage,
-      limit: 4,
+      limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // dispatch(getJobList([1, 10]));

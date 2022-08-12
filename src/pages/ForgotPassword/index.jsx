@@ -3,48 +3,26 @@ import "./styles.scss";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import CustomInput from "src/components/CustomInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { schema } from "./validateForm.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  getUserList,
-  userForgotPassword,
-} from "src/store/slices/Admin/user/userSlice";
+import { useDispatch } from "react-redux";
+import { forgotPassword } from "src/store/slices/Admin/user/userSlice";
 
 const ForgotPassword = () => {
-  const [message, setMessage] = useState("");
-
-  const { userList, forgotPassword } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (values) => {
-    handleFormSubmit(values);
+  const onSubmit = (data) => {
+    dispatch(forgotPassword(data.email));
+    navigate(-1);
   };
-  const handleFormSubmit = (data) => {
-    const getEmailUser = userList.find(
-      (findEmail) => findEmail.email === data.email
-    );
-
-    if (getEmailUser) {
-      dispatch(userForgotPassword(getEmailUser.email));
-      alert(forgotPassword);
-      // setMessage(forgotPassword);
-    } else {
-      alert("Email ko đúng");
-      // setMessage("Email ko đúng");
-    }
-  };
-
-  useEffect(() => {
-    dispatch(getUserList([1, 200]));
-  }, []);
 
   return (
     <Fragment>
@@ -67,13 +45,6 @@ const ForgotPassword = () => {
             >
               {errors.email?.message}
             </CustomInput>
-            {/* {message.length ? (
-              <div style={{ marginBottom: "12px", color: "red" }}>
-                {message}
-              </div>
-            ) : (
-              ""
-            )} */}
             <button
               onClick={handleSubmit(onSubmit)}
               className="forgotpassword__modal-btn"

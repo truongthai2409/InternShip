@@ -20,7 +20,6 @@ import {
   role,
   UniversityInfo,
 } from "./components";
-// import { TabTitle } from "src/utils/GeneralFunctions";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -51,7 +50,6 @@ const Profile = () => {
     default:
       RelatedInfor = null;
   }
-  console.log(profile);
   return (
     <>
       <div className="profile__wrapper">

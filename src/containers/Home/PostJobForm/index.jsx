@@ -8,7 +8,7 @@ import Button from "../../../components/Button";
 import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   addJob,
@@ -54,11 +54,13 @@ const PostJobForm = ({
 }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
-  const { jobPosition, status, jobListActived } = useSelector((state) => state.job);
+  const { jobPosition, status } = useSelector((state) => state.job);
   const { profile } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [noSalary, setNoSalary] = useState(false);
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -86,13 +88,13 @@ const PostJobForm = ({
 
   const {
     register,
+    unregister,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
-  // console.log("jobdetail:", jobDetail);
   const onSubmit = (data) => {
     if (!isUpdate) {
       const jobData = {
@@ -108,8 +110,8 @@ const PostJobForm = ({
           id: parseInt(data.jobType),
         },
         amount: parseInt(data.amount),
-        salaryMin: data.salaryMin,
-        salaryMax: data.salaryMax,
+        salaryMin: noSalary ? null : data.salaryMin,
+        salaryMax: noSalary ? null : data.salaryMax,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
         timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
@@ -124,9 +126,9 @@ const PostJobForm = ({
           address: data.address,
         },
       };
+      // console.log("jobData", jobData)
       dispatch(addJob(jobData));
     } else {
-      console.log("job nè:", jobListActived)
       const jobData = {
         name: data.name,
         hr: {
@@ -144,7 +146,7 @@ const PostJobForm = ({
         salaryMax: data.salaryMax,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
-        timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
+        timeStartStr: moment(data.timeStart_update).format("YYYY-MM-DD"),
         timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         createDate: jobDetail.createDate,
         jobposition: {
@@ -167,7 +169,7 @@ const PostJobForm = ({
           id: 1,
         },
       };
-      // console.log("job update:", jobData);
+      console.log("jobData", jobData);
       dispatch(updateJob([jobDetail.id, jobData]));
       setOpen(false);
     }
@@ -257,7 +259,7 @@ const PostJobForm = ({
               <div className="row-2-col">
                 <CustomInput
                   label="Ngày bắt đầu tuyển"
-                  id="timeStart"
+                  id={"timeStart"}
                   type="date"
                   placeholder=""
                   register={register}
@@ -266,12 +268,12 @@ const PostJobForm = ({
                 </CustomInput>
                 <CustomInput
                   label="Ngày hết hạn tuyển"
-                  id="timeEnd"
+                  id={"timeEnd"}
                   type="date"
                   placeholder=""
                   register={register}
                 >
-                  {errors.timeEnd?.message}
+                  {errors.timeEnd?.message} 
                 </CustomInput>
               </div>
               <div className={"row-3-col"}>
@@ -338,6 +340,7 @@ const PostJobForm = ({
                   defaultValue={isUpdate ? jobDetail?.desciption : ""}
                   setValue={setValue}
                   check={false}
+                  isUpdate={isUpdate && true}
                 >
                   {errors.jobDescription?.message}
                 </Textarea>
@@ -351,6 +354,7 @@ const PostJobForm = ({
                   setValue={setValue}
                   register={register}
                   check={false}
+                  isUpdate={isUpdate && true}
                 >
                   {errors.jobRequirement?.message}
                 </Textarea>
@@ -364,6 +368,7 @@ const PostJobForm = ({
                   register={register}
                   setValue={setValue}
                   check={false}
+                  isUpdate={isUpdate && true}
                 >
                   {errors.benefits?.message}
                 </Textarea>
@@ -378,7 +383,9 @@ const PostJobForm = ({
                     type="number"
                     placeholder="Nhập số tiền tối thiểu"
                     register={register}
+                    unregister={unregister}
                     requirementField={false}
+                    check={noSalary}
                   >
                     {errors.salaryMin?.message}
                   </CustomInput>
@@ -387,12 +394,20 @@ const PostJobForm = ({
                     type="number"
                     placeholder="Nhập số tiền tối đa"
                     register={register}
+                    unregister={unregister}
                     requirementField={false}
+                    check={noSalary}
                   >
                     {errors.salaryMax?.message}
                   </CustomInput>
                 </div>
-                <SwitchButton label="Không có trợ cấp" fontSize="13px" />
+                <SwitchButton
+                  state={noSalary}
+                  id={["salaryMin", "salaryMax"]}
+                  setState={setNoSalary}
+                  label="Không có trợ cấp"
+                  fontSize="13px"
+                />
               </div>
               <div className="hr-post__action">
                 <Button
