@@ -59,7 +59,7 @@ export const getUniversityList = createAsyncThunk(
   "university/getUniversityList",
   async () => {
     return await axios
-      .get(`${baseURL}/api/university`)
+      .get(`${baseURL}/api/r2s/admin/university?no=0&limit=10`)
       .then((response) => {
         return response.data;
       })

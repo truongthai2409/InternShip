@@ -5,8 +5,8 @@ import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import DataTable from "../../../../components/Table";
-import { getUserList } from "../../../../store/slices/Admin/user/userSlice";
+import { deleteUser, getUserList } from "src/store/slices/Admin/user/userSlice";
+import DataTable from "src/components/Table";
 
 const UserTable = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,8 @@ const UserTable = () => {
   const { userList } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUserList());
+    dispatch(getUserList([1, 10]));
   }, []);
-
-  // console.log(userList);
 
   const columns = [
     { field: "stt", headerName: "STT", width: 100 },
@@ -31,20 +29,24 @@ const UserTable = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 100,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
 
-        const handleOnClick = () => {
-          navigate(`/admin/user/${row.username}`);
+        const handleDeleteUser = async () => {
+          await dispatch(deleteUser(row.username));
+          dispatch(getUserList([1, 10]));
         };
         return (
           <>
-            <IconButton className="user-edit__button" onClick={handleOnClick}>
+            {/* <IconButton className="user-edit__button" onClick={handleOnClick}>
               <EditOutlinedIcon />
-            </IconButton>
-            <IconButton className="user-delete__button">
+            </IconButton> */}
+            <IconButton
+              className="user-delete__button"
+              onClick={handleDeleteUser}
+            >
               <DeleteForeverOutlinedIcon />
             </IconButton>
           </>
@@ -77,9 +79,9 @@ const UserTable = () => {
       username: userList[i].username,
       role: userList[i].role ? userList[i].role.name : null,
       gender: handleRenderGender(userList[i].gender),
-      // phone: userList[i].phone,
+      phone: userList[i].phone,
       email: userList[i].email,
-      status: userList[i].status,
+      status: userList[i].status.name,
     });
   }
   return (

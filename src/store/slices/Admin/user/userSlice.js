@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
 
 const userSlice = createSlice({
@@ -35,8 +36,6 @@ const userSlice = createSlice({
     });
   },
 });
-
-export default userSlice;
 
 export const getUserList = createAsyncThunk("user/getUserList", async (arg) => {
   return await axios
@@ -129,3 +128,23 @@ export const userForgotPassword = createAsyncThunk(
       });
   }
 );
+
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (data, thunkAPI) => {
+    return axios
+      .delete(`${baseURL}/api/r2s/admin/user/${data}`)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess(
+            "Đã disabled người dùng thành công"
+          )
+        );
+      })
+      .catch((error) => {
+        return thunkAPI.rejectWithValue(error);
+      });
+  }
+);
+
+export default userSlice;

@@ -11,7 +11,6 @@ import {
   updateIdJobActive,
   updateIndexCardActive,
 } from "../../store/slices/main/home/job/jobSlice";
-import { getRatingCompany } from "src/store/slices/main/home/rating/rating";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
@@ -47,10 +46,6 @@ const CardHome = (props) => {
       dispatch(updateIdJobActive(props.id));
     }
   }, [dispatch]);
-
-  React.useEffect(() => {
-    dispatch(getRatingCompany(props.idCompany));
-  }, []);
 
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));

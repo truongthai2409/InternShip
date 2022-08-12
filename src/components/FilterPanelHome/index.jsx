@@ -5,7 +5,6 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import CardHome from "../CardHome";
 import moment from "moment";
-import { Pagination, Stack } from "@mui/material";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
 
