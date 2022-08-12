@@ -11,8 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobByNameAndLocation,
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
-import { getDemandByName, getDemandList } from "src/store/slices/main/home/demand/demandSlice";
-import PaginationCustom from 'src/components/'
+import {
+  getDemandByName,
+  getDemandList,
+} from "src/store/slices/main/home/demand/demandSlice";
+import PaginationCustom from "src/components/Pagination";
+import { useNavigate, useParams } from "react-router-dom";
 
 const limit = 10;
 
@@ -20,12 +24,18 @@ const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
   const dispatch = useDispatch();
   // get global state from redux store
-  const { demandList, totalPagesofDemandList, demandDetail, indexPartnerCardActive } = useSelector(
-    (state) => state.demand
-  );
+  const {
+    demandList,
+    totalPagesofDemandList,
+    demandDetail,
+    indexPartnerCardActive,
+  } = useSelector((state) => state.demand);
+
+  const navigate = useNavigate();
+  const { keyword } = useParams();
+  console.log(keyword);
 
   useEffect(() => {
     const dataSearch = {
@@ -35,6 +45,7 @@ const PartnerHomePage = (props) => {
       limit: 4,
     };
     dispatch(getDemandByName(dataSearch));
+
     // dispatch(getJobList([1, 10]));
   }, [dispatch, currentPage]);
   // console.log(demandDetail, indexPartnerCardActive);
@@ -49,14 +60,20 @@ const PartnerHomePage = (props) => {
   useEffect(() => {
     console.log(currentPage);
     dispatch(getDemandList({ currentPage, limit }));
-  }, [demandList.length, currentPage]);
+  }, [currentPage]);
 
   const handleSearch = (value) => {
+    value = value.replace("%20", "+")
     const dataSearch = {
       name: value || "",
       no: 0,
-      limit: 2,
+      limit: 10,
     };
+    if (value) {
+      navigate(`/partner/search/${value}`);
+    } else {
+      navigate(`/partner`);
+    }
     dispatch(getDemandByName(dataSearch));
   };
 
@@ -78,9 +95,9 @@ const PartnerHomePage = (props) => {
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
-              <SearchResultHome 
-                onClick={handleSearch} 
-                onChange={getValueLocationAndHandle} 
+              <SearchResultHome
+                onClick={handleSearch}
+                onChange={getValueLocationAndHandle}
               />
             </div>
 
@@ -89,11 +106,10 @@ const PartnerHomePage = (props) => {
               indexCardActive={indexPartnerCardActive}
             />
             <div className="partner-postList__pagination">
-              <Pagination
-                count={totalPagesofDemandList}
-                variant="outlined"
-                color="primary"
-                onChange={(e) => handlePaginate(e.target.textContent)}
+              <PaginationCustom
+                page={currentPage}
+                totalPages={totalPagesofDemandList}
+                hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
               />
             </div>
           </Grid>
@@ -102,7 +118,7 @@ const PartnerHomePage = (props) => {
               <div className="none__res">
                 <SearchResultHome
                   onClick={handleSearch}
-                  onChange={getValueLocationAndHandle} 
+                  onChange={getValueLocationAndHandle}
                 />
               </div>
               {demandList ? (

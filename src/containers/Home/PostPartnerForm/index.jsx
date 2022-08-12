@@ -22,6 +22,7 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
@@ -152,6 +153,8 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV[0],
     };
 
+    console.log(demandData);
+
     if (isUpdate) {
       editDemand({ idDemand, demandData });
     } else {
@@ -180,6 +183,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Tên công việc"
                 id="jobName"
                 value="test"
+                height={50}
                 type="text"
                 placeholder="Vd. Thực tập thiết kế UI-UX"
                 register={register}
@@ -299,6 +303,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 type="file"
                 placeholder=""
                 register={register}
+                studentList={true}
               >
                 {errors.fileSV?.message}
               </CustomInput>

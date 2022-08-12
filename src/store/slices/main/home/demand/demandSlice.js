@@ -202,7 +202,7 @@ export const getDemandByName = createAsyncThunk(
   async (dataSearch) => {
     return await axios
       .get(
-        `${baseURL}/api/r2s/job/search`,
+        `${baseURL}/api/r2s/partner/demand/search`,
         { params: dataSearch }
       )
       .then((response) => {

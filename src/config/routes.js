@@ -182,6 +182,10 @@ export const partnerRouter = [
     path: "/partner/setting",
     Component: Password,
   },
+  {
+    path: "/partner/search/:keyword",
+    Component: PartnerHome,
+  },
 ];
 
 // register router
