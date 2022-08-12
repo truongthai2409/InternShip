@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobByNameAndLocation,
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
-import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
+import { getDemandByName, getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import Pagination from "@mui/material/Pagination";
 
 const limit = 10;
@@ -26,7 +26,18 @@ const PartnerHomePage = (props) => {
   const { demandList, totalPagesofDemandList, demandDetail, indexPartnerCardActive } = useSelector(
     (state) => state.demand
   );
-  console.log(demandDetail, indexPartnerCardActive);
+
+  useEffect(() => {
+    const dataSearch = {
+      name: "",
+      province: "",
+      no: currentPage,
+      limit: 4,
+    };
+    dispatch(getDemandByName(dataSearch));
+    // dispatch(getJobList([1, 10]));
+  }, [dispatch, currentPage]);
+  // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
 
   const handlePaginate = (page) => {
@@ -36,26 +47,18 @@ const PartnerHomePage = (props) => {
   };
 
   useEffect(() => {
-    // console.log(demandList);
+    console.log(currentPage);
     dispatch(getDemandList({ currentPage, limit }));
   }, [demandList.length, currentPage]);
 
-  // const handleSearch = (value) => {
-  //   setValueSearch(value);
-  //   const dataSearch = {
-  //     jobName: valueSearch,
-  //     location: locationValue,
-  //   };
-  //   if (valueSearch && value) {
-  //     dispatch(getJobByNameAndLocation(dataSearch));
-  //     // } else if (valueSearch && value === "") {
-  //     //   dispatch(getJobByNameAndLocation(valueSearch, ""));
-  //     // } else if (valueSearch === "" && value) {
-  //     //   dispatch(getJobByNameAndLocation("", value));
-  //     // } else {
-  //     //   dispatch(getJobByNameAndLocation("", ""));
-  //   }
-  // };
+  const handleSearch = (value) => {
+    const dataSearch = {
+      name: value || "",
+      no: 0,
+      limit: 2,
+    };
+    dispatch(getDemandByName(dataSearch));
+  };
 
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
@@ -75,7 +78,10 @@ const PartnerHomePage = (props) => {
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
-              <SearchResultHome onChange={getValueLocationAndHandle} />
+              <SearchResultHome 
+                onClick={handleSearch} 
+                onChange={getValueLocationAndHandle} 
+              />
             </div>
 
             <FilterPanelHome
@@ -85,9 +91,8 @@ const PartnerHomePage = (props) => {
             <div className="partner-postList__pagination">
               <Pagination
                 count={totalPagesofDemandList}
-                shape="rounded"
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 onChange={(e) => handlePaginate(e.target.textContent)}
               />
             </div>
@@ -95,7 +100,10 @@ const PartnerHomePage = (props) => {
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">
-                <SearchResultHome onChange={getValueLocationAndHandle} />
+                <SearchResultHome
+                  onClick={handleSearch}
+                  onChange={getValueLocationAndHandle} 
+                />
               </div>
               {demandList ? (
                 <DetailCard

@@ -10,19 +10,19 @@ const formatLocation = (location) => {
 export const ListDemand = ({ demandList, message }) => {
   return (
     <div className="hrpost__list">
-      {demandList && demandList.length > 0 ? (demandList.map((job) => (
+      {demandList && demandList.length > 0 ? (demandList.map((demand) => (
         <CardPost
-          key={job.id}
-          idDemand={job.id}
-          status={job.status}
-          jobName={job.name}
-          amount={job.amount}
-          timeStart={job?.updateDate || job?.createDate}
-          timeEnd={job?.end}
-          timeCreated={job.createDate}
-          timeUpdated = {job.updateDate}
-          companyName={job.hr?.company?.name || job?.universityDTO?.name}
-          companyLocation={job?.universityDTO?.address}
+          key={demand.id}
+          idDemand={demand.id}
+          status={demand.status}
+          jobName={demand.name}
+          amount={demand.amount}
+          timeStart={demand?.updateDate || demand?.createDate}
+          timeEnd={demand?.end}
+          timeCreated={demand.createDate}
+          timeUpdated = {demand.updateDate}
+          companyName={demand?.universityDTO?.name}
+          companyLocation={demand?.universityDTO?.address}
           isDemandPost={true}
         />
       ))) : <Null text={message} />}

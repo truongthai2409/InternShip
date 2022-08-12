@@ -15,7 +15,7 @@ const Textarea = ({
   setValue,
   defaultValue,
   textAlign,
-  isUpdate = true,
+  isUpdate = false,
   hover,
   watch,
 }) => {
@@ -25,6 +25,10 @@ const Textarea = ({
       register(id);
     }
   }, [register]);
+
+  useEffect(() => {
+    console.log("test render")
+  }, [defaultValue])
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
@@ -43,7 +47,7 @@ const Textarea = ({
       setValue(id, content);
     }
   };
-  console.log("register::", register(id));
+  console.log("defaultValue:", defaultValue);
   return (
     <>
       <div
@@ -100,6 +104,7 @@ const Textarea = ({
             onChange={handleOnChange}
             placeholder={placeholder}
             defaultValue={defaultValue}
+            value={defaultValue}
           />
           {check ? null : (
             <p className="custom-textarea__error">

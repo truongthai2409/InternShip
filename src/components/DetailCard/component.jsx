@@ -222,7 +222,7 @@ const Detail = ({
               <InformationCompany
                 jobDetailById={jobDetailById}
                 rating={rating}
-              ></InformationCompany>
+              />
             </Box>
           </div>
         </div>
