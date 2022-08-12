@@ -24,6 +24,7 @@ export const ListJob = ({ listJob, message, isDisabled }) => {
             companyName={job?.hr?.company?.name}
             companyLocation={formatLocation(job?.locationjob)}
             isDisabled={isDisabled}
+            jobDetail={job}
           />
         ))
       ) : (

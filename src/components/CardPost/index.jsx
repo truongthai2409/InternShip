@@ -2,6 +2,7 @@ import "./styles.scss";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DoorFrontIcon from "@mui/icons-material/DoorFront";
+import CachedIcon from "@mui/icons-material/Cached";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
@@ -13,6 +14,7 @@ import Confirmation from "../Confirmation";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStatusJob } from "src/store/slices/main/home/job/jobSlice";
 import PostPartnerForm from "src/containers/Home/PostPartnerForm";
+import { ConfirmDate } from "./components";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
@@ -20,10 +22,7 @@ const CardPost = (props) => {
   const [title, setTitle] = useState("");
   const action = useRef("");
   const dispatch = useDispatch();
-  // console.log(props.timeUpdated);
-  // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
-
   const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
@@ -93,15 +92,27 @@ const CardPost = (props) => {
           setTitle("Chỉnh sửa công việc");
           break;
         case "close":
-          setTitle("Đóng việc");
+          setTitle(
+            props.isDisabled ? "Xác nhận lại ngày đăng tuyển" : "Đóng việc"
+          );
           setComponent(
-            <Confirmation
-              func={handleCloseJob}
-              setOpen={setOpen}
-              text="Bạn có chắc muốn đóng việc?"
-              nameBtnYes="Đóng việc"
-              nameBtnNo="Hủy"
-            />
+            props.isDisabled ? (
+              <ConfirmDate
+                jobDetail={jobDetail}
+                setOpen={setOpen}
+                text="Bạn có chắc muốn đóng việc?"
+                nameBtnYes="Đăng lại"
+                nameBtnNo="Hủy"
+              />
+            ) : (
+              <Confirmation
+                func={handleCloseJob}
+                setOpen={setOpen}
+                text="Bạn có chắc muốn đóng việc?"
+                nameBtnYes="Đóng việc"
+                nameBtnNo="Hủy"
+              />
+            )
           );
           break;
         default:
@@ -111,7 +122,6 @@ const CardPost = (props) => {
       setOpen(true);
     }
   };
-
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -127,7 +137,6 @@ const CardPost = (props) => {
           <p className="company__location">{props.companyLocation}</p>
         </div>
       </div>
-      {/* <p className="card-post__amount">Số lượng: {props.amount}</p> */}
       <p className="card-post__time">
         <b>Thời gian tuyển dụng:</b>{" "}
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
@@ -175,12 +184,11 @@ const CardPost = (props) => {
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
-          icon={<DoorFrontIcon></DoorFrontIcon>}
+          icon={props.isDisabled ? <CachedIcon /> : <DoorFrontIcon />}
           color="#111"
-          name={props.isDemandPost ? "Đóng" : "Đóng việc"}
+          name={props.isDisabled ? "Đăng lại" : "Đóng"}
           fontSize="13px"
           type="close"
-          disabled={props.isDisabled}
         />
       </div>
       <Modal

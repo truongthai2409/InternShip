@@ -20,11 +20,27 @@
     align-items: center;
     margin-right: 22px;
     color: black;
+
+    &.active {
+      color: $primary-color !important;
+
+      > span {
+        font-weight: 700 !important;
+      }
+
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
     &-post {
       display: flex;
       margin-left: 10px;
       font-size: $fs-16;
       align-items: center;
+    }
+
+    > svg {
+      font-size: 20px;
     }
   }
   &-icon {

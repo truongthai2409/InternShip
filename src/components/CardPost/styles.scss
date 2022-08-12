@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .card-post__container {
   width: 100%;
@@ -9,7 +9,7 @@
 
   .card-post__job-name {
     font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 700;
     margin-bottom: 16px;
   }
@@ -56,6 +56,37 @@
 
     .css-i4bv87-MuiSvgIcon-root {
       color: #000000;
+    }
+  }
+}
+
+.confirmation-date__wrapper {
+  .confirmation-date__form {
+    .custom-input .custom-input__textfield input {
+      font-family: "Public Sans", sans-serif;
+      border: 1.6px solid #666;
+      border-radius: 2px;
+      width: 100%;
+      padding: 20px 12px;
+      height: 45px;
+      color: #444444;
+      font-size: 13px;
+    }
+  }
+  .confirmation-date__btns {
+    display: flex;
+    .button {
+      padding: 14px 8px;
+
+      p {
+        margin: 0;
+      }
+    }
+    &--add-job {
+      margin-right: 6px;
+    }
+    &-cancel {
+      padding: 10px !important;
     }
   }
 }
