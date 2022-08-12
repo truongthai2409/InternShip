@@ -259,7 +259,7 @@ const PostJobForm = ({
               <div className="row-2-col">
                 <CustomInput
                   label="Ngày bắt đầu tuyển"
-                  id={"timeStart"}
+                  id="timeStart"
                   type="date"
                   placeholder=""
                   register={register}
@@ -268,7 +268,7 @@ const PostJobForm = ({
                 </CustomInput>
                 <CustomInput
                   label="Ngày hết hạn tuyển"
-                  id={"timeEnd"}
+                  id="timeEnd"
                   type="date"
                   placeholder=""
                   register={register}
@@ -364,7 +364,7 @@ const PostJobForm = ({
                   label="Quyền lợi của ứng viên"
                   id="benefits"
                   placeholder="Nhập quyền lợi của ứng viên"
-                  defaultValue={jobDetail?.otherInfo}
+                  defaultValue={isUpdate ? jobDetail?.otherInfo : ""}
                   register={register}
                   setValue={setValue}
                   check={false}
