@@ -14,22 +14,30 @@ const Logo = ({ id }) => {
     1: "Nhà tuyển dụng",
     4: "Cộng tác viên",
   };
-  const getMarkByUser = () => {
-    const dataGetMarkByUser = {
-      userName: profile.username,
-      page: {
-        no: 0,
-        limit: 10,
-      },
-    };
-    if (profile.role === "Role_Candidate") {
-      dispatch(getMarkByUser(dataGetMarkByUser));
-    }
-  };
-  // useEffect(() => {}, []);
 
-  const handleClickGoHome = () => {
-    if (profile.role !== undefined) {
+  // useEffect(() => {
+  //   const dataGetMarkByUser = {
+  //     userName: profile.username,
+  //     page: {
+  //       no: 0,
+  //       limit: 10,
+  //     },
+  //   };
+  //   if (profile.role === "Role_Candidate") {
+  //     dispatch(getMarkByUser(dataGetMarkByUser));
+  //   }
+  // }, []);
+
+  const handleClickGoHome = async () => {
+    if (profile.token !== undefined) {
+      const dataGetMarkByUser = {
+        userName: profile.username,
+        page: {
+          no: 0,
+          limit: 10,
+        },
+      };
+      dispatch(getMarkByUser(dataGetMarkByUser));
       const role = profile.role;
       switch (role) {
         case "Role_HR":
@@ -42,7 +50,6 @@ const Logo = ({ id }) => {
           break;
         default:
           navigate(`/candidate`, { replace: true });
-          getMarkByUser();
           break;
       }
     } else {

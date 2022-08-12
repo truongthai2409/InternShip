@@ -12,42 +12,39 @@ import LanguageIcon from "@mui/icons-material/Language";
 // import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import PropTypes from "prop-types";
 
-const CardVisit = ({ jobDetailById, logo }) => {
+const CardVisit = ({ jobDetailById, logo, candidate }) => {
+  // console.log(jobDetailById);
   return (
     <div className="scroll scroll__onTablet-hide ">
       <Card className="visit__card visit__card__onTablet">
         <CardContent>
           <img className="visit__card-logo" alt="visit__card-logo" src={logo} />
           <h2 className="visit__card-nameComapy">
-            {jobDetailById?.company?.name}
+            {jobDetailById?.hr?.company?.name}
           </h2>
-          <Typography
-            variant="body2"
-            sx={{ ml: 1, mt: 3, mb: 3 }}
-            className="visit__card-detail"
-          >
-            {jobDetailById?.company?.description}
-          </Typography>
 
           <div className="config__info">
             <a
-              href={`mailto:${jobDetailById?.company?.email}`}
+              href={`mailto:${jobDetailById?.hr?.company?.email}`}
               className="config__info"
             >
               <LocalPostOfficeIcon className="config__info-icon"></LocalPostOfficeIcon>
-              {jobDetailById?.company?.email}
+              {jobDetailById?.hr?.company?.email}
             </a>
           </div>
           <div className="config__info">
             <Link to="/detail_job" className="config__info">
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
-              {jobDetailById?.company?.phone}
+              {jobDetailById?.hr?.company?.phone}
             </Link>
           </div>
           <div className="config__info">
-            <a href={jobDetailById?.company?.website} className="config__info">
+            <a
+              href={jobDetailById?.hr?.company?.website}
+              className="config__info"
+            >
               <LanguageIcon className="config__info-icon"></LanguageIcon>
-              {jobDetailById?.company?.website}
+              {jobDetailById?.hr?.company?.website}
             </a>
             {/* <Link to={jobDetailById?.company?.website} className="config__info">
               <LanguageIcon className="config__info-icon"></LanguageIcon>
@@ -62,7 +59,9 @@ const CardVisit = ({ jobDetailById, logo }) => {
           </div> */}
         </CardContent>
         <CardActions className="config-button">
-          <Button name="Về Chúng Tôi"></Button>
+          <Link to="/information_company">
+            <Button name="Về Chúng Tôi"></Button>
+          </Link>
         </CardActions>
       </Card>
     </div>

@@ -8,7 +8,6 @@
     font-family: $f-family;
     font-size: $fs-14;
     font-weight: $fw-bold-1;
-    // color: rgb(145, 158, 171);
     color: $color-black-0;
   }
 
@@ -33,7 +32,6 @@
 
       &:focus {
         outline: $primary-color;
-        // border: 1.6px solid $color-black-0;
         box-shadow: $primary-color-1 0px 3px 8px;
         &::placeholder {
           color: $primary-color;
@@ -65,15 +63,12 @@
 
 .custom-input__textfield-disabled {
   margin-top: 7px;
-  // height: fit-content;
   input {
-    // border: 2px solid rgb(145, 158, 171);
     background-color: transparent;
     font-family: $f-family;
     border: none;
     border-radius: 5px;
     width: 100%;
-    // padding: 15px 12px;
     font-size: $fs-16;
     color: #000;
   }

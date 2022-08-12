@@ -19,6 +19,11 @@ const HRInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const errorMessage = useSelector(errorSelector);
+  const { companyList } = useSelector((state) => state.company);
+
+  useEffect(() => {
+    dispatch(getCompanyList([1, 20]));
+  }, [dispatch]);
 
   const {
     register,
@@ -27,16 +32,7 @@ const HRInfo = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const { companyList } = useSelector((state) => state.company);
 
-  useEffect(() => {
-    dispatch(getCompanyList([1,20]));
-  }, [dispatch]);
-
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
   const onSubmit = (data) => {
     const hrData = {
       hr: JSON.stringify({
@@ -57,8 +53,12 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar[0] || null,
     };
-    console.log(hrData)
     dispatch(registerHr({ hrData, navigate }));
+  };
+
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
   };
 
   return (
@@ -67,6 +67,7 @@ const HRInfo = () => {
         (<span className="field-requirment"> * </span>)Trường bắt buộc
       </p>
       <form className="reg-hr__form" autoComplete="off">
+        <div className="reg-hr__form--name">
         <CustomInput
           label="Tài khoản"
           id="username"
@@ -87,21 +88,22 @@ const HRInfo = () => {
           {errors.email?.message}
           {errorMessage?.Email}
         </CustomInput>
+        </div>
         <CustomInput
           label="Mật khẩu"
           id="password"
           type="password"
+          visibility={true}
           placeholder="Mật khẩu"
           register={register}
         >
           {errors.password?.message}
-          {errorMessage?.Password}
         </CustomInput>
-
         <CustomInput
           label="Xác nhận mật khẩu"
           id="confirmPassword"
           type="password"
+          visibility={true}
           placeholder="Xác nhận mật khẩu"
           register={register}
         >

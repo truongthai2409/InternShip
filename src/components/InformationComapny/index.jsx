@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Button from "../Button";
 import WorkIcon from "@mui/icons-material/Work";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
@@ -12,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
+import "./styles.scss";
 // const formatSalary = (salary = "") => {
 //   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 // };
@@ -24,25 +24,29 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
   const handleAddJob = async (e) => {
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));
-    if (!res.payload.cv) {
-      toast.error("Bạn chưa có CV, vui lòng cập nhật");
-    } else {
-      const applyData = {
-        apply: JSON.stringify({
-          jobApp: {
-            id: jobDetail.id,
-          },
-          candidate: {
-            id: res.payload.id,
-          },
-          referenceLetter: `Đơn ứng tuyển ${profile.username}`,
-        }),
-        fileCV: res.cv,
-      };
-      const resApply = await dispatch(addApply(applyData));
-      if (resApply.type === "apply_candidate/addApply/fulfilled") {
-        toast.success("Đã nộp CV thành công");
+    if (profile.token) {
+      if (!res.payload.cv) {
+        toast.error("Bạn chưa có CV, vui lòng cập nhật");
+      } else {
+        const applyData = {
+          apply: JSON.stringify({
+            jobApp: {
+              id: jobDetail.id,
+            },
+            candidate: {
+              id: res.payload.id,
+            },
+            referenceLetter: `Đơn ứng tuyển ${profile.username}`,
+          }),
+          fileCV: res.cv,
+        };
+        const resApply = await dispatch(addApply(applyData));
+        if (resApply.type === "apply_candidate/addApply/fulfilled") {
+          toast.success("Đã nộp CV thành công");
+        }
       }
+    } else {
+      toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
   return (
@@ -55,7 +59,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                Mô tả công việc:
+                *Mô tả công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -67,13 +71,30 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 ></div>
               </Typography>
             </Typography>
+            <Typography variant="span">
+              <Typography
+                variant="span"
+                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+              >
+                *Yêu cầu công việc:
+              </Typography>
+              <Typography
+                variant="body2"
+                gutterBottom
+                sx={{ fontSize: 16, fontWeight: "400" }}
+              >
+                <div
+                  dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+                ></div>
+              </Typography>
+            </Typography>
             <div className="detail__card-3-item">
               <Typography variant="span">
                 <Typography
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  Yêu cầu công việc:
+                  *Quyền lợi:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -81,7 +102,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   sx={{ fontSize: 16, fontWeight: "400" }}
                 >
                   <div
-                    dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
+                    dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
                   ></div>
                 </Typography>
               </Typography>
@@ -92,7 +113,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  Thời hạn ứng tuyển:
+                  *Thời hạn ứng tuyển:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -184,7 +205,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: jobDetailById.description,
+                    __html: jobDetailById.desciption,
                   }}
                 ></div>
               </Typography>
@@ -253,7 +274,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   transform: "translate(5px,5px)",
                 }}
               >
-                {jobDetailById.jobType}
+                {jobDetailById.jobType?.name}
               </Typography>
             </div>
             <div className="detail__card-4-item">
@@ -271,7 +292,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   textOverflow: "ellipsis",
                 }}
               >
-                {`${jobDetailById.locationjob}`}
+                {`${jobDetailById.locationjob?.address} ${jobDetailById.locationjob?.district?.name}`}
               </Typography>
             </div>
           </div>
@@ -287,12 +308,12 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 value={rating}
               /> */}
             </Typography>
-            <Button
+            {/* <Button
               bwidth="115px"
               bheight="50px"
               name="Ứng tuyển"
               onClick={handleAddJob}
-            ></Button>
+            ></Button> */}
           </div>
         </>
       )}

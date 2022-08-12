@@ -1,4 +1,4 @@
-@use '../../../assets/styles/index.scss' as *;
+@use "../../../assets/styles/index.scss" as *;
 
 .form__container {
   margin: auto;
@@ -17,22 +17,34 @@
     margin-bottom: 200px;
 
     .custom-input .custom-input__textfield input {
-      font-family: 'Public Sans', sans-serif;
+      font-family: "Public Sans", sans-serif;
       border: 1.6px solid #666;
       border-radius: 2px;
       width: 100%;
       padding: 20px 12px;
       height: 45px;
       color: #444444;
+      font-size: 13px;
 
       &:hover {
         border: 1.6px solid $primary-color;
         box-shadow: $primary-color-1 0 3px 8px;
       }
     }
+    .custom-input .custom-input__textfield-disabled input {
+      font-family: "Public Sans", sans-serif;
+      border: 1.6px solid #666;
+      border-radius: 2px;
+      width: 100%;
+      padding: 20px 12px;
+      height: 45px;
+      color: #444444;
+      font-size: 13px;
+      opacity: 0.6;
+    }
 
     .custom-input .custom-input__textfield textarea {
-      font-family: 'Public Sans', sans-serif;
+      font-family: "Public Sans", sans-serif;
       border: 1.6px solid #666 !important;
       border-radius: 2px;
       width: 100%;
@@ -53,15 +65,15 @@
     .hr-post__heading {
       display: flex;
 
-      >svg {
+      > svg {
         margin: 0 !important;
       }
 
-      >.hr-post__title {
+      > .hr-post__title {
         border: none !important;
       }
     }
- 
+
     .row-3-col {
       display: flex;
       width: 100%;
@@ -123,7 +135,7 @@
       margin-bottom: 35px;
 
       textarea {
-        font-family: 'Public Sans', sans-serif;
+        font-family: "Public Sans", sans-serif;
         border: 1.6px solid #666;
         border-radius: 2px;
         height: 150px;
@@ -178,7 +190,7 @@ input#title {
 }
 
 label {
-  font-family: 'Public Sans', sans-serif;
+  font-family: "Public Sans", sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #29303b;

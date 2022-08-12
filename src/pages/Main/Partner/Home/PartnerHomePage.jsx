@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
 import { getDemandByName, getDemandList } from "src/store/slices/main/home/demand/demandSlice";
-import Pagination from "@mui/material/Pagination";
+import PaginationCustom from 'src/components/'
 
 const limit = 10;
 

@@ -14,14 +14,58 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import PlaylistAddCheckOutlinedIcon from "@mui/icons-material/PlaylistAddCheckOutlined";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
+import { styled, alpha } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 const HeaderWithHR = (props) => {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
-  const nameUser = JSON.parse(localStorage.getItem("userPresent"))?.username;
-
   useEffect(() => {
     const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
@@ -119,14 +163,31 @@ const HeaderWithHR = (props) => {
         </div>
       )}
       {props.search ? (
-        <SearchResultHome
-          bwidth="630px"
-          bheight="50px"
-          bwidthInput="fit-content"
-          bheightInput="fit-content"
-          mb="0"
-          candidate_infomation={true}
-        />
+        <div>
+          <div style={{}} className="responsive__header-search">
+            <SearchResultHome
+              bwidth="630px"
+              bheight="50px"
+              bwidthInput="fit-content"
+              bheightInput="fit-content"
+              mb="0"
+              candidate_infomation={true}
+            />
+          </div>
+          <div className="search__icon">
+            <Toolbar>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Tìm kiếm…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Toolbar>
+          </div>
+        </div>
       ) : null}
       <div className="header__hr-icon">
         {/* <div className="header__hr-icon-config">

@@ -36,7 +36,7 @@ export default function SelectCustom({
   const handleChangeLocation = id => {
     dispatch(action(id))
   }
-
+  
   return (
     <>
       <div className="select-form">

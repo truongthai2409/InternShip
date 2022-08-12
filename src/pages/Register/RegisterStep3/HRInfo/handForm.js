@@ -50,18 +50,26 @@ export const schema = yup
       ),
     avatar: yup
       .mixed()
+      // .nullable()
       .test(
         "fileSize",
         " * Ảnh bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
-          return value && value[0].size <= 512 * 1024;
+          if (value[0]?.size) {
+            return value[0]?.size <= 512 * 1024;
+          } else {
+            return true;
+          }
         }
       )
       .test("type", " * Chỉ hỗ trợ jpeg, png.", (value) => {
-        return (
-          value &&
-          (value[0].type === "image/jpeg" || value[0].type === "image/png")
-        );
+        if (value[0]?.type) {
+          return (
+            value[0]?.type === "image/jpeg" || value[0]?.type === "image/png"
+          );
+        } else {
+          return true;
+        }
       }),
     gender: yup.string().required(" * Bạn phải chọn giới tính."),
     company: yup.string().required(" * Bạn phải chọn chuyên ngành."),

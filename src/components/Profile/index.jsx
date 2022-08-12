@@ -20,7 +20,6 @@ import {
   role,
   UniversityInfo,
 } from "./components";
-// import { TabTitle } from "src/utils/GeneralFunctions";
 
 const Profile = () => {
   const dispatch = useDispatch();

@@ -11,7 +11,7 @@
 
   .detail__card-1 {
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: space-between;
     // padding: 0 20px;
     // padding-right: 39px;
@@ -57,7 +57,6 @@
 
     &-item {
       font-size: 16px;
-      margin-bottom: 24px;
 
       &-name {
         font-family: "Open Sans";
@@ -73,6 +72,8 @@
         font-size: 16px;
       }
     }
+
+    
   }
 
   .line::after {
@@ -117,6 +118,19 @@
       }
     }
   }
+
+  .css-1urujxi-MuiTypography-root {
+    // padding-left: 10px !important;
+
+    ol,ul {
+      padding-left: 40px;
+    }
+  }
+
+  .css-1d23cxy-MuiTypography-root {
+    // padding-left: 10px !important;
+  }
+
 }
 
 .detail__card::-webkit-scrollbar {
@@ -160,4 +174,5 @@
       justify-content: start !important;
     }
   }
+
 }

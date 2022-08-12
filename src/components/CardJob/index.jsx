@@ -20,6 +20,7 @@ import {
   getApplyListByIdCandidate,
 } from "src/store/slices/main/candidate/apply/applySlice";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+import { IconButton, Tooltip } from "@mui/material";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE;
@@ -152,14 +153,11 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
                 {moment(jobCare.jobCare?.timeStartStr).format("DD/MM/YYYY")} -{" "}
                 {moment(jobCare.jobCare?.timeEndStr).format("DD/MM/YYYY")}
               </span>
-              <Button
-                color="error"
-                onClick={handleDeleteJobCare}
-                sx={{ fontSize: 12 }}
-                startIcon={<DeleteIcon />}
-              >
-                Xóa
-              </Button>
+              <Tooltip title="Xóa" onClick={handleDeleteJobCare}>
+                <IconButton sx={{ fontSize: 12 }}>
+                  <DeleteIcon color="" />
+                </IconButton>
+              </Tooltip>
             </div>
 
             <div className="card-job__send-cv" onClick={handleAddJob}>
@@ -217,14 +215,11 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
                 {moment(jobApplied.jobApp?.timeStartStr).format("DD/MM/YYYY")} -{" "}
                 {moment(jobApplied.jobApp?.timeEndStr).format("DD/MM/YYYY")}
               </span>
-              <Button
-                color="error"
-                onClick={handleDeleteJobApply}
-                sx={{ fontSize: 12 }}
-                startIcon={<DeleteIcon />}
-              >
-                Xóa
-              </Button>
+              <Tooltip title="Xóa" onClick={handleDeleteJobApply}>
+                <IconButton sx={{ fontSize: 12 }}>
+                  <DeleteIcon color="" />
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
         </>

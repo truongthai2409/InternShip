@@ -9,7 +9,6 @@ const userSlice = createSlice({
     userList: [],
     profile: {},
     user: {},
-    forgotPassword: "",
     idRole: null,
     notification: {},
     page: 0,
@@ -30,8 +29,15 @@ const userSlice = createSlice({
       state.profile = payload;
       toast.success("Chỉnh sửa thành công");
     });
-    builder.addCase(userForgotPassword.fulfilled, (state, { payload }) => {
-      state.forgotPassword = payload.data.message;
+    builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
+      // console.log("payload:", payload);
+      if (payload.httpCode === 200) {
+        toast.success(
+          "Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !"
+        );
+      } else {
+        toast.error("Không tìm thấy địa chỉ email !");
+      }
     });
   },
 });
@@ -116,16 +122,16 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
 });
 
 // function use for feature forgot password
-export const userForgotPassword = createAsyncThunk(
-  "user/userForgotPassword",
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
   async (emailUser) => {
     return await axios
       .get(`${baseURL}/api/user/forgotPassword/${emailUser}`)
       .then((response) => {
-        return response;
+        return response.data;
       })
       .catch((error) => {
-        return error;
+        return error.response.data;
       });
   }
 );

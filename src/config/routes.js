@@ -86,6 +86,10 @@ export const mainRouter = [
     path: "/detail_job",
     Component: DetailHome,
   },
+  {
+    path: "/information_company",
+    Component: CandidateInformationCompany,
+  },
 ];
 
 // hr router

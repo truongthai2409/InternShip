@@ -13,7 +13,7 @@ import {
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
-
+import Tooltip from "@mui/material/Tooltip";
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE;
 
@@ -31,10 +31,11 @@ const ButtonMark = (props) => {
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
     profile?.username && dispatch(getCandidateByUserName(profile.username));
-  }, [dispatch, profile.username]);
+  }, [dispatch]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
+
     const dataGetMarkByUser = {
       userName: profile.username,
       page: {
@@ -64,7 +65,7 @@ const ButtonMark = (props) => {
           idJob: Number(props.jobId),
           page: {
             no: 0,
-            limit: 2,
+            limit: 4,
           },
         };
         const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
@@ -86,33 +87,35 @@ const ButtonMark = (props) => {
     }
   };
   return (
-    <IconButton
-      style={{
-        border: props.border ? props.border : "1px solid #F1F1F1",
-        borderRadius: "4px",
-        width: `${props.width}`,
-        height: `${props.height}`,
-      }}
-      aria-label="mark"
-      className="buttonMark__wrapper"
-      onClick={handleClickMarkJob}
-    >
-      {pathUrl === "/candidate" ? (
-        props.isMark === false && mark === false ? (
-          <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+    <Tooltip title="Lưu công việc">
+      <IconButton
+        style={{
+          border: props.border ? props.border : "1px solid #F1F1F1",
+          borderRadius: "4px",
+          width: `${props.width}`,
+          height: `${props.height}`,
+        }}
+        aria-label="mark"
+        className="buttonMark__wrapper"
+        onClick={handleClickMarkJob}
+      >
+        {pathUrl === "/candidate" ? (
+          props.isMark === false && mark === false ? (
+            <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+          ) : (
+            <BookmarkIcon
+              className="buttonMark__isChecking"
+              style={{ fontSize: `${props.fontSize}` }}
+            />
+          )
         ) : (
-          <BookmarkIcon
-            className="buttonMark__isChecking"
+          <BookmarkBorderIcon
             style={{ fontSize: `${props.fontSize}` }}
+            onClick={handleLogin}
           />
-        )
-      ) : (
-        <BookmarkBorderIcon
-          style={{ fontSize: `${props.fontSize}` }}
-          onClick={handleLogin}
-        />
-      )}
-    </IconButton>
+        )}
+      </IconButton>
+    </Tooltip>
   );
 };
 

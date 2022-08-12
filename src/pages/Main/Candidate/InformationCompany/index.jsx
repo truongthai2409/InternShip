@@ -59,6 +59,7 @@ const CandidateInformationCompany = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const { appreciateList } = useSelector((state) => state.appreciate);
+  const { profile } = useSelector((state) => state.authentication);
   const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
@@ -84,8 +85,15 @@ const CandidateInformationCompany = () => {
   const rating = (res / data?.length).toFixed(2);
 
   const handleOpen = () => {
-    setOpen(true);
-    reset();
+    if (profile.token) {
+      setOpen(true);
+      reset();
+    } else {
+      toast.error("Bạn cần đăng nhập để đánh giá công ty", {
+        // position: "top-center",
+        // autoClose: 3000,
+      });
+    }
   };
 
   const onSubmit = async (data) => {
@@ -152,16 +160,16 @@ const CandidateInformationCompany = () => {
       />
       <div className="appreciate intro__company-title">
         <h5 style={{ marginTop: "0px" }} className="">
-          Đánh giá về công ty*{" "}
+          Đánh giá về công ty{" "}
         </h5>
         <Modal
-          modalTitle="Viết đánh giá về công ty"
+          modalTitle="Viết đánh giá"
           open={open}
           setOpen={setOpen}
           children={
             <div>
               <CustomInput
-                label="Nhập tiêu đề hoặc để trống"
+                label="Nhập tiêu đề"
                 id="title"
                 type="text"
                 placeholder="Vd. Rất tuyệt"
@@ -171,7 +179,7 @@ const CandidateInformationCompany = () => {
                 height="45px"
               />
               <Textarea
-                label="Viết đánh giá về công ty"
+                label="Viết đánh giá "
                 id="comment"
                 placeholder="Nhập vào đây"
                 register={register}
