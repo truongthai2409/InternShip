@@ -2,13 +2,19 @@ import Button from "../Button";
 import ButtonOutline from "../ButtonOutline";
 import "./styles.scss";
 
-const Confirmation = ({ text, dispatch, nameBtnYes, nameBtnNo, setOpen, func, image }) => {
+const Confirmation = ({
+  text,
+  nameBtnYes,
+  nameBtnNo,
+  setOpen,
+  func,
+  image,
+}) => {
   const handleClose = () => setOpen(false);
-
   return (
     <div className="confirmation__wrapper">
       <img src={image} alt="" className="confirmation__img" />
-      <p>{text}</p>
+      <h1 className="confirmation__title">{text}</h1>
       <div className="confirmation__btns">
         <Button
           onClick={func}

@@ -14,7 +14,6 @@ import Confirmation from "../Confirmation";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStatusJob } from "src/store/slices/main/home/job/jobSlice";
 import PostPartnerForm from "src/containers/Home/PostPartnerForm";
-import { ConfirmDate } from "./components";
 
 const CardPost = (props) => {
   const [open, setOpen] = useState(false);
@@ -82,30 +81,31 @@ const CardPost = (props) => {
         case "update":
           setComponent(
             <PostJobForm
-              isUpdate={true}
+              formStatus={"update"}
               jobDetail={jobDetail[0]}
               idJob={props.idJob}
               disabled={props.isDisabled}
               setOpen={setOpen}
             />
           );
-          setTitle("Chỉnh sửa công việc");
+          setTitle("Chỉnh sửa thông tin đăng tuyển");
           break;
         case "close":
           setTitle(
-            props.isDisabled ? "Xác nhận lại ngày đăng tuyển" : "Đóng việc"
+            props.isDisabled ? "Chỉnh sửa thông tin đăng tuyển" : "Đóng việc"
           );
           setComponent(
             props.isDisabled ? (
-              <ConfirmDate
-                jobDetail={jobDetail}
+              <PostJobForm
+                formStatus={"repost"}
+                jobDetail={jobDetail[0]}
+                idJob={props.idJob}
+                disabled={false}
                 setOpen={setOpen}
-                text="Bạn có chắc muốn đóng việc?"
-                nameBtnYes="Đăng lại"
-                nameBtnNo="Hủy"
               />
             ) : (
               <Confirmation
+                image="https://cdn-icons-png.flaticon.com/512/1162/1162410.png"
                 func={handleCloseJob}
                 setOpen={setOpen}
                 text="Bạn có chắc muốn đóng việc?"
