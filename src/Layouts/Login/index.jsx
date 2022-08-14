@@ -58,7 +58,7 @@ const LoginLayout = () => {
                 variant="h6"
                 component="h2"
               >
-                Xác nhận Email
+                Thông báo
               </Typography>
               <Typography id="transition-modal-description" sx={{ mt: 2 }}>
                 Bạn đã đăng ký tài khoản thành công, vui lòng chờ xác nhận !
@@ -69,7 +69,7 @@ const LoginLayout = () => {
                 style={{ float: "right" }}
                 onClick={handleClose}
               >
-                Xác nhận
+                Đồng ý
               </Button>
             </Box>
           </Fade>
