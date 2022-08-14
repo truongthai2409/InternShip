@@ -12,7 +12,11 @@ const registerSlice = createSlice({
     user: {},
     error: {},
   },
-  reducers: {},
+  reducers: {
+    updateStatusRegister: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkUser.fulfilled, (state, action) => {
@@ -55,7 +59,7 @@ const registerSlice = createSlice({
       });
   },
 });
-
+export const { updateStatusRegister } = registerSlice.actions;
 export default registerSlice;
 
 export const checkUser = createAsyncThunk(
