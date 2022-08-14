@@ -37,9 +37,8 @@ const HRInfo = () => {
     dispatch(getCompanyList([1, 20]));
     if (status === "success") {
       navigate("/login");
-      dispatch(updateStatusRegister("idle"));
     }
-  }, [status]);
+  }, []);
 
   const onSubmit = (data) => {
     const hrData = {
