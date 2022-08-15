@@ -18,7 +18,7 @@ import {
 import PaginationCustom from "src/components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
 
-const limit = 10;
+const limit = 5;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
@@ -37,6 +37,7 @@ const PartnerHomePage = (props) => {
   const navigate = useNavigate();
   const { keyword } = useParams();
   console.log(keyword);
+  console.log(keyword);
 
   // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
@@ -53,16 +54,14 @@ const PartnerHomePage = (props) => {
   }, [currentPage]);
 
   useEffect(() => {
-    console.log(keyword);
     const dataSearch = {
-      name: keyword,
+      name: keyword || "",
       no: currentSearchPage - 1,
       limit: 5,
     };
     dispatch(getDemandByName(dataSearch));
-  }, [currentSearchPage]);
-
-  console.log(currentSearchPage, currentPage);
+  }, [keyword, currentSearchPage]);
+  
   const handleSearch = (value) => {
     value = value.replace("%20", "+")
     const dataSearch = {
