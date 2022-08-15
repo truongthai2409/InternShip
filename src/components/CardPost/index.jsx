@@ -80,13 +80,17 @@ const CardPost = (props) => {
       switch (action.current) {
         case "update":
           setComponent(
-            <PostJobForm
-              formStatus={"update"}
-              jobDetail={jobDetail[0]}
-              idJob={props.idJob}
-              disabled={props.isDisabled}
-              setOpen={setOpen}
-            />
+            props.isDisabled ? (
+              ""
+            ) : (
+              <PostJobForm
+                formStatus={"update"}
+                jobDetail={jobDetail[0]}
+                idJob={props.idJob}
+                disabled={props.isDisabled}
+                setOpen={setOpen}
+              />
+            )
           );
           setTitle("Chỉnh sửa thông tin đăng tuyển");
           break;
@@ -110,7 +114,7 @@ const CardPost = (props) => {
                 setOpen={setOpen}
                 text="Bạn có chắc muốn đóng việc?"
                 nameBtnYes="Đóng việc"
-                nameBtnNo="Hủy"
+                // nameBtnNo="Hủy"
               />
             )
           );
@@ -125,7 +129,19 @@ const CardPost = (props) => {
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
-      <h3 className="card-post__job-name">{props.jobName}</h3>
+      <h3 className="card-post__job-name">
+        {props.jobName}
+        {props.timeUpdated ? (
+          <p className="card-post__created">
+            <b>Ngày cập nhật:</b>{" "}
+            {moment(props.timeUpdated).format("DD/MM/YYYY")}
+          </p>
+        ) : (
+          <p className="card-post__created">
+            <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
+          </p>
+        )}
+      </h3>
       <div className="card-post__company-info-detail">
         <img
           className="company-info-detail__img"
@@ -142,15 +158,6 @@ const CardPost = (props) => {
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
         {moment(props.timeEnd).format("DD/MM/YYYY")}
       </p>
-      {props.timeUpdated ? (
-        <p className="card-post__created">
-          <b>Ngày cập nhật:</b> {moment(props.timeUpdated).format("DD/MM/YYYY")}
-        </p>
-      ) : (
-        <p className="card-post__created">
-          <b>Ngày đăng:</b> {moment(props.timeCreated).format("DD/MM/YYYY")}
-        </p>
-      )}
 
       <div className="card-post__action">
         <ButtonAction
@@ -159,7 +166,9 @@ const CardPost = (props) => {
           height="50px"
           amountApplies={props.amount}
           width="33.33%"
-          border="0.5px solid #DEDEDE"
+          borderTop="0.5px solid #DEDEDE"
+          borderRight="0.5px solid #DEDEDE"
+          borderBottom="0.5px solid #DEDEDE"
           icon={<PersonOutlineIcon></PersonOutlineIcon>}
           color="#111"
           name={props.isDemandPost ? "Ứng tuyển" : "Ứng viên"}
@@ -171,19 +180,23 @@ const CardPost = (props) => {
           onMouseEnter={update}
           height="50px"
           width="33.33%"
-          border="0.5px solid #DEDEDE"
+          borderTop="0.5px solid #DEDEDE"
+          borderRight="0.5px solid #DEDEDE"
+          borderBottom="0.5px solid #DEDEDE"
           icon={<ModeEditOutlineIcon></ModeEditOutlineIcon>}
           color="#111"
           name="Chỉnh sửa"
           fontSize="13px"
           type="update"
+          disabled={props.isDisabled && true}
         />
         <ButtonAction
           onClick={handleOnClick}
           onMouseEnter={close}
           height="50px"
           width="33.33%"
-          border="0.5px solid #DEDEDE"
+          borderTop="0.5px solid #DEDEDE"
+          borderBottom="0.5px solid #DEDEDE"
           icon={props.isDisabled ? <CachedIcon /> : <DoorFrontIcon />}
           color="#111"
           name={props.isDisabled ? "Đăng lại" : "Đóng"}
@@ -196,6 +209,7 @@ const CardPost = (props) => {
         name="list-candidate"
         open={open}
         setOpen={setOpen}
+        iconClose={true}
       >
         {component}
       </Modal>
