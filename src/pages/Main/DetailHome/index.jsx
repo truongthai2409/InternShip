@@ -5,7 +5,7 @@ import CardVisit from "../../../components/CardVisit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@mui/material";
 import "./styles.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +17,9 @@ const DetailHome = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { keyword } = useParams()
+  console.log(keyword);
+
   const { jobDetailById, idJobActive } = useSelector((state) => state.job);
 
   useEffect(() => {
@@ -27,8 +30,8 @@ const DetailHome = (props) => {
       limit: 10,
     };
     dispatch(getJobByNameAndLocation(dataSearch));
-    dispatch(getJobById(idJobActive));
-  }, [dispatch]);
+    dispatch(getJobById(keyword));
+  }, [dispatch, keyword]);
   const handleBackClick = () => {
     navigate(-1);
   };

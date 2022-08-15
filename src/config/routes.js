@@ -135,7 +135,7 @@ export const candidateRouter = [
     Component: CandidateSaveProfile,
   },
   {
-    path: "/candidate/information_company",
+    path: "/candidate/information_company/:keyword",
     Component: CandidateInformationCompany,
   },
   {
@@ -151,7 +151,7 @@ export const candidateRouter = [
     Component: CandidateViewList,
   },
   {
-    path: "/candidate/detail_job",
+    path: "/candidate/detail_job/:keyword",
     Component: DetailHome,
   },
 ];

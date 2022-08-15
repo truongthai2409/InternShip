@@ -27,10 +27,11 @@ function BaseInformationCompany({
   // const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
   const idCompany = jobDetail?.hr?.company.id;
+  console.log(idCompany, jobDetail);
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
-  }, []);
+  }, [idCompany]);
   return (
     <div className="">
       {jobDetail && (
@@ -205,7 +206,7 @@ function BaseInformationCompany({
           </div>
           {pathUrl !== "/information_company" ? (
             <div className="button-card">
-              <Link to="/candidate/information_company">
+              <Link to={`/candidate/information_company/${jobDetail?.id}`}>
                 <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
               </Link>
             </div>
@@ -328,26 +329,6 @@ function BaseInformationCompany({
           </div>
           <div className="job-applying-container">
             <h5 className="intro__company-title">Việc làm đang tuyển</h5>
-            {/* <Grid
-              container
-              spacing={3}
-              sx={{
-                paddingLeft: `${pl}px`,
-                paddingRight: `${pr}px`,
-                marginLeft: `${ml}px`,
-              }}
-            >
-              {jobListCompany.map((job, index) => {
-                <Grid key={job.id} item lg="auto" md="auto" xs={6}>
-                  <JobCandidate job={job} />
-                </Grid>;
-              })}
-              {jobListCompany?.map((job) => (
-                <Grid item lg="auto" md="auto" sm="auto" xs="auto">
-                  <JobCandidate job={job} key={job.id} idJob={job.id} />
-                </Grid>
-              ))}
-            </Grid> */}
           </div>
           {pathUrl !== "/information_company" ? (
             <div className="button-card">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import WorkIcon from "@mui/icons-material/Work";
@@ -9,13 +9,18 @@ import "./styles.scss";
 import moment from "moment";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
+import { getJobById, updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
 const JobCandidate = ({ job, idJob }) => {
   const dispatch = useDispatch();
+  const { jobDetailById } = useSelector(state => state.job);
   const handleClick = async () => {
     dispatch(updateIdJobActive(idJob));
   };
+
+  useEffect(() => {
+    dispatch(getJobById(idJob));
+  }, [idJob])
   return (
     <div
       style={{
@@ -23,7 +28,7 @@ const JobCandidate = ({ job, idJob }) => {
       }}
     >
       <Link
-        to={`/detail_job`}
+        to={`/candidate/detail_job/${idJob}`}
         onClick={handleClick}
         className="link__job-detail"
       >
