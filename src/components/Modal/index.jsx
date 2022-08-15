@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  Slide,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-} from "@mui/material";
+import { Slide, Dialog, DialogTitle, DialogContent } from "@mui/material";
 
 import "./styles.scss";
 
@@ -12,7 +7,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const Modal = ({ modalTitle, open, setOpen, name, children }) => {
+const Modal = ({
+  modalTitle,
+  open,
+  setOpen,
+  name,
+  children,
+  iconClose = false,
+}) => {
   const handleClose = () => {
     setOpen(false);
   };
@@ -25,7 +27,14 @@ const Modal = ({ modalTitle, open, setOpen, name, children }) => {
         TransitionComponent={Transition}
         className="dialog"
       >
-        <DialogTitle className={`dialog-title__${name}`}>
+        <DialogTitle className={`dialog-title dialog-title__${name}`}>
+          {iconClose && (
+            <img
+              onClick={handleClose}
+              className="dialog__icon"
+              src="https://img.icons8.com/fluency/48/000000/close-window.png"
+            />
+          )}
           {modalTitle}
         </DialogTitle>
         <DialogContent>{children}</DialogContent>

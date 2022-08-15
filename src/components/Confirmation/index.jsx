@@ -23,16 +23,18 @@ const Confirmation = ({
           fz="14px"
           outline="1.5px solid #DEDEDE"
         />
-        <ButtonOutline
-          className="confirmation__btn-cancel"
-          onClick={handleClose}
-          name={nameBtnNo}
-          bg="#F3F4F6"
-          color="#111111"
-          radius="4px"
-          fz="14px"
-          outline="1.5px solid #DEDEDE"
-        />
+        {nameBtnNo && (
+          <ButtonOutline
+            className="confirmation__btn-cancel"
+            onClick={handleClose}
+            name={nameBtnNo}
+            bg="#F3F4F6"
+            color="#111111"
+            radius="4px"
+            fz="14px"
+            outline="1.5px solid #DEDEDE"
+          />
+        )}
       </div>
     </div>
   );
