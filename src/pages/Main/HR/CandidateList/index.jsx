@@ -29,13 +29,14 @@ const CandidateList = ({ idJob }) => {
         })
       ) : (
         <Null
+          image="https://www.blumira.com/wp-content/uploads/2020/11/search.png"
           text="Chưa có ứng viên nào đang ứng tuyển."
           height="100px"
           fs="10px"
           fw="400"
         />
       )}
-      <PaginationCustome 
+      <PaginationCustome
         page={page}
         totalPages={totalPages}
         hanldeOnChange={hanldeOnChange}

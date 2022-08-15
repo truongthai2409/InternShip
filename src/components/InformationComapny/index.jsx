@@ -59,7 +59,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                *Mô tả công việc:
+                Mô tả công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -76,7 +76,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                *Yêu cầu công việc:
+                Yêu cầu công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -94,7 +94,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  *Quyền lợi:
+                  Quyền lợi:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -113,7 +113,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  *Thời hạn ứng tuyển:
+                  Thời hạn ứng tuyển:
                 </Typography>
                 <Typography
                   variant="body2"

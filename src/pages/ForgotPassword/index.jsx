@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import "./styles.scss";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
@@ -7,21 +7,31 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { schema } from "./validateForm.js";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
-import { forgotPassword } from "src/store/slices/Admin/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  forgotPassword,
+  updateStatusForgotPassword,
+} from "src/store/slices/Admin/user/userSlice";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { statusForgotPassword } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  useEffect(() => {
+    if (statusForgotPassword) {
+      navigate("/login");
+      dispatch(updateStatusForgotPassword(false));
+    }
+  }, [statusForgotPassword]);
+
   const onSubmit = (data) => {
     dispatch(forgotPassword(data.email));
-    navigate(-1);
   };
 
   return (
@@ -35,7 +45,7 @@ const ForgotPassword = () => {
           <p>Xin vui lòng nhập địa chỉ email để lấy lại mật khẩu.</p>
           <form action="">
             <CustomInput
-              label="Nhập email"
+              label="Nhập Email"
               id="email"
               name="email"
               type="email"
@@ -52,7 +62,7 @@ const ForgotPassword = () => {
               Lấy lại mật khẩu
             </button>
           </form>
-          <Link to="/" className="forgotpassword__modal-link">
+          <Link to="/login" className="forgotpassword__modal-link">
             Quay về trang đăng nhập
           </Link>
         </div>

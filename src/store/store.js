@@ -15,6 +15,7 @@ import infoCandidateSlice from "./slices/main/candidate/info/infoCandidateSlice"
 import appSlice from "src/app.slice";
 import demandSlice from "./slices/main/home/demand/demandSlice";
 import appreciateSlice from "./slices/main/candidate/appreciate/appreciateSlice";
+import globalSlices from "./slices/main/home/global/globalSlices"
 
 const store = configureStore({
   reducer: {
@@ -34,6 +35,7 @@ const store = configureStore({
     app: appSlice.reducer,
     demand: demandSlice.reducer,
     appreciate: appreciateSlice.reducer,
+    globalSlices: globalSlices.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

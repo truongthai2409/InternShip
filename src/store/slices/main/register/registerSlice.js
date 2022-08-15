@@ -12,7 +12,11 @@ const registerSlice = createSlice({
     user: {},
     error: {},
   },
-  reducers: {},
+  reducers: {
+    updateStatusRegister: (state, action) => {
+      state.status = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkUser.fulfilled, (state, action) => {
@@ -34,7 +38,7 @@ const registerSlice = createSlice({
           state.user = action.payload;
           state.status = "success";
           state.error = {};
-          toast.success("Bạn đã đăng ký tài khoản thành công!");
+          // toast.success("Bạn đã đăng ký tài khoản thành công!");
         } else {
           state.status = "fail";
           state.error = action.payload;
@@ -55,7 +59,7 @@ const registerSlice = createSlice({
       });
   },
 });
-
+export const { updateStatusRegister } = registerSlice.actions;
 export default registerSlice;
 
 export const checkUser = createAsyncThunk(

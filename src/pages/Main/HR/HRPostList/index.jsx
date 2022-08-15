@@ -47,14 +47,14 @@ const HRPostList = (props) => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
   const dispatch = useDispatch();
-  const { jobDetail, jobListActived, jobListDisabled } = useSelector(
+  const { jobListActived, jobListDisabled } = useSelector(
     (state) => state.job
   );
   const userPresent = JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
-  }, [jobDetail]);
-
+  }, []);
+  
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">
@@ -93,6 +93,7 @@ const HRPostList = (props) => {
             <ListJob
               listJob={jobListActived}
               message="Không có công việc nào đang đăng tuyển."
+              isDisabled={false}
             />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>

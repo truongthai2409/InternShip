@@ -2,6 +2,7 @@ import "./styles.scss";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DoorFrontIcon from "@mui/icons-material/DoorFront";
+import CachedIcon from "@mui/icons-material/Cached";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
@@ -20,10 +21,7 @@ const CardPost = (props) => {
   const [title, setTitle] = useState("");
   const action = useRef("");
   const dispatch = useDispatch();
-  // console.log(props.timeUpdated);
-  // const { closeEditDemand } = useSelector(state => state.demand)
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
-
   const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
@@ -83,25 +81,38 @@ const CardPost = (props) => {
         case "update":
           setComponent(
             <PostJobForm
-              isUpdate={true}
+              formStatus={"update"}
               jobDetail={jobDetail[0]}
               idJob={props.idJob}
               disabled={props.isDisabled}
               setOpen={setOpen}
             />
           );
-          setTitle("Chỉnh sửa công việc");
+          setTitle("Chỉnh sửa thông tin đăng tuyển");
           break;
         case "close":
-          setTitle("Đóng việc");
+          setTitle(
+            props.isDisabled ? "Chỉnh sửa thông tin đăng tuyển" : "Đóng việc"
+          );
           setComponent(
-            <Confirmation
-              func={handleCloseJob}
-              setOpen={setOpen}
-              text="Bạn có chắc muốn đóng việc?"
-              nameBtnYes="Đóng việc"
-              nameBtnNo="Hủy"
-            />
+            props.isDisabled ? (
+              <PostJobForm
+                formStatus={"repost"}
+                jobDetail={jobDetail[0]}
+                idJob={props.idJob}
+                disabled={false}
+                setOpen={setOpen}
+              />
+            ) : (
+              <Confirmation
+                image="https://cdn-icons-png.flaticon.com/512/1162/1162410.png"
+                func={handleCloseJob}
+                setOpen={setOpen}
+                text="Bạn có chắc muốn đóng việc?"
+                nameBtnYes="Đóng việc"
+                nameBtnNo="Hủy"
+              />
+            )
           );
           break;
         default:
@@ -111,7 +122,6 @@ const CardPost = (props) => {
       setOpen(true);
     }
   };
-
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />
@@ -127,7 +137,6 @@ const CardPost = (props) => {
           <p className="company__location">{props.companyLocation}</p>
         </div>
       </div>
-      {/* <p className="card-post__amount">Số lượng: {props.amount}</p> */}
       <p className="card-post__time">
         <b>Thời gian tuyển dụng:</b>{" "}
         {moment(props.timeStart).format("DD/MM/YYYY")} -{" "}
@@ -175,12 +184,11 @@ const CardPost = (props) => {
           height="50px"
           width="33.33%"
           border="0.5px solid #DEDEDE"
-          icon={<DoorFrontIcon></DoorFrontIcon>}
+          icon={props.isDisabled ? <CachedIcon /> : <DoorFrontIcon />}
           color="#111"
-          name={props.isDemandPost ? "Đóng" : "Đóng việc"}
+          name={props.isDisabled ? "Đăng lại" : "Đóng"}
           fontSize="13px"
           type="close"
-          disabled={props.isDisabled}
         />
       </div>
       <Modal

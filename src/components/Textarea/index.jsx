@@ -24,7 +24,6 @@ const Textarea = ({
   }, [register]);
 
   useEffect(() => {
-    console.log("test render")
   }, [defaultValue])
 
   const [showError1, setShowError1] = useState(false);
