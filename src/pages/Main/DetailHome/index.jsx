@@ -18,7 +18,7 @@ const DetailHome = (props) => {
   const navigate = useNavigate();
 
   const { keyword } = useParams()
-  console.log(keyword);
+  // console.log(keyword);
 
   const { jobDetailById, idJobActive } = useSelector((state) => state.job);
 
