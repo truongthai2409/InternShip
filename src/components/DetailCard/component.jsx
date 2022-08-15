@@ -169,12 +169,39 @@ const Detail = ({
                     mt: 1,
                     fontSize: 3,
                   }}
-                ></Box>
+                >
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                    textColor="primary"
+                    scrollButtons
+                  >
+                    <Tab
+                      label="Chi tiết"
+                      {...a11yProps(0)}
+                      textColor="inherit"
+                      sx={{ fontSize: 12 }}
+                    />
+                    <Tab
+                      label="Thông tin về trường"
+                      {...a11yProps(1)}
+                      textColor="inherit"
+                      sx={{ fontSize: 12 }}
+                    />
+                  </Tabs>
+                </Box>
                 <TabPanel value={value} index={0}>
                   <InformationUniversity
                     jobDetail={jobDetail}
                     rating={rating}
                   ></InformationUniversity>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <BaseInformationCompany
+                    isPartner={true}
+                    jobDetail={jobDetail}
+                  />
                 </TabPanel>
               </Box>
             )}
@@ -194,10 +221,13 @@ const Detail = ({
                 }
               />
               <div>
-                <h2>{jobDetailById?.hr?.company?.name}</h2>
-                <p className="name-company">
+                <h2>
                   {jobDetailById?.hr?.company?.name ||
                     jobDetailById?.universityDTO?.name}
+                </h2>
+                <p className="name-company">
+                  {jobDetailById?.hr?.company?.name ||
+                    jobDetailById?.universityDTO?.shortName}
                 </p>
               </div>
             </div>
@@ -217,6 +247,7 @@ const Detail = ({
             <Box sx={{ width: "100%" }}>
               <InformationCompany
                 jobDetailById={jobDetailById}
+                demandPartner={demandPartner}
               ></InformationCompany>
             </Box>
           </div>

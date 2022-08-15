@@ -137,7 +137,7 @@ export const getDemandListByUniId = createAsyncThunk(
     };
     return await axios
       .get(
-        `${baseURL}/api/demand/filter-university/25?no=${
+        `${baseURL}/api/demand/filter-university/${uniId}?no=${
           currentPage - 1
         }&limit=${limit}`,
         axiosConfig
