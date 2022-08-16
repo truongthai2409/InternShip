@@ -3,21 +3,11 @@ import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import LoginContainer from "../../containers/LoginContainer";
 import "./styles.scss";
-import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
+// import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { updateStatusRegister } from "src/store/slices/main/register/registerSlice";
-
-const style = {
-  position: "absolute",
-  top: "25%",
-  left: "50%",
-  transform: "translate(-51.9%, -50%)",
-  width: 480,
-  bgcolor: "white",
-  borderRadius: 3,
-  boxShadow: 12,
-  p: 2,
-};
+import Modal from "./../../components/Modal/index";
+import { ModalContent } from "./components";
 
 const LoginLayout = () => {
   const { status } = useSelector((state) => state.register);
@@ -39,42 +29,17 @@ const LoginLayout = () => {
   return (
     <div className="login-layout">
       <Header />
+
       <div className="login-container-wrapper">
         <LoginContainer />
-
         <Modal
+          modalTitle="Thông báo"
           open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <Box sx={style}>
-              <Typography
-                id="transition-modal-title"
-                variant="h6"
-                component="h2"
-              >
-                Thông báo
-              </Typography>
-              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                Bạn đã đăng ký tài khoản thành công, vui lòng chờ xác nhận !
-              </Typography>
-              <Button
-                variant="contained"
-                sx={{ mt: 2 }}
-                style={{ float: "right" }}
-                onClick={handleClose}
-              >
-                Đồng ý
-              </Button>
-            </Box>
-          </Fade>
-        </Modal>
+          setOpen={setOpen}
+          children={<ModalContent onClick={handleClose} nameButton="Đồng ý" />}
+        />
       </div>
+
       <Footer />
     </div>
   );
