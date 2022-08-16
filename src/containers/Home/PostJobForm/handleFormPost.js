@@ -8,7 +8,7 @@ const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
 
-export const schema = yup.object({
+export const schemaFormPost = yup.object({
   name: yup.string().required(" * Bạn phải điền chức danh."),
   jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
   major: yup.string().required(" * Bạn phải chọn chuyên ngành."),

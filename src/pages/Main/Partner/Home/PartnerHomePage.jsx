@@ -18,12 +18,13 @@ import {
 import PaginationCustom from "src/components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
 
-const limit = 10;
+const limit = 5;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentSearchPage, setCurrentSearchPage] = useState(1);
   const dispatch = useDispatch();
   // get global state from redux store
   const {
@@ -36,24 +37,14 @@ const PartnerHomePage = (props) => {
   const navigate = useNavigate();
   const { keyword } = useParams();
   console.log(keyword);
+  console.log(keyword);
 
-  useEffect(() => {
-    const dataSearch = {
-      name: "",
-      province: "",
-      no: currentPage,
-      limit: 4,
-    };
-    dispatch(getDemandByName(dataSearch));
-
-    // dispatch(getJobList([1, 10]));
-  }, [dispatch, currentPage]);
   // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
 
   const handlePaginate = (page) => {
     console.log(page);
-    setCurrentPage(parseInt(page));
+    keyword ? setCurrentSearchPage(parseInt(page)) : setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
 
@@ -62,12 +53,21 @@ const PartnerHomePage = (props) => {
     dispatch(getDemandList({ currentPage, limit }));
   }, [currentPage]);
 
+  useEffect(() => {
+    const dataSearch = {
+      name: keyword || "",
+      no: currentSearchPage - 1,
+      limit: 5,
+    };
+    dispatch(getDemandByName(dataSearch));
+  }, [keyword, currentSearchPage]);
+  
   const handleSearch = (value) => {
     value = value.replace("%20", "+")
     const dataSearch = {
       name: value || "",
-      no: 0,
-      limit: 10,
+      no: currentSearchPage - 1,
+      limit: 5,
     };
     if (value) {
       navigate(`/partner/search/${value}`);
@@ -103,11 +103,12 @@ const PartnerHomePage = (props) => {
 
             <FilterPanelHome
               jobList={demandList}
+              partnerRole={true}
               indexCardActive={indexPartnerCardActive}
             />
             <div className="partner-postList__pagination">
               <PaginationCustom
-                page={currentPage}
+                page={keyword ? currentSearchPage : currentPage}
                 totalPages={totalPagesofDemandList}
                 hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
               />

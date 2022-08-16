@@ -27,6 +27,7 @@ import PartnerPost from "src/pages/Main/Partner/Post";
 import PartnerPostList from "src/pages/Main/Partner/PartnerPostList";
 import Password from "src/components/Password/index";
 import CandidateList from "src/pages/Main/HR/CandidateList";
+import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
 
 export const adminRouter = [
   {
@@ -135,7 +136,7 @@ export const candidateRouter = [
     Component: CandidateSaveProfile,
   },
   {
-    path: "/candidate/information_company",
+    path: "/candidate/information_company/:keyword",
     Component: CandidateInformationCompany,
   },
   {
@@ -151,7 +152,7 @@ export const candidateRouter = [
     Component: CandidateViewList,
   },
   {
-    path: "/candidate/detail_job",
+    path: "/candidate/detail_job/:keyword",
     Component: DetailHome,
   },
 ];
@@ -185,6 +186,10 @@ export const partnerRouter = [
   {
     path: "/partner/search/:keyword",
     Component: PartnerHome,
+  },
+  {
+    path: "/partner/detail_demand/:keyword",
+    Component: DetailPostPartner,
   },
 ];
 

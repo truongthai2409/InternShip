@@ -20,7 +20,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
         <CardContent>
           <img className="visit__card-logo" alt="visit__card-logo" src={logo} />
           <h2 className="visit__card-nameComapy">
-            {jobDetailById?.hr?.company?.name}
+            {jobDetailById?.hr?.company?.name || jobDetailById?.universityDTO?.name}
           </h2>
 
           <div className="config__info">
@@ -29,13 +29,13 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
               className="config__info"
             >
               <LocalPostOfficeIcon className="config__info-icon"></LocalPostOfficeIcon>
-              {jobDetailById?.hr?.company?.email}
+              {jobDetailById?.hr?.company?.email || jobDetailById?.universityDTO?.email}
             </a>
           </div>
           <div className="config__info">
             <Link to="/detail_job" className="config__info">
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
-              {jobDetailById?.hr?.company?.phone}
+              {jobDetailById?.hr?.company?.phone || jobDetailById?.universityDTO?.phone}
             </Link>
           </div>
           <div className="config__info">
@@ -44,7 +44,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
               className="config__info"
             >
               <LanguageIcon className="config__info-icon"></LanguageIcon>
-              {jobDetailById?.hr?.company?.website}
+              {jobDetailById?.hr?.company?.website || jobDetailById?.universityDTO?.website}
             </a>
             {/* <Link to={jobDetailById?.company?.website} className="config__info">
               <LanguageIcon className="config__info-icon"></LanguageIcon>

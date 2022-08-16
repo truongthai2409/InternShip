@@ -1,11 +1,9 @@
 import Button from "../Button";
 import ButtonOutline from "../ButtonOutline";
 import CustomInput from "../CustomInput";
-import { schema } from "./validateForm.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "./styles.scss";
-import "./validateForm.js";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { addJob } from "src/store/slices/main/home/job/jobSlice";
@@ -13,7 +11,6 @@ import { addJob } from "src/store/slices/main/home/job/jobSlice";
 export const ConfirmDate = ({
   jobDetail,
   setOpen,
-  text,
   nameBtnYes,
   nameBtnNo,
 }) => {

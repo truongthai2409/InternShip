@@ -11,16 +11,11 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobById, updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
-const JobCandidate = ({ job, idJob }) => {
+const DemandPartner = ({ demand, idDemand }) => {
   const dispatch = useDispatch();
-  // const { jobDetailById } = useSelector(state => state.job);
   const handleClick = async () => {
-    dispatch(updateIdJobActive(idJob));
+    dispatch(updateIdJobActive(idDemand));
   };
-
-  useEffect(() => {
-    dispatch(getJobById(idJob));
-  }, [idJob])
   return (
     <div
       style={{
@@ -28,9 +23,9 @@ const JobCandidate = ({ job, idJob }) => {
       }}
     >
       <Link
-        to={`/candidate/detail_job/${idJob}`}
+        to={`/partner/detail_demand/${idDemand}`}
         onClick={handleClick}
-        className="link__job-detail"
+        className="link__demand-detail"
       >
         <Box
           sx={{
@@ -47,41 +42,41 @@ const JobCandidate = ({ job, idJob }) => {
             },
           }}
         >
-          <div className="job__candidate">
+          <div className="demand__partner">
             <h4
-              id="job__candidate-infor-name"
-              className="job__candidate-infor job__candidate-infor-name-job"
+              id="demand__partner-infor-name"
+              className="demand__partner-infor demand__partner-infor-name-job"
             >
-              {job.name}
+              {demand.name}
             </h4>
-            <div className="job__candidate-infor job__candidate-infor-time">
-              <Icon className="job__candidate-info-item-icon">
+            <div className="demand__partner-infor demand__partner-infor-time">
+              <Icon className="demand__partner-info-item-icon">
                 <AccessTimeIcon fontSize="small" />
               </Icon>
-              <h6 className="card-content-job-candidate">
-                {moment(job.timeStartStr).format("DD/MM/YYYY")} -{" "}
-                {moment(job.timeEndStr).format("DD/MM/YYYY")}
+              <h6 className="card-content-demand__partner">
+                {moment(demand?.createDate).format("DD/MM/YYYY")} -{" "}
+                {moment(demand?.end).format("DD/MM/YYYY")}
               </h6>
             </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
+            <div className="demand__partner-infor">
+              <Icon className="demand__partner-info-item-icon">
                 <WorkIcon fontSize="small" />
               </Icon>
-              <h6 className="card-content-job-candidate">{job.jobType.name}</h6>
+              <h6 className="card-content-demand__partner">{demand?.jobType?.name || "Không có"}</h6>
             </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
+            <div className="demand__partner-infor">
+              <Icon className="demand__partner-info-item-icon">
                 <CurrencyExchangeIcon fontSize="small" />
               </Icon>
 
-              <h6 className="card-content-job-candidate">{job.salaryMin} $</h6>
+              <h6 className="card-content-demand__partner">{demand?.amount > 0 ? demand.amount : "Không có"} sinh viên</h6>
             </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
+            <div className="demand__partner-infor">
+              <Icon className="demand__partner-info-item-icon">
                 <AddLocationIcon fontSize="small" />
               </Icon>
               <h6 className="card-content-job-candidate">
-                {job.locationjob.address}
+                {demand?.address || "Không có"}
               </h6>
             </div>
           </div>
@@ -91,6 +86,6 @@ const JobCandidate = ({ job, idJob }) => {
   );
 };
 
-JobCandidate.propTypes = {};
+DemandPartner.propTypes = {};
 
-export default JobCandidate;
+export default DemandPartner;

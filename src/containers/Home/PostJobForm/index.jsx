@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import "./styles.scss";
 import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
-import { schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -23,6 +22,9 @@ import { useNavigate } from "react-router-dom";
 import Textarea from "src/components/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
+import { schemaFormPost } from "./handleFormPost";
+import { schemaFormRepost } from "./handleFormRepost";
+import { schemaFormUpdate } from "./handleFormUpdate";
 
 const jobTypeList = [
   {
@@ -46,12 +48,7 @@ const countryList = [
   },
 ];
 
-const PostJobForm = ({
-  isUpdate = false,
-  jobDetail,
-  disabled = false,
-  setOpen,
-}) => {
+const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
@@ -69,13 +66,13 @@ const PostJobForm = ({
   }, []);
 
   useEffect(() => {
-    if (isUpdate) {
+    if (formStatus !== "post") {
       dispatch(getDistrictList(jobDetail?.locationjob?.district?.province?.id));
     }
   }, []);
 
   useEffect(() => {
-    if (isUpdate) {
+    if (formStatus !== "post") {
       setValue("name", jobDetail?.name);
       setValue("amount", jobDetail?.amount);
       setValue("address", jobDetail?.locationjob?.address);
@@ -85,6 +82,22 @@ const PostJobForm = ({
       setValue("timeEnd", jobDetail?.timeEndStr);
     }
   }, []);
+
+  let schema;
+  let textBtn;
+  switch (formStatus) {
+    case "update":
+      schema = schemaFormUpdate;
+      textBtn = "Chỉnh sửa";
+      break;
+    case "repost":
+      schema = schemaFormRepost;
+      textBtn = "Đăng lại";
+      break;
+    default: //"post"
+      schema = schemaFormPost;
+      textBtn = "Đăng tuyển";
+  }
 
   const {
     register,
@@ -96,7 +109,7 @@ const PostJobForm = ({
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    if (!isUpdate) {
+    if (formStatus === "post") {
       const jobData = {
         name: data.name,
         hr: {
@@ -127,7 +140,7 @@ const PostJobForm = ({
         },
       };
       // console.log("jobData", jobData)
-      dispatch(addJob(jobData));
+      dispatch(addJob([jobData, "post"]));
     } else {
       const jobData = {
         name: data.name,
@@ -169,14 +182,18 @@ const PostJobForm = ({
           id: 1,
         },
       };
-      console.log("jobData", jobData);
-      dispatch(updateJob([jobDetail.id, jobData]));
+      if (formStatus === "repost") {
+        dispatch(addJob([jobData, "repost"]));
+      } else if (formStatus === "update") {
+        dispatch(updateJob([jobDetail.id, jobData]));
+      }
       setOpen(false);
     }
   };
-
-  if (status === "success") {
-    navigate("/hr/list");
+  if (formStatus !== "repost") {
+    if (status === "success") {
+      navigate("/hr/list");
+    }
   }
 
   return (
@@ -273,7 +290,7 @@ const PostJobForm = ({
                   placeholder=""
                   register={register}
                 >
-                  {errors.timeEnd?.message} 
+                  {errors.timeEnd?.message}
                 </CustomInput>
               </div>
               <div className={"row-3-col"}>
@@ -337,10 +354,12 @@ const PostJobForm = ({
                   id="jobDescription"
                   placeholder="Nhập mô tả công việc"
                   register={register}
-                  defaultValue={isUpdate ? jobDetail?.desciption : ""}
+                  defaultValue={
+                    formStatus !== "post" ? jobDetail?.desciption : ""
+                  }
                   setValue={setValue}
                   check={false}
-                  isUpdate={isUpdate && true}
+                  isUpdate={formStatus !== "post" && true}
                 >
                   {errors.jobDescription?.message}
                 </Textarea>
@@ -350,11 +369,13 @@ const PostJobForm = ({
                   label="Yêu cầu công việc"
                   id="jobRequirement"
                   placeholder="Nhập yêu cầu công việc"
-                  defaultValue={isUpdate ? jobDetail?.requirement : ""}
+                  defaultValue={
+                    formStatus !== "post" ? jobDetail?.requirement : ""
+                  }
                   setValue={setValue}
                   register={register}
                   check={false}
-                  isUpdate={isUpdate && true}
+                  isUpdate={formStatus !== "post" && true}
                 >
                   {errors.jobRequirement?.message}
                 </Textarea>
@@ -364,11 +385,13 @@ const PostJobForm = ({
                   label="Quyền lợi của ứng viên"
                   id="benefits"
                   placeholder="Nhập quyền lợi của ứng viên"
-                  defaultValue={isUpdate ? jobDetail?.otherInfo : ""}
+                  defaultValue={
+                    formStatus !== "post" ? jobDetail?.otherInfo : ""
+                  }
                   register={register}
                   setValue={setValue}
                   check={false}
-                  isUpdate={isUpdate && true}
+                  isUpdate={formStatus !== "post" && true}
                 >
                   {errors.benefits?.message}
                 </Textarea>
@@ -412,7 +435,7 @@ const PostJobForm = ({
               <div className="hr-post__action">
                 <Button
                   onClick={handleSubmit(onSubmit)}
-                  name={isUpdate ? "Chỉnh sửa" : "Đăng tuyển"}
+                  name={textBtn}
                   disabled={disabled}
                 />
               </div>

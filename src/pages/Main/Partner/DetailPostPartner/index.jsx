@@ -1,26 +1,24 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import DetailCard from "../../../components/DetailCard";
-import CardVisit from "../../../components/CardVisit";
+import DetailCard from "src/components/DetailCard";
+import CardVisit from "src/components/CardVisit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@mui/material";
 import "./styles.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getJobById,
-  getJobByNameAndLocation,
-} from "../../../store/slices/main/home/job/jobSlice";
 import ArrowButton from "src/components/ArrowButton";
-const DetailHome = (props) => {
+import { getDemandById } from "src/store/slices/main/home/demand/demandSlice";
+
+const DetailPostPartner = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { keyword } = useParams()
   // console.log(keyword);
 
-  const { jobDetailById, idJobActive } = useSelector((state) => state.job);
+  const { demandDetail, idJobActive } = useSelector((state) => state.demand);
 
   useEffect(() => {
     const dataSearch = {
@@ -29,8 +27,7 @@ const DetailHome = (props) => {
       no: 0,
       limit: 10,
     };
-    dispatch(getJobByNameAndLocation(dataSearch));
-    dispatch(getJobById(keyword));
+    dispatch(getDemandById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {
     navigate(-1);
@@ -51,7 +48,8 @@ const DetailHome = (props) => {
           <div className="">
             <DetailCard
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-              jobDetailById={jobDetailById}
+              jobDetailById={demandDetail}
+              demandPartner={true}
             />
             <div className=" hide-on-table">
               <div className="" onClick={handleBackClick}>
@@ -63,7 +61,7 @@ const DetailHome = (props) => {
         <Grid item md={4} sm={12} xs={12}>
           <CardVisit
             logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-            jobDetailById={jobDetailById}
+            jobDetailById={demandDetail}
           />
         </Grid>
         <div className="config__arow-back hide-on-desktop ">
@@ -77,6 +75,6 @@ const DetailHome = (props) => {
   );
 };
 
-DetailHome.propTypes = {};
+DetailPostPartner.propTypes = {};
 
-export default DetailHome;
+export default DetailPostPartner;
