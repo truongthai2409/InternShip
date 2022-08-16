@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
 import { useNavigate } from "react-router-dom";
-import Pagination from "@mui/material/Pagination";
 import PaginationCustom from "src/components/Pagination";
 
 function TabPanel(props) {
@@ -57,7 +56,7 @@ const PartnerPostList = (props) => {
   const { activeUser } = useSelector((state) => state.university);
   const handleChange = (event, newValue) => setValue(newValue);
   const { demandListUniversity } = useSelector((state) => state.demand);
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
   // console.log(currentPage, totalPage);
   // console.log(demandListUniversity?.totalPages);

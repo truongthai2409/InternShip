@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import AddCardIcon from "@mui/icons-material/AddCard";
-import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
@@ -19,7 +17,7 @@ function HeaderWithPartner(props) {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
+    const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
     dispatch(getUserById(idUser));
   }, []);
 

@@ -134,7 +134,7 @@ export const UniversityInfo = () => {
   // console.log(user, universityDTO);
 
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+    const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
   return (

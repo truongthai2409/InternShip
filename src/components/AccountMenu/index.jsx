@@ -23,12 +23,12 @@ const AccountMenu = ({ linkImg }) => {
     setAnchorEl(null);
   };
 
-  const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
+  const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
 
-  const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
+  const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
 
   const handleLogout = () => {
-    localStorage.removeItem("userPresent");
+    sessionStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất!", {
       theme: "dark",
     });

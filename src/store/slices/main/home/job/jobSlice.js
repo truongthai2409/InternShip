@@ -22,6 +22,7 @@ const jobSlice = createSlice({
     error: "",
     listCandidatesApplied: [],
     totalPages: 0,
+    amountApplications: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -109,6 +110,7 @@ const jobSlice = createSlice({
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
       state.listCandidatesApplied = payload.contents;
       state.totalPages = payload.totalPages;
+      state.amountApplications = payload.totalItems;
     });
   },
 });

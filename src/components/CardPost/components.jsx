@@ -7,6 +7,7 @@ import "./styles.scss";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { addJob } from "src/store/slices/main/home/job/jobSlice";
+import { schema } from "./validateForm";
 
 export const ConfirmDate = ({
   jobDetail,

@@ -11,7 +11,7 @@ const loginSlice = createSlice({
     status: "idle",
     user: {},
     error: {},
-    profile: JSON.parse(localStorage.getItem("userPresent")) || {},
+    profile: JSON.parse(sessionStorage.getItem("userPresent")) || {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -24,7 +24,7 @@ const loginSlice = createSlice({
         if (action.payload?.token) {
           state.status = "success";
           toast.success("Bạn đã đăng nhập thành công!");
-          localStorage.setItem("userPresent", JSON.stringify(action.payload));
+          sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
         } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!");

@@ -22,7 +22,6 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
@@ -67,7 +66,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser = JSON.parse(localStorage.getItem("userPresent")).idUser;
+  const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
 
   useEffect(() => {
     dispatch(getMajorList());
@@ -290,7 +289,9 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                       onClick={handleUseForm}
                       className="description-confirm-sample-btn"
                     >
-                      {!useSampleForm ? "Sử dụng mẫu này" : "Không dùng thư mẫu"}
+                      {!useSampleForm
+                        ? "Sử dụng mẫu này"
+                        : "Không dùng thư mẫu"}
                     </button>
                   </div>
                 </div>

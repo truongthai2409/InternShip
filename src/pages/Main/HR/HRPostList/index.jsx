@@ -50,7 +50,7 @@ const HRPostList = (props) => {
   const { jobListActived, jobListDisabled } = useSelector(
     (state) => state.job
   );
-  const userPresent = JSON.parse(localStorage.getItem("userPresent"));
+  const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
   }, []);

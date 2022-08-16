@@ -77,7 +77,7 @@ export const getUserById = createAsyncThunk("user/getUserById", async (id) => {
 export const getProfileByIdUser = createAsyncThunk(
   "user/getHrByIdUser",
   async (idUser) => {
-    switch (JSON.parse(localStorage.getItem("userPresent")).role) {
+    switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
       case "Role_HR":
         return await axios
           .get(`${baseURL}/api/r2s/hr/user/${idUser}`)

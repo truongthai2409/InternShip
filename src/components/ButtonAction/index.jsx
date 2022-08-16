@@ -4,13 +4,12 @@ const ButtonAction = ({
   onClick,
   height,
   width,
-  border,
   borderTop,
   borderRight,
   borderBottom,
   borderLeft,
   amountDemands = "",
-  amountApplies = "",
+  amountApplications = "",
   name,
   icon,
   fontSize,
@@ -39,8 +38,8 @@ const ButtonAction = ({
       >
         {icon}
         <p className="button-action__name" style={{ fontSize: fontSize }}>
-          {amountApplies || amountDemands !== ""
-            ? `${amountApplies}/${amountDemands} `
+          {amountApplications || amountDemands !== ""
+            ? `${amountApplications}/${amountDemands} `
             : ""}
           {`${name}`}
         </p>

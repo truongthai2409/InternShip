@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import CardPost from "src/components/CardPost";
 import Null from "src/components/Null";
 import "./styles.scss";

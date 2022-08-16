@@ -105,7 +105,7 @@ const CandidateInformationCompany = () => {
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
+    const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,

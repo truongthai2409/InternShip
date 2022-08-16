@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,7 +21,7 @@ const Login = () => {
   const status = useSelector(authenticationSelector);
 
   if (status === "success") {
-    const role = JSON.parse(localStorage.getItem("userPresent"))?.role;
+    const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
     switch (role) {
       case "Role_HR":
         navigate("/hr", { replace: true });

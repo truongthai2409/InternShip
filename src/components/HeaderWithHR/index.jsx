@@ -67,7 +67,7 @@ const HeaderWithHR = (props) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
+    const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
   const [anchorEl, setAnchorEl] = React.useState(null);
