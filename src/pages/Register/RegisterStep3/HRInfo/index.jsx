@@ -6,10 +6,7 @@ import CustomInput from "../../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import {
-  registerHr,
-  updateStatusRegister,
-} from "../../../../store/slices/main/register/registerSlice";
+import { registerHr } from "../../../../store/slices/main/register/registerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { genderList, schema } from "./handForm";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
