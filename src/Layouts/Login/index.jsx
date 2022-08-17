@@ -32,12 +32,20 @@ const LoginLayout = () => {
 
       <div className="login-container-wrapper">
         <LoginContainer />
-        <Modal
-          modalTitle="Thông báo"
-          open={open}
-          setOpen={setOpen}
-          children={<ModalContent onClick={handleClose} nameButton="Đồng ý" />}
-        />
+        <div className="login-container__modal">
+          <Modal
+            modalTitle="Thông báo"
+            open={open}
+            setOpen={setOpen}
+            children={
+              <ModalContent
+                onClick={handleClose}
+                nameButton="Đồng ý"
+                className="login-container__modal--content"
+              />
+            }
+          />
+        </div>
       </div>
 
       <Footer />
