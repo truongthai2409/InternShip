@@ -43,7 +43,7 @@ const DetailCard = ({
           rating={rating}
         />
       ) : (
-        <Detail jobDetailById={jobDetailById} /> || null
+        <Detail demandPartner={demandPartner} jobDetailById={jobDetailById} /> || null
       )}
     </div>
   );

@@ -23,6 +23,7 @@ const jobSlice = createSlice({
     error: "",
     listCandidatesApplied: [],
     totalPages: 0,
+    amountApplications: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -78,9 +79,15 @@ const jobSlice = createSlice({
     builder.addCase(getJobFilterByUser.fulfilled, (state, { payload }) => {
       state.jobFilter = payload.contents;
     });
-    builder.addCase(addJob.fulfilled, (state) => {
-      toast.success("Đăng tuyển công việc thành công!");
-      state.status = "success";
+    builder.addCase(addJob.fulfilled, (state, payload) => {
+      if (payload.payload[1] === "repost") {
+        state.jobListActived.unshift(payload.payload[0]);
+        toast.success("Đăng tuyển công việc thành công!");
+      }
+      if (payload.payload[1] === "post") {
+        toast.success("Đăng tuyển công việc thành công!");
+        state.status = "success";
+      }
     });
     builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
       switch (payload?.status.id) {
@@ -107,10 +114,10 @@ const jobSlice = createSlice({
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
       state.listCandidatesApplied = payload.contents;
       state.totalPages = payload.totalPages;
+      state.amountApplications = payload.totalItems;
     });
   },
 });
-
 export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
   return axios
     .get(`${baseURL}/api/r2s/job?no=${args[0] - 1}&limit=${args[1]}`)
@@ -190,7 +197,13 @@ export const getJobPositionList = createAsyncThunk(
   }
 );
 
-export const addJob = createAsyncThunk("job/addJob", async (jobData) => {
+// function use for adding job
+/**
+ * para
+ * args[0] : data of job
+ * args[1] : status of form
+ */
+export const addJob = createAsyncThunk("job/addJob", async (args) => {
   let axiosConfig = {
     headers: {
       "Content-Type": "application/json",
@@ -198,9 +211,9 @@ export const addJob = createAsyncThunk("job/addJob", async (jobData) => {
     },
   };
   return axios
-    .post(`${baseURL}/api/r2s/job`, jobData, axiosConfig)
+    .post(`${baseURL}/api/r2s/job`, args[0], axiosConfig)
     .then((response) => {
-      return response.data;
+      return [response.data, args[1]];
     })
     .catch((error) => {
       return error.response.data;

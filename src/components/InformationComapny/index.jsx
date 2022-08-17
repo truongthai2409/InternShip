@@ -16,9 +16,15 @@ import "./styles.scss";
 //   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 // };
 
-const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
+const InformationCompany = ({
+  jobDetail,
+  jobDetailById,
+  rating,
+  demandPartner = false,
+}) => {
   const { profile } = useSelector((state) => state.authentication);
 
+  console.log(demandPartner);
   const dispatch = useDispatch();
 
   const handleAddJob = async (e) => {
@@ -59,7 +65,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                *Mô tả công việc:
+                Mô tả công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -76,7 +82,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                *Yêu cầu công việc:
+                Yêu cầu công việc:
               </Typography>
               <Typography
                 variant="body2"
@@ -94,7 +100,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  *Quyền lợi:
+                  Quyền lợi:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -113,7 +119,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                   variant="span"
                   sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  *Thời hạn ứng tuyển:
+                  Thời hạn ứng tuyển:
                 </Typography>
                 <Typography
                   variant="body2"
@@ -196,7 +202,7 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                Mô tả công việc:
+                {demandPartner ? "Bản tin tuyển dụng:" : "Mô tả công việc:"}
               </Typography>
               <Typography
                 variant="body2"
@@ -211,25 +217,27 @@ const InformationCompany = ({ jobDetail, jobDetailById, rating }) => {
               </Typography>
             </Typography>
             <div className="detail__card-3-item">
-              <Typography variant="span">
-                <Typography
-                  variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700" }}
-                >
-                  Yêu cầu công việc:
+              {demandPartner ? <></> : (
+                <Typography variant="span">
+                  <Typography
+                    variant="span"
+                    sx={{ fontSize: 18, fontWeight: "700" }}
+                  >
+                    Yêu cầu công việc:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    sx={{ fontSize: 16, fontWeight: "400" }}
+                  >
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: jobDetailById.requirement,
+                      }}
+                    ></div>
+                  </Typography>
                 </Typography>
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  sx={{ fontSize: 16, fontWeight: "400" }}
-                >
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: jobDetailById.requirement,
-                    }}
-                  ></div>
-                </Typography>
-              </Typography>
+              )}
             </div>
             <div className="detail__card-3-item">
               <Typography variant="span">

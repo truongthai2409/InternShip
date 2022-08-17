@@ -11,51 +11,71 @@ import { useDispatch, useSelector } from "react-redux";
 //   getJobByNameAndLocation,
 //   getJobList,
 // } from "src/store/slices/main/home/job/jobSlice";
-import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
-import Pagination from "@mui/material/Pagination";
+import {
+  getDemandByName,
+  getDemandList,
+} from "src/store/slices/main/home/demand/demandSlice";
+import PaginationCustom from "src/components/Pagination";
+import { useNavigate, useParams } from "react-router-dom";
 
-const limit = 10;
+const limit = 5;
 
 const PartnerHomePage = (props) => {
   // const [valueSearch, setValueSearch] = useState("");
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [currentSearchPage, setCurrentSearchPage] = useState(1);
   const dispatch = useDispatch();
   // get global state from redux store
-  const { demandList, totalPagesofDemandList, demandDetail, indexPartnerCardActive } = useSelector(
-    (state) => state.demand
-  );
-  console.log(demandDetail, indexPartnerCardActive);
+  const {
+    demandList,
+    totalPagesofDemandList,
+    demandDetail,
+    indexPartnerCardActive,
+  } = useSelector((state) => state.demand);
+
+  const navigate = useNavigate();
+  const { keyword } = useParams();
+  console.log(keyword);
+  console.log(keyword);
+
+  // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
 
   const handlePaginate = (page) => {
     console.log(page);
-    setCurrentPage(parseInt(page));
+    keyword ? setCurrentSearchPage(parseInt(page)) : setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
 
   useEffect(() => {
-    // console.log(demandList);
+    console.log(currentPage);
     dispatch(getDemandList({ currentPage, limit }));
-  }, [demandList.length, currentPage]);
+  }, [currentPage]);
 
-  // const handleSearch = (value) => {
-  //   setValueSearch(value);
-  //   const dataSearch = {
-  //     jobName: valueSearch,
-  //     location: locationValue,
-  //   };
-  //   if (valueSearch && value) {
-  //     dispatch(getJobByNameAndLocation(dataSearch));
-  //     // } else if (valueSearch && value === "") {
-  //     //   dispatch(getJobByNameAndLocation(valueSearch, ""));
-  //     // } else if (valueSearch === "" && value) {
-  //     //   dispatch(getJobByNameAndLocation("", value));
-  //     // } else {
-  //     //   dispatch(getJobByNameAndLocation("", ""));
-  //   }
-  // };
+  useEffect(() => {
+    const dataSearch = {
+      name: keyword || "",
+      no: currentSearchPage - 1,
+      limit: 5,
+    };
+    dispatch(getDemandByName(dataSearch));
+  }, [keyword, currentSearchPage]);
+  
+  const handleSearch = (value) => {
+    value = value.replace("%20", "+")
+    const dataSearch = {
+      name: value || "",
+      no: currentSearchPage - 1,
+      limit: 5,
+    };
+    if (value) {
+      navigate(`/partner/search/${value}`);
+    } else {
+      navigate(`/partner`);
+    }
+    dispatch(getDemandByName(dataSearch));
+  };
 
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
@@ -75,27 +95,32 @@ const PartnerHomePage = (props) => {
           </Grid>
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
-              <SearchResultHome onChange={getValueLocationAndHandle} />
+              <SearchResultHome
+                onClick={handleSearch}
+                onChange={getValueLocationAndHandle}
+              />
             </div>
 
             <FilterPanelHome
               jobList={demandList}
+              partnerRole={true}
               indexCardActive={indexPartnerCardActive}
             />
             <div className="partner-postList__pagination">
-              <Pagination
-                count={totalPagesofDemandList}
-                shape="rounded"
-                variant="outlined"
-                color="secondary"
-                onChange={(e) => handlePaginate(e.target.textContent)}
+              <PaginationCustom
+                page={keyword ? currentSearchPage : currentPage}
+                totalPages={totalPagesofDemandList}
+                hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
               />
             </div>
           </Grid>
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">
-                <SearchResultHome onChange={getValueLocationAndHandle} />
+                <SearchResultHome
+                  onClick={handleSearch}
+                  onChange={getValueLocationAndHandle}
+                />
               </div>
               {demandList ? (
                 <DetailCard

@@ -20,10 +20,7 @@ const HRInfo = () => {
   const dispatch = useDispatch();
   const errorMessage = useSelector(errorSelector);
   const { companyList } = useSelector((state) => state.company);
-
-  useEffect(() => {
-    dispatch(getCompanyList([1, 20]));
-  }, [dispatch]);
+  const { status } = useSelector((state) => state.register);
 
   const {
     register,
@@ -32,6 +29,13 @@ const HRInfo = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    dispatch(getCompanyList([1, 20]));
+    if (status === "success") {
+      navigate("/login");
+    }
+  }, []);
 
   const onSubmit = (data) => {
     const hrData = {
@@ -68,26 +72,26 @@ const HRInfo = () => {
       </p>
       <form className="reg-hr__form" autoComplete="off">
         <div className="reg-hr__form--name">
-        <CustomInput
-          label="Tài khoản"
-          id="username"
-          type="text"
-          placeholder="Tài khoản..."
-          register={register}
-        >
-          {errors.username?.message}
-          {errorMessage?.Username}
-        </CustomInput>
-        <CustomInput
-          label="Email"
-          id="email"
-          type="email"
-          placeholder="Email..."
-          register={register}
-        >
-          {errors.email?.message}
-          {errorMessage?.Email}
-        </CustomInput>
+          <CustomInput
+            label="Tài khoản"
+            id="username"
+            type="text"
+            placeholder="Tài khoản..."
+            register={register}
+          >
+            {errors.username?.message}
+            {errorMessage?.Username}
+          </CustomInput>
+          <CustomInput
+            label="Email"
+            id="email"
+            type="email"
+            placeholder="Email..."
+            register={register}
+          >
+            {errors.email?.message}
+            {errorMessage?.Email}
+          </CustomInput>
         </div>
         <CustomInput
           label="Mật khẩu"

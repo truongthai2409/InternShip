@@ -7,7 +7,7 @@ import BaseInformationCompany from "src/components/BaseInformationCompany";
 import Button from "src/components/Button";
 import Appreciate from "src/components/Appreciate";
 import { useSelector, useDispatch } from "react-redux";
-import { getJobList } from "src/store/slices/main/home/job/jobSlice";
+import { getJobById, getJobList } from "src/store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import {
@@ -15,7 +15,7 @@ import {
   getAppreciateByCompany,
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 import ArrowButton from "src/components/ArrowButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Modal from "src/components/Modal";
 import Textarea from "src/components/Textarea";
 import { useForm } from "react-hook-form";
@@ -60,13 +60,20 @@ const CandidateInformationCompany = () => {
 
   const { appreciateList } = useSelector((state) => state.appreciate);
   const { profile } = useSelector((state) => state.authentication);
-  const { jobDetail } = useSelector((state) => state.job);
+  const { jobDetailById } = useSelector((state) => state.job);
   const dispatch = useDispatch();
-  const idCompany = jobDetail?.hr?.company.id;
+  const { keyword } = useParams();
+  // console.log(keyword);
+  const idCompany = jobDetailById?.hr?.company.id;
+  // console.log(idCompany, jobDetailById);
+
 
   useEffect(() => {
+    dispatch(getJobById(keyword));
+  }, [keyword])
+  useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
-  }, []);
+  }, [idCompany]);
 
   useEffect(() => {
     dispatch(getJobList([1, 10]));
@@ -98,7 +105,7 @@ const CandidateInformationCompany = () => {
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
+    const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -152,7 +159,7 @@ const CandidateInformationCompany = () => {
   return (
     <div className="information-company__container">
       <BaseInformationCompany
-        jobDetail={jobDetail}
+        jobDetail={jobDetailById}
         information
         pl={0}
         pr={0}

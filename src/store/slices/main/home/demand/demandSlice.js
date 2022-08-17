@@ -52,6 +52,19 @@ const demandSlice = createSlice({
         }
       });
     builder
+      .addCase(getDemandByName.pending, (state, { payload }) => {
+        state.status = "loading";
+      })
+      .addCase(getDemandByName.fulfilled, (state, { payload }) => {
+        // console.log(payload.demandList[0]);
+        state.demandList = payload.demandList;
+        state.totalPagesofDemandList = payload.totalPage;
+        if (payload.demandList.length > 0) {
+          state.demandDetail = payload.demandList[0];
+        } else {
+        }
+      });
+    builder
       .addCase(getDemandById.pending, (state, { payload }) => {
         state.status = "loading";
       })
@@ -124,7 +137,9 @@ export const getDemandListByUniId = createAsyncThunk(
     };
     return await axios
       .get(
-        `${baseURL}/api/demand/filter-university/${uniId}?no=${currentPage - 1}&limit=${limit}`,
+        `${baseURL}/api/demand/filter-university/${uniId}?no=${
+          currentPage - 1
+        }&limit=${limit}`,
         axiosConfig
       )
       .then((response) => {
@@ -166,9 +181,35 @@ export const getDemandList = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`, axiosConfig)
+      .get(
+        `${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`,
+        axiosConfig
+      )
       .then((response) => {
-        return {demandList: response.data.contents, totalPage: response.data.totalPages};
+        return {
+          demandList: response.data.contents,
+          totalPage: response.data.totalPages,
+        };
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+  }
+);
+
+export const getDemandByName = createAsyncThunk(
+  "demand/getDemandByName",
+  async (dataSearch) => {
+    return await axios
+      .get(
+        `${baseURL}/api/r2s/partner/demand/search`,
+        { params: dataSearch }
+      )
+      .then((response) => {
+        return {
+          demandList: response.data.contents,
+          totalPage: response.data.totalPages,
+        };
       })
       .catch((err) => {
         return err.response.data;

@@ -21,7 +21,6 @@ import Paper from "@mui/material/Paper";
 import Appreciate from "../Appreciate";
 
 import StarIcon from "@mui/icons-material/Star";
-// import PropTypes from 'prop-types'
 import { getJobList } from "src/store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 import { TabTitle } from "src/utils/GeneralFunctions";
@@ -38,6 +37,9 @@ import CustomCheckbox from "src/components/CustomCheckbox";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
+import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import DemandPartner from "../Demand";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -71,7 +73,11 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-function BaseInformationCompany({
+
+
+const currentPage = 1
+const limit = 5
+const BaseInformationCompany = ({
   jobDetail,
   jobDetailById,
   information,
@@ -80,7 +86,8 @@ function BaseInformationCompany({
   ml,
   mt,
   appreciateList,
-}) {
+  isPartner = false,
+}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
@@ -99,9 +106,10 @@ function BaseInformationCompany({
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  // const { rating } = useSelector((state) => state.rating);
   const { jobListCompany } = useSelector((state) => state.job);
-  const idCompany = jobDetail?.hr?.company.id;
+  const { demandListUniversity } = useSelector((state) => state.demand);
+  let idCompany = jobDetail?.hr?.company.id;
+  const uniId = jobDetail?.universityDTO?.id;
   useEffect(() => {
     dispatch(getRatingCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
@@ -187,10 +195,14 @@ function BaseInformationCompany({
   const handleCheck = async (e) => {
     const check = e.target.checked;
     checked = check;
-  };
+  }, [idCompany]);
+
+  useEffect(() => {
+    dispatch(getDemandListByUniId({ uniId, currentPage, limit }))
+  }, [uniId])
   return (
     <div className="">
-      {jobDetail && (
+      {!isPartner ? (
         <div
           className={`base__information`}
           style={{
@@ -679,6 +691,177 @@ function BaseInformationCompany({
               </Box>
             </TabPanel>
           </Box>
+          {pathUrl !== "/information_company" ? (
+            <div className="button-card">
+              <Link to={`/candidate/information_company/${jobDetail?.id}`}>
+                <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
+              </Link>
+            </div>
+          ) : null}
+        </div>
+      ) : (
+        <div
+          className={`base__information`}
+          style={{
+            marginTop: mt ? `${mt}` : "",
+            // border: '1px solid black'
+          }}
+        >
+          <div className="base__information-card">
+            <div
+              style={{
+                marginRight: "16px",
+              }}
+            >
+              <img
+                className="img-logo"
+                alt=""
+                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+              />
+              {information ? (
+                <div>
+                  <Rating
+                    name="read-only"
+                    precision={0.5}
+                    readOnly
+                    value={Number(rating)}
+                  />
+                  {/* <Rating
+                  name="text-feedback"
+                  value={value}
+                  readOnly
+                  precision={0.5}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
+                  sx={{ fontSize: 24 }}
+                /> */}
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontSize: 17,
+                      fontWeight: "400",
+                      transform: "translate(5px,5px)",
+                    }}
+                  >
+                    {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
+                  </Typography>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+
+            <div className="base__information-card-detail">
+              <h3 className="company-name">{jobDetail?.universityDTO.name}</h3>
+              <div className="">
+                <h5>Số điện thoại: </h5>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontSize: 17,
+                    fontWeight: "400",
+                    transform: "translate(5px,5px)",
+                  }}
+                >
+                  {jobDetail?.universityDTO?.phone}
+                </Typography>
+              </div>
+              <div className="fix__margin">
+                <h5>
+                  Email:
+                  <a
+                    href={`mailto:${jobDetail?.hr?.company.email}`}
+                    className="fix-fontSize fix__margin"
+                  >
+                    {jobDetail?.universityDTO?.email}
+                  </a>
+                </h5>
+              </div>
+              <div className="detail-website">
+                <h5 className="fix__margin">
+                  Website:
+                  <a
+                    href={jobDetail?.universityDTO.website}
+                    className="fix-fontSize "
+                  >
+                    {jobDetail?.universityDTO.website}
+                  </a>
+                </h5>
+
+                <div className=" base__information-card-detail-location">
+                  <h5 className="">Địa điểm:</h5>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontSize: 17,
+                      fontWeight: "400",
+                      transform: "translate(5px,5px)",
+                    }}
+                  >
+                    {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="intro__company">
+            <h5 className="intro__company-title">Giới thiệu về Trường</h5>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                fontSize: 17,
+                fontWeight: "400",
+                transform: "translate(5px,5px)",
+              }}
+            >
+              {jobDetail?.universityDTO.description}
+            </Typography>
+          </div>
+          <div className="job-applying-container">
+            <h5 className="intro__company-title intro__company-title-appling">
+              Danh sách các đợt thực tập đang mở
+            </h5>
+            <Grid
+              container
+              spacing={3}
+              // sx={{
+              //   paddingLeft: `${pl}px`,
+              //   paddingRight: `${pr}px`,
+              //   marginLeft: `${ml}px`,
+              // }}
+            >
+              {demandListUniversity?.contents?.length > 0 &&
+                demandListUniversity?.contents.map((demand) => (
+                  <Grid
+                    item
+                    lg="auto"
+                    md="auto"
+                    sm="auto"
+                    xs="auto"
+                    key={demand.id}
+                    sx={
+                      {
+                        // paddingLeft: `0px`,
+                      }
+                    }
+                  >
+                    <DemandPartner demand={demand} key={demand.id} idDemand={demand.id} />
+                  </Grid>
+                ))}
+            </Grid>
+          </div>
+          {pathUrl !== "/information_company" ? (
+            <div className="button-card">
+              <Link to={`/partner/information_school/${jobDetail?.universityDTO.id}`}>
+                <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       )}
 
@@ -818,6 +1001,8 @@ function BaseInformationCompany({
                 </Grid>
               ))}
             </Grid> */}
+=======
+            <h5 className="intro__company-title">Việc làm đang tuyển</h5>
           </div>
           {pathUrl !== "/information_company" ? (
             <div className="button-card">

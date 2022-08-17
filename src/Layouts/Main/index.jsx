@@ -9,8 +9,8 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 
 const MainLayout = () => {
   TabTitle("Trang chủ | IT Internship Jobs");
-  const role = localStorage.getItem("userPresent")
-    ? JSON.parse(localStorage.getItem("userPresent")).role
+  const role = sessionStorage.getItem("userPresent")
+    ? JSON.parse(sessionStorage.getItem("userPresent")).role
     : "";
   return (
     <div className="main__layout">

@@ -9,10 +9,15 @@ import { Typography } from "@mui/material";
 import "./styles.scss";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import Button from "../Button";
 
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail }) => {
+
+  const handleApplyDemandUni = async (e) => {
+  };
+
   return (
     <div>
       <div className="detail__card-3-partner">
@@ -125,6 +130,12 @@ const InformationUniversity = ({ jobDetail }) => {
             {jobDetail?.universityDTO?.address || "Không có"}
           </Typography>
         </div>
+      </div>
+      <div className="detail__card-5">
+        <Button
+          name="Ứng tuyển"
+          onClick={handleApplyDemandUni}
+        />
       </div>
     </div>
   );

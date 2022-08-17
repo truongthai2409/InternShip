@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import JobCandidate from "../Job";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../Button";
 import "./styles.scss";

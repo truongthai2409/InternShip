@@ -1,7 +1,6 @@
 import React from "react";
 import ComponentFooter from "./ComponentFooter";
 import "./styles.scss";
-import img from "./mobile-app.png";
 import AddressComponent from "./AddressComponent";
 
 const aboutUs = [

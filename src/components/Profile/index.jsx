@@ -29,8 +29,8 @@ const Profile = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
-  const roleUser = JSON.parse(localStorage.getItem("userPresent"))?.role;
+  const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
+  const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
 
   useEffect(() => {
     dispatch(getProfileByIdUser(idUser));

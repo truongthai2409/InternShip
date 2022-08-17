@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.png";
 import "./styles.scss";
 
 const AddressComponent = () => {
@@ -13,28 +12,47 @@ const AddressComponent = () => {
           <div className="address-headquarters-content"></div>
           <div className="text-footer">
             <p>
-              Trụ sở: Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ,
-              Phường 25, Quận Bình Thạnh, Thành Phố Hồ Chí Minh
+              Trụ sở:
+              <span style={{ fontWeight: "400", marginLeft: "4px" }}>
+                Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, Phường 25,
+                Quận Bình Thạnh, Thành Phố Hồ Chí Minh
+              </span>
             </p>
           </div>
         </div>
         <div className="address-footer-office">
           <div className="text-footer">
             <p>
-              Văn phòng: A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn
-              Đồng, P.Linh Đông, TP Thủ Đức, Thành Phố Hồ Chí Minh
+              Văn phòng:
+              <span style={{ fontWeight: "400", marginLeft: "4px" }}>
+                A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng,
+                P.Linh Đông, TP Thủ Đức, Thành Phố Hồ Chí Minh
+              </span>
             </p>
           </div>
         </div>
         <div className="address-footer-hotline">
           <div className="text-footer">
-            <p>Hotline: 0919 365 363</p>{" "}
+            <p>
+              <span style={{ fontWeight: "500", marginRight: "4px" }}>
+                Hotline:
+              </span>
+              0919 365 363
+            </p>
           </div>
         </div>
         <div className="address-footer-email">
           <div className="text-footer">
-            <a className="email-link__footer" href="mailto:tuyendung@r2s.com.vn">
-              <p>Email: tuyendung@r2s.com.vn</p>
+            <a
+              className="email-link__footer"
+              href="mailto:tuyendung@r2s.com.vn"
+            >
+              <p>
+                <span style={{ fontWeight: "500", marginRight: "4px" }}>
+                  Email:
+                </span>
+                tuyendung@r2s.com.vn
+              </p>
             </a>
           </div>
         </div>

@@ -67,7 +67,7 @@ const HeaderWithHR = (props) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   useEffect(() => {
-    const idUser = JSON.parse(localStorage.getItem("userPresent"))?.idUser;
+    const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
     dispatch(getProfileByIdUser(idUser));
   }, []);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -82,16 +82,28 @@ const HeaderWithHR = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
   return (
     <div className="container-header__hr header__hr config">
       {props.hr ? <Logo /> : <Logo />}
       {props.hr ? (
         <div className="header__hr">
-          <Link to="post" className="header__hr-post">
+          <Link
+            to="post"
+            className={
+              pathUrl === "/hr/post"
+                ? "header__hr-post active"
+                : "header__hr-post"
+            }
+          >
             <AddCardIcon></AddCardIcon>
             <span className="header__hr-post-post">Đăng tuyển</span>
           </Link>
-          <Link to="list" className="header__hr-post">
+          <Link to="list" className={
+              pathUrl === "/hr/list"
+                ? "header__hr-post active"
+                : "header__hr-post"
+            }>
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
           </Link>
@@ -146,7 +158,6 @@ const HeaderWithHR = (props) => {
           >
             <Typography sx={{ p: 2 }}>
               <Link to="view-list-apply" className="header__hr-post">
-                {/* <FormatAlignJustifyIcon></FormatAlignJustifyIcon> */}
                 <PlaylistAddCheckOutlinedIcon></PlaylistAddCheckOutlinedIcon>
                 <span className="header__hr-post-post">
                   Công việc đã ứng tuyển
@@ -190,28 +201,6 @@ const HeaderWithHR = (props) => {
         </div>
       ) : null}
       <div className="header__hr-icon">
-        {/* <div className="header__hr-icon-config">
-          <Link to={`${pathUrl}/view-list-care`}>
-            <BookmarkBorderOutlinedIcon></BookmarkBorderOutlinedIcon>
-            {props.isMark ? (
-              <FiberManualRecordIcon
-                fontSize="inherit"
-                color="warning"
-              ></FiberManualRecordIcon>
-            ) : null}
-          </Link>
-        </div>
-        <div className="header__hr-icon-config">
-          <Link to={`${pathUrl}`}>
-            <AddAlertOutlinedIcon></AddAlertOutlinedIcon>
-            {props.isNoti ? (
-              <FiberManualRecordIcon
-                fontSize="inherit"
-                color="warning"
-              ></FiberManualRecordIcon>
-            ) : null}
-          </Link>
-        </div> */}
         <div
           style={{
             borderRadius: "20px",

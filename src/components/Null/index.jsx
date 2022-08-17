@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-const Null = ({ text, height, fs, fw }) => {
+const Null = ({ text, height, fs, fw, image }) => {
   return (
     <div
       style={{
@@ -9,6 +9,7 @@ const Null = ({ text, height, fs, fw }) => {
       }}
       className="null__wrapper"
     >
+      <img className="null__img" src={image} alt="" />
       <h1 style={{ fontWeight: fw ? fw : "" }}>{text}</h1>
     </div>
   );

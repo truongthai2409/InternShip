@@ -14,8 +14,13 @@ const userSlice = createSlice({
     notification: {},
     page: 0,
     error: [],
+    statusForgotPassword: false,
   },
-  reducers: {},
+  reducers: {
+    updateStatusForgotPassword: (state, action) => {
+      state.statusForgotPassword = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
       state.userList = payload.data.contents;
@@ -33,10 +38,12 @@ const userSlice = createSlice({
     builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
       // console.log("payload:", payload);
       if (payload.httpCode === 200) {
+        state.statusForgotPassword = true;
         toast.success(
           "Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !"
         );
       } else {
+        state.statusForgotPassword = false;
         toast.error("Không tìm thấy địa chỉ email !");
       }
     });
@@ -70,7 +77,7 @@ export const getUserById = createAsyncThunk("user/getUserById", async (id) => {
 export const getProfileByIdUser = createAsyncThunk(
   "user/getHrByIdUser",
   async (idUser) => {
-    switch (JSON.parse(localStorage.getItem("userPresent")).role) {
+    switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
       case "Role_HR":
         return await axios
           .get(`${baseURL}/api/r2s/hr/user/${idUser}`)
@@ -152,5 +159,5 @@ export const deleteUser = createAsyncThunk(
       });
   }
 );
-
+export const { updateStatusForgotPassword } = userSlice.actions;
 export default userSlice;
