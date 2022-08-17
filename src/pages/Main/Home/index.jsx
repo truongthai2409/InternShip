@@ -4,22 +4,63 @@ import DetailCard from "../../../components/DetailCard";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import FilterPanelHome from "../../../components/FilterPanelHome";
 import "./styles.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobByNameAndLocation } from "../../../store/slices/main/home/job/jobSlice";
+import {
+  getJobByNameAndLocation,
+  getJobFilterByUser,
+} from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
 const Home = (props) => {
+  const dispatch = useDispatch();
+
   const [locationValue, setLocationValue] = useState("");
-  const [positionValue, setPositionValue] = useState("");
+  const [positionValue, setPositionValue] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  // let [filters, setFilters] = useState();
   const { profile } = useSelector((state) => state.authentication);
+  // get global state from redux store
+  let {
+    jobListName,
+    jobDetail,
+    indexCardActive,
+    jobListNameHavePages,
+    jobFilter,
+  } = useSelector((state) => state.job);
   // const [totalPages, setTotalPages] = useState();
 
-  const dispatch = useDispatch();
-  // get global state from redux store
-  const { jobListName, jobDetail, indexCardActive, jobListNameHavePages } =
-    useSelector((state) => state.job);
+  const [products, setProducts] = useState(jobFilter);
+  const [type, setType] = useState([]);
+  const [position, setPosition] = useState([]);
+  const [major, setMajor] = useState([]);
+
+  const listPositionWorkingFormat = [
+    "Backend",
+    "Business Analysis",
+    "Frontend",
+    "Project Management",
+  ];
+  const updateProducts = useCallback(() => {
+    let temp = jobFilter;
+    if (type.length > 0) {
+      temp = temp.filter((e) => type.includes(e?.jobType?.name));
+    }
+
+    if (position.length > 0) {
+      temp = temp.filter((e) => position.includes(e?.jobposition?.name));
+    }
+    if (major.length > 0) {
+      temp = temp.filter((e) => major?.includes(e?.major?.name));
+    }
+    setProducts(temp);
+  }, [type, position, major, jobFilter]);
+
+  useEffect(() => {
+    updateProducts();
+  }, [updateProducts]);
+  // const clearFilter = () => setFilter(initFilter);
+
   useEffect(() => {
     const dataSearch = {
       name: "",
@@ -31,12 +72,6 @@ const Home = (props) => {
     // dispatch(getJobList([1, 10]));
   }, [dispatch, currentPage]);
 
-  // const generateNameId = (name) => {
-  //   encodeURIComponent(name)
-  //     .replace(/\s/g, "-")
-  //     .replace(/%/g, "")
-  //     .replace("%20", "+");
-  // };
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
@@ -50,14 +85,45 @@ const Home = (props) => {
     }
   }, []);
 
-  const handleSearch = (value) => {
-    const dataSearch = {
-      name: value || "",
-      province: locationValue || "",
+  useEffect(() => {
+    const dataFilter = {
+      type: positionValue?.[0] || "",
+      order: "oldest",
+      position: positionValue?.[1] || "",
+      name: "",
+      province: "",
+      major: positionValue?.[2] || "",
       no: 0,
       limit: 5,
     };
-    dispatch(getJobByNameAndLocation(dataSearch));
+    dispatch(getJobFilterByUser(dataFilter));
+    // const _getJobs = async () => {
+    //   const data = await dispatch(getJobFilterByUser(dataFilter));
+    //   const res = unwrapResult(data);
+    //   setFilters(res.contents);
+    // };
+    // _getJobs();
+  }, []);
+
+  const handleSearch = (value) => {
+    // const dataSearch = {
+    //   name: value || "",
+    //   province: locationValue || "",
+    //   no: 0,
+    //   limit: 5,
+    // };
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
+      name: value || "",
+      province: locationValue || "",
+      major: "",
+      no: 0,
+      limit: 10,
+    };
+    dispatch(getJobFilterByUser(dataFilter));
+    // dispatch(getJobByNameAndLocation(dataSearch));
     // navigate(
     //   `/candidate` +
     //     `?name=${value || ""}&province=${
@@ -73,13 +139,52 @@ const Home = (props) => {
   };
 
   const handleCheck = (value) => {
-    // positionJobValue = value;
-    setPositionValue(value);
+    // let temp = [];
+    // temp = value.filter(() =>
+    //   value.includes("Parttime" || "Fulltime" || "Remote")
+    // );
+    let tempType = [];
+    let tempPosition = [];
+    let tempMajor = [];
+
+    if (value.length > 0) {
+      tempType = value.filter(
+        (el) => el === "Fulltime" || el === "Parttime" || el === "Remote"
+      );
+    }
+    setType(tempType);
+
+    if (value.length > 0) {
+      tempPosition = value.filter(
+        (el) =>
+          el === listPositionWorkingFormat[0] ||
+          el === listPositionWorkingFormat[1] ||
+          el === listPositionWorkingFormat[2] ||
+          el === listPositionWorkingFormat[3]
+      );
+    }
+    setPosition(tempPosition);
+
+    if (value.length > 0) {
+      tempMajor = value.filter(
+        (el) =>
+          el !== "Fulltime" &&
+          el !== "Parttime" &&
+          el !== "Remote" &&
+          el !== listPositionWorkingFormat[0] &&
+          el !== listPositionWorkingFormat[1] &&
+          el !== listPositionWorkingFormat[2] &&
+          el !== listPositionWorkingFormat[3]
+      );
+    }
+    setMajor(tempMajor);
+
+    // setPositionValue(temp);
   };
 
   const getValuePageAndHandle = (value) => {
     setCurrentPage(value);
-    // window.scroll(0, 0);
+    window.scroll(0, 0);
   };
   return (
     <>
@@ -102,7 +207,7 @@ const Home = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={jobListName}
+              jobList={products}
               indexCardActive={indexCardActive}
               // positionJobValue={positionJobValue}
               positionValue={positionValue}

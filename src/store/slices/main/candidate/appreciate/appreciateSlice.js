@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
 const baseURL = process.env.REACT_APP_API;
 
 const appreciateSlice = createSlice({
@@ -59,7 +58,6 @@ export const addAppreciate = createAsyncThunk(
 export const updateAppreciate = createAsyncThunk(
   "appreciate/updateAppreciate",
   async (data) => {
-    console.log(data);
     const res = await axios
       .put(`${baseURL}/api/r2s/rate/${data.id}`, data.avaluateData)
 

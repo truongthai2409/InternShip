@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import ListCollapse from "../ListCollapse";
 
@@ -7,8 +7,8 @@ import { getMajorList } from "../../store/slices/Admin/major/majorSlice";
 import { getJobPositionList } from "../../store/slices/main/home/job/jobSlice";
 
 const listWorkingFormat = [
-  { name: "Full time", id: 1 },
-  { name: "Part time", id: 2 },
+  { name: "Fulltime", id: 1 },
+  { name: "Parttime", id: 2 },
   { name: "Remote", id: 3 },
 ];
 
@@ -16,25 +16,68 @@ const SideBarHomeList = ({ onChange }) => {
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
+  const [checkedType, setCheckedType] = useState([]);
+  const [checkedPosition, setCheckedPosition] = useState([]);
+  const [checkedMajor, setCheckedMajor] = useState([]);
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getJobPositionList());
   }, [dispatch]);
 
-  const handleCheck = (value) => {
-    onChange && onChange(value);
+  const handleCheckType = (valueName, valueCheck) => {
+    var updatedList = [...checkedType];
+    if (valueCheck) {
+      updatedList = [...checkedType, valueName];
+    } else {
+      updatedList.splice(checkedType.indexOf(valueName), 1);
+    }
+    setCheckedType(updatedList);
+    onChange && onChange(updatedList);
   };
 
+  const handleCheckPosition = (valueName, valueCheck) => {
+    var updatedList = [...checkedType];
+    if (valueCheck) {
+      updatedList = [...checkedType, valueName];
+    } else {
+      updatedList.splice(checkedType.indexOf(valueName), 1);
+    }
+    setCheckedType(updatedList);
+    onChange && onChange(updatedList);
+  };
+
+  const handleCheckMajor = (valueName, valueCheck) => {
+    var updatedList = [...checkedType];
+    if (valueCheck) {
+      updatedList = [...checkedType, valueName];
+    } else {
+      updatedList.splice(checkedType.indexOf(valueName), 1);
+    }
+    setCheckedType(updatedList);
+    onChange && onChange(updatedList);
+  };
   return (
     <div className="slideBarHome__wrapper">
       <ListCollapse
         title="Hình thức làm việc"
         list={listWorkingFormat}
         spacing={3}
-        onChange={handleCheck}
+        onChange={handleCheckType}
       />
-      <ListCollapse title="Vị trí làm việc" list={jobPosition} spacing={3} />
-      <ListCollapse title="Chuyên ngành" list={majorList} spacing={3} />
+      <ListCollapse
+        title="Vị trí làm việc"
+        list={jobPosition}
+        spacing={3}
+        name="POSITIONJOBS"
+        onChange={handleCheckPosition}
+      />
+      <ListCollapse
+        title="Chuyên ngành"
+        list={majorList}
+        spacing={3}
+        name="MAJORJOBS"
+        onChange={handleCheckMajor}
+      />
     </div>
   );
 };

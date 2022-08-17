@@ -2,16 +2,20 @@ import React from "react";
 import "./styles.scss";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
-const CustomCheckbox = ({ label, onChange }) => {
+const CustomCheckbox = ({ label, onChange, checked }) => {
+  const inputRef = React.useRef(null);
   const handleChange = (e) => {
     const checkedName = e.target.name;
-    onChange && onChange(checkedName);
+    const checkedValue = e.target.checked;
+    onChange && onChange(checkedName, checkedValue);
   };
   return (
     <FormControlLabel
-      onChange={(name) => handleChange(name)}
+      onChange={handleChange}
       className="formControlLabel"
       name={label}
+      checked={checked}
+      ref={inputRef}
       control={
         <Checkbox
           className="checkBoxColor"

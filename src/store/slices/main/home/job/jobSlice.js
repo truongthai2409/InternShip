@@ -10,6 +10,7 @@ const jobSlice = createSlice({
     jobList: [],
     jobListCompany: [],
     jobListName: [],
+    jobFilter: [],
     jobListNameHavePages: [],
     jobListActived: [],
     jobListDisabled: [],
@@ -73,6 +74,9 @@ const jobSlice = createSlice({
     });
     builder.addCase(getJobPositionList.fulfilled, (state, { payload }) => {
       state.jobPosition = payload;
+    });
+    builder.addCase(getJobFilterByUser.fulfilled, (state, { payload }) => {
+      state.jobFilter = payload.contents;
     });
     builder.addCase(addJob.fulfilled, (state) => {
       toast.success("Đăng tuyển công việc thành công!");
@@ -271,6 +275,22 @@ export const getListCandidateApplied = createAsyncThunk(
           args[1] - 1
         }&limit=${args[2]}`
       )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getJobFilterByUser = createAsyncThunk(
+  "job/getJobFilterByUser",
+  async (dataSearch) => {
+    return axios
+      .get(`${baseURL}/api/r2s/job/filter`, {
+        params: dataSearch,
+      })
       .then((response) => {
         return response.data;
       })

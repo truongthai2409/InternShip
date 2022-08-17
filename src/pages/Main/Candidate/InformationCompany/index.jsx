@@ -148,6 +148,7 @@ const CandidateInformationCompany = () => {
     const check = e.target.checked;
     checked = check;
   };
+
   return (
     <div className="information-company__container">
       <BaseInformationCompany
@@ -159,97 +160,6 @@ const CandidateInformationCompany = () => {
         rating={rating}
         appreciateList={appreciateList}
       />
-      <div className="appreciate intro__company-title">
-        <h5 style={{ marginTop: "0px" }} className="">
-          Đánh giá về công ty{" "}
-        </h5>
-        <Modal
-          modalTitle="Viết đánh giá"
-          open={open}
-          setOpen={setOpen}
-          children={
-            <div>
-              <CustomInput
-                label="Nhập tiêu đề"
-                id="title"
-                type="text"
-                placeholder="Vd. Rất tuyệt"
-                register={register}
-                requirementField={false}
-                setValue={setValue}
-                height="45px"
-              />
-              <Textarea
-                label="Viết đánh giá "
-                id="comment"
-                placeholder="Nhập vào đây"
-                register={register}
-                setValue={setValue}
-                check={true}
-                children="Bạn phải nhập trường này "
-              >
-                {errors.comment?.message}
-              </Textarea>
-              <Box
-                sx={{
-                  width: 200,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Rating
-                  name="size-medium"
-                  value={valueRating}
-                  precision={0.5}
-                  getLabelText={getLabelText}
-                  onChange={(event, newValue) => {
-                    setValueRating(newValue);
-                  }}
-                  onChangeActive={(event, newHover) => {
-                    setHover(newHover);
-                  }}
-                  sx={{
-                    fontSize: "20px",
-                    color: "yellow",
-                  }}
-                  size="large"
-                  emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                  }
-                />
-                {valueRating !== null && (
-                  <Box sx={{ ml: 2 }}>
-                    {labels[hover !== -1 ? hover : valueRating]}
-                  </Box>
-                )}
-              </Box>
-              <div onChange={handleCheck}>
-                <CustomCheckbox label="Ẩn danh" />
-              </div>
-              <Button
-                onClick={handleSubmit(onSubmit)}
-                onChange={handleCheck}
-                name="Đăng đánh giá"
-              />
-            </div>
-          }
-          name="list-candidate"
-        />
-        <Button
-          name="Viết đánh giá"
-          bwidth="130px"
-          bheight="40px"
-          onClick={handleOpen}
-        ></Button>
-      </div>
-      <div>
-        {appreciateList?.map((appreciate, index) => (
-          <Appreciate appreciate={appreciate} key={appreciate.id} />
-        ))}
-      </div>
-      <div className="demand-detail__back" onClick={handleBackClick}>
-        <ArrowButton direction="left" text="Trở lại" />
-      </div>
     </div>
   );
 };

@@ -222,7 +222,18 @@ const HeaderWithHR = (props) => {
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
+          {pathUrl === "/candidate" ||
+          pathUrl === "/candidate/view-list-apply" ||
+          pathUrl === "/candidate/view-list-care" ||
+          pathUrl === "/candidate/profile" ||
+          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
+              profile?.userDTO?.firstName || ""
+            }`}</h4>
+          ) : (
+            <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
+          )}
+
           <AccountMenu
             linkImg={
               profile?.user?.avatar

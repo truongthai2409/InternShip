@@ -29,8 +29,6 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Popover from "@mui/material/Popover";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "transparent",
-  ...theme.typography.body2,
   padding: theme.spacing(1.2),
 }));
 const labels = {
@@ -50,13 +48,14 @@ const getLabelText = (value) => {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 };
 const Appreciate = ({ appreciate }) => {
-  const value = appreciate.score;
+  console.log(appreciate);
+  const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
   const { profile } = useSelector((state) => state.authentication);
 
   const [open, setOpen] = useState(false);
-  const [valueRating, setValueRating] = useState(appreciate.score);
+  const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
   // const [isCheck, setIsCheck] = useState(false);
   const {
@@ -72,10 +71,10 @@ const Appreciate = ({ appreciate }) => {
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
   useEffect(() => {
-    setValue("title", appreciate.title);
-    setValue("comment", appreciate.comment);
-    setValue("size-medium", appreciate.score);
-    setValue("isCheck", appreciate.hide);
+    setValue("title", appreciate?.title);
+    setValue("comment", appreciate?.comment);
+    setValue("size-medium", appreciate?.score);
+    setValue("isCheck", appreciate?.hide);
   }, [setValue]);
   const handleOpen = () => {
     setOpen(true);
@@ -158,6 +157,7 @@ const Appreciate = ({ appreciate }) => {
     >
       <Stack sx={{}}>
         <Item
+          elevation={1}
           sx={{}}
           className={
             appreciate?.user?.username === profile.username
@@ -167,16 +167,16 @@ const Appreciate = ({ appreciate }) => {
         >
           <div className="appreciate">
             <div className="fix_display">
-              <img
+              {/* <img
                 className=""
                 alt=""
                 src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-              />
+              /> */}
               <div>
                 <div
                   style={{
                     display: "flex",
-                    marginBottom: "10px",
+                    alignItems: "center",
                   }}
                 >
                   <div
@@ -189,39 +189,54 @@ const Appreciate = ({ appreciate }) => {
                       component="div"
                       sx={{ fontSize: 16 }}
                     >
-                      {(appreciate.hide === true && nameUser) ||
+                      {(appreciate?.hide === true && nameUser) ||
                         appreciate?.user?.username}
                     </Typography>
                   </div>
-                  <div>
-                    <Rating
-                      name="text-feedback"
-                      value={value}
-                      readOnly
-                      precision={0.5}
-                      emptyIcon={
-                        <StarIcon
-                          style={{ opacity: 0.55 }}
-                          fontSize="inherit"
-                        />
-                      }
-                      sx={{ fontSize: 24 }}
-                    />
-                    <Box
-                      sx={{
-                        ml: 2,
-                        fontSize: 16,
-                        transform: "translate(0,13px)",
-                      }}
-                    >
-                      {/* {labels[value]} */}
-                    </Box>
-                  </div>
+                  <h6
+                    className=""
+                    style={{
+                      display: "flex",
+                    }}
+                  >
+                    {appreciate?.createDate}
+                  </h6>
+                </div>
+                <div
+                  style={{
+                    marginBottom: 10,
+                    transform: "translate(-2px,0)",
+                  }}
+                >
+                  <Rating
+                    name="text-feedback"
+                    value={value}
+                    readOnly
+                    precision={0.5}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                    sx={{ fontSize: 24 }}
+                  />
+                  <Box
+                    sx={{
+                      fontSize: 16,
+                      // transform: "translate(0,13px)",
+                    }}
+                  >
+                    {/* {labels[value]} */}
+                  </Box>
                 </div>
                 <Typography
                   variant="p"
                   component="div"
-                  sx={{ fontSize: 16, transform: "translate(0,-10px)" }}
+                  sx={{
+                    fontSize: 16,
+                    transform: "translate(0,-10px)",
+                    display: "flex",
+                    wordBreak: "break-word",
+                    textAlign: "initial",
+                  }}
                 >
                   {/* {`${appreciate?.comment?.slice(
                     3,

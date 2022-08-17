@@ -10,8 +10,9 @@ import moment from "moment";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
-
-const JobCandidate = ({ job, idJob }) => {
+import TagName from "../TagName";
+import ButtonMark from "../ButtonMark";
+const JobCandidate = ({ job, idJob, pdLeft, pdRight }) => {
   const dispatch = useDispatch();
   const handleClick = async () => {
     dispatch(updateIdJobActive(idJob));
@@ -19,7 +20,8 @@ const JobCandidate = ({ job, idJob }) => {
   return (
     <div
       style={{
-        marginRight: "15px",
+        paddingLeft: pdLeft ? pdLeft : "",
+        paddingRight: pdRight ? pdRight : "",
       }}
     >
       <Link
@@ -29,8 +31,6 @@ const JobCandidate = ({ job, idJob }) => {
       >
         <Box
           sx={{
-            width: 220,
-            minHeight: 160,
             border: 1,
             borderColor: "#DEDEDE",
             borderRadius: 2,
@@ -40,44 +40,91 @@ const JobCandidate = ({ job, idJob }) => {
               backgroundColor: "DEDEDE",
               opacity: [0.9, 0.8, 0.7],
             },
+            // backgroundColor: "#e6eefa",
+            paddingRight: 2,
           }}
         >
           <div className="job__candidate">
-            <h4
-              id="job__candidate-infor-name"
-              className="job__candidate-infor job__candidate-infor-name-job"
+            <Box
+              sx={{
+                width: 80,
+                height: 80,
+                backgroundColor: "transparent",
+                border: "0.5px solid #dedede",
+                borderRadius: "6px",
+                marginTop: "10px",
+                marginLeft: "10px",
+              }}
             >
-              {job.name}
-            </h4>
-            <div className="job__candidate-infor job__candidate-infor-time">
-              <Icon className="job__candidate-info-item-icon">
-                <AccessTimeIcon fontSize="small" />
-              </Icon>
-              <h6 className="card-content-job-candidate">
-                {moment(job.timeStartStr).format("DD/MM/YYYY")} -{" "}
-                {moment(job.timeEndStr).format("DD/MM/YYYY")}
-              </h6>
-            </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
-                <WorkIcon fontSize="small" />
-              </Icon>
-              <h6 className="card-content-job-candidate">{job.jobType.name}</h6>
-            </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
-                <CurrencyExchangeIcon fontSize="small" />
-              </Icon>
+              <img
+                className="img-logo"
+                alt=""
+                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                style={{
+                  width: 60,
+                  height: 60,
+                  marginTop: "10px",
+                  marginLeft: "10px",
+                }}
+              />
+            </Box>
+            <div>
+              <div>
+                <h4 id="job__candidate-infor-name" className="">
+                  {job.name}
+                </h4>
+              </div>
+              <div className="job__candidate-infor job__candidate-infor-time">
+                <Icon className="job__candidate-info-item-icon">
+                  <AccessTimeIcon fontSize="small" />
+                </Icon>
+                <h6 className="card-content-job-candidate">
+                  {moment(job.timeStartStr).format("DD/MM/YYYY")} -{" "}
+                  {moment(job.timeEndStr).format("DD/MM/YYYY")}
+                </h6>
+              </div>
+              <div className="job__candidate-infor">
+                <Icon className="job__candidate-info-item-icon">
+                  <WorkIcon fontSize="small" />
+                </Icon>
+                <h6 className="card-content-job-candidate">
+                  {job.jobType.name}
+                </h6>
+              </div>
+              <div className="job__candidate-infor">
+                <Icon className="job__candidate-info-item-icon">
+                  <CurrencyExchangeIcon fontSize="small" />
+                </Icon>
 
-              <h6 className="card-content-job-candidate">{job.salaryMin} $</h6>
+                <h6 className="card-content-job-candidate">
+                  {job.salaryMin} $
+                </h6>
+              </div>
+              <div className="job__candidate-infor">
+                <Icon className="job__candidate-info-item-icon">
+                  <AddLocationIcon fontSize="small" />
+                </Icon>
+                <h6 className="card-content-job-candidate">
+                  {job.locationjob.address}
+                </h6>
+              </div>
             </div>
-            <div className="job__candidate-infor">
-              <Icon className="job__candidate-info-item-icon">
-                <AddLocationIcon fontSize="small" />
-              </Icon>
-              <h6 className="card-content-job-candidate">
-                {job.locationjob.address}
-              </h6>
+            <div
+              style={{
+                marginLeft: "10px",
+                marginTop: "11px",
+              }}
+            >
+              <TagName title={"Hot"} />
+            </div>
+            <div
+              style={{
+                marginTop: "10px",
+                marginLeft: "auto",
+                marginRight: "10px",
+              }}
+            >
+              <ButtonMark width="25px" height="25px" />
             </div>
           </div>
         </Box>

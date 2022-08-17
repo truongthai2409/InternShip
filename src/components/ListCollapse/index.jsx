@@ -12,14 +12,15 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const ListCollapse = (props) => {
   const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   const spacing = props.spacing;
 
-  const handleCheck = (value) => {
-    props.onChange && props.onChange(value);
+  const handleCheck = (valueName, valueCheck) => {
+    props.onChange && props.onChange(valueName, valueCheck);
+  };
+
+  const handleClick = () => {
+    setOpen(!open);
   };
   return (
     <List
@@ -41,11 +42,11 @@ const ListCollapse = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         {props.list.length > 0
           ? props.list.map((item, index) => (
-              <List key={item.id || index} component="div" disablePadding>
+              <List key={item.id} component="div" disablePadding>
                 <ListItemButton sx={{ pl: spacing }}>
                   <ListItemIcon>
                     <CustomCheckbox
-                      key={item.id || index}
+                      key={item.id}
                       label={item.name}
                       onChange={handleCheck}
                     />
