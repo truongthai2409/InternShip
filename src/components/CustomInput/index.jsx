@@ -12,7 +12,7 @@ const CustomInput = ({
   placeholder,
   children,
   register,
-  unregister=null,
+  unregister = null,
   check = false,
   defaultValue,
   requirementField = true,
@@ -25,17 +25,21 @@ const CustomInput = ({
   top,
 }) => {
   useEffect(() => {
-    if(check){
-      unregister(id)
+    if (check) {
+      unregister(id);
     }
-  },[check])
+  }, [check]);
 
-  const accept = id === "avatar" ? ".png, .jpeg, .jpg" : ".pdf"
+  const accept =
+    type === "file" && (id === "avatar" ? ".png, .jpeg, .jpg" : ".pdf");
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
     setIsHide(!isHide);
   };
+
+  // const handle
+
   return (
     <div className={`custom-input ${className ? className : ""}`}>
       <label htmlFor={id} className="custom-input__label">
@@ -56,6 +60,7 @@ const CustomInput = ({
           }}
           type={type === "password" ? (isHide ? "text" : "password") : type}
           id={id}
+          // onChange={type === "file" ? }
           placeholder={placeholder}
           disabled={check}
           {...register(id)}
