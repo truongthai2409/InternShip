@@ -12,7 +12,7 @@ import { ModalContent } from "./components";
 const LoginLayout = () => {
   const { status } = useSelector((state) => state.register);
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
