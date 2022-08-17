@@ -13,7 +13,7 @@ const LoginContainer = () => {
       <div className="logo-login-container">
         <Logo />
       </div>
-      <div className="login-container__google">
+      {/* <div className="login-container__google">
         <Button>
           ĐĂNG NHẬP VỚI GOOGLE <i className="fa-brands fa-google"></i>
         </Button>
@@ -23,7 +23,7 @@ const LoginContainer = () => {
         <div className="login-container__or--line"></div>
         <h6>HOẶC</h6>
         <div className="login-container__or--line"></div>
-      </span>
+      </span> */}
       <h1 className="login-container__title">Đăng nhập</h1>
       <Login />
       <div className="login-container__footer">

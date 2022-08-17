@@ -4,11 +4,13 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { useEffect } from "react";
+import { FileUpload } from "./components";
 
 const CustomInput = ({
   label,
   id,
   type,
+  format,
   placeholder,
   children,
   register,
@@ -23,6 +25,7 @@ const CustomInput = ({
   border,
   icon,
   top,
+  setValue,
 }) => {
   useEffect(() => {
     if (check) {
@@ -30,26 +33,57 @@ const CustomInput = ({
     }
   }, [check]);
 
-  const accept =
-    type === "file" && (id === "avatar" ? ".png, .jpeg, .jpg" : ".pdf");
+  let accept;
+  if (type === "file") {
+    if (format === "img") {
+      accept = ".png, .jpeg, .jpg";
+    }
+    if (format === "word") {
+      accept = ".docx";
+    }
+    if (format === "pdf") {
+      accept = ".pdf";
+    }
+  }
 
   const [isHide, setIsHide] = useState(false);
+  const [imgSrc, setImgSrc] = useState("");
   const handleHide = () => {
     setIsHide(!isHide);
   };
 
-  // const handle
+  const handlePreviewImage = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let imgFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (x) => {
+        setImgSrc(x.target.result);
+      };
+      reader.readAsDataURL(imgFile);
+      setValue(id, imgFile);
+    }
+  };
+
+  // type === "file" && console.log("children", register(id))
 
   return (
-    <div className={`custom-input ${className ? className : ""}`}>
+    <div className={`custom-input ${className ? className : ""} `}>
       <label htmlFor={id} className="custom-input__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}
+        {type === "file" && <FileUpload img={imgSrc} />}
       </label>
+      {type === "file" &&
+        (check ? null : <p className="custom-input__error">{children}</p>)}
       <div
-        className={
-          check ? "custom-input__textfield-disabled" : "custom-input__textfield"
-        }
+        className={` ${type === "file" && "file-input"}
+          ${
+            check
+              ? "custom-input__textfield-disabled"
+              : "custom-input__textfield"
+          }
+          
+        `}
       >
         {icon}
         <input
@@ -60,10 +94,10 @@ const CustomInput = ({
           }}
           type={type === "password" ? (isHide ? "text" : "password") : type}
           id={id}
-          // onChange={type === "file" ? }
           placeholder={placeholder}
           disabled={check}
           {...register(id)}
+          onChange={handlePreviewImage}
           accept={accept}
         />
         {check ? null : <p className="custom-input__error">{children}</p>}

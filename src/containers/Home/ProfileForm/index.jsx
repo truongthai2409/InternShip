@@ -45,7 +45,7 @@ const ProfileForm = ({ handleClose }) => {
         position: profile.position,
         company: { id: profile.company?.id },
       }),
-      fileAvatar: data.avatar[0],
+      fileAvatar: data.avatar,
     };
     dispatch(updateUser([profileData, profile.id]));
     handleClose();

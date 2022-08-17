@@ -41,11 +41,11 @@
         font-family: $f-family;
       }
     }
+  }
 
-    .custom-input__error {
-      color: $color-red;
-      font-size: $fs-13;
-    }
+  .custom-input__error {
+    color: $color-red;
+    font-size: $fs-13;
   }
 
   .field-requirment {
@@ -74,7 +74,7 @@
   }
 }
 
-.fileSV-container > input[type='file'] {
+.fileSV-container > input[type="file"] {
   display: none;
 }
 
@@ -90,5 +90,39 @@
 
   &:hover {
     background-color: $primary-color-1;
+  }
+}
+
+.file-input {
+  display: none;
+  .custom-input__error {
+    display: inline-block !important;
+  }
+}
+
+.file-upload {
+  position: relative;
+  cursor: pointer;
+  margin-top: 7px;
+  height: 150px;
+  width: 100%;
+  border: 1px dashed $primary-color;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  &__img {
+    width: 30%;
+    height: 90%;
+    border-radius: 4px;
+    object-fit: cover;
   }
 }
