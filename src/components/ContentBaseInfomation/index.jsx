@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import JobCandidate from "../Job";
 import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "react-router-dom";
@@ -10,13 +9,19 @@ const ContentBaseInformation = ({
   jobListCompany,
   pdLeft,
   pdRight,
+  hideMark = false,
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
   return (
     <div>
       <div className="job-applying-container _scroll">
-        <h5 className="intro__company-title intro__company-title-appling">
+        <h5
+          className="intro__company-title intro__company-title-appling"
+          style={{
+            marginLeft: "25px",
+          }}
+        >
           Việc làm đang tuyển
         </h5>
         <Grid
@@ -29,7 +34,7 @@ const ContentBaseInformation = ({
             width: "auto",
           }}
         >
-          {jobListCompany.length > 0 &&
+          {jobListCompany?.length > 0 &&
             jobListCompany?.map((job) => (
               <Grid
                 item
@@ -48,14 +53,15 @@ const ContentBaseInformation = ({
                   idJob={job.id}
                   pdLeft={pdLeft}
                   pdRight={pdRight}
+                  hideMark={hideMark}
                 />
               </Grid>
             ))}
         </Grid>
       </div>
-      {pathUrl !== "/candidate/information_company" ? (
+      {pathUrl !== `/candidate/information_company/${jobDetail?.id}` ? (
         <div className="button-card">
-          <Link to="/candidate/information_company">
+          <Link to={`/candidate/information_company/${jobDetail?.id}`}>
             <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
           </Link>
         </div>

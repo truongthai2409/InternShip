@@ -1,7 +1,6 @@
 @use "../../assets/styles/" as *;
 
 .base__information {
-  padding: 3px 130px;
   .company-name {
     // text-align: center;
     width: auto;
@@ -14,7 +13,7 @@
     line-height: 35.2px;
   }
   .base__information-card {
-    background-color: $primary-color-background-2;
+    background-color: $color-white-0;
     display: flex;
     justify-content: center;
     align-items: center;

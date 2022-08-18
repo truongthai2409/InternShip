@@ -16,7 +16,7 @@ import {
   updateIdJobActive,
 } from "src/store/slices/main/home/job/jobSlice";
 
-const JobCandidate = ({ job, idJob, pdLeft, pdRight }) => {
+const JobCandidate = ({ job, idJob, pdLeft, pdRight, hideMark }) => {
   const dispatch = useDispatch();
   // const { jobDetailById } = useSelector(state => state.job);
   const handleClick = async () => {
@@ -56,10 +56,10 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight }) => {
           <div className="job__candidate">
             <Box
               sx={{
-                width: 80,
-                height: 80,
+                width: 55,
+                height: 50,
                 backgroundColor: "transparent",
-                border: "0.5px solid #dedede",
+                // border: "0.5px solid #dedede",
                 borderRadius: "6px",
                 marginTop: "10px",
                 marginLeft: "10px",
@@ -70,10 +70,9 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight }) => {
                 alt=""
                 src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
                 style={{
-                  width: 60,
-                  height: 60,
-                  marginTop: "10px",
-                  marginLeft: "10px",
+                  width: 40,
+                  height: 35,
+                  marginTop: "5px",
                 }}
               />
             </Box>
@@ -113,28 +112,38 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight }) => {
                 <Icon className="job__candidate-info-item-icon">
                   <AddLocationIcon fontSize="small" />
                 </Icon>
-                <h6 className="card-content-job-candidate">
+                <h6 className="card-content-job-candidate card-content-job-candidate-location">
                   {job.locationjob.address}
                 </h6>
               </div>
             </div>
-            <div
-              style={{
-                marginLeft: "10px",
-                marginTop: "11px",
-              }}
-            >
-              <TagName title={"Hot"} />
-            </div>
-            <div
-              style={{
-                marginTop: "10px",
-                marginLeft: "auto",
-                marginRight: "10px",
-              }}
-            >
-              <ButtonMark width="25px" height="25px" />
-            </div>
+            {hideMark === true ? null : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  margin: "0 0 0 auto",
+                }}
+              >
+                <div
+                  style={{
+                    marginLeft: "10px",
+                    marginTop: "11px",
+                  }}
+                >
+                  <TagName title={"Hot"} />
+                </div>
+                <div
+                  style={{
+                    marginTop: "10px",
+                    marginLeft: "auto",
+                    marginRight: "10px",
+                  }}
+                >
+                  <ButtonMark width="25px" height="25px" />
+                </div>
+              </div>
+            )}
           </div>
         </Box>
       </Link>

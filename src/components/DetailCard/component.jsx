@@ -55,13 +55,15 @@ const Detail = ({
   jobDetailById,
   demandPartner = false,
   rating,
+  jobListCompany,
 }) => {
+  console.log(jobListCompany);
+
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -157,7 +159,10 @@ const Detail = ({
                   ></InformationCompany>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                  <BaseInformationCompany jobDetail={jobDetail} />
+                  <BaseInformationCompany
+                    jobDetail={jobDetail}
+                    jobListCompany={jobListCompany}
+                  />
                 </TabPanel>
               </Box>
             ) : (
@@ -201,6 +206,7 @@ const Detail = ({
                   <BaseInformationCompany
                     isPartner={true}
                     jobDetail={jobDetail}
+                    jobListCompany={jobListCompany}
                   />
                 </TabPanel>
               </Box>

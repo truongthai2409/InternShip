@@ -30,7 +30,7 @@ const Home = (props) => {
   } = useSelector((state) => state.job);
   // const [totalPages, setTotalPages] = useState();
 
-  const [products, setProducts] = useState(jobFilter);
+  const [jobs, setJobs] = useState(jobFilter);
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
@@ -41,7 +41,7 @@ const Home = (props) => {
     "Frontend",
     "Project Management",
   ];
-  const updateProducts = useCallback(() => {
+  const updateJob = useCallback(() => {
     let temp = jobFilter;
     if (type.length > 0) {
       temp = temp.filter((e) => type.includes(e?.jobType?.name));
@@ -53,12 +53,12 @@ const Home = (props) => {
     if (major.length > 0) {
       temp = temp.filter((e) => major?.includes(e?.major?.name));
     }
-    setProducts(temp);
+    setJobs(temp);
   }, [type, position, major, jobFilter]);
 
   useEffect(() => {
-    updateProducts();
-  }, [updateProducts]);
+    updateJob();
+  }, [updateJob]);
   // const clearFilter = () => setFilter(initFilter);
 
   useEffect(() => {
@@ -207,7 +207,7 @@ const Home = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={products}
+              jobList={jobs}
               indexCardActive={indexCardActive}
               // positionJobValue={positionJobValue}
               positionValue={positionValue}

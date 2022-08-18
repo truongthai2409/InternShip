@@ -48,7 +48,6 @@ const getLabelText = (value) => {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 };
 const Appreciate = ({ appreciate }) => {
-  console.log(appreciate);
   const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
