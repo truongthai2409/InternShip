@@ -9,7 +9,7 @@ const Null = ({ text, height, fs, fw, image }) => {
       }}
       className="null__wrapper"
     >
-      <img className="null__img" src={image} alt="" />
+      {image && <img className="null__img" src={image} alt="" />}
       <h1 style={{ fontWeight: fw ? fw : "" }}>{text}</h1>
     </div>
   );
