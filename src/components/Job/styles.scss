@@ -2,9 +2,13 @@
 
 .job__candidate {
   margin-top: 12px;
+  margin-left: 20px;
+  @include flex(start, null);
   &-infor {
-    @include flex(center, null);
+    @include flex(center, start);
     margin-left: 18px;
+    margin-left: 18px;
+    width: max-content;
 
     &-time {
       height: 20px;
@@ -30,7 +34,6 @@
 }
 
 #job__candidate-infor-name {
-  display: block;
   display: -webkit-box;
   font-size: 16px;
   line-height: 1.3;
@@ -38,6 +41,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-left: 25px;
+  width: fit-content;
+  margin-left: auto;
+  margin-left: 25px;
+  margin-bottom: 5px;
+  margin-top: 8px;
 }
 
 .card-content-job-candidate {
@@ -49,6 +58,11 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: initial;
+
+  &-location {
+    width: 200px;
+  }
 }
 
 .link__job-detail {

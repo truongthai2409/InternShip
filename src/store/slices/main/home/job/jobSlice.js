@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ const jobSlice = createSlice({
     jobList: [],
     jobListCompany: [],
     jobListName: [],
+    jobFilter: [],
     jobListNameHavePages: [],
     jobListActived: [],
     jobListDisabled: [],
@@ -75,6 +76,9 @@ const jobSlice = createSlice({
     builder.addCase(getJobPositionList.fulfilled, (state, { payload }) => {
       state.jobPosition = payload;
     });
+    builder.addCase(getJobFilterByUser.fulfilled, (state, { payload }) => {
+      state.jobFilter = payload.contents;
+    });
     builder.addCase(addJob.fulfilled, (state, payload) => {
       if (payload.payload[1] === "repost") {
         state.jobListActived.unshift(payload.payload[0]);
@@ -114,7 +118,6 @@ const jobSlice = createSlice({
     });
   },
 });
-
 export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
   return axios
     .get(`${baseURL}/api/r2s/job?no=${args[0] - 1}&limit=${args[1]}`)
@@ -285,6 +288,22 @@ export const getListCandidateApplied = createAsyncThunk(
           args[1] - 1
         }&limit=${args[2]}`
       )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
+
+export const getJobFilterByUser = createAsyncThunk(
+  "job/getJobFilterByUser",
+  async (dataSearch) => {
+    return axios
+      .get(`${baseURL}/api/r2s/job/filter`, {
+        params: dataSearch,
+      })
       .then((response) => {
         return response.data;
       })

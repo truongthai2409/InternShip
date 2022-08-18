@@ -3,15 +3,20 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ButtonOutline from "../ButtonOutline";
-import EditIcon from '@mui/icons-material/Edit';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import TransgenderIcon from '@mui/icons-material/Transgender';
-import PersonIcon from '@mui/icons-material/Person';
+import EditIcon from "@mui/icons-material/Edit";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import TransgenderIcon from "@mui/icons-material/Transgender";
+import PersonIcon from "@mui/icons-material/Person";
+import LanguageIcon from "@mui/icons-material/Language";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import { Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getProfileByIdUser, getUserById } from "src/store/slices/Admin/user/userSlice";
+import {
+  getProfileByIdUser,
+  getUserById,
+} from "src/store/slices/Admin/user/userSlice";
 
 export const role = (id) => {
   let role = "";
@@ -47,7 +52,7 @@ export const gender = (id) => {
   return gender;
 };
 
-export const UserInfor = ({open, setOpen}) => {
+export const UserInfor = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const { user, profile } = useSelector((state) => state.user);
   const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
@@ -71,16 +76,6 @@ export const UserInfor = ({open, setOpen}) => {
             alt="Ảnh đại diện"
           />
         </div>
-        <ButtonOutline
-          onClick={handleOpen}
-          width="200px"
-          bg="#F3F4F6"
-          outline="1.5px solid #DEDEDE"
-          name="Chỉnh sửa thông tin"
-          color="#111111"
-          fz="14px"
-          radius="4px"
-        />
       </div>
       <div className="profile__infor">
         <h1 className="profile__infor-name">
@@ -88,10 +83,20 @@ export const UserInfor = ({open, setOpen}) => {
             profile?.user?.firstName || user?.firstName
           }`}
           <span className="profile__infor-location">
-            <EditIcon />
+            <ButtonOutline
+              onClick={handleOpen}
+              icon={<EditIcon />}
+              outline="none"
+              color="#111111"
+              fz="14px"
+              radius="4px"
+              padding="0"
+            />
           </span>
         </h1>
         <h4 className="profile__infor-username">@{profile?.user?.username}</h4>
+        <Divider orientation="horizontal" width="90%" height="2px" />
+        <br />
         <div className="profile__infor-item">
           <span>
             <EmailIcon /> Email:
@@ -154,8 +159,8 @@ export const CompanyInfo = () => {
 
   return (
     <div className="company-infor__wrapper">
-      <h2 className="company-infor__title">Công ty</h2>
-      <Divider />
+      {/* <h2 className="company-infor__title">Công ty</h2> */}
+      {/* <Divider /> */}
       <div className="company-infor__content">
         <div className="company-infor__col-1">
           <img
@@ -165,40 +170,53 @@ export const CompanyInfo = () => {
           />
           <p className="company-infor__name">{profile?.company?.name}</p>
         </div>
-        <div className="company-infor__col-2">
-          <div className="company-infor__profile">
-            <div className="company-infor__row">
-              <p className="company-infor__item">
-                <span>Email:</span>
-                {profile?.company?.email}
-              </p>
-              <p className="company-infor__item">
-                <span>Số điện thoại:</span>
-                {profile?.company?.phone}
-              </p>
-            </div>
-            <div className="company-infor__row">
-              <p className="company-infor__item">
-                <span>Website:</span>
-                <a
-                  style={{ textDecoration: "underline", color: "blue" }}
-                  href={profile?.company?.website}
-                  target="_blank"
-                >
-                  {profile?.company?.website}
-                </a>
-              </p>
-              <p className="company-infor__item">
-                <span>Mã số thuế:</span>
-                {profile?.company?.tax}
-              </p>
-            </div>
-            <p className="company-infor__des-company">
-              <span>Mô tả công ty:</span>
-              <br />
-              {profile?.company?.description}
+        <Divider orientation="horizontal" width="100%" height="2px" />
+        <br />
+        <div className="company-infor__profile">
+          <div className="company-infor__row">
+            <p className="company-infor__item">
+              <span>
+                {" "}
+                <EmailIcon />
+                Email:
+              </span>
+              {profile?.company?.email}
+            </p>
+            <p className="company-infor__item">
+              <span>
+                <PhoneIcon />
+                Số điện thoại:
+              </span>
+              {profile?.company?.phone}
             </p>
           </div>
+          <div className="company-infor__row">
+            <p className="company-infor__item">
+              <span>
+                <LanguageIcon />
+                Website:
+              </span>
+              <a
+                style={{ textDecoration: "underline", color: "blue" }}
+                href={profile?.company?.website}
+                target="_blank"
+              >
+                {profile?.company?.website}
+              </a>
+            </p>
+            <p className="company-infor__item">
+              <span>
+                <ConfirmationNumberIcon />
+                Mã số thuế:
+              </span>
+              {profile?.company?.tax}
+            </p>
+          </div>
+          <p className="company-infor__des-company">
+            <span>Mô tả công ty:</span>
+            <br />
+            {profile?.company?.description}
+          </p>
         </div>
       </div>
     </div>

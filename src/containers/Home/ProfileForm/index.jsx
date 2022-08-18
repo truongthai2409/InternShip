@@ -25,10 +25,13 @@ const ProfileForm = ({ handleClose }) => {
 
   useEffect(() => {
     // setValue("avatar", profile?.user.avatar);
-    setValue("firstName", profile?.user?.firstName);
-    setValue("lastName", profile?.user?.lastName);
-    setValue("email", profile?.user?.email);
-    setValue("phone", profile?.user?.phone);
+    setValue(
+      "firstName",
+      profile?.user?.firstName || profile?.userDTO?.firstName
+    );
+    setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
+    setValue("email", profile?.user?.email || profile?.userDTO?.email);
+    setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
   }, []);
 
   const onSubmit = (data) => {
@@ -103,7 +106,7 @@ const ProfileForm = ({ handleClose }) => {
               register={register}
               id="gender"
               label="Giới tính"
-              defaultValue={profile?.user?.gender}
+              defaultValue={profile.user.gender}
               options={genderList}
             >
               {errors.gender?.message}

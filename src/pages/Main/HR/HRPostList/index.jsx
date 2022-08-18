@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./styles.scss";
+import "./responsive.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
 import { ListJob } from "./ListJob";
@@ -47,14 +48,12 @@ const HRPostList = (props) => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
   const dispatch = useDispatch();
-  const { jobListActived, jobListDisabled } = useSelector(
-    (state) => state.job
-  );
+  const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getJobListByUserId(userPresent.idUser));
   }, []);
-  
+
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">

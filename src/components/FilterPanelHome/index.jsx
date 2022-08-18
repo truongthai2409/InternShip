@@ -7,6 +7,7 @@ import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
+import { Pagination, Stack } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, jobList, ...other } = props;
@@ -102,7 +103,7 @@ const FilterPanelHome = ({
       <TabPanel value={value} index={2}>
         {/* <CardHome /> */}
       </TabPanel>
-      {/* <Stack spacing={2}>
+      <Stack spacing={2}>
         <Pagination
           page={jobListNameHavePages?.numberOfCurrentPage || 0}
           defaultPage={1}
@@ -117,7 +118,7 @@ const FilterPanelHome = ({
           //     jobListNameHavePages?.totalPages
           // }
         />
-      </Stack> */}
+      </Stack>
     </Box>
   );
 };

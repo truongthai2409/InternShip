@@ -17,10 +17,10 @@ const DetailHome = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { keyword } = useParams()
+  const { keyword } = useParams();
   // console.log(keyword);
 
-  const { jobDetailById, idJobActive } = useSelector((state) => state.job);
+  const { jobDetailById } = useSelector((state) => state.job);
 
   useEffect(() => {
     const dataSearch = {

@@ -1,31 +1,34 @@
 @use "../../assets/styles/" as *;
 
 .base__information {
-  padding: 3px;
   .company-name {
     // text-align: center;
     width: auto;
     font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
     line-height: 33px;
+    color: rgb(53, 53, 53);
+    line-height: 35.2px;
   }
   .base__information-card {
-    background-color: $primary-color-background-2;
+    background-color: $color-white-0;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 6px;
 
     .img-logo {
-      width: 135px;
-      // height: 130px;
+      width: 120px;
+      height: 100px;
       border-radius: 4px;
       margin-left: 35px;
       margin-right: 23px;
       transform: translate(-30px, 15px);
       margin-bottom: 20px;
+      opacity: 1;
+      transition: opacity 200ms;
     }
 
     &-detail {
@@ -38,13 +41,21 @@
       }
       p {
         padding-left: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       a {
         padding-left: 5px;
         color: $primary-color-2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       h5 {
         transform: translateY(5px);
+        display: flex;
+        align-items: center;
       }
     }
   }
@@ -57,11 +68,11 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-    margin-top: 29px;
     /* identical to box height */
     display: flex;
     align-items: center;
     color: #000000;
+    margin-left: 7px;
 
     &-appling {
       margin-bottom: 14px;

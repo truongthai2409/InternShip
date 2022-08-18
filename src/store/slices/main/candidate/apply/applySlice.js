@@ -39,7 +39,6 @@ const applySlice = createSlice({
 export const getApplyListByIdCandidate = createAsyncThunk(
   "apply_candidate/getApplyListByIdCandidate",
   async (data) => {
-    console.log(data);
     return axios
       .get(`${baseURL}/api/applylist/candidate/${data.idCandidate}`, {
         params: data.page,

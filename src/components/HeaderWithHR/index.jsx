@@ -203,15 +203,27 @@ const HeaderWithHR = (props) => {
       <div className="header__hr-icon">
         <div
           style={{
-            borderRadius: "20px",
+            borderRadius: "14px",
             backgroundColor: "#FFFFFF",
+            boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.15)",
             display: "flex",
             alignItems: "center",
             paddingLeft: "12px",
             paddingRight: "12px",
           }}
         >
-          <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
+          {pathUrl === "/candidate" ||
+          pathUrl === "/candidate/view-list-apply" ||
+          pathUrl === "/candidate/view-list-care" ||
+          pathUrl === "/candidate/profile" ||
+          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
+              profile?.userDTO?.firstName || ""
+            }`}</h4>
+          ) : (
+            <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
+          )}
+
           <AccountMenu
             linkImg={
               profile?.user?.avatar
