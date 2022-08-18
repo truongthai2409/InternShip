@@ -15,6 +15,8 @@ import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
 import SelectCustom from '../../../../components/Select'
 import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
 import { TabTitle } from 'src/utils/GeneralFunctions'
+import {  } from 'src/components/CustomInput/components'
+import InputFile from 'src/components/InputFile'
 
 const CandidateInfo = () => {
   TabTitle('Đăng ký - Ứng viên')
@@ -36,6 +38,7 @@ const CandidateInfo = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
@@ -114,7 +117,6 @@ const CandidateInfo = () => {
           {errors.password?.message}
           {errorMessage?.Password}
         </CustomInput>
-
         <CustomInput
           label="Xác nhận mật khẩu"
           id="confirmPassword"
@@ -125,7 +127,6 @@ const CandidateInfo = () => {
         >
           {errors.confirmPassword?.message}
         </CustomInput>
-
         <p className="reg-candidate__title-infor">Cập nhật thông tin</p>
         <div className="reg-candidate__form--name">
           <CustomInput
@@ -137,7 +138,6 @@ const CandidateInfo = () => {
           >
             {errors.lastname?.message}
           </CustomInput>
-
           <CustomInput
             label="Tên"
             id="firstname"
@@ -148,7 +148,6 @@ const CandidateInfo = () => {
             {errors?.firstname?.message}
           </CustomInput>
         </div>
-
         <CustomInput
           label="Số điện thoại"
           id="phone"
@@ -176,25 +175,26 @@ const CandidateInfo = () => {
         >
           {errors.major?.message}
         </SelectCustom>
-        <CustomInput
+        <InputFile
           label="Ảnh đại diện"
+          requirementField = {false}
           id="avatar"
-          type="file"
+          format="image"
+          setValue={setValue}
           register={register}
         >
           {errors.avatar?.message}
-        </CustomInput>
-
-        <CustomInput
+        </InputFile>
+        <InputFile
           label="CV"
+          requirementField = {false}
           id="cv"
-          type="file"
+          // format="pdf"
+          setValue={setValue}
           register={register}
-          requirementField={false}
         >
           {errors.cv?.message}
-        </CustomInput>
-
+        </InputFile>
         <div className="reg-candidate__btns">
           <div className="reg-candidate__btns--item" onClick={handleBackClick}>
             <ArrowButton fontSize="16px" text="Trở lại" direction="left" />

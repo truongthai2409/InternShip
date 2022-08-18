@@ -1,13 +1,26 @@
 @use "../../../../assets/styles/" as *;
 
 .candidate-list__wrapper {
-  width: 550px;
+  min-width: 550px;
+  height: 632px;
+  margin-top: 14px;
+  position: relative;
   .dialog-title {
     font-size: 20px;
   }
 
   .css-wjh20t-MuiPagination-ul {
     justify-content: center !important;
+  }
+
+  .pagination__wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  &.none-list {
+    height: 145px !important;
   }
 }
 
@@ -21,7 +34,8 @@
   display: flex;
   width: 100%;
   margin-bottom: 20px;
-  background-color: rgba(235, 235, 235, 0.8);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0 0 0 / 24%);
   padding: 30px 10px;
   border-radius: 8px;
   position: relative;
@@ -95,4 +109,5 @@
       }
     }
   }
+
 }

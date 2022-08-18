@@ -17,14 +17,14 @@ const Textarea = ({
   isUpdate = false,
 }) => {
   useEffect(() => {
-    if (isUpdate) {
-      setValue(id, defaultValue);
-    }
     register(id);
   }, [register]);
 
   useEffect(() => {
-  }, [defaultValue])
+    if (isUpdate) {
+      setValue(id, defaultValue);
+    }
+  }, []);
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
@@ -67,7 +67,6 @@ const Textarea = ({
             onChange={handleOnChange}
             placeholder={placeholder}
             defaultValue={defaultValue}
-            value={defaultValue}
           />
           {check ? null : (
             <p className="custom-textarea__error">

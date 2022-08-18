@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { genderList } from "./validateForm";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import InputFile from "src/components/InputFile";
 
 const ProfileForm = ({ handleClose }) => {
   const {
@@ -59,21 +60,17 @@ const ProfileForm = ({ handleClose }) => {
             (<span className="field-requirment"> * </span>)Trường bắt buộc
           </p>
           <div className="profile-form__content-item">
-            <CustomInput
-              register={register}
-              id="avatar"
+            <InputFile
               label="Ảnh đại diện"
-              type="file"
-              setValue={setValue}
-              file={profile?.user.avatar}
               requirementField={false}
-              className="profile-form__input"
+              id="avatar"
+              format="image"
               radius="2px"
-              height="45px"
-              border="1.6px solid #777777"
+              setValue={setValue}
+              register={register}
             >
               {errors.avatar?.message}
-            </CustomInput>
+            </InputFile>
           </div>
           <div className="profile-form__content-item">
             <CustomInput

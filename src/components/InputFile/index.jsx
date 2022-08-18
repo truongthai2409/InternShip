@@ -1,17 +1,15 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./styles.scss";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { useEffect } from "react";
-import { FileUpload } from "./components";
+import { FileUpload, ImageUpload } from "./components";
 
-const CustomInput = ({
+const InputFile = ({
   label,
   id,
-  type,
-  format,
-  placeholder,
+  format = "not image",
   children,
   register,
   unregister = null,
@@ -33,19 +31,68 @@ const CustomInput = ({
     }
   }, [check]);
 
+  let accept;
+  let text;
+  switch (format) {
+    case "image":
+      accept = ".png, .jpg";
+      text = "Chỉ hỗ trợ file .JPG, .PNG. Kích thước tối đa 512KB."
+      break;
+    case "doc":
+      accept = ".docx";
+      text="Chỉ hỗ trợ file .DOCX."
+      break;
+    case "pdf":
+      accept = ".pdf";
+      text="Chỉ hỗ trợ file .PDF."
+      break;
+    case "excel":
+      accept = ".xlsx";
+      break;
+    default: // all of file (except image)
+      accept = ".docx, .pdf, .xlsx";
+      text="Chỉ hỗ trợ file .DOCX, .PDF, .XLSX."
+  }
+
   const [isHide, setIsHide] = useState(false);
+  const [imgSrc, setImgSrc] = useState("");
+  const [fileName, setFileName] = useState("");
   const handleHide = () => {
     setIsHide(!isHide);
   };
+
+  const handlePreviewFile = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let imgFile = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (x) => {
+        setImgSrc(x.target.result);
+      };
+      reader.readAsDataURL(imgFile);
+      setValue(id, imgFile);
+      setFileName(imgFile.name);
+    }
+  };
+
+  let component;
+  switch (format) {
+    case "image":
+      component = <ImageUpload text={text} img={imgSrc} />;
+      break;
+    default: //word or pdf or excel
+      component = <FileUpload text={text} format={format} fileName={fileName} />;
+  }
 
   return (
     <div className={`custom-input ${className ? className : ""} `}>
       <label htmlFor={id} className="custom-input__label">
         {label}
         {requirementField && <span className="field-requirment">*</span>}
+        {component}
       </label>
+      {check ? null : <p className="custom-input__error">{children}</p>}
       <div
-        className={` ${type === "file" && "file-input"}
+        className={` ${"file-input"}
           ${
             check
               ? "custom-input__textfield-disabled"
@@ -61,13 +108,13 @@ const CustomInput = ({
             height: height ? height : "",
             border: border ? border : "",
           }}
-          type={type === "password" ? (isHide ? "text" : "password") : type}
+          type="file"
           id={id}
-          placeholder={placeholder}
           disabled={check}
           {...register(id)}
+          onChange={handlePreviewFile}
+          accept={accept}
         />
-        {check ? null : <p className="custom-input__error">{children}</p>}
         {visibility && (
           <div
             className="visibility-icon"
@@ -82,4 +129,4 @@ const CustomInput = ({
   );
 };
 
-export default CustomInput;
+export default InputFile;

@@ -22,7 +22,7 @@ const CandidateList = ({ idJob }) => {
   };
 
   return (
-    <div className="candidate-list__wrapper">
+    <div className={`${listCandidatesApplied.length === 0 && "none-list"} candidate-list__wrapper`}>
       {listCandidatesApplied.length ? (
         listCandidatesApplied.map((candidate) => {
           return <CandidateCard candidate={candidate} />;

@@ -3,10 +3,15 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import ButtonOutline from "../ButtonOutline";
+import EditIcon from '@mui/icons-material/Edit';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import TransgenderIcon from '@mui/icons-material/Transgender';
+import PersonIcon from '@mui/icons-material/Person';
 import { Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
+import { useEffect, useState } from "react";
+import { getProfileByIdUser, getUserById } from "src/store/slices/Admin/user/userSlice";
 
 export const role = (id) => {
   let role = "";
@@ -40,6 +45,80 @@ export const gender = (id) => {
       gender = "Khác";
   }
   return gender;
+};
+
+export const UserInfor = ({open, setOpen}) => {
+  const dispatch = useDispatch();
+  const { user, profile } = useSelector((state) => state.user);
+  const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
+  const handleOpen = () => setOpen(true);
+
+  useEffect(() => {
+    dispatch(getProfileByIdUser(idUser));
+    dispatch(getUserById(idUser));
+  }, [idUser]);
+  return (
+    <div className="user-infor__wrapper">
+      <div className="profile__avatar">
+        <div>
+          <img
+            className="avatar__img"
+            src={
+              profile?.user?.avatar
+                ? `http://localhost:8085${profile?.user?.avatar}`
+                : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+            }
+            alt="Ảnh đại diện"
+          />
+        </div>
+        <ButtonOutline
+          onClick={handleOpen}
+          width="200px"
+          bg="#F3F4F6"
+          outline="1.5px solid #DEDEDE"
+          name="Chỉnh sửa thông tin"
+          color="#111111"
+          fz="14px"
+          radius="4px"
+        />
+      </div>
+      <div className="profile__infor">
+        <h1 className="profile__infor-name">
+          {`${profile?.user?.lastName || user?.lastName} ${
+            profile?.user?.firstName || user?.firstName
+          }`}
+          <span className="profile__infor-location">
+            <EditIcon />
+          </span>
+        </h1>
+        <h4 className="profile__infor-username">@{profile?.user?.username}</h4>
+        <div className="profile__infor-item">
+          <span>
+            <EmailIcon /> Email:
+          </span>
+          <h3>{profile?.user?.email}</h3>
+        </div>
+        <div className="profile__infor-item">
+          <span>
+            <PhoneIcon /> Số điện thoại:
+          </span>
+          <h3>{profile?.user?.phone}</h3>
+        </div>
+        <div className="profile__infor-item">
+          <span>
+            <TransgenderIcon /> Giới tính:
+          </span>
+          <h3>{gender(profile?.user?.gender)}</h3>
+        </div>
+        <div className="profile__infor-item">
+          <span>
+            <PersonIcon /> Vai trò:
+          </span>
+          <h3>{role(profile?.user?.role?.id)}</h3>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export const Actions = () => {

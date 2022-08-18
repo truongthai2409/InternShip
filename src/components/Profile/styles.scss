@@ -1,100 +1,121 @@
 @use "../../assets/styles/" as *;
 
 .profile__wrapper {
-  padding: 0px 200px 100px 200px;
-  display: flex;
-  align-items: flex-start;
+  padding: 20px 200px 100px 200px;
   width: 100%;
-  min-height: 1000px;
+  height: 800px;
+  gap: 45px;
+  display: flex;
   position: relative;
 
-  .profile__avatar {
+  //general infor
+  .user-infor__wrapper {
+    width: 35%;
+    height: 90%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0 0 0 / 24%);
 
-    > div {
-      position: relative;
-
-      .avatar__img {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-        object-fit: cover;
-      }
-    }
-    .btn-outline {
-      padding: 10px 12px;
-      margin-bottom: 18px;
-
-      &:hover {
-        background-color: $primary-color !important;
-        color: #ffffff !important;
-        opacity: 1;
-        transition: all 0.5s;
-      }
-    }
-  }
-  .profile__infor {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .profile__infor-name {
-      font-size: 40px;
-      text-align: center;
-
-      .profile__infor-location {
-        margin-left: 10px;
-        color: #dedede;
-
-        > svg {
-          font-size: 16px;
-        }
-      }
-    }
-
-    .profile__infor-username {
-      color: #888;
-      font-weight: 500;
-      font-size: 20px;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .profile__infor-item {
+    .profile__avatar {
       display: flex;
-      font-size: 26px;
-      margin-bottom: 15px;
-      width: 60%;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
 
-      > span {
-        display: flex;
-        align-items: center;
-        font-size: 22px;
-        font-weight: 500;
-        font-family: $f-family-1;
+      > div {
+        position: relative;
 
-        > svg {
-          font-size: 30px;
-          margin-right: 4px;
+        .avatar__img {
+          width: 170px;
+          height: 170px;
+          border-radius: 50%;
+          margin-bottom: 20px;
+          object-fit: cover;
+        }
+      }
+      .btn-outline {
+        padding: 10px 12px;
+        margin-bottom: 18px;
+
+        &:hover {
+          background-color: $primary-color !important;
+          color: #ffffff !important;
+          opacity: 1;
+          transition: all 0.5s;
         }
       }
 
-      > h3 {
-        font-size: 22px;
-        font-weight: 700;
+      .profile__infor-item {
+        display: flex;
+        font-size: 26px;
+        margin-bottom: 15px;
+        width: 60%;
+        justify-content: space-between;
+
+        > span {
+          display: flex;
+          align-items: center;
+          font-size: 22px;
+          font-weight: 500;
+          font-family: $f-family-1;
+
+          > svg {
+            font-size: 30px;
+            margin-right: 4px;
+          }
+        }
+
+        > h3 {
+          font-size: 22px;
+          font-weight: 700;
+        }
       }
     }
+
+    .profile__infor {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .profile__infor-name {
+        font-size: 40px;
+        text-align: center;
+
+        .profile__infor-location {
+          margin-left: 10px;
+          color: #dedede;
+
+          > svg {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .profile__infor-username {
+        color: #888;
+        font-weight: 500;
+        font-size: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+    }
+
+    
   }
 
   // company
   .company-infor__wrapper {
-    margin-top: 30px;
-    width: 100%;
+    width: 65%;
+    height: 90%;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0 0 0 / 24%);
 
     .company-infor__title {
       margin-bottom: 4px;
@@ -163,11 +184,15 @@
       }
     }
   }
-}
 
-.profile__actions {
-  display: flex;
-}
-.profile__actions-item {
-  margin: 0 18px 10px 10px;
+  .profile__actions {
+    display: flex;
+  }
+  .profile__actions-item {
+    margin: 0 18px 10px 10px;
+  }
+
+  .profile__infor-username {
+    height: 100%;
+  }
 }
