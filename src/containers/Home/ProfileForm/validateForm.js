@@ -35,6 +35,7 @@ export const schema = yup.object({
     )
     .test("type", " * Chỉ hỗ trợ jpeg, png.", (value) => {
       if (value[0]?.type) {
+        console.log("value", value)
         return (
           value[0]?.type === "image/jpeg" || value[0]?.type === "image/png"
         );

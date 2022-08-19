@@ -17,13 +17,14 @@ const Textarea = ({
   isUpdate = false,
 }) => {
   useEffect(() => {
-    if (isUpdate) {
-      setValue(id, defaultValue);
-    }
     register(id);
   }, [register]);
 
-  useEffect(() => {}, [defaultValue]);
+  useEffect(() => {
+    if (isUpdate) {
+      setValue(id, defaultValue);
+    }
+  }, []);
 
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);

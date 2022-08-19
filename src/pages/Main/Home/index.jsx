@@ -10,6 +10,7 @@ import {
   getJobByCompany,
   getJobByNameAndLocation,
   getJobFilterByUser,
+  getJobList,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
@@ -36,6 +37,7 @@ const Home = (props) => {
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
   const idCompany = jobDetail?.hr?.company?.id;
+  console.log(idCompany);
   const listPositionWorkingFormat = [
     "Backend",
     "Business Analysis",
@@ -86,6 +88,34 @@ const Home = (props) => {
     }
   }, [idCompany, dispatch]);
 
+  useEffect(() => {
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
+      name: "",
+      province: "",
+      major: "",
+      no: currentPage,
+      limit: 5,
+    };
+    dispatch(getJobFilterByUser(dataFilter));
+    dispatch(getJobByCompany(idCompany));
+  }, [idCompany, currentPage]);
+  useEffect(() => {
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
+      name: "",
+      province: "",
+      major: "",
+      no: 0,
+      limit: 5,
+    };
+    dispatch(getJobFilterByUser(dataFilter));
+    dispatch(getJobByCompany(idCompany));
+  }, []);
   useEffect(() => {
     const dataFilter = {
       type: "",

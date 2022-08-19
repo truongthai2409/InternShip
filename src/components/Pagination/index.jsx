@@ -3,7 +3,7 @@ import "./styles.scss";
 
 const PaginationCustom = ({totalPages, page, hanldeOnChange, variant="outlined", shape}) => {
   return (
-    <Stack spacing={2}>
+    <Stack className="pagination__wrapper" spacing={2}>
       <Pagination
         page={page}
         onChange={hanldeOnChange}

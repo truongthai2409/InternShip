@@ -52,6 +52,7 @@ const registerSlice = createSlice({
           state.user = action.payload;
           state.status = "success";
           state.error = {};
+          toast.success("Bạn đã đăng ký tài khoản thành công!");
         } else {
           state.status = "fail";
           state.error = action.payload;

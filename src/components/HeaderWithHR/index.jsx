@@ -206,8 +206,9 @@ const HeaderWithHR = (props) => {
       <div className="header__hr-icon">
         <div
           style={{
-            borderRadius: "20px",
+            borderRadius: "14px",
             backgroundColor: "#FFFFFF",
+            boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.15)",
             display: "flex",
             alignItems: "center",
             paddingLeft: "12px",

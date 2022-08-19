@@ -100,3 +100,65 @@
   }
 }
 
+.image-upload {
+  position: relative;
+  cursor: pointer;
+  margin-top: 7px;
+  height: 150px;
+  width: 100%;
+  border: 1px dashed $primary-color;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__text {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  &__img {
+    height: 95%;
+    border-radius: 4px;
+    object-fit: contain;
+  }
+}
+
+.file-upload {
+    position: relative;
+    cursor: pointer;
+    margin-top: 7px;
+    height: 61px;
+    width: 100%;
+    border: 1px dashed $primary-color;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__text {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      font-size: 11px;
+      font-weight: 400;
+
+      &.selected {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        font-size: 16px;
+      }
+    }
+  
+    &__img {
+      width: 12%;
+      height: 90%;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+  }

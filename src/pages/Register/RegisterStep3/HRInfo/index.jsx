@@ -13,6 +13,7 @@ import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import SelectCustom from "../../../../components/Select";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
+import InputFile from "src/components/InputFile";
 
 const HRInfo = () => {
   TabTitle("Đăng ký - Nhà tuyển dụng");
@@ -153,17 +154,15 @@ const HRInfo = () => {
         >
           {errors.gender?.message}
         </SelectCustom>
-        <CustomInput
+        <InputFile
           label="Ảnh đại diện"
           id="avatar"
-          type="file"
+          format="image"
           register={register}
           requirementField={false}
-          // check={true}
         >
           {errors.avatar?.message}
-        </CustomInput>
-
+        </InputFile>
         <SelectCustom
           label="Công ty"
           placeholder="Vui lòng chọn..."
