@@ -104,9 +104,9 @@ function App() {
           <Route
             path="/partner"
             element={
-              <AuthenticatedGuard>
-                <PartnerLayout />
-              </AuthenticatedGuard>
+              // <AuthenticatedGuard>
+              <PartnerLayout />
+              // </AuthenticatedGuard>
             }
           >
             {renderPartnerRouter()}

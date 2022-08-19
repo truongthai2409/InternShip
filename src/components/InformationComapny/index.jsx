@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../Button";
 import WorkIcon from "@mui/icons-material/Work";
@@ -23,10 +23,9 @@ const InformationCompany = ({
   demandPartner = false,
 }) => {
   const { profile } = useSelector((state) => state.authentication);
-
-  console.log(demandPartner);
+  const [disabled, setDisabled] = useState(false);
+  const [name, setName] = useState("Ứng tuyển");
   const dispatch = useDispatch();
-
   const handleAddJob = async (e) => {
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));
@@ -47,8 +46,10 @@ const InformationCompany = ({
           fileCV: res.cv,
         };
         const resApply = await dispatch(addApply(applyData));
-        if (resApply.type === "apply_candidate/addApply/fulfilled") {
+        if (resApply.payload.status === 200) {
           toast.success("Đã nộp CV thành công");
+          setDisabled(true);
+          setName("Đã ứng tuyển");
         }
       }
     } else {
@@ -134,15 +135,6 @@ const InformationCompany = ({
           </div>
           <div className="line"></div>
           <div className="detail__card-4">
-            {/* <div className="detail__card-4-item">
-          <Icon className="detail__card-4-item-icon">
-            <CurrencyExchangeIcon />
-          </Icon>
-          <Typography variant="h6" gutterBottom component="div" >
-            {formatSalary(jobDetail.salaryMin)} -{" "}
-            {formatSalary(jobDetail.salaryMax)}
-          </Typography>
-        </div> */}
             <div className="detail__card-4-item" sx={{ display: "flex" }}>
               <Icon className="detail__card-4-item-icon">
                 <WorkIcon />
@@ -190,7 +182,11 @@ const InformationCompany = ({
                 value={Number(rating)}
               />
             </Typography>
-            <Button name="Ứng tuyển" onClick={handleAddJob}></Button>
+            <Button
+              name={name}
+              onClick={handleAddJob}
+              disabled={disabled}
+            ></Button>
           </div>
         </>
       )}
@@ -217,7 +213,9 @@ const InformationCompany = ({
               </Typography>
             </Typography>
             <div className="detail__card-3-item">
-              {demandPartner ? <></> : (
+              {demandPartner ? (
+                <></>
+              ) : (
                 <Typography variant="span">
                   <Typography
                     variant="span"

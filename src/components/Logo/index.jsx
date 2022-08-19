@@ -14,20 +14,6 @@ const Logo = ({ id }) => {
     1: "Nhà tuyển dụng",
     4: "Cộng tác viên",
   };
-
-  // useEffect(() => {
-  //   const dataGetMarkByUser = {
-  //     userName: profile.username,
-  //     page: {
-  //       no: 0,
-  //       limit: 10,
-  //     },
-  //   };
-  //   if (profile.role === "Role_Candidate") {
-  //     dispatch(getMarkByUser(dataGetMarkByUser));
-  //   }
-  // }, []);
-
   const handleClickGoHome = async () => {
     if (profile.token !== undefined) {
       const dataGetMarkByUser = {
@@ -56,6 +42,20 @@ const Logo = ({ id }) => {
       navigate(`/`);
     }
   };
+  useEffect(() => {
+    // const dataGetMarkByUser = {
+    //   userName: profile.username,
+    //   page: {
+    //     no: 0,
+    //     limit: 10,
+    //   },
+    // };
+    // if (profile.role === "Role_Candidate") {
+    //   dispatch(getMarkByUser(dataGetMarkByUser));
+    // }
+    // handleClickGoHome();
+  }, []);
+
   return (
     <div onClick={handleClickGoHome}>
       <Link to="" className="logo">

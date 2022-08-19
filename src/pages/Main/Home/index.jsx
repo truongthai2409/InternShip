@@ -7,6 +7,7 @@ import "./styles.scss";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getJobByCompany,
   getJobByNameAndLocation,
   getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
@@ -25,16 +26,16 @@ const Home = (props) => {
     jobListName,
     jobDetail,
     indexCardActive,
-    jobListNameHavePages,
+    jobListHavePages,
     jobFilter,
+    jobListCompany,
   } = useSelector((state) => state.job);
-  // const [totalPages, setTotalPages] = useState();
 
   const [jobs, setJobs] = useState(jobFilter);
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
-
+  const idCompany = jobDetail?.hr?.company?.id;
   const listPositionWorkingFormat = [
     "Backend",
     "Business Analysis",
@@ -70,7 +71,7 @@ const Home = (props) => {
     };
     dispatch(getJobByNameAndLocation(dataSearch));
     // dispatch(getJobList([1, 10]));
-  }, [dispatch, currentPage]);
+  }, [dispatch]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
@@ -83,35 +84,24 @@ const Home = (props) => {
     if (profile.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, []);
+  }, [idCompany, dispatch]);
 
   useEffect(() => {
     const dataFilter = {
-      type: positionValue?.[0] || "",
+      type: "",
       order: "oldest",
-      position: positionValue?.[1] || "",
+      position: "",
       name: "",
       province: "",
-      major: positionValue?.[2] || "",
-      no: 0,
+      major: "",
+      no: currentPage,
       limit: 5,
     };
     dispatch(getJobFilterByUser(dataFilter));
-    // const _getJobs = async () => {
-    //   const data = await dispatch(getJobFilterByUser(dataFilter));
-    //   const res = unwrapResult(data);
-    //   setFilters(res.contents);
-    // };
-    // _getJobs();
-  }, []);
+    dispatch(getJobByCompany(idCompany));
+  }, [idCompany, currentPage]);
 
   const handleSearch = (value) => {
-    // const dataSearch = {
-    //   name: value || "",
-    //   province: locationValue || "",
-    //   no: 0,
-    //   limit: 5,
-    // };
     const dataFilter = {
       type: "",
       order: "oldest",
@@ -120,18 +110,9 @@ const Home = (props) => {
       province: locationValue || "",
       major: "",
       no: 0,
-      limit: 10,
+      limit: 5,
     };
     dispatch(getJobFilterByUser(dataFilter));
-    // dispatch(getJobByNameAndLocation(dataSearch));
-    // navigate(
-    //   `/candidate` +
-    //     `?name=${value || ""}&province=${
-    //       encodeURIComponent(locationValue)
-    //         .replace(/%20/g, "+")
-    //         .replace(/\s/g, "-") || ""
-    //     }&no=0&limit=10`
-    // );
   };
 
   const getValueLocationAndHandle = (value) => {
@@ -139,10 +120,6 @@ const Home = (props) => {
   };
 
   const handleCheck = (value) => {
-    // let temp = [];
-    // temp = value.filter(() =>
-    //   value.includes("Parttime" || "Fulltime" || "Remote")
-    // );
     let tempType = [];
     let tempPosition = [];
     let tempMajor = [];
@@ -178,8 +155,6 @@ const Home = (props) => {
       );
     }
     setMajor(tempMajor);
-
-    // setPositionValue(temp);
   };
 
   const getValuePageAndHandle = (value) => {
@@ -209,9 +184,8 @@ const Home = (props) => {
             <FilterPanelHome
               jobList={jobs}
               indexCardActive={indexCardActive}
-              // positionJobValue={positionJobValue}
               positionValue={positionValue}
-              jobListNameHavePages={jobListNameHavePages}
+              jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
             />
           </Grid>
@@ -228,6 +202,7 @@ const Home = (props) => {
                 jobDetail={jobDetail}
                 jobListName={jobListName}
                 candidate={props.candidate}
+                jobListCompany={jobListCompany}
               />
             </div>
           </Grid>

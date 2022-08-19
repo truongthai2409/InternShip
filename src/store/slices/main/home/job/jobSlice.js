@@ -11,7 +11,7 @@ const jobSlice = createSlice({
     jobListCompany: [],
     jobListName: [],
     jobFilter: [],
-    jobListNameHavePages: [],
+    jobListHavePages: [],
     jobListActived: [],
     jobListDisabled: [],
     jobDetailById: {},
@@ -62,8 +62,8 @@ const jobSlice = createSlice({
       }
     });
     builder.addCase(getJobByNameAndLocation.fulfilled, (state, { payload }) => {
-      state.jobListName = payload.contents;
-      state.jobListNameHavePages = payload;
+      state.jobListName = payload?.contents;
+      state.jobListHavePages = payload;
       if (payload?.contents?.length > 0) {
         state.jobDetail = payload.contents[0];
       } else {
@@ -77,7 +77,8 @@ const jobSlice = createSlice({
       state.jobPosition = payload;
     });
     builder.addCase(getJobFilterByUser.fulfilled, (state, { payload }) => {
-      state.jobFilter = payload.contents;
+      state.jobFilter = payload?.contents;
+      state.jobListHavePages = payload;
     });
     builder.addCase(addJob.fulfilled, (state, payload) => {
       if (payload.payload[1] === "repost") {

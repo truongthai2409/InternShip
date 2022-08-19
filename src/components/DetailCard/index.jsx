@@ -17,12 +17,11 @@ const DetailCard = ({
   jobPostHR,
   jobDetailById,
   demandPartner = false,
+  jobListCompany,
 }) => {
   const { appreciateList } = useSelector((state) => state.appreciate);
-  const { jobListCompany } = useSelector((state) => state.job);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
-  console.log(idCompany);
   useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
     dispatch(getJobByCompany(idCompany));

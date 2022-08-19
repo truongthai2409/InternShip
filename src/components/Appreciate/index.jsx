@@ -12,6 +12,9 @@ import ButtonCustom from "../Button";
 import "./styles.scss";
 import Modal from "../Modal";
 import { useForm } from "react-hook-form";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import {
   deleteAppreciate,
   getAppreciateByCompany,
@@ -28,6 +31,7 @@ import { schema } from "./validate";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Popover from "@mui/material/Popover";
 import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1.2),
 }));
@@ -56,6 +60,8 @@ const Appreciate = ({ appreciate }) => {
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
+  const [like, setLike] = useState(false);
+  const [dislike, setDislike] = useState(false);
   // const [isCheck, setIsCheck] = useState(false);
   const {
     register,
@@ -74,7 +80,7 @@ const Appreciate = ({ appreciate }) => {
     setValue("comment", appreciate?.comment);
     setValue("size-medium", appreciate?.score);
     setValue("isCheck", appreciate?.hide);
-  }, [setValue]);
+  }, []);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -142,7 +148,12 @@ const Appreciate = ({ appreciate }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handleClickLike = () => {
+    setLike(!like);
+  };
+  const handleClickDisLike = () => {
+    setDislike(!dislike);
+  };
   const openAnchorEl = Boolean(anchorEl);
   const id = openAnchorEl ? "simple-popover" : undefined;
 
@@ -164,14 +175,26 @@ const Appreciate = ({ appreciate }) => {
               : ""
           }
         >
-          <div className="appreciate">
+          <div
+            className="appreciate"
+            style={{
+              alignItems: "start",
+              justifyContent: "start",
+            }}
+          >
             <div className="fix_display">
-              {/* <img
+              <img
                 className=""
                 alt=""
                 src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-              /> */}
-              <div>
+              />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "start",
+                  flexDirection: "column",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -217,14 +240,6 @@ const Appreciate = ({ appreciate }) => {
                     }
                     sx={{ fontSize: 24 }}
                   />
-                  <Box
-                    sx={{
-                      fontSize: 16,
-                      // transform: "translate(0,13px)",
-                    }}
-                  >
-                    {/* {labels[value]} */}
-                  </Box>
                 </div>
                 <Typography
                   variant="p"
@@ -235,6 +250,7 @@ const Appreciate = ({ appreciate }) => {
                     display: "flex",
                     wordBreak: "break-word",
                     textAlign: "initial",
+                    fontWeight: "400",
                   }}
                 >
                   {/* {`${appreciate?.comment?.slice(
@@ -247,6 +263,57 @@ const Appreciate = ({ appreciate }) => {
                     }}
                   ></div>
                 </Typography>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "start",
+                  }}
+                >
+                  <Tooltip title="Thích đánh giá">
+                    <IconButton
+                      style={{
+                        borderRadius: "4px",
+                      }}
+                      aria-label="like"
+                      className="buttonMark__wrapper"
+                      onClick={handleClickLike}
+                    >
+                      {like === false ? (
+                        <ThumbUpOutlinedIcon
+                          fontSize="small"
+                          className="buttonMark__isChecking"
+                        />
+                      ) : (
+                        <ThumbUpIcon
+                          fontSize="small"
+                          className="buttonMark__isChecking"
+                        />
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Bỏ thích đánh giá">
+                    <IconButton
+                      style={{
+                        borderRadius: "4px",
+                      }}
+                      aria-label="dislike"
+                      onClick={handleClickDisLike}
+                      className="buttonMark__wrapper"
+                    >
+                      {/* {dislike === false ? (
+                        <ThumbDownOutlinedIcon
+                          fontSize="small"
+                          className="buttonMark__isChecking"
+                        />
+                      ) : (
+                        <ThumbDownIcon
+                          fontSize="small"
+                          className="buttonMark__isChecking"
+                        />
+                      )} */}
+                    </IconButton>
+                  </Tooltip>
+                </div>
               </div>
             </div>
 
@@ -313,6 +380,7 @@ const Appreciate = ({ appreciate }) => {
           </div>
         </Item>
         <Modal
+          iconClose={true}
           modalTitle="Sửa đánh giá "
           open={open}
           setOpen={setOpen}

@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import moment from "moment";
 
-import ButtonOutline from "../ButtonOutline";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,7 +11,6 @@ import {
   deleteMark,
   getMarkByUser,
 } from "src/store/slices/main/mark/markSlice";
-import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   addApply,
@@ -21,6 +19,7 @@ import {
 } from "src/store/slices/main/candidate/apply/applySlice";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { IconButton, Tooltip } from "@mui/material";
+import Button from "../Button";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE;
@@ -30,6 +29,8 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
+  const [disabled, setDisabled] = useState(false);
+  const [name, setName] = useState("Ứng tuyển");
   const dispatch = useDispatch();
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
@@ -68,13 +69,6 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     if (!res.payload.cv) {
       toast.error("Bạn chưa có CV, vui lòng cập nhật");
     } else {
-      // if (jobCare.jobCare.id) {
-      //   // for (let j = 0; j < eleDuplicate.length; j++) {
-      //   //   if (eleDuplicate[j].jobCare.id === jobCare.jobCare.id) {
-      //   //     toast.success("Bạn đã apply job này, vui lòng kiểm tra lại");
-      //   //   }
-      //   // }
-      // } else {
       const applyData = {
         apply: JSON.stringify({
           jobApp: {
@@ -89,9 +83,10 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       };
 
       const resApply = await dispatch(addApply(applyData));
-      if (resApply.type === "apply_candidate/addApply/fulfilled") {
+      if (resApply.payload.status === 200) {
         toast.success("Đã nộp CV thành công");
-        // }
+        setDisabled(true);
+        setName("Đã ứng tuyển");
       }
       const dataGetAppliedByCandidate = {
         idCandidate: candidateInfoByUsername?.id,
@@ -129,14 +124,6 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
                     {jobCare.jobCare?.jobType.name}
                   </span>
                 </div>
-                {/* <div className="card-job__company-salary">
-              <PaymentsIcon />
-              <span className="card-job-text">
-                {" "}
-                {formatSalary(jobCare.jobCare?.salaryMin)} -{" "}
-                {formatSalary(jobCare.jobCare?.salaryMax)}
-              </span>
-            </div> */}
                 <div className="card-job__company-location">
                   <LocationOnIcon />
                   <span className="card-job-text">
@@ -160,8 +147,8 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
               </Tooltip>
             </div>
 
-            <div className="card-job__send-cv" onClick={handleAddJob}>
-              <ButtonOutline name="Nộp CV" />
+            <div className="card-job__send-cv">
+              <Button name={name} onClick={handleAddJob} disabled={disabled} />
             </div>
           </div>
         </>
@@ -190,14 +177,6 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
                     {jobApplied?.jobApp?.jobType.name}
                   </span>
                 </div>
-                {/* <div className="card-job__company-salary">
-              <PaymentsIcon />
-              <span className="card-job-text">
-                {" "}
-                {formatSalary(jobApp.jobApp?.salaryMin)} -{" "}
-                {formatSalary(jobApp.jobApp?.salaryMax)}
-              </span>
-            </div> */}
                 <div className="card-job__company-location">
                   <LocationOnIcon />
                   <span className="card-job-text">

@@ -10,6 +10,7 @@ const ContentBaseInformation = ({
   pdLeft,
   pdRight,
   hideMark = false,
+  mgLeft,
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
@@ -19,7 +20,7 @@ const ContentBaseInformation = ({
         <h5
           className="intro__company-title intro__company-title-appling"
           style={{
-            marginLeft: "25px",
+            marginLeft: `${mgLeft ? mgLeft : ""}`,
           }}
         >
           Việc làm đang tuyển
