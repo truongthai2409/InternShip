@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { toast } from 'react-toastify'
-
 import './styles.scss'
 import ArrowButton from '../../../../components/ArrowButton/index'
 import Button from '../../../../components/Button'

@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0 0 0 / 24%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
     .profile__avatar {
       display: flex;
@@ -118,7 +118,7 @@
     height: 80%;
     background-color: #FFFFFF;
     border-radius: 20px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0 0 0 / 24%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
     .company-infor__title {
       margin-bottom: 4px;
@@ -159,17 +159,20 @@
           display: flex;
           justify-content: space-between;
           margin-bottom: 18px;
+          gap: 70px;
 
           .company-infor__item {
             display: flex;
+            flex-basis: 50%;
             font-size: 18px;
             font-weight: 700;
+            justify-content: space-between;
 
             > span {
               font-weight: 500;
               font-size: 18px;
-              padding-right: 20px;
-              display: flex;  
+              padding-right: 6px;
+              display: flex;
 
               >svg {
                 font-size: 26px;

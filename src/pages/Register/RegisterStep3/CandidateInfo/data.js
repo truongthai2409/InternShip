@@ -41,7 +41,7 @@ export const schema = yup.object({
   lastname: yup.string().required("* Bạn phải nhập họ."),
   phone: yup
     .string()
-    .required(" * Bạn phải nhập tên số điện thoại.")
+    .required(" * Bạn phải nhập số điện thoại.")
     .matches(
       /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
       " * Số điện thoại không đúng."
