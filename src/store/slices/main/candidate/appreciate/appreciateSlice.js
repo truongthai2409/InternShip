@@ -14,7 +14,7 @@ const appreciateSlice = createSlice({
     });
     builder
       .addCase(getAppreciateByCompany.fulfilled, (state, { payload }) => {
-        state.appreciateList = payload.contents;
+        state.appreciateList = payload?.contents;
       })
       .addCase(updateAppreciate.fulfilled, (state, action) => {
         if (action.payload) {

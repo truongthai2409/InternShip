@@ -13,7 +13,6 @@ const InputFile = ({
   children,
   register,
   unregister = null,
-  check = false,
   defaultValue,
   requirementField = true,
   visibility = false,
@@ -25,33 +24,27 @@ const InputFile = ({
   top,
   setValue,
 }) => {
-  useEffect(() => {
-    if (check) {
-      unregister(id);
-    }
-  }, [check]);
-
   let accept;
   let text;
   switch (format) {
     case "image":
       accept = ".png, .jpg";
-      text = "Chỉ hỗ trợ file .JPG, .PNG. Kích thước tối đa 512KB."
+      text = "Chỉ hỗ trợ file .JPG, .PNG. Kích thước tối đa 512KB.";
       break;
     case "doc":
       accept = ".docx";
-      text="Chỉ hỗ trợ file .DOCX."
+      text = "Chỉ hỗ trợ file .DOCX.";
       break;
     case "pdf":
       accept = ".pdf";
-      text="Chỉ hỗ trợ file .PDF."
+      text = "Chỉ hỗ trợ file .PDF.";
       break;
     case "excel":
       accept = ".xlsx";
       break;
     default: // all of file (except image)
       accept = ".docx, .pdf, .xlsx";
-      text="Chỉ hỗ trợ file .DOCX, .PDF, .XLSX."
+      text = "Chỉ hỗ trợ file .DOCX, .PDF, .XLSX.";
   }
 
   const [isHide, setIsHide] = useState(false);
@@ -62,6 +55,7 @@ const InputFile = ({
   };
 
   const handlePreviewFile = (e) => {
+    console.log(1)
     if (e.target.files && e.target.files[0]) {
       let imgFile = e.target.files[0];
       const reader = new FileReader();
@@ -69,7 +63,7 @@ const InputFile = ({
         setImgSrc(x.target.result);
       };
       reader.readAsDataURL(imgFile);
-      setValue(id, imgFile);
+      // setValue(id, imgFile);
       setFileName(imgFile.name);
     }
   };
@@ -80,7 +74,9 @@ const InputFile = ({
       component = <ImageUpload text={text} img={imgSrc} />;
       break;
     default: //word or pdf or excel
-      component = <FileUpload text={text} format={format} fileName={fileName} />;
+      component = (
+        <FileUpload text={text} format={format} fileName={fileName} />
+      );
   }
 
   return (
@@ -90,15 +86,10 @@ const InputFile = ({
         {requirementField && <span className="field-requirment">*</span>}
         {component}
       </label>
-      {check ? null : <p className="custom-input__error">{children}</p>}
+      {<p className="custom-input__error">{children}</p>}
       <div
         className={` ${"file-input"}
-          ${
-            check
-              ? "custom-input__textfield-disabled"
-              : "custom-input__textfield"
-          }
-          
+          ${"custom-input__textfield"}
         `}
       >
         {icon}
@@ -108,9 +99,9 @@ const InputFile = ({
             height: height ? height : "",
             border: border ? border : "",
           }}
-          type="file"
           id={id}
-          disabled={check}
+          type="file"
+          name={id}
           {...register(id)}
           onChange={handlePreviewFile}
           accept={accept}

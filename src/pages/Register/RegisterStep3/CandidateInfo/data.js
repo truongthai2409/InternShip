@@ -50,13 +50,14 @@ export const schema = yup.object({
   avatar: yup
     .mixed()
     .nullable()
-    .test(
-      "type",
-      " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif.",
-      (value) => {
-        return value && IMAGE_FORMATS.includes(value[0]?.type);
-      }
-    )
+    // .test(
+    //   "type",
+    //   " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif.",
+    //   (value) => {
+    //     console.log("value", value);
+    //     return value && IMAGE_FORMATS.includes(value[0]?.type);
+    //   }
+    // )
     .test("fileSize", " * Ảnh vượt quá kích thước 512KB.", (value) => {
       return value && value[0]?.size <= 512*1024;
     })

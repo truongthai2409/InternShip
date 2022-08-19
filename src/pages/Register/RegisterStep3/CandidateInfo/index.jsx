@@ -18,19 +18,19 @@ import {  } from 'src/components/CustomInput/components'
 import InputFile from 'src/components/InputFile'
 
 const CandidateInfo = () => {
-  TabTitle('Đăng ký - Ứng viên')
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const { majorList } = useSelector(state => state.major)
-  const errorMessage = useSelector(errorSelector)
-  const handleBackClick = e => {
-    e.preventDefault()
-    navigate(-1)
-  }
+  TabTitle("Đăng ký - Ứng viên");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { majorList } = useSelector((state) => state.major);
+  const errorMessage = useSelector(errorSelector);
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
   useEffect(() => {
-    dispatch(getMajorList())
-  }, [dispatch])
+    dispatch(getMajorList());
+  }, [dispatch]);
 
   // const status = useSelector(statusSelector);
 
@@ -38,12 +38,12 @@ const CandidateInfo = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     // const step2Data = JSON.parse(sessionStorage.getItem("account"));
     const userData = {
       fileCV: data.cv[0],
@@ -57,23 +57,24 @@ const CandidateInfo = () => {
           lastName: data.lastname,
           firstName: data.firstname,
           phone: data.phone,
-          email: data.email
+          email: data.email,
         },
         major: {
-          id: parseInt(data.major)
-        }
-      })
-    }
+          id: parseInt(data.major),
+        },
+      }),
+    };
 
     try {
-      const res = await dispatch(registerCandidate(userData))
-      if (res.type === 'register/registerCandidate/fulfilled') {
-        navigate('/login')
+      const res = await dispatch(registerCandidate(userData));
+      if (res.payload.status === 200) {
+        toast.success("Đăng ký tài khoản thành công");
+        navigate("/login");
       }
     } catch (error) {
-      toast.error(error)
+      toast.error(error);
     }
-  }
+  };
 
   return (
     <div className="reg-candidate">
@@ -176,7 +177,7 @@ const CandidateInfo = () => {
         </SelectCustom>
         <InputFile
           label="Ảnh đại diện"
-          requirementField = {false}
+          requirementField={false}
           id="avatar"
           format="image"
           setValue={setValue}
@@ -186,7 +187,7 @@ const CandidateInfo = () => {
         </InputFile>
         <InputFile
           label="CV"
-          requirementField = {false}
+          requirementField={false}
           id="cv"
           // format="pdf"
           setValue={setValue}
@@ -204,6 +205,6 @@ const CandidateInfo = () => {
         </div>
       </form>
     </div>
-  )
-}
-export default CandidateInfo
+  );
+};
+export default CandidateInfo;

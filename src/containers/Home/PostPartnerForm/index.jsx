@@ -118,7 +118,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   }
 
   if (isUpdate) {
-    console.log(demandDetail?.desciption);
+    // console.log(demandDetail?.desciption);
     setValue("jobName", demandDetail?.name);
     setValue("jobDescription", demandDetail?.desciption);
     setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
@@ -152,7 +152,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV[0],
     };
 
-    console.log(demandData);
+    // console.log(demandData);
 
     if (isUpdate) {
       editDemand({ idDemand, demandData });
@@ -164,7 +164,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   if (status === "success") {
     navigate("/partner/post-list");
   }
-  console.log("formSample", formSample);
+  // console.log("formSample", formSample);
   return (
     <>
       <div className="partner-post__container">
@@ -277,7 +277,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   className="description-btn-post-partner"
                   onClick={handleToggle}
                 >
-                  {openForm == false ? "(Xem thư mẫu)" : "(Đóng)"}
+                  {openForm === false ? "(Xem thư mẫu)" : "(Đóng)"}
                 </button>
               </div>
               {openForm && (

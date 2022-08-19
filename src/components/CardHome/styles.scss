@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .cardHome__container {
   width: 100%;
@@ -28,6 +28,13 @@
 
       .cardHome__title {
         color: $primary-color;
+        display: -webkit-box;
+        font-size: 16px;
+        line-height: 1.3;
+        -webkit-line-clamp: 1; /* số dòng hiển thị */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .cardHome__nameCompany {
@@ -62,7 +69,7 @@
         p {
           font-size: 10px;
           color: #626262;
-          font-family: 'Open Sans';
+          font-family: "Open Sans";
           font-style: normal;
           margin-left: 6px;
         }

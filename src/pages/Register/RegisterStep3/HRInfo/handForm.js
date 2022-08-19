@@ -55,6 +55,7 @@ export const schema = yup
         "fileSize",
         " * Ảnh bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
+          console.log(value);
           if (value[0]?.size) {
             return value[0]?.size <= 512 * 1024;
           } else {

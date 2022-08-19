@@ -48,8 +48,9 @@ const FilterPanelHome = ({
   positionJobValue,
   positionValue,
   onChange,
-  jobListNameHavePages,
+  jobListHavePages,
 }) => {
+  console.log(jobList);
   const location = useLocation();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);
@@ -97,28 +98,28 @@ const FilterPanelHome = ({
             ))
           : null}
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        {/* <CardHome /> */}
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        {/* <CardHome /> */}
-      </TabPanel>
-      <Stack spacing={2}>
-        <Pagination
-          page={jobListNameHavePages?.numberOfCurrentPage || 0}
-          defaultPage={1}
-          onChange={(e) => handlePagination(e.target.textContent)}
-          count={jobListNameHavePages?.totalPages || 1}
-          variant="outlined"
-          shape="rounded"
-          size="medium"
-          // disabled={
-          //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
-          //   jobListNameHavePages?.numberOfCurrentPage ===
-          //     jobListNameHavePages?.totalPages
-          // }
-        />
-      </Stack>
+      <TabPanel value={value} index={1}></TabPanel>
+      <TabPanel value={value} index={2}></TabPanel>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "16px",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            page={jobListHavePages?.numberOfCurrentPage || 0}
+            defaultPage={1}
+            onChange={(e) => handlePagination(e.target.textContent)}
+            count={jobListHavePages?.totalPages || 1}
+            variant="outlined"
+            shape="rounded"
+            size="medium"
+          />
+        </Stack>
+      </div>
     </Box>
   );
 };

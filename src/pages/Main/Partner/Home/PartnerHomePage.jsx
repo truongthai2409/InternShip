@@ -44,7 +44,9 @@ const PartnerHomePage = (props) => {
 
   const handlePaginate = (page) => {
     console.log(page);
-    keyword ? setCurrentSearchPage(parseInt(page)) : setCurrentPage(parseInt(page));
+    keyword
+      ? setCurrentSearchPage(parseInt(page))
+      : setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
 
@@ -61,9 +63,9 @@ const PartnerHomePage = (props) => {
     };
     dispatch(getDemandByName(dataSearch));
   }, [keyword, currentSearchPage]);
-  
+
   const handleSearch = (value) => {
-    value = value.replace("%20", "+")
+    value = value.replace("%20", "+");
     const dataSearch = {
       name: value || "",
       no: currentSearchPage - 1,

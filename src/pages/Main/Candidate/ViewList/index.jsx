@@ -15,7 +15,7 @@ import {
   getJobCandidateAppliedByNameAndLocation,
 } from "src/store/slices/main/candidate/apply/applySlice";
 import SearchResultHome from "src/components/SearchResultHome";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowButton from "src/components/ArrowButton";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
@@ -33,6 +33,7 @@ const CandidateViewList = () => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState();
+  const [emptyList, setEmpList] = useState("");
   // const jobCare = {};
   let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
     (state) => state.mark
@@ -51,7 +52,7 @@ const CandidateViewList = () => {
   }
   const { profile } = useSelector((state) => state.authentication);
   useEffect(() => {
-    const getValue = async () => {
+    const _getValue = async () => {
       const dataGetMarkByUser = {
         userName: profile.username,
         page: {
@@ -70,27 +71,25 @@ const CandidateViewList = () => {
           limit: 10,
         },
       };
-      dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
 
-      // if (
-      //   pathUrl === "/candidate/view-list-care" &&
-      //   careListOfPrivate &&
-      //   careListOfPrivate.length === 0
-      // ) {
-      //   toast.success(
-      //     "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
-      //   );
-      // }
+      if (
+        pathUrl === "/candidate/view-list-care" &&
+        careListOfPrivate?.length === 0
+      ) {
+        setEmpList(
+          "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
+        );
+      }
 
-      // if (
-      //   pathUrl === "/candidate/view-list-apply" &&
-      //   careListOfPrivate &&
-      //   careListOfPrivate.length === 0
-      // ) {
-      //   toast.success("Bạn chưa ứng tuyển công việc nào");
-      // }
+      if (
+        pathUrl === "/candidate/view-list-apply" &&
+        careListOfPrivate?.length === 0
+      ) {
+        setEmpList("Bạn chưa ứng tuyển công việc nào");
+      }
     };
-    getValue();
+    _getValue();
   }, [candidateInfoByUsername.id]);
 
   useEffect(() => {}, []);
@@ -164,13 +163,18 @@ const CandidateViewList = () => {
             <Grid item xs={7}>
               <div className="view-list__job-card">
                 {pathUrl === "/candidate/view-list-care" &&
-                  careListOfPrivate?.map((jobCare) => (
+                careListOfPrivate?.length > 0 ? (
+                  careListOfPrivate.map((jobCare) => (
                     <CardJob
                       key={jobCare.id}
                       jobCare={jobCare}
                       eleDuplicate={eleDuplicate}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <h3>{emptyList}</h3>
+                )}
+
                 {pathUrl === "/candidate/view-list-apply" &&
                   applyList?.map((jobApplied) => (
                     <CardJob

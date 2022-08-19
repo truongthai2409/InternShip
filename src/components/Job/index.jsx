@@ -140,7 +140,7 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight, hideMark }) => {
                     marginRight: "10px",
                   }}
                 >
-                  <ButtonMark width="25px" height="25px" />
+                  {/* <ButtonMark width="25px" height="25px" /> */}
                 </div>
               </div>
             )}

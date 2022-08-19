@@ -190,7 +190,17 @@ const BaseInformationCompany = ({
     const check = e.target.checked;
     checked = check;
   };
+  const handleChangeLink = (event, newValue) => {
+    setValueTab(1);
+  };
+  const handleChangeLinkViewAvaluate = (event, newValue) => {
+    setValueTab(1);
+  };
 
+  const handleChangeAvaluate = (event, newValue) => {
+    setValueTab(1);
+    setOpen(true);
+  };
   return (
     <div className="">
       {jobDetailById && (
@@ -498,6 +508,7 @@ const BaseInformationCompany = ({
                             jobListCompany={jobListCompany}
                             pdLeft={"25px"}
                             pdRight="25px"
+                            mgLeft="25px"
                           />
                         </Item>
                       </Grid>
@@ -543,9 +554,9 @@ const BaseInformationCompany = ({
                                 <Button
                                   className="button-card"
                                   name="Viết đánh giá"
-                                  bwidth="130px"
+                                  bwidth="150px"
                                   bheight="40px"
-                                  onClick={handleOpen}
+                                  onClick={handleChangeAvaluate}
                                 ></Button>
                               </div>
                             </div>
@@ -557,11 +568,17 @@ const BaseInformationCompany = ({
                           sx={{
                             paddingTop: 1,
                             paddingBottom: 2.3,
-                            fontWeight: "600",
                           }}
                           elevation={0}
                         >
-                          Đánh giá mới nhất
+                          <h5
+                            className="intro__company-title"
+                            style={{
+                              transform: "translate(-7px,0px)",
+                            }}
+                          >
+                            Đánh giá mới nhất
+                          </h5>
                           <div>
                             {topAppreciate?.map((appreciate, index) => (
                               <Appreciate appreciate={appreciate} key={index} />
@@ -575,11 +592,16 @@ const BaseInformationCompany = ({
                             ></div>
                           </div>
                           <div className="button-card">
-                            <Link to="/candidate/information_company">
+                            <Link
+                              to={`/candidate/information_company/${jobDetail?.id}`}
+                              value={valueTab}
+                              index={1}
+                            >
                               <Button
                                 name="Xem tất cả đánh giá"
                                 bwidth="215px"
                                 bheight="40px"
+                                onClick={handleChangeLinkViewAvaluate}
                               ></Button>
                             </Link>
                           </div>
@@ -643,9 +665,11 @@ const BaseInformationCompany = ({
                         >
                           <div
                             className="appreciate intro__company-title"
-                            style={{
-                              marginLeft: "12px",
-                            }}
+                            style={
+                              {
+                                // marginLeft: "12px",
+                              }
+                            }
                           >
                             <h4
                               style={{ marginTop: "0px", marginLeft: 0 }}
@@ -657,6 +681,7 @@ const BaseInformationCompany = ({
                               modalTitle="Viết đánh giá"
                               open={open}
                               setOpen={setOpen}
+                              iconClose={true}
                               children={
                                 <div>
                                   <CustomInput
@@ -730,7 +755,7 @@ const BaseInformationCompany = ({
                             />
                             <Button
                               name="Viết đánh giá"
-                              bwidth="130px"
+                              bwidth="150px"
                               bheight="40px"
                               onClick={handleOpen}
                             ></Button>

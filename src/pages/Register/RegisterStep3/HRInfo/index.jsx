@@ -58,7 +58,8 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar[0] || null,
     };
-    dispatch(registerHr({ hrData, navigate }));
+    console.log("hrData", hrData.fileAvatar)
+    // dispatch(registerHr({ hrData, navigate }));
   };
 
   const handleBackClick = (e) => {

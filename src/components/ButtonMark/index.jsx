@@ -54,6 +54,7 @@ const ButtonMark = (props) => {
         },
         note: "Đây là công việc ưa thích của mình",
       };
+
       await dispatch(createMark(dataCareList));
       await dispatch(getMarkByUser(dataGetMarkByUser));
       setMark(!mark);
@@ -76,7 +77,6 @@ const ButtonMark = (props) => {
       }
     }
   };
-
   const handleLogin = async (e) => {
     e.stopPropagation();
     if (profile.username === undefined) {
@@ -99,7 +99,8 @@ const ButtonMark = (props) => {
         className="buttonMark__wrapper"
         onClick={handleClickMarkJob}
       >
-        {pathUrl === "/candidate" ? (
+        {pathUrl === "/candidate" ||
+        pathUrl === "/candidate/information_company/4" ? (
           props.isMark === false && mark === false ? (
             <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
           ) : (

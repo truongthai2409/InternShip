@@ -57,8 +57,6 @@ const Detail = ({
   rating,
   jobListCompany,
 }) => {
-  console.log(jobListCompany);
-
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const [jobType, setJobType] = useState({});

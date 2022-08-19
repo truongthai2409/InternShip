@@ -94,7 +94,8 @@
 }
 
 .file-input {
-  display: none;
+  display: inline-block;
+  opacity: 0;
   .custom-input__error {
     display: inline-block !important;
   }
