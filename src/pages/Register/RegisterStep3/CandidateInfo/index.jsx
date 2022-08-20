@@ -1,22 +1,21 @@
-import React, { useEffect } from "react";
-import { toast } from "react-toastify";
-
-import "./styles.scss";
-import ArrowButton from "../../../../components/ArrowButton/index";
-import Button from "../../../../components/Button";
-import CustomInput from "../../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { errorSelector } from "../../../../store/selectors/main/registerSelectors";
-import { genderList, schema } from "./data";
-import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
-import SelectCustom from "../../../../components/Select";
-import { registerCandidate } from "src/store/slices/main/register/registerSlice";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import {} from "src/components/CustomInput/components";
-import InputFile from "src/components/InputFile";
+import React, { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import './styles.scss'
+import ArrowButton from '../../../../components/ArrowButton/index'
+import Button from '../../../../components/Button'
+import CustomInput from '../../../../components/CustomInput/index'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { errorSelector } from '../../../../store/selectors/main/registerSelectors'
+import { genderList, schema } from './data'
+import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
+import SelectCustom from '../../../../components/Select'
+import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
+import { TabTitle } from 'src/utils/GeneralFunctions'
+import {  } from 'src/components/CustomInput/components'
+import InputFile from 'src/components/InputFile'
 
 const CandidateInfo = () => {
   TabTitle("Đăng ký - Ứng viên");

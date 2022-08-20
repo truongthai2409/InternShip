@@ -208,7 +208,7 @@ const HeaderWithHR = (props) => {
           style={{
             borderRadius: "14px",
             backgroundColor: "#FFFFFF",
-            boxShadow: "0 0 20px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.15)",
+            boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
             display: "flex",
             alignItems: "center",
             paddingLeft: "12px",

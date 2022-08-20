@@ -1,4 +1,5 @@
 import "./styles.scss";
+import "./reponsive.scss";
 import { useState } from "react";
 import Modal from "../Modal";
 import ProfileForm from "src/containers/Home/ProfileForm";

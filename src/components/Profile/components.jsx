@@ -180,7 +180,9 @@ export const CompanyInfo = () => {
                 <EmailIcon />
                 Email:
               </span>
-              {profile?.company?.email}
+              <p className="screen__max-width-375px">
+                {profile?.company?.email}
+              </p>
             </p>
             <p className="company-infor__item">
               <span>
