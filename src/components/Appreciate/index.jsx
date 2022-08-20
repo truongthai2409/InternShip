@@ -167,7 +167,7 @@ const Appreciate = ({ appreciate }) => {
     >
       <Stack sx={{}}>
         <Item
-          elevation={1}
+          elevation={0}
           sx={{}}
           className={
             appreciate?.user?.username === profile.username
@@ -226,7 +226,7 @@ const Appreciate = ({ appreciate }) => {
                 </div>
                 <div
                   style={{
-                    marginBottom: 10,
+                    // marginBottom: 10,
                     transform: "translate(-2px,0)",
                   }}
                 >
@@ -238,7 +238,7 @@ const Appreciate = ({ appreciate }) => {
                     emptyIcon={
                       <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                     }
-                    sx={{ fontSize: 24 }}
+                    sx={{ fontSize: 20, marginBottom: 2 }}
                   />
                 </div>
                 <Typography

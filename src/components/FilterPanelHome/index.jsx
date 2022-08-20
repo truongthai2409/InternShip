@@ -50,7 +50,6 @@ const FilterPanelHome = ({
   onChange,
   jobListHavePages,
 }) => {
-  console.log(jobList);
   const location = useLocation();
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => setValue(newValue);

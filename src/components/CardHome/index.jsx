@@ -14,6 +14,7 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
+import { Link } from "react-router-dom";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE;
@@ -23,6 +24,9 @@ const CardHome = (props) => {
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
   // console.log(profile.username);
+  // React.useEffect(() => {
+  //   dispatch(getJobById(idJob));
+  // }, [idJob]);
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
@@ -61,6 +65,11 @@ const CardHome = (props) => {
   };
 
   return (
+    // <Link
+    //   to={`/candidate/detail_job/${props.id}`}
+    //   onClick={handleClick}
+    //   className="link__job-detail"
+    // >
     <div
       onClick={handleClick}
       className={clsx(
@@ -127,6 +136,7 @@ const CardHome = (props) => {
         </div>
       </div>
     </div>
+    // </Link>
   );
 };
 

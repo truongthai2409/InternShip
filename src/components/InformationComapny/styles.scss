@@ -72,8 +72,6 @@
         font-size: 16px;
       }
     }
-
-    
   }
 
   .line::after {
@@ -120,17 +118,17 @@
   }
 
   .css-1urujxi-MuiTypography-root {
-    padding-left: 10px !important;
+    // padding-left: 10px !important;
 
-    ol,ul {
+    ol,
+    ul {
       padding-left: 40px;
     }
   }
 
   .css-1d23cxy-MuiTypography-root {
-    padding-left: 6px !important;
+    // padding-left: 6px !important;
   }
-
 }
 
 .detail__card::-webkit-scrollbar {
@@ -174,5 +172,4 @@
       justify-content: start !important;
     }
   }
-
 }
