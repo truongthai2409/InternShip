@@ -190,7 +190,7 @@ const CandidateInfo = () => {
           label="CV"
           requirementField={false}
           id="cv"
-          // format="pdf"
+          format="pdf"
           setValue={setValue}
           register={register}
         >

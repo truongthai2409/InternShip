@@ -29,7 +29,7 @@ const InputFile = ({
     if (check) {
       unregister(id);
     }
-  }, [check]);
+  }, [check, id, unregister]);
 
   let accept;
   let text;

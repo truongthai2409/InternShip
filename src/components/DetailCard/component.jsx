@@ -15,6 +15,7 @@ import InformationCompany from "../InformationComapny";
 import BaseInformationCompany from "../BaseInformationCompany";
 import { Box } from "@mui/material";
 import InformationUniversity from "../InformationUniversity";
+import BaseInformationUniversity from "../BaseInformationUniversity";
 export function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -94,7 +95,7 @@ const Detail = ({
                 <h2>{jobDetail?.name}</h2>
                 <p className="name-company">
                   {jobDetail.hr?.company?.name ||
-                    jobDetail?.universityDTO?.name}
+                    jobDetail?.partner?.universityDTO?.name}
                 </p>
               </div>
             </div>
@@ -201,10 +202,9 @@ const Detail = ({
                   ></InformationUniversity>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                  <BaseInformationCompany
-                    isPartner={true}
-                    jobDetail={jobDetail}
-                    jobListCompany={jobListCompany}
+                  <BaseInformationUniversity
+                    demandDetail={jobDetail}
+                    demandListUni={jobListName}
                   />
                 </TabPanel>
               </Box>

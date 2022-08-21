@@ -22,6 +22,7 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
+import InputFile from "src/components/InputFile";
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
@@ -73,7 +74,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     dispatch(getJobPositionList());
     dispatch(getDemandById(idDemand));
     dispatch(getPartnerByUserID(idUser));
-  }, [idUser]);
+  }, [idUser, idDemand, dispatch]);
 
   const {
     register,
@@ -136,7 +137,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         startStr: moment(data.timeStart).format("YYYY-MM-DD"),
         endStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         partner: {
-          id: 25,
+          id: parseInt(activeUser?.universityDTO?.id),
         },
         major: {
           id: parseInt(data.major),
@@ -152,7 +153,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV[0],
     };
 
-    // console.log(demandData);
+    console.log(demandData);
 
     if (isUpdate) {
       editDemand({ idDemand, demandData });
@@ -298,16 +299,16 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               )}
             </div>
             <div className="partner-post__textarea">
-              <CustomInput
+              <InputFile
                 label="Danh sách sinh viên"
+                requirementField={false}
                 id="fileSV"
-                type="file"
-                placeholder=""
+                format="pdf"
+                setValue={setValue}
                 register={register}
-                studentList={true}
               >
-                {errors.fileSV?.message}
-              </CustomInput>
+              {errors.fileSV?.message}
+              </InputFile>
             </div>
             <div className="partner-post__action">
               <Button
