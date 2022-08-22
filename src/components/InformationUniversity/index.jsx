@@ -15,6 +15,8 @@ const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail }) => {
 
+  console.log(jobDetail);
+
   const handleApplyDemandUni = async (e) => {
   };
 
@@ -34,7 +36,7 @@ const InformationUniversity = ({ jobDetail }) => {
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
             <div
-              dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+              dangerouslySetInnerHTML={{ __html: jobDetail?.desciption }}
             ></div>
           </Typography>
         </Typography>

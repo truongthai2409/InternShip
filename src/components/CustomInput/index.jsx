@@ -30,7 +30,7 @@ const CustomInput = ({
     if (check) {
       unregister(id);
     }
-  }, [check]);
+  }, [check, id, unregister]);
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {

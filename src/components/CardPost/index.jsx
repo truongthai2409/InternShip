@@ -12,9 +12,7 @@ import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
 import Confirmation from "../Confirmation";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateStatusJob,
-} from "src/store/slices/main/home/job/jobSlice";
+import { updateStatusJob } from "src/store/slices/main/home/job/jobSlice";
 import PostPartnerForm from "src/containers/Home/PostPartnerForm";
 
 const CardPost = (props) => {
@@ -28,7 +26,6 @@ const CardPost = (props) => {
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
   });
-
 
   const update = () => {
     action.current = "update";
@@ -168,7 +165,7 @@ const CardPost = (props) => {
           onMouseEnter={read}
           height="50px"
           amountApplications={props.amountApplications}
-          amountDemands={props.amount}
+          amountDemands={!props.isDemandPost ? props.amount : ""}
           width="33.33%"
           borderTop="0.5px solid #DEDEDE"
           borderRight="0.5px solid #DEDEDE"
