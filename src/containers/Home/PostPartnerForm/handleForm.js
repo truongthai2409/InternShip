@@ -47,16 +47,16 @@ export const schema = yup
         "fileSize",
         " * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
-          if (value[0]?.size) {
-            return value && value[0]?.size <= 512 * 1024;
+          if (value?.size) {
+            return value && value?.size <= 512 * 1024;
           } else {
             return true;
           }
         }
       )
       .test("type", " * Chỉ hỗ trợ xlsx.", (value) => {
-        if (value[0]?.type) {
-          return value && fileSV_FORMATS.includes(value[0]?.type);
+        if (value?.type) {
+          return value && fileSV_FORMATS.includes(value?.type);
         } else {
           return true;
         }

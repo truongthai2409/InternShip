@@ -9,10 +9,12 @@ const demandSlice = createSlice({
   initialState: {
     demandList: [],
     demandListUniversity: [],
+    demandListUniversityActive: [],
     status: "fail",
     indexPartnerCardActive: 0,
     idPartnerCardActive: 0,
     demandDetail: {},
+    demandListByPartnerId: [],
     closeEditDemand: false,
     totalPagesofDemandList: 0,
   },
@@ -29,6 +31,7 @@ const demandSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getDemandListByUniId.fulfilled, (state, { payload }) => {
       state.demandListUniversity = payload;
+      state.demandListUniversityActive = payload?.contents;
     });
     builder
       .addCase(addDemand.pending, (state) => {
@@ -77,6 +80,13 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(updateDemand.fulfilled, (state, { payload }) => {
+        console.log(state.demandListUniversityActive);
+        state.demandListUniversityActive = state.demandListUniversityActive.map((demand) => {
+          if (demand.id === payload.id) {
+            return payload;
+          }
+          return demand;
+        })
         toast.success("Cập nhật danh sách thực tập thành công!");
         state.closeEditDemand = true;
       });
