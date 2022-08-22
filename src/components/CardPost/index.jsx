@@ -6,14 +6,13 @@ import CachedIcon from "@mui/icons-material/Cached";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
 import Confirmation from "../Confirmation";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getListCandidateApplied,
   updateStatusJob,
 } from "src/store/slices/main/home/job/jobSlice";
 import PostPartnerForm from "src/containers/Home/PostPartnerForm";
@@ -24,15 +23,11 @@ const CardPost = (props) => {
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
   const action = useRef("");
-  const { jobListActived, jobListDisabled, amountApplications } = useSelector((state) => state.job);
+  const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
     return job.id === props.idJob;
   });
-  // const amountCandidates = useRef({"amount" : amountApplications, "idJob" : props.idJob}); 
-  useEffect(() => {
-    console.log("amountCandidates")
-  }, []);
 
 
   const update = () => {
@@ -172,7 +167,7 @@ const CardPost = (props) => {
           onClick={handleOnClick}
           onMouseEnter={read}
           height="50px"
-          // amountApplications={amountCandidates.current}
+          amountApplications={props.amountApplications}
           amountDemands={props.amount}
           width="33.33%"
           borderTop="0.5px solid #DEDEDE"
