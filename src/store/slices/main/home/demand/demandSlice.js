@@ -21,7 +21,7 @@ const demandSlice = createSlice({
       state.idPartnerCardActive = action.payload;
     },
     updateIndexPartnerCardActive: (state, { payload }) => {
-      // console.log(state?.demandList);
+      console.log(state?.demandList);
       state.indexPartnerCardActive = payload;
       state.demandDetail = state?.demandList[payload];
     },
@@ -56,9 +56,9 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandByName.fulfilled, (state, { payload }) => {
-        // console.log(payload.demandList[0]);
+        console.log(payload.demandList);
         state.demandList = payload.demandList;
-        state.totalPagesofDemandList = payload.totalPage;
+        state.totalPagesofDemandList = payload?.totalPage;
         if (payload.demandList.length > 0) {
           state.demandDetail = payload.demandList[0];
         } else {
