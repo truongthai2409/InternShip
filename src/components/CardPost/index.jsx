@@ -173,7 +173,7 @@ const CardPost = (props) => {
           onMouseEnter={read}
           height="50px"
           // amountApplications={amountCandidates.current}
-          amountDemands={props.amount}
+          amountDemands={!props.isDemandPost ? props.amount : ""}
           width="33.33%"
           borderTop="0.5px solid #DEDEDE"
           borderRight="0.5px solid #DEDEDE"

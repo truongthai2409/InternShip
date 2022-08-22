@@ -36,7 +36,7 @@ const InformationUniversity = ({ jobDetail }) => {
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
             <div
-              dangerouslySetInnerHTML={{ __html: jobDetail?.description }}
+              dangerouslySetInnerHTML={{ __html: jobDetail?.desciption }}
             ></div>
           </Typography>
         </Typography>
@@ -97,7 +97,7 @@ const InformationUniversity = ({ jobDetail }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.phone || "Không có"}
+            {jobDetail?.universityDTO?.phone || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item" sx={{ display: "flex" }}>
@@ -113,7 +113,7 @@ const InformationUniversity = ({ jobDetail }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.email || "Không có"}
+            {jobDetail?.universityDTO?.email || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item">
@@ -129,7 +129,7 @@ const InformationUniversity = ({ jobDetail }) => {
               textOverflow: "ellipsis",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.address || "Không có"}
+            {jobDetail?.universityDTO?.address || "Không có"}
           </Typography>
         </div>
       </div>

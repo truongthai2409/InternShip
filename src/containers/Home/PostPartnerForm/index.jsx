@@ -63,7 +63,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const [useSampleForm, setUseSampleForm] = useState(false);
   // console.log(demandDetail);
 
-  // console.log(activeUser);
+  console.log(activeUser?.universityDTO?.id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -108,7 +108,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   async function postDemand(demandData) {
     setLoading(true);
-
     try {
       await dispatch(addDemand(demandData));
     } catch (error) {
@@ -137,7 +136,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         startStr: moment(data.timeStart).format("YYYY-MM-DD"),
         endStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         partner: {
-          id: parseInt(activeUser?.universityDTO?.id),
+          id: parseInt(activeUser?.id),
         },
         major: {
           id: parseInt(data.major),
@@ -283,7 +282,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               </div>
               {openForm && (
                 <div className="descriptionForm__partner">
-                  <DescriptionForm />
+                  <DescriptionForm schoolName={activeUser?.universityDTO?.name} />
 
                   <div className="description-confirm-sample-btn-container">
                     <button
@@ -303,7 +302,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Danh sách sinh viên"
                 requirementField={false}
                 id="fileSV"
-                format="pdf"
+                format="excel"
                 setValue={setValue}
                 register={register}
               >

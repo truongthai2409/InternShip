@@ -63,6 +63,7 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
+  console.log(jobDetailById?.universityDTO?.majors[0]?.name);
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -227,21 +228,21 @@ const Detail = ({
               <div>
                 <h2>
                   {jobDetailById?.hr?.company?.name ||
-                    jobDetailById?.universityDTO?.name}
+                    jobDetailById?.name}
                 </h2>
                 <p className="name-company">
                   {jobDetailById?.hr?.company?.name ||
-                    jobDetailById?.universityDTO?.shortName}
+                    jobDetailById?.universityDTO?.name}
                 </p>
               </div>
             </div>
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobDetailById?.jobType?.name || "fulltime"} />
-                  <TagName title={jobDetailById?.jobposition?.name} />
+                  <TagName title={jobDetailById?.jobType?.name || "Không có"} />
+                  <TagName title={jobDetailById?.position?.name || "Không có"} />
                   <TagName
-                    title={jobDetailById?.major?.name || "Công nghệ thông tin"}
+                    title={jobDetailById?.universityDTO?.majors[0]?.name || "Không có"}
                   />
                 </div>
               </div>
@@ -249,10 +250,10 @@ const Detail = ({
           </div>
           <div>
             <Box sx={{ width: "100%" }}>
-              <InformationCompany
-                jobDetailById={jobDetailById}
+              <InformationUniversity
+                jobDetail={jobDetailById}
                 demandPartner={demandPartner}
-              ></InformationCompany>
+              ></InformationUniversity>
             </Box>
           </div>
         </div>

@@ -108,17 +108,6 @@ const FilterPanelHome = ({
           marginTop: "16px",
         }}
       >
-        <Stack spacing={2}>
-          <Pagination
-            page={jobListHavePages?.numberOfCurrentPage || 0}
-            defaultPage={1}
-            onChange={(e) => handlePagination(e.target.textContent)}
-            count={jobListHavePages?.totalPages || 1}
-            variant="outlined"
-            shape="rounded"
-            size="medium"
-          />
-        </Stack>
       </div>
     </Box>
   );
