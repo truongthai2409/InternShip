@@ -59,7 +59,7 @@ const HRInfo = () => {
       fileAvatar: data.avatar[0] || null,
     };
     console.log("hrData", hrData.fileAvatar)
-    // dispatch(registerHr({ hrData, navigate }));
+    dispatch(registerHr({ hrData, navigate }));
   };
 
   const handleBackClick = (e) => {

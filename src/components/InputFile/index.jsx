@@ -28,7 +28,7 @@ const InputFile = ({
   let text;
   switch (format) {
     case "image":
-      accept = ".png, .jpg";
+      accept = ".png, .jpg, .jpeg, .gif, .bmp";
       text = "Chỉ hỗ trợ file .JPG, .PNG. Kích thước tối đa 512KB.";
       break;
     case "doc":
@@ -55,7 +55,6 @@ const InputFile = ({
   };
 
   const handlePreviewFile = (e) => {
-    console.log(1)
     if (e.target.files && e.target.files[0]) {
       let imgFile = e.target.files[0];
       const reader = new FileReader();
@@ -63,8 +62,9 @@ const InputFile = ({
         setImgSrc(x.target.result);
       };
       reader.readAsDataURL(imgFile);
-      // setValue(id, imgFile);
+      setValue(id, imgFile);
       setFileName(imgFile.name);
+      console.log("imgFile", imgFile);
     }
   };
 

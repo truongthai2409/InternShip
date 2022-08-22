@@ -4,7 +4,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
 import { useEffect } from "react";
-import { FileUpload } from "./components";
 
 const CustomInput = ({
   label,
