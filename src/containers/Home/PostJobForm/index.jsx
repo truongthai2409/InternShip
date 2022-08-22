@@ -115,7 +115,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
         hr: {
           id: profile?.id,
         },
-        desciption: data.jobDescription,
+        description: data.jobDescription,
         major: {
           id: parseInt(data.major),
         },
@@ -147,7 +147,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
         hr: {
           id: profile?.id,
         },
-        desciption: data.jobDescription,
+        description: data.jobDescription,
         major: {
           id: parseInt(data.major),
         },
@@ -353,11 +353,11 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Mô tả công việc"
                   id="jobDescription"
                   placeholder="Nhập mô tả công việc"
-                  register={register}
                   defaultValue={
-                    formStatus !== "post" ? jobDetail?.desciption : ""
+                    formStatus !== "post" ? jobDetail?.description : ""
                   }
                   setValue={setValue}
+                  register={register}
                   check={false}
                   isUpdate={formStatus !== "post" && true}
                 >

@@ -36,7 +36,7 @@ const InformationUniversity = ({ jobDetail }) => {
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
             <div
-              dangerouslySetInnerHTML={{ __html: jobDetail?.desciption }}
+              dangerouslySetInnerHTML={{ __html: jobDetail?.description }}
             ></div>
           </Typography>
         </Typography>

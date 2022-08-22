@@ -12,7 +12,7 @@ export const genderList = [
 ];
 
 const IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
-// const CV_FORMATS = ['application/pdf']
+const CV_FORMATS = ["application/pdf"];
 
 export const schema = yup.object({
   username: yup
@@ -50,26 +50,26 @@ export const schema = yup.object({
   avatar: yup
     .mixed()
     .nullable()
-    // .test(
-    //   "type",
-    //   " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif.",
-    //   (value) => {
-    //     console.log("value", value);
-    //     return value && IMAGE_FORMATS.includes(value[0]?.type);
-    //   }
-    // )
+    .test(
+      "type",
+      " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif.",
+      (value) => {
+        return value && IMAGE_FORMATS.includes(value?.type);
+      }
+    )
     .test("fileSize", " * Ảnh vượt quá kích thước 512KB.", (value) => {
-      return value && value[0]?.size <= 512*1024;
+      return value && value?.size <= 512 * 1024;
     })
     .required("Bạn phải tải avatar"),
   major: yup.string().required("* Bạn phải chọn chuyên ngành."),
-  cv: yup.mixed(),
-  // .test("type", " * CV phải là file có đuôi là: .pdf", (value) => {
-  //   return value && CV_FORMATS.includes(value[0]?.type);
-  // })
-  // .test("fileSize", " * CV vượt quá kích thước 500kb", (value) => {
-  //   return value && value[0]?.size <= 512000;
-  // }),
+  cv: yup
+    .mixed()
+    .test("type", " * CV phải là file có đuôi là: .pdf", (value) => {
+      return value && CV_FORMATS.includes(value?.type);
+    })
+    .test("fileSize", " * CV vượt quá kích thước 500kb", (value) => {
+      return value && value?.size <= 512000;
+    }),
   // .required("Bạn phải tải CV lên"),
 });
 //   .required();

@@ -118,9 +118,8 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   }
 
   if (isUpdate) {
-    // console.log(demandDetail?.desciption);
     setValue("jobName", demandDetail?.name);
-    setValue("jobDescription", demandDetail?.desciption);
+    setValue("jobDescription", demandDetail?.description);
     setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
     setValue("timeEnd", demandDetail?.end);
     setValue("amount", demandDetail?.amount);
