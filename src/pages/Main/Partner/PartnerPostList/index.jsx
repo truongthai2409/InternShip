@@ -50,12 +50,15 @@ const limit = 5;
 const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
-  const [partnerPostList, setPartnerPostList] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { activeUser } = useSelector((state) => state.university);
   const handleChange = (event, newValue) => setValue(newValue);
-  const { demandListUniversity } = useSelector((state) => state.demand);
+  const { demandListUniversity, demandListUniversityActive } = useSelector(
+    (state) => state.demand
+  );
+
+  console.log(demandListUniversityActive);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
   // console.log(currentPage, totalPage);
@@ -63,7 +66,6 @@ const PartnerPostList = (props) => {
   // console.log(activeUser?.universityDTO?.id);
 
   const handlePaginate = (page) => {
-    // console.log(typeof page);
     setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
@@ -123,7 +125,7 @@ const PartnerPostList = (props) => {
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListDemand
-              demandList={demandListUniversity.contents}
+              demandList={demandListUniversityActive}
               message="Không có đợt thực tập đăng tuyển."
             />
           </TabPanel>

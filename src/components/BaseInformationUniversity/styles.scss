@@ -1,7 +1,7 @@
 @use "../../assets/styles/" as *;
 
 .base__information {
-  .company-name {
+  .university-name {
     // text-align: center;
     width: auto;
     font-family: "Open Sans";
@@ -61,7 +61,7 @@
   }
 }
 
-.intro__company {
+.intro__university {
   &-title {
     font-family: "Open Sans";
     font-style: normal;
@@ -115,7 +115,7 @@
   }
 }
 
-.company-job-detail__card {
+.university-job-detail__card {
   display: grid;
   margin-left: 50px;
   margin-top: 20px;
@@ -129,7 +129,7 @@
 }
 
 @media only screen and (min-width: 500px) and (max-width: 705px) {
-  .company-job-detail__card {
+  .university-job-detail__card {
     justify-content: center;
     align-items: center;
   }

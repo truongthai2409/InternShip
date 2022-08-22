@@ -117,13 +117,19 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     }
   }
 
-  if (isUpdate) {
-    setValue("jobName", demandDetail?.name);
-    setValue("jobDescription", demandDetail?.description);
-    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
-    setValue("timeEnd", demandDetail?.end);
-    setValue("amount", demandDetail?.amount);
-  }
+  useEffect(() => {
+    if (isUpdate) {
+      // console.log(demandDetail?.desciption);
+      setValue("jobName", demandDetail?.name);
+      setValue("jobDescription", demandDetail?.desciption);
+      setValue(
+        "timeStart",
+        demandDetail?.updateDate || demandDetail?.createDate
+      );
+      setValue("timeEnd", demandDetail?.end);
+      setValue("amount", demandDetail?.amount);
+    }
+  }, []);
 
   const onSubmit = (data) => {
     const demandData = {
@@ -148,7 +154,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         },
         amount: parseInt(data.amount),
       }),
-      fileSV: data.fileSV[0],
+      fileSV: data.fileSV,
     };
 
     console.log(demandData);
@@ -281,7 +287,9 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               </div>
               {openForm && (
                 <div className="descriptionForm__partner">
-                  <DescriptionForm schoolName={activeUser?.universityDTO?.name} />
+                  <DescriptionForm
+                    schoolName={activeUser?.universityDTO?.name}
+                  />
 
                   <div className="description-confirm-sample-btn-container">
                     <button
@@ -301,11 +309,11 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Danh sách sinh viên"
                 requirementField={false}
                 id="fileSV"
-                format="excel"
+                // format="excel"
                 setValue={setValue}
                 register={register}
               >
-              {errors.fileSV?.message}
+                {errors.fileSV?.message}
               </InputFile>
             </div>
             <div className="partner-post__action">

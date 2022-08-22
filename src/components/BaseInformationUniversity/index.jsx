@@ -28,12 +28,11 @@ const BaseInformationUniversity = ({
   const dispatch = useDispatch();
   const { demandListUniversity } = useSelector((state) => state.demand);
   const uniId = demandDetail?.universityDTO?.id;
-  console.log(demandDetail);
+  console.log(demandDetail?.partner?.universityDTO?.email);
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [dispatch, uniId]);
-
 
   return (
     <div className="">
@@ -48,23 +47,9 @@ const BaseInformationUniversity = ({
                   src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
                 />
                 <div className="base__information-card-detail">
-                  <h3 className="company-name">
-                    {demandDetail?.company.name}
+                  <h3 className="university-name">
+                    {demandDetail?.partner?.universityDTO?.name}
                   </h3>
-                  <div className="">
-                    <h5>Mã số thuế: </h5>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontSize: 17,
-                        fontWeight: "400",
-                        transform: "translate(5px,5px)",
-                      }}
-                    >
-                      {demandDetail?.company.tax}
-                    </Typography>
-                  </div>
                   <div className="">
                     <h5>Số điện thoại: </h5>
                     <Typography
@@ -76,30 +61,35 @@ const BaseInformationUniversity = ({
                         transform: "translate(5px,5px)",
                       }}
                     >
-                      {demandDetail?.company.phone}
+                      {demandDetail?.partner?.universityDTO?.phone}
                     </Typography>
                   </div>
                   <div className="">
                     <h5>
                       Email:
                       <a
-                        href={demandDetail?.company.email}
+                        href={demandDetail?.partner?.universityDTO?.email}
                         className="fix-fontSize"
                       >
-                        {demandDetail?.company.email}
+                        {demandDetail?.partner?.universityDTO?.email}
                       </a>
                     </h5>
                   </div>
                   <div className="detail-website">
-                    <h5>
-                      Website:
-                      <a
-                        href={demandDetail?.company.website}
-                        className="fix-fontSize"
+                    <div className="">
+                      <h5>Website: </h5>
+                      <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                          fontSize: 17,
+                          fontWeight: "400",
+                          transform: "translate(5px,5px)",
+                        }}
                       >
-                        {demandDetail?.company.website}
-                      </a>
-                    </h5>
+                        {demandDetail?.partner?.universityDTO?.website}
+                      </Typography>
+                    </div>
 
                     <div className=" base__information-card-detail-location">
                       <h5 className="">Địa điểm:</h5>
@@ -112,14 +102,14 @@ const BaseInformationUniversity = ({
                           transform: "translate(5px,5px)",
                         }}
                       >
-                        {`${demandDetail?.locationjob}`}
+                        {`${demandDetail?.partner?.universityDTO?.address}`}
                       </Typography>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="intro__company">
-                <h5 className="intro__company-title">Giới thiệu về công ty</h5>
+              <div className="intro__university">
+                <h5 className="intro__university-title">Giới thiệu về Trường</h5>
                 <Typography
                   variant="h6"
                   component="div"
@@ -129,14 +119,13 @@ const BaseInformationUniversity = ({
                     transform: "translate(5px,5px)",
                   }}
                 >
-                  {demandDetail?.company.description}
                 </Typography>
               </div>
 
               {pathUrl !== "/information_company" ? (
                 <div className="button-card">
                   <Link
-                    to={`/partner/information_school/${demandDetail?.universityDTO.id}`}
+                    to={`/partner/information_school/${demandDetail?.partner?.universityDTO.id}`}
                   >
                     <Button
                       name="Xem thêm"

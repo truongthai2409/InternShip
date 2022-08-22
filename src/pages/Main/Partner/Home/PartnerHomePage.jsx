@@ -36,8 +36,7 @@ const PartnerHomePage = (props) => {
 
   const navigate = useNavigate();
   const { keyword } = useParams();
-  console.log(keyword);
-  console.log(keyword);
+  // console.log(keyword);
 
   // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
