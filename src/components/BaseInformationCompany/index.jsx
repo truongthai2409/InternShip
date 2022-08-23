@@ -143,7 +143,7 @@ const BaseInformationCompany = ({
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
+    const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -502,7 +502,7 @@ const BaseInformationCompany = ({
 
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: jobDetail?.desciption,
+                                __html: jobDetail?.description,
                               }}
                               style={{
                                 display: "flex",
@@ -1120,7 +1120,7 @@ const BaseInformationCompany = ({
                         </Typography> */}
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: jobDetail?.desciption,
+                                  __html: jobDetail?.description,
                                 }}
                                 style={{
                                   display: "flex",

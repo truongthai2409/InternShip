@@ -15,6 +15,8 @@ const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail }) => {
 
+  console.log(jobDetail);
+
   const handleApplyDemandUni = async (e) => {
   };
 
@@ -34,7 +36,7 @@ const InformationUniversity = ({ jobDetail }) => {
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
             <div
-              dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+              dangerouslySetInnerHTML={{ __html: jobDetail?.description }}
             ></div>
           </Typography>
         </Typography>
@@ -73,15 +75,6 @@ const InformationUniversity = ({ jobDetail }) => {
       </div>
       <div className="line"></div>
       <div className="detail__card-4">
-        {/* <div className="detail__card-4-item">
-          <Icon className="detail__card-4-item-icon">
-            <CurrencyExchangeIcon />
-          </Icon>
-          <Typography variant="h6" gutterBottom component="div" >
-            {formatSalary(jobDetail.salaryMin)} -{" "}
-            {formatSalary(jobDetail.salaryMax)}
-          </Typography>
-        </div> */}
         <div className="detail__card-4-item" sx={{ display: "flex" }}>
           <Icon className="detail__card-4-item-icon">
             <LocalPhoneIcon />
@@ -95,7 +88,7 @@ const InformationUniversity = ({ jobDetail }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.universityDTO?.phone || "Không có"}
+            {jobDetail?.partner?.universityDTO?.phone || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item" sx={{ display: "flex" }}>
@@ -111,7 +104,7 @@ const InformationUniversity = ({ jobDetail }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.universityDTO?.email || "Không có"}
+            {jobDetail?.partner?.universityDTO?.email || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item">
@@ -127,7 +120,7 @@ const InformationUniversity = ({ jobDetail }) => {
               textOverflow: "ellipsis",
             }}
           >
-            {jobDetail?.universityDTO?.address || "Không có"}
+            {jobDetail?.partner?.universityDTO?.address || "Không có"}
           </Typography>
         </div>
       </div>

@@ -22,6 +22,7 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
+import InputFile from "src/components/InputFile";
 
 const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
@@ -62,7 +63,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const [useSampleForm, setUseSampleForm] = useState(false);
   // console.log(demandDetail);
 
-  // console.log(activeUser);
+  console.log(activeUser?.universityDTO?.id);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     dispatch(getJobPositionList());
     dispatch(getDemandById(idDemand));
     dispatch(getPartnerByUserID(idUser));
-  }, [idUser]);
+  }, [idUser, idDemand, dispatch]);
 
   const {
     register,
@@ -107,7 +108,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   async function postDemand(demandData) {
     setLoading(true);
-
     try {
       await dispatch(addDemand(demandData));
     } catch (error) {
@@ -117,14 +117,19 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     }
   }
 
-  if (isUpdate) {
-    // console.log(demandDetail?.desciption);
-    setValue("jobName", demandDetail?.name);
-    setValue("jobDescription", demandDetail?.desciption);
-    setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
-    setValue("timeEnd", demandDetail?.end);
-    setValue("amount", demandDetail?.amount);
-  }
+  useEffect(() => {
+    if (isUpdate) {
+      // console.log(demandDetail?.desciption);
+      setValue("jobName", demandDetail?.name);
+      setValue("jobDescription", demandDetail?.desciption);
+      setValue(
+        "timeStart",
+        demandDetail?.updateDate || demandDetail?.createDate
+      );
+      setValue("timeEnd", demandDetail?.end);
+      setValue("amount", demandDetail?.amount);
+    }
+  }, []);
 
   const onSubmit = (data) => {
     const demandData = {
@@ -136,7 +141,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         startStr: moment(data.timeStart).format("YYYY-MM-DD"),
         endStr: moment(data.timeEnd).format("YYYY-MM-DD"),
         partner: {
-          id: 25,
+          id: parseInt(activeUser?.id),
         },
         major: {
           id: parseInt(data.major),
@@ -149,10 +154,10 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         },
         amount: parseInt(data.amount),
       }),
-      fileSV: data.fileSV[0],
+      fileSV: data.fileSV,
     };
 
-    // console.log(demandData);
+    console.log(demandData);
 
     if (isUpdate) {
       editDemand({ idDemand, demandData });
@@ -282,7 +287,9 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               </div>
               {openForm && (
                 <div className="descriptionForm__partner">
-                  <DescriptionForm />
+                  <DescriptionForm
+                    schoolName={activeUser?.universityDTO?.name}
+                  />
 
                   <div className="description-confirm-sample-btn-container">
                     <button
@@ -298,16 +305,16 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               )}
             </div>
             <div className="partner-post__textarea">
-              <CustomInput
+              <InputFile
                 label="Danh sách sinh viên"
+                requirementField={false}
                 id="fileSV"
-                type="file"
-                placeholder=""
+                // format="excel"
+                setValue={setValue}
                 register={register}
-                studentList={true}
               >
                 {errors.fileSV?.message}
-              </CustomInput>
+              </InputFile>
             </div>
             <div className="partner-post__action">
               <Button

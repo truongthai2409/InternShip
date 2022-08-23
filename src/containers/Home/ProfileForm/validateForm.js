@@ -15,6 +15,14 @@ export const genderList = [
   },
 ];
 
+const IMAGE_FORMATS = [
+  "image/jpg",
+  "image/jpeg",
+  "image/gif",
+  "image/png",
+  "image/bmp",
+];
+
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -26,19 +34,16 @@ export const schema = yup.object({
       "fileSize",
       " * Ảnh bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
       (value) => {
-        if (value[0]?.size) {
-          return value[0]?.size <= 512 * 1024;
+        if (value?.size) {
+          return value?.size <= 512 * 1024;
         } else {
           return true;
         }
       }
     )
-    .test("type", " * Chỉ hỗ trợ jpeg, png.", (value) => {
-      if (value[0]?.type) {
-        console.log("value", value)
-        return (
-          value[0]?.type === "image/jpeg" || value[0]?.type === "image/png"
-        );
+    .test("type", " * Chỉ hỗ trợ .jpeg, .jpg, .png, .gif. , .bmp", (value) => {
+      if (value?.type) {
+        return IMAGE_FORMATS.includes(value?.type);
       } else {
         return true;
       }

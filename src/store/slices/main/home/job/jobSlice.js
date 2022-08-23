@@ -23,7 +23,6 @@ const jobSlice = createSlice({
     error: "",
     listCandidatesApplied: [],
     totalPages: 0,
-    amountApplications: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -45,13 +44,14 @@ const jobSlice = createSlice({
       if (payload.httpCode === 404) {
         state.error = 404;
       } else {
-        state.jobListActived = payload.filter((job) => {
+        state.jobListActived = payload.contents.filter((job) => {
           return job?.status.id === 1;
         });
-        state.jobListDisabled = payload.filter((job) => {
+        state.jobListDisabled = payload.contents.filter((job) => {
           return job?.status.id === 4;
         });
         state.status = "fail";
+        state.totalPages = payload.totalPages;
       }
     });
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
@@ -171,11 +171,18 @@ export const getJobByNameAndLocation = createAsyncThunk(
   }
 );
 
+// function use for get list of job by user id
+/**
+ * para
+ * args[0] : id of user
+ * args[1] : page
+ * args[2] : amount of candidates in each time get
+ */
 export const getJobListByUserId = createAsyncThunk(
   "job/getJobListByUser",
-  async (userId) => {
+  async (args) => {
     return axios
-      .get(`${baseURL}/api/r2s/job/user/${userId}`)
+      .get(`${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1]}&limit=${args[2]}`)
       .then((response) => {
         return response.data;
       })

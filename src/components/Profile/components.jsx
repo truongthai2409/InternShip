@@ -235,7 +235,7 @@ export const UniversityInfo = () => {
   useEffect(() => {
     const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
     dispatch(getProfileByIdUser(idUser));
-  }, []);
+  }, [dispatch]);
   return (
     <div className="company-infor__wrapper">
       <h2 className="company-infor__title">Trường</h2>

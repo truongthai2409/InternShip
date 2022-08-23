@@ -77,8 +77,8 @@ const FilterPanelHome = ({
                 key={job.id}
                 title={job.name}
                 fontSize={10}
-                nameCompany={job.hr?.company?.name || job?.universityDTO.name}
-                idCompany={job.hr?.company?.id || job?.universityDTO.id}
+                nameCompany={job?.hr?.company?.name || job?.partner?.universityDTO.name}
+                idCompany={job?.hr?.company?.id || job?.partner?.universityDTO.id}
                 tagName={[
                   job?.jobposition?.name || job?.position.name || "Không có",
                   job?.jobType?.name || "Không có",
@@ -107,17 +107,6 @@ const FilterPanelHome = ({
           marginTop: "16px",
         }}
       >
-        <Stack spacing={2}>
-          <Pagination
-            page={jobListHavePages?.numberOfCurrentPage || 0}
-            defaultPage={1}
-            onChange={(e) => handlePagination(e.target.textContent)}
-            count={jobListHavePages?.totalPages || 1}
-            variant="outlined"
-            shape="rounded"
-            size="medium"
-          />
-        </Stack>
       </div>
     </Box>
   );

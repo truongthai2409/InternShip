@@ -60,7 +60,7 @@
   display: flex;
   align-items: flex-start;
   line-height: 30px;
-  color: $color-black-3;
+  color: $color-white-0;
 
   & .text-footer {
     display: flex;
@@ -81,12 +81,12 @@
 .list-header {
   & .text-wrap {
     & .text {
-      color: $color-black-3;
+      color: $color-white-0;
       font-weight: 500;
       line-height: 30px;
 
       &:hover {
-        color: $color-white-0;
+        color: $color-black-3;
         transition: 0.3s ease;
       }
     }
@@ -147,9 +147,9 @@
 }
 
 .email-link__footer {
-  color: $color-black-3;
+  color: $color-white-0;
   &:hover {
-    color: $color-white-0;
+    color: $color-black-3;
     transition: 0.3s ease;
   }
 }

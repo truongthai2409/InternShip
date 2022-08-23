@@ -8,6 +8,11 @@ const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
 
+const fileSV_FORMATS = [
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/pdf",
+];
+
 // yup validate form post job form
 export const schema = yup
   .object({
@@ -42,16 +47,19 @@ export const schema = yup
         "fileSize",
         " * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
-          return value && value[0].size <= 512 * 1024;
+          if (value?.size) {
+            return value && value?.size <= 512 * 1024;
+          } else {
+            return true;
+          }
         }
       )
       .test("type", " * Chỉ hỗ trợ xlsx.", (value) => {
-        return (
-          value &&
-            value[0].type ===
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
-              "application/pdf"
-        );
+        if (value?.type) {
+          return value && fileSV_FORMATS.includes(value?.type);
+        } else {
+          return true;
+        }
       }),
   })
   .required();

@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import CardPost from "src/components/CardPost";
 import Null from "src/components/Null";
 import "./styles.scss";
@@ -19,6 +18,7 @@ export const ListJob = ({ listJob, message, isDisabled }) => {
             status={job?.status}
             jobName={job?.name}
             amount={job?.amount}
+            amountApplications={job?.numOfApply}
             timeStart={job?.timeStartStr}
             timeEnd={job?.timeEndStr}
             timeCreated={job?.createDate}

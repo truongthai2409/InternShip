@@ -22,6 +22,7 @@ const DetailCard = ({
   const { appreciateList } = useSelector((state) => state.appreciate);
   const dispatch = useDispatch();
   const idCompany = jobDetail?.hr?.company.id;
+  // console.log(jobListName);
   useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
