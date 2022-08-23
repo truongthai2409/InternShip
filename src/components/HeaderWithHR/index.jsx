@@ -6,6 +6,7 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
+import "./responsive.scss";
 import SearchResultHome from "../SearchResultHome";
 import AccountMenu from "../AccountMenu";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
@@ -18,6 +19,7 @@ import { styled, alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,6 +87,9 @@ const HeaderWithHR = (props) => {
 
   return (
     <div className="container-header__hr header__hr config">
+      <div onClick={() => {}} className="responsive-menu">
+        <MenuIcon />
+      </div>
       {props.hr ? <Logo /> : <Logo />}
       {props.hr ? (
         <div className="header__hr">
@@ -205,6 +210,7 @@ const HeaderWithHR = (props) => {
       ) : null}
       <div className="header__hr-icon">
         <div
+          className="responsive__hr-icon"
           style={{
             borderRadius: "14px",
             backgroundColor: "#FFFFFF",

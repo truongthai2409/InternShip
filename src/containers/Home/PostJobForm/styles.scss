@@ -64,6 +64,8 @@
 
     .hr-post__heading {
       display: flex;
+      align-items: center;
+      gap: 4px;
 
       > svg {
         margin: 0 !important;
