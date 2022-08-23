@@ -51,7 +51,7 @@ const labels = {
 const getLabelText = (value) => {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 };
-const Appreciate = ({ appreciate }) => {
+const Appreciate = ({ appreciate, fontSize }) => {
   const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
@@ -175,18 +175,13 @@ const Appreciate = ({ appreciate }) => {
               : ""
           }
         >
-          <div
-            className="appreciate"
-            style={{
-              alignItems: "start",
-              justifyContent: "start",
-            }}
-          >
+          <div className="appreciate" style={{}}>
             <div className="fix_display">
               <img
                 className=""
                 alt=""
                 src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                style={{}}
               />
               <div
                 style={{
@@ -195,74 +190,72 @@ const Appreciate = ({ appreciate }) => {
                   flexDirection: "column",
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      marginRight: "10px",
-                    }}
-                  >
-                    <Typography
-                      variant="subtitle2"
-                      component="div"
-                      sx={{ fontSize: 16 }}
+                <div>
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
                     >
-                      {(appreciate?.hide === true && nameUser) ||
-                        appreciate?.user?.username}
-                    </Typography>
-                  </div>
-                  <h6
-                    className=""
-                    style={{
-                      display: "flex",
-                    }}
-                  >
-                    {appreciate?.createDate}
-                  </h6>
-                </div>
-                <div
-                  style={{
-                    // marginBottom: 10,
-                    transform: "translate(-2px,0)",
-                  }}
-                >
-                  <Rating
-                    name="text-feedback"
-                    value={value}
-                    readOnly
-                    precision={0.5}
-                    emptyIcon={
-                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-                    }
-                    sx={{ fontSize: 20, marginBottom: 2 }}
-                  />
-                </div>
-                <Typography
-                  variant="p"
-                  component="div"
-                  sx={{
-                    fontSize: 16,
-                    transform: "translate(0,-10px)",
-                    display: "flex",
-                    wordBreak: "break-word",
-                    textAlign: "initial",
-                    fontWeight: "400",
-                  }}
-                >
-                  {/* {`${appreciate?.comment?.slice(
+                      <div
+                        style={{
+                          marginRight: "10px",
+                        }}
+                      >
+                        <Typography
+                          variant="subtitle2"
+                          component="div"
+                          sx={{ fontSize: 16 }}
+                        >
+                          {(appreciate?.hide === true && nameUser) ||
+                            appreciate?.user?.username}
+                        </Typography>
+                      </div>
+                      <div
+                        style={{
+                          // marginBottom: 10,
+                          transform: "translate(0px,4px)",
+                        }}
+                      >
+                        <Rating
+                          name="text-feedback"
+                          value={value}
+                          readOnly
+                          precision={0.5}
+                          emptyIcon={
+                            <StarIcon
+                              style={{ opacity: 0.55 }}
+                              fontSize="inherit"
+                            />
+                          }
+                          sx={{ fontSize: 18 }}
+                        />
+                      </div>
+                    </div>
+
+                    <Typography
+                      sx={{
+                        fontSize: 16,
+                        // transform: "translate(0,-10px)",
+                        display: "flex",
+                        wordBreak: "break-word",
+                        textAlign: "initial",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {/* {`${appreciate?.comment?.slice(
                     3,
                     appreciate?.comment?.length - 4
                   )}` || ""} */}
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: appreciate?.comment,
-                    }}
-                  ></div>
-                </Typography>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: appreciate?.comment,
+                        }}
+                      ></div>
+                    </Typography>
+                  </div>
+                </div>
                 <div
                   style={{
                     display: "flex",
@@ -282,99 +275,56 @@ const Appreciate = ({ appreciate }) => {
                         <ThumbUpOutlinedIcon
                           fontSize="small"
                           className="buttonMark__isChecking"
+                          style={{ fontSize: "17px" }}
                         />
                       ) : (
                         <ThumbUpIcon
                           fontSize="small"
                           className="buttonMark__isChecking"
+                          style={{ fontSize: "17px" }}
                         />
                       )}
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Bỏ thích đánh giá">
-                    <IconButton
-                      style={{
-                        borderRadius: "4px",
-                      }}
-                      aria-label="dislike"
-                      onClick={handleClickDisLike}
-                      className="buttonMark__wrapper"
-                    >
-                      {/* {dislike === false ? (
-                        <ThumbDownOutlinedIcon
-                          fontSize="small"
-                          className="buttonMark__isChecking"
-                        />
-                      ) : (
-                        <ThumbDownIcon
-                          fontSize="small"
-                          className="buttonMark__isChecking"
-                        />
-                      )} */}
                     </IconButton>
                   </Tooltip>
                 </div>
               </div>
             </div>
-
-            <div className="fix_display">
-              <div
-                className=""
-                style={{
-                  marginTop: "12px",
-                  marginRight: "10px",
-                }}
-              >
-                {appreciate?.user?.username === profile.username && (
-                  <div className="fix_display">
-                    <div>
-                      <div
-                        className="fix_display"
-                        onClick={handleClick}
-                        style={{
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Tooltip title="Nhiều hơn">
-                          <IconButton sx={{ fontSize: 12 }}>
-                            <MoreVertOutlinedIcon />
+            <div
+              style={{
+                fontSize: fontSize ? fontSize : "",
+              }}
+            >
+              <h6>{appreciate?.createDate}</h6>
+              <div className="">
+                <div
+                  className=""
+                  style={{
+                    marginTop: "25px",
+                  }}
+                >
+                  {appreciate?.user?.username === profile.username && (
+                    <div className="">
+                      <div>
+                        {" "}
+                        <Tooltip title="Chỉnh sửa" onClick={handleOpen}>
+                          <IconButton>
+                            <EditOutlinedIcon
+                              sx={{ fontSize: "20px", color: "#04bf8a" }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Xóa" onClick={handleDeleteAppreciate}>
+                          <IconButton>
+                            <DeleteIcon
+                              color=""
+                              sx={{ fontSize: "20px", color: "#04bf8a" }}
+                            />
                           </IconButton>
                         </Tooltip>
                       </div>
-                      <Popover
-                        id={id}
-                        open={openAnchorEl}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "left",
-                        }}
-                      >
-                        <Typography sx={{ p: 2 }}>
-                          <div
-                            className="fix_display"
-                            onClick={handleOpen}
-                            style={{
-                              cursor: "pointer",
-                            }}
-                          >
-                            <Tooltip title="Chỉnh sửa">
-                              <IconButton sx={{ fontSize: 12 }}>
-                                <EditOutlinedIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </div>
-                          <Tooltip title="Xóa" onClick={handleDeleteAppreciate}>
-                            <IconButton sx={{ fontSize: 12 }}>
-                              <DeleteIcon color="" />
-                            </IconButton>
-                          </Tooltip>
-                        </Typography>
-                      </Popover>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>

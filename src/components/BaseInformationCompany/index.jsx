@@ -216,7 +216,7 @@ const BaseInformationCompany = ({
                   variant="h6"
                   component="div"
                   sx={{
-                    fontSize: 17,
+                    fontSize: 15,
                     fontWeight: "400",
                     transform: "translate(5px,5px)",
                   }}
@@ -373,14 +373,17 @@ const BaseInformationCompany = ({
                     </h3>
 
                     <div className="">
-                      <PhoneInTalkIcon />
+                      <PhoneInTalkIcon
+                        sx={{
+                          fontSize: 20,
+                          color: "#04bf8a",
+                        }}
+                      />
                       <Typography
                         variant="h6"
                         component="div"
                         sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
+                          transform: "translate(5px,0px)",
                         }}
                       >
                         {jobDetail?.hr?.company.phone}
@@ -388,18 +391,28 @@ const BaseInformationCompany = ({
                     </div>
                     <div className="fix__margin">
                       <h5>
-                        <EmailIcon />
+                        <EmailIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <a
                           href={`mailto:${jobDetail?.hr?.company.email}`}
-                          className="fix-fontSize fix__margin"
+                          className="fix-fontSize "
                         >
                           {jobDetail?.hr?.company.email}
                         </a>
                       </h5>
                     </div>
                     <div className="detail-website">
-                      <h5 className="fix__margin">
-                        <LanguageIcon />
+                      <h5 className="">
+                        <LanguageIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <a
                           href={jobDetail?.hr?.company.website}
                           className="fix-fontSize "
@@ -408,15 +421,25 @@ const BaseInformationCompany = ({
                         </a>
                       </h5>
 
-                      <div className=" base__information-card-detail-location">
-                        <LocationOnIcon />
+                      <div
+                        className=" base__information-card-detail-location"
+                        style={{
+                          transform: "translate(0px,5px)",
+                        }}
+                      >
+                        <LocationOnIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <Typography
                           variant="h6"
                           component="div"
                           sx={{
                             fontSize: 16,
                             fontWeight: "400",
-                            transform: "translate(5px,-5px)",
+                            transform: "translate(5px,0px)",
                           }}
                         >
                           {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
@@ -502,7 +525,7 @@ const BaseInformationCompany = ({
                           <ContentBaseInformation
                             jobDetail={jobDetail}
                             jobListCompany={jobListCompany}
-                            pdLeft={"25px"}
+                            pdLeft={"35px"}
                             pdRight="25px"
                             mgLeft="25px"
                           />
@@ -578,7 +601,11 @@ const BaseInformationCompany = ({
                           </h5>
                           <div>
                             {topAppreciate?.map((appreciate, index) => (
-                              <Appreciate appreciate={appreciate} key={index} />
+                              <Appreciate
+                                appreciate={appreciate}
+                                key={index}
+                                fontSize="15px"
+                              />
                             ))}
 
                             <div
@@ -659,6 +686,7 @@ const BaseInformationCompany = ({
                             paddingBottom: 2.3,
                             fontWeight: "600",
                           }}
+                          elevation={0}
                         >
                           <div
                             className="appreciate intro__company-title"
@@ -977,14 +1005,19 @@ const BaseInformationCompany = ({
                       </h3>
 
                       <div className="">
-                        <PhoneInTalkIcon />
+                        <PhoneInTalkIcon
+                          sx={{
+                            fontSize: 17,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <Typography
                           variant="h6"
                           component="div"
                           sx={{
                             fontSize: 17,
                             fontWeight: "400",
-                            transform: "translate(5px,5px)",
+                            transform: "translate(5px,0px)",
                           }}
                         >
                           {jobDetail?.hr?.company.phone}
@@ -992,7 +1025,12 @@ const BaseInformationCompany = ({
                       </div>
                       <div className="fix__margin">
                         <h5>
-                          <EmailIcon />
+                          <EmailIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <a
                             href={`mailto:${jobDetail?.hr?.company.email}`}
                             className="fix-fontSize fix__margin"
@@ -1003,7 +1041,12 @@ const BaseInformationCompany = ({
                       </div>
                       <div className="detail-website">
                         <h5 className="fix__margin">
-                          <LanguageIcon />
+                          <LanguageIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <a
                             href={jobDetail?.hr?.company.website}
                             className="fix-fontSize "
@@ -1013,7 +1056,12 @@ const BaseInformationCompany = ({
                         </h5>
 
                         <div className=" base__information-card-detail-location">
-                          <LocationOnIcon />
+                          <LocationOnIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <Typography
                             variant="h6"
                             component="div"
@@ -1095,8 +1143,8 @@ const BaseInformationCompany = ({
                             <ContentBaseInformation
                               jobDetail={jobDetail}
                               jobListCompany={jobListCompany}
-                              pdLeft={"25px"}
-                              pdRight="25px"
+                              pdLeft={"20px"}
+                              pdRight="8px"
                               hideMark={true}
                             />
                           </Item>

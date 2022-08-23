@@ -23,10 +23,7 @@ const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-  // console.log(profile.username);
-  // React.useEffect(() => {
-  //   dispatch(getJobById(idJob));
-  // }, [idJob]);
+
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
@@ -37,7 +34,7 @@ const CardHome = (props) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 10,
+        limit: 5,
       },
     };
     if (profile.role === "Role_Candidate") {
@@ -49,21 +46,13 @@ const CardHome = (props) => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
-  }, [dispatch]);
+  }, []);
 
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
   };
-
-  var handleRerender = async (id) => {
-    if (id) {
-      // setId(id);
-      // dispatch(getMarkByUser(profile.username));
-    }
-  };
-
   return (
     // <Link
     //   to={`/candidate/detail_job/${props.id}`}
@@ -76,7 +65,10 @@ const CardHome = (props) => {
         "cardHome__container",
         props.active === props.index ? "active" : ""
       )}
-      dataset={props.id}
+      style={{
+        paddingLeft: props.pdLeft ? props.pdLeft : "",
+        paddingRight: props.pdRight ? props.pdRight : "",
+      }}
     >
       <div className="cardHome__col1" dataset={props.id}>
         <div className="cardHome__aboutCompany">
@@ -116,7 +108,6 @@ const CardHome = (props) => {
           fontSize="18px"
           jobId={props.id}
           isMark={isMarkLength}
-          onClick={handleRerender}
         />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">

@@ -188,7 +188,7 @@ const HeaderWithHR = (props) => {
               candidate_infomation={true}
             />
           </div>
-          <div className="search__icon">
+          <div className="search__icon-mobile">
             <Toolbar>
               <Search>
                 <SearchIconWrapper>

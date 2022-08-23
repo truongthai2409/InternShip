@@ -12,7 +12,7 @@ import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 
 const DetailCard = ({
   jobDetail,
-  jobListName,
+  jobList,
   candidate,
   jobPostHR,
   jobDetailById,
@@ -38,7 +38,7 @@ const DetailCard = ({
   const rating = (res / data?.length).toFixed(2);
   return (
     <div>
-      {jobListName && jobListName.length > 0 ? (
+      {jobList && jobList.length > 0 ? (
         <Detail
           jobDetail={jobDetail}
           demandPartner={demandPartner}

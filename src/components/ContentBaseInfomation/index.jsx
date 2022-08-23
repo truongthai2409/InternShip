@@ -48,7 +48,8 @@ const ContentBaseInformation = ({
                 sm="12"
                 key={job.id}
                 sx={{
-                  // paddingLeft: `0px`,
+                  paddingLeft: pdLeft ? `${pdLeft} !important` : "",
+                  paddingRight: pdRight ? `${pdRight} !important` : "",
                   width: "200px",
                 }}
               >
@@ -85,6 +86,8 @@ const ContentBaseInformation = ({
                     moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
                   ]}
                   locationPath={location.pathname}
+                  pdLeft="30px"
+                  pdRight="30px"
                 />
               </Grid>
             ))}
