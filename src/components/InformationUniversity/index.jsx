@@ -13,12 +13,10 @@ import Button from "../Button";
 
 const baseURL = process.env.REACT_APP_API;
 
-const InformationUniversity = ({ jobDetail }) => {
-
+const InformationUniversity = ({ jobDetail, detailJob = false }) => {
   console.log(jobDetail);
 
-  const handleApplyDemandUni = async (e) => {
-  };
+  const handleApplyDemandUni = async (e) => {};
 
   return (
     <div>
@@ -35,9 +33,15 @@ const InformationUniversity = ({ jobDetail }) => {
             gutterBottom
             sx={{ fontSize: 17, fontWeight: "400" }}
           >
-            <div
-              dangerouslySetInnerHTML={{ __html: jobDetail?.description }}
-            ></div>
+            {detailJob ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: jobDetail?.desciption }}
+              ></div>
+            ) : (
+              <div
+                dangerouslySetInnerHTML={{ __html: jobDetail?.description }}
+              ></div>
+            )}
           </Typography>
         </Typography>
         <div className="detail__card-3-item-partner">
@@ -125,10 +129,7 @@ const InformationUniversity = ({ jobDetail }) => {
         </div>
       </div>
       <div className="detail__card-5">
-        <Button
-          name="Ứng tuyển"
-          onClick={handleApplyDemandUni}
-        />
+        <Button name="Ứng tuyển" onClick={handleApplyDemandUni} />
       </div>
     </div>
   );

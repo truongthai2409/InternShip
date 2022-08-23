@@ -108,11 +108,11 @@ export const schema = yup
         "type",
         " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif",
         (value) => {
-          return value && IMAGE_FORMATS.includes(value[0]?.type);
+          return value && IMAGE_FORMATS.includes(value?.type);
         }
       )
       .test("fileSize", " * Ảnh vượt quá kích thước 512kb", (value) => {
-        return value && value[0].size <= 512 * 1024;
+        return value && value?.size <= 512 * 1024;
       })
       .required("Bạn phải tải avatar"),
     district: yup.string().required(" * Bạn phải chọn quận/huyện."),
@@ -125,11 +125,11 @@ export const schema = yup
         "type",
         " * Ảnh phải là file có đuôi là: .jpeg, .jpg, .png, .gif",
         (value) => {
-          return value && IMAGE_FORMATS.includes(value[0]?.type);
+          return value && IMAGE_FORMATS.includes(value?.type);
         }
       )
       .test("fileSize", " * Ảnh vượt quá kích thước 128kb", (value) => {
-        return value && value[0]?.size <= 131072;
+        return value && value?.size <= 512 * 1024;
       })
       .required("Bạn phải tải logo"),
   })
