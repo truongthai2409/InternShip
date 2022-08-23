@@ -36,7 +36,6 @@ const PartnerHomePage = (props) => {
 
   const navigate = useNavigate();
   const { keyword } = useParams();
-  // console.log(keyword);
 
   // console.log(demandDetail, indexPartnerCardActive);
   // console.log(totalPagesofDemandList);
@@ -54,14 +53,14 @@ const PartnerHomePage = (props) => {
     dispatch(getDemandList({ currentPage, limit }));
   }, [currentPage]);
 
-  useEffect(() => {
-    const dataSearch = {
-      name: keyword || "",
-      no: currentSearchPage - 1,
-      limit: 5,
-    };
-    dispatch(getDemandByName(dataSearch));
-  }, [keyword, currentSearchPage]);
+  // useEffect(() => {
+  //   const dataSearch = {
+  //     name: keyword || "",
+  //     no: currentSearchPage - 1,
+  //     limit: 5,
+  //   };
+  //   dispatch(getDemandByName(dataSearch));
+  // }, [keyword, currentSearchPage]);
 
   const handleSearch = (value) => {
     value = value.replace("%20", "+");
@@ -126,7 +125,7 @@ const PartnerHomePage = (props) => {
               {demandList ? (
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobListName={demandList}
+                  jobList={demandList}
                   jobDetail={demandDetail}
                   demandPartner={true}
                 />
