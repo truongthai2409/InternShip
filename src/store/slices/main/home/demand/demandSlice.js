@@ -19,8 +19,8 @@ const demandSlice = createSlice({
     totalPagesofDemandList: 0,
   },
   reducers: {
-    updateIdPartnerCardActive: (state, action) => {
-      state.idPartnerCardActive = action.payload;
+    updateIdPartnerCardActive: (state, { payload }) => {
+      state.idPartnerCardActive = payload;
     },
     updateIndexPartnerCardActive: (state, { payload }) => {
       console.log(state?.demandList);
@@ -46,7 +46,7 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
-        // console.log(payload.demandList[0]);
+        console.log(payload.demandList);
         state.demandList = payload.demandList;
         state.totalPagesofDemandList = payload.totalPage;
         if (payload.demandList.length > 0) {

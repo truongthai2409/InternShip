@@ -20,6 +20,7 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import Textarea from "src/components/Textarea";
+import InputFile from "src/components/InputFile";
 
 const countryList = [
   {
@@ -213,25 +214,29 @@ const PartnerInfo = () => {
         </div>
 
         <div className="reg-partner__form--name">
-          <CustomInput
+          <InputFile
             label="Ảnh đại diện"
             id="avatar"
             type="file"
+            format="image"
             register={register}
+            setValue={setValue}
             // check={true}
           >
             {errors.avatar?.message}
-          </CustomInput>
+          </InputFile>
 
-          <CustomInput
+          <InputFile
             label="Logo Trường"
             id="logo"
             type="file"
+            format="image"
+            setValue={setValue}
             register={register}
             // check={true}
           >
             {errors.logo?.message}
-          </CustomInput>
+          </InputFile>
         </div>
 
         <div className="section-input__container">
