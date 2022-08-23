@@ -28,6 +28,7 @@ import PartnerPostList from "src/pages/Main/Partner/PartnerPostList";
 import Password from "src/components/Password/index";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
+import CandidateManagement from "src/pages/Main/HR/CandidateManagement/CandidateManagement";
 
 export const adminRouter = [
   {
@@ -119,6 +120,10 @@ export const hrRouter = [
     path: "/hr/setting",
     Component: Password,
   },
+  {
+    path: "/hr/candidatemanagement",
+    Component : CandidateManagement,
+  }
 ];
 
 // candidate router

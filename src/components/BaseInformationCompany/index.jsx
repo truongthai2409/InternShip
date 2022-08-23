@@ -6,7 +6,7 @@ import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
@@ -375,56 +375,47 @@ const BaseInformationCompany = ({
                     <h3 className="company-name">
                       {jobDetail?.hr?.company.name}
                     </h3>
-
-                    <div className="">
-                      <PhoneInTalkIcon />
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
-                        }}
-                      >
-                        {jobDetail?.hr?.company.phone}
-                      </Typography>
+                    <div className="fix__margin">
+                      <div className="fix_container">
+                        <PhoneInTalkIcon className='icon_fix' />
+                        <a
+                          className="fix-fontSize fix__margin"
+                        >
+                          {jobDetail?.hr?.company.phone}
+                        </a>
+                      </div>
                     </div>
                     <div className="fix__margin">
-                      <h5>
-                        <EmailIcon />
+                      <div className="fix_container">
+                        <EmailIcon className='icon_fix' />
                         <a
                           href={`mailto:${jobDetail?.hr?.company.email}`}
                           className="fix-fontSize fix__margin"
                         >
                           {jobDetail?.hr?.company.email}
                         </a>
-                      </h5>
+                      </div>
                     </div>
-                    <div className="detail-website">
-                      <h5 className="fix__margin">
-                        <LanguageIcon />
+                    <div className="fix__margin">
+                      <div className="fix_container">
+                        <LanguageIcon className='icon_fix' />
                         <a
                           href={jobDetail?.hr?.company.website}
-                          className="fix-fontSize "
+                          className="fix-fontSize fix__margin"
                         >
                           {jobDetail?.hr?.company.website}
                         </a>
-                      </h5>
+                      </div>
+                    </div>
 
-                      <div className=" base__information-card-detail-location">
-                        <LocationOnIcon />
-                        <Typography
-                          variant="h6"
-                          component="div"
-                          sx={{
-                            fontSize: 16,
-                            fontWeight: "400",
-                            transform: "translate(5px,-5px)",
-                          }}
+                    <div className="fix__margin">
+                      <div className="fix_container">
+                        <LocationOnIcon className='icon_fix' />
+                        <a
+                          className="fix-fontSize fix__margin"
                         >
                           {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
-                        </Typography>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -974,56 +965,46 @@ const BaseInformationCompany = ({
                       <h3 className="company-name">
                         {jobDetail?.hr?.company.name}
                       </h3>
-
-                      <div className="">
-                        <PhoneInTalkIcon />
-                        <Typography
-                          variant="h6"
-                          component="div"
-                          sx={{
-                            fontSize: 17,
-                            fontWeight: "400",
-                            transform: "translate(5px,5px)",
-                          }}
-                        >
-                          {jobDetail?.hr?.company.phone}
-                        </Typography>
+                      <div className="fix__margin">
+                        <div className="fix_container">
+                          <PhoneInTalkIcon className='icon_fix' />
+                          <a
+                            className="fix-fontSize fix__margin"
+                          >
+                            {jobDetail?.hr?.company.phone}
+                          </a>
+                        </div>
                       </div>
                       <div className="fix__margin">
-                        <h5>
-                          <EmailIcon />
+                        <div className="fix_container">
+                          <EmailIcon className='icon_fix' />
                           <a
                             href={`mailto:${jobDetail?.hr?.company.email}`}
                             className="fix-fontSize fix__margin"
                           >
                             {jobDetail?.hr?.company.email}
                           </a>
-                        </h5>
+                        </div>
                       </div>
-                      <div className="detail-website">
-                        <h5 className="fix__margin">
-                          <LanguageIcon />
+                      <div className="fix__margin">
+                        <div className="fix_container">
+                          <LanguageIcon className='icon_fix' />
                           <a
                             href={jobDetail?.hr?.company.website}
-                            className="fix-fontSize "
+                            className="fix-fontSize fix__margin"
                           >
                             {jobDetail?.hr?.company.website}
                           </a>
-                        </h5>
-
-                        <div className=" base__information-card-detail-location">
-                          <LocationOnIcon />
-                          <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                              fontSize: 16,
-                              fontWeight: "400",
-                              transform: "translate(5px,-5px)",
-                            }}
+                        </div>
+                      </div>
+                      <div className="fix__margin">
+                        <div className="fix_container">
+                          <LocationOnIcon className='icon_fix' />
+                          <a
+                            className="fix-fontSize fix__margin"
                           >
                             {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
-                          </Typography>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -1045,9 +1026,9 @@ const BaseInformationCompany = ({
                         <Grid item xs={12}>
                           <Item
                             sx={{
-                              marginTop: 3,
-                              marginBottom: 3,
-                              paddingBottom: 2.5,
+                              marginTop: 1,
+                              marginBottom: 1,
+                              paddingBottom: 1,
                             }}
                             elevation={0}
                           >
@@ -1058,6 +1039,7 @@ const BaseInformationCompany = ({
                               >
                                 Giới thiệu về công ty
                               </h5>
+                              <Divider />
                               {/* <Typography
                           variant="h6"
                           component="div"

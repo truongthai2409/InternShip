@@ -110,6 +110,17 @@ const HeaderWithHR = (props) => {
             <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
           </Link>
+          <Link
+            to="candidatemanagement"
+            className={
+              pathUrl === "/hr/candidatemanagement"
+                ? "header__hr-post active"
+                : "header__hr-post"
+            }
+          >
+            <AddCardIcon> </AddCardIcon>
+            <span className="header__hr-post-post">Quản Lý Ứng Viên</span>
+          </Link>
         </div>
       ) : null}
       {pathUrl === "/candidate" ? (
