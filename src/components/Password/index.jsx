@@ -70,10 +70,6 @@ const Password = () => {
         Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className="password-form">
-        <img
-          src="https://img.freepik.com/free-vector/reset-password-concept-illustration_114360-7886.jpg?w=740&t=st=1659012076~exp=1659012676~hmac=0c16b61c2f92a4795b0868b298a5f7a6f00307787552adf106ae9d43752c9488"
-          alt="change-password"
-        />
         <div>
           <CustomInput
             label="Mật Khẩu Cũ"

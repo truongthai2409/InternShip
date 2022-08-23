@@ -26,6 +26,7 @@ const HRInfo = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -56,7 +57,7 @@ const HRInfo = () => {
           id: parseInt(data.company),
         },
       }),
-      fileAvatar: data.avatar[0] || null,
+      fileAvatar: data.avatar || null,
     };
     console.log("hrData", hrData.fileAvatar)
     dispatch(registerHr({ hrData, navigate }));
@@ -160,6 +161,7 @@ const HRInfo = () => {
           id="avatar"
           format="image"
           register={register}
+          setValue={setValue}
           requirementField={false}
         >
           {errors.avatar?.message}

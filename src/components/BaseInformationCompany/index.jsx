@@ -33,7 +33,6 @@ import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
-import DemandPartner from "../Demand";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -139,15 +138,12 @@ const BaseInformationCompany = ({
       setOpen(true);
       reset();
     } else {
-      toast.error("Bạn cần đăng nhập để đánh giá công ty", {
-        // position: "top-center",
-        // autoClose: 3000,
-      });
+      toast.error("Bạn cần đăng nhập để đánh giá công ty", {});
     }
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(localStorage.getItem("userPresent"))?.username;
+    const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -220,7 +216,7 @@ const BaseInformationCompany = ({
                   variant="h6"
                   component="div"
                   sx={{
-                    fontSize: 17,
+                    fontSize: 15,
                     fontWeight: "400",
                     transform: "translate(5px,5px)",
                   }}
@@ -377,14 +373,17 @@ const BaseInformationCompany = ({
                     </h3>
 
                     <div className="">
-                      <PhoneInTalkIcon />
+                      <PhoneInTalkIcon
+                        sx={{
+                          fontSize: 20,
+                          color: "#04bf8a",
+                        }}
+                      />
                       <Typography
                         variant="h6"
                         component="div"
                         sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
+                          transform: "translate(5px,0px)",
                         }}
                       >
                         {jobDetail?.hr?.company.phone}
@@ -392,18 +391,28 @@ const BaseInformationCompany = ({
                     </div>
                     <div className="fix__margin">
                       <h5>
-                        <EmailIcon />
+                        <EmailIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <a
                           href={`mailto:${jobDetail?.hr?.company.email}`}
-                          className="fix-fontSize fix__margin"
+                          className="fix-fontSize "
                         >
                           {jobDetail?.hr?.company.email}
                         </a>
                       </h5>
                     </div>
                     <div className="detail-website">
-                      <h5 className="fix__margin">
-                        <LanguageIcon />
+                      <h5 className="">
+                        <LanguageIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <a
                           href={jobDetail?.hr?.company.website}
                           className="fix-fontSize "
@@ -412,15 +421,25 @@ const BaseInformationCompany = ({
                         </a>
                       </h5>
 
-                      <div className=" base__information-card-detail-location">
-                        <LocationOnIcon />
+                      <div
+                        className=" base__information-card-detail-location"
+                        style={{
+                          transform: "translate(0px,5px)",
+                        }}
+                      >
+                        <LocationOnIcon
+                          sx={{
+                            fontSize: 20,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <Typography
                           variant="h6"
                           component="div"
                           sx={{
                             fontSize: 16,
                             fontWeight: "400",
-                            transform: "translate(5px,-5px)",
+                            transform: "translate(5px,0px)",
                           }}
                         >
                           {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
@@ -483,7 +502,7 @@ const BaseInformationCompany = ({
 
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: jobDetail?.desciption,
+                                __html: jobDetail?.description,
                               }}
                               style={{
                                 display: "flex",
@@ -506,7 +525,7 @@ const BaseInformationCompany = ({
                           <ContentBaseInformation
                             jobDetail={jobDetail}
                             jobListCompany={jobListCompany}
-                            pdLeft={"25px"}
+                            pdLeft={"35px"}
                             pdRight="25px"
                             mgLeft="25px"
                           />
@@ -540,6 +559,7 @@ const BaseInformationCompany = ({
                                   fontWeight: "700",
                                   // transform: "translate(5px,5px)",
                                   fontSize: 13,
+                                  paddingBottom: 2.5,
                                 }}
                               >
                                 {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
@@ -581,7 +601,11 @@ const BaseInformationCompany = ({
                           </h5>
                           <div>
                             {topAppreciate?.map((appreciate, index) => (
-                              <Appreciate appreciate={appreciate} key={index} />
+                              <Appreciate
+                                appreciate={appreciate}
+                                key={index}
+                                fontSize="15px"
+                              />
                             ))}
 
                             <div
@@ -662,6 +686,7 @@ const BaseInformationCompany = ({
                             paddingBottom: 2.3,
                             fontWeight: "600",
                           }}
+                          elevation={0}
                         >
                           <div
                             className="appreciate intro__company-title"
@@ -762,10 +787,13 @@ const BaseInformationCompany = ({
                           </div>
                           <div>
                             {appreciateList?.map((appreciate, index) => (
-                              <Appreciate
-                                appreciate={appreciate}
-                                key={appreciate.id}
-                              />
+                              <div>
+                                <Appreciate
+                                  appreciate={appreciate}
+                                  key={appreciate.id}
+                                />
+                                <span style={{}} className="line"></span>
+                              </div>
                             ))}
                           </div>
                           <div
@@ -782,6 +810,7 @@ const BaseInformationCompany = ({
                             marginTop: 3,
                             marginBottom: 3,
                           }}
+                          elevation={0}
                         >
                           <ContentBaseInformation
                             jobDetail={jobDetail}
@@ -976,14 +1005,19 @@ const BaseInformationCompany = ({
                       </h3>
 
                       <div className="">
-                        <PhoneInTalkIcon />
+                        <PhoneInTalkIcon
+                          sx={{
+                            fontSize: 17,
+                            color: "#04bf8a",
+                          }}
+                        />
                         <Typography
                           variant="h6"
                           component="div"
                           sx={{
                             fontSize: 17,
                             fontWeight: "400",
-                            transform: "translate(5px,5px)",
+                            transform: "translate(5px,0px)",
                           }}
                         >
                           {jobDetail?.hr?.company.phone}
@@ -991,7 +1025,12 @@ const BaseInformationCompany = ({
                       </div>
                       <div className="fix__margin">
                         <h5>
-                          <EmailIcon />
+                          <EmailIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <a
                             href={`mailto:${jobDetail?.hr?.company.email}`}
                             className="fix-fontSize fix__margin"
@@ -1002,7 +1041,12 @@ const BaseInformationCompany = ({
                       </div>
                       <div className="detail-website">
                         <h5 className="fix__margin">
-                          <LanguageIcon />
+                          <LanguageIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <a
                             href={jobDetail?.hr?.company.website}
                             className="fix-fontSize "
@@ -1012,7 +1056,12 @@ const BaseInformationCompany = ({
                         </h5>
 
                         <div className=" base__information-card-detail-location">
-                          <LocationOnIcon />
+                          <LocationOnIcon
+                            sx={{
+                              fontSize: 17,
+                              color: "#04bf8a",
+                            }}
+                          />
                           <Typography
                             variant="h6"
                             component="div"
@@ -1071,7 +1120,7 @@ const BaseInformationCompany = ({
                         </Typography> */}
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: jobDetail?.desciption,
+                                  __html: jobDetail?.description,
                                 }}
                                 style={{
                                   display: "flex",
@@ -1089,12 +1138,13 @@ const BaseInformationCompany = ({
                               marginTop: 3,
                               marginBottom: 3,
                             }}
+                            elevation={0}
                           >
                             <ContentBaseInformation
                               jobDetail={jobDetail}
                               jobListCompany={jobListCompany}
-                              pdLeft={"25px"}
-                              pdRight="25px"
+                              pdLeft={"20px"}
+                              pdRight="8px"
                               hideMark={true}
                             />
                           </Item>

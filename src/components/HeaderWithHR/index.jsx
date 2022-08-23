@@ -188,7 +188,7 @@ const HeaderWithHR = (props) => {
               candidate_infomation={true}
             />
           </div>
-          <div className="search__icon">
+          <div className="search__icon-mobile">
             <Toolbar>
               <Search>
                 <SearchIconWrapper>
@@ -219,9 +219,9 @@ const HeaderWithHR = (props) => {
           pathUrl === "/candidate/view-list-apply" ||
           pathUrl === "/candidate/view-list-care" ||
           pathUrl === "/candidate/profile" ||
-          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
-              profile?.userDTO?.firstName || ""
+          (profile?.user && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.user?.lastName || ""} ${
+              profile?.user?.firstName || ""
             }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>

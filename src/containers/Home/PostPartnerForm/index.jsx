@@ -122,11 +122,14 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       // console.log(demandDetail?.desciption);
       setValue("jobName", demandDetail?.name);
       setValue("jobDescription", demandDetail?.desciption);
-      setValue("timeStart", demandDetail?.updateDate || demandDetail?.createDate);
+      setValue(
+        "timeStart",
+        demandDetail?.updateDate || demandDetail?.createDate
+      );
       setValue("timeEnd", demandDetail?.end);
       setValue("amount", demandDetail?.amount);
     }
-  }, [])
+  }, []);
 
   const onSubmit = (data) => {
     const demandData = {
@@ -284,7 +287,9 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               </div>
               {openForm && (
                 <div className="descriptionForm__partner">
-                  <DescriptionForm schoolName={activeUser?.universityDTO?.name} />
+                  <DescriptionForm
+                    schoolName={activeUser?.universityDTO?.name}
+                  />
 
                   <div className="description-confirm-sample-btn-container">
                     <button
@@ -308,7 +313,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 setValue={setValue}
                 register={register}
               >
-              {errors.fileSV?.message}
+                {errors.fileSV?.message}
               </InputFile>
             </div>
             <div className="partner-post__action">

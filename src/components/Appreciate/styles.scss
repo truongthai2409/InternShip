@@ -6,3 +6,13 @@
 .fix_display {
   @include flex(start, flex-end);
 }
+
+.line::after {
+  background-color: $color-gray-3;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+}

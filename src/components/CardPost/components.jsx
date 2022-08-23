@@ -28,7 +28,7 @@ export const ConfirmDate = ({
       hr: {
         id: jobDetail[0].hr?.id,
       },
-      desciption: jobDetail[0].desciption,
+      description: jobDetail[0].description,
       major: {
         id: jobDetail[0].major?.id,
       },

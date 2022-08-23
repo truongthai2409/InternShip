@@ -12,13 +12,12 @@ const listWorkingFormat = [
   { name: "Remote", id: 3 },
 ];
 
-const SideBarHomeList = ({ onChange }) => {
+const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const [checkedType, setCheckedType] = useState([]);
-  const [checkedPosition, setCheckedPosition] = useState([]);
-  const [checkedMajor, setCheckedMajor] = useState([]);
+
   useEffect(() => {
     dispatch(getMajorList());
     dispatch(getJobPositionList());
@@ -57,7 +56,7 @@ const SideBarHomeList = ({ onChange }) => {
     onChange && onChange(updatedList);
   };
   return (
-    <div className="slideBarHome__wrapper">
+    <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ""}>
       <ListCollapse
         title="Hình thức làm việc"
         list={listWorkingFormat}
