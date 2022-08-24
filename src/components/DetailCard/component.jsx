@@ -63,7 +63,6 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  console.log(jobDetailById?.universityDTO?.majors[0]?.name);
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -213,6 +212,7 @@ const Detail = ({
           </div>
         </div>
       )}
+
       {jobDetailById && jobDetailById !== {} && (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
           <div className="detail__card-1">
@@ -227,8 +227,7 @@ const Detail = ({
               />
               <div>
                 <h2>
-                  {jobDetailById?.hr?.company?.name ||
-                    jobDetailById?.name}
+                  {jobDetailById?.hr?.company?.name || jobDetailById?.name}
                 </h2>
                 <p className="name-company">
                   {jobDetailById?.hr?.company?.name ||
@@ -240,9 +239,14 @@ const Detail = ({
               <div className="tag-name">
                 <div className="tag-name__name">
                   <TagName title={jobDetailById?.jobType?.name || "Không có"} />
-                  <TagName title={jobDetailById?.position?.name || "Không có"} />
                   <TagName
-                    title={jobDetailById?.universityDTO?.majors[0]?.name || "Không có"}
+                    title={jobDetailById?.position?.name || "Không có"}
+                  />
+                  <TagName
+                    title={
+                      jobDetailById?.universityDTO?.majors[0]?.name ||
+                      "Không có"
+                    }
                   />
                 </div>
               </div>
@@ -250,10 +254,14 @@ const Detail = ({
           </div>
           <div>
             <Box sx={{ width: "100%" }}>
-              <InformationUniversity
-                jobDetail={jobDetailById}
-                demandPartner={demandPartner}
-              ></InformationUniversity>
+              {demandPartner ? (
+                <InformationUniversity
+                  jobDetail={jobDetailById}
+                  demandPartner={demandPartner}
+                ></InformationUniversity>
+              ) : (
+                <InformationCompany jobDetailById={jobDetailById} />
+              )}
             </Box>
           </div>
         </div>

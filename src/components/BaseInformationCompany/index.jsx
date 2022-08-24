@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 import { Box, Typography } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -33,6 +32,7 @@ import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import HeaderBaseInformationCompany from "../HeaderBaseInformationCompany";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,9 +75,6 @@ const BaseInformationCompany = ({
   jobDetail,
   jobDetailById,
   information,
-  pl,
-  pr,
-  ml,
   mt,
   appreciateList,
   pdLeft,
@@ -93,7 +90,7 @@ const BaseInformationCompany = ({
   const [valueRating, setValueRating] = useState(2);
   const [hover, setHover] = useState(-1);
   const { profile } = useSelector((state) => state.authentication);
-  var checked = false;
+  let checked = false;
   const {
     register,
     handleSubmit,
@@ -106,7 +103,6 @@ const BaseInformationCompany = ({
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { demandListUniversity } = useSelector((state) => state.demand);
   const uniId = jobDetail?.universityDTO?.id;
   const idCompany = jobDetail?.hr?.company.id;
 
@@ -143,7 +139,9 @@ const BaseInformationCompany = ({
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
+    const username = JSON.parse(
+      sessionStorage.getItem("userPresent")
+    )?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -197,143 +195,15 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
+
   return (
     <div className="">
-      {jobDetailById && (
-        <div className="base__information">
-          {/* base */}
-          <div className="base__information-card">
-            <img
-              className="img-logo"
-              alt=""
-              src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-            />
-            <div className="base__information-card-detail">
-              <h3 className="company-name">{jobDetailById?.company.name}</h3>
-              <div className="">
-                <h5>Mã số thuế: </h5>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 15,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
-                  }}
-                >
-                  {jobDetailById?.company.tax}
-                </Typography>
-              </div>
-              <div className="">
-                <h5>Số điện thoại: </h5>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
-                  }}
-                >
-                  {jobDetailById?.company.phone}
-                </Typography>
-              </div>
-              <div className="">
-                <h5>
-                  Email:
-                  <a
-                    href={jobDetailById?.company.email}
-                    className="fix-fontSize"
-                  >
-                    {jobDetailById?.company.email}
-                  </a>
-                </h5>
-              </div>
-              <div className="detail-website">
-                <h5>
-                  Website:
-                  <a
-                    href={jobDetailById?.company.website}
-                    className="fix-fontSize"
-                  >
-                    {jobDetailById?.company.website}
-                  </a>
-                </h5>
-
-                <div className=" base__information-card-detail-location">
-                  <h5 className="">Địa điểm:</h5>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      fontSize: 17,
-                      fontWeight: "400",
-                      transform: "translate(5px,5px)",
-                    }}
-                  >
-                    {`${jobDetailById?.locationjob}`}
-                  </Typography>
-                </div>
-              </div>
-            </div>
-
-            {/* body */}
-            {information ? (
-              <div>
-                <Rating
-                  name="read-only"
-                  precision={0.5}
-                  readOnly
-                  defaultValue={jobDetailById?.company.rates.length}
-                />
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
-                  }}
-                >
-                  {/* 5.0 trong 48 lượt đánh giá */}
-                </Typography>
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="intro__company">
-            <h5 className="intro__company-title">Giới thiệu về công ty</h5>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                fontSize: 17,
-                fontWeight: "400",
-                transform: "translate(5px,5px)",
-              }}
-            >
-              {jobDetailById?.company.description}
-            </Typography>
-          </div>
-          <div className="job-applying-container">
-            <h5 className="intro__company-title">Việc làm đang tuyển</h5>
-          </div>
-          {pathUrl !== "/information_company" ? (
-            <div className="button-card">
-              <Link to={`/candidate/information_company/${jobDetail?.id}`}>
-                <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
-              </Link>
-            </div>
-          ) : null}
-        </div>
-      )}
       {/* Nếu trang home thì bỏ tab còn trang information thì có tab */}
       {information ? (
         <div>
           {jobDetail && (
             <div
-              className={`base__information`}
+              className={`base__information-candidate`}
               style={{
                 marginTop: mt ? `${mt}` : "",
                 paddingLeft: pdLeft ? `${pdLeft}` : "",
@@ -342,114 +212,7 @@ const BaseInformationCompany = ({
                 paddingBottom: pdBottom ? `${pdBottom}` : "",
               }}
             >
-              <Box sx={{}}>
-                <div className="base__information-card">
-                  <div
-                    style={{
-                      marginRight: "16px",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: 135,
-                        height: 135,
-                        backgroundColor: "transparent",
-                        // border: "0.5px solid #dedede",
-                        borderRadius: "6px",
-                        marginRight: "20px",
-                      }}
-                    >
-                      <img
-                        className="img-logo"
-                        alt=""
-                        src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-                      />
-                    </Box>
-                  </div>
-
-                  <div className="base__information-card-detail">
-                    <h3 className="company-name">
-                      {jobDetail?.hr?.company.name}
-                    </h3>
-
-                    <div className="">
-                      <PhoneInTalkIcon
-                        sx={{
-                          fontSize: 20,
-                          color: "#04bf8a",
-                        }}
-                      />
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          transform: "translate(5px,0px)",
-                        }}
-                      >
-                        {jobDetail?.hr?.company.phone}
-                      </Typography>
-                    </div>
-                    <div className="fix__margin">
-                      <h5>
-                        <EmailIcon
-                          sx={{
-                            fontSize: 20,
-                            color: "#04bf8a",
-                          }}
-                        />
-                        <a
-                          href={`mailto:${jobDetail?.hr?.company.email}`}
-                          className="fix-fontSize "
-                        >
-                          {jobDetail?.hr?.company.email}
-                        </a>
-                      </h5>
-                    </div>
-                    <div className="detail-website">
-                      <h5 className="">
-                        <LanguageIcon
-                          sx={{
-                            fontSize: 20,
-                            color: "#04bf8a",
-                          }}
-                        />
-                        <a
-                          href={jobDetail?.hr?.company.website}
-                          className="fix-fontSize "
-                        >
-                          {jobDetail?.hr?.company.website}
-                        </a>
-                      </h5>
-
-                      <div
-                        className=" base__information-card-detail-location"
-                        style={{
-                          transform: "translate(0px,5px)",
-                        }}
-                      >
-                        <LocationOnIcon
-                          sx={{
-                            fontSize: 20,
-                            color: "#04bf8a",
-                          }}
-                        />
-                        <Typography
-                          variant="h6"
-                          component="div"
-                          sx={{
-                            fontSize: 16,
-                            fontWeight: "400",
-                            transform: "translate(5px,0px)",
-                          }}
-                        >
-                          {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Box>
-
+              <HeaderBaseInformationCompany jobDetail={jobDetail} />
               <Box>
                 <Box
                   sx={{
@@ -499,10 +262,9 @@ const BaseInformationCompany = ({
                             >
                               Giới thiệu về công ty
                             </h5>
-
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: jobDetail?.description,
+                                __html: jobDetail?.desciption,
                               }}
                               style={{
                                 display: "flex",
@@ -539,6 +301,7 @@ const BaseInformationCompany = ({
                           }}
                           elevation={0}
                         >
+                          {/* Nếu trang information thì hiện rating  */}
                           {information ? (
                             <div>
                               <Rating
@@ -584,6 +347,7 @@ const BaseInformationCompany = ({
                             ""
                           )}
                         </Item>
+                        {/*  */}
                         <Item
                           sx={{
                             paddingTop: 1,
@@ -634,6 +398,7 @@ const BaseInformationCompany = ({
                     </Grid>
                   </Box>
                 </TabPanel>
+                {/* Tab Đánh giá */}
                 <TabPanel value={valueTab} index={1}>
                   <Box>
                     <Grid container spacing={2}>
@@ -645,40 +410,36 @@ const BaseInformationCompany = ({
                           }}
                           elevation={0}
                         >
-                          {information ? (
-                            <div>
-                              <Rating
-                                precision={0.5}
-                                readOnly
-                                value={Number(rating)}
-                                size="large"
-                                sx={{
-                                  fontWeight: "800",
-                                }}
-                              />
+                          <div>
+                            <Rating
+                              precision={0.5}
+                              readOnly
+                              value={Number(rating)}
+                              size="large"
+                              sx={{
+                                fontWeight: "800",
+                              }}
+                            />
 
-                              <Typography
-                                variant="h6"
-                                component="div"
-                                sx={{
-                                  fontWeight: "700",
-                                  // transform: "translate(5px,5px)",
-                                  fontSize: 15,
-                                }}
-                              >
-                                {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
-                              </Typography>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignContent: "center",
-                                  justifyContent: "center",
-                                }}
-                              ></div>
-                            </div>
-                          ) : (
-                            ""
-                          )}
+                            <Typography
+                              variant="h6"
+                              component="div"
+                              sx={{
+                                fontWeight: "700",
+                                // transform: "translate(5px,5px)",
+                                fontSize: 15,
+                              }}
+                            >
+                              {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
+                            </Typography>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignContent: "center",
+                                justifyContent: "center",
+                              }}
+                            ></div>
+                          </div>
                         </Item>
                         <Item
                           sx={{
@@ -688,18 +449,8 @@ const BaseInformationCompany = ({
                           }}
                           elevation={0}
                         >
-                          <div
-                            className="appreciate intro__company-title"
-                            style={
-                              {
-                                // marginLeft: "12px",
-                              }
-                            }
-                          >
-                            <h4
-                              style={{ marginTop: "0px", marginLeft: 0 }}
-                              className=""
-                            >
+                          <div className="appreciate intro__company-title">
+                            <h4 style={{ marginTop: "0px", marginLeft: 0 }}>
                               Đánh giá về công ty{" "}
                             </h4>
                             <Modal
@@ -816,6 +567,7 @@ const BaseInformationCompany = ({
                             jobDetail={jobDetail}
                             jobListCompany={jobListCompany}
                             hideMark={true}
+                            none__time={true}
                           />
                         </Item>
                       </Grid>
@@ -825,138 +577,6 @@ const BaseInformationCompany = ({
               </Box>
             </div>
           )}
-
-          {jobDetailById && (
-            <div className="base__information">
-              <div className="base__information-card">
-                <img
-                  className="img-logo"
-                  alt=""
-                  src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-                />
-                <div className="base__information-card-detail">
-                  <h3 className="company-name">
-                    {jobDetailById?.company.name}
-                  </h3>
-                  <div className="">
-                    <h5>Mã số thuế: </h5>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontSize: 17,
-                        fontWeight: "400",
-                        transform: "translate(5px,5px)",
-                      }}
-                    >
-                      {jobDetailById?.company.tax}
-                    </Typography>
-                  </div>
-                  <div className="">
-                    <h5>Số điện thoại: </h5>
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontSize: 17,
-                        fontWeight: "400",
-                        transform: "translate(5px,5px)",
-                      }}
-                    >
-                      {jobDetailById?.company.phone}
-                    </Typography>
-                  </div>
-                  <div className="">
-                    <h5>
-                      Email:
-                      <a
-                        href={jobDetailById?.company.email}
-                        className="fix-fontSize"
-                      >
-                        {jobDetailById?.company.email}
-                      </a>
-                    </h5>
-                  </div>
-                  <div className="detail-website">
-                    <h5>
-                      Website:
-                      <a
-                        href={jobDetailById?.company.website}
-                        className="fix-fontSize"
-                      >
-                        {jobDetailById?.company.website}
-                      </a>
-                    </h5>
-
-                    <div className=" base__information-card-detail-location">
-                      <h5 className="">Địa điểm:</h5>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
-                        }}
-                      >
-                        {`${jobDetailById?.locationjob}`}
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-
-                {information ? (
-                  <div>
-                    <Rating
-                      name="read-only"
-                      precision={0.5}
-                      readOnly
-                      defaultValue={jobDetailById?.company.rates.length}
-                    />
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      sx={{
-                        fontSize: 17,
-                        fontWeight: "400",
-                        transform: "translate(5px,5px)",
-                      }}
-                    >
-                      {/* 5.0 trong 48 lượt đánh giá */}
-                    </Typography>
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="intro__company">
-                <h5 className="intro__company-title">Giới thiệu về công ty</h5>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 17,
-                    fontWeight: "400",
-                    transform: "translate(5px,5px)",
-                  }}
-                >
-                  {jobDetailById?.company.description}
-                </Typography>
-              </div>
-              <div className="job-applying-container"></div>
-              {pathUrl !== "/information_company" ? (
-                <div className="button-card">
-                  <Link to={`/candidate/information_company/${jobDetail?.id}`}>
-                    <Button
-                      name="Xem thêm"
-                      bwidth="130px"
-                      bheight="40px"
-                    ></Button>
-                  </Link>
-                </div>
-              ) : null}
-            </div>
-          )}
         </div>
       ) : (
         // trang home
@@ -964,7 +584,7 @@ const BaseInformationCompany = ({
           <div>
             {jobDetail && (
               <div
-                className={`base__information`}
+                className={`base__information-candidate`}
                 style={{
                   marginTop: mt ? `${mt}` : "",
                   // border: '1px solid black'
@@ -1015,7 +635,7 @@ const BaseInformationCompany = ({
                           variant="h6"
                           component="div"
                           sx={{
-                            fontSize: 17,
+                            fontSize: 15,
                             fontWeight: "400",
                             transform: "translate(5px,0px)",
                           }}
@@ -1023,27 +643,27 @@ const BaseInformationCompany = ({
                           {jobDetail?.hr?.company.phone}
                         </Typography>
                       </div>
-                      <div className="fix__margin">
+                      <div className="">
                         <h5>
                           <EmailIcon
                             sx={{
-                              fontSize: 17,
+                              fontSize: 15,
                               color: "#04bf8a",
                             }}
                           />
                           <a
                             href={`mailto:${jobDetail?.hr?.company.email}`}
-                            className="fix-fontSize fix__margin"
+                            className="fix-fontSize "
                           >
                             {jobDetail?.hr?.company.email}
                           </a>
                         </h5>
                       </div>
                       <div className="detail-website">
-                        <h5 className="fix__margin">
+                        <h5 className="">
                           <LanguageIcon
                             sx={{
-                              fontSize: 17,
+                              fontSize: 15,
                               color: "#04bf8a",
                             }}
                           />
@@ -1058,8 +678,9 @@ const BaseInformationCompany = ({
                         <div className=" base__information-card-detail-location">
                           <LocationOnIcon
                             sx={{
-                              fontSize: 17,
+                              fontSize: 15,
                               color: "#04bf8a",
+                              marginTop: "5px",
                             }}
                           />
                           <Typography
@@ -1107,20 +728,10 @@ const BaseInformationCompany = ({
                               >
                                 Giới thiệu về công ty
                               </h5>
-                              {/* <Typography
-                          variant="h6"
-                          component="div"
-                          sx={{
-                            fontSize: 17,
-                            fontWeight: "400",
-                            transform: "translate(5px,5px)",
-                          }}
-                        >
-                          {jobDetail?.hr?.company.description}
-                        </Typography> */}
+
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: jobDetail?.description,
+                                  __html: jobDetail?.desciption,
                                 }}
                                 style={{
                                   display: "flex",
@@ -1153,141 +764,6 @@ const BaseInformationCompany = ({
                     </Box>
                   </TabPanel>
                 </Box>
-              </div>
-            )}
-
-            {jobDetailById && (
-              <div className="base__information">
-                <div className="base__information-card">
-                  <img
-                    className="img-logo"
-                    alt=""
-                    src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-                  />
-                  <div className="base__information-card-detail">
-                    <h3 className="company-name">
-                      {jobDetailById?.company.name}
-                    </h3>
-                    <div className="">
-                      <h5>Mã số thuế: </h5>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
-                        }}
-                      >
-                        {jobDetailById?.company.tax}
-                      </Typography>
-                    </div>
-                    <div className="">
-                      <h5>Số điện thoại: </h5>
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
-                        }}
-                      >
-                        {jobDetailById?.company.phone}
-                      </Typography>
-                    </div>
-                    <div className="">
-                      <h5>
-                        Email:
-                        <a
-                          href={jobDetailById?.company.email}
-                          className="fix-fontSize"
-                        >
-                          {jobDetailById?.company.email}
-                        </a>
-                      </h5>
-                    </div>
-                    <div className="detail-website">
-                      <h5>
-                        Website:
-                        <a
-                          href={jobDetailById?.company.website}
-                          className="fix-fontSize"
-                        >
-                          {jobDetailById?.company.website}
-                        </a>
-                      </h5>
-
-                      <div className=" base__information-card-detail-location">
-                        <h5 className="">Địa điểm:</h5>
-                        <Typography
-                          variant="h6"
-                          component="div"
-                          sx={{
-                            fontSize: 17,
-                            fontWeight: "400",
-                            transform: "translate(5px,5px)",
-                          }}
-                        >
-                          {`${jobDetailById?.locationjob}`}
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                  {information ? (
-                    <div>
-                      <Rating
-                        name="read-only"
-                        precision={0.5}
-                        readOnly
-                        defaultValue={jobDetailById?.company.rates.length}
-                      />
-                      <Typography
-                        variant="h6"
-                        component="div"
-                        sx={{
-                          fontSize: 17,
-                          fontWeight: "400",
-                          transform: "translate(5px,5px)",
-                        }}
-                      >
-                        {/* 5.0 trong 48 lượt đánh giá */}
-                      </Typography>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div className="intro__company">
-                  <h5 className="intro__company-title">
-                    Giới thiệu về công ty
-                  </h5>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      fontSize: 17,
-                      fontWeight: "400",
-                      transform: "translate(5px,5px)",
-                    }}
-                  >
-                    {jobDetailById?.company.description}
-                  </Typography>
-                </div>
-
-                {pathUrl !== "/information_company" ? (
-                  <div className="button-card">
-                    <Link
-                      to={`/partner/information_school/${jobDetail?.universityDTO.id}`}
-                    >
-                      <Button
-                        name="Xem thêm"
-                        bwidth="130px"
-                        bheight="40px"
-                      ></Button>
-                    </Link>
-                  </div>
-                ) : null}
               </div>
             )}
           </div>

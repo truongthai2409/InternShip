@@ -7,7 +7,7 @@ import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
-import { Pagination, Stack } from "@mui/material";
+import PaginationCustome from "src/components/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, jobList, ...other } = props;
@@ -52,10 +52,11 @@ const FilterPanelHome = ({
 }) => {
   const location = useLocation();
   const [value, setValue] = useState(0);
+  const [page, setPage] = useState(1);
   const handleChange = (event, newValue) => setValue(newValue);
-
-  const handlePagination = (page) => {
-    onChange && onChange(page);
+  const handlePagination = (e, valuePage) => {
+    setPage(valuePage);
+    onChange && onChange(valuePage);
   };
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
@@ -70,6 +71,7 @@ const FilterPanelHome = ({
         {jobList && jobList?.length > 0
           ? jobList.map((job, index) => (
               <CardHome
+                page={page}
                 positionValue={positionValue}
                 id={job.id}
                 active={indexCardActive}
@@ -77,8 +79,12 @@ const FilterPanelHome = ({
                 key={job.id}
                 title={job.name}
                 fontSize={10}
-                nameCompany={job?.hr?.company?.name || job?.partner?.universityDTO.name}
-                idCompany={job?.hr?.company?.id || job?.partner?.universityDTO.id}
+                nameCompany={
+                  job?.hr?.company?.name || job?.partner?.universityDTO.name
+                }
+                idCompany={
+                  job?.hr?.company?.id || job?.partner?.universityDTO.id
+                }
                 tagName={[
                   job?.jobposition?.name || job?.position.name || "Không có",
                   job?.jobType?.name || "Không có",
@@ -107,6 +113,11 @@ const FilterPanelHome = ({
           marginTop: "16px",
         }}
       >
+        <PaginationCustome
+          page={page}
+          totalPages={jobListHavePages.totalPages}
+          hanldeOnChange={handlePagination}
+        />
       </div>
     </Box>
   );

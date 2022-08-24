@@ -8,8 +8,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getJobByCompany,
-  getJobByNameAndLocation,
   getJobFilterByUser,
+  updateIndexCardActive,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
@@ -17,9 +17,10 @@ import Logo from "src/components/Logo";
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  // let currentPage = 1;
 
   const [locationValue, setLocationValue] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
   const [openDrawer, setOpenDrawer] = useState(false);
   // get global state from redux store
@@ -69,11 +70,11 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: 1,
+      no: currentPage - 1,
       limit: 5,
     };
     dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
+    dispatch(getJobByCompany(Number(idCompany)));
   }, []);
 
   useEffect(() => {
@@ -84,17 +85,19 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: currentPage,
+      no: currentPage - 1,
       limit: 5,
     };
+
     dispatch(getJobFilterByUser(dataFilter));
     dispatch(getJobByCompany(idCompany));
+    dispatch(updateIndexCardActive(0));
   }, [currentPage]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
-      no: 1,
+      no: currentPage - 1,
       limit: 5,
     },
   };
@@ -112,7 +115,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: 1,
+      no: currentPage - 1,
       limit: 5,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -162,6 +165,7 @@ const Home = (props) => {
 
   const getValuePageAndHandle = (value) => {
     setCurrentPage(value);
+    // currentPage = value;
     window.scroll(0, 0);
   };
 

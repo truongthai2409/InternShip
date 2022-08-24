@@ -6,6 +6,8 @@ import Button from "../Button";
 import "./styles.scss";
 import CardHome from "../CardHome";
 import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
 const ContentBaseInformation = ({
   jobDetail,
@@ -14,10 +16,12 @@ const ContentBaseInformation = ({
   pdRight,
   hideMark = false,
   mgLeft,
+  none__time,
 }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const pathUrl = location.pathname;
-
+  const { indexCardActive } = useSelector((state) => state.job);
   return (
     <div>
       <div className="job-applying-container _scroll">
@@ -31,7 +35,7 @@ const ContentBaseInformation = ({
         </h5>
         <Grid
           container
-          spacing={1.5}
+          spacing={1}
           sx={{
             // paddingLeft: `${pl}px`,
             // paddingRight: `${pr}px`,
@@ -40,7 +44,7 @@ const ContentBaseInformation = ({
           }}
         >
           {jobListCompany?.length > 0 &&
-            jobListCompany?.map((job) => (
+            jobListCompany?.map((job, index) => (
               <Grid
                 item
                 lg="12"
@@ -61,34 +65,45 @@ const ContentBaseInformation = ({
                   pdRight={pdRight}
                   hideMark={hideMark}
                 /> */}
-
-                <CardHome
-                  id={job.id}
-                  // index={index}
-                  title={job.name}
-                  fontSize={10}
-                  nameCompany={job.hr?.company?.name}
-                  idCompany={job.hr?.company?.id}
-                  job={job}
-                  // key={job.id}
-                  idJob={job.id}
-                  tagName={[
-                    job?.jobposition?.name || job?.position.name || "Không có",
-                    job?.jobType?.name || "Không có",
-                  ]}
-                  location="Hồ Chí Minh"
-                  amount={job.amount || "Không có"}
-                  demandPartner={true}
-                  time={[
-                    moment(job.timeStartStr || job.createDate).format(
-                      "DD/MM/YYYY"
-                    ),
-                    moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
-                  ]}
-                  locationPath={location.pathname}
-                  pdLeft="30px"
-                  pdRight="30px"
-                />
+                <Link
+                  to={`/candidate/detail_job/${job.id}`}
+                  // onClick={async () => {
+                  //   dispatch(updateIdJobActive(job.id));
+                  // }}
+                  className="link__job-detail"
+                >
+                  <CardHome
+                    id={job.id}
+                    index={index}
+                    title={job.name}
+                    fontSize={10}
+                    nameCompany={job.hr?.company?.name}
+                    idCompany={job.hr?.company?.id}
+                    job={job}
+                    // key={job.id}
+                    idJob={job.id}
+                    tagName={[
+                      job?.jobposition?.name ||
+                        job?.position.name ||
+                        "Không có",
+                      job?.jobType?.name || "Không có",
+                    ]}
+                    location="Hồ Chí Minh"
+                    amount={job.amount || "Không có"}
+                    demandPartner={true}
+                    time={[
+                      moment(job.timeStartStr || job.createDate).format(
+                        "DD/MM/YYYY"
+                      ),
+                      moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                    ]}
+                    locationPath={location.pathname}
+                    pdLeft="30px"
+                    pdRight="30px"
+                    none__time={none__time}
+                    active={indexCardActive}
+                  />
+                </Link>
               </Grid>
             ))}
         </Grid>

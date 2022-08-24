@@ -49,7 +49,7 @@ const demandSlice = createSlice({
         // console.log(payload.demandList[0]);
         state.demandList = payload.demandList;
         state.totalPagesofDemandList = payload.totalPage;
-        if (payload.demandList.length > 0) {
+        if (payload.demandList?.length > 0) {
           state.demandDetail = payload.demandList[0];
         } else {
         }
@@ -62,7 +62,7 @@ const demandSlice = createSlice({
         console.log(payload.demandList);
         state.demandList = payload.demandList;
         state.totalPagesofDemandList = payload?.totalPage;
-        if (payload.demandList.length > 0) {
+        if (payload.demandList?.length > 0) {
           state.demandDetail = payload.demandList[0];
         } else {
         }
@@ -81,12 +81,14 @@ const demandSlice = createSlice({
       })
       .addCase(updateDemand.fulfilled, (state, { payload }) => {
         console.log(state.demandListUniversityActive);
-        state.demandListUniversityActive = state.demandListUniversityActive.map((demand) => {
-          if (demand.id === payload.id) {
-            return payload;
+        state.demandListUniversityActive = state.demandListUniversityActive.map(
+          (demand) => {
+            if (demand.id === payload.id) {
+              return payload;
+            }
+            return demand;
           }
-          return demand;
-        })
+        );
         toast.success("Cập nhật danh sách thực tập thành công!");
         state.closeEditDemand = true;
       });
@@ -211,10 +213,7 @@ export const getDemandByName = createAsyncThunk(
   "demand/getDemandByName",
   async (dataSearch) => {
     return await axios
-      .get(
-        `${baseURL}/api/r2s/partner/demand/search`,
-        { params: dataSearch }
-      )
+      .get(`${baseURL}/api/r2s/partner/demand/search`, { params: dataSearch })
       .then((response) => {
         return {
           demandList: response.data.contents,

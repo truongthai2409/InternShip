@@ -10,8 +10,13 @@ import { schema } from "./validate";
 import Button from "../Button";
 import { updateUserPassword } from "src/store/slices/main/login/loginSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import Logo from "../Logo";
+import ArrowButton from "../ArrowButton";
+import { useNavigate } from "react-router-dom";
 const Password = () => {
   const { profile } = useSelector((state) => state.authentication);
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     formState: { errors },
@@ -60,14 +65,28 @@ const Password = () => {
       }
     }
   };
-  const handleClear = () => {
-    reset();
+  // const handleClear = () => {
+  //   reset();
+  // };
+
+  const handleBackClick = () => {
+    navigate(-1);
   };
   return (
     <div className=" password">
-      <h4>Đổi mật khẩu</h4>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginLeft: "50px",
+          marginTop: "15px",
+        }}
+      >
+        <Logo />
+      </div>
+      <h4>Đổi Mật Khẩu</h4>
       <Typography variant="subtitle2" component="div" sx={{ fontSize: 16 }}>
-        Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
+        {/* Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác */}
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className="password-form">
         <div>
@@ -75,7 +94,7 @@ const Password = () => {
             label="Mật Khẩu Cũ"
             id="passwordOld"
             type="password"
-            placeholder="Mật Khẩu Cũ"
+            placeholder="Mật khẩu cũ"
             register={register}
             visibility
             height="20px"
@@ -85,7 +104,7 @@ const Password = () => {
             {/* {errorMessage?.Password} */}
           </CustomInput>
           <CustomInput
-            label="Mật Khẩu Mới"
+            label="Mật khẩu mới"
             id="passwordNew"
             type="password"
             placeholder="Mật Khẩu Mới"
@@ -98,7 +117,7 @@ const Password = () => {
             {/* {errorMessage?.Password} */}
           </CustomInput>
           <CustomInput
-            label="Nhập Lại Mật Khẩu
+            label="Nhập lại mật khẩu
 "
             id="confirmPasswordNew"
             type="password"
@@ -112,17 +131,14 @@ const Password = () => {
             {errors.confirmPasswordNew?.message}
           </CustomInput>
           <div className="button__change-password">
+            <div className="reg-hr__btns--item" onClick={handleBackClick}>
+              <ArrowButton fontSize="16px" text="Trở lại" direction="left" />
+            </div>
             <Button
               bwidth="100px"
               bheight="40px"
               name="Lưu"
               onClick={handleSubmit(onSubmit)}
-            ></Button>
-            <Button
-              bwidth="100px"
-              bheight="40px"
-              name="Hủy"
-              onClick={handleClear}
             ></Button>
           </div>
         </div>

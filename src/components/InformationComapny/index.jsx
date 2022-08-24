@@ -74,7 +74,7 @@ const InformationCompany = ({
                 sx={{ fontSize: 16, fontWeight: "400" }}
               >
                 <div
-                  dangerouslySetInnerHTML={{ __html: jobDetail.description }}
+                  dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
                 ></div>
               </Typography>
             </Typography>
@@ -172,9 +172,6 @@ const InformationCompany = ({
           </div>
           <div className="detail__card-5">
             <Typography variant="span" gutterBottom component="div">
-              <Typography variant="button" display="block" gutterBottom>
-                {jobDetail.company?.rates?.length}
-              </Typography>
               <Rating
                 name="read-only"
                 precision={0.5}
@@ -207,7 +204,7 @@ const InformationCompany = ({
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: jobDetailById.description,
+                    __html: jobDetailById.desciption,
                   }}
                 ></div>
               </Typography>

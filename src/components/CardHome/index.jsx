@@ -43,6 +43,19 @@ const CardHome = (props) => {
   }, []);
 
   React.useEffect(() => {
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: props.page - 1,
+        limit: 5,
+      },
+    };
+    if (profile.role === "Role_Candidate") {
+      dispatch(getMarkByUser(dataGetMarkByUser));
+    }
+  }, [props.page]);
+
+  React.useEffect(() => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
@@ -54,11 +67,6 @@ const CardHome = (props) => {
     dispatch(updateIdJobActive(props.id));
   };
   return (
-    // <Link
-    //   to={`/candidate/detail_job/${props.id}`}
-    //   onClick={handleClick}
-    //   className="link__job-detail"
-    // >
     <div
       onClick={handleClick}
       className={clsx(
@@ -109,25 +117,40 @@ const CardHome = (props) => {
           jobId={props.id}
           isMark={isMarkLength}
         />
-        <div className="cardHome__col2-End">
+
+        {props.none__time ? (
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon
               style={{ fontSize: `${props.fontSize + 2}px` }}
             />
-            <p style={{ fontSize: `${props.fontSize}px` }}>{props.location}</p>
-          </div>
-          <div className="cardHome__col2-End-2">
-            <WatchLaterOutlinedIcon
-              style={{ fontSize: `${props.fontSize + 2}px` }}
-            />
             <p
-              style={{ fontSize: `${props.fontSize}px` }}
-            >{`${props.time[0]} - ${props.time[1]}`}</p>
+              style={{ fontSize: `${props.fontSize}px`, width: "max-content" }}
+            >
+              {props.location}
+            </p>
           </div>
-        </div>
+        ) : (
+          <div className="cardHome__col2-End">
+            <div className="cardHome__col2-End-1">
+              <AddLocationAltRoundedIcon
+                style={{ fontSize: `${props.fontSize + 2}px` }}
+              />
+              <p style={{ fontSize: `${props.fontSize}px` }}>
+                {props.location}
+              </p>
+            </div>
+            <div className="cardHome__col2-End-2">
+              <WatchLaterOutlinedIcon
+                style={{ fontSize: `${props.fontSize + 2}px` }}
+              />
+              <p
+                style={{ fontSize: `${props.fontSize}px` }}
+              >{`${props.time[0]} - ${props.time[1]}`}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
-    // </Link>
   );
 };
 
