@@ -51,16 +51,18 @@
         }
 
         .candidate_choise {
-            gap: 6rem;
+            margin-top: 4rem;
+            gap: 4rem;   
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            align-items: center;
+            align-items: flex-start;
             height: 100%;
             span {
                 color: #ccc;
             }
             .choise {
+                margin-top: 2.5rem;
                 cursor: pointer;
                 display: flex;
                 justify-content: center;
@@ -88,7 +90,7 @@
             justify-content: center;
             align-items: center;
             img {
-                margin-top: 1rem;
+                // margin-top: 1rem;
                 border-radius: 50%;
             }
             .candidate_info {
@@ -98,6 +100,7 @@
                 align-items: center;
             }
             .candidate_choise {
+                margin-top: 1px;
                 gap : 0rem;
                 justify-content: flex-start;
                 align-items: flex-start;

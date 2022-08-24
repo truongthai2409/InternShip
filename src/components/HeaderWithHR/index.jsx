@@ -18,7 +18,7 @@ import { styled, alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -118,9 +118,10 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <AddCardIcon> </AddCardIcon>
-            <span className="header__hr-post-post">Quản Lý Ứng Viên</span>
+            <BookmarksIcon />
+            <span className="header__hr-post-post">Ứng viên ưa thích</span>
           </Link>
+          
         </div>
       ) : null}
       {pathUrl === "/candidate" ? (
@@ -227,13 +228,12 @@ const HeaderWithHR = (props) => {
           }}
         >
           {pathUrl === "/candidate" ||
-          pathUrl === "/candidate/view-list-apply" ||
-          pathUrl === "/candidate/view-list-care" ||
-          pathUrl === "/candidate/profile" ||
-          (profile?.user && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.user?.lastName || ""} ${
-              profile?.user?.firstName || ""
-            }`}</h4>
+            pathUrl === "/candidate/view-list-apply" ||
+            pathUrl === "/candidate/view-list-care" ||
+            pathUrl === "/candidate/profile" ||
+            (profile?.user && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.user?.lastName || ""} ${profile?.user?.firstName || ""
+              }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           )}
