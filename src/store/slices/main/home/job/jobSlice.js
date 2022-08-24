@@ -30,7 +30,7 @@ const jobSlice = createSlice({
     },
     updateIndexCardActive: (state, action) => {
       state.indexCardActive = action.payload;
-      state.jobDetail = state?.jobListName[action.payload];
+      state.jobDetail = state?.jobFilter[action.payload];
     },
   },
   extraReducers: (builder) => {
@@ -79,6 +79,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobFilterByUser.fulfilled, (state, { payload }) => {
       state.jobFilter = payload?.contents;
       state.jobListHavePages = payload;
+      state.jobDetail = payload?.contents[0];
     });
     builder.addCase(addJob.fulfilled, (state, payload) => {
       if (payload.payload[1] === "repost") {
@@ -313,6 +314,7 @@ export const getJobFilterByUser = createAsyncThunk(
         params: dataSearch,
       })
       .then((response) => {
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {

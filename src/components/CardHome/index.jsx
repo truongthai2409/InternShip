@@ -14,6 +14,7 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
+import { Link } from "react-router-dom";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE;
@@ -22,7 +23,7 @@ const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-  // console.log(profile.username);
+
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
@@ -33,7 +34,7 @@ const CardHome = (props) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 10,
+        limit: 5,
       },
     };
     if (profile.role === "Role_Candidate") {
@@ -45,29 +46,29 @@ const CardHome = (props) => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
-  }, [dispatch]);
+  }, []);
 
   const handleClick = () => {
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
   };
-
-  var handleRerender = async (id) => {
-    if (id) {
-      // setId(id);
-      // dispatch(getMarkByUser(profile.username));
-    }
-  };
-
   return (
+    // <Link
+    //   to={`/candidate/detail_job/${props.id}`}
+    //   onClick={handleClick}
+    //   className="link__job-detail"
+    // >
     <div
       onClick={handleClick}
       className={clsx(
         "cardHome__container",
         props.active === props.index ? "active" : ""
       )}
-      dataset={props.id}
+      style={{
+        paddingLeft: props.pdLeft ? props.pdLeft : "",
+        paddingRight: props.pdRight ? props.pdRight : "",
+      }}
     >
       <div className="cardHome__col1" dataset={props.id}>
         <div className="cardHome__aboutCompany">
@@ -107,7 +108,6 @@ const CardHome = (props) => {
           fontSize="18px"
           jobId={props.id}
           isMark={isMarkLength}
-          onClick={handleRerender}
         />
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">
@@ -127,6 +127,7 @@ const CardHome = (props) => {
         </div>
       </div>
     </div>
+    // </Link>
   );
 };
 

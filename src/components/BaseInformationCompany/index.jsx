@@ -33,7 +33,6 @@ import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
-import DemandPartner from "../Demand";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -139,10 +138,7 @@ const BaseInformationCompany = ({
       setOpen(true);
       reset();
     } else {
-      toast.error("Bạn cần đăng nhập để đánh giá công ty", {
-        // position: "top-center",
-        // autoClose: 3000,
-      });
+      toast.error("Bạn cần đăng nhập để đánh giá công ty", {});
     }
   };
 
@@ -220,7 +216,7 @@ const BaseInformationCompany = ({
                   variant="h6"
                   component="div"
                   sx={{
-                    fontSize: 17,
+                    fontSize: 15,
                     fontWeight: "400",
                     transform: "translate(5px,5px)",
                   }}
@@ -390,7 +386,7 @@ const BaseInformationCompany = ({
                         <EmailIcon className='icon_fix' />
                         <a
                           href={`mailto:${jobDetail?.hr?.company.email}`}
-                          className="fix-fontSize fix__margin"
+                          className="fix-fontSize "
                         >
                           {jobDetail?.hr?.company.email}
                         </a>
@@ -497,7 +493,7 @@ const BaseInformationCompany = ({
                           <ContentBaseInformation
                             jobDetail={jobDetail}
                             jobListCompany={jobListCompany}
-                            pdLeft={"25px"}
+                            pdLeft={"35px"}
                             pdRight="25px"
                             mgLeft="25px"
                           />
@@ -531,6 +527,7 @@ const BaseInformationCompany = ({
                                   fontWeight: "700",
                                   // transform: "translate(5px,5px)",
                                   fontSize: 13,
+                                  paddingBottom: 2.5,
                                 }}
                               >
                                 {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
@@ -572,7 +569,11 @@ const BaseInformationCompany = ({
                           </h5>
                           <div>
                             {topAppreciate?.map((appreciate, index) => (
-                              <Appreciate appreciate={appreciate} key={index} />
+                              <Appreciate
+                                appreciate={appreciate}
+                                key={index}
+                                fontSize="15px"
+                              />
                             ))}
 
                             <div
@@ -653,6 +654,7 @@ const BaseInformationCompany = ({
                             paddingBottom: 2.3,
                             fontWeight: "600",
                           }}
+                          elevation={0}
                         >
                           <div
                             className="appreciate intro__company-title"
@@ -753,10 +755,13 @@ const BaseInformationCompany = ({
                           </div>
                           <div>
                             {appreciateList?.map((appreciate, index) => (
-                              <Appreciate
-                                appreciate={appreciate}
-                                key={appreciate.id}
-                              />
+                              <div>
+                                <Appreciate
+                                  appreciate={appreciate}
+                                  key={appreciate.id}
+                                />
+                                <span style={{}} className="line"></span>
+                              </div>
                             ))}
                           </div>
                           <div
@@ -773,6 +778,7 @@ const BaseInformationCompany = ({
                             marginTop: 3,
                             marginBottom: 3,
                           }}
+                          elevation={0}
                         >
                           <ContentBaseInformation
                             jobDetail={jobDetail}
@@ -1071,12 +1077,13 @@ const BaseInformationCompany = ({
                               marginTop: 3,
                               marginBottom: 3,
                             }}
+                            elevation={0}
                           >
                             <ContentBaseInformation
                               jobDetail={jobDetail}
                               jobListCompany={jobListCompany}
-                              pdLeft={"25px"}
-                              pdRight="25px"
+                              pdLeft={"20px"}
+                              pdRight="8px"
                               hideMark={true}
                             />
                           </Item>

@@ -52,10 +52,9 @@ const Login = () => {
       const res = await dispatch(loginUser(userData));
       if (res.payload.token) {
         const role = res.payload.role;
-        // if (checked === false) {
-        //   console.log(localStorage.getItem("userPresent")?.token);
-        //   delete localStorage.getItem("userPresent")?.token;
-        // }
+        if (checked === false) {
+          localStorage.removeItem("userPresent");
+        }
         switch (role) {
           case "Role_Partner":
             navigate(`/partner`, { replace: true });
@@ -74,7 +73,6 @@ const Login = () => {
   const handleSaveLogin = (e) => {
     const check = e.target.checked;
     checked = check;
-    console.log(checked);
   };
 
   return (

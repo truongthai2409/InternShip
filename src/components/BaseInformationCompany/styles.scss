@@ -27,10 +27,9 @@
       border-radius: 4px;
       margin-left: 35px;
       margin-right: 23px;
-      transform: translate(-30px, 15px);
+      transform: translate(-30px, 30px);
       margin-bottom: 20px;
       opacity: 1;
-      transition: opacity 200ms;
     }
 
     &-detail {
@@ -39,23 +38,54 @@
       height: fit-content;
       div {
         @include flex(center, null);
-        font-size: 18px;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+
+        color: #000000;
       }
       p {
         padding-left: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
       }
       a {
         padding-left: 5px;
-        color: $primary-color-2;
+        color: #757575;
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px !important;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+
+        color: #000000;
       }
       h5 {
-        transform: translateY(5px);
+        // transform: translateY(5px);
+        display: flex;
+        align-items: center;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
         display: flex;
         align-items: center;
       }
@@ -102,18 +132,19 @@
     white-space: nowrap;
     margin-bottom: 15px;
   }
-  align-items: baseline !important;
+  align-items: inherit !important;
 }
 
 .appreciate {
   // margin: 5px 0px 10px 0px;
-  @include flex(center, space-between);
+  @include flex(start, space-between);
 
   img {
     width: 35px;
     height: 35px;
     margin-right: 16px;
     border-radius: 50%;
+    margin-top: 8px;
   }
 }
 

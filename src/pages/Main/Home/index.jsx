@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Drawer, Grid, Hidden, Tooltip } from "@mui/material";
 import SearchResultHome from "../../../components/SearchResultHome";
 import DetailCard from "../../../components/DetailCard";
 import SideBarHomeList from "../../../components/SideBarHomeList";
@@ -10,34 +10,32 @@ import {
   getJobByCompany,
   getJobByNameAndLocation,
   getJobFilterByUser,
-  getJobList,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
+import Logo from "src/components/Logo";
 
 const Home = (props) => {
   const dispatch = useDispatch();
 
   const [locationValue, setLocationValue] = useState("");
-  const [positionValue, setPositionValue] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  // let [filters, setFilters] = useState();
   const { profile } = useSelector((state) => state.authentication);
+  const [openDrawer, setOpenDrawer] = useState(false);
   // get global state from redux store
   let {
-    jobListName,
     jobDetail,
     indexCardActive,
     jobListHavePages,
     jobFilter,
     jobListCompany,
   } = useSelector((state) => state.job);
-
   const [jobs, setJobs] = useState(jobFilter);
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
   const idCompany = jobDetail?.hr?.company?.id;
-  console.log(idCompany);
+
   const listPositionWorkingFormat = [
     "Backend",
     "Business Analysis",
@@ -62,74 +60,49 @@ const Home = (props) => {
   useEffect(() => {
     updateJob();
   }, [updateJob]);
-  // const clearFilter = () => setFilter(initFilter);
 
   useEffect(() => {
-    const dataSearch = {
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
       name: "",
       province: "",
-      no: currentPage,
-      limit: 10,
+      major: "",
+      no: 1,
+      limit: 5,
     };
-    dispatch(getJobByNameAndLocation(dataSearch));
-    // dispatch(getJobList([1, 10]));
-  }, [dispatch]);
+    dispatch(getJobFilterByUser(dataFilter));
+    dispatch(getJobByCompany(idCompany));
+  }, []);
+
+  useEffect(() => {
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
+      name: "",
+      province: "",
+      major: "",
+      no: currentPage,
+      limit: 5,
+    };
+    dispatch(getJobFilterByUser(dataFilter));
+    dispatch(getJobByCompany(idCompany));
+  }, [currentPage]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
-      no: 0,
-      limit: 10,
+      no: 1,
+      limit: 5,
     },
   };
   useEffect(() => {
     if (profile.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, [idCompany, dispatch]);
-
-  useEffect(() => {
-    const dataFilter = {
-      type: "",
-      order: "oldest",
-      position: "",
-      name: "",
-      province: "",
-      major: "",
-      no: currentPage,
-      limit: 5,
-    };
-    dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
-  }, [idCompany, currentPage]);
-  useEffect(() => {
-    const dataFilter = {
-      type: "",
-      order: "oldest",
-      position: "",
-      name: "",
-      province: "",
-      major: "",
-      no: 0,
-      limit: 5,
-    };
-    dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
-  }, []);
-  useEffect(() => {
-    const dataFilter = {
-      type: "",
-      order: "oldest",
-      position: "",
-      name: "",
-      province: "",
-      major: "",
-      no: currentPage,
-      limit: 5,
-    };
-    dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
-  }, [idCompany, currentPage]);
+  }, [idCompany]);
 
   const handleSearch = (value) => {
     const dataFilter = {
@@ -139,7 +112,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: 0,
+      no: 1,
       limit: 5,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -191,6 +164,14 @@ const Home = (props) => {
     setCurrentPage(value);
     window.scroll(0, 0);
   };
+
+  const handleOpenDrawer = () => {
+    setOpenDrawer(!openDrawer);
+  };
+
+  const handleCloseDrawer = () => {
+    setOpenDrawer(false);
+  };
   return (
     <>
       {jobDetail && (
@@ -201,9 +182,36 @@ const Home = (props) => {
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
-            <SideBarHomeList onChange={handleCheck} />
+            <Hidden mdUp>
+              <div className="">
+                <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
+                  <ViewQuiltOutlinedIcon />
+                </Tooltip>
+              </div>
+            </Hidden>
+            <div className="">
+              <Drawer
+                variant="temporary"
+                anchor="left"
+                open={openDrawer}
+                onClose={handleCloseDrawer}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                className="admin-layout__sidebar-hide"
+              >
+                <Logo />
+                <SideBarHomeList />
+              </Drawer>
+            </div>
+            <Hidden mdDown>
+              <SideBarHomeList
+                onChange={handleCheck}
+                slideBarHome__wrapper={true}
+              />
+            </Hidden>
           </Grid>
-          <Grid item lg={4} md={8} sm={8} xs={12}>
+          <Grid item lg={4} md={8} sm={12} xs={12}>
             <div className="onDesktop">
               <SearchResultHome
                 onClick={handleSearch}
@@ -214,7 +222,6 @@ const Home = (props) => {
             <FilterPanelHome
               jobList={jobs}
               indexCardActive={indexCardActive}
-              positionValue={positionValue}
               jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
             />
@@ -230,7 +237,7 @@ const Home = (props) => {
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                 jobDetail={jobDetail}
-                jobListName={jobListName}
+                jobList={jobs}
                 candidate={props.candidate}
                 jobListCompany={jobListCompany}
               />

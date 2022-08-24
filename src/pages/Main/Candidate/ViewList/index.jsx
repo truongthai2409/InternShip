@@ -77,16 +77,15 @@ const CandidateViewList = () => {
         pathUrl === "/candidate/view-list-care" &&
         careListOfPrivate?.length === 0
       ) {
-        setEmpList(
-          "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
-        );
+        setEmpList();
+        // "Bạn chưa có công việc nào được thêm vào danh sách quan tâm"
       }
 
       if (
         pathUrl === "/candidate/view-list-apply" &&
         careListOfPrivate?.length === 0
       ) {
-        setEmpList("Bạn chưa ứng tuyển công việc nào");
+        // setEmpList("Bạn chưa ứng tuyển công việc nào");
       }
     };
     _getValue();
@@ -163,17 +162,16 @@ const CandidateViewList = () => {
             <Grid item xs={7}>
               <div className="view-list__job-card">
                 {pathUrl === "/candidate/view-list-care" &&
-                careListOfPrivate?.length > 0 ? (
-                  careListOfPrivate.map((jobCare) => (
-                    <CardJob
-                      key={jobCare.id}
-                      jobCare={jobCare}
-                      eleDuplicate={eleDuplicate}
-                    />
-                  ))
-                ) : (
-                  <h3>{emptyList}</h3>
-                )}
+                careListOfPrivate?.length > 0
+                  ? careListOfPrivate.map((jobCare) => (
+                      <CardJob
+                        key={jobCare.id}
+                        jobCare={jobCare}
+                        eleDuplicate={eleDuplicate}
+                      />
+                    ))
+                  : // <h3>{emptyList}</h3>
+                    ""}
 
                 {pathUrl === "/candidate/view-list-apply" &&
                   applyList?.map((jobApplied) => (

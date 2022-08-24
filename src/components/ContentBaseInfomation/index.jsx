@@ -4,6 +4,9 @@ import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../Button";
 import "./styles.scss";
+import CardHome from "../CardHome";
+import moment from "moment";
+
 const ContentBaseInformation = ({
   jobDetail,
   jobListCompany,
@@ -14,6 +17,7 @@ const ContentBaseInformation = ({
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
+
   return (
     <div>
       <div className="job-applying-container _scroll">
@@ -44,17 +48,46 @@ const ContentBaseInformation = ({
                 sm="12"
                 key={job.id}
                 sx={{
-                  // paddingLeft: `0px`,
+                  paddingLeft: pdLeft ? `${pdLeft} !important` : "",
+                  paddingRight: pdRight ? `${pdRight} !important` : "",
                   width: "200px",
                 }}
               >
-                <JobCandidate
+                {/* <JobCandidate
                   job={job}
                   key={job.id}
                   idJob={job.id}
                   pdLeft={pdLeft}
                   pdRight={pdRight}
                   hideMark={hideMark}
+                /> */}
+
+                <CardHome
+                  id={job.id}
+                  // index={index}
+                  title={job.name}
+                  fontSize={10}
+                  nameCompany={job.hr?.company?.name}
+                  idCompany={job.hr?.company?.id}
+                  job={job}
+                  // key={job.id}
+                  idJob={job.id}
+                  tagName={[
+                    job?.jobposition?.name || job?.position.name || "Không có",
+                    job?.jobType?.name || "Không có",
+                  ]}
+                  location="Hồ Chí Minh"
+                  amount={job.amount || "Không có"}
+                  demandPartner={true}
+                  time={[
+                    moment(job.timeStartStr || job.createDate).format(
+                      "DD/MM/YYYY"
+                    ),
+                    moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                  ]}
+                  locationPath={location.pathname}
+                  pdLeft="30px"
+                  pdRight="30px"
                 />
               </Grid>
             ))}
