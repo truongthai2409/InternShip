@@ -4,6 +4,8 @@
   .company-name {
     // text-align: center;
     width: auto;
+    margin-top: 1rem;
+    // margin-bottom: 1rem;
     font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
@@ -18,8 +20,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    border: 1.5px solid #dedede;
-    height: 200px;
+    padding-bottom: 1rem;
+
+    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     .img-logo {
       width: 120px;
       height: 100px;
@@ -27,7 +30,7 @@
       margin-left: 35px;
       margin-right: 23px;
       transform: translate(-30px, 30px);
-      margin-bottom: 20px;
+      margin-top: 20px;
       opacity: 1;
     }
 
@@ -170,13 +173,12 @@
 .detail-website {
   display: block !important;
 }
-
 .fix-fontSize {
   font-size: 17px !important;
 }
 
 .fix__margin {
-  // margin-bottom: 7px;
+  margin-bottom: 4px;
 }
 .css-1q7v9b9-MuiGrid-root > .MuiGrid-item {
   padding-left: 0 !important;
@@ -187,4 +189,22 @@
 }
 .css-1aquho2-MuiTabs-indicator {
   background-color: $primary-color !important;
+}
+.css-badz6b-MuiPaper-root {
+  margin-top: 0 !important;
+}
+
+.fix__margin {
+  .fix_container {
+    .icon_fix {
+      margin-top: 1px;
+      font-size: 20px;
+    }
+    margin-top: 4px;
+    align-items: flex-start !important;
+    a {
+      text-align: center;
+      color: #000000 !important;
+    }
+  }
 }

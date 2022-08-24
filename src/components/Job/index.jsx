@@ -59,7 +59,7 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight, hideMark }) => {
                 width: 55,
                 height: 50,
                 backgroundColor: "transparent",
-                // border: "0.5px solid #dedede",
+                border: "1px solid #dedede",
                 borderRadius: "6px",
                 marginTop: "10px",
                 marginLeft: "10px",

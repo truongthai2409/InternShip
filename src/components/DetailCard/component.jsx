@@ -258,6 +258,7 @@ const Detail = ({
                 <InformationUniversity
                   jobDetail={jobDetailById}
                   demandPartner={demandPartner}
+                  detailJob={true}
                 ></InformationUniversity>
               ) : (
                 <InformationCompany jobDetailById={jobDetailById} />

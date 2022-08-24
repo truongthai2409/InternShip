@@ -29,7 +29,7 @@ const ListCollapse = (props) => {
         maxWidth: 360,
         bgcolor: "background.paper",
         borderRadius: "6px",
-        border: "0.5px solid #DEDEDE",
+        border: "1px solid #DEDEDE",
         marginBottom: "20px",
       }}
       component="nav"

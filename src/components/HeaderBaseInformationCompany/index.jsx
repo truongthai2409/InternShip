@@ -8,7 +8,15 @@ import { Typography } from "@mui/material";
 const HeaderBaseInformationCompany = ({ jobDetail }) => {
   return (
     <div>
-      <Box sx={{}}>
+      <Box
+        sx={{
+          border: "1px solid #DEDEDE",
+        }}
+        elevation={0}
+        PaperProps={{
+          elevation: 0,
+        }}
+      >
         <div className="base__information-card">
           <div
             style={{
@@ -16,11 +24,11 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
             }}
           >
             <Box
+              elevation={0}
               sx={{
                 width: 135,
                 height: 135,
                 backgroundColor: "transparent",
-                // border: "0.5px solid #dedede",
                 borderRadius: "6px",
                 marginRight: "20px",
               }}

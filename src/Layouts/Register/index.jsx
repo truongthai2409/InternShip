@@ -1,6 +1,7 @@
 import React from "react";
 import RegisterContainer from "../../containers/RegisterContainer/index";
 import "./styles.scss";
+import "./responsive.scss";
 import { Outlet } from "react-router-dom";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";

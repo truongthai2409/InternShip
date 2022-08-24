@@ -594,7 +594,11 @@ const BaseInformationCompany = ({
                   paddingBottom: pdBottom ? `${pdBottom}` : "",
                 }}
               >
-                <Box sx={{}}>
+                <Box
+                  sx={{
+                    border: "1px solid #dedede",
+                  }}
+                >
                   <div className="base__information-card">
                     <div
                       style={{
@@ -606,7 +610,6 @@ const BaseInformationCompany = ({
                           width: 135,
                           height: 135,
                           backgroundColor: "transparent",
-                          // border: "0.5px solid #dedede",
                           borderRadius: "6px",
                           marginRight: "20px",
                         }}
