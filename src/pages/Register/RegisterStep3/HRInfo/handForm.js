@@ -34,7 +34,7 @@ export const schema = yup
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự.")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
-        " * Mật khẩu chưa hợp lệ(Chứa ít nhất 1 chữ cái)."
+        " * Mật khẩu chưa hợp lệ(Chứa ít nhất 1 chữ cái và 1 chữ số)."
       ),
     confirmPassword: yup
       .string()
@@ -50,30 +50,29 @@ export const schema = yup
       ),
     avatar: yup
       .mixed()
-      // .nullable()
       .test(
         "fileSize",
         " * Ảnh bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
           console.log(value);
-          if (value[0]?.size) {
-            return value[0]?.size <= 512 * 1024;
+          if (value.size) {
+            return value.size <= 512 * 1024;
           } else {
             return true;
           }
         }
       )
       .test("type", " * Chỉ hỗ trợ jpeg, png.", (value) => {
-        if (value[0]?.type) {
+        if (value) {
           return (
-            value[0]?.type === "image/jpeg" || value[0]?.type === "image/png"
+            value === "image/jpeg" || value === "image/png"
           );
         } else {
           return true;
         }
       }),
     gender: yup.string().required(" * Bạn phải chọn giới tính."),
-    company: yup.string().required(" * Bạn phải chọn chuyên ngành."),
+    company: yup.string().required(" * Bạn phải chọn công ty."),
     position: yup.string().required(" * Bạn phải nhập vị trí làm việc."),
   })
   .required();

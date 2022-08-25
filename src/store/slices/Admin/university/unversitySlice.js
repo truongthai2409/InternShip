@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import api from "src/config/api/apiConfig";
 import notificationSlice from "../../notifications/notificationSlice";
 const baseURL = process.env.REACT_APP_API;
 
@@ -14,11 +13,15 @@ const universitySlice = createSlice({
     status: "idle",
     user: {},
     activeUser: {},
+    totalPages: 0,
+    totalItems: 0,
   },
   reducer: {},
   extraReducers: (builder) => {
     builder.addCase(getUniversityList.fulfilled, (state, { payload }) => {
-      state.universityList = payload;
+      state.universityList = payload.contents;
+      state.totalPages = payload.totalPages;
+      state.totalItems = payload.totalItems;
     });
     builder.addCase(addUniversity.pending, (state, { payload }) => {
       state.status = "loading";
@@ -53,13 +56,16 @@ export default universitySlice;
 
 /**
  * get company list
+ * @param args[]:
+ * args[0]: number of current page
+ * args[1]: size current item
  * @returns company list
  */
 export const getUniversityList = createAsyncThunk(
   "university/getUniversityList",
-  async () => {
+  async (args) => {
     return await axios
-      .get(`${baseURL}/api/r2s/admin/university?no=0&limit=10`)
+      .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
       .then((response) => {
         return response.data;
       })

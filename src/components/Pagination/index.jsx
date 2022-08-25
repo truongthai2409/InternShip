@@ -1,12 +1,18 @@
 import { Pagination, Stack } from "@mui/material";
 import "./styles.scss";
 
-const PaginationCustom = ({totalPages, page, hanldeOnChange, variant="outlined", shape}) => {
+const PaginationCustom = ({
+  totalPages,
+  page,
+  handleOnChange,
+  variant = "outlined",
+  shape,
+}) => {
   return (
     <Stack className="pagination__wrapper" spacing={2}>
       <Pagination
         page={page}
-        onChange={hanldeOnChange}
+        onChange={handleOnChange}
         count={totalPages}
         variant={variant}
         shape={shape}

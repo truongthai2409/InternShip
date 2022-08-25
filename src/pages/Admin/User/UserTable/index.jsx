@@ -1,47 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-
-import { deleteUser, getUserList } from "src/store/slices/Admin/user/userSlice";
+import {
+  deleteUser,
+  getUserList,
+  updateUser,
+} from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
-import { role } from "src/components/Profile/components";
+import IconEdit from "../../../../assets/img/icons8-write-24.png";
 
-const UserTable = () => {
+const UserTable = ({ openModal }) => {
   const dispatch = useDispatch();
 
-  const { userList } = useSelector((state) => state.user);
+  const { userList, totalPages, totalItems } = useSelector(
+    (state) => state.user
+  );
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getUserList([1, 20]));
-  }, []);
+    dispatch(getUserList([page, 10]));
+  }, [page]);
 
-  console.log("userList", userList);
   const columns = [
-    { field: "stt", headerName: "STT", width: 100 },
-    { field: "username", headerName: "Tài khoản", flex: 1 },
-    { field: "role", headerName: "Vai trò", flex: 1 },
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "username", headerName: "Tài khoản", width: 220 },
+    { field: "role", headerName: "Vai trò", width: 150 },
     { field: "gender", headerName: "Giới tính", width: 100 },
     { field: "phone", headerName: "Số điện thoại", width: 150 },
     { field: "email", headerName: "Email", flex: 1 },
-    { field: "status", headerName: "Trạng thái", flex: 1 },
+    { field: "status", headerName: "Trạng thái", width: 120 },
     {
       field: "action",
-      headerName: "Action",
-      width: 100,
+      headerName: "Chỉnh sửa",
+      width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
 
         const handleDeleteUser = async () => {
           await dispatch(deleteUser(row.username));
-          dispatch(getUserList([1, 20]));
+          dispatch(getUserList([page, 20]));
+        };
+
+        const handleUpdateUser = async () => {
+          await dispatch(updateUser(row.username));
         };
         return (
           <>
-            {/* <IconButton className="user-edit__button" onClick={handleOnClick}>
-              <EditOutlinedIcon />
-            </IconButton> */}
+            <IconButton onClick={openModal}>
+              <img src={IconEdit} />
+            </IconButton>
             <IconButton
               className="user-delete__button"
               onClick={handleDeleteUser}
@@ -88,9 +97,20 @@ const UserTable = () => {
       status: userList[i].status.name,
     });
   }
+
+  const handlePagination = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <>
-      <DataTable rows={rows} columns={columns} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        handleOnChange={handlePagination}
+      />
     </>
   );
 };
