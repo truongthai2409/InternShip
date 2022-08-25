@@ -58,7 +58,7 @@ export const schema = yup.object({
       }
     )
     .test("fileSize", " * Ảnh vượt quá kích thước 512KB.", (value) => {
-      return value && value[0]?.size <= 512 * 1024;
+      return value && value?.size <= 512 * 1024;
     }),
   // .required("Bạn phải tải avatar"),
 
