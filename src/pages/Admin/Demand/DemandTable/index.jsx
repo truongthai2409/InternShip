@@ -1,53 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { IconButton, Tooltip } from "@mui/material";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import DataTable from "../../../../components/Table";
+import { getAdminListDemand } from "src/store/slices/Admin/demand/adminDemandSlice";
 
 const DemandTable = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [page, setPage] = useState(1);
   const draftText =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices feugiat tincidunt. Vestibulum rhoncus, leo sed fringilla aliquam, lectus enim ornare urna, ut iaculis lorem ex ac ipsum. Curabitur eget mauris varius, aliquet neque id, commodo arcu. Nam quis pharetra quam. Duis luctus sapien eu nisi interdum, sed semper erat porta.";
 
-  //   const { DemandList } = useSelector((state) => state.Demand);
-  const demandList = [
-    {
-      id: 1,
-      name: "Kỳ thực tập tháng 6/2022",
-      description: draftText,
-      requirement: draftText,
-      otherInfo: draftText,
-      status: "Not verified",
-      students: [],
-      major: [],
-      partner: 1,
-      start: "",
-      end: "",
-      createDate: "",
-    },
-    {
-      id: 2,
-      name: "Kỳ thực tập tháng 8/2022",
-      description: draftText,
-      requirement: draftText,
-      otherInfo: draftText,
-      status: "Not verified",
-      students: [],
-      major: [],
-      partner: 10,
-      start: "",
-      end: "",
-      createDate: "",
-    },
-  ];
+  const { demandList, totalPages, totalItems } = useSelector(
+    (state) => state.adminDemand
+  );
+
+  useEffect(() => {
+    dispatch(getAdminListDemand([page, 10]));
+  }, [page]);
+
   const columns = [
-    { field: "stt", headerName: "STT", width: 70 },
+    { field: "id", headerName: "ID", width: 70 },
     {
       field: "name",
       headerName: "Tiêu đề bài đăng",
@@ -62,7 +39,7 @@ const DemandTable = () => {
       },
     },
     { field: "partner", headerName: "Cộng tác viên", width: 150 },
-    { field: "major", headerName: "Chuyên ngành", width: 100 },
+    { field: "major", headerName: "Chuyên ngành", width: 250 },
     { field: "createDate", headerName: "Ngày tạo", width: 150 },
     { field: "students", headerName: "Danh sách sinh viên", width: 150 },
     {
@@ -74,9 +51,9 @@ const DemandTable = () => {
         const handleChangeStatus = (e) => {};
         return (
           <select
-            name={row.status}
-            id={row.status}
-            value={row.status || 0}
+            // name={row.status}
+            // id={row.status}
+            // value={row.status || 0}
             onChange={(e) => handleChangeStatus(e)}
             className="company-table__select"
           >
@@ -90,8 +67,8 @@ const DemandTable = () => {
     },
     {
       field: "action",
-      headerName: "Action",
-      width: 100,
+      headerName: "Chỉnh sửa",
+      width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
@@ -119,16 +96,28 @@ const DemandTable = () => {
       id: demandList[i].id,
       stt: i + 1,
       name: demandList[i].name,
-      major: demandList[i].major,
-      partner: demandList[i].partner,
+      major: demandList[i].major.name,
+      partner: demandList[i].partner.position,
       createDate: demandList[i].createDate,
       status: demandList[i].status,
       students: demandList[i].students,
     });
   }
+
+  const handlePagination = (e, value) => {
+    console.log("value", value);
+    setPage(value);
+  };
+
   return (
     <>
-      <DataTable rows={rows} columns={columns} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        handleOnChange={handlePagination}
+      />
     </>
   );
 };

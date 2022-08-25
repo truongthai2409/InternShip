@@ -78,7 +78,8 @@ export default function SelectAreaHome({ onChange }) {
               },
               "& div": {
                 textOverflow: "unset !important"
-              }
+              },
+              mr: 2,
             }}
             multiple={false}
             displayEmpty
@@ -89,7 +90,7 @@ export default function SelectAreaHome({ onChange }) {
             {provinceList.map((province) => (
               <MenuItem
                 key={province.id}
-                value={province.name}
+                value={((province.name).length > 10) ? (province.name.slice(0,9).concat("...")) : (province.name)}
                 // style={getStyles(province.id, personName, theme)}
                 sx={{
                   "& .MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {

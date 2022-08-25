@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
@@ -14,14 +14,16 @@ import ProfileTable from "../../../../components/ProfileTable";
 const UniversityTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const { universityList, totalPages, totalItems } = useSelector(
+    (state) => state.university
+  );
 
-  const { universityList } = useSelector((state) => state.university);
-  console.log(universityList);
   useEffect(() => {
-    dispatch(getUniversityList());
-  }, []);
+    dispatch(getUniversityList([page, 10]));
+  }, [page]);
   const columns = [
-    { field: "stt", headerName: "STT", width: 70 },
+    { field: "id", headerName: "ID", width: 70 },
     {
       field: "name",
       headerName: "Trường học",
@@ -31,7 +33,7 @@ const UniversityTable = () => {
         return <ProfileTable row={row} />;
       },
     },
-    { field: "shortName", headerName: "Tên viết tắt", width: 100 },
+    { field: "shortName", headerName: "Tên viết tắt", width: 150 },
 
     // { field: "majors", headerName: "Chuyên ngành", width: 130 },
     { field: "createDate", headerName: "Ngày tạo", width: 150 },
@@ -60,8 +62,8 @@ const UniversityTable = () => {
     },
     {
       field: "action",
-      headerName: "Action",
-      width: 100,
+      headerName: "Chỉnh sửa",
+      width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
@@ -99,9 +101,20 @@ const UniversityTable = () => {
       status: universityList[i].status,
     });
   }
+
+  const handlePagination = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <>
-      <DataTable rows={rows} columns={columns} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        handleOnChange={handlePagination}
+      />
     </>
   );
 };

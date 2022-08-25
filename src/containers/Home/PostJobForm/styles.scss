@@ -67,6 +67,8 @@
       & svg, h2 {
         color: $primary-color;
       }
+      align-items: center;
+      gap: 4px;
 
       > svg {
         margin: 5px !important;

@@ -3,13 +3,12 @@ import "./reponsive.scss";
 import { useState } from "react";
 import Modal from "../Modal";
 import ProfileForm from "src/containers/Home/ProfileForm";
-import { Actions, CompanyInfo, UniversityInfo, UserInfor } from "./components";
+import { CompanyInfo, UniversityInfo, UserInfor } from "./components";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
-
   let RelatedInfor = "";
   switch (roleUser) {
     case "Role_HR":
@@ -19,7 +18,7 @@ const Profile = () => {
       RelatedInfor = <UniversityInfo />;
       break;
     case "Role_Candidate":
-      RelatedInfor = <Actions />;
+      RelatedInfor = null;
       break;
     default:
       RelatedInfor = null;
@@ -27,8 +26,8 @@ const Profile = () => {
   return (
     <>
       <div className="profile__wrapper">
-        <UserInfor open={open} setOpen={setOpen} />
-        {RelatedInfor}
+       <UserInfor open={open} setOpen={setOpen} /> 
+          {RelatedInfor}
       </div>
       <Modal
         modalTitle="Chỉnh sửa thông tin cá nhân"
