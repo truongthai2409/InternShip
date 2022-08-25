@@ -107,7 +107,7 @@ const ProfileForm = ({ handleClose }) => {
               register={register}
               id="gender"
               label="Giới tính"
-              defaultValue={profile.user.gender}
+              defaultValue={profile.user?.gender}
               options={genderList}
             >
               {errors.gender?.message}
