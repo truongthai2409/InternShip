@@ -70,7 +70,7 @@ const Password = () => {
         Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className="password-form">
-        <div>
+        <div className="passform">
           <CustomInput
             label="Mật Khẩu Cũ"
             id="passwordOld"
@@ -119,9 +119,9 @@ const Password = () => {
               onClick={handleSubmit(onSubmit)}
             ></Button>
             <Button
-              bwidth="100px"
+              bwidth="140px"
               bheight="40px"
-              name="Hủy"
+              name="Nhập Lại"
               onClick={handleClear}
             ></Button>
           </div>

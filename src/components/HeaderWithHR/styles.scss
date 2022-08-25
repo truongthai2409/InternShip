@@ -9,7 +9,9 @@
   z-index: 99;
   box-shadow: 0 2px 2px -2px gray;
 }
-
+.menu_mobile {
+  display: none;
+}
 .header__hr {
   // margin-top: 28px;
   background-color: $primary-color-1;
