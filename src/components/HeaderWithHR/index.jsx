@@ -96,7 +96,7 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <AddCardIcon></AddCardIcon>
+            <AddCardIcon sx={{color: "#04bf8a"}}></AddCardIcon>
             <span className="header__hr-post-post">Đăng tuyển</span>
           </Link>
           <Link
@@ -107,7 +107,7 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <FormatAlignJustifyIcon sx={{color: "#04bf8a"}}></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
           </Link>
         </div>

@@ -35,28 +35,17 @@
     }
   }
 
-  .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
-    max-width: none !important;
-  }
-
-  .filter-panel-home__wrapper .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
-    flex-basis: 50%;
-  }
-
-  .filter-panel-home__wrapper
-    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-    flex-basis: 50%;
-
-    &#simple-tab-1 {
-      background-color: #666;
-    }
-  }
-  & .partner-postList__pagination {
-    display: flex;
-    justify-content: center;
-    margin-right: 50px;
-    margin-bottom: 24px;
-  }
+  // .filter-panel-home__wrapper .filter-panel-list-tabs {
+  //   &#simple-tab-1 {
+  //     background-color: #666 !important;
+  //   }
+  // }
+}
+.partner-postList__pagination {
+  display: flex;
+  justify-content: center;
+  margin-right: 50px;
+  margin-bottom: 24px;
 }
 
 @media only screen and (max-width: 740px) {

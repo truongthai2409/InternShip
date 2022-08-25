@@ -64,9 +64,12 @@
 
     .hr-post__heading {
       display: flex;
+      & svg, h2 {
+        color: $primary-color;
+      }
 
       > svg {
-        margin: 0 !important;
+        margin: 5px !important;
       }
 
       > .hr-post__title {

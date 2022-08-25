@@ -89,7 +89,7 @@ const CardHome = (props) => {
         </div>
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">
-            <PeopleIcon />
+            <PeopleIcon sx={{color: "#04bf8a !important"}} />
             <span>Số lượng ứng viên: {props.amount}</span>
           </div>
         ) : (
@@ -112,13 +112,15 @@ const CardHome = (props) => {
         <div className="cardHome__col2-End">
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon
-              style={{ fontSize: `${props.fontSize + 2}px` }}
+              style={{ fontSize: `${props.fontSize + 2}px`}}
+              sx={{color: "#04bf8a"}}
             />
             <p style={{ fontSize: `${props.fontSize}px` }}>{props.location}</p>
           </div>
           <div className="cardHome__col2-End-2">
             <WatchLaterOutlinedIcon
               style={{ fontSize: `${props.fontSize + 2}px` }}
+              sx={{color: "#04bf8a"}}
             />
             <p
               style={{ fontSize: `${props.fontSize}px` }}

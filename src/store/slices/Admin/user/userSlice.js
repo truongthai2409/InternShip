@@ -159,5 +159,23 @@ export const deleteUser = createAsyncThunk(
       });
   }
 );
+
+export const verifyUser = createAsyncThunk(
+  "user/deleteUser",
+  async (data, thunkAPI) => {
+    return axios
+      .get(`${baseURL}/api/r2s/admin/user/re/${data}`)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess(
+            "Đã verified người dùng thành công"
+          )
+        );
+      })
+      .catch((error) => {
+        return thunkAPI.rejectWithValue(error);
+      });
+  }
+);
 export const { updateStatusForgotPassword } = userSlice.actions;
 export default userSlice;

@@ -12,7 +12,9 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 70,
+      width: "70px !important",
+      maxHeight: "none !important",
+      height: "200px",
     },
   },
 };
@@ -64,6 +66,19 @@ export default function SelectAreaHome({ onChange }) {
             MenuProps={MenuProps}
             sx={{
               mr: 0,
+              color: "#04bf8a",
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "transparent !important",
+              },
+              "& .MuiSelect-nativeInput": {
+                position: "relative !important",
+              },
+              "& .MuiSelect-icon": {
+                color: "#04bf8a",
+              },
+              "& div": {
+                textOverflow: "unset !important"
+              }
             }}
             multiple={false}
             displayEmpty
@@ -76,6 +91,11 @@ export default function SelectAreaHome({ onChange }) {
                 key={province.id}
                 value={province.name}
                 // style={getStyles(province.id, personName, theme)}
+                sx={{
+                  "& .MuiFormLabel-root-MuiInputLabel-root.Mui-focused": {
+                    display: "none",
+                  },
+                }}
               >
                 {province.name}
               </MenuItem>

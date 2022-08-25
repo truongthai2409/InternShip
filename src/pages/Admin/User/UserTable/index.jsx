@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import GppBadIcon from '@mui/icons-material/GppBad';
 import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
-import { deleteUser, getUserList } from "src/store/slices/Admin/user/userSlice";
+import {
+  deleteUser,
+  getUserList,
+  verifyUser,
+} from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
 
 const UserTable = () => {
@@ -15,8 +20,10 @@ const UserTable = () => {
   const { userList } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUserList([1, 10]));
+    dispatch(getUserList([8, 10]));
   }, []);
+
+  console.log(userList);
 
   const columns = [
     { field: "stt", headerName: "STT", width: 100 },
@@ -38,16 +45,27 @@ const UserTable = () => {
           await dispatch(deleteUser(row.username));
           dispatch(getUserList([1, 10]));
         };
+
+        const handleVerifyUser = async () => {
+          await dispatch(verifyUser(row.username));
+          dispatch(getUserList([8, 10]));
+        };
         return (
           <>
             {/* <IconButton className="user-edit__button" onClick={handleOnClick}>
               <EditOutlinedIcon />
             </IconButton> */}
             <IconButton
+              className="user-verify__button"
+              onClick={handleVerifyUser}
+            >
+              <VerifiedUserIcon />
+            </IconButton>
+            <IconButton
               className="user-delete__button"
               onClick={handleDeleteUser}
             >
-              <DeleteForeverOutlinedIcon />
+              <GppBadIcon sx={{ color: "red !important" }} />
             </IconButton>
           </>
         );
@@ -75,7 +93,7 @@ const UserTable = () => {
   for (let i = 0; i < userList.length; i++) {
     rows.push({
       id: userList[i].id,
-      stt: i + 1,
+      stt: userList[i].id + 1,
       username: userList[i].username,
       role: userList[i].role ? userList[i].role.name : null,
       gender: handleRenderGender(userList[i].gender),
