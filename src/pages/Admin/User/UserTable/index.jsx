@@ -1,29 +1,28 @@
 import React, { useEffect } from "react";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import { deleteUser, getUserList } from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
+import { role } from "src/components/Profile/components";
 
 const UserTable = () => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
   const { userList } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getUserList([1, 10]));
+    dispatch(getUserList([1, 20]));
   }, []);
 
+  console.log("userList", userList);
   const columns = [
     { field: "stt", headerName: "STT", width: 100 },
     { field: "username", headerName: "Tài khoản", flex: 1 },
-    { field: "role", headerName: "Quyền truy cập", flex: 1 },
+    { field: "role", headerName: "Vai trò", flex: 1 },
     { field: "gender", headerName: "Giới tính", width: 100 },
-    // { field: "phone", headerName: "Số điện thoại", width: 150 },
+    { field: "phone", headerName: "Số điện thoại", width: 150 },
     { field: "email", headerName: "Email", flex: 1 },
     { field: "status", headerName: "Trạng thái", flex: 1 },
     {
@@ -36,7 +35,7 @@ const UserTable = () => {
 
         const handleDeleteUser = async () => {
           await dispatch(deleteUser(row.username));
-          dispatch(getUserList([1, 10]));
+          dispatch(getUserList([1, 20]));
         };
         return (
           <>
@@ -71,13 +70,18 @@ const UserTable = () => {
     }
   };
 
+  const convertRoleName = (roleName) => {
+    const index = roleName.lastIndexOf("_");
+    return roleName.substring(index + 1);
+  };
+
   const rows = [];
   for (let i = 0; i < userList.length; i++) {
     rows.push({
       id: userList[i].id,
       stt: i + 1,
       username: userList[i].username,
-      role: userList[i].role ? userList[i].role.name : null,
+      role: convertRoleName(userList[i]?.role?.name),
       gender: handleRenderGender(userList[i].gender),
       phone: userList[i].phone,
       email: userList[i].email,
