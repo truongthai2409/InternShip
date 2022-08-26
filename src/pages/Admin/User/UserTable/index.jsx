@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GppBadIcon from "@mui/icons-material/GppBad";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 
 import {
   deleteUser,
@@ -27,19 +27,17 @@ const UserTable = ({ openModal }) => {
     dispatch(getUserList([page, 10]));
   }, [page]);
 
-  console.log(userList);
-
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "username", headerName: "Tài khoản", width: 220 },
     { field: "role", headerName: "Vai trò", width: 150 },
     { field: "gender", headerName: "Giới tính", width: 100 },
     { field: "phone", headerName: "Số điện thoại", width: 150 },
-    { field: "email", headerName: "Email", width: 250 },
-    { field: "status", headerName: "Trạng thái", width: 120 },
+    { field: "email", headerName: "Email", flex: 1 },
+    { field: "status", headerName: "Trạng thái", width: 150 },
     {
       field: "action",
-      headerName: "Chỉnh sửa",
+      headerName: "Tùy chọn",
       width: 150,
       sortable: false,
       renderCell: (params) => {
@@ -60,21 +58,27 @@ const UserTable = ({ openModal }) => {
         };
         return (
           <>
-            <IconButton onClick={openModal}>
-              <img src={IconEdit} />
-            </IconButton>
-            <IconButton
-              className="user-verify__button"
-              onClick={handleVerifyUser}
-            >
-              <VerifiedUserIcon />
-            </IconButton>
-            <IconButton
-              className="user-delete__button"
-              onClick={handleDeleteUser}
-            >
-              <GppBadIcon sx={{ color: "red !important" }} />
-            </IconButton>
+            <Tooltip title="Chỉnh sửa">
+              <IconButton onClick={openModal}>
+                <img src={IconEdit} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Xác minh tài khoản">
+              <IconButton
+                className="user-verify__button"
+                onClick={handleVerifyUser}
+              >
+                <VerifiedUserIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Xóa tài khoản">
+              <IconButton
+                className="user-delete__button"
+                onClick={handleDeleteUser}
+              >
+                <DeleteForeverOutlinedIcon />
+              </IconButton>
+            </Tooltip>
           </>
         );
       },

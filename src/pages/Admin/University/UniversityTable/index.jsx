@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -76,9 +76,11 @@ const UniversityTable = () => {
             <IconButton className="user-edit__button" onClick={handleClick}>
               <VisibilityOutlinedIcon />
             </IconButton>
-            <IconButton className="user-delete__button">
-              <DeleteForeverOutlinedIcon />
-            </IconButton>
+            <Tooltip title="Xóa tài khoản">
+              <IconButton className="user-delete__button">
+                <DeleteForeverOutlinedIcon />
+              </IconButton>
+            </Tooltip>
           </>
         );
       },

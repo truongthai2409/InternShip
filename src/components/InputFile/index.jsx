@@ -15,7 +15,6 @@ const InputFile = ({
   unregister = null,
   defaultValue,
   requirementField = true,
-  visibility = false,
   className,
   radius,
   height,
@@ -64,7 +63,6 @@ const InputFile = ({
       reader.readAsDataURL(imgFile);
       setValue(id, imgFile);
       setFileName(imgFile.name);
-      console.log("imgFile", imgFile);
     }
   };
 
@@ -106,20 +104,9 @@ const InputFile = ({
           onChange={handlePreviewFile}
           accept={accept}
         />
-        {visibility && (
-          <div
-            className="visibility-icon"
-            onClick={handleHide}
-            style={{ cursor: "pointer", top: `${top}` }}
-          >
-            {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
-          </div>
-        )}
       </div>
     </div>
   );
 };
 
 export default InputFile;
-
-

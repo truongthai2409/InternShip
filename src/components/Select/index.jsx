@@ -1,12 +1,13 @@
-import * as React from 'react'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import './styles.scss'
+import * as React from "react";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import "./styles.scss";
 
 export default function SelectCustom({
   label,
   id,
+  className,
   children,
   defaultValue,
   register = false,
@@ -14,41 +15,42 @@ export default function SelectCustom({
   placeholder,
   requirementField = true,
   dispatch = () => {},
-  action = () => {}
+  action = () => {},
 }) {
   const renderSelectOption = () => {
-    return options.map(item => {
+    return options.map((item) => {
       return (
         <MenuItem
           onClick={() => {
-            handleChangeLocation(item.id)
+            handleChangeLocation(item.id);
           }}
           value={item.id}
           key={item.id}
         >
           {item.name}
         </MenuItem>
-      )
-    })
-  }
+      );
+    });
+  };
 
   // handle change district
-  const handleChangeLocation = id => {
-    dispatch(action(id))
-  }
-  
+  const handleChangeLocation = (id) => {
+    dispatch(action(id));
+  };
+
   return (
     <>
-      <div className="select-form">
+      <div className={`select-form ${className ? className : ""}`}>
         <h1 className="select-label">
           {label}
           {requirementField && <span className="field-requirment">*</span>}
         </h1>
-        <FormControl className='select-formControl' fullWidth>
+        <FormControl className="select-formControl" fullWidth>
           <Select
+          className="select-field"
             displayEmpty
-            inputProps={{ 'aria-label': 'Without label' }}
-            defaultValue={defaultValue >= 0 ? defaultValue : ''}
+            inputProps={{ "aria-label": "Without label" }}
+            defaultValue={defaultValue >= 0 ? defaultValue : ""}
             {...register(id)}
           >
             <MenuItem value="">
@@ -60,5 +62,5 @@ export default function SelectCustom({
         <p className="select-error">{children}</p>
       </div>
     </>
-  )
+  );
 }

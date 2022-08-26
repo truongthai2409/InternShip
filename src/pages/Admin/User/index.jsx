@@ -48,7 +48,12 @@ const User = () => {
         onClick={handleOpenModal}
       />
       <UserTable openModal={handleOpenModal} />
-      <Modal modalTitle="Thêm người dùng" open={open} setOpen={setOpen}>
+      <Modal
+        modalTitle="Thêm người dùng"
+        open={open}
+        setOpen={setOpen}
+        iconClose={true}
+      >
         <UserForm />
       </Modal>
     </>
