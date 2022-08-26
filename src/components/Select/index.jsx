@@ -44,7 +44,7 @@ export default function SelectCustom({
           {label}
           {requirementField && <span className="field-requirment">*</span>}
         </h1>
-        <FormControl fullWidth>
+        <FormControl className='select-formControl' fullWidth>
           <Select
             displayEmpty
             inputProps={{ 'aria-label': 'Without label' }}

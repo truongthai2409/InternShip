@@ -126,6 +126,10 @@
 
   &__heading {
     display: flex;
+
+    & svg, h2 {
+      color: $primary-color;
+    }
   }
 
   &__heading {

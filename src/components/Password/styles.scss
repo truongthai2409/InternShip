@@ -1,8 +1,9 @@
 @use "../../assets/styles/" as *;
 
 .password {
+  padding: 2rem;
   display: flex;
-  width: 50% !important;
+  width: 70% !important;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -10,6 +11,11 @@
   background-color: $primary-color-background-2;
   border-radius: 5px;
   margin-bottom: 15px;
+  .password-form {
+    .passform {
+      width: 300px;
+    }
+  }
   &-form {
     @include flex(null, space-between);
     padding-bottom: 20px;
@@ -24,4 +30,5 @@
 }
 .button__change-password {
   @include flex(null, space-between);
+  gap: 4px;
 }

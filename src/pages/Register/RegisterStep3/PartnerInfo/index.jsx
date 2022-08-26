@@ -149,7 +149,7 @@ const PartnerInfo = () => {
             placeholder="Mật khẩu"
             register={register}
             visibility={true}
-            requirementField={false}
+            requirementField={true}
           >
             {errors.password?.message}
             {errorMessage?.Password}
@@ -162,7 +162,7 @@ const PartnerInfo = () => {
             placeholder="Xác nhận mật khẩu"
             register={register}
             visibility={true}
-            requirementField={false}
+            requirementField={true}
           >
             {errors.passwordConfirmation?.message}
           </CustomInput>

@@ -1,53 +1,79 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import GppBadIcon from "@mui/icons-material/GppBad";
 import { IconButton } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
-import { deleteUser, getUserList } from "src/store/slices/Admin/user/userSlice";
+import {
+  deleteUser,
+  getUserList,
+  updateUser,
+  verifyUser,
+} from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
+import IconEdit from "../../../../assets/img/icons8-write-24.png";
 
-const UserTable = () => {
+const UserTable = ({ openModal }) => {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
 
-  const { userList } = useSelector((state) => state.user);
+  const { userList, totalPages, totalItems } = useSelector(
+    (state) => state.user
+  );
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getUserList([1, 10]));
-  }, []);
+    dispatch(getUserList([page, 10]));
+  }, [page]);
+
+  console.log(userList);
 
   const columns = [
-    { field: "stt", headerName: "STT", width: 100 },
-    { field: "username", headerName: "Tài khoản", flex: 1 },
-    { field: "role", headerName: "Quyền truy cập", flex: 1 },
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "username", headerName: "Tài khoản", width: 220 },
+    { field: "role", headerName: "Vai trò", width: 150 },
     { field: "gender", headerName: "Giới tính", width: 100 },
-    // { field: "phone", headerName: "Số điện thoại", width: 150 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "status", headerName: "Trạng thái", flex: 1 },
+    { field: "phone", headerName: "Số điện thoại", width: 150 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "status", headerName: "Trạng thái", width: 120 },
     {
       field: "action",
-      headerName: "Action",
-      width: 100,
+      headerName: "Chỉnh sửa",
+      width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
 
         const handleDeleteUser = async () => {
           await dispatch(deleteUser(row.username));
-          dispatch(getUserList([1, 10]));
+          dispatch(getUserList([page, 20]));
+        };
+
+        const handleUpdateUser = async () => {
+          await dispatch(updateUser(row.username));
+        };
+
+        const handleVerifyUser = async () => {
+          await dispatch(verifyUser(row.username));
+          dispatch(getUserList([page, 20]));
         };
         return (
           <>
-            {/* <IconButton className="user-edit__button" onClick={handleOnClick}>
-              <EditOutlinedIcon />
-            </IconButton> */}
+            <IconButton onClick={openModal}>
+              <img src={IconEdit} />
+            </IconButton>
+            <IconButton
+              className="user-verify__button"
+              onClick={handleVerifyUser}
+            >
+              <VerifiedUserIcon />
+            </IconButton>
             <IconButton
               className="user-delete__button"
               onClick={handleDeleteUser}
             >
-              <DeleteForeverOutlinedIcon />
+              <GppBadIcon sx={{ color: "red !important" }} />
             </IconButton>
           </>
         );
@@ -71,22 +97,38 @@ const UserTable = () => {
     }
   };
 
+  const convertRoleName = (roleName) => {
+    const index = roleName.lastIndexOf("_");
+    return roleName.substring(index + 1);
+  };
+
   const rows = [];
   for (let i = 0; i < userList.length; i++) {
     rows.push({
       id: userList[i].id,
-      stt: i + 1,
+      stt: userList[i].id + 1,
       username: userList[i].username,
-      role: userList[i].role ? userList[i].role.name : null,
+      role: convertRoleName(userList[i]?.role?.name),
       gender: handleRenderGender(userList[i].gender),
       phone: userList[i].phone,
       email: userList[i].email,
       status: userList[i].status.name,
     });
   }
+
+  const handlePagination = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <>
-      <DataTable rows={rows} columns={columns} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        handleOnChange={handlePagination}
+      />
     </>
   );
 };

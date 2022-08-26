@@ -1,10 +1,8 @@
 @use '../../assets/styles' as *;
 
-.listTitle {
-  .css-10hburv-MuiTypography-root {
-    font-size: 16px;
+.listButton {
+  svg {
     color: $primary-color;
-    font-weight: 700;
   }
 }
 

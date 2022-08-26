@@ -48,7 +48,7 @@ export const schema = yup
         " * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
           if (value?.size) {
-            return value && value?.size <= 512 * 1024;
+            return value && value?.size <= (512 * 1024);
           } else {
             return true;
           }

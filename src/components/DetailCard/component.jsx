@@ -137,6 +137,8 @@ const Detail = ({
                     aria-label="basic tabs example"
                     textColor="primary"
                     scrollButtons
+                    sx={{
+                    }}
                   >
                     <Tab
                       label="Chi tiết"
@@ -227,8 +229,7 @@ const Detail = ({
               />
               <div>
                 <h2>
-                  {jobDetailById?.hr?.company?.name ||
-                    jobDetailById?.name}
+                  {jobDetailById?.hr?.company?.name || jobDetailById?.name}
                 </h2>
                 <p className="name-company">
                   {jobDetailById?.hr?.company?.name ||
@@ -240,9 +241,14 @@ const Detail = ({
               <div className="tag-name">
                 <div className="tag-name__name">
                   <TagName title={jobDetailById?.jobType?.name || "Không có"} />
-                  <TagName title={jobDetailById?.position?.name || "Không có"} />
                   <TagName
-                    title={jobDetailById?.universityDTO?.majors[0]?.name || "Không có"}
+                    title={jobDetailById?.position?.name || "Không có"}
+                  />
+                  <TagName
+                    title={
+                      jobDetailById?.universityDTO?.majors[0]?.name ||
+                      "Không có"
+                    }
                   />
                 </div>
               </div>
@@ -250,11 +256,13 @@ const Detail = ({
           </div>
           <div>
             <Box sx={{ width: "100%" }}>
-              <InformationUniversity
-                jobDetail={jobDetailById}
-                demandPartner={demandPartner}
-                detailJob={true}
-              ></InformationUniversity>
+              {demandPartner ? (
+                <InformationUniversity
+                  jobDetail={jobDetailById}
+                  demandPartner={demandPartner}
+                  detailJob={true}
+                ></InformationUniversity>
+              ) : null}
             </Box>
           </div>
         </div>

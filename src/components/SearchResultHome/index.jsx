@@ -44,7 +44,7 @@ function SearchResultHome({
       >
         <div className="header__with-search-search-wrap">
           <span className="search__icon">
-            <SearchOutlinedIcon />
+            <SearchOutlinedIcon sx={{color: "#04bf8a"}} />
           </span>
           <input
             type="text"
@@ -61,7 +61,7 @@ function SearchResultHome({
           />
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">
-          <AddLocationIcon />
+          <AddLocationIcon sx={{color: "#04bf8a"}} />
           <SelectAreaHome onChange={onChange} />
         </div>
         <div className="header__with-search-button-search" onClick={search}>

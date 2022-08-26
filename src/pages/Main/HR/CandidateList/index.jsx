@@ -5,7 +5,7 @@ import { getListCandidateApplied } from "src/store/slices/main/home/job/jobSlice
 import { useDispatch, useSelector } from "react-redux";
 import Null from "src/components/Null";
 import PaginationCustome from "src/components/Pagination";
-
+import './reponsive.scss'
 const CandidateList = ({ idJob }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ const CandidateList = ({ idJob }) => {
         })
       ) : (
         <Null
+          className="null_cadidate"
           image="https://www.blumira.com/wp-content/uploads/2020/11/search.png"
           text="Chưa có ứng viên nào đang ứng tuyển."
           height="100px"

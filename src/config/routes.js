@@ -28,7 +28,10 @@ import PartnerPostList from "src/pages/Main/Partner/PartnerPostList";
 import Password from "src/components/Password/index";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
+import CandidateManagement from "src/pages/Main/HR/CandidateManagement/CandidateManagement";
+import Company from "src/pages/Admin/Company";
 
+// admin router
 export const adminRouter = [
   {
     path: "",
@@ -46,7 +49,10 @@ export const adminRouter = [
     path: "/admin/university/:uniId",
     Component: UniversityDetail,
   },
-
+  {
+    path: "/admin/company",
+    Component: Company,
+  },
   {
     path: "/admin/company/:comid",
     Component: CompanyDetail,
@@ -119,6 +125,10 @@ export const hrRouter = [
     path: "/hr/setting",
     Component: Password,
   },
+  {
+    path: "/hr/candidatemanagement",
+    Component : CandidateManagement,
+  }
 ];
 
 // candidate router

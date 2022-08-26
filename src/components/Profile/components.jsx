@@ -17,7 +17,8 @@ import {
   getProfileByIdUser,
   getUserById,
 } from "src/store/slices/Admin/user/userSlice";
-
+import InfoUser from "./InfoUser";
+import './reponsive.scss'
 export const role = (id) => {
   let role = "";
   switch (id) {
@@ -63,7 +64,65 @@ export const UserInfor = ({ open, setOpen }) => {
     dispatch(getUserById(idUser));
   }, [idUser]);
   return (
-    <div className="user-infor__wrapper">
+    <>
+    {user?.role?.name?.includes("Role_Candidate")
+    ?
+    (
+      <div className="candidate_container">
+
+      <div className="candidate_user">
+        <img src={
+              profile?.user?.avatar
+                ? `http://localhost:8085${profile?.user?.avatar}`
+                : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+            }></img>
+        <div className="candidate_user-info">
+          <h2>{user.firstName+" "+user.lastName}
+            <ButtonOutline
+              className="btn_user"
+              onClick={handleOpen}
+              icon={<EditIcon />}
+              outline="none"
+              color="#111111"
+              fz="14px"
+              radius="4px"
+              padding="0"
+            />
+          </h2>
+          <p>@{user.username}</p>
+        </div>
+        <div className="candidate_user-actions">
+          <Actions />
+        </div>
+      </div>
+
+      <div className="candidate_info">
+          <InfoUser 
+          emailIcons={<EmailIcon/>}
+          name="Email"
+          value={profile?.user?.email}
+          />
+          <InfoUser 
+          emailIcons={<PhoneIcon/>}
+          name="Số Điện Thoại"
+          value={profile?.user?.phone}
+          />
+          <InfoUser 
+          emailIcons={<TransgenderIcon/>}
+          name="Giới Tính"
+          value={gender(profile?.user?.gender)}
+          />
+          <InfoUser 
+          emailIcons={<PersonIcon/>}
+          name="Vai Trò"
+          value={profile?.user?.role?.name?.slice(5,100)}
+          />
+      </div>
+    </div>
+    )
+    :
+    (
+      <div className="user-infor__wrapper">
       <div className="profile__avatar">
         <div>
           <img
@@ -79,9 +138,8 @@ export const UserInfor = ({ open, setOpen }) => {
       </div>
       <div className="profile__infor">
         <h1 className="profile__infor-name">
-          {`${profile?.user?.lastName || user?.lastName} ${
-            profile?.user?.firstName || user?.firstName
-          }`}
+          {`${profile?.user?.lastName || user?.lastName} ${profile?.user?.firstName || user?.firstName
+            }`}
           <span className="profile__infor-location">
             <ButtonOutline
               onClick={handleOpen}
@@ -123,33 +181,35 @@ export const UserInfor = ({ open, setOpen }) => {
         </div>
       </div>
     </div>
+    )
+    }
+    </>
   );
 };
 
 export const Actions = () => {
   return (
-    <div className="profile__actions">
-      <ButtonOutline
-        className="profile__actions-item"
-        name="Cập nhật CV"
-        icon={<SyncAltIcon />}
-        outline="1.5px solid #DEDEDE"
-        bg="#FFFFFF"
-      />
-      <ButtonOutline
-        className="profile__actions-item"
-        name="Xem CV"
-        icon={<RemoveRedEyeIcon />}
-        outline="1.5px solid #DEDEDE"
-        bg="#FFFFFF"
-      />
-      <ButtonOutline
-        className="profile__actions-item"
-        name="Tải CV"
-        icon={<FileDownloadIcon />}
-        outline="1.5px solid #DEDEDE"
-        bg="#FFFFFF"
-      />
+    <div>
+      <div className="profile__actions">
+        <ButtonOutline
+          className="profile__actions-item"
+          icon={<SyncAltIcon />}
+          outline="1.5px solid #DEDEDE"
+          bg="#FFFFFF"
+        />
+        <ButtonOutline
+          className="profile__actions-item"
+          icon={<RemoveRedEyeIcon />}
+          outline="1.5px solid #DEDEDE"
+          bg="#FFFFFF"
+        />
+        <ButtonOutline
+          className="profile__actions-item"
+          icon={<FileDownloadIcon />}
+          outline="1.5px solid #DEDEDE"
+          bg="#FFFFFF"
+        />
+      </div>
     </div>
   );
 };

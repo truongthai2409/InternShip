@@ -6,6 +6,7 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import PropTypes from "prop-types";
 import Logo from "../Logo";
 import "./styles.scss";
+import "./responsive.scss";
 import SearchResultHome from "../SearchResultHome";
 import AccountMenu from "../AccountMenu";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
@@ -18,6 +19,9 @@ import { styled, alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,6 +89,9 @@ const HeaderWithHR = (props) => {
 
   return (
     <div className="container-header__hr header__hr config">
+      <div onClick={() => {}} className="responsive-menu">
+        <MenuIcon />
+      </div>
       {props.hr ? <Logo /> : <Logo />}
       {props.hr ? (
         <div className="header__hr">
@@ -96,7 +103,7 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <AddCardIcon></AddCardIcon>
+            <AddCardIcon sx={{color: "#04bf8a"}}></AddCardIcon>
             <span className="header__hr-post-post">Đăng tuyển</span>
           </Link>
           <Link
@@ -107,9 +114,21 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+            <FormatAlignJustifyIcon sx={{color: "#04bf8a"}}></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
           </Link>
+          <Link
+            to="candidatemanagement"
+            className={
+              pathUrl === "/hr/candidatemanagement"
+                ? "header__hr-post active"
+                : "header__hr-post"
+            }
+          >
+            <BookmarksIcon />
+            <span className="header__hr-post-post">Ứng viên ưa thích</span>
+          </Link>
+          
         </div>
       ) : null}
       {pathUrl === "/candidate" ? (
@@ -205,6 +224,7 @@ const HeaderWithHR = (props) => {
       ) : null}
       <div className="header__hr-icon">
         <div
+          className="responsive__hr-icon"
           style={{
             borderRadius: "14px",
             backgroundColor: "#FFFFFF",
@@ -216,13 +236,12 @@ const HeaderWithHR = (props) => {
           }}
         >
           {pathUrl === "/candidate" ||
-          pathUrl === "/candidate/view-list-apply" ||
-          pathUrl === "/candidate/view-list-care" ||
-          pathUrl === "/candidate/profile" ||
-          (profile?.user && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.user?.lastName || ""} ${
-              profile?.user?.firstName || ""
-            }`}</h4>
+            pathUrl === "/candidate/view-list-apply" ||
+            pathUrl === "/candidate/view-list-care" ||
+            pathUrl === "/candidate/profile" ||
+            (profile?.user && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.user?.lastName || ""} ${profile?.user?.firstName || ""
+              }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           )}
