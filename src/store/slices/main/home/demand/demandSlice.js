@@ -23,7 +23,6 @@ const demandSlice = createSlice({
       state.idPartnerCardActive = payload;
     },
     updateIndexPartnerCardActive: (state, { payload }) => {
-      console.log(state?.demandList);
       state.indexPartnerCardActive = payload;
       state.demandDetail = state?.demandList[payload];
     },
@@ -46,7 +45,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
-        console.log(payload.demandList);
         state.demandList = payload.demandList;
         state.totalPagesofDemandList = payload.totalPage;
         if (payload.demandList?.length > 0) {
@@ -59,7 +57,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandByName.fulfilled, (state, { payload }) => {
-        console.log(payload.demandList);
         state.demandList = payload.demandList;
         state.totalPagesofDemandList = payload?.totalPage;
         if (payload.demandList?.length > 0) {
@@ -80,7 +77,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(updateDemand.fulfilled, (state, { payload }) => {
-        console.log(state.demandListUniversityActive);
         state.demandListUniversityActive = state.demandListUniversityActive.map(
           (demand) => {
             if (demand.id === payload.id) {

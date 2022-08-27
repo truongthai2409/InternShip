@@ -88,7 +88,6 @@ const BaseInformationCompany = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
-  const [hover, setHover] = useState(-1);
   const { profile } = useSelector((state) => state.authentication);
   let checked = false;
   const {
@@ -100,8 +99,6 @@ const BaseInformationCompany = ({
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [valueTab, setValueTab] = useState(0);
-  const location = useLocation();
-  const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const uniId = jobDetail?.universityDTO?.id;
   const idCompany = jobDetail?.hr?.company.id;
@@ -184,9 +181,7 @@ const BaseInformationCompany = ({
     const check = e.target.checked;
     checked = check;
   };
-  const handleChangeLink = (event, newValue) => {
-    setValueTab(1);
-  };
+
   const handleChangeLinkViewAvaluate = (event, newValue) => {
     setValueTab(1);
   };
@@ -195,7 +190,6 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
-
   return (
     <div className="">
       {/* Nếu trang home thì bỏ tab còn trang information thì có tab */}
@@ -264,7 +258,7 @@ const BaseInformationCompany = ({
                             </h5>
                             <div
                               dangerouslySetInnerHTML={{
-                                __html: jobDetail?.desciption,
+                                __html: jobDetail?.hr?.company?.description,
                               }}
                               style={{
                                 display: "flex",
@@ -273,6 +267,10 @@ const BaseInformationCompany = ({
                                 marginLeft: "25px",
                                 textAlign: "justify",
                                 paddingRight: "25px",
+                                fontWeight: "450",
+                                fontSize: "16px",
+                                fontFamily: "Open Sans",
+                                fontStyle: "normal",
                               }}
                             ></div>
                           </div>
@@ -325,7 +323,9 @@ const BaseInformationCompany = ({
                                   paddingBottom: 2.5,
                                 }}
                               >
-                                {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
+                                {`${Number(rating) || 0} trong ${
+                                  appreciateList?.length
+                                } lượt đánh giá`}
                               </Typography>
                               <div
                                 style={{
@@ -430,7 +430,9 @@ const BaseInformationCompany = ({
                                 fontSize: 15,
                               }}
                             >
-                              {`${rating} trong ${appreciateList?.length} lượt đánh giá`}
+                              {`${Number(rating) || 0} trong ${
+                                appreciateList?.length
+                              } lượt đánh giá`}
                             </Typography>
                             <div
                               style={{
@@ -495,9 +497,6 @@ const BaseInformationCompany = ({
                                       // getLabelText={getLabelText}
                                       onChange={(event, newValue) => {
                                         setValueRating(newValue);
-                                      }}
-                                      onChangeActive={(event, newHover) => {
-                                        setHover(newHover);
                                       }}
                                       sx={{
                                         fontSize: "20px",
@@ -599,7 +598,12 @@ const BaseInformationCompany = ({
                     border: "1px solid #dedede",
                   }}
                 >
-                  <div className="base__information-card">
+                  <div
+                    className="base__information-card"
+                    style={{
+                      marginLeft: 0,
+                    }}
+                  >
                     <div
                       style={{
                         marginRight: "16px",
@@ -609,9 +613,12 @@ const BaseInformationCompany = ({
                         sx={{
                           width: 135,
                           height: 135,
-                          backgroundColor: "transparent",
                           borderRadius: "6px",
                           marginRight: "20px",
+                          backgroundColor: "white",
+                          border: "1px solid #DEDEDE",
+                          marginLeft: "25px",
+                          marginTop: "25px",
                         }}
                       >
                         <img
@@ -621,7 +628,6 @@ const BaseInformationCompany = ({
                         />
                       </Box>
                     </div>
-
                     <div className="base__information-card-detail">
                       <h3 className="company-name">
                         {jobDetail?.hr?.company.name}
@@ -656,7 +662,7 @@ const BaseInformationCompany = ({
                           />
                           <a
                             href={`mailto:${jobDetail?.hr?.company.email}`}
-                            className="fix-fontSize "
+                            className=" "
                           >
                             {jobDetail?.hr?.company.email}
                           </a>
@@ -672,13 +678,13 @@ const BaseInformationCompany = ({
                           />
                           <a
                             href={jobDetail?.hr?.company.website}
-                            className="fix-fontSize "
+                            className=" "
                           >
                             {jobDetail?.hr?.company.website}
                           </a>
                         </h5>
 
-                        <div className=" base__information-card-detail-location">
+                        <div className=" base__information-card-detail-location-candidate">
                           <LocationOnIcon
                             sx={{
                               fontSize: 15,
@@ -692,7 +698,7 @@ const BaseInformationCompany = ({
                             sx={{
                               fontSize: 16,
                               fontWeight: "400",
-                              transform: "translate(5px,-5px)",
+                              transform: "translate(5px,5px)",
                             }}
                           >
                             {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
@@ -704,68 +710,60 @@ const BaseInformationCompany = ({
                 </Box>
 
                 <Box>
-                  <Box
-                    sx={{
-                      borderBottom: 1,
-                      borderColor: "divider",
-                      mt: 1,
-                      fontSize: 3,
-                    }}
-                  ></Box>
-                  <TabPanel value={valueTab} index={0}>
-                    <Box>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                          <Item
-                            sx={{
-                              marginTop: 3,
-                              marginBottom: 3,
-                              paddingBottom: 2.5,
-                            }}
-                            elevation={0}
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Item
+                        sx={{
+                          marginTop: 3,
+                          marginBottom: 3,
+                          paddingBottom: 2.5,
+                        }}
+                        elevation={0}
+                      >
+                        <div className="intro__company">
+                          <h5
+                            className="intro__company-title"
+                            style={{ marginLeft: "25px" }}
                           >
-                            <div className="intro__company">
-                              <h5
-                                className="intro__company-title"
-                                style={{ marginLeft: "25px" }}
-                              >
-                                Giới thiệu về công ty
-                              </h5>
+                            Giới thiệu về công ty
+                          </h5>
 
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: jobDetail?.desciption,
-                                }}
-                                style={{
-                                  display: "flex",
-                                  alignItems: "start",
-                                  wordBreak: "break-word",
-                                  marginLeft: "25px",
-                                  textAlign: "justify",
-                                  paddingRight: "25px",
-                                }}
-                              ></div>
-                            </div>
-                          </Item>
-                          <Item
-                            sx={{
-                              marginTop: 3,
-                              marginBottom: 3,
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: jobDetail?.hr?.company?.description,
                             }}
-                            elevation={0}
-                          >
-                            <ContentBaseInformation
-                              jobDetail={jobDetail}
-                              jobListCompany={jobListCompany}
-                              pdLeft={"20px"}
-                              pdRight="8px"
-                              hideMark={true}
-                            />
-                          </Item>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </TabPanel>
+                            style={{
+                              display: "flex",
+                              alignItems: "start",
+                              wordBreak: "break-word",
+                              marginLeft: "25px",
+                              textAlign: "justify",
+                              paddingRight: "25px",
+                              fontWeight: "450",
+                              fontSize: "16px",
+                              fontFamily: "Open Sans",
+                              fontStyle: "normal",
+                            }}
+                          ></div>
+                        </div>
+                      </Item>
+                      <Item
+                        sx={{
+                          marginTop: 3,
+                          marginBottom: 3,
+                        }}
+                        elevation={0}
+                      >
+                        <ContentBaseInformation
+                          jobDetail={jobDetail}
+                          jobListCompany={jobListCompany}
+                          pdLeft={"20px"}
+                          pdRight="8px"
+                          hideMark={true}
+                        />
+                      </Item>
+                    </Grid>
+                  </Grid>
                 </Box>
               </div>
             )}

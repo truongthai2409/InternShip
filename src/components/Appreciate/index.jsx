@@ -85,28 +85,21 @@ const Appreciate = ({ appreciate, fontSize }) => {
       const res = await dispatch(updateAppreciate(dataUpdate));
       await dispatch(getAppreciateByCompany(idCompany));
       if (res.payload.status === 200) {
-        toast.success("Đã đăng đánh giá", {
-          // position: "top-center",
-          // autoClose: 3000,
-        });
+        toast.success("Đã đăng đánh giá");
       } else {
         toast.error(
-          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
-          {
-            // position: "top-center",
-            // autoClose: 3000,
-          }
+          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại"
         );
       }
     } catch (error) {
-      if (error.status === 400) {
-        for (const key in error.data) {
-          setError(key, {
-            type: "server",
-            message: error.data[key],
-          });
-        }
-      }
+      // if (error.status === 400) {
+      //   for (const key in error.data) {
+      //     setError(key, {
+      //       type: "server",
+      //       message: error.data[key],
+      //     });
+      //   }
+      // }
     }
 
     reset();
@@ -122,19 +115,12 @@ const Appreciate = ({ appreciate, fontSize }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const handleClickLike = () => {
     setLike(!like);
   };
 
   const openAnchorEl = Boolean(anchorEl);
-  const id = openAnchorEl ? "simple-popover" : undefined;
+  // const id = openAnchorEl ? "simple-popover" : undefined;
 
   return (
     <Box

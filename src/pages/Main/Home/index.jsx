@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getJobByCompany,
   getJobFilterByUser,
+  updateIdJobActive,
   updateIndexCardActive,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
 import Logo from "src/components/Logo";
 
+const limit = process.env.LIMIT_OF_PAGE || 5;
 const Home = (props) => {
   const dispatch = useDispatch();
   // let currentPage = 1;
@@ -35,8 +37,7 @@ const Home = (props) => {
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
-  const idCompany = jobDetail?.hr?.company?.id;
-
+  const idCompany = Number(jobDetail?.hr?.company?.id);
   const listPositionWorkingFormat = [
     "Backend",
     "Business Analysis",
@@ -71,12 +72,15 @@ const Home = (props) => {
       province: "",
       major: "",
       no: currentPage - 1,
-      limit: 5,
+      limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
     dispatch(getJobByCompany(Number(idCompany)));
   }, []);
-
+  useEffect(() => {
+    dispatch(getJobByCompany(Number(idCompany)));
+    // dispatch(updateIndexCardActive(0));
+  }, [idCompany]);
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -86,19 +90,22 @@ const Home = (props) => {
       province: "",
       major: "",
       no: currentPage - 1,
-      limit: 5,
+      limit: limit,
     };
 
     dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
-    dispatch(updateIndexCardActive(0));
   }, [currentPage]);
+
+  // useEffect(() => {
+  //   dispatch(getJobByCompany(idCompany));
+  //   dispatch(updateIdJobActive(jobDetail.id));
+  // }, [idCompany]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
       no: currentPage - 1,
-      limit: 5,
+      limit: limit,
     },
   };
   useEffect(() => {
@@ -116,7 +123,7 @@ const Home = (props) => {
       province: locationValue || "",
       major: "",
       no: currentPage - 1,
-      limit: 5,
+      limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
   };

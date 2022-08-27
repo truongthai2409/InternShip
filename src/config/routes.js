@@ -85,11 +85,11 @@ export const mainRouter = [
     Component: Home,
   },
   {
-    path: "/detail_job",
+    path: "/candidate/detail_job/:keyword",
     Component: DetailHome,
   },
   {
-    path: "/information_company",
+    path: "/candidate/information_company/:keyword",
     Component: CandidateInformationCompany,
   },
 ];
@@ -122,8 +122,8 @@ export const hrRouter = [
   },
   {
     path: "/hr/candidatemanagement",
-    Component : CandidateManagement,
-  }
+    Component: CandidateManagement,
+  },
 ];
 
 // candidate router

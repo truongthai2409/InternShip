@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getJobById,
-  getJobByNameAndLocation,
   getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
 import ArrowButton from "src/components/ArrowButton";
@@ -40,7 +39,6 @@ const DetailHome = (props) => {
   const handleBackClick = () => {
     navigate(-1);
   };
-  console.log(jobDetailById);
   return (
     <div>
       <Grid

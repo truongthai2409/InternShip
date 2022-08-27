@@ -1,13 +1,11 @@
 import React from "react";
-import JobCandidate from "../Job";
 import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "react-router-dom";
 import Button from "../Button";
 import "./styles.scss";
 import CardHome from "../CardHome";
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
-import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
+import { useSelector } from "react-redux";
 
 const ContentBaseInformation = ({
   jobDetail,
@@ -18,7 +16,6 @@ const ContentBaseInformation = ({
   mgLeft,
   none__time,
 }) => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const pathUrl = location.pathname;
   const { indexCardActive } = useSelector((state) => state.job);
@@ -57,19 +54,8 @@ const ContentBaseInformation = ({
                   width: "200px",
                 }}
               >
-                {/* <JobCandidate
-                  job={job}
-                  key={job.id}
-                  idJob={job.id}
-                  pdLeft={pdLeft}
-                  pdRight={pdRight}
-                  hideMark={hideMark}
-                /> */}
                 <Link
                   to={`/candidate/detail_job/${job.id}`}
-                  // onClick={async () => {
-                  //   dispatch(updateIdJobActive(job.id));
-                  // }}
                   className="link__job-detail"
                 >
                   <CardHome

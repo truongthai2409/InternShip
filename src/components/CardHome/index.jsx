@@ -14,11 +14,9 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
-import { Link } from "react-router-dom";
 
 const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE;
-
+const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
@@ -34,7 +32,7 @@ const CardHome = (props) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 5,
+        limit: limit,
       },
     };
     if (profile.role === "Role_Candidate") {
@@ -47,7 +45,7 @@ const CardHome = (props) => {
       userName: profile.username,
       page: {
         no: props.page - 1,
-        limit: 5,
+        limit: limit,
       },
     };
     if (profile.role === "Role_Candidate") {

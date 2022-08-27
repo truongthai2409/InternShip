@@ -64,7 +64,6 @@ const InputFile = ({
       reader.readAsDataURL(imgFile);
       setValue(id, imgFile);
       setFileName(imgFile.name);
-      console.log("imgFile", imgFile);
     }
   };
 
@@ -121,5 +120,3 @@ const InputFile = ({
 };
 
 export default InputFile;
-
-

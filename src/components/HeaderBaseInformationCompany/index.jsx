@@ -27,10 +27,13 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
               elevation={0}
               sx={{
                 width: 135,
-                height: 135,
-                backgroundColor: "transparent",
+                height: 120,
+                backgroundColor: "white",
+                border: "1px solid #DEDEDE",
                 borderRadius: "6px",
                 marginRight: "20px",
+                marginTop: "16px",
+                marginLeft: "28px",
               }}
             >
               <img
@@ -43,76 +46,119 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
 
           <div className="base__information-card-detail">
             <h3 className="company-name">{jobDetail?.hr?.company.name}</h3>
-
-            <div className="">
-              <PhoneInTalkIcon
-                sx={{
-                  fontSize: 18,
-                  color: "#04bf8a",
-                }}
-              />
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  transform: "translate(5px,0px)",
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  display: "block",
+                  marginRight: "20px",
                 }}
               >
-                {jobDetail?.hr?.company.phone}
-              </Typography>
-            </div>
-            <div className="fix__margin">
-              <h5>
-                <EmailIcon
-                  sx={{
-                    fontSize: 18,
-                    color: "#04bf8a",
+                <div
+                  className=""
+                  style={{
+                    marginBottom: "10px",
                   }}
-                />
-                <a
-                  href={`mailto:${jobDetail?.hr?.company.email}`}
-                  className=" "
                 >
-                  {jobDetail?.hr?.company.email}
-                </a>
-              </h5>
-            </div>
-            <div className="detail-website">
-              <h5 className="">
-                <LanguageIcon
-                  sx={{
-                    fontSize: 18,
-                    color: "#04bf8a",
-                  }}
-                />
-                <a href={jobDetail?.hr?.company.website} className=" ">
-                  {jobDetail?.hr?.company.website}
-                </a>
-              </h5>
+                  <PhoneInTalkIcon
+                    sx={{
+                      fontSize: 18,
+                      color: "#04bf8a",
+                    }}
+                  />
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      transform: "translate(5px,0px)",
+                    }}
+                  >
+                    {jobDetail?.hr?.company.phone}
+                  </Typography>
+                </div>
+                <div className="">
+                  <h5
+                    style={
+                      {
+                        // marginTop: "7px",
+                      }
+                    }
+                  >
+                    <EmailIcon
+                      sx={{
+                        fontSize: 18,
+                        color: "#04bf8a",
+                      }}
+                    />
+                    <a
+                      href={`mailto:${jobDetail?.hr?.company.email}`}
+                      className=" "
+                    >
+                      {jobDetail?.hr?.company.email}
+                    </a>
+                  </h5>
+                </div>
+              </div>
 
               <div
-                className=" base__information-card-detail-location"
-                style={{
-                  transform: "translate(0px,5px)",
-                }}
+                className="detail-website"
+                style={
+                  {
+                    // height: "58px",
+                  }
+                }
               >
-                <LocationOnIcon
-                  sx={{
-                    fontSize: 18,
-                    color: "#04bf8a",
-                  }}
-                />
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{
-                    fontSize: 16,
-                    fontWeight: "400",
-                    transform: "translate(5px,0px)",
+                <h5
+                  className=""
+                  style={{
+                    marginBottom: "10px",
                   }}
                 >
-                  {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
-                </Typography>
+                  <LanguageIcon
+                    sx={{
+                      fontSize: 18,
+                      color: "#04bf8a",
+                    }}
+                  />
+                  <a
+                    href={jobDetail?.hr?.company.website}
+                    className=""
+                    style={{}}
+                  >
+                    {jobDetail?.hr?.company.website}
+                  </a>
+                </h5>
+
+                <div
+                  className=" base__information-card-detail-location-candidate"
+                  style={
+                    {
+                      // transform: "translate(0px,5px)",
+                    }
+                  }
+                >
+                  <LocationOnIcon
+                    sx={{
+                      fontSize: 18,
+                      color: "#04bf8a",
+                    }}
+                  />
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      fontSize: 16,
+                      fontWeight: "400",
+                      transform: "translate(5px,0px)",
+                    }}
+                  >
+                    {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
+                  </Typography>
+                </div>
               </div>
             </div>
           </div>

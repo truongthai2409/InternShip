@@ -82,7 +82,7 @@ const HeaderWithHR = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-
+  console.log(profile);
   return (
     <div className="container-header__hr header__hr config">
       {props.hr ? <Logo /> : <Logo />}
@@ -230,9 +230,9 @@ const HeaderWithHR = (props) => {
           pathUrl === "/candidate/view-list-apply" ||
           pathUrl === "/candidate/view-list-care" ||
           pathUrl === "/candidate/profile" ||
-          (profile?.user && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.user?.lastName || ""} ${
-              profile?.user?.firstName || ""
+          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
+              profile?.userDTO?.firstName || ""
             }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
