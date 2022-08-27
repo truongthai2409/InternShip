@@ -21,6 +21,8 @@
       border-radius: 2px;
       width: 100%;
       padding: 21px 12px;
+      // margin-top: 2px;
+      height: 45px;
 
       &:hover {
         border: 1.6px solid $primary-color !important;
@@ -57,7 +59,8 @@
   .visibility-icon {
     position: absolute;
     right: 8px;
-    top: 32%;
+    top: 9px;
+    cursor: pointer;
   }
 }
 
@@ -71,6 +74,12 @@
     width: 100%;
     font-size: $fs-16;
     color: #000;
+  }
+}
+
+.visibility-icon {
+  svg {
+    color: $primary-color;
   }
 }
 

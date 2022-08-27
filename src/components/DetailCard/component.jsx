@@ -136,6 +136,7 @@ const Detail = ({
                     aria-label="basic tabs example"
                     textColor="primary"
                     scrollButtons
+                    sx={{}}
                   >
                     <Tab
                       label="Chi tiết"

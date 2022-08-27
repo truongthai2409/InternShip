@@ -15,6 +15,8 @@ const userSlice = createSlice({
     page: 0,
     error: [],
     statusForgotPassword: false,
+    totalPages: 0,
+    totalItems: 0,
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
@@ -24,6 +26,8 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
       state.userList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
     });
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
@@ -36,7 +40,6 @@ const userSlice = createSlice({
       toast.success("Chỉnh sửa thành công");
     });
     builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
-      // console.log("payload:", payload);
       if (payload.httpCode === 200) {
         state.statusForgotPassword = true;
         toast.success(
@@ -151,6 +154,24 @@ export const deleteUser = createAsyncThunk(
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
             "Đã disabled người dùng thành công"
+          )
+        );
+      })
+      .catch((error) => {
+        return thunkAPI.rejectWithValue(error);
+      });
+  }
+);
+
+export const verifyUser = createAsyncThunk(
+  "user/deleteUser",
+  async (data, thunkAPI) => {
+    return axios
+      .get(`${baseURL}/api/r2s/admin/user/re/${data}`)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess(
+            "Đã verified người dùng thành công"
           )
         );
       })

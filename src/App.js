@@ -86,14 +86,7 @@ function App() {
           </Route>
           <Route path="/login" element={<LoginLayout />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-          <Route
-            path="/hr"
-            element={
-              // <AuthenticatedGuard>
-              <HRLayOut />
-              // </AuthenticatedGuard>
-            }
-          >
+          <Route path="/hr" element={<HRLayOut />}>
             {renderHrRouter()}
           </Route>
           <Route path="/candidate" element={<CandidateLayOut />}>

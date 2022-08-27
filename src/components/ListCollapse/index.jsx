@@ -35,8 +35,16 @@ const ListCollapse = (props) => {
       component="nav"
       aria-labelledby="nested-list-subheader"
     >
-      <ListItemButton onClick={handleClick}>
-        <ListItemText className="listTitle" primary={`${props.title}`} />
+      <ListItemButton className="listButton" onClick={handleClick}>
+        <ListItemText className="listTitle" primary={`${props.title}`} 
+          sx={{
+            "& span": {
+              fontSize: "16px",
+              color: "#04bf8a",
+              fontWeight: "700",
+            }
+          }}
+        />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>

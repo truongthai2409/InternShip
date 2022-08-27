@@ -7,6 +7,10 @@
   border: none;
   color: $primary-color;
   padding: 0 2px !important;
+
+  & path {
+    color: $primary-color;
+  }
 }
 
 .MuiSelect-outlined {
@@ -14,40 +18,23 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: $primary-color;
+  color: $color-black-0;
   outline: none !important;
   padding-right: 0px;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-  border-color: transparent !important;
-}
-.css-yf8vq0-MuiSelect-nativeInput {
-  position: relative !important;
-}
 .config-select {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-  display: none;
-}
-.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
-  text-overflow: unset !important;
+
+
+.MuiPaper-root-MuiPopover-paper {
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-  width: 130px !important;
-  max-height: none !important;
-  height: 200px;
-}
 
-.css-74kp6b-MuiFormControl-root {
-  margin: 0 !important;
-  padding-left: 0 !important;
-}
 .text-location {
   margin-right: 10px;
   width: 80px;

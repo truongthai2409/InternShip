@@ -14,6 +14,7 @@ import applySlice from "./slices/main/candidate/apply/applySlice";
 import infoCandidateSlice from "./slices/main/candidate/info/infoCandidateSlice";
 import appSlice from "src/app.slice";
 import demandSlice from "./slices/main/home/demand/demandSlice";
+import adminDemandSlice from "./slices/Admin/demand/adminDemandSlice"
 import appreciateSlice from "./slices/main/candidate/appreciate/appreciateSlice";
 import globalSlices from "./slices/main/home/global/globalSlices"
 
@@ -34,6 +35,7 @@ const store = configureStore({
     infoCandidate: infoCandidateSlice.reducer,
     app: appSlice.reducer,
     demand: demandSlice.reducer,
+    adminDemand: adminDemandSlice.reducer,
     appreciate: appreciateSlice.reducer,
     globalSlices: globalSlices.reducer,
   },

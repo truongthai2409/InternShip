@@ -64,9 +64,15 @@
 
     .hr-post__heading {
       display: flex;
+      & svg,
+      h2 {
+        color: $primary-color;
+      }
+      align-items: center;
+      gap: 4px;
 
       > svg {
-        margin: 0 !important;
+        margin: 5px !important;
       }
 
       > .hr-post__title {
@@ -171,6 +177,9 @@
         }
       }
     }
+    .custom-select__textfield {
+      margin-top: 7px;
+    }
   }
 }
 
@@ -183,10 +192,6 @@
 
 input#title {
   height: 20px;
-}
-
-.custom-select__textfield {
-  margin-top: 7px;
 }
 
 label {

@@ -1,4 +1,6 @@
 @use '../../assets/styles/' as *;
+
+
 .container-header__partner {
   width: 100%;
   position: fixed;
@@ -48,12 +50,3 @@
   }
 }
 
-.css-i4bv87-MuiSvgIcon-root {
-  color: $primary-color;
-  position: relative;
-}
-
-.css-bxzqik-MuiSvgIcon-root {
-  position: absolute;
-  transform: translate(-17px, -5px);
-}

@@ -102,17 +102,20 @@ const ButtonMark = (props) => {
         {pathUrl === "/candidate" ||
         pathUrl === "/candidate/information_company/4" ? (
           props.isMark === false && mark === false ? (
-            <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} />
+            <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} 
+            sx={{color: "#04bf8a"}}/>
           ) : (
             <BookmarkIcon
               className="buttonMark__isChecking"
               style={{ fontSize: `${props.fontSize}` }}
+              sx={{color: "#04bf8a"}}
             />
           )
         ) : (
           <BookmarkBorderIcon
             style={{ fontSize: `${props.fontSize}` }}
             onClick={handleLogin}
+            sx={{color: "#04bf8a"}}
           />
         )}
       </IconButton>

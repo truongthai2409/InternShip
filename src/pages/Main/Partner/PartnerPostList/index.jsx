@@ -118,7 +118,30 @@ const PartnerPostList = (props) => {
         </div>
         <Box className="filter-panel-home__wrapper" sx={{}}>
           <Box className="filter-panel-home__filterPanel" sx={{}}>
-            <Tabs value={value} onChange={handleChange}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              sx={{
+                "& button": {
+                  fontSize: "14px !important",
+                  textTransform: "uppercase",
+                  color: "black !important",
+                  fontWeight: "700 !important",
+                  flexBasis: "50%",
+                },
+                "& button.Mui-selected": {
+                  color: "#fff !important",
+                  background: "#04bf8a",
+                  borderRadius: "4px",
+                  "&#simple-tab-1": {
+                    backgroundColor: "#666 !important",
+                  },
+                },
+                "& span.MuiTabs-indicator": {
+                  backgroundColor: "unset !important",
+                },
+              }}
+            >
               <Tab label="Đang đăng tuyển" {...a11yProps(0)} />
               <Tab label="Đã đóng" {...a11yProps(1)} />
             </Tabs>

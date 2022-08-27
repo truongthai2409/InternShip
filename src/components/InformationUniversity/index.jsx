@@ -90,7 +90,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.phone || "Không có"}
+            {jobDetail?.universityDTO?.phone || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item" sx={{ display: "flex" }}>
@@ -106,7 +106,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               transform: "translate(5px,5px)",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.email || "Không có"}
+            {jobDetail?.universityDTO?.email || "Không có"}
           </Typography>
         </div>
         <div className="detail__card-4-item">
@@ -122,7 +122,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               textOverflow: "ellipsis",
             }}
           >
-            {jobDetail?.partner?.universityDTO?.address || "Không có"}
+            {jobDetail?.universityDTO?.address || "Không có"}
           </Typography>
         </div>
       </div>

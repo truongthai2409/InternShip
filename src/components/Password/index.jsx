@@ -65,9 +65,9 @@ const Password = () => {
       }
     }
   };
-  // const handleClear = () => {
-  //   reset();
-  // };
+  const handleClear = () => {
+    reset();
+  };
 
   const handleBackClick = () => {
     navigate(-1);
@@ -89,7 +89,7 @@ const Password = () => {
         {/* Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác */}
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)} className="password-form">
-        <div>
+        <div className="passform">
           <CustomInput
             label="Mật Khẩu Cũ"
             id="passwordOld"
@@ -139,6 +139,12 @@ const Password = () => {
               bheight="40px"
               name="Lưu"
               onClick={handleSubmit(onSubmit)}
+            ></Button>
+            <Button
+              bwidth="140px"
+              bheight="40px"
+              name="Nhập Lại"
+              onClick={handleClear}
             ></Button>
           </div>
         </div>

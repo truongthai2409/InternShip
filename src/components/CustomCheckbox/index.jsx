@@ -20,7 +20,7 @@ const CustomCheckbox = ({ label, onChange, checked }) => {
         <Checkbox
           className="checkBoxColor"
           sx={{
-            color: "dedede",
+            color: "#04bf8a",
           }}
         />
       }

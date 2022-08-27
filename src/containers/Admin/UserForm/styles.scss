@@ -1,83 +1,38 @@
-@use '../../../assets/styles/' as *;
+@use "../../../assets/styles/" as *;
 
 .user-form {
-  padding: 0px 20px;
-  height: auto;
-  .user-form__container {
-    .user-form__logo {
-      padding: 30px 30px 10px 30px;
-      margin: 20px 20px 10px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      .css-12bapnq-MuiAvatar-root {
-        border: 2px solid rgb(145, 158, 171) !important;
-      }
-      .user-form__avatar {
-        border: 2px solid rgb(145, 158, 171);
-        margin-bottom: 20px;
-        width: 200px;
-        height: 200px;
-        cursor: pointer;
-      }
-      .user-form__control {
-        width: 100%;
-        ul {
-          li {
-            margin: 10px;
-            list-style: none;
-            .link {
-              font-family: $f-family;
-              font-size: $fs-13;
-              color: #000;
-              text-decoration: none;
-            }
-          }
-        }
-        .user-form__block {
-          font-family: $f-family;
-          font-size: $fs-13;
-          margin-left: 10px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          align-content: center;
-        }
-      }
-      input {
-        visibility: hidden;
-        // display: none;
-      }
-    }
+  padding: 10px 20px;
+  min-height: 500px;
+  min-width: 800px;
 
-    .user-form__input {
-      padding: 0px 20px;
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 20px;
+  }
 
-      .user-form__checkbox {
-        .user-form__checkbox-label {
-          font-family: $f-family;
-          font-size: $fs-13;
-          font-weight: $fw-bold-0;
-          margin-left: 5px;
-          color: rgb(145, 158, 171);
-          margin-bottom: 20px;
-        }
-        input {
-          margin-right: 5px;
-        }
+  &__avatar {
+    width: 40%;
 
-        label {
-          margin-right: 30px;
-        }
-      }
+    .avatar-input {
+      margin: 0 !important;
     }
   }
 
-  .user-form__submit {
-    padding: 10px;
-    float: right;
+  &__input-infor {
+    width: 60%;
+  }
+
+  &__input-item {
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
   }
 }
 

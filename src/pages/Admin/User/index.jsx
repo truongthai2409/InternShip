@@ -45,10 +45,15 @@ const User = () => {
         selectOptions={selectOptions}
         btnName="Thêm User"
         BtnIcon={AddOutlinedIcon}
-        // onClick={handleOpenModal}
+        onClick={handleOpenModal}
       />
-      <UserTable />
-      <Modal modalTitle="Thêm người dùng" open={open} setOpen={setOpen}>
+      <UserTable openModal={handleOpenModal} />
+      <Modal
+        modalTitle="Thêm người dùng"
+        open={open}
+        setOpen={setOpen}
+        iconClose={true}
+      >
         <UserForm />
       </Modal>
     </>

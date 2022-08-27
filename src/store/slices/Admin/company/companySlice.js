@@ -11,11 +11,16 @@ const companySlice = createSlice({
     companyDetail: {},
     companyDetail1: {},
     error: [],
+    totalPages: 0,
+    totalItems: 0,
   },
   reducer: {},
   extraReducers: (builder) => {
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
       state.companyList = payload.contents;
+      state.totalPages = payload.totalPages;
+      state.totalItems = payload.totalItems;
+
       if (payload.length > 0) {
         state.companyDetail1 = payload[0];
       } else {
@@ -42,6 +47,8 @@ export default companySlice;
 /**
  * get company list
  * @param args
+ * args[0]: number of current page
+ * args[1]: size current item
  * @returns company list
  */
 export const getCompanyList = createAsyncThunk(

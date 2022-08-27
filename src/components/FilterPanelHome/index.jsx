@@ -61,7 +61,31 @@ const FilterPanelHome = ({
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          sx={{
+            background: "#fff",
+            borderRadius: "6px",
+            padding: "8px 10px",
+            border: "0.5px solid #dedede",
+            "& button": {
+              fontSize: "13px !important",
+              textTransform: "none !important",
+              color: "black !important",
+              fontWeight: "600 !important",
+              flexBasis: "33.33%",
+            },
+            "& button.Mui-selected": {
+              color: "#fff !important",
+              background: "#04bf8a",
+              borderRadius: "4px",
+            },
+            "& span.MuiTabs-indicator": {
+              backgroundColor: "unset !important",
+            },
+          }}
+        >
           <Tab label="Mới nhất" {...a11yProps(0)} />
           <Tab label="Đánh giá" {...a11yProps(1)} />
           <Tab label="Liên quan" {...a11yProps(2)} />

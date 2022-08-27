@@ -1,4 +1,4 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .select-form {
   width: 100%;
@@ -27,35 +27,44 @@
   }
 }
 
-.MuiFormControl-root.MuiFormControl-fullWidth.css-q8hpuo-MuiFormControl-root {
-  border: 1.6px solid #777777;
-  border-radius: 2px;
+.select-formControl {
   height: 45px !important;
 
   &:hover {
     box-shadow: $primary-color-1 0 3px 8px;
-    border: 1.6px solid $primary-color;
-    color: $primary-color;
   }
 
-  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  & div {
     height: 100%;
+
+    & div {
+      color: #111111;
+      font-size: 13px;
+      text-align: left;
+    }
+    & input {
+      width: 0%;
+    }
   }
 
-  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    color: #111111;
-    font-size: 13px;
-    text-align: left;
-  }
+}
 
-  .css-yf8vq0-MuiSelect-nativeInput {
-    width: 0%;
+.select-form {
+  & .select-formControl {
+    font-family: 'Public Sans', sans-serif;
+    outline: none !important;
+
+    .select-field {
+      border-radius:2px;
+      outline: none !important;
+
+      &:hover {
+        border-color: $primary-color !important;
+      }
+    }
   }
 }
 
-// .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiMenu-paper.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
-//   // width: 200px !important;
-// }
 
 .field-requirment {
   color: red;

@@ -26,11 +26,11 @@ function HeaderWithPartner(props) {
       <Logo />
       <div className="header__partner">
         <Link to="/partner/post" className="header__partner-post">
-          <AddCardIcon></AddCardIcon>
+          <AddCardIcon sx={{color: "#04bf8a"}}></AddCardIcon>
           <span className="header__partner-post-post">Đăng tuyển</span>
         </Link>
         <Link to="/partner/post-list" className="header__partner-post">
-          <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
+          <FormatAlignJustifyIcon sx={{color: "#04bf8a"}}></FormatAlignJustifyIcon>
           <span className="header__partner-post-post">
             Danh sách các đợt thực tập
           </span>
