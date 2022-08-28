@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getJobById,
-  getJobByNameAndLocation,
+  getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
 import ArrowButton from "src/components/ArrowButton";
 const DetailHome = (props) => {
@@ -23,13 +23,17 @@ const DetailHome = (props) => {
   const { jobDetailById } = useSelector((state) => state.job);
 
   useEffect(() => {
-    const dataSearch = {
+    const dataFilter = {
+      type: "",
+      order: "oldest",
+      position: "",
       name: "",
       province: "",
+      major: "",
       no: 0,
-      limit: 10,
+      limit: 5,
     };
-    dispatch(getJobByNameAndLocation(dataSearch));
+    dispatch(getJobFilterByUser(dataFilter));
     dispatch(getJobById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {

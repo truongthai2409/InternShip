@@ -5,6 +5,8 @@ import logo from "./logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
+const limit = process.env.LIMIT_OF_PAGE || 5;
+
 const Logo = ({ id }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.authentication);
@@ -20,7 +22,7 @@ const Logo = ({ id }) => {
         userName: profile.username,
         page: {
           no: 0,
-          limit: 10,
+          limit: limit,
         },
       };
       dispatch(getMarkByUser(dataGetMarkByUser));

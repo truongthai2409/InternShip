@@ -63,7 +63,6 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  console.log(jobDetailById?.universityDTO?.majors[0]?.name);
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -137,8 +136,7 @@ const Detail = ({
                     aria-label="basic tabs example"
                     textColor="primary"
                     scrollButtons
-                    sx={{
-                    }}
+                    sx={{}}
                   >
                     <Tab
                       label="Chi tiết"
@@ -215,6 +213,7 @@ const Detail = ({
           </div>
         </div>
       )}
+
       {jobDetailById && jobDetailById !== {} && (
         <div className="detail__card detail__card-ontablet containerDetailCard-home">
           <div className="detail__card-1">
@@ -262,7 +261,9 @@ const Detail = ({
                   demandPartner={demandPartner}
                   detailJob={true}
                 ></InformationUniversity>
-              ) : null}
+              ) : (
+                <InformationCompany jobDetailById={jobDetailById} />
+              )}
             </Box>
           </div>
         </div>

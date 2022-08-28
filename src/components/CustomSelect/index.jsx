@@ -1,62 +1,64 @@
-import React from 'react'
-import './styles.scss'
+import React from "react";
+import "./styles.scss";
 
 const CustomSelect = React.forwardRef(
   (
     {
-      onBlur,
       register,
-      name,
       label,
-      selectOptions,
+      options,
       getDistrictList,
       dispatch = () => {},
       id,
-      children
+      className,
+      children,
+      placeholder,
+      requirementField = true,
     },
     ref
   ) => {
     // render option
     const renderSelectOption = () => {
-      if (selectOptions) {
-        return selectOptions.map(item => {
+      if (options) {
+        return options.map((item) => {
           return (
             <option value={item.id} key={item.id}>
               {item.name}
             </option>
-          )
-        })
+          );
+        });
       }
-    }
+    };
 
-    // handle change district
-    const handleChangeDistrict = e => {
-      // console.log(e.target.value);
-      dispatch(getDistrictList(e.target.value))
-    }
+    const handleChangeDistrict = (e) => {
+      dispatch(getDistrictList(e.target.value));
+    };
 
-    const handleChange = e => {}
-
+    const handleChange = (e) => {};
     return (
       <>
-        <label>{label}</label>
-        <div className="custom-select__textfield">
+        <div className={`custom-select__wrapper ${className ? className : ""}`}>
+          <h1 className="custom-select__label">
+            {label}
+            {requirementField && <span className="field-requirment">*</span>}
+          </h1>
           <select
-            name={name}
-            ref={ref}
-            onChange={handleChange || handleChangeDistrict}
-            onBlur={onBlur}
             id={id}
-            className="select__item"
+            name={id}
+            {...register(id)}
+            className="select"
+            required
           >
-            <option value="">Vui lòng chọn</option>
+            <option hidden value="">
+              {placeholder}
+            </option>
             {renderSelectOption()}
           </select>
           <p className="custom-input__error">{children}</p>
         </div>
       </>
-    )
+    );
   }
-)
+);
 
-export default CustomSelect
+export default CustomSelect;

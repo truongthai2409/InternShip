@@ -22,7 +22,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import Button from "../Button";
 
 const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE;
+const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const { profile } = useSelector((state) => state.authentication);
@@ -35,13 +35,13 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
     await dispatch(deleteMark(jobCare.id)).then(
-      toast.success("Đã xóa lưu thành công")
+      toast.success("Đã hủy lưu việc làm")
     );
     const dataGetMarkByUser = {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 10,
+        limit: limit,
       },
     };
     await dispatch(getMarkByUser(dataGetMarkByUser));
@@ -57,7 +57,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       idCandidate: candidateInfoByUsername?.id,
       page: {
         no: 0,
-        limit: 10,
+        limit: limit,
       },
     };
     await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
@@ -92,7 +92,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
         idCandidate: candidateInfoByUsername?.id,
         page: {
           no: 0,
-          limit: 10,
+          limit: limit,
         },
       };
       await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));

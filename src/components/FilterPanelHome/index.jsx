@@ -7,7 +7,7 @@ import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
-import { Pagination, Stack } from "@mui/material";
+import PaginationCustome from "src/components/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, jobList, ...other } = props;
@@ -52,10 +52,11 @@ const FilterPanelHome = ({
 }) => {
   const location = useLocation();
   const [value, setValue] = useState(0);
+  const [page, setPage] = useState(1);
   const handleChange = (event, newValue) => setValue(newValue);
-
-  const handlePagination = (page) => {
-    onChange && onChange(page);
+  const handlePagination = (e, valuePage) => {
+    setPage(valuePage);
+    onChange && onChange(valuePage);
   };
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
@@ -75,14 +76,14 @@ const FilterPanelHome = ({
               fontWeight: "600 !important",
               flexBasis: "33.33%",
             },
-            "& button.Mui-selected" : {
+            "& button.Mui-selected": {
               color: "#fff !important",
               background: "#04bf8a",
-              borderRadius: "4px"
+              borderRadius: "4px",
             },
             "& span.MuiTabs-indicator": {
-              backgroundColor: "unset !important"
-            }
+              backgroundColor: "unset !important",
+            },
           }}
         >
           <Tab label="Mới nhất" {...a11yProps(0)} />
@@ -94,6 +95,7 @@ const FilterPanelHome = ({
         {jobList && jobList?.length > 0
           ? jobList.map((job, index) => (
               <CardHome
+                page={page}
                 positionValue={positionValue}
                 id={job.id}
                 active={indexCardActive}
@@ -134,7 +136,13 @@ const FilterPanelHome = ({
           justifyContent: "center",
           marginTop: "16px",
         }}
-      ></div>
+      >
+        <PaginationCustome
+          page={page}
+          totalPages={jobListHavePages.totalPages}
+          hanldeOnChange={handlePagination}
+        />
+      </div>
     </Box>
   );
 };

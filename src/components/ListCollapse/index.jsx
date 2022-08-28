@@ -11,7 +11,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const ListCollapse = (props) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const spacing = props.spacing;
 
@@ -29,7 +29,7 @@ const ListCollapse = (props) => {
         maxWidth: 360,
         bgcolor: "background.paper",
         borderRadius: "6px",
-        border: "0.5px solid #DEDEDE",
+        border: "1px solid #DEDEDE",
         marginBottom: "20px",
       }}
       component="nav"

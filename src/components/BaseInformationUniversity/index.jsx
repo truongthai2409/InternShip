@@ -28,7 +28,6 @@ const BaseInformationUniversity = ({
   const dispatch = useDispatch();
   const { demandListUniversity } = useSelector((state) => state.demand);
   const uniId = demandDetail?.universityDTO?.id;
-  console.log(demandDetail?.partner?.universityDTO?.email);
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
@@ -109,7 +108,9 @@ const BaseInformationUniversity = ({
                 </div>
               </div>
               <div className="intro__university">
-                <h5 className="intro__university-title">Giới thiệu về Trường</h5>
+                <h5 className="intro__university-title">
+                  Giới thiệu về Trường
+                </h5>
                 <Typography
                   variant="h6"
                   component="div"
@@ -118,8 +119,7 @@ const BaseInformationUniversity = ({
                     fontWeight: "400",
                     transform: "translate(5px,5px)",
                   }}
-                >
-                </Typography>
+                ></Typography>
               </div>
 
               {pathUrl !== "/information_company" ? (

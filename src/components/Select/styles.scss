@@ -28,7 +28,6 @@
 }
 
 .select-formControl {
-  border-radius: 2px;
   height: 45px !important;
 
   &:hover {
@@ -47,12 +46,22 @@
       width: 0%;
     }
   }
+
 }
 
 .select-form {
   & .select-formControl {
     font-family: 'Public Sans', sans-serif;
-    border-radius: 5px;
+    outline: none !important;
+
+    .select-field {
+      border-radius:2px;
+      outline: none !important;
+
+      &:hover {
+        border-color: $primary-color !important;
+      }
+    }
   }
 }
 

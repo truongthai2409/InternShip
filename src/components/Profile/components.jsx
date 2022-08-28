@@ -12,7 +12,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import { Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   getProfileByIdUser,
   getUserById,
@@ -63,6 +63,8 @@ export const UserInfor = ({ open, setOpen }) => {
     dispatch(getProfileByIdUser(idUser));
     dispatch(getUserById(idUser));
   }, [idUser]);
+  console.log(profile);
+  console.log(user);
   return (
     <>
     {user?.role?.name?.includes("Role_Candidate")

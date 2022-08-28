@@ -12,12 +12,11 @@ const DemandTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const draftText =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices feugiat tincidunt. Vestibulum rhoncus, leo sed fringilla aliquam, lectus enim ornare urna, ut iaculis lorem ex ac ipsum. Curabitur eget mauris varius, aliquet neque id, commodo arcu. Nam quis pharetra quam. Duis luctus sapien eu nisi interdum, sed semper erat porta.";
-
   const { demandList, totalPages, totalItems } = useSelector(
     (state) => state.adminDemand
   );
+
+  console.log("demandList", demandList);
 
   useEffect(() => {
     dispatch(getAdminListDemand([page, 10]));
@@ -73,7 +72,6 @@ const DemandTable = () => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          // console.log(row);
           navigate(`/admin/Demand/${row.id}`);
         };
         return (
@@ -93,19 +91,18 @@ const DemandTable = () => {
   const rows = [];
   for (let i = 0; i < demandList.length; i++) {
     rows.push({
-      id: demandList[i].id,
+      id: demandList[i]?.id,
       stt: i + 1,
-      name: demandList[i].name,
-      major: demandList[i].major.name,
-      partner: demandList[i].partner.position,
-      createDate: demandList[i].createDate,
-      status: demandList[i].status,
-      students: demandList[i].students,
+      name: demandList[i]?.name,
+      major: demandList[i]?.major?.name,
+      partner: demandList[i]?.partner?.position,
+      createDate: demandList[i]?.createDate,
+      status: demandList[i]?.status,
+      students: demandList[i]?.students,
     });
   }
 
   const handlePagination = (e, value) => {
-    console.log("value", value);
     setPage(value);
   };
 

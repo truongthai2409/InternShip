@@ -1,161 +1,159 @@
-import React, { useState, useRef } from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Avatar, Grid, Switch } from '@mui/material'
+import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import './styles.scss'
-import CustomInput from '../../../components/CustomInput'
-// import CustomTextarea from "../../../components/CustomTextarea";
-import Button from '../../../components/Button'
-import cameraLogo from '../../../assets/img/camera.png'
-// import Select from "../../../components/Select";
-import { schema, renderControlAction } from './script.js'
+import "./styles.scss";
+import CustomInput from "../../../components/CustomInput";
+import Button from "../../../components/Button";
+import { roleList, schema } from "./handleForm.js";
+import InputFile from "src/components/InputFile";
+import CustomSelect from "src/components/CustomSelect";
+import { genderList } from "src/pages/Register/RegisterStep3/PartnerInfo/data";
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } }
-
-const UserForm = props => {
-  const { isAdd } = props
-
-  const [image, setImage] = useState(cameraLogo)
-  const fileInput = useRef(null)
+const UserForm = (props) => {
+  const { isAdd } = props;
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    setValue,
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema)
-  })
+    resolver: yupResolver(schema),
+  });
 
-  // show preview image
-  const showPreviewImage = e => {
-    if (e.target.files && e.target.files[0]) {
-      let imageFile = e.target.files[0]
-      const reader = new FileReader()
-      reader.onload = x => {
-        setImage(x.target.result)
-      }
-      reader.readAsDataURL(imageFile)
-    }
-  }
-
-  const onSubmit = data => {}
+  const onSubmit = (data) => {
+    console.log("data", data);
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      autoComplete="off"
-      className="user-form"
-    >
-      <div className="user-form__container">
-        <Grid container>
-          <Grid item md={3}>
-            <div className="user-form__logo">
-              <Avatar
-                src={image}
-                // variant="rounded"
-                alt="user-logo"
-                className="user-form__avatar"
-                onClick={() => fileInput.current.click()}
-              />
-              {/* <h3>user Name</h3> */}
-              <input
-                id="logo"
-                type="file"
-                name="logo"
-                // {...register("logo")}
-                onChange={showPreviewImage}
-                ref={fileInput}
-              />
-              <p className="user-form__error">{errors.logo?.message}</p>
-
-              {!isAdd ? (
-                <div className="user-form__control">
-                  <ul>{renderControlAction()}</ul>
-                  <div className="user-form__block">
-                    <p>Khóa tài khoản</p>
-                    <Switch {...label} defaultChecked />
-                  </div>
-                </div>
-              ) : null}
+    <>
+      <form autoComplete="off" className="user-form">
+        <div className="user-form__wrapper">
+          <div className="user-form__avatar">
+            <InputFile
+              label="Ảnh đại diện"
+              requirementField={false}
+              id="avatar"
+              format="image"
+              className="avatar-input"
+              setValue={setValue}
+              register={register}
+            >
+              {errors.avatar?.message}
+            </InputFile>
+          </div>
+          <div className="user-form__input-infor">
+            <div className="row">
+              <CustomInput
+                id="username"
+                label="Tên tài khoản"
+                className="user-form__input-item"
+                type="text"
+                placeholder="vd. abcdef..."
+                register={register}
+              >
+                {errors.username?.message}
+              </CustomInput>
+              <CustomInput
+                id="email"
+                className="user-form__input-item"
+                label="Email"
+                type="email"
+                placeholder="vd. abc@gmail.com..."
+                register={register}
+              >
+                {errors.email?.message}
+              </CustomInput>
             </div>
-          </Grid>
-          <Grid item md={9}>
-            <Grid container>
-              <Grid item md={6}>
-                <div className="user-form__input">
-                  <CustomInput
-                    label="Tên đăng nhập"
-                    id="tenDangNhap"
-                    type="text"
-                    placeholder="Tên đăng nhập..."
-                    register={register}
-                    // check={!isAdd}
-                  >
-                    {errors.tenDangNhap?.message}
-                  </CustomInput>
-                  <CustomInput
-                    label="Email"
-                    id="email"
-                    type="email"
-                    placeholder="hoangvubg@gmail.com..."
-                    register={register}
-                  >
-                    {errors.email?.message}
-                  </CustomInput>
-                  <CustomInput
-                    label="Số điện thoại"
-                    id="sDT"
-                    type="tel"
-                    placeholder="Số điện thoại..."
-                    register={register}
-                  >
-                    {errors.sDT?.message}
-                  </CustomInput>
-                </div>
-              </Grid>
-              <Grid item md={6}>
-                <div className="user-form__input">
-                  <CustomInput
-                    label="Mật khẩu"
-                    id="matKhau"
-                    type="password"
-                    placeholder="Mật khẩu..."
-                    register={register}
-                  >
-                    {errors.matKhau?.message}
-                  </CustomInput>
-                  <CustomInput
-                    label="Họ tên"
-                    id="ten"
-                    type="text"
-                    placeholder="Họ tên..."
-                    register={register}
-                  >
-                    {errors.ten?.message}
-                  </CustomInput>
-                  <div className="user-form__checkbox">
-                    <p className="user-form__checkbox-label">Type</p>
-                    <select {...register('isAdmin')}>
-                      <option value={true}>Admin</option>
-                      <option value={false}>Khach hang</option>
-                    </select>
-                    <p className="user-form__error">{errors.type?.message}</p>
-                  </div>
-                </div>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </div>
-
-      {isAdd ? (
+            <div className="row">
+              <CustomInput
+                id="password"
+                className="user-form__input-item"
+                label="Mật khẩu"
+                type="password"
+                visibility={true}
+                placeholder="vd. Abc123..."
+                register={register}
+              >
+                {errors.password?.message}
+              </CustomInput>
+              <CustomInput
+                id="confirmPassword"
+                className="user-form__input-item"
+                label="Xác nhận mật khẩu"
+                type="password"
+                visibility={true}
+                placeholder="vd. Abc123..."
+                register={register}
+              >
+                {errors.confirmPassword?.message}
+              </CustomInput>
+            </div>
+            <div className="row">
+              <CustomInput
+                id="firstName"
+                className="user-form__input-item"
+                label="Họ"
+                type="text"
+                placeholder="vd. Nguyễn Văn..."
+                register={register}
+              >
+                {errors.firstName?.message}
+              </CustomInput>
+              <CustomInput
+                id="lastName"
+                className="user-form__input-item"
+                label="Tên"
+                type="text"
+                placeholder="vd. An..."
+                register={register}
+              >
+                {errors.lastName?.message}
+              </CustomInput>
+            </div>
+            <div className="row">
+              <CustomInput
+                id="phone"
+                className="user-form__input-item"
+                label="Số điện thoại"
+                type="tel"
+                placeholder="vd. 0964xxx473..."
+                register={register}
+              >
+                {errors.phone?.message}
+              </CustomInput>
+              <CustomSelect
+                id="gender"
+                className="user-form__input-item"
+                label="Giới tính"
+                placeholder="Chọn giới tính..."
+                register={register}
+                options={genderList}
+              >
+                {errors.gender?.message}
+              </CustomSelect>
+            </div>
+            <div className="row">
+              <CustomSelect
+                id="role"
+                className="user-form__input-item"
+                label="Vai trò"
+                placeholder="Chọn vai trò..."
+                register={register}
+                options={roleList}
+              >
+                {errors.role?.message}
+              </CustomSelect>
+            </div>
+          </div>
+        </div>
         <div className="user-form__submit">
           <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
         </div>
-      ) : null}
-    </form>
-  )
-}
+      </form>
+    </>
+  );
+};
 
-export default UserForm
+export default UserForm;

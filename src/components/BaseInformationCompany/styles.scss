@@ -1,34 +1,44 @@
 @use "../../assets/styles/" as *;
 
-.base__information {
+.base__information-candidate {
   .company-name {
     // text-align: center;
     width: auto;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 30px;
     line-height: 33px;
     color: rgb(53, 53, 53);
     line-height: 35.2px;
+    display: -webkit-box;
+    // line-height: 1.3;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .base__information-card {
-    background-color: $color-white-0;
+    // background-color: $primary-color-background;
+    background-color: white;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     border-radius: 6px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-bottom: 1rem;
+
+    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     .img-logo {
-      width: 120px;
-      height: 100px;
+      width: 100px;
+      height: 80px;
       border-radius: 4px;
-      margin-left: 35px;
-      margin-right: 23px;
-      transform: translate(-30px, 30px);
-      margin-bottom: 20px;
+      margin-left: 14px;
+      // margin-right: 23px;
+      // transform: translate(-30px, 30px);
+      box-sizing: border-box;
+      margin-top: 16px;
       opacity: 1;
     }
 
@@ -41,7 +51,7 @@
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
         display: flex;
         align-items: center;
@@ -56,7 +66,7 @@
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
         display: flex;
         align-items: center;
@@ -70,12 +80,15 @@
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 400;
-        font-size: 20px !important;
+        font-size: 16px !important;
         line-height: 27px;
         display: flex;
         align-items: center;
-
         color: #000000;
+      }
+
+      a:hover {
+        color: $primary-color;
       }
       h5 {
         // transform: translateY(5px);
@@ -84,7 +97,7 @@
         font-family: "Open Sans";
         font-style: normal;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 27px;
         display: flex;
         align-items: center;
@@ -127,7 +140,7 @@
   margin-top: 26px;
 }
 
-.base__information-card-detail-location {
+.base__information-card-detail-location-candidate {
   h5 {
     white-space: nowrap;
     margin-bottom: 15px;
@@ -144,7 +157,7 @@
     height: 35px;
     margin-right: 16px;
     border-radius: 50%;
-    margin-top: 8px;
+    margin-top: 4px;
   }
 }
 
@@ -185,14 +198,13 @@
 .fix__margin {
   .fix_container {
     .icon_fix {
-      margin-top: 3px;
-    font-size: 20px;
+      margin-top: 1px;
+      font-size: 20px;
     }
     align-items: flex-start !important;
     a {
       text-align: center;
       color: #000000 !important;
-      
     }
   }
 }

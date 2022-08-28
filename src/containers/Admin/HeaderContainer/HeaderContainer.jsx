@@ -23,6 +23,7 @@ const HeaderContainer = ({
             <IconButton
               onClick={onClick}
               className="header-container__add-button"
+              sx={{ width: "42px" }}
             >
               <AddIcon />
             </IconButton>
@@ -31,9 +32,6 @@ const HeaderContainer = ({
         <Grid item xs={12}>
           <Search placeholder={placeholder} onChange={onChange} />
         </Grid>
-        {/* <Grid item md={4}>
-          <Select selectName={selectName} selectOptions={selectOptions} />
-        </Grid> */}
       </Grid>
     </div>
   );
