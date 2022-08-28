@@ -1,4 +1,4 @@
-import { Drawer, Grid, Hidden, Tooltip } from "@mui/material";
+import { Grid, Hidden } from "@mui/material";
 import SearchResultHome from "../../../components/SearchResultHome";
 import DetailCard from "../../../components/DetailCard";
 import SideBarHomeList from "../../../components/SideBarHomeList";
@@ -12,8 +12,6 @@ import {
   getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
-import Logo from "src/components/Logo";
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +19,7 @@ const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const { profile } = useSelector((state) => state.authentication);
-  const [openDrawer, setOpenDrawer] = useState(false);
+
   // get global state from redux store
   let {
     jobDetail,
@@ -165,13 +163,6 @@ const Home = (props) => {
     window.scroll(0, 0);
   };
 
-  const handleOpenDrawer = () => {
-    setOpenDrawer(!openDrawer);
-  };
-
-  const handleCloseDrawer = () => {
-    setOpenDrawer(false);
-  };
   return (
     <>
       {jobDetail && (
@@ -182,28 +173,6 @@ const Home = (props) => {
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
-            <Hidden mdUp>
-              <div className="">
-                <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
-                  <ViewQuiltOutlinedIcon />
-                </Tooltip>
-              </div>
-            </Hidden>
-            <div className="">
-              <Drawer
-                variant="temporary"
-                anchor="left"
-                open={openDrawer}
-                onClose={handleCloseDrawer}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}
-                className="admin-layout__sidebar-hide"
-              >
-                <Logo />
-                <SideBarHomeList />
-              </Drawer>
-            </div>
             <Hidden mdDown>
               <SideBarHomeList
                 onChange={handleCheck}
@@ -211,6 +180,7 @@ const Home = (props) => {
               />
             </Hidden>
           </Grid>
+
           <Grid item lg={4} md={8} sm={12} xs={12}>
             <div className="onDesktop">
               <SearchResultHome
@@ -226,6 +196,7 @@ const Home = (props) => {
               onChange={getValuePageAndHandle}
             />
           </Grid>
+
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">
