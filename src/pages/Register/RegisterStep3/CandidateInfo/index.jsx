@@ -164,7 +164,7 @@ const CandidateInfo = () => {
           id="gender"
           register={register}
         >
-          {errors.phone?.message}
+          {errors.gender?.message}
         </SelectCustom>
         <SelectCustom
           label="Chuyên ngành"
@@ -177,7 +177,7 @@ const CandidateInfo = () => {
         </SelectCustom>
         <InputFile
           label="Ảnh đại diện"
-          requirementField={false}
+          requirementField={true}
           id="avatar"
           format="image"
           setValue={setValue}
@@ -187,7 +187,7 @@ const CandidateInfo = () => {
         </InputFile>
         <InputFile
           label="CV"
-          requirementField={false}
+          requirementField={true}
           id="cv"
           format="pdf"
           setValue={setValue}

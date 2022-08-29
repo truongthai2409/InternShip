@@ -85,7 +85,6 @@ const HeaderWithHR = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-  console.log(profile);
   return (
     <div className="container-header__hr header__hr config">
       <div onClick={() => {}} className="responsive-menu">

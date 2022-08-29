@@ -31,6 +31,7 @@
         box-shadow: $primary-color-1 0 3px 8px;
       }
     }
+
     .custom-input .custom-input__textfield-disabled input {
       font-family: "Public Sans", sans-serif;
       border: 1.6px solid #666;
@@ -64,18 +65,20 @@
 
     .hr-post__heading {
       display: flex;
+
       & svg,
       h2 {
         color: $primary-color;
       }
+
       align-items: center;
       gap: 4px;
 
-      > svg {
+      >svg {
         margin: 5px !important;
       }
 
-      > .hr-post__title {
+      >.hr-post__title {
         border: none !important;
       }
     }
@@ -100,7 +103,7 @@
         }
       }
 
-      > .custom-input {
+      >.custom-input {
         margin: 0;
       }
     }
@@ -115,11 +118,11 @@
       align-items: baseline;
       margin-bottom: 35px;
 
-      > .hr-post__select {
+      >.hr-post__select {
         flex-basis: 49%;
       }
 
-      > div.custom-input {
+      >div.custom-input {
         flex-basis: 49%;
         margin: 0 !important;
 
@@ -132,7 +135,7 @@
     .hr-post__select {
       flex-basis: 33.33%;
 
-      > .custom-input {
+      >.custom-input {
         margin: 0 0 35px 0;
       }
     }
@@ -177,6 +180,7 @@
         }
       }
     }
+
     .custom-select__textfield {
       margin-top: 7px;
     }
@@ -220,9 +224,30 @@ label {
       width: 100%;
     }
   }
+
   #max-salary {
     margin-left: 35px;
   }
+}
+
+@media screen and (max-width : 500px) {
+
+  .form__container,
+  .hr-post__form {
+    width: 100% !important;
+
+    .row-2-col,
+    .row-3-col,
+    .hr-post__salary-range {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .custom-input {
+      width: 100%;
+    }
+  }
+
 }
 
 .title-requirement {

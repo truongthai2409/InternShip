@@ -201,18 +201,17 @@ const PartnerInfo = () => {
           >
             {errors.phone?.message}
           </CustomInput>
+          <SelectCustom
+            label="Giới tính"
+            placeholder="Vui lòng chọn..."
+            options={genderList}
+            id="gender"
+            register={register}
+          >
 
-          <div className="gender-container-partner-page">
-            <Select
-              label="Giới tính"
-              placeholder="Vui lòng chọn..."
-              options={genderList}
-              id="gender"
-              register={register}
-            />
-          </div>
+            {errors.gender?.message}
+          </SelectCustom>
         </div>
-
         <div className="reg-partner__form--name">
           <InputFile
             label="Ảnh đại diện"
@@ -221,7 +220,7 @@ const PartnerInfo = () => {
             format="image"
             register={register}
             setValue={setValue}
-            // check={true}
+            check={true}
           >
             {errors.avatar?.message}
           </InputFile>
@@ -233,7 +232,7 @@ const PartnerInfo = () => {
             format="image"
             setValue={setValue}
             register={register}
-            // check={true}
+            check={true}
           >
             {errors.logo?.message}
           </InputFile>

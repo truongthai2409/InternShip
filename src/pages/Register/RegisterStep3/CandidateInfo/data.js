@@ -50,6 +50,13 @@ export const schema = yup.object({
   avatar: yup
     .mixed()
     .nullable()
+    .test("type", " * Chỉ hỗ trợ .jpeg, .jpg, .png, .gif. , .bmp", (value) => {
+      if (value?.type) {
+        return IMAGE_FORMATS.includes(value?.type);
+      } else {
+        return false;
+      }
+    })
     .test(
       "fileSize",
       " * Ảnh bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
@@ -57,17 +64,10 @@ export const schema = yup.object({
         if (value?.size) {
           return value?.size <= 512 * 1024;
         } else {
-          return true;
+          return false;
         }
       }
-    )
-    .test("type", " * Chỉ hỗ trợ .jpeg, .jpg, .png, .gif. , .bmp", (value) => {
-      if (value?.type) {
-        return IMAGE_FORMATS.includes(value?.type);
-      } else {
-        return true;
-      }
-    }),
+    ),
   major: yup.string().required("* Bạn phải chọn chuyên ngành."),
   cv: yup
     .mixed()

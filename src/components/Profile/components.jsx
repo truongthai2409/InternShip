@@ -225,6 +225,9 @@ export const Actions = ({ props }) => {
   const onSubmit = () => {
     console.log("register")
   }
+  const handleChange = (e) => {
+    console.log(e)
+  }
   
   return (
     <div>
@@ -235,6 +238,7 @@ export const Actions = ({ props }) => {
           setOpen={setOpen}
           children={
             <form
+              onChange={handleChange}
               style={{ width: 300, height: 300, display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: "center" }} >
               <InputFile
                 label="CV"
@@ -243,8 +247,8 @@ export const Actions = ({ props }) => {
                 format="pdf"
                 setValue={setValue}
                 register={register}
-              ></InputFile>
-              <Button name="Gửi" type='submit' onClick={()=>onSubmit}>Thay Đổi</Button>
+              />
+              <Button onClick={()=>onSubmit()}>Thay Đổi</Button>
             </form>
           }
           name='Thay Đổi CV'
