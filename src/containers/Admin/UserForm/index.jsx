@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -9,10 +9,13 @@ import { roleList, schema } from "./handleForm.js";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
 import { genderList } from "src/pages/Register/RegisterStep3/PartnerInfo/data";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
 const UserForm = (props) => {
-  const { isAdd } = props;
-
+  const { isUpdate, idRow } = props;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -22,9 +25,27 @@ const UserForm = (props) => {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    dispatch(getUserById(idRow));
+  }, []);
+
+  useEffect(() => {
+    if (isUpdate) {
+      setValue("username", user?.username);
+      setValue("email", user?.email);
+      setValue("firstName", user?.firstName);
+      setValue("lastName", user?.lastName);
+      setValue("phone", user?.phone);
+      setValue("gender", user?.gender);
+      setValue("role", user?.role?.id);
+    }
+  }, [user]);
+
   const onSubmit = (data) => {
     console.log("data", data);
   };
+
+  console.log("user", user);
 
   return (
     <>
@@ -66,30 +87,32 @@ const UserForm = (props) => {
                 {errors.email?.message}
               </CustomInput>
             </div>
-            <div className="row">
-              <CustomInput
-                id="password"
-                className="user-form__input-item"
-                label="Mật khẩu"
-                type="password"
-                visibility={true}
-                placeholder="vd. Abc123..."
-                register={register}
-              >
-                {errors.password?.message}
-              </CustomInput>
-              <CustomInput
-                id="confirmPassword"
-                className="user-form__input-item"
-                label="Xác nhận mật khẩu"
-                type="password"
-                visibility={true}
-                placeholder="vd. Abc123..."
-                register={register}
-              >
-                {errors.confirmPassword?.message}
-              </CustomInput>
-            </div>
+            {!isUpdate && (
+              <div className="row">
+                <CustomInput
+                  id="password"
+                  className="user-form__input-item"
+                  label="Mật khẩu"
+                  type="password"
+                  visibility={true}
+                  placeholder="vd. Abc123..."
+                  register={register}
+                >
+                  {errors.password?.message}
+                </CustomInput>
+                <CustomInput
+                  id="confirmPassword"
+                  className="user-form__input-item"
+                  label="Xác nhận mật khẩu"
+                  type="password"
+                  visibility={true}
+                  placeholder="vd. Abc123..."
+                  register={register}
+                >
+                  {errors.confirmPassword?.message}
+                </CustomInput>
+              </div>
+            )}
             <div className="row">
               <CustomInput
                 id="firstName"

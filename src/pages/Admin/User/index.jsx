@@ -28,11 +28,13 @@ const selectOptions = [
 
 const User = () => {
   const [open, setOpen] = useState(false);
-
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [idRow, setIdRow] = useState("");
   const handleSearch = (e) => {};
-
-  const handleOpenModal = () => {
+  
+  const handleOpenAddModal = () => {
     setOpen(true);
+    setIsUpdate(false);
   };
 
   return (
@@ -45,16 +47,20 @@ const User = () => {
         selectOptions={selectOptions}
         btnName="Thêm User"
         BtnIcon={AddOutlinedIcon}
-        onClick={handleOpenModal}
+        onClick={handleOpenAddModal}
       />
-      <UserTable openModal={handleOpenModal} />
+      <UserTable
+        setIdRow={setIdRow}
+        setIsUpdate={setIsUpdate}
+        setOpen={setOpen}
+      />
       <Modal
-        modalTitle="Thêm người dùng"
+        modalTitle={isUpdate ? "Chỉnh sửa tài khoản" : "Thêm tài khoản"}
         open={open}
         setOpen={setOpen}
         iconClose={true}
       >
-        <UserForm />
+        <UserForm isUpdate={isUpdate} idRow={idRow}/>
       </Modal>
     </>
   );

@@ -9,10 +9,11 @@ const Confirmation = ({
   setOpen,
   func,
   image,
+  className,
 }) => {
   const handleClose = () => setOpen(false);
   return (
-    <div className="confirmation__wrapper">
+    <div className={`confirmation__wrapper ${className ? className : ""}`}>
       <img src={image} alt="" className="confirmation__img" />
       <h1 className="confirmation__title">{text}</h1>
       <div className="confirmation__btns">

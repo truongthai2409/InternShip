@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import GppBadIcon from "@mui/icons-material/GppBad";
 import { IconButton, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-
 import {
   deleteUser,
   getUserList,
-  updateUser,
   verifyUser,
 } from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
 import IconEdit from "../../../../assets/img/icons8-write-24.png";
+import Confirmation from "src/components/Confirmation";
+import Modal from "src/components/Modal";
+import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
+import "./styles.scss";
 
-const UserTable = ({ openModal }) => {
+
+const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
   const dispatch = useDispatch();
-
+  const [page, setPage] = useState(1);
+  const [confirmation, setConfirmation] = useState({});
+  const [openConfirmation, setOpenConfirmation] = useState(false);
   const { userList, totalPages, totalItems } = useSelector(
     (state) => state.user
   );
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(getUserList([page, 10]));
@@ -44,23 +46,35 @@ const UserTable = ({ openModal }) => {
         const { row } = params;
 
         const handleDeleteUser = async () => {
-          await dispatch(deleteUser(row.username));
+          dispatch(deleteUser(row.username));
           dispatch(getUserList([page, 20]));
         };
 
-        const handleUpdateUser = async () => {
-          await dispatch(updateUser(row.username));
+        const handleVerifyUser = () => {
+          setOpenConfirmation(true);
+          setConfirmation({
+            text: "Xác minh tài khoản",
+            nameBtnYes: "Xác minh",
+            func: () => {
+              dispatch(verifyUser(row.username));
+              dispatch(getUserList([page, 20]));
+            },
+            setOpen: setOpenConfirmation,
+            image: verifiedIcon,
+            className: "verify",
+          });
         };
 
-        const handleVerifyUser = async () => {
-          await dispatch(verifyUser(row.username));
-          dispatch(getUserList([page, 20]));
+        const handleOpenUpdateModal = () => {
+          setOpen(true);
+          setIsUpdate(true);
+          setIdRow(row.id);
         };
         return (
           <>
             <Tooltip title="Chỉnh sửa">
-              <IconButton onClick={openModal}>
-                <img src={IconEdit} />
+              <IconButton onClick={handleOpenUpdateModal}>
+                <img src={IconEdit} alt="" />
               </IconButton>
             </Tooltip>
             <Tooltip title="Xác minh tài khoản">
@@ -79,6 +93,20 @@ const UserTable = ({ openModal }) => {
                 <DeleteForeverOutlinedIcon />
               </IconButton>
             </Tooltip>
+            <Modal
+              open={openConfirmation}
+              setOpen={setOpenConfirmation}
+              iconClose={true}
+            >
+              <Confirmation
+                text={confirmation.text}
+                nameBtnYes={confirmation.nameBtnYes}
+                setOpen={confirmation.setOpen}
+                func={confirmation.func}
+                image={confirmation.image}
+                className={confirmation.className}
+              />
+            </Modal>
           </>
         );
       },

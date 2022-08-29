@@ -62,7 +62,7 @@ const UniversityTable = () => {
     },
     {
       field: "action",
-      headerName: "Chỉnh sửa",
+      headerName: "Tùy chọn",
       width: 150,
       sortable: false,
       renderCell: (params) => {

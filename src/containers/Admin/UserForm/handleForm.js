@@ -73,7 +73,8 @@ export const genderList = [
 
 // list gender
 export const roleList = [
-  { name: "Ứng viên", id: 3 },
   { name: "Nhà tuyển dụng", id: 1 },
+  { name: "Admin", id: 2 },
+  { name: "Ứng viên", id: 3 },
   { name: "Cộng tác viên", id: 4 },
 ];

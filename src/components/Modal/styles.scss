@@ -1,6 +1,7 @@
 @use "../../assets/styles/" as *;
 
 .dialog {
+  background: none !important;
   h2 {
     font-family: $f-family;
     // font-size: $fs-40;
@@ -37,6 +38,10 @@
   font-size: $fs-30 !important;
 }
 
-.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
-  background-color: rgba(0, 0, 0, 0.4) !important;
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.MuiDialog-paper {
+  box-shadow: unset !important;
 }

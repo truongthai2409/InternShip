@@ -115,6 +115,10 @@ export const getProfileByIdUser = createAsyncThunk(
 );
 
 // function use for update profile of user
+/**
+ * args[0] : data
+ * args[1] : id of user
+ */
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
   return await axios
     .put(`${baseURL}/api/r2s/hr/${args[1]}`, args[0], {

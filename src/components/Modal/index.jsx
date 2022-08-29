@@ -14,13 +14,14 @@ const Modal = ({
   name,
   children,
   iconClose = false,
+  className,
 }) => {
   const handleClose = () => {
     setOpen(false);
   };
 
   return (
-    <div>
+    <>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -32,6 +33,7 @@ const Modal = ({
             <img
               onClick={handleClose}
               className="dialog__icon"
+              alt=""
               src="https://img.icons8.com/fluency/48/000000/close-window.png"
             />
           )}
@@ -39,7 +41,7 @@ const Modal = ({
         </DialogTitle>
         <DialogContent>{children}</DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 };
 
