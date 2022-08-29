@@ -63,12 +63,12 @@ export const schema = yup
         }
       )
       .test("type", " * Chỉ hỗ trợ jpeg, png.", (value) => {
-        if (value) {
+        if (value && (value.type === "image/jpeg" || value.type === "image/png")) {
           return (
-            value === "image/jpeg" || value === "image/png"
+            true
           );
         } else {
-          return true;
+          return false;
         }
       }),
     gender: yup.string().required(" * Bạn phải chọn giới tính."),
