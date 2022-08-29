@@ -51,20 +51,33 @@
 
 .select-form {
   & .select-formControl {
+    .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+      border-width: 0px;
+    }
     font-family: 'Public Sans', sans-serif;
     outline: none !important;
-
+    &:hover {
+      border-color: $primary-color;
+    }
     .select-field {
-      border-radius:2px;
-      outline: none !important;
+      border: 1.6px solid #666 !important;
+      border-radius: 2px;
 
       &:hover {
         border-color: $primary-color !important;
+        .select-placeholder {
+          color: $primary-color;
+        }
       }
     }
   }
 }
-
+#timeStart,
+#timeEnd {
+  &:hover {
+    color : $primary-color
+  }
+}
 
 .field-requirment {
   color: red;

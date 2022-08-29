@@ -42,6 +42,7 @@ const CandidateViewList = () => {
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
+  
   const eleDuplicate = [];
   for (let i = 0; i < careListOfPrivate?.length; i++) {
     for (let j = 0; j < careListOfPrivate?.length; j++) {
@@ -157,9 +158,8 @@ const CandidateViewList = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <div className="view-list">
-        <div className="">
-          <Grid container spacing={2}>
-            <Grid item xs={7}>
+        <div className="grid_container">
+            <div className="candidate_job">
               <div className="view-list__job-card">
                 {pathUrl === "/candidate/view-list-care" &&
                 careListOfPrivate?.length > 0
@@ -182,6 +182,7 @@ const CandidateViewList = () => {
                     />
                   ))}
               </div>
+              {careListOfPrivateHavePages?.totalPages===0? <p>Không có công việc quan tâm nào</p>: 
               <div
                 className="view-list-page"
                 style={{
@@ -221,9 +222,9 @@ const CandidateViewList = () => {
                     fontSize="15px"
                   />
                 </div>
-              </div>
-            </Grid>
-            <Grid item xs={5}>
+              </div>}
+            </div>
+            <div className="candidate_info">
               <div className="view-list__job-user-card">
                 <div className="">
                   <SearchResultHome
@@ -239,8 +240,7 @@ const CandidateViewList = () => {
                 <UserCard />
                 <FeedBack />
               </div>
-            </Grid>
-          </Grid>
+            </div>
         </div>
       </div>
     </Box>

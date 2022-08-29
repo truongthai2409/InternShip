@@ -81,9 +81,9 @@ export const schema = yup
         " * Số điện thoại không đúng."
       ),
     gender: yup.string().required("* Bạn phải chọn giới tính"),
-    position: yup.string(),
-    schoolName: yup.string(),
-    shortName: yup.string(),
+    position: yup.string().required("* Bạn phải nhập vai trò của bạn ở trường"),
+    schoolName: yup.string().required("* Bạn phải nhập tên trường"),
+    shortName: yup.string().required("* Bạn phải nhập tên viết tắt của trường"),
     emailSchool: yup
       .string()
       .required(" * Bạn phải nhập email")
@@ -99,8 +99,8 @@ export const schema = yup
         " * Số điện thoại không đúng."
       ),
     description: yup.string(),
-    website: yup.string(),
-    address: yup.string(),
+    website: yup.string().required("* Website của trường là bắt buộc"),
+    address: yup.string().required("* Bạn phải nhập địa chỉ trường"),
     note: yup.string(),
     avatar: yup
       .mixed()

@@ -139,7 +139,7 @@ const FilterPanelHome = ({
       >
         <PaginationCustome
           page={page}
-          totalPages={jobListHavePages.totalPages}
+          totalPages={jobListHavePages?.totalPages}
           hanldeOnChange={handlePagination}
         />
       </div>

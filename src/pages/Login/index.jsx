@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,22 +19,22 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector(authenticationSelector);
-
-  if (status === "success") {
-    const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
-    switch (role) {
-      case "Role_HR":
-        navigate("/hr", { replace: true });
-        break;
-      case "Role_Partner":
-        navigate("/partner", { replace: true });
-        break;
-      case "Role_Candidate":
-        navigate("/candidate", { replace: true });
-        break;
+  useEffect(()=>{
+    if (status === "success") {
+      const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
+      switch (role) {
+        case "Role_HR":
+          navigate("/hr", { replace: true });
+          break;
+        case "Role_Partner":
+          navigate("/partner", { replace: true });
+          break;
+        case "Role_Candidate":
+          navigate("/candidate", { replace: true });
+          break;
+      }
     }
-  }
-
+  },[])
   const {
     register,
     handleSubmit,
