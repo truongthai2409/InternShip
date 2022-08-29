@@ -45,6 +45,7 @@ const DetailCard = ({
           demandPartner={demandPartner}
           rating={rating}
           jobListCompany={jobListCompany}
+          jobDetailById={jobDetailById}
         />
       ) : (
         (

@@ -14,7 +14,6 @@ const DataTable = ({
 }) => {
   return (
     <Paper className="data-table">
-      {/* <h2>Danh sách</h2> */}
       <div className="data-table_container">
         <DataGrid
           rows={rows}

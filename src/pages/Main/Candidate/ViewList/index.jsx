@@ -21,7 +21,7 @@ import ArrowButton from "src/components/ArrowButton";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { Grid, Pagination, Stack } from "@mui/material";
 
-const limit = process.env.limit_of_page;
+const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const CandidateViewList = () => {
   TabTitle("Danh sách ứng viên");
@@ -57,7 +57,7 @@ const CandidateViewList = () => {
         userName: profile.username,
         page: {
           no: currentPage,
-          limit: 10,
+          limit: limit,
         },
       };
 
@@ -68,7 +68,7 @@ const CandidateViewList = () => {
         idCandidate: candidateInfoByUsername.id,
         page: {
           no: currentPage,
-          limit: 10,
+          limit: limit,
         },
       };
       await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
@@ -110,7 +110,7 @@ const CandidateViewList = () => {
         // // .replace(/%20/g, "+")
         // // .replace(/\s/g, "-") || "",
         no: 0,
-        limit: 10,
+        limit: limit,
       },
     };
     if (pathUrl === "/candidate/view-list-care") {

@@ -8,28 +8,25 @@ import { useEffect } from "react";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
 const no = process.env.NO_OF_PAGE;
-const limit = process.env.limit_of_page;
+const limit = process.env.LIMIT_OF_PAGE || 5;
 
+console.log(limit);
 const CandidateLayOut = () => {
   let location = useLocation();
   const dispatch = useDispatch();
-  const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
+
   useEffect(() => {
     const dataGetMarkByUser = {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 10,
+        limit: limit,
       },
     };
     dispatch(getMarkByUser(dataGetMarkByUser));
-  }, [dispatch]);
-  const handleRerender = async (id) => {
-    if (id) {
-      // dispatch(getMarkByUser(profile.username));
-    }
-  };
+  }, []);
+
   return (
     <div className="main__layout">
       {location.pathname === "/candidate/information_company" ? (

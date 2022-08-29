@@ -182,7 +182,9 @@ export const getJobListByUserId = createAsyncThunk(
   "job/getJobListByUser",
   async (args) => {
     return axios
-      .get(`${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1]}&limit=${args[2]}`)
+      .get(
+        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1]}&limit=${args[2]}`
+      )
       .then((response) => {
         return response.data;
       })
@@ -314,7 +316,6 @@ export const getJobFilterByUser = createAsyncThunk(
         params: dataSearch,
       })
       .then((response) => {
-        console.log(response.data);
         return response.data;
       })
       .catch((error) => {

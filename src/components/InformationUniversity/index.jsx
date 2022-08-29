@@ -14,8 +14,6 @@ import Button from "../Button";
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail, detailJob = false }) => {
-  console.log(jobDetail);
-
   const handleApplyDemandUni = async (e) => {};
 
   return (

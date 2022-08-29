@@ -15,7 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import Tooltip from "@mui/material/Tooltip";
 const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE;
+const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const ButtonMark = (props) => {
   const location = useLocation();
@@ -41,7 +41,7 @@ const ButtonMark = (props) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 10,
+        limit: limit,
       },
     };
     if (props.isMark === false) {
@@ -58,7 +58,7 @@ const ButtonMark = (props) => {
       await dispatch(createMark(dataCareList));
       await dispatch(getMarkByUser(dataGetMarkByUser));
       setMark(!mark);
-      toast.success("Đã lưu thành công");
+      toast.success("Đã lưu việc làm thành công");
     } else {
       if (profile.role !== undefined && profile.role === "Role_Candidate") {
         const dataByUserAndJob = {
@@ -66,14 +66,14 @@ const ButtonMark = (props) => {
           idJob: Number(props.jobId),
           page: {
             no: 0,
-            limit: 4,
+            limit: limit,
           },
         };
         const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
         await dispatch(deleteMark(res.payload.id));
         await dispatch(getMarkByUser(dataGetMarkByUser));
         setMark(false);
-        toast.success("Đã hủy lưu thành công");
+        toast.success("Đã hủy lưu việc làm ");
       }
     }
   };

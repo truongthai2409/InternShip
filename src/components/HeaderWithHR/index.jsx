@@ -20,8 +20,7 @@ import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
-
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -86,7 +85,7 @@ const HeaderWithHR = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
-
+  console.log(profile);
   return (
     <div className="container-header__hr header__hr config">
       <div onClick={() => {}} className="responsive-menu">
@@ -103,7 +102,7 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <AddCardIcon sx={{color: "#04bf8a"}}></AddCardIcon>
+            <AddCardIcon sx={{ color: "#04bf8a" }}></AddCardIcon>
             <span className="header__hr-post-post">Đăng tuyển</span>
           </Link>
           <Link
@@ -114,7 +113,9 @@ const HeaderWithHR = (props) => {
                 : "header__hr-post"
             }
           >
-            <FormatAlignJustifyIcon sx={{color: "#04bf8a"}}></FormatAlignJustifyIcon>
+            <FormatAlignJustifyIcon
+              sx={{ color: "#04bf8a" }}
+            ></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đang tuyển</span>
           </Link>
           <Link
@@ -128,7 +129,6 @@ const HeaderWithHR = (props) => {
             <BookmarksIcon />
             <span className="header__hr-post-post">Ứng viên ưa thích</span>
           </Link>
-          
         </div>
       ) : null}
       {pathUrl === "/candidate" ? (
@@ -236,12 +236,13 @@ const HeaderWithHR = (props) => {
           }}
         >
           {pathUrl === "/candidate" ||
-            pathUrl === "/candidate/view-list-apply" ||
-            pathUrl === "/candidate/view-list-care" ||
-            pathUrl === "/candidate/profile" ||
-            (profile?.user && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.user?.lastName || ""} ${profile?.user?.firstName || ""
-              }`}</h4>
+          pathUrl === "/candidate/view-list-apply" ||
+          pathUrl === "/candidate/view-list-care" ||
+          pathUrl === "/candidate/profile" ||
+          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
+              profile?.userDTO?.firstName || ""
+            }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           )}

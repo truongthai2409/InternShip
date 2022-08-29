@@ -14,11 +14,9 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
-import { Link } from "react-router-dom";
 
 const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE;
-
+const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
@@ -34,13 +32,26 @@ const CardHome = (props) => {
       userName: profile.username,
       page: {
         no: 0,
-        limit: 5,
+        limit: limit,
       },
     };
     if (profile.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, []);
+
+  React.useEffect(() => {
+    const dataGetMarkByUser = {
+      userName: profile.username,
+      page: {
+        no: props.page - 1,
+        limit: limit,
+      },
+    };
+    if (profile.role === "Role_Candidate") {
+      dispatch(getMarkByUser(dataGetMarkByUser));
+    }
+  }, [props.page]);
 
   React.useEffect(() => {
     if (props.index === 0) {
@@ -54,11 +65,6 @@ const CardHome = (props) => {
     dispatch(updateIdJobActive(props.id));
   };
   return (
-    // <Link
-    //   to={`/candidate/detail_job/${props.id}`}
-    //   onClick={handleClick}
-    //   className="link__job-detail"
-    // >
     <div
       onClick={handleClick}
       className={clsx(
@@ -89,7 +95,7 @@ const CardHome = (props) => {
         </div>
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">
-            <PeopleIcon sx={{color: "#04bf8a !important"}} />
+            <PeopleIcon sx={{ color: "#04bf8a !important" }} />
             <span>Số lượng ứng viên: {props.amount}</span>
           </div>
         ) : (
@@ -109,27 +115,42 @@ const CardHome = (props) => {
           jobId={props.id}
           isMark={isMarkLength}
         />
-        <div className="cardHome__col2-End">
+
+        {props.none__time ? (
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon
-              style={{ fontSize: `${props.fontSize + 2}px`}}
-              sx={{color: "#04bf8a"}}
-            />
-            <p style={{ fontSize: `${props.fontSize}px` }}>{props.location}</p>
-          </div>
-          <div className="cardHome__col2-End-2">
-            <WatchLaterOutlinedIcon
               style={{ fontSize: `${props.fontSize + 2}px` }}
-              sx={{color: "#04bf8a"}}
+              sx={{ color: "#04bf8a" }}
             />
+
             <p
-              style={{ fontSize: `${props.fontSize}px` }}
-            >{`${props.time[0]} - ${props.time[1]}`}</p>
+              style={{ fontSize: `${props.fontSize}px`, width: "max-content" }}
+            >
+              {props.location}
+            </p>
           </div>
-        </div>
+        ) : (
+          <div className="cardHome__col2-End">
+            <div className="cardHome__col2-End-1">
+              <AddLocationAltRoundedIcon
+                style={{ fontSize: `${props.fontSize + 2}px` }}
+              />
+              <p style={{ fontSize: `${props.fontSize}px` }}>
+                {props.location}
+              </p>
+            </div>
+            <div className="cardHome__col2-End-2">
+              <WatchLaterOutlinedIcon
+                style={{ fontSize: `${props.fontSize + 2}px` }}
+              />
+              <p
+                style={{ fontSize: `${props.fontSize}px` }}
+              >{`${props.time[0]} - ${props.time[1]}`}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
-    // </Link>
   );
 };
 

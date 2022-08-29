@@ -13,14 +13,14 @@ import LanguageIcon from "@mui/icons-material/Language";
 import PropTypes from "prop-types";
 
 const CardVisit = ({ jobDetailById, logo, candidate }) => {
-  // console.log(jobDetailById);
   return (
     <div className="scroll scroll__onTablet-hide ">
       <Card className="visit__card visit__card__onTablet">
         <CardContent>
           <img className="visit__card-logo" alt="visit__card-logo" src={logo} />
           <h2 className="visit__card-nameComapy">
-            {jobDetailById?.hr?.company?.name || jobDetailById?.universityDTO?.name}
+            {jobDetailById?.hr?.company?.name ||
+              jobDetailById?.universityDTO?.name}
           </h2>
 
           <div className="config__info">
@@ -29,13 +29,18 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
               className="config__info"
             >
               <LocalPostOfficeIcon className="config__info-icon"></LocalPostOfficeIcon>
-              {jobDetailById?.hr?.company?.email || jobDetailById?.universityDTO?.email}
+              {jobDetailById?.hr?.company?.email ||
+                jobDetailById?.universityDTO?.email}
             </a>
           </div>
           <div className="config__info">
-            <Link to="/detail_job" className="config__info">
+            <Link
+              to={`/candidate/detail_job/${jobDetailById.id}`}
+              className="config__info"
+            >
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
-              {jobDetailById?.hr?.company?.phone || jobDetailById?.universityDTO?.phone}
+              {jobDetailById?.hr?.company?.phone ||
+                jobDetailById?.universityDTO?.phone}
             </Link>
           </div>
           <div className="config__info">
@@ -44,22 +49,13 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
               className="config__info"
             >
               <LanguageIcon className="config__info-icon"></LanguageIcon>
-              {jobDetailById?.hr?.company?.website || jobDetailById?.universityDTO?.website}
+              {jobDetailById?.hr?.company?.website ||
+                jobDetailById?.universityDTO?.website}
             </a>
-            {/* <Link to={jobDetailById?.company?.website} className="config__info">
-              <LanguageIcon className="config__info-icon"></LanguageIcon>
-              {jobDetailById?.company?.website}
-            </Link> */}
           </div>
-          {/* <div className="config__info">
-            <Link to="/detail_job" className="config__info">
-              <AddLocationAltIcon className="config__info-icon"></AddLocationAltIcon>
-              {jobDetailById?.company.location}
-            </Link>
-          </div> */}
         </CardContent>
         <CardActions className="config-button">
-          <Link to="/information_company">
+          <Link to={`/candidate/information_company/${jobDetailById.id}`}>
             <Button name="Về Chúng Tôi"></Button>
           </Link>
         </CardActions>

@@ -23,7 +23,6 @@ const CustomInput = ({
   height,
   border,
   icon,
-  top,
   setValue,
 }) => {
   useEffect(() => {
@@ -71,7 +70,6 @@ const CustomInput = ({
           <div
             className="visibility-icon"
             onClick={handleHide}
-            style={{ cursor: "pointer", top: `${top}` }}
           >
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </div>

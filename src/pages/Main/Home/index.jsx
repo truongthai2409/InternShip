@@ -1,4 +1,4 @@
-import { Drawer, Grid, Hidden, Tooltip } from "@mui/material";
+import { Grid, Hidden } from "@mui/material";
 import SearchResultHome from "../../../components/SearchResultHome";
 import DetailCard from "../../../components/DetailCard";
 import SideBarHomeList from "../../../components/SideBarHomeList";
@@ -8,20 +8,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getJobByCompany,
-  getJobByNameAndLocation,
   getJobFilterByUser,
+  updateIdJobActive,
+  updateIndexCardActive,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-import ViewQuiltOutlinedIcon from "@mui/icons-material/ViewQuiltOutlined";
-import Logo from "src/components/Logo";
 
+const limit = process.env.LIMIT_OF_PAGE || 5;
 const Home = (props) => {
   const dispatch = useDispatch();
+  // let currentPage = 1;
 
   const [locationValue, setLocationValue] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
-  const [openDrawer, setOpenDrawer] = useState(false);
+
   // get global state from redux store
   let {
     jobDetail,
@@ -34,8 +35,7 @@ const Home = (props) => {
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
-  const idCompany = jobDetail?.hr?.company?.id;
-
+  const idCompany = Number(jobDetail?.hr?.company?.id);
   const listPositionWorkingFormat = [
     "Backend",
     "Business Analysis",
@@ -69,13 +69,16 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: 1,
-      limit: 5,
+      no: currentPage - 1,
+      limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
+    dispatch(getJobByCompany(Number(idCompany)));
   }, []);
-
+  useEffect(() => {
+    dispatch(getJobByCompany(Number(idCompany)));
+    // dispatch(updateIndexCardActive(0));
+  }, [idCompany]);
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -84,18 +87,23 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: currentPage,
-      limit: 5,
+      no: currentPage - 1,
+      limit: limit,
     };
+
     dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobByCompany(idCompany));
   }, [currentPage]);
+
+  // useEffect(() => {
+  //   dispatch(getJobByCompany(idCompany));
+  //   dispatch(updateIdJobActive(jobDetail.id));
+  // }, [idCompany]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
-      no: 1,
-      limit: 5,
+      no: currentPage - 1,
+      limit: limit,
     },
   };
   useEffect(() => {
@@ -112,8 +120,8 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: 1,
-      limit: 5,
+      no: currentPage - 1,
+      limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
   };
@@ -162,16 +170,10 @@ const Home = (props) => {
 
   const getValuePageAndHandle = (value) => {
     setCurrentPage(value);
+    // currentPage = value;
     window.scroll(0, 0);
   };
 
-  const handleOpenDrawer = () => {
-    setOpenDrawer(!openDrawer);
-  };
-
-  const handleCloseDrawer = () => {
-    setOpenDrawer(false);
-  };
   return (
     <>
       {jobDetail && (
@@ -182,28 +184,6 @@ const Home = (props) => {
           container
         >
           <Grid item lg={2} md={3} sm={4} xs={12}>
-            <Hidden mdUp>
-              <div className="">
-                <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
-                  <ViewQuiltOutlinedIcon />
-                </Tooltip>
-              </div>
-            </Hidden>
-            <div className="">
-              <Drawer
-                variant="temporary"
-                anchor="left"
-                open={openDrawer}
-                onClose={handleCloseDrawer}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}
-                className="admin-layout__sidebar-hide"
-              >
-                <Logo />
-                <SideBarHomeList />
-              </Drawer>
-            </div>
             <Hidden mdDown>
               <SideBarHomeList
                 onChange={handleCheck}
@@ -211,6 +191,7 @@ const Home = (props) => {
               />
             </Hidden>
           </Grid>
+
           <Grid item lg={4} md={8} sm={12} xs={12}>
             <div className="onDesktop">
               <SearchResultHome
@@ -226,6 +207,7 @@ const Home = (props) => {
               onChange={getValuePageAndHandle}
             />
           </Grid>
+
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">

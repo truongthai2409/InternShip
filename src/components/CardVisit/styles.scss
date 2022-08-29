@@ -68,12 +68,15 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
-  color: $primary-color;
+  color: #000000;
   &-icon {
     color: $primary-color;
   }
 }
 
+.config__info:hover {
+  color: $primary-color;
+}
 .config-button {
   display: flex;
   align-items: center;

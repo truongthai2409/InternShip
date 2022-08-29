@@ -25,7 +25,6 @@ const loginSlice = createSlice({
           toast.success("Bạn đã đăng nhập thành công!");
           sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
           localStorage.setItem("userPresent", JSON.stringify(action.payload));
-          console.log(action.payload);
         } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!");

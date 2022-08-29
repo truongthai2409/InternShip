@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
-import './styles.scss'
+import React, { useState } from "react";
+import "./styles.scss";
 
 const ContactCandidate = () => {
-  const [checked, setChecked] = useState(1)
+  const [checked, setChecked] = useState(1);
   const listCV = [
     {
       id: 1,
-      value: 'CV Online'
+      value: "CV Online",
     },
     {
       id: 2,
-      value: 'TopCV Profile'
-    }
-  ]
+      value: "TopCV Profile",
+    },
+  ];
   return (
     <div className="contact-candidate__container">
       <div className="finding-status">
@@ -24,8 +24,8 @@ const ContactCandidate = () => {
       <div className="accept-contact">
         <h3>Cho phép NTD liên hệ bạn qua</h3>
         <div className="select-contact">
-          {listCV.map(list => (
-            <div className="select-cv">
+          {listCV.map((list, index) => (
+            <div className="select-cv" key={index}>
               <input
                 type="radio"
                 checked={checked === list.id}
@@ -45,7 +45,7 @@ const ContactCandidate = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContactCandidate
+export default ContactCandidate;

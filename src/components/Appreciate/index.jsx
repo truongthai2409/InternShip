@@ -7,14 +7,12 @@ import { styled } from "@mui/material/styles";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "@mui/material/Button";
 import ButtonCustom from "../Button";
 import "./styles.scss";
 import Modal from "../Modal";
 import { useForm } from "react-hook-form";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import {
   deleteAppreciate,
   getAppreciateByCompany,
@@ -29,27 +27,13 @@ import { IconButton, Tooltip } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./validate";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import Popover from "@mui/material/Popover";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1.2),
 }));
-const labels = {
-  0.5: "Vô dụng",
-  1: "Vô dụng +",
-  1.5: "Kém",
-  2: "Kém +",
-  2.5: "Được",
-  3: "Ok +",
-  3.5: "Tốt",
-  4: "Tốt +",
-  4.5: "Xuất sắc",
-  5: "Xuất sắc +",
-};
 
 const getLabelText = (value) => {
-  return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+  // return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 };
 const Appreciate = ({ appreciate, fontSize }) => {
   const value = appreciate?.score;
@@ -61,8 +45,6 @@ const Appreciate = ({ appreciate, fontSize }) => {
   const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
   const [like, setLike] = useState(false);
-  const [dislike, setDislike] = useState(false);
-  // const [isCheck, setIsCheck] = useState(false);
   const {
     register,
     handleSubmit,
@@ -103,34 +85,26 @@ const Appreciate = ({ appreciate, fontSize }) => {
       const res = await dispatch(updateAppreciate(dataUpdate));
       await dispatch(getAppreciateByCompany(idCompany));
       if (res.payload.status === 200) {
-        toast.success("Đã đăng đánh giá", {
-          // position: "top-center",
-          // autoClose: 3000,
-        });
+        toast.success("Đã đăng đánh giá");
       } else {
         toast.error(
-          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại",
-          {
-            // position: "top-center",
-            // autoClose: 3000,
-          }
+          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại"
         );
       }
     } catch (error) {
-      if (error.status === 400) {
-        for (const key in error.data) {
-          setError(key, {
-            type: "server",
-            message: error.data[key],
-          });
-        }
-      }
+      // if (error.status === 400) {
+      //   for (const key in error.data) {
+      //     setError(key, {
+      //       type: "server",
+      //       message: error.data[key],
+      //     });
+      //   }
+      // }
     }
 
     reset();
     setOpen(false);
   };
-
   const handleDeleteAppreciate = async (e) => {
     e.stopPropagation();
     await dispatch(deleteAppreciate(appreciate.id)).then(
@@ -141,21 +115,12 @@ const Appreciate = ({ appreciate, fontSize }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const handleClickLike = () => {
     setLike(!like);
   };
-  const handleClickDisLike = () => {
-    setDislike(!dislike);
-  };
+
   const openAnchorEl = Boolean(anchorEl);
-  const id = openAnchorEl ? "simple-popover" : undefined;
+  // const id = openAnchorEl ? "simple-popover" : undefined;
 
   return (
     <Box
@@ -388,7 +353,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                 />
                 {valueRating !== null && (
                   <Box sx={{ ml: 2 }}>
-                    {labels[hover !== -1 ? hover : valueRating]}
+                    {/* {labels[hover !== -1 ? hover : valueRating]} */}
                   </Box>
                 )}
               </Box>

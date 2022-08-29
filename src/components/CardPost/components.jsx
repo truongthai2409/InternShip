@@ -9,12 +9,7 @@ import { useDispatch } from "react-redux";
 import { addJob } from "src/store/slices/main/home/job/jobSlice";
 import { schema } from "./validateForm";
 
-export const ConfirmDate = ({
-  jobDetail,
-  setOpen,
-  nameBtnYes,
-  nameBtnNo,
-}) => {
+export const ConfirmDate = ({ jobDetail, setOpen, nameBtnYes, nameBtnNo }) => {
   const {
     register,
     handleSubmit,
@@ -59,10 +54,8 @@ export const ConfirmDate = ({
         address: jobDetail[0].locationjob?.address,
       },
     };
-    console.log("data", jobData);
     // dispatch(addJob(jobData));
   };
-  console.log("jobDetail", jobDetail);
   return (
     <>
       <div className="confirmation-date__wrapper">
