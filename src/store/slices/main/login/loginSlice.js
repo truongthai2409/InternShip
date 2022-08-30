@@ -30,13 +30,7 @@ const loginSlice = createSlice({
           toast.error("Tài khoản hoặc mật khẩu không đúng!");
         }
       })
-      .addCase(updateUserPassword.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.status = "success";
-        } else {
-          state.status = "fail";
-        }
-      });
+      
   },
 });
 
@@ -52,24 +46,5 @@ export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
   return res;
 });
 
-export const updateUserPassword = createAsyncThunk(
-  "login/updateUserPassword",
-  async (data) => {
-    const { token, dataChangePassword } = data;
-    const res = await axios
-      .put(`${baseURL}/api/user/changePassword`, dataChangePassword, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-    return res;
-  }
-);
 
 export default loginSlice;

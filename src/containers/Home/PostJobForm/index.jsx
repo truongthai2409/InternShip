@@ -60,7 +60,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const [noSalary, setNoSalary] = useState(false);
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorList([1, 20]));
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
   }, []);

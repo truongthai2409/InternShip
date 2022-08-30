@@ -25,11 +25,11 @@ import PartnerHome from "src/pages/Main/Partner/Home";
 import Profile from "src/components/Profile";
 import PartnerPost from "src/pages/Main/Partner/Post";
 import PartnerPostList from "src/pages/Main/Partner/PartnerPostList";
-import Password from "src/components/Password/index";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
 import CandidateManagement from "src/pages/Main/HR/CandidateManagement/CandidateManagement";
 import Company from "src/pages/Admin/Company";
+import Password from "src/containers/Home/ChangePasswordForm";
 
 // admin router
 export const adminRouter = [

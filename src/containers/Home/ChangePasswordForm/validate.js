@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 export const schema = yup
   .object({
-    passwordOld: yup
+    oldPassword: yup
       .string()
       .required(" * Bạn phải nhập password cũ")
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự  ")
@@ -10,7 +10,7 @@ export const schema = yup
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
         " * Vui lòng nhập lại mật khẩu"
       ),
-    passwordNew: yup
+    newPassword: yup
       .string()
       .required(" * Bạn phải nhập password mới")
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự ")
@@ -18,8 +18,9 @@ export const schema = yup
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
         " * Vui lòng nhập lại mật khẩu"
       ),
-    confirmPasswordNew: yup
+    // .matches([yup.ref("oldPassword"), null], " * Mật khẩu mới không được trùng với mật khẩu cũ."),
+    confirmNewPassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], " * Mật khẩu chưa khớp."),
+      .oneOf([yup.ref("newPassword"), null], " * Mật khẩu chưa khớp."),
   })
   .required();

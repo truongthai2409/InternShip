@@ -50,6 +50,13 @@ const userSlice = createSlice({
         toast.error("Không tìm thấy địa chỉ email !");
       }
     });
+    builder.addCase(changePassword.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.status = "success";
+      } else {
+        state.status = "fail";
+      }
+    });
   },
 });
 
@@ -184,5 +191,26 @@ export const verifyUser = createAsyncThunk(
       });
   }
 );
+
+export const changePassword = createAsyncThunk(
+  "user/changePassword",
+  async (data) => {
+    const { token, dataChangePassword } = data;
+    const res = await axios
+      .put(`${baseURL}/api/user/changePassword`, dataChangePassword, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+    return res;
+  }
+);
+
 export const { updateStatusForgotPassword } = userSlice.actions;
 export default userSlice;
