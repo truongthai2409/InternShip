@@ -154,7 +154,6 @@ const CandidateViewList = () => {
       careListOfPrivateHavePages?.totalPages || applyListHavePage?.totalPages
     );
   }, []);
-
   return (
     <Box sx={{ width: "100%" }}>
       <div className="view-list">
@@ -182,6 +181,7 @@ const CandidateViewList = () => {
                     />
                   ))}
               </div>
+              
               {careListOfPrivateHavePages?.totalPages===0? <p>Không có công việc quan tâm nào</p>: 
               <div
                 className="view-list-page"
@@ -193,27 +193,23 @@ const CandidateViewList = () => {
                 }}
               >
                 <Stack spacing={2}>
+                  {careListOfPrivateHavePages.totalItems > 3 ?
                   <Pagination
-                    page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
-                    defaultPage={1}
-                    onChange={(e) => handlePagination(e.target.textContent)}
-                    count={totalPage || 1}
-                    variant="outlined"
-                    shape="rounded"
-                    size="medium"
-                    sx={{
-                      display: "flex",
-                      justifyContent: "start",
-                      flexDirection: "row-reverse",
-                      alignItems: "center",
-                      marginLeft: "150px",
-                    }}
-                    // disabled={
-                    //   jobListNameHavePages?.numberOfCurrentPage === 1 ||
-                    //   jobListNameHavePages?.numberOfCurrentPage ===
-                    //     jobListNameHavePages?.totalPages
-                    // }
-                  />
+                  page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
+                  defaultPage={1}
+                  onChange={(e) => handlePagination(e.target.textContent)}
+                  count={totalPage || 1}
+                  variant="outlined"
+                  shape="rounded"
+                  size="medium"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    flexDirection: "row-reverse",
+                    alignItems: "center",
+                    marginLeft: "150px",
+                  }}
+                /> : "" }
                 </Stack>
                 <div className="demand-detail__back" onClick={handleBackClick}>
                   <ArrowButton

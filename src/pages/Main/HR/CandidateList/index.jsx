@@ -37,11 +37,12 @@ const CandidateList = ({ idJob }) => {
           fw="400"
         />
       )}
-      <PaginationCustome
-        page={page}
-        totalPages={totalPages}
-        hanldeOnChange={hanldeOnChange}
-      />
+      {totalPages > 5 ?
+        <PaginationCustome
+          page={page}
+          totalPages={totalPages}
+          hanldeOnChange={hanldeOnChange}
+        /> : ""}
     </div>
   );
 };

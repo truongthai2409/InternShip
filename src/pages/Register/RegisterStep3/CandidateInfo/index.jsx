@@ -16,6 +16,7 @@ import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
 import { TabTitle } from 'src/utils/GeneralFunctions'
 import {  } from 'src/components/CustomInput/components'
 import InputFile from 'src/components/InputFile'
+import { Divider } from '@mui/material'
 
 const CandidateInfo = () => {
   TabTitle("Đăng ký - Ứng viên");
@@ -127,7 +128,7 @@ const CandidateInfo = () => {
         >
           {errors.confirmPassword?.message}
         </CustomInput>
-        <p className="reg-candidate__title-infor">Cập nhật thông tin</p>
+        <Divider style={{marginTop : '2rem'}} />
         <div className="reg-candidate__form--name">
           <CustomInput
             label="Họ"

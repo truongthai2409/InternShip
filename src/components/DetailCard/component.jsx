@@ -223,14 +223,11 @@ const Detail = ({
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={
-                  `${API}${jobDetailById?.hr?.company?.logo} ` ||
-                  "https://img.freepik.com/free-vector/404-error-lost-space-concept-illustration_114360-7901.jpg?w=2000"
-                }
+                src={`${API}${jobDetailById?.hr?.company?.logo} `}
               />
               <div>
                 <h2>
-                  {jobDetailById?.hr?.company?.name || jobDetailById?.name}
+                  {jobDetailById?.name || jobDetailById?.name}
                 </h2>
                 <p className="name-company">
                   {jobDetailById?.hr?.company?.name ||
@@ -243,11 +240,11 @@ const Detail = ({
                 <div className="tag-name__name">
                   <TagName title={jobDetailById?.jobType?.name || "Không có"} />
                   <TagName
-                    title={jobDetailById?.position?.name || "Không có"}
+                    title={jobDetailById?.jobposition?.name || "Không có"}
                   />
                   <TagName
                     title={
-                      jobDetailById?.universityDTO?.majors[0]?.name ||
+                      jobDetailById?.major?.name ||
                       "Không có"
                     }
                   />
