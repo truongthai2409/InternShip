@@ -45,7 +45,7 @@ export default function SelectAreaHome({ onChange }) {
       <FormControl sx={{ m: 1, width: 170, pl: 1 }}>
         {/* <h6>Khu vực</h6> */}
         {/* <InputLabel id="demo-multiple-name-label">Khu Vực </InputLabel> */}
-        <div className="config-select">
+        <div className="config-select" style={{cursor: "pointer"}}>
           <Select
             labelId="demo-multiple-name-label"
             // id="demo-multiple-name"

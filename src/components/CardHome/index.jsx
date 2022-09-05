@@ -96,7 +96,7 @@ const CardHome = (props) => {
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">
             <PeopleIcon sx={{ color: "#04bf8a !important" }} />
-            <span>Số lượng ứng viên: {props.amount}</span>
+            <span className="amount">Số lượng ứng viên: {props.amount}</span>
           </div>
         ) : (
           <Rating
