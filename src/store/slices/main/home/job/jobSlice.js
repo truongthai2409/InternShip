@@ -41,6 +41,7 @@ const jobSlice = createSlice({
       state.jobListCompany = payload;
     });
     builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
+      console.log("payload", payload);
       if (payload.httpCode === 404) {
         state.error = 404;
       } else {

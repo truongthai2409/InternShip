@@ -71,6 +71,16 @@
   }
 }
 
+.card-post__modal {
+  .MuiPaper-root {
+    max-width: unset !important;
+    width: auto !important;
+
+    .MuiTypography-root {
+      // width: 800px;
+    }
+  }
+}
 .confirmation-date__wrapper {
   .confirmation-date__form {
     .custom-input .custom-input__textfield input {

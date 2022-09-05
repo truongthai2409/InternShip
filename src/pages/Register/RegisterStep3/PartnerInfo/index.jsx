@@ -3,23 +3,20 @@ import "./styles.scss";
 import ArrowButton from "../../../../components/ArrowButton/index";
 import Button from "../../../../components/Button";
 import CustomInput from "../../../../components/CustomInput/index";
-import Select from "../../../../components/Select";
 import SelectCustom from "src/components/Select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { addUniversity } from "src/store/slices/Admin/university/unversitySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { genderList, schema } from "./data";
+import { genderList, schema, typeSchoolList } from "./data";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { TabTitle } from "src/utils/GeneralFunctions";
-import { toast } from "react-toastify";
 import {
   getProvinceList,
   getDistrictList,
 } from "src/store/slices/location/locationSlice";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import Textarea from "src/components/Textarea";
 import InputFile from "src/components/InputFile";
 
 const countryList = [
@@ -35,11 +32,11 @@ const PartnerInfo = () => {
   const dispatch = useDispatch();
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { majorList } = useSelector((state) => state.major);
-  const { status } = useSelector(state => state.university);
+  const { status } = useSelector((state) => state.university);
   const errorMessage = useSelector(errorSelector);
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorList([1, 20]));
     dispatch(getProvinceList());
   }, []);
 
@@ -49,10 +46,9 @@ const PartnerInfo = () => {
   };
 
   const onSubmit = async (data) => {
-    // const data = JSON.parse(sessionStorage.getItem("account"));
     const partnerData = {
-      avatarUser: data.avatar[0],
-      logo: data.logo[0],
+      avatar: data.avatar,
+      logo: data.logo,
       university: JSON.stringify({
         name: data.schoolName,
         shortName: data.shortName,
@@ -60,11 +56,6 @@ const PartnerInfo = () => {
         description: "mô tả",
         website: data.website,
         phone: data.phoneSchool,
-        majors: [
-          {
-            id: data.major,
-          },
-        ],
         location: [
           {
             district: {
@@ -74,6 +65,9 @@ const PartnerInfo = () => {
             note: "",
           },
         ],
+        type: {
+          id: 1,
+        },
       }),
       partner: JSON.stringify({
         position: data.position,
@@ -87,17 +81,13 @@ const PartnerInfo = () => {
           gender: parseInt(data.gender),
           email: data.email,
           role: {
-            id: 4,
+            id: parseInt(data.typeSchool),
           },
         },
       }),
     };
-    console.log(partnerData);
-    dispatch(addUniversity(partnerData))
-
-    if (status === "success") {
-      navigate('/login')
-    }
+    console.log("partnerData", partnerData);
+    dispatch(addUniversity(partnerData));
   };
 
   const {
@@ -109,6 +99,9 @@ const PartnerInfo = () => {
     resolver: yupResolver(schema),
   });
 
+  if (status === "success") {
+    navigate("/login");
+  }
   return (
     <div className="reg-partner">
       <p className="title-requirement">
@@ -208,7 +201,6 @@ const PartnerInfo = () => {
             id="gender"
             register={register}
           >
-
             {errors.gender?.message}
           </SelectCustom>
         </div>
@@ -303,13 +295,13 @@ const PartnerInfo = () => {
         </div>
 
         <SelectCustom
-          id="major"
-          label="Chuyên ngành"
+          id="typeSchool"
+          label="Loại hình"
           placeholder="Vui lòng chọn"
-          options={majorList}
+          options={typeSchoolList}
           register={register}
         >
-          {errors.major?.message}
+          {errors.typeSchool?.message}
         </SelectCustom>
         <div className={"row-3-col"}>
           <div className={"university-register__select-location"}>

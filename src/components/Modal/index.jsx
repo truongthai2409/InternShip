@@ -26,7 +26,7 @@ const Modal = ({
         open={open}
         onClose={handleClose}
         TransitionComponent={Transition}
-        className="dialog"
+        className={`dialog ${className ? className : ""}`}
       >
         <DialogTitle className={`dialog-title dialog-title__${name}`}>
           {iconClose && (

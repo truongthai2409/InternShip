@@ -46,15 +46,11 @@
       width: 0%;
     }
   }
-
 }
 
 .select-form {
   & .select-formControl {
-    .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-      border-width: 0px;
-    }
-    font-family: 'Public Sans', sans-serif;
+    font-family: "Public Sans", sans-serif;
     outline: none !important;
     &:hover {
       border-color: $primary-color;
@@ -75,7 +71,7 @@
 #timeStart,
 #timeEnd {
   &:hover {
-    color : $primary-color
+    color: $primary-color;
   }
 }
 
@@ -83,4 +79,8 @@
   color: red;
   font-weight: 700;
   font-size: 16px;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-width: 0px !important;
 }

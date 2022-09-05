@@ -47,6 +47,21 @@ export const roleAtSchool = [
   },
 ];
 
+export const typeSchoolList = [
+  {
+    id: 1,
+    name: "Đại học"
+  },
+  {
+    id: 2,
+    name: "Cao đẳng"
+  },
+  {
+    id: 3,
+    name: "Trung cấp"
+  }
+]
+
 export const schema = yup
   .object({
     username: yup
@@ -118,7 +133,7 @@ export const schema = yup
     district: yup.string().required(" * Bạn phải chọn quận/huyện."),
     province: yup.string().required(" * Bạn phải chọn tỉnh/thành phố."),
     country: yup.string().required(" * Bạn phải chọn quốc gia."),
-    major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
+    typeSchool: yup.string().required(" * Bạn phải chọn loại hình."),
     logo: yup
       .mixed()
       .test(

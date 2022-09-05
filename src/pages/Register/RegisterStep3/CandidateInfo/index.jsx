@@ -29,8 +29,10 @@ const CandidateInfo = () => {
   };
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorList([1,20]));
   }, [dispatch]);
+
+  console.log("")
 
   // const status = useSelector(statusSelector);
 

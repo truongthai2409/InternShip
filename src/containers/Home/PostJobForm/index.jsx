@@ -199,7 +199,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   return (
     <>
       <form
-        className="postJob-form"
+        className="post-job-form"
         autoComplete="off"
         encType="multipart/form-data"
       >

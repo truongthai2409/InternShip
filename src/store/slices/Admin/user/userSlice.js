@@ -124,7 +124,7 @@ export const getProfileByIdUser = createAsyncThunk(
 // function use for update profile of user
 /**
  * args[0] : data
- * args[1] : id of user
+ * args[1] : id match to the each role
  */
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
   return await axios

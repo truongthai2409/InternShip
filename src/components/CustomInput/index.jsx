@@ -29,7 +29,7 @@ const CustomInput = ({
     if (check) {
       unregister(id);
     }
-  }, [check, id, unregister]);
+  }, [check]);
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -67,10 +67,7 @@ const CustomInput = ({
         />
         {check ? null : <p className="custom-input__error">{children}</p>}
         {visibility && (
-          <div
-            className="visibility-icon"
-            onClick={handleHide}
-          >
+          <div className="visibility-icon" onClick={handleHide}>
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </div>
         )}

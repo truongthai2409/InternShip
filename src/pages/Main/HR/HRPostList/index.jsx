@@ -55,6 +55,7 @@ const HRPostList = (props) => {
   }, []);
 
   console.log("jobListActived", jobListActived)
+  console.log("jobListDisabled", jobListDisabled)
 
   return (
     <div className="hr-post__wrapper">

@@ -27,7 +27,8 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      if (payload?.id) {
+      console.log("payload", payload)
+      if (payload.id) {
         state.user = payload;
         state.status = "success";
         state.error = {};
@@ -91,7 +92,7 @@ export const addUniversity = createAsyncThunk(
         },
       })
       .then((res) => {
-        return res;
+        return res.data;
       })
       .catch((error) => {
         return error.response.data;

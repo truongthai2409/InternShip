@@ -208,6 +208,7 @@ const CardPost = (props) => {
       <Modal
         modalTitle={title}
         name="list-candidate"
+        className="card-post__modal"
         open={open}
         setOpen={setOpen}
         iconClose={true}
