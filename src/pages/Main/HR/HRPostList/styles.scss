@@ -35,5 +35,18 @@
       align-items: center;
       margin-bottom: 40px;
     }
+
+    
+  }
+
+  .MuiTabs-flexContainer {
+    background-color: #FFFFFF;
+    padding: 4px 8px;
+    border: 1px solid #DADADA;
+    border-radius:4px;
+  }
+
+  .MuiButtonBase-root {
+    max-width: none !important;
   }
 }

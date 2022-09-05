@@ -51,8 +51,10 @@ const HRPostList = (props) => {
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
-    dispatch(getJobListByUserId([userPresent.idUser, 0, 10]));
+    dispatch(getJobListByUserId([userPresent.idUser, 1, 10]));
   }, []);
+
+  console.log("jobListActived", jobListActived)
 
   return (
     <div className="hr-post__wrapper">
@@ -81,6 +83,7 @@ const HRPostList = (props) => {
             }}
           />
         </div>
+
         <Box className="filter-panel-home__wrapper" sx={{}}>
           <Box className="filter-panel-home__filterPanel" sx={{}}>
             <Tabs
@@ -111,6 +114,7 @@ const HRPostList = (props) => {
               <Tab label="Đã đóng" {...a11yProps(1)} />
             </Tabs>
           </Box>
+          
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListJob
               listJob={jobListActived}

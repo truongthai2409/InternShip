@@ -183,7 +183,9 @@ export const getJobListByUserId = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1]}&limit=${args[2]}`
+        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1] - 1}&limit=${
+          args[2]
+        }`
       )
       .then((response) => {
         return response.data;
