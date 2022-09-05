@@ -47,6 +47,7 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
           <div className="base__information-card-detail">
             <h3 className="company-name">{jobDetail?.hr?.company.name}</h3>
             <div
+            className="company_info"
               style={{
                 display: "flex",
                 alignItems: "center",

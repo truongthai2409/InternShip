@@ -14,6 +14,8 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
+import { Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
@@ -58,8 +60,11 @@ const CardHome = (props) => {
       dispatch(updateIdJobActive(props.id));
     }
   }, []);
-
+  const navigate= useNavigate()
   const handleClick = () => {
+    if(window.innerWidth < 1199) {
+      navigate(`/candidate/detail_job/${props.id}`)
+    }
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
@@ -84,7 +89,9 @@ const CardHome = (props) => {
             alt=""
           />
           <div>
+          <Tooltip title={props.title} placement="top">
             <h4 className="cardHome__title">{props.title}</h4>
+          </Tooltip>
             <p className="cardHome__nameCompany">{props.nameCompany}</p>
           </div>
         </div>
@@ -96,7 +103,7 @@ const CardHome = (props) => {
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">
             <PeopleIcon sx={{ color: "#04bf8a !important" }} />
-            <span>Số lượng ứng viên: {props.amount}</span>
+            <span className="amount">Số lượng ứng viên: {props.amount}</span>
           </div>
         ) : (
           <Rating
@@ -124,7 +131,7 @@ const CardHome = (props) => {
             />
 
             <p
-              style={{ fontSize: `${props.fontSize}px`, width: "max-content" }}
+              style={{ fontSize: `${props.fontSize}px`, width: "max-content", color  : "#000" }}
             >
               {props.location}
             </p>
@@ -135,7 +142,7 @@ const CardHome = (props) => {
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />
-              <p style={{ fontSize: `${props.fontSize}px` }}>
+              <p style={{ fontSize: `${props.fontSize}px` , color : "#000"}}>
                 {props.location}
               </p>
             </div>

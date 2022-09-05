@@ -37,10 +37,13 @@ const Home = (props) => {
   const [major, setMajor] = useState([]);
   const idCompany = Number(jobDetail?.hr?.company?.id);
   const listPositionWorkingFormat = [
-    "Backend",
-    "Business Analysis",
-    "Frontend",
-    "Project Management",
+    "Backend Developer",
+    "Business Analyst",
+    "Data Engineer",
+    "Data Scientist",
+    "DevOps",
+    "Frontend Developer",
+    "Tester",
   ];
   const updateJob = useCallback(() => {
     let temp = jobFilter;
@@ -148,7 +151,10 @@ const Home = (props) => {
           el === listPositionWorkingFormat[0] ||
           el === listPositionWorkingFormat[1] ||
           el === listPositionWorkingFormat[2] ||
-          el === listPositionWorkingFormat[3]
+          el === listPositionWorkingFormat[3] ||
+          el === listPositionWorkingFormat[4] ||
+          el === listPositionWorkingFormat[5] ||
+          el === listPositionWorkingFormat[6]
       );
     }
     setPosition(tempPosition);
@@ -162,18 +168,73 @@ const Home = (props) => {
           el !== listPositionWorkingFormat[0] &&
           el !== listPositionWorkingFormat[1] &&
           el !== listPositionWorkingFormat[2] &&
-          el !== listPositionWorkingFormat[3]
+          el !== listPositionWorkingFormat[3] &&
+          el !== listPositionWorkingFormat[4] &&
+          el !== listPositionWorkingFormat[5] &&
+          el !== listPositionWorkingFormat[6]
       );
     }
     setMajor(tempMajor);
   };
-
+  
   const getValuePageAndHandle = (value) => {
     setCurrentPage(value);
     // currentPage = value;
     window.scroll(0, 0);
   };
+  if (jobs?.length === 0) {
+    return (
+      <Grid
+          className="wrapper"
+          spacing={{ xs: 1 }}
+          sx={{ padding: "18px" }}
+          container
+        >
+          <Grid item lg={2} md={3} sm={4} xs={12}>
+            <Hidden mdDown>
+              <SideBarHomeList
+                onChange={handleCheck}
+                slideBarHome__wrapper={true}
+              />
+            </Hidden>
+          </Grid>
 
+          <Grid item lg={4} md={8} sm={12} xs={12}>
+            <div className="onDesktop">
+              <SearchResultHome
+                onClick={handleSearch}
+                onChange={getValueLocationAndHandle}
+              />
+            </div>
+
+            <FilterPanelHome
+              jobList={jobs}
+              indexCardActive={indexCardActive}
+              jobListHavePages={jobListHavePages}
+              onChange={getValuePageAndHandle}
+            />
+          </Grid>
+
+          <Grid item lg={6} className="onTablet">
+            <div className="containerDetailCard containerDetailCard-none">
+              <div className="none__res">
+                <SearchResultHome
+                  onClick={handleSearch}
+                  onChange={getValueLocationAndHandle}
+                />
+              </div>
+              <DetailCard
+                logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                jobDetail={jobDetail}
+                jobList={jobs}
+                candidate={props.candidate}
+                jobListCompany={jobListCompany}
+              />
+            </div>
+          </Grid>
+        </Grid>
+    )
+  }
   return (
     <>
       {jobDetail && (

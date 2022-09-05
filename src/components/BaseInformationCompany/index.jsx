@@ -301,7 +301,7 @@ const BaseInformationCompany = ({
                         >
                           {/* Nếu trang information thì hiện rating  */}
                           {information ? (
-                            <div>
+                            <div className="rating">
                               <Rating
                                 precision={0.5}
                                 readOnly
@@ -633,7 +633,7 @@ const BaseInformationCompany = ({
                         {jobDetail?.hr?.company.name}
                       </h3>
 
-                      <div className="">
+                      <div className="company-info">
                         <PhoneInTalkIcon
                           sx={{
                             fontSize: 17,

@@ -60,7 +60,7 @@ const Logo = ({ id }) => {
 
   return (
     <div onClick={handleClickGoHome}>
-      <Link to="" className="logo">
+      <Link to="/candidate" className="logo">
         <div className="roleName__header">
           <img src={logo} alt="" />
           <span>{id ? roleList[id] : ""}</span>

@@ -14,6 +14,7 @@ import SelectCustom from "../../../../components/Select";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import InputFile from "src/components/InputFile";
+import { Divider } from "@mui/material";
 
 const HRInfo = () => {
   TabTitle("Đăng ký - Nhà tuyển dụng");
@@ -116,7 +117,7 @@ const HRInfo = () => {
         >
           {errors.confirmPassword?.message}
         </CustomInput>
-        <p className="reg-hr__title-infor">Cập nhật thông tin</p>
+        <Divider style={{marginTop : '2rem'}} />
         <div className="reg-hr__form--name">
           <CustomInput
             label="Họ"

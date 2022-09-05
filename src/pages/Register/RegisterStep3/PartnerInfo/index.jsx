@@ -18,6 +18,7 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import InputFile from "src/components/InputFile";
+import { Divider } from "@mui/material";
 
 const countryList = [
   {
@@ -161,7 +162,7 @@ const PartnerInfo = () => {
           </CustomInput>
         </div>
 
-        <p className="reg-partner__title-infor">Cập nhật thông tin</p>
+        <Divider style={{marginTop : '2rem'}} />
         <div className="reg-partner__form--name">
           <CustomInput
             label="Họ"

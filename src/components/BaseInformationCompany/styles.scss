@@ -208,3 +208,30 @@
     }
   }
 }
+.rating {
+  padding: 1rem 0;
+  height: 23.8vh;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 1050px) {
+  .base__information-candidate {
+    padding: 0 !important;
+    .company_info {
+      flex-direction: column;
+      align-items: flex-start !important;
+    }
+  }
+  .css-mhc70k-MuiGrid-root {
+    flex-direction: column !important;
+    width: 100vw !important;
+    .css-6tql9i-MuiPaper-root {
+      height: 35vh !important;
+      overflow-y: auto !important;
+
+    }
+    .css-gj1fbr-MuiGrid-root ,
+    .css-vok43g-MuiGrid-root {
+      max-width: 93.67% !important;
+    }
+  }
+}
