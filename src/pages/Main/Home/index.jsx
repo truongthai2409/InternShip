@@ -9,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getJobByCompany,
   getJobFilterByUser,
-  updateIdJobActive,
-  updateIndexCardActive,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
@@ -80,7 +78,6 @@ const Home = (props) => {
   }, []);
   useEffect(() => {
     dispatch(getJobByCompany(Number(idCompany)));
-    // dispatch(updateIndexCardActive(0));
   }, [idCompany]);
   useEffect(() => {
     const dataFilter = {
@@ -96,11 +93,6 @@ const Home = (props) => {
 
     dispatch(getJobFilterByUser(dataFilter));
   }, [currentPage]);
-
-  // useEffect(() => {
-  //   dispatch(getJobByCompany(idCompany));
-  //   dispatch(updateIdJobActive(jobDetail.id));
-  // }, [idCompany]);
 
   const dataGetMarkByUser = {
     userName: profile.username,

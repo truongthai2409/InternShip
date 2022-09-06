@@ -58,6 +58,7 @@ const FilterPanelHome = ({
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
+  console.log("jobList", jobList);
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>

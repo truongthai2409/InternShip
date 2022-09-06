@@ -37,7 +37,7 @@ const CandidateList = ({ idJob }) => {
           fw="400"
         />
       )}
-      {totalPages > 5 ?
+      {totalPages > 1 ?
         <PaginationCustome
           page={page}
           totalPages={totalPages}
