@@ -91,7 +91,7 @@
 
       > div.custom-input {
         flex-basis: 49%;
-        margin: 0 !important;
+        margin: 0;
 
         input {
           height: 45px;
@@ -117,6 +117,10 @@
         height: 150px;
       }
     }
+    .partner-post__input {
+      flex: 1;
+      margin-right: 12px;
+    }
 
     .partner-post__action {
       display: flex;
@@ -126,10 +130,15 @@
 
   &__heading {
     display: flex;
+    align-items: center;
 
-    & svg,
+    & svg {
+      color: $primary-color;
+    }
+
     h2 {
       color: $primary-color;
+      padding-left: 15px;
     }
   }
 
@@ -243,13 +252,31 @@ label {
       padding: 15px 10px;
     }
     &__heading {
-      margin-top: 0;
-      display: flex;
-      align-items: center;
+      margin: 0 0 15px;
       h2 {
         font-size: 20px;
         padding-left: 10px;
       }
     }
+  }
+  .partner-post-title,
+  .title-requirement,
+  .partner-post__select,
+  .partner-post__input {
+    margin: 0 0 15px !important;
+  }
+  .partner-post__textarea {
+    margin-bottom: 25px;
+  }
+
+  .partner-post__form .row-2-col {
+    display: block;
+    margin-bottom: 15px;
+  }
+  .partner-post__textarea-description {
+    margin-bottom: 20px;
+  }
+  .partner-post__action {
+    flex-direction: column;
   }
 }

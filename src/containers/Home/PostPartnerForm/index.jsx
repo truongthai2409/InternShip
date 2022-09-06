@@ -304,6 +304,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 </div>
               )}
             </div>
+
             <div className="partner-post__textarea">
               <InputFile
                 label="Danh sách sinh viên"
