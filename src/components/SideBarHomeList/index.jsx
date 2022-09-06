@@ -19,7 +19,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   const [checkedType, setCheckedType] = useState([]);
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorList([1, 20]));
     dispatch(getJobPositionList());
   }, [dispatch]);
 
