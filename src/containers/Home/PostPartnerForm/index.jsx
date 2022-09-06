@@ -70,7 +70,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorList([1, 20]));
     dispatch(getJobPositionList());
     dispatch(getDemandById(idDemand));
     dispatch(getPartnerByUserID(idUser));
@@ -106,16 +106,16 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     }
   }
 
-  async function postDemand(demandData) {
-    setLoading(true);
-    try {
-      await dispatch(addDemand(demandData));
-    } catch (error) {
-      toast.error("Đăng bài ứng tuyển không thành công");
-    } finally {
-      setLoading(false);
-    }
-  }
+  // async function postDemand(demandData) {
+  //   setLoading(true);
+  //   try {
+  //     await dispatch(addDemand(demandData));
+  //   } catch (error) {
+  //     toast.error("Đăng bài ứng tuyển không thành công");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   useEffect(() => {
     if (isUpdate) {
@@ -156,14 +156,14 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       }),
       fileSV: data.fileSV,
     };
+    dispatch(addDemand(demandData));
+    // console.log(demandData);
 
-    console.log(demandData);
-
-    if (isUpdate) {
-      editDemand({ idDemand, demandData });
-    } else {
-      postDemand(demandData);
-    }
+    // if (isUpdate) {
+    //   editDemand({ idDemand, demandData });
+    // } else {
+    //   postDemand(demandData);
+    // }
   };
 
   if (status === "success") {
@@ -176,7 +176,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         <div className="form__container">
           <div className="partner-post__form">
             <div className="partner-post__heading">
-              <WorkIcon style={{ margin: "5px 5px 0 0" }} />
+              <WorkIcon />
               <h2>Đợt thực tập của trường</h2>
             </div>
             <p className="title-requirement">
@@ -304,6 +304,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 </div>
               )}
             </div>
+
             <div className="partner-post__textarea">
               <InputFile
                 label="Danh sách sinh viên"

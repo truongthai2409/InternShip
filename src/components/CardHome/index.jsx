@@ -2,7 +2,6 @@ import * as React from "react";
 import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
-import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import clsx from "clsx";
@@ -27,7 +26,6 @@ const CardHome = (props) => {
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
-  const isMarkLength = isMark && isMark.length > 0 ? true : false;
 
   React.useEffect(() => {
     const dataGetMarkByUser = {
@@ -60,10 +58,10 @@ const CardHome = (props) => {
       dispatch(updateIdJobActive(props.id));
     }
   }, []);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const handleClick = () => {
-    if(window.innerWidth < 1199) {
-      navigate(`/candidate/detail_job/${props.id}`)
+    if (window.innerWidth < 1199) {
+      navigate(`/candidate/detail_job/${props.id}`);
     }
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
@@ -89,9 +87,9 @@ const CardHome = (props) => {
             alt=""
           />
           <div>
-          <Tooltip title={props.title} placement="top">
-            <h4 className="cardHome__title">{props.title}</h4>
-          </Tooltip>
+            <Tooltip title={props.title} placement="top">
+              <h4 className="cardHome__title">{props.title}</h4>
+            </Tooltip>
             <p className="cardHome__nameCompany">{props.nameCompany}</p>
           </div>
         </div>
@@ -114,15 +112,8 @@ const CardHome = (props) => {
           />
         )}
       </div>
-      <div className="cardHome__col2">
-        <ButtonMark
-          height="32px"
-          width="32px"
-          fontSize="18px"
-          jobId={props.id}
-          isMark={isMarkLength}
-        />
 
+      <div className="cardHome__col2">
         {props.none__time ? (
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon
@@ -131,7 +122,11 @@ const CardHome = (props) => {
             />
 
             <p
-              style={{ fontSize: `${props.fontSize}px`, width: "max-content", color  : "#000" }}
+              style={{
+                fontSize: `${props.fontSize}px`,
+                width: "max-content",
+                color: "#000",
+              }}
             >
               {props.location}
             </p>
@@ -142,7 +137,7 @@ const CardHome = (props) => {
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />
-              <p style={{ fontSize: `${props.fontSize}px` , color : "#000"}}>
+              <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
                 {props.location}
               </p>
             </div>

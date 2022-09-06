@@ -5,39 +5,35 @@ import AddressComponent from "./AddressComponent";
 
 const aboutUs = [
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Trang chủ",
   },
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Về chúng tôi",
   },
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Liên hệ",
   },
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Câu hỏi thường gặp",
   },
 ];
 
 const policy = [
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Chính sách bảo mật",
   },
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Điều khoản dịch vụ",
   },
   {
-    link: "/",
+    link: "/not_found_404",
     content: "Quy chế",
-  },
-  {
-    link: "/",
-    content: "Câu hỏi thường gặp",
   },
 ];
 
@@ -52,11 +48,13 @@ const Footer = () => {
             <ComponentFooter header="Chính sách" tabContent={policy} />
             <div className="mobile-app-link-container">
               <div className="mobile-app-link-header">
-                <h2 className="heading-primary elementor-heading-title">Ứng dụng di động</h2>
+                <h2 className="heading-primary elementor-heading-title">
+                  Ứng dụng di động
+                </h2>
               </div>
               <div className="mobile-app-link-download">
                 <div className="mobile-app-link-chplay">
-                  <a href="#">
+                  <a href="/#">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
                       alt=""
@@ -66,7 +64,7 @@ const Footer = () => {
                   </a>
                 </div>
                 <div className="mobile-app-link-appstore">
-                  <a href="#">
+                  <a href="/#">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png"
                       alt=""

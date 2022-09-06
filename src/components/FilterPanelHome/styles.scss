@@ -1,8 +1,9 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .filter-panel-home__wrapper {
   width: 100%;
   padding-left: 30px;
+  margin-bottom: 25px;
 
   .filter-panel-home__filterPanel {
     border-bottom: 1;

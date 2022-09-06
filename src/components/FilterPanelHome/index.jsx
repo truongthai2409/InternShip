@@ -92,6 +92,7 @@ const FilterPanelHome = ({
           <Tab label="Liên quan" {...a11yProps(2)} />
         </Tabs>
       </Box>
+
       <TabPanel className="tabPanel" value={value} index={0}>
         {jobList && jobList?.length > 0
           ? jobList.map((job, index) => (
@@ -128,22 +129,25 @@ const FilterPanelHome = ({
             ))
           : null}
       </TabPanel>
-      <TabPanel value={value} index={1}></TabPanel>
-      <TabPanel value={value} index={2}></TabPanel>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "16px",
-        }}
-      >
-        <PaginationCustome
-          page={page}
-          totalPages={jobListHavePages?.totalPages}
-          hanldeOnChange={handlePagination}
-        />
-      </div>
+
+      {page > 1 ? (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: "16px",
+          }}
+        >
+          <PaginationCustome
+            page={page}
+            totalPages={jobListHavePages?.totalPages}
+            hanldeOnChange={handlePagination}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </Box>
   );
 };
