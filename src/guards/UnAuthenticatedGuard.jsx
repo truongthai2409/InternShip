@@ -9,7 +9,7 @@ const UnAuthenticatedGuard = ({ children }) => {
   const navigate = useNavigate()
   const { profile } = useSelector(state => state.authentication)
   if (authenticated) {
-    const role = profile.role
+    const role = profile?.role
     switch (role) {
       case 'Role_HR':
         navigate(`/hr`, { replace: true })

@@ -60,7 +60,7 @@ const ButtonMark = (props) => {
       setMark(!mark);
       toast.success("Đã lưu việc làm thành công");
     } else {
-      if (profile.role !== undefined && profile.role === "Role_Candidate") {
+      if (profile?.role !== undefined && profile?.role === "Role_Candidate") {
         const dataByUserAndJob = {
           userName: profile.username,
           idJob: Number(props.jobId),

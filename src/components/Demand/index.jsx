@@ -8,8 +8,8 @@ import { Icon } from "@mui/material";
 import "./styles.scss";
 import moment from "moment";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getJobById, updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
+import { useDispatch } from "react-redux";
+import { updateIdJobActive } from "src/store/slices/main/home/job/jobSlice";
 
 const DemandPartner = ({ demand, idDemand }) => {
   const dispatch = useDispatch();

@@ -37,7 +37,7 @@ const CardHome = (props) => {
         limit: limit,
       },
     };
-    if (profile.role === "Role_Candidate") {
+    if (profile?.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, []);
@@ -50,7 +50,7 @@ const CardHome = (props) => {
         limit: limit,
       },
     };
-    if (profile.role === "Role_Candidate") {
+    if (profile?.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, [props.page]);

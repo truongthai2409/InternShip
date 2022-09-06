@@ -18,14 +18,13 @@ import HRLayOut from "./Layouts/HR";
 import { RegisterStep1 } from "./pages/Register";
 import CandidateLayOut from "./Layouts/Candidate";
 import PartnerLayout from "./Layouts/Partner";
-// import { lazy, Suspense } from "react";
 import Loading from "./Loading";
 import RegisterLayout from "./Layouts/Register";
 import LoginLayout from "./Layouts/Login";
 import ForgotPassword from "./pages/ForgotPassword/index";
+import { AuthenticationPathUrl } from "./utils/GeneralFunctions";
+import NotFound from "./pages/NotFound";
 
-// const RegisterLayout = lazy(() => import("./Layouts/Register/index"));
-// const LoginLayout = lazy(() => import("./Layouts/Login/index"));
 function App() {
   const renderAdminRouter = () => {
     return adminRouter.map(({ path, Component }, index) => {
@@ -70,16 +69,6 @@ function App() {
             <Route index element={<Dashboard />} />
             {renderAdminRouter()}
           </Route>
-          {/* <Route
-            path="/register"
-            element={
-              <RegisterLayout>
-                <Suspense fallback={<Fallback />}></Suspense>
-                <Route index element={<RegisterStep1 />} />
-                {renderRegisterRouter()}
-              </RegisterLayout>
-            }
-          ></Route> */}
           <Route path="/register" element={<RegisterLayout />}>
             <Route index element={<RegisterStep1 />} />
             {renderRegisterRouter()}
@@ -106,7 +95,9 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             {renderMainRouter()}
           </Route>
+          <Route path="/not-found" element={<NotFound />} />
         </Routes>
+        <AuthenticationPathUrl />
       </Router>
       <Loading />
       <ToastContainer />

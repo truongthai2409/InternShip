@@ -5,14 +5,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const globalSlices = createSlice({
   name: "globalSlices",
   initialState: {
+    isRightAuth : "", 
   },
   reducers: {
-    
+    setISRigthAuth: (state, action) => {
+      state.isRightAuth = action.payload;
+    }
   },
   extraReducers: (builder) => {
 
   }
 });
 
-export const {  } = globalSlices.actions;
+export const { setISRigthAuth } = globalSlices.actions;
 export default globalSlices;

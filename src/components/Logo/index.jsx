@@ -26,7 +26,7 @@ const Logo = ({ id }) => {
         },
       };
       dispatch(getMarkByUser(dataGetMarkByUser));
-      const role = profile.role;
+      const role = profile?.role;
       switch (role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
