@@ -93,6 +93,7 @@ const PartnerHomePage = (props) => {
           <Grid item lg={2} md={3} sm={4} xs={12}>
             <SideBarHomeList />
           </Grid>
+
           <Grid item lg={4} md={8} sm={8} xs={12}>
             <div className="onDesktop">
               <SearchResultHome
@@ -106,14 +107,19 @@ const PartnerHomePage = (props) => {
               partnerRole={true}
               indexCardActive={indexPartnerCardActive}
             />
-            <div className="partner-postList__pagination">
-              <PaginationCustom
-                page={keyword ? currentSearchPage : currentPage}
-                totalPages={totalPagesofDemandList}
-                hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
-              />
-            </div>
+            {currentPage > 1 ? (
+              <div className="partner-postList__pagination">
+                <PaginationCustom
+                  page={keyword ? currentSearchPage : currentPage}
+                  totalPages={totalPagesofDemandList}
+                  hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
+                />
+              </div>
+            ) : (
+              ""
+            )}
           </Grid>
+
           <Grid item lg={6} className="onTablet">
             <div className="containerDetailCard containerDetailCard-none">
               <div className="none__res">

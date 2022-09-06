@@ -58,7 +58,8 @@ const PartnerPostList = (props) => {
     (state) => state.demand
   );
 
-  console.log(demandListUniversityActive);
+  console.log("5-PartnerPostList:", demandListUniversityActive);
+
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
   // console.log(currentPage, totalPage);
@@ -67,7 +68,7 @@ const PartnerPostList = (props) => {
 
   const handlePaginate = (page) => {
     setCurrentPage(parseInt(page));
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
   };
 
   useEffect(() => {
@@ -80,7 +81,6 @@ const PartnerPostList = (props) => {
     dispatch(getPartnerByUserID(userPresent.idUser));
   }, [userPresent.idUser]);
 
-  // console.log(partnerPostList);
   return (
     <div className="partner-post__wrapper">
       <div className="partner-post__list-bt">
@@ -158,13 +158,19 @@ const PartnerPostList = (props) => {
               message="Không có đợt thực tập đã đóng."
             />
           </TabPanel>
-          <div className="partner-postList__pagination">
-            <PaginationCustom
-              page={currentPage}
-              totalPages={demandListUniversity?.totalPages}
-              hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
-            />
-          </div>
+
+          {/* nếu số trang lớn hơn 1 thì hiển thị UI pagination  */}
+          {currentPage > 1 ? (
+            <div className="partner-postList__pagination">
+              <PaginationCustom
+                page={currentPage}
+                totalPages={demandListUniversity?.totalPages}
+                hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </Box>
       </div>
     </div>
