@@ -18,7 +18,7 @@ import {
   getUserById,
 } from "src/store/slices/Admin/user/userSlice";
 import InfoUser from "./InfoUser";
-import './reponsive.scss'
+import "./reponsive.scss";
 import Modal from "../Modal";
 import InputFile from "../InputFile";
 import { useForm } from "react-hook-form";
@@ -68,132 +68,130 @@ export const UserInfor = ({ open, setOpen }) => {
     dispatch(getProfileByIdUser(idUser));
     dispatch(getUserById(idUser));
   }, [idUser]);
-  console.log(profile);
-  console.log(user);
+
   return (
     <>
-      {user?.role?.name?.includes("Role_Candidate")
-        ?
-        (
-          <div className="candidate_container">
-
-            <div className="candidate_user">
-              <img src={
+      {user?.role?.name?.includes("Role_Candidate") ? (
+        <div className="candidate_container">
+          <div className="candidate_user">
+            <img
+              src={
                 profile?.user?.avatar
                   ? `http://localhost:8085${profile?.user?.avatar}`
                   : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-              }></img>
-              <div className="candidate_user-info">
-                <h2>{user.firstName + " " + user.lastName}
-                  <ButtonOutline
-                    className="btn_user"
-                    onClick={handleOpen}
-                    icon={<EditIcon />}
-                    outline="none"
-                    color="#111111"
-                    fz="14px"
-                    radius="4px"
-                    padding="0"
-                  />
-                </h2>
-                <p>@{user.username}</p>
-              </div>
-              <div className="candidate_user-actions">
-                <Actions props={
+              }
+            />
+            <div className="candidate_user-info">
+              <h2>
+                {user.firstName + " " + user.lastName}
+                <ButtonOutline
+                  className="btn_user"
+                  onClick={handleOpen}
+                  icon={<EditIcon />}
+                  outline="none"
+                  color="#111111"
+                  fz="14px"
+                  radius="4px"
+                  padding="0"
+                />
+              </h2>
+              <p>@{user.username}</p>
+            </div>
+            <div className="candidate_user-actions">
+              <Actions
+                props={
                   profile?.user?.avatar
                     ? `http://localhost:8085${profile?.user?.avatar}`
                     : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-                } />
-              </div>
+                }
+              />
             </div>
+          </div>
 
-            <div className="candidate_info">
-              <InfoUser
-                emailIcons={<EmailIcon />}
-                name="Email"
-                value={profile?.user?.email}
-              />
-              <InfoUser
-                emailIcons={<PhoneIcon />}
-                name="Số Điện Thoại"
-                value={profile?.user?.phone}
-              />
-              <InfoUser
-                emailIcons={<TransgenderIcon />}
-                name="Giới Tính"
-                value={gender(profile?.user?.gender)}
-              />
-              <InfoUser
-                emailIcons={<PersonIcon />}
-                name="Vai Trò"
-                value={profile?.user?.role?.name?.slice(5, 100)}
+          <div className="candidate_info">
+            <InfoUser
+              emailIcons={<EmailIcon />}
+              name="Email"
+              value={profile?.user?.email}
+            />
+            <InfoUser
+              emailIcons={<PhoneIcon />}
+              name="Số Điện Thoại"
+              value={profile?.user?.phone}
+            />
+            <InfoUser
+              emailIcons={<TransgenderIcon />}
+              name="Giới Tính"
+              value={gender(profile?.user?.gender)}
+            />
+            <InfoUser
+              emailIcons={<PersonIcon />}
+              name="Vai Trò"
+              value={profile?.user?.role?.name?.slice(5, 100)}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="user-infor__wrapper">
+          <div className="profile__avatar">
+            <div>
+              <img
+                className="avatar__img"
+                src={
+                  user?.avatar
+                    ? `http://localhost:8085${user?.avatar}`
+                    : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+                }
+                alt="Ảnh đại diện"
               />
             </div>
           </div>
-        )
-        :
-        (
-          <div className="user-infor__wrapper">
-            <div className="profile__avatar">
-              <div>
-                <img
-                  className="avatar__img"
-                  src={
-                    profile?.user?.avatar
-                      ? `http://localhost:8085${profile?.user?.avatar}`
-                      : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-                  }
-                  alt="Ảnh đại diện"
+
+          <div className="profile__infor">
+            <h1 className="profile__infor-name">
+              {`${user?.lastName} ${user?.firstName}`}
+              <span className="profile__infor-location">
+                <ButtonOutline
+                  onClick={handleOpen}
+                  icon={<EditIcon />}
+                  outline="none"
+                  color="#111111"
+                  fz="14px"
+                  radius="4px"
+                  padding="0"
                 />
-              </div>
+              </span>
+            </h1>
+            <h4 className="profile__infor-username">@{user?.username}</h4>
+            <Divider orientation="horizontal" width="90%" height="2px" />
+            <br />
+            <div className="profile__infor-item">
+              <span>
+                <EmailIcon /> Email:
+              </span>
+              <h3>{user?.email}</h3>
             </div>
-            <div className="profile__infor">
-              <h1 className="profile__infor-name">
-                {`${profile?.user?.lastName || user?.lastName} ${profile?.user?.firstName || user?.firstName
-                  }`}
-                <span className="profile__infor-location">
-                  <ButtonOutline
-                    onClick={handleOpen}
-                    icon={<EditIcon />}
-                    outline="none"
-                    color="#111111"
-                    fz="14px"
-                    radius="4px"
-                    padding="0"
-                  />
-                </span>
-              </h1>
-              <h4 className="profile__infor-username">@{profile?.user?.username}</h4>
-              <Divider orientation="horizontal" width="90%" height="2px" />
-              <br />
-              <div className="profile__infor-item">
-                <span>
-                  <EmailIcon /> Email:
-                </span>
-                <h3>{profile?.user?.email}</h3>
-              </div>
-              <div className="profile__infor-item">
-                <span>
-                  <PhoneIcon /> Số điện thoại:
-                </span>
-                <h3>{profile?.user?.phone}</h3>
-              </div>
-              <div className="profile__infor-item">
-                <span>
-                  <TransgenderIcon /> Giới tính:
-                </span>
-                <h3>{gender(profile?.user?.gender)}</h3>
-              </div>
-              <div className="profile__infor-item">
-                <span>
-                  <PersonIcon /> Vai trò:
-                </span>
-                <h3>{role(profile?.user?.role?.id)}</h3>
-              </div>
+            <div className="profile__infor-item">
+              <span>
+                <PhoneIcon /> Số điện thoại:
+              </span>
+              <h3>{user?.phone}</h3>
+            </div>
+            <div className="profile__infor-item">
+              <span>
+                <TransgenderIcon /> Giới tính:
+              </span>
+              <h3>{gender(user?.gender)}</h3>
+            </div>
+            <div className="profile__infor-item">
+              <span>
+                <PersonIcon /> Vai trò:
+              </span>
+              <h3>{role(user?.role?.id)}</h3>
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
     </>
   );
 };
@@ -206,29 +204,29 @@ export const Actions = ({ props }) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const [opens, setOpens] = useState(false)
-  const [open, setOpen] = useState(false)
+  const [opens, setOpens] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleClick = (number) => {
     switch (number) {
       case 1: {
-        setOpen(!open)
+        setOpen(!open);
         break;
       }
       case 2: {
-        setOpens(!opens)
-        break
+        setOpens(!opens);
+        break;
       }
       default:
         break;
     }
-  }
+  };
   const onSubmit = () => {
-    console.log("register")
-  }
+    console.log("register");
+  };
   const handleChange = (e) => {
-    console.log(e)
-  }
-  
+    console.log(e);
+  };
+
   return (
     <div>
       <div className="profile__actions">
@@ -239,7 +237,15 @@ export const Actions = ({ props }) => {
           children={
             <form
               onChange={handleChange}
-              style={{ width: 300, height: 300, display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: "center" }} >
+              style={{
+                width: 300,
+                height: 300,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <InputFile
                 label="CV"
                 requirementField={false}
@@ -248,20 +254,19 @@ export const Actions = ({ props }) => {
                 setValue={setValue}
                 register={register}
               />
-              <Button onClick={()=>onSubmit()}>Thay Đổi</Button>
+              <Button onClick={() => onSubmit()}>Thay Đổi</Button>
             </form>
           }
-          name='Thay Đổi CV'
+          name="Thay Đổi CV"
           iconClose={<SyncAltIcon />}
         />
         <Modal
           modalTitle={"Xem CV"}
           open={opens}
           setOpen={setOpens}
-          children={<img width={'100%'} src={props}></img>}
-          name='CV'
+          children={<img width={"100%"} src={props}></img>}
+          name="CV"
           iconClose={<SyncAltIcon />}
-
         />
         <ButtonOutline
           onClick={() => handleClick(1)}
@@ -365,9 +370,6 @@ export const UniversityInfo = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
 
-  const { user, universityDTO } = profile;
-  // console.log(user, universityDTO);
-
   useEffect(() => {
     const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
     dispatch(getProfileByIdUser(idUser));
@@ -381,20 +383,24 @@ export const UniversityInfo = () => {
           <img
             className="company-infor__logo"
             alt="Ảnh của trường"
-            src="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+            src={
+              profile?.universityDTO?.avatar
+                ? `http://localhost:8085${profile?.universityDTO?.avatar}`
+                : "https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+            }
           />
-          <p className="company-infor__name">{universityDTO?.name}</p>
+          <p className="company-infor__name">{profile?.universityDTO?.name}</p>
         </div>
         <div className="company-infor__col-2">
           <div className="company-infor__profile">
             <div className="company-infor__row">
               <p className="company-infor__item">
                 <span>Email:</span>
-                {universityDTO?.email}
+                {profile?.universityDTO?.email}
               </p>
               <p className="company-infor__item">
                 <span>Số điện thoại:</span>
-                {universityDTO?.phone}
+                {profile?.universityDTO?.phone}
               </p>
             </div>
             <div className="company-infor__row">
@@ -402,21 +408,21 @@ export const UniversityInfo = () => {
                 <span>Website:</span>
                 <a
                   style={{ textDecoration: "underline", color: "blue" }}
-                  href={universityDTO?.website}
-                  target="_blank"
+                  href={profile?.universityDTO?.website}
+                  target={`_blank`}
                 >
-                  {universityDTO?.website}
+                  {profile?.universityDTO?.website}
                 </a>
               </p>
               <p className="company-infor__item">
                 <span>Tên viết tắc:</span>
-                {universityDTO?.shortName}
+                {profile?.universityDTO?.shortName}
               </p>
             </div>
             <p className="company-infor__des-company">
               <span>Mô tả về trường:</span>
               <br />
-              {universityDTO?.description}
+              {profile?.universityDTO?.description}
             </p>
           </div>
         </div>
