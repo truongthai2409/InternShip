@@ -27,16 +27,18 @@ export const AuthenticationPathUrl = () => {
         role = "candidate";
         break;
       default:
+        role = "admin";
     }
     if (!pathUrl.includes(role) && pathUrl !== "/not-found") {
       dispatch(setISRigthAuth(false));
     }
   } else {
     if (
-      pathUrl.includes("hr") ||
-      pathUrl.includes("partner") ||
-      pathUrl.includes("candidate") ||
-      pathUrl.includes("admin")
+      (pathUrl.includes("hr") ||
+        pathUrl.includes("partner") ||
+        pathUrl.includes("candidate") ||
+        pathUrl.includes("admin")) &&
+      !pathUrl.includes("register")
     ) {
       dispatch(setISRigthAuth(false));
     }
