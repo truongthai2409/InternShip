@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { errorSelector } from '../../../../store/selectors/main/registerSelectors'
-import { genderList, schema } from './data'
+import { genderList, schema } from 'src/utils/yupValidate'
 import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice'
 import SelectCustom from '../../../../components/Select'
 import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
@@ -49,8 +49,8 @@ const CandidateInfo = () => {
   const onSubmit = async (data) => {
     // const step2Data = JSON.parse(sessionStorage.getItem("account"));
     const userData = {
-      fileCV: data.cv[0],
-      fileAvatar: data.avatar[0],
+      fileCV: data.cv[0] || null,
+      fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
         createUser: {
           username: data.username,
@@ -180,7 +180,7 @@ const CandidateInfo = () => {
         </SelectCustom>
         <InputFile
           label="Ảnh đại diện"
-          requirementField={true}
+          requirementField={false}
           id="avatar"
           format="image"
           setValue={setValue}
@@ -190,7 +190,7 @@ const CandidateInfo = () => {
         </InputFile>
         <InputFile
           label="CV"
-          requirementField={true}
+          requirementField={false}
           id="cv"
           format="pdf"
           setValue={setValue}

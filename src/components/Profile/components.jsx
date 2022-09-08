@@ -23,7 +23,7 @@ import Modal from "../Modal";
 import InputFile from "../InputFile";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "src/pages/Register/RegisterStep3/PartnerInfo/data";
+import { schema } from "src/utils/yupValidate";
 export const role = (id) => {
   let role = "";
   switch (id) {

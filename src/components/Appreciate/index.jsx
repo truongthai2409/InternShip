@@ -40,7 +40,6 @@ const Appreciate = ({ appreciate, fontSize }) => {
   const nameUser = "Ẩn danh";
   var checked = false;
   const { profile } = useSelector((state) => state.authentication);
-
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
@@ -174,7 +173,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                           sx={{ fontSize: 16 }}
                         >
                           {(appreciate?.hide === true && nameUser) ||
-                            appreciate?.user?.username}
+                            appreciate?.user?.username || "Ẩn danh"}
                         </Typography>
                       </div>
                       <div

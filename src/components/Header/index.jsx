@@ -1,3 +1,4 @@
+import DehazeIcon from "@mui/icons-material/Dehaze";
 import {
   Box,
   Divider,
@@ -5,18 +6,16 @@ import {
   Hidden,
   IconButton,
   Toolbar,
-  Tooltip,
-  Typography,
+  Tooltip
 } from "@mui/material";
-import DehazeIcon from "@mui/icons-material/Dehaze";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import PropTypes from 'prop-types'
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "../Button";
 import Logo from "../Logo";
-import "./styles.scss";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import SideBarHomeList from "../SideBarHomeList";
+import "./styles.scss";
 
 function Header(props) {
   const [openDrawer, setOpenDrawer] = useState(false);

@@ -2,6 +2,7 @@ import * as React from "react";
 import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
+import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import clsx from "clsx";
@@ -22,11 +23,10 @@ const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
-
+  const isMarkLength = isMark && isMark.length > 0 ? true : false;
   React.useEffect(() => {
     const dataGetMarkByUser = {
       userName: profile.username,
@@ -114,6 +114,20 @@ const CardHome = (props) => {
       </div>
 
       <div className="cardHome__col2">
+        {profile?.role?.includes("Role_Candidate") ?
+          <ButtonMark
+            height="32px"
+            width="32px"
+            fontSize="18px"
+            jobId={props.id}
+            isMark={isMarkLength}
+          /> : <div style={{ visibility: "hidden" }}><ButtonMark
+            height="32px"
+            width="32px"
+            fontSize="18px"
+            jobId={props.id}
+            isMark={isMarkLength}
+          /></div>}
         {props.none__time ? (
           <div className="cardHome__col2-End-1">
             <AddLocationAltRoundedIcon

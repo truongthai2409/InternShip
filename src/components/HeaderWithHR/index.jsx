@@ -87,11 +87,11 @@ const HeaderWithHR = (props) => {
   const id = open ? "simple-popover" : undefined;
   return (
     <div className="container-header__hr header__hr config">
-      <div onClick={() => {}} className="responsive-menu">
+      <div onClick={() => { }} className="responsive-menu">
         <MenuIcon />
       </div>
-      {props.hr ? <Logo /> : <Logo />}
-      {props.hr ? (
+      <Logo />
+      {profile?.user?.role?.name.includes("Role_HR") ?
         <div className="header__hr">
           <Link
             to="post"
@@ -128,32 +128,15 @@ const HeaderWithHR = (props) => {
             <BookmarksIcon />
             <span className="header__hr-post-post">Ứng viên ưa thích</span>
           </Link>
-        </div>
-      ) : null}
-      {pathUrl === "/candidate" ? (
+        </div> : null}
+      {pathUrl === "/candidate" || profile?.user?.role?.name.includes("Role_Candidate") ? (
         <div className="header__hr">
-          <Link to="view-list-apply" className="header__hr-post">
+          <Link to="/candidate/view-list-apply" className="header__hr-post">
             <PlaylistAddCheckOutlinedIcon fontSize="large" />
             <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
           </Link>
-          <Link to="view-list-care" className="header__hr-post">
+          <Link to="/candidate/view-list-care" className="header__hr-post">
             <FormatAlignJustifyIcon />
-            <span className="header__hr-post-post">Công việc đã quan tâm</span>
-          </Link>
-        </div>
-      ) : null}
-      {pathUrl === "/candidate/view-list-care" ? (
-        <div className="header__hr">
-          <Link to="view-list-apply" className="header__hr-post">
-            <PlaylistAddCheckOutlinedIcon fontSize="large" />
-            <span className="header__hr-post-post">Công việc đã ứng tuyển</span>
-          </Link>
-        </div>
-      ) : null}
-      {pathUrl === "/candidate/view-list-apply" ? (
-        <div className="header__hr">
-          <Link to="view-list-care" className="header__hr-post">
-            <FormatAlignJustifyIcon></FormatAlignJustifyIcon>
             <span className="header__hr-post-post">Công việc đã quan tâm</span>
           </Link>
         </div>
@@ -235,13 +218,12 @@ const HeaderWithHR = (props) => {
           }}
         >
           {pathUrl === "/candidate" ||
-          pathUrl === "/candidate/view-list-apply" ||
-          pathUrl === "/candidate/view-list-care" ||
-          pathUrl === "/candidate/profile" ||
-          (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
-            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${
-              profile?.userDTO?.firstName || ""
-            }`}</h4>
+            pathUrl === "/candidate/view-list-apply" ||
+            pathUrl === "/candidate/view-list-care" ||
+            pathUrl === "/candidate/profile" ||
+            (profile?.userDTO && pathUrl === "/candidate/information_company") ? (
+            <h4 className="name">{`${profile?.userDTO?.lastName || ""} ${profile?.userDTO?.firstName || ""
+              }`}</h4>
           ) : (
             <h4 className="name">{`${profile?.user?.lastName} ${profile?.user?.firstName}`}</h4>
           )}

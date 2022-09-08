@@ -82,9 +82,7 @@ const ButtonMark = (props) => {
     if (profile.username === undefined) {
       toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
       await navigate("/login");
-    } else {
-      navigate("/candidate");
-    }
+    } 
   };
   return (
     <Tooltip title="Lưu công việc">

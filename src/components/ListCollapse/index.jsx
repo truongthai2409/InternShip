@@ -48,8 +48,8 @@ const ListCollapse = (props) => {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        {props.list.length > 0
-          ? props.list.map((item, index) => (
+        {props.list?.length > 0
+          ? props.list?.map((item, index) => (
               <List key={item.id} component="div" disablePadding>
                 <ListItemButton sx={{ pl: spacing }}>
                   <ListItemIcon>

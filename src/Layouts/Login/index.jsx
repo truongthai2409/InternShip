@@ -29,7 +29,6 @@ const LoginLayout = () => {
   return (
     <div className="login-layout">
       <Header />
-
       <div className="login-container-wrapper">
         <LoginContainer />
         <div className="login-container__modal">

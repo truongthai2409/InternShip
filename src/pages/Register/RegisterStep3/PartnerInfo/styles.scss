@@ -7,6 +7,7 @@
     &--name {
       width: 100%;
       display: flex;
+      justify-content: center;
       gap: 30px;
       margin-bottom: -20px;
     }
@@ -81,4 +82,18 @@
 
 .gender-container-partner-page {
   margin-top: 5px;
+}
+.css-10hburv-MuiTypography-root {
+  text-align: center;
+}
+.customfilter {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: 1px dashed $primary-color;
+  .customfield {
+    border-left: 1px solid $primary-color;
+    border-right: 1px solid $primary-color;
+  }
 }

@@ -1,11 +1,9 @@
-import "./styles.scss";
-import { Outlet } from "react-router-dom";
-import Footer from "../../components/Footer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import HeaderWithHR from "src/components/HeaderWithHR";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import "./styles.scss";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
@@ -34,10 +32,6 @@ const CandidateLayOut = () => {
       ) : (
         <HeaderWithHR id={3} candidate_res />
       )}
-      <div className="candidate__layout-body-outlet">
-        <Outlet />
-      </div>
-      <Footer />
     </div>
   );
 };

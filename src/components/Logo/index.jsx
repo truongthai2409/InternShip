@@ -44,6 +44,7 @@ const Logo = ({ id }) => {
       navigate(`/`);
     }
   };
+
   useEffect(() => {
     // const dataGetMarkByUser = {
     //   userName: profile.username,
@@ -60,7 +61,7 @@ const Logo = ({ id }) => {
 
   return (
     <div onClick={handleClickGoHome}>
-      <Link to="/candidate" className="logo">
+      <Link to='/' className="logo">
         <div className="roleName__header">
           <img src={logo} alt="" />
           <span>{id ? roleList[id] : ""}</span>

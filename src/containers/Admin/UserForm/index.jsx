@@ -5,10 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
 import Button from "../../../components/Button";
-import { roleList, schema } from "./handleForm.js";
+import { genderList, schema } from "src/utils/yupValidate";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
-import { genderList } from "src/pages/Register/RegisterStep3/PartnerInfo/data";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "src/store/slices/Admin/user/userSlice";
 
@@ -45,7 +44,12 @@ const UserForm = (props) => {
     console.log("data", data);
   };
 
-  console.log("user", user);
+  const roleList = [
+    { name: "Nhà tuyển dụng", id: 1 },
+    { name: "Admin", id: 2 },
+    { name: "Ứng viên", id: 3 },
+    { name: "Cộng tác viên", id: 4 },
+  ];
 
   return (
     <>

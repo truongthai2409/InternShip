@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import { toast } from "react-toastify";
@@ -26,9 +26,9 @@ const AccountMenu = ({ linkImg }) => {
   const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
 
   const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
-
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
+    localStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất!", {
       theme: "dark",
     });
