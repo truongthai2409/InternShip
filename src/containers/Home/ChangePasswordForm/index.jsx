@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
@@ -7,10 +7,13 @@ import { schema } from "./validate";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "src/components/CustomInput";
 import Button from "src/components/Button";
+import {
+  changePassword,
+  updateStatusForgotPassword,
+} from "src/store/slices/Admin/user/userSlice";
 
 const Password = () => {
-  const { profile } = useSelector((state) => state.authentication);
-  const navigate = useNavigate();
+  const { statusForgotPassword } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const {
@@ -18,20 +21,39 @@ const Password = () => {
     formState: { errors },
     reset,
     register,
+    setValue,
   } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    if (statusForgotPassword === "success") {
+      dispatch(updateStatusForgotPassword("fail"));
+      reset();
+    }
+  }, [statusForgotPassword]);
+
   const onSubmit = async (data) => {
-    console.log("data", data);
+    const dataSubmit = {
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword,
+    };
+
+    dispatch(
+      changePassword({
+        dataChangePassword: dataSubmit,
+        token: JSON.parse(sessionStorage.getItem("userPresent")).token,
+      })
+    );
   };
   const handleClear = () => {
-    reset();
+    // setValue("oldPassword", "");
+    // setValue("newPassword", "");
+    // setValue("confirmNewPassword", "");
   };
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
   return (
     <>
       <div className="change-password__wrapper">
@@ -69,9 +91,15 @@ const Password = () => {
           </CustomInput>
           <div className="change-password__actions">
             <Button onClick={handleSubmit(onSubmit)} bwidth="60%">
-              Lưu
+              Thay đổi
             </Button>
-            <Button bg="#f3f4f6" color="#111" bwidth="40%" border="none">
+            <Button
+              onClick={handleClear}
+              bg="#f3f4f6"
+              color="#111"
+              bwidth="40%"
+              border="none"
+            >
               Hủy
             </Button>
           </div>

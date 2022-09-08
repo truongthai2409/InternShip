@@ -13,7 +13,7 @@ const CustomInput = ({
   placeholder,
   children,
   register,
-  unregister = null,
+  unregister,
   check = false,
   defaultValue,
   requirementField = true,

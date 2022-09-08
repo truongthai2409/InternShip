@@ -20,6 +20,7 @@ const userSlice = createSlice({
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
+      console.log("action", action)
       state.statusForgotPassword = action.payload;
     },
   },
@@ -52,10 +53,24 @@ const userSlice = createSlice({
       // }
     });
     builder.addCase(changePassword.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.status = "success";
+      if (action.payload.httpCode === 400) {
+        state.statusForgotPassword = "fail";
+        toast.error("Mật khẩu cũ không đúng!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      } else if (action.payload.httpCode === 500) {
+        state.statusForgotPassword = "fail";
+        toast.error("Đổi mật khẩu không thành công!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
       } else {
-        state.status = "fail";
+        state.statusForgotPassword = "success";
+        toast.success("Đổi mật khẩu thành công!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
       }
     });
   },
@@ -197,7 +212,7 @@ export const changePassword = createAsyncThunk(
   "user/changePassword",
   async (data) => {
     const { token, dataChangePassword } = data;
-    const res = await axios
+    return axios
       .put(`${baseURL}/api/user/changePassword`, dataChangePassword, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -209,7 +224,6 @@ export const changePassword = createAsyncThunk(
       .catch((error) => {
         return error.response.data;
       });
-    return res;
   }
 );
 

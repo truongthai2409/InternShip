@@ -1,10 +1,12 @@
 @use "../../../assets/styles/index.scss" as *;
 
 .post-job-form {
+  min-width: 60vw;
 }
 .form__container {
   margin: auto;
   padding: 30px;
+  border-radius: 2px;
   width: 60%;
   background-color: $color-white-0;
   border: 0.5px solid #dedede;
@@ -14,7 +16,6 @@
   &__container {
     width: 100%;
     min-height: 100vh;
-    padding: 20px;
     height: max-content;
     margin-bottom: 200px;
 

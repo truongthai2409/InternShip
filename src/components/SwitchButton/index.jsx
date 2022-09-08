@@ -3,14 +3,18 @@ import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-const SwitchButton = ({ label, setState, state}) => {
+const SwitchButton = ({ label, setState, state, onClick }) => {
   const handleOnChange = () => {
     setState(!state);
-
   };
   return (
     <FormGroup>
-      <FormControlLabel onChange={handleOnChange} control={<Switch />} label={label} />
+      <FormControlLabel
+        onChange={handleOnChange}
+        onClick={onClick}
+        control={<Switch />}
+        label={label}
+      />
     </FormGroup>
   );
 };

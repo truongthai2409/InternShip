@@ -87,6 +87,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   let textBtn;
   switch (formStatus) {
     case "update":
+      if (isNoSalary) {
+      }
       schema = schemaFormUpdate;
       textBtn = "Chỉnh sửa";
       break;
@@ -106,9 +108,12 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
     setValue,
     formState: { errors },
   } = useForm({
+    mode: "onTouched",
+    reValidateMode: "onChange",
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
+    console.log("first");
     if (formStatus === "post") {
       const jobData = {
         name: data.name,
@@ -401,30 +406,57 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   Trợ cấp<span className="field-requirment">*</span>
                 </label>
                 <div className="hr-post__salary-range">
-                  <CustomInput
-                    id={isNoSalary ? "noSalary" : "salaryMin"}
-                    type="number"
-                    placeholder="Nhập số tiền tối thiểu"
-                    register={register}
-                    unregister={unregister}
-                    requirementField={false}
-                    // check={isNoSalary}
-                  >
-                    {errors.noSalary?.message}
-                  </CustomInput>
-                  <CustomInput
-                    id={isNoSalary ? "noSalary" : "salaryMax"}
-                    type="number"
-                    placeholder="Nhập số tiền tối đa"
-                    register={register}
-                    unregister={unregister}
-                    requirementField={false}
-                    // check={isNoSalary}
-                  >
-                    {errors.noSalary?.message}
-                  </CustomInput>
+                  {!isNoSalary ? (
+                    <>
+                      <CustomInput
+                        id="salaryMin"
+                        type="number"
+                        placeholder="Nhập số tiền tối thiểu"
+                        register={register}
+                        requirementField={false}
+                      >
+                        {errors.salaryMin?.message}
+                      </CustomInput>
+                      <CustomInput
+                        id="salaryMax"
+                        type="number"
+                        placeholder="Nhập số tiền tối đa"
+                        register={register}
+                        requirementField={false}
+                      >
+                        {errors.salaryMax?.message}
+                      </CustomInput>
+                    </>
+                  ) : (
+                    <>
+                      <CustomInput
+                        id="noSalary"
+                        type="number"
+                        placeholder="Nhập số tiền tối thiểu"
+                        register={register}
+                        requirementField={false}
+                        check={isNoSalary}
+                      >
+                        {errors.noSalary?.message}
+                      </CustomInput>
+                      <CustomInput
+                        id="noSalary"
+                        type="number"
+                        placeholder="Nhập số tiền tối đa"
+                        register={register}
+                        requirementField={false}
+                        check={isNoSalary}
+                      >
+                        {errors.noSalary?.message}
+                      </CustomInput>
+                    </>
+                  )}
                 </div>
                 <SwitchButton
+                  onClick={() => {
+                    unregister("salaryMin");
+                    unregister("salaryMax");
+                  }}
                   state={isNoSalary}
                   id={["salaryMin", "salaryMax"]}
                   setState={setIsNoSalary}
