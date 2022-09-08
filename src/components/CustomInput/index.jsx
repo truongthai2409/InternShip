@@ -25,11 +25,6 @@ const CustomInput = ({
   icon,
   setValue,
 }) => {
-  useEffect(() => {
-    if (check) {
-      unregister(id);
-    }
-  }, [check]);
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {

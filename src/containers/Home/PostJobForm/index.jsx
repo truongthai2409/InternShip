@@ -57,7 +57,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [noSalary, setNoSalary] = useState(false);
+  const [isNoSalary, setIsNoSalary] = useState(false);
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -123,8 +123,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           id: parseInt(data.jobType),
         },
         amount: parseInt(data.amount),
-        salaryMin: noSalary ? null : data.salaryMin,
-        salaryMax: noSalary ? null : data.salaryMax,
+        salaryMin: isNoSalary ? null : data.salaryMin,
+        salaryMax: isNoSalary ? null : data.salaryMax,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
         timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
@@ -402,32 +402,32 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 </label>
                 <div className="hr-post__salary-range">
                   <CustomInput
-                    id="salaryMin"
+                    id={isNoSalary ? "noSalary" : "salaryMin"}
                     type="number"
                     placeholder="Nhập số tiền tối thiểu"
                     register={register}
                     unregister={unregister}
                     requirementField={false}
-                    check={noSalary}
+                    // check={isNoSalary}
                   >
-                    {errors.salaryMin?.message}
+                    {errors.noSalary?.message}
                   </CustomInput>
                   <CustomInput
-                    id="salaryMax"
+                    id={isNoSalary ? "noSalary" : "salaryMax"}
                     type="number"
                     placeholder="Nhập số tiền tối đa"
                     register={register}
                     unregister={unregister}
                     requirementField={false}
-                    check={noSalary}
+                    // check={isNoSalary}
                   >
-                    {errors.salaryMax?.message}
+                    {errors.noSalary?.message}
                   </CustomInput>
                 </div>
                 <SwitchButton
-                  state={noSalary}
+                  state={isNoSalary}
                   id={["salaryMin", "salaryMax"]}
-                  setState={setNoSalary}
+                  setState={setIsNoSalary}
                   label="Không có trợ cấp"
                   fontSize="13px"
                 />
