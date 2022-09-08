@@ -3,6 +3,7 @@ import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
 import ButtonMark from "../ButtonMark";
+import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import clsx from "clsx";
@@ -36,6 +37,7 @@ const CardHome = (props) => {
       },
     };
     if (profile?.role === "Role_Candidate") {
+      console.log("role:", "đúng");
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, []);

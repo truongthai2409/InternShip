@@ -13,7 +13,7 @@ const CustomInput = ({
   placeholder,
   children,
   register,
-  unregister = null,
+  unregister,
   check = false,
   defaultValue,
   requirementField = true,
@@ -25,11 +25,6 @@ const CustomInput = ({
   icon,
   setValue,
 }) => {
-  useEffect(() => {
-    if (check) {
-      unregister(id);
-    }
-  }, [check]);
 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {

@@ -19,8 +19,10 @@ const Button = ({
   return (
     <>
       <button
-        className={`button ${className ? className : ""} ${disabled && "disabled"}`}
-        onClick={onClick || (() => {})}
+        className={`button ${className ? className : ""} ${
+          disabled && "disabled"
+        }`}
+        onClick={onClick}
         style={{
           width: bwidth ? `${bwidth}` : "",
           height: bheight ? `${bheight}` : "",

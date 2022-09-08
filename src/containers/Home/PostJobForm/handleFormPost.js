@@ -8,6 +8,8 @@ const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
 
+const test = false;
+
 export const schemaFormPost = yup.object({
   name: yup.string().required(" * Bạn phải điền chức danh."),
   jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
@@ -55,6 +57,7 @@ export const schemaFormPost = yup.object({
     .required(" * Bạn phải nhập mức lương tối thiểu.")
     .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
     .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
+  noSalary: yup.string().nullable(),
   salaryMax: yup
     .number()
     .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")

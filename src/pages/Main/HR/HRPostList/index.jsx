@@ -51,7 +51,7 @@ const HRPostList = (props) => {
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
-    dispatch(getJobListByUserId([userPresent.idUser, 1, 10]));
+    dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
   }, []);
 
   console.log("jobListActived", jobListActived)

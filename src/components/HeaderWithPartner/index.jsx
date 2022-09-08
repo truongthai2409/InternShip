@@ -16,6 +16,7 @@ function HeaderWithPartner(props) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
+  console.log(user?.avatar);
   useEffect(() => {
     const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
     dispatch(getUserById(idUser));
@@ -26,11 +27,13 @@ function HeaderWithPartner(props) {
       <Logo />
       <div className="header__partner">
         <Link to="/partner/post" className="header__partner-post">
-          <AddCardIcon sx={{color: "#04bf8a"}}></AddCardIcon>
+          <AddCardIcon sx={{ color: "#04bf8a" }}></AddCardIcon>
           <span className="header__partner-post-post">Đăng tuyển</span>
         </Link>
         <Link to="/partner/post-list" className="header__partner-post">
-          <FormatAlignJustifyIcon sx={{color: "#04bf8a"}}></FormatAlignJustifyIcon>
+          <FormatAlignJustifyIcon
+            sx={{ color: "#04bf8a" }}
+          ></FormatAlignJustifyIcon>
           <span className="header__partner-post-post">
             Danh sách các đợt thực tập
           </span>
@@ -47,8 +50,7 @@ function HeaderWithPartner(props) {
         />
       ) : null}
       <div className="header__partner-icon">
-        <div className="header__partner-icon-config">
-        </div>
+        <div className="header__partner-icon-config"></div>
         <div
           style={{
             borderRadius: "14px",
@@ -59,7 +61,13 @@ function HeaderWithPartner(props) {
           }}
         >
           <h4 className="name">Chào {user?.lastName || "User"}</h4>
-          <AccountMenu linkImg="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg" />
+          <AccountMenu
+            linkImg={
+              user.avatar
+                ? `http://localhost:8085${user?.avatar}`
+                : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
+            }
+          />
         </div>
       </div>
     </div>
