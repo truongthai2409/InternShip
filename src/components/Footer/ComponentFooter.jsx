@@ -1,26 +1,7 @@
 import React from "react";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
 
 const ComponentFooter = ({ header, tabContent }) => {
-  const tabContents = [
-    {
-      link: "/",
-      content: "Trang chủ",
-    },
-    {
-      link: "/",
-      content: "Về chúng tôi",
-    },
-    {
-      link: "/",
-      content: "Liên hệ",
-    },
-    {
-      link: "/",
-      content: "Câu hỏi thường gặp",
-    },
-  ];
   return (
     <div className="contact__container">
       <div>

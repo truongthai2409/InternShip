@@ -53,9 +53,9 @@
   .cardHome__col2 {
     flex-basis: 35%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 15px;
 
     .cardHome__col2-End {
       display: flex;

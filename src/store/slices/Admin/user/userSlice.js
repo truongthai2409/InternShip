@@ -39,16 +39,17 @@ const userSlice = createSlice({
       state.profile = payload;
       toast.success("Chỉnh sửa thành công");
     });
-    builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
-      if (payload.httpCode === 200) {
-        state.statusForgotPassword = true;
-        toast.success(
-          "Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !"
-        );
-      } else {
-        state.statusForgotPassword = false;
-        toast.error("Không tìm thấy địa chỉ email !");
-      }
+    builder.addCase(forgotPassword.fulfilled, (state, action) => {
+      console.log(action);
+      // if (payload.httpCode === 200) {
+      //   state.statusForgotPassword = true;
+      //   toast.success(
+      //     "Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !"
+      //   );
+      // } else {
+      //   state.statusForgotPassword = false;
+      //   toast.error("Không tìm thấy địa chỉ email !");
+      // }
     });
     builder.addCase(changePassword.fulfilled, (state, action) => {
       if (action.payload) {
