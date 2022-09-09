@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { Pagination, Stack } from "@mui/material";
+import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import ArrowButton from "src/components/ArrowButton";
 import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
+import SearchResultHome from "src/components/SearchResultHome";
 import UserCard from "src/components/UserCard";
 import {
+  getApplyListByIdCandidate,
+  getJobCandidateAppliedByNameAndLocation
+} from "src/store/slices/main/candidate/apply/applySlice";
+import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+import {
   getJobCandidateCaredByNameAndLocation,
-  getMarkByUser,
+  getMarkByUser
 } from "src/store/slices/main/mark/markSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import "./styles.scss";
-import Box from "@mui/material/Box";
-import {
-  getApplyListByIdCandidate,
-  getJobCandidateAppliedByNameAndLocation,
-} from "src/store/slices/main/candidate/apply/applySlice";
-import SearchResultHome from "src/components/SearchResultHome";
-import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
-import ArrowButton from "src/components/ArrowButton";
-import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
-import { Grid, Pagination, Stack } from "@mui/material";
 
 const limit = process.env.LIMIT_OF_PAGE || 5;
 
@@ -108,8 +107,6 @@ const CandidateViewList = () => {
       valueSearch: {
         name: value || "",
         // province: locationValue,
-        // // .replace(/%20/g, "+")
-        // // .replace(/\s/g, "-") || "",
         no: 0,
         limit: limit,
       },
@@ -187,7 +184,7 @@ const CandidateViewList = () => {
                 className="view-list-page"
                 style={{
                   display: "flex",
-                  justifyContent: "start",
+                  justifyContent: "flex-start",
                   flexDirection: "row-reverse",
                   alignItems: "center",
                 }}
@@ -204,7 +201,7 @@ const CandidateViewList = () => {
                   size="medium"
                   sx={{
                     display: "flex",
-                    justifyContent: "start",
+                    justifyContent: "flex-start",
                     flexDirection: "row-reverse",
                     alignItems: "center",
                     marginLeft: "150px",

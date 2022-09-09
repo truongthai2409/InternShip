@@ -4,7 +4,7 @@ import "./styles.scss";
 import Grid from "@mui/material/Grid";
 import Button from "../Button";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -262,7 +262,7 @@ const BaseInformationCompany = ({
                               }}
                               style={{
                                 display: "flex",
-                                alignItems: "start",
+                                alignItems: "flex-start",
                                 wordBreak: "break-word",
                                 marginLeft: "25px",
                                 textAlign: "justify",
@@ -734,7 +734,7 @@ const BaseInformationCompany = ({
                             }}
                             style={{
                               display: "flex",
-                              alignItems: "start",
+                              alignItems: "flex-start",
                               wordBreak: "break-word",
                               marginLeft: "25px",
                               textAlign: "justify",
