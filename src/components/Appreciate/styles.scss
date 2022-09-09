@@ -4,7 +4,7 @@
   border: 2px solid $primary-color;
 }
 .fix_display {
-  @include flex(start, flex-end);
+  @include flex(flex-start, flex-end);
 }
 
 .line::after {
