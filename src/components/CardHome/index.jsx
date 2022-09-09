@@ -3,7 +3,6 @@ import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
 import ButtonMark from "../ButtonMark";
-import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import clsx from "clsx";
