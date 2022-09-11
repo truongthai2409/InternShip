@@ -51,7 +51,7 @@ function SearchResultHome({
             className="header__with-search-search-1"
             required
             id="none"
-            placeholder="Tìm kiếm"
+            placeholder="Tìm kiếm..."
             value={searchValue}
             onChange={onChangeSearch}
             style={{

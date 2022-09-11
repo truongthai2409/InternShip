@@ -38,7 +38,7 @@ export default function Location() {
     <>
       <HeaderContainer
         headerName="Quản lý location"
-        placeholder="Tìm kiếm location"
+        placeholder="Tìm kiếm location..."
         onchange={handleSearch}
         selectName="role"
         selectOptions={selectOptions}

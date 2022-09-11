@@ -16,7 +16,7 @@ import {
   getDistrictList, getProvinceList
 } from "src/store/slices/location/locationSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
-import { genderList, schema } from "src/utils/yupValidate";
+import { genderList, schema } from "./data";
 import CustomInput from "../../../../components/CustomInput/index";
 import Container from '../../Container/Container';
 import "./styles.scss";
@@ -36,6 +36,7 @@ const PartnerInfo = () => {
   const dispatch = useDispatch();
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { status, universityList } = useSelector((state) => state.university);
+  
   const errorMessage = useSelector(errorSelector);
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -169,7 +170,7 @@ const PartnerInfo = () => {
                       label="Tên trường"
                       type="text"
                       id="schoolName"
-                      placeholder="Vd. Đại học Bách Khoa"
+                      placeholder="Vd. Đại học Bách Khoa..."
                       register={register}
                     >
                       {errors.schoolName?.message}
@@ -178,7 +179,7 @@ const PartnerInfo = () => {
                       label="Tên viết tắt của trường"
                       type="text"
                       id="shortName"
-                      placeholder="Vd. hust"
+                      placeholder="Vd. HUST..."
                       register={register}
                     >
                       {errors.shortName?.message}
@@ -190,7 +191,7 @@ const PartnerInfo = () => {
                       label="Vai trò tại trường"
                       id="position"
                       type="text"
-                      placeholder="Vai trò tại trường"
+                      placeholder="Vai trò tại trường..."
                       register={register}
                     >
                       {errors.position?.message}
@@ -212,26 +213,26 @@ const PartnerInfo = () => {
                       label="Email của Trường"
                       id="emailSchool"
                       type="email"
-                      placeholder="Email"
+                      placeholder="Email..."
                       register={register}
                     >
-                      {errors.emailSchool?.message}
+                      {errors.email?.message}
                     </CustomInput>
                     <CustomInput
                       label="Số điện thoại của Trường"
                       id="phoneSchool"
                       type="text"
-                      placeholder="Vd. 999-999-9999"
+                      placeholder="Vd. 999-999-..."
                       register={register}
                     >
-                      {errors.phoneSchool?.message}
+                      {errors.phone?.message}
                     </CustomInput>
                   </div>
 
                   <SelectCustom
                     id="typeSchool"
                     label="Loại hình"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     options={typeSchoolList}
                     register={register}
                   >
@@ -242,7 +243,7 @@ const PartnerInfo = () => {
                       <SelectCustom
                         id="country"
                         label="Quốc gia"
-                        placeholder="Vui lòng chọn"
+                        placeholder="Vui lòng chọn..."
                         options={countryList}
                         register={register}
                       >
@@ -253,7 +254,7 @@ const PartnerInfo = () => {
                       <SelectCustom
                         id="province"
                         label="Tỉnh/Thành phố"
-                        placeholder="Vui lòng chọn"
+                        placeholder="Vui lòng chọn..."
                         dispatch={dispatch}
                         action={getDistrictList}
                         options={provinceList}
@@ -266,7 +267,7 @@ const PartnerInfo = () => {
                       <SelectCustom
                         id="district"
                         label="Quận/Huyện"
-                        placeholder="Vui lòng chọn"
+                        placeholder="Vui lòng chọn..."
                         options={districtList}
                         register={register}
                       >
@@ -278,7 +279,7 @@ const PartnerInfo = () => {
                     label="Địa chỉ"
                     id="address"
                     type="text"
-                    placeholder="Vd. 254, Dương Đình Hội"
+                    placeholder="Vd. 254, Dương Đình Hội..."
                     register={register}
                   >
                     {errors.address?.message}

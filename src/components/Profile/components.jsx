@@ -23,7 +23,6 @@ import Modal from "../Modal";
 import InputFile from "../InputFile";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "src/utils/yupValidate";
 export const role = (id) => {
   let role = "";
   switch (id) {
@@ -202,7 +201,7 @@ export const Actions = ({ props }) => {
     setValue,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(),
   });
   const [opens, setOpens] = useState(false);
   const [open, setOpen] = useState(false);

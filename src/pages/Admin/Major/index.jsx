@@ -38,7 +38,7 @@ export default function Major() {
     <>
       <HeaderContainer
         headerName="Quản lý chuyên ngành"
-        placeholder="Tìm kiếm chuyên ngành"
+        placeholder="Tìm kiếm chuyên ngành..."
         onchange={handleSearch}
         selectName="role"
         selectOptions={selectOptions}

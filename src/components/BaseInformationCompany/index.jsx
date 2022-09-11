@@ -466,7 +466,7 @@ const BaseInformationCompany = ({
                                     label="Nhập tiêu đề"
                                     id="title"
                                     type="text"
-                                    placeholder="Vd. Rất tuyệt"
+                                    placeholder="Vd. Rất tuyệt..."
                                     register={register}
                                     requirementField={false}
                                     setValue={setValue}
@@ -475,7 +475,7 @@ const BaseInformationCompany = ({
                                   <Textarea
                                     label="Viết đánh giá "
                                     id="comment"
-                                    placeholder="Nhập vào đây"
+                                    placeholder="Nhập vào đây..."
                                     register={register}
                                     setValue={setValue}
                                     check={true}

@@ -20,7 +20,7 @@ export default function Demand() {
     <>
       <HeaderContainer
         headerName="Quản lý nhu cầu tìm việc"
-        placeholder="Tìm kiếm nhu cầu"
+        placeholder="Tìm kiếm nhu cầu..."
         onchange={handleSearch}
         // selectName="position"
         btnName="Thêm bài đăng"

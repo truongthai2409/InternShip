@@ -189,7 +189,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 value="test"
                 height={50}
                 type="text"
-                placeholder="Vd. Thực tập thiết kế UI-UX"
+                placeholder="Vd. Thực tập thiết kế UI-UX..."
                 register={register}
               >
                 {errors.jobName?.message}
@@ -200,7 +200,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 <SelectCustom
                   id="jobPosition"
                   label="Vị trí công việc"
-                  placeholder="Vui lòng chọn"
+                  placeholder="Vui lòng chọn..."
                   defaultValue={demandDetail?.position?.id}
                   options={jobPosition}
                   register={register}
@@ -212,7 +212,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 <SelectCustom
                   id="major"
                   label="Chuyên ngành"
-                  placeholder="Vui lòng chọn"
+                  placeholder="Vui lòng chọn..."
                   options={majorList}
                   register={register}
                 >
@@ -225,7 +225,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 <SelectCustom
                   id="jobType"
                   label="Hình thức làm việc"
-                  placeholder="Vui lòng chọn"
+                  placeholder="Vui lòng chọn..."
                   defaultValue={demandDetail?.jobType?.id}
                   options={jobTypeList}
                   register={register}
@@ -237,7 +237,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Số lượng ứng viên"
                 id="amount"
                 type="number"
-                placeholder="Nhập số lượng"
+                placeholder="Nhập số lượng..."
                 register={register}
               >
                 {errors.amount?.message}
@@ -269,7 +269,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 label="Thư giới thiệu"
                 id="jobDescription"
                 type="description"
-                placeholder="Thư giới thiệu"
+                placeholder="Thư giới thiệu..."
                 defaultValue={useSampleForm && formSample}
                 register={register}
                 setValue={setValue}

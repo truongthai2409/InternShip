@@ -304,7 +304,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                 label="Sửa tiêu đề "
                 id="title"
                 type="text"
-                placeholder="Vd. Rất tuyệt"
+                placeholder="Vd. Rất tuyệt..."
                 register={register}
                 requirementField={false}
                 setValue={setValue}
@@ -314,7 +314,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
               <Textarea
                 label="Sửa đánh giá "
                 id="comment"
-                placeholder="Nhập vào đây"
+                placeholder="Nhập vào đây..."
                 register={register}
                 defaultValue={appreciate?.comment}
                 setValue={setValue}

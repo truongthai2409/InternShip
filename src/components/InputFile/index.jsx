@@ -1,10 +1,6 @@
-import React from "react";
-import "./styles.scss";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
-import { useEffect } from "react";
 import { FileUpload, ImageUpload } from "./components";
+import "./styles.scss";
 
 const InputFile = ({
   label,
@@ -28,22 +24,22 @@ const InputFile = ({
   switch (format) {
     case "image":
       accept = ".png, .jpg, .jpeg, .gif, .bmp";
-      text = "Chỉ hỗ trợ file .JPG, .PNG. Kích thước tối đa 512KB.";
+      text = "Chỉ hỗ trợ file .jpg .png và kích thước tối đa 512KB.";
       break;
     case "doc":
       accept = ".docx";
-      text = "Chỉ hỗ trợ file .DOCX.";
+      text = "Chỉ hỗ trợ file .docx.";
       break;
     case "pdf":
       accept = ".pdf";
-      text = "Chỉ hỗ trợ file .PDF.";
+      text = "Chỉ hỗ trợ file .pdf.";
       break;
     case "excel":
       accept = ".xlsx";
       break;
     default: // all of file (except image)
       accept = ".docx, .pdf, .xlsx";
-      text = "Chỉ hỗ trợ file .DOCX, .PDF, .XLSX.";
+      text = "Chỉ hỗ trợ file .docx, .pdf, .xlxs";
   }
 
   const [isHide, setIsHide] = useState(false);

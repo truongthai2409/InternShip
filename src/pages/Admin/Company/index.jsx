@@ -40,7 +40,7 @@ export default function Company() {
     <>
       <HeaderContainer
         headerName="Quản lý công ty"
-        placeholder="Tìm kiếm công ty"
+        placeholder="Tìm kiếm công ty..."
         onchange={handleSearch}
         selectName="role"
         selectOptions={selectOptions}
