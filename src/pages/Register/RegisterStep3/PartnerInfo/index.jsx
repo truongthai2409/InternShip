@@ -36,7 +36,7 @@ const PartnerInfo = () => {
   const dispatch = useDispatch();
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { status, universityList } = useSelector((state) => state.university);
-  
+
   const errorMessage = useSelector(errorSelector);
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -49,6 +49,7 @@ const PartnerInfo = () => {
     navigate(-1);
   };
   const onSubmit = async (data) => {
+
     const partnerData = {
       avatar: data.avatar || info.logo,
       logo: data.logo,
@@ -72,6 +73,7 @@ const PartnerInfo = () => {
           id: 1,
         },
       }),
+
       partner: JSON.stringify({
         position: data.position,
         userCreationDTO: {
@@ -89,7 +91,7 @@ const PartnerInfo = () => {
         },
       }),
     };
-
+    console.log(partnerData)
     dispatch(addUniversity(partnerData));
   };
 
@@ -99,6 +101,7 @@ const PartnerInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    mode: "all",
     resolver: yupResolver(schema),
   });
 
@@ -120,7 +123,7 @@ const PartnerInfo = () => {
     }
   ]
   const handleLabel = (number) => {
-    setInfo(number)
+    setInfo(number.id)
   }
   const handerClicker = () => {
     setOpen(!open)
@@ -201,7 +204,7 @@ const PartnerInfo = () => {
                       label="Website"
                       id="website"
                       type="text"
-                      placeholder="Vd. hust.edu.vn"
+                      placeholder="Vd: hust.edu..."
                       register={register}
                     >
                       {errors.website?.message}

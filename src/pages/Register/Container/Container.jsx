@@ -25,6 +25,7 @@ export default function Container({
         (<span className="field-requirment"> * </span>)Trường bắt buộc
       </p>
       <form
+      onSubmit={handleClick}
         className="reg-candidate__form"
         autoComplete="off"
         encType="multipart/form-data"
@@ -53,7 +54,7 @@ export default function Container({
           label="Mật khẩu"
           id="password"
           type="password"
-          placeholder="Mật khẩu"
+          placeholder="Mật khẩu..."
           register={register}
           visibility
         >

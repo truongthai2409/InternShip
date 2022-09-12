@@ -11,6 +11,7 @@ import { ModalContent } from "./components";
 
 const LoginLayout = () => {
   const { status } = useSelector((state) => state.register);
+  console.log(status)
 
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();

@@ -24,6 +24,7 @@ const CustomInput = ({
   icon,
   setValue,
 }) => {
+  const { onBlur } = register(id); 
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
     setIsHide(!isHide);

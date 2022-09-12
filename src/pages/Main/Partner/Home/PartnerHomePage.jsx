@@ -103,7 +103,7 @@ const PartnerHomePage = (props) => {
             </div>
 
             <FilterPanelHome
-              jobList={`x`}
+              jobList={demandList}
               partnerRole={true}
               indexCardActive={indexPartnerCardActive}
             />

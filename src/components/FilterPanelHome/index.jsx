@@ -53,12 +53,14 @@ const FilterPanelHome = ({
   const location = useLocation();
   const [value, setValue] = useState(0);
   const [page, setPage] = useState(1);
-  const handleChange = (event, newValue) => setValue(newValue);
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
   const handlePagination = (e, valuePage) => {
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
-  console.log("jobList", jobList);
+  // console.log("jobList", jobList);
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>

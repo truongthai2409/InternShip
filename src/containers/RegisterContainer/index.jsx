@@ -20,7 +20,6 @@ export default function RegisterContainer({ Outlet }) {
   const location = useLocation();
 
   const status = useSelector(statusSelector);
-
   if (status === "success") {
     setTimeout(() => {
       navigate("/login");

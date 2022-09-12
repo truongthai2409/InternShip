@@ -33,6 +33,7 @@ const Home = (props) => {
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
+  const [jobDetails,setJobDetails] = useState(jobs[0])
   const idCompany = Number(jobDetail?.hr?.company?.id);
   const listPositionWorkingFormat = [
     "Backend Developer",
@@ -43,25 +44,24 @@ const Home = (props) => {
     "Frontend Developer",
     "Tester",
   ];
-  const updateJob = useCallback(() => {
-    let temp = jobFilter;
-    if (type.length > 0) {
-      temp = temp.filter((e) => type.includes(e?.jobType?.name));
+  
+  useEffect(()=>{
+    const updateJob = () => {
+      let temp = jobFilter;
+      if (type.length > 0) {
+        temp = temp.filter((e) => type.includes(e?.jobType?.name));
+      }
+      
+      if (position.length > 0) {
+        temp = temp.filter((e) => position.includes(e?.jobposition?.name));
+      }
+      if (major.length > 0) {
+        temp = temp.filter((e) => major?.includes(e?.major?.name));
+      }
+      setJobs(temp);
     }
-
-    if (position.length > 0) {
-      temp = temp.filter((e) => position.includes(e?.jobposition?.name));
-    }
-    if (major.length > 0) {
-      temp = temp.filter((e) => major?.includes(e?.major?.name));
-    }
-    setJobs(temp);
-  }, [type, position, major, jobFilter]);
-
-  useEffect(() => {
-    updateJob();
-  }, [updateJob]);
-
+    updateJob()  
+  },  [type, position, major, jobFilter])
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -73,26 +73,10 @@ const Home = (props) => {
       no: currentPage - 1,
       limit: limit,
     };
+    setJobDetails(jobs[indexCardActive])
     dispatch(getJobFilterByUser(dataFilter));
     dispatch(getJobByCompany(Number(idCompany)));
-  }, []);
-  useEffect(() => {
-    dispatch(getJobByCompany(Number(idCompany)));
-  }, [idCompany]);
-  useEffect(() => {
-    const dataFilter = {
-      type: "",
-      order: "oldest",
-      position: "",
-      name: "",
-      province: "",
-      major: "",
-      no: currentPage - 1,
-      limit: limit,
-    };
-
-    dispatch(getJobFilterByUser(dataFilter));
-  }, [currentPage]);
+  }, [indexCardActive,currentPage,idCompany]);
 
   const dataGetMarkByUser = {
     userName: profile.username,
@@ -106,7 +90,7 @@ const Home = (props) => {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, [idCompany]);
-
+  
   const handleSearch = (value) => {
     const dataFilter = {
       type: "",
@@ -217,7 +201,7 @@ const Home = (props) => {
               </div>
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                jobDetail={jobDetail}
+                jobDetail={jobDetails}
                 jobList={jobs}
                 candidate={props.candidate}
                 jobListCompany={jobListCompany}
@@ -271,7 +255,7 @@ const Home = (props) => {
               </div>
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                jobDetail={jobDetail}
+                jobDetail={jobDetails}
                 jobList={jobs}
                 candidate={props.candidate}
                 jobListCompany={jobListCompany}

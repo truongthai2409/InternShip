@@ -32,6 +32,7 @@ const CandidateInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    mode: "all",
     resolver: yupResolver(schema),
   });
   const handleBackClick = (e) => {
@@ -61,7 +62,7 @@ const CandidateInfo = () => {
 
     try {
       const res = await dispatch(registerCandidate(userData));
-      if (res.payload.status === 200) {
+      if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Đăng ký tài khoản thành công");
         navigate("/login");
       }
