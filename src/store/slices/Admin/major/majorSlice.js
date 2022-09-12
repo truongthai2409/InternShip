@@ -15,7 +15,7 @@ const majorSlice = createSlice({
   reducer: {},
   extraReducers: (builder) => {
     builder.addCase(getMajorList.fulfilled, (state, { payload }) => {
-      state.majorList = payload;
+      state.majorList = payload.contents;
     });
     builder.addCase(addMajor.fulfilled, (state, { payload }) => {
       if (!payload?.data) {

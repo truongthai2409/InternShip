@@ -47,10 +47,9 @@ const Password = () => {
       })
     );
   };
-  const handleClear = () => {
-    // setValue("oldPassword", "");
-    // setValue("newPassword", "");
-    // setValue("confirmNewPassword", "");
+  const handleClear = (e) => {
+    e.preventDefault();
+    reset();
   };
 
   return (
