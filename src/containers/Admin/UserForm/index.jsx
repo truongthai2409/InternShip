@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./styles.scss";
 import CustomInput from "../../../components/CustomInput";
 import Button from "../../../components/Button";
-import { genderList, schema } from "src/utils/yupValidate";
+import { genderList, schema } from "./data";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";

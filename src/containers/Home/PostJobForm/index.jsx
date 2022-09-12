@@ -223,7 +223,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Tên công việc"
                   id="name"
                   type="text"
-                  placeholder="Vd. Thực tập thiết kế UI-UX"
+                  placeholder="Vd. Thực tập thiết kế UI-UX..."
                   register={register}
                 >
                   {errors.name?.message}
@@ -234,7 +234,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="jobType"
                     label="Hình thức làm việc"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     defaultValue={jobDetail?.jobType?.id}
                     options={jobTypeList}
                     register={register}
@@ -246,7 +246,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="major"
                     label="Chuyên ngành"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     defaultValue={jobDetail?.major?.id}
                     options={majorList}
                     register={register}
@@ -260,7 +260,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="jobPosition"
                     label="Vị trí"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     defaultValue={jobDetail?.jobposition?.id}
                     options={jobPosition}
                     register={register}
@@ -272,7 +272,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Số lượng cần tuyển"
                   id="amount"
                   type="number"
-                  placeholder="Nhập số lượng"
+                  placeholder="Nhập số lượng..."
                   register={register}
                 >
                   {errors.amount?.message}
@@ -303,7 +303,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="country"
                     label="Quốc gia"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     defaultValue={
                       jobDetail?.locationjob?.district?.province?.countries?.id
                     }
@@ -317,7 +317,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="province"
                     label="Tỉnh/Thành phố"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     dispatch={dispatch}
                     defaultValue={
                       jobDetail?.locationjob?.district?.province?.id
@@ -333,7 +333,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   <SelectCustom
                     id="district"
                     label="Quận/Huyện"
-                    placeholder="Vui lòng chọn"
+                    placeholder="Vui lòng chọn..."
                     defaultValue={jobDetail?.locationjob?.district?.id}
                     options={districtList}
                     register={register}
@@ -347,7 +347,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Địa chỉ"
                   id="address"
                   type="text"
-                  placeholder="Vd. 254, Dương Đình Hội"
+                  placeholder="Vd. 254, Dương Đình Hội..."
                   register={register}
                 >
                   {errors.address?.message}
@@ -357,7 +357,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 <Textarea
                   label="Mô tả công việc"
                   id="jobDescription"
-                  placeholder="Nhập mô tả công việc"
+                  placeholder="Nhập mô tả công việc..."
                   defaultValue={
                     formStatus !== "post" ? jobDetail?.description : ""
                   }
@@ -373,7 +373,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 <Textarea
                   label="Yêu cầu công việc"
                   id="jobRequirement"
-                  placeholder="Nhập yêu cầu công việc"
+                  placeholder="Nhập yêu cầu công việc..."
                   defaultValue={
                     formStatus !== "post" ? jobDetail?.requirement : ""
                   }
@@ -389,7 +389,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 <Textarea
                   label="Quyền lợi của ứng viên"
                   id="benefits"
-                  placeholder="Nhập quyền lợi của ứng viên"
+                  placeholder="Nhập quyền lợi của ứng viên..."
                   defaultValue={
                     formStatus !== "post" ? jobDetail?.otherInfo : ""
                   }
@@ -411,7 +411,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                       <CustomInput
                         id="salaryMin"
                         type="number"
-                        placeholder="Nhập số tiền tối thiểu"
+                        placeholder="Nhập số tiền tối thiểu..."
                         register={register}
                         requirementField={false}
                       >
@@ -420,7 +420,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                       <CustomInput
                         id="salaryMax"
                         type="number"
-                        placeholder="Nhập số tiền tối đa"
+                        placeholder="Nhập số tiền tối đa..."
                         register={register}
                         requirementField={false}
                       >

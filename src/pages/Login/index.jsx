@@ -116,7 +116,7 @@ const Login = () => {
           label="Mật khẩu"
           id="password"
           type="password"
-          placeholder="Mật khẩu"
+          placeholder="Mật khẩu..."
           setValue={setValue}
           register={register}
           visibility={true}

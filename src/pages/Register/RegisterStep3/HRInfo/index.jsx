@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
-import { genderList, schema } from "src/utils/yupValidate";
+import { genderList, schema } from "./data";
 import CustomInput from "../../../../components/CustomInput/index";
 import SelectCustom from "../../../../components/Select";
 import { registerHr } from "../../../../store/slices/main/register/registerSlice";
@@ -93,7 +93,7 @@ const HRInfo = () => {
             placeholder="Vị trí..."
             register={register}
           >
-            {errors.position?.message}
+            {errors.jobPosition?.message}
           </CustomInput>
         </>
       }

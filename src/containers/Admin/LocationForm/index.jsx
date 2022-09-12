@@ -85,7 +85,7 @@ const LocationForm = props => {
                   <CustomInput
                     id="district"
                     type="text"
-                    placeholder="Tên quận"
+                    placeholder="Tên quận..."
                     register={register}
                   >
                     {errors.district?.message}
@@ -93,7 +93,7 @@ const LocationForm = props => {
                   <CustomInput
                     label=""
                     id="province"
-                    placeholder="Tên tỉnh/thành phố"
+                    placeholder="Tên tỉnh/thành phố..."
                     register={register}
                   >
                     {errors.province?.message}
@@ -101,7 +101,7 @@ const LocationForm = props => {
                   <CustomInput
                     label=""
                     id="countries"
-                    placeholder="Tên quốc gia"
+                    placeholder="Tên quốc gia..."
                     register={register}
                   >
                     {errors.countries?.message}
@@ -114,7 +114,7 @@ const LocationForm = props => {
                     label=""
                     id="address"
                     type=""
-                    placeholder="Địa chỉ"
+                    placeholder="Địa chỉ..."
                     register={register}
                   >
                     {errors.address?.message}
@@ -122,7 +122,7 @@ const LocationForm = props => {
                   <CustomInput
                     id="note"
                     type="text"
-                    placeholder="Ghi chú"
+                    placeholder="Ghi chú..."
                     register={register}
                   >
                     {errors.ten?.message}

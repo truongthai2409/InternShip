@@ -123,7 +123,7 @@ export default function DemandForm(props) {
                     label="Tiêu đề"
                     id="name"
                     type="text"
-                    placeholder="Tiêu đề"
+                    placeholder="Tiêu đề..."
                     register={register}
                     // defaultValue="name"
                     check={!isEdit}
@@ -166,7 +166,7 @@ export default function DemandForm(props) {
                     label="Danh sách sinh viên"
                     id="students"
                     type="file"
-                    placeholder="Phải là file excel danh sách sinh viên"
+                    placeholder="Phải là file excel danh sách sinh viên."
                     register={register}
                     check={!isEdit}
                   >
@@ -190,7 +190,7 @@ export default function DemandForm(props) {
                     label="Mô tả"
                     id="description"
                     type="description"
-                    placeholder="Mô tả nhu cầu"
+                    placeholder="Mô tả nhu cầu..."
                     register={register}
                     check={!isEdit}
                   >
@@ -210,7 +210,7 @@ export default function DemandForm(props) {
                     label="Thông tin khác"
                     id="otherInfo"
                     type="description"
-                    placeholder="Các thông tin khác"
+                    placeholder="Các thông tin khác..."
                     register={register}
                     check={!isEdit}
                   >

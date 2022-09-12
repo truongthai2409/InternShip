@@ -61,7 +61,7 @@ const Password = () => {
             id="oldPassword"
             type="password"
             label="Mật khẩu cũ"
-            placeholder="Nhập mật khẩu"
+            placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
           >
@@ -71,7 +71,7 @@ const Password = () => {
             id="newPassword"
             type="password"
             label="Mật khẩu mới"
-            placeholder="Nhập mật khẩu"
+            placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
           >
@@ -81,7 +81,7 @@ const Password = () => {
             id="confirmNewPassword"
             type="password"
             label="Nhập lại mật khẩu"
-            placeholder="Nhập mật khẩu"
+            placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
           >

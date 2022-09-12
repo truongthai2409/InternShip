@@ -39,7 +39,7 @@ export default function University() {
     <>
       <HeaderContainer
         headerName="Quản lý trường học"
-        placeholder="Tìm kiếm trường"
+        placeholder="Tìm kiếm trường..."
         onchange={handleSearch}
         selectName="position"
         selectOptions={selectOptions}

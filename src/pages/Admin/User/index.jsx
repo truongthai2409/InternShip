@@ -41,7 +41,7 @@ const User = () => {
     <>
       <HeaderContainer
         headerName="Quản lý tài khoản"
-        placeholder="Tìm kiếm người dùng"
+        placeholder="Tìm kiếm người dùng..."
         onchange={handleSearch}
         selectName="role"
         selectOptions={selectOptions}

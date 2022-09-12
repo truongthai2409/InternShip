@@ -64,7 +64,7 @@ export default function Container({
           label="Xác nhận mật khẩu"
           id="confirmPassword"
           type="password"
-          placeholder="Xác nhận mật khẩu"
+          placeholder="Xác nhận mật khẩu..."
           register={register}
           visibility
         >
@@ -88,7 +88,7 @@ export default function Container({
             placeholder="Tên..."
             register={register}
           >
-            {err?.firstname?.message}
+            {err.firstname?.message}
           </CustomInput>
         </div>
         <CustomInput
@@ -96,7 +96,7 @@ export default function Container({
           label="Số điện thoại"
           id="phone"
           type="phone"
-          placeholder="Số điện thoại"
+          placeholder="Số điện thoại..."
           register={register}
         >
           {err.phone?.message}

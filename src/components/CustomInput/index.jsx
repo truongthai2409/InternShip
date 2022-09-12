@@ -3,7 +3,6 @@ import "./styles.scss";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useState } from "react";
-import { useEffect } from "react";
 
 const CustomInput = ({
   label,
@@ -25,7 +24,6 @@ const CustomInput = ({
   icon,
   setValue,
 }) => {
-
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
     setIsHide(!isHide);
