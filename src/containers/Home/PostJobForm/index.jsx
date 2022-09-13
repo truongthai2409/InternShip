@@ -406,7 +406,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   Trợ cấp<span className="field-requirment">*</span>
                 </label>
                 <div className="hr-post__salary-range">
-                  {!isNoSalary ? (
+                  {!isNoSalary && (
                     <>
                       <CustomInput
                         id="salaryMin"
@@ -427,36 +427,10 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                         {errors.salaryMax?.message}
                       </CustomInput>
                     </>
-                  ) : (
-                    <>
-                      <CustomInput
-                        id="noSalary"
-                        type="number"
-                        placeholder="Nhập số tiền tối thiểu..."
-                        register={register}
-                        requirementField={false}
-                        check={isNoSalary}
-                      >
-                        {errors.noSalary?.message}
-                      </CustomInput>
-                      <CustomInput
-                        id="noSalary"
-                        type="number"
-                        placeholder="Nhập số tiền tối đa..."
-                        register={register}
-                        requirementField={false}
-                        check={isNoSalary}
-                      >
-                        {errors.noSalary?.message}
-                      </CustomInput>
-                    </>
                   )}
                 </div>
                 <SwitchButton
-                  onClick={() => {
-                    unregister("salaryMin");
-                    unregister("salaryMax");
-                  }}
+                  onClick={() => {}}
                   state={isNoSalary}
                   id={["salaryMin", "salaryMax"]}
                   setState={setIsNoSalary}

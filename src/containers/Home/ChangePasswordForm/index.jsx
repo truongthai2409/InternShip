@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./validate";
-import { useNavigate } from "react-router-dom";
 import CustomInput from "src/components/CustomInput";
 import Button from "src/components/Button";
 import {
@@ -48,10 +47,9 @@ const Password = () => {
       })
     );
   };
-  const handleClear = () => {
-    // setValue("oldPassword", "");
-    // setValue("newPassword", "");
-    // setValue("confirmNewPassword", "");
+  const handleClear = (e) => {
+    e.preventDefault();
+    reset();
   };
 
   return (

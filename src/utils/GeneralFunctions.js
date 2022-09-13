@@ -52,3 +52,4 @@ export const AuthenticationPathUrl = () => {
     dispatch(setISRigthAuth(true));
   }
 };
+
