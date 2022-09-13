@@ -238,6 +238,7 @@ export const addJob = createAsyncThunk("job/addJob", async (args) => {
 export const getJobByCompany = createAsyncThunk(
   "job/getJobByCompany",
   async (companyId) => {
+    console.log("companyid", companyId);
     return axios
       .get(`${baseURL}/api/job/company/${companyId}`)
       .then((response) => {
