@@ -29,7 +29,9 @@ const AccountMenu = ({ linkImg }) => {
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
     localStorage.removeItem("userPresent");
-    toast.warning("Bạn vừa đăng xuất!", {
+    toast.warning("Bạn vừa đăng xuất", {
+      position: "bottom-right",
+      autoClose: 3000,
       theme: "dark",
     });
   };

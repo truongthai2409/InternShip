@@ -59,7 +59,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.contents.length > 0) {
-        console.log("getJobByName", payload)
+        console.log("getJobByName", payload);
         state.jobDetail = payload.contents[0];
       } else {
       }
@@ -68,13 +68,13 @@ const jobSlice = createSlice({
       state.jobListName = payload?.contents;
       state.jobListHavePages = payload;
       if (payload?.contents?.length > 0) {
-        console.log("getJobByNameAndLocation", payload)
+        console.log("getJobByNameAndLocation", payload);
         state.jobDetail = payload.contents[0];
       } else {
       }
     });
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
-      console.log("getJobById", payload)
+      console.log("getJobById", payload);
       state.jobActive = payload;
       state.jobDetailById = payload;
     });
@@ -88,12 +88,20 @@ const jobSlice = createSlice({
     });
     builder.addCase(addJob.fulfilled, (state, payload) => {
       if (payload.payload[1] === "repost") {
-        console.log("addJob", payload)
+        console.log("addJob", payload);
         state.jobListActived.unshift(payload.payload[0]);
-        toast.success("Đăng tuyển công việc thành công!");
+        toast.success("Đăng tuyển công việc thành công!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
       }
       if (payload.payload[1] === "post") {
-        toast.success("Đăng tuyển công việc thành công!");
+        toast.success("Đăng tuyển công việc thành công!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          theme: "colored",
+        });
         state.status = "success";
       }
     });
@@ -104,10 +112,18 @@ const jobSlice = createSlice({
             return job.id !== payload.id;
           });
           state.jobListDisabled.push(payload);
-          toast.success("Đóng công việc thành công!");
+          toast.success("Đóng công việc thành công!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            theme: "colored",
+          });
           break;
         default:
-          toast.error("Chỉnh sửa trạng thái công việc thất bại!");
+          toast.error("Chỉnh sửa trạng thái công việc thất bại!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            theme: "colored",
+          });
       }
     });
     builder.addCase(updateJob.fulfilled, (state, { payload }) => {
@@ -117,7 +133,11 @@ const jobSlice = createSlice({
         }
         return job;
       });
-      toast.success("Chỉnh sửa công việc thành công!");
+      toast.success("Chỉnh sửa công việc thành công!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
     });
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
       state.listCandidatesApplied = payload.contents;
@@ -189,7 +209,8 @@ export const getJobListByUserId = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1] - 1}&limit=${args[2]
+        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1] - 1}&limit=${
+          args[2]
         }`
       )
       .then((response) => {
@@ -303,7 +324,8 @@ export const getListCandidateApplied = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `${baseURL}/api/r2s/admin/candidate/job/${args[0]}?no=${args[1] - 1
+        `${baseURL}/api/r2s/admin/candidate/job/${args[0]}?no=${
+          args[1] - 1
         }&limit=${args[2]}`
       )
       .then((response) => {

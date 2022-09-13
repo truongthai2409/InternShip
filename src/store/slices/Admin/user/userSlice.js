@@ -20,7 +20,7 @@ const userSlice = createSlice({
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
-      console.log("action", action)
+      console.log("action", action);
       state.statusForgotPassword = action.payload;
     },
   },
@@ -37,8 +37,13 @@ const userSlice = createSlice({
       state.profile = payload;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
+      console.log("updateUser", payload);
       state.profile = payload;
-      toast.success("Chỉnh sửa thành công");
+      toast.success("Chỉnh sửa thành công", {
+        position: "bottom-right",
+            autoClose: 3000,
+            theme: "colored",
+      });
     });
     builder.addCase(forgotPassword.fulfilled, (state, action) => {
       console.log(action);
@@ -58,18 +63,21 @@ const userSlice = createSlice({
         toast.error("Mật khẩu cũ không đúng!", {
           position: "bottom-right",
           autoClose: 3000,
+          theme: "colored",
         });
       } else if (action.payload.httpCode === 500) {
         state.statusForgotPassword = "fail";
         toast.error("Đổi mật khẩu không thành công!", {
           position: "bottom-right",
           autoClose: 3000,
+          theme: "colored",
         });
       } else {
         state.statusForgotPassword = "success";
         toast.success("Đổi mật khẩu thành công!", {
           position: "bottom-right",
           autoClose: 3000,
+          theme: "colored",
         });
       }
     });

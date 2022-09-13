@@ -67,7 +67,7 @@ export const UserInfor = ({ open, setOpen }) => {
     dispatch(getProfileByIdUser(idUser));
     dispatch(getUserById(idUser));
   }, [idUser]);
-
+console.log("profile1", profile);
   return (
     <>
       {user?.role?.name?.includes("Role_Candidate") ? (
@@ -80,7 +80,7 @@ export const UserInfor = ({ open, setOpen }) => {
                   : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
               }
             />
-            <div className="candidate_user-info">
+            <div classNkame="candidate_user-info">
               <h2>
                 {user.firstName + " " + user.lastName}
                 <ButtonOutline
