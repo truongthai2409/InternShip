@@ -14,12 +14,13 @@ export default function index({ data, avatarRender, nameRender, labelName, onCha
             onChange={onChange}
             renderOption={(props, option) => (
                 <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                    <img
-                        loading="lazy"
-                        width="30"
-                        src={avatarRender(option)}
-                        alt=""
-                    />
+                    {avatarRender === null ? null :
+                        <img
+                            loading="lazy"
+                            width="30"
+                            src={avatarRender(option)}
+                            alt=""
+                        />}
                     {nameRender(option)}
                 </Box>
             )}

@@ -4,9 +4,7 @@ import "./styles.scss";
 const AddressComponent = () => {
   return (
     <div className="address__container-footer">
-      <div className="logo">
-        <h2 className="heading-primary elementor-heading-title">Địa chỉ</h2>
-      </div>
+      <h2 className="heading-primary elementor-heading-title">Địa chỉ</h2>
       <div className="address-footer-content">
         <div className="address-footer-headquarters">
           <div className="address-headquarters-content"></div>

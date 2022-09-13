@@ -17,7 +17,7 @@ const HRInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);
-  const { status } = useSelector((state) => state.register);
+  
   const errorMessage = useSelector(errorSelector);
   const {
     register,
@@ -25,17 +25,15 @@ const HRInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
+    mode: "all",
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
     dispatch(getCompanyList([1, 20]));
-    if (status === "success") {
-      navigate("/login");
-    }
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const hrData = {
       hr: JSON.stringify({
         user: {
@@ -55,8 +53,7 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar || null,
     };
-    console.log("hrData", hrData.fileAvatar)
-    dispatch(registerHr({ hrData, navigate }));
+    dispatch(registerHr({ hrData, navigate }))
   };
 
   const handleBackClick = (e) => {
@@ -88,10 +85,11 @@ const HRInfo = () => {
 
           <CustomInput
             label="Vai trò tại công ty"
-            id="position"
+            id="jobPosition"
             type="text"
             placeholder="Vị trí..."
             register={register}
+            requirementField={false}
           >
             {errors.jobPosition?.message}
           </CustomInput>

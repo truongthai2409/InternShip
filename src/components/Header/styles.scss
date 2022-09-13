@@ -31,10 +31,17 @@
   padding: 10px 18px;
   font-size: 16px;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .login__home-register {
-  // border-left: solid 1px black;
+  font-family: $f-family-0;
+  color: $color-gray;
+  padding: 10px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+
 }
 
 @media (max-width: 740px) {
