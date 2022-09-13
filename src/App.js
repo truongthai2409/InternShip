@@ -6,7 +6,7 @@ import router from './config/routes/index';
 import Loading from "./Loading";
 import { AuthenticationPathUrl } from "./utils/GeneralFunctions";
 function App() {
-  
+
   return (
     <>
       <Router>

@@ -10,9 +10,9 @@ export const AuthenticationPathUrl = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const pathUrl = location.pathname;
-  console.log("pathUrl", pathUrl);
   const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const { isRightAuth } = useSelector((state) => state.globalSlices);
+  
 
   let role;
   if (roleUser) {
@@ -31,6 +31,7 @@ export const AuthenticationPathUrl = () => {
     }
     if (!pathUrl.includes(role) && pathUrl !== "/not-found") {
       dispatch(setISRigthAuth(false));
+      console.log("pathUrl1", isRightAuth);
     }
   } else {
     if (
@@ -38,12 +39,15 @@ export const AuthenticationPathUrl = () => {
         pathUrl.includes("partner") ||
         pathUrl.includes("candidate") ||
         pathUrl.includes("admin")) &&
-      !pathUrl.includes("register")
+      !pathUrl.includes("register") &&
+      !pathUrl.includes("loginadmin")
     ) {
       dispatch(setISRigthAuth(false));
+      console.log("pathUrl2", isRightAuth);
     }
   }
   if (!isRightAuth) {
+    console.log("pathUrl3", isRightAuth);
     navigate("/not-found", { replace: true });
     dispatch(setISRigthAuth(true));
   }
