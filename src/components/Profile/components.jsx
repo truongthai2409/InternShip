@@ -80,7 +80,7 @@ console.log("profile1", profile);
                   : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
               }
             />
-            <div classNkame="candidate_user-info">
+            <div className="candidate_user-info">
               <h2>
                 {user.firstName + " " + user.lastName}
                 <ButtonOutline

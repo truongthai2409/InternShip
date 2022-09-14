@@ -14,7 +14,6 @@ const LoginAdminLayout = () => {
   console.log(status)
 
   const [open, setOpen] = useState(false);
-  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (status === "success") {
@@ -22,33 +21,21 @@ const LoginAdminLayout = () => {
     }
   }, [status]);
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  //   dispatch(updateStatusRegister("idle"));
-  // };
-
   return (
-    <div className="login-layout">
-      <Header />
-      <div className="login-container-wrapper">
+    <div className="login-admin-layout">
+
+      <div className="login-admin-container-wrapper">
         <LoginAdminContainer />
         <div className="login-container__modal">
           <Modal
             modalTitle="Thông báo"
             open={open}
             setOpen={setOpen}
-            // children={
-            //   <ModalContent
-            //     onClick={handleClose}
-            //     nameButton="Đồng ý"
-            //     className="login-container__modal--content"
-            //   />
-            // }
+
           />
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 }

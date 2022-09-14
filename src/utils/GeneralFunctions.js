@@ -31,7 +31,6 @@ export const AuthenticationPathUrl = () => {
     }
     if (!pathUrl.includes(role) && pathUrl !== "/not-found") {
       dispatch(setISRigthAuth(false));
-      console.log("pathUrl1", isRightAuth);
     }
   } else {
     if (
@@ -43,11 +42,9 @@ export const AuthenticationPathUrl = () => {
       !pathUrl.includes("loginadmin")
     ) {
       dispatch(setISRigthAuth(false));
-      console.log("pathUrl2", isRightAuth);
     }
   }
   if (!isRightAuth) {
-    console.log("pathUrl3", isRightAuth);
     navigate("/not-found", { replace: true });
     dispatch(setISRigthAuth(true));
   }

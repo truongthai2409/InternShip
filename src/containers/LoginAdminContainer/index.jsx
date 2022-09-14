@@ -1,11 +1,9 @@
 import React from "react";
 import "./styles.scss";
-import { Link } from "react-router-dom";
 
 import  logo  from "src/assets/img/loginpage.png";
 import LoginAdmin from "../../pages/LoginAdmin";
-import Button from "../../components/Button/index";
-import { Typography } from "@mui/material";
+
 
 const LoginAdminContainer = () => {
   return (

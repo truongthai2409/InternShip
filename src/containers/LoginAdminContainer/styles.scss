@@ -1,16 +1,8 @@
 @use "../../assets/styles/" as *;
-
-// .logo-login-container {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-left: 50px
-// }
-
 .login-admin-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+
   .form-wrapper {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     display: flex;

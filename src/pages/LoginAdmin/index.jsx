@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CustomCheckbox from "../../components/CustomCheckbox";
 import CustomInput from "../../components/CustomInput/index";
 import Button from "../../components/Button/index";
-import { loginUser } from "../../store/slices/main/login/loginSlice";
+import { loginAdmin } from "../../store/slices/main/login/loginSlice";
 import { schema } from "./validate";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { authenticationSelector } from "src/store/selectors/main/loginSelectors";
@@ -42,49 +42,45 @@ const LoginAdmin = () => {
         "username",
         JSON.parse(localStorage.getItem("saveLogin")).username
       );
-      console.log("username");
       setValue(
         "password",
         JSON.parse(localStorage.getItem("saveLogin")).password
       );
     }
+
   }, []);
 
-  // const onSubmit = async (data) => {
-  //   const userData = {
-  //     username: data.username,
-  //     password: data.password,
-  //   };
-  //   try {
-  //     const res = await dispatch(loginUser(userData));
-  //     if (res.payload.token) {
-  //       const role = res.payload.role;
-  //       switch (role) {
-  //         case "Role_Partner":
-  //           navigate(`/partner`, { replace: true });
-  //           break;
-  //         case "Role_HR":
-  //           navigate(`/hr`, { replace: true });
-  //           break;
-  //         case "Role_Candidate":
-  //           navigate(`/candidate`, { replace: true });
-  //           break;
-  //         default:
-  //       }
-  //     }
-  //   } catch (error) {
-  //     toast.error(error);
-  //   }
-  //   if (isCheck) {
-  //     const loginInfor = {
-  //       username: data.username,
-  //       password: data.password,
-  //     };
-  //     localStorage.setItem("saveLogin", JSON.stringify(loginInfor));
-  //   } else {
-  //     localStorage.removeItem("saveLogin");
-  //   }
-  // };
+  const onSubmit = async (data) => {
+    const userData = {
+      username: data.username,
+      password: data.password,
+    };
+    try {
+      const res = await dispatch(loginAdmin(userData));
+      console.log(res)
+
+      if (res.payload.token) {
+        const role = res.payload.role;
+        switch (role) {
+          case "Role_Admin":
+            navigate(`/admin`, { replace: true });
+            break;
+          default:
+        }
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+    if (isCheck) {
+      const loginInfor = {
+        username: data.username,
+        password: data.password,
+      };
+      localStorage.setItem("saveLogin", JSON.stringify(loginInfor));
+    } else {
+      localStorage.removeItem("saveLogin");
+    }
+  };
   const handleSaveLogin = (e) => {
     setIsCheck(!isCheck);
   };
@@ -97,8 +93,7 @@ const LoginAdmin = () => {
       <h1 className="login-container__title">Đăng nhập</h1>
 
       <div className="login-admin-form__container">
-        {/* <form onSubmit={handleSubmit(onSubmit)} autoComplete="off"> */}
-        <form autoComplete="off">
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <CustomInput
             label="Tài khoản"
             id="username"
@@ -123,7 +118,10 @@ const LoginAdmin = () => {
             {errors.password?.message}
           </CustomInput>
           <div className="login-admin-form__action">
-            <div className="login-admin-form__save-pass" onChange={handleSaveLogin}>
+            <div
+              className="login-admin-form__save-pass"
+              onChange={handleSaveLogin}
+            >
               <CustomCheckbox checked={isCheck} label="Lưu đăng nhập" />
             </div>
             <div className="login-admin-form__footer">
@@ -131,8 +129,7 @@ const LoginAdmin = () => {
             </div>
           </div>
           <div className="login-admin-form__btn">
-            {/* <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button> */}
-            <Button name="ĐĂNG NHẬP"></Button>
+            <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>
           </div>
         </form>
       </div>

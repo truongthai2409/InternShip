@@ -30,6 +30,7 @@ import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
 import CandidateManagement from "src/pages/Main/HR/CandidateManagement/CandidateManagement";
 import Company from "src/pages/Admin/Company";
 import Password from "src/containers/Home/ChangePasswordForm";
+import LoginAdmin from "src/pages/LoginAdmin";
 
 // admin router
 export const adminRouter = [
@@ -81,6 +82,7 @@ export const adminRouter = [
     path: "*",
     Component: NotFound,
   },
+  
 ];
 
 // main router

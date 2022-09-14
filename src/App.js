@@ -24,7 +24,7 @@ function App() {
             })
           })}
         </Routes>
-        <AuthenticationPathUrl />
+        {/* <AuthenticationPathUrl /> */}
       </Router>
       <Loading />
       <ToastContainer />
