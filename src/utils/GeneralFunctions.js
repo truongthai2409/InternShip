@@ -12,6 +12,7 @@ export const AuthenticationPathUrl = () => {
   const pathUrl = location.pathname;
   const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const { isRightAuth } = useSelector((state) => state.globalSlices);
+  
 
   let role;
   if (roleUser) {
@@ -37,7 +38,8 @@ export const AuthenticationPathUrl = () => {
         pathUrl.includes("partner") ||
         pathUrl.includes("candidate") ||
         pathUrl.includes("admin")) &&
-      !pathUrl.includes("register")
+      !pathUrl.includes("register") &&
+      !pathUrl.includes("loginadmin")
     ) {
       dispatch(setISRigthAuth(false));
     }

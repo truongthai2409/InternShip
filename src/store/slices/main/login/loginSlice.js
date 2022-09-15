@@ -19,7 +19,7 @@ const loginSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload?.token) {
+        if (action.payload?.token && action.payload?.role !== "Role_Admin") {
           state.status = "success";
           toast.success("Đăng nhập thành công", {
             position: "bottom-right",
@@ -27,7 +27,30 @@ const loginSlice = createSlice({
             theme: "colored",
           });
           sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
-        } else {
+        }
+        else {
+          state.status = "fail";
+          toast.error("Tài khoản hoặc mật khẩu không đúng!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            theme: "colored",
+          });
+        }
+      })
+      .addCase(loginAdmin.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(loginAdmin.fulfilled, (state, action) => {
+        if (action.payload?.token && action.payload?.role === "Role_Admin") {
+          state.status = "success";
+          toast.success("Đăng nhập thành công", {
+            position: "bottom-right",
+            autoClose: 3000,
+            theme: "colored",
+          });
+          sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
+        }
+        else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {
             position: "bottom-right",
@@ -37,9 +60,22 @@ const loginSlice = createSlice({
         }
       });
   },
+  
 });
 
 export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
+  const res = await api
+    .post(`${baseURL}/api/signin`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
+  return res;
+});
+
+export const loginAdmin = createAsyncThunk("login/loginAdmin", async (data) => {
   const res = await api
     .post(`${baseURL}/api/signin`, data)
     .then((res) => {

@@ -12,6 +12,7 @@ import UserDetail from "../../pages/Admin/UserDetail";
 import NotFound from "../../pages/NotFound";
 import AdminRouterLayout from "../../Layouts/Admin/index";
 
+
 const adminRouter = [
     {
         path: "/admin",
@@ -65,7 +66,7 @@ const adminRouter = [
             {
                 path: "*",
                 Component: NotFound,
-            },
+            }
         ]
     }
 ]
