@@ -214,7 +214,7 @@ const PartnerInfo = () => {
                   <div className="reg-candidate__form--name">
                     <CustomInput
                       label="Email của Trường"
-                      id="emailSchool"
+                      id="email"
                       type="email"
                       placeholder="Email..."
                       register={register}
@@ -223,7 +223,7 @@ const PartnerInfo = () => {
                     </CustomInput>
                     <CustomInput
                       label="Số điện thoại của Trường"
-                      id="phoneSchool"
+                      id="phone"
                       type="text"
                       placeholder="Vd. 999-999-..."
                       register={register}

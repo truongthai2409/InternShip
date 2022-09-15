@@ -12,7 +12,7 @@ export const AuthenticationPathUrl = () => {
   const pathUrl = location.pathname;
   const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const { isRightAuth } = useSelector((state) => state.globalSlices);
-  
+
 
   let role;
   if (roleUser) {

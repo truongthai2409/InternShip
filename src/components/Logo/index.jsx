@@ -9,7 +9,7 @@ const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const Logo = ({ id }) => {
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const roleList = {
     3: "Ứng viên",
@@ -17,16 +17,17 @@ const Logo = ({ id }) => {
     4: "Cộng tác viên",
   };
   const handleClickGoHome = async () => {
-    if (profile.token !== undefined) {
+    console.log(profile)
+    if (profile.id !== undefined) {
       const dataGetMarkByUser = {
-        userName: profile.username,
+        userName: profile.user?.username,
         page: {
           no: 0,
           limit: limit,
         },
       };
       dispatch(getMarkByUser(dataGetMarkByUser));
-      const role = profile?.role;
+      const role = profile?.user?.role?.name;
       switch (role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
@@ -36,8 +37,10 @@ const Logo = ({ id }) => {
           navigate(`/partner`, { replace: true });
           // getMarkByUser();
           break;
+          case "Role_Candidate": {
+            return navigate(`/candidate`, { replace: true });
+          }
         default:
-          navigate(`/candidate`, { replace: true });
           break;
       }
     } else {
@@ -45,23 +48,9 @@ const Logo = ({ id }) => {
     }
   };
 
-  useEffect(() => {
-    // const dataGetMarkByUser = {
-    //   userName: profile.username,
-    //   page: {
-    //     no: 0,
-    //     limit: 10,
-    //   },
-    // };
-    // if (profile.role === "Role_Candidate") {
-    //   dispatch(getMarkByUser(dataGetMarkByUser));
-    // }
-    // handleClickGoHome();
-  }, []);
-
   return (
     <div onClick={handleClickGoHome}>
-      <Link to='/' className="logo">
+      <Link to='#/' className="logo">
         <div className="roleName__header">
           <img src={logo} alt="" />
           <span>{id ? roleList[id] : ""}</span>
