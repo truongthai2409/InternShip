@@ -46,7 +46,14 @@ function a11yProps(index) {
 const HRPostList = (props) => {
   TabTitle("Công việc đang tuyển | IT Internship JOBS");
   const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => setValue(newValue);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if(newValue === 0) {
+      dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
+    }else if(newValue === 1) {
+    dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
+    }
+  };
   const dispatch = useDispatch();
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
@@ -54,8 +61,8 @@ const HRPostList = (props) => {
     dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
   }, []);
 
-  console.log("jobListActived", jobListActived)
-  console.log("jobListDisabled", jobListDisabled)
+  console.log("jobListActived", jobListActived);
+  console.log("jobListDisabled", jobListDisabled);
 
   return (
     <div className="hr-post__wrapper">
@@ -115,7 +122,7 @@ const HRPostList = (props) => {
               <Tab label="Đã đóng" {...a11yProps(1)} />
             </Tabs>
           </Box>
-          
+
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListJob
               listJob={jobListActived}
