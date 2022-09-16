@@ -2,12 +2,7 @@ import moment from "moment";
 import * as yup from "yup";
 import { mixed } from "yup/lib/locale";
 
-const date = moment(Date.now()).format("MM-DD-YYYY").toString();
-const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
-const tomorow = new Date();
-const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
-  "MM-DD-YYYY"
-);
+const dateNow = moment(Date.now()).format("MM-DD-YYYY");
 
 export const schemaFormPost = yup.object({
   name: yup.string().required(" * Bạn điền trường này."),
@@ -39,13 +34,28 @@ export const schemaFormPost = yup.object({
     .nullable()
     .transform((curr, orig) => (orig === "" ? null : curr))
     .required(" * Bạn phải chọn ngày bắt đầu tuyển dụng.")
-    .min(`${date}`, ` * Bạn không thể chọn ngày bắt đầu tuyển ở quá khứ.`),
+    .test(
+      "Validate time start",
+      " * Thời gian bắt đầu tuyển dụng không thể ở quá khứ.",
+      (value) => {
+        return moment(value).format("MM-DD-YYYY") >= dateNow;
+      }
+    ),
   timeEnd: yup
     .date()
     .nullable()
     .transform((curr, orig) => (orig === "" ? null : curr))
     .required(" * Bạn phải chọn ngày kết thúc tuyển dụng.")
-    .min(yup.ref("timeStart"), " * Ngày hết hạn phải lớn hơn ngày bắt đầu."),
+    .test(
+      "Validate time end",
+      " * Ngày kết thúc ứng tuyển phải sau ngày bắt đầu",
+      (value, context) => {
+        return (
+          moment(value).format("MM-DD-YYYY") >
+          moment(context.parent.timeStart).format("MM-DD-YYYY")
+        );
+      }
+    ),
   district: yup.string().required(" * Bạn phải chọn quận/huyện."),
   province: yup.string().required(" * Bạn phải chọn tỉnh/thành phố."),
   country: yup.string().required(" * Bạn phải chọn quốc gia."),

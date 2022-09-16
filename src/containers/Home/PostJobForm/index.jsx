@@ -78,8 +78,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       setValue("name", jobDetail?.name);
       setValue("amount", jobDetail?.amount);
       setValue("address", jobDetail?.locationjob?.address);
-      setValue("salaryMin", jobDetail?.salaryMin);
-      setValue("salaryMax", jobDetail?.salaryMax);
+      setValue("salaryMin", jobDetail?.salaryMin === 0 && null);
+      setValue("salaryMax", jobDetail?.salaryMax === 0 && null);
       setValue("timeStart", jobDetail?.timeStartStr);
       setValue("timeEnd", jobDetail?.timeEndStr);
     }
@@ -89,8 +89,9 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   let textBtn;
   switch (formStatus) {
     case "update":
-      if (isNoSalary) {
-      }
+      let dateStart = new Date(jobDetail?.timeStartStr);
+      dateStart = moment(dateStart).format("MM-DD-YYYY");
+      sessionStorage.setItem("timeStart", dateStart);
       schema = schemaFormUpdate;
       textBtn = "Chỉnh sửa";
       break;
@@ -109,12 +110,11 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
     setValue,
     formState: { errors },
   } = useForm({
-    mode: "onTouched",
+    mode: "onChange",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-    console.log("first");
     if (formStatus === "post") {
       const jobData = {
         name: data.name,
@@ -129,8 +129,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           id: parseInt(data.jobType),
         },
         amount: parseInt(data.amount),
-        salaryMin: isNoSalary ? null : data.salaryMin,
-        salaryMax: isNoSalary ? null : data.salaryMax,
+        salaryMin: isNoSalary ? 0 : data.salaryMin,
+        salaryMax: isNoSalary ? 0 : data.salaryMax,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
         timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
@@ -429,7 +429,6 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 </div>
                 <SwitchButton
                   state={isNoSalary}
-                  id={["salaryMin", "salaryMax"]}
                   setState={setIsNoSalary}
                   label="Không có trợ cấp"
                   fontSize="13px"
