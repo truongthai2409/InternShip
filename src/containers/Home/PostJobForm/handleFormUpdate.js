@@ -1,12 +1,7 @@
 import moment from "moment";
 import * as yup from "yup";
 
-const date = moment(Date.now()).format("MM-DD-YYYY").toString();
 const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
-const tomorow = new Date();
-const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
-  "MM-DD-YYYY"
-);
 
 export const schemaFormUpdate = yup.object({
   name: yup.string().required(" * Bạn phải điền chức danh."),
@@ -22,16 +17,30 @@ export const schemaFormUpdate = yup.object({
     .integer(" * Số lượng ứng viên phải là số nguyên. "),
   timeStart: yup
     .date()
-    .nullable()
     .transform((curr, orig) => (orig === "" ? null : curr))
     .required(" * Bạn phải chọn ngày bắt đầu tuyển dụng.")
-    .min(`${date}`, ` * Bạn không thể chọn ngày bắt đầu tuyển ở quá khứ.`),
+    .test(
+      "Validate time start",
+      " * Không thể chọn thời gian trước ngày đã chọn lúc tạo.",
+      (value) => {
+        const dateBefore = sessionStorage.getItem("timeStart");
+        return moment(value).format("MM-DD-YYYY") >= dateBefore;
+      }
+    ),
   timeEnd: yup
     .date()
-    .nullable()
     .transform((curr, orig) => (orig === "" ? null : curr))
     .required(" * Bạn phải chọn ngày kết thúc tuyển dụng.")
-    .min(yup.ref("timeStart"), " * Ngày hết hạn phải lớn hơn ngày bắt đầu."),
+    .test(
+      "Validate time end",
+      " * Ngày kết thúc ứng tuyển phải sau ngày bắt đầu",
+      (value, context) => {
+        return (
+          moment(value).format("MM-DD-YYYY") >
+          moment(context.parent.timeStart).format("MM-DD-YYYY")
+        );
+      }
+    ),
   district: yup.string().required(" * Bạn phải chọn quận/huyện."),
   province: yup.string().required(" * Bạn phải chọn tỉnh/thành phố."),
   country: yup.string().required(" * Bạn phải chọn quốc gia."),
@@ -40,15 +49,29 @@ export const schemaFormUpdate = yup.object({
   jobRequirement: yup.string().required(" * Bạn phải nhập mô tả công việc."),
   benefits: yup.string().required(" * Bạn phải nhập quyền lợi của ứng viên."),
   salaryMin: yup
-    .number()
-    .required(" * Bạn phải nhập mức lương tối thiểu.")
-    .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
-    .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
+    .string()
+    .nullable()
+    .test("Validate type", " * Giá trị bạn vừa nhập không hợp lệ.", (value) => {
+      return !isNaN(value);
+    })
+    .test(
+      "validate min salary",
+      " * Mức trợ cấp tối thiểu là 1000.",
+      (value) => {
+        return value ? Number(value) >= 1000 : true;
+      }
+    ),
   salaryMax: yup
-    .number()
-    .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
-    .min(
-      yup.ref("salaryMin"),
-      " * Mức trợ cấp tối đa phải lớn hơn hoặc bằng mức tối thiểu."
+    .string()
+    .nullable()
+    .test("Validate type", " * Giá trị bạn vừa nhập không hợp lệ.", (value) => {
+      return !isNaN(value);
+    })
+    .test(
+      "validate max salary",
+      " * Mức trợ cấp tối đa phải lớn hơn mức trợ cấp tối thiểu.",
+      (value, context) => {
+        return value ? Number(value) > context.parent.salaryMin : true;
+      }
     ),
 });

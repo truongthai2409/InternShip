@@ -222,6 +222,11 @@ export const getJobListByUserId = createAsyncThunk(
   }
 );
 
+export const getDisabledJobListByUserId = createAsyncThunk(
+  "job/getDisabledJobListByUserId",
+  
+)
+
 export const getJobPositionList = createAsyncThunk(
   "job/getJobPositionList",
   async () => {

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./styles.scss";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -8,13 +8,10 @@ const CustomInput = ({
   label,
   id,
   type,
-  format,
   placeholder,
   children,
   register,
-  unregister,
   check = false,
-  defaultValue,
   requirementField = true,
   visibility = false,
   className,
@@ -28,6 +25,12 @@ const CustomInput = ({
   const handleHide = () => {
     setIsHide(!isHide);
   };
+
+  useEffect(() => {
+    if (check) {
+      setValue(id, null);
+    }
+  }, [check]);
 
   return (
     <div className={`custom-input ${className ? className : ""} `}>
