@@ -12,7 +12,7 @@ const SwitchButton = ({ label, setState, state, onClick }) => {
       <FormControlLabel
         onChange={handleOnChange}
         onClick={onClick}
-        control={<Switch />}
+        control={<Switch checked={state} />}
         label={label}
       />
     </FormGroup>

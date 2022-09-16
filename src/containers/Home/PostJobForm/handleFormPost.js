@@ -9,20 +9,31 @@ const tomorowFormat = moment(tomorow.setDate(tomorow.getDate() + 1)).format(
   "MM-DD-YYYY"
 );
 
-const test = false;
-
 export const schemaFormPost = yup.object({
-  name: yup.string().required(" * Bạn phải điền chức danh."),
-  jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
-  major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
-  jobPosition: yup.string().required(" * Bạn phải chọn vị trí công việc."),
+  name: yup.string().required(" * Bạn điền trường này."),
+  jobType: yup.string().required(" * Bạn điền trường này."),
+  major: yup.string().required(" * Bạn điền trường này."),
+  jobPosition: yup.string().required(" * Bạn điền trường này."),
   amount: yup
-    .number()
-    .typeError(
-      " * Số lượng ứng viên không được để trống hoặc không phải là số."
+    .string()
+    .required(" * Bạn nhập trường này.")
+    .test(
+      "Validate space",
+      " * Giá trị bạn vừa nhập không hợp lệ.",
+      (value) => {
+        return value.indexOf(" ");
+      }
     )
-    .min(1, " * Số lượng ứng viên phải lớn hơn 0. ")
-    .integer(" * Số lượng ứng viên phải là số nguyên. "),
+    .test("Validate type", " * Giá trị bạn vừa nhập không hợp lệ.", (value) => {
+      return !isNaN(value);
+    })
+    .test(
+      "Validate type",
+      " * Giá trị bạn vừa nhập phải là số nguyên và lớn hơn 0.",
+      (value) => {
+        return Number.isInteger(Number(value)) && Number(value) > 0;
+      }
+    ),
   timeStart: yup
     .date()
     .nullable()
@@ -45,13 +56,27 @@ export const schemaFormPost = yup.object({
   salaryMin: yup
     .string()
     .nullable()
-    .min(1000, " * Số tiền trợ cấp phải lớn hơn 1000."),
+    .test("Validate type", " * Giá trị bạn vừa nhập không hợp lệ.", (value) => {
+      return !isNaN(value);
+    })
+    .test(
+      "validate min salary",
+      " * Mức trợ cấp tối thiểu là 1000.",
+      (value) => {
+        return value ? Number(value) >= 1000 : true;
+      }
+    ),
   salaryMax: yup
-    .number()
+    .string()
     .nullable()
-    .typeError(" * Vui lòng không nhập kí tự khác ngoài số.")
-    .min(
-      yup.ref("salaryMin"),
-      " * Mức trợ cấp tối đa phải lớn hơn hoặc bằng mức tối thiểu."
+    .test("Validate type", " * Giá trị bạn vừa nhập không hợp lệ.", (value) => {
+      return !isNaN(value);
+    })
+    .test(
+      "validate max salary",
+      " * Mức trợ cấp tối đa phải lớn hơn mức trợ cấp tối thiểu.",
+      (value, context) => {
+        return value ? Number(value) > context.parent.salaryMin : true;
+      }
     ),
 });

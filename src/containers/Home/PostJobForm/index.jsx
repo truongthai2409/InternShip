@@ -57,7 +57,9 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [isNoSalary, setIsNoSalary] = useState(false);
+  const [isNoSalary, setIsNoSalary] = useState(
+    jobDetail ? jobDetail.salaryMax === 0 && true : false
+  );
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -103,7 +105,6 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
 
   const {
     register,
-    unregister,
     handleSubmit,
     setValue,
     formState: { errors },
@@ -271,7 +272,6 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                 <CustomInput
                   label="Số lượng cần tuyển"
                   id="amount"
-                  type="number"
                   placeholder="Nhập số lượng..."
                   register={register}
                 >
@@ -406,31 +406,28 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   Trợ cấp<span className="field-requirment">*</span>
                 </label>
                 <div className="hr-post__salary-range">
-                  {!isNoSalary && (
-                    <>
-                      <CustomInput
-                        id="salaryMin"
-                        type="number"
-                        placeholder="Nhập số tiền tối thiểu..."
-                        register={register}
-                        requirementField={false}
-                      >
-                        {errors.salaryMin?.message}
-                      </CustomInput>
-                      <CustomInput
-                        id="salaryMax"
-                        type="number"
-                        placeholder="Nhập số tiền tối đa..."
-                        register={register}
-                        requirementField={false}
-                      >
-                        {errors.salaryMax?.message}
-                      </CustomInput>
-                    </>
-                  )}
+                  <CustomInput
+                    id="salaryMin"
+                    placeholder="Từ bao nhiêu..."
+                    register={register}
+                    requirementField={false}
+                    check={isNoSalary}
+                    setValue={setValue}
+                  >
+                    {errors.salaryMin?.message}
+                  </CustomInput>
+                  <CustomInput
+                    id="salaryMax"
+                    placeholder="Đến bao nhiêu..."
+                    register={register}
+                    requirementField={false}
+                    check={isNoSalary}
+                    setValue={setValue}
+                  >
+                    {errors.salaryMax?.message}
+                  </CustomInput>
                 </div>
                 <SwitchButton
-                  onClick={() => {}}
                   state={isNoSalary}
                   id={["salaryMin", "salaryMax"]}
                   setState={setIsNoSalary}
