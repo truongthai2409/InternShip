@@ -8,20 +8,6 @@ const loginRouter = [
     {
         path: "/login",
         element: <LoginLayout />,
-        children: [
-            {
-                path: "candidate",
-                Component: CandidateInfo,
-            },
-            {
-                path: "hr",
-                Component: HRInfo,
-            },
-            {
-                path: "partner",
-                Component: PartnerInfo,
-            },
-        ]
     }
 ]
 export default loginRouter

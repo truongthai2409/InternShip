@@ -28,7 +28,7 @@ const Login = () => {
     setValue,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
+    mode: "all",
     resolver: yupResolver(schema),
   });
 

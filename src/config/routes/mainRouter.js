@@ -33,6 +33,17 @@ const mainRouter = [
         path: "/forgot-password",
         element: <ForgotPassword />
 
+    },
+    {
+        //Doesn't match route?, It's here. If you want to change just delete children and change element
+        path: "*",
+        element: <MainLayout />,
+        children: [
+            {
+                path: "*",
+                Component: Home
+            }
+        ]
     }
 ]
 export default mainRouter
