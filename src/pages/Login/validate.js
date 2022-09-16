@@ -11,7 +11,7 @@ export const schema = yup
       .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới gạch ngang và dấu chấm.")
       .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
       .min(6, '* Tối thiểu 6 kí tự.')
-      .matches(/[^\W_]$/, "* Kết thúc phải là chữ cái hoặc số.")
+      .matches(/[^\W_]$/, "* Không đúng định dạng.")
       .max(32, '* Tối đa 32 kí tự.'),
     password: yup
       .string()
@@ -21,7 +21,7 @@ export const schema = yup
       .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
       .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
       .min(6, '* Tối thiểu 6 kí tự.')
-      .matches(/[^\W_]$/, "* Kết thúc phải là chữ cái hoặc số.")
+      .matches(/[^\W_]$/, "* Không đúng định dạng.")
       .matches(/[A-Z]/, "* ít nhất 1 chữ in hoa.")
       .matches(/[0-9]/, "* Ít nhất 1 số.")
       .max(32, '* Tối đa 32 kí tự.'),
