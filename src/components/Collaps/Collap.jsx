@@ -3,7 +3,7 @@ import React from 'react';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
 
-export default function Collap({ children, title , opens}) {
+export default function Collap({ children, title}) {
     const [open, setOpen] = React.useState(false);
     
     const handleClick = () => {

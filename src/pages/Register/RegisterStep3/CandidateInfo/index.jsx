@@ -73,7 +73,7 @@ const CandidateInfo = () => {
 
   return (
     <Container
-      title="Cộng Tác Viên"
+      title="Ứng Viên"
       onClick={handleBackClick}
       handleClick={handleSubmit(onSubmit)}
       err={errors}

@@ -129,7 +129,7 @@ const HeaderWithHR = (props) => {
             <span className="header__hr-post-post">Ứng viên ưa thích</span>
           </Link>
         </div> : null}
-      {pathUrl === "/candidate" || profile?.user?.role?.name.includes("Role_Candidate") ? (
+      {/* {pathUrl === "/candidate" || profile?.user?.role?.name.includes("Role_Candidate") ? (
         <div className="header__hr">
           <Link to="/candidate/view-list-apply" className="header__hr-post">
             <PlaylistAddCheckOutlinedIcon fontSize="large" />
@@ -176,7 +176,7 @@ const HeaderWithHR = (props) => {
             </Typography>
           </Popover>
         </div>
-      )}
+      )} */}
       {props.search ? (
         <div>
           <div style={{}} className="responsive__header-search">

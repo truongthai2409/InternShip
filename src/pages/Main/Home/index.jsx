@@ -11,12 +11,11 @@ import {
   getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import PaginationCustom from "src/components/Pagination";
 
 const limit = process.env.LIMIT_OF_PAGE || 5;
 const Home = (props) => {
   const dispatch = useDispatch();
-  // let currentPage = 1;
-
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
@@ -29,6 +28,7 @@ const Home = (props) => {
     jobFilter,
     jobListCompany,
   } = useSelector((state) => state.job);
+
   const [jobs, setJobs] = useState(jobFilter);
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
@@ -81,8 +81,7 @@ const Home = (props) => {
   useEffect(() => {
     setJobDetails(jobs[indexCardActive])
     dispatch(getJobByCompany(Number(idCompany)));
-  }, [idCompany,indexCardActive]);
-  
+  }, [idCompany, indexCardActive]);
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
@@ -95,9 +94,9 @@ const Home = (props) => {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, [idCompany]);
-  useEffect(()=>{
+  useEffect(() => {
     setJobDetails(jobs[0])
-  },[jobs])
+  }, [jobs])
   const handleSearch = (value) => {
     const dataFilter = {
       type: "",
@@ -165,6 +164,15 @@ const Home = (props) => {
     // currentPage = value;
     window.scroll(0, 0);
   };
+  const handleChanges = (e) => {
+    if (e.target.dataset.testid === "NavigateNextIcon") {
+      return setCurrentPage(currentPage + 1)
+    }
+    if (e.target.dataset.testid === "NavigateBeforeIcon") {
+      return setCurrentPage(currentPage - 1)
+    }
+    return setCurrentPage(parseInt(e.target.innerText));
+  }
   if (jobs?.length === 0) {
     return (
       <Grid
@@ -250,6 +258,14 @@ const Home = (props) => {
               jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
             />
+            <div className="pagination_home">
+              <PaginationCustom
+                page={currentPage}
+                totalPages={jobListHavePages.totalPages}
+                handleOnChange={handleChanges}
+                shape={"circular"}
+              />
+            </div>
           </Grid>
 
           <Grid item lg={6} className="onTablet">

@@ -24,6 +24,7 @@ export default function SelectAreaHome({ onChange }) {
       nameRender={(option) => option.name}
       labelName="Khu Vực"
       onChange={(event, value) => handleLabel(value)}
+      register={(option)=>option}
     />
     </div>
   );

@@ -129,7 +129,7 @@ const FilterPanelHome = ({
                 locationPath={location.pathname}
               />
             ))
-          : null}
+          : <div style={{"textAlignLast": "center"}}>Không tìm thấy công việc</div>}
       </TabPanel>
 
       {page > 1 ? (

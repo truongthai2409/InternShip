@@ -17,6 +17,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    justify-content: center;
   }
 
   &.none-list {
@@ -27,7 +28,7 @@
 .dialog-title__list-candidate {
   font-size: 25px !important;
   font-weight: 600 !important;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+  font-family: "Public Sans", sans-serif;
 }
 
 .candidate-card__wrapper {

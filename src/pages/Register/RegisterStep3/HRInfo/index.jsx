@@ -63,7 +63,7 @@ const HRInfo = () => {
 
   return (
     <Container
-      title="Cộng Tác Viên"
+      title="Nhà Tuyển Dụng"
       onClick={handleBackClick}
       handleClick={handleSubmit(onSubmit)}
       err={errors}
