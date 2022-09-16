@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "./styles.scss";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { TabTitle } from "src/utils/GeneralFunctions";
+import Button from "../../components/Button/index";
 import CustomCheckbox from "../../components/CustomCheckbox";
 import CustomInput from "../../components/CustomInput/index";
-import Button from "../../components/Button/index";
 import { loginUser } from "../../store/slices/main/login/loginSlice";
+import "./styles.scss";
 import { schema } from "./validate";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import { authenticationSelector } from "src/store/selectors/main/loginSelectors";
-import { toast } from "react-toastify";
-import { stringify } from "query-string";
 
 const Login = () => {
   TabTitle("Login");
@@ -33,20 +31,6 @@ const Login = () => {
   });
 
   useEffect(() => {
-    // if (status === "success") {
-    //   const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
-    //   switch (role) {
-    //     case "Role_HR":
-    //       navigate("/hr", { replace: true });
-    //       break;
-    //     case "Role_Partner":
-    //       navigate("/partner", { replace: true });
-    //       break;
-    //     case "Role_Candidate":
-    //       navigate("/candidate", { replace: true });
-    //       break;
-    //   }
-    // }
     if (isCheck) {
       setValue(
         "username",

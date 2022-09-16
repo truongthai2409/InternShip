@@ -12,9 +12,7 @@ import { getCandidateByUserName } from "src/store/slices/main/candidate/info/inf
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
 import "./styles.scss";
-// const formatSalary = (salary = "") => {
-//   return salary.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-// };
+
 
 const InformationCompany = ({
   jobDetail,

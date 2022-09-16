@@ -41,7 +41,7 @@ const Logo = ({ id }) => {
             return navigate(`/candidate`, { replace: true });
           }
         default:
-          break;
+          return navigate(`/`, { replace: true });
       }
     } else {
       navigate(`/`);

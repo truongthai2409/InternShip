@@ -7,14 +7,17 @@ import Button from '../Button';
 import './styles.scss';
 
 export default function Login() {
-    const {profile} = useSelector(state=>state.user) 
+    const { profile } = useSelector(state => state.user)
+    const role = sessionStorage.getItem("userPresent")
+        ? JSON.parse(sessionStorage.getItem("userPresent")).role
+        : "";
     const dispatch = useDispatch()
     useEffect(() => {
         const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
         dispatch(getProfileByIdUser(idUser))
     }, [])
     const renderLogin = () => {
-        if (profile.id !== undefined) {
+        if (role) {
             return (
                 <div className="header__hr-icon">
                     <div
@@ -43,19 +46,16 @@ export default function Login() {
             )
         } else {
             return (
-                <div className="login_container">
+                <div className="login__home">
                     <Link to="/login">
-                        <Button
-                            bheight="45px"
-                            name="Đăng Nhập"
-                            className="login__home-login"
-                        />
+                        <span className="login__home-sign-in">Đăng nhập</span>
                     </Link>
                     <Link to="/register">
                         <Button
+                            bwidth="117px"
                             bheight="45px"
                             name="Đăng ký"
-                            className="login__home-login"
+                            className="login__home-register"
                         />
                     </Link>
                 </div>
