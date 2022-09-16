@@ -202,7 +202,7 @@ export default function UniversityForm(props) {
                     label="Email"
                     id="email"
                     type="email"
-                    placeholder="VD: hoangvubg6262125@gmail.com..."
+                    placeholder="abc.xyz@gmail.co..."
                     register={register}
                     check={!isEdit}
                   >
@@ -236,7 +236,7 @@ export default function UniversityForm(props) {
                     label="Tên viết tắt"
                     id="shortName"
                     type="text"
-                    placeholder="VD: UTE..."
+                    placeholder="UTE..."
                     register={register}
                     check={!isEdit}
                   >

@@ -69,7 +69,7 @@
     }
   }
 
-  > .custom-input {
+  >.custom-input {
     margin: 0;
   }
 }
@@ -80,23 +80,33 @@
   grid-gap: 30px;
 }
 
+.requirment {
+  text-align: left;
+  color: #ff5c58;
+  font-size: 13px;
+}
+
 .gender-container-partner-page {
   margin-top: 5px;
 }
+
 .css-10hburv-MuiTypography-root {
   text-align: center;
 }
+
 .customfilter {
   margin-top: 1rem;
   width: 100%;
   display: flex;
   justify-content: center;
   border: 1px dashed $primary-color;
+
   .customfield {
     border-left: 1px solid $primary-color;
     border-right: 1px solid $primary-color;
   }
 }
+
 @media (min-width: 300px) and (max-width: 640px) {
   .row-3-col {
     flex-direction: column;

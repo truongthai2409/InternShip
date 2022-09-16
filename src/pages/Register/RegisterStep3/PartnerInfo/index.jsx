@@ -125,6 +125,7 @@ const PartnerInfo = () => {
   const handleLabel = (number) => {
     setInfo(number.id)
   }
+
   const handerClicker = () => {
     setOpen(!open)
     setInfo()
@@ -149,8 +150,11 @@ const PartnerInfo = () => {
                 nameRender={(option) => option.name}
                 labelName="Chọn Trường"
                 onChange={(event, value) => handleLabel(value)}
+                id="registerPartner"
+                register={register}
               />
             </div> : ""}
+              {!open? <div className="requirment">{errors.registerPartner?.message}</div> : ""}
           <div className="collap" onClick={() => handerClicker()}>
             <Collap
               title="Chưa có trường của bạn? Đăng kí ngay"
@@ -204,7 +208,7 @@ const PartnerInfo = () => {
                       label="Website"
                       id="website"
                       type="text"
-                      placeholder="Vd: hust.edu..."
+                      placeholder="hust.edu..."
                       register={register}
                     >
                       {errors.website?.message}
@@ -214,21 +218,21 @@ const PartnerInfo = () => {
                   <div className="reg-candidate__form--name">
                     <CustomInput
                       label="Email của Trường"
-                      id="email"
+                      id="emailSchool"
                       type="email"
                       placeholder="Email..."
                       register={register}
                     >
-                      {errors.email?.message}
+                      {errors.emailSchool?.message}
                     </CustomInput>
                     <CustomInput
                       label="Số điện thoại của Trường"
-                      id="phone"
+                      id="phoneSchool"
                       type="text"
                       placeholder="Vd. 999-999-..."
                       register={register}
                     >
-                      {errors.phone?.message}
+                      {errors.phoneSchool?.message}
                     </CustomInput>
                   </div>
 

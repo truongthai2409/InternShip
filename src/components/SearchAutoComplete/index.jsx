@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box } from "@mui/system";
 
-export default function index({ data, avatarRender, nameRender, labelName, onChange }) {
+export default function index({ data, avatarRender, nameRender, labelName, onChange, register, id}) {
 
     return (
         <Autocomplete
@@ -13,7 +13,7 @@ export default function index({ data, avatarRender, nameRender, labelName, onCha
             getOptionLabel={nameRender}
             onChange={onChange}
             renderOption={(props, option) => (
-                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} >
                     {avatarRender === null ? null :
                         <img
                             loading="lazy"
@@ -22,10 +22,12 @@ export default function index({ data, avatarRender, nameRender, labelName, onCha
                             alt=""
                         />}
                     {nameRender(option)}
+
                 </Box>
             )}
             renderInput={(params) => (
                 <TextField
+                    {...register(id)}
                     {...params}
                     label={labelName}
                 />
