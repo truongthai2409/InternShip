@@ -51,6 +51,8 @@ const CandidateViewList = () => {
     }
   }
   const { profile } = useSelector((state) => state.authentication);
+  // const {profile} = useSelector((state)=>state.user)
+
   useEffect(() => {
     const _getValue = async () => {
       const dataGetMarkByUser = {
@@ -113,27 +115,11 @@ const CandidateViewList = () => {
     };
     if (pathUrl === "/candidate/view-list-care") {
       dispatch(getJobCandidateCaredByNameAndLocation(dataSearch));
-      // navigate(
-      //   `/candidate` +
-      //     `?name=${value || ""}&province=${
-      //       encodeURIComponent(locationValue)
-      //         .replace(/%20/g, "+")
-      //         .replace(/\s/g, "-") || ""
-      //     }&no=0&limit=10`
-      // );
     }
 
     if (pathUrl === "/candidate/view-list-apply") {
       dispatch(getJobCandidateAppliedByNameAndLocation(dataSearch));
     }
-    // navigate(
-    //   `/candidate` +
-    //     `?name=${value || ""}&province=${
-    //       encodeURIComponent(locationValue)
-    //         .replace(/%20/g, "+")
-    //         .replace(/\s/g, "-") || ""
-    //     }&no=0&limit=10`
-    // );
   };
 
   const getValueLocationAndHandle = (value) => {
@@ -151,6 +137,7 @@ const CandidateViewList = () => {
       careListOfPrivateHavePages?.totalPages || applyListHavePage?.totalPages
     );
   }, []);
+  console.log(careListOfPrivate)
   return (
     <Box sx={{ width: "100%" }}>
       <div className="view-list">
@@ -166,7 +153,7 @@ const CandidateViewList = () => {
                         eleDuplicate={eleDuplicate}
                       />
                     ))
-                  : // <h3>{emptyList}</h3>
+                  :
                     ""}
 
                 {pathUrl === "/candidate/view-list-apply" &&

@@ -138,7 +138,7 @@
 
 @media (min-width: 300px) and (max-width: 940px) {
   .candidate_container {
-    height: 110vh;
+    min-height: 110vh;
     padding: 1px;
     .candidate_user {
       flex-direction: column !important;

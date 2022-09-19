@@ -1,9 +1,11 @@
-import "./styles.scss";
-import "./reponsive.scss";
 import { useState } from "react";
-import Modal from "../Modal";
 import ProfileForm from "src/containers/Home/ProfileForm";
-import { CompanyInfo, UniversityInfo, UserInfor } from "./components";
+import Modal from "../Modal";
+import Profiles from "./Profiles";
+import ProfileHR from "./ProfileHR";
+import ProfilePartner from "./ProfilePartner";
+import "./reponsive.scss";
+import "./styles.scss";
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
@@ -12,10 +14,10 @@ const Profile = () => {
   let RelatedInfor = "";
   switch (roleUser) {
     case "Role_HR":
-      RelatedInfor = <CompanyInfo />;
+      RelatedInfor = <ProfileHR />;
       break;
     case "Role_Partner":
-      RelatedInfor = <UniversityInfo />;
+      RelatedInfor = <ProfilePartner />;
       break;
     case "Role_Candidate":
       RelatedInfor = null;
@@ -26,7 +28,7 @@ const Profile = () => {
   return (
     <>
       <div className="profile__wrapper">
-       <UserInfor open={open} setOpen={setOpen} /> 
+       <Profiles open={open} setOpen={setOpen} /> 
           {RelatedInfor}
       </div>
       <Modal

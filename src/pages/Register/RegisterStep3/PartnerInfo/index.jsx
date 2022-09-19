@@ -49,50 +49,75 @@ const PartnerInfo = () => {
     navigate(-1);
   };
   const onSubmit = async (data) => {
-
-    const partnerData = {
-      avatar: data.avatar || info.logo,
-      logo: data.logo,
-      university: JSON.stringify({
-        name: data.schoolName,
-        shortName: data.shortName,
-        email: data.emailSchool,
-        description: "mô tả",
-        website: data.website,
-        phone: data.phoneSchool,
-        location: [
-          {
-            district: {
-              id: data.district,
+    if (info) {
+      const partnerData = {
+        avatar: data.avatar || info.logo,
+        logo: data.logo,
+        university: info,
+        partner: JSON.stringify({
+          position: data.position,
+          userCreationDTO: {
+            username: data.username,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            firstName: data.firstname,
+            lastName: data.lastname,
+            phone: data.phone,
+            gender: parseInt(data.gender),
+            email: data.email,
+            role: {
+              id: parseInt(data.typeSchool),
             },
-            address: data.address,
-            note: "",
           },
-        ],
-        type: {
-          id: 1,
-        },
-      }),
+        }),
+      };
+      console.log(partnerData)
+      dispatch(addUniversity(partnerData));
+    } else {
+      const partnerData = {
+        avatar: data.avatar || info.logo,
+        logo: data.logo,
+        university: JSON.stringify({
+          name: data.schoolName,
+          shortName: data.shortName,
+          email: data.emailSchool,
+          description: "mô tả",
+          website: data.website,
+          phone: data.phoneSchool,
+          location: [
+            {
+              district: {
+                id: data.district,
+              },
+              address: data.address,
+              note: "",
+            },
+          ],
+          type: {
+            id: 1,
+          },
+        }),
 
-      partner: JSON.stringify({
-        position: data.position,
-        userCreationDTO: {
-          username: data.username,
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-          firstName: data.firstname,
-          lastName: data.lastname,
-          phone: data.phone,
-          gender: parseInt(data.gender),
-          email: data.email,
-          role: {
-            id: parseInt(data.typeSchool),
+        partner: JSON.stringify({
+          position: data.position,
+          userCreationDTO: {
+            username: data.username,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            firstName: data.firstname,
+            lastName: data.lastname,
+            phone: data.phone,
+            gender: parseInt(data.gender),
+            email: data.email,
+            role: {
+              id: parseInt(data.typeSchool),
+            },
           },
-        },
-      }),
-    };
-    console.log(partnerData)
-    dispatch(addUniversity(partnerData));
+        }),
+      };
+      console.log(partnerData)
+      dispatch(addUniversity(partnerData));
+    }
   };
 
   const {
@@ -154,7 +179,7 @@ const PartnerInfo = () => {
                 register={register}
               />
             </div> : ""}
-              {!open? <div className="requirment">{errors.registerPartner?.message}</div> : ""}
+          {!open ? <div className="requirment">{errors.registerPartner?.message}</div> : ""}
           <div className="collap" onClick={() => handerClicker()}>
             <Collap
               title="Chưa có trường của bạn? Đăng kí ngay"

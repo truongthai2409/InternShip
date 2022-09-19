@@ -205,14 +205,6 @@ const Home = (props) => {
               jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
             />
-            <div className="pagination_home">
-              <PaginationCustom
-                page={currentPage}
-                totalPages={jobListHavePages.totalPages}
-                handleOnChange={handleChanges}
-                shape={"circular"}
-              />
-            </div>
           </Grid>
 
           <Grid item lg={6} className="onTablet">

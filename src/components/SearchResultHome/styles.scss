@@ -44,7 +44,7 @@
     align-items: center;
     flex: 1;
     justify-content: flex-start;
-
+    margin-left: 15px;
     .select__icon-location {
       color: $primary-color;
     }
@@ -79,6 +79,7 @@
 @media (min-width: 1024px) and (max-width: 1070px) {
   .header__with-search-search {
     display: flex;
+    margin-left: 15px;
   }
 }
 
@@ -92,7 +93,10 @@
 }
 @media (min-width: 1050px) and (max-width: 1200px) {
   .onTablet {
-    padding-left: 15px;
+    // padding-left: 15px;
+  }
+  .header__with-search-search {
+    margin-left: 0;
   }
 }
 //mobile
@@ -117,5 +121,8 @@
 @media (max-width: 1024px) {
   .header__with-search-search-fix {
     // display: none !important;
+  }
+  .header__with-search-search {
+    margin-left: 0;
   }
 }

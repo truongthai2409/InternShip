@@ -23,7 +23,6 @@ const ProfileForm = ({ handleClose }) => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   useEffect(() => {
-    // setValue("avatar", profile?.user.avatar);
     setValue(
       "firstName",
       profile?.user?.firstName || profile?.userDTO?.firstName

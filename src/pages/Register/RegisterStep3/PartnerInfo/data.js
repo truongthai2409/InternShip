@@ -27,8 +27,8 @@ export const schemaRegister = yup.object().shape({
 })
 
 export const schema = yup.object().shape({
-    //Container
-    username: yup
+  //Container
+  username: yup
     .string()
     .required('* Bạn phải nhập tài khoản.')
     .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
@@ -43,7 +43,7 @@ export const schema = yup.object().shape({
     .matches(/[^\W_]$/, "* Không đúng định dạng.")
     .min(6, '* Tối thiểu 6 kí tự.')
     .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 kí tự chữ.")
-    .max(32, '* Tối đa 32 kí tự.'), 
+    .max(32, '* Tối đa 32 kí tự.'),
   email: yup
     .string()
     .required('* Bạn phải nhập email.')
@@ -71,7 +71,7 @@ export const schema = yup.object().shape({
   lastname: yup
     .string()
     .required('* Bạn phải nhập họ.')
-    .test("CheckNumber", "* Họ không được chứa số", (value)=> (/\D+$/).test(value))
+    .test("CheckNumber", "* Họ không được chứa số", (value) => (/\D+$/).test(value))
     .min(2, '* Tối thiểu 2 kí tự.')
     .max(32, '* Tối đa 32 kí tự.'),
   firstname: yup
@@ -106,7 +106,10 @@ export const schema = yup.object().shape({
       }
     }),
   //END Conatiner
-  registerPartner: yup.string().required("* Bạn phải chọn trường hoặc đăng kí"),
+  registerPartner: yup
+    .string()
+    .default(null)
+    .nullable(),
   logo: yup
     .mixed()
     .test("type", '* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp', (value) => {
@@ -125,66 +128,132 @@ export const schema = yup.object().shape({
     }),
   schoolName: yup
     .string()
-    .required('* Bạn phải nhập tên trường.')
-    .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
-    .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới gạch ngang và dấu chấm.")
-    .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
-    .min(3, '* Tối thiểu 3 kí tự.')
-    .matches(/[^\W_]$/, "* Không đúng định dạng.")
-    .max(64, '* Tối đa 64 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập tên trường.')
+        .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
+        .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới gạch ngang và dấu chấm.")
+        .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
+        .min(3, '* Tối thiểu 3 kí tự.')
+        .matches(/[^\W_]$/, "* Không đúng định dạng.")
+        .max(64, '* Tối đa 64 kí tự.'),
+    }),
   shortName: yup
     .string()
-    .required('* Bạn phải nhập tên viết tắt của trường.')
-    .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
-    .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới gạch ngang và dấu chấm.")
-    .min(3, '* Tối thiểu 3 kí tự.')
-    .matches(/[^\W_]$/, "* Không đúng định dạng.")
-    .max(16, '* Tối đa 16 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập tên viết tắt của trường.')
+        .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
+        .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới gạch ngang và dấu chấm.")
+        .min(3, '* Tối thiểu 3 kí tự.')
+        .matches(/[^\W_]$/, "* Không đúng định dạng.")
+        .max(16, '* Tối đa 16 kí tự.')
+    }),
   position: yup
     .string()
-    .required('* Bạn phải nhập vai trò tại trường.')
-    .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
-    .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
-    .min(3, '* Tối thiểu 3 kí tự.')
-    .matches(/[^\W_]$/, "* Không đúng định dạng.")
-    .max(64, '* Tối đa 64 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập vai trò tại trường.')
+        .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
+        .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
+        .min(3, '* Tối thiểu 3 kí tự.')
+        .matches(/[^\W_]$/, "* Không đúng định dạng.")
+        .max(64, '* Tối đa 64 kí tự.'),
+    }),
   website: yup
     .string()
-    .required('* Bạn phải nhập website trường.')
-    .min(5, '* Tối thiểu 5 kí tự.')
-    .max(128, '* Tối đa 128 kí tự.')
-    .matches(URL_REGEX, '* Bạn đã nhập địa chỉ website trường không đúng.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập website trường.')
+        .min(5, '* Tối thiểu 5 kí tự.')
+        .max(128, '* Tối đa 128 kí tự.')
+        .matches(URL_REGEX, '* Bạn đã nhập địa chỉ website trường không đúng.'),
+    }),
   typeSchool: yup
     .string()
-    .required("* Bạn phải chọn loại hình."),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required("* Bạn phải chọn loại hình."),
+    }),
   district: yup
     .string()
-    .required('* Bạn phải chọn quận/huyện.')
-    .max(7, 'Tối đa 7 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải chọn quận/huyện.')
+        .max(7, 'Tối đa 7 kí tự.'),
+    }),
   province: yup
     .string()
-    .required('* Bạn phải chọn tỉnh/thành phố.')
-    .max(7, '* Tối đa 7 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải chọn tỉnh/thành phố.')
+        .max(7, '* Tối đa 7 kí tự.'),
+    }),
   country: yup
     .string()
-    .required('* Bạn phải chọn quốc gia.')
-    .max(7, '* Tối đa 7 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải chọn quốc gia.')
+        .max(7, '* Tối đa 7 kí tự.'),
+    }),
   address: yup
     .string()
-    .required('* Bạn phải nhập địa chỉ.')
-    .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
-    .min(6, '* Tối thiểu 6 kí tự.')
-    .max(64, '* Tối đa 64 kí tự.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập địa chỉ.')
+        .matches(/^[^\W_]/, "* Yêu cầu một chữ cái hoặc số đứng đầu.")
+        .min(6, '* Tối thiểu 6 kí tự.')
+        .max(64, '* Tối đa 64 kí tự.'),
+    }),
   emailSchool: yup
     .string()
-    .required('* Bạn phải nhập email trường.')
-    .min(6, '* Tối thiểu 6 kí tự.')
-    .max(64, '* Tối đa 64 kí tự.')
-    .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập email trường.')
+        .min(6, '* Tối thiểu 6 kí tự.')
+        .max(64, '* Tối đa 64 kí tự.')
+        .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng.'),
+    }),
   phoneSchool: yup
     .string()
-    .required('* Bạn phải nhập số điện thoại trường.')
-    .min(8, '* Tối thiểu 8 kí tự.')
-    .max(11, '* Tối đa 11 kí tự.')
-    .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập số điện thoại trường.')
+        .min(8, '* Tối thiểu 8 kí tự.')
+        .max(11, '* Tối đa 11 kí tự.')
+        .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
+    }),
 });
