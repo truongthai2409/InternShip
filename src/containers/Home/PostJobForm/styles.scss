@@ -21,7 +21,7 @@
 
     .custom-input .custom-input__textfield input {
       font-family: "Public Sans", sans-serif;
-      border: 1.6px solid $primary-color;
+      border: 1.6px solid rgb(119, 119, 119);
       border-radius: 2px;
       width: 100%;
       padding: 20px 12px;
@@ -210,47 +210,6 @@ label {
 
 .salary-select-field {
   width: 100%;
-}
-
-// Reponsive
-@media only screen and (min-width: 500px) and (max-width: 740px) {
-  .hr-post {
-    &__form {
-      width: 100%;
-    }
-  }
-}
-
-@media only screen and (min-width: 740px) and (max-width: 1260px) {
-  .hr-post {
-    &__form {
-      width: 100%;
-    }
-  }
-
-  #max-salary {
-    margin-left: 35px;
-  }
-}
-
-@media screen and (max-width : 500px) {
-
-  .form__container,
-  .hr-post__form {
-    width: 100% !important;
-
-    .row-2-col,
-    .row-3-col,
-    .hr-post__salary-range {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .custom-input {
-      width: 100%;
-    }
-  }
-
 }
 
 .title-requirement {

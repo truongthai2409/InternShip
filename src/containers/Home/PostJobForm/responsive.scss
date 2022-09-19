@@ -1,0 +1,39 @@
+@media only screen and (min-width: 500px) and (max-width: 740px) {
+    .hr-post {
+      &__form {
+        width: 100%;
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 740px) and (max-width: 1260px) {
+    .hr-post {
+      &__form {
+        width: 100%;
+      }
+    }
+  
+    #max-salary {
+      margin-left: 35px;
+    }
+  }
+  
+  @media screen and (max-width : 500px) {
+  
+    .form__container,
+    .hr-post__form {
+      width: 100% !important;
+  
+      .row-2-col,
+      .row-3-col,
+      .hr-post__salary-range {
+        flex-direction: column;
+        align-items: stretch;
+      }
+  
+      .custom-input {
+        width: 100%;
+      }
+    }
+  
+  }

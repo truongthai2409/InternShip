@@ -3,6 +3,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import CustomInput from "../../../components/CustomInput/index";
 import { useForm } from "react-hook-form";
 import "./styles.scss";
+import "./responsive.scss";
 import SwitchButton from "../../../components/SwitchButton";
 import Button from "../../../components/Button";
 import SelectCustom from "../../../components/Select";
@@ -78,13 +79,19 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       setValue("name", jobDetail?.name);
       setValue("amount", jobDetail?.amount);
       setValue("address", jobDetail?.locationjob?.address);
-      setValue("salaryMin", jobDetail?.salaryMin === 0 && null);
-      setValue("salaryMax", jobDetail?.salaryMax === 0 && null);
+      setValue(
+        "salaryMin",
+        jobDetail?.salaryMin === 0 ? null : jobDetail?.salaryMin
+      );
+      setValue(
+        "salaryMax",
+        jobDetail?.salaryMax === 0 ? null : jobDetail?.salaryMax
+      );
       setValue("timeStart", jobDetail?.timeStartStr);
       setValue("timeEnd", jobDetail?.timeEndStr);
     }
   }, []);
-
+  console.log("jobDetail", jobDetail);
   let schema;
   let textBtn;
   switch (formStatus) {
@@ -365,6 +372,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   register={register}
                   check={false}
                   isUpdate={formStatus !== "post" && true}
+                  subtitle={"(Tối đa 1500 ký tự)"}
                 >
                   {errors.jobDescription?.message}
                 </Textarea>
@@ -381,6 +389,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   register={register}
                   check={false}
                   isUpdate={formStatus !== "post" && true}
+                  subtitle={"(Tối đa 1500 ký tự)"}
                 >
                   {errors.jobRequirement?.message}
                 </Textarea>
@@ -397,6 +406,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   setValue={setValue}
                   check={false}
                   isUpdate={formStatus !== "post" && true}
+                  subtitle={"(Tối đa 1500 ký tự)"}
                 >
                   {errors.benefits?.message}
                 </Textarea>
@@ -413,6 +423,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                     requirementField={false}
                     check={isNoSalary}
                     setValue={setValue}
+                    subtitle="(Đơn vị VNĐ)"
                   >
                     {errors.salaryMin?.message}
                   </CustomInput>
@@ -423,6 +434,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                     requirementField={false}
                     check={isNoSalary}
                     setValue={setValue}
+                    subtitle="(Đơn vị VNĐ)"
                   >
                     {errors.salaryMax?.message}
                   </CustomInput>

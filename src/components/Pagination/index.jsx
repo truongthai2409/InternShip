@@ -7,9 +7,13 @@ const PaginationCustom = ({
   handleOnChange,
   variant = "outlined",
   shape,
+  className,
 }) => {
   return (
-    <Stack className="pagination__wrapper" spacing={2}>
+    <Stack
+      className={`pagination__wrapper ${className ? className : ""}`}
+      spacing={2}
+    >
       <Pagination
         page={page}
         onChange={handleOnChange}

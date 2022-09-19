@@ -15,6 +15,7 @@ const Textarea = ({
   defaultValue,
   textAlign,
   isUpdate = false,
+  subtitle,
 }) => {
   useEffect(() => {
     register(id);
@@ -85,7 +86,7 @@ const Textarea = ({
                     color: "#999",
                   }}
                 >
-                  (Tối đa 1500 ký tự)
+                  {subtitle}
                 </span>
               )}
             </p>

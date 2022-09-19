@@ -18,7 +18,7 @@ const ProfileForm = ({ handleClose }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
@@ -50,7 +50,7 @@ const ProfileForm = ({ handleClose }) => {
       }),
       fileAvatar: data.avatar,
     };
-    console.log(profileData);
+    // console.log(profileData);
     dispatch(updateUser([profileData, profile.id]));
     handleClose();
   };

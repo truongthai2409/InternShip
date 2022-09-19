@@ -1,7 +1,7 @@
 import moment from "moment";
 import * as yup from "yup";
 
-const dateNow = moment(Date.now()).format("DD-MM-YYYY").toString();
+const dateNow = moment(Date.now()).format("MM-DD-YYYY");
 
 export const schemaFormRepost = yup.object({
   name: yup.string().required(" * Bạn phải điền chức danh."),
@@ -29,16 +29,18 @@ export const schemaFormRepost = yup.object({
     ),
   timeEnd: yup
     .date()
+    .nullable()
     .transform((curr, orig) => (orig === "" ? null : curr))
     .required(" * Bạn phải chọn ngày kết thúc tuyển dụng.")
     .test(
       "Validate time end",
       " * Ngày kết thúc ứng tuyển phải sau ngày bắt đầu",
       (value, context) => {
-        return (
-          moment(value).format("MM-DD-YYYY") >
+        const dateStart = new Date(
           moment(context.parent.timeStart).format("MM-DD-YYYY")
         );
+        const dateEnd = new Date(moment(value).format("MM-DD-YYYY"));
+        return dateStart.getTime() < dateEnd.getTime();
       }
     ),
   district: yup.string().required(" * Bạn phải chọn quận/huyện."),

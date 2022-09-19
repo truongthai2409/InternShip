@@ -41,7 +41,12 @@
       font-weight: 700;
     }
 
-    .company__location {
+    .company-info-detail {
+      &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
     }
   }
 
@@ -75,10 +80,6 @@
   .MuiPaper-root {
     max-width: unset !important;
     width: auto !important;
-
-    .MuiTypography-root {
-      // width: 800px;
-    }
   }
 }
 .confirmation-date__wrapper {

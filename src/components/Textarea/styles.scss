@@ -1,13 +1,25 @@
 @use "../../assets/styles/" as *;
 
 .custom-textarea {
+  &:hover {
+    .ql-editor {
+      border: 1.6px solid $primary-color;
+      border-top: none;
+    }
+
+    .ql-toolbar.ql-snow {
+      border: 1.6px solid $primary-color;
+    }
+  }
+
   .custom-textarea__label {
     font-family: $f-family;
     font-size: $fs-14;
     font-weight: $fw-bold-0;
     color: #000;
   }
-  &__error, &__label {
+  &__error,
+  &__label {
     width: 100%;
     text-align: left;
   }
@@ -19,7 +31,7 @@
   .ql-editor {
     height: 150px !important;
     font-family: "Public Sans", sans-serif;
-    border: 1.6px solid $primary-color;
+    border: 1.6px solid rgb(119, 119, 119);
     border-top: none;
     border-radius: 2px;
     border-top-left-radius: 0px;
@@ -28,7 +40,7 @@
 
   .ql-toolbar.ql-snow {
     font-family: "Public Sans", sans-serif;
-    border: 1.6px solid $primary-color;
+    border: 1.6px solid rgb(119, 119, 119);
     border-radius: 2px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;

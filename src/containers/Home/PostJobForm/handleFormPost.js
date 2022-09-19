@@ -50,10 +50,11 @@ export const schemaFormPost = yup.object({
       "Validate time end",
       " * Ngày kết thúc ứng tuyển phải sau ngày bắt đầu",
       (value, context) => {
-        return (
-          moment(value).format("MM-DD-YYYY") >
+        const dateStart = new Date(
           moment(context.parent.timeStart).format("MM-DD-YYYY")
         );
+        const dateEnd = new Date(moment(value).format("MM-DD-YYYY"));
+        return dateStart.getTime() < dateEnd.getTime();
       }
     ),
   district: yup.string().required(" * Bạn phải chọn quận/huyện."),

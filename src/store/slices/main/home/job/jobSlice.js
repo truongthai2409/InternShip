@@ -35,27 +35,38 @@ const jobSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
-      console.log("payload", payload);
+      // console.log("payload", payload);
       state.jobList = payload.contents;
     });
     builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
     });
-    builder.addCase(getJobListByUserId.fulfilled, (state, { payload }) => {
-      console.log("payload", payload);
-      if (payload.httpCode === 404) {
-        state.error = 404;
-      } else {
-        state.jobListActived = payload.contents.filter((job) => {
-          return job?.status.id === 1;
-        });
-        state.jobListDisabled = payload.contents.filter((job) => {
-          return job?.status.id === 4;
-        });
-        state.status = "fail";
-        state.totalPages = payload.totalPages;
+    builder.addCase(
+      getActivedJobListByUserId.fulfilled,
+      (state, { payload }) => {
+        // console.log("payload", payload);
+        if (payload.httpCode === 404) {
+          state.error = 404;
+        } else {
+          state.jobListActived = payload.contents;
+          state.status = "fail";
+          state.totalPages = payload.totalPages;
+        }
       }
-    });
+    );
+    builder.addCase(
+      getDisabledJobListByUserId.fulfilled,
+      (state, { payload }) => {
+        // console.log("payload", payload);
+        if (payload.httpCode === 404) {
+          state.error = 404;
+        } else {
+          state.jobListDisabled = payload.contents;
+          state.status = "fail";
+          state.totalPages = payload.totalPages;
+        }
+      }
+    );
     builder.addCase(getJobByName.fulfilled, (state, { payload }) => {
       state.jobListName = payload;
       if (payload.contents.length > 0) {
@@ -74,7 +85,7 @@ const jobSlice = createSlice({
       }
     });
     builder.addCase(getJobById.fulfilled, (state, { payload }) => {
-      console.log("getJobById", payload);
+      // console.log("getJobById", payload);
       state.jobActive = payload;
       state.jobDetailById = payload;
     });
@@ -88,7 +99,7 @@ const jobSlice = createSlice({
     });
     builder.addCase(addJob.fulfilled, (state, payload) => {
       if (payload.payload[1] === "repost") {
-        console.log("addJob", payload);
+        // console.log("addJob", payload);
         state.jobListActived.unshift(payload.payload[0]);
         toast.success("Đăng tuyển công việc thành công!", {
           position: "bottom-right",
@@ -197,14 +208,14 @@ export const getJobByNameAndLocation = createAsyncThunk(
   }
 );
 
-// function use for get list of job by user id
+// function use for get list of actived job by user id
 /**
  * para
  * args[0] : id of user
  * args[1] : page
- * args[2] : amount of candidates in each time get
+ * args[2] : amount of job in each time get
  */
-export const getJobListByUserId = createAsyncThunk(
+export const getActivedJobListByUserId = createAsyncThunk(
   "job/getJobListByUser",
   async (args) => {
     return axios
@@ -222,10 +233,30 @@ export const getJobListByUserId = createAsyncThunk(
   }
 );
 
+// function use for get list of disabled job by user id
+/**
+ * para
+ * args[0] : id of user
+ * args[1] : page
+ * args[2] : amount of job in each time get
+ */
 export const getDisabledJobListByUserId = createAsyncThunk(
   "job/getDisabledJobListByUserId",
-  
-)
+  async (args) => {
+    return axios
+      .get(
+        `${baseURL}/api/r2s/job/user/disable/${args[0]}?no=${
+          args[1] - 1
+        }&limit=${args[2]}`
+      )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
 
 export const getJobPositionList = createAsyncThunk(
   "job/getJobPositionList",
