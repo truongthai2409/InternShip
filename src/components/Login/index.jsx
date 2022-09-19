@@ -32,7 +32,7 @@ export default function Login() {
                             paddingRight: "12px",
                         }}
                     >
-                        <h4 className="name"> {profile?.user?.firstName} {profile?.user?.lastName}</h4>
+                        <h4 className="name"> {profile?.user?.lastName} {profile?.user?.firstName}  </h4>
 
                         <AccountMenu
                             linkImg={

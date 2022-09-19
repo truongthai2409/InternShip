@@ -23,7 +23,8 @@ const CardHome = (props) => {
 
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
-  const { profile } = useSelector((state) => state.authentication);
+  const  {profile}  = useSelector((state) => state.authentication);
+  const user = JSON.parse(sessionStorage.getItem("userPresent"))
   var isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
@@ -116,7 +117,7 @@ const CardHome = (props) => {
       </div>
 
       <div className="cardHome__col2">
-        {profile?.role?.includes("Role_Candidate") ?
+        {user?.role?.includes("Role_Candidate") ?
           <ButtonMark
             height="32px"
             width="32px"
