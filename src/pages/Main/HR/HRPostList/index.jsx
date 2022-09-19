@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import "./styles.scss";
 import "./responsive.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobListByUserId } from "../../../../store/slices/main/home/job/jobSlice";
+import {
+  getActivedJobListByUserId,
+  getDisabledJobListByUserId,
+} from "../../../../store/slices/main/home/job/jobSlice";
 import { ListJob } from "./ListJob";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
 import Statistic from "src/components/Statistic";
+import PaginationCustom from "src/components/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,21 +52,17 @@ const HRPostList = (props) => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    if(newValue === 0) {
-      dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
-    }else if(newValue === 1) {
-    dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
+    if (newValue === 0) {
+    } else if (newValue === 1) {
     }
   };
   const dispatch = useDispatch();
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
-    dispatch(getJobListByUserId([userPresent.idUser, 1, 40]));
+    dispatch(getActivedJobListByUserId([userPresent.idUser, 1, 5]));
+    dispatch(getDisabledJobListByUserId([userPresent.idUser, 1, 5]));
   }, []);
-
-  console.log("jobListActived", jobListActived);
-  console.log("jobListDisabled", jobListDisabled);
 
   return (
     <div className="hr-post__wrapper">
@@ -138,6 +138,9 @@ const HRPostList = (props) => {
             />
           </TabPanel>
         </Box>
+      </div>
+      <div className="pagination__wrapper">
+        <PaginationCustom className="pagination" />
       </div>
     </div>
   );

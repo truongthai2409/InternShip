@@ -20,6 +20,7 @@ const CustomInput = ({
   border,
   icon,
   setValue,
+  subtitle,
 }) => {
   const [isHide, setIsHide] = useState(false);
   const handleHide = () => {
@@ -61,7 +62,24 @@ const CustomInput = ({
           disabled={check}
           {...register(id)}
         />
-        {check ? null : <p className="custom-input__error">{children}</p>}
+        {check ? null : (
+          <p className="custom-input__error">
+            {children ? (
+              children
+            ) : (
+              <span
+                style={{
+                  marginTop: "2px",
+                  fontSize: "12px",
+                  fontStyle: "italic",
+                  color: "#999",
+                }}
+              >
+                {subtitle}
+              </span>
+            )}
+          </p>
+        )}
         {visibility && (
           <div className="visibility-icon" onClick={handleHide}>
             {isHide ? <VisibilityOffIcon /> : <VisibilityIcon />}
