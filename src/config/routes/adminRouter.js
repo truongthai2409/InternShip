@@ -11,6 +11,7 @@ import User from "../../pages/Admin/User";
 import UserDetail from "../../pages/Admin/UserDetail";
 import NotFound from "../../pages/NotFound";
 import AdminRouterLayout from "../../Layouts/Admin/index";
+import Setting from "src/pages/Admin/Setting";
 
 
 const adminRouter = [
@@ -38,6 +39,10 @@ const adminRouter = [
             {
                 path: "company",
                 Component: Company,
+            },
+            {
+                path: "setting",
+                Component: Setting,
             },
             {
                 path: "company/:comid",

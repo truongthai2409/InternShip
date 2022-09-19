@@ -63,7 +63,7 @@
 
 .admin-navbar__icon {
   color: $primary-color;
-
+  cursor: pointer;
   &:hover {
     transform: rotate(180deg);
     transition: all 0.5s ease;
