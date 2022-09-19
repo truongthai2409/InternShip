@@ -65,6 +65,7 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
+  const user = JSON.parse(sessionStorage.getItem("userPresent"))
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -79,7 +80,9 @@ const Detail = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // console.log("JoB",jobDetail)
+  console.log("JoB",jobDetail)
+  console.log("maor",major)
+  console.log("JoB",jobDetail)
 
   return (
     <div>
@@ -91,7 +94,7 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                  `${API}${jobDetail?.hr?.company?.logo}`
+                 user?.role?.includes("Role_Partner") ? `${API}${jobDetail?.universityDTO?.avatar}` : `${API}${jobDetail?.hr?.company?.logo}` 
                 }
               />
               <div>
@@ -239,7 +242,7 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobDetailById?.jobType?.name || "Không có"} />
+                  <TagName title={jobDetailById?.jobType?.name || "Không cós"} />
                   <TagName
                     title={jobDetailById?.jobposition?.name || "Không có"}
                   />

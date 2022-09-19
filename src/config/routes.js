@@ -31,6 +31,7 @@ import CandidateManagement from "src/pages/Main/HR/CandidateManagement/Candidate
 import Company from "src/pages/Admin/Company";
 import Password from "src/containers/Home/ChangePasswordForm";
 import LoginAdmin from "src/pages/LoginAdmin";
+import Setting from "src/pages/Admin/Setting";
 
 // admin router
 export const adminRouter = [
@@ -53,6 +54,10 @@ export const adminRouter = [
   {
     path: "/admin/company",
     Component: Company,
+  },
+  {
+    path: "/admin/setting",
+    Component: Setting,
   },
   {
     path: "/admin/company/:comid",

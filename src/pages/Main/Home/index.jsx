@@ -13,7 +13,7 @@ import {
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import PaginationCustom from "src/components/Pagination";
 
-const limit = process.env.LIMIT_OF_PAGE || 5;
+const limit = 5;
 const Home = (props) => {
   const dispatch = useDispatch();
   const [locationValue, setLocationValue] = useState("");
@@ -30,6 +30,7 @@ const Home = (props) => {
   } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState(jobFilter);
+  console.log(jobFilter)
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
@@ -161,7 +162,6 @@ const Home = (props) => {
 
   const getValuePageAndHandle = (value) => {
     setCurrentPage(value);
-    // currentPage = value;
     window.scroll(0, 0);
   };
   const handleChanges = (e) => {
@@ -172,59 +172,6 @@ const Home = (props) => {
       return setCurrentPage(currentPage - 1)
     }
     return setCurrentPage(parseInt(e.target.innerText));
-  }
-  if (jobs?.length === 0) {
-    return (
-      <Grid
-        className="wrapper"
-        spacing={{ xs: 1 }}
-        sx={{ padding: "18px" }}
-        container
-      >
-        <Grid item lg={2} md={3} sm={4} xs={12}>
-          <Hidden mdDown>
-            <SideBarHomeList
-              onChange={handleCheck}
-              slideBarHome__wrapper={true}
-            />
-          </Hidden>
-        </Grid>
-
-        <Grid item lg={4} md={8} sm={12} xs={12}>
-          <div className="onDesktop">
-            <SearchResultHome
-              onClick={handleSearch}
-              onChange={getValueLocationAndHandle}
-            />
-          </div>
-
-          <FilterPanelHome
-            jobList={jobs}
-            indexCardActive={indexCardActive}
-            jobListHavePages={jobListHavePages}
-            onChange={getValuePageAndHandle}
-          />
-        </Grid>
-
-        <Grid item lg={6} className="onTablet">
-          <div className="containerDetailCard containerDetailCard-none">
-            <div className="none__res">
-              <SearchResultHome
-                onClick={handleSearch}
-                onChange={getValueLocationAndHandle}
-              />
-            </div>
-            <DetailCard
-              logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-              jobDetail={jobDetails}
-              jobList={jobs}
-              candidate={props.candidate}
-              jobListCompany={jobListCompany}
-            />
-          </div>
-        </Grid>
-      </Grid>
-    )
   }
   return (
     <>

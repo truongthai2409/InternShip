@@ -6,6 +6,7 @@ import ViewQuiltOutlinedIcon from '@mui/icons-material/ViewQuiltOutlined'
 
 import './styles.scss'
 import adminLogo from '../../assets/img/logo_admin_green.png'
+import AdminAccountMenu from '../AdminAccountMenu'
 
 const AdminNav = ({ openDrawer, setOpenDrawer }) => {
   //
@@ -49,7 +50,7 @@ const AdminNav = ({ openDrawer, setOpenDrawer }) => {
             </Tooltip>
 
             <Tooltip title="Cài đặt">
-              <SettingsOutlinedIcon className="admin-navbar__icon" />
+              <AdminAccountMenu/>
             </Tooltip>
           </div>
         </div>
