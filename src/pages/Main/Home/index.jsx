@@ -1,18 +1,19 @@
 import { Grid, Hidden } from "@mui/material";
-import SearchResultHome from "../../../components/SearchResultHome";
-import DetailCard from "../../../components/DetailCard";
-import SideBarHomeList from "../../../components/SideBarHomeList";
-import FilterPanelHome from "../../../components/FilterPanelHome";
-import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getAllRating } from "src/store/slices/main/home/rating/rating";
+import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import DetailCard from "../../../components/DetailCard";
+import FilterPanelHome from "../../../components/FilterPanelHome";
+import SearchResultHome from "../../../components/SearchResultHome";
+import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
   getJobFilterByUser,
+  getJobPositionList
 } from "../../../store/slices/main/home/job/jobSlice";
-import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-import PaginationCustom from "src/components/Pagination";
-import { getAllRating } from "src/store/slices/main/home/rating/rating";
+import "./styles.scss";
 
 const limit = 5;
 const Home = (props) => {
@@ -20,7 +21,7 @@ const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
-  const {allRating} = useSelector(state=>state.rating)
+  const { allRating } = useSelector(state => state.rating)
   // get global state from redux store
   let {
     jobDetail,
@@ -64,9 +65,10 @@ const Home = (props) => {
     updateJob()
   }, [type, position, major, jobFilter])
   const [jobDetails, setJobDetails] = useState(jobs[0])
-  useEffect(()=>{
-    dispatch(getAllRating([0,5]))
-  },[])
+
+  useEffect(() => {
+    dispatch(getAllRating([0, 5]))
+  }, [])
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -117,7 +119,6 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
-
   const handleCheck = (value) => {
     let tempType = [];
     let tempPosition = [];
@@ -166,15 +167,6 @@ const Home = (props) => {
     setCurrentPage(value);
     window.scroll(0, 0);
   };
-  const handleChanges = (e) => {
-    if (e.target.dataset.testid === "NavigateNextIcon") {
-      return setCurrentPage(currentPage + 1)
-    }
-    if (e.target.dataset.testid === "NavigateBeforeIcon") {
-      return setCurrentPage(currentPage - 1)
-    }
-    return setCurrentPage(parseInt(e.target.innerText));
-  }
   return (
     <>
       {(

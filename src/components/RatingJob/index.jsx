@@ -1,13 +1,13 @@
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import ButtonMark from "../ButtonMark";
-import TagName from '../TagName';
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
-import './styles.scss';
 import { Rating } from "@mui/material";
+import TagName from '../TagName';
+import './styles.scss';
 const baseUrl = process.env.REACT_APP_API
 export default function RatingJob({ allRating }) {
+    
     const renderRating = () => {
-        return allRating.slice(0, 4).map((item) => {
+        return allRating.slice(0,4).map(( item) => {
             return (
                 <div className="cardHome__container">
                     <div className="cardHome__col1">
@@ -16,8 +16,8 @@ export default function RatingJob({ allRating }) {
                                 style={{ borderRadius: "50%" }}
                                 className="cardHome__img"
                                 src={`${baseUrl}${item.company?.logo}`}
-                                onError="https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
                                 alt=""
+                                onerror="this.onerror=null;this.src='https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg';"
                             />
                             <div>
                                 <h4 className="cardHome__title">{item.company?.name}</h4>

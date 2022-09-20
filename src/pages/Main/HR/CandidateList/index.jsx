@@ -20,10 +20,10 @@ const CandidateList = ({ idJob }) => {
   const hanldeOnChange = (e, value) => {
     setPage(value);
   };
-
+  console.log("Ok213",listCandidatesApplied)
   return (
     <div className={`${listCandidatesApplied.length === 0 && "none-list"} candidate-list__wrapper`}>
-      {listCandidatesApplied.length ? (
+      {listCandidatesApplied?.length ? (
         listCandidatesApplied.map((candidate) => {
           return <CandidateCard candidate={candidate} />;
         })
