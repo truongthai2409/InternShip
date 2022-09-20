@@ -12,6 +12,7 @@ import {
 } from "src/store/slices/main/home/demand/demandSlice";
 import PaginationCustom from "src/components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
+import { getAllRating } from "src/store/slices/main/home/rating/rating";
 
 const limit = 5;
 
@@ -27,6 +28,7 @@ const PartnerHomePage = (props) => {
     demandDetail,
     indexPartnerCardActive,
   } = useSelector((state) => state.demand);
+  const {allRating} = useSelector(state=>state.rating)
   const navigate = useNavigate();
   const { keyword } = useParams();
   const [jobs, setJobs] = useState(demandList);
@@ -119,6 +121,9 @@ const PartnerHomePage = (props) => {
   console.log("type",type)
   console.log("position",position)
   console.log("major",major)
+  useEffect(()=>{
+    dispatch(getAllRating([0,5]))
+  },[])
   useEffect(() => {
     const updateJob = () => {
       let temp = demandList;
@@ -137,7 +142,7 @@ const PartnerHomePage = (props) => {
     }
     updateJob()
   }, [type, position, major, demandList])
-  console.log("jobs", jobs)
+
   return (
     <>
       {demandDetail && (
@@ -166,6 +171,7 @@ const PartnerHomePage = (props) => {
               jobList={jobs}
               partnerRole={true}
               indexCardActive={indexPartnerCardActive}
+              allRating={allRating}
             />
             {currentPage > 1 ? (
               <div className="partner-postList__pagination">

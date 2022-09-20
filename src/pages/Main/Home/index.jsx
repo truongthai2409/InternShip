@@ -12,6 +12,7 @@ import {
 } from "../../../store/slices/main/home/job/jobSlice";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import PaginationCustom from "src/components/Pagination";
+import { getAllRating } from "src/store/slices/main/home/rating/rating";
 
 const limit = 5;
 const Home = (props) => {
@@ -19,7 +20,7 @@ const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
-
+  const {allRating} = useSelector(state=>state.rating)
   // get global state from redux store
   let {
     jobDetail,
@@ -30,7 +31,6 @@ const Home = (props) => {
   } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState(jobFilter);
-  console.log(jobFilter)
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
@@ -64,7 +64,9 @@ const Home = (props) => {
     updateJob()
   }, [type, position, major, jobFilter])
   const [jobDetails, setJobDetails] = useState(jobs[0])
-
+  useEffect(()=>{
+    dispatch(getAllRating([0,5]))
+  },[])
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -204,6 +206,7 @@ const Home = (props) => {
               indexCardActive={indexCardActive}
               jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
+              allRating={allRating}
             />
           </Grid>
 

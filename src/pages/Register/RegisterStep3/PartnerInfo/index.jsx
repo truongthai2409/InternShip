@@ -71,7 +71,6 @@ const PartnerInfo = () => {
           },
         }),
       };
-      console.log(partnerData)
       dispatch(addUniversity(partnerData));
     } else {
       const partnerData = {
@@ -115,7 +114,6 @@ const PartnerInfo = () => {
           },
         }),
       };
-      console.log(partnerData)
       dispatch(addUniversity(partnerData));
     }
   };

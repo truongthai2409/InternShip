@@ -20,7 +20,7 @@ const InformationCompany = ({
   rating,
   demandPartner = false,
 }) => {
-  // console.log(jobDetail)
+
   const { profile } = useSelector((state) => state.authentication);
   const [disabled, setDisabled] = useState(false);
   const [name, setName] = useState("Ứng tuyển");

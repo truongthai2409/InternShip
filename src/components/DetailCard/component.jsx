@@ -80,9 +80,6 @@ const Detail = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log("JoB",jobDetail)
-  console.log("maor",major)
-  console.log("JoB",jobDetail)
 
   return (
     <div>

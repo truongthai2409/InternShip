@@ -8,6 +8,7 @@ import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
 import PaginationCustome from "src/components/Pagination";
+import RatingJob from "../RatingJob";
 
 function TabPanel(props) {
   const { children, value, index, jobList, ...other } = props;
@@ -49,6 +50,7 @@ const FilterPanelHome = ({
   positionValue,
   onChange,
   jobListHavePages,
+  allRating
 }) => {
   const location = useLocation();
   const [value, setValue] = useState(0);
@@ -60,7 +62,6 @@ const FilterPanelHome = ({
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
-  // console.log("jobList", jobList);
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
@@ -150,7 +151,7 @@ const FilterPanelHome = ({
         )}
       </TabPanel>
       <TabPanel value={value} index={1}>
-          <p>Đánh giá sẽ có ở đây, nhưng không phải bây giờ nhé Tester :v</p>
+          <RatingJob allRating={allRating} /> 
       </TabPanel>
       <TabPanel value={value} index={2}>
           <p>Liên quan sẽ có ở đây, nhưng không phải bây giờ nhé Tester :v</p>

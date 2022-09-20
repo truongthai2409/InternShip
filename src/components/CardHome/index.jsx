@@ -38,7 +38,6 @@ const CardHome = (props) => {
       },
     };
     if (profile?.role === "Role_Candidate") {
-      console.log("role:", "đúng");
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
   }, []);

@@ -137,7 +137,6 @@ const CandidateViewList = () => {
       careListOfPrivateHavePages?.totalPages || applyListHavePage?.totalPages
     );
   }, []);
-  console.log(careListOfPrivate)
   return (
     <Box sx={{ width: "100%" }}>
       <div className="view-list">
