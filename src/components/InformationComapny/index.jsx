@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../Button";
 import WorkIcon from "@mui/icons-material/Work";
@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
+import {
+  getApplyListByIdCandidate
+} from "src/store/slices/main/candidate/apply/applySlice";
 import "./styles.scss";
 
 
@@ -21,9 +24,13 @@ const InformationCompany = ({
   demandPartner = false,
 }) => {
 
+  const [check,setCheck] = useState(false)
   const { profile } = useSelector((state) => state.authentication);
-  const [disabled, setDisabled] = useState(false);
-  const [name, setName] = useState("Ứng tuyển");
+  let { applyList } = useSelector((state) => state.apply);
+  const { candidateInfoByUsername } = useSelector(
+    (state) => state.infoCandidate
+  );
+
   const dispatch = useDispatch();
   const handleAddJob = async (e) => {
     e.stopPropagation();
@@ -47,14 +54,41 @@ const InformationCompany = ({
         const resApply = await dispatch(addApply(applyData));
         if (resApply.payload.status === 200) {
           toast.success("Đã nộp CV thành công");
-          setDisabled(true);
-          setName("Đã ứng tuyển");
+          setCheck(true)
         }
       }
     } else {
       toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
+  useEffect(()=>{
+    setCheck(applyList?.map((item)=>{return item.jobApp?.id}).includes(jobDetail?.id))
+  },[jobDetail,applyList])
+
+  useEffect(()=>{
+    
+    const _getValue = async () => {
+      const dataGetMarkByUser = {
+        userName: profile.username,
+        page: {
+          no: 0,
+          limit: 20,
+        },
+      };
+
+      await dispatch(getCandidateByUserName(profile.username));
+
+      const dataGetAppliedByCandidate = {
+        idCandidate: candidateInfoByUsername.id,
+        page: {
+          no: 0,
+          limit: 20,
+        },
+      };
+      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+    }
+    _getValue();
+  },[candidateInfoByUsername.id,check])
   return (
     <div>
       {jobDetail && (
@@ -179,9 +213,9 @@ const InformationCompany = ({
               />
             </Typography>
             <Button
-              name={name}
+              name={check ? "Đã Ứng Tuyển" :  "Ứng Tuyển"}
               onClick={handleAddJob}
-              disabled={disabled}
+              disabled={check ? true : false}
             ></Button>
           </div>
         </>

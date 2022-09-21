@@ -71,7 +71,7 @@ export const CandidateCard = ({
         />
         <div className="candidate-card__infor">
           <div className="row">
-            <h2 className="candidate-card__infor-name">{`${candidate?.userDTO?.lastName} ${candidate?.userDTO?.firstName}`}</h2>
+            <h2 className="candidate-card__infor-name">{`${candidate?.user?.lastName} ${candidate?.user?.firstName}`}</h2>
           </div>
           <p className="candidate-card__infor-item">
             <span>Chuyên ngành:</span>
@@ -79,11 +79,11 @@ export const CandidateCard = ({
           </p>
           <p className="candidate-card__infor-item">
             <span>Số điện thoại:</span>
-            {`${candidate?.userDTO?.phone}`}
+            {`${candidate?.user?.phone}`}
           </p>
           <p className="candidate-card__infor-item">
             <span>Email:</span>
-            {`${candidate?.userDTO?.email}`}
+            {`${candidate?.user?.email}`}
           </p>
         </div>
         <div className="candidate-card__actions">

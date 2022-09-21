@@ -23,8 +23,11 @@ const CardPost = (props) => {
   const action = useRef("");
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const jobList = jobListActived.concat(jobListDisabled);
+  console.log("jobList",jobList)
   const jobDetail = jobList.filter((job) => {
-    return job.id === props.idJob;
+    if(job) {
+      return job.id === props.idJob;
+    }
   });
 
   const update = () => {

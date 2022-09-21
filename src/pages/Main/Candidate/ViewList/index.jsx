@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ArrowButton from "src/components/ArrowButton";
 import CardJob from "src/components/CardJob";
 import FeedBack from "src/components/FeedBack";
+import Null from "src/components/Null";
 import SearchResultHome from "src/components/SearchResultHome";
 import UserCard from "src/components/UserCard";
 import {
@@ -33,7 +34,7 @@ const CandidateViewList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPage, setTotalPage] = useState();
   const [emptyList, setEmpList] = useState("");
-  // const jobCare = {};
+
   let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
     (state) => state.mark
   );
@@ -165,7 +166,7 @@ const CandidateViewList = () => {
                   ))}
               </div>
               
-              {careListOfPrivateHavePages?.totalPages===0? <p>Không có công việc quan tâm nào</p>: 
+              {careListOfPrivateHavePages?.totalPages===0? <Null image={"https://minimal-assets-api-dev.vercel.app/assets/images/avatars/avatar_21.jpg"}/>: 
               <div
                 className="view-list-page"
                 style={{

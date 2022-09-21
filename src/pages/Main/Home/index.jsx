@@ -77,7 +77,7 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     };
 
@@ -90,7 +90,7 @@ const Home = (props) => {
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     },
   };
@@ -110,7 +110,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -144,7 +144,7 @@ const Home = (props) => {
       );
     }
     setPosition(tempPosition);
-
+    
     if (value.length > 0) {
       tempMajor = value.filter(
         (el) =>
