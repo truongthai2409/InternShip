@@ -106,16 +106,16 @@ const FilterPanelHome = ({
               active={indexCardActive}
               index={index}
               key={job.id}
-              title={job.name}
+              title={job.name ? job.name : job.jobApp?.name}
               fontSize={10}
               nameCompany={
-                job?.hr?.company?.name || job?.partner?.universityDTO.name
+                job?.hr?.company?.name || job?.partner?.universityDTO.name || job?.jobApp?.company?.name
               }
               idCompany={
                 job?.hr?.company?.id || job?.partner?.universityDTO.id
               }
               tagName={[
-                job?.jobposition?.name || job?.position.name || "Không có",
+                job?.jobposition?.name || job?.position?.name || "Không có",
                 job?.jobType?.name || "Không có",
               ]}
               location="Hồ Chí Minh"

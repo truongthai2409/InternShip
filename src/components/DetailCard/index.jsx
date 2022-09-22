@@ -36,6 +36,7 @@ const DetailCard = ({
     return total + currentValue;
   }, 0);
   const rating = (res / data?.length).toFixed(2);
+
   return (
     <div>
       {jobList && jobList.length > 0 ? (
