@@ -18,13 +18,6 @@ const companySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
       state.companyList = payload.contents;
-      state.totalPages = payload.totalPages;
-      state.totalItems = payload.totalItems;
-
-      if (payload.length > 0) {
-        state.companyDetail1 = payload[0];
-      } else {
-      }
     });
     builder.addCase(addCompany.fulfilled, (state, { payload }) => {
       if (!payload?.data) {

@@ -10,15 +10,17 @@ import { genderList, schema } from "./data";
 import CustomInput from "../../../../components/CustomInput/index";
 import SelectCustom from "../../../../components/Select";
 import { registerHr } from "../../../../store/slices/main/register/registerSlice";
-import Container from '../../Container/Container';
+import Container from "../../Container/Container";
 import "./styles.scss";
+import { updateStatusRegisterForHR } from "src/store/slices/main/register/registerSlice";
 const HRInfo = () => {
   TabTitle("Đăng ký - Nhà tuyển dụng");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);
-  
+  const { statusRegister } = useSelector((state) => state.register);
   const errorMessage = useSelector(errorSelector);
+
   const {
     register,
     setValue,
@@ -31,7 +33,11 @@ const HRInfo = () => {
 
   useEffect(() => {
     dispatch(getCompanyList([1, 20]));
-  }, []);
+    if (statusRegister === "successRegister") {
+      navigate("/home");
+      dispatch(updateStatusRegisterForHR("idleRegister"));
+    }
+  }, [statusRegister]);
 
   const onSubmit = async (data) => {
     const hrData = {
@@ -53,7 +59,7 @@ const HRInfo = () => {
       }),
       fileAvatar: data.avatar || null,
     };
-    dispatch(registerHr({ hrData, navigate }))
+    dispatch(registerHr({ hrData, navigate }));
   };
 
   const handleBackClick = (e) => {
