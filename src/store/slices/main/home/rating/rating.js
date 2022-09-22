@@ -7,12 +7,16 @@ const ratingSlice = createSlice({
   name: "rating",
   initialState: {
     rating: 0,
+    allRating: [],
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getRatingCompany.fulfilled, (state, action) => {
       state.rating = action.payload;
     });
+    builder.addCase(getAllRating.fulfilled, (state, action) => {
+      state.allRating = action.payload
+    })
   },
 });
 
@@ -29,5 +33,17 @@ export const getRatingCompany = createAsyncThunk(
       });
   }
 );
-
+export const getAllRating = createAsyncThunk(
+  "rating/getAllRating",
+  async (args) => {
+    return axios
+      .get(`${baseURL}/api/r2s/rate?no=${args[0]}&limit=${args[1]}`)
+      .then((res) => {
+        return res.data
+      })
+      .catch((err) => {
+        return err.response.data
+      })
+  }
+)
 export default ratingSlice;

@@ -27,9 +27,6 @@ export default function index() {
   }
   return (
     <div className="container-header__hr header__hr config">
-      <div onClick={() => { }} className="responsive-menu">
-        <MenuIcon />
-      </div>
       <Logo />
       {renderLayout()}
       <div className="header__hr-icon">

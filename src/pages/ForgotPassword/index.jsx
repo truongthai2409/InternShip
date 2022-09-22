@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import "./styles.scss";
 import Footer from "src/components/Footer";
-import Header from "src/components/Header";
+import HeaderContainer from "src/components/HeaderContainer";
 import CustomInput from "src/components/CustomInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -36,7 +36,7 @@ const ForgotPassword = () => {
 
   return (
     <Fragment>
-      <Header />
+      <HeaderContainer />
       <div className="forgotpassword__wrapper">
         <div className="forgotpassword__modal">
           <h2>

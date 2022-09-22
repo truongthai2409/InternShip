@@ -1,17 +1,19 @@
 import { Grid, Hidden } from "@mui/material";
-import SearchResultHome from "../../../components/SearchResultHome";
-import DetailCard from "../../../components/DetailCard";
-import SideBarHomeList from "../../../components/SideBarHomeList";
-import FilterPanelHome from "../../../components/FilterPanelHome";
-import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getAllRating } from "src/store/slices/main/home/rating/rating";
+import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
+import DetailCard from "../../../components/DetailCard";
+import FilterPanelHome from "../../../components/FilterPanelHome";
+import SearchResultHome from "../../../components/SearchResultHome";
+import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
   getJobFilterByUser,
+  getJobPositionList
 } from "../../../store/slices/main/home/job/jobSlice";
-import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-import PaginationCustom from "src/components/Pagination";
+import "./styles.scss";
 
 const limit = 5;
 const Home = (props) => {
@@ -19,7 +21,7 @@ const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
-
+  const { allRating } = useSelector(state => state.rating)
   // get global state from redux store
   let {
     jobDetail,
@@ -30,7 +32,6 @@ const Home = (props) => {
   } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState(jobFilter);
-  console.log(jobFilter)
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const [major, setMajor] = useState([]);
@@ -66,6 +67,9 @@ const Home = (props) => {
   const [jobDetails, setJobDetails] = useState(jobs[0])
 
   useEffect(() => {
+    dispatch(getAllRating([0, 5]))
+  }, [])
+  useEffect(() => {
     const dataFilter = {
       type: "",
       order: "oldest",
@@ -73,7 +77,7 @@ const Home = (props) => {
       name: "",
       province: "",
       major: "",
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     };
 
@@ -86,7 +90,7 @@ const Home = (props) => {
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     },
   };
@@ -106,7 +110,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage - 1,
+      no: currentPage,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -115,7 +119,6 @@ const Home = (props) => {
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
-
   const handleCheck = (value) => {
     let tempType = [];
     let tempPosition = [];
@@ -141,7 +144,7 @@ const Home = (props) => {
       );
     }
     setPosition(tempPosition);
-
+    
     if (value.length > 0) {
       tempMajor = value.filter(
         (el) =>
@@ -164,15 +167,6 @@ const Home = (props) => {
     setCurrentPage(value);
     window.scroll(0, 0);
   };
-  const handleChanges = (e) => {
-    if (e.target.dataset.testid === "NavigateNextIcon") {
-      return setCurrentPage(currentPage + 1)
-    }
-    if (e.target.dataset.testid === "NavigateBeforeIcon") {
-      return setCurrentPage(currentPage - 1)
-    }
-    return setCurrentPage(parseInt(e.target.innerText));
-  }
   return (
     <>
       {(
@@ -204,6 +198,7 @@ const Home = (props) => {
               indexCardActive={indexCardActive}
               jobListHavePages={jobListHavePages}
               onChange={getValuePageAndHandle}
+              allRating={allRating}
             />
           </Grid>
 

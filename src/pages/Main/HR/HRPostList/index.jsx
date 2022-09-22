@@ -57,7 +57,8 @@ const HRPostList = (props) => {
     }
   };
   const dispatch = useDispatch();
-  const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
+  const { jobListActived } = useSelector((state) => state.job);
+  const jobListDisabled = jobListActived?.filter(sp=>sp.status.name.includes("Disable"))
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getActivedJobListByUserId([userPresent.idUser, 1, 5]));
@@ -82,7 +83,7 @@ const HRPostList = (props) => {
           <Statistic
             title="Trạng thái đăng tuyển"
             firstObject={{
-              score: jobListActived?.length,
+              score: jobListActived?.filter(sp=>sp.status.name.includes("Active")).length,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
@@ -125,7 +126,7 @@ const HRPostList = (props) => {
 
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListJob
-              listJob={jobListActived}
+              listJob={jobListActived?.filter(sp=>sp.status?.name?.includes("Active"))}
               message="Không có công việc nào đang đăng tuyển."
               isDisabled={false}
             />

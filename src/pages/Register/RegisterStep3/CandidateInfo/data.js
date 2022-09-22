@@ -35,7 +35,7 @@ export const schema = yup.object({
         return !(/\s/g.test(value));
       }
     )
-    .matches(/^[A-Za-z_. ]+$/, "* Tên tài khoản không đúng định dạng")
+    .matches(/^[A-Za-z0-9_. ]+$/, "* Tên tài khoản không đúng định dạng")
     .matches(/[^\W_]$/, "* Không đúng định dạng.")
     .min(6, '* Tối thiểu 6 kí tự.')
     .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 kí tự chữ.")

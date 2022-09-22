@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WorkIcon from "@mui/icons-material/Work";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -26,11 +26,14 @@ const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   const { profile } = useSelector((state) => state.authentication);
+  let { applyList } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
-  const [disabled, setDisabled] = useState(false);
-  const [name, setName] = useState("Ứng tuyển");
+  const [check,setCheck] = useState(applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id))
+  console.log(check)
+
+  const disabled = false
   const dispatch = useDispatch();
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
@@ -46,7 +49,18 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     };
     await dispatch(getMarkByUser(dataGetMarkByUser));
   };
-
+  useEffect(()=>{
+  },[])
+  useEffect(()=>{
+    const dataGetAppliedByCandidate = {
+      idCandidate: candidateInfoByUsername.id,
+      page: {
+        no: 0,
+        limit: 20,
+      },
+    };
+    dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+  },[])
   const handleDeleteJobApply = async (e) => {
     e.stopPropagation();
     await dispatch(deleteApply(jobApplied.id)).then(
@@ -64,6 +78,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
   };
 
   const handleAddJob = async (e) => {
+    setCheck(!check)
     e.stopPropagation();
     const res = await dispatch(getCandidateByUserName(profile.username));
     if (!res.payload.cv) {
@@ -85,8 +100,6 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       const resApply = await dispatch(addApply(applyData));
       if (resApply.payload.status === 200) {
         toast.success("Đã nộp CV thành công");
-        setDisabled(true);
-        setName("Đã ứng tuyển");
       }
       const dataGetAppliedByCandidate = {
         idCandidate: candidateInfoByUsername?.id,
@@ -148,7 +161,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
             </div>
 
             <div className="card-job__send-cv">
-              <Button name={name} onClick={handleAddJob} disabled={disabled} />
+              <Button name={applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id) ? "Đã Ứng Tuyển" : "Ứng Tuyển"} onClick={handleAddJob} disabled={applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id) ? true : disabled} />
             </div>
           </div>
         </>

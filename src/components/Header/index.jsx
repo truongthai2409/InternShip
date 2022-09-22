@@ -37,9 +37,9 @@ function Header(props) {
         }}
       >
         <Hidden mdUp>
-          <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
+          {/* <Tooltip title="Show sidebar" onClick={handleOpenDrawer}>
             <DehazeIcon />
-          </Tooltip>
+          </Tooltip> */}
         </Hidden>
         <Logo />
       </Box>

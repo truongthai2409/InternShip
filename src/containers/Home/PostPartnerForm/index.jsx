@@ -201,7 +201,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   id="jobPosition"
                   label="Vị trí công việc"
                   placeholder="Vui lòng chọn..."
-                  defaultValue={demandDetail?.position?.id}
                   options={jobPosition}
                   register={register}
                 >
