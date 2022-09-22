@@ -33,6 +33,17 @@ const CustomInput = ({
     }
   }, [check]);
 
+  const isErrorMessage = (children) => {
+    if (typeof children === "object") {
+      return (
+        (children[0] === undefined || children[1] !== undefined) &&
+        (children[0] !== undefined || children[1] === undefined)
+      );
+    } else {
+      return children === undefined;
+    }
+  };
+  
   return (
     <div className={`custom-input ${className ? className : ""} `}>
       <label htmlFor={id} className="custom-input__label">
@@ -62,11 +73,9 @@ const CustomInput = ({
           disabled={check}
           {...register(id)}
         />
-        {check ? null : (
+        {!check && (
           <p className="custom-input__error">
-            {children ? (
-              children
-            ) : (
+            {isErrorMessage(children) ? (
               <span
                 style={{
                   marginTop: "2px",
@@ -77,6 +86,8 @@ const CustomInput = ({
               >
                 {subtitle}
               </span>
+            ) : (
+              children
             )}
           </p>
         )}

@@ -15,7 +15,7 @@ export default function Container({
   setValue,
   register,
   errorMessage,
-  genderList
+  genderList,
 }) {
   TabTitle(`Đăng ký - ${title}`);
 
@@ -25,7 +25,7 @@ export default function Container({
         (<span className="field-requirment"> * </span>)Trường bắt buộc
       </p>
       <form
-      onSubmit={handleClick}
+        onSubmit={handleClick}
         className="reg-candidate__form"
         autoComplete="off"
         encType="multipart/form-data"
@@ -36,6 +36,7 @@ export default function Container({
           type="text"
           placeholder="Tài khoản..."
           register={register}
+          subtitle="(Tên tài khoản ít nhất 6 - 32 kí tự, không dấu và kí tự đặc biệt)"
         >
           {err.username?.message}
           {errorMessage?.Username}
@@ -46,6 +47,7 @@ export default function Container({
           type="email"
           placeholder="Email..."
           register={register}
+          subtitle="(Email có dạng abc@gmail.com, abc@yahoo.com,...)"
         >
           {err.email?.message}
           {errorMessage?.Email}
@@ -54,9 +56,10 @@ export default function Container({
           label="Mật khẩu"
           id="password"
           type="password"
-          placeholder="Mật khẩu..."
+          placeholder="Mật khẩu"
           register={register}
-          visibility
+          visibility={true}
+          subtitle="(Mật khẩu ít nhất 6 - 32 kí tự, không dấu và kí tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
         >
           {err.password?.message}
           {errorMessage?.Password}
@@ -67,7 +70,8 @@ export default function Container({
           type="password"
           placeholder="Xác nhận mật khẩu..."
           register={register}
-          visibility
+          visibility={true}
+          subtitle="(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)"
         >
           {err.confirmPassword?.message}
         </CustomInput>
@@ -99,6 +103,7 @@ export default function Container({
           type="phone"
           placeholder="Số điện thoại..."
           register={register}
+          subtitle="(Các đầu số 03, 05, 07, 08, 09 - ví dụ: 0981234567. Số có thể bắt đầu với +84, 84 - ví dụ: 84981234567)"
         >
           {err.phone?.message}
         </CustomInput>
