@@ -17,8 +17,7 @@ const ListApply = () => {
     const navigate = useNavigate();
     let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
         (state) => state.mark);
-    console.log(careListOfPrivate)
-    console.log(careListOfPrivateHavePages)
+
     const eleDuplicate = [];
     for (let i = 0; i < careListOfPrivate?.length; i++) {
         for (let j = 0; j < careListOfPrivate?.length; j++) {

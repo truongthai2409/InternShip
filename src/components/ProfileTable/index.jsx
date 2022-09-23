@@ -6,8 +6,7 @@ import "./styles.scss";
 
 const baseURL = process.env.REACT_APP_API;
 const ProfileTable = ({ row }) => {
-  //   console.log(row.status);
-  //   console.log(row.status ?? row.status.id == 1);
+
   return (
     <div className="profile-table">
       <div className="profile-table__logo">

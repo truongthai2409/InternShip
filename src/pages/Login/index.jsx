@@ -36,7 +36,6 @@ const Login = () => {
         "username",
         JSON.parse(localStorage.getItem("saveLogin")).username
       );
-      console.log("username");
       setValue(
         "password",
         JSON.parse(localStorage.getItem("saveLogin")).password

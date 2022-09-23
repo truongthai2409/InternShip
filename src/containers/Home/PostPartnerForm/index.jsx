@@ -61,10 +61,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const [loading, setLoading] = useState(false);
   const [formSample, setFormSample] = useState("");
   const [useSampleForm, setUseSampleForm] = useState(false);
-  // console.log(demandDetail);
-
-  console.log(activeUser?.universityDTO?.id);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
@@ -119,7 +115,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   useEffect(() => {
     if (isUpdate) {
-      // console.log(demandDetail?.desciption);
       setValue("jobName", demandDetail?.name);
       setValue("jobDescription", demandDetail?.desciption);
       setValue(
@@ -157,7 +152,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV,
     };
     dispatch(addDemand(demandData));
-    // console.log(demandData);
 
     // if (isUpdate) {
     //   editDemand({ idDemand, demandData });
@@ -169,7 +163,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   if (status === "success") {
     navigate("/partner/post-list");
   }
-  // console.log("formSample", formSample);
   return (
     <>
       <div className="partner-post__container">

@@ -25,7 +25,6 @@ const MajorTable = () => {
     dispatch(getMajorList());
   }, [dispatch]);
 
-  // console.log(companyList);
   const columns = [
     { field: "stt", headerName: "STT", width: 70 },
     { field: "name", headerName: "Tên Chuyên Ngành", width: 250 },

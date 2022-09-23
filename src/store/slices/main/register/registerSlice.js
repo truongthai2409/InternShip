@@ -92,7 +92,6 @@ export const checkUser = createAsyncThunk(
 //     let res;
 //     switch (role) {
 //       case "hr":
-//         console.log("dataRes", data.hrData);
 
 //         res = await api
 //           .post(`${baseURL}/api/r2s/hr`, data.hrData, {
@@ -108,7 +107,6 @@ export const checkUser = createAsyncThunk(
 //           });
 //         return res;
 //       case "candidate":
-//         console.log("dataRes", data.userData);
 //         res = await api
 //           .post(`${baseURL}/api/r2s/${role}`, data.userData, {
 //             headers: {

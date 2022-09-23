@@ -79,21 +79,21 @@ export default function Container({
         <div className="reg-candidate__form--name">
           <CustomInput
             label="Họ"
-            id="lastname"
+            id="lastName"
             type="text"
             placeholder="Họ..."
             register={register}
           >
-            {err.lastname?.message}
+            {err.lastName?.message}
           </CustomInput>
           <CustomInput
             label="Tên"
-            id="firstname"
+            id="firstName"
             type="text"
             placeholder="Tên..."
             register={register}
           >
-            {err.firstname?.message}
+            {err.firstName?.message}
           </CustomInput>
         </div>
         <CustomInput

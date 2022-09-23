@@ -41,7 +41,7 @@ const UserForm = (props) => {
   }, [user]);
 
   const onSubmit = (data) => {
-    console.log("data", data);
+
   };
 
   const roleList = [

@@ -20,7 +20,6 @@ const userSlice = createSlice({
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
-      console.log("action", action);
       state.statusForgotPassword = action.payload;
     },
   },
@@ -37,7 +36,6 @@ const userSlice = createSlice({
       state.profile = payload;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      console.log("updateUser", payload);
       state.profile = payload;
       toast.success("Chỉnh sửa thành công", {
         position: "bottom-right",

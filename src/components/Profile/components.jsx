@@ -36,10 +36,10 @@ export const Actions = ({ props }) => {
     }
   };
   const onSubmit = () => {
-    console.log("register");
+
   };
   const handleChange = (e) => {
-    console.log(e);
+
   };
 
   return (

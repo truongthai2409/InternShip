@@ -16,8 +16,6 @@ const InfomationDemand = () => {
 
     const { demandListUniversity } = useSelector((state) => state.demand);
 
-    console.log(demandListUniversity)
-
     useEffect(() => {
         dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
     }, [dispatch, uniId]);

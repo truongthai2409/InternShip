@@ -13,7 +13,7 @@ export default function SelectAreaHome({ onChange }) {
     dispatch(getProvinceList());
   }, []);
   const handleLabel = (value) => {
-    console.log(value.name)
+
     onChange && onChange(value.name)
   }
   return (

@@ -49,12 +49,12 @@ export const schema = yup.object({
     .min(6, "* Tối thiểu 6 kí tự.")
     .max(32, "* Tối đa 32 kí tự.")
     .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
-  lastname: yup //
+  lastName: yup //
     .string()
     .required('* Bạn phải nhập họ.')
     .min(2, 'Tối thiểu 2 kí tự.')
     .max(32, 'Tối đa 32 kí tự.'),
-  firstname: yup //
+  firstName: yup //
     .string()
     .required('* Bạn phải nhập tên.')
     .min(2, 'Tối thiểu 2 kí tự.')

@@ -20,7 +20,6 @@ export const CandidateCard = ({
     setNumberCV(info);
   };
 
-  console.log("Candidate", candidate);
   const renderCV = () => {
     return (
       <Modal

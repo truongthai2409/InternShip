@@ -68,7 +68,6 @@ const UniversityTable = () => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          // console.log(row);
           navigate(`/admin/university/${row.id}`);
         };
         return (

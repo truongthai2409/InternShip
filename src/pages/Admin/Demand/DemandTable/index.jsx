@@ -16,8 +16,6 @@ const DemandTable = () => {
     (state) => state.adminDemand
   );
 
-  console.log("demandList", demandList);
-
   useEffect(() => {
     dispatch(getAdminListDemand([page, 10]));
   }, [page]);

@@ -41,7 +41,6 @@ const BaseInformationUniversity = ({
   let { demandListUniversity } = useSelector((state) => state.demand);
   const uniId = demandDetail?.universityDTO?.id;
 
-
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [dispatch, uniId]);
@@ -168,7 +167,7 @@ const BaseInformationUniversity = ({
                         width: "auto",
                       }}
                     >
-                      {demandListUniversity?.contents?.length > 0 ?
+                      {demandListUniversity?.contents?.length > 0 &&
                         demandListUniversity?.contents?.map((job, index) => (
                           <Grid
                             item
@@ -202,7 +201,7 @@ const BaseInformationUniversity = ({
                                   "Không có",
                                   job?.jobType?.name || "Không có",
                                 ]}
-                                location="Hồ Chí Minh"
+                                location={job.universityDTO?.name}
                                 amount={job.amount || "Không có"}
                                 demandPartner={true}
                                 time={[
@@ -218,56 +217,7 @@ const BaseInformationUniversity = ({
                               />
                             </Link>
                           </Grid>
-                        )) : (arrDemand ? arrDemand?.contents?.map((job, index) => (
-                          <Grid
-                            item
-                            lg="12"
-                            md="12"
-                            sm="12"
-                            key={job.id}
-                            sx={{
-                              paddingLeft: pdLeft ? `${pdLeft} !important` : "",
-                              paddingRight: pdRight ? `${pdRight} !important` : "",
-                              width: "200px",
-                            }}
-                          >
-                            <Link
-                              to={`/partner/detail_demand/${job.id}`}
-                              className="link__job-detail"
-                            >
-                              <CardHome
-                                id={job.id}
-                                index={index}
-                                title={job.name}
-                                fontSize={10}
-                                nameCompany={job.universityDTO?.name}
-                                idCompany={job.universityDTO?.id}
-                                job={job}
-                                // key={job.id}
-                                idJob={job.id}
-                                tagName={[
-                                  job?.jobposition?.name ||
-                                  job?.position.name ||
-                                  "Không có",
-                                  job?.jobType?.name || "Không có",
-                                ]}
-                                location="Hồ Chí Minh"
-                                amount={job.amount || "Không có"}
-                                demandPartner={true}
-                                time={[
-                                  moment(job.timeStartStr || job.createDate).format(
-                                    "DD/MM/YYYY"
-                                  ),
-                                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
-                                ]}
-                                locationPath={location.pathname}
-                                pdLeft="30px"
-                                pdRight="30px"
-                                active={0}
-                              />
-                            </Link>
-                          </Grid>
-                        )) : "") }
+                        ))}
                     </Grid>
                   </div>
                 </Item>

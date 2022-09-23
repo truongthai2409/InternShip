@@ -37,7 +37,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
-        console.log("4-payload:", payload);
         state.status = "success";
         state.demandListUniversityActive.unshift(payload);
         toast.success("Đăng danh sách thực tập thành công!");
@@ -71,7 +70,7 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandById.fulfilled, (state, { payload }) => {
-        // console.log(payload);
+
         state.demandDetail = payload;
       });
     builder
@@ -94,7 +93,6 @@ const demandSlice = createSlice({
 });
 
 export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
-  console.log("1-data:", data);
   let axiosConfig = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -104,11 +102,9 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
   return axios
     .post(`${baseURL}/api/r2s/partner/demand`, data, axiosConfig)
     .then((res) => {
-      console.log("2-response:", res.data);
       return res.data;
     })
     .catch((error) => {
-      console.log("3-error:", error.response);
       return error.response.data;
     });
 });
@@ -141,7 +137,6 @@ export const updateDemand = createAsyncThunk(
 export const getDemandListByUniId = createAsyncThunk(
   "demand/getDemandListByUniId",
   async ({ uniId, currentPage, limit }) => {
-    // console.log(uniId, currentPage, limit);
     let axiosConfig = {
       headers: {
         "Content-Type": "multipart/form-data",

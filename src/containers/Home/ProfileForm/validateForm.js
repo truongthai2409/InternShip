@@ -64,7 +64,7 @@ export const schema = yup.object({
         return true;
       }
     }),
-  lastname: yup
+  lastName: yup
     .string()
     .required('* Bạn phải nhập họ.')
     .min(2, '* Tối thiểu 2 kí tự.')
@@ -77,7 +77,7 @@ export const schema = yup.object({
     )
 
     .max(32, '* Tối đa 32 kí tự.'),
-  firstname: yup
+  firstName: yup
     .string()
     .required('* Bạn phải nhập tên.')
     .min(2, '* Tối thiểu 2 kí tự.')

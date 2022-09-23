@@ -31,7 +31,6 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     (state) => state.infoCandidate
   );
   const [check,setCheck] = useState(applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id))
-  console.log(check)
 
   const disabled = false
   const dispatch = useDispatch();

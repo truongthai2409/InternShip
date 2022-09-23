@@ -21,7 +21,6 @@ const AdminLayout = () => {
     setOpenDrawer(false);
   };
 
-  // console.log(openDrawer);
 
   return (
     <div className="admin-layout">
