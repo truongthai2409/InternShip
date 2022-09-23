@@ -3,6 +3,7 @@ import Password from "src/containers/Home/ChangePasswordForm";
 import MainLayout from "src/Layouts/Main";
 import CandidateHome from "src/pages/Main/Candidate/Home";
 import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
+import ListApply from "src/pages/Main/Candidate/ListApply";
 import CandidateSaveProfile from "src/pages/Main/Candidate/SaveProfile";
 import CandidateViewList from "src/pages/Main/Candidate/ViewList";
 import DetailHome from "../../pages/Main/DetailHome";
@@ -18,7 +19,7 @@ const candidateRouter = [
             },
             {
                 path: "view-list-care",
-                Component: CandidateViewList,
+                Component: ListApply,
             },
             {
                 path: "save-profile",

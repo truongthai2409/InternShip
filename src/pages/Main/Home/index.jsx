@@ -1,7 +1,6 @@
 import { Grid, Hidden } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getAllRating } from "src/store/slices/main/home/rating/rating";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import DetailCard from "../../../components/DetailCard";
@@ -10,8 +9,7 @@ import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
-  getJobFilterByUser,
-  getJobPositionList
+  getJobFilterByUser
 } from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 
@@ -68,7 +66,7 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(getAllRating([0, 5]))
-  }, [])
+  }, [dispatch])
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -82,11 +80,11 @@ const Home = (props) => {
     };
 
     dispatch(getJobFilterByUser(dataFilter));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
   useEffect(() => {
     setJobDetails(jobs[indexCardActive])
     dispatch(getJobByCompany(Number(idCompany)));
-  }, [idCompany, indexCardActive]);
+  }, [idCompany, indexCardActive,dispatch]);
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
@@ -110,7 +108,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage,
+      no: currentPage -1,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -167,6 +165,7 @@ const Home = (props) => {
     setCurrentPage(value);
     window.scroll(0, 0);
   };
+
   return (
     <>
       {(
