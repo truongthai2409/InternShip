@@ -9,7 +9,10 @@ import SelectCustom from "src/components/Select";
 import { useEffect } from "react";
 import { genderList } from "./validateForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileByIdUser, updateUser } from "src/store/slices/Admin/user/userSlice";
+import {
+  getProfileByIdUser,
+  updateUser,
+} from "src/store/slices/Admin/user/userSlice";
 import InputFile from "src/components/InputFile";
 
 const ProfileForm = ({ handleClose }) => {
@@ -21,7 +24,7 @@ const ProfileForm = ({ handleClose }) => {
   } = useForm({ resolver: yupResolver(schema), mode: "all" });
 
   const dispatch = useDispatch();
-  const userLocalStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -34,8 +37,12 @@ const ProfileForm = ({ handleClose }) => {
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
   }, []);
   useEffect(() => {
-    const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
-    dispatch(getProfileByIdUser(idUser));
+    const userSessionStorage = JSON.parse(
+      sessionStorage.getItem("userPresent")
+    );
+    dispatch(
+      getProfileByIdUser([userSessionStorage.idUser, userSessionStorage.token])
+    );
   }, [dispatch]);
   const onSubmit = (data) => {
     const profileData = {
@@ -45,8 +52,8 @@ const ProfileForm = ({ handleClose }) => {
           gender: parseInt(data.gender),
           phone: data.phone,
           email: profile?.user?.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
+          firstName: data.firstname,
+          lastName: data.lastname,
           role: profile?.user?.role,
         },
         position: profile.position,
@@ -55,7 +62,7 @@ const ProfileForm = ({ handleClose }) => {
       fileAvatar: data.avatar,
     };
     // console.log(profileData);
-    dispatch(updateUser([profile.id, userLocalStorage.token,profileData]));
+    dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
     handleClose();
   };
 

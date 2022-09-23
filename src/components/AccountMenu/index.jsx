@@ -28,7 +28,7 @@ const AccountMenu = ({ linkImg }) => {
   const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
-    localStorage.removeItem("userPresent");
+    sessionStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",
       autoClose: 3000,

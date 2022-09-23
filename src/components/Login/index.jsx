@@ -13,9 +13,9 @@ export default function Login() {
     : "";
   const dispatch = useDispatch();
   useEffect(() => {
-    const userLocalStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+    const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
     dispatch(
-      getProfileByIdUser([userLocalStorage?.idUser, userLocalStorage?.token])
+      getProfileByIdUser([userSessionStorage?.idUser, userSessionStorage?.token])
     );
   }, []);
   const renderLogin = () => {

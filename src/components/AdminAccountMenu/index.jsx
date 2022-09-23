@@ -21,7 +21,7 @@ const AdminAccountMenu = () => {
   };
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
-    localStorage.removeItem("userPresent");
+    sessionStorage.removeItem("userPresent");
     navigate("/")
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",

@@ -50,15 +50,15 @@ export default function Profiles({ setOpen }) {
   };
   const dispatch = useDispatch();
   const { user, profile } = useSelector((state) => state.user);
-  const userLocalStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const handleOpen = () => setOpen(true);
 
   useEffect(() => {
     dispatch(
-      getProfileByIdUser([userLocalStorage?.idUser, userLocalStorage?.token])
+      getProfileByIdUser([userSessionStorage?.idUser, userSessionStorage?.token])
     );
-    dispatch(getUserById([userLocalStorage?.idUser, userLocalStorage?.token]));
-  }, [userLocalStorage?.idUser]);
+    dispatch(getUserById([userSessionStorage?.idUser, userSessionStorage?.token]));
+  }, [userSessionStorage?.idUser]);
   return (
     <>
       {user?.role?.name?.includes("Role_Candidate") ? (

@@ -124,7 +124,7 @@ export const getUserById = createAsyncThunk(
  * args[1] : token
  */
 export const getProfileByIdUser = createAsyncThunk(
-  "user/getHrByIdUser",
+  "user/getProfileByIdUser",
   async (args) => {
     const header = {
       headers: {
