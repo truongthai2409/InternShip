@@ -21,7 +21,6 @@ const ListCardJobHome = ({
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
-  
   return (
     <>
       <div className="filter-panel-home__wrapper">
@@ -44,7 +43,7 @@ const ListCardJobHome = ({
                 job?.jobposition?.name || job?.position?.name || "Không có",
                 job?.jobType?.name || "Không có",
               ]}
-              location="Hồ Chí Minh"
+              location={job.locationjob?.district?.province?.name}
               amount={job.amount || "Không có"}
               demandPartner={true}
               time={[
