@@ -28,6 +28,8 @@ const PartnerHomePage = (props) => {
     demandDetail,
     indexPartnerCardActive,
   } = useSelector((state) => state.demand);
+
+
   const {allRating} = useSelector(state=>state.rating)
   const navigate = useNavigate();
   const { keyword } = useParams();
@@ -118,9 +120,7 @@ const PartnerHomePage = (props) => {
     }
     setMajor(tempMajor);
   }
-  console.log("type",type)
-  console.log("position",position)
-  console.log("major",major)
+
   useEffect(()=>{
     dispatch(getAllRating([0,5]))
   },[])

@@ -108,7 +108,7 @@ const BaseInformationCompany = ({
   }, [uniId]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
-
+  console.log("app",appreciateList)
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
     topAppreciate.push(appreciateList?.[i]);
@@ -190,6 +190,7 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
+
   return (
     <div className="">
       {/* Nếu trang home thì bỏ tab còn trang information thì có tab */}

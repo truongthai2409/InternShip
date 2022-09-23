@@ -9,7 +9,7 @@ import SelectCustom from "src/components/Select";
 import { useEffect } from "react";
 import { genderList } from "./validateForm";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import { getProfileByIdUser, updateUser } from "src/store/slices/Admin/user/userSlice";
 import InputFile from "src/components/InputFile";
 
 const ProfileForm = ({ handleClose }) => {
@@ -18,20 +18,24 @@ const ProfileForm = ({ handleClose }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
+  } = useForm({ resolver: yupResolver(schema), mode: "all" });
 
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
+
   useEffect(() => {
     setValue(
-      "firstName",
+      "firstname",
       profile?.user?.firstName || profile?.userDTO?.firstName
     );
-    setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
+    setValue("lastname", profile?.user?.lastName || profile?.userDTO?.lastName);
     setValue("email", profile?.user?.email || profile?.userDTO?.email);
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
   }, []);
-
+  useEffect(() => {
+    const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
+    dispatch(getProfileByIdUser(idUser));
+  }, [dispatch]);
   const onSubmit = (data) => {
     const profileData = {
       hr: JSON.stringify({
@@ -49,7 +53,6 @@ const ProfileForm = ({ handleClose }) => {
       }),
       fileAvatar: data.avatar,
     };
-    // console.log(profileData);
     dispatch(updateUser([profileData, profile.id]));
     handleClose();
   };
@@ -77,27 +80,27 @@ const ProfileForm = ({ handleClose }) => {
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="lastName"
+              id="lastname"
               label="Họ"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1.6px solid #777777"
             >
-              {errors.lastName?.message}
+              {errors.lastname?.message}
             </CustomInput>
           </div>
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="firstName"
+              id="firstname"
               label="Tên"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1.6px solid #777777"
             >
-              {errors.firstName?.message}
+              {errors.firstname?.message}
             </CustomInput>
           </div>
           <div className="profile-form__content-item">

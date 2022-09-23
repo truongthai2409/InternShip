@@ -6,6 +6,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Typography } from "@mui/material";
 const HeaderBaseInformationCompany = ({ jobDetail }) => {
+  console.log('jobDetail hihi',jobDetail)
   return (
     <div>
       <Box
@@ -78,7 +79,7 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                       transform: "translate(5px,0px)",
                     }}
                   >
-                    {jobDetail?.hr?.company.phone}
+                    {jobDetail?.hr?.company?.phone}
                   </Typography>
                 </div>
                 <div className="">

@@ -109,10 +109,10 @@ const FilterPanelHome = ({
               title={job.name ? job.name : job.jobApp?.name}
               fontSize={10}
               nameCompany={
-                job?.hr?.company?.name || job?.partner?.universityDTO.name || job?.jobApp?.company?.name
+                job?.hr?.company?.name || job?.universityDTO.name || job?.jobApp?.company?.name
               }
               idCompany={
-                job?.hr?.company?.id || job?.partner?.universityDTO.id
+                job?.hr?.company?.id || job?.universityDTO.id
               }
               tagName={[
                 job?.jobposition?.name || job?.position?.name || "Không có",

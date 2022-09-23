@@ -6,10 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import ContentBaseInformation from "../ContentBaseInfomation";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import CardHome from "../CardHome";
+import moment from "moment";
 
 const currentPage = 1;
 const limit = 5;
-
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 const BaseInformationUniversity = ({
   demandDetail,
   demandListUni,
@@ -22,16 +33,19 @@ const BaseInformationUniversity = ({
   pdTop,
   pdBottom,
   mgLeft,
+  arrDemand
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
-  const { demandListUniversity } = useSelector((state) => state.demand);
+  let { demandListUniversity } = useSelector((state) => state.demand);
   const uniId = demandDetail?.universityDTO?.id;
+
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [dispatch, uniId]);
+
 
   return (
     <div className="">
@@ -47,7 +61,7 @@ const BaseInformationUniversity = ({
                 />
                 <div className="base__information-card-detail">
                   <h3 className="university-name">
-                    {demandDetail?.partner?.universityDTO?.name}
+                    {demandDetail?.universityDTO?.name}
                   </h3>
                   <div className="">
                     <h5>Số điện thoại: </h5>
@@ -60,17 +74,17 @@ const BaseInformationUniversity = ({
                         transform: "translate(5px,5px)",
                       }}
                     >
-                      {demandDetail?.partner?.universityDTO?.phone}
+                      {demandDetail?.universityDTO?.phone}
                     </Typography>
                   </div>
                   <div className="">
                     <h5>
                       Email:
                       <a
-                        href={demandDetail?.partner?.universityDTO?.email}
+                        href={demandDetail?.universityDTO?.email}
                         className="fix-fontSize"
                       >
-                        {demandDetail?.partner?.universityDTO?.email}
+                        {demandDetail?.universityDTO?.email}
                       </a>
                     </h5>
                   </div>
@@ -86,7 +100,7 @@ const BaseInformationUniversity = ({
                           transform: "translate(5px,5px)",
                         }}
                       >
-                        {demandDetail?.partner?.universityDTO?.website}
+                        {demandDetail?.universityDTO?.website}
                       </Typography>
                     </div>
 
@@ -101,7 +115,7 @@ const BaseInformationUniversity = ({
                           transform: "translate(5px,5px)",
                         }}
                       >
-                        {`${demandDetail?.partner?.universityDTO?.address}`}
+                        {`${demandDetail?.universityDTO?.address}`}
                       </Typography>
                     </div>
                   </div>
@@ -111,6 +125,152 @@ const BaseInformationUniversity = ({
                 <h5 className="intro__university-title">
                   Giới thiệu về Trường
                 </h5>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: demandDetail?.universityDTO?.description,
+                  }}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    wordBreak: "break-word",
+                    marginLeft: "25px",
+                    textAlign: "justify",
+                    paddingRight: "25px",
+                    fontWeight: "450",
+                    fontSize: "16px",
+                    fontFamily: "Open Sans",
+                    fontStyle: "normal",
+                  }}
+                ></div>
+                <Item
+                  sx={{
+                    marginTop: 3,
+                    marginBottom: 3,
+                  }}
+                  elevation={0}
+                >
+                  <div className="job-applying-container _scroll">
+                    <h5
+                      className="intro__company-title intro__company-title-appling"
+                      style={{
+                        marginLeft: `${mgLeft ? mgLeft : ""}`,
+                      }}
+                    >
+                      Việc làm đang tuyển
+                    </h5>
+                    <Grid
+                      container
+                      spacing={1}
+                      sx={{
+                        // paddingLeft: `${pl}px`,
+                        // paddingRight: `${pr}px`,
+                        // marginLeft: `${ml}px`,
+                        width: "auto",
+                      }}
+                    >
+                      {demandListUniversity?.contents?.length > 0 ?
+                        demandListUniversity?.contents?.map((job, index) => (
+                          <Grid
+                            item
+                            lg="12"
+                            md="12"
+                            sm="12"
+                            key={job.id}
+                            sx={{
+                              paddingLeft: pdLeft ? `${pdLeft} !important` : "",
+                              paddingRight: pdRight ? `${pdRight} !important` : "",
+                              width: "200px",
+                            }}
+                          >
+                            <Link
+                              to={`/partner/detail_demand/${job.id}`}
+                              className="link__job-detail"
+                            >
+                              <CardHome
+                                id={job.id}
+                                index={index}
+                                title={job.name}
+                                fontSize={10}
+                                nameCompany={job.universityDTO?.name}
+                                idCompany={job.universityDTO?.id}
+                                job={job}
+                                // key={job.id}
+                                idJob={job.id}
+                                tagName={[
+                                  job?.jobposition?.name ||
+                                  job?.position.name ||
+                                  "Không có",
+                                  job?.jobType?.name || "Không có",
+                                ]}
+                                location="Hồ Chí Minh"
+                                amount={job.amount || "Không có"}
+                                demandPartner={true}
+                                time={[
+                                  moment(job.timeStartStr || job.createDate).format(
+                                    "DD/MM/YYYY"
+                                  ),
+                                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                                ]}
+                                locationPath={location.pathname}
+                                pdLeft="30px"
+                                pdRight="30px"
+                                active={0}
+                              />
+                            </Link>
+                          </Grid>
+                        )) : (arrDemand ? arrDemand?.contents?.map((job, index) => (
+                          <Grid
+                            item
+                            lg="12"
+                            md="12"
+                            sm="12"
+                            key={job.id}
+                            sx={{
+                              paddingLeft: pdLeft ? `${pdLeft} !important` : "",
+                              paddingRight: pdRight ? `${pdRight} !important` : "",
+                              width: "200px",
+                            }}
+                          >
+                            <Link
+                              to={`/partner/detail_demand/${job.id}`}
+                              className="link__job-detail"
+                            >
+                              <CardHome
+                                id={job.id}
+                                index={index}
+                                title={job.name}
+                                fontSize={10}
+                                nameCompany={job.universityDTO?.name}
+                                idCompany={job.universityDTO?.id}
+                                job={job}
+                                // key={job.id}
+                                idJob={job.id}
+                                tagName={[
+                                  job?.jobposition?.name ||
+                                  job?.position.name ||
+                                  "Không có",
+                                  job?.jobType?.name || "Không có",
+                                ]}
+                                location="Hồ Chí Minh"
+                                amount={job.amount || "Không có"}
+                                demandPartner={true}
+                                time={[
+                                  moment(job.timeStartStr || job.createDate).format(
+                                    "DD/MM/YYYY"
+                                  ),
+                                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                                ]}
+                                locationPath={location.pathname}
+                                pdLeft="30px"
+                                pdRight="30px"
+                                active={0}
+                              />
+                            </Link>
+                          </Grid>
+                        )) : "") }
+                    </Grid>
+                  </div>
+                </Item>
                 <Typography
                   variant="h6"
                   component="div"
@@ -125,7 +285,7 @@ const BaseInformationUniversity = ({
               {pathUrl !== "/information_company" ? (
                 <div className="button-card">
                   <Link
-                    to={`/partner/information_school/${demandDetail?.partner?.universityDTO.id}`}
+                    to={`/partner/infomation_demand/${demandDetail?.universityDTO.id}`}
                   >
                     <Button
                       name="Xem thêm"

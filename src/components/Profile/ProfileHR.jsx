@@ -50,7 +50,7 @@ export default function ProfileHR() {
                             <a
                                 style={{ textDecoration: "underline", color: "blue" }}
                                 href={profile?.company?.website}
-                                target="_blank"
+                                target="_blank" rel="noreferrer"
                             >
                                 {profile?.company?.website}
                             </a>
