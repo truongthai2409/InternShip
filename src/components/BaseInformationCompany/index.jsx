@@ -105,7 +105,7 @@ const BaseInformationCompany = ({
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-  }, [uniId]);
+  }, [uniId, dispatch]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
 
