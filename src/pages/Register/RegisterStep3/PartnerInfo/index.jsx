@@ -1,5 +1,3 @@
-
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -7,20 +5,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Collap from "src/components/Collaps/Collap";
 import InputFile from "src/components/InputFile";
-import SearchAutoComplete from 'src/components/SearchAutoComplete';
+import SearchAutoComplete from "src/components/SearchAutoComplete";
 import SelectCustom from "src/components/Select";
 import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import { addUniversity, getUniversityList } from "src/store/slices/Admin/university/unversitySlice";
 import {
-  getDistrictList, getProvinceList
+  addUniversity,
+  getUniversityList,
+  updateStatusPartner,
+} from "src/store/slices/Admin/university/unversitySlice";
+import {
+  getDistrictList,
+  getProvinceList,
 } from "src/store/slices/location/locationSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
 import CustomInput from "../../../../components/CustomInput/index";
-import Container from '../../Container/Container';
+import Container from "../../Container/Container";
 import "./styles.scss";
-const API = process.env.REACT_APP_API
+const API = process.env.REACT_APP_API;
 const countryList = [
   {
     id: 84,
@@ -29,7 +32,7 @@ const countryList = [
 ];
 const PartnerInfo = () => {
   TabTitle("Đăng ký - Cộng tác viên trường");
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [info, setInfo] = React.useState();
 
   const navigate = useNavigate();
@@ -38,16 +41,42 @@ const PartnerInfo = () => {
   const { status, universityList } = useSelector((state) => state.university);
 
   const errorMessage = useSelector(errorSelector);
+
+  const typeSchoolList = [
+    {
+      id: 1,
+      name: "Đại học",
+    },
+    {
+      id: 2,
+      name: "Cao đẳng",
+    },
+    {
+      id: 3,
+      name: "Trung cấp",
+    },
+  ];
+
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "all",
+    resolver: yupResolver(schema),
+  });
+
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
     dispatch(getProvinceList());
-    dispatch(getUniversityList([1, 200]))
-  }, []);
+    dispatch(getUniversityList([1, 200]));
+    if (status === "success") {
+      navigate("/home");
+    }
+    dispatch(updateStatusPartner("idle"));
+  }, [status]);
 
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
   const onSubmit = async (data) => {
     if (info) {
       const partnerData = {
@@ -118,41 +147,20 @@ const PartnerInfo = () => {
     }
   };
 
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "all",
-    resolver: yupResolver(schema),
-  });
-
-  if (status === "success") {
-    navigate("/login");
-  }
-  const typeSchoolList = [
-    {
-      id: 1,
-      name: "Đại học"
-    },
-    {
-      id: 2,
-      name: "Cao đẳng"
-    },
-    {
-      id: 3,
-      name: "Trung cấp"
-    }
-  ]
   const handleLabel = (number) => {
-    setInfo(number.id)
-  }
+    setInfo(number.id);
+  };
 
   const handerClicker = () => {
-    setOpen(!open)
-    setInfo()
-  }
+    setOpen(!open);
+    setInfo();
+  };
+
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
+
   return (
     <Container
       title="Cộng Tác Viên"
@@ -165,19 +173,26 @@ const PartnerInfo = () => {
       setValue={setValue}
       children={
         <>
-          {!open ?
+          {!open ? (
             <div className="customfilter">
               <SearchAutoComplete
                 data={universityList}
-                avatarRender={option => `${API}${option?.avatar}`}
+                avatarRender={(option) => `${API}${option?.avatar}`}
                 nameRender={(option) => option.name}
                 labelName="Chọn Trường"
                 onChange={(event, value) => handleLabel(value)}
                 id="registerPartner"
                 register={register}
               />
-            </div> : ""}
-          {!open ? <div className="requirment">{errors.registerPartner?.message}</div> : ""}
+            </div>
+          ) : (
+            ""
+          )}
+          {!open ? (
+            <div className="requirment">{errors.registerPartner?.message}</div>
+          ) : (
+            ""
+          )}
           <div className="collap" onClick={() => handerClicker()}>
             <Collap
               title="Chưa có trường của bạn? Đăng kí ngay"
@@ -314,7 +329,6 @@ const PartnerInfo = () => {
                   >
                     {errors.address?.message}
                   </CustomInput>
-
                 </>
               }
             />

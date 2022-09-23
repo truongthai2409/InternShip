@@ -16,9 +16,14 @@ const universitySlice = createSlice({
     totalPages: 0,
     totalItems: 0,
   },
-  reducer: {},
+  reducers: {
+    updateStatusPartner: (state, { payload }) => {
+      state.status = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUniversityList.fulfilled, (state, { payload }) => {
+      // console.log(payload);
       state.universityList = payload.contents;
       state.totalPages = payload.totalPages;
       state.totalItems = payload.totalItems;
@@ -27,14 +32,13 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      console.log("payload", payload)
+      console.log("payload", payload);
       if (payload.id) {
         state.user = payload;
         state.status = "success";
-        state.error = {};
         toast.success("Bạn đã đăng ký tài khoản thành công!");
       } else {
-        state.status = "fail";
+        state.status = "idle";
         state.error = payload;
         toast.error("Đăng ký không thành công!");
       }
@@ -52,7 +56,7 @@ const universitySlice = createSlice({
     });
   },
 });
-
+export const { updateStatusPartner } = universitySlice.actions;
 export default universitySlice;
 
 /**
@@ -68,6 +72,7 @@ export const getUniversityList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
       .then((response) => {
+        console.log("call API:", response);
         return response.data;
       })
       .catch((error) => {
