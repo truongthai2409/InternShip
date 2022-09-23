@@ -1,7 +1,6 @@
 import { Grid, Hidden } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getAllRating } from "src/store/slices/main/home/rating/rating";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import DetailCard from "../../../components/DetailCard";
@@ -11,7 +10,6 @@ import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
   getJobFilterByUser,
-  getJobPositionList
 } from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 
@@ -21,7 +19,7 @@ const Home = (props) => {
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { profile } = useSelector((state) => state.authentication);
-  const { allRating } = useSelector(state => state.rating)
+  const { allRating } = useSelector((state) => state.rating);
   // get global state from redux store
   let {
     jobDetail,
@@ -61,14 +59,14 @@ const Home = (props) => {
         temp = temp.filter((e) => major?.includes(e?.major?.name));
       }
       setJobs(temp);
-    }
-    updateJob()
-  }, [type, position, major, jobFilter])
-  const [jobDetails, setJobDetails] = useState(jobs[0])
+    };
+    updateJob();
+  }, [type, position, major, jobFilter]);
+  const [jobDetails, setJobDetails] = useState(jobs[0]);
 
   useEffect(() => {
-    dispatch(getAllRating([0, 5]))
-  }, [])
+    dispatch(getAllRating([0, 5]));
+  }, []);
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -84,7 +82,7 @@ const Home = (props) => {
     dispatch(getJobFilterByUser(dataFilter));
   }, [currentPage]);
   useEffect(() => {
-    setJobDetails(jobs[indexCardActive])
+    setJobDetails(jobs[indexCardActive]);
     dispatch(getJobByCompany(Number(idCompany)));
   }, [idCompany, indexCardActive]);
   const dataGetMarkByUser = {
@@ -100,8 +98,8 @@ const Home = (props) => {
     }
   }, [idCompany]);
   useEffect(() => {
-    setJobDetails(jobs[0])
-  }, [jobs])
+    setJobDetails(jobs[0]);
+  }, [jobs]);
   const handleSearch = (value) => {
     const dataFilter = {
       type: "",
@@ -110,7 +108,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage,
+      no: currentPage - 1,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -144,7 +142,7 @@ const Home = (props) => {
       );
     }
     setPosition(tempPosition);
-    
+
     if (value.length > 0) {
       tempMajor = value.filter(
         (el) =>
@@ -169,58 +167,55 @@ const Home = (props) => {
   };
   return (
     <>
-      {(
-        <Grid
-          className="wrapper"
-          spacing={{ xs: 1 }}
-          sx={{ padding: "18px" }}
-          container
-        >
-          <Grid item lg={2} md={3} sm={4} xs={12}>
-            <Hidden mdDown>
-              <SideBarHomeList
-                onChange={handleCheck}
-                slideBarHome__wrapper={true}
-              />
-            </Hidden>
-          </Grid>
-
-          <Grid item lg={4} md={8} sm={12} xs={12}>
-            <div className="onDesktop">
-              <SearchResultHome
-                onClick={handleSearch}
-                onChange={getValueLocationAndHandle}
-              />
-            </div>
-
-            <FilterPanelHome
-              jobList={jobs}
-              indexCardActive={indexCardActive}
-              jobListHavePages={jobListHavePages}
-              onChange={getValuePageAndHandle}
-              allRating={allRating}
+      <Grid
+        className="wrapper"
+        spacing={{ xs: 1 }}
+        xs={12}
+        sx={{ padding: "18px" }}
+        container
+      >
+        <Grid item lg={2} md={3} sm={4} xs={4}>
+          <Hidden mdDown>
+            <SideBarHomeList
+              onChange={handleCheck}
+              slideBarHome__wrapper={true}
             />
-          </Grid>
-
-          <Grid item lg={6} className="onTablet">
-            <div className="containerDetailCard containerDetailCard-none">
+          </Hidden>
+        </Grid>
+        <Grid xs={8} item spacing={{ xs: 1 }}>
+          <Grid container>
+            <Grid item xs={12}>
               <div className="none__res">
                 <SearchResultHome
                   onClick={handleSearch}
                   onChange={getValueLocationAndHandle}
                 />
               </div>
-              <DetailCard
-                logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                jobDetail={jobDetails}
+            </Grid>
+            <Grid item lg={4} md={8} sm={12} xs={12}>
+              <FilterPanelHome
                 jobList={jobs}
-                candidate={props.candidate}
-                jobListCompany={jobListCompany}
+                indexCardActive={indexCardActive}
+                jobListHavePages={jobListHavePages}
+                onChange={getValuePageAndHandle}
+                allRating={allRating}
               />
-            </div>
+            </Grid>
+            <Grid item lg={6} xs={8} className="onTablet">
+              <div className="containerDetailCard containerDetailCard-none">
+                <DetailCard
+                  logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                  jobDetail={jobDetails}
+                  jobList={jobs}
+                  candidate={props.candidate}
+                  jobListCompany={jobListCompany}
+                />
+              </div>
+            </Grid>
           </Grid>
         </Grid>
-      )}
+      </Grid>
+      <Grid container spacing={{ xs: 1 }}></Grid>
     </>
   );
 };

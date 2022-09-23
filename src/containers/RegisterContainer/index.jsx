@@ -44,9 +44,7 @@ export default function RegisterContainer({ Outlet }) {
   const roleID = useSelector(userSelector)?.role?.id;
   return (
     <div className="register-container">
-      <div className="logo-register-page">
-        <Logo id={roleID ? roleID : false} />
-      </div>
+     
       <h1 className="register-container__title">{title}</h1>
       <Outlet />
       <div className="register-container__footer">

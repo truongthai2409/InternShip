@@ -54,5 +54,5 @@ export const schema = yup.object({
     .string()
     .required(" * Số điện thoại của bạn không được để trống.")
     .matches(phoneRegExp, " * Số điện thoại không đúng."),
-  gender: yup.string().required(),
+  gender: yup.string().required(" * Giới tính không được để trống."),
 });

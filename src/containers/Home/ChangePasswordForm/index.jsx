@@ -88,14 +88,14 @@ const Password = () => {
             {errors.confirmNewPassword?.message}
           </CustomInput>
           <div className="change-password__actions">
-            <Button onClick={handleSubmit(onSubmit)} bwidth="60%">
+            <Button onClick={handleSubmit(onSubmit)} bwidth="30%">
               Thay đổi
             </Button>
             <Button
               onClick={handleClear}
               bg="#f3f4f6"
               color="#111"
-              bwidth="40%"
+              bwidth="30%"
               border="none"
             >
               Hủy

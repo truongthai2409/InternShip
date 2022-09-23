@@ -82,8 +82,7 @@ export const schema = yup.object({
     .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
   gender: yup
     .string()
-    .required('* Bạn phải chọn giới tính.')
-    .max(7, '* Tối đa 7 kí tự.'),
+    .required('* Bạn phải chọn giới tính.'),
   avatar: yup
     .mixed()
     .test("type", '* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp', (value) => {

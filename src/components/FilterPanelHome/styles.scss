@@ -2,8 +2,12 @@
 
 .filter-panel-home__wrapper {
   width: 100%;
+  height: 690px;
   padding-left: 16px;
   margin-bottom: 25px;
+  overflow-y: scroll;
+  -ms-overflow-style: none !important;
+  scrollbar-width: 0 !important;
 
   .filter-panel-home__filterPanel {
     border-bottom: 1;
@@ -12,15 +16,13 @@
     height: 66px;
   }
 
-  .tabPanel {
-    height: 600px;
-    overflow-y: scroll;
-    border-radius: 6px;
+  &::-wenkit-scrollbar {
+    display: none !important;
   }
+}
 
-  .tabPanel::-webkit-scrollbar {
-    display: none;
-  }
+.filter-panel-home__wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 740px) {
@@ -32,9 +34,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .css-1eyyxxn-MuiList-root {
-    height: fit-content !important;
   }
   .filter-panel-home__wrapper {
     padding: 0;

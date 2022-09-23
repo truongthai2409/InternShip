@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
-import logo from "./logo.png";
+import logoUser from "../../assets/img/Logo_user.png";
 import { useDispatch, useSelector } from "react-redux";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 
@@ -51,7 +51,7 @@ const Logo = ({ id }) => {
     <div onClick={handleClickGoHome}>
       <Link to='#/' className="logo">
         <div className="roleName__header">
-          <img src={logo} alt="" />
+          <img src={logoUser} alt="" />
           <span>{id ? roleList[id] : ""}</span>
         </div>
       </Link>

@@ -93,6 +93,7 @@ function Header(props) {
           <Button
             bwidth="117px"
             bheight="45px"
+            fz="14px"
             name="Đăng ký"
             className="login__home-register"
           />
