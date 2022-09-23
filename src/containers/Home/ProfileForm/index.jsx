@@ -29,10 +29,10 @@ const ProfileForm = ({ handleClose }) => {
 
   useEffect(() => {
     setValue(
-      "firstName",
+      "firstname",
       profile?.user?.firstName || profile?.userDTO?.firstName
     );
-    setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
+    setValue("lastname", profile?.user?.lastName || profile?.userDTO?.lastName);
     setValue("email", profile?.user?.email || profile?.userDTO?.email);
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
   }, []);
@@ -61,7 +61,8 @@ const ProfileForm = ({ handleClose }) => {
       }),
       fileAvatar: data.avatar,
     };
-    dispatch(updateUser([profile.id, userLocalStorage.token,profileData]));
+    // console.log(profileData);
+    dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
     handleClose();
   };
 
@@ -88,27 +89,27 @@ const ProfileForm = ({ handleClose }) => {
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="lastName"
+              id="lastname"
               label="Họ"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1px solid #777777"
             >
-              {errors.lastName?.message}
+              {errors.lastname?.message}
             </CustomInput>
           </div>
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="firstName"
+              id="firstname"
               label="Tên"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1px solid #777777"
             >
-              {errors.firstName?.message}
+              {errors.firstname?.message}
             </CustomInput>
           </div>
           <div className="profile-form__content-item">
