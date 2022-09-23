@@ -12,6 +12,7 @@ import UserDetail from "../../pages/Admin/UserDetail";
 import NotFound from "../../pages/NotFound";
 import AdminRouterLayout from "../../Layouts/Admin/index";
 import Setting from "src/pages/Admin/Setting";
+import Statistic from "src/components/Statistic";
 
 
 const adminRouter = [
@@ -24,6 +25,10 @@ const adminRouter = [
                 path: "",
                 Component: Dashboard,
             },
+            {
+                path: "statistical",
+                Component: Statistic,
+              },
             {
                 path: "user",
                 Component: User,

@@ -1,19 +1,19 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { } from 'src/components/CustomInput/components';
-import InputFile from 'src/components/InputFile';
-import { errorSelector } from 'src/store/selectors/main/registerSelectors';
-import { registerCandidate } from 'src/store/slices/main/register/registerSlice';
-import { TabTitle } from 'src/utils/GeneralFunctions';
-import { genderList, schema } from './data';
-import SelectCustom from '../../../../components/Select';
-import { getMajorList } from '../../../../store/slices/Admin/major/majorSlice';
-import Container from '../../Container/Container';
-import './styles.scss';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {} from "src/components/CustomInput/components";
+import InputFile from "src/components/InputFile";
+import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import { registerCandidate } from "src/store/slices/main/register/registerSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
+import { genderList, schema } from "./data";
+import SelectCustom from "../../../../components/Select";
+import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
+import Container from "../../Container/Container";
+import "./styles.scss";
 const CandidateInfo = () => {
   TabTitle("Đăng ký - Ứng viên");
 

@@ -9,7 +9,7 @@ import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
-  getJobFilterByUser,
+  getJobFilterByUser
 } from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 
@@ -65,8 +65,8 @@ const Home = (props) => {
   const [jobDetails, setJobDetails] = useState(jobs[0]);
 
   useEffect(() => {
-    dispatch(getAllRating([0, 5]));
-  }, []);
+    dispatch(getAllRating([0, 5]))
+  }, [dispatch])
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -80,11 +80,11 @@ const Home = (props) => {
     };
 
     dispatch(getJobFilterByUser(dataFilter));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
   useEffect(() => {
     setJobDetails(jobs[indexCardActive]);
     dispatch(getJobByCompany(Number(idCompany)));
-  }, [idCompany, indexCardActive]);
+  }, [idCompany, indexCardActive,dispatch]);
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
@@ -108,7 +108,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage - 1,
+      no: currentPage -1,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -165,6 +165,7 @@ const Home = (props) => {
     setCurrentPage(value);
     window.scroll(0, 0);
   };
+
   return (
     <>
       <Grid

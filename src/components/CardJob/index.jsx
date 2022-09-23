@@ -49,8 +49,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     };
     await dispatch(getMarkByUser(dataGetMarkByUser));
   };
-  useEffect(()=>{
-  },[])
+  
   useEffect(()=>{
     const dataGetAppliedByCandidate = {
       idCandidate: candidateInfoByUsername.id,

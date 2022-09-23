@@ -32,12 +32,17 @@ import Company from "src/pages/Admin/Company";
 import Password from "src/containers/Home/ChangePasswordForm";
 import LoginAdmin from "src/pages/LoginAdmin";
 import Setting from "src/pages/Admin/Setting";
+import Statistic from "src/components/Statistic";
 
 // admin router
 export const adminRouter = [
   {
     path: "",
     Component: Dashboard,
+  },
+  {
+    path: "admin/statistical",
+    Component: Statistic,
   },
   {
     path: "user",

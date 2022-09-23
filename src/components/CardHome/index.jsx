@@ -23,7 +23,7 @@ const CardHome = (props) => {
 
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
-  const  {profile}  = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.authentication);
   const user = JSON.parse(sessionStorage.getItem("userPresent"))
   var isMark =
     careListOfPrivate &&
@@ -115,59 +115,67 @@ const CardHome = (props) => {
         )}
       </div>
 
-      <div className="cardHome__col2">
-        {user?.role?.includes("Role_Candidate") ?
-          <ButtonMark
-            height="32px"
-            width="32px"
-            fontSize="18px"
-            jobId={props.id}
-            isMark={isMarkLength}
-          /> : <div style={{ visibility: "hidden" }}><ButtonMark
-            height="32px"
-            width="32px"
-            fontSize="18px"
-            jobId={props.id}
-            isMark={isMarkLength}
-          /></div>}
-        {props.none__time ? (
-          <div className="cardHome__col2-End-1">
-            <AddLocationAltRoundedIcon
-              style={{ fontSize: `${props.fontSize + 2}px` }}
-              sx={{ color: "#04bf8a" }}
-            />
-
-            <p
-              style={{
-                fontSize: `${props.fontSize}px`,
-                width: "max-content",
-                color: "#000",
-              }}
-            >
-              {props.location}
-            </p>
-          </div>
-        ) : (
-          <div className="cardHome__col2-End">
+        <div className="cardHome__col2">
+      {props.hiddent ? <div style={{ visibility: "hidden" }}><ButtonMark
+              height="32px"
+              width="32px"
+              fontSize="18px"
+              jobId={props.id}
+              isMark={isMarkLength}
+            /></div> :
+          <>{user?.role?.includes("Role_Candidate") ?
+            <ButtonMark
+              height="32px"
+              width="32px"
+              fontSize="18px"
+              jobId={props.id}
+              isMark={isMarkLength}
+            /> : <div style={{ visibility: "hidden" }}><ButtonMark
+              height="32px"
+              width="32px"
+              fontSize="18px"
+              jobId={props.id}
+              isMark={isMarkLength}
+            /></div>}</>
+          }
+          {props.none__time ? (
             <div className="cardHome__col2-End-1">
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
+                sx={{ color: "#04bf8a" }}
               />
-              <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
+
+              <p
+                style={{
+                  fontSize: `${props.fontSize}px`,
+                  width: "max-content",
+                  color: "#000",
+                }}
+              >
                 {props.location}
               </p>
             </div>
-            <div className="cardHome__col2-End-2">
-              <WatchLaterOutlinedIcon
-                style={{ fontSize: `${props.fontSize + 2}px` }}
-              />
-              <p
-                style={{ fontSize: `${props.fontSize}px` }}
-              >{`${props.time[0]} - ${props.time[1]}`}</p>
+          ) : (
+            <div className="cardHome__col2-End">
+              <div className="cardHome__col2-End-1">
+                <AddLocationAltRoundedIcon
+                  style={{ fontSize: `${props.fontSize + 2}px` }}
+                />
+                <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
+                  {props.location}
+                </p>
+              </div>
+              <div className="cardHome__col2-End-2">
+                <WatchLaterOutlinedIcon
+                  style={{ fontSize: `${props.fontSize + 2}px` }}
+                />
+                <p
+                  style={{ fontSize: `${props.fontSize}px` }}
+                >{`${props.time[0]} - ${props.time[1]}`}</p>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
     </div>
   );
 };
