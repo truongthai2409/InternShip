@@ -11,11 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import {
-  getApplyListByIdCandidate
-} from "src/store/slices/main/candidate/apply/applySlice";
+import { getApplyListByIdCandidate } from "src/store/slices/main/candidate/apply/applySlice";
 import "./styles.scss";
-
 
 const InformationCompany = ({
   jobDetail,
@@ -23,8 +20,7 @@ const InformationCompany = ({
   rating,
   demandPartner = false,
 }) => {
-
-  const [check,setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
   const { profile } = useSelector((state) => state.authentication);
   let { applyList } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
@@ -54,19 +50,24 @@ const InformationCompany = ({
         const resApply = await dispatch(addApply(applyData));
         if (resApply.payload.status === 200) {
           toast.success("Đã nộp CV thành công");
-          setCheck(true)
+          setCheck(true);
         }
       }
     } else {
       toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
-  useEffect(()=>{
-    setCheck(applyList?.map((item)=>{return item.jobApp?.id}).includes(jobDetail?.id))
-  },[jobDetail,applyList])
+  useEffect(() => {
+    setCheck(
+      applyList
+        ?.map((item) => {
+          return item.jobApp?.id;
+        })
+        .includes(jobDetail?.id)
+    );
+  }, [jobDetail, applyList]);
 
-  useEffect(()=>{
-    
+  useEffect(() => {
     const _getValue = async () => {
       const dataGetMarkByUser = {
         userName: profile.username,
@@ -86,9 +87,9 @@ const InformationCompany = ({
         },
       };
       await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
-    }
+    };
     _getValue();
-  },[candidateInfoByUsername.id,check])
+  }, [candidateInfoByUsername.id, check]);
   return (
     <div>
       {jobDetail && (
@@ -97,7 +98,7 @@ const InformationCompany = ({
             <Typography variant="span">
               <Typography
                 variant="span"
-                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+                sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
               >
                 Mô tả công việc:
               </Typography>
@@ -114,14 +115,14 @@ const InformationCompany = ({
             <Typography variant="span">
               <Typography
                 variant="span"
-                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+                sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
               >
                 Yêu cầu công việc:
               </Typography>
               <Typography
                 variant="body2"
                 gutterBottom
-                sx={{ fontSize: 16, fontWeight: "400" }}
+                sx={{ fontSize: 14, fontWeight: "400" }}
               >
                 <div
                   dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
@@ -132,14 +133,14 @@ const InformationCompany = ({
               <Typography variant="span">
                 <Typography
                   variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700" }}
+                  sx={{ fontSize: 16, fontWeight: "700" }}
                 >
                   Quyền lợi:
                 </Typography>
                 <Typography
                   variant="body2"
                   gutterBottom
-                  sx={{ fontSize: 16, fontWeight: "400" }}
+                  sx={{ fontWeight: "400", fontSize: "14px !important" }}
                 >
                   <div
                     dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
@@ -151,14 +152,14 @@ const InformationCompany = ({
               <Typography variant="span">
                 <Typography
                   variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700" }}
+                  sx={{ fontSize: 16, fontWeight: "700" }}
                 >
                   Thời hạn ứng tuyển:
                 </Typography>
                 <Typography
                   variant="body2"
                   gutterBottom
-                  sx={{ fontSize: 17, fontWeight: "400" }}
+                  sx={{ fontSize: "14px !important", fontWeight: "400" }}
                 >
                   {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
                   {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
@@ -176,7 +177,7 @@ const InformationCompany = ({
                 variant="h6"
                 component="div"
                 sx={{
-                  fontSize: 17,
+                  fontSize: 14,
                   fontWeight: "400",
                   transform: "translate(5px,5px)",
                 }}
@@ -192,9 +193,10 @@ const InformationCompany = ({
                 variant="h6"
                 component="div"
                 sx={{
-                  fontSize: 17,
+                  fontSize: 14,
                   fontWeight: "400",
                   transform: "translate(5px,5px)",
+                  flex: 1,
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                 }}
@@ -204,18 +206,11 @@ const InformationCompany = ({
             </div>
           </div>
           <div className="detail__card-5">
-            <Typography variant="span" gutterBottom component="div">
-              <Rating
-                name="read-only"
-                precision={0.5}
-                readOnly
-                value={Number(rating)}
-              />
-            </Typography>
             <Button
-              name={check ? "Đã Ứng Tuyển" :  "Ứng Tuyển"}
+              name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
               onClick={handleAddJob}
               disabled={check ? true : false}
+              bheight="35px"
             ></Button>
           </div>
         </>
@@ -288,15 +283,6 @@ const InformationCompany = ({
           </div>
           <div className="line"></div>
           <div className="detail__card-4">
-            {/* <div className="detail__card-4-item">
-          <Icon className="detail__card-4-item-icon">
-            <CurrencyExchangeIcon />
-          </Icon>
-          <Typography variant="h6" gutterBottom component="div" >
-            {formatSalary(jobDetailById.salaryMin)} -{" "}
-            {formatSalary(jobDetailById.salaryMax)}
-          </Typography>
-        </div> */}
             <div className="detail__card-4-item" sx={{ display: "flex" }}>
               <Icon className="detail__card-4-item-icon">
                 <WorkIcon />
@@ -321,7 +307,7 @@ const InformationCompany = ({
                 variant="h6"
                 component="div"
                 sx={{
-                  fontSize: 17,
+                  fontSize: 14,
                   fontWeight: "400",
                   transform: "translate(5px,5px)",
                   overflow: "hidden",
@@ -331,25 +317,6 @@ const InformationCompany = ({
                 {`${jobDetailById.locationjob?.address} ${jobDetailById.locationjob?.district?.name}`}
               </Typography>
             </div>
-          </div>
-          <div className="detail__card-5">
-            <Typography variant="span" gutterBottom component="div">
-              {/* <Typography variant="button" display="block" gutterBottom>
-                {rating}
-              </Typography> */}
-              {/* <Rating
-                name="read-only"
-                precision={0.5}
-                readOnly
-                value={rating}
-              /> */}
-            </Typography>
-            {/* <Button
-              bwidth="115px"
-              bheight="50px"
-              name="Ứng tuyển"
-              onClick={handleAddJob}
-            ></Button> */}
           </div>
         </>
       )}

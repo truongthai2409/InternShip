@@ -92,7 +92,7 @@ function Header(props) {
         <Link to="/register">
           <Button
             bwidth="117px"
-            bheight="45px"
+            bheight="35px"
             fz="14px"
             name="Đăng ký"
             className="login__home-register"

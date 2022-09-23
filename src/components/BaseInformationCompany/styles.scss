@@ -21,7 +21,6 @@
     text-overflow: ellipsis;
   }
   .base__information-card {
-    // background-color: $primary-color-background;
     background-color: white;
     display: flex;
     justify-content: flex-start;
@@ -29,21 +28,17 @@
     border-radius: 6px;
     padding-bottom: 1rem;
 
-    // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     .img-logo {
       width: 100px;
       height: 80px;
       border-radius: 4px;
       margin-left: 14px;
-      // margin-right: 23px;
-      // transform: translate(-30px, 30px);
       box-sizing: border-box;
       margin-top: 16px;
       opacity: 1;
     }
 
     &-detail {
-      // margin: $mg-1;
       width: fit-content;
       height: fit-content;
       div {
@@ -91,7 +86,6 @@
         color: $primary-color;
       }
       h5 {
-        // transform: translateY(5px);
         display: flex;
         align-items: center;
         font-family: "Open Sans";
@@ -113,7 +107,6 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
     display: flex;
     align-items: center;
     color: #000000;
@@ -149,7 +142,6 @@
 }
 
 .appreciate {
-  // margin: 5px 0px 10px 0px;
   @include flex(flex-start, space-between);
 
   img {

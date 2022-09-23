@@ -6,12 +6,8 @@
   border: 2px solid $primary-color;
   padding: $pd-2;
   overflow-y: scroll;
-  height: 600px;
+  height: 695px;
   margin-bottom: 15px;
-
-  &-4-item {
-    max-width: 33%;
-  }
 
   .detail__card-1 {
     display: flex;

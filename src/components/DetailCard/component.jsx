@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
 import {
-  // useSelector,
   useDispatch,
 } from "react-redux";
 import { getJobList } from "../../store/slices/main/home/job/jobSlice";
-// import moment from "moment";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";

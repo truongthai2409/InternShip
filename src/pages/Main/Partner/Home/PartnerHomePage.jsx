@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import SearchResultHome from "src/components/SearchResultHome";
 import DetailCard from "src/components/DetailCard";
 import SideBarHomeList from "src/components/SideBarHomeList";
-import FilterPanelHome from "src/components/FilterPanelHome";
+import FilterPanelHome from "src/components/ListCardJobHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

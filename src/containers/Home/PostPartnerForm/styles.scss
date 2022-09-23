@@ -19,27 +19,27 @@
 
     .custom-input .custom-input__textfield input {
       font-family: "Public Sans", sans-serif;
-      border: 1.6px solid $primary-color;
+      border: 1px solid $primary-color;
       border-radius: 2px;
       width: 100%;
       padding: 21px 12px;
       color: #444444;
 
       &:hover {
-        border: 1.6px solid $primary-color;
+        border: 1px solid $primary-color;
         box-shadow: $primary-color-1 0 3px 8px;
       }
     }
 
     .custom-input .custom-input__textfield textarea {
       font-family: "Public Sans", sans-serif;
-      border: 1.6px solid $primary-color !important;
+      border: 1px solid $primary-color !important;
       border-radius: 2px;
       width: 100%;
       padding: 20px 12px;
 
       &:hover {
-        border: 1.6px solid $primary-color;
+        border: 1px solid $primary-color;
         box-shadow: $primary-color-1 0 3px 8px;
       }
     }
@@ -112,7 +112,7 @@
 
       textarea {
         font-family: "Public Sans", sans-serif;
-        border: 1.6px solid $primary-color;
+        border: 1px solid $primary-color;
         border-radius: 2px;
         height: 150px;
       }

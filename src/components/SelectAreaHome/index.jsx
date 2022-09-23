@@ -17,12 +17,12 @@ export default function SelectAreaHome({ onChange }) {
     onChange && onChange(value.name)
   }
   return (
-    <div className="config-select">
+    <div className="config-select" style={{fontSize: "14px"}}>
       <SearchAutoComplete
       data={provinceList}
       avatarRender={null}
       nameRender={(option) => option.name}
-      labelName="Khu Vực"
+      labelName="Khu vực"
       onChange={(event, value) => handleLabel(value)}
       register={(option)=>option}
     />

@@ -21,6 +21,7 @@ const ProfileForm = ({ handleClose }) => {
   } = useForm({ resolver: yupResolver(schema), mode: "onChange" });
 
   const dispatch = useDispatch();
+  const userLocalStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { profile } = useSelector((state) => state.user);
   useEffect(() => {
     setValue(
@@ -50,7 +51,7 @@ const ProfileForm = ({ handleClose }) => {
       fileAvatar: data.avatar,
     };
     // console.log(profileData);
-    dispatch(updateUser([profileData, profile.id]));
+    dispatch(updateUser([profile.id, userLocalStorage.token,profileData]));
     handleClose();
   };
 
@@ -82,7 +83,7 @@ const ProfileForm = ({ handleClose }) => {
               className="profile-form__input"
               radius="2px"
               height="45px"
-              border="1.6px solid #777777"
+              border="1px solid #777777"
             >
               {errors.lastName?.message}
             </CustomInput>
@@ -95,7 +96,7 @@ const ProfileForm = ({ handleClose }) => {
               className="profile-form__input"
               radius="2px"
               height="45px"
-              border="1.6px solid #777777"
+              border="1px solid #777777"
             >
               {errors.firstName?.message}
             </CustomInput>
@@ -120,7 +121,7 @@ const ProfileForm = ({ handleClose }) => {
               className="profile-form__input"
               radius="2px"
               height="45px"
-              border="1.6px solid #777777"
+              border="1px solid #777777"
             >
               {errors.phone?.message}
             </CustomInput>

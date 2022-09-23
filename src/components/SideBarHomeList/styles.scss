@@ -2,7 +2,7 @@
 
 .slideBarHome__wrapper {
   overflow-y: scroll;
-  height: 690px;
+  height: 750px;
   border-radius: 6px;
 
   .slideBarHome__container {
@@ -25,9 +25,8 @@
       font-size: 14px;
       display: flex;
     }
-
-    .MuiButtonBase-root {
-      padding: 10px 10px 10px 24px;
+    .MuiListItemButton-root {
+      width: 100%;
     }
   }
 }

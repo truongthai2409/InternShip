@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllRating } from "src/store/slices/main/home/rating/rating";
 import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 import DetailCard from "../../../components/DetailCard";
-import FilterPanelHome from "../../../components/FilterPanelHome";
+import ListCardJobHome from "../../../components/ListCardJobHome";
 import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
-  getJobFilterByUser
+  getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
 
@@ -65,8 +65,8 @@ const Home = (props) => {
   const [jobDetails, setJobDetails] = useState(jobs[0]);
 
   useEffect(() => {
-    dispatch(getAllRating([0, 5]))
-  }, [dispatch])
+    dispatch(getAllRating([0, 5]));
+  }, [dispatch]);
   useEffect(() => {
     const dataFilter = {
       type: "",
@@ -84,7 +84,7 @@ const Home = (props) => {
   useEffect(() => {
     setJobDetails(jobs[indexCardActive]);
     dispatch(getJobByCompany(Number(idCompany)));
-  }, [idCompany, indexCardActive,dispatch]);
+  }, [idCompany, indexCardActive, dispatch]);
   const dataGetMarkByUser = {
     userName: profile.username,
     page: {
@@ -108,7 +108,7 @@ const Home = (props) => {
       name: value || "",
       province: locationValue || "",
       major: "",
-      no: currentPage -1,
+      no: currentPage - 1,
       limit: limit,
     };
     dispatch(getJobFilterByUser(dataFilter));
@@ -170,12 +170,12 @@ const Home = (props) => {
     <>
       <Grid
         className="wrapper"
-        spacing={{ xs: 1 }}
+        spacing={{ xs: 1, height: "700px" }}
         xs={12}
         sx={{ padding: "18px" }}
         container
       >
-        <Grid item lg={2} md={3} sm={4} xs={4}>
+        <Grid item xs={2.5}>
           <Hidden mdDown>
             <SideBarHomeList
               onChange={handleCheck}
@@ -183,8 +183,8 @@ const Home = (props) => {
             />
           </Hidden>
         </Grid>
-        <Grid xs={8} item spacing={{ xs: 1 }}>
-          <Grid container>
+        <Grid xs={9.5} item>
+          <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12}>
               <div className="none__res">
                 <SearchResultHome
@@ -193,8 +193,8 @@ const Home = (props) => {
                 />
               </div>
             </Grid>
-            <Grid item lg={4} md={8} sm={12} xs={12}>
-              <FilterPanelHome
+            <Grid item xs={5} md={5}>
+              <ListCardJobHome
                 jobList={jobs}
                 indexCardActive={indexCardActive}
                 jobListHavePages={jobListHavePages}
@@ -202,7 +202,7 @@ const Home = (props) => {
                 allRating={allRating}
               />
             </Grid>
-            <Grid item lg={6} xs={8} className="onTablet">
+            <Grid item xs={7} md={7}>
               <div className="containerDetailCard containerDetailCard-none">
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"

@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import PaginationCustome from "src/components/Pagination";
 import RatingJob from "../RatingJob";
 
-const FilterPanelHome = ({
+const ListCardJobHome = ({
   jobList,
   indexCardActive,
   positionJobValue,
@@ -66,7 +66,6 @@ const FilterPanelHome = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: "16px",
           }}
         >
           <PaginationCustome
@@ -81,4 +80,4 @@ const FilterPanelHome = ({
     </>
   );
 };
-export default FilterPanelHome;
+export default ListCardJobHome;

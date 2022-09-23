@@ -95,25 +95,47 @@ export const getUserList = createAsyncThunk("user/getUserList", async (arg) => {
 });
 
 // function use for get basic information match to each role through idUser
-export const getUserById = createAsyncThunk("user/getUserById", async (id) => {
-  return await axios
-    .get(`${baseURL}/api/r2s/admin/user/get-id/${id}`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return error.response.data;
-    });
-});
+/**
+ * args[0] : id of user
+ * args[1] : token
+ */
+export const getUserById = createAsyncThunk(
+  "user/getUserById",
+  async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+      },
+    };
+    return await axios
+      .get(`${baseURL}/api/r2s/admin/user/get-id/${args[0]}`, header)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
+);
 
 // function use for get all of information match to each role through idUser
+/**
+ * args[0] : id of user
+ * args[1] : token
+ */
 export const getProfileByIdUser = createAsyncThunk(
   "user/getHrByIdUser",
-  async (idUser) => {
+  async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+      },
+    };
+
     switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
       case "Role_HR":
         return await axios
-          .get(`${baseURL}/api/r2s/hr/user/${idUser}`)
+          .get(`${baseURL}/api/r2s/hr/user/${args[0]}`, header)
           .then((response) => {
             return response.data;
           })
@@ -122,7 +144,7 @@ export const getProfileByIdUser = createAsyncThunk(
           });
       case "Role_Partner":
         return await axios
-          .get(`${baseURL}/api/r2s/partner/user/${idUser}`)
+          .get(`${baseURL}/api/r2s/partner/user/${args[0]}`, header)
           .then((response) => {
             return response.data;
           })
@@ -131,7 +153,7 @@ export const getProfileByIdUser = createAsyncThunk(
           });
       case "Role_Candidate":
         return await axios
-          .get(`${baseURL}/api/r2s/candidate/user/${idUser}`)
+          .get(`${baseURL}/api/r2s/candidate/user/${args[0]}`, header)
           .then((response) => {
             return response.data;
           })
@@ -146,16 +168,19 @@ export const getProfileByIdUser = createAsyncThunk(
 
 // function use for update profile of user
 /**
- * args[0] : data
- * args[1] : id match to the each role
+ * args[0] : id match to the each role
+ * args[1] : token
+ * args[2] : data
  */
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[1],
+      "Content-Type": "multipart/form-data",
+    },
+  };
   return await axios
-    .put(`${baseURL}/api/r2s/hr/${args[1]}`, args[0], {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
+    .put(`${baseURL}/api/r2s/hr/${args[0]}`, args[2], header)
     .then((response) => {
       return response.data;
     })

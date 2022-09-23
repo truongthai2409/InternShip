@@ -22,13 +22,11 @@
 .login__home {
   display: flex;
   align-items: center;
-  text-align: none;
-  border-radius: 5px;
+  gap: 4px;
 }
 .login__home-sign-in {
   font-family: $f-family-0;
   color: $color-black-0;
-  padding: 10px 18px;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -38,7 +36,6 @@
   font-family: $f-family-0;
   color: $color-gray;
   padding: 10px 18px;
-  font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
 
