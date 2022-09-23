@@ -21,11 +21,12 @@ const DetailCard = ({
 }) => {
   const { appreciateList } = useSelector((state) => state.appreciate);
   const dispatch = useDispatch();
-  const idCompany = jobDetail?.hr?.company.id;
+  const idCompany = jobDetail?.universityDTO?.id || jobDetail?.hr?.company.id;
+
   useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
-  }, []);
+  }, [dispatch, idCompany]);
 
   const data = [];
   for (let i = 0; i < appreciateList?.length; i++) {
@@ -36,7 +37,7 @@ const DetailCard = ({
     return total + currentValue;
   }, 0);
   const rating = (res / data?.length).toFixed(2);
-
+  
   return (
     <div>
       {jobList && jobList.length > 0 ? (

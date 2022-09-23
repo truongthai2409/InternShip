@@ -11,7 +11,7 @@ export default function ProfilePartner() {
     const { profile } = useSelector((state) => state.user);
 
     useEffect(() => {
-        const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
+        const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
         dispatch(getProfileByIdUser(idUser));
     }, [dispatch]);
     return (

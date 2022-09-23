@@ -72,7 +72,7 @@ const Detail = ({
     }
   }, [jobDetail]);
   useEffect(() => {
-    dispatch(getJobList());
+    dispatch(getJobList([1,20]));
   }, [dispatch]);
 
   const handleChange = (event, newValue) => {
@@ -96,7 +96,7 @@ const Detail = ({
                 <h2>{jobDetail?.name}</h2>
                 <p className="name-company">
                   {jobDetail.hr?.company?.name ||
-                    jobDetail?.partner?.universityDTO?.name}
+                    jobDetail?.universityDTO?.name}
                 </p>
               </div>
             </div>
@@ -222,7 +222,9 @@ const Detail = ({
               <img
                 className="detail__card__logo"
                 alt="detail-card-logo"
-                src={`${API}${jobDetailById?.hr?.company?.logo} `}
+                src={
+                  user?.role?.includes("Role_Partner") ? `${API}${jobDetailById?.universityDTO?.avatar}` : `${API}${jobDetailById?.hr?.company?.logo}` 
+                 }
               />
               <div>
                 <h2>

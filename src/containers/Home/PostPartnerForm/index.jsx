@@ -67,7 +67,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
+  const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));

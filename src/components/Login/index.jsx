@@ -17,7 +17,6 @@ export default function Login() {
     dispatch(
       getProfileByIdUser([userLocalStorage?.idUser, userLocalStorage?.token])
     );
-    console.log("userLocalStorage", userLocalStorage.idUser)
   }, []);
   const renderLogin = () => {
     if (role) {

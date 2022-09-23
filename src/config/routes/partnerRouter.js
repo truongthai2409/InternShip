@@ -5,6 +5,7 @@ import PartnerHome from "src/pages/Main/Partner/Home";
 import PartnerPostList from "src/pages/Main/Partner/PartnerPostList";
 import PartnerPost from "src/pages/Main/Partner/Post";
 import MainLayout from "src/Layouts/Main";
+import InfomationDemand from "src/pages/Main/Partner/InfomationDemand";
 
 const partnerRouter = [
     {
@@ -39,6 +40,10 @@ const partnerRouter = [
                 path: "detail_demand/:keyword",
                 Component: DetailPostPartner,
             },
+            {
+                path : "infomation_demand/:keywod",
+                Component : InfomationDemand,
+            }
         ]
     }
 ]

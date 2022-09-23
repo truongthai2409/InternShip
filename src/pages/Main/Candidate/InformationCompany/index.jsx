@@ -35,7 +35,7 @@ const CandidateInformationCompany = () => {
   useEffect(() => {
     dispatch(getJobList([1, 10]));
   }, [keyword]);
-
+  
   return (
     <div className="information-company__container">
       <BaseInformationCompany
