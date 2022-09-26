@@ -42,9 +42,6 @@ const InfomationDemandBase = ({ arrDemand }) => {
                         container
                         spacing={1}
                         sx={{
-                            // paddingLeft: `${pl}px`,
-                            // paddingRight: `${pr}px`,
-                            // marginLeft: `${ml}px`,
                             width: "auto",
                         }}
                     >

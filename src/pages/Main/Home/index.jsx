@@ -170,12 +170,11 @@ const Home = (props) => {
     <>
       <Grid
         className="wrapper"
-        spacing={{ xs: 1, height: "700px" }}
-        xs={12}
-        sx={{ padding: "18px" }}
+        sx={{ padding: "8px" }}
+        spacing={{ xs: 1 }}
         container
       >
-        <Grid item xs={2.5}>
+        <Grid item xs={2}>
           <Hidden mdDown>
             <SideBarHomeList
               onChange={handleCheck}
@@ -183,7 +182,7 @@ const Home = (props) => {
             />
           </Hidden>
         </Grid>
-        <Grid xs={9.5} item>
+        <Grid item xs={4}>
           <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12}>
               <div className="none__res">
@@ -193,7 +192,7 @@ const Home = (props) => {
                 />
               </div>
             </Grid>
-            <Grid item xs={5} md={5}>
+            <Grid item xs={12}>
               <ListCardJobHome
                 jobList={jobs}
                 indexCardActive={indexCardActive}
@@ -202,21 +201,20 @@ const Home = (props) => {
                 allRating={allRating}
               />
             </Grid>
-            <Grid item xs={7} md={7}>
-              <div className="containerDetailCard containerDetailCard-none">
-                <DetailCard
-                  logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobDetail={jobDetails}
-                  jobList={jobs}
-                  candidate={props.candidate}
-                  jobListCompany={jobListCompany}
-                />
-              </div>
-            </Grid>
           </Grid>
         </Grid>
+        <Grid item xs={6}>
+          <div className="containerDetailCard containerDetailCard-none">
+            <DetailCard
+              logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+              jobDetail={jobDetails}
+              jobList={jobs}
+              candidate={props.candidate}
+              jobListCompany={jobListCompany}
+            />
+          </div>
+        </Grid>
       </Grid>
-      <Grid container spacing={{ xs: 1 }}></Grid>
     </>
   );
 };

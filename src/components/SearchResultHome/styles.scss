@@ -71,12 +71,6 @@
   min-width: 180px !important;
 }
 
-@media (min-width: 1050px) {
-  .onDesktop {
-    padding-left: 15px;
-  }
-}
-
 @media (min-width: 1024px) and (max-width: 1070px) {
   .header__with-search-search {
     display: flex;
@@ -87,7 +81,6 @@
 //tablet
 @media (min-width: 740px) and (max-width: 1050px) {
   .onTablet {
-    // padding-left: 30px;
   }
   .header__with-search-search-1 {
   }

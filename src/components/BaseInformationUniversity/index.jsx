@@ -137,7 +137,7 @@ const BaseInformationUniversity = ({
                     textAlign: "justify",
                     paddingRight: "25px",
                     fontWeight: "450",
-                    fontSize: "16px",
+                    fontSize: "14px",
                     fontFamily: "Open Sans",
                     fontStyle: "normal",
                   }}

@@ -88,7 +88,7 @@ const CardHome = (props) => {
             src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
             alt=""
           />
-          <div>
+          <div style={{textAlign: "left"}}>
             <Tooltip title={props.title} placement="top">
               <h4 className="cardHome__title">{props.title}</h4>
             </Tooltip>

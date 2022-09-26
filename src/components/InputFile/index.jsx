@@ -42,12 +42,8 @@ const InputFile = ({
       text = "Chỉ hỗ trợ file .docx, .pdf, .xlxs";
   }
 
-  const [isHide, setIsHide] = useState(false);
   const [imgSrc, setImgSrc] = useState("");
   const [fileName, setFileName] = useState("");
-  const handleHide = () => {
-    setIsHide(!isHide);
-  };
 
   const handlePreviewFile = (e) => {
     if (e.target.files && e.target.files[0]) {

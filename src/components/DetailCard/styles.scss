@@ -6,7 +6,7 @@
   border: 2px solid $primary-color;
   padding: $pd-2;
   overflow-y: scroll;
-  height: 695px;
+  height: 750px;
   margin-bottom: 15px;
 
   .detail__card-1 {
@@ -21,11 +21,14 @@
       align-items: center;
 
       div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
         h2 {
-          font-size: 21px;
+          font-size: 20px;
         }
         .name-company {
-          font-size: 13px;
+          font-size: 12px;
         }
       }
       .detail__card__logo {

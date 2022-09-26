@@ -149,19 +149,15 @@ export default function UniversityForm(props) {
             <div className="university-form__logo">
               <Avatar
                 src={image}
-                // variant="rounded"
                 alt="university-logo"
                 className="university-form__avatar"
-                // onClick={() => fileInput.current.click()}
               />
-              {/* <h3>university Name</h3> */}
               <input
                 id="logo"
                 type="file"
                 name="logo"
                 {...register("logo")}
                 onChange={showPreviewImage}
-                // ref={fileInput}
               />
               <p className="university-form__error">{errors.logo?.message}</p>
 
@@ -193,7 +189,6 @@ export default function UniversityForm(props) {
                     type="text"
                     placeholder="Tên trường..."
                     register={register}
-                    // defaultValue="name"
                     check={!isEdit}
                   >
                     {errors.name?.message}

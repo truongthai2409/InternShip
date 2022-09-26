@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./styles.scss";
 import Button from "../../../components/Button";
-import { schema } from "./handleForm";
+import { SAMPLEFORM, schema } from "./handleForm";
 import SelectCustom from "../../../components/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -23,18 +23,6 @@ import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
 import InputFile from "src/components/InputFile";
-
-const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
-
-
-Trường .................... vinh dự và tự hào là đối tác tuyển dụng của quý cơ quan, doanh nghiệp.
-
-Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuyển dụng thực tập, việc làm đến sinh viên/ cựu sinh viên Trường ................... Phía Trung tâm Hướng nghiệp - Tư vấn việc làm của Trường đã đăng tuyển và cung cấp thông tin ứng viên đến Quý đơn vị. Quý Cơ quan/ Doanh nghiệp vui lòng xem thông tin ứng viên bên dưới.
-
-
-Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.
-
-Trân trọng cảm ơn!`;
 
 const jobTypeList = [
   {
@@ -106,20 +94,8 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     }
   }
 
-  // async function postDemand(demandData) {
-  //   setLoading(true);
-  //   try {
-  //     await dispatch(addDemand(demandData));
-  //   } catch (error) {
-  //     toast.error("Đăng bài ứng tuyển không thành công");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   useEffect(() => {
     if (isUpdate) {
-      // console.log(demandDetail?.desciption);
       setValue("jobName", demandDetail?.name);
       setValue("jobDescription", demandDetail?.desciption);
       setValue(
@@ -157,19 +133,11 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       fileSV: data.fileSV,
     };
     dispatch(addDemand(demandData));
-    // console.log(demandData);
-
-    // if (isUpdate) {
-    //   editDemand({ idDemand, demandData });
-    // } else {
-    //   postDemand(demandData);
-    // }
   };
 
   if (status === "success") {
     navigate("/partner/post-list");
   }
-  // console.log("formSample", formSample);
   return (
     <>
       <div className="partner-post__container">
@@ -269,7 +237,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 id="jobDescription"
                 type="description"
                 placeholder="Thư giới thiệu..."
-                defaultValue={useSampleForm && formSample}
+                defaultValue={useSampleForm ? formSample : ""}
                 register={register}
                 setValue={setValue}
               >

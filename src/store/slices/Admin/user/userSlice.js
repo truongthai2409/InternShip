@@ -166,7 +166,7 @@ export const getProfileByIdUser = createAsyncThunk(
   }
 );
 
-// function use for update profile of user
+// function use for updating information match to each role through idUser
 /**
  * args[0] : id match to the each role
  * args[1] : token
@@ -179,14 +179,37 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  return await axios
-    .put(`${baseURL}/api/r2s/hr/${args[0]}`, args[2], header)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return error.response.data;
-    });
+  switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
+    case "Role_HR":
+      return await axios
+        .put(`${baseURL}/api/r2s/hr/${args[0]}`, args[2], header)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          return error.response.data;
+        });
+    case "Role_Partner":
+      return await axios
+        .put(`${baseURL}/api/r2s/partner/${args[0]}`, args[2], header)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          return error.response.data;
+        });
+    case "Role_Candidate":
+      return await axios
+        .put(`${baseURL}/api/r2s/candidate/${args[0]}`, args[2], header)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          return error.response.data;
+        });
+    default:
+      return null;
+  }
 });
 
 // function use for feature forgot password

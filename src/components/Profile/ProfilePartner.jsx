@@ -25,7 +25,7 @@ export default function ProfilePartner() {
                         alt="Ảnh của trường"
                         src={
                             profile?.universityDTO?.avatar
-                                ? `http://localhost:8085${profile?.universityDTO?.avatar}`
+                                ? `${profile?.universityDTO?.avatar}`
                                 : "https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                         }
                     />

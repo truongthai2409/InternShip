@@ -139,7 +139,6 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                   className=" base__information-card-detail-location-candidate"
                   style={
                     {
-                      // transform: "translate(0px,5px)",
                     }
                   }
                 >

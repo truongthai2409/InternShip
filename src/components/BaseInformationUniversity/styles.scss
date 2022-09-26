@@ -2,7 +2,6 @@
 
 .base__information {
   .university-name {
-    // text-align: center;
     width: auto;
     font-family: "Open Sans";
     font-style: normal;
@@ -32,7 +31,6 @@
     }
 
     &-detail {
-      // margin: $mg-1;
       width: fit-content;
       height: fit-content;
       div {
@@ -68,7 +66,6 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
     display: flex;
     align-items: center;
     color: #000000;
@@ -104,7 +101,6 @@
 }
 
 .appreciate {
-  // margin: 5px 0px 10px 0px;
   @include flex(center, space-between);
 
   img {

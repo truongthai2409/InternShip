@@ -15,7 +15,6 @@ import ContentBaseInformation from "../ContentBaseInfomation";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Appreciate from "../Appreciate";
-
 import StarIcon from "@mui/icons-material/Star";
 import "./styles.scss";
 import {
@@ -33,6 +32,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import HeaderBaseInformationCompany from "../HeaderBaseInformationCompany";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -193,7 +193,6 @@ const BaseInformationCompany = ({
 
   return (
     <div className="">
-      {/* Nếu trang home thì bỏ tab còn trang information thì có tab */}
       {information ? (
         <div>
           {jobDetail && (
@@ -269,7 +268,7 @@ const BaseInformationCompany = ({
                                 textAlign: "justify",
                                 paddingRight: "25px",
                                 fontWeight: "450",
-                                fontSize: "16px",
+                                fontSize: "14px",
                                 fontFamily: "Open Sans",
                                 fontStyle: "normal",
                               }}
@@ -319,7 +318,6 @@ const BaseInformationCompany = ({
                                 component="div"
                                 sx={{
                                   fontWeight: "700",
-                                  // transform: "translate(5px,5px)",
                                   fontSize: 13,
                                   paddingBottom: 2.5,
                                 }}
@@ -597,6 +595,7 @@ const BaseInformationCompany = ({
                 <Box
                   sx={{
                     border: "1px solid #dedede",
+                    borderRadius: "4px"
                   }}
                 >
                   <div
@@ -740,9 +739,9 @@ const BaseInformationCompany = ({
                               marginLeft: "25px",
                               textAlign: "justify",
                               paddingRight: "25px",
-                              fontWeight: "450",
-                              fontSize: "16px",
-                              fontFamily: "Open Sans",
+                              color: "#000000",
+                              fontWeight: "500",
+                              fontSize: "14px",
                               fontStyle: "normal",
                             }}
                           ></div>

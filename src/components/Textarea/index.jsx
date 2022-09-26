@@ -22,11 +22,9 @@ const Textarea = ({
   }, [register]);
 
   useEffect(() => {
-    if (isUpdate) {
       setValue(id, defaultValue);
-    }
-  }, []);
-
+      console.log("textt", defaultValue);
+  }, [defaultValue]);
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
 
@@ -83,7 +81,7 @@ const Textarea = ({
                     marginTop: "2px",
                     fontSize: "12px",
                     fontStyle: "italic",
-                    color: "#999",
+                    color: "#555",
                   }}
                 >
                   {subtitle}

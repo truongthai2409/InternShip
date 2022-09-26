@@ -21,9 +21,9 @@ export default function Login() {
   const renderLogin = () => {
     if (role) {
       return (
-        <div className="header__hr-icon">
+        <div className="login__icon">
           <div
-            className="responsive__hr-icon"
+            className="responsive-login__icon"
             style={{
               borderRadius: "50px",
               backgroundColor: "#FFFFFF",

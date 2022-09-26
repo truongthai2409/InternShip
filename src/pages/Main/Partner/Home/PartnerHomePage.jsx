@@ -2,7 +2,6 @@ import { Grid } from "@mui/material";
 import SearchResultHome from "src/components/SearchResultHome";
 import DetailCard from "src/components/DetailCard";
 import SideBarHomeList from "src/components/SideBarHomeList";
-import FilterPanelHome from "src/components/ListCardJobHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import {
 import PaginationCustom from "src/components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllRating } from "src/store/slices/main/home/rating/rating";
+import ListCardJobHome from "src/components/ListCardJobHome";
 
 const limit = 5;
 
@@ -29,12 +29,11 @@ const PartnerHomePage = (props) => {
     indexPartnerCardActive,
   } = useSelector((state) => state.demand);
 
-
-  const {allRating} = useSelector(state=>state.rating)
+  const { allRating } = useSelector((state) => state.rating);
   const navigate = useNavigate();
   const { keyword } = useParams();
   const [jobs, setJobs] = useState(demandList);
-  const [major,setMajor] = useState([])
+  const [major, setMajor] = useState([]);
   const [type, setType] = useState([]);
   const [position, setPosition] = useState([]);
   const listPositionWorkingFormat = [
@@ -54,7 +53,7 @@ const PartnerHomePage = (props) => {
       : setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
-  
+
   useEffect(() => {
     dispatch(getDemandList({ currentPage, limit }));
   }, [currentPage]);
@@ -119,11 +118,11 @@ const PartnerHomePage = (props) => {
       );
     }
     setMajor(tempMajor);
-  }
+  };
 
-  useEffect(()=>{
-    dispatch(getAllRating([0,5]))
-  },[])
+  useEffect(() => {
+    dispatch(getAllRating([0, 5]));
+  }, []);
   useEffect(() => {
     const updateJob = () => {
       let temp = demandList;
@@ -139,9 +138,9 @@ const PartnerHomePage = (props) => {
         temp = temp.filter((e) => major?.includes(e?.major?.name));
       }
       setJobs(temp);
-    }
-    updateJob()
-  }, [type, position, major, demandList])
+    };
+    updateJob();
+  }, [type, position, major, demandList]);
 
   return (
     <>
@@ -149,51 +148,37 @@ const PartnerHomePage = (props) => {
         <Grid
           className="wrapper"
           spacing={{ xs: 1 }}
-          sx={{ padding: "18px" }}
+          sx={{ padding: "8px" }}
           container
         >
-          <Grid item lg={2} md={3} sm={4} xs={12}>
+          <Grid item xs={2}>
             <SideBarHomeList
-            onChange={handleCheck}
-            slideBarHome__wrapper={true}
+              onChange={handleCheck}
+              slideBarHome__wrapper={true}
             />
           </Grid>
-
-          <Grid item lg={4} md={8} sm={8} xs={12}>
-            <div className="onDesktop">
-              <SearchResultHome
-                onClick={handleSearch}
-                onChange={getValueLocationAndHandle}
-              />
-            </div>
-
-            <FilterPanelHome
-              jobList={jobs}
-              partnerRole={true}
-              indexCardActive={indexPartnerCardActive}
-              allRating={allRating}
-            />
-            {currentPage > 1 ? (
-              <div className="partner-postList__pagination">
-                <PaginationCustom
-                  page={keyword ? currentSearchPage : currentPage}
-                  totalPages={totalPagesofDemandList}
-                  hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
+          <Grid xs={4} item spacing={{ xs: 1 }}>
+            <Grid container spacing={{ xs: 1 }}>
+              <Grid item xs={12}>
+                <div className="onDesktop">
+                  <SearchResultHome
+                    onClick={handleSearch}
+                    onChange={getValueLocationAndHandle}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <ListCardJobHome
+                  jobList={jobs}
+                  partnerRole={true}
+                  indexCardActive={indexPartnerCardActive}
+                  allRating={allRating}
                 />
-              </div>
-            ) : (
-              ""
-            )}
+              </Grid>
+            </Grid>
           </Grid>
-
-          <Grid item lg={6} className="onTablet">
+          <Grid xs={6} item>
             <div className="containerDetailCard containerDetailCard-none">
-              <div className="none__res">
-                <SearchResultHome
-                  onClick={handleSearch}
-                  onChange={getValueLocationAndHandle}
-                />
-              </div>
               {demandList ? (
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
@@ -207,6 +192,17 @@ const PartnerHomePage = (props) => {
             </div>
           </Grid>
         </Grid>
+      )}
+      {currentPage > 1 ? (
+        <div className="partner-postList__pagination">
+          <PaginationCustom
+            page={keyword ? currentSearchPage : currentPage}
+            totalPages={totalPagesofDemandList}
+            hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
+          />
+        </div>
+      ) : (
+        ""
       )}
     </>
   );
