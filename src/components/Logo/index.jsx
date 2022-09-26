@@ -17,7 +17,6 @@ const Logo = ({ id }) => {
     4: "Cộng tác viên",
   };
   const handleClickGoHome = async () => {
-    window.location.reload()
     if (profile.id !== undefined) {
       const dataGetMarkByUser = {
         userName: profile.user?.username,
@@ -34,17 +33,20 @@ const Logo = ({ id }) => {
           // getMarkByUser();
           break;
         case "Role_Partner":
-          navigate(`/partner`, { replace: true });
+          navigate(`/partner`, { replace: true },);
           // getMarkByUser();
           break;
           case "Role_Candidate": {
-            return navigate(`/candidate`, { replace: true });
+            navigate(`/candidate`, { replace: true });
+            break;
           }
         default:
           return navigate(`/`, { replace: true });
       }
+      navigate(0)
     } else {
       navigate(`/`);
+      navigate(0)
     }
   };
 

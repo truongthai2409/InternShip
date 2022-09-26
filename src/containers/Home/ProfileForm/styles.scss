@@ -20,6 +20,7 @@
   .profile-form__action {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
 
     .profile-form__action-btn {
       padding: 8px 16px;

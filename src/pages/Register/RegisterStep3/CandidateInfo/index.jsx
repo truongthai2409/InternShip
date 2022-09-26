@@ -40,9 +40,10 @@ const CandidateInfo = () => {
     navigate(-1);
   };
   const onSubmit = async (data) => {
+    console.log(data)
     const userData = {
-      fileCV: data.cv[0] || null,
-      fileAvatar: data.avatar[0] || null,
+      fileCV: data.cv || null,
+      fileAvatar: data.avatar || null,
       candidate: JSON.stringify({
         createUser: {
           username: data.username,

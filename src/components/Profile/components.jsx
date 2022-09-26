@@ -79,7 +79,7 @@ export const Actions = ({ props }) => {
           modalTitle={"Xem CV"}
           open={opens}
           setOpen={setOpens}
-          children={<img width={"100%"} src={props}></img>}
+          children={<img width={"100%"} src={props}> </img>}
           name="CV"
           iconClose={<SyncAltIcon />}
         />

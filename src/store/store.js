@@ -18,6 +18,7 @@ import adminDemandSlice from "./slices/Admin/demand/adminDemandSlice"
 import appreciateSlice from "./slices/main/candidate/appreciate/appreciateSlice";
 import globalSlices from "./slices/main/home/global/globalSlices"
 import filterSlices from "./slices/main/home/filter/filterSlices";
+import userCandidateSlice from "./slices/main/candidate/user/userCandidateSlice";
 
 const store = configureStore({
   reducer: {
@@ -40,6 +41,7 @@ const store = configureStore({
     appreciate: appreciateSlice.reducer,
     globalSlices: globalSlices.reducer,
     filter : filterSlices.reducer,
+    userFilter : userCandidateSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

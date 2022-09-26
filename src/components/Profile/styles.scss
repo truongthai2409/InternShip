@@ -1,7 +1,7 @@
 @use "../../assets/styles/" as *;
 
 .profile__wrapper {
-  padding: 3rem;
+  padding: 2rem 20rem;
   width: 100%;
   min-height: 600px;
   gap: 45px;
@@ -14,7 +14,7 @@
     // height: 90%;
     background-color: #ffffff;
     border-radius: 20px;
-    padding: 10px 10px;
+    padding: 2rem 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,18 +22,22 @@
 
     .profile__avatar {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
+      justify-content: space-around;
       width: 100%;
-
+      .profile_icon {
+        display: flex;
+        padding: 1rem;
+        gap : 2rem;
+      }
       >div {
         position: relative;
 
         .avatar__img {
-          width: 170px;
-          height: 170px;
+          width: 115px;
+          height: 115px;
           border-radius: 50%;
-          margin-bottom: 20px;
           object-fit: cover;
         }
       }
@@ -79,7 +83,7 @@
         font-weight: 500;
         font-size: 20px;
         margin-bottom: 15px;
-        text-align: center;
+        text-align: left;
       }
 
       .profile__infor-item {

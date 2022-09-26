@@ -25,7 +25,9 @@ const LoginLayout = () => {
     setOpen(false);
     dispatch(updateStatusRegister("idle"));
   };
-
+  useEffect(()=>{
+    window.scroll(0,0)
+  },[])
   return (
     <div className="login-layout">
       <Header />

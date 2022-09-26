@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RegisterContainer from "../../containers/RegisterContainer/index";
 import "./styles.scss";
 import "./responsive.scss";
@@ -7,6 +7,9 @@ import Footer from "src/components/Footer";
 import HeaderContainer from "src/components/HeaderContainer";
 
 export default function RegisterLayout() {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <div className="register-layout">
       <HeaderContainer />

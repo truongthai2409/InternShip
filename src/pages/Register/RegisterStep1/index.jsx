@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import './styles.scss'
@@ -28,8 +28,12 @@ export default function RegisterStep1() {
   const navigate = useNavigate()
 
   const handleClick = path => {
+    window.scrollTo(0,0)
     navigate(path)
   }
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   return (
     <div className="register-step1">

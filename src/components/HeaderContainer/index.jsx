@@ -5,7 +5,6 @@ import HeaderWithCandidate from "src/components/HeaderWithCandidate";
 import HeaderWithPartner from "src/components/HeaderWithPartner";
 import Logo from '../Logo';
 import Login from '../Login';
-import MenuIcon from "@mui/icons-material/Menu";
 
 export default function index() {
   const role = sessionStorage.getItem("userPresent")
