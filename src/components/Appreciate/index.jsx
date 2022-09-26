@@ -319,7 +319,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                 defaultValue={appreciate?.comment}
                 setValue={setValue}
                 check={true}
-                hover="1.6px solid green"
+                hover="1px solid green"
               >
                 {errors.comment?.message}
               </Textarea>

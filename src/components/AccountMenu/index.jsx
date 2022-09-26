@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import { toast } from "react-toastify";
@@ -28,7 +28,7 @@ const AccountMenu = ({ linkImg }) => {
   const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
-    localStorage.removeItem("userPresent");
+    sessionStorage.removeItem("userPresent");
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",
       autoClose: 3000,
@@ -43,12 +43,12 @@ const AccountMenu = ({ linkImg }) => {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
+            sx={{ ml: 2 , padding: 0}}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 50, height: 50, background: "transparent" }}>
+            <Avatar sx={{ width: 45, height: 45, background: "transparent" }}>
               <img src={linkImg} alt="Ảnh đại diện" className="avatar__image" />
             </Avatar>
           </IconButton>

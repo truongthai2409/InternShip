@@ -6,7 +6,7 @@
   // border: 2px solid $primary-color;
   padding: $pd-2;
   overflow-y: scroll;
-  height: 600px;
+  height: 695px;
   margin-bottom: 15px;
 
   .detail__card-1 {
@@ -88,7 +88,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 0px;
+    margin-bottom: 10px !important;
     &-item {
       display: flex;
       justify-content: space-between;
@@ -106,8 +106,9 @@
 
   .detail__card-5 {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
+    margin-top: 30px;
 
     div {
       p {
@@ -116,19 +117,10 @@
       }
     }
   }
+}
 
-  .css-1urujxi-MuiTypography-root {
-    // padding-left: 10px !important;
-
-    ol,
-    ul {
-      padding-left: 40px;
-    }
-  }
-
-  .css-1d23cxy-MuiTypography-root {
-    // padding-left: 6px !important;
-  }
+.MuiInputBase-root {
+  font-size: 14px !important;
 }
 
 .detail__card::-webkit-scrollbar {

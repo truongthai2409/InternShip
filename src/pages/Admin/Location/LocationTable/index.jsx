@@ -76,8 +76,7 @@ const LocationTable = () => {
   // for (let i = 0; i < idDistrict.length; i++) {
   //   dispatch(getDistrictById(idDistrict[i]))
   // }
-  // console.log(district)
-  // console.log(districtById)
+
 
   return (
     <>

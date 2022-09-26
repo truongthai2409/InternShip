@@ -16,16 +16,16 @@ import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/
 import PeopleIcon from "@mui/icons-material/People";
 import { Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { indexFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
-
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
   const user = JSON.parse(sessionStorage.getItem("userPresent"))
-  var isMark =
+  let isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
   const isMarkLength = isMark && isMark.length > 0 ? true : false;
@@ -65,6 +65,7 @@ const CardHome = (props) => {
     if (window.innerWidth < 1199) {
       navigate(`/candidate/detail_job/${props.id}`);
     }
+    dispatch(indexFilterChange(props.index))
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));

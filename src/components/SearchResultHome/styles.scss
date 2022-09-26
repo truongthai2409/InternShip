@@ -9,14 +9,13 @@
   background: white;
   border: 0.5px solid #dedede;
   border-radius: 6px;
-  height: 66px;
-  margin-bottom: 24px;
+  height: 47px;
 
   .header__with-search-search-wrap {
     display: flex;
     align-items: center;
     margin-left: 10px;
-    flex: 1;
+    width: 40%;
     .search__icon {
       font-size: $fs-13;
       color: $primary-color;
@@ -26,7 +25,7 @@
       font-family: inherit;
       font-size: $fs-16;
       color: black;
-      height: 37px;
+      height: 32px;
       border: none;
       border-radius: 2px;
       outline: none;
@@ -34,6 +33,7 @@
       flex : 1;
       // width: 100px;
       border-bottom: 1px solid $color-gray-2;
+      font-size: 14px;
     }
   }
 
@@ -45,6 +45,7 @@
     flex: 1;
     justify-content: flex-start;
     margin-left: 15px;
+    height: 100%;
     .select__icon-location {
       color: $primary-color;
     }

@@ -58,13 +58,9 @@ const PartnerPostList = (props) => {
     (state) => state.demand
   );
 
-  console.log("5-PartnerPostList:", demandListUniversityActive);
 
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
-  // console.log(currentPage, totalPage);
-  // console.log(demandListUniversity?.totalPages);
-  // console.log(activeUser?.universityDTO?.id);
 
   const handlePaginate = (page) => {
     setCurrentPage(parseInt(page));
@@ -73,7 +69,6 @@ const PartnerPostList = (props) => {
 
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
-    // console.log(currentPage);
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [activeUser?.universityDTO?.id, currentPage]);
 

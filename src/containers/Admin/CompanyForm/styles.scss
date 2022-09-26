@@ -110,19 +110,19 @@
             box-sizing: border-box;
             margin-top: 7px;
             font-family: 'Public Sans', sans-serif;
-            border: 1.6px solid $primary-color;
+            border: 1px solid $primary-color;
             border-radius: 5px;
             width: 100%;
             padding: 21px 12px;
 
             &:hover {
-              border: 1.6px solid $primary-color;
+              border: 1px solid $primary-color;
               box-shadow: $primary-color-1 0px 3px 8px;
             }
 
             &:focus {
               outline: $primary-color;
-              border: 1.6px solid #29303b;
+              border: 1px solid #29303b;
               box-shadow: $primary-color-1 0px 3px 8px;
             }
           }

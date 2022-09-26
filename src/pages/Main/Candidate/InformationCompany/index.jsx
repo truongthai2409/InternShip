@@ -23,19 +23,19 @@ const CandidateInformationCompany = () => {
   useEffect(() => {
     dispatch(getJobById(keyword));
     dispatch(getJobByCompany(idCompany));
-  }, []);
+  }, [dispatch,keyword,idCompany]);
   useEffect(() => {
     dispatch(getJobById(keyword));
     dispatch(getJobByCompany(idCompany));
-  }, [keyword, idCompany]);
+  }, [keyword, idCompany, dispatch]);
   useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
-  }, [idCompany]);
+  }, [idCompany, dispatch]);
 
   useEffect(() => {
     dispatch(getJobList([1, 10]));
-  }, [keyword]);
-
+  }, [keyword, dispatch]);
+  
   return (
     <div className="information-company__container">
       <BaseInformationCompany

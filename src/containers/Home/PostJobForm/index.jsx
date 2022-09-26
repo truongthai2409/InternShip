@@ -91,7 +91,6 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       setValue("timeEnd", jobDetail?.timeEndStr);
     }
   }, []);
-  console.log("jobDetail", jobDetail);
   let schema;
   let textBtn;
   switch (formStatus) {
@@ -117,7 +116,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
     setValue,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
+    mode: "onChanged",
     reValidateMode: "onChange",
     resolver: yupResolver(schema),
   });
@@ -152,7 +151,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           address: data.address,
         },
       };
-      // console.log("jobData", jobData)
+
       dispatch(addJob([jobData, "post"]));
     } else {
       const jobData = {

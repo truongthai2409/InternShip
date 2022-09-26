@@ -31,10 +31,11 @@
 
     .hrpost__list {
       display: flex;
-      min-height: 500px;
+      height: 80vh;
       flex-direction: column;
       align-items: center;
       margin-bottom: 40px;
+      overflow-y: scroll;
     }
   }
 

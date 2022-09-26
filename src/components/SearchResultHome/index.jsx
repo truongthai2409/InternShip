@@ -68,7 +68,7 @@ function SearchResultHome({
           {candidate_infomation ? (
             <Button name="Tìm kiếm" bwidth="123px" bheight="38px" />
           ) : (
-            <Button name="Tìm kiếm" bwidth="125px" bheight="50px"></Button>
+            <Button name="Tìm kiếm" bwidth="125px" bheight="35px"></Button>
           )}
         </div>
       </form>

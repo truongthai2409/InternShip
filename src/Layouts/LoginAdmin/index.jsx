@@ -11,7 +11,6 @@ import "./styles.scss";
 
 const LoginAdminLayout = () => {
   const { status } = useSelector((state) => state.register);
-  console.log(status)
 
   const [open, setOpen] = useState(false);
 

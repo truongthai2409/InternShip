@@ -11,8 +11,8 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
-import Statistic from "src/components/Statistic";
 import PaginationCustom from "src/components/Pagination";
+import StatisticUser from "src/components/StatisticUser";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,8 +57,7 @@ const HRPostList = (props) => {
     }
   };
   const dispatch = useDispatch();
-  const { jobListActived } = useSelector((state) => state.job);
-  const jobListDisabled = jobListActived?.filter(sp=>sp.status.name.includes("Disable"))
+  const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
     dispatch(getActivedJobListByUserId([userPresent.idUser, 1, 5]));
@@ -69,7 +68,7 @@ const HRPostList = (props) => {
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">
         <div className="hr-post-list__statistic">
-          <Statistic
+          <StatisticUser
             title="Điểm khả dụng"
             firstObject={{
               score: jobListActived?.length,
@@ -80,7 +79,7 @@ const HRPostList = (props) => {
               description: "Lượt xem hồ sơ",
             }}
           />
-          <Statistic
+          <StatisticUser
             title="Trạng thái đăng tuyển"
             firstObject={{
               score: jobListActived?.filter(sp=>sp.status.name.includes("Active")).length,

@@ -17,7 +17,7 @@
 
     input {
       font-family: $f-family;
-      border: 1.6px solid $primary-color;
+      border: 1px solid $primary-color;
       border-radius: 2px;
       width: 100%;
       padding: 21px 12px;
@@ -25,7 +25,7 @@
       height: 45px;
 
       &:hover {
-        border: 1.6px solid $primary-color !important;
+        border: 1px solid $primary-color !important;
         box-shadow: $primary-color-1 0px 3px 8px;
         &::placeholder {
           color: $primary-color;

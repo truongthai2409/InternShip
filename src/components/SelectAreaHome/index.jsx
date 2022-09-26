@@ -13,16 +13,19 @@ export default function SelectAreaHome({ onChange }) {
     dispatch(getProvinceList());
   }, []);
   const handleLabel = (value) => {
-    console.log(value.name)
-    onChange && onChange(value.name)
+    if(value === null) {
+      onChange && onChange("")
+    } else { 
+      onChange && onChange(value.name)
+    }
   }
   return (
-    <div className="config-select">
+    <div className="config-select" style={{fontSize: "14px"}}>
       <SearchAutoComplete
       data={provinceList}
       avatarRender={null}
       nameRender={(option) => option.name}
-      labelName="Khu Vực"
+      labelName="Khu vực"
       onChange={(event, value) => handleLabel(value)}
       register={(option)=>option}
     />

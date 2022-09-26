@@ -44,7 +44,6 @@ const CompanyTable = () => {
       flex: 1,
       renderCell: (params) => {
         const { row } = params;
-        // console.log(row.email);
         return (
           <a
             href={`https://www.google.com/search?q=ma+so+thue+${row.tax}`}
@@ -107,7 +106,6 @@ const CompanyTable = () => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          // console.log(row);
           navigate(`/admin/company/${row.id}`);
         };
 

@@ -16,7 +16,6 @@ const DetailPostPartner = (props) => {
   const navigate = useNavigate();
 
   const { keyword } = useParams()
-  // console.log(keyword);
 
   const { demandDetail, idJobActive } = useSelector((state) => state.demand);
 

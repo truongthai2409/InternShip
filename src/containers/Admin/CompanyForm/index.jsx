@@ -84,7 +84,7 @@ export default function CompanyForm(props) {
     setValue("website", isAdd ? "" : companyDetail.website);
   }, [companyDetail]);
 
-  // console.log(error);
+
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -92,7 +92,7 @@ export default function CompanyForm(props) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (x) => {
-        // console.log(x.target.result);
+
         setImageFile(imageFile);
         setImage(x.target.result);
       };
@@ -153,7 +153,6 @@ export default function CompanyForm(props) {
 
   // handle change district
   // const handleChangeDistrict = (e) => {
-  //   console.log(e.target.value);
   //   dispatch(getDistrictList(e.target.value));
   // };
 

@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import SearchResultHome from "src/components/SearchResultHome";
 import DetailCard from "src/components/DetailCard";
 import SideBarHomeList from "src/components/SideBarHomeList";
-import FilterPanelHome from "src/components/FilterPanelHome";
+import FilterPanelHome from "src/components/ListCardJobHome";
 import "./styles.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +28,8 @@ const PartnerHomePage = (props) => {
     demandDetail,
     indexPartnerCardActive,
   } = useSelector((state) => state.demand);
+
+
   const {allRating} = useSelector(state=>state.rating)
   const navigate = useNavigate();
   const { keyword } = useParams();
@@ -46,7 +48,6 @@ const PartnerHomePage = (props) => {
   ];
 
   const handlePaginate = (page) => {
-    console.log(page);
     keyword
       ? setCurrentSearchPage(parseInt(page))
       : setCurrentPage(parseInt(page));
@@ -118,9 +119,7 @@ const PartnerHomePage = (props) => {
     }
     setMajor(tempMajor);
   }
-  console.log("type",type)
-  console.log("position",position)
-  console.log("major",major)
+
   useEffect(()=>{
     dispatch(getAllRating([0,5]))
   },[])

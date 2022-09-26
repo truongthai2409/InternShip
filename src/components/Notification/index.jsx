@@ -5,12 +5,12 @@ import notificationSlice from '../../store/slices/notifications/notificationSlic
 
 const Notification = props => {
   const { notifyAlert, ...other } = props
-  //console.log("notifyAlert", notifyAlert);
+
   const dispatch = useDispatch()
 
   const handleCloseNotification = () => {
     dispatch(notificationSlice.actions.close())
-    // console.log("Close");
+
   }
 
   return (

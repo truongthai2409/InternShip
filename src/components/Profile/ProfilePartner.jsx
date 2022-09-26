@@ -11,8 +11,8 @@ export default function ProfilePartner() {
     const { profile } = useSelector((state) => state.user);
 
     useEffect(() => {
-        const idUser = JSON.parse(sessionStorage.getItem("userPresent")).idUser;
-        dispatch(getProfileByIdUser(idUser));
+        const userSessionStore = JSON.parse(sessionStorage.getItem("userPresent"));
+        dispatch(getProfileByIdUser([userSessionStore.idUser, userSessionStore.token]));
     }, [dispatch]);
     return (
         <div className="company-infor__wrapper">

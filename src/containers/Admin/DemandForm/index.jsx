@@ -18,7 +18,7 @@ export default function DemandForm(props) {
   const { isAdd } = props
   // const [majorList, setMajorList] = useState([])
   const { majorList } = useSelector(state => state.major)
-  // console.log(demandDetail);
+
   const [isEdit, setIsEdit] = useState(isAdd)
   const dispatch = useDispatch()
 
@@ -63,7 +63,6 @@ export default function DemandForm(props) {
   // handle Submit form
   const onSubmit = data => {
     // const demandData = {}
-    // console.log(data);
     // dispatch(
     //   addDemand({
     //     demandData,

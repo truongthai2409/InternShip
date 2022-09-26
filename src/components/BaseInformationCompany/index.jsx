@@ -105,7 +105,7 @@ const BaseInformationCompany = ({
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-  }, [uniId]);
+  }, [uniId, dispatch]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
 
@@ -190,6 +190,7 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
+
   return (
     <div className="">
       {/* Nếu trang home thì bỏ tab còn trang information thì có tab */}
