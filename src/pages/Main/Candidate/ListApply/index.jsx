@@ -45,9 +45,8 @@ const ListApply = () => {
                         <div className="view-list__job-card">
                             {careListOfPrivate?.length > 0
                                 ? careListOfPrivate.map((jobCare) => (
-                                    <div>
+                                    <div key={jobCare.id}>
                                         <CardJob
-                                            key={jobCare.id}
                                             jobCare={jobCare}
                                             eleDuplicate={eleDuplicate}
                                         />

@@ -21,12 +21,11 @@ import { indexFilterChange } from "src/store/slices/main/home/filter/filterSlice
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
-
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
   const user = JSON.parse(sessionStorage.getItem("userPresent"))
-  var isMark =
+  let isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
   const isMarkLength = isMark && isMark.length > 0 ? true : false;

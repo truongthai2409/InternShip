@@ -10,7 +10,7 @@ const globalSlices = createSlice({
   reducers: {
     setISRigthAuth: (state, action) => {
       state.isRightAuth = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
 
