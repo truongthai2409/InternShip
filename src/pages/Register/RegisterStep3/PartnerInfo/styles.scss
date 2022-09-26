@@ -1,4 +1,4 @@
-@use '../../../../assets/styles/' as *;
+@use "../../../../assets/styles/" as *;
 
 .reg-partner {
   width: 100%;
@@ -44,10 +44,7 @@
     text-transform: uppercase;
     margin-top: 40px;
   }
-
 }
-
-
 
 .row-3-col {
   display: flex;
@@ -69,7 +66,7 @@
     }
   }
 
-  >.custom-input {
+  > .custom-input {
     margin: 0;
   }
 }
@@ -99,7 +96,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  border: 1px dashed $primary-color;
+  border: 1px solid $primary-color;
 
   .customfield {
     border-left: 1px solid $primary-color;

@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 const CircularProgressWithLabel = (props) => {
-  console.log(props)
   const full = {
     value: 100
   }

@@ -17,6 +17,7 @@ import demandSlice from "./slices/main/home/demand/demandSlice";
 import adminDemandSlice from "./slices/Admin/demand/adminDemandSlice"
 import appreciateSlice from "./slices/main/candidate/appreciate/appreciateSlice";
 import globalSlices from "./slices/main/home/global/globalSlices"
+import filterSlices from "./slices/main/home/filter/filterSlices";
 
 const store = configureStore({
   reducer: {
@@ -38,6 +39,7 @@ const store = configureStore({
     adminDemand: adminDemandSlice.reducer,
     appreciate: appreciateSlice.reducer,
     globalSlices: globalSlices.reducer,
+    filter : filterSlices.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

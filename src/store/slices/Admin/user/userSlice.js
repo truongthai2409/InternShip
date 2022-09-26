@@ -20,12 +20,12 @@ const userSlice = createSlice({
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
-      console.log("action", action);
       state.statusForgotPassword = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
+      console.log(payload.data)
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
@@ -37,7 +37,6 @@ const userSlice = createSlice({
       state.profile = payload;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      console.log("updateUser", payload);
       state.profile = payload;
       toast.success("Chỉnh sửa thành công", {
         position: "bottom-right",
@@ -246,7 +245,7 @@ export const deleteUser = createAsyncThunk(
 );
 
 export const verifyUser = createAsyncThunk(
-  "user/deleteUser",
+  "user/verifyUser",
   async (data, thunkAPI) => {
     return axios
       .get(`${baseURL}/api/r2s/admin/user/re/${data}`)

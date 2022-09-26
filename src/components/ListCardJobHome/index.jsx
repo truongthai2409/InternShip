@@ -43,7 +43,7 @@ const ListCardJobHome = ({
                 job?.jobposition?.name || job?.position?.name || "Không có",
                 job?.jobType?.name || "Không có",
               ]}
-              location={job.locationjob?.district?.province?.name}
+              location={job.locationjob?.district?.province?.name || job?.universityDTO?.name}
               amount={job.amount || "Không có"}
               demandPartner={true}
               time={[
@@ -59,7 +59,7 @@ const ListCardJobHome = ({
           </div>
         )}
       </div>
-      {jobListHavePages?.totalPages > 5 ? (
+      {jobListHavePages?.totalPages > 1 ? (
         <div
           style={{
             display: "flex",

@@ -38,8 +38,6 @@ export default function UniversityForm(props) {
 
   // get params from URL
   const { uniId } = useParams();
-  // console.log(uniId);
-
   const {
     register,
     handleSubmit,

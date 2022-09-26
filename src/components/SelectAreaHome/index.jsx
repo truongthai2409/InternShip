@@ -13,8 +13,11 @@ export default function SelectAreaHome({ onChange }) {
     dispatch(getProvinceList());
   }, []);
   const handleLabel = (value) => {
-    console.log(value.name)
-    onChange && onChange(value.name)
+    if(value === null) {
+      onChange && onChange("")
+    } else { 
+      onChange && onChange(value.name)
+    }
   }
   return (
     <div className="config-select" style={{fontSize: "14px"}}>

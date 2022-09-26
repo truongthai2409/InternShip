@@ -39,8 +39,7 @@ const CandidateViewList = () => {
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
-  console.log(applyList, applyListHavePage)
-  console.log(applyList)
+
 
   const { profile } = useSelector((state) => state.authentication);
   // const {profile} = useSelector((state)=>state.user)
@@ -75,12 +74,11 @@ const CandidateViewList = () => {
   const handleBackClick = () => {
     navigate(-1);
   };
-  console.log(applyList)
   useEffect(()=>{
     setJobDetails(applyList ? applyList[0]?.jobApp : [])
   },[applyList])
   const handlePagination = (page) => {
-    // console.log(typeof page);
+
     setCurrentPage(parseInt(page));
     window.scroll(0, 0);
   };
@@ -117,7 +115,7 @@ const CandidateViewList = () => {
                         tagName={[
                           job.jobApp?.jobposition?.name
                         ]}
-                        location="Hồ Chí Minh"
+                        location={job.jobApp?.locationjob?.district?.province?.name}
                         amount={job.jobApp?.amount || "Không có"}
                         demandPartner={true}
                         time={[

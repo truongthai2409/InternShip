@@ -47,7 +47,6 @@ const PartnerHomePage = (props) => {
   ];
 
   const handlePaginate = (page) => {
-    console.log(page);
     keyword
       ? setCurrentSearchPage(parseInt(page))
       : setCurrentPage(parseInt(page));

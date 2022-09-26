@@ -105,10 +105,10 @@ const BaseInformationCompany = ({
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-  }, [uniId]);
+  }, [uniId, dispatch]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
-  console.log("app",appreciateList)
+
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
     topAppreciate.push(appreciateList?.[i]);

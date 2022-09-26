@@ -17,6 +17,7 @@ const Logo = ({ id }) => {
     4: "Cộng tác viên",
   };
   const handleClickGoHome = async () => {
+    window.location.reload()
     if (profile.id !== undefined) {
       const dataGetMarkByUser = {
         userName: profile.user?.username,

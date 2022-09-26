@@ -49,10 +49,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const [loading, setLoading] = useState(false);
   const [formSample, setFormSample] = useState("");
   const [useSampleForm, setUseSampleForm] = useState(false);
-  // console.log(demandDetail);
-
-  console.log(activeUser?.universityDTO?.id);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;

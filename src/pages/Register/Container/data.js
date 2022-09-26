@@ -66,7 +66,7 @@ export const containerSchema = yup.object().shape({
         .min(6, "* Tối thiểu 6 kí tự.")
         .max(32, "* Tối đa 32 kí tự.")
         .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
-    lastname: yup
+    lastName: yup
         .string()
         .required('* Bạn phải nhập họ.')
         .min(2, '* Tối thiểu 2 kí tự.')
@@ -79,7 +79,7 @@ export const containerSchema = yup.object().shape({
         )
 
         .max(32, '* Tối đa 32 kí tự.'),
-    firstname: yup
+    firstName: yup
         .string()
         .required('* Bạn phải nhập tên.')
         .min(2, '* Tối thiểu 2 kí tự.')
@@ -95,7 +95,7 @@ export const containerSchema = yup.object().shape({
         .string()
         .required('* Bạn phải nhập số điện thoại.')
         .min(8, '* Tối thiểu 8 kí tự.')
-        .max(11, '* Tối đa 11 kí tự.')
+        .max(13, '* Tối đa 13 kí tự.')
         .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
     gender: yup
         .string()

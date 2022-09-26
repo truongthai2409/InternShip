@@ -23,11 +23,9 @@ export default function MajorForm({ isAdd, setOpen }) {
   const [nameMajor, setNameMajor] = useState("");
 
   const dispatch = useDispatch();
-  // get params from URL
-  // const uniId = useParams();
-  // console.log(uniId)
+
   const location = useLocation();
-  // console.log(location.pathname.slice(13));
+
   const {
     register,
     handleSubmit,

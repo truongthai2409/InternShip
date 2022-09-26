@@ -19,6 +19,7 @@ const ContentBaseInformation = ({
   const location = useLocation();
   const pathUrl = location.pathname;
   const { indexCardActive } = useSelector((state) => state.job);
+
   return (
     <div>
       <div className="job-applying-container _scroll">
@@ -71,7 +72,7 @@ const ContentBaseInformation = ({
                         "Không có",
                       job?.jobType?.name || "Không có",
                     ]}
-                    location="Hồ Chí Minh"
+                    location={job.locationjob?.district?.province?.name}
                     amount={job.amount || "Không có"}
                     demandPartner={true}
                     time={[

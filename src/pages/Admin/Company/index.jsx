@@ -29,7 +29,6 @@ export default function Company() {
   const [open, setOpen] = useState(false)
 
   const handleSearch = e => {
-    // console.log(e.target.value);
   }
 
   const handleOpenModal = () => {

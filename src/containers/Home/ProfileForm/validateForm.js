@@ -64,7 +64,7 @@ export const schema = yup.object({
         return true;
       }
     }),
-  lastname: yup
+  lastName: yup
     .string()
     .required('* Bạn phải nhập họ.')
     .min(2, '* Tối thiểu 2 kí tự.')
@@ -77,7 +77,7 @@ export const schema = yup.object({
     )
 
     .max(32, '* Tối đa 32 kí tự.'),
-  firstname: yup
+  firstName: yup
     .string()
     .required('* Bạn phải nhập tên.')
     .min(2, '* Tối thiểu 2 kí tự.')
@@ -92,8 +92,8 @@ export const schema = yup.object({
   phone: yup
     .string()
     .required('* Bạn phải nhập số điện thoại.')
-    .min(10, '* Tối thiểu 10 kí tự.')
-    .max(12, '* Tối đa 11 kí tự.')
+    .min(10, '* Tối thiểu 8 kí tự.')
+    .max(13, '* Tối đa 13 kí tự.')
     .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
   gender: yup
     .string()

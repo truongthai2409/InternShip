@@ -62,7 +62,7 @@ const FilterPanelHome = ({
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
-  console.log(positionValue)
+
   return (
     <Box className="filter-panel-home__wrapper" sx={{}}>
       <Box className="filter-panel-home__filterPanel" sx={{}}>
@@ -119,7 +119,7 @@ const FilterPanelHome = ({
                 job?.jobposition?.name || job?.position?.name || "Không có",
                 job?.jobType?.name || "Không có",
               ]}
-              location="Hồ Chí Minh"
+              location={job.name ? job.name : job.jobApp?.name}
               amount={job.amount || "Không có"}
               demandPartner={true}
               time={[
