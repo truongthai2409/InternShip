@@ -15,7 +15,6 @@ import Modal from "src/components/Modal";
 import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
 import "./styles.scss";
 
-
 const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -24,10 +23,9 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
   const { userList, totalPages, totalItems } = useSelector(
     (state) => state.user
   );
-
   useEffect(() => {
     dispatch(getUserList([page, 10]));
-  }, [page]);
+  }, [page, dispatch]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -44,10 +42,10 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
-
         const handleDeleteUser = async () => {
-          dispatch(deleteUser(row.username));
-          dispatch(getUserList([page, 20]));
+          dispatch(deleteUser(row.username)).then(() => {
+            dispatch(getUserList([page, 10]));
+          })
         };
 
         const handleVerifyUser = () => {
@@ -56,8 +54,10 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
             text: "Xác minh tài khoản",
             nameBtnYes: "Xác minh",
             func: () => {
-              dispatch(verifyUser(row.username));
-              dispatch(getUserList([page, 20]));
+              dispatch(verifyUser(row.username)).then(() => {
+                dispatch(getUserList([page, 10]));
+              })
+              setOpenConfirmation(false);
             },
             setOpen: setOpenConfirmation,
             image: verifiedIcon,
@@ -112,7 +112,6 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
       },
     },
   ];
-
   /**
    * render gender
    * @param {*id}  (0, 1, 2 )

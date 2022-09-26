@@ -8,6 +8,25 @@ const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PHONE_REGEX =
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/
+
+const regexName = (str) => {
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+  str = str.replace(/đ/g, "d");
+  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+  str = str.replace(/Đ/g, "D");
+  return str;
+}
 
 export const genderList = [
   {
@@ -49,15 +68,29 @@ export const schema = yup.object({
     .min(6, "* Tối thiểu 6 kí tự.")
     .max(32, "* Tối đa 32 kí tự.")
     .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
-  lastname: yup //
+  lastName: yup //
     .string()
     .required('* Bạn phải nhập họ.')
     .min(2, 'Tối thiểu 2 kí tự.')
+    // .test(
+    //   "* Validate Tên",
+    //   "* Họ không hợp lệ.",
+    //   (value) => {
+    //     return (uni.test(regexName(value)));
+    //   }
+    // )
     .max(32, 'Tối đa 32 kí tự.'),
-  firstname: yup //
+  firstName: yup //
     .string()
     .required('* Bạn phải nhập tên.')
     .min(2, 'Tối thiểu 2 kí tự.')
+    // .test(
+    //   "* Validate Họ",
+    //   "* Tên không hợp lệ.",
+    //   (value) => {
+    //     return (uni.test(regexName(value)));
+    //   }
+    // )
     .max(32, 'Tối đa 32 kí tự.'),
   phone: yup //
     .string()
@@ -86,7 +119,7 @@ export const schema = yup.object({
       }
     }),
   //END Conatiner
-  role : yup
+  role: yup
     .string()
     .required('* Bạn phải chọn vai trò.'),
 

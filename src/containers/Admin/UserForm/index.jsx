@@ -23,6 +23,7 @@ const UserForm = (props) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+  console.log(register)
 
   useEffect(() => {
     dispatch(getUserById(idRow));
@@ -41,7 +42,8 @@ const UserForm = (props) => {
   }, [user]);
 
   const onSubmit = (data) => {
-    console.log("data", data);
+      console.log("data", data);
+      console.log(11111111111)
   };
 
   const roleList = [
@@ -53,7 +55,7 @@ const UserForm = (props) => {
 
   return (
     <>
-      <form autoComplete="off" className="user-form">
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="user-form">
         <div className="user-form__wrapper">
           <div className="user-form__avatar">
             <InputFile
