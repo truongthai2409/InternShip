@@ -14,7 +14,7 @@ import DetailHome from "../pages/Main/DetailHome";
 import HR from "../pages/Main/HR";
 import HRPost from "../pages/Main/HR/HRPost";
 import HRPostList from "../pages/Main/HR/HRPostList";
-import CandidateInfo from "src/pages/Register/RegisterStep3/CandidateInfo";
+import CandidateInfo from "src/pages/Register/CandidateInfo";
 import HRInfo from "src/pages/Register/RegisterStep3/HRInfo";
 import PartnerInfo from "src/pages/Register/RegisterStep3/PartnerInfo";
 import CandidateViewList from "src/pages/Main/Candidate/ViewList";

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getProfileByIdUser } from "src/store/slices/Admin/user/userSlice";
 import AccountMenu from "../AccountMenu";
 import Button from "../Button";
+import { MenuDropDown } from "./components";
 import "./styles.scss";
 
 export default function Login() {
@@ -13,15 +14,20 @@ export default function Login() {
     : "";
   const dispatch = useDispatch();
   useEffect(() => {
-    const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+    const userSessionStorage = JSON.parse(
+      sessionStorage.getItem("userPresent")
+    );
     dispatch(
-      getProfileByIdUser([userSessionStorage?.idUser, userSessionStorage?.token])
+      getProfileByIdUser([
+        userSessionStorage?.idUser,
+        userSessionStorage?.token,
+      ])
     );
   }, []);
   const renderLogin = () => {
     if (role) {
       return (
-        <div className="login__icon">
+        <div className="login--already">
           <div
             className="responsive-login__icon"
             style={{
@@ -51,19 +57,11 @@ export default function Login() {
       );
     } else {
       return (
-        <div className="login__home">
+        <div className="login--not-yet">
           <Link to="/login">
             <span className="login__home-sign-in">Đăng nhập</span>
           </Link>
-          <Link to="/register">
-            <Button
-              bwidth="117px"
-              bheight="35px"
-              fz="14px"
-              name="Đăng ký"
-              className="login__home-register"
-            />
-          </Link>
+          <MenuDropDown />
         </div>
       );
     }

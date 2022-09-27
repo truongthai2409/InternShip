@@ -10,9 +10,9 @@ import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { registerCandidate } from "src/store/slices/main/register/registerSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import SelectCustom from "../../../../components/Select";
-import { getMajorList } from "../../../../store/slices/Admin/major/majorSlice";
-import Container from "../../Container/Container";
+import SelectCustom from "../../../components/Select";
+import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
+import Container from "../Container";
 import "./styles.scss";
 const CandidateInfo = () => {
   TabTitle("Đăng ký - Ứng viên");

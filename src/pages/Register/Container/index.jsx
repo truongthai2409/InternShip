@@ -20,7 +20,7 @@ export default function Container({
   TabTitle(`Đăng ký - ${title}`);
 
   return (
-    <div className="reg-candidate">
+    <div className="register__container">
       <p className="title-requirement">
         (<span className="field-requirment"> * </span>)Trường bắt buộc
       </p>

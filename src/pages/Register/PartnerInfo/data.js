@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { containerSchema } from "../../Container/data";
+import { containerSchema } from "../Container/data";
 
 const IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 const URL_REGEX =

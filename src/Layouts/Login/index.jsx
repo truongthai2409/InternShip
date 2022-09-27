@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Footer from "src/components/Footer";
-import Header from "src/components/Header";
 import LoginContainer from "../../containers/LoginContainer";
 import "./styles.scss";
-// import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { updateStatusRegister } from "src/store/slices/main/register/registerSlice";
 import Modal from "./../../components/Modal/index";
 import { ModalContent } from "./components";
+import HeaderContainer from "src/components/HeaderContainer";
 
 const LoginLayout = () => {
   const { status } = useSelector((state) => state.register);
@@ -30,7 +29,7 @@ const LoginLayout = () => {
   },[])
   return (
     <div className="login-layout">
-      <Header />
+      <HeaderContainer />
       <div className="login-container-wrapper">
         <LoginContainer />
         <div className="login-container__modal">
@@ -48,7 +47,6 @@ const LoginLayout = () => {
           />
         </div>
       </div>
-
       <Footer />
     </div>
   );

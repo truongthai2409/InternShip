@@ -81,7 +81,7 @@ const Footer = () => {
 
       <div className="address-footer-copyright">
         <div className="text-footer">
-          <p>Copyright: © 2022 R2S. All Rights Reserved</p>
+          <p>Copyright © 2022 R2S. All Rights Reserved</p>
         </div>
       </div>
     </div>

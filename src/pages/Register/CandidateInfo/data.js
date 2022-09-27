@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { containerSchema } from "../../Container/data";
+import { containerSchema } from "../Container/data";
 
 const CV_FORMATS = ["application/pdf"];
 

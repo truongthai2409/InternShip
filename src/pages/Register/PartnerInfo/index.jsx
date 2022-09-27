@@ -20,8 +20,8 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import CustomInput from "../../../../components/CustomInput/index";
-import Container from "../../Container/Container";
+import CustomInput from "../../../components/CustomInput/index";
+import Container from "../Container";
 import "./styles.scss";
 const API = process.env.REACT_APP_API;
 const countryList = [

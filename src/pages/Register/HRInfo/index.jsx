@@ -7,10 +7,10 @@ import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import CustomInput from "../../../../components/CustomInput/index";
-import SelectCustom from "../../../../components/Select";
-import { registerHr } from "../../../../store/slices/main/register/registerSlice";
-import Container from "../../Container/Container";
+import CustomInput from "../../../components/CustomInput";
+import SelectCustom from "../../../components/Select";
+import { registerHr } from "../../../store/slices/main/register/registerSlice";
+import Container from "../Container";
 import "./styles.scss";
 import { updateStatusRegisterForHR } from "src/store/slices/main/register/registerSlice";
 const HRInfo = () => {

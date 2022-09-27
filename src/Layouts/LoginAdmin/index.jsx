@@ -1,11 +1,7 @@
 import React, { useEffect, useState} from 'react'
-import Footer from "src/components/Footer";
-import Header from "src/components/Header";
 import LoginAdminContainer from "../../containers/LoginAdminContainer";
 import "./styles.scss";
-// import { Backdrop, Box, Button, Fade, Modal, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { updateStatusRegister } from "src/store/slices/main/register/registerSlice";
+import { useSelector } from "react-redux";
 import Modal from "./../../components/Modal/index";
 import "./styles.scss";
 
