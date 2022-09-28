@@ -9,9 +9,11 @@ import { genderList, schema } from "./data";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "src/store/slices/Admin/user/userSlice";
+import { createUser, getUserById } from "src/store/slices/Admin/user/userSlice";
+import { toast } from "react-toastify";
 
 const UserForm = (props) => {
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -23,7 +25,6 @@ const UserForm = (props) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log(register)
 
   useEffect(() => {
     dispatch(getUserById(idRow));
@@ -41,9 +42,33 @@ const UserForm = (props) => {
     }
   }, [user]);
 
-  const onSubmit = (data) => {
-      console.log("data", data);
-
+  const onSubmit = async (data) => {
+    const userData = {
+      fileAvatar: data.avatar[0] || null,
+      candidate: JSON.stringify({
+        createUser: {
+          username: data.username,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+          gender: parseInt(data.gender),
+          lastName: data.lastName,
+          firstName: data.firstName,
+          phone: data.phone,
+          email: data.email,
+        },
+        major: {
+          id: parseInt(data.role),
+        },
+      }),
+    };
+    try {
+      const res = await dispatch(createUser([userData, userSessionStorage?.token]));
+      if (res.payload.status === 200 || res.payload.status === 201) {
+        toast.success("Tạo tài khoản thành công");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const roleList = [

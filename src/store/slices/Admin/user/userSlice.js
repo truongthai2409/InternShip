@@ -25,7 +25,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUserList.fulfilled, (state, { payload }) => {
-      console.log(payload.data)
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
@@ -82,9 +81,14 @@ const userSlice = createSlice({
   },
 });
 
-export const getUserList = createAsyncThunk("user/getUserList", async (arg) => {
+export const getUserList = createAsyncThunk("user/getUserList", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[2],
+    },
+  };
   return await axios
-    .get(`${baseURL}/api/r2s/admin/user?no=${arg[0] - 1}&limit=${arg[1]}`)
+    .get(`${baseURL}/api/r2s/admin/user?no=${args[0] - 1}&limit=${args[1]}`, header)
     .then((response) => {
       return response;
     })
@@ -101,6 +105,7 @@ export const getUserList = createAsyncThunk("user/getUserList", async (arg) => {
 export const getUserById = createAsyncThunk(
   "user/getUserById",
   async (args) => {
+
     const header = {
       headers: {
         Authorization: "Bearer " + args[1],
@@ -165,7 +170,7 @@ export const getProfileByIdUser = createAsyncThunk(
   }
 );
 
-// function use for updating information match to each role through idUser
+// function use for update profile of user
 /**
  * args[0] : id match to the each role
  * args[1] : token
@@ -178,37 +183,14 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
-    case "Role_HR":
-      return await axios
-        .put(`${baseURL}/api/r2s/hr/${args[0]}`, args[2], header)
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
-    case "Role_Partner":
-      return await axios
-        .put(`${baseURL}/api/r2s/partner/${args[0]}`, args[2], header)
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
-    case "Role_Candidate":
-      return await axios
-        .put(`${baseURL}/api/r2s/candidate/${args[0]}`, args[2], header)
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
-    default:
-      return null;
-  }
+  return await axios
+    .put(`${baseURL}/api/r2s/hr/${args[0]}`, args[2], header)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error.response.data;
+    });
 });
 
 // function use for feature forgot password
@@ -228,28 +210,44 @@ export const forgotPassword = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
-  async (data, thunkAPI) => {
+  async (args, thunkAPI) => {
+    console.log("token", args[1]);
+
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "multipart/form-data",
+      },
+    };
     return axios
-      .delete(`${baseURL}/api/r2s/admin/user/${data}`)
+      .delete(`${baseURL}/api/r2s/admin/user/${args[0]}`, header)
       .then((response) => {
+        console.log("hello", response);
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
             "Đã disabled người dùng thành công"
           )
-        );
+        )
       })
       .catch((error) => {
-        return thunkAPI.rejectWithValue(error);
+        return error
       });
   }
 );
 
 export const verifyUser = createAsyncThunk(
   "user/verifyUser",
-  async (data, thunkAPI) => {
+  async (args, thunkAPI) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "multipart/form-data",
+      },
+    };
     return axios
-      .get(`${baseURL}/api/r2s/admin/user/re/${data}`)
+      .get(`${baseURL}/api/r2s/admin/user/re/${args[0]}`, header)
       .then((response) => {
+        console.log("response", response);
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
             "Đã verified người dùng thành công"
@@ -280,6 +278,27 @@ export const changePassword = createAsyncThunk(
       });
   }
 );
+
+export const createUser = createAsyncThunk("user/createUser", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[1],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  console.log(args[0])
+  const res = await axios
+    .post(`${baseURL}/api/r2s/admin/user/add`, args[0], header)
+    .then((res) => {
+      console.log("res", res)
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  return res;
+})
+
 
 export const { updateStatusForgotPassword } = userSlice.actions;
 export default userSlice;

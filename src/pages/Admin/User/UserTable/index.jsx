@@ -16,6 +16,7 @@ import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
 import "./styles.scss";
 
 const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [confirmation, setConfirmation] = useState({});
@@ -24,8 +25,8 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
     (state) => state.user
   );
   useEffect(() => {
-    dispatch(getUserList([page, 10]));
-  }, [page, dispatch]);
+    dispatch(getUserList([page, 10,userSessionStorage?.token]));
+  }, [page, dispatch, userSessionStorage?.token]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -43,8 +44,8 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
       renderCell: (params) => {
         const { row } = params;
         const handleDeleteUser = async () => {
-          dispatch(deleteUser(row.username)).then(() => {
-            dispatch(getUserList([page, 10]));
+          dispatch(deleteUser([row.username, userSessionStorage?.token])).then(() => {
+            dispatch(getUserList([page, 10,userSessionStorage?.token]))
           })
         };
 
@@ -54,8 +55,8 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
             text: "Xác minh tài khoản",
             nameBtnYes: "Xác minh",
             func: () => {
-              dispatch(verifyUser(row.username)).then(() => {
-                dispatch(getUserList([page, 10]));
+              dispatch(verifyUser([row.username, userSessionStorage?.token])).then(() => {
+                dispatch(getUserList([page, 10,userSessionStorage?.token]));
               })
               setOpenConfirmation(false);
             },
