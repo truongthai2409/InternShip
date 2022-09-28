@@ -13,10 +13,17 @@ import PaginationCustom from "src/components/Pagination";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllRating } from "src/store/slices/main/home/rating/rating";
 import ListCardJobHome from "src/components/ListCardJobHome";
+import { getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
+
+
+
 
 const limit = 5;
 
 const PartnerHomePage = (props) => {
+
+
+
   const dispatch = useDispatch();
   const [locationValue, setLocationValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,10 +78,13 @@ const PartnerHomePage = (props) => {
     }
     dispatch(getDemandByName(dataSearch));
   };
-
+  
   const getValueLocationAndHandle = (value) => {
     setLocationValue(value);
   };
+
+
+
   const handleCheck = (value) => {
     let tempType = [];
     let tempPosition = [];
@@ -140,7 +150,9 @@ const PartnerHomePage = (props) => {
     };
     updateJob();
   }, [type, position, major, demandList]);
-
+  useEffect(()=>{
+    dispatch(getAllUserCandidate())
+  },[dispatch])
   return (
     <>
       {demandDetail && (

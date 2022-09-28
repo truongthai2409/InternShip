@@ -16,7 +16,10 @@ import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/
 import PeopleIcon from "@mui/icons-material/People";
 import { Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { indexFilterChange } from "src/store/slices/main/home/filter/filterSlices";
+import {
+  idFilterChange,
+  indexFilterChange,
+} from "src/store/slices/main/home/filter/filterSlices";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
@@ -24,7 +27,7 @@ const CardHome = (props) => {
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
   const { profile } = useSelector((state) => state.authentication);
-  const user = JSON.parse(sessionStorage.getItem("userPresent"))
+  const user = JSON.parse(sessionStorage.getItem("userPresent"));
   let isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
@@ -59,13 +62,14 @@ const CardHome = (props) => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
-  }, []);
+  }, [dispatch]);
   const navigate = useNavigate();
   const handleClick = () => {
     if (window.innerWidth < 1199) {
       navigate(`/candidate/detail_job/${props.id}`);
     }
-    dispatch(indexFilterChange(props.index))
+    dispatch(indexFilterChange(props.index));
+    dispatch(idFilterChange(props.id));
     dispatch(updateIndexCardActive(props.index));
     dispatch(updateIndexPartnerCardActive(props.index));
     dispatch(updateIdJobActive(props.id));
@@ -89,7 +93,7 @@ const CardHome = (props) => {
             src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
             alt=""
           />
-          <div style={{textAlign: "left"}}>
+          <div style={{ textAlign: "left" }}>
             <Tooltip title={props.title} placement="top">
               <h4 className="cardHome__title">{props.title}</h4>
             </Tooltip>
@@ -116,67 +120,78 @@ const CardHome = (props) => {
         )}
       </div>
 
-        <div className="cardHome__col2">
-      {props.hiddent ? <div style={{ visibility: "hidden" }}><ButtonMark
-              height="32px"
-              width="32px"
-              fontSize="18px"
-              jobId={props.id}
-              isMark={isMarkLength}
-            /></div> :
-          <>{user?.role?.includes("Role_Candidate") ?
+      <div className="cardHome__col2">
+        {props.hiddent ? (
+          <div style={{ visibility: "hidden" }}>
             <ButtonMark
               height="32px"
               width="32px"
               fontSize="18px"
               jobId={props.id}
               isMark={isMarkLength}
-            /> : <div style={{ visibility: "hidden" }}><ButtonMark
-              height="32px"
-              width="32px"
-              fontSize="18px"
-              jobId={props.id}
-              isMark={isMarkLength}
-            /></div>}</>
-          }
-          {props.none__time ? (
+            />
+          </div>
+        ) : (
+          <>
+            {user?.role?.includes("Role_Candidate") ? (
+              <ButtonMark
+                height="32px"
+                width="32px"
+                fontSize="18px"
+                jobId={props.id}
+                isMark={isMarkLength}
+              />
+            ) : (
+              <div style={{ visibility: "hidden" }}>
+                <ButtonMark
+                  height="32px"
+                  width="32px"
+                  fontSize="18px"
+                  jobId={props.id}
+                  isMark={isMarkLength}
+                />
+              </div>
+            )}
+          </>
+        )}
+        {props.none__time ? (
+          <div className="cardHome__col2-End-1">
+            <AddLocationAltRoundedIcon
+              style={{ fontSize: `${props.fontSize + 2}px` }}
+              sx={{ color: "#04bf8a" }}
+            />
+
+            <p
+              style={{
+                fontSize: `${props.fontSize}px`,
+                width: "max-content",
+                color: "#000",
+              }}
+            >
+              {props.location}
+            </p>
+          </div>
+        ) : (
+          <div className="cardHome__col2-End">
             <div className="cardHome__col2-End-1">
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
-                sx={{ color: "#04bf8a" }}
               />
-
-              <p
-                style={{
-                  fontSize: `${props.fontSize}px`,
-                  width: "max-content",
-                  color: "#000",
-                }}
-              >
+              <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
                 {props.location}
               </p>
             </div>
-          ) : (
-            <div className="cardHome__col2-End">
-              <div className="cardHome__col2-End-1">
-                <AddLocationAltRoundedIcon
-                  style={{ fontSize: `${props.fontSize + 2}px` }}
-                />
-                <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
-                  {props.location}
-                </p>
-              </div>
-              <div className="cardHome__col2-End-2">
-                <WatchLaterOutlinedIcon
-                  style={{ fontSize: `${props.fontSize + 2}px` }}
-                />
-                <p
-                  style={{ fontSize: `${props.fontSize}px` }}
-                >{`${props.time[0]} - ${props.time[1]}`}</p>
-              </div>
+            <div className="cardHome__col2-End-2">
+              <WatchLaterOutlinedIcon
+                style={{ fontSize: `${props.fontSize + 2}px` }}
+              />
+              <p
+                style={{ fontSize: `${props.fontSize}px` }}
+              >{`${props.time[0]} - ${props.time[1]}`}</p>
             </div>
-          )}
-        </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

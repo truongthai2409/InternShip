@@ -11,9 +11,11 @@ import DetailCard from "../../../components/DetailCard";
 import ListCardJobHome from "../../../components/ListCardJobHome";
 import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
-import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
+import { getJobByCompany, getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
-
+import notfound from 'src/assets/img/notfound.webp'
+import { userCandidateRemainingSelector } from "src/store/slices/main/candidate/user/userCandidateRemaining";
+import { getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
 const initialState = {
   type: [],
   position: [],
@@ -56,9 +58,11 @@ function reducer(state = initialState, action) {
 }
 
 const Home = (props) => {
-  const { index, jobFilter, jobPage } = useSelector((state) => state.filter);
+  const userCandidate = useSelector(userCandidateRemainingSelector)
+  console.log(userCandidate)
+  const { index, id, jobFilter, jobPage } = useSelector((state) => state.filter);
   const { allRating } = useSelector((state) => state.rating);
-  const { jobPosition } = useSelector((state) => state.job);
+  const { jobPosition, jobListCompany } = useSelector((state) => state.job);
   const dispatch = useDispatch();
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -77,12 +81,14 @@ const Home = (props) => {
   ];
 
   const handleSearch = (value) => {
+    dispatch(nameFilterChange(value))
     dispatch(indexFilterChange(0));
     dispatcher({ type: "name", payload: value });
     dispatcher({ type: "no", payload: 0 });
     dispatcher({ type: "province", payload: valueLocation });
   };
   const getValueLocationAndHandle = (value) => {
+    dispatch(majorFilterChange(value))
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
@@ -129,7 +135,9 @@ const Home = (props) => {
       dispatcher({ type: "no", payload: 0 });
     }
   };
-
+  useEffect(() => {
+    dispatch(getJobByCompany(id));
+  }, [dispatch, id])
   useEffect(() => {
     dispatch(indexFilterChange(0));
     dispatch(getMajorList([1, 20]));
@@ -153,6 +161,9 @@ const Home = (props) => {
     setJob(jobFilter);
     setJobDetail(jobFilter[index]);
   }, [jobFilter, dispatch, index]);
+  useEffect(()=>{
+    dispatch(getAllUserCandidate())
+  },[dispatch])
   return (
     <>
       <Grid
@@ -169,38 +180,57 @@ const Home = (props) => {
             />
           </Hidden>
         </Grid>
-        <Grid item xs={4}>
-          <Grid container spacing={{ xs: 1 }}>
-            <Grid item xs={12}>
-              <div className="none__res">
-                <SearchResultHome
-                  onClick={handleSearch}
-                  onChange={getValueLocationAndHandle}
+        {jobs.length === 0 ?
+          <Grid item xs={10}>
+            <Grid container spacing={{ xs: 1 }}>
+              <Grid item xs={12}>
+                <div className="none__res">
+                  <SearchResultHome
+                    onClick={handleSearch}
+                    onChange={getValueLocationAndHandle}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} style={{ textAlignLast: "center" }}>
+                <img src={notfound} alt="notfound" width={"70%"} height={"50%"} />
+              </Grid>
+            </Grid>
+          </Grid> :
+          <>
+            <Grid item xs={4}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item xs={12}>
+                  <div className="none__res">
+                    <SearchResultHome
+                      onClick={handleSearch}
+                      onChange={getValueLocationAndHandle}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <ListCardJobHome
+                    jobList={jobs}
+                    indexCardActive={index}
+                    jobListHavePages={jobPage}
+                    onChange={getValuePageAndHandle}
+                    allRating={allRating}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={6}>
+              <div className="containerDetailCard containerDetailCard-none">
+                <DetailCard
+                  logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                  jobDetail={jobDetail}
+                  jobList={jobs}
+                  candidate={props.candidate}
+                  jobListCompany={jobListCompany}
                 />
               </div>
             </Grid>
-            <Grid item xs={12}>
-              <ListCardJobHome
-                jobList={jobs}
-                indexCardActive={index}
-                jobListHavePages={jobPage}
-                onChange={getValuePageAndHandle}
-                allRating={allRating}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={6}>
-          <div className="containerDetailCard containerDetailCard-none">
-            <DetailCard
-              logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-              jobDetail={jobDetail}
-              jobList={jobs}
-              candidate={props.candidate}
-              jobListCompany={jobs}
-            />
-          </div>
-        </Grid>
+          </>
+        }
       </Grid>
     </>
   );

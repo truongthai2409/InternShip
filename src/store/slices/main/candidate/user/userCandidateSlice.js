@@ -6,15 +6,15 @@ const userCandidateSlice = createSlice({
   name: "userFilter",
   initialState: {
     allUser: [],
-    major: "",
-    name: ""
+    majors: "",
+    names: ""
   },
   reducers: {
     nameFilterChange: (state, action) => {
-      state.name = action.payload
+      state.names = action.payload
     },
     majorFilterChange: (state, action) => {
-      state.major = action.payload
+      state.majors = action.payload.name
     }
   },
   extraReducers: (builder) => {

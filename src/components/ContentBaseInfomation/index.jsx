@@ -85,7 +85,7 @@ const ContentBaseInformation = ({
                     pdLeft="30px"
                     pdRight="30px"
                     none__time={none__time}
-                    active={indexCardActive}
+                    // active={indexCardActive}
                   />
                 </Link>
               </Grid>

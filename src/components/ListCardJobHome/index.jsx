@@ -14,6 +14,7 @@ const ListCardJobHome = ({
   onChange,
   jobListHavePages,
   allRating,
+  hiddent,
 }) => {
   const location = useLocation();
   const [page, setPage] = useState(1);
@@ -27,24 +28,25 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
+              hiddent={hiddent}
               page={page}
               positionValue={positionValue}
-              id={job.id}
+              id={job?.jobApp?.hr?.id || job?.jobCare?.hr?.id || job?.id}
               active={indexCardActive}
               index={index}
               key={job.id}
-              title={job.name ? job.name : job.jobApp?.name}
+              title={job.name ? job.name : job.jobApp?.name || job.jobCare?.name}
               fontSize={10}
               nameCompany={
-                job?.hr?.company?.name || job?.partner?.universityDTO.name || job?.jobApp?.company?.name
+                job?.hr?.company?.name || job?.partner?.universityDTO.name || job?.jobApp?.company?.name || job?.jobApp?.hr?.company?.name || job?.jobCare?.hr?.company?.name
               }
-              idCompany={job?.hr?.company?.id || job?.partner?.universityDTO.id}
+              idCompany={job?.hr?.company?.id || job?.partner?.universityDTO.id || job?.jobApp?.hr?.company?.id}
               tagName={[
-                job?.jobposition?.name || job?.position?.name || "Không có",
-                job?.jobType?.name || "Không có",
+                job?.jobposition?.name || job?.position?.name || job?.jobApp?.jobposition?.name || job?.jobCare?.jobposition?.name|| "Không có",
+                job?.jobType?.name ||job?.jobApp?.jobType?.name || job?.jobCare?.jobType?.name || "Không có",
               ]}
-              location={job.locationjob?.district?.province?.name || job?.universityDTO?.name}
-              amount={job.amount || "Không có"}
+              location={job.locationjob?.district?.province?.name || job?.universityDTO?.name || job?.jobApp?.locationjob?.district?.province?.name || job?.jobCare?.locationjob?.district?.province?.name}
+              amount={job.amount || job.jobApp?.amount || job.jobCare?.amount || "Không có"}
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
@@ -54,7 +56,7 @@ const ListCardJobHome = ({
             />
           ))
         ) : (
-          <div style={{ textAlignLast: "center" }}>
+          <div className="not_found" style={{ textAlignLast: "center" }}>
             Không tìm thấy công việc
           </div>
         )}

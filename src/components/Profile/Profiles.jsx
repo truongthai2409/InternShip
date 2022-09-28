@@ -4,7 +4,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PersonIcon from "@mui/icons-material/Person";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TransgenderIcon from "@mui/icons-material/Transgender";
-import { Divider, Tooltip } from "@mui/material";
+import { Divider, Switch, Tooltip } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,6 +24,8 @@ import Button from "../Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./data";
+import './styles.scss'
+
 const BASEURL = process.env.REACT_APP_API
 export default function Profiles({ setOpen }) {
   const role = (id) => {
@@ -64,13 +66,17 @@ export default function Profiles({ setOpen }) {
     formState: { errors },
     handleSubmit
   } = useForm({
-    mode : "all",
+    mode: "all",
     resolver: yupResolver(schema),
   });
   const dispatch = useDispatch();
   const { user, profile } = useSelector((state) => state.user);
-  console.log(user)
-  console.log(profile)
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(checked)
+  };
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const handleOpen = () => setOpen(true);
   const [openCV, setOpenCV] = useState(false);
@@ -102,129 +108,49 @@ export default function Profiles({ setOpen }) {
     }
     console.log(cv)
   };
-  const handleChange = (e) => {
-
-  };
   return (
     <>
       {user?.role?.name?.includes("Role_Candidate") && (
-        <div className="user-infor__wrapper">
-          <div className="profile__avatar">
-            <div>
-              <img
-                className="avatar__img"
-                src={
-                  profile?.user?.avatar
-                    ? `${profile?.user?.avatar}`
-                    : "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg"
-                }
-                alt="Ảnh đại diện"
-              />
+        <div className="user_container">
+          <div className="user_profile">
+            <img className="user_avatar" src="https://cdn.dribbble.com/users/699610/avatars/normal/a49e77902498a4248634ae6d9d62c0cb.png?1646912207&compress=1&resize=200x200" alt="avatar" />
+            <div className="user_name">
+              <span className="user_username">Đang làm nhaaaaaaaaaaaaaa. mới làm . Giờ push code để về</span>
+              <span className="user_link"></span>
             </div>
-            <div className="profile_icon">
-              <Modal
-                modalTitle={"Thay đổi CV"}
-                open={openChangeCV}
-                setOpen={setOpenChangeCV}
-                children={
-                  <>
-                  <form
-                    onChange={handleChange}
-                    style={{
-                      width: 300,
-                      height: 300,
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <InputFile
-                      label="CV"
-                      requirementField={false}
-                      id="cv"
-                      format="pdf"
-                      setValue={setValue}
-                      register={register}
-                    />
-                    {errors.cv?.message}
-                    <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>  
-                  </form>
-                  </>
-                }
-                name="Thay Đổi CV"
-                iconClose={<SyncAltIcon />}
-              />
-              <Modal
-                modalTitle={"Xem CV"}
-                open={openCV}
-                setOpen={setOpenCV}
-                children={
-                  <iframe src={`${BASEURL}/${profile.cv}`} width={1200} height={1200} title="CV">
-                  </iframe>
-                }
-                name="CV"
-                iconClose={<SyncAltIcon />}
-              />
-
-              <Tooltip title="Cập nhật CV">
-                <CachedRoundedIcon style={{ width: 48, height: 48, cursor: "pointer" }} onClick={() => handleClick(1)} />
-              </Tooltip>
+            <Button variant="contained" size="large">
+              Edit Profile
+            </Button>
+          </div>
+          <div className="user_content">
+            <span className="content_span">Thông Tin CV</span>
+            <div className="user_link_3">
+              <div>
+                <Tooltip title="Cập nhật CV">
+                  <CachedRoundedIcon style={{ width: 48, height: 48, cursor: "pointer" }} onClick={() => handleClick(1)} />
+                </Tooltip>
+                <span>EDIT</span>
+              </div>
               <Tooltip title="Xem CV">
                 <RemoveRedEyeIcon style={{ width: 48, height: 48, cursor: "pointer" }} onClick={() => handleClick(2)} />
               </Tooltip>
               <a href={`${BASEURL}${profile.cv}`}>
                 <Tooltip title="Tải CV">
                   <CloudDownloadRoundedIcon style={{ width: 48, height: 48, cursor: "pointer" }} onClick={() => handleClick(3)} />
-                </Tooltip>
-              </a>
-
+                </Tooltip> </a>
             </div>
           </div>
-
-          <div className="profile__infor">
-            <h1 className="profile__infor-name">
-              {`${profile?.user?.lastName} ${profile?.user?.firstName}`}
-              <span className="profile__infor-location">
-                <ButtonOutline
-                  onClick={handleOpen}
-                  icon={<EditIcon />}
-                  outline="none"
-                  color="#111111"
-                  fz="14px"
-                  radius="4px"
-                  padding="0"
+          <div className="user_preferences">
+            <div>
+              <span className="content_span">Liên kết</span>
+              <div className="content_page">
+                <span>Cho phép nhà tuyển dụng tìm kiếm bạn</span>
+                <Switch
+                  checked={checked}
+                  onChange={handleChange}
+                  inputProps={{ 'aria-label': 'controlled' }}
                 />
-              </span>
-            </h1>
-            <h4 className="profile__infor-username">
-              @{profile?.user?.username}
-            </h4>
-            <Divider orientation="horizontal" width="90%" height="2px" />
-            <br />
-            <div className="profile__infor-item">
-              <span>
-                <EmailIcon /> Email:
-              </span>
-              <h3>{profile?.user?.email}</h3>
-            </div>
-            <div className="profile__infor-item">
-              <span>
-                <PhoneIcon /> Số điện thoại:
-              </span>
-              <h3>{profile?.user?.phone}</h3>
-            </div>
-            <div className="profile__infor-item">
-              <span>
-                <TransgenderIcon /> Giới tính:
-              </span>
-              <h3>{gender(profile?.user?.gender)}</h3>
-            </div>
-            <div className="profile__infor-item">
-              <span>
-                <PersonIcon /> Vai trò:
-              </span>
-              <h3>{role(profile?.user?.role?.id)}</h3>
+              </div>
             </div>
           </div>
         </div>

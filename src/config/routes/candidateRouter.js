@@ -19,6 +19,10 @@ const candidateRouter = [
             },
             {
                 path: "view-list-care",
+                Component: CandidateViewList,
+            },
+            {
+                path: "view-list-apply",
                 Component: ListApply,
             },
             {
@@ -36,10 +40,6 @@ const candidateRouter = [
             {
                 path: "setting",
                 Component: Password,
-            },
-            {
-                path: "view-list-apply",
-                Component: CandidateViewList,
             },
             {
                 path: "detail_job/:keyword",

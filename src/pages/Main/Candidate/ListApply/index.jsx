@@ -1,107 +1,74 @@
-import { Pagination } from '@mui/material';
-import { Box, Stack } from '@mui/system';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import ArrowButton from 'src/components/ArrowButton';
-import CardJob from 'src/components/CardJob';
-import FeedBack from 'src/components/FeedBack';
-import Null from 'src/components/Null';
-import UserCard from 'src/components/UserCard';
-import { TabTitle } from 'src/utils/GeneralFunctions';
+import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import DetailCard from "src/components/DetailCard";
+import ListCardJobHome from "src/components/ListCardJobHome";
+import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
+import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
 
 const ListApply = () => {
-    TabTitle("Công việc quan tâm");
-    const [currentPage, setCurrentPage] = useState(0);
-    const [totalPage, setTotalPage] = useState();
-    const navigate = useNavigate();
-    let { careListOfPrivate, careListOfPrivateHavePages } = useSelector(
-        (state) => state.mark);
+    TabTitle("Công việc ứng tuyển");
 
-    const eleDuplicate = [];
-    for (let i = 0; i < careListOfPrivate?.length; i++) {
-        for (let j = 0; j < careListOfPrivate?.length; j++) {
-            if (careListOfPrivate[i] === careListOfPrivate[j]) {
-                eleDuplicate.push(careListOfPrivate[i]);
-            }
-        }
-    }
-    const handleBackClick = () => {
-        navigate(-1);
-    };
-    useEffect(() => {
-        setTotalPage(careListOfPrivateHavePages?.totalPages);
-    }, []);
-    const handlePagination = (page) => {
+    const { jobApplyList, jobApplyListHavePage } = useSelector((state) => state.jobCandidateSlice);
+    const { index , id} = useSelector((state) => state.filter);
+    const { jobListCompany } = useSelector((state) => state.job);
 
-        setCurrentPage(parseInt(page));
-        window.scroll(0, 0);
-    };
+    const [jobs,setJobs] = useState([])
+    const [jobDetail,setJobDetail] = useState([])
+
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        const user = JSON.parse(sessionStorage.getItem("userPresent"))
+        dispatch(getJobApplyListByCandidate(user))
+    },[dispatch, id])
+    useEffect(()=>{
+        dispatch(getJobByCompany(id))
+    },[dispatch, id])
+    useEffect(()=>{
+        setJobs(jobApplyList)
+        setJobDetail(jobApplyList[index]?.jobApp)
+    },[index, jobApplyList])
     return (
-        <Box sx={{ width: "100%", marginTop: 4 }}>
-            <div className="view-list">
-                <div className="grid_container">
-                    <div className="candidate_job">
-                        <div className="view-list__job-card">
-                            {careListOfPrivate?.length > 0
-                                ? careListOfPrivate.map((jobCare) => (
-                                    <div key={jobCare.id}>
-                                        <CardJob
-                                            jobCare={jobCare}
-                                            eleDuplicate={eleDuplicate}
-                                        />
-                                    </div>
-                                )) : <></>}
-
-                        </div>
-
-                        {careListOfPrivateHavePages?.totalPages === 0 ? <Null image={"https://minimal-assets-api-dev.vercel.app/assets/images/avatars/avatar_21.jpg"} /> :
-                            <div
-                                className="view-list-page"
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "flex-start",
-                                    flexDirection: "row-reverse",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <Stack spacing={2}>
-                                    {careListOfPrivateHavePages.totalItems > 3 ?
-                                        <Pagination
-                                            page={careListOfPrivateHavePages?.numberOfCurrentPage || 0}
-                                            defaultPage={1}
-                                            onChange={(e) => handlePagination(e.target.textContent)}
-                                            count={totalPage || 1}
-                                            variant="outlined"
-                                            shape="rounded"
-                                            size="medium"
-                                            sx={{
-                                                display: "flex",
-                                                justifyContent: "flex-start",
-                                                flexDirection: "row-reverse",
-                                                alignItems: "center",
-                                                marginLeft: "150px",
-                                            }}
-                                        /> : ""}
-                                </Stack>
-                                <div className="demand-detail__back" onClick={handleBackClick}>
-                                    <ArrowButton
-                                        direction="left"
-                                        text="Trở lại"
-                                        fontSize="15px"
-                                    />
-                                </div>
-                            </div>}
-                    </div>
-                    <div className="candidate_info">
-                        <div className="view-list__job-user-card" style={{ paddingBottom: 22 }}>
-                            <UserCard />
-                            <FeedBack />
-                        </div>
-                    </div>
+        <>
+            <div className="apply__list--container">
+                <div className="header__apply">
+                    <h2 className="header__apply-title">Công việc đã ứng tuyển</h2>
+                    <p className="header__apply--des">Xem lại danh sách những việc làm mà bạn đã ứng tuyển trước đó.</p>
                 </div>
+                <div className="section__apply">
+                    <span>Bạn đã ứng tuyển <span>{jobApplyList.length}</span> việc làm</span>
+                </div>
+                <Grid
+                    className="wrapper"
+                    spacing={{ xs: 2 }}
+                    container
+                >
+                    <Grid item xs={4}>
+                        <Grid container spacing={{ xs: 1 }}>
+                            <Grid item xs={12}>
+                                <ListCardJobHome
+                                    hiddent={true}
+                                    jobList={jobs}
+                                    indexCardActive={index}
+                                    jobListHavePages={jobApplyListHavePage}
+                                />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <div style={{ height: "90%" }}>
+                            <DetailCard
+                                logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                                jobDetail={jobDetail}
+                                jobList={jobs}
+                                jobListCompany={jobListCompany}
+                            />
+                        </div>
+                    </Grid>
+                </Grid>
             </div>
-        </Box >
+        </>
     )
 }
 

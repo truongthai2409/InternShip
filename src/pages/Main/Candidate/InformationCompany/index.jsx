@@ -25,10 +25,6 @@ const CandidateInformationCompany = () => {
     dispatch(getJobByCompany(idCompany));
   }, [dispatch,keyword,idCompany]);
   useEffect(() => {
-    dispatch(getJobById(keyword));
-    dispatch(getJobByCompany(idCompany));
-  }, [keyword, idCompany, dispatch]);
-  useEffect(() => {
     dispatch(getAppreciateByCompany(idCompany));
   }, [idCompany, dispatch]);
 

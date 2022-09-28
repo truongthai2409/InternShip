@@ -55,15 +55,12 @@ const Login = () => {
         switch (role) {
           case "Role_Partner":
             navigate(`/partner`, { replace: true });
-            window.location.reload();
             break;
           case "Role_HR":
             navigate(`/hr`, { replace: true });
-            window.location.reload();
             break;
           case "Role_Candidate":
             navigate(`/candidate`, { replace: true });
-            window.location.reload();
             break;
           default:
         }

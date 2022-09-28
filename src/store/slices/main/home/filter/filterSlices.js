@@ -6,11 +6,15 @@ const BASEURL = process.env.REACT_APP_API;
 const filterSlices = createSlice({
     name: "filter",
     initialState: {
+        id : 1,
         index: 0,
         jobFilter: [],
         jobPage: [],
     },
     reducers: {
+        idFilterChange : (state, action) => {
+            state.id = action.payload
+        },
         indexFilterChange: (state, action) => {
             state.index = action.payload
         }
@@ -36,6 +40,7 @@ export const jobFilters = createAsyncThunk(
         })
     })
 export const {
-    indexFilterChange
+    indexFilterChange,
+    idFilterChange
 } = filterSlices.actions;
 export default filterSlices;

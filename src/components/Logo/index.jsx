@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import logoUser from "../../assets/img/Logo_user.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
 const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const Logo = ({ id }) => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -17,6 +18,14 @@ const Logo = ({ id }) => {
     4: "Cộng tác viên",
   };
   const handleClickGoHome = async () => {
+    if (
+      location.pathname === "/" ||
+      location.pathname === "/candidate" ||
+      location.pathname === "/hr" ||
+      location.pathname === "/partner"
+    ) {
+      return window.location.reload();
+    }
     if (profile.id !== undefined) {
       const dataGetMarkByUser = {
         userName: profile.user?.username,
@@ -33,26 +42,24 @@ const Logo = ({ id }) => {
           // getMarkByUser();
           break;
         case "Role_Partner":
-          navigate(`/partner`, { replace: true },);
+          navigate(`/partner`, { replace: true });
           // getMarkByUser();
           break;
-          case "Role_Candidate": {
-            navigate(`/candidate`, { replace: true });
-            break;
-          }
+        case "Role_Candidate": {
+          navigate(`/candidate`, { replace: true });
+          break;
+        }
         default:
           return navigate(`/`, { replace: true });
       }
-      navigate(0)
     } else {
       navigate(`/`);
-      navigate(0)
     }
   };
 
   return (
     <div onClick={handleClickGoHome}>
-      <Link to='#/' className="logo">
+      <Link to="#/" className="logo">
         <div className="roleName__header">
           <img src={logoUser} alt="" />
           <span>{id ? roleList[id] : ""}</span>
