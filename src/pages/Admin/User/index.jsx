@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
 import Modal from "../../../components/Modal";
 import UserTable from "./UserTable";
 import UserForm from "../../../containers/Admin/UserForm";
+import { getUserList, searchUser } from "src/store/slices/Admin/user/userSlice";
 
 const selectOptions = [
   {
@@ -27,11 +28,22 @@ const selectOptions = [
 ];
 
 const User = () => {
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [idRow, setIdRow] = useState("");
-  const handleSearch = (e) => {};
-  
+  const [searchValue, setSearchValue] = useState("");
+  console.log("searchValue", searchValue);
+  const handleSearch = () => {
+    if (searchValue === "") {
+      console.log("ccadcasas");
+      dispatch(getUserList([1, 10, userSessionStorage?.token]));
+    } else {
+      dispatch(searchUser([searchValue, 1, 10, userSessionStorage?.token]));
+    }
+  };
+
   const handleOpenAddModal = () => {
     setOpen(true);
     setIsUpdate(false);
@@ -42,17 +54,20 @@ const User = () => {
       <HeaderContainer
         headerName="Quản lý tài khoản"
         placeholder="Tìm kiếm người dùng..."
-        onchange={handleSearch}
+        onChange={(e) => setSearchValue(e.target.value)}
         selectName="role"
         selectOptions={selectOptions}
         btnName="Thêm User"
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenAddModal}
+        searchValue={searchValue}
+        onSearch={handleSearch}
       />
       <UserTable
         setIdRow={setIdRow}
         setIsUpdate={setIsUpdate}
         setOpen={setOpen}
+        searchValue={searchValue}
       />
       <Modal
         modalTitle={isUpdate ? "Chỉnh sửa tài khoản" : "Thêm tài khoản"}
@@ -60,7 +75,7 @@ const User = () => {
         setOpen={setOpen}
         iconClose={true}
       >
-        <UserForm isUpdate={isUpdate} idRow={idRow}/>
+        <UserForm isUpdate={isUpdate} idRow={idRow} />
       </Modal>
     </>
   );

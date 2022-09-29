@@ -17,6 +17,7 @@ const userSlice = createSlice({
     statusForgotPassword: false,
     totalPages: 0,
     totalItems: 0,
+    onSearch: false
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
@@ -28,6 +29,7 @@ const userSlice = createSlice({
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
+      state.onSearch = false;
     });
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
@@ -77,6 +79,12 @@ const userSlice = createSlice({
           theme: "colored",
         });
       }
+    });
+    builder.addCase(searchUser.fulfilled, (state, { payload }) => {
+      state.userList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
+      state.onSearch = true;
     });
   },
 });
@@ -286,9 +294,27 @@ export const createUser = createAsyncThunk("user/createUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  console.log(args[0])
   const res = await axios
     .post(`${baseURL}/api/r2s/admin/user/add`, args[0], header)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  return res;
+})
+
+export const searchUser = createAsyncThunk("user/searchUser", async (args) => {
+  console.log("args", args)
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[3],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await axios
+    .get(`${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]}`, header)
     .then((res) => {
       console.log("res", res)
       return res;

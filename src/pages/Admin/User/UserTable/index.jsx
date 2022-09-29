@@ -6,6 +6,7 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import {
   deleteUser,
   getUserList,
+  searchUser,
   verifyUser,
 } from "src/store/slices/Admin/user/userSlice";
 import DataTable from "src/components/Table";
@@ -15,18 +16,25 @@ import Modal from "src/components/Modal";
 import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
 import "./styles.scss";
 
-const UserTable = ({ setIdRow, setIsUpdate, setOpen }) => {
+const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [confirmation, setConfirmation] = useState({});
   const [openConfirmation, setOpenConfirmation] = useState(false);
-  const { userList, totalPages, totalItems } = useSelector(
+  const { userList, totalPages, totalItems, onSearch } = useSelector(
     (state) => state.user
   );
   useEffect(() => {
-    dispatch(getUserList([page, 10,userSessionStorage?.token]));
-  }, [page, dispatch, userSessionStorage?.token]);
+    if (onSearch) {
+      console.log(1)
+      dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]))
+    }
+    else {
+      console.log(2)
+      dispatch(getUserList([page, 10, userSessionStorage?.token]));
+    }
+  }, [page, onSearch, dispatch, userSessionStorage?.token]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },

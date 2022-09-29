@@ -13,6 +13,8 @@ const HeaderContainer = ({
   selectName,
   selectOptions,
   onClick,
+  searchValue,
+  onSearch
 }) => {
   return (
     <div className="header-container">
@@ -30,7 +32,7 @@ const HeaderContainer = ({
           </Tooltip>
         </Grid>
         <Grid item xs={12}>
-          <Search placeholder={placeholder} onChange={onChange} />
+          <Search placeholder={placeholder} onChange={onChange} searchValue={searchValue} onSearch={onSearch}/>
         </Grid>
       </Grid>
     </div>
