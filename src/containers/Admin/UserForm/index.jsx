@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 const UserForm = (props) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
+  console.log(idRow)
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const {
@@ -27,7 +28,7 @@ const UserForm = (props) => {
   });
 
   useEffect(() => {
-    dispatch(getUserById(idRow));
+    dispatch(getUserById([idRow,userSessionStorage?.token]));
   }, []);
 
   useEffect(() => {
@@ -62,7 +63,9 @@ const UserForm = (props) => {
       }),
     };
     try {
-      const res = await dispatch(createUser([userData, userSessionStorage?.token]));
+      const res = await dispatch(
+        createUser([userData, userSessionStorage?.token])
+      );
       if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Tạo tài khoản thành công");
       }
@@ -80,7 +83,11 @@ const UserForm = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="user-form">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+        className="user-form"
+      >
         <div className="user-form__wrapper">
           <div className="user-form__avatar">
             <InputFile
@@ -203,7 +210,11 @@ const UserForm = (props) => {
           </div>
         </div>
         <div className="user-form__submit">
-          <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
+          {!isUpdate ? (
+            <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
+          ) : (
+            <Button name="Lưu" onClick={handleSubmit(onSubmit)} />
+          )}
         </div>
       </form>
     </>

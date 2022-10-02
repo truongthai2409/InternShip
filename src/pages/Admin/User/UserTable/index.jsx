@@ -27,11 +27,9 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   );
   useEffect(() => {
     if (onSearch) {
-      console.log(1)
       dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]))
     }
     else {
-      console.log(2)
       dispatch(getUserList([page, 10, userSessionStorage?.token]));
     }
   }, [page, onSearch, dispatch, userSessionStorage?.token]);
@@ -79,10 +77,11 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
           setIsUpdate(true);
           setIdRow(row.id);
         };
+        
         return (
           <>
             <Tooltip title="Chỉnh sửa">
-              <IconButton onClick={handleOpenUpdateModal}>
+              <IconButton onClick={() => (handleOpenUpdateModal())}>
                 <img src={IconEdit} alt="" />
               </IconButton>
             </Tooltip>

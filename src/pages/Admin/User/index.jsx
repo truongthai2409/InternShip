@@ -33,11 +33,10 @@ const User = () => {
   const [open, setOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [idRow, setIdRow] = useState("");
+  console.log(idRow)
   const [searchValue, setSearchValue] = useState("");
-  console.log("searchValue", searchValue);
   const handleSearch = () => {
     if (searchValue === "") {
-      console.log("ccadcasas");
       dispatch(getUserList([1, 10, userSessionStorage?.token]));
     } else {
       dispatch(searchUser([searchValue, 1, 10, userSessionStorage?.token]));

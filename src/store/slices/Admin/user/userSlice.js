@@ -219,7 +219,6 @@ export const forgotPassword = createAsyncThunk(
 export const deleteUser = createAsyncThunk(
   "user/deleteUser",
   async (args, thunkAPI) => {
-    console.log("token", args[1]);
 
     const header = {
       headers: {
@@ -230,7 +229,6 @@ export const deleteUser = createAsyncThunk(
     return axios
       .delete(`${baseURL}/api/r2s/admin/user/${args[0]}`, header)
       .then((response) => {
-        console.log("hello", response);
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
             "Đã disabled người dùng thành công"
@@ -255,7 +253,6 @@ export const verifyUser = createAsyncThunk(
     return axios
       .get(`${baseURL}/api/r2s/admin/user/re/${args[0]}`, header)
       .then((response) => {
-        console.log("response", response);
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
             "Đã verified người dùng thành công"
@@ -294,19 +291,20 @@ export const createUser = createAsyncThunk("user/createUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
+  console.log(args[0]);
   const res = await axios
     .post(`${baseURL}/api/r2s/admin/user/add`, args[0], header)
     .then((res) => {
       return res;
     })
     .catch((err) => {
+      console.log("err",err)
       return err.response.data;
     });
   return res;
 })
 
 export const searchUser = createAsyncThunk("user/searchUser", async (args) => {
-  console.log("args", args)
   const header = {
     headers: {
       Authorization: "Bearer " + args[3],
@@ -316,7 +314,6 @@ export const searchUser = createAsyncThunk("user/searchUser", async (args) => {
   const res = await axios
     .get(`${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]}`, header)
     .then((res) => {
-      console.log("res", res)
       return res;
     })
     .catch((err) => {
