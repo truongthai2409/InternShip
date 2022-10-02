@@ -18,6 +18,7 @@ const InputFile = ({
   icon,
   top,
   setValue,
+  imageCurrent
 }) => {
   let accept;
   let text;
@@ -61,7 +62,7 @@ const InputFile = ({
   let component;
   switch (format) {
     case "image":
-      component = <ImageUpload text={text} img={imgSrc} />;
+      component = <ImageUpload imageCurrent={imageCurrent} text={text} img={imgSrc} />;
       break;
     default: //word or pdf or excel
       component = (

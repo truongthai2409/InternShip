@@ -89,7 +89,7 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                 user?.role?.includes("Role_Partner") ? `${API}${jobDetail?.universityDTO?.avatar}` : `${API}${jobDetail?.hr?.company?.logo}` 
+                 user?.role?.includes("Role_HR") ? `${API}${jobDetail?.universityDTO?.avatar}` : `${API}${jobDetail?.hr?.company?.logo}` 
                 }
               />
               <div>

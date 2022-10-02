@@ -1,50 +1,52 @@
-import "./styles.scss";
-import Button from "src/components/Button";
-import ButtonOutline from "src/components/ButtonOutline";
-import CustomInput from "src/components/CustomInput";
-import { useForm } from "react-hook-form";
-import { schema } from "./validateForm";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SelectCustom from "src/components/Select";
-import { useEffect } from "react";
-import { genderList } from "./validateForm";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getProfileByIdUser,
-  updateUser,
-} from "src/store/slices/Admin/user/userSlice";
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import Button from "src/components/Button";
+import CustomInput from "src/components/CustomInput";
 import InputFile from "src/components/InputFile";
-
-const ProfileForm = ({ handleClose }) => {
+import SelectCustom from "src/components/Select";
+import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import "./styles.scss";
+import { genderList, schema } from "./validateForm";
+const BASEURL = process.env.REACT_APP_API;
+const ProfileForm = ({ profile }) => {
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema), mode: "all" });
-
+  } = useForm({
+    mode: "all",
+    resolver: yupResolver(schema),
+  });
+  console.log("nef",profile.user?.avatar)
   const dispatch = useDispatch();
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
-  const { profile } = useSelector((state) => state.user);
 
   useEffect(() => {
     setValue(
-      "firstname",
+      "firstName",
       profile?.user?.firstName || profile?.userDTO?.firstName
     );
-    setValue("lastname", profile?.user?.lastName || profile?.userDTO?.lastName);
+    setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
     setValue("email", profile?.user?.email || profile?.userDTO?.email);
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
-  }, []);
-  useEffect(() => {
-    const userSessionStorage = JSON.parse(
-      sessionStorage.getItem("userPresent")
-    );
-    dispatch(
-      getProfileByIdUser([userSessionStorage.idUser, userSessionStorage.token])
-    );
-  }, [dispatch]);
+  }, [
+    profile?.user?.email,
+    profile?.user?.firstName,
+    profile?.user?.lastName,
+    profile?.user?.phone,
+    profile?.userDTO?.email,
+    profile?.userDTO?.firstName,
+    profile?.userDTO?.lastName,
+    profile?.userDTO?.phone,
+    setValue,
+  ]);
+  console.log(profile);
   const onSubmit = (data) => {
+    console.log(data);
     const profileData = {
       hr: JSON.stringify({
         user: {
@@ -52,8 +54,8 @@ const ProfileForm = ({ handleClose }) => {
           gender: parseInt(data.gender),
           phone: data.phone,
           email: profile?.user?.email,
-          firstName: data.firstname,
-          lastName: data.lastname,
+          firstName: data.firstName,
+          lastName: data.lastName,
           role: profile?.user?.role,
         },
         position: profile.position,
@@ -61,14 +63,13 @@ const ProfileForm = ({ handleClose }) => {
       }),
       fileAvatar: data.avatar,
     };
-    // console.log(profileData);
     dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
-    handleClose();
   };
 
   return (
     <>
       <form className="profile-form__wrapper" autoComplete="off">
+        <Typography variant="button">Thay đổi thông tin</Typography>
         <div className="profile-form__content">
           <p className="title-requirement">
             (<span className="field-requirment"> * </span>)Trường bắt buộc
@@ -82,6 +83,7 @@ const ProfileForm = ({ handleClose }) => {
               radius="2px"
               setValue={setValue}
               register={register}
+              imageCurrent={profile.user?.avatar}
             >
               {errors.avatar?.message}
             </InputFile>
@@ -89,43 +91,43 @@ const ProfileForm = ({ handleClose }) => {
           <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="lastname"
+              setValue={setValue}
+              id="lastName"
               label="Họ"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1px solid #777777"
             >
-              {errors.lastname?.message}
+              {errors.lastName?.message}
             </CustomInput>
-          </div>
-          <div className="profile-form__content-item">
             <CustomInput
               register={register}
-              id="firstname"
+              setValue={setValue}
+              id="firstName"
               label="Tên"
               className="profile-form__input"
               radius="2px"
               height="45px"
               border="1px solid #777777"
             >
-              {errors.firstname?.message}
+              {errors.firstName?.message}
             </CustomInput>
           </div>
           <div className="profile-form__content-item">
             <SelectCustom
               register={register}
+              setValue={setValue}
               id="gender"
               label="Giới tính"
-              defaultValue={profile.user?.gender}
+              defaultValue={profile?.user?.gender}
               options={genderList}
             >
               {errors.gender?.message}
             </SelectCustom>
-          </div>
-          <div className="profile-form__content-item">
             <CustomInput
               register={register}
+              setValue={setValue}
               id="phone"
               type="text"
               label="Số điện thoại"
@@ -138,27 +140,16 @@ const ProfileForm = ({ handleClose }) => {
             </CustomInput>
           </div>
         </div>
+        <div className="profile-form__action">
+          <Button
+            name="Lưu"
+            onClick={handleSubmit(onSubmit)}
+            fz="14px"
+            outline="1.5px solid #DEDEDE"
+            className="profile-form__action-btn"
+          />
+        </div>
       </form>
-      <div className="profile-form__action">
-        <Button
-          name="Lưu"
-          onClick={handleSubmit(onSubmit)}
-          fz="14px"
-          outline="1.5px solid #DEDEDE"
-          className="profile-form__action-btn"
-        />
-        <span style={{ margin: "0 4px" }}></span>
-        <ButtonOutline
-          name="Hủy"
-          onClick={handleClose}
-          bg="#F3F4F6"
-          outline="1.5px solid #DEDEDE"
-          color="#111111"
-          fz="14px"
-          className="profile-form__action-btn"
-          radius="4px"
-        />
-      </div>
     </>
   );
 };

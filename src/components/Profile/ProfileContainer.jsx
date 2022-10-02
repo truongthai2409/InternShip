@@ -4,10 +4,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import LanguageIcon from "@mui/icons-material/Language";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Divider } from "@mui/material";
-import { useSelector } from "react-redux";
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
-export default function ProfileHR() {
-    const { profile } = useSelector((state) => state.user);
+export default function ProfileContainer(props) {
+
     return (
         <div className="company-infor__wrapper">
             <div className="company-infor__content">
@@ -17,7 +17,7 @@ export default function ProfileHR() {
                         alt="Ảnh của công ty"
                         src="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                     />
-                    <p className="company-infor__name">{profile?.company?.name}</p>
+                    <p className="company-infor__name">{props.profile?.name}</p>
                 </div>
                 <Divider orientation="horizontal" width="100%" height="2px" />
                 <br />
@@ -30,7 +30,7 @@ export default function ProfileHR() {
                                 Email:
                             </span>
                             <p className="screen__max-width-375px">
-                                {profile?.company?.email}
+                                {props.profile?.email}
                             </p>
                         </p>
                         <p className="company-infor__item">
@@ -38,7 +38,7 @@ export default function ProfileHR() {
                                 <PhoneIcon />
                                 Số điện thoại:
                             </span>
-                            {profile?.company?.phone}
+                            {props.profile?.phone}
                         </p>
                     </div>
                     <div className="company-infor__row">
@@ -49,24 +49,29 @@ export default function ProfileHR() {
                             </span>
                             <a
                                 style={{ textDecoration: "underline", color: "blue" }}
-                                href={profile?.company?.website}
+                                href={props.profile?.website}
                                 target="_blank" rel="noreferrer"
                             >
-                                {profile?.company?.website}
+                                {props.profile?.website}
                             </a>
                         </p>
-                        <p className="company-infor__item">
+                        {props.profile?.tax ? <p className="company-infor__item">
                             <span>
                                 <ConfirmationNumberIcon />
                                 Mã số thuế:
                             </span>
-                            {profile?.company?.tax}
-                        </p>
+                            {props.profile?.tax}
+                        </p> : <p className="company-infor__item">
+                        
+                            <span><DriveFileRenameOutlineIcon /> Tên viết tắt:</span>
+
+                            {props.profile?.shortName}
+                        </p>}
                     </div>
                     <p className="company-infor__des-company">
-                        <span>Mô tả công ty:</span>
+                        <span>Mô tả :</span>
                         <br />
-                        {profile?.company?.description}
+                        {props.profile?.description}
                     </p>
                 </div>
             </div>

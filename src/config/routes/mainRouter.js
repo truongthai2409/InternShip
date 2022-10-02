@@ -1,7 +1,7 @@
 import MainLayout from "src/Layouts/Main";
 import ForgotPassword from "src/pages/ForgotPassword";
 import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
-import Home from "src/pages/Main/Home";
+import Main from "src/pages/Main";
 import NotFound from "src/pages/NotFound";
 import DetailHome from "../../pages/Main/DetailHome";
 
@@ -12,7 +12,7 @@ const mainRouter = [
         children: [
             {
                 path: "/",
-                Component: Home,
+                Component: Main,
             },
             {
                 path: "/candidate/detail_job/:keyword",
@@ -41,7 +41,7 @@ const mainRouter = [
         children: [
             {
                 path: "*",
-                Component: Home
+                Component: Main
             }
         ]
     }

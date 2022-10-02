@@ -31,8 +31,8 @@ const filterSlices = createSlice({
 export const jobFilters = createAsyncThunk(
     "filter/jobFilter",
     async (dataFilter) => {
-        return axios.get(`${BASEURL}/api/r2s/job/filter`, {
-            params: dataFilter
+        return axios.get(`${BASEURL}${dataFilter[1].link}`, {
+            params: dataFilter[0]
         }).then((res) => {
             return res.data
         }).catch((err) => {

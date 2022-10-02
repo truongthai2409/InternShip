@@ -29,12 +29,7 @@ const PartnerHomePage = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSearchPage, setCurrentSearchPage] = useState(1);
   // get global state from redux store
-  const {
-    demandList,
-    totalPagesofDemandList,
-    demandDetail,
-    indexPartnerCardActive,
-  } = useSelector((state) => state.demand);
+
 
   const { allRating } = useSelector((state) => state.rating);
   const navigate = useNavigate();

@@ -15,7 +15,8 @@ import { getJobByCompany, getJobPositionList } from "../../../store/slices/main/
 import "./styles.scss";
 import notfound from 'src/assets/img/notfound.webp'
 import { userCandidateRemainingSelector } from "src/store/slices/main/candidate/user/userCandidateRemaining";
-import { getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import { changeFilterChange, getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import SearchHR from "../HR/SearchHR";
 const initialState = {
   type: [],
   position: [],
@@ -58,20 +59,20 @@ function reducer(state = initialState, action) {
 }
 
 const Home = (props) => {
-  const userCandidate = useSelector(userCandidateRemainingSelector)
-  console.log(userCandidate)
-  const { index, id, jobFilter, jobPage } = useSelector((state) => state.filter);
-  const { allRating } = useSelector((state) => state.rating);
-  const { jobPosition, jobListCompany } = useSelector((state) => state.job);
+
   const dispatch = useDispatch();
+  const { index, id } = useSelector(state => state.filter)
+  const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
 
-  const listPositionWorkingFormat = jobPosition.map((item) => {
+  const listPositionWorkingFormat = jobPosition?.map((item) => {
     return item.name;
   });
   const [valueLocation, setValueLocation] = useState("");
   const [jobs, setJob] = useState([]);
+  const [user, setUser] = useState([])
+  const [userDetail, setUserDetail] = useState([])
   const [jobDetail, setJobDetail] = useState([]);
 
   const listWorkingFormat = [
@@ -86,6 +87,7 @@ const Home = (props) => {
     dispatcher({ type: "name", payload: value });
     dispatcher({ type: "no", payload: 0 });
     dispatcher({ type: "province", payload: valueLocation });
+    dispatch(changeFilterChange(false))
   };
   const getValueLocationAndHandle = (value) => {
     dispatch(majorFilterChange(value))
@@ -98,6 +100,7 @@ const Home = (props) => {
   };
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
+    dispatch(changeFilterChange(false))
     let tempType = [];
     let tempPosition = [];
     let tempMajor = [];
@@ -135,17 +138,9 @@ const Home = (props) => {
       dispatcher({ type: "no", payload: 0 });
     }
   };
+
   useEffect(() => {
-    dispatch(getJobByCompany(id));
-  }, [dispatch, id])
-  useEffect(() => {
-    dispatch(indexFilterChange(0));
-    dispatch(getMajorList([1, 20]));
-    dispatch(getJobPositionList());
-    dispatch(getAllRating([0, 5]));
-  }, [dispatch]);
-  useEffect(() => {
-    const dataFilter = {
+    const dataFilter = [{
       type: state.type + "",
       order: state.order,
       position: state.position + "",
@@ -154,16 +149,30 @@ const Home = (props) => {
       major: state.major + "",
       no: state.no,
       limit: 5,
-    };
+    }, { link: props.linkFilter }];
     dispatch(jobFilters(dataFilter));
-  }, [state, dispatch]);
+  }, [state, dispatch, props.linkFilter]);
+
   useEffect(() => {
-    setJob(jobFilter);
-    setJobDetail(jobFilter[index]);
-  }, [jobFilter, dispatch, index]);
-  useEffect(()=>{
-    dispatch(getAllUserCandidate())
-  },[dispatch])
+    setJob(props.jobFilter);
+    setJobDetail(props.jobFilter[index]);
+  }, [props.jobFilter, dispatch, index]);
+
+  useEffect(() => {
+    dispatch(getJobByCompany(id));
+    dispatch(getJobPositionList());
+  }, [dispatch, id])
+  console.log(props.userCandidate)
+
+  useEffect(() => {
+    if (props.userCandidate) {
+      setUser(props.userCandidate)
+      setUserDetail(props.userCandidate[0])
+    } else {
+      setUser()
+      setUserDetail()
+    }
+  }, [props.userCandidate])
   return (
     <>
       <Grid
@@ -185,6 +194,7 @@ const Home = (props) => {
             <Grid container spacing={{ xs: 1 }}>
               <Grid item xs={12}>
                 <div className="none__res">
+
                   <SearchResultHome
                     onClick={handleSearch}
                     onChange={getValueLocationAndHandle}
@@ -201,6 +211,9 @@ const Home = (props) => {
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item xs={12}>
                   <div className="none__res">
+                    <div style={{ backgroundColor: "#fff", height: 45 }}>
+                      <h4 style={{ color: "#000", padding: 12, textAlign: "center" }}>Tìm kiếm {props.nameSearch}</h4>
+                    </div>
                     <SearchResultHome
                       onClick={handleSearch}
                       onChange={getValueLocationAndHandle}
@@ -209,23 +222,27 @@ const Home = (props) => {
                 </Grid>
                 <Grid item xs={12}>
                   <ListCardJobHome
-                    jobList={jobs}
+                    jobList={user && user.length > 0 ? user : jobs}
                     indexCardActive={index}
-                    jobListHavePages={jobPage}
+                    jobListHavePages={props.jobPage}
                     onChange={getValuePageAndHandle}
-                    allRating={allRating}
+                    user={user && user.length > 0 ? true : false}
                   />
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={6}>
               <div className="containerDetailCard containerDetailCard-none">
+                {props.hr &&
+                  <SearchHR />
+                }
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobDetail={jobDetail}
-                  jobList={jobs}
-                  candidate={props.candidate}
+                  jobDetail={user && user.length > 0 ? userDetail : jobDetail}
+                  jobList={user && user.length > 0 ? user : jobs}
                   jobListCompany={jobListCompany}
+                  demandPartner={props.demandPartner}
+                  user={user && user.length > 0 ? true : false}
                 />
               </div>
             </Grid>

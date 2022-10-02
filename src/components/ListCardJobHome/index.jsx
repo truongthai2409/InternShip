@@ -15,7 +15,9 @@ const ListCardJobHome = ({
   jobListHavePages,
   allRating,
   hiddent,
+  user
 }) => {
+ 
   const location = useLocation();
   const [page, setPage] = useState(1);
   const handlePagination = (e, valuePage) => {
@@ -31,7 +33,7 @@ const ListCardJobHome = ({
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
-              id={job?.jobApp?.hr?.id || job?.jobCare?.hr?.id || job?.id}
+              id={job?.jobApp?.id || job?.jobCare?.id || job?.id}
               active={indexCardActive}
               index={index}
               key={job.id}

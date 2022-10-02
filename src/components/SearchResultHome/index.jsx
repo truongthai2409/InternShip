@@ -1,10 +1,10 @@
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
-import React, { useEffect, useState } from "react";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button/";
-import "./styles.scss";
-import SelectAreaHome from "../SelectAreaHome";
 import useQuery from "../../hooks/useQuery";
+import SelectAreaHome from "../SelectAreaHome";
+import "./styles.scss";
 
 function SearchResultHome({
   onChange,
@@ -44,14 +44,14 @@ function SearchResultHome({
       >
         <div className="header__with-search-search-wrap">
           <span className="search__icon">
-            <SearchOutlinedIcon sx={{color: "#04bf8a"}} />
+            <SearchOutlinedIcon sx={{ color: "#04bf8a" }} />
           </span>
           <input
             type="text"
             className="header__with-search-search-1"
             required
             id="none"
-            placeholder="Tìm kiếm..."
+            placeholder="Theo tên..."
             value={searchValue}
             onChange={onChangeSearch}
             style={{
@@ -61,7 +61,7 @@ function SearchResultHome({
           />
         </div>
         <div className="header__with-search-search-select header__with-search-search-select-onMobile">
-          <AddLocationIcon sx={{color: "#04bf8a"}} />
+          <AddLocationIcon sx={{ color: "#04bf8a" }} />
           <SelectAreaHome onChange={onChange} />
         </div>
         <div className="header__with-search-button-search" onClick={search}>

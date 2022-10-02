@@ -1,44 +1,39 @@
-import { useState } from "react";
-import ProfileForm from "src/containers/Home/ProfileForm";
-import Modal from "../Modal";
-import Profiles from "./Profiles";
-import ProfileHR from "./ProfileHR";
-import ProfilePartner from "./ProfilePartner";
-import "./reponsive.scss";
+import {
+  Grid
+} from "@mui/material";
+import React from "react";
+import { useSelector } from "react-redux";
+import Components from "./Components";
+
+import ProfileForm from 'src/containers/Home/ProfileForm'
+import ProfileContainer from "./ProfileContainer";
 import "./styles.scss";
+import "./reponsive.scss"
 
 const Profile = () => {
-  const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
-  const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
-  let RelatedInfor = "";
-  switch (roleUser) {
-    case "Role_HR":
-      RelatedInfor = <ProfileHR />;
-      break;
-    case "Role_Partner":
-      RelatedInfor = <ProfilePartner />;
-      break;
-    case "Role_Candidate":
-      RelatedInfor = null;
-      break;
-    default:
-      RelatedInfor = null;
-  }
+  const user = JSON.parse(sessionStorage.getItem("userPresent")).role;
+  const { profile } = useSelector((state) => state.user);
+
   return (
-    <>
-      <div className="profile__wrapper">
-       <Profiles open={open} setOpen={setOpen} /> 
-          {RelatedInfor}
-      </div>
-      <Modal
-        modalTitle="Chỉnh sửa thông tin cá nhân"
-        children={<ProfileForm handleClose={handleClose} />}
-        open={open}
-        setOpen={setOpen}
-        name="profile"
-      />
-    </>
+    <div className='profile__wrapper'>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={12} lg={5.5} xl={4}>
+          <Components profile={profile} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={6.5} xl={8}>
+          <ProfileForm profile={profile} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          {user === "Role_HR" ? (
+            <ProfileContainer profile={profile?.company} />
+          ) : user === "Role_Partner" ? (
+            <ProfileContainer profile={profile?.universityDTO} />
+          ) : (
+            ""
+          )}
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

@@ -24,15 +24,22 @@ import {
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
+  
   const dispatch = useDispatch();
   const { careListOfPrivate } = useSelector((state) => state.mark);
+
   const { profile } = useSelector((state) => state.authentication);
+
+  
   const user = JSON.parse(sessionStorage.getItem("userPresent"));
+
   let isMark =
     careListOfPrivate &&
     careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
-  const isMarkLength = isMark && isMark.length > 0 ? true : false;
-  React.useEffect(() => {
+    
+    const isMarkLength = isMark && isMark.length > 0 ? true : false;
+  
+    React.useEffect(() => {
     const dataGetMarkByUser = {
       userName: profile.username,
       page: {
@@ -43,7 +50,7 @@ const CardHome = (props) => {
     if (profile?.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, []);
+  }, [dispatch, profile?.role, profile.username]);
 
   React.useEffect(() => {
     const dataGetMarkByUser = {
@@ -56,13 +63,13 @@ const CardHome = (props) => {
     if (profile?.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, [props.page]);
+  }, [dispatch, profile?.role, profile.username, props.page]);
 
   React.useEffect(() => {
     if (props.index === 0) {
       dispatch(updateIdJobActive(props.id));
     }
-  }, [dispatch]);
+  }, [dispatch, props.id, props.index]);
   const navigate = useNavigate();
   const handleClick = () => {
     if (window.innerWidth < 1199) {

@@ -1,8 +1,9 @@
 import "./styles.scss";
-
+const BASEURL = process.env.REACT_APP_API
 export const ImageUpload = ({
   text = "Chỉ hỗ trợ file JPG, PNG. Kích thước tối đa 512KB.",
   img,
+  imageCurrent
 }) => {
   return (
     <>
@@ -10,7 +11,7 @@ export const ImageUpload = ({
         <img
           src={
             img === ""
-              ? "https://img.icons8.com/color/180/000000/image.png"
+              ? (imageCurrent ? `${BASEURL}${imageCurrent}` : "https://img.icons8.com/color/180/000000/image.png") 
               : img
           }
           alt=""

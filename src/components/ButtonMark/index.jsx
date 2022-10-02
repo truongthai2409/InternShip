@@ -32,7 +32,7 @@ const ButtonMark = (props) => {
   useEffect(() => {
     profile.username !== undefined &&
       dispatch(getCandidateByUserName(profile.username));
-  }, []);
+  }, [dispatch, profile.username]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
@@ -98,7 +98,8 @@ const ButtonMark = (props) => {
         onClick={handleClickMarkJob}
       >
         {pathUrl === "/candidate" ||
-        pathUrl === "/candidate/information_company/4" ? (
+        pathUrl === "/candidate/information_company/4" ||
+        pathUrl === "/candidate/view-list-care" ? (
           props.isMark === false && mark === false ? (
             <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} 
             sx={{color: "#04bf8a"}}/>

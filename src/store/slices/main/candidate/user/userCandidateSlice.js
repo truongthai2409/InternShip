@@ -7,7 +7,8 @@ const userCandidateSlice = createSlice({
   initialState: {
     allUser: [],
     majors: "",
-    names: ""
+    names: "",
+    change: false
   },
   reducers: {
     nameFilterChange: (state, action) => {
@@ -15,12 +16,16 @@ const userCandidateSlice = createSlice({
     },
     majorFilterChange: (state, action) => {
       state.majors = action.payload.name
+    },
+    changeFilterChange: (state, action) => {
+        state.change = action.payload
     }
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUserCandidate.fulfilled, (state, action) => {
       state.allUser = action.payload.contents;
     });
+
   },
 });
 
@@ -39,6 +44,7 @@ export const getAllUserCandidate = createAsyncThunk(
 );
 export const {
   nameFilterChange,
-  majorFilterChange
+  majorFilterChange,
+  changeFilterChange
 } = userCandidateSlice.actions;
 export default userCandidateSlice;
