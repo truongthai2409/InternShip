@@ -23,6 +23,7 @@ const CustomInput = ({
   subtitle,
 }) => {
   const [isHide, setIsHide] = useState(false);
+
   const handleHide = () => {
     setIsHide(!isHide);
   };

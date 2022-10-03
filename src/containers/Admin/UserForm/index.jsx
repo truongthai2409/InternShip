@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 const UserForm = (props) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
-  console.log(idRow)
+  console.log(idRow);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const {
@@ -27,8 +27,10 @@ const UserForm = (props) => {
     resolver: yupResolver(schema),
   });
 
+  console.log("errors", errors);
+  console.log(isUpdate)
   useEffect(() => {
-    dispatch(getUserById([idRow,userSessionStorage?.token]));
+    dispatch(getUserById([idRow, userSessionStorage?.token]));
   }, []);
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const UserForm = (props) => {
   }, [user]);
 
   const onSubmit = async (data) => {
+    console.log("create");
     const userData = {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
@@ -74,6 +77,37 @@ const UserForm = (props) => {
     }
   };
 
+  const onUpdate = async (data) => {
+    console.log("update");
+    const userData = {
+      fileAvatar: data.avatar[0] || null,
+      candidate: JSON.stringify({
+        createUser: {
+          username: data.username,
+          gender: parseInt(data.gender),
+          lastName: data.lastName,
+          firstName: data.firstName,
+          phone: data.phone,
+          email: data.email,
+        },
+        major: {
+          id: parseInt(data.role),
+        },
+      }),
+    };
+    console.log("userData", data);
+    // try {
+    //   const res = await dispatch(
+    //     createUser([userData, userSessionStorage?.token])
+    //   );
+    //   if (res.payload.status === 200 || res.payload.status === 201) {
+    //     toast.success("Tạo tài khoản thành công");
+    //   }
+    // } catch (error) {
+    //   toast.error(error);
+    // }
+  };
+
   const roleList = [
     { name: "Nhà tuyển dụng", id: 1 },
     { name: "Admin", id: 2 },
@@ -84,10 +118,12 @@ const UserForm = (props) => {
   return (
     <>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        // onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className="user-form"
       >
+        <input id="isUpdate" value={isUpdate} type="hidden" {...register("isUpdate")} disabled />
+
         <div className="user-form__wrapper">
           <div className="user-form__avatar">
             <InputFile
@@ -125,7 +161,7 @@ const UserForm = (props) => {
                 {errors.email?.message}
               </CustomInput>
             </div>
-            {!isUpdate && (
+            {!isUpdate ? (
               <div className="row">
                 <CustomInput
                   id="password"
@@ -150,6 +186,21 @@ const UserForm = (props) => {
                   {errors.confirmPassword?.message}
                 </CustomInput>
               </div>
+            ) : (
+              <>
+                <input
+                  id="password"
+                  type="hidden"
+                  {...register("password")}
+                  disabled
+                />
+                <input
+                  id="confirmPassword"
+                  type="hidden"
+                  {...register("confirmPassword")}
+                  disabled
+                />
+              </>
             )}
             <div className="row">
               <CustomInput
@@ -213,7 +264,7 @@ const UserForm = (props) => {
           {!isUpdate ? (
             <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
           ) : (
-            <Button name="Lưu" onClick={handleSubmit(onSubmit)} />
+            <Button name="Lưu" onClick={handleSubmit(onUpdate)} />
           )}
         </div>
       </form>

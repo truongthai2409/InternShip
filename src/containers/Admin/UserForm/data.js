@@ -44,6 +44,7 @@ export const genderList = [
 ];
 
 export const schema = yup.object({
+  isUpdate: yup.boolean(),
   //Container
   username: yup //
     .string()
@@ -58,39 +59,45 @@ export const schema = yup.object({
     .matches(EMAIL_REGEX, 'Bạn đã nhập email không đúng.'),
   password: yup //
     .string()
-    .min(6, "* Mật khẩu cần phải có ít nhất 6 ký tự bao gồm chữ hoa và số.")
-    .max(32, "* Tối đa 32 kí tự.")
-    .required("* Bạn phải nhập mật khẩu.")
-    .matches(PASSWORD_REGEX, "Mật khẩu không đúng định dạng."),
+    .required()
+    .when("isUpdate", {
+      is: isUpdate => true,
+      then: yup.string().notRequired(),
+    }),
+    // .when("isUpdate", {
+    //   is: false,
+    //   then: yup.string()
+    //     .required("* Bạn phải nhập mật khẩu.")
+    //     .min(6, "* Mật khẩu cần phải có ít nhất 6 ký tự bao gồm chữ hoa và số.")
+    //     .max(32, "* Tối đa 32 kí tự.")
+    //     .matches(PASSWORD_REGEX, "Mật khẩu không đúng định dạng.")
+    // }),
   confirmPassword: yup //
     .string()
-    .required("* Bạn phải nhập lại password.")
-    .min(6, "* Tối thiểu 6 kí tự.")
-    .max(32, "* Tối đa 32 kí tự.")
-    .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
+    .required()
+    .when("isUpdate", {
+      is: isUpdate => true,
+      then: yup.string().notRequired(),
+    }),
+    // .when("isUpdate", {
+    //   is: false,
+    //   then: yup.string()
+    //     .required("* Bạn phải nhập lại password.")
+    //     .min(6, "* Tối thiểu 6 kí tự.")
+    //     .max(32, "* Tối đa 32 kí tự.")
+    //     .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
+    // }),
   lastName: yup //
     .string()
     .required('* Bạn phải nhập họ.')
+    .nullable()
     .min(2, 'Tối thiểu 2 kí tự.')
-    // .test(
-    //   "* Validate Tên",
-    //   "* Họ không hợp lệ.",
-    //   (value) => {
-    //     return (uni.test(regexName(value)));
-    //   }
-    // )
     .max(32, 'Tối đa 32 kí tự.'),
   firstName: yup //
     .string()
     .required('* Bạn phải nhập tên.')
+    .nullable()
     .min(2, 'Tối thiểu 2 kí tự.')
-    // .test(
-    //   "* Validate Họ",
-    //   "* Tên không hợp lệ.",
-    //   (value) => {
-    //     return (uni.test(regexName(value)));
-    //   }
-    // )
     .max(32, 'Tối đa 32 kí tự.'),
   phone: yup //
     .string()
