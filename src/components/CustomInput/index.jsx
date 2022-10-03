@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -44,7 +44,7 @@ const CustomInput = ({
       return children === undefined;
     }
   };
-  
+
   return (
     <div className={`custom-input ${className ? className : ""} `}>
       <label htmlFor={id} className="custom-input__label">

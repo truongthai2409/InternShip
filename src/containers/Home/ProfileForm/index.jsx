@@ -10,7 +10,7 @@ import SelectCustom from "src/components/Select";
 import { updateUser } from "src/store/slices/Admin/user/userSlice";
 import "./styles.scss";
 import { genderList, schema } from "./validateForm";
-const BASEURL = process.env.REACT_APP_API;
+
 const ProfileForm = ({ profile }) => {
   const {
     register,
@@ -21,7 +21,6 @@ const ProfileForm = ({ profile }) => {
     mode: "all",
     resolver: yupResolver(schema),
   });
-  console.log("nef",profile.user?.avatar)
   const dispatch = useDispatch();
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
 
@@ -33,18 +32,8 @@ const ProfileForm = ({ profile }) => {
     setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
     setValue("email", profile?.user?.email || profile?.userDTO?.email);
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
-  }, [
-    profile?.user?.email,
-    profile?.user?.firstName,
-    profile?.user?.lastName,
-    profile?.user?.phone,
-    profile?.userDTO?.email,
-    profile?.userDTO?.firstName,
-    profile?.userDTO?.lastName,
-    profile?.userDTO?.phone,
-    setValue,
-  ]);
-  console.log(profile);
+    setValue("gender", profile?.user?.gender);
+  }, [profile, setValue]);
   const onSubmit = (data) => {
     console.log(data);
     const profileData = {
@@ -66,6 +55,7 @@ const ProfileForm = ({ profile }) => {
     dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
   };
 
+  console.log("profile", profile?.user?.gender);
   return (
     <>
       <form className="profile-form__wrapper" autoComplete="off">
@@ -116,12 +106,11 @@ const ProfileForm = ({ profile }) => {
           </div>
           <div className="profile-form__content-item">
             <SelectCustom
-              register={register}
-              setValue={setValue}
               id="gender"
               label="Giới tính"
-              defaultValue={profile?.user?.gender}
+              // defaultValue={0}
               options={genderList}
+              register={register}
             >
               {errors.gender?.message}
             </SelectCustom>

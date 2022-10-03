@@ -56,7 +56,7 @@ export default function Container({
           label="Mật khẩu"
           id="password"
           type="password"
-          placeholder="Mật khẩu"
+          placeholder="Mật khẩu..."
           register={register}
           visibility={true}
           subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ComponentFooter = ({ header, tabContent }) => {
+const ComponentFooter = ({ header, tabContent, className }) => {
   return (
-    <div className="contact__container">
+    <div className={`contact__container ${className && className}`}>
       <div>
         <div className="elementor-column-populated">
           <div className="heading-primary-wrap">

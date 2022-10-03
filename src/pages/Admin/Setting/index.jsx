@@ -12,45 +12,45 @@ import {
 } from "src/store/slices/Admin/user/userSlice";
 
 const Setting = () => {
-    const { statusForgotPassword } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
-  
-    const {
-      handleSubmit,
-      formState: { errors },
-      reset,
-      register,
-      setValue,
-    } = useForm({
-      mode: "onChange",
-      reValidateMode: "onChange",
-      resolver: yupResolver(schema),
-    });
-  
-    useEffect(() => {
-      if (statusForgotPassword === "success") {
-        dispatch(updateStatusForgotPassword("fail"));
-        reset();
-      }
-    }, [statusForgotPassword]);
-  
-    const onSubmit = async (data) => {
-      const dataSubmit = {
-        oldPassword: data.oldPassword,
-        newPassword: data.newPassword,
-      };
-  
-      dispatch(
-        changePassword({
-          dataChangePassword: dataSubmit,
-          token: JSON.parse(sessionStorage.getItem("userPresent")).token,
-        })
-      );
-    };
-    const handleClear = (e) => {
-      e.preventDefault();
+  const { statusForgotPassword } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    reset,
+    register,
+    setValue,
+  } = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    resolver: yupResolver(schema),
+  });
+
+  useEffect(() => {
+    if (statusForgotPassword === "success") {
+      dispatch(updateStatusForgotPassword("fail"));
       reset();
+    }
+  }, [statusForgotPassword]);
+
+  const onSubmit = async (data) => {
+    const dataSubmit = {
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword,
     };
+
+    dispatch(
+      changePassword({
+        dataChangePassword: dataSubmit,
+        token: JSON.parse(sessionStorage.getItem("userPresent")).token,
+      })
+    );
+  };
+  const handleClear = (e) => {
+    e.preventDefault();
+    reset();
+  };
   return (
     <div className="change-password__wrapper">
       <form action="" className="change-password__container">
@@ -72,13 +72,14 @@ const Setting = () => {
           placeholder="Nhập mật khẩu..."
           visibility={true}
           register={register}
+          subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
         >
           {errors.newPassword?.message}
         </CustomInput>
         <CustomInput
           id="confirmNewPassword"
           type="password"
-          label="Nhập lại mật khẩu"
+          label="Nhập lại mật khẩu mới"
           placeholder="Nhập mật khẩu..."
           visibility={true}
           register={register}

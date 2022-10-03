@@ -64,6 +64,7 @@ const Password = () => {
             placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
+            subtitle="Mật khẩu cũ phải đúng với mật khẩu đã đặt trước đó"
           >
             {errors.oldPassword?.message}
           </CustomInput>
@@ -74,16 +75,18 @@ const Password = () => {
             placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
+            subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
           >
             {errors.newPassword?.message}
           </CustomInput>
           <CustomInput
             id="confirmNewPassword"
             type="password"
-            label="Nhập lại mật khẩu"
+            label="Nhập lại mật khẩu mới"
             placeholder="Nhập mật khẩu..."
             visibility={true}
             register={register}
+            subtitle="(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)"
           >
             {errors.confirmNewPassword?.message}
           </CustomInput>

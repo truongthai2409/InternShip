@@ -179,7 +179,7 @@ const PartnerInfo = () => {
                 data={universityList}
                 avatarRender={(option) => `${API}${option?.avatar}`}
                 nameRender={(option) => option.name}
-                labelName="Chọn Trường"
+                labelName="Chọn trường"
                 onChange={(event, value) => handleLabel(value)}
                 id="registerPartner"
                 register={register}
@@ -199,7 +199,7 @@ const PartnerInfo = () => {
               children={
                 <>
                   <InputFile
-                    label="Logo Trường"
+                    label="Logo trường"
                     id="logo"
                     type="file"
                     format="image"
@@ -264,7 +264,7 @@ const PartnerInfo = () => {
                       {errors.emailSchool?.message}
                     </CustomInput>
                     <CustomInput
-                      label="Số điện thoại của Trường"
+                      label="Số điện thoại của trường"
                       id="phoneSchool"
                       type="text"
                       placeholder="Vd. 999-999-..."
