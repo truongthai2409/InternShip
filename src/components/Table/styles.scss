@@ -10,18 +10,6 @@
     background-color: $color-white-0;
     // height: 650px;
     width: 100%;
-    .css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root {
-      color: $color-white-0;
-      font-size: 17;
-      // &:hover{
-      //   background-color: rgb(244, 246, 248);
-      // }
-    }
-    .css-imf0nl-MuiDataGrid-root {
-      border: none !important;
-      font-family: $f-family-1;
-      font-size: 15px;
-    }
 
     .MuiDataGrid-columnHeaders {
       border-radius: 5px;
@@ -55,8 +43,4 @@
     font-weight: 400;
     font-family: $f-family-1;
   }
-}
-
-.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
-  color: $primary-color !important;
 }

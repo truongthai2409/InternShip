@@ -71,7 +71,7 @@
       font-size: 14px;
     }
 
-    & svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
+    & svg {
       margin-top: 3px;
       color: #333;
     }
@@ -97,6 +97,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  .item {
+    font-size: 14px;
+  }
 }
 
 .mobile-app-link {

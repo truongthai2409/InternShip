@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Box } from "@mui/system";
+import "./styles.scss";
 
 export default function index({
   data,
@@ -35,7 +36,7 @@ export default function index({
         </Box>
       )}
       renderInput={(params) => (
-        <TextField {...register(id)} {...params} label={labelName} />
+        <TextField {...register(id)} className="text-field" {...params} label={labelName} />
       )}
     />
   );

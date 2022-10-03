@@ -14,17 +14,6 @@ const LoginContainer = () => {
       <Login />
       <div className="register-container__footer">
         <Link to="/forgot-password">Quên mật khẩu?</Link>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            fontSize: 17,
-            fontWeight: "400",
-            transform: "translate(5px,5px)",
-          }}
-        >
-          Bạn chưa có tài khoản? <Link to="/register">Đăng ký</Link>
-        </Typography>
       </div>
     </div>
   );

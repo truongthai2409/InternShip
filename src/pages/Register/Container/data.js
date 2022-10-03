@@ -39,37 +39,37 @@ export const containerSchema = yup.object().shape({
         )
         .matches(/^[A-Za-z0-9_. ]+$/, "* Tên tài khoản không đúng định dạng")
         .matches(/[^\W_]$/, "* Không đúng định dạng.")
-        .min(6, '* Tối thiểu 6 kí tự.')
-        .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 kí tự chữ.")
-        .max(32, '* Tối đa 32 kí tự.'),
+        .min(6, '* Tối thiểu 6 ký tự.')
+        .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 ký tự chữ.")
+        .max(32, '* Tối đa 32 ký tự.'),
     email: yup
         .string()
         .required('* Bạn phải nhập email.')
-        .min(6, ' * Tối thiểu 6 kí tự.')
-        .max(64, ' * Tối đa 64 kí tự.')
+        .min(6, ' * Tối thiểu 6 ký tự.')
+        .max(64, ' * Tối đa 64 ký tự.')
         .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng.'),
     password: yup
         .string()
         .required('* Bạn phải nhập mật khẩu.')
         .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
-        .matches(/[a-zA-Z0-9.\_$@*!]$/, "* Không được chứa khoảng trắng và kí tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
-        .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa kí tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
-        .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần kí tự đặc biệt.")
-        .min(6, '* Tối thiểu 6 kí tự.')
+        .matches(/[a-zA-Z0-9.\_$@*!]$/, "* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
+        .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
+        .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần ký tự đặc biệt.")
+        .min(6, '* Tối thiểu 6 ký tự.')
         .matches(/[^\W_]$/, "* Không đúng định dạng.")
         .matches(/[A-Z]/, "* ít nhất 1 chữ in hoa.")
         .matches(/[0-9]/, "* Ít nhất 1 số.")
-        .max(32, '* Tối đa 32 kí tự.'),
+        .max(32, '* Tối đa 32 ký tự.'),
     confirmPassword: yup
         .string()
         .required("* Bạn phải nhập lại mật khẩu.")
-        .min(6, "* Tối thiểu 6 kí tự.")
-        .max(32, "* Tối đa 32 kí tự.")
+        .min(6, "* Tối thiểu 6 ký tự.")
+        .max(32, "* Tối đa 32 ký tự.")
         .oneOf([yup.ref("password"), null], "* Mật khẩu chưa khớp."),
     lastName: yup
         .string()
         .required('* Bạn phải nhập họ.')
-        .min(2, '* Tối thiểu 2 kí tự.')
+        .min(2, '* Tối thiểu 2 ký tự.')
         .test(
             "* Validate Tên",
             "* Họ không hợp lệ.",
@@ -78,11 +78,11 @@ export const containerSchema = yup.object().shape({
             }
         )
 
-        .max(32, '* Tối đa 32 kí tự.'),
+        .max(32, '* Tối đa 32 ký tự.'),
     firstName: yup
         .string()
         .required('* Bạn phải nhập tên.')
-        .min(2, '* Tối thiểu 2 kí tự.')
+        .min(2, '* Tối thiểu 2 ký tự.')
         .test(
             "* Validate Họ",
             "* Tên không hợp lệ.",
@@ -90,17 +90,17 @@ export const containerSchema = yup.object().shape({
                 return (uni.test(regexName(value)));
             }
         )
-        .max(32, '* Tối đa 32 kí tự.'),
+        .max(32, '* Tối đa 32 ký tự.'),
     phone: yup
         .string()
         .required('* Bạn phải nhập số điện thoại.')
-        .min(8, '* Tối thiểu 8 kí tự.')
-        .max(13, '* Tối đa 13 kí tự.')
+        .min(8, '* Tối thiểu 8 ký tự.')
+        .max(13, '* Tối đa 13 ký tự.')
         .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
     gender: yup
         .string()
         .required('* Bạn phải chọn giới tính.')
-        .max(7, '* Tối đa 7 kí tự.'),
+        .max(7, '* Tối đa 7 ký tự.'),
     avatar: yup
         .mixed()
         .test("type", '* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp', (value) => {

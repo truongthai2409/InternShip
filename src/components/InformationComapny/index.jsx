@@ -159,6 +159,7 @@ const InformationCompany = ({
                 <Typography
                   variant="body2"
                   gutterBottom
+                  className="time-line"
                   sx={{ fontSize: "14px !important", fontWeight: "400" }}
                 >
                   {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}

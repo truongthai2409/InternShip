@@ -3,7 +3,6 @@
 .detail__card {
   background-color: $color-white-0;
   border-radius: 6px;
-  // border: 2px solid $primary-color;
   padding: $pd-2;
   overflow-y: scroll;
   height: 750px;
@@ -13,8 +12,6 @@
     display: flex;
     align-items: left;
     justify-content: space-between;
-    // padding: 0 20px;
-    // padding-right: 39px;
     .detail__card-intro {
       display: flex;
       align-items: center;
@@ -54,7 +51,6 @@
   }
 
   .detail__card-3 {
-    font-family: "Open Sans";
     font-style: normal;
     font-size: 21px;
 
@@ -62,7 +58,6 @@
       font-size: 16px;
 
       &-name {
-        font-family: "Open Sans";
         font-style: normal;
         font-weight: 700;
         line-height: 22px;
@@ -73,6 +68,10 @@
 
       p {
         font-size: 16px;
+      }
+
+      .time-line {
+        font-family: $f-family;
       }
     }
   }

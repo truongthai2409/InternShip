@@ -1,4 +1,4 @@
-@use '../../assets/styles' as *;
+@use "../../assets/styles" as *;
 
 .listButton {
   svg {
@@ -6,22 +6,11 @@
   }
 }
 
-// .css-cveggr-MuiListItemIcon-root {
-//   flex-direction: column;
-//   align-items: flex-start;
-//   width: 100%;
-// }
-
-// .css-j204z7-MuiFormControlLabel-root {
-//   width: 100%;
-//   margin: 0;
-// }
-
 .MuiListItemButton-root {
-
 }
 
-// .css-1eyyxxn-MuiList-root {
-//   padding: 0 !important;
-//   margin-bottom: 24px !important;
-// }
+.MuiList-root {
+  .MuiTypography-root.MuiTypography-body1.MuiListItemText-primary {
+    font-family: $f-family;
+  }
+}

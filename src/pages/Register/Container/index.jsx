@@ -36,7 +36,7 @@ export default function Container({
           type="text"
           placeholder="Tài khoản..."
           register={register}
-          subtitle="(Tên tài khoản ít nhất 6 - 32 kí tự, không dấu và kí tự đặc biệt)"
+          subtitle="(Tên tài khoản ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt)"
         >
           {err.username?.message}
           {errorMessage?.Username}
@@ -59,7 +59,7 @@ export default function Container({
           placeholder="Mật khẩu"
           register={register}
           visibility={true}
-          subtitle="(Mật khẩu ít nhất 6 - 32 kí tự, không dấu và kí tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
+          subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
         >
           {err.password?.message}
           {errorMessage?.Password}
