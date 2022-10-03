@@ -33,7 +33,6 @@ const User = () => {
   const [open, setOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [idRow, setIdRow] = useState("");
-  console.log(idRow)
   const [searchValue, setSearchValue] = useState("");
   const handleSearch = () => {
     if (searchValue === "") {
