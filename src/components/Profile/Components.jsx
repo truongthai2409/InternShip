@@ -2,10 +2,14 @@ import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { Divider, Switch, Tooltip, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllUserCandidate } from "src/store/slices/main/candidate/user/userCandidateSlice";
 import UserInfo from "./UserInfo";
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({profile}) => {
+
+  const dispatch = useDispatch()
   const [checkedFind, setCheckedFind] = React.useState(true);
   const [checkedEmail, setCheckedEmail] = React.useState(false);
 
@@ -15,7 +19,9 @@ const Components = ({profile}) => {
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
   };
-
+  useEffect(()=>{
+    dispatch(getAllUserCandidate())
+  },[dispatch])
   return (
     <div className="profiles">
       <div className="profile_header">
@@ -132,9 +138,9 @@ const Components = ({profile}) => {
           <UserInfo
             name="Vai Trò "
             profile={
-              profile.user?.role === "Role_Candiate"
+              profile.user?.role?.name === "Role_Candidate"
                 ? "Ứng Viên"
-                : profile.user?.role === "Role_Hr"
+                : profile.user?.role?.name === "Role_Hr"
                 ? "Nhà Tuyển Dụng"
                 : "Cộng Tác Viên"
             }

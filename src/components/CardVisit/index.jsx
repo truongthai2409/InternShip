@@ -39,7 +39,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
               className="config__info"
             >
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
-              {jobDetailById?.hr?.company?.phone ||
+              {jobDetailById?.hr?.company?.phone || jobDetailById?.hr?.company?.tax ||
                 jobDetailById?.universityDTO?.phone}
             </Link>
           </div>

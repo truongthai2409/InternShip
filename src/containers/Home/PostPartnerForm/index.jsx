@@ -73,6 +73,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     setOpenForm(!openForm);
   };
 
+
   const handleUseForm = () => {
     setUseSampleForm(!useSampleForm);
     setFormSample(SAMPLEFORM);
@@ -271,7 +272,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
             <div className="partner-post__textarea">
               <InputFile
                 label="Danh sách sinh viên"
-                requirementField={false}
+                requirementField={true}
                 id="fileSV"
                 // format="excel"
                 setValue={setValue}

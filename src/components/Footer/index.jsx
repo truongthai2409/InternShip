@@ -5,34 +5,34 @@ import AddressComponent from "./AddressComponent";
 
 const aboutUs = [
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Trang chủ",
   },
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Về chúng tôi",
   },
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Liên hệ",
   },
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Câu hỏi thường gặp",
   },
 ];
 
 const policy = [
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Chính sách bảo mật",
   },
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Điều khoản dịch vụ",
   },
   {
-    link: "/not_found_404",
+    link: "/comming-soon",
     content: "Quy chế",
   },
 ];

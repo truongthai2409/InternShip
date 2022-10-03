@@ -13,7 +13,6 @@ const fileSV_FORMATS = [
   "application/pdf",
 ];
 
-
 export const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
 
 
@@ -26,7 +25,6 @@ Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đ
 
 Trân trọng cảm ơn!`;
 
-
 // yup validate form post job form
 export const schema = yup
   .object({
@@ -36,15 +34,19 @@ export const schema = yup
     jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
     timeStart: yup
       .date()
+      .nullable()
+      .transform((curr, orig) => (orig === "" ? null : curr))
+      .required("* Bạn phải chọn ngày bắt đầu ứng tuyển.")
       .min(
         `${date}`,
         ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`
-      )
-      .required(),
+      ),
     timeEnd: yup
       .date()
-      .min(`${tomorowFormat}`, "Ngày hết hạn phải lớn hơn ngày bắt đầu")
-      .required(),
+      .nullable()
+      .transform((cur, ori) => (ori === "" ? null : cur))
+      .required("* Bạn phải chọn ngày kết thúc ứng tuyển.")
+      .min(`${tomorowFormat}`, "Ngày hết hạn phải lớn hơn ngày bắt đầu"),
     jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
     // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     // otherInfo: yup.string(),
@@ -57,14 +59,22 @@ export const schema = yup
       .integer(" * Số lượng ứng viên phải là số nguyên. "),
     fileSV: yup
       .mixed()
+      .test("file", " * Yêu cầu có danh sách sinh viên.", (value) => {
+        console.log(value)
+        if (value.name) {
+          return value;
+        } else {
+          return false;
+        }
+      })
       .test(
         "fileSize",
         " * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.",
         (value) => {
           if (value?.size) {
-            return value && value?.size <= (512 * 1024);
+            return value && value?.size <= 512 * 1024;
           } else {
-            return true;
+            return false;
           }
         }
       )
@@ -72,7 +82,7 @@ export const schema = yup
         if (value?.type) {
           return value && fileSV_FORMATS.includes(value?.type);
         } else {
-          return true;
+          return false;
         }
       }),
   })

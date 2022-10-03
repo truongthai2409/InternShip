@@ -78,7 +78,7 @@ const HRInfo = () => {
       register={register}
       setValue={setValue}
       children={
-        <>
+        <div className="register__container__form--name">
           <SelectCustom
             label="Công ty"
             placeholder="Vui lòng chọn..."
@@ -99,7 +99,7 @@ const HRInfo = () => {
           >
             {errors.jobPosition?.message}
           </CustomInput>
-        </>
+        </div>
       }
     />
   );

@@ -12,14 +12,14 @@ export const userCandidateRemainingSelector = createSelector(
   allUser,
   (names, majors, change, allUser) => {
     if (change) {
-      let filter = allUser.allUser
-        .filter(
+      let filter = allUser?.allUser?.filter(
           (item) =>
             item?.user?.firstName?.includes(names) ||
-            item?.user?.lastName?.includes(names)
+            item?.user?.lastName?.includes(names) ||
+            (item?.user?.firstName + " " +item?.user?.lastName).includes(names)
         )
       if (majors) {
-        return filter = filter.filter((items) => items?.major?.name?.includes(majors));
+        return filter = filter?.filter((items) => items?.major?.name?.includes(majors));
       }
       return filter
     }

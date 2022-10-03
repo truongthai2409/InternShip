@@ -4,7 +4,7 @@ import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCom
 import Main from "src/pages/Main";
 import NotFound from "src/pages/NotFound";
 import DetailHome from "../../pages/Main/DetailHome";
-
+import CommingSoon from 'src/pages/Main/Home/CommingSoon'
 const mainRouter = [
     {
         path: "/",
@@ -33,6 +33,10 @@ const mainRouter = [
         path: "/forgot-password",
         element: <ForgotPassword />
 
+    },
+    {
+        path : "/comming-soon",
+        element : <CommingSoon />
     },
     {
         //Doesn't match route?, It's here. If you want to change just delete children and change element

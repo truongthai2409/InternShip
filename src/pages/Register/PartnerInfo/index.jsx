@@ -193,8 +193,10 @@ const PartnerInfo = () => {
           ) : (
             ""
           )}
-          <div className="collap" onClick={() => handerClicker()}>
+          <div className="collap" >
             <Collap
+              open={open}
+              handleClick={handerClicker}
               title="Chưa có trường của bạn? Đăng kí ngay"
               children={
                 <>
@@ -210,7 +212,7 @@ const PartnerInfo = () => {
                   >
                     {errors.logo?.message}
                   </InputFile>
-                  <div className="reg-candidate__form--name">
+                  <div className="register__container__form--name">
                     <CustomInput
                       label="Tên trường"
                       type="text"
@@ -229,9 +231,6 @@ const PartnerInfo = () => {
                     >
                       {errors.shortName?.message}
                     </CustomInput>
-                  </div>
-
-                  <div className="reg-candidate__form--name">
                     <CustomInput
                       label="Vai trò tại trường"
                       id="position"
@@ -241,7 +240,9 @@ const PartnerInfo = () => {
                     >
                       {errors.position?.message}
                     </CustomInput>
+                  </div>
 
+                  <div className="register__container__form--name">
                     <CustomInput
                       label="Website"
                       id="website"
@@ -251,9 +252,6 @@ const PartnerInfo = () => {
                     >
                       {errors.website?.message}
                     </CustomInput>
-                  </div>
-
-                  <div className="reg-candidate__form--name">
                     <CustomInput
                       label="Email của Trường"
                       id="emailSchool"
@@ -274,15 +272,6 @@ const PartnerInfo = () => {
                     </CustomInput>
                   </div>
 
-                  <SelectCustom
-                    id="typeSchool"
-                    label="Loại hình"
-                    placeholder="Vui lòng chọn..."
-                    options={typeSchoolList}
-                    register={register}
-                  >
-                    {errors.typeSchool?.message}
-                  </SelectCustom>
                   <div className="row-3-col">
                     <div className={"university-register__select-location"}>
                       <SelectCustom
@@ -320,6 +309,7 @@ const PartnerInfo = () => {
                       </SelectCustom>
                     </div>
                   </div>
+                  <div className="register__container__form--name">
                   <CustomInput
                     label="Địa chỉ"
                     id="address"
@@ -329,6 +319,16 @@ const PartnerInfo = () => {
                   >
                     {errors.address?.message}
                   </CustomInput>
+                  <SelectCustom
+                    id="typeSchool"
+                    label="Loại hình"
+                    placeholder="Vui lòng chọn..."
+                    options={typeSchoolList}
+                    register={register}
+                  >
+                    {errors.typeSchool?.message}
+                  </SelectCustom>
+                  </div>
                 </>
               }
             />

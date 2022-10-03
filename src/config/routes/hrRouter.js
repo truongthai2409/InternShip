@@ -6,6 +6,7 @@ import HR from "../../pages/Main/HR";
 import HRPost from "../../pages/Main/HR/HRPost";
 import HRPostList from "../../pages/Main/HR/HRPostList";
 import MainLayout from "src/Layouts/Main";
+import HrFindUser from "src/containers/HrFindUser";
 const hrRouter = [
     {
         path: "/hr",
@@ -39,6 +40,10 @@ const hrRouter = [
                 path: "candidatemanagement",
                 Component: CandidateManagement,
             },
+            {
+                path : "finduser",
+                Component : HrFindUser,
+            }
         ]
     }
 ]

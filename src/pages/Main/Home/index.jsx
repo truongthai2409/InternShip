@@ -17,6 +17,7 @@ import notfound from 'src/assets/img/notfound.webp'
 import { userCandidateRemainingSelector } from "src/store/slices/main/candidate/user/userCandidateRemaining";
 import { changeFilterChange, getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
 import SearchHR from "../HR/SearchHR";
+import { useNavigate } from "react-router-dom";
 const initialState = {
   type: [],
   position: [],
@@ -71,8 +72,6 @@ const Home = (props) => {
   });
   const [valueLocation, setValueLocation] = useState("");
   const [jobs, setJob] = useState([]);
-  const [user, setUser] = useState([])
-  const [userDetail, setUserDetail] = useState([])
   const [jobDetail, setJobDetail] = useState([]);
 
   const listWorkingFormat = [
@@ -162,17 +161,12 @@ const Home = (props) => {
     dispatch(getJobByCompany(id));
     dispatch(getJobPositionList());
   }, [dispatch, id])
-  console.log(props.userCandidate)
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (props.userCandidate) {
-      setUser(props.userCandidate)
-      setUserDetail(props.userCandidate[0])
-    } else {
-      setUser()
-      setUserDetail()
-    }
-  }, [props.userCandidate])
+        navigate("finduser")
+      }
+  }, [dispatch, navigate, props.userCandidate])
   return (
     <>
       <Grid
@@ -222,11 +216,10 @@ const Home = (props) => {
                 </Grid>
                 <Grid item xs={12}>
                   <ListCardJobHome
-                    jobList={user && user.length > 0 ? user : jobs}
+                    jobList={jobs}
                     indexCardActive={index}
                     jobListHavePages={props.jobPage}
                     onChange={getValuePageAndHandle}
-                    user={user && user.length > 0 ? true : false}
                   />
                 </Grid>
               </Grid>
@@ -238,11 +231,10 @@ const Home = (props) => {
                 }
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                  jobDetail={user && user.length > 0 ? userDetail : jobDetail}
-                  jobList={user && user.length > 0 ? user : jobs}
+                  jobDetail={jobDetail}
+                  jobList={jobs}
                   jobListCompany={jobListCompany}
                   demandPartner={props.demandPartner}
-                  user={user && user.length > 0 ? true : false}
                 />
               </div>
             </Grid>

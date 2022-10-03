@@ -13,6 +13,7 @@ import { adminUpdateUser, createUser, getUserById, updateUser } from "src/store/
 import { toast } from "react-toastify";
 
 const UserForm = (props) => {
+  console.log(props)
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
@@ -29,7 +30,11 @@ const UserForm = (props) => {
   console.log("errors", errors);
   useEffect(() => {
     dispatch(getUserById([idRow, userSessionStorage?.token]));
-  }, []);
+  }, [dispatch, idRow, userSessionStorage?.token]);
+  
+  useEffect(()=>{
+    setValue("isUpdate", isUpdate)
+  },[isUpdate, setValue])
 
   useEffect(() => {
     setValue("isUpdate", isUpdate)
@@ -44,7 +49,7 @@ const UserForm = (props) => {
       setValue("gender", user?.gender);
       setValue("role", user?.role?.id);
     }
-  }, [user]);
+  }, [isUpdate, setValue, user]);
 
   const onSubmit = async (data) => {
     console.log("create");
@@ -121,7 +126,7 @@ const UserForm = (props) => {
     { name: "Ứng viên", id: 3 },
     { name: "Cộng tác viên", id: 4 },
   ];
-
+  
   return (
     <>
       <form
@@ -129,7 +134,6 @@ const UserForm = (props) => {
         autoComplete="off"
         className="user-form"
       >
-
         <div className="user-form__wrapper">
           <div className="user-form__avatar">
             <InputFile

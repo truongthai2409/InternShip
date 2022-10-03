@@ -18,7 +18,6 @@ const DetailCard = ({
   jobDetailById,
   demandPartner = false,
   jobListCompany,
-  user
 }) => {
   const { appreciateList } = useSelector((state) => state.appreciate);
   const dispatch = useDispatch();

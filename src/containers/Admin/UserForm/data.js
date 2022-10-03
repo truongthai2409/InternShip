@@ -6,9 +6,9 @@ const CV_FORMATS = ["application/pdf"];
 
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const PHONE_REGEX =
-  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im
+  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im;
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
-const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/
+const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
 
 const regexName = (str) => {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -26,7 +26,7 @@ const regexName = (str) => {
   str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
   str = str.replace(/Đ/g, "D");
   return str;
-}
+};
 
 export const genderList = [
   {
@@ -44,19 +44,19 @@ export const genderList = [
 ];
 
 export const schema = yup.object({
-  isUpdate: yup.boolean(),
+  isUpdate: yup.boolean().required(),
   //Container
   username: yup //
     .string()
-    .required('* Bạn phải nhập tài khoản.')
-    .min(6, 'Tối thiểu 6 kí tự.')
-    .max(32, 'Tối đa 32 kí tự.'),
+    .required("* Bạn phải nhập tài khoản.")
+    .min(6, "Tối thiểu 6 kí tự.")
+    .max(32, "Tối đa 32 kí tự."),
   email: yup //
     .string()
-    .required('* Bạn phải nhập email.')
-    .min(6, 'Tối thiểu 6 kí tự.')
-    .max(64, 'Tối đa 64 kí tự.')
-    .matches(EMAIL_REGEX, 'Bạn đã nhập email không đúng.'),
+    .required("* Bạn phải nhập email.")
+    .min(6, "Tối thiểu 6 kí tự.")
+    .max(64, "Tối đa 64 kí tự.")
+    .matches(EMAIL_REGEX, "Bạn đã nhập email không đúng."),
   password: yup //
     .string()
     .notRequired()
@@ -81,36 +81,40 @@ export const schema = yup.object({
 
   lastName: yup //
     .string()
-    .required('* Bạn phải nhập họ.')
+    .required("* Bạn phải nhập họ.")
     .nullable()
-    .min(2, 'Tối thiểu 2 kí tự.')
-    .max(32, 'Tối đa 32 kí tự.'),
+    .min(2, "Tối thiểu 2 kí tự.")
+    .max(32, "Tối đa 32 kí tự."),
   firstName: yup //
     .string()
-    .required('* Bạn phải nhập tên.')
+    .required("* Bạn phải nhập tên.")
     .nullable()
-    .min(2, 'Tối thiểu 2 kí tự.')
-    .max(32, 'Tối đa 32 kí tự.'),
+    .min(2, "Tối thiểu 2 kí tự.")
+    .max(32, "Tối đa 32 kí tự."),
   phone: yup //
     .string()
-    .required('* Bạn phải nhập số điện thoại.')
-    .min(8, 'Tối thiểu 8 kí tự.')
-    .max(11, 'Tối đa 11 kí tự.')
-    .matches(PHONE_REGEX, 'Bạn đã nhập số điện thoại không đúng.'),
+    .required("* Bạn phải nhập số điện thoại.")
+    .min(8, "Tối thiểu 8 kí tự.")
+    .max(11, "Tối đa 11 kí tự.")
+    .matches(PHONE_REGEX, "Bạn đã nhập số điện thoại không đúng."),
   gender: yup //
     .string()
-    .required('* Bạn phải chọn giới tính.')
-    .max(7, 'Tối đa 7 kí tự.'),
+    .required("* Bạn phải chọn giới tính.")
+    .max(7, "Tối đa 7 kí tự."),
   avatar: yup //
     .mixed()
-    .test("type", '* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp', (value) => {
-      if (value?.type) {
-        return IMAGE_FORMATS.includes(value?.type);
-      } else {
-        return true;
+    .test(
+      "type",
+      "* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp",
+      (value) => {
+        if (value?.type) {
+          return IMAGE_FORMATS.includes(value?.type);
+        } else {
+          return true;
+        }
       }
-    })
-    .test("fileSize", '*Kích thước tối đa là 512Kb.', (value) => {
+    )
+    .test("fileSize", "*Kích thước tối đa là 512Kb.", (value) => {
       if (value?.size) {
         return value?.size <= 512 * 1024;
       } else {
@@ -118,8 +122,5 @@ export const schema = yup.object({
       }
     }),
   //END Conatiner
-  role: yup
-    .string()
-    .required('* Bạn phải chọn vai trò.'),
-
-})
+  role: yup.string().required("* Bạn phải chọn vai trò."),
+});

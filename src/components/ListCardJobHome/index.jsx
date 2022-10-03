@@ -15,7 +15,6 @@ const ListCardJobHome = ({
   jobListHavePages,
   allRating,
   hiddent,
-  user
 }) => {
  
   const location = useLocation();

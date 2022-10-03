@@ -37,7 +37,7 @@ const SearchHR = () => {
         }
     }
     useEffect(()=>{
-        dispatch(getMajorList())
+        dispatch(getMajorList([1,20]))
       },[dispatch])
     return (
         <div className="header__with-search onMobile onTablet">

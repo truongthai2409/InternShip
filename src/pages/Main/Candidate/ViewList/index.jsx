@@ -28,7 +28,7 @@ const CandidateViewList = () => {
   }, [dispatch]);
   useEffect(() => {
     setJobs(jobCare);
-    setJobDetail(jobCare[index]?.jobCare);
+    setJobDetail(jobCare && jobCare[index]?.jobCare);
   }, [index, jobCare]);
   useEffect(() => {
     dispatch(getJobByCompany(id));
@@ -45,7 +45,7 @@ const CandidateViewList = () => {
         </div>
         <div className="section__apply">
           <span>
-            Bạn đã quan tâm <span>{jobCare.length}</span> việc làm
+            Bạn đã quan tâm <span>{jobCare?.length}</span> việc làm
           </span>
         </div>
         <Grid className="wrapper" spacing={{ xs: 2 }} container>
@@ -53,7 +53,7 @@ const CandidateViewList = () => {
             <Grid container spacing={{ xs: 1 }}>
               <Grid item xs={12}>
                 <ListCardJobHome
-                  jobList={jobs.map((item) => {return item.jobCare})}
+                  jobList={jobs?.map((item) => {return item.jobCare})}
                   indexCardActive={index}
                   jobListHavePages={jobCareHavePage}
                 />
@@ -65,7 +65,7 @@ const CandidateViewList = () => {
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                 jobDetail={jobDetail}
-                jobList={jobs.map((item) => {return item.jobCare})}
+                jobList={jobs?.map((item) => {return item.jobCare})}
                 jobListCompany={jobListCompany}
               />
             </div>

@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
-import Button from "../../../../components/Button";
-import "./styles.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
-import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
-import { ListDemand } from "./ListDemand";
+import { Tab, Tabs } from "@mui/material";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
-import { Tab, Tabs } from "@mui/material";
-import Statistic from "src/components/Statistic";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
+import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import { TabTitle } from "src/utils/GeneralFunctions";
+import Button from "../../../../components/Button";
+import { ListDemand } from "./ListDemand";
+import "./styles.scss";
+
 import { useNavigate } from "react-router-dom";
 import PaginationCustom from "src/components/Pagination";
+import StatisticUser from "src/components/StatisticUser";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,18 +78,10 @@ const PartnerPostList = (props) => {
   }, [userPresent.idUser]);
 
   return (
-    <div className="partner-post__wrapper">
-      <div className="partner-post__list-bt">
-        <Button
-          onClick={() => {
-            navigate("/partner/post");
-          }}
-          name="ĐĂNG BÀI"
-        ></Button>
-      </div>
-      <div className="partner-post-list__content">
-        <div className="partner-post-list__statistic">
-          <Statistic
+    <div className="hr-post__wrapper">
+      <div className="hr-post-list__content">
+        <div className="hr-post-list__statistic">
+          <StatisticUser
             title="Điểm khả dụng"
             firstObject={{
               score: demandListUniversity?.totalItems,
@@ -99,7 +92,7 @@ const PartnerPostList = (props) => {
               description: "Lượt xem hồ sơ",
             }}
           />
-          <Statistic
+          <StatisticUser
             title="Trạng thái tin đăng"
             firstObject={{
               score: demandListUniversity?.totalItems,

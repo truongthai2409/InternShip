@@ -34,6 +34,7 @@ const User = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [idRow, setIdRow] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  
   const handleSearch = () => {
     if (searchValue === "") {
       dispatch(getUserList([1, 10, userSessionStorage?.token]));

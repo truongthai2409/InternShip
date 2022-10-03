@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import logoUser from "../../assets/img/Logo_user.png";
-import { useDispatch, useSelector } from "react-redux";
-import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-
-const limit = process.env.LIMIT_OF_PAGE || 5;
+import { useDispatch } from "react-redux";
+import { changeFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
 
 const Logo = ({ id }) => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
   const roleList = {
     3: "Ứng viên",
     1: "Nhà tuyển dụng",
     4: "Cộng tác viên",
   };
+  const dispatch = useDispatch()
   const handleClickGoHome = async () => {
+    dispatch(changeFilterChange(false));
+    const profile = JSON.parse(sessionStorage.getItem("userPresent"));
     if (
       location.pathname === "/" ||
       location.pathname === "/candidate" ||
@@ -26,24 +26,13 @@ const Logo = ({ id }) => {
     ) {
       return window.location.reload();
     }
-    if (profile.id !== undefined) {
-      const dataGetMarkByUser = {
-        userName: profile.user?.username,
-        page: {
-          no: 0,
-          limit: limit,
-        },
-      };
-      dispatch(getMarkByUser(dataGetMarkByUser));
-      const role = profile?.user?.role?.name;
-      switch (role) {
+    if (profile && profile.role !== null) {
+      switch (profile.role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
-          // getMarkByUser();
           break;
         case "Role_Partner":
           navigate(`/partner`, { replace: true });
-          // getMarkByUser();
           break;
         case "Role_Candidate": {
           navigate(`/candidate`, { replace: true });
@@ -53,17 +42,15 @@ const Logo = ({ id }) => {
           return navigate(`/`, { replace: true });
       }
     } else {
-      navigate(`/`);
+      navigate("/");
     }
   };
 
   return (
-    <div onClick={handleClickGoHome}>
+    <div className="roleName__header" onClick={handleClickGoHome}>
       <Link to="#/" className="logo">
-        <div className="roleName__header">
-          <img src={logoUser} alt="" />
-          <span>{id ? roleList[id] : ""}</span>
-        </div>
+        <img src={logoUser} alt="" />
+        <span>{id ? roleList[id] : ""}</span>
       </Link>
     </div>
   );

@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/Button";
 import CustomInput from "src/components/CustomInput";
 import InputFile from "src/components/InputFile";
@@ -54,6 +54,7 @@ const ProfileForm = ({ profile }) => {
     };
     dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
   };
+  console.log();
 
   console.log("profile", profile?.user?.gender);
   return (
@@ -106,11 +107,12 @@ const ProfileForm = ({ profile }) => {
           </div>
           <div className="profile-form__content-item">
             <SelectCustom
+              setValue={setValue}
               id="gender"
-              label="Giới tính"
-              // defaultValue={0}
-              options={genderList}
               register={register}
+              label="Giới tính"
+              defaultValue={parseInt(profile?.user?.gender)}
+              options={genderList}
             >
               {errors.gender?.message}
             </SelectCustom>
