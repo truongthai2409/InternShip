@@ -291,14 +291,32 @@ export const createUser = createAsyncThunk("user/createUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  console.log(args[0]);
   const res = await axios
     .post(`${baseURL}/api/r2s/admin/user/add`, args[0], header)
     .then((res) => {
       return res;
     })
     .catch((err) => {
-      console.log("err",err)
+      return err.response.data;
+    });
+  return res;
+})
+
+export const adminUpdateUser = createAsyncThunk("user/adminUpdateUser", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[1],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await axios
+    .put(`${baseURL}/api/r2s/admin/user/edit`, args[0], header)
+    .then((res) => {
+      console.log("res", res)
+      return res;
+    })
+    .catch((err) => {
+      console.log("errrrrr", err)
       return err.response.data;
     });
   return res;

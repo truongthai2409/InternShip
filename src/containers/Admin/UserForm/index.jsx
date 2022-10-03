@@ -9,13 +9,12 @@ import { genderList, schema } from "./data";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser, getUserById } from "src/store/slices/Admin/user/userSlice";
+import { adminUpdateUser, createUser, getUserById, updateUser } from "src/store/slices/Admin/user/userSlice";
 import { toast } from "react-toastify";
 
 const UserForm = (props) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
-  console.log(idRow);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const {
@@ -28,11 +27,13 @@ const UserForm = (props) => {
   });
 
   console.log("errors", errors);
-  console.log(isUpdate)
   useEffect(() => {
     dispatch(getUserById([idRow, userSessionStorage?.token]));
   }, []);
 
+  useEffect(() => {
+    setValue("isUpdate", isUpdate)
+  })
   useEffect(() => {
     if (isUpdate) {
       setValue("username", user?.username);
@@ -65,15 +66,20 @@ const UserForm = (props) => {
         },
       }),
     };
+    console.log("userData",userData)
     try {
       const res = await dispatch(
         createUser([userData, userSessionStorage?.token])
       );
+
       if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Tạo tài khoản thành công");
       }
+      else {
+        toast.error("Tạo tài khoản thất bại");
+      }
     } catch (error) {
-      toast.error(error);
+      console.log("error", error)
     }
   };
 
@@ -83,6 +89,7 @@ const UserForm = (props) => {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
         createUser: {
+          id: idRow,
           username: data.username,
           gender: parseInt(data.gender),
           lastName: data.lastName,
@@ -96,16 +103,16 @@ const UserForm = (props) => {
       }),
     };
     console.log("userData", data);
-    // try {
-    //   const res = await dispatch(
-    //     createUser([userData, userSessionStorage?.token])
-    //   );
-    //   if (res.payload.status === 200 || res.payload.status === 201) {
-    //     toast.success("Tạo tài khoản thành công");
-    //   }
-    // } catch (error) {
-    //   toast.error(error);
-    // }
+    try {
+      const res = await dispatch(
+        adminUpdateUser([userData, userSessionStorage?.token])
+      );
+      if (res.payload.status === 200 || res.payload.status === 201) {
+        toast.success("Chỉnh sửa tài khoản thành công");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const roleList = [
@@ -122,7 +129,6 @@ const UserForm = (props) => {
         autoComplete="off"
         className="user-form"
       >
-        <input id="isUpdate" value={isUpdate} type="hidden" {...register("isUpdate")} disabled />
 
         <div className="user-form__wrapper">
           <div className="user-form__avatar">
