@@ -20,19 +20,26 @@ import {
 import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { IconButton, Tooltip } from "@mui/material";
 import Button from "../Button";
+import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 
 const no = process.env.NO_OF_PAGE;
 const limit = process.env.LIMIT_OF_PAGE || 5;
 
 const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   let { applyList } = useSelector((state) => state.apply);
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
-  const [check,setCheck] = useState(applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id))
+  const [check, setCheck] = useState(
+    applyList
+      ?.map((item) => {
+        return item.jobApp?.id;
+      })
+      .includes(jobCare?.jobCare?.id)
+  );
 
-  const disabled = false
+  const disabled = false;
   const dispatch = useDispatch();
   const handleDeleteJobCare = async (e) => {
     e.stopPropagation();
@@ -40,7 +47,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       toast.success("Đã hủy lưu việc làm")
     );
     const dataGetMarkByUser = {
-      userName: profile.username,
+      userName: profile?.user?.username,
       page: {
         no: 0,
         limit: limit,
@@ -48,37 +55,25 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
     };
     await dispatch(getMarkByUser(dataGetMarkByUser));
   };
-  
-  useEffect(()=>{
-    const dataGetAppliedByCandidate = {
-      idCandidate: candidateInfoByUsername.id,
-      page: {
-        no: 0,
-        limit: 20,
-      },
-    };
-    dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
-  },[])
+
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    dispatch(getJobApplyListByCandidate(user));
+  }, [dispatch]);
   const handleDeleteJobApply = async (e) => {
     e.stopPropagation();
     await dispatch(deleteApply(jobApplied.id)).then(
       toast.success("Đã xóa công việc thành công")
     );
-    await dispatch(getCandidateByUserName(profile.username));
-    const dataGetAppliedByCandidate = {
-      idCandidate: candidateInfoByUsername?.id,
-      page: {
-        no: 0,
-        limit: limit,
-      },
-    };
-    await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+    await dispatch(getCandidateByUserName(profile?.user?.username));
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    await dispatch(getJobApplyListByCandidate(user));
   };
 
   const handleAddJob = async (e) => {
-    setCheck(!check)
+    setCheck(!check);
     e.stopPropagation();
-    const res = await dispatch(getCandidateByUserName(profile.username));
+    const res = await dispatch(getCandidateByUserName(profile?.user?.username));
     if (!res.payload.cv) {
       toast.error("Bạn chưa có CV, vui lòng cập nhật");
     } else {
@@ -90,7 +85,7 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
           candidate: {
             id: res.payload.id,
           },
-          referenceLetter: `Đơn ứng tuyển ${profile.username}`,
+          referenceLetter: `Đơn ứng tuyển ${profile?.user?.username}`,
         }),
         fileCV: res.cv,
       };
@@ -99,16 +94,12 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
       if (resApply.payload.status === 200) {
         toast.success("Đã nộp CV thành công");
       }
-      const dataGetAppliedByCandidate = {
-        idCandidate: candidateInfoByUsername?.id,
-        page: {
-          no: 0,
-          limit: limit,
-        },
-      };
-      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
+      const user = JSON.parse(sessionStorage.getItem("userPresent"));
+
+      await dispatch(getApplyListByIdCandidate(user));
     }
   };
+
   return (
     <div className="card-job__container">
       {jobCare && (
@@ -159,7 +150,27 @@ const CardJob = ({ jobCare, jobApplied, eleDuplicate }) => {
             </div>
 
             <div className="card-job__send-cv">
-              <Button name={applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id) ? "Đã Ứng Tuyển" : "Ứng Tuyển"} onClick={handleAddJob} disabled={applyList?.map((item)=>{return item.jobApp?.id}).includes(jobCare?.jobCare?.id) ? true : disabled} />
+              <Button
+                name={
+                  applyList
+                    ?.map((item) => {
+                      return item.jobApp?.id;
+                    })
+                    .includes(jobCare?.jobCare?.id)
+                    ? "Đã Ứng Tuyển"
+                    : "Ứng Tuyển"
+                }
+                onClick={handleAddJob}
+                disabled={
+                  applyList
+                    ?.map((item) => {
+                      return item.jobApp?.id;
+                    })
+                    .includes(jobCare?.jobCare?.id)
+                    ? true
+                    : disabled
+                }
+              />
             </div>
           </div>
         </>

@@ -23,7 +23,7 @@ export const getCandidateById = createAsyncThunk(
   "info_candidate/getCandidateById",
   async (id) => {
     return axios
-      .get(`${baseURL}/api/r2s/admin/candidate/${id}`)
+      .get(`${baseURL}/api/r2s/admin/candidate/${id}?no=0&limit=20`)
       .then((response) => {
         return response.data;
       })
@@ -37,7 +37,7 @@ export const getCandidateByUserName = createAsyncThunk(
   "info_candidate/getCandidateByUserName",
   async (name) => {
     return axios
-      .get(`${baseURL}/api/r2s/admin/candidate/u/${name}`)
+      .get(`${baseURL}/api/applylist/candidate/user/${name}?no=0&limit=20`)
       .then((response) => {
         return response.data;
       })

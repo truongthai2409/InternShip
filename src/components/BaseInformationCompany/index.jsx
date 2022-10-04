@@ -88,7 +88,7 @@ const BaseInformationCompany = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   let checked = false;
   const {
     register,

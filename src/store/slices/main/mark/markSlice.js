@@ -43,10 +43,16 @@ const markJobSlice = createSlice({
     });
   },
 });
+const user = JSON.parse(sessionStorage.getItem("userPresent"));
 
 export const getMark = createAsyncThunk("mark/getMark", async () => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + user.token,
+    },
+  };
   return axios
-    .get(`${baseURL}/api/r2s/carelist/?no=0&limit=10`)
+    .get(`${baseURL}/api/r2s/carelist?no=0&limit=10`, header)
     .then((response) => {
       return response.data;
     })
@@ -58,10 +64,16 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
 export const getMarkByUser = createAsyncThunk(
   "mark/getMarkByUser",
   async (data) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + user.token,
+      },
+    };
     return axios
-      .get(`${baseURL}/api/r2s/carelist/user/${data.userName}`, {
-        params: data.page,
-      })
+      .get(
+        `${baseURL}/api/r2s/carelist/user/${data.userName}?no=0&limit=20`,
+        header
+      )
       .then((response) => {
         return response.data;
       })
@@ -91,19 +103,15 @@ export const getMarkByUserAndJob = createAsyncThunk(
   "mark/getMarkByUserAndJob",
   async (data) => {
     const { userName, idJob, page } = data;
-    let axiosConfig = {
+    const header = {
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-        "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type",
+        Authorization: "Bearer " + user.token,
       },
     };
     return axios
       .get(
         `${baseURL}/api/r2s/carelist/user/${userName}/job/${idJob}`,
-        axiosConfig,
+        header,
         {
           params: page,
         }
@@ -136,8 +144,14 @@ export const getJobCandidateCaredByNameAndLocation = createAsyncThunk(
 );
 
 export const createMark = createAsyncThunk("mark/createMark", async (data) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + user.token,
+  };
   const res = await axios
-    .post(`${baseURL}/api/r2s/carelist`, data)
+    .post(`${baseURL}/api/r2s/carelist`, data, {
+      headers : headers
+    })
     .then((res) => {
       return res;
     })
@@ -148,8 +162,13 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
 });
 
 export const deleteMark = createAsyncThunk("mark/deleteMark", async (data) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + user.token,
+    },
+  };
   const res = await axios
-    .delete(`${baseURL}/api/r2s/carelist/${data}`)
+    .delete(`${baseURL}/api/r2s/carelist/${data}`, header)
     .then((res) => {
       return res.data;
     })
