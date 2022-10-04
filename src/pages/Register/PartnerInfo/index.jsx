@@ -75,7 +75,7 @@ const PartnerInfo = () => {
       navigate("/home");
     }
     dispatch(updateStatusPartner("idle"));
-  }, [status]);
+  }, [dispatch, navigate, status]);
 
   const onSubmit = async (data) => {
     if (info) {

@@ -2,16 +2,35 @@ import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { Divider, Switch, Tooltip, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllUserCandidate } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import Button from "../Button";
+import InputFile from "../InputFile";
+import Modal from "../Modal";
 import UserInfo from "./UserInfo";
+import SyncAltIcon from "@mui/icons-material/SyncAlt";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "./data";
 const BASEURL = process.env.REACT_APP_API;
-const Components = ({profile}) => {
-
-  const dispatch = useDispatch()
+const Components = ({ profile }) => {
+  const dispatch = useDispatch();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const [opens, setOpens] = useState(false);
+  const handleChange = (e) => {
+    console.log(e);
+  };
   const [checkedFind, setCheckedFind] = React.useState(true);
   const [checkedEmail, setCheckedEmail] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleChangeFind = (event) => {
     setCheckedFind(event.target.checked);
@@ -19,9 +38,38 @@ const Components = ({profile}) => {
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
   };
-  useEffect(()=>{
-    dispatch(getAllUserCandidate())
-  },[dispatch])
+
+  const handleClick = (number) => {
+    switch (number) {
+      case 1: {
+        return setOpens(!opens);
+      }
+      case 2: {
+        return setOpen(!open);
+      }
+      case 3: {
+        return (
+          // eslint-disable-next-line jsx-a11y/anchor-has-content
+          <a
+            id="downloadLink"
+            href={`${BASEURL}${profile?.cv}`}
+            target="_blank"
+            type="application/octet-stream"
+            download={`${BASEURL}${profile?.cv}`}
+            rel="noreferrer"
+          ></a>
+        );
+      }
+      default:
+        break;
+    }
+  };
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  useEffect(() => {
+    dispatch(getAllUserCandidate());
+  }, [dispatch]);
   return (
     <div className="profiles">
       <div className="profile_header">
@@ -44,7 +92,7 @@ const Components = ({profile}) => {
         <div style={{ textAlign: "center" }}>
           <div className="profile_name">
             <Typography variant="h6">
-              {profile.user?.firstName} {profile?.user?.lastName}
+              {profile?.user?.lastName} {profile.user?.firstName}
             </Typography>
           </div>
           <div className="profile_username">
@@ -64,20 +112,73 @@ const Components = ({profile}) => {
             >
               <div className="profile_children_handle">
                 <Tooltip title="Thay Đổi CV">
-                  <CachedRoundedIcon />
+                  <CachedRoundedIcon onClick={() => handleClick(1)} />
                 </Tooltip>
+                <Modal
+                  modalTitle={"Thay đổi CV"}
+                  open={opens}
+                  setOpen={setOpens}
+                  children={
+                    <form
+                      onChange={handleChange}
+                      style={{
+                        width: 300,
+                        height: 300,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <InputFile
+                        label="CV"
+                        requirementField={false}
+                        id="avatar"
+                        format="pdf"
+                        setValue={setValue}
+                        register={register}
+                      />
+                      {errors.message?.cv}
+                      <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>
+                    </form>
+                  }
+                  name="Thay Đổi CV"
+                  iconClose={<SyncAltIcon />}
+                />
               </div>
               <div
                 className="profile_children_handle"
                 style={{ padding: "0 2rem" }}
               >
                 <Tooltip title="Xem CV">
-                  <RemoveRedEyeIcon />
+                  <RemoveRedEyeIcon onClick={() => handleClick(2)} />
                 </Tooltip>
+                <Modal
+                  modalTitle={"Xem CV"}
+                  open={open}
+                  setOpen={setOpen}
+                  children={
+                    <form
+                      onChange={handleChange}
+                      style={{
+                        width: "1200px",
+                        height: "1200px",
+                      }}
+                    >
+                      <embed
+                        src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${BASEURL}${profile.cv}`}
+                        width="50%"
+                        height="100%"
+                      ></embed>
+                    </form>
+                  }
+                  name="Xem CV"
+                  iconClose={<SyncAltIcon />}
+                />
               </div>
               <div className="profile_children_handle">
                 <Tooltip title="Tải CV">
-                  <CloudDownloadRoundedIcon />
+                  <CloudDownloadRoundedIcon onClick={() => handleClick(3)} />
                 </Tooltip>
               </div>
             </div>
