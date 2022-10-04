@@ -24,9 +24,9 @@ export default function CandidateInfo({
             <img src={image} alt={image}></img>
             <div className='candidate_info'>
                 <h3>{name}</h3>
-                <p>Chuyên Ngành: <span>{major}</span></p>
-                <p>Phương Thức Làm Việc: <span>{formality}</span></p>
-                <p>Số Điện Thoại: <span>{numberPhone}</span></p>
+                <p>Chuyên ngành: <span>{major}</span></p>
+                <p>Phương thức làm việc: <span>{formality}</span></p>
+                <p>Số điện thoại: <span>{numberPhone}</span></p>
                 <p>Email: <span>{email}</span></p>
             </div>
             <div className='candidate_choise'>

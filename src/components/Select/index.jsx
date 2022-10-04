@@ -3,7 +3,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./styles.scss";
-import { useEffect } from "react";
 
 export default function SelectCustom({
   label,
@@ -23,9 +22,9 @@ export default function SelectCustom({
     return options.map((item) => {
       return (
         <MenuItem
-          onClick={() => {
-            handleChangeLocation(item.id);
-          }}
+          // onClick={() => {
+          //   handleChangeLocation(item.id);
+          // }}
           value={item.id}
           key={item.id}
         >
@@ -40,9 +39,6 @@ export default function SelectCustom({
     dispatch(action(id));
   };
 
-  // id === "jobType" && console.log("jobType", placeholder);
-
-
   return (
     <>
       <div className={`select-form ${className ? className : ""}`}>
@@ -55,10 +51,11 @@ export default function SelectCustom({
             className="select-field"
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
-            defaultValue={defaultValue >= 0 && defaultValue}
+            defaultValue={defaultValue ? defaultValue : ""}
+            // value={defaultValue}
             {...register(id)}
           >
-            <MenuItem value={false}>
+            <MenuItem value={""}>
               <p className="select-placeholder">{placeholder}</p>
             </MenuItem>
             {renderSelectOption()}

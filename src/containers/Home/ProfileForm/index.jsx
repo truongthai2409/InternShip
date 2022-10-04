@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
+import { set } from "date-fns";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +35,7 @@ const ProfileForm = ({ profile }) => {
     setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
     setValue("gender", profile?.user?.gender);
   }, [profile, setValue]);
+
   const onSubmit = (data) => {
     console.log(data);
     const profileData = {
