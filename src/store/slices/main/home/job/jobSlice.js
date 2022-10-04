@@ -144,6 +144,7 @@ const jobSlice = createSlice({
       });
     });
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
+
       state.listCandidatesApplied = payload.contents;
       state.totalPages = payload.totalPages;
       state.amountApplications = payload.totalItems;

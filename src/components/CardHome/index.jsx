@@ -26,11 +26,12 @@ const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
   
   const dispatch = useDispatch();
+
   const { careListOfPrivate } = useSelector((state) => state.mark);
 
-  const { profile } = useSelector((state) => state.authentication);
 
-  
+  const { profile } = useSelector((state) => state.user);
+
   const user = JSON.parse(sessionStorage.getItem("userPresent"));
 
   let isMark =
@@ -41,20 +42,20 @@ const CardHome = (props) => {
   
     React.useEffect(() => {
     const dataGetMarkByUser = {
-      userName: profile.username,
+      userName: profile?.user?.username,
       page: {
         no: 0,
         limit: limit,
       },
     };
-    if (profile?.role === "Role_Candidate") {
+    if (profile?.user?.role?.name === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, [dispatch, profile?.role, profile.username]);
+  }, [dispatch, profile.role, profile?.user?.role?.name, profile?.user?.username]);
 
   React.useEffect(() => {
     const dataGetMarkByUser = {
-      userName: profile.username,
+      userName: profile?.user?.username,
       page: {
         no: props.page - 1,
         limit: limit,
@@ -63,7 +64,7 @@ const CardHome = (props) => {
     if (profile?.role === "Role_Candidate") {
       dispatch(getMarkByUser(dataGetMarkByUser));
     }
-  }, [dispatch, profile?.role, profile.username, props.page]);
+  }, [dispatch, profile?.role, profile?.user?.username, props.page]);
 
   React.useEffect(() => {
     if (props.index === 0) {

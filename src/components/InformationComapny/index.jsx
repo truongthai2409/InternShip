@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
 import { getApplyListByIdCandidate } from "src/store/slices/main/candidate/apply/applySlice";
 import "./styles.scss";
+import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 
 const InformationCompany = ({
   jobDetail,
@@ -21,8 +22,10 @@ const InformationCompany = ({
   demandPartner = false,
 }) => {
   const [check, setCheck] = useState(false);
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   let { applyList } = useSelector((state) => state.apply);
+  const { jobApplyList, jobApplyListHavePage } = useSelector((state) => state.jobCandidateSlice);
+
   const { candidateInfoByUsername } = useSelector(
     (state) => state.infoCandidate
   );
@@ -30,7 +33,7 @@ const InformationCompany = ({
   const dispatch = useDispatch();
   const handleAddJob = async (e) => {
     e.stopPropagation();
-    const res = await dispatch(getCandidateByUserName(profile.username));
+    const res = await dispatch(getCandidateByUserName(profile?.user?.username));
     if (profile.token) {
       if (!res.payload.cv) {
         toast.error("Bạn chưa có CV, vui lòng cập nhật");
@@ -43,7 +46,7 @@ const InformationCompany = ({
             candidate: {
               id: res.payload.id,
             },
-            referenceLetter: `Đơn ứng tuyển ${profile.username}`,
+            referenceLetter: `Đơn ứng tuyển ${profile?.user?.username}`,
           }),
           fileCV: res.cv,
         };
@@ -57,39 +60,21 @@ const InformationCompany = ({
       toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
+
   useEffect(() => {
     setCheck(
-      applyList
+      jobApplyList
         ?.map((item) => {
           return item.jobApp?.id;
         })
         .includes(jobDetail?.id)
     );
-  }, [jobDetail, applyList]);
+  }, [jobDetail, jobApplyList]);
 
-  useEffect(() => {
-    const _getValue = async () => {
-      const dataGetMarkByUser = {
-        userName: profile.username,
-        page: {
-          no: 0,
-          limit: 20,
-        },
-      };
-
-      await dispatch(getCandidateByUserName(profile.username));
-
-      const dataGetAppliedByCandidate = {
-        idCandidate: candidateInfoByUsername.id,
-        page: {
-          no: 0,
-          limit: 20,
-        },
-      };
-      await dispatch(getApplyListByIdCandidate(dataGetAppliedByCandidate));
-    };
-    _getValue();
-  }, [candidateInfoByUsername.id, check]);
+  useEffect(()=>{
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))
+    dispatch(getJobApplyListByCandidate(user))
+},[dispatch])
   return (
     <div>
       {jobDetail && (

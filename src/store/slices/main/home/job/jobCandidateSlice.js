@@ -57,9 +57,14 @@ export const getJobApplyListByCandidate = createAsyncThunk(
 export const getJobCareByCandidate = createAsyncThunk(
     "jobCadidateSlice/getJobCareByCandidate",
     async (args) => {
+        const header = {
+            headers : {
+                Authorization : "Bearer "+ args.token,
+            }
+        }
         if (args.role.includes("Role_Candidate")) {
             return await axios
-                .get(`${BASEURL}/api/r2s/carelist/user/${args.username}?no=0&limit=20`)
+                .get(`${BASEURL}/api/r2s/carelist/user/${args.username}?no=0&limit=20`, header)
                 .then((response) => {
                     return response.data;
                 })

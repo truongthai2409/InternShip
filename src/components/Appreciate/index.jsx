@@ -39,7 +39,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
   const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
@@ -134,7 +134,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
           elevation={0}
           sx={{}}
           className={
-            appreciate?.user?.username === profile.username
+            appreciate?.user?.username === profile?.user?.username
               ? "appreciate__active"
               : ""
           }
@@ -266,7 +266,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                     marginTop: "25px",
                   }}
                 >
-                  {appreciate?.user?.username === profile.username && (
+                  {appreciate?.user?.username === profile?.user?.username && (
                     <div className="">
                       <div>
                         {" "}

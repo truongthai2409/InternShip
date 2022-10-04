@@ -56,7 +56,7 @@ const ProfileForm = ({ profile }) => {
   };
   console.log();
 
-  console.log("profile", profile?.user?.gender);
+
   return (
     <>
       <form className="profile-form__wrapper" autoComplete="off">

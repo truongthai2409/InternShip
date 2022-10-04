@@ -25,20 +25,17 @@ const ButtonMark = (props) => {
   const [mark, setMark] = useState(false);
 
   // get global state from redux store
-  const { candidateInfoByUsername } = useSelector(
-    (state) => state.infoCandidate
-  );
-  const { profile } = useSelector((state) => state.authentication);
+  const { profile } = useSelector((state) => state.user);
   useEffect(() => {
-    profile.username !== undefined &&
-      dispatch(getCandidateByUserName(profile.username));
-  }, [dispatch, profile.username]);
+    profile?.user?.username !== undefined &&
+      dispatch(getCandidateByUserName(profile?.user?.username));
+  }, [dispatch, profile?.user?.username]);
 
   const handleClickMarkJob = async (e) => {
     e.stopPropagation();
 
     const dataGetMarkByUser = {
-      userName: profile.username,
+      userName: profile?.user?.username,
       page: {
         no: 0,
         limit: limit,
@@ -47,7 +44,7 @@ const ButtonMark = (props) => {
     if (props.isMark === false) {
       const dataCareList = {
         candidateCare: {
-          id: candidateInfoByUsername.id,
+          id: profile?.id,
         },
         jobCare: {
           id: props.jobId,
@@ -60,9 +57,12 @@ const ButtonMark = (props) => {
       setMark(!mark);
       toast.success("Đã lưu việc làm thành công");
     } else {
-      if (profile?.role !== undefined && profile?.role === "Role_Candidate") {
+      if (
+        profile?.user?.role?.name !== undefined &&
+        profile?.user?.role?.name === "Role_Candidate"
+      ) {
         const dataByUserAndJob = {
-          userName: profile.username,
+          userName: profile?.user?.username,
           idJob: Number(props.jobId),
           page: {
             no: 0,
@@ -79,10 +79,10 @@ const ButtonMark = (props) => {
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (profile.username === undefined) {
+    if (profile?.user?.username === undefined) {
       toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
       await navigate("/login");
-    } 
+    }
   };
   return (
     <Tooltip title="Lưu công việc">
@@ -101,20 +101,22 @@ const ButtonMark = (props) => {
         pathUrl === "/candidate/information_company/4" ||
         pathUrl === "/candidate/view-list-care" ? (
           props.isMark === false && mark === false ? (
-            <BookmarkBorderIcon style={{ fontSize: `${props.fontSize}` }} 
-            sx={{color: "#04bf8a"}}/>
+            <BookmarkBorderIcon
+              style={{ fontSize: `${props.fontSize}` }}
+              sx={{ color: "#04bf8a" }}
+            />
           ) : (
             <BookmarkIcon
               className="buttonMark__isChecking"
               style={{ fontSize: `${props.fontSize}` }}
-              sx={{color: "#04bf8a"}}
+              sx={{ color: "#04bf8a" }}
             />
           )
         ) : (
           <BookmarkBorderIcon
             style={{ fontSize: `${props.fontSize}` }}
             onClick={handleLogin}
-            sx={{color: "#04bf8a"}}
+            sx={{ color: "#04bf8a" }}
           />
         )}
       </IconButton>

@@ -2,9 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TagName from "../TagName";
-import {
-  useDispatch,
-} from "react-redux";
+import { useDispatch } from "react-redux";
 import { getJobList } from "../../store/slices/main/home/job/jobSlice";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -14,9 +12,8 @@ import BaseInformationCompany from "../BaseInformationCompany";
 import { Box } from "@mui/material";
 import InformationUniversity from "../InformationUniversity";
 import BaseInformationUniversity from "../BaseInformationUniversity";
-const API = process.env.REACT_APP_API
+const API = process.env.REACT_APP_API;
 export function TabPanel(props) {
-
   const { children, value, index, ...other } = props;
 
   return (
@@ -63,7 +60,7 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  const user = JSON.parse(sessionStorage.getItem("userPresent"))
+  const user = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);
@@ -72,7 +69,7 @@ const Detail = ({
     }
   }, [jobDetail]);
   useEffect(() => {
-    dispatch(getJobList([1,20]));
+    dispatch(getJobList([1, 20]));
   }, [dispatch]);
 
   const handleChange = (event, newValue) => {
@@ -89,8 +86,16 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                 user?.role?.includes("Role_HR") ? `${API}${jobDetail?.universityDTO?.avatar}` : `${API}${jobDetail?.hr?.company?.logo}` 
+                  user?.role?.includes("Role_HR")
+                    ? `${API}${jobDetail?.universityDTO?.avatar}`
+                    : `${API}${jobDetail?.hr?.company?.logo}`
                 }
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.onerror = undefined;
+                  currentTarget.src =
+                    "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg";
+                }}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
@@ -223,13 +228,13 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                  user?.role?.includes("Role_Partner") ? `${API}${jobDetailById?.universityDTO?.avatar}` : `${API}${jobDetailById?.hr?.company?.logo}` 
-                 }
+                  user?.role?.includes("Role_Partner")
+                    ? `${API}${jobDetailById?.universityDTO?.avatar}`
+                    : `${API}${jobDetailById?.hr?.company?.logo}`
+                }
               />
               <div>
-                <h2>
-                  {jobDetailById?.name || jobDetailById?.name}
-                </h2>
+                <h2>{jobDetailById?.name || jobDetailById?.name}</h2>
                 <p className="name-company">
                   {jobDetailById?.hr?.company?.name ||
                     jobDetailById?.universityDTO?.name}
@@ -239,16 +244,13 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobDetailById?.jobType?.name || "Không cós"} />
+                  <TagName
+                    title={jobDetailById?.jobType?.name || "Không cós"}
+                  />
                   <TagName
                     title={jobDetailById?.jobposition?.name || "Không có"}
                   />
-                  <TagName
-                    title={
-                      jobDetailById?.major?.name ||
-                      "Không có"
-                    }
-                  />
+                  <TagName title={jobDetailById?.major?.name || "Không có"} />
                 </div>
               </div>
             </div>

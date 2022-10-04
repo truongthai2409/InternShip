@@ -13,7 +13,6 @@ import "./reponsive.scss"
 const Profile = () => {
   const user = JSON.parse(sessionStorage.getItem("userPresent")).role;
   const { profile } = useSelector((state) => state.user);
-
   return (
     <div className='profile__wrapper'>
       <Grid container spacing={2}>

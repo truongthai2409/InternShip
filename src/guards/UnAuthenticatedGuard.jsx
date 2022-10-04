@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 const UnAuthenticatedGuard = ({ children }) => {
   const authenticated = useAuthenticated()
   const navigate = useNavigate()
-  const { profile } = useSelector(state => state.authentication)
+  const { profile } = useSelector(state => state.user)
   if (authenticated) {
     const role = profile?.role
     switch (role) {

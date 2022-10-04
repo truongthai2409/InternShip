@@ -6,7 +6,6 @@ import UserInfo from "src/components/Profile/UserInfo";
 
 const BASEURL = process.env.REACT_APP_API;
 const Component = ({ profile }) => {
-    console.log(profile)
 
   const [checked, setChecked] = React.useState(false);
 
