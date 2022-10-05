@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
 import Modal from '../../../components/Modal'
 import CompanyForm from '../../../containers/Admin/CompanyForm'
 import CompanyTable from './CompanyTable'
+import { getCompanyList, searchCompany } from 'src/store/slices/Admin/company/companySlice';
 
 const selectOptions = [
   {
@@ -26,9 +28,18 @@ const selectOptions = [
 ]
 
 export default function Company() {
-  const [open, setOpen] = useState(false)
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
 
-  const handleSearch = e => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = () => {
+    if (searchValue === "") {
+      dispatch(getCompanyList([1, 10, userSessionStorage?.token]));
+    } else {
+      dispatch(searchCompany([searchValue, 1, 10, userSessionStorage?.token]));
+    }
   }
 
   const handleOpenModal = () => {
@@ -46,6 +57,7 @@ export default function Company() {
         btnName=""
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
+        onSearch={handleSearch}
       />
       <CompanyTable />
       <Modal modalTitle="Thêm Công Ty" open={open} setOpen={setOpen}>

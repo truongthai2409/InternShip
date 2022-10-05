@@ -12,19 +12,26 @@ import {
   getCompanyList,
   updateCompanyInfo,
   deleteCompany,
+  searchCompany,
 } from "../../../../store/slices/Admin/company/companySlice";
 import ProfileTable from "../../../../components/ProfileTable";
 
-const CompanyTable = () => {
+const CompanyTable = ({searchValue}) => {
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { companyList, totalPages, totalItems } = useSelector(
+  const { companyList, totalPages, totalItems, onSearch } = useSelector(
     (state) => state.company
   );
-
+  
   useEffect(() => {
-    dispatch(getCompanyList([page, 10]));
+    if (onSearch) {
+      dispatch(searchCompany([searchValue, page, 10, userSessionStorage?.token]))
+    }
+    else {
+      dispatch(getCompanyList([page, 10, userSessionStorage?.token]));
+    }
   }, []);
 
   const columns = [
@@ -80,7 +87,9 @@ const CompanyTable = () => {
             },
             comid: row.id,
           };
-          dispatch(updateCompanyInfo(updateData));
+          dispatch(updateCompanyInfo(updateData)).then(() => {
+            dispatch(getCompanyList([page, 10,userSessionStorage?.token]))
+          })
         };
         return (
           <select
@@ -110,7 +119,9 @@ const CompanyTable = () => {
         };
 
         const handleDelete = () => {
-          dispatch(deleteCompany(row.id));
+          dispatch(deleteCompany(row.id)).then(() => {
+            dispatch(getCompanyList([page, 10,userSessionStorage?.token]))
+          });
         };
         return (
           <>
