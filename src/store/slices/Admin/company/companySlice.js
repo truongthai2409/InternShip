@@ -47,8 +47,14 @@ export default companySlice;
 export const getCompanyList = createAsyncThunk(
   "company/getCompanyList",
   async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[2],
+        "Content-Type": "multipart/form-data",
+      },
+    };
     return await axios
-      .get(`${baseURL}/api/company?no=${args[0] - 1}&limit=${args[1]}`)
+      .get(`${baseURL}/api/r2s/admin/company?no=${args[0] - 1}&limit=${args[1]}`, header)
       .then((response) => {
         return response.data;
       })
@@ -171,3 +177,21 @@ export const deleteCompany = createAsyncThunk(
       });
   }
 );
+
+export const searchCompany = createAsyncThunk("company/searchCompany", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[3],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await axios
+    .get(`${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]}`, header)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  return res;
+})
