@@ -1,11 +1,8 @@
 import React from "react";
-import "./styles.scss";
 import { Link } from "react-router-dom";
-
-import Logo from "../../components/Logo";
+import "./styles.scss";
+import "./responsive.scss";
 import Login from "../../pages/Login";
-import Button from "../../components/Button/index";
-import { Typography } from "@mui/material";
 
 const LoginContainer = () => {
   return (

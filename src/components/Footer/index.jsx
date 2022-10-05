@@ -1,6 +1,7 @@
 import React from "react";
 import ComponentFooter from "./ComponentFooter";
 import "./styles.scss";
+import "./responsive.scss";
 import AddressComponent from "./AddressComponent";
 
 const aboutUs = [
@@ -45,7 +46,11 @@ const Footer = () => {
           <div id="first-section" className="elementor-row">
             <AddressComponent />
             <ComponentFooter header="Về IT JOBS" tabContent={aboutUs} />
-              <ComponentFooter header="Chính sách" className="policy" tabContent={policy} />
+            <ComponentFooter
+              header="Chính sách"
+              className="policy"
+              tabContent={policy}
+            />
             <div className="mobile-app-link-container">
               <div className="mobile-app-link-header">
                 <h2 className="heading-primary elementor-heading-title">

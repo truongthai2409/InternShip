@@ -8,7 +8,7 @@ const SwitchButton = ({ label, setState, state, onClick }) => {
     setState(!state);
   };
   return (
-    <FormGroup>
+    <FormGroup className="switch-btn__wrapper">
       <FormControlLabel
         onChange={handleOnChange}
         onClick={onClick}

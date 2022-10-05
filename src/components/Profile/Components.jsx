@@ -76,7 +76,7 @@ const Components = ({ profile }) => {
         <img
           style={{ width: 150, height: 150, borderRadius: "50%" }}
           src={
-            `${BASEURL}${profile.user?.avatar}` ||
+            `${profile.user?.avatar}` ||
             "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg"
           }
           onError={({ currentTarget }) => {

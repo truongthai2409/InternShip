@@ -5,6 +5,7 @@ import "./styles.scss";
 import { useLocation } from "react-router-dom";
 import PaginationCustome from "src/components/Pagination";
 import RatingJob from "../RatingJob";
+import { useEffect } from "react";
 
 const ListCardJobHome = ({
   jobList,
@@ -16,13 +17,17 @@ const ListCardJobHome = ({
   allRating,
   hiddent,
 }) => {
- 
   const location = useLocation();
   const [page, setPage] = useState(1);
   const handlePagination = (e, valuePage) => {
     setPage(valuePage);
     onChange && onChange(valuePage);
   };
+  useEffect(() => {
+    const filterPanel = document.querySelector(".filter-panel-home__wrapper");
+    filterPanel.scrollTop = 0;
+  }, [page]);
+
   return (
     <>
       <div className="filter-panel-home__wrapper">
@@ -36,18 +41,45 @@ const ListCardJobHome = ({
               active={indexCardActive}
               index={index}
               key={job.id}
-              title={job.name ? job.name : job.jobApp?.name || job.jobCare?.name}
+              title={
+                job.name ? job.name : job.jobApp?.name || job.jobCare?.name
+              }
               fontSize={10}
               nameCompany={
-                job?.hr?.company?.name || job?.partner?.universityDTO.name || job?.jobApp?.company?.name || job?.jobApp?.hr?.company?.name || job?.jobCare?.hr?.company?.name
+                job?.hr?.company?.name ||
+                job?.partner?.universityDTO.name ||
+                job?.jobApp?.company?.name ||
+                job?.jobApp?.hr?.company?.name ||
+                job?.jobCare?.hr?.company?.name
               }
-              idCompany={job?.hr?.company?.id || job?.partner?.universityDTO.id || job?.jobApp?.hr?.company?.id}
+              idCompany={
+                job?.hr?.company?.id ||
+                job?.partner?.universityDTO.id ||
+                job?.jobApp?.hr?.company?.id
+              }
               tagName={[
-                job?.jobposition?.name || job?.position?.name || job?.jobApp?.jobposition?.name || job?.jobCare?.jobposition?.name|| "Không có",
-                job?.jobType?.name ||job?.jobApp?.jobType?.name || job?.jobCare?.jobType?.name || "Không có",
+                job?.jobposition?.name ||
+                  job?.position?.name ||
+                  job?.jobApp?.jobposition?.name ||
+                  job?.jobCare?.jobposition?.name ||
+                  "Không có",
+                job?.jobType?.name ||
+                  job?.jobApp?.jobType?.name ||
+                  job?.jobCare?.jobType?.name ||
+                  "Không có",
               ]}
-              location={job.locationjob?.district?.province?.name || job?.universityDTO?.name || job?.jobApp?.locationjob?.district?.province?.name || job?.jobCare?.locationjob?.district?.province?.name}
-              amount={job.amount || job.jobApp?.amount || job.jobCare?.amount || "Không có"}
+              location={
+                job.locationjob?.district?.province?.name ||
+                job?.universityDTO?.name ||
+                job?.jobApp?.locationjob?.district?.province?.name ||
+                job?.jobCare?.locationjob?.district?.province?.name
+              }
+              amount={
+                job.amount ||
+                job.jobApp?.amount ||
+                job.jobCare?.amount ||
+                "Không có"
+              }
               demandPartner={true}
               time={[
                 moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
