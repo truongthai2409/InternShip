@@ -37,7 +37,7 @@ const ListApply = () => {
                     <p className="header__apply--des">Xem lại danh sách những việc làm mà bạn đã ứng tuyển trước đó.</p>
                 </div>
                 <div className="section__apply">
-                    <span>Bạn đã ứng tuyển <span>{jobApplyList.length}</span> việc làm</span>
+                    <span>Bạn đã ứng tuyển <span>{jobApplyList?.length}</span> việc làm</span>
                 </div>
                 <Grid
                     className="wrapper"

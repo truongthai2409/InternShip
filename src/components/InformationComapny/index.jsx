@@ -26,16 +26,12 @@ const InformationCompany = ({
   let { applyList } = useSelector((state) => state.apply);
   const { jobApplyList, jobApplyListHavePage } = useSelector((state) => state.jobCandidateSlice);
 
-  const { candidateInfoByUsername } = useSelector(
-    (state) => state.infoCandidate
-  );
-
   const dispatch = useDispatch();
   const handleAddJob = async (e) => {
     e.stopPropagation();
-    const res = await dispatch(getCandidateByUserName(profile?.user?.username));
-    if (profile.token) {
-      if (!res.payload.cv) {
+    console.log(profile)
+    if (profile?.user?.id) {
+      if (!profile?.cv) {
         toast.error("Bạn chưa có CV, vui lòng cập nhật");
       } else {
         const applyData = {
@@ -44,14 +40,15 @@ const InformationCompany = ({
               id: jobDetail.id,
             },
             candidate: {
-              id: res.payload.id,
+              id: profile.id,
             },
             referenceLetter: `Đơn ứng tuyển ${profile?.user?.username}`,
           }),
-          fileCV: res.cv,
+          fileCV: profile.cv,
         };
         const resApply = await dispatch(addApply(applyData));
-        if (resApply.payload.status === 200) {
+        console.log(resApply)
+        if (resApply.payload.status === 200 || resApply.payload.status === 201) {
           toast.success("Đã nộp CV thành công");
           setCheck(true);
         }
@@ -73,7 +70,7 @@ const InformationCompany = ({
 
   useEffect(()=>{
     const user = JSON.parse(sessionStorage.getItem("userPresent"))
-    dispatch(getJobApplyListByCandidate(user))
+    dispatch(getJobApplyListByCandidate(user)) 
 },[dispatch])
   return (
     <div>

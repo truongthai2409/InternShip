@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
-import Button from "../../../../components/Button";
 import { ListDemand } from "./ListDemand";
 import "./styles.scss";
 
@@ -71,11 +70,11 @@ const PartnerPostList = (props) => {
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-  }, [activeUser?.universityDTO?.id, currentPage]);
+  }, [activeUser?.universityDTO?.id, currentPage, dispatch]);
 
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
-  }, [userPresent.idUser]);
+  }, [dispatch, userPresent.idUser]);
 
   return (
     <div className="hr-post__wrapper">

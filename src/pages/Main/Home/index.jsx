@@ -11,11 +11,19 @@ import DetailCard from "../../../components/DetailCard";
 import ListCardJobHome from "../../../components/ListCardJobHome";
 import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
-import { getJobByCompany, getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
+import {
+  getJobByCompany,
+  getJobPositionList,
+} from "../../../store/slices/main/home/job/jobSlice";
 import "./styles.scss";
-import notfound from 'src/assets/img/notfound.webp'
+import notfound from "src/assets/img/notfound.webp";
 import { userCandidateRemainingSelector } from "src/store/slices/main/candidate/user/userCandidateRemaining";
-import { changeFilterChange, getAllUserCandidate, majorFilterChange, nameFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import {
+  changeFilterChange,
+  getAllUserCandidate,
+  majorFilterChange,
+  nameFilterChange,
+} from "src/store/slices/main/candidate/user/userCandidateSlice";
 import SearchHR from "../HR/SearchHR";
 import { useNavigate } from "react-router-dom";
 const initialState = {
@@ -37,10 +45,19 @@ function reducer(state = initialState, action) {
     case "province":
       return { ...state, province: action.payload };
     case "type":
+      if (action.payload.length === 0) {
+        return { ...state, type: "" };
+      }
       return { ...state, type: action.payload };
     case "position":
+      if (action.payload.length === 0) {
+        return { ...state, position: "" };
+      }
       return { ...state, position: action.payload };
     case "major":
+      if (action.payload.length === 0) {
+        return { ...state, major: "" };
+      }
       return { ...state, major: action.payload };
     case "reset": {
       return {
@@ -60,9 +77,8 @@ function reducer(state = initialState, action) {
 }
 
 const Home = (props) => {
-
   const dispatch = useDispatch();
-  const { index, id } = useSelector(state => state.filter)
+  const { index, id } = useSelector((state) => state.filter);
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -81,15 +97,15 @@ const Home = (props) => {
   ];
 
   const handleSearch = (value) => {
-    dispatch(nameFilterChange(value))
+    dispatch(nameFilterChange(value));
     dispatch(indexFilterChange(0));
     dispatcher({ type: "name", payload: value });
     dispatcher({ type: "no", payload: 0 });
     dispatcher({ type: "province", payload: valueLocation });
-    dispatch(changeFilterChange(false))
+    dispatch(changeFilterChange(false));
   };
   const getValueLocationAndHandle = (value) => {
-    dispatch(majorFilterChange(value))
+    dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
@@ -99,56 +115,57 @@ const Home = (props) => {
   };
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
-    dispatch(changeFilterChange(false))
+    dispatch(changeFilterChange(false));
     let tempType = [];
     let tempPosition = [];
     let tempMajor = [];
-    if (value.length > 0) {
-      tempType = value.filter((sp) =>
-        listWorkingFormat
-          .map((items) => {
-            return items.name;
-          })
-          .includes(sp)
-      );
-      tempPosition = value.filter((items) =>
-        listPositionWorkingFormat
+    tempType = value.filter((sp) =>
+      listWorkingFormat
+        .map((items) => {
+          return items.name;
+        })
+        .includes(sp)
+    );
+    tempPosition = value.filter((items) =>
+      listPositionWorkingFormat
+        .map((item) => {
+          return item;
+        })
+        .includes(items)
+    );
+    tempMajor = value.filter(
+      (items) =>
+        !listPositionWorkingFormat
           .map((item) => {
             return item;
           })
+          .includes(items) &&
+        !listWorkingFormat
+          .map((item) => {
+            return item.name;
+          })
           .includes(items)
-      );
-      tempMajor = value.filter(
-        (items) =>
-          !listPositionWorkingFormat
-            .map((item) => {
-              return item;
-            })
-            .includes(items) &&
-          !listWorkingFormat
-            .map((item) => {
-              return item.name;
-            })
-            .includes(items)
-      );
-      dispatcher({ type: "type", payload: tempType });
-      dispatcher({ type: "position", payload: tempPosition });
-      dispatcher({ type: "major", payload: tempMajor });
-      dispatcher({ type: "no", payload: 0 });
-    }
+    );
+    dispatcher({ type: "type", payload: tempType });
+    dispatcher({ type: "position", payload: tempPosition });
+    dispatcher({ type: "major", payload: tempMajor });
+    dispatcher({ type: "no", payload: 0 });
   };
 
   useEffect(() => {
-    const dataFilter = [{
-      type: state.type + "",
-      order: state.order,
-      position: state.position + "",
-      name: state.name,
-      province: state.province,
-      major: state.major + "",
-      no: state.no,
-      limit: 5,
-    }, { link: props.linkFilter }];
+    const dataFilter = [
+      {
+        type: state.type + "",
+        order: state.order,
+        position: state.position + "",
+        name: state.name,
+        province: state.province,
+        major: state.major + "",
+        no: state.no,
+        limit: 5,
+      },
+      { link: props.linkFilter },
+    ];
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
 
@@ -160,13 +177,13 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getJobByCompany(id));
     dispatch(getJobPositionList());
-  }, [dispatch, id])
-  const navigate = useNavigate()
+  }, [dispatch, id]);
+  const navigate = useNavigate();
   useEffect(() => {
     if (props.userCandidate) {
-        navigate("finduser")
-      }
-  }, [dispatch, navigate, props.userCandidate])
+      navigate("finduser");
+    }
+  }, [dispatch, navigate, props.userCandidate]);
   return (
     <>
       <Grid
@@ -183,12 +200,11 @@ const Home = (props) => {
             />
           </Hidden>
         </Grid>
-        {jobs.length === 0 ?
+        {jobs.length === 0 ? (
           <Grid item xs={10}>
             <Grid container spacing={{ xs: 1 }}>
               <Grid item xs={12}>
                 <div className="none__res">
-
                   <SearchResultHome
                     onClick={handleSearch}
                     onChange={getValueLocationAndHandle}
@@ -196,17 +212,31 @@ const Home = (props) => {
                 </div>
               </Grid>
               <Grid item xs={12} style={{ textAlignLast: "center" }}>
-                <img src={notfound} alt="notfound" width={"70%"} height={"50%"} />
+                <img
+                  src={notfound}
+                  alt="notfound"
+                  width={"70%"}
+                  height={"50%"}
+                />
               </Grid>
             </Grid>
-          </Grid> :
+          </Grid>
+        ) : (
           <>
             <Grid item xs={4}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item xs={12}>
                   <div className="none__res">
                     <div style={{ backgroundColor: "#fff", height: 45 }}>
-                      <h4 style={{ color: "#000", padding: 12, textAlign: "center" }}>Tìm kiếm {props.nameSearch}</h4>
+                      <h4
+                        style={{
+                          color: "#000",
+                          padding: 12,
+                          textAlign: "center",
+                        }}
+                      >
+                        Tìm kiếm {props.nameSearch}
+                      </h4>
                     </div>
                     <SearchResultHome
                       onClick={handleSearch}
@@ -226,9 +256,7 @@ const Home = (props) => {
             </Grid>
             <Grid item xs={6}>
               <div className="containerDetailCard containerDetailCard-none">
-                {props.hr &&
-                  <SearchHR />
-                }
+                {props.hr && <SearchHR />}
                 <DetailCard
                   logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                   jobDetail={jobDetail}
@@ -239,7 +267,7 @@ const Home = (props) => {
               </div>
             </Grid>
           </>
-        }
+        )}
       </Grid>
     </>
   );

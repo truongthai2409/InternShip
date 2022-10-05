@@ -56,7 +56,6 @@ const ProfileForm = ({ profile }) => {
     };
     dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
   };
-  console.log();
 
 
   return (
@@ -113,8 +112,9 @@ const ProfileForm = ({ profile }) => {
               id="gender"
               register={register}
               label="Giới tính"
-              defaultValue={parseInt(profile?.user?.gender)}
+              defaultValue={profile?.user?.gender}
               options={genderList}
+              placeholder="Vui lòng chọn"
             >
               {errors.gender?.message}
             </SelectCustom>

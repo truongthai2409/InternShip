@@ -37,7 +37,7 @@ const HRInfo = () => {
       navigate("/home");
       dispatch(updateStatusRegisterForHR("idleRegister"));
     }
-  }, [statusRegister]);
+  }, [statusRegister, dispatch]);
 
   const onSubmit = async (data) => {
     const hrData = {

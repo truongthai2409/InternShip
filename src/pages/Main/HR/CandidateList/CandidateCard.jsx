@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { toast } from "react-toastify";
+const BASEURL = process.env.REACT_APP_API
 export const CandidateCard = ({
   avatar = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg",
   candidate,
@@ -45,7 +46,9 @@ export const CandidateCard = ({
             </div>
             <img
               style={{ width: "100%", height: "100%", padding: "2rem 4rem" }}
-              src={`http://103.48.192.239:8085/${numberCV.cv}`}
+              src={`
+              ${BASEURL}/${numberCV.cv}`}
+              alt='avatar'
             ></img>
           </div>
         }
@@ -54,6 +57,7 @@ export const CandidateCard = ({
   };
   const addFavorite = (e) => {
     setClick(!click);
+    // eslint-disable-next-line no-lone-blocks
     {
       click
         ? toast.success("Đã thêm ứng viên vào yêu thích")
@@ -70,7 +74,7 @@ export const CandidateCard = ({
         />
         <div className="candidate-card__infor">
           <div className="row">
-            <h2 className="candidate-card__infor-name">{`${candidate?.user?.lastName} ${candidate?.user?.firstName}`}</h2>
+            <h2 className="candidate-card__infor-name">{`${candidate?.hr?.user?.lastName} ${candidate?.hr?.user?.firstName}`}</h2>
           </div>
           <p className="candidate-card__infor-item">
             <span>Chuyên ngành:</span>
@@ -78,11 +82,11 @@ export const CandidateCard = ({
           </p>
           <p className="candidate-card__infor-item">
             <span>Số điện thoại:</span>
-            {`${candidate?.user?.phone}`}
+            {`${candidate?.hr?.user?.phone}`}
           </p>
           <p className="candidate-card__infor-item">
             <span>Email:</span>
-            {`${candidate?.user?.email}`}
+            {`${candidate?.hr?.user?.email}`}
           </p>
         </div>
         <div className="candidate-card__actions">
