@@ -45,7 +45,8 @@ const CardPost = (props) => {
         id: 4,
       },
     };
-    dispatch(updateStatusJob([props.idJob, jobData]));
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))
+    dispatch(updateStatusJob([props.idJob, jobData, user]));
     setOpen(false);
   };
 

@@ -120,16 +120,17 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
           id: parseInt(data.major),
         },
         position: {
-          id: parseInt(data.jobPosition),
+          id: parseInt(data.jobPosition) || null,
         },
         jobType: {
-          id: parseInt(data.jobType),
+          id: parseInt(data.jobType) || null,
         },
         amount: parseInt(data.amount),
       }),
       fileSV: data.fileSV,
     };
-    dispatch(addDemand(demandData));
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))
+    dispatch(addDemand([demandData, user]));
   };
 
   if (status === "success") {
@@ -168,6 +169,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   placeholder="Vui lòng chọn..."
                   options={jobPosition}
                   register={register}
+                  requirementField={false}
                 >
                   {errors.jobPosition?.message}
                 </SelectCustom>
@@ -193,6 +195,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   defaultValue={demandDetail?.jobType?.id}
                   options={jobTypeList}
                   register={register}
+                  requirementField={false}
                 >
                   {errors.jobType?.message}
                 </SelectCustom>

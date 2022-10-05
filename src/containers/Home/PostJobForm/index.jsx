@@ -50,6 +50,7 @@ const countryList = [
 ];
 
 const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
+  
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
@@ -61,18 +62,18 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const [isNoSalary, setIsNoSalary] = useState(
     jobDetail ? jobDetail.salaryMax === 0 && true : false
   );
-
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
-  }, []);
-
+  }, [dispatch]);
+  
   useEffect(() => {
     if (formStatus !== "post") {
       dispatch(getDistrictList(jobDetail?.locationjob?.district?.province?.id));
     }
-  }, []);
+  }, [dispatch, formStatus, jobDetail?.locationjob?.district?.province?.id]);
+
 
   useEffect(() => {
     if (formStatus !== "post") {
@@ -197,7 +198,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       if (formStatus === "repost") {
         dispatch(addJob([jobData, "repost"]));
       } else if (formStatus === "update") {
-        dispatch(updateJob([jobDetail.id, jobData]));
+        const user = JSON.parse(sessionStorage.getItem("userPresent"))
+        dispatch(updateJob([jobDetail.id, jobData, user]));
       }
       setOpen(false);
     }

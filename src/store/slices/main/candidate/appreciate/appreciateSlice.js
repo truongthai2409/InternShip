@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const baseURL = process.env.REACT_APP_API;
+const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token;
 
 const appreciateSlice = createSlice({
   name: "appreciate",
@@ -29,8 +30,16 @@ const appreciateSlice = createSlice({
 export const getAppreciateByCompany = createAsyncThunk(
   "appreciate/getAppreciateByCompany",
   async (idCompany = 1) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + user,
+      },
+    };
     return axios
-      .get(`${baseURL}/api/r2s/rate/company/${idCompany}/?no=0&limit=10`)
+      .get(
+        `${baseURL}/api/r2s/rate/company/${idCompany}/?no=0&limit=10`,
+        header
+      )
       .then((response) => {
         return response.data;
       })
@@ -43,8 +52,14 @@ export const getAppreciateByCompany = createAsyncThunk(
 export const addAppreciate = createAsyncThunk(
   "appreciate/addAppreciate",
   async (data) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + user,
+    };
     const res = await axios
-      .post(`${baseURL}/api/r2s/rate`, data)
+      .post(`${baseURL}/api/r2s/rate`, data, {
+        headers : headers
+      })
       .then((res) => {
         return res;
       })
@@ -58,8 +73,15 @@ export const addAppreciate = createAsyncThunk(
 export const updateAppreciate = createAsyncThunk(
   "appreciate/updateAppreciate",
   async (data) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + user,
+    };
+
     const res = await axios
-      .put(`${baseURL}/api/r2s/rate/${data.id}`, data.avaluateData)
+      .put(`${baseURL}/api/r2s/rate/${data.id}`, data.avaluateData, {
+        headers: headers,
+      })
 
       .then((res) => {
         return res;
@@ -74,8 +96,19 @@ export const updateAppreciate = createAsyncThunk(
 export const deleteAppreciate = createAsyncThunk(
   "appreciate/deleteAppreciate",
   async (id) => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + user,
+    };
+
     const res = await axios
-      .delete(`${baseURL}/api/r2s/rate/${id}`)
+      .delete(
+        `${baseURL}/api/r2s/rate/${id}`,
+
+        {
+          headers: headers,
+        }
+      )
       .then((res) => {
         return res;
       })

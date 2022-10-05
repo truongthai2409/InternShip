@@ -22,9 +22,9 @@ export default function SelectCustom({
     return options.map((item) => {
       return (
         <MenuItem
-          // onClick={() => {
-          //   handleChangeLocation(item.id);
-          // }}
+          onClick={() => {
+            handleChangeLocation(item.id);
+          }}
           value={item.id}
           key={item.id}
         >

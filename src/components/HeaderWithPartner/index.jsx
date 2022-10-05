@@ -12,7 +12,7 @@ function HeaderWithPartner(props) {
       <div className="header__partner">
         <Link to="/partner/post" className="header__partner-post">
           <AddCardIcon sx={{ color: "#04bf8a" }}></AddCardIcon>
-          <span className="header__partner-post-post">Đăng tuyển</span>
+          <span className="header__partner-post-post">Đăng bài</span>
         </Link>
         <Link to="/partner/post-list" className="header__partner-post">
           <FormatAlignJustifyIcon

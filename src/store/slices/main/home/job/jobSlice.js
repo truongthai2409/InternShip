@@ -313,7 +313,9 @@ export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
     return axios
-      .put(`http://localhost:8085/api/r2s/admin/job/status/${args[0]}`, args[1])
+      .put(`${baseURL}/api/r2s/job/status/${args[0]}`, args[1], {
+        headers : "Bearer " + args[2].token
+      })
       .then((response) => {
         return response.data;
       })
@@ -330,8 +332,11 @@ export const updateStatusJob = createAsyncThunk(
  * args[1] : infor of job
  */
 export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
+  console.log(args)
   const res = await axios
-    .put(`http://localhost:8085/api/r2s/job/${args[0]}`, args[1])
+    .put(`${baseURL}/api/r2s/job/${args[0]}`, args[1], {
+      headers : "Bearer " + args.token
+    })
     .then((response) => {
       return response.data;
     })

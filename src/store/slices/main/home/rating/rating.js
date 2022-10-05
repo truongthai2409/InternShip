@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_API;
-
+const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token
 const ratingSlice = createSlice({
   name: "rating",
   initialState: {
@@ -23,8 +23,13 @@ const ratingSlice = createSlice({
 export const getRatingCompany = createAsyncThunk(
   "rating/getRatingCompany",
   async (idCompany = 1) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + user,
+    },
+    }
     return axios
-      .get(`${baseURL}/api/r2s/rate/company/${idCompany}?no=0&limit=5`)
+      .get(`${baseURL}/api/r2s/rate/company/${idCompany}?no=0&limit=5`, header)
       .then((res) => {
         return res.data;
       })

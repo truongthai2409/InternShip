@@ -188,14 +188,15 @@ const InformationCompany = ({
               </Typography>
             </div>
           </div>
+          {profile?.user?.role?.name==="Role_Candidate" ? 
           <div className="detail__card-5">
-            <Button
-              name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
-              onClick={handleAddJob}
-              disabled={check ? true : false}
-              bheight="35px"
-            ></Button>
-          </div>
+          <Button
+            name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
+            onClick={handleAddJob}
+            disabled={check ? true : false}
+            bheight="35px"
+          ></Button>
+        </div> : ""}
         </>
       )}
       {jobDetailById && (

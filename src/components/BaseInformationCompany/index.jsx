@@ -127,7 +127,7 @@ const BaseInformationCompany = ({
   const rating = (res / data?.length).toFixed(2);
 
   const handleOpen = () => {
-    if (profile.token) {
+    if (profile?.user?.id) {
       setOpen(true);
       reset();
     } else {
@@ -159,7 +159,7 @@ const BaseInformationCompany = ({
         toast.success("Đã đăng đánh giá", {});
       } else {
         toast.error(
-          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại"
+          res.payload.message
         );
       }
     } catch (error) {

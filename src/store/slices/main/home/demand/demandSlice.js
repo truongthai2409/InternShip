@@ -97,10 +97,12 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
     headers: {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + data[1].token,
+
     },
   };
   return axios
-    .post(`${baseURL}/api/r2s/partner/demand`, data, axiosConfig)
+    .post(`${baseURL}/api/r2s/partner/demand`, data[0], axiosConfig)
     .then((res) => {
       return res.data;
     })
