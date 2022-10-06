@@ -9,6 +9,9 @@
     font-size: 20px;
   }
 
+  &.null{
+    height: auto;
+  }
 
   .pagination__wrapper {
     position: absolute;
@@ -17,9 +20,6 @@
     justify-content: center;
   }
 
-  &.none-list {
-    height: 145px !important;
-  }
 }
 
 .dialog-title__list-candidate {

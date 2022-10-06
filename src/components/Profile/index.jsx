@@ -9,8 +9,7 @@ import ProfileForm from 'src/containers/Home/ProfileForm'
 import ProfileContainer from "./ProfileContainer";
 import "./styles.scss";
 import "./reponsive.scss"
-import { useState } from "react";
-import { useEffect } from "react";
+
 
 const Profile = () => {
   const user = JSON.parse(sessionStorage.getItem("userPresent")).role;

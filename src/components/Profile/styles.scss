@@ -240,7 +240,11 @@
 .profiles {
   .profile_header {
     background: #4ecdc4; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #556270, #4ecdc4); /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(
+      to right,
+      #556270,
+      #4ecdc4
+    ); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
       to right,
       #556270,
@@ -279,22 +283,33 @@
         padding: 0 2rem;
       }
     }
+    .profile_handle {
+      display: flex;
+      // gap: 1.5rem;
+      margin: 1rem 0;
+      flex-direction: column;
+      .profile_children_handle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: $primary-color;
+
+        > a {
+          color: $primary-color;
+        }
+      }
+
+      .profile_name {
+      }
+      .profile_username {
+        margin-bottom: 1rem;
+      }
+    }
     .profile_info {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      .profile_handle {
-        display: flex;
-        // gap: 1.5rem;
-        margin: 1rem 0;
-        flex-direction: column;
-        .profile_children_handle {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-        }
-      }
       .profile_content {
         margin-top: 0.3rem;
         padding: 0 2rem;
@@ -305,11 +320,6 @@
         .profile_content_name {
           font-weight: bold;
         }
-      }
-      .profile_name {
-      }
-      .profile_username {
-        margin-bottom: 1rem;
       }
     }
   }

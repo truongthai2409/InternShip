@@ -3,7 +3,7 @@ import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
-import PaginationCustome from "src/components/Pagination";
+import PaginationCustom from "src/components/Pagination";
 import RatingJob from "../RatingJob";
 import { useEffect } from "react";
 
@@ -102,7 +102,7 @@ const ListCardJobHome = ({
             justifyContent: "center",
           }}
         >
-          <PaginationCustome
+          <PaginationCustom
             page={page}
             totalPages={jobListHavePages?.totalPages}
             handleOnChange={handlePagination}
