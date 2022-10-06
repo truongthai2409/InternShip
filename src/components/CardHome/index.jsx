@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import TagName from "../TagName";
 import "./styles.scss";
 import Rating from "@mui/material/Rating";
@@ -30,44 +30,25 @@ const CardHome = (props) => {
 
   const { profile } = useSelector((state) => state.user);
 
-  const user = JSON.parse(sessionStorage.getItem("userPresent"));
-
-  let isMark =
-    careListOfPrivate &&
-    careListOfPrivate.filter((job) => job?.jobCare?.id === props?.id);
+  let isMark = careListOfPrivate.filter(
+    (job) => job?.jobCare?.id === props?.id
+  );
 
   const isMarkLength = isMark && isMark.length > 0 ? true : false;
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
     const dataGetMarkByUser = {
-      userName: profile?.user?.username,
+      userName: user?.username,
       page: {
         no: 0,
         limit: limit,
       },
     };
-    if (profile?.user?.role?.name === "Role_Candidate") {
-      dispatch(getMarkByUser(dataGetMarkByUser));
+    if (user?.role === "Role_Candidate") {
+      dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
     }
-  }, [
-    dispatch,
-    profile.role,
-    profile?.user?.role?.name,
-    profile?.user?.username,
-  ]);
-
-  React.useEffect(() => {
-    const dataGetMarkByUser = {
-      userName: profile?.user?.username,
-      page: {
-        no: props.page - 1,
-        limit: limit,
-      },
-    };
-    if (profile?.user?.role?.name === "Role_Candidate") {
-      dispatch(getMarkByUser(dataGetMarkByUser));
-    }
-  }, [dispatch, profile.role, profile?.user?.role?.name, profile?.user?.username, props.page]);
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (props.index === 0) {
@@ -144,7 +125,7 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.role?.includes("Role_Candidate") ? (
+            {profile?.user?.role?.name?.includes("Role_Candidate") ? (
               <ButtonMark
                 height="32px"
                 width="32px"

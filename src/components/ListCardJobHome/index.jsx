@@ -34,6 +34,7 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
+              jobList={jobList}
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
@@ -70,7 +71,7 @@ const ListCardJobHome = ({
               ]}
               location={
                 job.locationjob?.district?.province?.name ||
-                job?.universityDTO?.name ||
+                job?.universityDTO?.locations[0]?.district?.province?.name ||
                 job?.jobApp?.locationjob?.district?.province?.name ||
                 job?.jobCare?.locationjob?.district?.province?.name
               }

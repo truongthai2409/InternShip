@@ -5,6 +5,8 @@ import Main from "src/pages/Main";
 import NotFound from "src/pages/NotFound";
 import DetailHome from "../../pages/Main/DetailHome";
 import CommingSoon from 'src/pages/Main/Home/CommingSoon'
+import AboutUS from "src/components/Footer/FooterChildren/AboutUs";
+import Contact from "src/components/Footer/FooterChildren/Contact";
 const mainRouter = [
     {
         path: "/",
@@ -21,6 +23,14 @@ const mainRouter = [
             {
                 path: "/candidate/information_company/:keyword",
                 Component: CandidateInformationCompany,
+            },
+            {
+                path: "/about-us",
+                Component : AboutUS,
+            },
+            {
+                path : "/contact",
+                Component : Contact,
             }
         ],
     },

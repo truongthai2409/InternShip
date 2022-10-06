@@ -177,3 +177,20 @@
     flex-direction: column;
   }
 }
+.footer_components {
+  background-color: #fff;
+  min-height: 70vh;
+  margin : 2rem 10vw;
+  .footer_title {
+    text-align: center;
+    padding: 1rem;
+    color: #00B074;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  .footer_children {
+    padding: 1.5rem 3rem;
+    font-size: 20px;
+    font-weight: 400;
+  }
+}

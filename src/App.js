@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import router from './config/routes/index';
 import Loading from "./Loading";
-import { AuthenticationPathUrl } from "./utils/GeneralFunctions";
+
 function App() {
 
   return (
@@ -24,7 +24,6 @@ function App() {
             })
           })}
         </Routes>
-        <AuthenticationPathUrl />
       </Router>
       <Loading />
       <ToastContainer />

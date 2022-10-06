@@ -9,7 +9,6 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 import { ListDemand } from "./ListDemand";
 import "./styles.scss";
 
-import { useNavigate } from "react-router-dom";
 import PaginationCustom from "src/components/Pagination";
 import StatisticUser from "src/components/StatisticUser";
 
@@ -51,22 +50,23 @@ const PartnerPostList = (props) => {
   TabTitle("Danh sách bài đăng | IT Internship JOBS");
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { activeUser } = useSelector((state) => state.university);
   const handleChange = (event, newValue) => setValue(newValue);
   const { demandListUniversity, demandListUniversityActive } = useSelector(
     (state) => state.demand
   );
 
-
+    console.log(demandListUniversity )
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
+  
 
-  const handlePaginate = (page) => {
-    setCurrentPage(parseInt(page));
-    // window.scroll(0, 0);
+  const handlePaginate = (e, valuePage) => {
+    setCurrentPage(parseInt(valuePage));
+    window.scroll(0, 0);
   };
-
+  
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
@@ -75,7 +75,6 @@ const PartnerPostList = (props) => {
   useEffect(() => {
     dispatch(getPartnerByUserID(userPresent.idUser));
   }, [dispatch, userPresent.idUser]);
-
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">
@@ -147,12 +146,12 @@ const PartnerPostList = (props) => {
           </TabPanel>
 
           {/* nếu số trang lớn hơn 1 thì hiển thị UI pagination  */}
-          {currentPage > 1 ? (
+          {demandListUniversity?.totalPages > 1 ? (
             <div className="partner-postList__pagination">
               <PaginationCustom
                 page={currentPage}
                 totalPages={demandListUniversity?.totalPages}
-                hanldeOnChange={(e) => handlePaginate(e.target.textContent)}
+                handleOnChange={handlePaginate}
               />
             </div>
           ) : (

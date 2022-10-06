@@ -32,7 +32,6 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      console.log("payload", payload);
       if (payload.id) {
         state.user = payload;
         state.status = "success";
@@ -72,7 +71,6 @@ export const getUniversityList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
       .then((response) => {
-        console.log("call API:", response);
         return response.data;
       })
       .catch((error) => {

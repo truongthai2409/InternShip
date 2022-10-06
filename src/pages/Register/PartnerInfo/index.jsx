@@ -82,7 +82,11 @@ const PartnerInfo = () => {
       const partnerData = {
         avatar: data.avatar || info.logo,
         logo: data.logo,
-        university: info,
+        university: JSON.stringify({
+          id: 
+            info
+          
+        }),
         partner: JSON.stringify({
           position: data.position,
           userCreationDTO: {
@@ -193,7 +197,7 @@ const PartnerInfo = () => {
           ) : (
             ""
           )}
-          <div className="collap" >
+          <div className="collap">
             <Collap
               open={open}
               handleClick={handerClicker}
@@ -310,24 +314,24 @@ const PartnerInfo = () => {
                     </div>
                   </div>
                   <div className="register__container__form--name">
-                  <CustomInput
-                    label="Địa chỉ"
-                    id="address"
-                    type="text"
-                    placeholder="Vd. 254, Dương Đình Hội..."
-                    register={register}
-                  >
-                    {errors.address?.message}
-                  </CustomInput>
-                  <SelectCustom
-                    id="typeSchool"
-                    label="Loại hình"
-                    placeholder="Vui lòng chọn..."
-                    options={typeSchoolList}
-                    register={register}
-                  >
-                    {errors.typeSchool?.message}
-                  </SelectCustom>
+                    <CustomInput
+                      label="Địa chỉ"
+                      id="address"
+                      type="text"
+                      placeholder="Vd. 254, Dương Đình Hội..."
+                      register={register}
+                    >
+                      {errors.address?.message}
+                    </CustomInput>
+                    <SelectCustom
+                      id="typeSchool"
+                      label="Loại hình"
+                      placeholder="Vui lòng chọn..."
+                      options={typeSchoolList}
+                      register={register}
+                    >
+                      {errors.typeSchool?.message}
+                    </SelectCustom>
                   </div>
                 </>
               }

@@ -1,30 +1,30 @@
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Grid, Hidden } from "@mui/material";
 import { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import notfound from "src/assets/img/notfound.webp";
+import TemporaryDrawer from "src/components/Drawer";
 import {
   changeFilterChange,
   majorFilterChange,
-  nameFilterChange,
+  nameFilterChange
 } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import {
   indexFilterChange,
-  jobFilters,
+  jobFilters
 } from "src/store/slices/main/home/filter/filterSlices";
-import MenuIcon from '@mui/icons-material/Menu';
 import DetailCard from "../../../components/DetailCard";
 import ListCardJobHome from "../../../components/ListCardJobHome";
 import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
-  getJobPositionList,
+  getJobPositionList
 } from "../../../store/slices/main/home/job/jobSlice";
 import SearchHR from "../HR/SearchHR";
 import "./styles.scss";
-import notfound from "src/assets/img/notfound.webp";
-import TemporaryDrawer from "src/components/Drawer";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 const initialState = {
   type: [],
   position: [],
@@ -108,9 +108,14 @@ const Home = (props) => {
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
+    const userPartner = JSON.parse(sessionStorage.getItem("userPresent"));
+    if (userPartner && userPartner.role === "Role_HR") {
+      dispatch(indexFilterChange(0));
+      window.scroll(0, 0);
+      return dispatch(getDemandList({ currentPage: value, limit: 5 }));
+    }
     dispatcher({ type: "no", payload: value - 1 });
     dispatch(indexFilterChange(0));
-    window.scroll(0, 0);
   };
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
@@ -186,7 +191,7 @@ const Home = (props) => {
   return (
     <Grid
       className="wrapper"
-      sx={{ padding: "1rem 2rem", position :"relative" }}
+      sx={{ padding: "1rem 2rem", position: "relative" }}
       spacing={{ xs: 4 }}
       container
     >
@@ -272,18 +277,20 @@ const Home = (props) => {
               </Grid>
             </Hidden>
           </Grid>
-          <div className="HomePageMenu">
-            <TemporaryDrawer
-              children={
-                <SideBarHomeList
-                  onChange={handleCheck}
-                  slideBarHome__wrapper={true}
-                />
-              }
-              position="left"
-              name={<AddCircleIcon/>}
-            />
-          </div>
+          <Hidden lgUp>
+            <div className="HomePageMenu">
+              <TemporaryDrawer
+                children={
+                  <SideBarHomeList
+                    onChange={handleCheck}
+                    slideBarHome__wrapper={true}
+                  />
+                }
+                position="left"
+                name={<AddCircleIcon />}
+              />
+            </div>
+          </Hidden>
         </Grid>
       )}
     </Grid>
