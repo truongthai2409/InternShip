@@ -12,7 +12,8 @@ const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  }, [dispatch, id]);
+
+  }, [id]);
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
   }, [dispatch]);

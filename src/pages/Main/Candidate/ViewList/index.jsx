@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getJobCareByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 import { useState } from "react";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import { Hidden } from "@mui/material";
 
 const CandidateViewList = () => {
   TabTitle("Công việc quan tâm");
@@ -24,7 +25,14 @@ const CandidateViewList = () => {
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("userPresent"));
-    dispatch(getJobCareByCandidate(user));
+    const page = {
+      user : user,
+      page: {
+        no: 0,
+        limit: 5,
+      },
+    };
+    dispatch(getJobCareByCandidate(page));
   }, [dispatch]);
   useEffect(() => {
     setJobs(jobCare);
@@ -33,6 +41,17 @@ const CandidateViewList = () => {
   useEffect(() => {
     dispatch(getJobByCompany(id));
   }, [dispatch, id]);
+  const handleChange = (value) => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const page = {
+      user : user,
+      page: {
+        no: value - 1,
+        limit: 5,
+      },
+    };
+    dispatch(getJobCareByCandidate(page));
+  }
   return (
     <>
       <div className="apply__list--container">
@@ -49,18 +68,20 @@ const CandidateViewList = () => {
           </span>
         </div>
         <Grid className="wrapper" spacing={{ xs: 2 }} container>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
             <Grid container spacing={{ xs: 1 }}>
               <Grid item xs={12}>
                 <ListCardJobHome
                   jobList={jobs?.map((item) => {return item.jobCare})}
                   indexCardActive={index}
                   jobListHavePages={jobCareHavePage}
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={8}>
+          <Hidden mdDown>
+          <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
             <div style={{ height: "90%" }}>
               <DetailCard
                 logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
@@ -70,6 +91,7 @@ const CandidateViewList = () => {
               />
             </div>
           </Grid>
+          </Hidden>
         </Grid>
       </div>
     </>

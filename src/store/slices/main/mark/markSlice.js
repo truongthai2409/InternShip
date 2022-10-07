@@ -43,9 +43,9 @@ const markJobSlice = createSlice({
     });
   },
 });
-const user = JSON.parse(sessionStorage.getItem("userPresent"));
 
 export const getMark = createAsyncThunk("mark/getMark", async () => {
+  const user = JSON.parse(sessionStorage.getItem("userPresent"));
   const header = {
     headers: {
       Authorization: "Bearer " + user.token,
@@ -66,12 +66,12 @@ export const getMarkByUser = createAsyncThunk(
   async (data) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + user.token,
+        Authorization: "Bearer " + data[1],
       },
     };
-    return axios
+    return await axios
       .get(
-        `${baseURL}/api/r2s/carelist/user/${data.userName}?no=0&limit=20`,
+        `${baseURL}/api/r2s/carelist/user/${data[0].userName}?no=0&limit=20`,
         header
       )
       .then((response) => {
@@ -102,6 +102,7 @@ export const getJobByNameAndLocation = createAsyncThunk(
 export const getMarkByUserAndJob = createAsyncThunk(
   "mark/getMarkByUserAndJob",
   async (data) => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
     const { userName, idJob, page } = data;
     const header = {
       headers: {
@@ -146,11 +147,11 @@ export const getJobCandidateCaredByNameAndLocation = createAsyncThunk(
 export const createMark = createAsyncThunk("mark/createMark", async (data) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer " + user.token,
+    Authorization: "Bearer " + data[1].token,
   };
   const res = await axios
-    .post(`${baseURL}/api/r2s/carelist`, data, {
-      headers : headers
+    .post(`${baseURL}/api/r2s/carelist`, data[0], {
+      headers: headers,
     })
     .then((res) => {
       return res;
@@ -162,6 +163,7 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
 });
 
 export const deleteMark = createAsyncThunk("mark/deleteMark", async (data) => {
+  const user = JSON.parse(sessionStorage.getItem("userPresent"));
   const header = {
     headers: {
       Authorization: "Bearer " + user.token,

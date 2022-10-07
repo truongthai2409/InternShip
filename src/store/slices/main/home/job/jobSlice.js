@@ -144,7 +144,6 @@ const jobSlice = createSlice({
       });
     });
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
-
       state.listCandidatesApplied = payload.contents;
       state.totalPages = payload.totalPages;
       state.amountApplications = payload.totalItems;
@@ -308,14 +307,19 @@ export const getJobByCompany = createAsyncThunk(
  * para
  * args[0] : id job
  * args[1] : status
+ * args[2] : token
  */
 export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[2],
+      },
+    };
+    console.log("args", args[2]);
     return axios
-      .put(`${baseURL}/api/r2s/job/status/${args[0]}`, args[1], {
-        headers : "Bearer " + args[2].token
-      })
+      .put(`${baseURL}/api/job/status/${args[0]}`, args[1], header)
       .then((response) => {
         return response.data;
       })
@@ -330,13 +334,16 @@ export const updateStatusJob = createAsyncThunk(
  * para
  * args[0] : id job
  * args[1] : infor of job
+ * args[2] : token
  */
 export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
-  console.log(args)
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[2],
+    },
+  };
   const res = await axios
-    .put(`${baseURL}/api/r2s/job/${args[0]}`, args[1], {
-      headers : "Bearer " + args.token
-    })
+    .put(`${baseURL}/api/r2s/job/${args[0]}`, args[1], header)
     .then((response) => {
       return response.data;
     })
@@ -351,16 +358,24 @@ export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
  * para
  * args[0] : id job
  * args[1] : page
- * args[2] : amount of candidates in each time get
+ * args[2] : token
+ * args[3] : amount of candidates in each time get
  */
 export const getListCandidateApplied = createAsyncThunk(
   "job/getListCandidateApply",
   async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[2],
+      },
+    };
+    console.log("object", args[2]);
     return axios
       .get(
-        `${baseURL}/api/r2s/admin/candidate/job/${args[0]}?no=${
+        `${baseURL}/api/r2s/job/candidate/${args[0]}?no=${
           args[1] - 1
-        }&limit=${args[2]}`
+        }&limit=${args[3]}`,
+        header
       )
       .then((response) => {
         return response.data;

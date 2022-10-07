@@ -6,15 +6,15 @@ import AddressComponent from "./AddressComponent";
 
 const aboutUs = [
   {
-    link: "/comming-soon",
+    link: "/",
     content: "Trang chủ",
   },
   {
-    link: "/comming-soon",
+    link: "/about-us",
     content: "Về chúng tôi",
   },
   {
-    link: "/comming-soon",
+    link: "/contact",
     content: "Liên hệ",
   },
   {

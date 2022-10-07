@@ -122,13 +122,13 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               textOverflow: "ellipsis",
             }}
           >
-            {jobDetail?.universityDTO?.address || "Không có"}
+            {jobDetail?.universityDTO?.locations[0]?.district?.province?.name || "Không có"}
           </Typography>
         </div>
       </div>
-      <div className="detail__card-5">
+      {/* <div className="detail__card-5">
         <Button name="Ứng tuyển" onClick={handleApplyDemandUni} />
-      </div>
+      </div> */}
     </div>
   );
 };

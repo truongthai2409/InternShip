@@ -36,8 +36,14 @@ export const getCandidateById = createAsyncThunk(
 export const getCandidateByUserName = createAsyncThunk(
   "info_candidate/getCandidateByUserName",
   async (name) => {
+    const header = {
+      headers : {
+        Authorization: "Bearer " + name[1].token,
+      
+      }
+    }
     return axios
-      .get(`${baseURL}/api/applylist/candidate/user/${name}?no=0&limit=20`)
+      .get(`${baseURL}/api/applylist/candidate/user/${name[0]}?no=0&limit=20`,header)
       .then((response) => {
         return response.data;
       })

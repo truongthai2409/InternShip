@@ -29,7 +29,6 @@ const InformationCompany = ({
   const dispatch = useDispatch();
   const handleAddJob = async (e) => {
     e.stopPropagation();
-    console.log(profile)
     if (profile?.user?.id) {
       if (!profile?.cv) {
         toast.error("Bạn chưa có CV, vui lòng cập nhật");
@@ -47,7 +46,6 @@ const InformationCompany = ({
           fileCV: profile.cv,
         };
         const resApply = await dispatch(addApply(applyData));
-        console.log(resApply)
         if (resApply.payload.status === 200 || resApply.payload.status === 201) {
           toast.success("Đã nộp CV thành công");
           setCheck(true);

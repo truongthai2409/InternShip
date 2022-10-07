@@ -4,8 +4,8 @@ import CandidateCard from "./CandidateCard";
 import { getListCandidateApplied } from "src/store/slices/main/home/job/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Null from "src/components/Null";
-import PaginationCustome from "src/components/Pagination";
-import './reponsive.scss'
+import PaginationCustom from "src/components/Pagination";
+import "./reponsive.scss";
 const CandidateList = ({ idJob }) => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
@@ -13,15 +13,21 @@ const CandidateList = ({ idJob }) => {
     (state) => state.job
   );
 
+  const token = JSON.parse(sessionStorage.getItem("userPresent")).token;
   useEffect(() => {
-    dispatch(getListCandidateApplied([idJob, page, 3]));
+    dispatch(getListCandidateApplied([idJob, page, token, 3]));
   }, [page]);
 
   const hanldeOnChange = (e, value) => {
     setPage(value);
   };
+  console.log("object", listCandidatesApplied);
   return (
-    <div className={`${listCandidatesApplied?.length === 0 && "none-list"} candidate-list__wrapper`}>
+    <div
+      className={`${
+        listCandidatesApplied?.length === 0 && "null"
+      } candidate-list__wrapper`}
+    >
       {listCandidatesApplied?.length ? (
         listCandidatesApplied?.map((candidate) => {
           return <CandidateCard candidate={candidate} />;
@@ -36,12 +42,15 @@ const CandidateList = ({ idJob }) => {
           fw="400"
         />
       )}
-      {totalPages > 1 ?
-        <PaginationCustome
+      {totalPages > 1 ? (
+        <PaginationCustom
           page={page}
           totalPages={totalPages}
           hanldeOnChange={hanldeOnChange}
-        /> : ""}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

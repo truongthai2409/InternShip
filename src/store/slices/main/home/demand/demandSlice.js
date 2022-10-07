@@ -46,12 +46,8 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
-        state.demandList = payload.demandList;
-        state.totalPagesofDemandList = payload.totalPage;
-        if (payload.demandList?.length > 0) {
-          state.demandDetail = payload.demandList[0];
-        } else {
-        }
+        state.demandList = payload.contents;
+        state.totalPagesofDemandList = payload;
       });
     builder
       .addCase(getDemandByName.pending, (state, { payload }) => {
@@ -70,7 +66,6 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getDemandById.fulfilled, (state, { payload }) => {
-
         state.demandDetail = payload;
       });
     builder
@@ -98,7 +93,6 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
       "Content-Type": "multipart/form-data",
       "Access-Control-Allow-Origin": "*",
       Authorization: "Bearer " + data[1].token,
-
     },
   };
   return axios
@@ -184,22 +178,10 @@ export const getDemandById = createAsyncThunk(
 export const getDemandList = createAsyncThunk(
   "demand/getDemandList",
   async ({ currentPage, limit }) => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
     return await axios
-      .get(
-        `${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`,
-        axiosConfig
-      )
+      .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`)
       .then((response) => {
-        return {
-          demandList: response.data.contents,
-          totalPage: response.data.totalPages,
-        };
+        return response.data
       })
       .catch((err) => {
         return err.response.data;

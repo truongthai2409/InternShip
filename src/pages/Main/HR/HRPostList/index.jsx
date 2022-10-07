@@ -50,19 +50,29 @@ function a11yProps(index) {
 const HRPostList = (props) => {
   TabTitle("Công việc đang tuyển | IT Internship JOBS");
   const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    if (newValue === 0) {
-    } else if (newValue === 1) {
-    }
-  };
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
+
+  const handleChangeTab = (event, newValue) => {
+    setValue(newValue);
+    setPage(1);
+  };
+
+  const handleChangePage = (e, value) => {
+    setPage(value);
+  };
+
+  const { jobListActived, jobListDisabled, totalPages } = useSelector(
+    (state) => state.job
+  );
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
-    dispatch(getActivedJobListByUserId([userPresent.idUser, 1, 5]));
-    dispatch(getDisabledJobListByUserId([userPresent.idUser, 1, 5]));
-  }, []);
+    if (value === 0) {
+      dispatch(getActivedJobListByUserId([userPresent.idUser, page, 5]));
+    } else {
+      dispatch(getDisabledJobListByUserId([userPresent.idUser, page, 5]));
+    }
+  }, [value, page]);
 
   return (
     <div className="hr-post__wrapper">
@@ -82,7 +92,9 @@ const HRPostList = (props) => {
           <StatisticUser
             title="Trạng thái đăng tuyển"
             firstObject={{
-              score: jobListActived?.filter(sp=>sp.status.name.includes("Active")).length,
+              score: jobListActived?.filter((sp) =>
+                sp.status.name.includes("Active")
+              ).length,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
@@ -96,7 +108,7 @@ const HRPostList = (props) => {
           <Box className="filter-panel-home__filterPanel" sx={{}}>
             <Tabs
               value={value}
-              onChange={handleChange}
+              onChange={handleChangeTab}
               sx={{
                 "& button": {
                   fontSize: "14px !important",
@@ -125,7 +137,9 @@ const HRPostList = (props) => {
 
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListJob
-              listJob={jobListActived?.filter(sp=>sp.status?.name?.includes("Active"))}
+              listJob={jobListActived?.filter((sp) =>
+                sp.status?.name?.includes("Active")
+              )}
               message="Không có công việc nào đang đăng tuyển."
               isDisabled={false}
             />
@@ -140,7 +154,16 @@ const HRPostList = (props) => {
         </Box>
       </div>
       <div className="pagination__wrapper">
-        <PaginationCustom className="pagination" />
+        {totalPages > 1 ? (
+          <PaginationCustom
+            className="pagination"
+            totalPages={totalPages}
+            handleOnChange={handleChangePage}
+            page={page}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

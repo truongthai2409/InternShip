@@ -27,11 +27,14 @@ const ButtonMark = (props) => {
   // get global state from redux store
   const { profile } = useSelector((state) => state.user);
   useEffect(() => {
-    profile?.user?.username !== undefined &&
-      dispatch(getCandidateByUserName(profile?.user?.username));
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    if (user?.username !== undefined) {
+      dispatch(getCandidateByUserName([profile?.user?.username, user]));
+    }
   }, [dispatch, profile?.user?.username]);
 
   const handleClickMarkJob = async (e) => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
     e.stopPropagation();
 
     const dataGetMarkByUser = {
@@ -52,17 +55,14 @@ const ButtonMark = (props) => {
         note: "Đây là công việc ưa thích của mình",
       };
 
-      await dispatch(createMark(dataCareList));
-      await dispatch(getMarkByUser(dataGetMarkByUser));
+      await dispatch(createMark([dataCareList, user]));
+      await dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
       setMark(!mark);
       toast.success("Đã lưu việc làm thành công");
     } else {
-      if (
-        profile?.user?.role?.name !== undefined &&
-        profile?.user?.role?.name === "Role_Candidate"
-      ) {
+      if (user?.role !== undefined && user?.role === "Role_Candidate") {
         const dataByUserAndJob = {
-          userName: profile?.user?.username,
+          userName: user?.username,
           idJob: Number(props.jobId),
           page: {
             no: 0,
@@ -70,8 +70,8 @@ const ButtonMark = (props) => {
           },
         };
         const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
-        await dispatch(deleteMark(res.payload.id));
-        await dispatch(getMarkByUser(dataGetMarkByUser));
+        await dispatch(deleteMark(res?.payload?.id));
+        await dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
         setMark(false);
         toast.success("Đã hủy lưu việc làm ");
       }

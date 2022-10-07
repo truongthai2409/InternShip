@@ -47,19 +47,6 @@ const Components = ({ profile }) => {
       case 2: {
         return setOpen(!open);
       }
-      case 3: {
-        return (
-          // eslint-disable-next-line jsx-a11y/anchor-has-content
-          <a
-            id="downloadLink"
-            href={`${BASEURL}${profile?.cv}`}
-            target="_blank"
-            type="application/octet-stream"
-            download={`${BASEURL}${profile?.cv}`}
-            rel="noreferrer"
-          ></a>
-        );
-      }
       default:
         break;
     }
@@ -112,7 +99,7 @@ const Components = ({ profile }) => {
             >
               <div className="profile_children_handle">
                 <Tooltip title="Thay Đổi CV">
-                  <CachedRoundedIcon onClick={() => handleClick(1)} />
+                  <CachedRoundedIcon className="icon-action" onClick={() => handleClick(1)} />
                 </Tooltip>
                 <Modal
                   modalTitle={"Thay đổi CV"}
@@ -150,35 +137,34 @@ const Components = ({ profile }) => {
                 className="profile_children_handle"
                 style={{ padding: "0 2rem" }}
               >
-                <Tooltip title="Xem CV">
+                {/* <Tooltip title="Xem CV">
                   <RemoveRedEyeIcon onClick={() => handleClick(2)} />
-                </Tooltip>
-                <Modal
-                  modalTitle={"Xem CV"}
-                  open={open}
-                  setOpen={setOpen}
-                  children={
-                    <form
-                      onChange={handleChange}
-                      style={{
-                        width: "1200px",
-                        height: "1200px",
-                      }}
-                    >
-                      <embed
-                        src={`https://drive.google.com/viewerng/viewer?embedded=true&url=${BASEURL}${profile.cv}`}
-                        width="50%"
-                        height="100%"
-                      ></embed>
-                    </form>
-                  }
-                  name="Xem CV"
-                  iconClose={<SyncAltIcon />}
-                />
+                </Tooltip> */}
+                <a
+                  id="downloadLink"
+                  href={`${profile?.cv}`}
+                  target="_blank"
+                  type="application/octet-stream"
+                  // download={`${profile?.cv}`}
+                  download
+                  rel="noreferrer"
+                >
+                  <RemoveRedEyeIcon />
+                </a>
               </div>
               <div className="profile_children_handle">
                 <Tooltip title="Tải CV">
-                  <CloudDownloadRoundedIcon onClick={() => handleClick(3)} />
+                  <a
+                    id="downloadLink"
+                    href={`${profile?.cv}`}
+                    target="_blank"
+                    type="application/octet-stream"
+                    // download={`${profile?.cv}`}
+                    download
+                    rel="noreferrer"
+                  >
+                    <CloudDownloadRoundedIcon />
+                  </a>
                 </Tooltip>
               </div>
             </div>

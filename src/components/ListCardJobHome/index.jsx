@@ -3,7 +3,7 @@ import CardHome from "../CardHome";
 import moment from "moment";
 import "./styles.scss";
 import { useLocation } from "react-router-dom";
-import PaginationCustome from "src/components/Pagination";
+import PaginationCustom from "src/components/Pagination";
 import RatingJob from "../RatingJob";
 import { useEffect } from "react";
 
@@ -34,6 +34,7 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
+              jobList={jobList}
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
@@ -70,7 +71,7 @@ const ListCardJobHome = ({
               ]}
               location={
                 job.locationjob?.district?.province?.name ||
-                job?.universityDTO?.name ||
+                job?.universityDTO?.locations[0]?.district?.province?.name ||
                 job?.jobApp?.locationjob?.district?.province?.name ||
                 job?.jobCare?.locationjob?.district?.province?.name
               }
@@ -102,7 +103,7 @@ const ListCardJobHome = ({
             justifyContent: "center",
           }}
         >
-          <PaginationCustome
+          <PaginationCustom
             page={page}
             totalPages={jobListHavePages?.totalPages}
             handleOnChange={handlePagination}

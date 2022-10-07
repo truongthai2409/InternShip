@@ -33,7 +33,6 @@ const universitySlice = createSlice({
       state.status = "loading";
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
-      console.log("payload", payload);
       if (payload.id) {
         state.user = payload;
         state.status = "success";

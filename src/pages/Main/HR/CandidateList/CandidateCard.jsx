@@ -64,6 +64,7 @@ export const CandidateCard = ({
         : toast.warning("Xóa ứng viên khỏi yêu thích");
     }
   };
+  console.log("candidate", candidate)
   return (
     <>
       <div className="candidate-card__wrapper">
@@ -74,7 +75,7 @@ export const CandidateCard = ({
         />
         <div className="candidate-card__infor">
           <div className="row">
-            <h2 className="candidate-card__infor-name">{`${candidate?.hr?.user?.lastName} ${candidate?.hr?.user?.firstName}`}</h2>
+            <h2 className="candidate-card__infor-name">{`${candidate?.user?.lastName} ${candidate?.user?.firstName}`}</h2>
           </div>
           <p className="candidate-card__infor-item">
             <span>Chuyên ngành:</span>
@@ -82,11 +83,11 @@ export const CandidateCard = ({
           </p>
           <p className="candidate-card__infor-item">
             <span>Số điện thoại:</span>
-            {`${candidate?.hr?.user?.phone}`}
+            {`${candidate?.user?.phone}`}
           </p>
           <p className="candidate-card__infor-item">
             <span>Email:</span>
-            {`${candidate?.hr?.user?.email}`}
+            {`${candidate?.user?.email}`}
           </p>
         </div>
         <div className="candidate-card__actions">
