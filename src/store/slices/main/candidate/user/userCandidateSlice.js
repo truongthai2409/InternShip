@@ -8,32 +8,34 @@ const userCandidateSlice = createSlice({
     allUser: [],
     majors: "",
     names: "",
-    change: false
+    change: false,
   },
   reducers: {
     nameFilterChange: (state, action) => {
-      state.names = action.payload
+      state.names = action.payload;
     },
     majorFilterChange: (state, action) => {
-      state.majors = action.payload.name
+      state.majors = action.payload.name;
     },
     changeFilterChange: (state, action) => {
-        state.change = action.payload
-    }
+      state.change = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUserCandidate.fulfilled, (state, action) => {
       state.allUser = action.payload.contents;
     });
-
   },
 });
 
 export const getAllUserCandidate = createAsyncThunk(
   "user/getAllUserCandidate",
   async () => {
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
     return axios
-      .get(`${baseURL}/api/r2s/admin/candidate?no=0&limit=1000`)
+      .get(`${baseURL}/api/r2s/admin/candidate?no=0&limit=1000`, {
+        headers: "Bearer " + user.token,
+      })
       .then((response) => {
         return response.data;
       })
@@ -42,9 +44,6 @@ export const getAllUserCandidate = createAsyncThunk(
       });
   }
 );
-export const {
-  nameFilterChange,
-  majorFilterChange,
-  changeFilterChange
-} = userCandidateSlice.actions;
+export const { nameFilterChange, majorFilterChange, changeFilterChange } =
+  userCandidateSlice.actions;
 export default userCandidateSlice;

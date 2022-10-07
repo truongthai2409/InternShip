@@ -11,7 +11,7 @@ export const ImageUpload = ({
         <img
           src={
             img === ""
-              ? (imageCurrent ? `${BASEURL}${imageCurrent}` : "https://img.icons8.com/color/180/000000/image.png") 
+              ? (imageCurrent ? `${imageCurrent}` : "https://img.icons8.com/color/180/000000/image.png") 
               : img
           }
           alt=""

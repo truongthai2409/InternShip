@@ -100,7 +100,7 @@ const Component = ({ profile }) => {
           <UserInfo
             name="Chuyên Nghành"
             profile={
-              profile.major?.name
+              profile?.major?.name
             }
           />
           <UserInfo

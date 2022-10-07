@@ -13,6 +13,7 @@ import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./data";
+import { updateUser } from "src/store/slices/Admin/user/userSlice";
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
   const dispatch = useDispatch();
@@ -51,8 +52,27 @@ const Components = ({ profile }) => {
         break;
     }
   };
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"))
+    const profileData = {
+      candidate: JSON.stringify({
+        createUser: {
+          id: parseInt(userSessionStorage.idUser),
+          firstName: profile?.user?.firstName,
+          lastName: profile?.user?.lastName,
+          gender: parseInt(profile?.user?.gender),
+          phone: profile?.user?.phone,
+          email: profile?.user?.email,
+        },
+        major: {
+          id : profile?.major?.id,
+        }
+      }),
+      fileAvatar: profile?.user?.avatar || null,
+      fileCV:  data.cv,
+    };
+    await dispatch(updateUser([userSessionStorage, profileData]));
+    setOpens(!opens)
   };
   useEffect(() => {
     dispatch(getAllUserCandidate());
@@ -63,7 +83,7 @@ const Components = ({ profile }) => {
         <img
           style={{ width: 150, height: 150, borderRadius: "50%" }}
           src={
-            `${profile.user?.avatar}` ||
+            `${profile?.user?.avatar}` ||
             "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg"
           }
           onError={({ currentTarget }) => {
@@ -79,14 +99,14 @@ const Components = ({ profile }) => {
         <div style={{ textAlign: "center" }}>
           <div className="profile_name">
             <Typography variant="h6">
-              {profile?.user?.lastName} {profile.user?.firstName}
+              {profile?.user?.lastName} {profile?.user?.firstName}
             </Typography>
           </div>
           <div className="profile_username">
-            <h3>@{profile.user?.username}</h3>
+            <h3>@{profile?.user?.username}</h3>
           </div>
           <Divider style={{ padding: 8 }} />
-          {profile.user?.role?.id === 3 ? (
+          {profile?.user?.role?.id === 3 ? (
             <div
               className="profile_handle"
               style={{
@@ -120,7 +140,7 @@ const Components = ({ profile }) => {
                       <InputFile
                         label="CV"
                         requirementField={false}
-                        id="avatar"
+                        id="cv"
                         format="pdf"
                         setValue={setValue}
                         register={register}
@@ -173,7 +193,7 @@ const Components = ({ profile }) => {
           )}
         </div>
         <div>
-          {profile.user?.role?.id === 3 ? (
+          {profile?.user?.role?.id === 3 ? (
             <div className="profile_click">
               <div className="profile_check">
                 <Typography
@@ -220,14 +240,14 @@ const Components = ({ profile }) => {
         </div>
         <div className="profile_check"></div>
         <div className="profile_info">
-          <UserInfo name="Email" profile={profile.user?.email} />
-          <UserInfo name="Số Điện Thoại" profile={profile.user?.phone} />
+          <UserInfo name="Email" profile={profile?.user?.email} />
+          <UserInfo name="Số Điện Thoại" profile={profile?.user?.phone} />
           <UserInfo
             name="Vai Trò "
             profile={
-              profile.user?.role?.name === "Role_Candidate"
+              profile?.user?.role?.name === "Role_Candidate"
                 ? "Ứng Viên"
-                : profile.user?.role?.name === "Role_Hr"
+                : profile?.user?.role?.name === "Role_Hr"
                 ? "Nhà Tuyển Dụng"
                 : "Cộng Tác Viên"
             }
@@ -235,9 +255,9 @@ const Components = ({ profile }) => {
           <UserInfo
             name="Giới Tính"
             profile={
-              profile.user?.gender === 1
+              profile?.user?.gender === 1
                 ? "Nữ"
-                : profile.user?.gender === 0
+                : profile?.user?.gender === 0
                 ? "Nam"
                 : "Khác"
             }

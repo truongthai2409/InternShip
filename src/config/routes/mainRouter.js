@@ -7,6 +7,8 @@ import DetailHome from "../../pages/Main/DetailHome";
 import CommingSoon from 'src/pages/Main/Home/CommingSoon'
 import AboutUS from "src/components/Footer/FooterChildren/AboutUs";
 import Contact from "src/components/Footer/FooterChildren/Contact";
+import Help from "src/components/Footer/FooterChildren/Help";
+import PrivacyPolicy from "src/components/Footer/FooterChildren/PrivacyPolicy";
 const mainRouter = [
     {
         path: "/",
@@ -31,6 +33,14 @@ const mainRouter = [
             {
                 path : "/contact",
                 Component : Contact,
+            },
+            {
+                path : "/help",
+                Component : Help,
+            },
+            {
+                path : "privacy-policy",
+                Component : PrivacyPolicy
             }
         ],
     },

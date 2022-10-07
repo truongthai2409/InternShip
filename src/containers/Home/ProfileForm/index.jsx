@@ -24,6 +24,8 @@ const ProfileForm = ({ profile }) => {
   });
   const dispatch = useDispatch();
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const roleUser = userSessionStorage.role;
+  console.log(roleUser);
 
   useEffect(() => {
     setValue(
@@ -37,26 +39,71 @@ const ProfileForm = ({ profile }) => {
   }, [profile, setValue]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    const profileData = {
-      hr: JSON.stringify({
-        user: {
-          username: profile?.user?.username,
-          gender: parseInt(data.gender),
-          phone: data.phone,
-          email: profile?.user?.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          role: profile?.user?.role,
-        },
-        position: profile.position,
-        company: { id: profile.company?.id },
-      }),
-      fileAvatar: data.avatar,
-    };
-    dispatch(updateUser([profile.id, userSessionStorage.token, profileData]));
+    switch (roleUser) {
+      case "Role_HR": {
+        const profileData = {
+          hr: JSON.stringify({
+            user: {
+              username: profile?.user?.username,
+              gender: parseInt(data.gender),
+              phone: data.phone,
+              email: profile?.user?.email,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              role: profile?.user?.role,
+            },
+            position: profile.position,
+            company: { id: profile.company?.id },
+          }),
+          fileAvatar: data.avatar,
+        };
+        dispatch(updateUser([userSessionStorage, profileData, profile.id]));
+        break;
+      }
+      case "Role_Candidate": {
+        const profileData = {
+          candidate: JSON.stringify({
+            createUser: {
+              id: parseInt(userSessionStorage.idUser),
+              firstName: data.firstName,
+              lastName: data.lastName,
+              gender: parseInt(data.gender),
+              phone: data.phone,
+              email: profile?.user?.email,
+            },
+            major: {
+              id: profile.major.id,
+            },
+          }),
+          fileAvatar: data.avatar || null,
+          fileCV: profile.cv,
+        };
+        dispatch(updateUser([userSessionStorage, profileData]));
+        break;
+      }
+      case "Role_Partner": {
+        const profileData = {
+          partner : JSON.stringify({
+            id: parseInt(profile.id),
+            position: profile?.position,
+            userCreationDTO: {
+              username : profile.user.username, 
+              firstName: data.firstName,
+              lastName: data.lastName,
+              gender: parseInt(data.gender),
+              phone: data.phone,
+              email: profile?.user?.email,
+            },
+            // fileAvatar: data.avatar || null,
+          }),
+        };
+        dispatch(updateUser([userSessionStorage, profileData]));
+        break;
+      }
+      default:
+        break;
+    }
   };
-
 
   return (
     <>
@@ -75,7 +122,7 @@ const ProfileForm = ({ profile }) => {
               radius="2px"
               setValue={setValue}
               register={register}
-              imageCurrent={profile.user?.avatar}
+              imageCurrent={profile?.user?.avatar}
             >
               {errors.avatar?.message}
             </InputFile>

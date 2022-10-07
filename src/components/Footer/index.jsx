@@ -18,14 +18,14 @@ const aboutUs = [
     content: "Liên hệ",
   },
   {
-    link: "/comming-soon",
+    link: "/help",
     content: "Câu hỏi thường gặp",
   },
 ];
 
 const policy = [
   {
-    link: "/comming-soon",
+    link: "/privacy-policy",
     content: "Chính sách bảo mật",
   },
   {
