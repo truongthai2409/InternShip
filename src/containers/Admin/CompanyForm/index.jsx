@@ -28,7 +28,6 @@ const baseURL = process.env.REACT_APP_API;
 export default function CompanyForm(props) {
   const { isAdd } = props;
 
-  // get global state from redux store
   const { companyDetail, error } = useSelector((state) => state.company);
   const { provinceList, districtList } = useSelector((state) => state.location);
 
@@ -52,26 +51,21 @@ export default function CompanyForm(props) {
 
   // get company ID params from URL
   const { comid } = useParams();
+  console.log("comid", comid)
 
   useEffect(() => {
     dispatch(getProvinceList());
     // dispatch(getDistrictList(1));
   }, [dispatch]);
 
-  /**
-   * get company details
-   * @dependency  comid
-   */
   useEffect(() => {
     if (!isAdd) {
-      dispatch(getCompanyDetail(comid));
+      // dispatch(getCompanyDetail(comid));
+      dispatch(getCompanyDetail(1));
+
     }
   }, [isAdd, dispatch, comid]);
 
-  /**
-   * @dependency companyDetail
-   * isAdd ? "" : companyDetail
-   */
   useEffect(() => {
     if (!isAdd) {
       setImage(`${baseURL}${companyDetail.logo}`);
@@ -83,7 +77,6 @@ export default function CompanyForm(props) {
     setValue("tax", isAdd ? "" : companyDetail.tax);
     setValue("website", isAdd ? "" : companyDetail.website);
   }, [companyDetail]);
-
 
 
   // show preview image

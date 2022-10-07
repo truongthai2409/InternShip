@@ -13,6 +13,7 @@ const companySlice = createSlice({
     error: [],
     totalPages: 0,
     totalItems: 0,
+    onSearch: false
   },
   reducer: {},
   extraReducers: (builder) => {
@@ -31,6 +32,12 @@ const companySlice = createSlice({
       if (!payload?.data) {
         state.error = payload;
       }
+    });
+    builder.addCase(searchCompany.fulfilled, (state, { payload }) => {
+      state.companyList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
+      state.onSearch = true;
     });
   },
 });
@@ -186,7 +193,7 @@ export const searchCompany = createAsyncThunk("company/searchCompany", async (ar
     },
   };
   const res = await axios
-    .get(`${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]}`, header)
+    .get(`${baseURL}/api/r2s/admin/company/search?name=${args[0]}&no=${args[1] - 1}&limit=${args[2]}`, header)
     .then((res) => {
       return res;
     })

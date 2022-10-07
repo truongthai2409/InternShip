@@ -1,57 +1,57 @@
-import React, { useState } from 'react'
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { useDispatch } from "react-redux";
 
-import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
-import Modal from '../../../components/Modal'
-import CompanyForm from '../../../containers/Admin/CompanyForm'
-import CompanyTable from './CompanyTable'
-import { getCompanyList, searchCompany } from 'src/store/slices/Admin/company/companySlice';
+import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
+import Modal from "../../../components/Modal";
+import CompanyForm from "../../../containers/Admin/CompanyForm";
+import CompanyTable from "./CompanyTable";
+import {
+  getCompanyList,
+  searchCompany,
+} from "src/store/slices/Admin/company/companySlice";
 
 const selectOptions = [
   {
-    value: 'All',
-    name: 'All'
+    value: "All",
+    name: "All",
   },
   {
-    value: 'HR',
-    name: 'HR'
+    value: "HR",
+    name: "HR",
   },
   {
-    value: 'Candidate',
-    name: 'Candidate'
+    value: "Candidate",
+    name: "Candidate",
   },
   {
-    value: 'Partner',
-    name: 'Partner'
-  }
-]
+    value: "Partner",
+    name: "Partner",
+  },
+];
 
 export default function Company() {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
 
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  console.log("open",open)
 
   const handleSearch = () => {
-    if (searchValue === "") {
-      dispatch(getCompanyList([1, 10, userSessionStorage?.token]));
-    } else {
-      dispatch(searchCompany([searchValue, 1, 10, userSessionStorage?.token]));
-    }
-  }
+    dispatch(searchCompany([searchValue, 1, 10, userSessionStorage?.token]));
+  };
 
   const handleOpenModal = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   return (
     <>
       <HeaderContainer
         headerName="Quản lý công ty"
         placeholder="Tìm kiếm công ty..."
-        onchange={handleSearch}
+        onChange={(e) => setSearchValue(e.target.value)}
         selectName="role"
         selectOptions={selectOptions}
         btnName=""
@@ -59,10 +59,15 @@ export default function Company() {
         onClick={handleOpenModal}
         onSearch={handleSearch}
       />
-      <CompanyTable />
-      <Modal modalTitle="Thêm Công Ty" open={open} setOpen={setOpen}>
-        <CompanyForm isAdd={true} />
+      <CompanyTable searchValue={searchValue} />
+      <Modal
+        modalTitle="Thêm Công Ty"
+        open={open}
+        setOpen={setOpen}
+        iconClose={true}
+      >
+        <CompanyForm isAdd={true}/>
       </Modal>
     </>
-  )
+  );
 }

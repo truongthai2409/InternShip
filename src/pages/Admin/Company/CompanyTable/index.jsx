@@ -21,17 +21,12 @@ const CompanyTable = ({searchValue}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { companyList, totalPages, totalItems, onSearch } = useSelector(
+  const { companyList, totalPages, totalItems } = useSelector(
     (state) => state.company
   );
   
   useEffect(() => {
-    if (onSearch) {
       dispatch(searchCompany([searchValue, page, 10, userSessionStorage?.token]))
-    }
-    else {
-      dispatch(getCompanyList([page, 10, userSessionStorage?.token]));
-    }
   }, []);
 
   const columns = [

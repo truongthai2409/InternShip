@@ -1,56 +1,70 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
-import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
-import Modal from '../../../components/Modal'
-import UniversityTable from './UniversityTable'
-import UniversityForm from '../../../containers/Admin/UniversityForm'
+import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
+import Modal from "../../../components/Modal";
+import UniversityTable from "./UniversityTable";
+import UniversityForm from "../../../containers/Admin/UniversityForm";
+import { getUniversityList, searchUniversity } from "src/store/slices/Admin/university/unversitySlice";
 
 const selectOptions = [
   {
-    value: 'All',
-    name: 'All'
+    value: "All",
+    name: "All",
   },
   {
-    value: 'HR',
-    name: 'HR'
+    value: "HR",
+    name: "HR",
   },
   {
-    value: 'Candidate',
-    name: 'Candidate'
+    value: "Candidate",
+    name: "Candidate",
   },
   {
-    value: 'Partner',
-    name: 'Partner'
-  }
-]
+    value: "Partner",
+    name: "Partner",
+  },
+];
 
 export default function University() {
-  const [open, setOpen] = useState(false)
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState("");
 
-  const handleSearch = e => {}
+  const [open, setOpen] = useState(false);
+
+  const handleSearch = () => {
+    if (searchValue === "") {
+      dispatch(getUniversityList([1, 10]));
+    } else {
+      dispatch(searchUniversity([searchValue, 1, 10, userSessionStorage?.token]));
+    }
+  };
 
   const handleOpenModal = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   return (
     <>
       <HeaderContainer
         headerName="Quản lý trường học"
         placeholder="Tìm kiếm trường..."
-        onchange={handleSearch}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onSearch={handleSearch}
+        searchValue={searchValue}
         selectName="position"
         selectOptions={selectOptions}
         btnName="Thêm Uni"
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
       />
-      <UniversityTable />
+      <UniversityTable searchValue={searchValue} />
       <Modal modalTitle="Thêm trường" open={open} setOpen={setOpen}>
         <UniversityForm isAdd={true} />
       </Modal>
     </>
-  )
+  );
 }

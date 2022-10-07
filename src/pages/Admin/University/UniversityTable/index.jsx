@@ -8,20 +8,27 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 import DataTable from "../../../../components/Table";
-import { getUniversityList } from "../../../../store/slices/Admin/university/unversitySlice";
+import { getUniversityList, searchUniversity } from "../../../../store/slices/Admin/university/unversitySlice";
 import ProfileTable from "../../../../components/ProfileTable";
 
-const UniversityTable = () => {
+const UniversityTable = ({searchValue}) => {
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { universityList, totalPages, totalItems } = useSelector(
+  const { universityList, totalPages, totalItems, onSearch } = useSelector(
     (state) => state.university
   );
 
   useEffect(() => {
-    dispatch(getUniversityList([page, 10]));
+    if (onSearch) {
+      dispatch(searchUniversity([searchValue, page, 10, userSessionStorage?.token]))
+    }
+    else {
+      dispatch(getUniversityList([page, 10]));
+    }
   }, [page]);
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     {
@@ -43,7 +50,9 @@ const UniversityTable = () => {
       width: 120,
       renderCell: (params) => {
         const { row } = params;
-        const handleChangeStatus = (e) => {};
+        const handleChangeStatus = (e) => {
+          
+        };
         return (
           <select
             name={row.status}

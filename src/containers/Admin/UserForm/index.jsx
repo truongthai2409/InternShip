@@ -89,7 +89,7 @@ const UserForm = (props) => {
   };
 
   const onUpdate = async (data) => {
-    console.log("update");
+
     const userData = {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
@@ -107,7 +107,7 @@ const UserForm = (props) => {
         },
       }),
     };
-    console.log("userData", data);
+
     try {
       const res = await dispatch(
         adminUpdateUser([userData, userSessionStorage?.token])

@@ -312,11 +312,9 @@ export const adminUpdateUser = createAsyncThunk("user/adminUpdateUser", async (a
   const res = await axios
     .put(`${baseURL}/api/r2s/admin/user/edit`, args[0], header)
     .then((res) => {
-      console.log("res", res)
       return res;
     })
     .catch((err) => {
-      console.log("errrrrr", err)
       return err.response.data;
     });
   return res;

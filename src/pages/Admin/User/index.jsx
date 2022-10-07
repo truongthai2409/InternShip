@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./styles.scss";
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
 import Modal from "../../../components/Modal";

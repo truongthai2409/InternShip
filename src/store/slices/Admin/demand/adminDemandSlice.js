@@ -15,6 +15,7 @@ const demandSlice = createSlice({
     demand: {},
     totalPages: 0,
     totalItems: 0,
+    onSearch: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -33,6 +34,12 @@ const demandSlice = createSlice({
       state.demandList = payload.contents;
       state.totalPages = payload.totalPages;
       state.totalItems = payload.totalItems;
+    });
+    builder.addCase(searchDemand.fulfilled, (state, { payload }) => {
+      state.demandList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
+      state.onSearch = true;
     });
   },
 });
@@ -75,6 +82,24 @@ export const getAdminListDemand = createAsyncThunk(
     return res;
   }
 );
+
+export const searchDemand = createAsyncThunk("user/searchDemand", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[3],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await axios
+    .get(`${baseURL}/api/r2s/partner/demand/search/?name=${args[0]}&no=${args[1] - 1}&limit=${args[2]}`, header)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  return res;
+})
 
 export const { updateIdJobActive, updateIndexCardActive } = demandSlice.actions;
 export default demandSlice;

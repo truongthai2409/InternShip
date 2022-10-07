@@ -15,6 +15,7 @@ const universitySlice = createSlice({
     activeUser: {},
     totalPages: 0,
     totalItems: 0,
+    onSearch: false
   },
   reducers: {
     updateStatusPartner: (state, { payload }) => {
@@ -54,6 +55,12 @@ const universitySlice = createSlice({
     builder.addCase(getPartnerByUserID.fulfilled, (state, { payload }) => {
       state.activeUser = payload;
     });
+    builder.addCase(searchUniversity.fulfilled, (state, { payload }) => {
+      state.universityList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
+      state.onSearch = true;
+    });
   },
 });
 export const { updateStatusPartner } = universitySlice.actions;
@@ -72,7 +79,6 @@ export const getUniversityList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
       .then((response) => {
-        console.log("call API:", response);
         return response.data;
       })
       .catch((error) => {
@@ -170,3 +176,22 @@ export const updateUniversityInfo = createAsyncThunk(
       });
   }
 );
+
+export const searchUniversity = createAsyncThunk("university/searchUniversity", async (args) => {
+  const header = {
+    headers: {
+      Authorization: "Bearer " + args[3],
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await axios
+    .get(`${baseURL}/api/r2s/admin/university/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]}`, header)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+  return res;
+})
+
