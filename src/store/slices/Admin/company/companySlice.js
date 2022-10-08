@@ -147,6 +147,7 @@ export const updateCompanyInfo = createAsyncThunk(
         },
       })
       .then((response) => {
+        console.log(response.data)
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật công ty thành công")
         );

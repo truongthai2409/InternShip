@@ -152,25 +152,24 @@ export const getPartnerByUserID = createAsyncThunk(
  */
 export const updateUniversityInfo = createAsyncThunk(
   "university/updateUniversityInfo",
-  async (updateData, thunkAPI) => {
-    let axiosConfig = {
+  async (args, thunkAPI) => {
+    const header = {
       headers: {
+        Authorization: "Bearer " + args[1],
         "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
       },
     };
-    const { universityData, uniId } = updateData;
+    const { universityData, uniId } = args[0];
     return await axios
-      .put(`${baseURL}/api/university/${uniId}`, universityData, axiosConfig)
+      .put(`${baseURL}/api/r2s/admin/university/${uniId}`, universityData, header)
       .then((response) => {
+        console.log("response", response.data)
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật Trường thành công")
         );
-        // if (setIsEdit) {
-        //   setIsEdit(false);
-        // }
       })
       .catch((error) => {
+        console.log("error", error)
         return error.response.data;
       });
   }
@@ -194,3 +193,30 @@ export const searchUniversity = createAsyncThunk("university/searchUniversity", 
   return res;
 })
 
+export const deleteUniversity = createAsyncThunk(
+  "university/deleteUniversity",
+  async (args, thunkAPI) => {
+    console.log(args)
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return await axios
+      .delete(`${baseURL}/api/r2s/admin/university/${args[0]}`, header)
+      .then((response) => {
+        console.log(response)
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Xóa trường học thành công.")
+        );
+        return response.data;
+      })
+      .catch((error) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.errorMess("Xóa trường học không thành công.")
+        );
+        return error.response.data;
+      });
+  }
+);

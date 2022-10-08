@@ -8,10 +8,15 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 import DataTable from "../../../../components/Table";
-import { getUniversityList, searchUniversity } from "../../../../store/slices/Admin/university/unversitySlice";
+import {
+  deleteUniversity,
+  getUniversityList,
+  searchUniversity,
+  updateUniversityInfo,
+} from "../../../../store/slices/Admin/university/unversitySlice";
 import ProfileTable from "../../../../components/ProfileTable";
 
-const UniversityTable = ({searchValue}) => {
+const UniversityTable = ({ searchValue }) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,12 +24,12 @@ const UniversityTable = ({searchValue}) => {
   const { universityList, totalPages, totalItems, onSearch } = useSelector(
     (state) => state.university
   );
-
   useEffect(() => {
     if (onSearch) {
-      dispatch(searchUniversity([searchValue, page, 10, userSessionStorage?.token]))
-    }
-    else {
+      dispatch(
+        searchUniversity([searchValue, page, 10, userSessionStorage?.token])
+      );
+    } else {
       dispatch(getUniversityList([page, 10]));
     }
   }, [page]);
@@ -51,20 +56,39 @@ const UniversityTable = ({searchValue}) => {
       renderCell: (params) => {
         const { row } = params;
         const handleChangeStatus = (e) => {
-          
+          const updateData = {
+            universityData: {
+              university: JSON.stringify({
+                // description: row.description,
+                // email: row.email,
+                // // // logo: null,
+                // name: row.name,
+                // // phone: row.phone,
+                // shortName: row.shortName,
+                // website: row.website,
+                // status: {
+                //   id: parseInt(e.target.value),
+                // },
+              }),
+            },
+            uniId: row.id,
+          };
+          dispatch(updateUniversityInfo([updateData, userSessionStorage?.token])).then(() => {
+            dispatch(getUniversityList([page, 10, userSessionStorage?.token]))
+          })
         };
         return (
           <select
-            name={row.status}
-            id={row.status}
-            value={row.status || 0}
+            name="status"
+            id="status"
+            value={row.status.id}
             onChange={(e) => handleChangeStatus(e)}
             className="company-table__select"
           >
-            <option value={0}>Not verified</option>
+            <option value={2}>Not verified</option>
             <option value={1}>Active</option>
-            <option value={2}>Block</option>
-            <option value={3}>Disable</option>
+            <option value={3}>Block</option>
+            <option value={4}>Disable</option>
           </select>
         );
       },
@@ -79,13 +103,18 @@ const UniversityTable = ({searchValue}) => {
         const handleClick = () => {
           navigate(`/admin/university/${row.id}`);
         };
+        const handleDelete = () => {
+          dispatch(deleteUniversity([row.id, userSessionStorage?.token])).then(() => {
+            dispatch(getUniversityList([page, 10,userSessionStorage?.token]))
+          });
+        };
         return (
           <>
             <IconButton className="user-edit__button" onClick={handleClick}>
               <VisibilityOutlinedIcon />
             </IconButton>
             <Tooltip title="Xóa tài khoản">
-              <IconButton className="user-delete__button">
+              <IconButton className="user-delete__button" onClick={handleDelete}>
                 <DeleteForeverOutlinedIcon />
               </IconButton>
             </Tooltip>
