@@ -30,7 +30,7 @@ export const schema = yup
   .object({
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
     jobPosition: yup.string().notRequired(),
-    major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
+    major: yup.array().required(" * Bạn phải chọn chuyên ngành."),
     jobType: yup.string().notRequired(),
     timeStart: yup
       .date()
@@ -60,7 +60,6 @@ export const schema = yup
     fileSV: yup
       .mixed()
       .test("file", " * Yêu cầu có danh sách sinh viên.", (value) => {
-        console.log(value)
         if (value.name) {
           return value;
         } else {

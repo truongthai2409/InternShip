@@ -23,6 +23,8 @@ import Textarea from "src/components/Textarea";
 import moment from "moment";
 import { toast } from "react-toastify";
 import InputFile from "src/components/InputFile";
+import MultiSelect from "src/components/MultiSelect";
+import SelectMulti from "src/components/SelectMulti";
 
 const jobTypeList = [
   {
@@ -73,7 +75,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
     setOpenForm(!openForm);
   };
 
-
   const handleUseForm = () => {
     setUseSampleForm(!useSampleForm);
     setFormSample(SAMPLEFORM);
@@ -90,7 +91,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       setLoading(false);
     }
   }
-
   useEffect(() => {
     if (isUpdate) {
       setValue("jobName", demandDetail?.name);
@@ -103,7 +103,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       setValue("amount", demandDetail?.amount);
     }
   }, []);
-
   const onSubmit = (data) => {
     const demandData = {
       demand: JSON.stringify({
@@ -116,9 +115,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         partner: {
           id: parseInt(activeUser?.id),
         },
-        major: {
-          id: parseInt(data.major),
-        },
+        major: [data.major],
         position: {
           id: parseInt(data.jobPosition) || null,
         },
@@ -129,7 +126,8 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       }),
       fileSV: data.fileSV,
     };
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))
+    console.log(demandData);
+    const user = JSON.parse(sessionStorage.getItem("userPresent"));
     dispatch(addDemand([demandData, user]));
   };
 
@@ -175,15 +173,15 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 </SelectCustom>
               </div>
               <div className="partner-post__select">
-                <SelectCustom
+                <SelectMulti
                   id="major"
-                  label="Chuyên ngành"
-                  placeholder="Vui lòng chọn..."
-                  options={majorList}
+                  arrList={majorList}
                   register={register}
+                  title="Chuyên ngành"
+                  label="Chuyên ngành"
                 >
                   {errors.major?.message}
-                </SelectCustom>
+                </SelectMulti>
               </div>
             </div>
             <div className="row-2-col">
