@@ -26,11 +26,11 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
     (state) => state.user
   );
   useEffect(() => {
-    if (onSearch) {
-      dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]))
+    if (searchValue === "") {
+      dispatch(getUserList([page, 10, userSessionStorage?.token]));
     }
     else {
-      dispatch(getUserList([page, 10, userSessionStorage?.token]));
+      dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]))
     }
   }, [page, onSearch, dispatch, userSessionStorage?.token]);
 

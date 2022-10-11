@@ -15,7 +15,6 @@ const universitySlice = createSlice({
     activeUser: {},
     totalPages: 0,
     totalItems: 0,
-    onSearch: false
   },
   reducers: {
     updateStatusPartner: (state, { payload }) => {
@@ -24,7 +23,6 @@ const universitySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUniversityList.fulfilled, (state, { payload }) => {
-      // console.log(payload);
       state.universityList = payload.contents;
       state.totalPages = payload.totalPages;
       state.totalItems = payload.totalItems;
@@ -58,7 +56,6 @@ const universitySlice = createSlice({
       state.universityList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
-      state.onSearch = true;
     });
   },
 });
@@ -163,7 +160,6 @@ export const updateUniversityInfo = createAsyncThunk(
     return await axios
       .put(`${baseURL}/api/r2s/admin/university/${uniId}`, universityData, header)
       .then((response) => {
-        console.log("response", response.data)
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật Trường thành công")
         );
@@ -196,7 +192,6 @@ export const searchUniversity = createAsyncThunk("university/searchUniversity", 
 export const deleteUniversity = createAsyncThunk(
   "university/deleteUniversity",
   async (args, thunkAPI) => {
-    console.log(args)
     const header = {
       headers: {
         Authorization: "Bearer " + args[1],
@@ -206,7 +201,6 @@ export const deleteUniversity = createAsyncThunk(
     return await axios
       .delete(`${baseURL}/api/r2s/admin/university/${args[0]}`, header)
       .then((response) => {
-        console.log(response)
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Xóa trường học thành công.")
         );
@@ -216,6 +210,30 @@ export const deleteUniversity = createAsyncThunk(
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess("Xóa trường học không thành công.")
         );
+        return error.response.data;
+      });
+  }
+);
+
+export const updateUniversityStatus = createAsyncThunk(
+  "university/updateUniversityStatus",
+  async (args, thunkAPI) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "application/json",
+      },
+    };
+    const { university, uniId } = args[0];
+    return await axios
+      .put(`${baseURL}/api/r2s/admin/university/status/${uniId}`, university, header)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Cập nhật Trường thành công")
+        );
+      })
+      .catch((error) => {
+        console.log("error", error)
         return error.response.data;
       });
   }

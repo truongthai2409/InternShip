@@ -13,7 +13,6 @@ const companySlice = createSlice({
     error: [],
     totalPages: 0,
     totalItems: 0,
-    onSearch: false
   },
   reducer: {},
   extraReducers: (builder) => {
@@ -37,7 +36,6 @@ const companySlice = createSlice({
       state.companyList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
-      state.onSearch = true;
     });
   },
 });
@@ -140,6 +138,7 @@ export const updateCompanyInfo = createAsyncThunk(
   "company/updateCompanyInfo",
   async (updateData, thunkAPI) => {
     const { companyData, setIsEdit, comid } = updateData;
+    console.log(companyData)
     return axios
       .put(`${baseURL}/api/company/${comid}`, companyData, {
         headers: {
@@ -167,7 +166,7 @@ export const updateCompanyInfo = createAsyncThunk(
 );
 
 export const deleteCompany = createAsyncThunk(
-  "university/deleteCompany",
+  "company/deleteCompany",
   async (id, thunkAPI) => {
     return await axios
       .delete(`${baseURL}/api/company/${id}`)

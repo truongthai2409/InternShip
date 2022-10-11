@@ -17,7 +17,6 @@ const userSlice = createSlice({
     statusForgotPassword: false,
     totalPages: 0,
     totalItems: 0,
-    onSearch: false,
   },
   reducers: {
     updateStatusForgotPassword: (state, action) => {
@@ -29,7 +28,6 @@ const userSlice = createSlice({
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
-      state.onSearch = false;
     });
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
@@ -84,7 +82,6 @@ const userSlice = createSlice({
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
-      state.onSearch = true;
     });
   },
 });

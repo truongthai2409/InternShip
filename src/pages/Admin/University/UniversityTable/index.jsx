@@ -12,7 +12,7 @@ import {
   deleteUniversity,
   getUniversityList,
   searchUniversity,
-  updateUniversityInfo,
+  updateUniversityStatus,
 } from "../../../../store/slices/Admin/university/unversitySlice";
 import ProfileTable from "../../../../components/ProfileTable";
 
@@ -21,16 +21,16 @@ const UniversityTable = ({ searchValue }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { universityList, totalPages, totalItems, onSearch } = useSelector(
+  const { universityList, totalPages, totalItems} = useSelector(
     (state) => state.university
   );
   useEffect(() => {
-    if (onSearch) {
+    if (searchValue === "") {
+      dispatch(getUniversityList([page, 10]));
+    } else {
       dispatch(
         searchUniversity([searchValue, page, 10, userSessionStorage?.token])
       );
-    } else {
-      dispatch(getUniversityList([page, 10]));
     }
   }, [page]);
 
@@ -57,23 +57,14 @@ const UniversityTable = ({ searchValue }) => {
         const { row } = params;
         const handleChangeStatus = (e) => {
           const updateData = {
-            universityData: {
               university: JSON.stringify({
-                // description: row.description,
-                // email: row.email,
-                // // // logo: null,
-                // name: row.name,
-                // // phone: row.phone,
-                // shortName: row.shortName,
-                // website: row.website,
-                // status: {
-                //   id: parseInt(e.target.value),
-                // },
+                status: {
+                  id: parseInt(e.target.value),
+                },
               }),
-            },
             uniId: row.id,
           };
-          dispatch(updateUniversityInfo([updateData, userSessionStorage?.token])).then(() => {
+          dispatch(updateUniversityStatus([updateData, userSessionStorage?.token])).then(() => {
             dispatch(getUniversityList([page, 10, userSessionStorage?.token]))
           })
         };

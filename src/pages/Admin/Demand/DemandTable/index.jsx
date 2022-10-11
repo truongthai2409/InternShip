@@ -14,17 +14,15 @@ const DemandTable = ({ searchValue }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { demandList, totalPages, totalItems, onSearch } = useSelector(
+  const { demandList, totalPages, totalItems} = useSelector(
     (state) => state.adminDemand
   );
 
   useEffect(() => {
-    if (onSearch) {
-      console.log("search")
-      dispatch(searchDemand([searchValue, page, 10, userSessionStorage?.token]))
-    } else {
-      console.log("ko")
+    if ( searchValue === "") {
       dispatch(getAdminListDemand([page, 10]));
+    } else {
+      dispatch(searchDemand([searchValue, page, 10, userSessionStorage?.token]))
     }
   }, [page]);
 
