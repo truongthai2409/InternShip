@@ -52,6 +52,9 @@ const CandidateViewList = () => {
     };
     dispatch(getJobCareByCandidate(page));
   }
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
   return (
     <>
       <div className="apply__list--container">
@@ -62,6 +65,7 @@ const CandidateViewList = () => {
             ngay để không bỏ lỡ cơ hội nghề nghiệp dành cho bạn.
           </p>
         </div>
+        <>
         <div className="section__apply">
           <span>
             Bạn đã quan tâm <span>{jobCare?.length}</span> việc làm
@@ -93,6 +97,7 @@ const CandidateViewList = () => {
           </Grid>
           </Hidden>
         </Grid>
+        </>
       </div>
     </>
   );

@@ -10,11 +10,11 @@ function HeaderWithPartner(props) {
   return (
     <>
       <div className="header__partner">
-        <Link to="/partner/post" className="header__partner-post">
+        <Link onClick={()=>{ window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}} to="/partner/post" className="header__partner-post">
           <AddCardIcon sx={{ color: "#04bf8a" }}></AddCardIcon>
           <span className="header__partner-post-post">Đăng bài</span>
         </Link>
-        <Link to="/partner/post-list" className="header__partner-post">
+        <Link onClick={()=>{ window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}} to="/partner/post-list" className="header__partner-post">
           <FormatAlignJustifyIcon
             sx={{ color: "#04bf8a" }}
           ></FormatAlignJustifyIcon>

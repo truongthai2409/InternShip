@@ -22,7 +22,7 @@ const Profile = () => {
           <Components profile={profile} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6.5} xl={8}>
-          <ProfileForm profile={profile} />
+          <ProfileForm profile={profile}/>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           {user === "Role_HR" ? (

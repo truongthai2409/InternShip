@@ -247,7 +247,7 @@ const Components = ({ profile }) => {
             profile={
               profile?.user?.role?.name === "Role_Candidate"
                 ? "Ứng Viên"
-                : profile?.user?.role?.name === "Role_Hr"
+                : profile?.user?.role?.name === "Role_HR"
                 ? "Nhà Tuyển Dụng"
                 : "Cộng Tác Viên"
             }

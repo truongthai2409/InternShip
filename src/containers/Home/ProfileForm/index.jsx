@@ -108,7 +108,7 @@ const ProfileForm = ({ profile }) => {
   return (
     <>
       <form className="profile-form__wrapper" autoComplete="off">
-        <Typography variant="button">Thay đổi thông tin</Typography>
+        <Typography variant="button" style={{fontSize : 22}}>Thay đổi thông tin</Typography>
         <div className="profile-form__content">
           <p className="title-requirement">
             (<span className="field-requirment"> * </span>)Trường bắt buộc
@@ -183,8 +183,9 @@ const ProfileForm = ({ profile }) => {
         <div className="profile-form__action">
           <Button
             name="Lưu"
+            bheight={44}
             onClick={handleSubmit(onSubmit)}
-            fz="14px"
+            fz="18px"
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />

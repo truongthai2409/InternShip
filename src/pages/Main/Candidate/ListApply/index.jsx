@@ -50,6 +50,9 @@ const ListApply = () => {
     };
     dispatch(getJobApplyListByCandidate(page));
   }
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
   return (
     <>
       <div className="apply__list--container">

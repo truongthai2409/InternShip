@@ -11,7 +11,7 @@ export const ListJob = ({ listJob, message, isDisabled }) => {
   return (
     <div className="hrpost__list">
       {listJob?.length > 0 ? (
-        listJob.map((job) => (
+        listJob.sort((a,b)=> b.id - a.id ).map((job) => (
           <CardPost
             idJob={job?.id}
             key={job?.id}

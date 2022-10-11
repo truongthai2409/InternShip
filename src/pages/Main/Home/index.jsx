@@ -8,12 +8,13 @@ import TemporaryDrawer from "src/components/Drawer";
 import {
   changeFilterChange,
   majorFilterChange,
-  nameFilterChange
+  nameFilterChange,
 } from "src/store/slices/main/candidate/user/userCandidateSlice";
 import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import {
   indexFilterChange,
-  jobFilters
+  jobFilters,
+  pageFilterChange,
 } from "src/store/slices/main/home/filter/filterSlices";
 import DetailCard from "../../../components/DetailCard";
 import ListCardJobHome from "../../../components/ListCardJobHome";
@@ -21,7 +22,7 @@ import SearchResultHome from "../../../components/SearchResultHome";
 import SideBarHomeList from "../../../components/SideBarHomeList";
 import {
   getJobByCompany,
-  getJobPositionList
+  getJobPositionList,
 } from "../../../store/slices/main/home/job/jobSlice";
 import SearchHR from "../HR/SearchHR";
 import "./styles.scss";
@@ -30,7 +31,7 @@ const initialState = {
   position: [],
   major: [],
   no: 0,
-  order: "oldest",
+  order: "newest",
   name: "",
   province: "",
 };
@@ -88,7 +89,6 @@ const Home = (props) => {
   const [valueLocation, setValueLocation] = useState("");
   const [jobs, setJob] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
-
   const listWorkingFormat = [
     { name: "Fulltime", id: 1 },
     { name: "Parttime", id: 2 },
@@ -102,12 +102,15 @@ const Home = (props) => {
     dispatcher({ type: "no", payload: 0 });
     dispatcher({ type: "province", payload: valueLocation });
     dispatch(changeFilterChange(false));
+    dispatch(pageFilterChange(1))
+
   };
   const getValueLocationAndHandle = (value) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
+
     const userPartner = JSON.parse(sessionStorage.getItem("userPresent"));
     if (userPartner && userPartner.role === "Role_HR") {
       dispatch(indexFilterChange(0));
@@ -154,6 +157,7 @@ const Home = (props) => {
     dispatcher({ type: "position", payload: tempPosition });
     dispatcher({ type: "major", payload: tempMajor });
     dispatcher({ type: "no", payload: 0 });
+    dispatch(pageFilterChange(1))
   };
 
   useEffect(() => {

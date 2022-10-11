@@ -6,6 +6,8 @@ import { useLocation } from "react-router-dom";
 import PaginationCustom from "src/components/Pagination";
 import RatingJob from "../RatingJob";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 
 const ListCardJobHome = ({
   jobList,
@@ -18,16 +20,18 @@ const ListCardJobHome = ({
   hiddent,
 }) => {
   const location = useLocation();
-  const [page, setPage] = useState(1);
+  const dispatch = useDispatch()
+  const {page} = useSelector(state=> state.filter)
   const handlePagination = (e, valuePage) => {
-    setPage(valuePage);
-    onChange && onChange(valuePage);
+    dispatch(pageFilterChange(valuePage))
+    onChange && onChange(valuePage)
+    window.scrollTo(0, 0);
   };
+
   useEffect(() => {
     const filterPanel = document.querySelector(".filter-panel-home__wrapper");
     filterPanel.scrollTop = 0;
   }, [page]);
-
   return (
     <>
       <div className="filter-panel-home__wrapper">
@@ -105,7 +109,7 @@ const ListCardJobHome = ({
         >
           <PaginationCustom
             page={page}
-            totalPages={jobListHavePages?.totalPages}
+            totalPages={jobListHavePages?.totalPages - 1}
             handleOnChange={handlePagination}
           />
         </div>

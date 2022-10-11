@@ -2,6 +2,7 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./responsive.scss";
 import "./styles.scss";
@@ -13,6 +14,9 @@ const HeaderWithHR = (props) => {
   return (
     <div className="header__hr">
       <Link
+      onClick={()=>{
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }}
         to="post"
         className={
           pathUrl === "/hr/post" ? "header__hr-post active" : "header__hr-post"
@@ -22,6 +26,9 @@ const HeaderWithHR = (props) => {
         <span className="header__hr-post-post">Đăng tuyển</span>
       </Link>
       <Link
+      onClick={()=>{
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }}
         to="list"
         className={
           pathUrl === "/hr/list" ? "header__hr-post active" : "header__hr-post"
@@ -33,6 +40,9 @@ const HeaderWithHR = (props) => {
         <span className="header__hr-post-post">Công việc đang tuyển</span>
       </Link>
       <Link
+      onClick={()=>{
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+      }}
         to="candidatemanagement"
         className={
           pathUrl === "/hr/candidatemanagement"

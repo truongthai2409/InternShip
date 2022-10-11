@@ -10,6 +10,7 @@ const filterSlices = createSlice({
         index: 0,
         jobFilter: [],
         jobPage: [],
+        page : 1,
     },
     reducers: {
         idFilterChange : (state, action) => {
@@ -17,6 +18,9 @@ const filterSlices = createSlice({
         },
         indexFilterChange: (state, action) => {
             state.index = action.payload
+        },
+        pageFilterChange : (state, action) => {
+            state.page = action.payload
         }
 
     },
@@ -41,6 +45,7 @@ export const jobFilters = createAsyncThunk(
     })
 export const {
     indexFilterChange,
-    idFilterChange
+    idFilterChange,
+    pageFilterChange
 } = filterSlices.actions;
 export default filterSlices;

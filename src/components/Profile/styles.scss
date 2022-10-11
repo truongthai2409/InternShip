@@ -238,6 +238,8 @@
   }
 }
 .profiles {
+  border: 1px solid #ccc;
+  border-radius: 1rem;
   .profile_header {
     background: #4ecdc4; /* fallback for old browsers */
     background: -webkit-linear-gradient(

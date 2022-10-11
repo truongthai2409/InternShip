@@ -3,6 +3,7 @@ import ComponentFooter from "./ComponentFooter";
 import "./styles.scss";
 import "./responsive.scss";
 import AddressComponent from "./AddressComponent";
+import { Link } from "react-router-dom";
 
 const aboutUs = [
   {
@@ -29,11 +30,11 @@ const policy = [
     content: "Chính sách bảo mật",
   },
   {
-    link: "/comming-soon",
+    link: "/terms-of-services",
     content: "Điều khoản dịch vụ",
   },
   {
-    link: "/comming-soon",
+    link: "/regulation",
     content: "Quy chế",
   },
 ];
@@ -59,24 +60,24 @@ const Footer = () => {
               </div>
               <div className="mobile-app-link-download">
                 <div className="mobile-app-link-chplay">
-                  <a href="/#">
+                  <Link to='/comming-soon' >
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png"
                       alt=""
                       style={{ width: "180px" }}
                       className="mobile-app-link-chplay-img"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="mobile-app-link-appstore">
-                  <a href="/#">
+                  <Link to='/comming-soon' >
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png"
                       alt=""
                       style={{ width: "180px" }}
                       className="mobile-app-link-appstore-img"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

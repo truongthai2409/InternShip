@@ -59,6 +59,7 @@ const HRPostList = (props) => {
   };
 
   const handleChangePage = (e, value) => {
+    window.scrollTo(0,0)
     setPage(value);
   };
 
