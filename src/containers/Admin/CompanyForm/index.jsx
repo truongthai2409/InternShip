@@ -204,6 +204,7 @@ export default function CompanyForm(props) {
                     id="name"
                     type="text"
                     placeholder="Tên công ty..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -215,6 +216,7 @@ export default function CompanyForm(props) {
                     id="email"
                     type="email"
                     placeholder="email..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -226,6 +228,7 @@ export default function CompanyForm(props) {
                     id="phone"
                     type="tel"
                     placeholder="Số điện thoại..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -240,6 +243,7 @@ export default function CompanyForm(props) {
                     id="website"
                     type="text"
                     placeholder="Website..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -251,6 +255,7 @@ export default function CompanyForm(props) {
                     id="tax"
                     type="text"
                     placeholder="Mã số thuế..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -266,6 +271,8 @@ export default function CompanyForm(props) {
                         getDistrictList={getDistrictList}
                         selectOptions={provinceList}
                         id="province"
+                        register={register}
+
                       />
                       {/* {errors.province?.message} */}
                     </div>
@@ -277,6 +284,7 @@ export default function CompanyForm(props) {
                         // getDistrictList={getDistrictList}
                         selectOptions={districtList}
                         id="district"
+                        register={register}
                       />
                       {/* {errors.district?.message} */}
                     </div>

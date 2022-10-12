@@ -17,6 +17,7 @@ import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
 import {
   addUniversity,
+  addUniversityByAdmin,
   getUniversityDetail,
   updateUniversityInfo,
 } from "../../../store/slices/Admin/university/unversitySlice";
@@ -27,6 +28,7 @@ const baseURL = process.env.REACT_APP_API;
 
 export default function UniversityForm(props) {
   const { isAdd } = props;
+  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
 
   const { universityDetail } = useSelector((state) => state.university);
 
@@ -91,8 +93,9 @@ export default function UniversityForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
+    console.log("data: ", data);
     const universityData = {
-      file: data.logo[0],
+      // file: data.logo[0],
       university: JSON.stringify({
         description: data.description,
         email: data.email,
@@ -103,10 +106,11 @@ export default function UniversityForm(props) {
         website: data.website,
       }),
     };
+    console.log("universityData", universityData);
 
     if (isAdd) {
       dispatch(
-        addUniversity({
+        addUniversityByAdmin([{
           universityData,
           reset: reset({
             description: "",
@@ -118,7 +122,7 @@ export default function UniversityForm(props) {
             website: "",
           }),
           setImage: setImage(cameraLogo),
-        })
+        }, userSessionStorage?.token])
       );
     } else {
       const updateData = {
@@ -186,6 +190,7 @@ export default function UniversityForm(props) {
                     id="name"
                     type="text"
                     placeholder="Tên trường..."
+                    setValue={setValue}                    
                     register={register}
                     check={!isEdit}
                   >
@@ -196,6 +201,7 @@ export default function UniversityForm(props) {
                     id="email"
                     type="email"
                     placeholder="abc.xyz@gmail.co..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -206,6 +212,7 @@ export default function UniversityForm(props) {
                     id="phone"
                     type="tel"
                     placeholder="Số điện thoại..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -220,6 +227,7 @@ export default function UniversityForm(props) {
                     id="website"
                     type="text"
                     placeholder="Website..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -230,6 +238,7 @@ export default function UniversityForm(props) {
                     id="shortName"
                     type="text"
                     placeholder="UTE..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -245,6 +254,7 @@ export default function UniversityForm(props) {
                     id="description"
                     type="description"
                     placeholder="Mô tả trường..."
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >

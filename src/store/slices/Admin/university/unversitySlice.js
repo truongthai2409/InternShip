@@ -238,3 +238,28 @@ export const updateUniversityStatus = createAsyncThunk(
       });
   }
 );
+
+export const addUniversityByAdmin = createAsyncThunk(
+  "university/addUniversityByAdmin",
+  async (args) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "multipart/form-data",
+
+      },
+    };
+    const res = await axios
+      .post(`${baseURL}/api/r2s/admin/university`, args[0], header
+      )
+      .then((res) => {
+        console.log(res.data)
+        return res.data;
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+        return error.response.data;
+      });
+    return res;
+  }
+);
