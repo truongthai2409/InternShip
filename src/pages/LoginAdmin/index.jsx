@@ -55,7 +55,6 @@ const LoginAdmin = () => {
       username: data.username,
       password: data.password,
     };
-    console.log(data)
     try {
       const res = await dispatch(loginAdmin(userData));
 

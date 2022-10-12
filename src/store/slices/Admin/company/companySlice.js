@@ -138,7 +138,6 @@ export const updateCompanyInfo = createAsyncThunk(
   "company/updateCompanyInfo",
   async (updateData, thunkAPI) => {
     const { companyData, setIsEdit, comid } = updateData;
-    console.log(companyData)
     return axios
       .put(`${baseURL}/api/company/${comid}`, companyData, {
         headers: {
@@ -146,7 +145,6 @@ export const updateCompanyInfo = createAsyncThunk(
         },
       })
       .then((response) => {
-        console.log(response.data)
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Cập nhật công ty thành công")
         );

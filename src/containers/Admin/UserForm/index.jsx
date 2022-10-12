@@ -13,7 +13,6 @@ import { adminUpdateUser, createUser, getUserById, updateUser } from "src/store/
 import { toast } from "react-toastify";
 
 const UserForm = (props) => {
-  console.log(props)
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const UserForm = (props) => {
     resolver: yupResolver(schema),
   });
 
-  console.log("errors", errors);
   useEffect(() => {
     dispatch(getUserById([idRow, userSessionStorage?.token]));
   }, [dispatch, idRow, userSessionStorage?.token]);
@@ -52,7 +50,6 @@ const UserForm = (props) => {
   }, [isUpdate, setValue, user]);
 
   const onSubmit = async (data) => {
-    console.log("create");
     const userData = {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
@@ -71,7 +68,6 @@ const UserForm = (props) => {
         },
       }),
     };
-    console.log("userData",userData)
     try {
       const res = await dispatch(
         createUser([userData, userSessionStorage?.token])

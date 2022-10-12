@@ -21,7 +21,6 @@ const CandidateInfo = () => {
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const errorMessage = useSelector(errorSelector);
-  console.log(errorMessage)
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -41,7 +40,6 @@ const CandidateInfo = () => {
     navigate(-1);
   };
   const onSubmit = async (data) => {
-    console.log(data)
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,

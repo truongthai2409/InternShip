@@ -51,7 +51,6 @@ export default function CompanyForm(props) {
 
   // get company ID params from URL
   const { comid } = useParams();
-  console.log("comid", comid)
 
   useEffect(() => {
     dispatch(getProvinceList());

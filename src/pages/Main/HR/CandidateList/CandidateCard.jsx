@@ -72,7 +72,6 @@ export const CandidateCard = ({
         : toast.warning("Xóa ứng viên khỏi yêu thích");
     }
   };
-  console.log("candidate", candidate);
   return (
     <>
       <div className="candidate-card__wrapper">

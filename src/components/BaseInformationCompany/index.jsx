@@ -85,7 +85,6 @@ const BaseInformationCompany = ({
   isPartner,
   jobListCompany,
 }) => {
-  console.log(appreciateList)
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);

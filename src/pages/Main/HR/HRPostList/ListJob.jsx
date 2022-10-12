@@ -8,7 +8,6 @@ const formatLocation = (location) => {
 };
 
 export const ListJob = ({ listJob, message, isDisabled }) => {
-  console.log(listJob)
   return (
     <div className="hrpost__list">
       {listJob?.length > 0 ? (

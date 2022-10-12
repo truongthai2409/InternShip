@@ -316,7 +316,6 @@ export const getJobByCompany = createAsyncThunk(
 export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
-    console.log(args)
     const header = {
       headers: {
         Authorization: "Bearer " + args[2],

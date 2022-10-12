@@ -152,7 +152,6 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           address: data.address,
         },
       };
-      console.log(jobData)
       dispatch(addJob([jobData, "post"]));
     } else {
       const jobData = {

@@ -41,7 +41,6 @@ const PartnerInfo = () => {
   const { status, universityList } = useSelector((state) => state.university);
 
   const { error : errorMessage } = useSelector((state) => state.university);
-  console.log(errorMessage)
   const typeSchoolList = [
     {
       id: 1,

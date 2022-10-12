@@ -51,8 +51,6 @@ const CardPost = (props) => {
   };
 
   const handleOnClick = () => {
-    console.log(props.isDemandPost)
-    console.log(action.current)
     if (props.isDemandPost) {
       switch (action.current) {
         case "update":
