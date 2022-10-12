@@ -21,6 +21,7 @@ const CandidateInfo = () => {
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const errorMessage = useSelector(errorSelector);
+  console.log(errorMessage)
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));

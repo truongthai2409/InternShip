@@ -23,6 +23,8 @@ const jobSlice = createSlice({
     error: "",
     listCandidatesApplied: [],
     totalPages: 0,
+    totalItemActive: 0,
+    totalItemDisable: 0,
   },
   reducers: {
     updateIdJobActive: (state, action) => {
@@ -49,6 +51,7 @@ const jobSlice = createSlice({
           state.jobListActived = payload.contents;
           state.status = "fail";
           state.totalPages = payload.totalPages;
+          state.totalItemActive = payload.totalItems;
         }
       }
     );
@@ -61,6 +64,7 @@ const jobSlice = createSlice({
           state.jobListDisabled = payload.contents;
           state.status = "fail";
           state.totalPages = payload.totalPages;
+          state.totalItemDisable = payload.totalItems
         }
       }
     );
@@ -312,12 +316,13 @@ export const getJobByCompany = createAsyncThunk(
 export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
+    console.log(args)
     const header = {
       headers: {
         Authorization: "Bearer " + args[2],
       },
     };
-    console.log("args", args[2]);
+
     return axios
       .put(`${baseURL}/api/job/status/${args[0]}`, args[1], header)
       .then((response) => {
@@ -369,12 +374,11 @@ export const getListCandidateApplied = createAsyncThunk(
         Authorization: "Bearer " + args[2],
       },
     };
-    console.log("object", args[2]);
     return axios
       .get(
-        `${baseURL}/api/r2s/job/candidate/${args[0]}?no=${
-          args[1] - 1
-        }&limit=${args[3]}`,
+        `${baseURL}/api/r2s/job/candidate/${args[0]}?no=${args[1] - 1}&limit=${
+          args[3]
+        }`,
         header
       )
       .then((response) => {

@@ -40,8 +40,8 @@ const PartnerInfo = () => {
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { status, universityList } = useSelector((state) => state.university);
 
-  const errorMessage = useSelector(errorSelector);
-
+  const { error : errorMessage } = useSelector((state) => state.university);
+  console.log(errorMessage)
   const typeSchoolList = [
     {
       id: 1,
@@ -83,9 +83,7 @@ const PartnerInfo = () => {
         avatar: data.avatar || info.logo,
         logo: data.logo,
         university: JSON.stringify({
-          id: 
-            info
-          
+          id: info,
         }),
         partner: JSON.stringify({
           position: data.position,
@@ -221,7 +219,7 @@ const PartnerInfo = () => {
                       label="Tên trường"
                       type="text"
                       id="schoolName"
-                      placeholder="Vd. Đại học Bách Khoa..."
+                      placeholder="Đại học Bách Khoa..."
                       register={register}
                     >
                       {errors.schoolName?.message}
@@ -230,7 +228,7 @@ const PartnerInfo = () => {
                       label="Tên viết tắt của trường"
                       type="text"
                       id="shortName"
-                      placeholder="Vd. HUST..."
+                      placeholder="HUST..."
                       register={register}
                     >
                       {errors.shortName?.message}
@@ -257,7 +255,7 @@ const PartnerInfo = () => {
                       {errors.website?.message}
                     </CustomInput>
                     <CustomInput
-                      label="Email của Trường"
+                      label="Email của trường"
                       id="emailSchool"
                       type="email"
                       placeholder="Email..."
@@ -269,7 +267,7 @@ const PartnerInfo = () => {
                       label="Số điện thoại của trường"
                       id="phoneSchool"
                       type="text"
-                      placeholder="Vd. 999-999-..."
+                      placeholder="999-999-..."
                       register={register}
                     >
                       {errors.phoneSchool?.message}
@@ -318,7 +316,7 @@ const PartnerInfo = () => {
                       label="Địa chỉ"
                       id="address"
                       type="text"
-                      placeholder="Vd. 254, Dương Đình Hội..."
+                      placeholder="254, Dương Đình Hội..."
                       register={register}
                     >
                       {errors.address?.message}

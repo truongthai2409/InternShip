@@ -30,7 +30,7 @@ export const schema = yup
   .object({
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
     jobPosition: yup.string().notRequired(),
-    major: yup.array().required(" * Bạn phải chọn chuyên ngành."),
+    major: yup.array().required(" * Bạn phải chọn chuyên ngành.").nullable(),
     jobType: yup.string().notRequired(),
     timeStart: yup
       .date()
@@ -46,7 +46,7 @@ export const schema = yup
       .nullable()
       .transform((cur, ori) => (ori === "" ? null : cur))
       .required("* Bạn phải chọn ngày kết thúc ứng tuyển.")
-      .min(`${tomorowFormat}`, "Ngày hết hạn phải lớn hơn ngày bắt đầu"),
+      .min(`${tomorowFormat}`, "* Ngày hết hạn phải lớn hơn ngày bắt đầu"),
     jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
     // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     // otherInfo: yup.string(),

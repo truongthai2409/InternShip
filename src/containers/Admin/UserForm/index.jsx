@@ -155,7 +155,7 @@ const UserForm = (props) => {
                 label="Tên tài khoản"
                 className="user-form__input-item"
                 type="text"
-                placeholder="vd. abcdef..."
+                placeholder="Abcdef..."
                 register={register}
               >
                 {errors.username?.message}
@@ -165,7 +165,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Email"
                 type="email"
-                placeholder="vd. abc@gmail.com..."
+                placeholder="abc@gmail.com..."
                 register={register}
               >
                 {errors.email?.message}
@@ -179,7 +179,7 @@ const UserForm = (props) => {
                   label="Mật khẩu"
                   type="password"
                   visibility={true}
-                  placeholder="vd. Abc123..."
+                  placeholder="Abc123..."
                   register={register}
                 >
                   {errors.password?.message}
@@ -190,7 +190,7 @@ const UserForm = (props) => {
                   label="Xác nhận mật khẩu"
                   type="password"
                   visibility={true}
-                  placeholder="vd. Abc123..."
+                  placeholder="Abc123..."
                   register={register}
                 >
                   {errors.confirmPassword?.message}
@@ -218,7 +218,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Họ"
                 type="text"
-                placeholder="vd. Nguyễn Văn..."
+                placeholder="Nguyễn Văn..."
                 register={register}
               >
                 {errors.firstName?.message}
@@ -228,7 +228,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Tên"
                 type="text"
-                placeholder="vd. An..."
+                placeholder="An..."
                 register={register}
               >
                 {errors.lastName?.message}
@@ -240,7 +240,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Số điện thoại"
                 type="tel"
-                placeholder="vd. 0964xxx473..."
+                placeholder="0964xxx473..."
                 register={register}
               >
                 {errors.phone?.message}

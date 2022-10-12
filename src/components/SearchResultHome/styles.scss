@@ -73,7 +73,7 @@
 
 //tablet
 @media (min-width: 740px) and (max-width: 1050px) {
-  .onTablet {
+  .onTablet { 
   }
   .header__with-search-search-1 {
   }
@@ -95,13 +95,13 @@
     width: 100px !important;
   }
   .header__with-search-search-select-onMobile {
-    display: none !important;
+    // display: none !important;
   }
 }
 
 @media (max-width: 900px) {
   .header__with-search-search-select-onMobile {
-    display: none !important;
+    // display: none !important;
   }
 }
 

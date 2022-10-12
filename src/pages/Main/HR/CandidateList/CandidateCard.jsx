@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { toast } from "react-toastify";
-const BASEURL = process.env.REACT_APP_API
+const BASEURL = process.env.REACT_APP_API;
 export const CandidateCard = ({
   avatar = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg",
   candidate,
@@ -18,7 +18,7 @@ export const CandidateCard = ({
   const [numberCV, setNumberCV] = useState([]);
   const viewProfileCV = (info) => {
     setOpen(!open);
-    setNumberCV(info);
+    setNumberCV(info.cv);
   };
 
   const renderCV = () => {
@@ -44,12 +44,20 @@ export const CandidateCard = ({
             >
               <CloseIcon />
             </div>
-            <img
-              style={{ width: "100%", height: "100%", padding: "2rem 4rem" }}
-              src={`
-              ${BASEURL}/${numberCV.cv}`}
-              alt='avatar'
-            ></img>
+            {/* <embed
+              src={numberCV}
+              width="100%"
+              height="100%"
+              type="application/pdf"
+            ></embed> */}
+
+            <iframe
+              src={`https://docs.google.com/gview?url=${numberCV}&embedded=true`}
+              width="100%"
+              height="100%"
+              frameborder="1"
+              title="cv"
+            ></iframe>
           </div>
         }
       />
@@ -64,12 +72,12 @@ export const CandidateCard = ({
         : toast.warning("Xóa ứng viên khỏi yêu thích");
     }
   };
-  console.log("candidate", candidate)
+  console.log("candidate", candidate);
   return (
     <>
       <div className="candidate-card__wrapper">
         <img
-          src={avatar}
+          src={candidate?.user?.avatar || avatar}
           alt="ảnh đại diện"
           className="candidate-card__avatar"
         />

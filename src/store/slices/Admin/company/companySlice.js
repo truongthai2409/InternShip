@@ -59,7 +59,7 @@ export const getCompanyList = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${baseURL}/api/r2s/admin/company?no=${args[0] - 1}&limit=${args[1]}`, header)
+      .get(`${baseURL}/api/r2s/company?no=${args[0] - 1}&limit=${args[1]}`, header)
       .then((response) => {
         return response.data;
       })

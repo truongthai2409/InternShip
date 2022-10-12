@@ -12,7 +12,8 @@ import UserInfo from "./UserInfo";
 import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "./data";
+import { schema } from "./dataCV";
+import CloseIcon from "@mui/icons-material/Close";
 import { updateUser } from "src/store/slices/Admin/user/userSlice";
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
@@ -53,7 +54,9 @@ const Components = ({ profile }) => {
     }
   };
   const onSubmit = async (data) => {
-    const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"))
+    const userSessionStorage = JSON.parse(
+      sessionStorage.getItem("userPresent")
+    );
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
@@ -65,14 +68,14 @@ const Components = ({ profile }) => {
           email: profile?.user?.email,
         },
         major: {
-          id : profile?.major?.id,
-        }
+          id: profile?.major?.id,
+        },
       }),
       fileAvatar: profile?.user?.avatar || null,
-      fileCV:  data.cv,
+      fileCV: data.cv,
     };
     await dispatch(updateUser([userSessionStorage, profileData]));
-    setOpens(!opens)
+    setOpens(!opens);
   };
   useEffect(() => {
     dispatch(getAllUserCandidate());
@@ -119,7 +122,10 @@ const Components = ({ profile }) => {
             >
               <div className="profile_children_handle">
                 <Tooltip title="Thay Đổi CV">
-                  <CachedRoundedIcon className="icon-action" onClick={() => handleClick(1)} />
+                  <CachedRoundedIcon
+                    className="icon-action"
+                    onClick={() => handleClick(1)}
+                  />
                 </Tooltip>
                 <Modal
                   modalTitle={"Thay đổi CV"}
@@ -157,20 +163,32 @@ const Components = ({ profile }) => {
                 className="profile_children_handle"
                 style={{ padding: "0 2rem" }}
               >
-                {/* <Tooltip title="Xem CV">
+                <Tooltip title="Xem CV">
                   <RemoveRedEyeIcon onClick={() => handleClick(2)} />
-                </Tooltip> */}
-                <a
-                  id="downloadLink"
-                  href={`${profile?.cv}`}
-                  target="_blank"
-                  type="application/octet-stream"
-                  // download={`${profile?.cv}`}
-                  download
-                  rel="noreferrer"
-                >
-                  <RemoveRedEyeIcon />
-                </a>
+                </Tooltip>
+                <Modal
+                  iconClose={true}
+                  modalTitle="Xem CV"
+                  open={open}
+                  setOpen={setOpen}
+                  children={
+                    <div
+                      style={{
+                        width: "90vw",
+                        height: "90vh",
+                        padding: ".5rem",
+                      }}
+                    >
+                      <iframe
+                        src={`https://docs.google.com/gview?url=${profile.cv}&embedded=true`}
+                        width="100%"
+                        height="100%"
+                        frameborder="1"
+                        title="cv"
+                      ></iframe>
+                    </div>
+                  }
+                />
               </div>
               <div className="profile_children_handle">
                 <Tooltip title="Tải CV">

@@ -1,8 +1,13 @@
-@use '../../assets/styles/' as *;
+@use "../../assets/styles/" as *;
 
 .login-form {
   &__container {
     width: 100%;
+    .bgcIsCheck {
+      input {
+        background-color: #04bf8a5b;
+      }
+    }
   }
 
   &__save-pass {

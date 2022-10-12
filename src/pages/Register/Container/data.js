@@ -28,26 +28,26 @@ export const containerSchema = yup.object().shape({
     //Container
     username: yup
         .string()
-        .required('* Bạn phải nhập tài khoản.')
+        .required('* Bạn phải nhập tài khoản')
         // .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
         .test(
             "* Validate space",
-            "* Tên tài khoản không được chứa dấu cách .",
+            "* Tên tài khoản không được chứa dấu cách",
             (value) => {
                 return !(/\s/g.test(value));
             }
         )
         .matches(/^[A-Za-z0-9_. ]+$/, "* Tên tài khoản không đúng định dạng")
-        .matches(/[^\W_]$/, "* Không đúng định dạng.")
-        .min(6, '* Tối thiểu 6 ký tự.')
-        .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 ký tự chữ.")
-        .max(32, '* Tối đa 32 ký tự.'),
+        .matches(/[^\W_]$/, "* Không đúng định dạng")
+        .min(6, '* Tối thiểu 6 ký tự')
+        .matches(/[a-zA-Z]/, "* Tên tài khoản phải có ít nhất 1 ký tự chữ")
+        .max(32, '* Tối đa 32 ký tự'),
     email: yup
         .string()
-        .required('* Bạn phải nhập email.')
-        .min(6, ' * Tối thiểu 6 ký tự.')
-        .max(64, ' * Tối đa 64 ký tự.')
-        .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng.'),
+        .required('* Bạn phải nhập email')
+        .min(6, ' * Tối thiểu 6 ký tự')
+        .max(64, ' * Tối đa 64 ký tự')
+        .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
     password: yup
         .string()
         .required('* Bạn phải nhập mật khẩu.')
@@ -57,7 +57,7 @@ export const containerSchema = yup.object().shape({
         .matches(/^(?!.*?[._]{2})/, "* Không được phép lặp lại 2 lần ký tự đặc biệt.")
         .min(6, '* Tối thiểu 6 ký tự.')
         .matches(/[^\W_]$/, "* Không đúng định dạng.")
-        .matches(/[A-Z]/, "* ít nhất 1 chữ in hoa.")
+        .matches(/[A-Z]/, "* Ít nhất 1 chữ in hoa.")
         .matches(/[0-9]/, "* Ít nhất 1 số.")
         .max(32, '* Tối đa 32 ký tự.'),
     confirmPassword: yup

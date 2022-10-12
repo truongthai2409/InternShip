@@ -8,7 +8,7 @@ export const schema = yup
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự.")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
-        " * Vui lòng nhập lại mật khẩu."
+        " * Vui lòng nhập lại mật khẩu đúng định dạng."
       ),
     newPassword: yup
       .string()
@@ -16,7 +16,7 @@ export const schema = yup
       .min(6, " * Mật khẩu cần phải có ít nhất 6 ký tự.")
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}/,
-        " * Vui lòng nhập lại mật khẩu."
+        " * Vui lòng nhập lại mật khẩu đúng định dạng."
       )
       .notOneOf(
         [yup.ref("oldPassword")],

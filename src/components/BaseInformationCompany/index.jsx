@@ -85,6 +85,7 @@ const BaseInformationCompany = ({
   isPartner,
   jobListCompany,
 }) => {
+  console.log(appreciateList)
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
@@ -111,7 +112,7 @@ const BaseInformationCompany = ({
 
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
-    topAppreciate.push(appreciateList?.[i]);
+    topAppreciate.push(appreciateList.slice().sort((a,b)=> new Date(b.createDate) - new Date(a.createDate))[i]);
   }
   const handleBackClick = () => {
     navigate(-1);
@@ -155,7 +156,7 @@ const BaseInformationCompany = ({
     try {
       const res = await dispatch(addAppreciate(avaluateData));
       await dispatch(getAppreciateByCompany(idCompany));
-      if (res.payload.status === 200) {
+      if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Đã đăng đánh giá", {});
       } else {
         toast.error(
@@ -363,7 +364,7 @@ const BaseInformationCompany = ({
                             Đánh giá mới nhất
                           </h5>
                           <div>
-                            {topAppreciate?.map((appreciate, index) => (
+                            {topAppreciate.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
                               <Appreciate
                                 appreciate={appreciate}
                                 key={index}
@@ -465,7 +466,7 @@ const BaseInformationCompany = ({
                                     label="Nhập tiêu đề"
                                     id="title"
                                     type="text"
-                                    placeholder="Vd. Rất tuyệt..."
+                                    placeholder="Rất tuyệt..."
                                     register={register}
                                     requirementField={false}
                                     setValue={setValue}
@@ -535,7 +536,7 @@ const BaseInformationCompany = ({
                             ></Button>
                           </div>
                           <div>
-                            {appreciateList?.map((appreciate, index) => (
+                            {appreciateList.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
                               <div>
                                 <Appreciate
                                   appreciate={appreciate}

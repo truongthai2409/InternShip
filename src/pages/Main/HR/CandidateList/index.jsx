@@ -21,7 +21,6 @@ const CandidateList = ({ idJob }) => {
   const hanldeOnChange = (e, value) => {
     setPage(value);
   };
-  console.log("object", listCandidatesApplied);
   return (
     <div
       className={`${

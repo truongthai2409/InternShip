@@ -46,11 +46,13 @@ const CardPost = (props) => {
       },
     };
     const token = JSON.parse(sessionStorage.getItem("userPresent")).token
-    dispatch(updateStatusJob([props.idJob, jobData, token]));
+    dispatch(updateStatusJob([props.idDemand, jobData, token]));
     setOpen(false);
   };
 
   const handleOnClick = () => {
+    console.log(props.isDemandPost)
+    console.log(action.current)
     if (props.isDemandPost) {
       switch (action.current) {
         case "update":
@@ -63,13 +65,14 @@ const CardPost = (props) => {
           );
           setTitle("Chỉnh sửa thông tin đợt thực tập");
           break;
-        case "Đóng việc":
+        case "close":
           setComponent(
             <Confirmation
               setOpen={setOpen}
               text="Bạn có chắc muốn đóng việc?"
               nameBtnYes="Đóng việc"
               nameBtnNo="Hủy"
+              func={handleCloseJob}
             />
           );
           setTitle("Đóng việc");

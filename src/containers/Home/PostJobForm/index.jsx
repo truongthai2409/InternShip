@@ -232,7 +232,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Tên công việc"
                   id="name"
                   type="text"
-                  placeholder="Vd. Thực tập thiết kế UI-UX..."
+                  placeholder="Thực tập thiết kế UI-UX..."
                   register={register}
                 >
                   {errors.name?.message}
@@ -355,7 +355,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
                   label="Địa chỉ"
                   id="address"
                   type="text"
-                  placeholder="Vd. 254, Dương Đình Hội..."
+                  placeholder="254, Dương Đình Hội..."
                   register={register}
                 >
                   {errors.address?.message}
