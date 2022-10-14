@@ -1,18 +1,17 @@
 import React from "react";
-import "./styles.scss";
 
-const CustomSelect = React.forwardRef(
+const CustomSelectLocation = React.forwardRef(
   (
     {
       register,
       label,
       options,
-      dispatch = () => {},
       id,
       className,
       children,
       placeholder,
       requirementField = true,
+      onChange
     },
     ref
   ) => {
@@ -41,6 +40,7 @@ const CustomSelect = React.forwardRef(
             name={id}
             {...register(id)}
             className="select"
+            onChange={(e) => onChange(e.target.value)}
             required
           >
             <option hidden value="">
@@ -55,4 +55,4 @@ const CustomSelect = React.forwardRef(
   }
 );
 
-export default CustomSelect;
+export default CustomSelectLocation;

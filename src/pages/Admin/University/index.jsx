@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
@@ -8,6 +8,7 @@ import Modal from "../../../components/Modal";
 import UniversityTable from "./UniversityTable";
 import UniversityForm from "../../../containers/Admin/UniversityForm";
 import { getUniversityList, searchUniversity } from "src/store/slices/Admin/university/unversitySlice";
+import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const selectOptions = [
   {
@@ -35,6 +36,7 @@ export default function University() {
 
   const [open, setOpen] = useState(false);
 
+
   const handleSearch = () => {
     if (searchValue === "") {
       dispatch(getUniversityList([1, 10]));
@@ -44,6 +46,7 @@ export default function University() {
   };
 
   const handleOpenModal = () => {
+    dispatch(getProvinceList())
     setOpen(true);
   };
 

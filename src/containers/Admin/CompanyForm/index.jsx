@@ -31,6 +31,9 @@ export default function CompanyForm(props) {
   const { companyDetail, error } = useSelector((state) => state.company);
   const { provinceList, districtList } = useSelector((state) => state.location);
 
+  console.log("provinceList", provinceList)
+  console.log("districtList", districtList)
+
   const {
     register,
     handleSubmit,
@@ -51,11 +54,10 @@ export default function CompanyForm(props) {
 
   // get company ID params from URL
   const { comid } = useParams();
-  console.log("comid", comid)
 
   useEffect(() => {
     dispatch(getProvinceList());
-    // dispatch(getDistrictList(1));
+    dispatch(getDistrictList(1));
   }, [dispatch]);
 
   useEffect(() => {
@@ -265,11 +267,12 @@ export default function CompanyForm(props) {
                   <div className="company-form__selector">
                     <div className="company-form__selector-item">
                       <CustomSelect
-                        name="Tỉnh/Thành phố"
-                        label="Tỉnh/Thành phố"
+                        name="Tỉnh"
+                        label="Tỉnh"
+                        placeholder="Chọn tỉnh..."
                         dispatch={dispatch}
                         getDistrictList={getDistrictList}
-                        selectOptions={provinceList}
+                        options={provinceList}
                         id="province"
                         register={register}
 
@@ -280,9 +283,8 @@ export default function CompanyForm(props) {
                       <CustomSelect
                         name="Quận/Huyện"
                         label="Quận/Huyện"
-                        // dispatch={dispatch}
-                        // getDistrictList={getDistrictList}
-                        selectOptions={districtList}
+                        placeholder="Chọn quận/huyện..."
+                        options={districtList}
                         id="district"
                         register={register}
                       />

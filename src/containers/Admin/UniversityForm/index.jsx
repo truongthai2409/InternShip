@@ -22,6 +22,9 @@ import {
   updateUniversityInfo,
 } from "../../../store/slices/Admin/university/unversitySlice";
 import MultiSelect from "../../../components/MultiSelect";
+import CustomSelect from "src/components/CustomSelect";
+import CustomSelectLocation from "src/components/CustomSelectLocation";
+import { getDistrictList } from "src/store/slices/location/locationSlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const baseURL = process.env.REACT_APP_API;
@@ -31,10 +34,9 @@ export default function UniversityForm(props) {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
 
   const { universityDetail } = useSelector((state) => state.university);
-
+  const { districtList, provinceList } = useSelector((state) => state.location);
   const [image, setImage] = useState(cameraLogo);
   const [isEdit, setIsEdit] = useState(isAdd);
-
   // const fileInput = useRef(null)
   const dispatch = useDispatch();
 
@@ -97,32 +99,44 @@ export default function UniversityForm(props) {
     const universityData = {
       // file: data.logo[0],
       university: JSON.stringify({
-        description: data.description,
-        email: data.email,
-        // logo: null,
         name: data.name,
-        phone: data.phone,
         shortName: data.shortName,
+        email: data.email,
+        description: data.description,
         website: data.website,
+        phone: data.phone,
+        location: [
+          {
+            district: {
+              id: data.district,
+            },
+            address: data.address,
+            note: data.note,
+          }
+        ]
+        // logo: null,
       }),
     };
     console.log("universityData", universityData);
 
     if (isAdd) {
       dispatch(
-        addUniversityByAdmin([{
-          universityData,
-          reset: reset({
-            description: "",
-            email: "",
-            logo: "",
-            name: "",
-            phone: "",
-            shortName: "",
-            website: "",
-          }),
-          setImage: setImage(cameraLogo),
-        }, userSessionStorage?.token])
+        addUniversityByAdmin([
+          {
+            universityData,
+            // reset: reset({
+            //   description: "",
+            //   email: "",
+            //   logo: "",
+            //   name: "",
+            //   phone: "",
+            //   shortName: "",
+            //   website: "",
+            // }),
+            setImage: setImage(cameraLogo),
+          },
+          userSessionStorage?.token,
+        ])
       );
     } else {
       const updateData = {
@@ -138,6 +152,15 @@ export default function UniversityForm(props) {
     setIsEdit(!isEdit);
   };
 
+  const typeList = [
+    { name: "Đại học", id: 1 },
+    { name: "Cao đẳng", id: 2 },
+    { name: "Trung cấp", id: 3 },
+
+  ];
+  const getDistrict = (id) => {
+    dispatch(getDistrictList(id))
+  }  
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -190,7 +213,7 @@ export default function UniversityForm(props) {
                     id="name"
                     type="text"
                     placeholder="Tên trường..."
-                    setValue={setValue}                    
+                    setValue={setValue}
                     register={register}
                     check={!isEdit}
                   >
@@ -218,6 +241,17 @@ export default function UniversityForm(props) {
                   >
                     {errors.phone?.message}
                   </CustomInput>
+                  <CustomSelectLocation
+                    id="province"
+                    className="user-form__input-item"
+                    label="Tỉnh"
+                    placeholder="Chọn tỉnh..."
+                    register={register}
+                    options={provinceList}
+                    onChange={(id) => getDistrict(id)}
+                  >
+                    {errors.province?.message}
+                  </CustomSelectLocation>
                 </div>
               </Grid>
               <Grid item md={6}>
@@ -244,7 +278,26 @@ export default function UniversityForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
-                  <MultiSelect />
+                  <CustomSelect
+                    id="type"
+                    className="user-form__input-item"
+                    label="Loại trường"
+                    placeholder="Chọn loại trường..."
+                    register={register}
+                    options={typeList}
+                  >
+                    {errors.type?.message}
+                  </CustomSelect>
+                  <CustomSelect
+                    id="district"
+                    className="user-form__input-item"
+                    label="Quận/huyện"
+                    placeholder="Chọn quận/huyện..."
+                    register={register}
+                    options={districtList}
+                  >
+                    {errors.district?.message}
+                  </CustomSelect>
                 </div>
               </Grid>
               <Grid item md={12}>

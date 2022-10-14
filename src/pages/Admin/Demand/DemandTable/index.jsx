@@ -6,7 +6,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../../../../components/Table";
-import { getAdminListDemand, searchDemand } from "src/store/slices/Admin/demand/adminDemandSlice";
+import { getAdminListDemand, searchDemand, updateDemandStatus } from "src/store/slices/Admin/demand/adminDemandSlice";
 
 const DemandTable = ({ searchValue }) => {
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
@@ -51,7 +51,19 @@ const DemandTable = ({ searchValue }) => {
       width: 120,
       renderCell: (params) => {
         const { row } = params;
-        const handleChangeStatus = (e) => {};
+        const handleChangeStatus = (e) => {
+          const updateData = {
+            university: JSON.stringify({
+              status: {
+                id: parseInt(e.target.value),
+              },
+            }),
+          uniId: row.id,
+        };
+        dispatch(updateDemandStatus([updateData, userSessionStorage?.token])).then(() => {
+          dispatch(getAdminListDemand([page, 10, userSessionStorage?.token]))
+        })
+        };
         return (
           <select
             // name={row.status}

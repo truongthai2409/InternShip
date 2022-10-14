@@ -242,15 +242,16 @@ export const updateUniversityStatus = createAsyncThunk(
 export const addUniversityByAdmin = createAsyncThunk(
   "university/addUniversityByAdmin",
   async (args) => {
+    console.log(args)
+    const {universityData} = args[0]
     const header = {
       headers: {
         Authorization: "Bearer " + args[1],
         "Content-Type": "multipart/form-data",
-
       },
     };
     const res = await axios
-      .post(`${baseURL}/api/r2s/admin/university`, args[0], header
+      .post(`${baseURL}/api/r2s/admin/university`, universityData, header
       )
       .then((res) => {
         console.log(res.data)

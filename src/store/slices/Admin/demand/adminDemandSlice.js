@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import notificationSlice from "../../notifications/notificationSlice";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -100,6 +101,32 @@ export const searchDemand = createAsyncThunk("user/searchDemand", async (args) =
     });
   return res;
 })
+
+
+export const updateDemandStatus = createAsyncThunk(
+  "demand/updatDemandStatus",
+  async (args, thunkAPI) => {
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[1],
+        "Content-Type": "application/json",
+      },
+    };
+    const { university, uniId } = args[0];
+    return await axios
+      .put(`${baseURL}/api/r2s/admin/university/status/${uniId}`, university, header)
+      .then((response) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Cập nhật nhu cầu thành công")
+        );
+      })
+      .catch((error) => {
+        console.log("error", error)
+        return error.response.data;
+      });
+  }
+);
+
 
 export const { updateIdJobActive, updateIndexCardActive } = demandSlice.actions;
 export default demandSlice;
