@@ -57,7 +57,6 @@ const PartnerPostList = (props) => {
     (state) => state.demand
   );
 
-    console.log(demandListUniversity )
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
   

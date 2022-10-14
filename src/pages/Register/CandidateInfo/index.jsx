@@ -40,7 +40,6 @@ const CandidateInfo = () => {
     navigate(-1);
   };
   const onSubmit = async (data) => {
-    console.log(data)
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,

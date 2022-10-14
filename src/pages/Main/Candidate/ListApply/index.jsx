@@ -14,6 +14,7 @@ const ListApply = () => {
   const { jobApplyList, jobApplyListHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
+
   const { index, id } = useSelector((state) => state.filter);
   const { jobListCompany } = useSelector((state) => state.job);
 
@@ -24,7 +25,7 @@ const ListApply = () => {
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("userPresent"));
     const page = {
-      user : user,
+      user: user,
       page: {
         no: 0,
         limit: 5,
@@ -37,21 +38,21 @@ const ListApply = () => {
   }, [dispatch, id]);
   useEffect(() => {
     setJobs(jobApplyList);
-    setJobDetail(jobApplyList[index]?.jobApp);
+    setJobDetail(jobApplyList && jobApplyList[index]?.jobApp || []);
   }, [index, jobApplyList]);
   const handleChange = (value) => {
     const user = JSON.parse(sessionStorage.getItem("userPresent"));
     const page = {
-      user : user,
+      user: user,
       page: {
         no: value - 1,
         limit: 5,
       },
     };
     dispatch(getJobApplyListByCandidate(page));
-  }
+  };
   useEffect(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
   return (
     <>
@@ -64,7 +65,7 @@ const ListApply = () => {
         </div>
         <div className="section__apply">
           <span>
-            Bạn đã ứng tuyển <span>{jobApplyList?.length}</span> việc làm
+            Bạn đã ứng tuyển <span>{jobApplyList?.length || 0}</span> việc làm
           </span>
         </div>
         <Grid className="wrapper" spacing={{ xs: 2 }} container>

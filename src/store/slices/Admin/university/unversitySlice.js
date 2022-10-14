@@ -165,7 +165,6 @@ export const updateUniversityInfo = createAsyncThunk(
         );
       })
       .catch((error) => {
-        console.log("error", error)
         return error.response.data;
       });
   }
@@ -233,7 +232,6 @@ export const updateUniversityStatus = createAsyncThunk(
         );
       })
       .catch((error) => {
-        console.log("error", error)
         return error.response.data;
       });
   }
@@ -254,11 +252,9 @@ export const addUniversityByAdmin = createAsyncThunk(
       .post(`${baseURL}/api/r2s/admin/university`, universityData, header
       )
       .then((res) => {
-        console.log(res.data)
         return res.data;
       })
       .catch((error) => {
-        console.log(error.response.data)
         return error.response.data;
       });
     return res;

@@ -63,17 +63,15 @@ const HRPostList = (props) => {
     setPage(value);
   };
 
-  const { jobListActived, jobListDisabled, totalPages } = useSelector(
+  const { jobListActived, jobListDisabled, totalPages , totalItemActive, totalItemDisable } = useSelector(
     (state) => state.job
   );
+
   const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
   useEffect(() => {
-    if (value === 0) {
       dispatch(getActivedJobListByUserId([userPresent.idUser, page, 5]));
-    } else {
       dispatch(getDisabledJobListByUserId([userPresent.idUser, page, 5]));
-    }
-  }, [value, page]);
+  }, [page, dispatch, userPresent.idUser]);
 
   return (
     <div className="hr-post__wrapper">
@@ -82,7 +80,7 @@ const HRPostList = (props) => {
           <StatisticUser
             title="Điểm khả dụng"
             firstObject={{
-              score: jobListActived?.length,
+              score: (totalItemActive + totalItemDisable),
               description: "Lượt đăng tuyển",
             }}
             secondObject={{
@@ -93,13 +91,11 @@ const HRPostList = (props) => {
           <StatisticUser
             title="Trạng thái đăng tuyển"
             firstObject={{
-              score: jobListActived?.filter((sp) =>
-                sp.status.name.includes("Active")
-              ).length,
+              score: totalItemActive,
               description: "Đang đăng tuyển",
             }}
             secondObject={{
-              score: jobListDisabled?.length,
+              score: totalItemDisable,
               description: "Đã đóng",
             }}
           />

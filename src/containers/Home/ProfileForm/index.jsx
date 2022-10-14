@@ -25,7 +25,6 @@ const ProfileForm = ({ profile }) => {
   const dispatch = useDispatch();
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const roleUser = userSessionStorage.role;
-  console.log(roleUser);
 
   useEffect(() => {
     setValue(

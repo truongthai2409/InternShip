@@ -95,7 +95,6 @@ export default function UniversityForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
-    console.log("data: ", data);
     const universityData = {
       // file: data.logo[0],
       university: JSON.stringify({
@@ -117,7 +116,6 @@ export default function UniversityForm(props) {
         // logo: null,
       }),
     };
-    console.log("universityData", universityData);
 
     if (isAdd) {
       dispatch(

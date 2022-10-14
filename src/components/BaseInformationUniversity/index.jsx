@@ -154,15 +154,12 @@ const BaseInformationUniversity = ({
                         marginLeft: `${mgLeft ? mgLeft : ""}`,
                       }}
                     >
-                      Việc làm đang tuyển
+                      Bài đăng của Partner
                     </h5>
                     <Grid
                       container
                       spacing={1}
                       sx={{
-                        // paddingLeft: `${pl}px`,
-                        // paddingRight: `${pr}px`,
-                        // marginLeft: `${ml}px`,
                         width: "auto",
                       }}
                     >

@@ -126,11 +126,10 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       }),
       fileSV: data.fileSV,
     };
-    console.log(demandData);
     const user = JSON.parse(sessionStorage.getItem("userPresent"));
     dispatch(addDemand([demandData, user]));
   };
-
+  
   if (status === "success") {
     navigate("/partner/post-list");
   }
@@ -153,7 +152,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 value="test"
                 height={50}
                 type="text"
-                placeholder="Vd. Thực tập thiết kế UI-UX..."
+                placeholder="Thực tập thiết kế UI-UX..."
                 register={register}
               >
                 {errors.jobName?.message}
@@ -177,7 +176,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   id="major"
                   arrList={majorList}
                   register={register}
-                  title="Chuyên ngành"
+                  placeholder="Vui lòng chọn..."
                   label="Chuyên ngành"
                 >
                   {errors.major?.message}
@@ -274,10 +273,11 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
               <InputFile
                 label="Danh sách sinh viên"
                 requirementField={true}
+                format="excel"
                 id="fileSV"
-                // format="excel"
                 setValue={setValue}
                 register={register}
+              
               >
                 {errors.fileSV?.message}
               </InputFile>

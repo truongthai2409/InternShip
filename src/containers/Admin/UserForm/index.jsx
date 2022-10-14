@@ -13,7 +13,6 @@ import { adminUpdateUser, createUser, getUserById, updateUser } from "src/store/
 import { toast } from "react-toastify";
 
 const UserForm = (props) => {
-  console.log(props)
   const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const UserForm = (props) => {
     resolver: yupResolver(schema),
   });
 
-  console.log("errors", errors);
   useEffect(() => {
     dispatch(getUserById([idRow, userSessionStorage?.token]));
   }, [dispatch, idRow, userSessionStorage?.token]);
@@ -52,7 +50,6 @@ const UserForm = (props) => {
   }, [isUpdate, setValue, user]);
 
   const onSubmit = async (data) => {
-    console.log("create");
     const userData = {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
@@ -71,7 +68,6 @@ const UserForm = (props) => {
         },
       }),
     };
-    console.log("userData",userData)
     try {
       const res = await dispatch(
         createUser([userData, userSessionStorage?.token])
@@ -155,7 +151,7 @@ const UserForm = (props) => {
                 label="Tên tài khoản"
                 className="user-form__input-item"
                 type="text"
-                placeholder="vd. abcdef..."
+                placeholder="Abcdef..."
                 register={register}
               >
                 {errors.username?.message}
@@ -165,7 +161,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Email"
                 type="email"
-                placeholder="vd. abc@gmail.com..."
+                placeholder="abc@gmail.com..."
                 register={register}
               >
                 {errors.email?.message}
@@ -179,7 +175,7 @@ const UserForm = (props) => {
                   label="Mật khẩu"
                   type="password"
                   visibility={true}
-                  placeholder="vd. Abc123..."
+                  placeholder="Abc123..."
                   register={register}
                 >
                   {errors.password?.message}
@@ -190,7 +186,7 @@ const UserForm = (props) => {
                   label="Xác nhận mật khẩu"
                   type="password"
                   visibility={true}
-                  placeholder="vd. Abc123..."
+                  placeholder="Abc123..."
                   register={register}
                 >
                   {errors.confirmPassword?.message}
@@ -218,7 +214,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Họ"
                 type="text"
-                placeholder="vd. Nguyễn Văn..."
+                placeholder="Nguyễn Văn..."
                 register={register}
               >
                 {errors.firstName?.message}
@@ -228,7 +224,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Tên"
                 type="text"
-                placeholder="vd. An..."
+                placeholder="An..."
                 register={register}
               >
                 {errors.lastName?.message}
@@ -240,7 +236,7 @@ const UserForm = (props) => {
                 className="user-form__input-item"
                 label="Số điện thoại"
                 type="tel"
-                placeholder="vd. 0964xxx473..."
+                placeholder="0964xxx473..."
                 register={register}
               >
                 {errors.phone?.message}

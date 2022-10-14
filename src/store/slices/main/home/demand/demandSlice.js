@@ -37,9 +37,17 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
-        state.status = "success";
-        state.demandListUniversityActive.unshift(payload);
-        toast.success("Đăng danh sách thực tập thành công!");
+        if(payload.httpCode === 500) {
+          state.status = payload.message
+          toast.error("Đăng danh sách thực tập thất bại!");
+          toast.error(`Lỗi: ${payload.message}`);
+        } else { 
+          
+          state.status = "success"
+          state.demandListUniversityActive.unshift(payload);
+          toast.success("Đăng danh sách thực tập thành công!");
+        }
+
       });
     builder
       .addCase(getDemandList.pending, (state, { payload }) => {

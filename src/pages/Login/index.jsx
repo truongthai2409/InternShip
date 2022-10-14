@@ -93,7 +93,8 @@ const Login = () => {
           setValue={setValue}
           register={register}
           requirementField={false}
-        >
+          className={isCheck ? "bgcIsCheck" : ""}
+          >
           {errors.username?.message}
         </CustomInput>
         <CustomInput
@@ -105,6 +106,7 @@ const Login = () => {
           register={register}
           visibility={true}
           requirementField={false}
+          className={isCheck ? "bgcIsCheck" : ""}
         >
           {errors.password?.message}
         </CustomInput>

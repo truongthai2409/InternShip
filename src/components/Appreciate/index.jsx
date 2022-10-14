@@ -77,6 +77,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
         comment: data.comment,
         score: valueRating,
         hide: checked,
+        createDate : appreciate.createDate
       },
     };
 
@@ -120,7 +121,6 @@ const Appreciate = ({ appreciate, fontSize }) => {
 
   const openAnchorEl = Boolean(anchorEl);
   // const id = openAnchorEl ? "simple-popover" : undefined;
-
   return (
     <Box
       sx={{
@@ -304,7 +304,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                 label="Sửa tiêu đề "
                 id="title"
                 type="text"
-                placeholder="Vd. Rất tuyệt..."
+                placeholder="Rất tuyệt..."
                 register={register}
                 requirementField={false}
                 setValue={setValue}

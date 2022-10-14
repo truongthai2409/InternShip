@@ -37,10 +37,12 @@ const InputFile = ({
       break;
     case "excel":
       accept = ".xlsx";
+      text = "Chỉ hỗ trợ file .xlxs"
       break;
     default: // all of file (except image)
       accept = ".docx, .pdf, .xlsx";
       text = "Chỉ hỗ trợ file .docx, .pdf, .xlxs";
+      break;
   }
 
   const [imgSrc, setImgSrc] = useState("");

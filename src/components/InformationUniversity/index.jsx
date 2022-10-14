@@ -14,6 +14,7 @@ import Button from "../Button";
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail, detailJob = false }) => {
+
   const handleApplyDemandUni = async (e) => {};
 
   return (
@@ -65,10 +66,12 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               <div className="detail__card-list-students-link">
                 <a
                   className="list-students-file"
-                  href={`${baseURL}${jobDetail?.students}`}
+                  href={`${jobDetail?.students}`}
                   target="_blank"
+                  rel="noreferrer"
+                  download
                 >
-                  Danh sách sinh viên
+                  Tải danh sách sinh viên
                 </a>
               </div>
             </Typography>
