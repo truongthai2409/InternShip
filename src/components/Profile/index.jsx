@@ -12,23 +12,23 @@ import "./reponsive.scss"
 
 
 const Profile = () => {
-  const user = JSON.parse(sessionStorage.getItem("userPresent")).role;
-  const { profile } = useSelector((state) => state.user);
+
+  const { user } = useSelector((state) => state.profile);
 
   return (
     <div className='profile__wrapper'>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={5.5} xl={4}>
-          <Components profile={profile} />
+          <Components profile={user} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6.5} xl={8}>
-          <ProfileForm profile={profile}/>
+          <ProfileForm profile={user}/>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           {user === "Role_HR" ? (
-            <ProfileContainer profile={profile?.company} />
+            <ProfileContainer profile={user?.company} />
           ) : user === "Role_Partner" ? (
-            <ProfileContainer profile={profile?.universityDTO} />
+            <ProfileContainer profile={user?.universityDTO} />
           ) : (
             ""
           )}

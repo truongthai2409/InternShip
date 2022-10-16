@@ -1,14 +1,10 @@
-import { useEffect } from "react";
 import PropTypes from "prop-types";
-import // useSelector,
-"react-redux";
-// import { getJobList } from "../../store/slices/main/home/job/jobSlice";
-// import moment from "moment";
-import "./styles.scss";
-import Detail from "./component";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import Detail from "./component";
+import "./styles.scss";
 
 const DetailCard = ({
   jobDetail,
@@ -21,22 +17,29 @@ const DetailCard = ({
 }) => {
   const { appreciateList } = useSelector((state) => state.appreciate);
   const dispatch = useDispatch();
-  const idCompany = jobDetail?.universityDTO?.id || jobDetail?.hr?.company?.id || jobDetail?.jobApp?.hr?.company?.id;
   useEffect(() => {
+    let idCompany =
+      jobDetail?.universityDTO?.id ||
+      jobDetail?.hr?.company?.id ||
+      jobDetail?.jobApp?.hr?.company?.id;
     dispatch(getAppreciateByCompany(idCompany));
     dispatch(getJobByCompany(idCompany));
-  }, [dispatch, idCompany]);
+  }, [
+    dispatch,
+    jobDetail?.hr?.company?.id,
+    jobDetail?.jobApp?.hr?.company?.id,
+    jobDetail?.universityDTO?.id,
+  ]);
 
-  const data = [];
-  for (let i = 0; i < appreciateList?.length; i++) {
-    data.push(appreciateList[i].score);
-  }
-
+  const data = [appreciateList?.map((item) => {
+    return item?.score;
+  })]
+  console.log(appreciateList)
   const res = data?.reduce((total, currentValue) => {
     return total + currentValue;
   }, 0);
   const rating = (res / data?.length).toFixed(2);
-  
+
   return (
     <div>
       {jobList && jobList.length > 0 ? (

@@ -43,7 +43,9 @@ const Password = () => {
     dispatch(
       changePassword({
         dataChangePassword: dataSubmit,
-        token: JSON.parse(sessionStorage.getItem("userPresent")).token,
+        token:
+          JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+          JSON.parse(localStorage.getItem("userPresent"))?.token,
       })
     );
   };

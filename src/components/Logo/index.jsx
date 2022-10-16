@@ -2,11 +2,13 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import logoUser from "../../assets/img/Logo_user.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeFilterChange } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import { indexFilterChange, pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 
 const Logo = ({ id }) => {
   const location = useLocation();
+  const {role} = useSelector(state => state.profile)
 
   const navigate = useNavigate();
   const roleList = {
@@ -16,8 +18,6 @@ const Logo = ({ id }) => {
   };
   const dispatch = useDispatch()
   const handleClickGoHome = async () => {
-    dispatch(changeFilterChange(false));
-    const profile = JSON.parse(sessionStorage.getItem("userPresent"));
     if (
       location.pathname === "/" ||
       location.pathname === "/candidate" ||
@@ -26,8 +26,11 @@ const Logo = ({ id }) => {
     ) {
       return window.location.reload();
     }
-    if (profile && profile.role !== null) {
-      switch (profile.role) {
+    dispatch(indexFilterChange(0))
+    dispatch(changeFilterChange(false));
+    dispatch(pageFilterChange(1));
+    if (role) {
+      switch (role) {
         case "Role_HR":
           navigate(`/hr`, { replace: true });
           break;

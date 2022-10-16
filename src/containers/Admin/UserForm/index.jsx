@@ -9,11 +9,18 @@ import { genderList, schema } from "./data";
 import InputFile from "src/components/InputFile";
 import CustomSelect from "src/components/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";
-import { adminUpdateUser, createUser, getUserById, updateUser } from "src/store/slices/Admin/user/userSlice";
+import {
+  adminUpdateUser,
+  createUser,
+  getUserById,
+  updateUser,
+} from "src/store/slices/Admin/user/userSlice";
 import { toast } from "react-toastify";
 
 const UserForm = (props) => {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -29,14 +36,14 @@ const UserForm = (props) => {
   useEffect(() => {
     dispatch(getUserById([idRow, userSessionStorage?.token]));
   }, [dispatch, idRow, userSessionStorage?.token]);
-  
-  useEffect(()=>{
-    setValue("isUpdate", isUpdate)
-  },[isUpdate, setValue])
 
   useEffect(() => {
-    setValue("isUpdate", isUpdate)
-  })
+    setValue("isUpdate", isUpdate);
+  }, [isUpdate, setValue]);
+
+  useEffect(() => {
+    setValue("isUpdate", isUpdate);
+  });
   useEffect(() => {
     if (isUpdate) {
       setValue("username", user?.username);
@@ -75,17 +82,15 @@ const UserForm = (props) => {
 
       if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Tạo tài khoản thành công");
-      }
-      else {
+      } else {
         toast.error("Tạo tài khoản thất bại");
       }
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
     }
   };
 
   const onUpdate = async (data) => {
-
     const userData = {
       fileAvatar: data.avatar[0] || null,
       candidate: JSON.stringify({
@@ -122,7 +127,7 @@ const UserForm = (props) => {
     { name: "Ứng viên", id: 3 },
     { name: "Cộng tác viên", id: 4 },
   ];
-  
+
   return (
     <>
       <form

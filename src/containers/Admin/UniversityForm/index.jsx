@@ -31,7 +31,9 @@ const baseURL = process.env.REACT_APP_API;
 
 export default function UniversityForm(props) {
   const { isAdd } = props;
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
 
   const { universityDetail } = useSelector((state) => state.university);
   const { districtList, provinceList } = useSelector((state) => state.location);
@@ -111,8 +113,8 @@ export default function UniversityForm(props) {
             },
             address: data.address,
             note: data.note,
-          }
-        ]
+          },
+        ],
         // logo: null,
       }),
     };
@@ -122,15 +124,15 @@ export default function UniversityForm(props) {
         addUniversityByAdmin([
           {
             universityData,
-            // reset: reset({
-            //   description: "",
-            //   email: "",
-            //   logo: "",
-            //   name: "",
-            //   phone: "",
-            //   shortName: "",
-            //   website: "",
-            // }),
+            reset: reset({
+              description: "",
+              email: "",
+              logo: "",
+              name: "",
+              phone: "",
+              shortName: "",
+              website: "",
+            }),
             setImage: setImage(cameraLogo),
           },
           userSessionStorage?.token,
@@ -154,11 +156,10 @@ export default function UniversityForm(props) {
     { name: "Đại học", id: 1 },
     { name: "Cao đẳng", id: 2 },
     { name: "Trung cấp", id: 3 },
-
   ];
   const getDistrict = (id) => {
-    dispatch(getDistrictList(id))
-  }  
+    dispatch(getDistrictList(id));
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

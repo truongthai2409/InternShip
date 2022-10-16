@@ -2,15 +2,21 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { indexFilterChange, pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 import "./responsive.scss";
 import "./styles.scss";
 
 const HeaderWithHR = (props) => {
   const location = useLocation();
   const pathUrl = location.pathname;
-
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    window.scrollTo({ top : 0, left : 0, behavior : "smooth"})
+    dispatch(indexFilterChange(0))
+    dispatch(pageFilterChange(1));
+  }
   return (
     <div className="header__hr">
       <Link
@@ -26,9 +32,7 @@ const HeaderWithHR = (props) => {
         <span className="header__hr-post-post">Đăng tuyển</span>
       </Link>
       <Link
-      onClick={()=>{
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }}
+      onClick={()=>handleClick()}
         to="list"
         className={
           pathUrl === "/hr/list" ? "header__hr-post active" : "header__hr-post"

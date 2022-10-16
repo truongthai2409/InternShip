@@ -11,10 +11,10 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 const ListApply = () => {
   TabTitle("Công việc ứng tuyển");
 
+  const { user } = useSelector((state) => state.profile);
   const { jobApplyList, jobApplyListHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
-
   const { index, id } = useSelector((state) => state.filter);
   const { jobListCompany } = useSelector((state) => state.job);
 
@@ -22,28 +22,14 @@ const ListApply = () => {
   const [jobDetail, setJobDetail] = useState([]);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
-    const page = {
-      user: user,
-      page: {
-        no: 0,
-        limit: 5,
-      },
-    };
-    dispatch(getJobApplyListByCandidate(page));
-  }, [dispatch, id]);
-  useEffect(() => {
-    dispatch(getJobByCompany(id));
-  }, [dispatch, id]);
-  useEffect(() => {
-    setJobs(jobApplyList);
-    setJobDetail(jobApplyList && jobApplyList[index]?.jobApp || []);
-  }, [index, jobApplyList]);
+
   const handleChange = (value) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const token =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     const page = {
       user: user,
+      token: token.token,
       page: {
         no: value - 1,
         limit: 5,
@@ -51,6 +37,14 @@ const ListApply = () => {
     };
     dispatch(getJobApplyListByCandidate(page));
   };
+
+  useEffect(() => {
+    dispatch(getJobByCompany(id));
+  }, [dispatch, id]);
+  useEffect(() => {
+    setJobs(jobApplyList);
+    setJobDetail((jobApplyList && jobApplyList[index]?.jobApp) || []);
+  }, [index, jobApplyList]);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);

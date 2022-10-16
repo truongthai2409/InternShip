@@ -1,28 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDispatch } from "react-redux";
 
-import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer'
-import Modal from '../../../components/Modal'
-import DemandTable from './DemandTable'
-import DemandForm from '../../../containers/Admin/DemandForm'
-import { searchDemand } from 'src/store/slices/Admin/demand/adminDemandSlice';
+import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
+import Modal from "../../../components/Modal";
+import DemandTable from "./DemandTable";
+import DemandForm from "../../../containers/Admin/DemandForm";
+import { searchDemand } from "src/store/slices/Admin/demand/adminDemandSlice";
 
 export default function Demand() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
 
   const dispatch = useDispatch();
 
   const handleSearch = () => {
     dispatch(searchDemand([searchValue, 1, 10, userSessionStorage?.token]));
-  }
+  };
 
   const handleOpenModal = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   return (
     <>
@@ -35,12 +37,11 @@ export default function Demand() {
         onClick={handleOpenModal}
         onSearch={handleSearch}
         onChange={(e) => setSearchValue(e.target.value)}
-
       />
-      <DemandTable searchValue={searchValue}/>
+      <DemandTable searchValue={searchValue} />
       <Modal modalTitle="Thêm bài đăng" open={open} setOpen={setOpen}>
         <DemandForm isAdd={true} />
       </Modal>
     </>
-  )
+  );
 }

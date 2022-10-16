@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getUserById } from "src/store/slices/main/user/userSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import Button from "../../components/Button/index";
 import CustomCheckbox from "../../components/CustomCheckbox";
@@ -17,9 +18,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isCheck, setIsCheck] = useState(
-    localStorage.getItem("saveLogin") ? true : false
-  );
+  const [isCheck, setIsCheck] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,19 +29,6 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    if (isCheck) {
-      setValue(
-        "username",
-        JSON.parse(localStorage.getItem("saveLogin")).username
-      );
-      setValue(
-        "password",
-        JSON.parse(localStorage.getItem("saveLogin")).password
-      );
-    }
-  }, []);
-
   const onSubmit = async (data) => {
     const userData = {
       username: data.username,
@@ -51,6 +37,20 @@ const Login = () => {
     try {
       const res = await dispatch(loginUser(userData));
       if (res.payload.token) {
+        await dispatch(
+          getUserById(
+            JSON.stringify({ role: res.payload.role, ids: res.payload.idUser })
+          )
+        );
+        if (isCheck) {
+          localStorage.setItem(
+            "userPresent",
+            JSON.stringify({
+              token: res.payload.token,
+              ids: res.payload.idUser,
+            })
+          );
+        }
         const role = res.payload.role;
         switch (role) {
           case "Role_Partner":
@@ -63,19 +63,11 @@ const Login = () => {
             navigate(`/candidate`, { replace: true });
             break;
           default:
+            navigate("/");
         }
       }
     } catch (error) {
       toast.error(error);
-    }
-    if (isCheck) {
-      const loginInfor = {
-        username: data.username,
-        password: data.password,
-      };
-      localStorage.setItem("saveLogin", JSON.stringify(loginInfor));
-    } else {
-      localStorage.removeItem("saveLogin");
     }
   };
   const handleSaveLogin = (e) => {
@@ -94,7 +86,7 @@ const Login = () => {
           register={register}
           requirementField={false}
           className={isCheck ? "bgcIsCheck" : ""}
-          >
+        >
           {errors.username?.message}
         </CustomInput>
         <CustomInput
@@ -111,7 +103,7 @@ const Login = () => {
           {errors.password?.message}
         </CustomInput>
         <div className="login-form__save-pass" onChange={handleSaveLogin}>
-          <CustomCheckbox checked={isCheck} label="Lưu đăng nhập" />
+          <CustomCheckbox checked={isCheck} label="Lưu phiên đăng nhập" />
         </div>
         <div className="login-form__btn">
           <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>

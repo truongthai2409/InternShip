@@ -35,13 +35,15 @@ const ListCollapse = (props) => {
       aria-labelledby="nested-list-subheader"
     >
       <ListItemButton className="listButton" onClick={handleClick}>
-        <ListItemText className="listTitle" primary={`${props.title}`} 
+        <ListItemText
+          className="listTitle"
+          primary={`${props.title}`}
           sx={{
             "& span": {
               fontSize: "16px",
               color: "#04bf8a",
               fontWeight: "700",
-            }
+            },
           }}
         />
         {open ? <ExpandLess /> : <ExpandMore />}

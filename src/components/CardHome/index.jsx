@@ -1,71 +1,53 @@
-import React, { useEffect } from "react";
-import TagName from "../TagName";
-import "./styles.scss";
-import Rating from "@mui/material/Rating";
-import ButtonMark from "../ButtonMark";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
-import clsx from "clsx";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateIdJobActive,
-  updateIndexCardActive,
-} from "../../store/slices/main/home/job/jobSlice";
-import { getMarkByUser } from "src/store/slices/main/mark/markSlice";
-import { updateIndexPartnerCardActive } from "src/store/slices/main/home/demand/demandSlice";
 import PeopleIcon from "@mui/icons-material/People";
+import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import { Tooltip } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import clsx from "clsx";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   idFilterChange,
   indexFilterChange,
 } from "src/store/slices/main/home/filter/filterSlices";
+import { getAllJobCare } from "src/store/slices/main/home/job/jobCandidateSlice";
+import ButtonMark from "../ButtonMark";
+import TagName from "../TagName";
+import "./styles.scss";
 
-const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE || 5;
 const CardHome = (props) => {
   const dispatch = useDispatch();
-
-  const { careListOfPrivate } = useSelector((state) => state.mark);
-
-  const { profile } = useSelector((state) => state.user);
-
-  let isMark = careListOfPrivate.filter(
-    (job) => job?.jobCare?.id === props?.id
-  );
-
-  const isMarkLength = isMark && isMark.length > 0 ? true : false;
-
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
-    const dataGetMarkByUser = {
-      userName: user?.username,
-      page: {
-        no: 0,
-        limit: limit,
-      },
-    };
-    if (user?.role === "Role_Candidate") {
-      dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
-    }
-  }, [dispatch]);
-
-  React.useEffect(() => {
-    if (props.index === 0) {
-      dispatch(updateIdJobActive(props.id));
-    }
-  }, [dispatch, props.id, props.index]);
+  const [isMarkLength, setIsMarkLength] = useState();
+  const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
+  const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const handleClick = () => {
     if (window.innerWidth < 1199) {
-      navigate(`/candidate/detail_job/${props.id}`);
+      navigate(`/detail_job/${props.id}`);
     }
     dispatch(indexFilterChange(props.index));
-    dispatch(idFilterChange(props.id));
-    dispatch(updateIndexCardActive(props.index));
-    dispatch(updateIndexPartnerCardActive(props.index));
-    dispatch(updateIdJobActive(props.id));
+    dispatch(idFilterChange(props.idCompany));
   };
+  useEffect(() => {
+    const userStorage =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
+    const dispatchJobCAre = {
+      user: user,
+      token: userStorage.token,
+      page: {
+        no: 0,
+        limit: 1000,
+      },
+    };
+    dispatch(getAllJobCare(dispatchJobCAre));
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    let isMark = allJobCare.filter((job) => job?.jobCare?.id === props?.id);
+    setIsMarkLength(isMark.length > 0 ? true : false);
+  }, [allJobCare, props?.id]);
   return (
     <div
       onClick={handleClick}
@@ -120,12 +102,12 @@ const CardHome = (props) => {
               width="32px"
               fontSize="18px"
               jobId={props.id}
-              isMark={isMarkLength}
+              isMark={false}
             />
           </div>
         ) : (
           <>
-            {profile?.user?.role?.name?.includes("Role_Candidate") ? (
+            {user?.user?.role?.name?.includes("Role_Candidate") ? (
               <ButtonMark
                 height="32px"
                 width="32px"
@@ -140,7 +122,7 @@ const CardHome = (props) => {
                   width="32px"
                   fontSize="18px"
                   jobId={props.id}
-                  isMark={isMarkLength}
+                  isMark={false}
                 />
               </div>
             )}

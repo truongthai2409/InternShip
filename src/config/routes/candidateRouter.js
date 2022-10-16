@@ -9,44 +9,45 @@ import CandidateViewList from "src/pages/Main/Candidate/ViewList";
 import DetailHome from "../../pages/Main/DetailHome";
 
 const candidateRouter = [
-    {
-        path: "/candidate",
-        element: <MainLayout />,
-        children: [
-            {
-                path: "",
-                Component: CandidateHome,
-            },
-            {
-                path: "view-list-care",
-                Component: CandidateViewList,
-            },
-            {
-                path: "view-list-apply",
-                Component: ListApply,
-            },
-            {
-                path: "save-profile",
-                Component: CandidateSaveProfile,
-            },
-            {
-                path: "information_company/:keyword",
-                Component: CandidateInformationCompany,
-            },
-            {
-                path: "profile",
-                Component: Profile,
-            },
-            {
-                path: "setting",
-                Component: Password,
-            },
-            {
-                path: "detail_job/:keyword",
-                Component: DetailHome,
-            },
-        ]
-    }
-]
+  {
+    role: "Role_Candidate",
+    path: "/candidate",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        Component: CandidateHome,
+      },
+      {
+        path: "view-list-care",
+        Component: CandidateViewList,
+      },
+      {
+        path: "view-list-apply",
+        Component: ListApply,
+      },
+      {
+        path: "save-profile",
+        Component: CandidateSaveProfile,
+      },
+      {
+        path: "information_company/:keyword",
+        Component: CandidateInformationCompany,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+      },
+      {
+        path: "setting",
+        Component: Password,
+      },
+      {
+        path: "detail_job/:keyword",
+        Component: DetailHome,
+      },
+    ],
+  },
+];
 
-export default candidateRouter
+export default candidateRouter;

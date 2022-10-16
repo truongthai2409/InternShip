@@ -29,7 +29,8 @@ const appreciateSlice = createSlice({
 export const getAppreciateByCompany = createAsyncThunk(
   "appreciate/getAppreciateByCompany",
   async (idCompany = 1) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token;
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+   JSON.parse(localStorage.getItem("userPresent"))?.token;
     const header = {
       headers: {
         Authorization: "Bearer " + user,
@@ -52,7 +53,8 @@ export const getAppreciateByCompany = createAsyncThunk(
 export const addAppreciate = createAsyncThunk(
   "appreciate/addAppreciate",
   async (data) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token;
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+   JSON.parse(localStorage.getItem("userPresent"))?.token;
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + user,
@@ -74,7 +76,8 @@ export const addAppreciate = createAsyncThunk(
 export const updateAppreciate = createAsyncThunk(
   "appreciate/updateAppreciate",
   async (data) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token;
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+   JSON.parse(localStorage.getItem("userPresent"))?.token;
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + user,
@@ -98,7 +101,8 @@ export const updateAppreciate = createAsyncThunk(
 export const deleteAppreciate = createAsyncThunk(
   "appreciate/deleteAppreciate",
   async (id) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token;
+    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+   JSON.parse(localStorage.getItem("userPresent"))?.token;
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + user,

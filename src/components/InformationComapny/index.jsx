@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Button from "../Button";
-import WorkIcon from "@mui/icons-material/Work";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
-import Rating from "@mui/material/Rating";
-import { Icon } from "@mui/material";
+import WorkIcon from "@mui/icons-material/Work";
+import { Icon, Typography } from "@mui/material";
 import moment from "moment";
-import { Typography } from "@mui/material";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import { getApplyListByIdCandidate } from "src/store/slices/main/candidate/apply/applySlice";
+import { getAllJobApply } from "src/store/slices/main/home/job/jobCandidateSlice";
+import Button from "../Button";
 import "./styles.scss";
-import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 
 const InformationCompany = ({
   jobDetail,
@@ -22,15 +18,14 @@ const InformationCompany = ({
   demandPartner = false,
 }) => {
   const [check, setCheck] = useState(false);
-  const { profile } = useSelector((state) => state.user);
-  let { applyList } = useSelector((state) => state.apply);
-  const { jobApplyList, jobApplyListHavePage } = useSelector((state) => state.jobCandidateSlice);
+  const { user } = useSelector((state) => state.profile);
+  const { allJobApply } = useSelector((state) => state.jobCandidateSlice);
 
   const dispatch = useDispatch();
   const handleAddJob = async (e) => {
     e.stopPropagation();
-    if (profile?.user?.id) {
-      if (!profile?.cv) {
+    if (user) {
+      if (!user?.cv) {
         toast.error("Bạn chưa có CV, vui lòng cập nhật");
       } else {
         const applyData = {
@@ -39,14 +34,17 @@ const InformationCompany = ({
               id: jobDetail.id,
             },
             candidate: {
-              id: profile.id,
+              id: user.id,
             },
-            referenceLetter: `Đơn ứng tuyển ${profile?.user?.username}`,
+            referenceLetter: `Đơn ứng tuyển ${user?.user?.username}`,
           }),
-          fileCV: profile.cv,
+          fileCV: user.cv,
         };
         const resApply = await dispatch(addApply(applyData));
-        if (resApply.payload.status === 200 || resApply.payload.status === 201) {
+        if (
+          resApply.payload.status === 200 ||
+          resApply.payload.status === 201
+        ) {
           toast.success("Đã nộp CV thành công");
           setCheck(true);
         }
@@ -55,21 +53,30 @@ const InformationCompany = ({
       toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
     }
   };
-
+  useEffect(() => {
+    const userStorage =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
+    const dispatchJobApply = {
+      user: user,
+      token: userStorage.token,
+      page: {
+        no: 0,
+        limit: 1000,
+      },
+    };
+    dispatch(getAllJobApply(dispatchJobApply));
+  }, [dispatch, user]);
   useEffect(() => {
     setCheck(
-      jobApplyList
+      allJobApply
         ?.map((item) => {
           return item.jobApp?.id;
         })
         .includes(jobDetail?.id)
     );
-  }, [jobDetail, jobApplyList]);
+  }, [jobDetail, allJobApply]);
 
-  useEffect(()=>{
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))
-    dispatch(getJobApplyListByCandidate(user)) 
-},[dispatch])
   return (
     <div>
       {jobDetail && (
@@ -186,15 +193,18 @@ const InformationCompany = ({
               </Typography>
             </div>
           </div>
-          {profile?.user?.role?.name==="Role_Candidate" ? 
-          <div className="detail__card-5">
-          <Button
-            name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
-            onClick={handleAddJob}
-            disabled={check ? true : false}
-            bheight="35px"
-          ></Button>
-        </div> : ""}
+          {user?.user?.role?.name === "Role_Candidate" ? (
+            <div className="detail__card-5">
+              <Button
+                name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
+                onClick={handleAddJob}
+                disabled={check ? true : false}
+                bheight="35px"
+              ></Button>
+            </div>
+          ) : (
+            ""
+          )}
         </>
       )}
       {jobDetailById && (

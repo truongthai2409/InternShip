@@ -6,23 +6,30 @@ import { IconButton, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../../../../components/Table";
-import { getAdminListDemand, searchDemand, updateDemandStatus } from "src/store/slices/Admin/demand/adminDemandSlice";
+import {
+  getAdminListDemand,
+  searchDemand,
+} from "src/store/slices/Admin/demand/adminDemandSlice";
 
 const DemandTable = ({ searchValue }) => {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { demandList, totalPages, totalItems} = useSelector(
+  const { demandList, totalPages, totalItems } = useSelector(
     (state) => state.adminDemand
   );
 
   useEffect(() => {
-    if ( searchValue === "") {
+    if (searchValue === "") {
       dispatch(getAdminListDemand([page, 10]));
     } else {
-      dispatch(searchDemand([searchValue, page, 10, userSessionStorage?.token]))
+      dispatch(
+        searchDemand([searchValue, page, 10, userSessionStorage?.token])
+      );
     }
   }, [page]);
 

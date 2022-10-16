@@ -60,7 +60,9 @@ const Detail = ({
   const [jobType, setJobType] = useState({});
   const [jobPosition, setJobPosition] = useState({});
   const [major, setMajor] = useState({});
-  const user = JSON.parse(sessionStorage.getItem("userPresent"));
+  const user =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
     if (jobDetail) {
       setJobType(jobDetail?.jobType);

@@ -14,70 +14,70 @@ import AdminRouterLayout from "../../Layouts/Admin/index";
 import Setting from "src/pages/Admin/Setting";
 import Statistic from "src/components/Statistic";
 
-
 const adminRouter = [
-    {
-        path: "/admin",
-        element: <AdminRouterLayout />,
-        index: <Dashboard />,
-        children: [
-            {
-                path: "",
-                Component: Dashboard,
-            },
-            {
-                path: "statistical",
-                Component: Statistic,
-              },
-            {
-                path: "user",
-                Component: User,
-            },
-            {
-                path: "university",
-                Component: University,
-            },
-            {
-                path: "university/:uniId",
-                Component: UniversityDetail,
-            },
-            {
-                path: "company",
-                Component: Company,
-            },
-            {
-                path: "setting",
-                Component: Setting,
-            },
-            {
-                path: "company/:comid",
-                Component: CompanyDetail,
-            },
-            {
-                path: "major",
-                Component: Major,
-            },
-            {
-                path: "major/:id",
-                Component: MajorDetail,
-            },
-            {
-                path: "user/:username",
-                Component: UserDetail,
-            },
-            {
-                path: "demand",
-                Component: Demand,
-            },
-            {
-                path: "demand/:demandId",
-                Component: DemandDetail,
-            },
-            {
-                path: "*",
-                Component: NotFound,
-            }
-        ]
-    }
-]
-export default adminRouter
+  {
+    role: "Role_Admin",
+    path: "/admin",
+    element: <AdminRouterLayout />,
+    index: <Dashboard />,
+    children: [
+      {
+        path: "",
+        Component: Dashboard,
+      },
+      {
+        path: "statistical",
+        Component: Statistic,
+      },
+      {
+        path: "user",
+        Component: User,
+      },
+      {
+        path: "university",
+        Component: University,
+      },
+      {
+        path: "university/:uniId",
+        Component: UniversityDetail,
+      },
+      {
+        path: "company",
+        Component: Company,
+      },
+      {
+        path: "setting",
+        Component: Setting,
+      },
+      {
+        path: "company/:comid",
+        Component: CompanyDetail,
+      },
+      {
+        path: "major",
+        Component: Major,
+      },
+      {
+        path: "major/:id",
+        Component: MajorDetail,
+      },
+      {
+        path: "user/:username",
+        Component: UserDetail,
+      },
+      {
+        path: "demand",
+        Component: Demand,
+      },
+      {
+        path: "demand/:demandId",
+        Component: DemandDetail,
+      },
+      {
+        path: "*",
+        Component: NotFound,
+      },
+    ],
+  },
+];
+export default adminRouter;

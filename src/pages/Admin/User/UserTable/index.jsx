@@ -17,7 +17,9 @@ import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
 import "./styles.scss";
 
 const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [confirmation, setConfirmation] = useState({});
@@ -28,11 +30,10 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   useEffect(() => {
     if (searchValue === "") {
       dispatch(getUserList([page, 10, userSessionStorage?.token]));
+    } else {
+      dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]));
     }
-    else {
-      dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]))
-    }
-  }, [page, onSearch, dispatch, userSessionStorage?.token]);
+  }, [page, onSearch, dispatch, userSessionStorage?.token, searchValue]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -50,9 +51,11 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
       renderCell: (params) => {
         const { row } = params;
         const handleDeleteUser = async () => {
-          dispatch(deleteUser([row.username, userSessionStorage?.token])).then(() => {
-            dispatch(getUserList([page, 10,userSessionStorage?.token]))
-          })
+          dispatch(deleteUser([row.username, userSessionStorage?.token])).then(
+            () => {
+              dispatch(getUserList([page, 10, userSessionStorage?.token]));
+            }
+          );
         };
 
         const handleVerifyUser = () => {
@@ -61,9 +64,11 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
             text: "Xác minh tài khoản",
             nameBtnYes: "Xác minh",
             func: () => {
-              dispatch(verifyUser([row.username, userSessionStorage?.token])).then(() => {
-                dispatch(getUserList([page, 10,userSessionStorage?.token]));
-              })
+              dispatch(
+                verifyUser([row.username, userSessionStorage?.token])
+              ).then(() => {
+                dispatch(getUserList([page, 10, userSessionStorage?.token]));
+              });
               setOpenConfirmation(false);
             },
             setOpen: setOpenConfirmation,
@@ -77,11 +82,11 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
           setIsUpdate(true);
           setIdRow(row.id);
         };
-        
+
         return (
           <>
             <Tooltip title="Chỉnh sửa">
-              <IconButton onClick={() => (handleOpenUpdateModal())}>
+              <IconButton onClick={() => handleOpenUpdateModal()}>
                 <img src={IconEdit} alt="" />
               </IconButton>
             </Tooltip>

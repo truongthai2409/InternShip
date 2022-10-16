@@ -17,11 +17,13 @@ import {
 import ProfileTable from "../../../../components/ProfileTable";
 
 const UniversityTable = ({ searchValue }) => {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-  const { universityList, totalPages, totalItems} = useSelector(
+  const { universityList, totalPages, totalItems } = useSelector(
     (state) => state.university
   );
   useEffect(() => {
@@ -57,16 +59,18 @@ const UniversityTable = ({ searchValue }) => {
         const { row } = params;
         const handleChangeStatus = (e) => {
           const updateData = {
-              university: JSON.stringify({
-                status: {
-                  id: parseInt(e.target.value),
-                },
-              }),
+            university: JSON.stringify({
+              status: {
+                id: parseInt(e.target.value),
+              },
+            }),
             uniId: row.id,
           };
-          dispatch(updateUniversityStatus([updateData, userSessionStorage?.token])).then(() => {
-            dispatch(getUniversityList([page, 10, userSessionStorage?.token]))
-          })
+          dispatch(
+            updateUniversityStatus([updateData, userSessionStorage?.token])
+          ).then(() => {
+            dispatch(getUniversityList([page, 10, userSessionStorage?.token]));
+          });
         };
         return (
           <select
@@ -95,9 +99,13 @@ const UniversityTable = ({ searchValue }) => {
           navigate(`/admin/university/${row.id}`);
         };
         const handleDelete = () => {
-          dispatch(deleteUniversity([row.id, userSessionStorage?.token])).then(() => {
-            dispatch(getUniversityList([page, 10,userSessionStorage?.token]))
-          });
+          dispatch(deleteUniversity([row.id, userSessionStorage?.token])).then(
+            () => {
+              dispatch(
+                getUniversityList([page, 10, userSessionStorage?.token])
+              );
+            }
+          );
         };
         return (
           <>
@@ -105,7 +113,10 @@ const UniversityTable = ({ searchValue }) => {
               <VisibilityOutlinedIcon />
             </IconButton>
             <Tooltip title="Xóa tài khoản">
-              <IconButton className="user-delete__button" onClick={handleDelete}>
+              <IconButton
+                className="user-delete__button"
+                onClick={handleDelete}
+              >
                 <DeleteForeverOutlinedIcon />
               </IconButton>
             </Tooltip>

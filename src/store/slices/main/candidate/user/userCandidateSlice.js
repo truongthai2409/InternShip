@@ -31,7 +31,9 @@ const userCandidateSlice = createSlice({
 export const getAllUserCandidate = createAsyncThunk(
   "user/getAllUserCandidate",
   async () => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const user =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     return axios
       .get(`${baseURL}/api/r2s/admin/candidate?no=0&limit=1000`, {
         headers: "Bearer " + user.token,

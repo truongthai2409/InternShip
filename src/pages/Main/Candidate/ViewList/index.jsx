@@ -12,6 +12,8 @@ import { Hidden } from "@mui/material";
 
 const CandidateViewList = () => {
   TabTitle("Công việc quan tâm");
+
+  const { user } = useSelector((state) => state.profile);
   const { jobCare, jobCareHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
@@ -20,20 +22,24 @@ const CandidateViewList = () => {
 
   const [jobs, setJobs] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
-  
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+  const handleChange = (value) => {
+    const token =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     const page = {
-      user : user,
+      user: user,
+      token: token.token,
       page: {
-        no: 0,
+        no: value - 1,
         limit: 5,
       },
     };
     dispatch(getJobCareByCandidate(page));
-  }, [dispatch]);
+  };
+
   useEffect(() => {
     setJobs(jobCare);
     setJobDetail(jobCare && jobCare[index]?.jobCare);
@@ -41,19 +47,8 @@ const CandidateViewList = () => {
   useEffect(() => {
     dispatch(getJobByCompany(id));
   }, [dispatch, id]);
-  const handleChange = (value) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
-    const page = {
-      user : user,
-      page: {
-        no: value - 1,
-        limit: 5,
-      },
-    };
-    dispatch(getJobCareByCandidate(page));
-  }
   useEffect(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
   return (
     <>
@@ -66,37 +61,41 @@ const CandidateViewList = () => {
           </p>
         </div>
         <>
-        <div className="section__apply">
-          <span>
-            Bạn đã quan tâm <span>{jobCare?.length}</span> việc làm
-          </span>
-        </div>
-        <Grid className="wrapper" spacing={{ xs: 2 }} container>
-          <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
-            <Grid container spacing={{ xs: 1 }}>
-              <Grid item xs={12}>
-                <ListCardJobHome
-                  jobList={jobs?.map((item) => {return item.jobCare})}
-                  indexCardActive={index}
-                  jobListHavePages={jobCareHavePage}
-                  onChange={handleChange}
-                />
+          <div className="section__apply">
+            <span>
+              Bạn đã quan tâm <span>{jobCare?.length}</span> việc làm
+            </span>
+          </div>
+          <Grid className="wrapper" spacing={{ xs: 2 }} container>
+            <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item xs={12}>
+                  <ListCardJobHome
+                    jobList={jobs?.map((item) => {
+                      return item.jobCare;
+                    })}
+                    indexCardActive={index}
+                    jobListHavePages={jobCareHavePage}
+                    onChange={handleChange}
+                  />
+                </Grid>
               </Grid>
             </Grid>
+            <Hidden mdDown>
+              <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
+                <div style={{ height: "90%" }}>
+                  <DetailCard
+                    logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                    jobDetail={jobDetail}
+                    jobList={jobs?.map((item) => {
+                      return item.jobCare;
+                    })}
+                    jobListCompany={jobListCompany}
+                  />
+                </div>
+              </Grid>
+            </Hidden>
           </Grid>
-          <Hidden mdDown>
-          <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
-            <div style={{ height: "90%" }}>
-              <DetailCard
-                logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                jobDetail={jobDetail}
-                jobList={jobs?.map((item) => {return item.jobCare})}
-                jobListCompany={jobListCompany}
-              />
-            </div>
-          </Grid>
-          </Hidden>
-        </Grid>
         </>
       </div>
     </>

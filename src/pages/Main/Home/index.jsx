@@ -78,7 +78,9 @@ function reducer(state = initialState, action) {
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { index, id } = useSelector((state) => state.filter);
+  const { index, id, jobFilter, jobPage } = useSelector(
+    (state) => state.filter
+  );
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -102,16 +104,16 @@ const Home = (props) => {
     dispatcher({ type: "no", payload: 0 });
     dispatcher({ type: "province", payload: valueLocation });
     dispatch(changeFilterChange(false));
-    dispatch(pageFilterChange(1))
-
+    dispatch(pageFilterChange(1));
   };
   const getValueLocationAndHandle = (value) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
-
-    const userPartner = JSON.parse(sessionStorage.getItem("userPresent"));
+    const userPartner =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     if (userPartner && userPartner.role === "Role_HR") {
       dispatch(indexFilterChange(0));
       window.scroll(0, 0);
@@ -157,7 +159,7 @@ const Home = (props) => {
     dispatcher({ type: "position", payload: tempPosition });
     dispatcher({ type: "major", payload: tempMajor });
     dispatcher({ type: "no", payload: 0 });
-    dispatch(pageFilterChange(1))
+    dispatch(pageFilterChange(1));
   };
 
   useEffect(() => {
@@ -178,9 +180,9 @@ const Home = (props) => {
   }, [state, dispatch, props.linkFilter]);
 
   useEffect(() => {
-    setJob(props.jobFilter);
-    setJobDetail(props.jobFilter[index]);
-  }, [props.jobFilter, dispatch, index]);
+    setJob(jobFilter);
+    setJobDetail(jobFilter[index]);
+  }, [jobFilter, dispatch, index]);
 
   useEffect(() => {
     dispatch(getJobByCompany(id));
@@ -260,7 +262,7 @@ const Home = (props) => {
               <ListCardJobHome
                 jobList={jobs}
                 indexCardActive={index}
-                jobListHavePages={props.jobPage}
+                jobListHavePages={jobPage}
                 onChange={getValuePageAndHandle}
               />
             </Grid>

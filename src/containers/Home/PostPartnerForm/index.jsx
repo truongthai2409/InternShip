@@ -1,30 +1,26 @@
-import "./styles.scss";
-import WorkIcon from "@mui/icons-material/Work";
-import CustomInput from "../../../components/CustomInput/index";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import "./styles.scss";
-import Button from "../../../components/Button";
-import { SAMPLEFORM, schema } from "./handleForm";
-import SelectCustom from "../../../components/Select";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
-import { useNavigate } from "react-router-dom";
-import {
-  addDemand,
-  updateDemand,
-  getDemandById,
-} from "src/store/slices/main/home/demand/demandSlice";
-import DescriptionForm from "src/components/DescriptionForm";
-import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
-import Textarea from "src/components/Textarea";
+import WorkIcon from "@mui/icons-material/Work";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import DescriptionForm from "src/components/DescriptionForm";
 import InputFile from "src/components/InputFile";
-import MultiSelect from "src/components/MultiSelect";
 import SelectMulti from "src/components/SelectMulti";
+import Textarea from "src/components/Textarea";
+import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
+import {
+  addDemand, getDemandById, updateDemand
+} from "src/store/slices/main/home/demand/demandSlice";
+import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
+import Button from "../../../components/Button";
+import CustomInput from "../../../components/CustomInput/index";
+import SelectCustom from "../../../components/Select";
+import { SAMPLEFORM, schema } from "./handleForm";
+import "./styles.scss";
 
 const jobTypeList = [
   {
@@ -53,7 +49,9 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
   const [useSampleForm, setUseSampleForm] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const idUser = JSON.parse(sessionStorage.getItem("userPresent"))?.idUser;
+  const idUser =
+    JSON.parse(sessionStorage.getItem("userPresent"))?.ids ||
+    JSON.parse(localStorage.getItem("userPresent"))?.ids;
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -126,10 +124,12 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       }),
       fileSV: data.fileSV,
     };
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const user =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     dispatch(addDemand([demandData, user]));
   };
-  
+
   if (status === "success") {
     navigate("/partner/post-list");
   }
@@ -277,7 +277,6 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 id="fileSV"
                 setValue={setValue}
                 register={register}
-              
               >
                 {errors.fileSV?.message}
               </InputFile>

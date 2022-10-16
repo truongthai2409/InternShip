@@ -1,20 +1,19 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
 import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import SyncAltIcon from "@mui/icons-material/SyncAlt";
 import { Divider, Switch, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { getAllUserCandidate } from "src/store/slices/main/candidate/user/userCandidateSlice";
+import { updateUser } from "src/store/slices/main/user/userSlice";
 import Button from "../Button";
 import InputFile from "../InputFile";
 import Modal from "../Modal";
-import UserInfo from "./UserInfo";
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "./dataCV";
-import CloseIcon from "@mui/icons-material/Close";
-import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import UserInfo from "./UserInfo";
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
   const dispatch = useDispatch();
@@ -28,7 +27,6 @@ const Components = ({ profile }) => {
   });
   const [opens, setOpens] = useState(false);
   const handleChange = (e) => {
-    console.log(e);
   };
   const [checkedFind, setCheckedFind] = React.useState(true);
   const [checkedEmail, setCheckedEmail] = React.useState(false);
@@ -53,14 +51,17 @@ const Components = ({ profile }) => {
         break;
     }
   };
+
   const onSubmit = async (data) => {
     const userSessionStorage = JSON.parse(
       sessionStorage.getItem("userPresent")
-    );
+    ) || JSON.parse(
+      localStorage.getItem("userPresent")
+    )
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
-          id: parseInt(userSessionStorage.idUser),
+          id: parseInt(profile?.user?.id),
           firstName: profile?.user?.firstName,
           lastName: profile?.user?.lastName,
           gender: parseInt(profile?.user?.gender),
@@ -74,8 +75,13 @@ const Components = ({ profile }) => {
       fileAvatar: profile?.user?.avatar || null,
       fileCV: data.cv,
     };
-    await dispatch(updateUser([userSessionStorage, profileData]));
-    setOpens(!opens);
+    const headerUser = {
+      token : userSessionStorage.token,
+      role : profile?.user?.role?.name
+    }
+    await dispatch(updateUser([headerUser, profileData])).then(()=>{
+      setOpens(!opens);
+    })
   };
   useEffect(() => {
     dispatch(getAllUserCandidate());
@@ -150,8 +156,9 @@ const Components = ({ profile }) => {
                         format="pdf"
                         setValue={setValue}
                         register={register}
-                      />
-                      {errors.message?.cv}
+                      >
+                      {errors?.cv?.message}
+                      </InputFile>
                       <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>
                     </form>
                   }

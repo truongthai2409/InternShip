@@ -34,7 +34,7 @@ const JobCandidate = ({ job, idJob, pdLeft, pdRight, hideMark }) => {
       }}
     >
       <Link
-        to={`/candidate/detail_job/${idJob}`}
+        to={`/detail_job/${idJob}`}
         onClick={handleClick}
         className="link__job-detail"
       >

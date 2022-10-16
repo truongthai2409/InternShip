@@ -1,13 +1,11 @@
-import { useState } from "react";
-import CardHome from "../CardHome";
 import moment from "moment";
-import "./styles.scss";
-import { useLocation } from "react-router-dom";
-import PaginationCustom from "src/components/Pagination";
-import RatingJob from "../RatingJob";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import PaginationCustom from "src/components/Pagination";
 import { pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
+import CardHome from "../CardHome";
+import "./styles.scss";
 
 const ListCardJobHome = ({
   jobList,
@@ -20,11 +18,11 @@ const ListCardJobHome = ({
   hiddent,
 }) => {
   const location = useLocation();
-  const dispatch = useDispatch()
-  const {page} = useSelector(state=> state.filter)
+  const dispatch = useDispatch();
+  const { page } = useSelector((state) => state.filter);
   const handlePagination = (e, valuePage) => {
-    dispatch(pageFilterChange(valuePage))
-    onChange && onChange(valuePage)
+    dispatch(pageFilterChange(valuePage));
+    onChange && onChange(valuePage);
     window.scrollTo(0, 0);
   };
 
@@ -38,6 +36,7 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
+              
               jobList={jobList}
               hiddent={hiddent}
               page={page}
@@ -47,7 +46,7 @@ const ListCardJobHome = ({
               index={index}
               key={job.id}
               title={
-                job.name ? job.name : job.jobApp?.name || job.jobCare?.name
+                job?.name ? job.name : (job.jobApp?.name || job.jobCare?.name)
               }
               fontSize={10}
               nameCompany={
@@ -109,7 +108,7 @@ const ListCardJobHome = ({
         >
           <PaginationCustom
             page={page}
-            totalPages={jobListHavePages?.totalPages - 1}
+            totalPages={jobListHavePages?.totalPages}
             handleOnChange={handlePagination}
           />
         </div>

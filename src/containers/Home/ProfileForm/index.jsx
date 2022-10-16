@@ -1,18 +1,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
-import { set } from "date-fns";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/Button";
 import CustomInput from "src/components/CustomInput";
 import InputFile from "src/components/InputFile";
 import SelectCustom from "src/components/Select";
-import { updateUser } from "src/store/slices/Admin/user/userSlice";
+import { updateUser } from "src/store/slices/main/user/userSlice";
 import "./styles.scss";
 import { genderList, schema } from "./validateForm";
 
-const ProfileForm = ({ profile }) => {
+const ProfileForm = ({ profile : user }) => {
   const {
     register,
     handleSubmit,
@@ -22,81 +21,86 @@ const ProfileForm = ({ profile }) => {
     mode: "all",
     resolver: yupResolver(schema),
   });
+  const {role} = useSelector(state=>state.profile)
+  const userStorage = JSON.parse(sessionStorage.getItem("userPresent")) ||
+   JSON.parse(localStorage.getItem("userPresent"));
   const dispatch = useDispatch();
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
-  const roleUser = userSessionStorage.role;
 
   useEffect(() => {
     setValue(
       "firstName",
-      profile?.user?.firstName || profile?.userDTO?.firstName
+      user?.user?.firstName || user?.userDTO?.firstName
     );
-    setValue("lastName", profile?.user?.lastName || profile?.userDTO?.lastName);
-    setValue("email", profile?.user?.email || profile?.userDTO?.email);
-    setValue("phone", profile?.user?.phone || profile?.userDTO?.phone);
-    setValue("gender", profile?.user?.gender);
-  }, [profile, setValue]);
+    setValue("lastName", user?.user?.lastName || user?.userDTO?.lastName);
+    setValue("email", user?.user?.email || user?.userDTO?.email);
+    setValue("phone", user?.user?.phone || user?.userDTO?.phone);
+    setValue("gender", user?.user?.gender);
+  }, [user, setValue]);
 
   const onSubmit = (data) => {
-    switch (roleUser) {
+    const userPost = {
+      userStorage,
+      role
+    }
+    switch (role) {
       case "Role_HR": {
         const profileData = {
           hr: JSON.stringify({
             user: {
-              username: profile?.user?.username,
+              username: user?.user?.username,
               gender: parseInt(data.gender),
               phone: data.phone,
-              email: profile?.user?.email,
+              email: user?.user?.email,
               firstName: data.firstName,
               lastName: data.lastName,
-              role: profile?.user?.role,
+              role: user?.user?.role,
             },
-            position: profile.position,
-            company: { id: profile.company?.id },
+            position: user?.position,
+            company: { id: user?.company?.id },
           }),
           fileAvatar: data.avatar,
         };
-        dispatch(updateUser([userSessionStorage, profileData, profile.id]));
+        dispatch(updateUser([userPost, profileData, user.id]));
         break;
       }
       case "Role_Candidate": {
         const profileData = {
           candidate: JSON.stringify({
             createUser: {
-              id: parseInt(userSessionStorage.idUser),
+              id: parseInt(user?.user.id),
               firstName: data.firstName,
               lastName: data.lastName,
               gender: parseInt(data.gender),
               phone: data.phone,
-              email: profile?.user?.email,
+              email: user?.user?.email,
             },
             major: {
-              id: profile.major.id,
+              id: user?.major.id,
             },
           }),
           fileAvatar: data.avatar || null,
-          fileCV: profile.cv,
+          fileCV: user?.cv,
         };
-        dispatch(updateUser([userSessionStorage, profileData]));
+        dispatch(updateUser([userPost, profileData]));
         break;
       }
       case "Role_Partner": {
         const profileData = {
           partner : JSON.stringify({
-            id: parseInt(profile.id),
-            position: profile?.position,
+            id: parseInt(user.id),
+            position: user?.position,
             userCreationDTO: {
-              username : profile.user.username, 
+              username : user?.user.username, 
               firstName: data.firstName,
               lastName: data.lastName,
               gender: parseInt(data.gender),
               phone: data.phone,
-              email: profile?.user?.email,
+              email: user?.user?.email,
             },
             // fileAvatar: data.avatar || null,
           }),
         };
-        dispatch(updateUser([userSessionStorage, profileData]));
+        dispatch(updateUser([userPost, profileData]));
         break;
       }
       default:
@@ -121,7 +125,7 @@ const ProfileForm = ({ profile }) => {
               radius="2px"
               setValue={setValue}
               register={register}
-              imageCurrent={profile?.user?.avatar}
+              imageCurrent={user?.user?.avatar}
             >
               {errors.avatar?.message}
             </InputFile>
@@ -158,7 +162,7 @@ const ProfileForm = ({ profile }) => {
               id="gender"
               register={register}
               label="Giới tính"
-              defaultValue={profile?.user?.gender}
+              defaultValue={user?.user?.gender}
               options={genderList}
               placeholder="Vui lòng chọn"
             >

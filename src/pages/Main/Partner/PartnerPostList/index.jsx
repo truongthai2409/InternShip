@@ -57,15 +57,16 @@ const PartnerPostList = (props) => {
     (state) => state.demand
   );
 
-  const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userPresent =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
-  
 
   const handlePaginate = (e, valuePage) => {
     setCurrentPage(parseInt(valuePage));
     window.scroll(0, 0);
   };
-  
+
   useEffect(() => {
     let uniId = activeUser?.universityDTO?.id;
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));

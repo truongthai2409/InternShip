@@ -1,29 +1,32 @@
-import React, { Fragment } from 'react'
-import './styles.scss'
-import HeaderWithHR from "src/components/HeaderWithHR";
+import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import HeaderWithCandidate from "src/components/HeaderWithCandidate";
+import HeaderWithHR from "src/components/HeaderWithHR";
 import HeaderWithPartner from "src/components/HeaderWithPartner";
-import Logo from '../Logo';
-import Login from '../Login';
+import Login from "../Login";
+import Logo from "../Logo";
+import "./styles.scss";
 
-export default function index() {
-  const role = sessionStorage.getItem("userPresent")
-    ? JSON.parse(sessionStorage.getItem("userPresent")).role
-    : "";
+export default function HeaderContainer() {
+  const { role } = useSelector((state) => state.profile);
+
   const renderLayout = () => {
     switch (role) {
       case "Role_HR": {
-        return <HeaderWithHR />
+        return <HeaderWithHR />;
       }
       case "Role_Partner": {
-        return <HeaderWithPartner />
+        return <HeaderWithPartner />;
       }
       case "Role_Candidate": {
-        return <HeaderWithCandidate />
+        return <HeaderWithCandidate />;
       }
-      default : return <Fragment />
+      default: {
+        return <Fragment />;
+      }
     }
-  }
+  };
+  
   return (
     <div className="container-header__hr header__hr config">
       <Logo />
@@ -32,5 +35,5 @@ export default function index() {
         <Login />
       </div>
     </div>
-  )
+  );
 }

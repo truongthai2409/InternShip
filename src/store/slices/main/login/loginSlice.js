@@ -8,14 +8,11 @@ const loginSlice = createSlice({
   name: "login",
   initialState: {
     status: "idle",
-    user: {},
-    error: {},
-    profile: JSON.parse(sessionStorage.getItem("userPresent")) || {},
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.pending, (state) => {
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -23,12 +20,17 @@ const loginSlice = createSlice({
           state.status = "success";
           toast.success("Đăng nhập thành công", {
             position: "bottom-right",
-            autoClose: 3000,
+            autoClose: 2000,
             theme: "colored",
           });
-          sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
-        }
-        else {
+          sessionStorage.setItem(
+            "userPresent",
+            JSON.stringify({
+              token: action.payload.token,
+              ids: action.payload.idUser,
+            })
+          );
+        } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {
             position: "bottom-right",
@@ -49,8 +51,7 @@ const loginSlice = createSlice({
             theme: "colored",
           });
           sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
-        }
-        else {
+        } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {
             position: "bottom-right",
@@ -60,7 +61,6 @@ const loginSlice = createSlice({
         }
       });
   },
-  
 });
 
 export const loginUser = createAsyncThunk("login/loginUser", async (data) => {

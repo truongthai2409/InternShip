@@ -1,21 +1,19 @@
-import "./styles.scss";
-import { useEffect, useState } from "react";
-import { IconButton } from "@mui/material";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createMark,
-  deleteMark,
-  getMarkByUser,
-  getMarkByUserAndJob,
-} from "src/store/slices/main/mark/markSlice";
-import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getCandidateByUserName } from "src/store/slices/main/candidate/info/infoCandidateSlice";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { IconButton } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-const no = process.env.NO_OF_PAGE;
-const limit = process.env.LIMIT_OF_PAGE || 5;
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  addJobCare,
+  deleteJobCare,
+  getAllJobCare,
+  getJobCareByCandidate,
+} from "src/store/slices/main/home/job/jobCandidateSlice";
+import { getMarkByUserAndJob } from "src/store/slices/main/mark/markSlice";
+import "./styles.scss";
 
 const ButtonMark = (props) => {
   const location = useLocation();
@@ -24,30 +22,26 @@ const ButtonMark = (props) => {
   const dispatch = useDispatch();
   const [mark, setMark] = useState(false);
 
-  // get global state from redux store
-  const { profile } = useSelector((state) => state.user);
-  useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
-    if (user?.username !== undefined) {
-      dispatch(getCandidateByUserName([profile?.user?.username, user]));
-    }
-  }, [dispatch, profile?.user?.username]);
+  const { user } = useSelector((state) => state.profile);
 
   const handleClickMarkJob = async (e) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const userStorage =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     e.stopPropagation();
 
-    const dataGetMarkByUser = {
-      userName: profile?.user?.username,
+    const page = {
+      user: user,
+      token: userStorage?.token,
       page: {
         no: 0,
-        limit: limit,
+        limit: 5,
       },
     };
     if (props.isMark === false) {
       const dataCareList = {
         candidateCare: {
-          id: profile?.id,
+          id: user?.id,
         },
         jobCare: {
           id: props.jobId,
@@ -55,31 +49,46 @@ const ButtonMark = (props) => {
         note: "Đây là công việc ưa thích của mình",
       };
 
-      await dispatch(createMark([dataCareList, user]));
-      await dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
+      await dispatch(addJobCare([dataCareList, userStorage.token]));
+      await dispatch(getJobCareByCandidate(page));
       setMark(!mark);
       toast.success("Đã lưu việc làm thành công");
     } else {
-      if (user?.role !== undefined && user?.role === "Role_Candidate") {
+      if (user?.user?.role?.name === "Role_Candidate") {
         const dataByUserAndJob = {
-          userName: user?.username,
+          userName: user?.user?.username,
           idJob: Number(props.jobId),
           page: {
             no: 0,
-            limit: limit,
+            limit: 5,
           },
         };
-        const res = await dispatch(getMarkByUserAndJob(dataByUserAndJob));
-        await dispatch(deleteMark(res?.payload?.id));
-        await dispatch(getMarkByUser([dataGetMarkByUser, user.token]));
-        setMark(false);
-        toast.success("Đã hủy lưu việc làm ");
+
+        await dispatch(getMarkByUserAndJob(dataByUserAndJob)).then((res) => {
+          const delJobCare = {
+            id: res.payload.id,
+            token: userStorage.token,
+          };
+          dispatch(deleteJobCare([delJobCare])).then(() => {
+            const dispatchJobCare = {
+              user: user,
+              token: userStorage.token,
+              page: {
+                no: 0,
+                limit: 1000,
+              },
+            };
+            setMark(false);
+            toast.success("Đã hủy lưu việc làm ");
+            dispatch(getAllJobCare(dispatchJobCare));
+          });
+        });
       }
     }
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (profile?.user?.username === undefined) {
+    if (user?.user?.username === undefined) {
       toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
       await navigate("/login");
     }
@@ -98,7 +107,7 @@ const ButtonMark = (props) => {
         onClick={handleClickMarkJob}
       >
         {pathUrl === "/candidate" ||
-        pathUrl === "/candidate/information_company/4" ||
+        pathUrl.includes("information_company") ||
         pathUrl === "/candidate/view-list-care" ? (
           props.isMark === false && mark === false ? (
             <BookmarkBorderIcon

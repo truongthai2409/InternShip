@@ -88,7 +88,7 @@ const BaseInformationCompany = ({
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
-  const { profile } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.profile);
   let checked = false;
   const {
     register,
@@ -111,7 +111,7 @@ const BaseInformationCompany = ({
 
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
-    topAppreciate.push(appreciateList.slice().sort((a,b)=> new Date(b.createDate) - new Date(a.createDate))[i]);
+    topAppreciate.push(appreciateList?.slice().sort((a,b)=> new Date(b.createDate) - new Date(a.createDate))[i]);
   }
   const handleBackClick = () => {
     navigate(-1);
@@ -127,7 +127,7 @@ const BaseInformationCompany = ({
   const rating = (res / data?.length).toFixed(2);
 
   const handleOpen = () => {
-    if (profile?.user?.id) {
+    if (user?.user?.id) {
       setOpen(true);
       reset();
     } else {
@@ -136,9 +136,7 @@ const BaseInformationCompany = ({
   };
 
   const onSubmit = async (data) => {
-    const username = JSON.parse(
-      sessionStorage.getItem("userPresent")
-    )?.username;
+    const username = user?.user?.username
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -380,7 +378,7 @@ const BaseInformationCompany = ({
                           </div>
                           <div className="button-card">
                             <Link
-                              to={`/candidate/information_company/${jobDetail?.id}`}
+                              to={`/information_company/${jobDetail?.id}`}
                               value={valueTab}
                               index={1}
                             >
@@ -535,7 +533,7 @@ const BaseInformationCompany = ({
                             ></Button>
                           </div>
                           <div>
-                            {appreciateList.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
+                            {appreciateList?.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
                               <div>
                                 <Appreciate
                                   appreciate={appreciate}

@@ -24,25 +24,6 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUserList.fulfilled, (state, { payload }) => {
-      state.userList = payload.data.contents;
-      state.totalPages = payload.data.totalPages;
-      state.totalItems = payload.data.totalItems;
-    });
-    builder.addCase(getUserById.fulfilled, (state, { payload }) => {
-      state.user = payload;
-    });
-    builder.addCase(getProfileByIdUser.fulfilled, (state, { payload }) => {
-      state.profile = payload;
-    });
-    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      state.profile = payload;
-      toast.success("Chỉnh sửa thành công", {
-        position: "bottom-right",
-        autoClose: 3000,
-        theme: "colored",
-      });
-    });
     builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
       if (payload.httpCode === 200) {
         state.statusForgotPassword = true;
@@ -135,7 +116,8 @@ export const getUserById = createAsyncThunk(
 // function use for get all of information match to each role through idUser
 /**
  * args[0] : id of user
- * args[1] : token
+ * args[1] : tokenStorage
+ * args[2] : role
  */
 export const getProfileByIdUser = createAsyncThunk(
   "user/getProfileByIdUser",
@@ -146,7 +128,7 @@ export const getProfileByIdUser = createAsyncThunk(
       },
     };
 
-    switch (JSON.parse(sessionStorage.getItem("userPresent")).role) {
+    switch (args[2]) {
       case "Role_HR":
         return await axios
           .get(`${baseURL}/api/r2s/hr/user/${args[0]}`, header)
@@ -189,10 +171,11 @@ export const getProfileByIdUser = createAsyncThunk(
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[0].token,
+      Authorization: "Bearer " + args[0].userStorage.token,
       "Content-Type": "multipart/form-data",
     },
   };
+  console.log(args)
   switch (args[0].role) {
     case "Role_HR": {
       return await axios

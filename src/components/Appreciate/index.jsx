@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
-import Rating from "@mui/material/Rating";
+import { yupResolver } from "@hookform/resolvers/yup";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import StarIcon from "@mui/icons-material/Star";
-import { useDispatch, useSelector } from "react-redux";
-import ButtonCustom from "../Button";
-import "./styles.scss";
-import Modal from "../Modal";
-import { useForm } from "react-hook-form";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import { IconButton, Tooltip } from "@mui/material";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import {
   deleteAppreciate,
   getAppreciateByCompany,
-  updateAppreciate,
+  updateAppreciate
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
-import { toast } from "react-toastify";
-import CustomInput from "../CustomInput";
-import Textarea from "../Textarea";
+import ButtonCustom from "../Button";
 import CustomCheckbox from "../CustomCheckbox";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Tooltip } from "@mui/material";
-import { yupResolver } from "@hookform/resolvers/yup";
+import CustomInput from "../CustomInput";
+import Modal from "../Modal";
+import Textarea from "../Textarea";
+import "./styles.scss";
 import { schema } from "./validate";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1.2),
@@ -39,7 +39,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
   const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
-  const { profile } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.profile);
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(appreciate?.score);
   const [hover, setHover] = useState(-1);
@@ -134,7 +134,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
           elevation={0}
           sx={{}}
           className={
-            appreciate?.user?.username === profile?.user?.username
+            appreciate?.user?.username === user?.user?.username
               ? "appreciate__active"
               : ""
           }
@@ -266,7 +266,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
                     marginTop: "25px",
                   }}
                 >
-                  {appreciate?.user?.username === profile?.user?.username && (
+                  {appreciate?.user?.username === user?.user?.username && (
                     <div className="">
                       <div>
                         {" "}

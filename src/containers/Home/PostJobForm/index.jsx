@@ -50,11 +50,10 @@ const countryList = [
 ];
 
 const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
-  
   const { majorList } = useSelector((state) => state.major);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { jobPosition, status } = useSelector((state) => state.job);
-  const { profile } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,13 +66,12 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
   }, [dispatch]);
-  
+
   useEffect(() => {
     if (formStatus !== "post") {
       dispatch(getDistrictList(jobDetail?.locationjob?.district?.province?.id));
     }
   }, [dispatch, formStatus, jobDetail?.locationjob?.district?.province?.id]);
-
 
   useEffect(() => {
     if (formStatus !== "post") {
@@ -126,7 +124,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       const jobData = {
         name: data.name,
         hr: {
-          id: profile?.id,
+          id: user?.id,
         },
         description: data.jobDescription,
         major: {
@@ -157,7 +155,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       const jobData = {
         name: data.name,
         hr: {
-          id: profile?.id,
+          id: user?.id,
         },
         description: data.jobDescription,
         major: {
@@ -197,7 +195,9 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
       if (formStatus === "repost") {
         dispatch(addJob([jobData, "repost"]));
       } else if (formStatus === "update") {
-        const user = JSON.parse(sessionStorage.getItem("userPresent"))
+        const user =
+          JSON.parse(sessionStorage.getItem("userPresent")) ||
+          JSON.parse(localStorage.getItem("userPresent"));
         dispatch(updateJob([jobDetail.id, jobData, user]));
       }
       setOpen(false);

@@ -12,9 +12,12 @@ import { Link } from "react-router-dom";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import SettingsApplicationsSharpIcon from "@mui/icons-material/SettingsApplicationsSharp";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { updateRole } from "src/store/slices/main/user/userSlice";
 
 const AccountMenu = ({ linkImg }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch()
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,13 +25,13 @@ const AccountMenu = ({ linkImg }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const {user } = useSelector(state=>state.profile)
+  const username = user?.user?.username
 
-  const username = JSON.parse(sessionStorage.getItem("userPresent"))?.username;
-
-  const role = JSON.parse(sessionStorage.getItem("userPresent"))?.role;
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
-    sessionStorage.removeItem("userPresent");
+    localStorage.removeItem("userPresent");
+    dispatch(updateRole())
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",
       autoClose: 3000,
@@ -95,7 +98,7 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: "#111111" }}
-          to={role === "Role_Partner" ? "/partner/profile" : "profile"}
+          to="profile"
         >
           <MenuItem>
             <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân

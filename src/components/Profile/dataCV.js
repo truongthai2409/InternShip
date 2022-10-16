@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const CV_FORMATS = ["application/pdf"];
 
-export const schema = yup.object().shape({
+export const schema = yup.object({
   cv: yup
     .mixed()
     .test("type", "* Chỉ hỗ trợ định dạng pdf", (value) => {
@@ -13,8 +13,8 @@ export const schema = yup.object().shape({
       }
     })
     .test("fileSize", "* Kích thước tối đa là 512Kb.", (value) => {
-      if (value?.size) {
-        return value?.size <= 512 * 1024;
+      if (value.size) {
+        return value.size <= 512 * 1024;
       } else {
         return true;
       }

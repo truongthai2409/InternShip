@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_API;
-const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token
+const user =
+  JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+  JSON.parse(localStorage.getItem("userPresent"))?.token;
 const ratingSlice = createSlice({
   name: "rating",
   initialState: {
@@ -15,8 +17,8 @@ const ratingSlice = createSlice({
       state.rating = action.payload;
     });
     builder.addCase(getAllRating.fulfilled, (state, action) => {
-      state.allRating = action.payload
-    })
+      state.allRating = action.payload;
+    });
   },
 });
 
@@ -26,8 +28,8 @@ export const getRatingCompany = createAsyncThunk(
     const header = {
       headers: {
         Authorization: "Bearer " + user,
-    },
-    }
+      },
+    };
     return axios
       .get(`${baseURL}/api/r2s/rate/company/${idCompany}?no=0&limit=5`, header)
       .then((res) => {
@@ -44,11 +46,11 @@ export const getAllRating = createAsyncThunk(
     return axios
       .get(`${baseURL}/api/r2s/rate?no=${args[0]}&limit=${args[1]}`)
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .catch((err) => {
-        return err.response.data
-      })
+        return err.response.data;
+      });
   }
-)
+);
 export default ratingSlice;

@@ -20,6 +20,7 @@ import globalSlices from "./slices/main/home/global/globalSlices"
 import filterSlices from "./slices/main/home/filter/filterSlices";
 import userCandidateSlice from "./slices/main/candidate/user/userCandidateSlice";
 import jobCandidateSlice from "./slices/main/home/job/jobCandidateSlice";
+import profileSlice from "./slices/main/user/userSlice";
 
 const store = configureStore({
   reducer: {
@@ -43,7 +44,8 @@ const store = configureStore({
     globalSlices: globalSlices.reducer,
     filter : filterSlices.reducer,
     userFilter : userCandidateSlice.reducer,
-    jobCandidateSlice : jobCandidateSlice.reducer
+    jobCandidateSlice : jobCandidateSlice.reducer,
+    profile : profileSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

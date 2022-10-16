@@ -53,7 +53,7 @@ const ContentBaseInformation = ({
                 }}
               >
                 <Link
-                  to={`/candidate/detail_job/${job.id}`}
+                  to={`/detail_job/${job.id}`}
                   className="link__job-detail"
                 >
                   <CardHome
@@ -92,9 +92,9 @@ const ContentBaseInformation = ({
             ))}
         </Grid>
       </div>
-      {pathUrl !== `/candidate/information_company/${jobDetail?.id}` ? (
+      {pathUrl !== `/information_company/${jobDetail?.id}` ? (
         <div className="button-card">
-          <Link to={`/candidate/information_company/${jobDetail?.id}`}>
+          <Link to={`/information_company/${jobDetail?.id}`}>
             <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
           </Link>
         </div>

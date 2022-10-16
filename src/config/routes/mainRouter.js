@@ -21,11 +21,11 @@ const mainRouter = [
         Component: Main,
       },
       {
-        path: "/candidate/detail_job/:keyword",
+        path: "/detail_job/:keyword",
         Component: DetailHome,
       },
       {
-        path: "/candidate/information_company/:keyword",
+        path: "/information_company/:keyword",
         Component: CandidateInformationCompany,
       },
       {

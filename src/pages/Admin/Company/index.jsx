@@ -31,12 +31,13 @@ const selectOptions = [
 ];
 
 export default function Company() {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  console.log("open",open)
 
   const handleSearch = () => {
     dispatch(searchCompany([searchValue, 1, 10, userSessionStorage?.token]));
@@ -66,7 +67,7 @@ export default function Company() {
         setOpen={setOpen}
         iconClose={true}
       >
-        <CompanyForm isAdd={true}/>
+        <CompanyForm isAdd={true} />
       </Modal>
     </>
   );

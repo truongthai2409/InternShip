@@ -9,6 +9,7 @@ import MainLayout from "src/Layouts/Main";
 import HrFindUser from "src/containers/HrFindUser";
 const hrRouter = [
     {
+        role:"Role_HR",
         path: "/hr",
         element: <MainLayout />,
         children: [

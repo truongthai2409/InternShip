@@ -59,18 +59,24 @@ const HRPostList = (props) => {
   };
 
   const handleChangePage = (e, value) => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0);
     setPage(value);
   };
 
-  const { jobListActived, jobListDisabled, totalPages , totalItemActive, totalItemDisable } = useSelector(
-    (state) => state.job
-  );
+  const {
+    jobListActived,
+    jobListDisabled,
+    totalPages,
+    totalItemActive,
+    totalItemDisable,
+  } = useSelector((state) => state.job);
 
-  const userPresent = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userPresent =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
-      dispatch(getActivedJobListByUserId([userPresent.idUser, page, 5]));
-      dispatch(getDisabledJobListByUserId([userPresent.idUser, page, 5]));
+    dispatch(getActivedJobListByUserId([userPresent.idUser, page, 5]));
+    dispatch(getDisabledJobListByUserId([userPresent.idUser, page, 5]));
   }, [page, dispatch, userPresent.idUser]);
 
   return (
@@ -80,7 +86,7 @@ const HRPostList = (props) => {
           <StatisticUser
             title="Điểm khả dụng"
             firstObject={{
-              score: (totalItemActive + totalItemDisable),
+              score: totalItemActive + totalItemDisable,
               description: "Lượt đăng tuyển",
             }}
             secondObject={{

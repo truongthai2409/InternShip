@@ -8,44 +8,45 @@ import MainLayout from "src/Layouts/Main";
 import InfomationDemand from "src/pages/Main/Partner/InfomationDemand";
 
 const partnerRouter = [
-    {
-        path: "/partner",
-        element: <MainLayout />,
-        children: [
-            {
-                path: "",
-                Component: PartnerHome,
-            },
-            {
-                path: "post",
-                Component: PartnerPost,
-            },
-            {
-                path: "post-list",
-                Component: PartnerPostList,
-            },
-            {
-                path: "profile",
-                Component: Profile,
-            },
-            {
-                path: "setting",
-                Component: Password,
-            },
-            {
-                path: "search/:keyword",
-                Component: PartnerHome,
-            },
-            {
-                path: "detail_demand/:keyword",
-                Component: DetailPostPartner,
-            },
-            {
-                path : "infomation_demand/:keywod",
-                Component : InfomationDemand,
-            }
-        ]
-    }
-]
+  {
+    role: "Role_Partner",
+    path: "/partner",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        Component: PartnerHome,
+      },
+      {
+        path: "post",
+        Component: PartnerPost,
+      },
+      {
+        path: "post-list",
+        Component: PartnerPostList,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+      },
+      {
+        path: "setting",
+        Component: Password,
+      },
+      {
+        path: "search/:keyword",
+        Component: PartnerHome,
+      },
+      {
+        path: "detail_demand/:keyword",
+        Component: DetailPostPartner,
+      },
+      {
+        path: "infomation_demand/:keywod",
+        Component: InfomationDemand,
+      },
+    ],
+  },
+];
 
-export default partnerRouter
+export default partnerRouter;

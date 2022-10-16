@@ -35,7 +35,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
           </div>
           <div className="config__info">
             <Link
-              to={`/candidate/detail_job/${jobDetailById.id}`}
+              to={`/detail_job/${jobDetailById.id}`}
               className="config__info"
             >
               <PhoneInTalkIcon className="config__info-icon"></PhoneInTalkIcon>
@@ -55,7 +55,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
           </div>
         </CardContent>
         <CardActions className="config-button">
-          <Link to={`/candidate/information_company/${jobDetailById.id}`}>
+          <Link to={`/information_company/${jobDetailById.id}`}>
             <Button name="Về Chúng Tôi"></Button>
           </Link>
         </CardActions>

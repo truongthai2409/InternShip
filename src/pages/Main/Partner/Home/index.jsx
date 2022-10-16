@@ -1,7 +1,5 @@
-import React from "react";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import Main from "../..";
-import Home from "../../Home";
 import "./styles.scss";
 
 const PartnerHome = () => {

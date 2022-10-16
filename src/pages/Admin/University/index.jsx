@@ -7,8 +7,10 @@ import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderCon
 import Modal from "../../../components/Modal";
 import UniversityTable from "./UniversityTable";
 import UniversityForm from "../../../containers/Admin/UniversityForm";
-import { getUniversityList, searchUniversity } from "src/store/slices/Admin/university/unversitySlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
+import {
+  getUniversityList,
+  searchUniversity,
+} from "src/store/slices/Admin/university/unversitySlice";
 
 const selectOptions = [
   {
@@ -30,7 +32,9 @@ const selectOptions = [
 ];
 
 export default function University() {
-  const userSessionStorage = JSON.parse(sessionStorage.getItem("userPresent"));
+  const userSessionStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
 
@@ -41,7 +45,9 @@ export default function University() {
     if (searchValue === "") {
       dispatch(getUniversityList([1, 10]));
     } else {
-      dispatch(searchUniversity([searchValue, 1, 10, userSessionStorage?.token]));
+      dispatch(
+        searchUniversity([searchValue, 1, 10, userSessionStorage?.token])
+      );
     }
   };
 

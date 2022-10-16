@@ -13,10 +13,11 @@ const CandidateList = ({ idJob }) => {
     (state) => state.job
   );
 
-  const token = JSON.parse(sessionStorage.getItem("userPresent")).token;
+  const token = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+   JSON.parse(localStorage.getItem("userPresent"))?.token;
   useEffect(() => {
     dispatch(getListCandidateApplied([idJob, page, token, 3]));
-  }, [page]);
+  }, [dispatch, idJob, page, token]);
 
   const hanldeOnChange = (e, value) => {
     setPage(value);

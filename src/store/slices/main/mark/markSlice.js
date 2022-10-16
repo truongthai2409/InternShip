@@ -45,7 +45,9 @@ const markJobSlice = createSlice({
 });
 
 export const getMark = createAsyncThunk("mark/getMark", async () => {
-  const user = JSON.parse(sessionStorage.getItem("userPresent"));
+  const user =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const header = {
     headers: {
       Authorization: "Bearer " + user.token,
@@ -102,7 +104,9 @@ export const getJobByNameAndLocation = createAsyncThunk(
 export const getMarkByUserAndJob = createAsyncThunk(
   "mark/getMarkByUserAndJob",
   async (data) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"));
+    const user =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     const { userName, idJob, page } = data;
     const header = {
       headers: {
@@ -163,7 +167,9 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
 });
 
 export const deleteMark = createAsyncThunk("mark/deleteMark", async (data) => {
-  const user = JSON.parse(sessionStorage.getItem("userPresent"));
+  const user =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const header = {
     headers: {
       Authorization: "Bearer " + user.token,
