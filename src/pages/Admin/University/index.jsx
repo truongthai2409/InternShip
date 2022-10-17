@@ -11,6 +11,7 @@ import {
   getUniversityList,
   searchUniversity,
 } from "src/store/slices/Admin/university/unversitySlice";
+import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const selectOptions = [
   {

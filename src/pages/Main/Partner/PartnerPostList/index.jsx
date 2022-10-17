@@ -73,8 +73,8 @@ const PartnerPostList = (props) => {
   }, [activeUser?.universityDTO?.id, currentPage, dispatch]);
 
   useEffect(() => {
-    dispatch(getPartnerByUserID(userPresent.idUser));
-  }, [dispatch, userPresent.idUser]);
+    dispatch(getPartnerByUserID(userPresent.ids));
+  }, [dispatch, userPresent.ids]);
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">

@@ -75,9 +75,9 @@ const HRPostList = (props) => {
     JSON.parse(sessionStorage.getItem("userPresent")) ||
     JSON.parse(localStorage.getItem("userPresent"));
   useEffect(() => {
-    dispatch(getActivedJobListByUserId([userPresent.idUser, page, 5]));
-    dispatch(getDisabledJobListByUserId([userPresent.idUser, page, 5]));
-  }, [page, dispatch, userPresent.idUser]);
+    dispatch(getActivedJobListByUserId([userPresent.ids, page, 5]));
+    dispatch(getDisabledJobListByUserId([userPresent.ids, page, 5]));
+  }, [page, dispatch, userPresent.ids]);
 
   return (
     <div className="hr-post__wrapper">
