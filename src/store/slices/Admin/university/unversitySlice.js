@@ -240,7 +240,6 @@ export const updateUniversityStatus = createAsyncThunk(
 export const addUniversityByAdmin = createAsyncThunk(
   "university/addUniversityByAdmin",
   async (args) => {
-    console.log(args)
     const {universityData} = args[0]
     const header = {
       headers: {

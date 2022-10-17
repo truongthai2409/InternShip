@@ -47,7 +47,7 @@ function App() {
           })}
           {privateRouter.map((routers) => {
             return routers.map((route, index) => {
-              return route.role === role ? (
+              return route.role === role || route.role === "Role_Admin" ? (
                 <Route path={route.path} element={route.element} key={index}>
                   {route.index ? <Route index element={route.index} /> : null}
                   {route.children

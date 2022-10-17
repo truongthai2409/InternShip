@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // yup validation for company table
 export const schema = yup
   .object({
-    logo: yup.mixed().nullable().required('Bạn phải chọn ảnh cho trường'),
+    logo: yup.mixed().required('Bạn phải chọn ảnh cho trường'),
     name: yup.string().required(' * Bạn phải nhập tên trường.'),
     shortName: yup
       .string()
@@ -25,12 +25,10 @@ export const schema = yup
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         ' * Số điện thoại không đúng.'
       ),
-    // majors: yup
-    //   .array()
-    //   .nullable()
-    //   .min(1, " * Bạn phải chọn chuyên ngành của trường")
-    //   .required(" * Bạn phải chọn chuyên ngành của trường"),
-    description: yup.string().required(' * Bạn phải nhập mô tả trường.')
+    description: yup.string().required(' * Bạn phải nhập mô tả trường.'),
+    province: yup.string().required(' * Bạn chọn tỉnh/thành phố.'),
+    district: yup.string().required(' * Bạn chọn quận/huyện.'),
+    address: yup.string().required(' * Bạn phải nhận địa chỉ.')
   })
   .required()
 

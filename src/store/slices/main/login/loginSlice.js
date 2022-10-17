@@ -50,7 +50,7 @@ const loginSlice = createSlice({
             autoClose: 3000,
             theme: "colored",
           });
-          sessionStorage.setItem("userPresent", JSON.stringify(action.payload));
+          sessionStorage.setItem("userPresent", JSON.stringify({token : action.payload.token, ids : action.payload.idUser}));
         } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {

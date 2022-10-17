@@ -53,7 +53,7 @@ export default function University() {
   };
 
   const handleOpenModal = () => {
-    // dispatch(getProvinceList())
+    dispatch(getProvinceList())
     setOpen(true);
   };
 

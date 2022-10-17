@@ -64,6 +64,11 @@ const userSlice = createSlice({
       state.totalPages = payload.data.totalPages;
       state.totalItems = payload.data.totalItems;
     });
+    builder.addCase(getUserList.fulfilled, (state, { payload }) => {
+      state.userList = payload.data.contents;
+      state.totalPages = payload.data.totalPages;
+      state.totalItems = payload.data.totalItems;
+    });
   },
 });
 
@@ -81,6 +86,7 @@ export const getUserList = createAsyncThunk(
         header
       )
       .then((response) => {
+        console.log(response);
         return response;
       })
       .catch((error) => {
@@ -175,7 +181,6 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
       "Content-Type": "multipart/form-data",
     },
   };
-  console.log(args);
   switch (args[0].role) {
     case "Role_HR": {
       return await axios

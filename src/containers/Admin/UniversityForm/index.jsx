@@ -115,25 +115,29 @@ export default function UniversityForm(props) {
             note: data.note,
           },
         ],
-        // logo: null,
+        type: {
+          id: data.type
+        }
       }),
     };
+    console.log("data", data);
+    console.log("universityData", universityData);
 
     if (isAdd) {
       dispatch(
         addUniversityByAdmin([
           {
             universityData,
-            reset: reset({
-              description: "",
-              email: "",
-              logo: "",
-              name: "",
-              phone: "",
-              shortName: "",
-              website: "",
-            }),
-            setImage: setImage(cameraLogo),
+            // reset: reset({
+            //   description: "",
+            //   email: "",
+            //   logo: "",
+            //   name: "",
+            //   phone: "",
+            //   shortName: "",
+            //   website: "",
+            // }),
+            logo: image,
           },
           userSessionStorage?.token,
         ])
@@ -301,6 +305,28 @@ export default function UniversityForm(props) {
               </Grid>
               <Grid item md={12}>
                 <div className="university-form__input">
+                  <CustomInput
+                    label="Địa chỉ"
+                    id="address"
+                    type="text"
+                    placeholder="Địa chỉ..."
+                    setValue={setValue}
+                    register={register}
+                    check={!isEdit}
+                  >
+                    {errors.address?.message}
+                  </CustomInput>
+                  <CustomInput
+                    label="Note"
+                    id="note"
+                    type="text"
+                    placeholder="Note..."
+                    setValue={setValue}
+                    register={register}
+                    check={!isEdit}
+                  >
+                    {errors.note?.message}
+                  </CustomInput>
                   <CustomTextarea
                     label="Mô tả trường"
                     id="description"

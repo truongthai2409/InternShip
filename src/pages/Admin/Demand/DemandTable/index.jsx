@@ -74,9 +74,9 @@ const DemandTable = ({ searchValue }) => {
         };
         return (
           <select
-            // name={row.status}
-            // id={row.status}
-            // value={row.status || 0}
+            name={row.status}
+            id={row.status}
+            value={row.status || 0}
             onChange={(e) => handleChangeStatus(e)}
             className="company-table__select"
           >

@@ -57,7 +57,6 @@ const LoginAdmin = () => {
     };
     try {
       const res = await dispatch(loginAdmin(userData));
-
       if (res.payload.token) {
         const role = res.payload.role;
         switch (role) {

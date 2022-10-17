@@ -85,7 +85,7 @@ const CompanyTable = ({ searchValue }) => {
             comid: row.id,
           };
           dispatch(updateCompanyInfo(updateData)).then(() => {
-            dispatch(getCompanyList([page, 10, userSessionStorage?.token]));
+            dispatch(searchCompany([searchValue, page, 10, userSessionStorage?.token]));
           });
         };
         return (

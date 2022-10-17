@@ -61,6 +61,7 @@ export const getCompanyList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/r2s/company?no=${args[0] - 1}&limit=${args[1]}`, header)
       .then((response) => {
+        console.log(response)
         return response.data;
       })
       .catch((error) => {
