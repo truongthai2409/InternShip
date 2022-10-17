@@ -34,7 +34,6 @@ const DetailCard = ({
   const data = [appreciateList?.map((item) => {
     return item?.score;
   })]
-  console.log(appreciateList)
   const res = data?.reduce((total, currentValue) => {
     return total + currentValue;
   }, 0);

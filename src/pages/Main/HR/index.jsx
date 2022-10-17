@@ -20,7 +20,7 @@ const HR = (props) => {
   return (
     <Home
       jobFilter={demandList}
-      jobPage={totalPagesofDemandList}
+      jobPage={totalPagesofDemandList -1}
       demandPartner={true}
       hr={true}
       userCandidate={userCandidate}

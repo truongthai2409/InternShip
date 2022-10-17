@@ -41,7 +41,7 @@ const CardHome = (props) => {
         limit: 1000,
       },
     };
-    dispatch(getAllJobCare(dispatchJobCAre));
+    user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCAre));
   }, [dispatch, user]);
 
   useEffect(() => {

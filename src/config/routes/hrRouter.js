@@ -7,46 +7,51 @@ import HRPost from "../../pages/Main/HR/HRPost";
 import HRPostList from "../../pages/Main/HR/HRPostList";
 import MainLayout from "src/Layouts/Main";
 import HrFindUser from "src/containers/HrFindUser";
+import InfomationDemand from "src/containers/InfomationDemand";
 const hrRouter = [
-    {
-        role:"Role_HR",
-        path: "/hr",
-        element: <MainLayout />,
-        children: [
-            {
-                path: "",
-                Component: HR,
-            },
-            {
-                path: "profile",
-                Component: Profile,
-            },
-            {
-                path: "post",
-                Component: HRPost,
-            },
-            {
-                path: "list",
-                Component: HRPostList,
-            },
-            {
-                path: "candidate/list",
-                Component: CandidateList,
-            },
-            {
-                path: "setting",
-                Component: Password,
-            },
-            {
-                path: "candidatemanagement",
-                Component: CandidateManagement,
-            },
-            {
-                path : "finduser",
-                Component : HrFindUser,
-            }
-        ]
-    }
-]
+  {
+    role: "Role_HR",
+    path: "/hr",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "",
+        Component: HR,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+      },
+      {
+        path: "post",
+        Component: HRPost,
+      },
+      {
+        path: "list",
+        Component: HRPostList,
+      },
+      {
+        path: "candidate/list",
+        Component: CandidateList,
+      },
+      {
+        path: "setting",
+        Component: Password,
+      },
+      {
+        path: "candidatemanagement",
+        Component: CandidateManagement,
+      },
+      {
+        path: "finduser",
+        Component: HrFindUser,
+      },
+      {
+        path: "infomation_demand/:id",
+        Component : InfomationDemand
+      },
+    ],
+  },
+];
 
-export default hrRouter
+export default hrRouter;

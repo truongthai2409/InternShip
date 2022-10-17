@@ -80,7 +80,7 @@ const ButtonMark = (props) => {
             };
             setMark(false);
             toast.success("Đã hủy lưu việc làm ");
-            dispatch(getAllJobCare(dispatchJobCare));
+            user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCare));
           });
         });
       }

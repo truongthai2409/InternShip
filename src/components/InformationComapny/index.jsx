@@ -65,7 +65,7 @@ const InformationCompany = ({
         limit: 1000,
       },
     };
-    dispatch(getAllJobApply(dispatchJobApply));
+    user?.user?.role?.name === "Role_Candidate" &&  dispatch(getAllJobApply(dispatchJobApply));
   }, [dispatch, user]);
   useEffect(() => {
     setCheck(
