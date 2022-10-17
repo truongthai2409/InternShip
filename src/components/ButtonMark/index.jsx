@@ -49,7 +49,7 @@ const ButtonMark = (props) => {
         note: "Đây là công việc ưa thích của mình",
       };
 
-      await dispatch(addJobCare([dataCareList, userStorage.token]));
+      await dispatch(addJobCare([dataCareList, userStorage?.token]));
       await dispatch(getJobCareByCandidate(page));
       setMark(!mark);
       toast.success("Đã lưu việc làm thành công");
@@ -67,12 +67,12 @@ const ButtonMark = (props) => {
         await dispatch(getMarkByUserAndJob(dataByUserAndJob)).then((res) => {
           const delJobCare = {
             id: res.payload.id,
-            token: userStorage.token,
+            token: userStorage?.token,
           };
           dispatch(deleteJobCare([delJobCare])).then(() => {
             const dispatchJobCare = {
               user: user,
-              token: userStorage.token,
+              token: userStorage?.token,
               page: {
                 no: 0,
                 limit: 1000,

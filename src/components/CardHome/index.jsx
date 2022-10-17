@@ -35,7 +35,7 @@ const CardHome = (props) => {
       JSON.parse(localStorage.getItem("userPresent"));
     const dispatchJobCAre = {
       user: user,
-      token: userStorage.token,
+      token: userStorage?.token,
       page: {
         no: 0,
         limit: 1000,

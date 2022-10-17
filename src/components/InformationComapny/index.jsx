@@ -59,7 +59,7 @@ const InformationCompany = ({
       JSON.parse(localStorage.getItem("userPresent"));
     const dispatchJobApply = {
       user: user,
-      token: userStorage.token,
+      token: userStorage?.token,
       page: {
         no: 0,
         limit: 1000,

@@ -171,11 +171,11 @@ export const getProfileByIdUser = createAsyncThunk(
 export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[0].userStorage.token,
+      Authorization: "Bearer " + args[0].userStorage?.token,
       "Content-Type": "multipart/form-data",
     },
   };
-  console.log(args)
+  console.log(args);
   switch (args[0].role) {
     case "Role_HR": {
       return await axios

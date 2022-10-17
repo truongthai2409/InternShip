@@ -9,6 +9,7 @@ import DataTable from "../../../../components/Table";
 import {
   getAdminListDemand,
   searchDemand,
+  updateDemandStatus,
 } from "src/store/slices/Admin/demand/adminDemandSlice";
 
 const DemandTable = ({ searchValue }) => {
