@@ -70,6 +70,7 @@ const ListCardJobHome = ({
                 job?.jobApp?.jobType?.name || null,
                 job?.jobCare?.jobType?.name || null,
                 job?.jobTypes || null,
+                job?.major?.name || null
               ]}
               majors={[job?.majors]}
               location={

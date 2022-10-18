@@ -64,6 +64,7 @@ const Detail = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  console.log(jobDetail);
   return (
     <div>
       {jobDetail && (
@@ -98,30 +99,20 @@ const Detail = ({
                 <div className="tag-name__name">
                   <TagName
                     title={
-                      jobDetail?.jobType?.name ||
-                      jobDetail?.jobType ||
-                      null
+                      jobDetail?.jobType?.name || jobDetail?.jobType || null
                     }
                   />
                   <TagName
                     title={
-                      jobDetail?.jobPosition?.name ||
+                      jobDetail?.jobposition?.name ||
                       jobDetail?.position?.name ||
                       null
                     }
                   />
-                  <TagName
-                    title={
-                      jobDetail?.jobTypes ||
-                      null
-                    }
-                  />
+                  <TagName title={jobDetail?.jobTypes || null} />
+                  <TagName title={jobDetail?.major?.name || null} /> 
                   {jobDetail?.majors?.map((item) => {
-                    return <TagName
-                    title={
-                      item?.name
-                    }
-                  />
+                    return <TagName title={item?.name} />;
                   })}
                 </div>
               </div>
@@ -246,12 +237,8 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName
-                    title={jobDetailById?.jobType?.name || null}
-                  />
-                  <TagName
-                    title={jobDetailById?.jobposition?.name || null}
-                  />
+                  <TagName title={jobDetailById?.jobType?.name || null} />
+                  <TagName title={jobDetailById?.jobposition?.name || null} />
                   <TagName title={jobDetailById?.major?.name || null} />
                 </div>
               </div>

@@ -41,7 +41,8 @@ const CardHome = (props) => {
         limit: 1000,
       },
     };
-    user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCAre));
+    user?.user?.role?.name === "Role_Candidate" &&
+      dispatch(getAllJobCare(dispatchJobCAre));
   }, [dispatch, user]);
 
   useEffect(() => {
@@ -78,9 +79,10 @@ const CardHome = (props) => {
           {props.tagName?.map((tag) => (
             <TagName key={tag} title={tag} />
           ))}
-          {props.majors?.[0]?.map((majors)=> {
-            return <TagName  key="majors" title={majors.name} />
+          {props.majors?.[0]?.map((majors) => {
+            return <TagName key="majors" title={majors.name} />;
           })}
+          {/* <TagName title={props.major?.name || null} /> */}
         </div>
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">
