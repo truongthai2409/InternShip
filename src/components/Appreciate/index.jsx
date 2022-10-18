@@ -133,7 +133,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
         <Item
           elevation={0}
           sx={{}}
-          className={
+          className={ user &&
             appreciate?.user?.username === user?.user?.username
               ? "appreciate__active"
               : ""

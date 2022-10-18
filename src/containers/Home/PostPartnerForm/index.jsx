@@ -13,7 +13,9 @@ import Textarea from "src/components/Textarea";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import {
-  addDemand, getDemandById, updateDemand
+  addDemand,
+  getDemandById,
+  updateDemand,
 } from "src/store/slices/main/home/demand/demandSlice";
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import Button from "../../../components/Button";
@@ -113,12 +115,12 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
         partner: {
           id: parseInt(activeUser?.id),
         },
-        major: [data.major],
+        major: data.major,
         position: {
-          id: parseInt(data.jobPosition) || null,
+          id: data.jobPosition || null,
         },
         jobType: {
-          id: parseInt(data.jobType) || null,
+          id: data.jobType || null,
         },
         amount: parseInt(data.amount),
       }),
@@ -160,7 +162,17 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
             </div>
             <div className="row-2-col">
               <div className="partner-post__select">
-                <SelectCustom
+                <SelectMulti
+                  id="jobPosition"
+                  arrList={jobPosition}
+                  register={register}
+                  placeholder="Vui lòng chọn..."
+                  label="Vị trí công việc"
+                  requirementField={false}
+                >
+                  {errors.jobPosition?.message}
+                </SelectMulti>
+                {/* <SelectCustom
                   id="jobPosition"
                   label="Vị trí công việc"
                   placeholder="Vui lòng chọn..."
@@ -169,7 +181,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   requirementField={false}
                 >
                   {errors.jobPosition?.message}
-                </SelectCustom>
+                </SelectCustom> */}
               </div>
               <div className="partner-post__select">
                 <SelectMulti
@@ -185,7 +197,18 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
             </div>
             <div className="row-2-col">
               <div className="partner-post__select">
-                <SelectCustom
+                <SelectMulti
+                  id="jobType"
+                  arrList={jobTypeList}
+                  register={register}
+                  placeholder="Vui lòng chọn..."
+                  label="Hình thức làm việc"
+                  arrDefault={jobTypeList}
+                  requirementField={false}
+                >
+                  {errors.jobType?.message}
+                </SelectMulti>
+                {/* <SelectCustom
                   id="jobType"
                   label="Hình thức làm việc"
                   placeholder="Vui lòng chọn..."
@@ -195,7 +218,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   requirementField={false}
                 >
                   {errors.jobType?.message}
-                </SelectCustom>
+                </SelectCustom> */}
               </div>
               <CustomInput
                 label="Số lượng ứng viên"

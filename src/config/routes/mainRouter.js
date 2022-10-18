@@ -1,16 +1,17 @@
-import MainLayout from "src/Layouts/Main";
-import ForgotPassword from "src/pages/ForgotPassword";
-import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
-import Main from "src/pages/Main";
-import NotFound from "src/pages/NotFound";
-import DetailHome from "../../pages/Main/DetailHome";
-import CommingSoon from "src/pages/Main/Home/CommingSoon";
 import AboutUS from "src/components/Footer/FooterChildren/AboutUs";
 import Contact from "src/components/Footer/FooterChildren/Contact";
 import Help from "src/components/Footer/FooterChildren/Help";
 import PrivacyPolicy from "src/components/Footer/FooterChildren/PrivacyPolicy";
-import TermsOfServices from "src/components/Footer/FooterChildren/TermsOfServices";
 import Regulation from "src/components/Footer/FooterChildren/Regulation";
+import TermsOfServices from "src/components/Footer/FooterChildren/TermsOfServices";
+import InfomationDemand from "src/pages/Main/Partner/InfomationDemand";
+import MainLayout from "src/Layouts/Main";
+import ForgotPassword from "src/pages/ForgotPassword";
+import Main from "src/pages/Main";
+import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
+import CommingSoon from "src/pages/Main/Home/CommingSoon";
+import NotFound from "src/pages/NotFound";
+import DetailHome from "../../pages/Main/DetailHome";
 const mainRouter = [
   {
     path: "/",
@@ -51,7 +52,11 @@ const mainRouter = [
       {
         path : "regulation",
         Component : Regulation,
-      }
+      },
+      {
+        path: "infomation_demand/:keywod",
+        Component: InfomationDemand,
+      },
     ],
   },
   {

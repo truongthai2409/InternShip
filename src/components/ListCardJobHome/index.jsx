@@ -36,7 +36,6 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
-              
               jobList={jobList}
               hiddent={hiddent}
               page={page}
@@ -46,7 +45,7 @@ const ListCardJobHome = ({
               index={index}
               key={job.id}
               title={
-                job?.name ? job.name : (job.jobApp?.name || job.jobCare?.name)
+                job?.name ? job.name : job.jobApp?.name || job.jobCare?.name
               }
               fontSize={10}
               nameCompany={
@@ -54,7 +53,8 @@ const ListCardJobHome = ({
                 job?.partner?.universityDTO.name ||
                 job?.jobApp?.company?.name ||
                 job?.jobApp?.hr?.company?.name ||
-                job?.jobCare?.hr?.company?.name
+                job?.jobCare?.hr?.company?.name ||
+                job?.universityDTO?.name
               }
               idCompany={
                 job?.hr?.company?.id ||
@@ -62,16 +62,16 @@ const ListCardJobHome = ({
                 job?.jobApp?.hr?.company?.id
               }
               tagName={[
-                job?.jobposition?.name ||
-                  job?.position?.name ||
-                  job?.jobApp?.jobposition?.name ||
-                  job?.jobCare?.jobposition?.name ||
-                  "Không có",
-                job?.jobType?.name ||
-                  job?.jobApp?.jobType?.name ||
-                  job?.jobCare?.jobType?.name ||
-                  "Không có",
+                job?.jobposition?.name || null,
+                job?.position?.name || null,
+                job?.jobApp?.jobposition?.name || null,
+                job?.jobCare?.jobposition?.name || null,
+                job?.jobType?.name || null,
+                job?.jobApp?.jobType?.name || null,
+                job?.jobCare?.jobType?.name || null,
+                job?.jobTypes || null,
               ]}
+              majors={[job?.majors]}
               location={
                 job.locationjob?.district?.province?.name ||
                 job?.universityDTO?.locations[0]?.district?.province?.name ||

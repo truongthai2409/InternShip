@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
-import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
+import { getAllDemandListByUniId, getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { ListDemand } from "./ListDemand";
 import "./styles.scss";
@@ -51,30 +51,22 @@ const PartnerPostList = (props) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
 
-  const { activeUser } = useSelector((state) => state.university);
+  const { user } = useSelector((state) => state.profile);
   const handleChange = (event, newValue) => setValue(newValue);
-  const { demandListUniversity, demandListUniversityActive } = useSelector(
+  const { demandListUniversity, demandListUniversityActive, AllDemandListUniversity } = useSelector(
     (state) => state.demand
   );
-
-  const userPresent =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePaginate = (e, valuePage) => {
     setCurrentPage(parseInt(valuePage));
     window.scroll(0, 0);
   };
-
   useEffect(() => {
-    let uniId = activeUser?.universityDTO?.id;
+    let uniId = user?.universityDTO?.id;
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
-  }, [activeUser?.universityDTO?.id, currentPage, dispatch]);
-
-  useEffect(() => {
-    dispatch(getPartnerByUserID(userPresent.ids));
-  }, [dispatch, userPresent.ids]);
+    dispatch(getAllDemandListByUniId({ uniId, currentPages : 0, limits : 1000 }));
+  }, [user?.universityDTO?.id, currentPage, dispatch]);
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">
@@ -93,11 +85,11 @@ const PartnerPostList = (props) => {
           <StatisticUser
             title="Trạng thái tin đăng"
             firstObject={{
-              score: demandListUniversity?.totalItems,
+              score: AllDemandListUniversity.reduce((total,item) => { return total += (item?.status === null || item?.status?.name?.includes("Active"))},0),
               description: "Đang đăng tuyển",
             }}
             secondObject={{
-              score: 0,
+              score: AllDemandListUniversity.reduce((total,item) => { return total += (item.status && item?.status?.name?.includes("Disable"))},0),
               description: "Đã đóng",
             }}
           />
@@ -134,13 +126,13 @@ const PartnerPostList = (props) => {
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListDemand
-              demandList={demandListUniversityActive}
+              demandList={demandListUniversityActive.filter((item)=>item?.status?.name?.includes("Active") || item.status === null)}
               message="Không có đợt thực tập đăng tuyển."
             />
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
             <ListDemand
-              demandList={undefined}
+              demandList={AllDemandListUniversity.filter((item)=>item?.status?.name?.includes("Disable"))}
               message="Không có đợt thực tập đã đóng."
             />
           </TabPanel>

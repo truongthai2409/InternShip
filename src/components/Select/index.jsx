@@ -51,7 +51,7 @@ export default function SelectCustom({
             className="select-field"
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
-            defaultValue={defaultValue ? defaultValue : ""}
+            defaultValue={defaultValue ? defaultValue : (defaultValue === 0 ? defaultValue : "")}
             // value={defaultValue}
             {...register(id)}
           >

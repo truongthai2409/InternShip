@@ -44,7 +44,6 @@ const BaseInformationUniversity = ({
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [dispatch, uniId]);
 
-
   return (
     <div className="">
       <div>
@@ -192,11 +191,11 @@ const BaseInformationUniversity = ({
                                 // key={job.id}
                                 idJob={job.id}
                                 tagName={[
-                                  job?.jobposition?.name ||
-                                  job?.position.name ||
-                                  "Không có",
-                                  job?.jobType?.name || "Không có",
+                                  job?.jobposition?.name || null,
+                                  job?.position.name || null,
+                                  job?.jobType?.name || null,
                                 ]}
+                                majors={[job?.majors]}
                                 location={job.universityDTO?.name}
                                 amount={job.amount || "Không có"}
                                 demandPartner={true}
@@ -231,7 +230,7 @@ const BaseInformationUniversity = ({
               {pathUrl !== "/information_company" ? (
                 <div className="button-card">
                   <Link
-                    to={`/partner/infomation_demand/${demandDetail?.universityDTO.id}`}
+                    to={`/infomation_demand/${demandDetail?.universityDTO.id}`}
                   >
                     <Button
                       name="Xem thêm"

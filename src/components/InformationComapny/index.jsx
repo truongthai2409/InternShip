@@ -215,7 +215,7 @@ const InformationCompany = ({
                 variant="span"
                 sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
               >
-                {demandPartner ? "Bản tin tuyển dụng:" : "Mô tả công việc:"}
+                {demandPartner ? "Danh sách sinh viên" : "Mô tả công việc:"}
               </Typography>
               <Typography
                 variant="body2"

@@ -75,9 +75,12 @@ const CardHome = (props) => {
           </div>
         </div>
         <div className="cardHome__tagName">
-          {props.tagName.map((tag) => (
+          {props.tagName?.map((tag) => (
             <TagName key={tag} title={tag} />
           ))}
+          {props.majors?.[0]?.map((majors)=> {
+            return <TagName  key="majors" title={majors.name} />
+          })}
         </div>
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">

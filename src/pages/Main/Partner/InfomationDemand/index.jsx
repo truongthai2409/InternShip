@@ -10,7 +10,7 @@ const InfomationDemand = () => {
     const currentPage = 1;
     const limit = 20;
     const location = useLocation()
-    const uniId = parseInt(location.pathname.slice(27, 31))
+    const uniId = parseInt(location.pathname.slice(19, 20))
 
     const dispatch = useDispatch();
 

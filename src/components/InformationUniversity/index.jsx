@@ -25,7 +25,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
             variant="span"
             sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
           >
-            Bản tin tuyển dụng:
+            Danh sách sinh viên:
           </Typography>
           <Typography
             variant="body2"
@@ -46,7 +46,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
         <div className="detail__card-3-item-partner">
           <Typography variant="span">
             <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
-              Thời hạn ứng tuyển:
+              Thời gian sinh viên có thể chờ:
             </Typography>
             <Typography
               variant="body2"

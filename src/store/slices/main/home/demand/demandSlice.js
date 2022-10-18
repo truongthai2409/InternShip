@@ -16,7 +16,7 @@ const demandSlice = createSlice({
     demandDetail: {},
     demandListByPartnerId: [],
     closeEditDemand: false,
-    totalPagesofDemandList: 0,
+    AllDemandListUniversity: [],
   },
   reducers: {
     updateIdPartnerCardActive: (state, { payload }) => {
@@ -31,6 +31,9 @@ const demandSlice = createSlice({
     builder.addCase(getDemandListByUniId.fulfilled, (state, { payload }) => {
       state.demandListUniversity = payload;
       state.demandListUniversityActive = payload?.contents;
+    });
+    builder.addCase(getAllDemandListByUniId.fulfilled, (state, { payload }) => {
+      state.AllDemandListUniversity = payload.contents;
     });
     builder
       .addCase(addDemand.pending, (state) => {
@@ -152,6 +155,31 @@ export const getDemandListByUniId = createAsyncThunk(
         `${baseURL}/api/demand/filter-university/${uniId}?no=${
           currentPage - 1
         }&limit=${limit}`,
+        axiosConfig
+      )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+  }
+);
+
+export const getAllDemandListByUniId = createAsyncThunk(
+  "demand/getAllDemandListByUniId",
+  async ({ uniId, currentPages, limits }) => {
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    return await axios
+      .get(
+        `${baseURL}/api/demand/filter-university/${uniId}?no=${
+          currentPages
+        }&limit=${limits}`,
         axiosConfig
       )
       .then((response) => {

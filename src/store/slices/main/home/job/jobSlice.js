@@ -64,7 +64,7 @@ const jobSlice = createSlice({
           state.jobListDisabled = payload.contents;
           state.status = "fail";
           state.totalPages = payload.totalPages;
-          state.totalItemDisable = payload.totalItems
+          state.totalItemDisable = payload.totalItems;
         }
       }
     );
@@ -316,14 +316,20 @@ export const getJobByCompany = createAsyncThunk(
 export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
+    console.log(args);
     const header = {
       headers: {
         Authorization: "Bearer " + args[2],
       },
     };
-
+    const data = {
+      id: args[0],
+      status: {
+        id: args[1].status.id,
+      },
+    };
     return axios
-      .put(`${baseURL}/api/job/status/${args[0]}`, args[1], header)
+      .put(`${baseURL}/api/r2s/partner/demand/status`, data, header)
       .then((response) => {
         return response.data;
       })

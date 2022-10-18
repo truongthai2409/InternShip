@@ -1,17 +1,16 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import TagName from "../TagName";
-import { useDispatch } from "react-redux";
-import { getJobList } from "../../store/slices/main/home/job/jobSlice";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import InformationCompany from "../InformationComapny";
-import BaseInformationCompany from "../BaseInformationCompany";
 import { Box } from "@mui/material";
-import InformationUniversity from "../InformationUniversity";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobList } from "../../store/slices/main/home/job/jobSlice";
+import BaseInformationCompany from "../BaseInformationCompany";
 import BaseInformationUniversity from "../BaseInformationUniversity";
+import InformationCompany from "../InformationComapny";
+import InformationUniversity from "../InformationUniversity";
+import TagName from "../TagName";
 const API = process.env.REACT_APP_API;
 export function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,19 +56,7 @@ const Detail = ({
 }) => {
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
-  const [jobType, setJobType] = useState({});
-  const [jobPosition, setJobPosition] = useState({});
-  const [major, setMajor] = useState({});
-  const user =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
-  useEffect(() => {
-    if (jobDetail) {
-      setJobType(jobDetail?.jobType);
-      setJobPosition(jobDetail?.jobposition);
-      setMajor(jobDetail.major);
-    }
-  }, [jobDetail]);
+  const { role } = useSelector((state) => state.profile);
   useEffect(() => {
     dispatch(getJobList([1, 20]));
   }, [dispatch]);
@@ -77,7 +64,6 @@ const Detail = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   return (
     <div>
       {jobDetail && (
@@ -88,7 +74,7 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                  user?.role?.includes("Role_HR")
+                  role?.includes("Role_HR")
                     ? `${API}${jobDetail?.universityDTO?.avatar}`
                     : `${API}${jobDetail?.hr?.company?.logo}`
                 }
@@ -112,17 +98,31 @@ const Detail = ({
                 <div className="tag-name__name">
                   <TagName
                     title={
-                      jobType?.name || jobDetail?.jobType?.name || "Không có"
+                      jobDetail?.jobType?.name ||
+                      jobDetail?.jobType ||
+                      null
                     }
                   />
                   <TagName
                     title={
-                      jobPosition?.name ||
+                      jobDetail?.jobPosition?.name ||
                       jobDetail?.position?.name ||
-                      "Không có"
+                      null
                     }
                   />
-                  <TagName title={major?.name || "Công nghệ thông tin"} />
+                  <TagName
+                    title={
+                      jobDetail?.jobTypes ||
+                      null
+                    }
+                  />
+                  {jobDetail?.majors?.map((item) => {
+                    return <TagName
+                    title={
+                      item?.name
+                    }
+                  />
+                  })}
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@ const Detail = ({
                 className="detail__card__logo"
                 alt="detail-card-logo"
                 src={
-                  user?.role?.includes("Role_Partner")
+                  role?.includes("Role_Partner")
                     ? `${API}${jobDetailById?.universityDTO?.avatar}`
                     : `${API}${jobDetailById?.hr?.company?.logo}`
                 }
@@ -247,12 +247,12 @@ const Detail = ({
               <div className="tag-name">
                 <div className="tag-name__name">
                   <TagName
-                    title={jobDetailById?.jobType?.name || "Không cós"}
+                    title={jobDetailById?.jobType?.name || null}
                   />
                   <TagName
-                    title={jobDetailById?.jobposition?.name || "Không có"}
+                    title={jobDetailById?.jobposition?.name || null}
                   />
-                  <TagName title={jobDetailById?.major?.name || "Không có"} />
+                  <TagName title={jobDetailById?.major?.name || null} />
                 </div>
               </div>
             </div>

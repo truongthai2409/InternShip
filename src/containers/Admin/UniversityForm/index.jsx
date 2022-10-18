@@ -114,6 +114,7 @@ export default function UniversityForm(props) {
   const onSubmit = (data) => {
     const universityData = {
       logo: data.logo[0],
+      logo: data?.logo[0] || null,
       university: JSON.stringify({
         name: data.name,
         shortName: data.shortName,

@@ -98,13 +98,13 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: "#111111" }}
-          to="profile"
+          to={`/${user?.user?.role?.name?.replace("Role_", "")?.toLowerCase()}/profile`}
         >
           <MenuItem>
             <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
           </MenuItem>
         </Link>
-        <Link style={{ color: "#111111" }} to="setting">
+        <Link style={{ color: "#111111" }} to={`/${user?.user?.role?.name?.replace("Role_", "")?.toLowerCase()}/setting`}>
           <MenuItem>
             <SettingsApplicationsSharpIcon className="profile-icon" />
             Cài đặt tài khoản

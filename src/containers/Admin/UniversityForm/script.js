@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // yup validation for company table
 export const schema = yup
   .object({
-    logo: yup.mixed().required('Bạn phải chọn ảnh cho trường'),
+    logo: yup.mixed().required('Bạn phải chọn ảnh cho trường').nullable(),
     name: yup.string().required(' * Bạn phải nhập tên trường.'),
     shortName: yup
       .string()

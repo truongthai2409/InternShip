@@ -58,7 +58,7 @@ const InfomationDemandBase = ({ arrDemand }) => {
                                     }}
                                 >
                                     <Link
-                                        to={`/partner/detail_demand/${job.id}`}
+                                        to={`/detail_demand/${job.id}`}
                                         className="link__job-detail"
                                     >
                                         <CardHome

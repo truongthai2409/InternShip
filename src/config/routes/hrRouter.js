@@ -1,13 +1,12 @@
 import Profile from "src/components/Profile";
 import Password from "src/containers/Home/ChangePasswordForm";
+import HrFindUser from "src/containers/HrFindUser";
+import MainLayout from "src/Layouts/Main";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import CandidateManagement from "src/pages/Main/HR/CandidateManagement/CandidateManagement";
 import HR from "../../pages/Main/HR";
 import HRPost from "../../pages/Main/HR/HRPost";
 import HRPostList from "../../pages/Main/HR/HRPostList";
-import MainLayout from "src/Layouts/Main";
-import HrFindUser from "src/containers/HrFindUser";
-import InfomationDemand from "src/containers/InfomationDemand";
 const hrRouter = [
   {
     role: "Role_HR",
@@ -45,11 +44,7 @@ const hrRouter = [
       {
         path: "finduser",
         Component: HrFindUser,
-      },
-      {
-        path: "infomation_demand/:id",
-        Component : InfomationDemand
-      },
+      }
     ],
   },
 ];

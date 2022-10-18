@@ -29,9 +29,9 @@ Trân trọng cảm ơn!`;
 export const schema = yup
   .object({
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
-    jobPosition: yup.string().notRequired(),
+    jobPosition: yup.array().notRequired(),
     major: yup.array().required(" * Bạn phải chọn chuyên ngành.").nullable(),
-    jobType: yup.string().notRequired(),
+    jobType: yup.array().notRequired(),
     timeStart: yup
       .date()
       .nullable()
