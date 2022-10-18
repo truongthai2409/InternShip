@@ -11,7 +11,7 @@ const CustomSelectLocation = React.forwardRef(
       children,
       placeholder,
       requirementField = true,
-      onChange
+      onChange,
     },
     ref
   ) => {

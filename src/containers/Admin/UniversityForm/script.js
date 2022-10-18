@@ -25,10 +25,14 @@ export const schema = yup
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         ' * Số điện thoại không đúng.'
       ),
+    type: yup
+      .string()
+      .required(' * Bạn phải chọn loại trường.'),
     description: yup.string().required(' * Bạn phải nhập mô tả trường.'),
     province: yup.string().required(' * Bạn chọn tỉnh/thành phố.'),
     district: yup.string().required(' * Bạn chọn quận/huyện.'),
-    address: yup.string().required(' * Bạn phải nhận địa chỉ.')
+    address: yup.string().required(' * Bạn phải nhận địa chỉ.'),
+    note: yup.string().required('*')
   })
   .required()
 

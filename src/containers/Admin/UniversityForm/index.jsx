@@ -24,7 +24,10 @@ import {
 import MultiSelect from "../../../components/MultiSelect";
 import CustomSelect from "src/components/CustomSelect";
 import CustomSelectLocation from "src/components/CustomSelectLocation";
-import { getDistrictList } from "src/store/slices/location/locationSlice";
+import {
+  getDistrictList,
+  getProvinceList,
+} from "src/store/slices/location/locationSlice";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const baseURL = process.env.REACT_APP_API;
@@ -36,6 +39,7 @@ export default function UniversityForm(props) {
     JSON.parse(localStorage.getItem("userPresent"));
 
   const { universityDetail } = useSelector((state) => state.university);
+  console.log("universityDetail", universityDetail);
   const { districtList, provinceList } = useSelector((state) => state.location);
   const [image, setImage] = useState(cameraLogo);
   const [isEdit, setIsEdit] = useState(isAdd);
@@ -58,6 +62,7 @@ export default function UniversityForm(props) {
    * get company details
    */
   useEffect(() => {
+    dispatch(getProvinceList());
     if (!isAdd) {
       setImage(cameraLogo);
       dispatch(getUniversityDetail(uniId));
@@ -69,9 +74,14 @@ export default function UniversityForm(props) {
    * isAdd ? "" : universityDetail
    */
   useEffect(() => {
+
+  })
+
+  useEffect(() => {
     if (universityDetail) {
+      getDistrict(universityDetail?.locations?.[0]?.district?.province?.id)
       if (!isAdd) {
-        setImage(`${baseURL}${universityDetail.avatar}`);
+        setImage(`${universityDetail.avatar}`);
       }
       // setValue("logo", isAdd ? "" : universityDetail.avatar);
       setValue("name", isAdd ? "" : universityDetail.name);
@@ -80,6 +90,11 @@ export default function UniversityForm(props) {
       setValue("phone", isAdd ? "" : universityDetail.phone);
       setValue("shortName", isAdd ? "" : universityDetail.shortName);
       setValue("website", isAdd ? "" : universityDetail.website);
+      setValue("type", isAdd ? "" : universityDetail.type?.id);
+      setValue("province", isAdd ? "" : universityDetail?.locations?.[0]?.district?.province?.id);
+      setValue("district", isAdd ? "" : universityDetail?.locations?.[0]?.district?.id);
+      setValue("address", isAdd ? "" : universityDetail?.locations?.[0]?.address);
+      setValue("note", isAdd ? "" : universityDetail?.locations?.[0]?.note);
     }
   }, [universityDetail, isAdd]);
 
@@ -98,7 +113,7 @@ export default function UniversityForm(props) {
   // handle Submit form
   const onSubmit = (data) => {
     const universityData = {
-      // file: data.logo[0],
+      logo: data.logo[0],
       university: JSON.stringify({
         name: data.name,
         shortName: data.shortName,
@@ -116,12 +131,10 @@ export default function UniversityForm(props) {
           },
         ],
         type: {
-          id: data.type
-        }
+          id: data.type,
+        },
       }),
     };
-    console.log("data", data);
-    console.log("universityData", universityData);
 
     if (isAdd) {
       dispatch(
@@ -137,7 +150,6 @@ export default function UniversityForm(props) {
             //   shortName: "",
             //   website: "",
             // }),
-            logo: image,
           },
           userSessionStorage?.token,
         ])

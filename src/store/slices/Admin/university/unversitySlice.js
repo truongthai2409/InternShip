@@ -239,7 +239,7 @@ export const updateUniversityStatus = createAsyncThunk(
 
 export const addUniversityByAdmin = createAsyncThunk(
   "university/addUniversityByAdmin",
-  async (args) => {
+  async (args, thunkAPI) => {
     const {universityData} = args[0]
     const header = {
       headers: {
@@ -251,9 +251,16 @@ export const addUniversityByAdmin = createAsyncThunk(
       .post(`${baseURL}/api/r2s/admin/university`, universityData, header
       )
       .then((res) => {
+        thunkAPI.dispatch(
+          notificationSlice.actions.successMess("Tạo mới Trường thành công")
+        );
         return res.data;
       })
       .catch((error) => {
+        console.log(error.response.data)
+        thunkAPI.dispatch(
+          notificationSlice.actions.errorMess("Tạo mới Trường không thành công")
+        );
         return error.response.data;
       });
     return res;

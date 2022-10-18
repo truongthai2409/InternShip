@@ -23,6 +23,7 @@ const DemandTable = ({ searchValue }) => {
   const { demandList, totalPages, totalItems } = useSelector(
     (state) => state.adminDemand
   );
+  console.log(demandList)
 
   useEffect(() => {
     if (searchValue === "") {
@@ -118,7 +119,7 @@ const DemandTable = ({ searchValue }) => {
       id: demandList[i]?.id,
       stt: i + 1,
       name: demandList[i]?.name,
-      major: demandList[i]?.major?.name,
+      major: demandList[i]?.major,
       partner: demandList[i]?.partner?.position,
       createDate: demandList[i]?.createDate,
       status: demandList[i]?.status,
