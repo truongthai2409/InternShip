@@ -178,10 +178,9 @@ const Home = (props) => {
     ];
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
-
   useEffect(() => {
     setJob(jobFilter);
-    setJobDetail(jobFilter[index]);
+    jobFilter && setJobDetail(jobFilter[index]);
   }, [jobFilter, dispatch, index]);
 
   useEffect(() => {
@@ -216,7 +215,7 @@ const Home = (props) => {
           />
         </Grid>
       </Hidden>
-      {jobs.length === 0 ? (
+      {jobs?.length === 0 ? (
         <Grid item xs={10}>
           <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12}>

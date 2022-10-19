@@ -1,12 +1,10 @@
 import { Grid, Typography } from '@mui/material';
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 import moment from 'moment';
-import React from 'react';
 import { Link } from 'react-router-dom';
 import CardHome from '../CardHome';
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import './styles.scss'
-import BaseInformationUniversity from '../BaseInformationUniversity';
+import './styles.scss';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -18,7 +16,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const InfomationDemandBase = ({ arrDemand }) => {
 
     return (
-            // <BaseInformationUniversity arrDemand={arrDemand}  /> 
         <div className='InfomationDemandBase'>
             <Item
                 sx={{

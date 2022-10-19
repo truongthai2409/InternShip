@@ -18,7 +18,7 @@ const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.user = payload;
-      state.role = payload.user.role.name;
+      state.role = payload?.user?.role?.name;
     });
     builder.addCase(updateUser.fulfilled, (state, {payload}) => {
       state.user = payload;

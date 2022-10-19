@@ -16,8 +16,8 @@ function App() {
     const user =
       JSON.parse(sessionStorage.getItem("userPresent")) ||
       JSON.parse(localStorage.getItem("userPresent"));
-    if (user) return dispatch(getUserById(user));
-  }, [dispatch]);
+    if (user && !role) return dispatch(getUserById(user));
+  }, [dispatch, role]);
   useEffect(() => {
     dispatchUserIfSave();
   }, [dispatchUserIfSave]);

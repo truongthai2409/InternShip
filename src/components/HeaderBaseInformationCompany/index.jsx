@@ -5,9 +5,12 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import LanguageIcon from "@mui/icons-material/Language";
 import { Typography } from "@mui/material";
-const HeaderBaseInformationCompany = ({ jobDetail }) => {
-
-  return (
+const baseURL = process.env.REACT_APP_API
+const HeaderBaseInformationCompany = ({jobDetail }) => {
+//   const onClick = () => {
+//     console.log(123)
+//  }
+ return (
     <div>
       <Box
         sx={{
@@ -40,13 +43,19 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
               <img
                 className="img-logo"
                 alt=""
-                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                src={`${baseURL}/${jobDetail?.universityDTO?.avatar}`}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.onerror = undefined;
+                  currentTarget.src =
+                  "https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                }}
               />
             </Box>
           </div>
 
           <div className="base__information-card-detail">
-            <h3 className="company-name">{jobDetail?.hr?.company.name}</h3>
+            <h3 className="company-name">{jobDetail?.hr?.company.name || jobDetail?.universityDTO?.name}</h3>
             <div
             className="company_info"
               style={{
@@ -79,7 +88,7 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                       transform: "translate(5px,0px)",
                     }}
                   >
-                    {jobDetail?.hr?.company?.phone}
+                    {jobDetail?.hr?.company?.phone || jobDetail?.universityDTO?.phone}
                   </Typography>
                 </div>
                 <div className="">
@@ -97,10 +106,10 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                       }}
                     />
                     <a
-                      href={`mailto:${jobDetail?.hr?.company.email}`}
+                      href={`mailto:${jobDetail?.hr?.company.email}` || `mailto:${jobDetail?.universityDTO?.email}`}
                       className=" "
                     >
-                      {jobDetail?.hr?.company.email}
+                      {jobDetail?.hr?.company.email || jobDetail?.universityDTO?.email}
                     </a>
                   </h5>
                 </div>
@@ -127,11 +136,11 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                     }}
                   />
                   <a
-                    href={jobDetail?.hr?.company.website}
+                    href={jobDetail?.hr?.company.website || jobDetail?.universityDTO?.website}
                     className=""
                     style={{}}
                   >
-                    {jobDetail?.hr?.company.website}
+                    {jobDetail?.hr?.company.website || jobDetail?.universityDTO?.website}
                   </a>
                 </h5>
 
@@ -157,7 +166,8 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                       transform: "translate(5px,0px)",
                     }}
                   >
-                    {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}`}
+                    {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}` ||
+                     `${jobDetail?.universityDTO?.locations?.[0]?.address} ${jobDetail?.universityDTO?.locations?.[0]?.district?.name} ${jobDetail?.universityDTO?.locations?.[0]?.province?.name}` }
                   </Typography>
                 </div>
               </div>
