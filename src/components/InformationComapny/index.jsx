@@ -196,7 +196,7 @@ const InformationCompany = ({
           {user?.user?.role?.name === "Role_Candidate" ? (
             <div className="detail__card-5">
               <Button
-                name={check ? "Đã Ứng Tuyển" : "Ứng Tuyển"}
+                name={check ? "Đã ứng tuyển" : "Ứng tuyển"}
                 onClick={handleAddJob}
                 disabled={check ? true : false}
                 bheight="35px"

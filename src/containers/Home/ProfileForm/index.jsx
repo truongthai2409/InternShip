@@ -11,7 +11,7 @@ import { updateUser } from "src/store/slices/main/user/userSlice";
 import "./styles.scss";
 import { genderList, schema } from "./validateForm";
 
-const ProfileForm = ({ profile : user }) => {
+const ProfileForm = ({ profile: user }) => {
   const {
     register,
     handleSubmit,
@@ -21,16 +21,14 @@ const ProfileForm = ({ profile : user }) => {
     mode: "all",
     resolver: yupResolver(schema),
   });
-  const {role} = useSelector(state=>state.profile)
-  const userStorage = JSON.parse(sessionStorage.getItem("userPresent")) ||
-   JSON.parse(localStorage.getItem("userPresent"));
+  const { role } = useSelector((state) => state.profile);
+  const userStorage =
+    JSON.parse(sessionStorage.getItem("userPresent")) ||
+    JSON.parse(localStorage.getItem("userPresent"));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue(
-      "firstName",
-      user?.user?.firstName || user?.userDTO?.firstName
-    );
+    setValue("firstName", user?.user?.firstName || user?.userDTO?.firstName);
     setValue("lastName", user?.user?.lastName || user?.userDTO?.lastName);
     setValue("email", user?.user?.email || user?.userDTO?.email);
     setValue("phone", user?.user?.phone || user?.userDTO?.phone);
@@ -40,8 +38,8 @@ const ProfileForm = ({ profile : user }) => {
   const onSubmit = (data) => {
     const userPost = {
       userStorage,
-      role
-    }
+      role,
+    };
     switch (role) {
       case "Role_HR": {
         const profileData = {
@@ -78,7 +76,7 @@ const ProfileForm = ({ profile : user }) => {
               id: user?.major.id,
             },
           }),
-          fileAvatar: data.avatar || null,
+          fileAvatar: data.avatar,
           fileCV: user?.cv,
         };
         dispatch(updateUser([userPost, profileData]));
@@ -86,18 +84,18 @@ const ProfileForm = ({ profile : user }) => {
       }
       case "Role_Partner": {
         const profileData = {
-          partner : JSON.stringify({
+          avatar: data.avatar,
+          partner: JSON.stringify({
             id: parseInt(user.id),
             position: user?.position,
             userCreationDTO: {
-              username : user?.user.username, 
+              // username: user?.user.username,
               firstName: data.firstName,
               lastName: data.lastName,
               gender: parseInt(data.gender),
               phone: data.phone,
               email: user?.user?.email,
             },
-            // fileAvatar: data.avatar || null,
           }),
         };
         dispatch(updateUser([userPost, profileData]));
@@ -111,7 +109,9 @@ const ProfileForm = ({ profile : user }) => {
   return (
     <>
       <form className="profile-form__wrapper" autoComplete="off">
-        <Typography variant="button" style={{fontSize : 22}}>Thay đổi thông tin</Typography>
+        <Typography variant="button" style={{ fontSize: 22 }}>
+          Thay đổi thông tin
+        </Typography>
         <div className="profile-form__content">
           <p className="title-requirement">
             (<span className="field-requirment"> * </span>)Trường bắt buộc

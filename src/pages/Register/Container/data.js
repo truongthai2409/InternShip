@@ -50,7 +50,7 @@ export const containerSchema = yup.object().shape({
         .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
     password: yup
         .string()
-        .required('* Bạn phải nhập mật khẩu.')
+        .required('* Bạn phải nhập mật khẩu')
         .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
         .matches(/[a-zA-Z0-9.\_$@*!]$/, "* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")
         .matches(/[a-zA-Z0-9\w]*$/, "* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .")

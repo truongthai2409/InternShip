@@ -32,7 +32,7 @@ const AddressComponent = () => {
         <div className="address-footer-hotline">
           <div className="text-footer">
             <p>
-              <span style={{ fontWeight: "900", marginRight: "4px" }}>
+              <span style={{ fontWeight: "600", marginRight: "4px" }}>
                 Hotline:
               </span>
               0919 365 363
@@ -46,7 +46,7 @@ const AddressComponent = () => {
               href="mailto:tuyendung@r2s.com.vn"
             >
               <p>
-                <span style={{ fontWeight: "900", marginRight: "4px" }}>
+                <span style={{ fontWeight: "600", marginRight: "4px" }}>
                   Email:
                 </span>
                 tuyendung@r2s.com.vn
