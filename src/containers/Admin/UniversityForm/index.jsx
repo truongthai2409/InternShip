@@ -40,7 +40,6 @@ export default function UniversityForm(props) {
     JSON.parse(localStorage.getItem("userPresent"));
 
   const { universityDetail } = useSelector((state) => state.university);
-  console.log("universityDetail", universityDetail);
   const { districtList, provinceList } = useSelector((state) => state.location);
   const [image, setImage] = useState(cameraLogo);
   const [isEdit, setIsEdit] = useState(isAdd);

@@ -111,7 +111,6 @@ export const addJobCare = createAsyncThunk(
 export const deleteJobCare = createAsyncThunk(
   "jobCadidateSlice/deleteJobCare",
   async (args) => {
-    console.log(args);
     const header = {
       headers: {
         Authorization: "Bearer " + args[0].token,

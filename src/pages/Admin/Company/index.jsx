@@ -53,7 +53,7 @@ export default function Company() {
     <>
       <HeaderContainer
         headerName="Quản lý công ty"
-        placeholder="Tìm kiếm công ty..."
+        placeholder="Tìm kiếm công ty"
         onChange={(e) => setSearchValue(e.target.value)}
         selectName="role"
         selectOptions={selectOptions}

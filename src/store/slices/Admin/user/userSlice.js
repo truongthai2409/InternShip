@@ -86,7 +86,6 @@ export const getUserList = createAsyncThunk(
         header
       )
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {

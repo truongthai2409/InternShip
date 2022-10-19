@@ -203,7 +203,6 @@ export const deleteUniversity = createAsyncThunk(
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Xóa trường học thành công.")
         );
-        return response.data;
       })
       .catch((error) => {
         thunkAPI.dispatch(

@@ -19,7 +19,7 @@ const NumberOfNewUsers = () => {
           </div>
         </div>
         <div className="new-user__item">
-          <div className="title">Số lượng công tác viên mới</div>
+          <div className="title">Số lượng cộng tác viên mới</div>
           <div className="number">10000</div>
           <div className="value-change">
           <span className="down"><KeyboardDoubleArrowDownIcon fontSize='small'/>10%</span> So với tháng trước

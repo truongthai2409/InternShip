@@ -61,7 +61,7 @@ export default function University() {
     <>
       <HeaderContainer
         headerName="Quản lý trường học"
-        placeholder="Tìm kiếm trường..."
+        placeholder="Tìm kiếm trường"
         onChange={(e) => setSearchValue(e.target.value)}
         onSearch={handleSearch}
         searchValue={searchValue}
