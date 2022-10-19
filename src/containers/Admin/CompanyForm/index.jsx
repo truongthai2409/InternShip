@@ -13,7 +13,7 @@ import Button from "../../../components/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
 import {
-  addCompany,
+  addCompanyByAdmin,
   getCompanyDetail,
   updateCompanyInfo,
 } from "../../../store/slices/Admin/company/companySlice";
@@ -21,6 +21,7 @@ import {
   getProvinceList,
   getDistrictList,
 } from "../../../store/slices/location/locationSlice";
+import CustomSelectLocation from "src/components/CustomSelectLocation";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const baseURL = process.env.REACT_APP_API;
@@ -30,10 +31,6 @@ export default function CompanyForm(props) {
 
   const { companyDetail, error } = useSelector((state) => state.company);
   const { provinceList, districtList } = useSelector((state) => state.location);
-
-  console.log("provinceList", provinceList)
-  console.log("districtList", districtList)
-
   const {
     register,
     handleSubmit,
@@ -57,17 +54,18 @@ export default function CompanyForm(props) {
 
   useEffect(() => {
     dispatch(getProvinceList());
-    dispatch(getDistrictList(1));
   }, [dispatch]);
 
   useEffect(() => {
     if (!isAdd) {
-      // dispatch(getCompanyDetail(comid));
-      dispatch(getCompanyDetail(1));
-
+      dispatch(getCompanyDetail(comid));
+      // dispatch(getCompanyDetail(1));
     }
   }, [isAdd, dispatch, comid]);
 
+  const getDistrict = (id) => {
+    dispatch(getDistrictList(id));
+  };
   useEffect(() => {
     if (!isAdd) {
       setImage(`${baseURL}${companyDetail.logo}`);
@@ -78,8 +76,7 @@ export default function CompanyForm(props) {
     setValue("phone", isAdd ? "" : companyDetail.phone);
     setValue("tax", isAdd ? "" : companyDetail.tax);
     setValue("website", isAdd ? "" : companyDetail.website);
-  }, [companyDetail]);
-
+  }, [companyDetail, isAdd, setValue]);
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -87,7 +84,6 @@ export default function CompanyForm(props) {
       let imageFile = e.target.files[0];
       const reader = new FileReader();
       reader.onload = (x) => {
-
         setImageFile(imageFile);
         setImage(x.target.result);
       };
@@ -99,35 +95,38 @@ export default function CompanyForm(props) {
   const onSubmit = (data) => {
     const companyData = {
       company: JSON.stringify({
-        description: data.description,
-        email: data.email,
-        // logo: image,
         name: data.name,
+        description: data.description,
+        website: data.website,
+        email: data.email,
         phone: data.phone,
         tax: data.tax,
-        website: data.website,
+        status: {
+          id: 4,
+        },
       }),
       fileLogo: data.logo[0],
       location: JSON.stringify({
+        district: {
+          id: data.district,
+        },
         address: data.address,
-        note: "note",
+        note: data.note,
       }),
     };
 
     if (isAdd) {
-      const addData = { companyData, reset };
-      dispatch(addCompany(addData));
+      dispatch(addCompanyByAdmin(companyData));
     } else {
       const updateData = {
         companyData: {
           company: JSON.stringify({
-            description: data.description,
-            email: data.email,
-            // logo: image,
             name: data.name,
+            description: data.description,
+            website: data.website,
+            email: data.email,
             phone: data.phone,
             tax: data.tax,
-            website: data.website,
             status: {
               id: 4,
             },
@@ -145,11 +144,6 @@ export default function CompanyForm(props) {
   const handleOnClickEdit = () => {
     setIsEdit(!isEdit);
   };
-
-  // handle change district
-  // const handleChangeDistrict = (e) => {
-  //   dispatch(getDistrictList(e.target.value));
-  // };
 
   return (
     <form
@@ -236,10 +230,6 @@ export default function CompanyForm(props) {
                   >
                     {errors.phone?.message}
                   </CustomInput>
-                </div>
-              </Grid>
-              <Grid item md={6}>
-                <div className="company-form__input">
                   <CustomInput
                     label="Website"
                     id="website"
@@ -252,6 +242,10 @@ export default function CompanyForm(props) {
                     {error?.Website}
                     {errors.website?.message}
                   </CustomInput>
+                </div>
+              </Grid>
+              <Grid item md={6}>
+                <div className="company-form__input">
                   <CustomInput
                     label="Mã số thuế"
                     id="tax"
@@ -263,35 +257,51 @@ export default function CompanyForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
+                  <CustomInput
+                    label="Địa chỉ"
+                    id="address"
+                    type="text"
+                    placeholder="Địa chỉ..."
+                    setValue={setValue}
+                    register={register}
+                    check={!isEdit}
+                  >
+                    {errors.address?.message}
+                  </CustomInput>
 
-                  <div className="company-form__selector">
-                    <div className="company-form__selector-item">
-                      <CustomSelect
-                        name="Tỉnh"
-                        label="Tỉnh"
-                        placeholder="Chọn tỉnh..."
-                        dispatch={dispatch}
-                        getDistrictList={getDistrictList}
-                        options={provinceList}
-                        id="province"
-                        register={register}
-
-                      />
-                      {/* {errors.province?.message} */}
-                    </div>
-                    <div className="company-form__selector-item">
-                      <CustomSelect
-                        name="Quận/Huyện"
-                        label="Quận/Huyện"
-                        placeholder="Chọn quận/huyện..."
-                        options={districtList}
-                        id="district"
-                        register={register}
-                      />
-                      {/* {errors.district?.message} */}
-                    </div>
-                  </div>
+                  <CustomSelectLocation
+                    id="province"
+                    className="user-form__input-item"
+                    label="Tỉnh"
+                    placeholder="Chọn tỉnh..."
+                    options={provinceList}
+                    register={register}
+                    onChange={(id) => getDistrict(id)}
+                  >
+                    {errors.province?.message}
+                  </CustomSelectLocation>
+                  <CustomSelect
+                    id="district"
+                    className="user-form__input-item"
+                    label="Quận/Huyện"
+                    placeholder="Chọn quận/huyện..."
+                    register={register}
+                    options={districtList}
+                  >
+                    {errors.district?.message}
+                  </CustomSelect>
                 </div>
+                <CustomInput
+                  label="Note"
+                  id="note"
+                  type="text"
+                  placeholder="Note..."
+                  setValue={setValue}
+                  register={register}
+                  check={!isEdit}
+                >
+                  {errors.note?.message}
+                </CustomInput>
               </Grid>
               <Grid container item md={12}>
                 <Grid item md={6}>

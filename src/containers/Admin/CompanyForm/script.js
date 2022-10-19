@@ -39,10 +39,11 @@ export const schema = yup
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         ' * Mã số thuế không đúng.'
       ),
-    description: yup.string().required(' * Bạn phải nhập mô tả công ty.'),
-    address: yup.string().required(' * Bạn phải nhập chi tiết địa chỉ.')
-    // district: yup.string().required(" * Bạn phải nhập quận/huyện."),
-    // province: yup.string().required(" * Bạn phải nhập tỉnh/thành phố.")
+    description: yup.string().required(' * Bạn phải nhập mô tả trường.'),
+    province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố.'),
+    district: yup.string().required(' * Bạn phải chọn quận/huyện.'),
+    address: yup.string().required(' * Bạn phải nhập địa chỉ.'),
+    note: yup.string().required('* Bạn phải nhập ghi chú')
   })
   .required()
 

@@ -29,10 +29,10 @@ export const schema = yup
       .string()
       .required(' * Bạn phải chọn loại trường.'),
     description: yup.string().required(' * Bạn phải nhập mô tả trường.'),
-    province: yup.string().required(' * Bạn chọn tỉnh/thành phố.'),
-    district: yup.string().required(' * Bạn chọn quận/huyện.'),
-    address: yup.string().required(' * Bạn phải nhận địa chỉ.'),
-    note: yup.string().required('*')
+    province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố.'),
+    district: yup.string().required(' * Bạn phải chọn quận/huyện.'),
+    address: yup.string().required(' * Bạn phải nhập địa chỉ.'),
+    note: yup.string().required('* Bạn phải nhập ghi chú')
   })
   .required()
 

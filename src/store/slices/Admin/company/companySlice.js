@@ -19,7 +19,7 @@ const companySlice = createSlice({
     builder.addCase(getCompanyList.fulfilled, (state, { payload }) => {
       state.companyList = payload.contents;
     });
-    builder.addCase(addCompany.fulfilled, (state, { payload }) => {
+    builder.addCase(addCompanyByAdmin.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
         state.error = payload;
       }
@@ -76,12 +76,11 @@ export const getCompanyList = createAsyncThunk(
  * @returns notification
  */
 
-export const addCompany = createAsyncThunk(
-  "company/addCompany",
+export const addCompanyByAdmin = createAsyncThunk(
+  "company/addCompanyByAdmin",
   async (data, thunkAPI) => {
-    const { companyData, reset } = data;
     return axios
-      .post(`${baseURL}/api/company`, companyData, {
+      .post(`${baseURL}/api/company`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -90,20 +89,12 @@ export const addCompany = createAsyncThunk(
         thunkAPI.dispatch(
           notificationSlice.actions.successMess("Thêm công ty thành công")
         );
-        reset({
-          description: "",
-          email: "",
-          // logo: image,
-          name: "",
-          phone: "",
-          tax: "",
-          website: "",
-        });
-        // return response.data;
+        
+        return response.data;
       })
       .catch((error) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Thêm công ty khoong thành công")
+          notificationSlice.actions.errorMess("Thêm công ty không thành công")
         );
         return error.response.data;
       });

@@ -18,7 +18,7 @@ const CustomSelect = React.forwardRef(
   ) => {
     // render option
     const renderSelectOption = () => {
-      if (options) {
+      if (options.length > 0) {
         return options.map((item) => {
           return (
             <option value={item.id} key={item.id}>

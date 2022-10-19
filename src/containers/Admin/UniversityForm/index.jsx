@@ -2,6 +2,7 @@ import React, {
   useState,
   // useRef,
   useEffect,
+  useCallback,
 } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -67,15 +68,12 @@ export default function UniversityForm(props) {
       setImage(cameraLogo);
       dispatch(getUniversityDetail(uniId));
     }
-  }, [isAdd, dispatch]);
+  }, [isAdd, dispatch, uniId]);
 
-  /**
-   * @dependency universityDetail
-   * isAdd ? "" : universityDetail
-   */
-  useEffect(() => {
 
-  })
+   const getDistrict = useCallback((id) => {
+    dispatch(getDistrictList(id));
+  }, [dispatch])
 
   useEffect(() => {
     if (universityDetail) {
@@ -96,7 +94,7 @@ export default function UniversityForm(props) {
       setValue("address", isAdd ? "" : universityDetail?.locations?.[0]?.address);
       setValue("note", isAdd ? "" : universityDetail?.locations?.[0]?.note);
     }
-  }, [universityDetail, isAdd]);
+  }, [universityDetail, isAdd, getDistrict, setValue]);
 
   // show preview image
   const showPreviewImage = (e) => {
@@ -114,7 +112,6 @@ export default function UniversityForm(props) {
   const onSubmit = (data) => {
     const universityData = {
       logo: data.logo[0],
-      logo: data?.logo[0] || null,
       university: JSON.stringify({
         name: data.name,
         shortName: data.shortName,
@@ -174,9 +171,7 @@ export default function UniversityForm(props) {
     { name: "Cao đẳng", id: 2 },
     { name: "Trung cấp", id: 3 },
   ];
-  const getDistrict = (id) => {
-    dispatch(getDistrictList(id));
-  };
+  
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

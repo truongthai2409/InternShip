@@ -10,6 +10,7 @@ import {
   getCompanyList,
   searchCompany,
 } from "src/store/slices/Admin/company/companySlice";
+import { getProvinceList } from "src/store/slices/location/locationSlice";
 
 const selectOptions = [
   {
@@ -44,6 +45,7 @@ export default function Company() {
   };
 
   const handleOpenModal = () => {
+    dispatch(getProvinceList())
     setOpen(true);
   };
 
