@@ -233,7 +233,7 @@ const Home = (props) => {
         </Grid>
       ) : (
         <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={12} md={6} lg={4} xl={5}>
               <div className="none__res" style={{ paddingBottom: 16 }}>
                 <div

@@ -25,6 +25,7 @@ const ButtonMark = (props) => {
   const { user } = useSelector((state) => state.profile);
 
   const handleClickMarkJob = async (e) => {
+    e.preventDefault()
     const userStorage =
       JSON.parse(sessionStorage.getItem("userPresent")) ||
       JSON.parse(localStorage.getItem("userPresent"));
@@ -78,9 +79,17 @@ const ButtonMark = (props) => {
                 limit: 1000,
               },
             };
+            const page = {
+              user: user,
+              token: userStorage?.token,
+              page: {
+                no: 0,
+                limit: 5,
+              },
+            };
             setMark(false);
             toast.success("Đã hủy lưu việc làm ");
-            user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCare));
+            user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCare)) && dispatch(getJobCareByCandidate(page))
           });
         });
       }
@@ -88,9 +97,9 @@ const ButtonMark = (props) => {
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (user?.user?.username === undefined) {
-      toast.error("Bạn cần đăng nhập với candidate để đánh dấu công việc");
-      await navigate("/login");
+    if (user?.user?.role?.name !== "Role_Candiate") {
+      toast.error("Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc");
+      // await navigate("/login");
     }
   };
   return (

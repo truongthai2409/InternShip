@@ -56,7 +56,7 @@ const CardVisit = ({ jobDetailById, logo, candidate }) => {
         </CardContent>
         <CardActions className="config-button">
           <Link to={`/information_company/${jobDetailById.id}`}>
-            <Button name="Về Chúng Tôi"></Button>
+            <Button name="Về chúng tôi"></Button>
           </Link>
         </CardActions>
       </Card>

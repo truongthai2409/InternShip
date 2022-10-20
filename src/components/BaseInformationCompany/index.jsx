@@ -33,7 +33,6 @@ import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import HeaderBaseInformationCompany from "../HeaderBaseInformationCompany";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -111,7 +110,11 @@ const BaseInformationCompany = ({
 
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
-    topAppreciate.push(appreciateList?.slice().sort((a,b)=> new Date(b.createDate) - new Date(a.createDate))[i]);
+    topAppreciate.push(
+      appreciateList
+        ?.slice()
+        .sort((a, b) => new Date(b.createDate) - new Date(a.createDate))[i]
+    );
   }
   const handleBackClick = () => {
     navigate(-1);
@@ -136,7 +139,7 @@ const BaseInformationCompany = ({
   };
 
   const onSubmit = async (data) => {
-    const username = user?.user?.username
+    const username = user?.user?.username;
     const avaluateData = {
       comment: data.comment,
       score: valueRating,
@@ -156,9 +159,7 @@ const BaseInformationCompany = ({
       if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Đã đăng đánh giá", {});
       } else {
-        toast.error(
-          res.payload.message
-        );
+        toast.error(res.payload.message);
       }
     } catch (error) {
       if (error.status === 400) {
@@ -331,13 +332,15 @@ const BaseInformationCompany = ({
                                   justifyContent: "center",
                                 }}
                               >
-                                <Button
-                                  className="button-card"
-                                  name="Viết đánh giá"
-                                  bwidth="150px"
-                                  bheight="40px"
-                                  onClick={handleChangeAvaluate}
-                                ></Button>
+                                {user?.user?.role.name === "Role_Candidate" && (
+                                  <Button
+                                    className="button-card"
+                                    name="Viết đánh giá"
+                                    bwidth="150px"
+                                    bheight="40px"
+                                    onClick={handleChangeAvaluate}
+                                  ></Button>
+                                )}
                               </div>
                             </div>
                           ) : (
@@ -361,13 +364,20 @@ const BaseInformationCompany = ({
                             Đánh giá mới nhất
                           </h5>
                           <div>
-                            {topAppreciate.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
-                              <Appreciate
-                                appreciate={appreciate}
-                                key={index}
-                                fontSize="15px"
-                              />
-                            ))}
+                            {topAppreciate
+                              .slice()
+                              .sort(
+                                (a, b) =>
+                                  new Date(b.createDate) -
+                                  new Date(a.createDate)
+                              )
+                              ?.map((appreciate, index) => (
+                                <Appreciate
+                                  appreciate={appreciate}
+                                  key={index}
+                                  fontSize="15px"
+                                />
+                              ))}
 
                             <div
                               style={{
@@ -525,23 +535,32 @@ const BaseInformationCompany = ({
                               }
                               name="list-candidate"
                             />
-                            <Button
-                              name="Viết đánh giá"
-                              bwidth="150px"
-                              bheight="40px"
-                              onClick={handleOpen}
-                            ></Button>
+                            {user?.user?.role?.name === "Role_Candidate" && (
+                              <Button
+                                name="Viết đánh giá"
+                                bwidth="150px"
+                                bheight="40px"
+                                onClick={handleOpen}
+                              ></Button>
+                            )}
                           </div>
                           <div>
-                            {appreciateList?.slice().sort((a,b) => new Date(b.createDate) - new Date(a.createDate))?.map((appreciate, index) => (
-                              <div>
-                                <Appreciate
-                                  appreciate={appreciate}
-                                  key={appreciate.id}
-                                />
-                                <span style={{}} className="line"></span>
-                              </div>
-                            ))}
+                            {appreciateList
+                              ?.slice()
+                              .sort(
+                                (a, b) =>
+                                  new Date(b.createDate) -
+                                  new Date(a.createDate)
+                              )
+                              ?.map((appreciate, index) => (
+                                <div>
+                                  <Appreciate
+                                    appreciate={appreciate}
+                                    key={appreciate.id}
+                                  />
+                                  <span style={{}} className="line"></span>
+                                </div>
+                              ))}
                           </div>
                           <div
                             className="demand-detail__back"
@@ -593,7 +612,7 @@ const BaseInformationCompany = ({
                 <Box
                   sx={{
                     border: "1px solid #dedede",
-                    borderRadius: "4px"
+                    borderRadius: "4px",
                   }}
                 >
                   <div

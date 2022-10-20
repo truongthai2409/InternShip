@@ -76,6 +76,7 @@ const SelectMulti = ({
           </InputLabel>
         )}
         <Select
+        sx={{padding : "6px 0 8xpx 0"}}
           className="container_form_post"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
