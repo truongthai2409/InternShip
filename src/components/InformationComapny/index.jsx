@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import { getAllJobApply } from "src/store/slices/main/home/job/jobCandidateSlice";
+import { getAllJobApply, getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 import Button from "../Button";
 import "./styles.scss";
 
@@ -47,6 +47,18 @@ const InformationCompany = ({
         ) {
           toast.success("Đã nộp CV thành công");
           setCheck(true);
+          const token =
+            JSON.parse(sessionStorage.getItem("userPresent")) ||
+            JSON.parse(localStorage.getItem("userPresent"));
+          const page = {
+            user: user,
+            token: token.token,
+            page: {
+              no:0,
+              limit: 5,
+            },
+          };
+          dispatch(getJobApplyListByCandidate(page));
         }
       }
     } else {
@@ -65,7 +77,8 @@ const InformationCompany = ({
         limit: 1000,
       },
     };
-    user?.user?.role?.name === "Role_Candidate" &&  dispatch(getAllJobApply(dispatchJobApply));
+    user?.user?.role?.name === "Role_Candidate" &&
+      dispatch(getAllJobApply(dispatchJobApply));
   }, [dispatch, user]);
   useEffect(() => {
     setCheck(
@@ -258,12 +271,12 @@ const InformationCompany = ({
               <Typography variant="span">
                 <Typography
                   variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700" }}
+                  sx={{ fontSize: 18, fontWeight: "700"}}
                 >
-                  Thời hạn ứng tuyển:
+                  Thời hạn ứng tuyển:<br/>
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="span"
                   gutterBottom
                   sx={{ fontSize: 17, fontWeight: "400" }}
                 >
@@ -280,7 +293,7 @@ const InformationCompany = ({
                 <WorkIcon />
               </Icon>
               <Typography
-                variant="h6"
+                  variant="span"
                 component="div"
                 sx={{
                   fontSize: 17,
@@ -296,7 +309,7 @@ const InformationCompany = ({
                 <WorkIcon />
               </AddLocationIcon>
               <Typography
-                variant="h6"
+                  variant="span"
                 component="div"
                 sx={{
                   fontSize: 14,
