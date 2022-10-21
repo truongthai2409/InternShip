@@ -83,7 +83,12 @@ const Appreciate = ({ appreciate, fontSize }) => {
 
     try {
       const res = await dispatch(updateAppreciate(dataUpdate));
-      await dispatch(getAppreciateByCompany(idCompany));
+      const values = {
+        idCompany: idCompany,
+        no: 0,
+        limit: 10,
+      };
+      await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200) {
         toast.success("Đã đăng đánh giá");
       } else {
@@ -110,7 +115,13 @@ const Appreciate = ({ appreciate, fontSize }) => {
     await dispatch(deleteAppreciate(appreciate.id)).then(
       toast.success("Đã xóa đánh giá ")
     );
-    await dispatch(getAppreciateByCompany(idCompany));
+    const values = {
+      idCompany: idCompany,
+      no: 0,
+      limit: 10,
+    };
+    await dispatch(getAppreciateByCompany(values));
+    
   };
 
   const [anchorEl, setAnchorEl] = useState(null);

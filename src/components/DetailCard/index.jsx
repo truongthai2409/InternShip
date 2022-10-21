@@ -22,7 +22,12 @@ const DetailCard = ({
       jobDetail?.universityDTO?.id ||
       jobDetail?.hr?.company?.id ||
       jobDetail?.jobApp?.hr?.company?.id;
-    dispatch(getAppreciateByCompany(idCompany));
+      const values = {
+        idCompany: idCompany,
+        no: 0,
+        limit: 10,
+      };
+    dispatch(getAppreciateByCompany(values));
     dispatch(getJobByCompany(idCompany));
   }, [
     dispatch,

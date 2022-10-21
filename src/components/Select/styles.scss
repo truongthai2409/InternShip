@@ -50,7 +50,7 @@
 
 .select-form {
   & .select-formControl {
-    font-family: "Public Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     outline: none !important;
     &:hover {
       border-color: $primary-color;
@@ -58,7 +58,7 @@
     .select-field {
       border: 1px solid rgb(119, 119, 119);
       border-radius: 2px;
-      border :  1px solid $primary-color;
+      border: 1px solid $primary-color;
 
       &:hover {
         border-color: $primary-color !important;

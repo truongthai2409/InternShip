@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
@@ -9,18 +9,20 @@ const CustomCheckbox = ({ label, onChange, checked }) => {
     const checkedValue = e.target.checked;
     onChange && onChange(checkedName, checkedValue);
   };
+
   return (
     <FormControlLabel
       onChange={handleChange}
       className="formControlLabel"
       name={label}
-      checked={checked}
       ref={inputRef}
+      checked={checked}
       control={
         <Checkbox
           className="checkBoxColor"
           sx={{
             color: "#04bf8a",
+            fontFamily: "Public Sans !important",
           }}
         />
       }

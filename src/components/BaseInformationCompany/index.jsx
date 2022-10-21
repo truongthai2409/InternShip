@@ -32,6 +32,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import HeaderBaseInformationCompany from "../HeaderBaseInformationCompany";
+import PaginationCustom from "../Pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -76,6 +77,7 @@ const BaseInformationCompany = ({
   information,
   mt,
   appreciateList,
+  appreciateListHasvePage,
   pdLeft,
   pdRight,
   pdTop,
@@ -83,6 +85,7 @@ const BaseInformationCompany = ({
   mgLeft,
   isPartner,
   jobListCompany,
+  onChange
 }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -107,7 +110,7 @@ const BaseInformationCompany = ({
   }, [uniId, dispatch]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
-
+  const [page,setPage] = useState(1)
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
     topAppreciate.push(
@@ -137,7 +140,6 @@ const BaseInformationCompany = ({
       toast.error("Bạn cần đăng nhập để đánh giá công ty", {});
     }
   };
-
   const onSubmit = async (data) => {
     const username = user?.user?.username;
     const avaluateData = {
@@ -155,7 +157,12 @@ const BaseInformationCompany = ({
 
     try {
       const res = await dispatch(addAppreciate(avaluateData));
-      await dispatch(getAppreciateByCompany(idCompany));
+      const values = {
+        idCompany: idCompany,
+        no: 0,
+        limit: 10,
+      };
+      await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200 || res.payload.status === 201) {
         toast.success("Đã đăng đánh giá", {});
       } else {
@@ -189,7 +196,11 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
-
+  const handleChangePage = (e,value) => {
+    e.preventDefault()
+    setPage(value)
+    onChange && onChange(value)
+  }
   return (
     <div className="">
       {information ? (
@@ -290,118 +301,123 @@ const BaseInformationCompany = ({
                           />
                         </Item>
                       </Grid>
-                      <Grid item xs={4}>
-                        <Item
-                          sx={{
-                            marginTop: 3,
-                            marginBottom: 3,
-                          }}
-                          elevation={0}
-                        >
-                          {/* Nếu trang information thì hiện rating  */}
-                          {information ? (
-                            <div className="rating">
-                              <Rating
-                                precision={0.5}
-                                readOnly
-                                value={Number(rating)}
-                                size="medium"
-                                sx={{
-                                  fontWeight: "800",
-                                  fontSize: 32,
-                                }}
-                              />
+                      {user?.user?.role?.name !== "Role_HR" ? (
+                        <Grid item xs={4}>
+                          <Item
+                            sx={{
+                              marginTop: 3,
+                              marginBottom: 3,
+                            }}
+                            elevation={0}
+                          >
+                            {information ? (
+                              <div className="rating">
+                                <Rating
+                                  precision={0.5}
+                                  readOnly
+                                  value={Number(rating)}
+                                  size="medium"
+                                  sx={{
+                                    fontWeight: "800",
+                                    fontSize: 32,
+                                  }}
+                                />
 
-                              <Typography
-                                variant="h6"
-                                component="div"
-                                sx={{
-                                  fontWeight: "700",
-                                  fontSize: 13,
-                                  paddingBottom: 2.5,
-                                }}
-                              >
-                                {`${Number(rating) || 0} trong ${
-                                  appreciateList?.length
-                                } lượt đánh giá`}
-                              </Typography>
+                                <Typography
+                                  variant="h6"
+                                  component="div"
+                                  sx={{
+                                    fontWeight: "700",
+                                    fontSize: 13,
+                                    paddingBottom: 2.5,
+                                  }}
+                                >
+                                  {`${Number(rating)} trong ${
+                                    appreciateList?.length
+                                  } lượt đánh giá`}
+                                </Typography>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignContent: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {user?.user?.role.name 
+                                  !==
+                                    "Role_HR" && (
+                                    <Button
+                                      className="button-card"
+                                      name="Viết đánh giá"
+                                      bwidth="150px"
+                                      bheight="40px"
+                                      onClick={handleChangeAvaluate}
+                                    ></Button>
+                                  )}
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </Item>
+
+                          <Item
+                            sx={{
+                              paddingTop: 1,
+                              paddingBottom: 2.3,
+                            }}
+                            elevation={0}
+                          >
+                            <h5
+                              className="intro__company-title"
+                              style={{
+                                transform: "translate(-7px,0px)",
+                              }}
+                            >
+                              Đánh giá mới nhất
+                            </h5>
+                            <div>
+                              {topAppreciate
+                                .slice()
+                                .sort(
+                                  (a, b) =>
+                                    new Date(b.createDate) -
+                                    new Date(a.createDate)
+                                )
+                                ?.map((appreciate, index) => (
+                                  <Appreciate
+                                    appreciate={appreciate}
+                                    key={index}
+                                    fontSize="15px"
+                                  />
+                                ))}
+
                               <div
                                 style={{
                                   display: "flex",
-                                  alignContent: "center",
                                   justifyContent: "center",
                                 }}
-                              >
-                                {user?.user?.role.name === "Role_Candidate" && (
-                                  <Button
-                                    className="button-card"
-                                    name="Viết đánh giá"
-                                    bwidth="150px"
-                                    bheight="40px"
-                                    onClick={handleChangeAvaluate}
-                                  ></Button>
-                                )}
-                              </div>
+                              ></div>
                             </div>
-                          ) : (
-                            ""
-                          )}
-                        </Item>
-                        {/*  */}
-                        <Item
-                          sx={{
-                            paddingTop: 1,
-                            paddingBottom: 2.3,
-                          }}
-                          elevation={0}
-                        >
-                          <h5
-                            className="intro__company-title"
-                            style={{
-                              transform: "translate(-7px,0px)",
-                            }}
-                          >
-                            Đánh giá mới nhất
-                          </h5>
-                          <div>
-                            {topAppreciate
-                              .slice()
-                              .sort(
-                                (a, b) =>
-                                  new Date(b.createDate) -
-                                  new Date(a.createDate)
-                              )
-                              ?.map((appreciate, index) => (
-                                <Appreciate
-                                  appreciate={appreciate}
-                                  key={index}
-                                  fontSize="15px"
-                                />
-                              ))}
-
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            ></div>
-                          </div>
-                          <div className="button-card">
-                            <Link
-                              to={`/information_company/${jobDetail?.id}`}
-                              value={valueTab}
-                              index={1}
-                            >
-                              <Button
-                                name="Xem tất cả đánh giá"
-                                bwidth="215px"
-                                bheight="40px"
-                                onClick={handleChangeLinkViewAvaluate}
-                              ></Button>
-                            </Link>
-                          </div>
-                        </Item>
-                      </Grid>
+                            <div className="button-card">
+                              <Link
+                                to={`/information_company/${jobDetail?.id}`}
+                                value={valueTab}
+                                index={1}
+                              >
+                                <Button
+                                  name="Xem tất cả đánh giá"
+                                  bwidth="215px"
+                                  bheight="40px"
+                                  onClick={handleChangeLinkViewAvaluate}
+                                ></Button>
+                              </Link>
+                            </div>
+                          </Item>
+                        </Grid>
+                      ) : (
+                        ""
+                      )}
                     </Grid>
                   </Box>
                 </TabPanel>
@@ -535,7 +551,7 @@ const BaseInformationCompany = ({
                               }
                               name="list-candidate"
                             />
-                            {user?.user?.role?.name === "Role_Candidate" && (
+                            {user?.user?.role?.name !== "Role_HR" && (
                               <Button
                                 name="Viết đánh giá"
                                 bwidth="150px"
@@ -562,6 +578,12 @@ const BaseInformationCompany = ({
                                 </div>
                               ))}
                           </div>
+                          <PaginationCustom
+                            page={page}
+                            totalPages={appreciateListHasvePage.totalPages}
+                            handleOnChange={handleChangePage}
+                            
+                            />
                           <div
                             className="demand-detail__back"
                             onClick={handleBackClick}

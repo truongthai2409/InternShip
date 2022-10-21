@@ -9,7 +9,7 @@
     display: flex;
   }
   .search__icon {
-    font-family: "Public Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     display: flex !important;
     align-items: center;
   }
@@ -22,8 +22,6 @@
   .responsive-menu {
     // position: fixed;
     display: block !important;
-
-    
   }
 }
 //tablet
@@ -52,7 +50,7 @@
 // @media (max-width: 868px) and (min-width: ) {
 
 // }
- 
+
 //desktop
 @media screen and (max-width: 3000.98px) and (min-width: 900px) {
   .res__header_with_hr,

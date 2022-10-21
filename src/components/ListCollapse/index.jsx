@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import CustomCheckbox from "../CustomCheckbox";
 import List from "@mui/material/List";
@@ -11,13 +11,10 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const ListCollapse = (props) => {
   const [open, setOpen] = React.useState(false);
-
   const spacing = props.spacing;
-
   const handleCheck = (valueName, valueCheck) => {
     props.onChange && props.onChange(valueName, valueCheck);
   };
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -58,6 +55,10 @@ const ListCollapse = (props) => {
                       key={item.id}
                       label={item.name}
                       onChange={handleCheck}
+                      checked={props.checkedType?.map((items) => {
+                          return items;
+                        })
+                        .includes(item.name)}
                     />
                   </ListItemIcon>
                 </ListItemButton>

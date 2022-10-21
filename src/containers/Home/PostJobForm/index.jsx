@@ -59,7 +59,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   const navigate = useNavigate();
 
   const [isNoSalary, setIsNoSalary] = useState(
-    jobDetail ? jobDetail.salaryMax === 0 && true : false
+    jobDetail ? jobDetail.salaryMax === 0 && false : true
   );
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
@@ -134,8 +134,8 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           id: parseInt(data.jobType),
         },
         amount: parseInt(data.amount),
-        salaryMin: isNoSalary ? 0 : data.salaryMin,
-        salaryMax: isNoSalary ? 0 : data.salaryMax,
+        salaryMin: isNoSalary ? data.salaryMin :  0,
+        salaryMax: isNoSalary ? data.salaryMax : 0,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,
         timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),

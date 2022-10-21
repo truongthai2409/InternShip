@@ -6,6 +6,7 @@ const appreciateSlice = createSlice({
   name: "appreciate",
   initialState: {
     appreciateList: [],
+    appreciateListHasvePage : []
   },
   extraReducers: (builder) => {
     builder.addCase(addAppreciate.fulfilled, (state, action) => {
@@ -15,6 +16,7 @@ const appreciateSlice = createSlice({
     builder
       .addCase(getAppreciateByCompany.fulfilled, (state, { payload }) => {
         state.appreciateList = payload?.contents;
+        state.appreciateListHasvePage = payload
       })
       .addCase(updateAppreciate.fulfilled, (state, action) => {
         if (action.payload) {
@@ -28,7 +30,7 @@ const appreciateSlice = createSlice({
 
 export const getAppreciateByCompany = createAsyncThunk(
   "appreciate/getAppreciateByCompany",
-  async (idCompany = 1) => {
+  async (args) => {
     const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
    JSON.parse(localStorage.getItem("userPresent"))?.token;
     const header = {
@@ -38,7 +40,7 @@ export const getAppreciateByCompany = createAsyncThunk(
     };
     return axios
       .get(
-        `${baseURL}/api/r2s/rate/company/${idCompany}/?no=0&limit=10`,
+        `${baseURL}/api/r2s/rate/company/${args.idCompany}/?no=${args.no}&limit=${args.limit}`,
         header
       )
       .then((response) => {

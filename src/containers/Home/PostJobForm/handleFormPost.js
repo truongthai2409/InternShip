@@ -5,13 +5,13 @@ import { mixed } from "yup/lib/locale";
 const dateNow = moment(Date.now()).format("MM-DD-YYYY");
 
 export const schemaFormPost = yup.object({
-  name: yup.string().required(" * Bạn phải nhập trường này."),
-  jobType: yup.string().required(" * Bạn phải nhập trường này."),
-  major: yup.string().required(" * Bạn phải nhập trường này."),
-  jobPosition: yup.string().required(" * Bạn phải nhập trường này."),
+  name: yup.string().required(" * Bạn phải nhập tên công việc."),
+  jobType: yup.string().required(" * Bạn phải chọn hình thức làm việc."),
+  major: yup.string().required(" * Bạn phải chọn chuyên ngành."),
+  jobPosition: yup.string().required(" * Bạn phải chọn vị trí."),
   amount: yup
     .string()
-    .required(" * Bạn phải nhập trường này.")
+    .required(" * Bạn phải nhập số luợng cần tuyển.")
     .test(
       "Validate space",
       " * Giá trị bạn vừa nhập không hợp lệ.",

@@ -62,6 +62,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         list={listWorkingFormat}
         spacing={3}
         onChange={handleCheckType}
+        checkedType={checkedType}
       />
       <ListCollapse
         title="Vị trí làm việc"
@@ -69,6 +70,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         spacing={3}
         name="POSITIONJOBS"
         onChange={handleCheckPosition}
+        checkedType={checkedType}
       />
       <ListCollapse
         title="Chuyên ngành"
@@ -76,6 +78,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         spacing={3}
         name="MAJORJOBS"
         onChange={handleCheckMajor}
+        checkedType={checkedType}
       />
     </div>
   );
