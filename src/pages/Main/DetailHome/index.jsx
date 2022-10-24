@@ -56,7 +56,7 @@ const DetailHome = (props) => {
               logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
               jobDetailById={jobDetailById}
             />
-            <div className=" hide-on-table">
+            <div className=" hide-on-table" style={{padding : "0px 0 12px 0"}}>
               <div className="" onClick={handleBackClick}>
                 <ArrowButton direction="left" text="Trở lại" />
               </div>

@@ -44,10 +44,10 @@ export const containerSchema = yup.object().shape({
         .max(32, '* Tối đa 32 ký tự'),
     email: yup
         .string()
-        .required('* Bạn phải nhập email')
-        .min(6, ' * Tối thiểu 6 ký tự')
-        .max(64, ' * Tối đa 64 ký tự')
-        .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
+        .required('* Bạn phải nhập email.')
+        .min(6, ' * Tối thiểu 6 ký tự.')
+        .max(64, ' * Tối đa 64 ký tự.')
+        .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng.'),
     password: yup
         .string()
         .required('* Bạn phải nhập mật khẩu')

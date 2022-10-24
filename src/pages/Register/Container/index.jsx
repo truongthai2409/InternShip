@@ -53,7 +53,6 @@ export default function Container({
           >
             {err.email?.message}
             {errorMessage?.Email}
-            {"."}
           </CustomInput>
           <CustomInput
             className="custom_req_can"

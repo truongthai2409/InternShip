@@ -219,7 +219,7 @@ const Detail = ({
             <div className="detail__card-intro">
               <img
                 className="detail__card__logo"
-                alt="detail-card-lo44444go"
+                alt="detail-card-logo"
                 src={
                   role?.includes("Role_Partner")
                     ? `${API}${jobDetailById?.universityDTO?.avatar}`

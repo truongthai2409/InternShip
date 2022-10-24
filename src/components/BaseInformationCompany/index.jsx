@@ -280,7 +280,7 @@ const BaseInformationCompany = ({
                                 paddingRight: "25px",
                                 fontWeight: "450",
                                 fontSize: "14px",
-                                fontFamily: "Open Sans",
+                                fontFamily: "Roboto",
                                 fontStyle: "normal",
                               }}
                             ></div>

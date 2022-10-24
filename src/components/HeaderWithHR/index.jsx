@@ -23,7 +23,7 @@ const HeaderWithHR = (props) => {
       onClick={()=>{
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       }}
-        to="post"
+        to="/hr/post"
         className={
           pathUrl === "/hr/post" ? "header__hr-post active" : "header__hr-post"
         }
@@ -33,7 +33,7 @@ const HeaderWithHR = (props) => {
       </Link>
       <Link
       onClick={()=>handleClick()}
-        to="list"
+        to="/hr/list"
         className={
           pathUrl === "/hr/list" ? "header__hr-post active" : "header__hr-post"
         }

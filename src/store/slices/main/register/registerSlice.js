@@ -48,6 +48,7 @@ const registerSlice = createSlice({
         } else {
           state.statusRegister = "idleRegister";
           toast.error("Đăng ký tài khoản thất bại!");
+          state.error = payload;
         }
       })
       .addCase(registerCandidate.pending, (state, action) => {
@@ -61,6 +62,7 @@ const registerSlice = createSlice({
           toast.success("Bạn đã đăng ký tài khoản thành công!");
         } else {
           state.status = "fail";
+          toast.error("Đăng ký tài khoản thất bại!");
           state.error = action.payload;
         }
       });

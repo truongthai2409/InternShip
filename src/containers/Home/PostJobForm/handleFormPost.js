@@ -62,7 +62,7 @@ export const schemaFormPost = yup.object({
   country: yup.string().required(" * Bạn phải chọn quốc gia."),
   address: yup.string().required(" * Bạn phải nhập chi tiết địa chỉ."),
   jobDescription: yup.string().required(" * Bạn phải nhập mô tả công việc."),
-  jobRequirement: yup.string().required(" * Bạn phải nhập mô tả công việc."),
+  jobRequirement: yup.string().required(" * Bạn phải nhập yêu cầu công việc."),
   benefits: yup.string().required(" * Bạn phải nhập quyền lợi của ứng viên."),
   salaryMin: yup
     .string()

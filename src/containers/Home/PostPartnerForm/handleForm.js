@@ -29,9 +29,9 @@ Trân trọng cảm ơn!`;
 export const schema = yup
   .object({
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
-    jobPosition: yup.array().notRequired(),
+    jobPosition: yup.array().notRequired().nullable(),
     major: yup.array().required(" * Bạn phải chọn chuyên ngành.").nullable(),
-    jobType: yup.array().notRequired(),
+    jobType: yup.array().notRequired().nullable(),
     timeStart: yup
       .date()
       .nullable()
@@ -46,7 +46,7 @@ export const schema = yup
       .nullable()
       .transform((cur, ori) => (ori === "" ? null : cur))
       .required("* Bạn phải chọn ngày kết thúc ứng tuyển.")
-      .min(`${tomorowFormat}`, "* Ngày hết hạn phải lớn hơn ngày bắt đầu"),
+      .min(`${tomorowFormat}`, "* Ngày hết hạn phải lớn hơn ngày bắt đầu."),
     jobDescription: yup.string().required(" * Bạn phải có thư giới thiệu."),
     // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
     // otherInfo: yup.string(),

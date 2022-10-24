@@ -7,7 +7,6 @@
   padding: $pd-2;
   overflow-y: scroll;
   height: 750px;
-  margin-bottom: 15px;
 
   .detail__card-1 {
     display: flex;
@@ -56,7 +55,7 @@
   }
 
   .detail__card-3 {
-    font-family: "Open Sans";
+    font-family: "Roboto";
     font-style: normal;
     font-size: 21px;
 
@@ -64,7 +63,7 @@
       font-size: 16px;
 
       &-name {
-        font-family: "Open Sans";
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 700;
         line-height: 22px;
@@ -127,7 +126,6 @@
 }
 
 .MuiTabs-scroller {
-
   & button.Mui-selected {
     color: $primary-color !important;
   }

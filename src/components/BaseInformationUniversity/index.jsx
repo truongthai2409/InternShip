@@ -32,7 +32,7 @@ const BaseInformationUniversity = ({
   pdTop,
   pdBottom,
   mgLeft,
-  arrDemand
+  arrDemand,
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
@@ -135,7 +135,7 @@ const BaseInformationUniversity = ({
                     paddingRight: "25px",
                     fontWeight: "450",
                     fontSize: "14px",
-                    fontFamily: "Open Sans",
+                    fontFamily: "Roboto",
                     fontStyle: "normal",
                   }}
                 ></div>
@@ -172,7 +172,9 @@ const BaseInformationUniversity = ({
                             key={job.id}
                             sx={{
                               paddingLeft: pdLeft ? `${pdLeft} !important` : "",
-                              paddingRight: pdRight ? `${pdRight} !important` : "",
+                              paddingRight: pdRight
+                                ? `${pdRight} !important`
+                                : "",
                               width: "200px",
                             }}
                           >
@@ -200,10 +202,12 @@ const BaseInformationUniversity = ({
                                 amount={job.amount || "Không có"}
                                 demandPartner={true}
                                 time={[
-                                  moment(job.timeStartStr || job.createDate).format(
+                                  moment(
+                                    job.timeStartStr || job.createDate
+                                  ).format("DD/MM/YYYY"),
+                                  moment(job.timeEndStr || job.end).format(
                                     "DD/MM/YYYY"
                                   ),
-                                  moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
                                 ]}
                                 locationPath={location.pathname}
                                 pdLeft="30px"
@@ -230,7 +234,7 @@ const BaseInformationUniversity = ({
               {pathUrl !== "/information_company" ? (
                 <div className="button-card">
                   <Link
-                    to={`/infomation_demand/${demandDetail?.universityDTO.id}`}
+                    to={`/infomation_demand/${demandDetail?.universityDTO?.id}`}
                   >
                     <Button
                       name="Xem thêm"

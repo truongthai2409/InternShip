@@ -19,11 +19,11 @@ const Textarea = ({
 }) => {
   useEffect(() => {
     register(id);
-  }, [register]);
+  }, [id, register]);
 
   useEffect(() => {
-      setValue(id, defaultValue);
-  }, [defaultValue]);
+    setValue(id, defaultValue);
+  }, [defaultValue, id, setValue]);
   const [showError1, setShowError1] = useState(false);
   const [showError2, setShowError2] = useState(true);
 

@@ -63,15 +63,15 @@ export const CandidateCard = ({
       />
     );
   };
-  const addFavorite = (e) => {
-    setClick(!click);
-    // eslint-disable-next-line no-lone-blocks
-    {
-      click
-        ? toast.success("Đã thêm ứng viên vào yêu thích")
-        : toast.warning("Xóa ứng viên khỏi yêu thích");
-    }
-  };
+  // const addFavorite = (e) => {
+  //   setClick(!click);
+  //   // eslint-disable-next-line no-lone-blocks
+  //   {
+  //     click
+  //       ? toast.success("Đã thêm ứng viên vào yêu thích")
+  //       : toast.warning("Xóa ứng viên khỏi yêu thích");
+  //   }
+  // };
   return (
     <>
       <div className="candidate-card__wrapper">
@@ -108,7 +108,7 @@ export const CandidateCard = ({
           <div style={{ display: "none" }}>
             <ButtonMark border="1px solid #DEDEDE" />
           </div>
-          <div
+          {/* <div
             onClick={() => addFavorite()}
             style={{
               border: "1px solid #DEDEDE",
@@ -119,7 +119,7 @@ export const CandidateCard = ({
             }}
           >
             {click ? <BookmarkBorderIcon /> : <BookmarkIcon />}
-          </div>
+          </div> */}
         </div>
         <p className="candidate-card__infor-time">
           <AccessTimeIcon />

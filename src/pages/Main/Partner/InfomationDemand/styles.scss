@@ -1,8 +1,8 @@
 @use "../../../../assets/styles/" as *;
 .demandUniverSity {
-    padding-left: 130px;
-    padding-right: 130px;
-    padding-bottom: 3px;
+  padding-left: 130px;
+  padding-right: 130px;
+  padding-bottom: 3px;
   .base__information-card {
     background-color: white;
     display: flex;
@@ -26,7 +26,7 @@
       height: fit-content;
       div {
         @include flex(center, null);
-        font-family: "Open Sans";
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -40,7 +40,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: "Open Sans";
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -54,7 +54,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: "Open Sans";
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 12px !important;
@@ -69,7 +69,7 @@
       h5 {
         display: flex;
         align-items: center;
-        font-family: "Open Sans";
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
