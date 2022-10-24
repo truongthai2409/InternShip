@@ -85,7 +85,8 @@ const BaseInformationCompany = ({
   mgLeft,
   isPartner,
   jobListCompany,
-  onChange
+  onChange,
+  idCompany,
 }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -103,14 +104,13 @@ const BaseInformationCompany = ({
   const [valueTab, setValueTab] = useState(0);
   const dispatch = useDispatch();
   const uniId = jobDetail?.universityDTO?.id;
-  const idCompany = jobDetail?.hr?.company.id;
 
   useEffect(() => {
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
   }, [uniId, dispatch]);
 
   const handleChange = (event, newValue) => setValueTab(newValue);
-  const [page,setPage] = useState(1)
+  const [page, setPage] = useState(1);
   let topAppreciate = [];
   for (let i = 0; i < 1; i++) {
     topAppreciate.push(
@@ -164,7 +164,7 @@ const BaseInformationCompany = ({
       };
       await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success("Đã đăng đánh giá", {});
+        toast.success("Đã đăng đánh giá");
       } else {
         toast.error(res.payload.message);
       }
@@ -196,11 +196,12 @@ const BaseInformationCompany = ({
     setValueTab(1);
     setOpen(true);
   };
-  const handleChangePage = (e,value) => {
-    e.preventDefault()
-    setPage(value)
-    onChange && onChange(value)
-  }
+  const handleChangePage = (e, value) => {
+    e.preventDefault();
+    setPage(value);
+    onChange && onChange(value);
+  };
+
   return (
     <div className="">
       {information ? (
@@ -343,9 +344,7 @@ const BaseInformationCompany = ({
                                     justifyContent: "center",
                                   }}
                                 >
-                                  {user?.user?.role.name 
-                                  !==
-                                    "Role_HR" && (
+                                  {user?.user?.role.name !== "Role_HR" && (
                                     <Button
                                       className="button-card"
                                       name="Viết đánh giá"
@@ -389,6 +388,7 @@ const BaseInformationCompany = ({
                                     appreciate={appreciate}
                                     key={index}
                                     fontSize="15px"
+                                    idCompany={idCompany}
                                   />
                                 ))}
 
@@ -401,7 +401,7 @@ const BaseInformationCompany = ({
                             </div>
                             <div className="button-card">
                               <Link
-                                to={`/information_company/${jobDetail?.id}`}
+                                to={`/information_company/${jobDetail?.hr?.company?.id}`}
                                 value={valueTab}
                                 index={1}
                               >
@@ -572,18 +572,22 @@ const BaseInformationCompany = ({
                                 <div>
                                   <Appreciate
                                     appreciate={appreciate}
+                                    idCompany={idCompany}
                                     key={appreciate.id}
                                   />
                                   <span style={{}} className="line"></span>
                                 </div>
                               ))}
                           </div>
-                          <PaginationCustom
-                            page={page}
-                            totalPages={appreciateListHasvePage.totalPages}
-                            handleOnChange={handleChangePage}
-                            
+                          {appreciateListHasvePage.totalPages > 1 ? (
+                            <PaginationCustom
+                              page={page}
+                              totalPages={appreciateListHasvePage.totalPages}
+                              handleOnChange={handleChangePage}
                             />
+                          ) : (
+                            ""
+                          )}
                           <div
                             className="demand-detail__back"
                             onClick={handleBackClick}

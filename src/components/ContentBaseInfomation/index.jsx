@@ -6,6 +6,8 @@ import "./styles.scss";
 import CardHome from "../CardHome";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import PaginationCustom from "../Pagination";
+import { flexbox } from "@mui/system";
 
 const ContentBaseInformation = ({
   jobDetail,
@@ -18,7 +20,6 @@ const ContentBaseInformation = ({
 }) => {
   const location = useLocation();
   const pathUrl = location.pathname;
-  const { indexCardActive } = useSelector((state) => state.job);
 
   return (
     <div>
@@ -38,7 +39,7 @@ const ContentBaseInformation = ({
             width: "auto",
           }}
         >
-          {jobListCompany?.length > 0 &&
+          {jobListCompany?.length > 0 ?
             jobListCompany?.map((job, index) => (
               <Grid
                 item
@@ -52,10 +53,7 @@ const ContentBaseInformation = ({
                   width: "200px",
                 }}
               >
-                <Link
-                  to={`/detail_job/${job.id}`}
-                  className="link__job-detail"
-                >
+                <Link to={`/detail_job/${job.id}`} className="link__job-detail">
                   <CardHome
                     id={job.id}
                     index={index}
@@ -89,12 +87,16 @@ const ContentBaseInformation = ({
                   />
                 </Link>
               </Grid>
-            ))}
+            )) : <div style={{padding : 16, fontWeight : "bold"}}>Không có việc làm đang tuyển</div>}
         </Grid>
+        {/* JobListCompany Chưa phân trang ( đang trả về tất cả) */}
+        {/* <div style={{ display: "flex", justifyContent: "center" }}>
+          <PaginationCustom page={1} totalPages={10} />
+        </div> */}
       </div>
-      {pathUrl !== `/information_company/${jobDetail?.id}` ? (
+      {pathUrl !== `/information_company/${jobDetail?.hr?.company?.id}` ? (
         <div className="button-card">
-          <Link to={`/information_company/${jobDetail?.id}`}>
+          <Link to={`/information_company/${jobDetail?.hr?.company?.id}`}>
             <Button name="Xem thêm" bwidth="130px" bheight="40px"></Button>
           </Link>
         </div>

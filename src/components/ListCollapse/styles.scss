@@ -5,12 +5,9 @@
     color: $primary-color;
   }
 }
-
-.MuiListItemButton-root {
-}
-
-.MuiList-root {
-  .MuiTypography-root.MuiTypography-body1.MuiListItemText-primary {
-    font-family: $f-family;
+.ListCollapWraper {
+  width: 100%;
+  > label {
+    width: 100%;
   }
 }

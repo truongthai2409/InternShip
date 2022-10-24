@@ -1,8 +1,4 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
-import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
 import Detail from "./component";
 import "./styles.scss";
 
@@ -15,42 +11,12 @@ const DetailCard = ({
   demandPartner = false,
   jobListCompany,
 }) => {
-  const { appreciateList } = useSelector((state) => state.appreciate);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    let idCompany =
-      jobDetail?.universityDTO?.id ||
-      jobDetail?.hr?.company?.id ||
-      jobDetail?.jobApp?.hr?.company?.id;
-      const values = {
-        idCompany: idCompany,
-        no: 0,
-        limit: 10,
-      };
-    dispatch(getAppreciateByCompany(values));
-    dispatch(getJobByCompany(idCompany));
-  }, [
-    dispatch,
-    jobDetail?.hr?.company?.id,
-    jobDetail?.jobApp?.hr?.company?.id,
-    jobDetail?.universityDTO?.id,
-  ]);
-
-  const data = [appreciateList?.map((item) => {
-    return item?.score;
-  })]
-  const res = data?.reduce((total, currentValue) => {
-    return total + currentValue;
-  }, 0);
-  const rating = (res / data?.length).toFixed(2);
-
   return (
     <div>
       {jobList && jobList.length > 0 ? (
         <Detail
           jobDetail={jobDetail}
           demandPartner={demandPartner}
-          rating={rating}
           jobListCompany={jobListCompany}
           jobDetailById={jobDetailById}
         />

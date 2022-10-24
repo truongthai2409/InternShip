@@ -43,7 +43,8 @@ const HeaderWithHR = (props) => {
         ></FormatAlignJustifyIcon>
         <span className="header__hr-post-post">Công việc đang tuyển</span>
       </Link>
-      <Link
+      {/* Version 2 . 🌹 Not Delete it*/}
+      {/* <Link
       onClick={()=>{
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       }}
@@ -56,7 +57,7 @@ const HeaderWithHR = (props) => {
       >
         <BookmarksIcon sx={{ color: "#04bf8a" }} />
         <span className="header__hr-post-post">Ứng viên ưa thích</span>
-      </Link>
+      </Link> */}
     </div>
   );
 };

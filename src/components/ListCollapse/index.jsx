@@ -50,7 +50,7 @@ const ListCollapse = (props) => {
           ? props.list?.map((item, index) => (
               <List key={item.id} component="div" disablePadding>
                 <ListItemButton sx={{ pl: spacing }}>
-                  <ListItemIcon>
+                  <ListItemIcon className="ListCollapWraper">
                     <CustomCheckbox
                       key={item.id}
                       label={item.name}

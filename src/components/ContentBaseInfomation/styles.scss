@@ -1,6 +1,6 @@
 ._scroll {
   overflow-y: scroll;
-  height: 83vh;
+  max-height: 83vh;
 }
 
 ._scroll::-webkit-scrollbar {

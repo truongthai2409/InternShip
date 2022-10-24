@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import {
   deleteAppreciate,
   getAppreciateByCompany,
-  updateAppreciate
+  updateAppreciate,
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
 import ButtonCustom from "../Button";
 import CustomCheckbox from "../CustomCheckbox";
@@ -32,36 +32,31 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1.2),
 }));
 
-const getLabelText = (value) => {
-  // return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-};
-const Appreciate = ({ appreciate, fontSize }) => {
+const Appreciate = ({ appreciate, fontSize , idCompany}) => {
   const value = appreciate?.score;
   const nameUser = "Ẩn danh";
   var checked = false;
   const { user } = useSelector((state) => state.profile);
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(appreciate?.score);
-  const [hover, setHover] = useState(-1);
   const [like, setLike] = useState(false);
   const {
     register,
     handleSubmit,
     setValue,
     reset,
-    setError,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
   const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
-  const idCompany = jobDetail?.hr?.company.id;
+
   useEffect(() => {
     setValue("title", appreciate?.title);
     setValue("comment", appreciate?.comment);
     setValue("size-medium", appreciate?.score);
     setValue("isCheck", appreciate?.hide);
-  }, []);
+  }, [appreciate?.comment, appreciate?.hide, appreciate?.score, appreciate?.title, setValue]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -77,7 +72,7 @@ const Appreciate = ({ appreciate, fontSize }) => {
         comment: data.comment,
         score: valueRating,
         hide: checked,
-        createDate : appreciate.createDate
+        createDate: appreciate.createDate,
       },
     };
 
@@ -121,17 +116,11 @@ const Appreciate = ({ appreciate, fontSize }) => {
       limit: 10,
     };
     await dispatch(getAppreciateByCompany(values));
-    
   };
-
-  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClickLike = () => {
     setLike(!like);
   };
-
-  const openAnchorEl = Boolean(anchorEl);
-  // const id = openAnchorEl ? "simple-popover" : undefined;
   return (
     <Box
       sx={{
@@ -144,8 +133,8 @@ const Appreciate = ({ appreciate, fontSize }) => {
         <Item
           elevation={0}
           sx={{}}
-          className={ user &&
-            appreciate?.user?.username === user?.user?.username
+          className={
+            user && appreciate?.user?.username === user?.user?.username
               ? "appreciate__active"
               : ""
           }
@@ -184,7 +173,8 @@ const Appreciate = ({ appreciate, fontSize }) => {
                           sx={{ fontSize: 16 }}
                         >
                           {(appreciate?.hide === true && nameUser) ||
-                            appreciate?.user?.username || "Ẩn danh"}
+                            appreciate?.user?.username ||
+                            "Ẩn danh"}
                         </Typography>
                       </div>
                       <div
@@ -345,12 +335,8 @@ const Appreciate = ({ appreciate, fontSize }) => {
                   name="size-medium"
                   defaultValue={valueRating}
                   precision={0.5}
-                  getLabelText={getLabelText}
                   onChange={(event, newValue) => {
                     setValueRating(newValue);
-                  }}
-                  onChangeActive={(event, newHover) => {
-                    setHover(newHover);
                   }}
                   sx={{
                     fontSize: "20px",

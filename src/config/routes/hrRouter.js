@@ -38,6 +38,7 @@ const hrRouter = [
         Component: Password,
       },
       {
+        // Version 2 🌹
         path: "candidatemanagement",
         Component: CandidateManagement,
       },
