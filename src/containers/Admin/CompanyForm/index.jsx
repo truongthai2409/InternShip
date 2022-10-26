@@ -30,6 +30,7 @@ export default function CompanyForm(props) {
   const { isAdd } = props;
 
   const { companyDetail, error } = useSelector((state) => state.company);
+  console.log("companyDetail", companyDetail);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const {
     register,
@@ -72,10 +73,20 @@ export default function CompanyForm(props) {
     }
     setValue("name", isAdd ? "" : companyDetail.name);
     setValue("description", isAdd ? "" : companyDetail.description);
+    setValue("website", isAdd ? "" : companyDetail.website);
     setValue("email", isAdd ? "" : companyDetail.email);
     setValue("phone", isAdd ? "" : companyDetail.phone);
     setValue("tax", isAdd ? "" : companyDetail.tax);
-    setValue("website", isAdd ? "" : companyDetail.website);
+    setValue(
+      "province",
+      isAdd ? "" : companyDetail?.locations?.[0]?.district?.province?.id
+    );
+    setValue(
+      "district",
+      isAdd ? "" : companyDetail?.locations?.[0]?.district?.id
+    );
+    setValue("address", isAdd ? "" : companyDetail?.locations?.[0]?.address);
+    setValue("note", isAdd ? "" : companyDetail?.locations?.[0]?.note);
   }, [companyDetail, isAdd, setValue]);
 
   // show preview image
@@ -93,6 +104,7 @@ export default function CompanyForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
+    console.log(data)
     const companyData = {
       company: JSON.stringify({
         name: data.name,
@@ -257,17 +269,6 @@ export default function CompanyForm(props) {
                   >
                     {errors.tax?.message}
                   </CustomInput>
-                  <CustomInput
-                    label="Địa chỉ"
-                    id="address"
-                    type="text"
-                    placeholder="Địa chỉ..."
-                    setValue={setValue}
-                    register={register}
-                    check={!isEdit}
-                  >
-                    {errors.address?.message}
-                  </CustomInput>
 
                   <CustomSelectLocation
                     id="province"
@@ -290,18 +291,18 @@ export default function CompanyForm(props) {
                   >
                     {errors.district?.message}
                   </CustomSelect>
+                  <CustomInput
+                    label="Địa chỉ"
+                    id="address"
+                    type="text"
+                    placeholder="Địa chỉ..."
+                    setValue={setValue}
+                    register={register}
+                    check={!isEdit}
+                  >
+                    {errors.address?.message}
+                  </CustomInput>
                 </div>
-                <CustomInput
-                  label="Note"
-                  id="note"
-                  type="text"
-                  placeholder="Note..."
-                  setValue={setValue}
-                  register={register}
-                  check={!isEdit}
-                >
-                  {errors.note?.message}
-                </CustomInput>
               </Grid>
               <Grid container item md={12}>
                 <Grid item md={6}>
@@ -321,14 +322,15 @@ export default function CompanyForm(props) {
                 <Grid item md={6}>
                   <div className="company-form__input">
                     <CustomTextarea
-                      label="Chi tiết địa chỉ"
-                      id="address"
-                      type="description"
-                      placeholder="Chi tiết địa chỉ..."
+                      label="Note"
+                      id="note"
+                      type="text"
+                      placeholder="Note..."
+                      setValue={setValue}
                       register={register}
                       check={!isEdit}
                     >
-                      {errors.address?.message}
+                      {errors.note?.message}
                     </CustomTextarea>
                   </div>
                 </Grid>

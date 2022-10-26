@@ -97,23 +97,40 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName
-                    title={
-                      jobDetail?.jobType?.name || jobDetail?.jobType || null
-                    }
-                  />
-                  <TagName
-                    title={
-                      jobDetail?.jobposition?.name ||
-                      jobDetail?.position?.name ||
-                      null
-                    }
-                  />
+                  {jobDetail?.jobType?.length > 0 ? (
+                    jobDetail?.jobType?.map((item) => {
+                      return <TagName key={item.name} title={item.name} />;
+                    })
+                  ) : (
+                    <TagName
+                      title={
+                        jobDetail?.jobType?.name ||
+                        jobDetail?.jobType.name ||
+                        null
+                      }
+                    />
+                  )}
+                  {jobDetail?.position?.length > 0 ? (
+                    jobDetail?.position?.map((item) => {
+                      return <TagName key={item.name} title={item.name} />;
+                    })
+                  ) : (
+                    <TagName
+                      title={
+                        jobDetail?.position?.name ||
+                        jobDetail?.jobposition?.name ||
+                        null
+                      }
+                    />
+                  )}
                   <TagName title={jobDetail?.jobTypes || null} />
-                  <TagName title={jobDetail?.major?.name || null} /> 
-                  {jobDetail?.majors?.map((item) => {
-                    return <TagName title={item?.name} />;
-                  })}
+                  {jobDetail?.major?.length > 0 ? (
+                    jobDetail?.major?.map((item) => {
+                      return <TagName key={item.name} title={item.name} />;
+                    })
+                  ) : (
+                    <TagName title={jobDetail?.major?.name || null} />
+                  )}
                 </div>
               </div>
             </div>
@@ -237,9 +254,39 @@ const Detail = ({
             <div className="detail__card-2">
               <div className="tag-name">
                 <div className="tag-name__name">
-                  <TagName title={jobDetailById?.jobType?.name || null} />
-                  <TagName title={jobDetailById?.jobposition?.name || null} />
-                  <TagName title={jobDetailById?.major?.name || null} />
+                  {jobDetailById?.jobType?.length > 0 ? (
+                    jobDetailById?.jobType?.map((item) => {
+                      return <TagName title={item.name} />;
+                    })
+                  ) : (
+                    <TagName
+                      title={
+                        jobDetailById?.jobType?.name ||
+                        jobDetailById?.jobTypes?.name ||
+                        null
+                      }
+                    />
+                  )}
+                  {jobDetailById?.position?.length > 0 ? (
+                    jobDetailById?.position?.map((item) => {
+                      return <TagName title={item.name} />;
+                    })
+                  ) : (
+                    <TagName
+                      title={
+                        jobDetailById?.position?.name ||
+                        jobDetailById?.jobposition?.name ||
+                        null
+                      }
+                    />
+                  )}
+                  {jobDetailById?.major?.length > 0 ? (
+                    jobDetailById?.major?.map((item) => {
+                      return <TagName keu={item.named} title={item.name} />;
+                    })
+                  ) : (
+                    <TagName title={jobDetailById?.major?.name || null} />
+                  )}
                 </div>
               </div>
             </div>

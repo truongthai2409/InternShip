@@ -116,7 +116,8 @@ const BaseInformationCompany = ({
     topAppreciate.push(
       appreciateList
         ?.slice()
-        .sort((a, b) => new Date(b.createDate) - new Date(a.createDate))[i]
+        ?.sort((a, b) => new Date(b.createDate) - new Date(a.createDate))
+        ?.sort((a, b) => b.id - a.id)[i]
     );
   }
   const handleBackClick = () => {
@@ -249,8 +250,8 @@ const BaseInformationCompany = ({
                   </Tabs>
                 </Box>
                 <TabPanel value={valueTab} index={0}>
-                  <Box>
-                    <Grid container spacing={2}>
+                  <Box >
+                    <Grid sx={{justifyContent : "center"}} container spacing={2}>
                       <Grid item xs={8}>
                         <Item
                           sx={{
@@ -302,7 +303,7 @@ const BaseInformationCompany = ({
                           />
                         </Item>
                       </Grid>
-                      {user?.user?.role?.name !== "Role_HR" ? (
+                      {user.user ? (
                         <Grid item xs={4}>
                           <Item
                             sx={{
@@ -344,7 +345,7 @@ const BaseInformationCompany = ({
                                     justifyContent: "center",
                                   }}
                                 >
-                                  {user?.user?.role.name !== "Role_HR" && (
+                                  {user.user && (
                                     <Button
                                       className="button-card"
                                       name="Viết đánh giá"
@@ -378,11 +379,12 @@ const BaseInformationCompany = ({
                             <div>
                               {topAppreciate
                                 .slice()
-                                .sort(
+                                ?.sort(
                                   (a, b) =>
                                     new Date(b.createDate) -
                                     new Date(a.createDate)
                                 )
+                                ?.sort((a, b) => b.id - a.id)
                                 ?.map((appreciate, index) => (
                                   <Appreciate
                                     appreciate={appreciate}
@@ -433,38 +435,41 @@ const BaseInformationCompany = ({
                           }}
                           elevation={0}
                         >
-                          <div>
-                            <Rating
-                              precision={0.5}
-                              readOnly
-                              value={Number(rating)}
-                              size="large"
-                              sx={{
-                                fontWeight: "800",
-                              }}
-                            />
+                          {user?.user ? 
+                        <div>
+                        <Rating
+                          precision={0.5}
+                          readOnly
+                          value={Number(rating)}
+                          size="large"
+                          sx={{
+                            fontWeight: "800",
+                          }}
+                        />
 
-                            <Typography
-                              variant="h6"
-                              component="div"
-                              sx={{
-                                fontWeight: "700",
-                                // transform: "translate(5px,5px)",
-                                fontSize: 15,
-                              }}
-                            >
-                              {`${Number(rating) || 0} trong ${
-                                appreciateList?.length
-                              } lượt đánh giá`}
-                            </Typography>
-                            <div
-                              style={{
-                                display: "flex",
-                                alignContent: "center",
-                                justifyContent: "center",
-                              }}
-                            ></div>
-                          </div>
+                        <Typography
+                          variant="h6"
+                          component="div"
+                          sx={{
+                            fontWeight: "700",
+                            // transform: "translate(5px,5px)",
+                            fontSize: 15,
+                          }}
+                        >
+                          {`${Number(rating) || 0} trong ${
+                            appreciateList?.length
+                          } lượt đánh giá`}
+                        </Typography>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignContent: "center",
+                            justifyContent: "center",
+                          }}
+                        ></div>
+                      </div>
+                      : <Typography variant="h6">Bạn cần <Link to='/login'> đăng nhập </Link> để có thể xem và đánh giá</Typography>  
+                        }
                         </Item>
                         <Item
                           sx={{
@@ -551,7 +556,7 @@ const BaseInformationCompany = ({
                               }
                               name="list-candidate"
                             />
-                            {user?.user?.role?.name !== "Role_HR" && (
+                            {user.user && (
                               <Button
                                 name="Viết đánh giá"
                                 bwidth="150px"
@@ -563,11 +568,12 @@ const BaseInformationCompany = ({
                           <div>
                             {appreciateList
                               ?.slice()
-                              .sort(
+                              ?.sort(
                                 (a, b) =>
                                   new Date(b.createDate) -
                                   new Date(a.createDate)
                               )
+                              ?.sort((a, b) => b.id - a.id)
                               ?.map((appreciate, index) => (
                                 <div>
                                   <Appreciate

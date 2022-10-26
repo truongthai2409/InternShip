@@ -69,10 +69,10 @@ const InfomationDemandBase = ({ arrDemand }) => {
                                             // key={job.id}
                                             idJob={job.id}
                                             tagName={[
-                                                job?.jobposition?.name ||
-                                                job?.position.name ||
-                                                "Không có",
-                                                job?.jobType?.name || "Không có",
+                                                job?.jobposition || null,
+                                                job?.position || null,
+                                                job?.jobType || null,
+                                                job?.major || null
                                             ]}
                                             location="Hồ Chí Minh"
                                             amount={job.amount || "Không có"}

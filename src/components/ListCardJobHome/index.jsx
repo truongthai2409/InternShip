@@ -62,17 +62,16 @@ const ListCardJobHome = ({
                 job?.jobApp?.hr?.company?.id
               }
               tagName={[
-                job?.jobposition?.name || null,
-                job?.position?.name || null,
-                job?.jobApp?.jobposition?.name || null,
-                job?.jobCare?.jobposition?.name || null,
-                job?.jobType?.name || null,
-                job?.jobApp?.jobType?.name || null,
-                job?.jobCare?.jobType?.name || null,
+                job?.jobposition || null,
+                job?.position || null,
+                job?.jobApp?.jobposition || null,
+                job?.jobCare?.jobposition || null,
+                job?.jobType || null,
+                job?.jobApp?.jobType || null,
+                job?.jobCare?.jobType || null,
                 job?.jobTypes || null,
-                job?.major?.name || null
+                job?.major || null
               ]}
-              majors={[job?.majors]}
               location={
                 job.locationjob?.district?.province?.name ||
                 job?.universityDTO?.locations[0]?.district?.province?.name ||

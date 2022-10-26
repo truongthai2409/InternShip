@@ -37,11 +37,11 @@ const InputFile = ({
       break;
     case "excel":
       accept = ".xlsx";
-      text = "Chỉ hỗ trợ file .xlxs"
+      text = "Chỉ hỗ trợ file .xlsx."
       break;
     default: // all of file (except image)
       accept = ".docx, .pdf, .xlsx";
-      text = "Chỉ hỗ trợ file .docx, .pdf, .xlxs";
+      text = "Chỉ hỗ trợ file .docx, .pdf, .xlsx.";
       break;
   }
 

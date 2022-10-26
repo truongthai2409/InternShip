@@ -32,7 +32,6 @@ const SelectMulti = ({
   register,
   placeholder,
   dispatch = () => {},
-  action = () => {},
   className,
   label,
   requirementField = true,
@@ -45,17 +44,11 @@ const SelectMulti = ({
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-  const handleClick = (number) => {
-    dispatch(action(number));
+    setPersonName(typeof value === "string" ? value.split(",") : value);
   };
   React.useEffect(() => {
-    arrDefault && setPersonName(arrDefault.map((item) => { return item.name}))
-  }, [arrDefault])
+    arrDefault && setPersonName(arrDefault);
+  }, [arrDefault]);
   return (
     <div className={`select-form ${className ? className : ""}`}>
       <h1 className="select-label">
@@ -76,7 +69,7 @@ const SelectMulti = ({
           </InputLabel>
         )}
         <Select
-        sx={{padding : "6px 0 8xpx 0"}}
+          sx={{ padding: "6px 0 8xpx 0" }}
           className="container_form_post"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
@@ -94,7 +87,7 @@ const SelectMulti = ({
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={value} />
+                <Chip key={value.name} label={value.name} />
               ))}
             </Box>
           )}
@@ -102,12 +95,9 @@ const SelectMulti = ({
         >
           {arrList.map((name) => (
             <MenuItem
-            onClick={() => {
-              handleClick(name.id);
-            }}
-            key={name}
-            value={name.name}
-            style={getStyles(name, personName, theme)}
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
             >
               {name.name}
             </MenuItem>
