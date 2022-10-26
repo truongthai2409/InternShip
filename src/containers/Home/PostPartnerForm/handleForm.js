@@ -29,9 +29,19 @@ Trân trọng cảm ơn!`;
 export const schema = yup
   .object({
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
-    jobPosition: yup.array().notRequired().nullable(),
-    major: yup.array().required(" * Bạn phải chọn chuyên ngành.").nullable(),
-    jobType: yup.array().notRequired().nullable(),
+    jobPosition: yup
+      .array()
+      .required("* Bạn phải nhập vị trí công việc.")
+      .nullable("* Bạn phải nhập vị trí công việc."),
+    major: yup
+      .array()
+      .required(" * Bạn phải chọn chuyên ngành.")
+      .nullable(" * Bạn phải chọn chuyên ngành."),
+    jobType: yup
+      .array()
+      .length(1, "* Bạn phải nhập hình thức làm việc.")
+      .required("* Bạn phải nhập hình thức làm việc.")
+      .nullable(" * Bạn phải nhập hình thức làm việc."),
     timeStart: yup
       .date()
       .nullable()

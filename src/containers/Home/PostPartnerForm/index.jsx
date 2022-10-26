@@ -20,7 +20,6 @@ import {
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import Button from "../../../components/Button";
 import CustomInput from "../../../components/CustomInput/index";
-import SelectCustom from "../../../components/Select";
 import { SAMPLEFORM, schema } from "./handleForm";
 import "./styles.scss";
 
@@ -51,7 +50,6 @@ const PostPartnerForm = ({
   const { activeUser } = useSelector((state) => state.university);
   const { demandDetail } = useSelector((state) => state.demand);
   const [openForm, setOpenForm] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [formSample, setFormSample] = useState("");
   const [useSampleForm, setUseSampleForm] = useState(false);
   const dispatch = useDispatch();
@@ -85,18 +83,8 @@ const PostPartnerForm = ({
     setFormSample(SAMPLEFORM);
   };
 
-  async function editDemand({ idDemand, demandData }) {
-    setLoading(true);
-    try {
-      await dispatch(updateDemand({ idDemand, demandData }));
-      setOpen(false);
-    } catch (error) {
-      toast.error("Chỉnh sửa bài ứng tuyển không thành công");
-    } finally {
-      setLoading(false);
-    }
-  }
   useEffect(() => {
+    !isUpdate && setValue("jobType", [{ id: 1 }, { id: 2 }, { id: 3 }]);
     if (isUpdate) {
       setValue("jobName", demandDetail?.name);
       setValue("jobDescription", demandDetail?.desciption);
@@ -110,8 +98,6 @@ const PostPartnerForm = ({
       setValue("jobPosition", demandDetail.position);
       setValue("major", demandDetail?.major);
       setValue("fileSV", demandDetail?.students);
-    } else {
-      setValue("jobType", [{ id: 1 }, { id: 2 }, { id: 3 }]);
     }
   }, [
     demandDetail?.amount,
@@ -129,6 +115,7 @@ const PostPartnerForm = ({
   ]);
 
   const onSubmit = (data) => {
+    console.log(data)
     const demandData = {
       demand: JSON.stringify({
         name: data.jobName,
@@ -159,6 +146,7 @@ const PostPartnerForm = ({
   if (status === "success") {
     navigate("/partner/post-list");
   }
+
   return (
     <>
       <div className="partner-post__container">
@@ -192,7 +180,6 @@ const PostPartnerForm = ({
                   register={register}
                   placeholder="Vui lòng chọn..."
                   label="Vị trí công việc"
-                  requirementField={false}
                   arrDefault={isUpdate && demandDetail?.position}
                 >
                   {errors.jobPosition?.message}
@@ -220,7 +207,6 @@ const PostPartnerForm = ({
                   placeholder="Vui lòng chọn..."
                   label="Hình thức làm việc"
                   arrDefault={isUpdate ? demandDetail?.jobType : jobTypeList}
-                  requirementField={false}
                 >
                   {errors.jobType?.message}
                 </SelectMulti>
