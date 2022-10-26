@@ -60,6 +60,7 @@ const DemandTable = ({ searchValue }) => {
       width: 120,
       renderCell: (params) => {
         const { row } = params;
+        // console.log(row)
         const handleChangeStatus = (e) => {
           const updateData = {
             university: JSON.stringify({
@@ -83,8 +84,8 @@ const DemandTable = ({ searchValue }) => {
           >
             <option value={0}>Not verified</option>
             <option value={1}>Active</option>
-            <option value={2}>Block</option>
-            <option value={3}>Disable</option>
+            <option value={3}>Block</option>
+            <option value={2}>Disable</option>
           </select>
         );
       },
@@ -122,7 +123,7 @@ const DemandTable = ({ searchValue }) => {
       major: demandList[i]?.major,
       partner: demandList[i]?.partner?.position,
       createDate: demandList[i]?.createDate,
-      status: demandList[i]?.status,
+      status: demandList[i]?.universityDTO.status.id,
       students: demandList[i]?.students,
     });
   }
