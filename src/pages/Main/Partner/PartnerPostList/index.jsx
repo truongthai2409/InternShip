@@ -126,7 +126,7 @@ const PartnerPostList = (props) => {
           </Box>
           <TabPanel className="tabPanel" value={value} index={0}>
             <ListDemand
-              demandList={demandListUniversityActive.filter((item)=>item?.status?.name?.includes("Active") || item.status === null)}
+              demandList={demandListUniversityActive?.filter((item)=>item?.status?.name?.includes("Active") || item.status === null)}
               message="Không có đợt thực tập đăng tuyển."
             />
           </TabPanel>

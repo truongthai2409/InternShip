@@ -116,8 +116,10 @@ const FilterPanelHome = ({
                 job?.hr?.company?.id || job?.universityDTO.id
               }
               tagName={[
-                job?.jobposition?.name || job?.position?.name || "Không có",
-                job?.jobType?.name || "Không có",
+                job?.jobposition ||null,
+                job?.position || null,
+                job?.jobType || null,
+                job?.major || null
               ]}
               location={job.name ? job.name : job.jobApp?.name}
               amount={job.amount || "Không có"}
