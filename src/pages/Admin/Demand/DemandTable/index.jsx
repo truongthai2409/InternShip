@@ -85,7 +85,7 @@ const DemandTable = ({ searchValue }) => {
             <option value={0}>Not verified</option>
             <option value={1}>Active</option>
             <option value={3}>Block</option>
-            <option value={2}>Disable</option>
+            <option value={4}>Disable</option>
           </select>
         );
       },
