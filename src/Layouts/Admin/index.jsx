@@ -13,10 +13,6 @@ const AdminLayout = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const notification = useSelector(notificationSelector);
 
-  /**
-   * handle Close drawer
-   * setOpenDrawer(false);
-   */
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };

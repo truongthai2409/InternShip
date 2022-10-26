@@ -193,9 +193,10 @@ const BaseInformationUniversity = ({
                                 // key={job.id}
                                 idJob={job.id}
                                 tagName={[
-                                  job?.jobposition?.name || null,
-                                  job?.position.name || null,
-                                  job?.jobType?.name || null,
+                                  job?.jobposition || null,
+                                  job?.position || null,
+                                  job?.jobType || null,
+                                  job?.major || null
                                 ]}
                                 majors={[job?.majors]}
                                 location={job.universityDTO?.name}

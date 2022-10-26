@@ -39,7 +39,12 @@ const jobTypeList = [
   },
 ];
 
-const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
+const PostPartnerForm = ({
+  idDemand,
+  isUpdate = false,
+  setOpen,
+  demandList,
+}) => {
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
   const { status } = useSelector((state) => state.demand);
@@ -101,8 +106,28 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
       );
       setValue("timeEnd", demandDetail?.end);
       setValue("amount", demandDetail?.amount);
+      setValue("jobType", demandDetail?.jobType);
+      setValue("jobPosition", demandDetail.position);
+      setValue("major", demandDetail?.major);
+      setValue("fileSV", demandDetail?.students);
+    } else {
+      setValue("jobType", [{ id: 1 }, { id: 2 }, { id: 3 }]);
     }
-  }, []);
+  }, [
+    demandDetail?.amount,
+    demandDetail?.createDate,
+    demandDetail?.desciption,
+    demandDetail?.end,
+    demandDetail?.jobType,
+    demandDetail?.major,
+    demandDetail?.name,
+    demandDetail?.position,
+    demandDetail?.students,
+    demandDetail?.updateDate,
+    isUpdate,
+    setValue,
+  ]);
+
   const onSubmit = (data) => {
     const demandData = {
       demand: JSON.stringify({
@@ -116,13 +141,12 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
           id: parseInt(activeUser?.id),
         },
         major: data.major,
-        position: {
-          id: data.jobPosition || null,
-        },
-        jobType: {
-          id: data.jobType || null,
-        },
+        position: data.jobPosition,
+        jobType: data.jobType,
         amount: parseInt(data.amount),
+        status: {
+          id: 1,
+        },
       }),
       fileSV: data.fileSV,
     };
@@ -169,19 +193,10 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   placeholder="Vui lòng chọn..."
                   label="Vị trí công việc"
                   requirementField={false}
+                  arrDefault={isUpdate && demandDetail?.position}
                 >
                   {errors.jobPosition?.message}
                 </SelectMulti>
-                {/* <SelectCustom
-                  id="jobPosition"
-                  label="Vị trí công việc"
-                  placeholder="Vui lòng chọn..."
-                  options={jobPosition}
-                  register={register}
-                  requirementField={false}
-                >
-                  {errors.jobPosition?.message}
-                </SelectCustom> */}
               </div>
               <div className="partner-post__select">
                 <SelectMulti
@@ -190,6 +205,7 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   register={register}
                   placeholder="Vui lòng chọn..."
                   label="Chuyên ngành"
+                  arrDefault={isUpdate && demandDetail?.major}
                 >
                   {errors.major?.message}
                 </SelectMulti>
@@ -203,22 +219,11 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                   register={register}
                   placeholder="Vui lòng chọn..."
                   label="Hình thức làm việc"
-                  arrDefault={jobTypeList}
+                  arrDefault={isUpdate ? demandDetail?.jobType : jobTypeList}
                   requirementField={false}
                 >
                   {errors.jobType?.message}
                 </SelectMulti>
-                {/* <SelectCustom
-                  id="jobType"
-                  label="Hình thức làm việc"
-                  placeholder="Vui lòng chọn..."
-                  defaultValue={demandDetail?.jobType?.id}
-                  options={jobTypeList}
-                  register={register}
-                  requirementField={false}
-                >
-                  {errors.jobType?.message}
-                </SelectCustom> */}
               </div>
               <CustomInput
                 label="Số lượng ứng viên"
@@ -257,7 +262,15 @@ const PostPartnerForm = ({ idDemand, isUpdate = false, setOpen }) => {
                 id="jobDescription"
                 type="description"
                 placeholder="Thư giới thiệu..."
-                defaultValue={useSampleForm ? formSample : ""}
+                defaultValue={
+                  isUpdate
+                    ? useSampleForm
+                      ? formSample
+                      : demandDetail?.desciption
+                    : useSampleForm
+                    ? formSample
+                    : ""
+                }
                 register={register}
                 setValue={setValue}
               >

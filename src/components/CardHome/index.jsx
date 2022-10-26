@@ -76,13 +76,19 @@ const CardHome = (props) => {
           </div>
         </div>
         <div className="cardHome__tagName">
-          {props.tagName?.map((tag) => (
-            <TagName key={tag} title={tag} />
-          ))}
-          {props.majors?.[0]?.map((majors) => {
-            return <TagName key="majors" title={majors.name} />;
-          })}
-          {/* <TagName title={props.major?.name || null} /> */}
+          {props?.tagName?.map((tag) =>
+            tag?.length > 0 ? (
+              tag?.map((item) => {
+                return (item?.length > 0
+                  ? item?.map((ite) => {
+                      return <TagName key={ite} title={ite?.name || null} />
+                    })
+                : <TagName key={item} title={item?.name || null} />)
+              })
+            ) : (
+              <TagName key={tag} title={tag?.name || null} />
+            )
+          )}
         </div>
         {props.demandPartner ? (
           <div className="cardHome__amount-hr-apply">

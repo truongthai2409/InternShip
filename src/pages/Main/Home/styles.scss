@@ -2,7 +2,9 @@
   position: fixed;
   bottom: 2rem;
   right: 1rem;
-  
+  > div > button > svg {
+    font-size: 2.5rem;
+  }
 }
 
 .pagination_home {
