@@ -13,17 +13,9 @@ const fileSV_FORMATS = [
   "application/pdf",
 ];
 
-export const SAMPLEFORM = `Kính chào Quý Cơ quan, Doanh nghiệp\t\t,
-
-
-Trường .................... vinh dự và tự hào là đối tác tuyển dụng của quý cơ quan, doanh nghiệp.
-
-Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuyển dụng thực tập, việc làm đến sinh viên/ cựu sinh viên Trường ................... Phía Trung tâm Hướng nghiệp - Tư vấn việc làm của Trường đã đăng tuyển và cung cấp thông tin ứng viên đến Quý đơn vị. Quý Cơ quan/ Doanh nghiệp vui lòng xem thông tin ứng viên bên dưới.
-
-
-Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.
-
-Trân trọng cảm ơn!`;
+export const SAMPLEFORM = (name) => {
+  return `<p>Kính chào Quý Cơ quan, Doanh nghiệp ,</p><p><br></p><p>Trường <strong>${name}</strong> vinh dự và tự hào là đối tác tuyển dụng của quý cơ quan, doanh nghiệp.</p><p><br></p><p>Nhằm hỗ trợ Quý Cơ quan/ Doanh nghiệp trong công tác thông tin tuyển dụng thực tập, việc làm đến sinh viên/ cựu sinh viên trường <strong>${name}</strong> Phía Trung tâm Hướng nghiệp - Tư vấn việc làm của Trường đã đăng tuyển và cung cấp thông tin ứng viên đến Quý đơn vị. Quý Cơ quan/ Doanh nghiệp vui lòng xem thông tin ứng viên bên dưới.</p><p><br></p><p>Chúng tôi rất vui mừng trở thành cầu nối hiệu quả với các đối tác nhằm tạo việc làm cho người học và sự hợp tác thành công giữa hai bên.</p><p><br></p><p>Trân trọng cảm ơn!</p>`
+};
 
 // yup validate form post job form
 export const schema = yup
@@ -31,17 +23,34 @@ export const schema = yup
     jobName: yup.string().required(" * Bạn phải điền chức danh."),
     jobPosition: yup
       .array()
-      .required("* Bạn phải nhập vị trí công việc.")
-      .nullable("* Bạn phải nhập vị trí công việc."),
+      .nullable()
+      .test("file", " * Bạn phải chọn vị trí công việc.", (value) => {
+        if (value && value.length >= 1) {
+          return value;
+        } else {
+          return false;
+        }
+      }),
     major: yup
       .array()
-      .required(" * Bạn phải chọn chuyên ngành.")
-      .nullable(" * Bạn phải chọn chuyên ngành."),
+      .nullable()
+      .test("file", " * Bạn phải chọn chuyên ngành.", (value) => {
+        if (value && value.length >= 1) {
+          return value;
+        } else {
+          return false;
+        }
+      }),
     jobType: yup
       .array()
-      .length(1, "* Bạn phải nhập hình thức làm việc.")
-      .required("* Bạn phải nhập hình thức làm việc.")
-      .nullable(" * Bạn phải nhập hình thức làm việc."),
+      .nullable()
+      .test("file", " * Bạn phải chọn hình thức làm việc.", (value) => {
+        if (value && value.length >= 1) {
+          return value;
+        } else {
+          return false;
+        }
+      }),
     timeStart: yup
       .date()
       .nullable()

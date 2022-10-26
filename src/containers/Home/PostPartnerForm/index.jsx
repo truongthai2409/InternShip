@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import DescriptionForm from "src/components/DescriptionForm";
 import InputFile from "src/components/InputFile";
 import SelectMulti from "src/components/SelectMulti";
@@ -15,7 +14,6 @@ import { getPartnerByUserID } from "src/store/slices/Admin/university/unversityS
 import {
   addDemand,
   getDemandById,
-  updateDemand,
 } from "src/store/slices/main/home/demand/demandSlice";
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
 import Button from "../../../components/Button";
@@ -71,6 +69,7 @@ const PostPartnerForm = ({
     setValue,
     formState: { errors },
   } = useForm({
+    mode: "all",
     resolver: yupResolver(schema),
   });
 
@@ -80,11 +79,13 @@ const PostPartnerForm = ({
 
   const handleUseForm = () => {
     setUseSampleForm(!useSampleForm);
-    setFormSample(SAMPLEFORM);
+    setFormSample(SAMPLEFORM(activeUser?.universityDTO?.name));
   };
-
   useEffect(() => {
-    !isUpdate && setValue("jobType", [{ id: 1 }, { id: 2 }, { id: 3 }]);
+    isUpdate === false &&
+      setValue("jobType", [{ id: 1 }, { id: 2 }, { id: 3 }]);
+  }, [isUpdate, setValue]);
+  useEffect(() => {
     if (isUpdate) {
       setValue("jobName", demandDetail?.name);
       setValue("jobDescription", demandDetail?.desciption);
@@ -113,9 +114,7 @@ const PostPartnerForm = ({
     isUpdate,
     setValue,
   ]);
-
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
     const demandData = {
       demand: JSON.stringify({
         name: data.jobName,
@@ -140,13 +139,11 @@ const PostPartnerForm = ({
     const user =
       JSON.parse(sessionStorage.getItem("userPresent")) ||
       JSON.parse(localStorage.getItem("userPresent"));
-    dispatch(addDemand([demandData, user]));
-  };
-
-  if (status === "success") {
-    navigate("/partner/post-list");
-  }
-
+      await dispatch(addDemand([demandData, user]))
+    };
+    if(status === "success" && !isUpdate) {
+      navigate("/partner/post-list")
+    }
   return (
     <>
       <div className="partner-post__container">

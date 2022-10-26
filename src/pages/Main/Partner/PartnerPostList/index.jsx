@@ -62,11 +62,11 @@ const PartnerPostList = (props) => {
     setCurrentPage(parseInt(valuePage));
     window.scroll(0, 0);
   };
+  let uniId = user?.universityDTO?.id;
   useEffect(() => {
-    let uniId = user?.universityDTO?.id;
     dispatch(getDemandListByUniId({ uniId, currentPage, limit }));
     dispatch(getAllDemandListByUniId({ uniId, currentPages : 0, limits : 1000 }));
-  }, [user?.universityDTO?.id, currentPage, dispatch]);
+  }, [user?.universityDTO?.id, currentPage, dispatch, uniId]);
   return (
     <div className="hr-post__wrapper">
       <div className="hr-post-list__content">
@@ -85,11 +85,11 @@ const PartnerPostList = (props) => {
           <StatisticUser
             title="Trạng thái tin đăng"
             firstObject={{
-              score: AllDemandListUniversity.reduce((total,item) => { return total += (item?.status === null || item?.status?.name?.includes("Active"))},0),
+              score: AllDemandListUniversity?.reduce((total,item) => { return total += (item?.status === null || item?.status?.name?.includes("Active"))},0),
               description: "Đang đăng tuyển",
             }}
             secondObject={{
-              score: AllDemandListUniversity.reduce((total,item) => { return total += (item.status && item?.status?.name?.includes("Disable"))},0),
+              score: AllDemandListUniversity?.reduce((total,item) => { return total += (item.status && item?.status?.name?.includes("Disable"))},0),
               description: "Đã đóng",
             }}
           />
@@ -132,7 +132,7 @@ const PartnerPostList = (props) => {
           </TabPanel>
           <TabPanel className="tabPanel" value={value} index={1}>
             <ListDemand
-              demandList={AllDemandListUniversity.filter((item)=>item?.status?.name?.includes("Disable"))}
+              demandList={AllDemandListUniversity?.filter((item)=>item?.status?.name?.includes("Disable"))}
               message="Không có đợt thực tập đã đóng."
             />
           </TabPanel>

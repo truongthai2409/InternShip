@@ -6,7 +6,7 @@ import CachedIcon from "@mui/icons-material/Cached";
 import PostStatus from "../PostStatus";
 import ButtonAction from "../ButtonAction";
 import moment from "moment";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../Modal";
 import CandidateList from "src/pages/Main/HR/CandidateList";
 import PostJobForm from "src/containers/Home/PostJobForm";
@@ -21,10 +21,12 @@ const CardPost = (props) => {
   const [component, setComponent] = useState(<CandidateList />);
   const [title, setTitle] = useState("");
   const action = useRef("");
+  const { status } = useSelector((state) => state.demand);
+  const { role } = useSelector((state) => state.profile);
   const { jobListActived, jobListDisabled } = useSelector((state) => state.job);
   const jobList = jobListActived.concat(jobListDisabled);
   const jobDetail = jobList.filter((job) => {
-    if(job) {
+    if (job) {
       return job.id === props.idJob;
     }
   });
@@ -39,15 +41,20 @@ const CardPost = (props) => {
     action.current = "close";
   };
 
-  const handleCloseJob = () => {
+  const handleCloseJob = async () => {
     const jobData = {
       status: {
         id: 4,
       },
     };
-    const token = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token
-    dispatch(updateStatusJob([props.idDemand, jobData, token]));
+    const token =
+      JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
+      JSON.parse(localStorage.getItem("userPresent"))?.token;
+    await dispatch(
+      updateStatusJob([props.idDemand || props.idJob, jobData, token, role])
+    ).then((res) => {
+      // return res.payload.id && dispatch() => Dispath để cập nhật lại job khi xóa. 0372
+    });
     setOpen(false);
   };
 
@@ -131,6 +138,11 @@ const CardPost = (props) => {
       setOpen(true);
     }
   };
+  useEffect(() => {
+    if (status === "success") {
+      setOpen(false);
+    }
+  }, [open, status]);
   return (
     <div className="card-post__container">
       <PostStatus status={props.status?.id} />

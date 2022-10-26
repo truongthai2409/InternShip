@@ -40,12 +40,11 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
-        if(payload.httpCode === 500) {
+        if(payload.httpCode && payload.httpCode === 500) {
           state.status = payload.message
           toast.error("Đăng danh sách thực tập thất bại!");
           toast.error(`Lỗi: ${payload.message}`);
-        } else { 
-          
+        } else {
           state.status = "success"
           state.demandListUniversityActive.unshift(payload);
           toast.success("Đăng danh sách thực tập thành công!");
@@ -99,6 +98,7 @@ const demandSlice = createSlice({
 });
 
 export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
+
   let axiosConfig = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -106,7 +106,7 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
       Authorization: "Bearer " + data[1].token,
     },
   };
-  return axios
+  return await axios
     .post(`${baseURL}/api/r2s/partner/demand`, data[0], axiosConfig)
     .then((res) => {
       return res.data;

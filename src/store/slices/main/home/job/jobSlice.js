@@ -114,7 +114,7 @@ const jobSlice = createSlice({
       }
     });
     builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
-      switch (payload?.status.id) {
+      switch (payload?.status?.id) {
         case 4:
           state.jobListActived = state.jobListActived.filter((job) => {
             return job.id !== payload.id;
@@ -312,30 +312,52 @@ export const getJobByCompany = createAsyncThunk(
  * args[0] : id job
  * args[1] : status
  * args[2] : token
+ * args[3] : role
  */
 export const updateStatusJob = createAsyncThunk(
   "job/updateStatusJob",
   async (args) => {
-    console.log(args);
     const header = {
       headers: {
         Authorization: "Bearer " + args[2],
       },
     };
-    const data = {
-      id: args[0],
-      status: {
-        id: args[1].status.id,
-      },
-    };
-    return axios
-      .put(`${baseURL}/api/r2s/partner/demand/status`, data, header)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
+
+    switch (args[3]) {
+      case "Role_HR": {
+        const data = {
+          status: {
+            id: args[1].status.id,
+          },
+        };
+        return axios
+          .put(`${baseURL}/api/job/status/${args[0]}`, data, header)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            return error.response.data;
+          });
+      }
+      case "Role_Partner": {
+        const data = {
+          id: args[0],
+          status: {
+            id: args[1].status.id,
+          },
+        };
+        return axios
+          .put(`${baseURL}/api/r2s/partner/demand/status`, data, header)
+          .then((response) => {
+            return response.data;
+          })
+          .catch((error) => {
+            return error.response.data;
+          });
+      }
+      default:
+        break;
+    }
   }
 );
 

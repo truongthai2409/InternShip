@@ -31,7 +31,6 @@ const SelectMulti = ({
   id,
   register,
   placeholder,
-  dispatch = () => {},
   className,
   label,
   requirementField = true,

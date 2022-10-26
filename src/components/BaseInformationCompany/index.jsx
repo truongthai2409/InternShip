@@ -789,7 +789,7 @@ const BaseInformationCompany = ({
                               textAlign: "justify",
                               paddingRight: "25px",
                               color: "#000000",
-                              fontWeight: "500",
+                              fontWeight: "400",
                               fontSize: "14px",
                               fontStyle: "normal",
                             }}
