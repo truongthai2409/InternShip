@@ -72,15 +72,21 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
 export const getAdminListDemand = createAsyncThunk(
   "adminDemand/getAdminDemandList",
   async (args) => {
-    const res = await axios
-      .get(`${baseURL}/api/demand?no=${args[0] - 1}&limit=${args[1]}`)
-      .then((res) => {
-        return res.data;
+    const header = {
+      headers: {
+        Authorization: "Bearer " + args[2],
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return await axios
+      .get(`${baseURL}/api/demand?no=${args[0] - 1}&limit=${args[1]}`,header)
+      .then((response) => {
+        return response.data;
       })
       .catch((error) => {
         return error.response.data;
       });
-    return res;
+    // return res;
   }
 );
 
