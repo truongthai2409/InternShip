@@ -10,7 +10,7 @@ const formatLocation = (location) => {
 export const ListJob = ({ listJob, message, isDisabled }) => {
   return (
     <div className="hrpost__list">
-      {listJob?.length > 0 ? (
+      {listJob && listJob?.length > 0 ? (
         isDisabled ? (
           listJob?.map((job) => (
             <CardPost
@@ -31,6 +31,7 @@ export const ListJob = ({ listJob, message, isDisabled }) => {
           ))
         ) : (
           listJob
+            ?.slice()
             ?.sort((a, b) => b.id - a.id)
             ?.map((job) => (
               <CardPost

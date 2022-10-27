@@ -49,6 +49,12 @@
 }
 
 .select-form {
+  > div {
+    border-color: rgb(119, 119, 119) !important;
+    > div {
+      border-color: rgb(119, 119, 119) !important;
+    }
+  }
   & .select-formControl {
     font-family: "Roboto", sans-serif;
     outline: none !important;

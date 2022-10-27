@@ -150,6 +150,17 @@ export const schema = containerSchema.shape({
         .min(6, '* Tối thiểu 6 kí tự.')
         .max(64, '* Tối đa 64 kí tự.'),
     }),
+    descriptionSchool: yup
+    .string()
+    .nullable()
+    .when("registerPartner", {
+      is: registerPartner => !registerPartner,
+      then: yup
+        .string()
+        .required('* Bạn phải nhập mô tả về truờng.')
+        .min(2, '* Tối thiểu 2 kí tự.')
+        .max(1024, '* Tối đa 1024 kí tự.'),
+    }),
   emailSchool: yup
     .string()
     .nullable()

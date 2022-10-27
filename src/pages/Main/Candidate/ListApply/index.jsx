@@ -59,7 +59,7 @@ const ListApply = () => {
         </div>
         <div className="section__apply">
           <span>
-            Bạn đã ứng tuyển <span>{jobApplyList?.length || 0}</span> việc làm
+            Bạn đã ứng tuyển <span>{jobApplyListHavePage?.totalItems || 0}</span> việc làm
           </span>
         </div>
         <Grid className="wrapper" spacing={{ xs: 2 }} container>

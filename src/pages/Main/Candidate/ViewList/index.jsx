@@ -63,7 +63,7 @@ const CandidateViewList = () => {
         <>
           <div className="section__apply">
             <span>
-              Bạn đã quan tâm <span>{jobCare?.length}</span> việc làm
+              Bạn đã quan tâm <span>{jobCareHavePage?.totalItems}</span> việc làm
             </span>
           </div>
           <Grid className="wrapper" spacing={{ xs: 2 }} container>

@@ -110,7 +110,7 @@ const PartnerInfo = () => {
           name: data.schoolName,
           shortName: data.shortName,
           email: data.emailSchool,
-          description: "mô tả",
+          description: data.descriptionSchool,
           website: data.website,
           phone: data.phoneSchool,
           location: [
@@ -311,6 +311,15 @@ const PartnerInfo = () => {
                     </div>
                   </div>
                   <div className="register__container__form--name">
+                  <CustomInput
+                      label="Mô tả truờng"
+                      id="descriptionSchool"
+                      type="text"
+                      placeholder="Mô tả về truờng..."
+                      register={register}
+                    >
+                      {errors.descriptionSchool?.message}
+                    </CustomInput>
                     <CustomInput
                       label="Địa chỉ"
                       id="address"

@@ -5,7 +5,7 @@ const PaginationCustom = ({
   totalPages,
   page,
   handleOnChange,
-  variant = "outlined",
+  variant = "text",
   shape,
   className,
 }) => {

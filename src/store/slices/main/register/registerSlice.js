@@ -55,7 +55,7 @@ const registerSlice = createSlice({
         state.status = "loading";
       })
       .addCase(registerCandidate.fulfilled, (state, action) => {
-        if (action.payload?.id) {
+        if (action.payload?.id || action.payload?.status) {
           state.user = action.payload;
           state.status = "success";
           state.error = {};

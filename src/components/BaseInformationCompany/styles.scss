@@ -3,17 +3,17 @@
 .base__information-candidate {
   .company-name {
     width: auto;
-    margin-top: 1rem;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(53, 53, 53);
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 1rem 0 2rem 0;
   }
   .base__information-card {
     background-color: white;
@@ -22,7 +22,7 @@
     align-items: center;
     border-radius: 6px;
     padding-bottom: 1rem;
-
+    align-items: flex-end;
     .img-logo {
       width: 100px;
       height: 80px;

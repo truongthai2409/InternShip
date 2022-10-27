@@ -1,5 +1,7 @@
 @use "../../../assets/styles/" as *;
-
+.wrapper {
+  margin-top: 4px !important;
+}
 .config__arow-back {
   display: flex;
   color: $primary-color;

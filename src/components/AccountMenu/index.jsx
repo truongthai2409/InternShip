@@ -17,7 +17,7 @@ import { updateRole } from "src/store/slices/main/user/userSlice";
 
 const AccountMenu = ({ linkImg }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,13 +25,13 @@ const AccountMenu = ({ linkImg }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const {user } = useSelector(state=>state.profile)
-  const username = user?.user?.username
+  const { user } = useSelector((state) => state.profile);
+  const username = user?.user?.username;
 
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
     localStorage.removeItem("userPresent");
-    dispatch(updateRole())
+    dispatch(updateRole());
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",
       autoClose: 3000,
@@ -46,7 +46,7 @@ const AccountMenu = ({ linkImg }) => {
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 , padding: 0}}
+            sx={{ ml: 2, padding: 0 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
@@ -98,16 +98,29 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: "#111111" }}
-          to={`/${user?.user?.role?.name?.replace("Role_", "")?.toLowerCase()}/profile`}
+          to={`/${user?.user?.role?.name
+            ?.replace("Role_", "")
+            ?.toLowerCase()}/profile`}
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
         >
           <MenuItem>
             <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
           </MenuItem>
         </Link>
-        <Link style={{ color: "#111111" }} to={`/${user?.user?.role?.name?.replace("Role_", "")?.toLowerCase()}/setting`}>
+        <Link
+          style={{ color: "#111111" }}
+          to={`/${user?.user?.role?.name
+            ?.replace("Role_", "")
+            ?.toLowerCase()}/setting`}
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          }}
+        >
           <MenuItem>
             <SettingsApplicationsSharpIcon className="profile-icon" />
-            Cài đặt tài khoản
+            Thay đổi mật khẩu
           </MenuItem>
         </Link>
         <Divider />

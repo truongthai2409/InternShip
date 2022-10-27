@@ -98,7 +98,7 @@ export const updateUser = createAsyncThunk(
     console.log(args);
     const header = {
       headers: {
-        Authorization: "Bearer " + args[0].token,
+        Authorization: "Bearer " + args[0].userStorage?.token,
         "Content-Type": "multipart/form-data",
       },
     };

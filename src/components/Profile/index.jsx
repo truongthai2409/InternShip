@@ -10,10 +10,9 @@ import ProfileContainer from "./ProfileContainer";
 import "./styles.scss";
 import "./reponsive.scss"
 
-
 const Profile = () => {
-
-  const { user } = useSelector((state) => state.profile);
+  
+  const { user , role} = useSelector((state) => state.profile);
 
   return (
     <div className='profile__wrapper'>
@@ -25,9 +24,9 @@ const Profile = () => {
           <ProfileForm profile={user}/>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          {user === "Role_HR" ? (
+          {role === "Role_HR" ? (
             <ProfileContainer profile={user?.company} />
-          ) : user === "Role_Partner" ? (
+          ) : role === "Role_Partner" ? (
             <ProfileContainer profile={user?.universityDTO} />
           ) : (
             ""

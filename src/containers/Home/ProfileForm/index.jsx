@@ -188,7 +188,7 @@ const ProfileForm = ({ profile: user }) => {
             name="Lưu"
             bheight={44}
             onClick={handleSubmit(onSubmit)}
-            fz="18px"
+            fz="14px"
             outline="1.5px solid #DEDEDE"
             className="profile-form__action-btn"
           />

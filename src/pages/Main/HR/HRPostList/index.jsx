@@ -60,6 +60,10 @@ const HRPostList = (props) => {
 
   const handleChangePage = (e, value) => {
     window.scrollTo(0, 0);
+    const filterPanel = document.querySelector(".hrpost__list");
+    const filterPanels = document.querySelector(".filter-panel-home__wrapper");
+    filterPanel.scrollTop = 0;
+    filterPanels.scrollTop = 0;
     setPage(value);
   };
 

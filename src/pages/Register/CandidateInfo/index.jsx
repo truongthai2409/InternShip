@@ -63,8 +63,7 @@ const CandidateInfo = () => {
     try {
       const res = await dispatch(registerCandidate(userData));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success("Đăng ký tài khoản thành công");
-        navigate("/login");
+        return navigate("/login");
       }
     } catch (error) {
       toast.error(error);

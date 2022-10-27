@@ -30,10 +30,6 @@ const hrRouter = [
         Component: HRPostList,
       },
       {
-        path: "candidate/list",
-        Component: CandidateList,
-      },
-      {
         path: "setting",
         Component: Password,
       },
