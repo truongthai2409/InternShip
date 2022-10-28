@@ -23,6 +23,8 @@ const jobSlice = createSlice({
     error: "",
     listCandidatesApplied: [],
     totalPages: 0,
+    totalPageActive: 0,
+    totalPageDisable: 0,
     totalItemActive: 0,
     totalItemDisable: 0,
   },
@@ -51,6 +53,7 @@ const jobSlice = createSlice({
           state.jobListActived = payload.contents;
           state.status = "fail";
           state.totalPages = payload.totalPages;
+          state.totalPageActive = payload.totalPages;
           state.totalItemActive = payload.totalItems;
         }
       }
@@ -64,6 +67,7 @@ const jobSlice = createSlice({
           state.jobListDisabled = payload.contents;
           state.status = "fail";
           state.totalPages = payload.totalPages;
+          state.totalPageDisable = payload.totalPages;
           state.totalItemDisable = payload.totalItems;
         }
       }

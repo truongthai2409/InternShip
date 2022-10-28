@@ -25,7 +25,7 @@ const InputFile = ({
   switch (format) {
     case "image":
       accept = ".png, .jpg, .jpeg, .gif, .bmp";
-      text = "Chỉ hỗ trợ file .jpg .png và kích thước tối đa 512KB.";
+      text = "Hỗ trợ file .jpg .png và tối đa 512KB.";
       break;
     case "doc":
       accept = ".docx";

@@ -242,22 +242,25 @@
   border: 1px solid #ccc;
   border-radius: 1rem;
   .profile_header {
-    background: #4ecdc4; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #556270,
-      #4ecdc4
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #556270,
-      #4ecdc4
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    // background: #4ecdc4; /* fallback for old browsers */
+    // background: -webkit-linear-gradient(
+    //   to right,
+    //   #556270,
+    //   #4ecdc4
+    // ); /* Chrome 10-25, Safari 5.1-6 */
+    // background: linear-gradient(
+    //   to right,
+    //   #556270,
+    //   #4ecdc4
+    // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     height: 200px;
-    background-color: #ccc;
+    // background-color: #ccc;
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
     img {
       position: absolute;

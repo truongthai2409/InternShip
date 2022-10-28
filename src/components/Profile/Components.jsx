@@ -14,6 +14,7 @@ import InputFile from "../InputFile";
 import Modal from "../Modal";
 import { schema } from "./dataCV";
 import UserInfo from "./UserInfo";
+import avatarDefault from 'src/assets/img/avatar-default.png'
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
   const dispatch = useDispatch();
@@ -88,18 +89,16 @@ const Components = ({ profile }) => {
   }, [dispatch]);
   return (
     <div className="profiles">
-      <div className="profile_header">
+      <div className="profile_header" style={{backgroundImage : `url(${profile?.user?.avatar || "https://i.stack.imgur.com/SvWWN.png"})`}}>
         <img
           style={{ width: 150, height: 150, borderRadius: "50%" }}
           src={
-            `${profile?.user?.avatar}` ||
-            "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg"
+            `${profile?.user?.avatar}`
           }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
-            currentTarget.src =
-              "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg";
+            currentTarget.src=`${avatarDefault}`;
           }}
           alt="avatar"
         ></img>

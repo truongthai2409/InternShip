@@ -108,7 +108,7 @@ const InformationCompany = ({
                 sx={{ fontSize: 16, fontWeight: "400" }}
               >
                 <div
-                  dangerouslySetInnerHTML={{ __html: jobDetail.desciption }}
+                  dangerouslySetInnerHTML={{ __html: jobDetail.description }}
                 ></div>
               </Typography>
             </Typography>
@@ -237,7 +237,7 @@ const InformationCompany = ({
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: jobDetailById.desciption,
+                    __html: jobDetailById.description,
                   }}
                 ></div>
               </Typography>

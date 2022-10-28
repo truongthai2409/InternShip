@@ -73,7 +73,10 @@ const HRPostList = (props) => {
     totalPages,
     totalItemActive,
     totalItemDisable,
+    totalPageActive,
+    totalPageDisable,
   } = useSelector((state) => state.job);
+
 
   const userPresent =
     JSON.parse(sessionStorage.getItem("userPresent")) ||
@@ -164,7 +167,7 @@ const HRPostList = (props) => {
         {totalPages > 1 ? (
           <PaginationCustom
             className="pagination"
-            totalPages={totalPages}
+            totalPages={value === 0 ? totalPageActive : totalPageDisable}
             handleOnChange={handleChangePage}
             page={page}
           />
