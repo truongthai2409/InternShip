@@ -14,7 +14,7 @@ import InputFile from "../InputFile";
 import Modal from "../Modal";
 import { schema } from "./dataCV";
 import UserInfo from "./UserInfo";
-import avatarDefault from 'src/assets/img/avatar-default.png'
+import avatarDefault from "src/assets/img/avatar-default.png";
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
   const dispatch = useDispatch();
@@ -27,8 +27,7 @@ const Components = ({ profile }) => {
     resolver: yupResolver(schema),
   });
   const [opens, setOpens] = useState(false);
-  const handleChange = (e) => {
-  };
+  const handleChange = (e) => {};
   const [checkedFind, setCheckedFind] = React.useState(true);
   const [checkedEmail, setCheckedEmail] = React.useState(false);
   const [open, setOpen] = useState(false);
@@ -54,11 +53,9 @@ const Components = ({ profile }) => {
   };
 
   const onSubmit = async (data) => {
-    const userSessionStorage = JSON.parse(
-      sessionStorage.getItem("userPresent")
-    ) || JSON.parse(
-      localStorage.getItem("userPresent")
-    )
+    const userSessionStorage =
+      JSON.parse(sessionStorage.getItem("userPresent")) ||
+      JSON.parse(localStorage.getItem("userPresent"));
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
@@ -77,28 +74,33 @@ const Components = ({ profile }) => {
       fileCV: data.cv,
     };
     const headerUser = {
-      token : userSessionStorage.token,
-      role : profile?.user?.role?.name
-    }
-    await dispatch(updateUser([headerUser, profileData])).then(()=>{
+      token: userSessionStorage.token,
+      role: profile?.user?.role?.name,
+    };
+    await dispatch(updateUser([headerUser, profileData])).then(() => {
       setOpens(!opens);
-    })
+    });
   };
   useEffect(() => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);
   return (
     <div className="profiles">
-      <div className="profile_header" style={{backgroundImage : `url(${profile?.user?.avatar || "https://i.stack.imgur.com/SvWWN.png"})`}}>
+      <div
+        className="profile_header"
+        style={{
+          backgroundImage: `url(${
+            profile?.user?.avatar || "https://i.stack.imgur.com/SvWWN.png"
+          })`,
+        }}
+      >
         <img
           style={{ width: 150, height: 150, borderRadius: "50%" }}
-          src={
-            `${profile?.user?.avatar}`
-          }
+          src={`${profile?.user?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
-            currentTarget.src=`${avatarDefault}`;
+            currentTarget.src = `${avatarDefault}`;
           }}
           alt="avatar"
         ></img>
@@ -156,7 +158,7 @@ const Components = ({ profile }) => {
                         setValue={setValue}
                         register={register}
                       >
-                      {errors?.cv?.message}
+                        {errors?.cv?.message}
                       </InputFile>
                       <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>
                     </form>
