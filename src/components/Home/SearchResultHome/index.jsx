@@ -1,8 +1,7 @@
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../../shared/Button";
-import useQuery from "../../../hooks/useQuery";
 import SelectAreaHome from "../SelectAreaHome";
 import "./styles.scss";
 
@@ -17,11 +16,6 @@ function SearchResultHome({
   candidate_infomation,
 }) {
   const [searchValue, setSearchValue] = useState("");
-  const query = useQuery();
-  useEffect(() => {
-    const { name = "" } = query;
-    setSearchValue(name);
-  }, [query]);
 
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
