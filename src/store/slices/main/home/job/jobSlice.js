@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getCompanyDetailAPI } from './../../../../../services/api/company/companyApi';
+import request from './../../../../../services/request';
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -299,14 +301,16 @@ export const addJob = createAsyncThunk("job/addJob", async (args) => {
 export const getJobByCompany = createAsyncThunk(
   "job/getJobByCompany",
   async (companyId) => {
-    return axios
-      .get(`${baseURL}/api/job/company/${companyId}`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
+    // return axios
+    //   .get(`${baseURL}/api/job/company/${companyId}`)
+    //   .then((response) => {
+    //     return response.data;
+    //   })
+    //   .catch((error) => {
+    //     return error.response.data;
+    //   });
+    const res = await getCompanyDetailAPI(companyId);
+    return res.data
   }
 );
 

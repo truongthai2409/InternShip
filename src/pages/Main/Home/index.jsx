@@ -1,6 +1,7 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Grid, Hidden } from "@mui/material";
 import { useEffect, useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import notfound from "src/assets/img/notfound.webp";
@@ -78,6 +79,7 @@ function reducer(state = initialState, action) {
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('client');
   const { index, id, jobFilter, jobPage } = useSelector(
     (state) => state.filter
   );
