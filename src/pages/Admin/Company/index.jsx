@@ -3,7 +3,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDispatch } from "react-redux";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
+import Modal from "../../../components/shared/Modal";
 import CompanyForm from "../../../containers/Admin/CompanyForm";
 import CompanyTable from "./CompanyTable";
 import {

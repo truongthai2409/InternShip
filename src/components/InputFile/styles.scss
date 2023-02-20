@@ -5,7 +5,7 @@
   width: 100%;
   text-align: left;
   .custom-input__label {
-    font-family: $f-family-2 !important;
+    font-family: $f-family;
     font-size: $fs-14;
     font-weight: $fw-bold-1;
     color: $color-black-0;
@@ -46,7 +46,7 @@
   .custom-input__error {
     color: $color-red;
     font-size: $fs-13;
-    font-family: $f-family-2;
+    font-family: $f-family;
   }
 
   .field-requirment {
@@ -93,7 +93,7 @@
   opacity: 0;
   .custom-input__error {
     display: inline-block !important;
-    font-family: $f-family-2;
+    font-family: $f-family;
   }
 }
 

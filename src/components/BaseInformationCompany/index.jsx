@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import "./styles.scss";
 import Grid from "@mui/material/Grid";
-import Button from "../Button";
+import Button from "../shared/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -21,18 +21,18 @@ import {
   addAppreciate,
   getAppreciateByCompany,
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
-import ArrowButton from "src/components/ArrowButton";
-import Modal from "src/components/Modal";
-import Textarea from "src/components/Textarea";
+import ArrowButton from "src/components/shared/ArrowButton";
+import Modal from "src/components/shared/Modal";
+import Textarea from "src/components/shared/Textarea";
 import { useForm } from "react-hook-form";
-import CustomInput from "src/components/CustomInput";
-import CustomCheckbox from "src/components/CustomCheckbox";
+import CustomInput from "src/components/shared/CustomInput";
+import CustomCheckbox from "src/components/shared/CustomCheckbox";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../Appreciate/validate";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import HeaderBaseInformationCompany from "../HeaderBaseInformationCompany";
-import PaginationCustom from "../Pagination";
+import PaginationCustom from "../shared/Pagination";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -281,7 +281,7 @@ const BaseInformationCompany = ({
                                 paddingRight: "25px",
                                 fontWeight: "450",
                                 fontSize: "14px",
-                                fontFamily: "$f-family-2",
+                                fontFamily: "$f-family",
                                 fontStyle: "normal",
                               }}
                             ></div>

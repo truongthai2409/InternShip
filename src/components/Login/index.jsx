@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import AccountMenu from "../AccountMenu";
+import AccountMenu from "../Home/AccountMenu";
 import MenuDropDown from "./components";
 import "./styles.scss";
 

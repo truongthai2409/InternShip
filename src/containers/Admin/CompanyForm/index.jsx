@@ -6,10 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import CustomTextarea from "../../../components/CustomTextarea";
-import CustomSelect from "../../../components/CustomSelect";
-import Button from "../../../components/Button";
+import CustomInput from "../../../components/shared/CustomInput";
+import CustomTextarea from "../../../components/shared/CustomTextarea";
+import CustomSelect from "../../../components/shared/CustomSelect";
+import Button from "../../../components/shared/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
 import {
@@ -21,7 +21,7 @@ import {
   getProvinceList,
   getDistrictList,
 } from "../../../store/slices/location/locationSlice";
-import CustomSelectLocation from "src/components/CustomSelectLocation";
+import CustomSelectLocation from "src/components/shared/CustomSelectLocation";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 const baseURL = process.env.REACT_APP_API;

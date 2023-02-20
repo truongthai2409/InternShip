@@ -4,7 +4,7 @@ import { Grid, IconButton, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import "./styles.scss";
-import Search from "../../../components/Search";
+import Search from "../../../components/shared/Search";
 
 const HeaderContainer = ({
   headerName,

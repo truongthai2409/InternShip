@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
 import "./styles.scss";
-import DataTable from "../../../../components/Table";
+import DataTable from "../../../../components/shared/Table";
 import {
   getCompanyList,
   updateCompanyInfo,
   deleteCompany,
   searchCompany,
 } from "../../../../store/slices/Admin/company/companySlice";
-import ProfileTable from "../../../../components/ProfileTable";
+import ProfileTable from "../../../../components/User/ProfileTable";
 
 const CompanyTable = ({ searchValue }) => {
   const userSessionStorage =

@@ -4,7 +4,7 @@ import HeaderWithCandidate from "src/components/HeaderWithCandidate";
 import HeaderWithHR from "src/components/HeaderWithHR";
 import HeaderWithPartner from "src/components/HeaderWithPartner";
 import Login from "../Login";
-import Logo from "../Logo";
+import Logo from "../shared/Logo";
 import "./styles.scss";
 
 export default function HeaderContainer() {

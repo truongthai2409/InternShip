@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import DescriptionForm from "src/components/DescriptionForm";
-import InputFile from "src/components/InputFile";
-import SelectMulti from "src/components/SelectMulti";
-import Textarea from "src/components/Textarea";
+import DescriptionForm from "src/components/shared/DescriptionForm";
+import InputFile from "src/components/shared/InputFile";
+import SelectMulti from "src/components/shared/SelectMulti";
+import Textarea from "src/components/shared/Textarea";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import {
@@ -16,8 +16,8 @@ import {
   getDemandById,
 } from "src/store/slices/main/home/demand/demandSlice";
 import { getJobPositionList } from "src/store/slices/main/home/job/jobSlice";
-import Button from "../../../components/Button";
-import CustomInput from "../../../components/CustomInput/index";
+import Button from "../../../components/shared/Button";
+import CustomInput from "../../../components/shared/CustomInput/index";
 import { SAMPLEFORM, schema } from "./handleForm";
 import "./styles.scss";
 

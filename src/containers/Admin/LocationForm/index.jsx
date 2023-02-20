@@ -4,9 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Grid } from '@mui/material'
 
 import './styles.scss'
-import CustomInput from '../../../components/CustomInput'
+import CustomInput from '../../../components/shared/CustomInput'
 // import CustomTextarea from "../../../components/CustomTextarea";
-import Button from '../../../components/Button'
+import Button from '../../../components/shared/Button'
 import cameraLogo from '../../../assets/img/camera.png'
 // import Select from "../../../components/Select";
 import { schema } from './script.js'

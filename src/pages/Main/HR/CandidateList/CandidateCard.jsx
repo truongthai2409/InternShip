@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.scss";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import ButtonMark from "src/components/ButtonMark";
+import ButtonMark from "src/components/shared/ButtonMark";
 import { Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";

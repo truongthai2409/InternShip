@@ -6,7 +6,7 @@ import Regulation from "src/components/Footer/FooterChildren/Regulation";
 import TermsOfServices from "src/components/Footer/FooterChildren/TermsOfServices";
 import InfomationDemand from "src/pages/Main/Partner/InfomationDemand";
 import MainLayout from "src/Layouts/Main";
-import ForgotPassword from "src/pages/ForgotPassword";
+import ForgotPassword from "src/pages/Authenticate/ForgotPassword";
 import Main from "src/pages/Main";
 import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCompany";
 import CommingSoon from "src/pages/Main/Home/CommingSoon";

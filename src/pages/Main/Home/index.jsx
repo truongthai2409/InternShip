@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import notfound from "src/assets/img/notfound.webp";
-import TemporaryDrawer from "src/components/Drawer";
+import TemporaryDrawer from "src/components/shared/Drawer";
 import {
   changeFilterChange,
   majorFilterChange,
@@ -16,14 +16,12 @@ import {
   jobFilters,
   pageFilterChange,
 } from "src/store/slices/main/home/filter/filterSlices";
-import DetailCard from "../../../components/DetailCard";
-import ListCardJobHome from "../../../components/ListCardJobHome";
-import SearchResultHome from "../../../components/SearchResultHome";
-import SideBarHomeList from "../../../components/SideBarHomeList";
-import {
-  getJobByCompany,
-  getJobPositionList,
-} from "../../../store/slices/main/home/job/jobSlice";
+import DetailCard from "../../../components/Card/DetailCard";
+import ListCardJobHome from "../../../components/Home/ListCardJobHome";
+import SearchResultHome from "../../../components/Home/SearchResultHome";
+import SideBarHomeList from "../../../components/Home/SideBarHomeList";
+import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
+import { getJobByCompany } from "src/store/action/company/companyAction";
 import SearchHR from "../HR/SearchHR";
 import "./styles.scss";
 const initialState = {
@@ -204,14 +202,7 @@ const Home = (props) => {
       container
     >
       <Hidden lgDown>
-        <Grid
-          item
-          xs={0}
-          sm={0}
-          md={0}
-          lg={2}
-          xl={2}
-        >
+        <Grid item xs={0} sm={0} md={0} lg={2} xl={2}>
           <SideBarHomeList
             onChange={handleCheck}
             slideBarHome__wrapper={true}
@@ -237,53 +228,40 @@ const Home = (props) => {
       ) : (
         <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={12} md={6} lg={4} xl={5}>
-              <div className="none__res" style={{ paddingBottom: 16 }}>
-                <div
-                  style={{
-                    backgroundColor: "#fff",
-                    height: 45,
-                    marginBottom: 6,
-                  }}
-                >
-                  <h4
-                    style={{
-                      color: "#000",
-                      padding: 12,
-                      textAlign: "center",
-                    }}
-                  >
-                    Tìm kiếm {props.nameSearch}
-                  </h4>
-                </div>
+            <Grid item xs={12}>
+              <div className="none__res">
                 <SearchResultHome
                   onClick={handleSearch}
                   onChange={getValueLocationAndHandle}
                 />
               </div>
+            </Grid>
+
+            <div className="home__container">
               <ListCardJobHome
                 jobList={jobs}
                 indexCardActive={index}
                 jobListHavePages={jobPage}
                 onChange={getValuePageAndHandle}
               />
-            </Grid>
-            <Hidden mdDown>
-              <Grid item xs={12} sm={12} md={6} lg={8} xl={7}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <div className="containerDetailCard containerDetailCard-none">
-                    {props.hr && <SearchHR />}
-                    <DetailCard
-                      logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
-                      jobDetail={jobDetail}
-                      jobList={jobs}
-                      jobListCompany={jobListCompany}
-                      demandPartner={props.demandPartner}
-                    />
-                  </div>
+
+              <Hidden mdDown>
+                <Grid item xs={12} sm={12} md={6} lg={8} xl={7}>
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                    <div className="containerDetailCard containerDetailCard-none">
+                      {props.hr && <SearchHR />}
+                      <DetailCard
+                        logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                        jobDetail={jobDetail}
+                        jobList={jobs}
+                        jobListCompany={jobListCompany}
+                        demandPartner={props.demandPartner}
+                      />
+                    </div>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Hidden>
+              </Hidden>
+            </div>
           </Grid>
           <Hidden lgUp>
             <div className="HomePageMenu">

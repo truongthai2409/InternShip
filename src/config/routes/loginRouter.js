@@ -1,4 +1,4 @@
-import LoginLayout from "src/Layouts/Login"
+import LoginLayout from "src/Layouts/Authenticate/Login"
 
 
 const loginRouter = [

@@ -7,14 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 
-import DataTable from "../../../../components/Table";
+import DataTable from "../../../../components/shared/Table";
 import {
   deleteUniversity,
   getUniversityList,
   searchUniversity,
   updateUniversityStatus,
 } from "../../../../store/slices/Admin/university/unversitySlice";
-import ProfileTable from "../../../../components/ProfileTable";
+import ProfileTable from "../../../../components/User/ProfileTable";
 
 const UniversityTable = ({ searchValue }) => {
   const userSessionStorage =

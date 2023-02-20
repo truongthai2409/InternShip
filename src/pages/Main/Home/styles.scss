@@ -11,3 +11,13 @@
   display: flex;
   justify-content: center;
 }
+
+.home {
+  &__container {
+    display: flex;
+    margin: 32px;
+    margin-right: 0px;
+    gap: 32px;
+    width: 100%;
+  }
+}

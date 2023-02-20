@@ -1,4 +1,4 @@
-import RegisterLayout from "src/Layouts/Register";
+import RegisterLayout from "src/Layouts/Authenticate/Register";
 import CandidateInfo from "src/pages/Register/CandidateInfo";
 import HRInfo from "src/pages/Register/HRInfo";
 import PartnerInfo from "src/pages/Register/PartnerInfo";

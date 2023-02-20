@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 
 import  logo  from "src/assets/img/loginpage.png";
-import LoginAdmin from "../../pages/LoginAdmin";
+import LoginAdmin from "../../pages/Admin/LoginAdmin";
 
 
 const LoginAdminContainer = () => {

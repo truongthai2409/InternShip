@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import CardHome from '../CardHome';
+import CardHome from '../Card/CardHome';
 import './styles.scss';
 
 const Item = styled(Paper)(({ theme }) => ({

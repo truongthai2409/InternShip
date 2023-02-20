@@ -4,10 +4,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Collap from "src/components/Collaps/Collap";
-import InputFile from "src/components/InputFile";
-import SearchAutoComplete from "src/components/SearchAutoComplete";
-import SelectCustom from "src/components/Select";
-import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import InputFile from "src/components/shared/InputFile";
+import SearchAutoComplete from "src/components/shared/SearchAutoComplete";
+import SelectCustom from "src/components/shared/Select";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import {
   addUniversity,
@@ -20,7 +19,7 @@ import {
 } from "src/store/slices/location/locationSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import CustomInput from "../../../components/CustomInput/index";
+import CustomInput from "../../../components/shared/CustomInput/index";
 import Container from "../Container";
 import "./styles.scss";
 const API = process.env.REACT_APP_API;

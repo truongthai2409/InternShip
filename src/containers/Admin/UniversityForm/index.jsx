@@ -11,9 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import CustomTextarea from "../../../components/CustomTextarea";
-import Button from "../../../components/Button";
+import CustomInput from "../../../components/shared/CustomInput";
+import CustomTextarea from "../../../components/shared/CustomTextarea";
+import Button from "../../../components/shared/Button";
 import cameraLogo from "../../../assets/img/camera.png";
 import { schema, renderControlAction } from "./script.js";
 import {
@@ -22,9 +22,9 @@ import {
   getUniversityDetail,
   updateUniversityInfo,
 } from "../../../store/slices/Admin/university/unversitySlice";
-import MultiSelect from "../../../components/MultiSelect";
-import CustomSelect from "src/components/CustomSelect";
-import CustomSelectLocation from "src/components/CustomSelectLocation";
+import MultiSelect from "../../../components/shared/MultiSelect";
+import CustomSelect from "src/components/shared/CustomSelect";
+import CustomSelectLocation from "src/components/shared/CustomSelectLocation";
 import {
   getDistrictList,
   getProvinceList,

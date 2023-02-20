@@ -1,9 +1,9 @@
 import { Divider } from "@mui/material";
-import ArrowButton from "src/components/ArrowButton/index";
-import Button from "src/components/Button";
-import CustomInput from "src/components/CustomInput/index";
-import InputFile from "src/components/InputFile";
-import SelectCustom from "src/components/Select";
+import ArrowButton from "src/components/shared/ArrowButton/index";
+import Button from "src/components/shared/Button";
+import CustomInput from "src/components/shared/CustomInput/index";
+import InputFile from "src/components/shared/InputFile";
+import SelectCustom from "src/components/shared/Select";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import "./styles.scss";
 export default function Container({
