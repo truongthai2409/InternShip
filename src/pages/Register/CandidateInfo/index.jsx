@@ -4,13 +4,12 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {} from "src/components/CustomInput/components";
-import InputFile from "src/components/InputFile";
-import { errorSelector } from "src/store/selectors/main/registerSelectors";
+import {} from "src/components/shared/CustomInput/components";
+import InputFile from "src/components/shared/InputFile";
 import { registerCandidate } from "src/store/slices/main/register/registerSlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import SelectCustom from "../../../components/Select";
+import SelectCustom from "../../../components/shared/Select";
 import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
 import Container from "../Container";
 import "./styles.scss";
@@ -20,7 +19,7 @@ const CandidateInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
-  const errorMessage = useSelector(errorSelector);
+  const errorMessage = useSelector((state) => state.register.error);
 
   useEffect(() => {
     dispatch(getMajorList([1, 20]));

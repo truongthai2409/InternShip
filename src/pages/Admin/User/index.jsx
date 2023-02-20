@@ -3,7 +3,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDispatch } from "react-redux";
 import "./styles.scss";
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
+import Modal from "../../../components/shared/Modal";
 import UserTable from "./UserTable";
 import UserForm from "../../../containers/Admin/UserForm";
 import { getUserList, searchUser } from "src/store/slices/Admin/user/userSlice";

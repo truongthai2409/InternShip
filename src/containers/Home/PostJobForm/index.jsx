@@ -1,12 +1,12 @@
 import "./styles.scss";
 import WorkIcon from "@mui/icons-material/Work";
-import CustomInput from "../../../components/CustomInput/index";
+import CustomInput from "../../../components/shared/CustomInput/index";
 import { useForm } from "react-hook-form";
 import "./styles.scss";
 import "./responsive.scss";
-import SwitchButton from "../../../components/SwitchButton";
-import Button from "../../../components/Button";
-import SelectCustom from "../../../components/Select";
+import SwitchButton from "../../../components/shared/SwitchButton";
+import Button from "../../../components/shared/Button";
+import SelectCustom from "../../../components/shared/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
@@ -20,7 +20,7 @@ import {
   getProvinceList,
 } from "src/store/slices/location/locationSlice";
 import { useNavigate } from "react-router-dom";
-import Textarea from "src/components/Textarea";
+import Textarea from "src/components/shared/Textarea";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
 import { schemaFormPost } from "./handleFormPost";

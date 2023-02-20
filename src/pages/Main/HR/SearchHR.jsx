@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Button from 'src/components/Button';
+import Button from 'src/components/shared/Button';
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import useQuery from 'src/hooks/useQuery';
 import AddLocationIcon from "@mui/icons-material/AddLocation";
-import SearchAutoComplete from 'src/components/SearchAutoComplete';
+import SearchAutoComplete from 'src/components/shared/SearchAutoComplete';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMajorList } from 'src/store/slices/Admin/major/majorSlice';
 import { changeFilterChange, majorFilterChange, nameFilterChange } from 'src/store/slices/main/candidate/user/userCandidateSlice';

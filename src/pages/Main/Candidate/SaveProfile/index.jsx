@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import CandidateProfile from 'src/components/CandidateProfile'
+import CandidateProfile from 'src/components/User/CandidateProfile'
 import './styles.scss'
-import ContactCandidate from 'src/components/ContactCandidate'
+import ContactCandidate from 'src/components/User/ContactCandidate'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCandidateById } from 'src/store/slices/main/candidate/info/infoCandidateSlice'
 

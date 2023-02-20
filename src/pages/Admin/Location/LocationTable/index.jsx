@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 
 import './styles.scss'
-import DataTable from '../../../../components/Table'
+import DataTable from '../../../../components/shared/Table'
 import { getLocationList } from '../../../../store/slices/location/locationSlice'
 
 const LocationTable = () => {

@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from "react";
+import React, {  useEffect } from "react";
 import BaseInformationCompany from "src/components/BaseInformationCompany";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getJobByCompany,
   getJobById,
   getJobList,
 } from "src/store/slices/main/home/job/jobSlice";
+import { getJobByCompany } from "src/store/action/company/companyAction";
 import "./styles.scss";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";

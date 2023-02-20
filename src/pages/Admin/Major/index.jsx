@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
+import Modal from "../../../components/shared/Modal";
 import MajorForm from "../../../containers/Admin/MajorForm";
 import MajorTable from "./MajorTable/index";
 

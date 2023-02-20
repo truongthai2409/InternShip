@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import './styles.scss'
 import DemandForm from '../../../containers/Admin/DemandForm'
-import ArrowButton from '../../../components/ArrowButton'
+import ArrowButton from '../../../components/shared/ArrowButton'
 
 const DemandDetail = () => {
   const navigate = useNavigate()

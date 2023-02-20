@@ -1,4 +1,4 @@
-import LoginAdminLayout from "src/Layouts/LoginAdmin"
+import LoginAdminLayout from "src/Layouts/Authenticate/LoginAdmin"
 
 const loginAdminRouter = [
     {

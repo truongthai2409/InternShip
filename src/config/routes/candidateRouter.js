@@ -1,4 +1,4 @@
-import Profile from "src/components/Profile";
+import Profile from "src/components/User/Profile";
 import Password from "src/containers/Home/ChangePasswordForm";
 import MainLayout from "src/Layouts/Main";
 import CandidateHome from "src/pages/Main/Candidate/Home";

@@ -9,7 +9,7 @@ import { Typography } from "@mui/material";
 import "./styles.scss";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import Button from "../Button";
+import Button from "../shared/Button";
 
 const baseURL = process.env.REACT_APP_API;
 

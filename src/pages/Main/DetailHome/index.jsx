@@ -1,7 +1,7 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import DetailCard from "../../../components/DetailCard";
-import CardVisit from "../../../components/CardVisit";
+import DetailCard from "../../../components/Card/DetailCard";
+import CardVisit from "../../../components/Card/CardVisit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@mui/material";
 import "./styles.scss";
@@ -12,7 +12,7 @@ import {
   getJobById,
   getJobFilterByUser,
 } from "../../../store/slices/main/home/job/jobSlice";
-import ArrowButton from "src/components/ArrowButton";
+import ArrowButton from "src/components/shared/ArrowButton";
 const DetailHome = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

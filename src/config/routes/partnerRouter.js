@@ -1,4 +1,4 @@
-import Profile from "src/components/Profile";
+import Profile from "src/components/User/Profile";
 import Password from "src/containers/Home/ChangePasswordForm";
 import DetailPostPartner from "src/pages/Main/Partner/DetailPostPartner";
 import PartnerHome from "src/pages/Main/Partner/Home";

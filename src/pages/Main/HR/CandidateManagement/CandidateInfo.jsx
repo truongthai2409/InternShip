@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-import Button from 'src/components/Button';
-import Modal from 'src/components/Modal';
+import Button from 'src/components/shared/Button';
+import Modal from 'src/components/shared/Modal';
 
 export default function CandidateInfo({
     image,

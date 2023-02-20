@@ -9,8 +9,8 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 import { ListDemand } from "./ListDemand";
 import "./styles.scss";
 
-import PaginationCustom from "src/components/Pagination";
-import StatisticUser from "src/components/StatisticUser";
+import PaginationCustom from "src/components/shared/Pagination";
+import StatisticUser from "src/components/User/StatisticUser";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

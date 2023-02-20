@@ -1,5 +1,5 @@
-import CardPost from "src/components/CardPost";
-import Null from "src/components/Null";
+import CardPost from "src/components/Card/CardPost";
+import Null from "src/components/shared/Null";
 import "./styles.scss";
 
 const formatLocation = (location) => {

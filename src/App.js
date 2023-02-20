@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { publicRouter, privateRouter } from "./config/routes/index";
-import Loading from "./Loading";
+import Loading from "./components/shared/Loading";
 import { getUserById } from "./store/slices/main/user/userSlice";
 import './config/i18n/i18n';
 
