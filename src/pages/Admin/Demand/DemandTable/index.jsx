@@ -5,7 +5,7 @@ import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined
 import { IconButton, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import DataTable from "../../../../components/Table";
+import DataTable from "../../../../components/shared/Table";
 import {
   getAdminListDemand,
   searchDemand,

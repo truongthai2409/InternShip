@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import Button from "../../../components/Button";
+import CustomInput from "../../../components/shared/CustomInput";
+import Button from "../../../components/shared/Button";
 import { schemaMajor, renderControlAction } from "./script.js";
 import {
   addMajor,

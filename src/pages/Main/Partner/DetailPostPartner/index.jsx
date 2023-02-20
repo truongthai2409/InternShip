@@ -1,14 +1,14 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import DetailCard from "src/components/DetailCard";
-import CardVisit from "src/components/CardVisit";
+import DetailCard from "src/components/Card/DetailCard";
+import CardVisit from "src/components/Card/CardVisit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Grid } from "@mui/material";
 import "./styles.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ArrowButton from "src/components/ArrowButton";
+import ArrowButton from "src/components/shared/ArrowButton";
 import { getDemandById } from "src/store/slices/main/home/demand/demandSlice";
 
 const DetailPostPartner = (props) => {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { indexFilterChange, pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
-import SearchResultHome from "../SearchResultHome";
+import SearchResultHome from "../Home/SearchResultHome";
 import "./styles.scss";
 
 function HeaderWithPartner(props) {

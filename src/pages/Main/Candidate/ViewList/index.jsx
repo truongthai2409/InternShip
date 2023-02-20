@@ -1,13 +1,13 @@
 import Grid from "@mui/material/Grid";
 import { TabTitle } from "src/utils/GeneralFunctions";
-import DetailCard from "src/components/DetailCard";
-import ListCardJobHome from "src/components/ListCardJobHome";
+import DetailCard from "src/components/Card/DetailCard";
+import ListCardJobHome from "src/components/Home/ListCardJobHome";
 import "./styles.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobCareByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 import { useState } from "react";
-import { getJobByCompany } from "src/store/slices/main/home/job/jobSlice";
+import { getJobByCompany } from "src/store/action/company/companyAction";
 import { Hidden } from "@mui/material";
 
 const CandidateViewList = () => {

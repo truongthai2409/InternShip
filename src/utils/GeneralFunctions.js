@@ -10,10 +10,10 @@ export const AuthenticationPathUrl = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const pathUrl = location.pathname;
-  const roleUser = JSON.parse(sessionStorage.getItem("userPresent"))?.role ||
-   JSON.parse(localStorage.getItem("userPresent"))?.role;
+  const roleUser =
+    JSON.parse(sessionStorage.getItem("userPresent"))?.role ||
+    JSON.parse(localStorage.getItem("userPresent"))?.role;
   const { isRightAuth } = useSelector((state) => state.globalSlices);
-
 
   let role;
   if (roleUser) {
@@ -50,4 +50,3 @@ export const AuthenticationPathUrl = () => {
     dispatch(setISRigthAuth(true));
   }
 };
-

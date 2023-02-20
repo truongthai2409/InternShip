@@ -3,12 +3,11 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { errorSelector } from "src/store/selectors/main/registerSelectors";
 import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { genderList, schema } from "./data";
-import CustomInput from "../../../components/CustomInput";
-import SelectCustom from "../../../components/Select";
+import CustomInput from "../../../components/shared/CustomInput";
+import SelectCustom from "../../../components/shared/Select";
 import { registerHr } from "../../../store/slices/main/register/registerSlice";
 import Container from "../Container";
 import "./styles.scss";
@@ -19,7 +18,7 @@ const HRInfo = () => {
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);
   const { statusRegister } = useSelector((state) => state.register);
-  const errorMessage = useSelector(errorSelector);
+  const errorMessage = useSelector((state) => state.register.error);
 
   const {
     register,

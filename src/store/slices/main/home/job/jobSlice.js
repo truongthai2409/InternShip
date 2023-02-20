@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+import { getJobByCompany } from "src/store/action/company/companyAction";
+
 const baseURL = process.env.REACT_APP_API;
 
 const jobSlice = createSlice({
@@ -296,19 +298,27 @@ export const addJob = createAsyncThunk("job/addJob", async (args) => {
     });
 });
 
-export const getJobByCompany = createAsyncThunk(
-  "job/getJobByCompany",
-  async (companyId) => {
-    return axios
-      .get(`${baseURL}/api/job/company/${companyId}`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+// export const getJobByCompany = createAsyncThunk(
+//   "job/getJobByCompany",
+//   async (companyId) => {
+//     return axios
+//       .get(`${baseURL}/api/job/company/${companyId}`)
+//       .then((response) => {
+//         return response.data;
+//       })
+//       .catch((error) => {
+//         return error.response.data;
+//       });
+//   }
+// );
+
+// export const getJobByCompany = createAsyncThunk(
+//   "job/getJobByCompany",
+//   async (companyId) => {
+//     const res = await getCompanyDetailAPI(companyId);
+//     return res.data;
+//   }
+// );
 
 // function use for update ?status of job by id job
 /**

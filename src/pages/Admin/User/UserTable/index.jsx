@@ -9,10 +9,10 @@ import {
   searchUser,
   verifyUser,
 } from "src/store/slices/Admin/user/userSlice";
-import DataTable from "src/components/Table";
+import DataTable from "src/components/shared/Table";
 import IconEdit from "../../../../assets/img/icons8-write-24.png";
 import Confirmation from "src/components/Confirmation";
-import Modal from "src/components/Modal";
+import Modal from "src/components/shared/Modal";
 import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
 import "./styles.scss";
 

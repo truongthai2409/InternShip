@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "src/components/Button";
+import Button from "src/components/shared/Button";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import imgError403 from "../../assets/img/error-403.png";
 import "./styles.scss";

@@ -2,24 +2,17 @@ import React from "react";
 import "./styles.scss";
 import { useSelector } from "react-redux";
 
-import Logo from "../../components/Logo/index";
-import Notification from "../../components/Notification";
-import {
-  userSelector,
-  statusSelector,
-} from "../../store/selectors/main/registerSelectors";
-
-import { notificationSelector } from "../../store/selectors/notificationSelectors";
+import Notification from "../../components/shared/Notification";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 export default function RegisterContainer({ Outlet }) {
-  const notification = useSelector(notificationSelector);
+  const notification = useSelector((state) => state.notification);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const status = useSelector(statusSelector);
+  const status = useSelector((state) => state.register.status);
   if (status === "success") {
     setTimeout(() => {
       navigate("/login");
@@ -41,10 +34,9 @@ export default function RegisterContainer({ Outlet }) {
       title = "Đăng ký";
   }
 
-  const roleID = useSelector(userSelector)?.role?.id;
+  const roleID = useSelector((state) => state.register.user);
   return (
     <div className="register-container">
-     
       <h1 className="register-container__title">{title}</h1>
       <Outlet />
       <div className="register-container__footer">

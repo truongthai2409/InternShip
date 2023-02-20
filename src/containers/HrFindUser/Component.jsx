@@ -2,7 +2,7 @@ import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { Divider, Switch, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import UserInfo from "src/components/Profile/UserInfo";
+import UserInfo from "src/components/User/Profile/UserInfo";
 
 const BASEURL = process.env.REACT_APP_API;
 const Component = ({ profile }) => {

@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 import "./responsive.scss";
-import Login from "../../pages/Login";
+import Login from "../../pages/Authenticate/Login";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "src/components/Button";
+import Button from "src/components/shared/Button";
 import { updateRole } from "src/store/slices/main/user/userSlice";
 import { toast } from "react-toastify";
 

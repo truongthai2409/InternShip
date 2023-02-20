@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import Grid from "@mui/material/Grid";
-import Button from "../Button";
+import Button from "../shared/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { getDemandListByUniId } from "src/store/slices/main/home/demand/demandSlice";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import CardHome from "../CardHome";
+import CardHome from "../Card/CardHome";
 import moment from "moment";
 
 const currentPage = 1;

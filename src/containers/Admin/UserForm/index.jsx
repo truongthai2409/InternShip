@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import Button from "../../../components/Button";
+import CustomInput from "../../../components/shared/CustomInput";
+import Button from "../../../components/shared/Button";
 import { genderList, schema } from "./data";
-import InputFile from "src/components/InputFile";
-import CustomSelect from "src/components/CustomSelect";
+import InputFile from "src/components/shared/InputFile";
+import CustomSelect from "src/components/shared/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";
 import {
   adminUpdateUser,

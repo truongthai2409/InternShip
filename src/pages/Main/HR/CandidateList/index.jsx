@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import CandidateCard from "./CandidateCard";
 import { getListCandidateApplied } from "src/store/slices/main/home/job/jobSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Null from "src/components/Null";
-import PaginationCustom from "src/components/Pagination";
+import Null from "src/components/shared/Null";
+import PaginationCustom from "src/components/shared/Pagination";
 import "./reponsive.scss";
 const CandidateList = ({ idJob }) => {
   const [page, setPage] = useState(1);

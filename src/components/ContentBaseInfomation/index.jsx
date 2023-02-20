@@ -1,12 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import { Link, useLocation } from "react-router-dom";
-import Button from "../Button";
+import Button from "../shared/Button";
 import "./styles.scss";
-import CardHome from "../CardHome";
+import CardHome from "../Card/CardHome";
 import moment from "moment";
 import { useSelector } from "react-redux";
-import PaginationCustom from "../Pagination";
+import PaginationCustom from "../shared/Pagination";
 import { flexbox } from "@mui/system";
 
 const ContentBaseInformation = ({

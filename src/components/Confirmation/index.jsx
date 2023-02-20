@@ -1,5 +1,5 @@
-import Button from "../Button";
-import ButtonOutline from "../ButtonOutline";
+import Button from "../shared/Button";
+import ButtonOutline from "../shared/ButtonOutline";
 import "./styles.scss";
 
 const Confirmation = ({

@@ -11,8 +11,8 @@ import { TabTitle } from "src/utils/GeneralFunctions";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
 import { Tab, Tabs } from "@mui/material";
-import PaginationCustom from "src/components/Pagination";
-import StatisticUser from "src/components/StatisticUser";
+import PaginationCustom from "src/components/shared/Pagination";
+import StatisticUser from "src/components/User/StatisticUser";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

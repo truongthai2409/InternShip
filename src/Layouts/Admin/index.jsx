@@ -4,14 +4,13 @@ import { Drawer, Hidden } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import "./styles.scss";
-import Sidebar from "../../components/Sidebar";
-import AdminNav from "../../components/AdminNav";
-import Notification from "../../components/Notification";
-import { notificationSelector } from "../../store/selectors/notificationSelectors";
+import Sidebar from "../../components/shared/Sidebar";
+import AdminNav from "../../components/Admin/AdminNav";
+import Notification from "../../components/shared/Notification";
 
 const AdminLayout = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const notification = useSelector(notificationSelector);
+  const notification = useSelector((state)=>state.notification);
 
   const handleCloseDrawer = () => {
     setOpenDrawer(false);

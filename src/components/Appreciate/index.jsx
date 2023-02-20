@@ -20,11 +20,11 @@ import {
   getAppreciateByCompany,
   updateAppreciate,
 } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
-import ButtonCustom from "../Button";
-import CustomCheckbox from "../CustomCheckbox";
-import CustomInput from "../CustomInput";
-import Modal from "../Modal";
-import Textarea from "../Textarea";
+import ButtonCustom from "../shared/Button";
+import CustomCheckbox from "../shared/CustomCheckbox";
+import CustomInput from "../shared/CustomInput";
+import Modal from "../shared/Modal";
+import Textarea from "../shared/Textarea";
 import "./styles.scss";
 import { schema } from "./validate";
 
@@ -48,7 +48,6 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -92,14 +91,6 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
         );
       }
     } catch (error) {
-      // if (error.status === 400) {
-      //   for (const key in error.data) {
-      //     setError(key, {
-      //       type: "server",
-      //       message: error.data[key],
-      //     });
-      //   }
-      // }
     }
 
     reset();

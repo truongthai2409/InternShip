@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
+import Modal from "../../../components/shared/Modal";
 import UniversityTable from "./UniversityTable";
 import UniversityForm from "../../../containers/Admin/UniversityForm";
 import {
