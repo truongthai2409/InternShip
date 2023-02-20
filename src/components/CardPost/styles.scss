@@ -11,7 +11,7 @@
 
   .card-post__job-name {
     font-size: 18px;
-    font-family: "Roboto", sans-serif;
+    font-family: $f-family-2;
     font-weight: 700;
     margin-bottom: 16px;
     display: flex;
@@ -85,7 +85,7 @@
 .confirmation-date__wrapper {
   .confirmation-date__form {
     .custom-input .custom-input__textfield input {
-      font-family: "Roboto", sans-serif;
+      font-family: $f-family-2;
       border: 1px solid $primary-color;
       border-radius: 2px;
       width: 100%;

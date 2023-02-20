@@ -55,7 +55,7 @@
   }
 
   .detail__card-3 {
-    font-family: "Roboto";
+    font-family: $f-family-2;
     font-style: normal;
     font-size: 21px;
 
@@ -63,7 +63,7 @@
       font-size: 16px;
 
       &-name {
-        font-family: "Roboto";
+        font-family: $f-family-2;
         font-style: normal;
         font-weight: 700;
         line-height: 22px;

@@ -20,7 +20,7 @@ const ComponentFooter = ({ header, tabContent, className }) => {
                 <div key={i} className="item">
                   <div className="list-header">
                     <div className="text-wrap">
-                      <Link to={content.link} target="_blank"  title="">
+                      <Link to={content.link} title="">
                         <div className="text">{content.content}</div>
                       </Link>
                     </div>
