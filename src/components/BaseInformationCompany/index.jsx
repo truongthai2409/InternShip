@@ -251,7 +251,7 @@ const BaseInformationCompany = ({
                 </Box>
                 <TabPanel value={valueTab} index={0}>
                   <Box >
-                    <Grid sx={{ justifyContent: "center" }} container spacing={2}>
+                    <Grid sx={{justifyContent : "center"}} container spacing={2}>
                       <Grid item xs={8}>
                         <Item
                           sx={{
@@ -281,7 +281,7 @@ const BaseInformationCompany = ({
                                 paddingRight: "25px",
                                 fontWeight: "450",
                                 fontSize: "14px",
-                                fontFamily: "$f-family",
+                                fontFamily: "Roboto",
                                 fontStyle: "normal",
                               }}
                             ></div>
@@ -334,8 +334,9 @@ const BaseInformationCompany = ({
                                     paddingBottom: 2.5,
                                   }}
                                 >
-                                  {`${Number(rating)} trong ${appreciateList?.length
-                                    } lượt đánh giá`}
+                                  {`${Number(rating)} trong ${
+                                    appreciateList?.length
+                                  } lượt đánh giá`}
                                 </Typography>
                                 <div
                                   style={{
@@ -434,40 +435,41 @@ const BaseInformationCompany = ({
                           }}
                           elevation={0}
                         >
-                          {user?.user ?
-                            <div>
-                              <Rating
-                                precision={0.5}
-                                readOnly
-                                value={Number(rating)}
-                                size="large"
-                                sx={{
-                                  fontWeight: "800",
-                                }}
-                              />
+                          {user?.user ? 
+                        <div>
+                        <Rating
+                          precision={0.5}
+                          readOnly
+                          value={Number(rating)}
+                          size="large"
+                          sx={{
+                            fontWeight: "800",
+                          }}
+                        />
 
-                              <Typography
-                                variant="h6"
-                                component="div"
-                                sx={{
-                                  fontWeight: "700",
-                                  // transform: "translate(5px,5px)",
-                                  fontSize: 15,
-                                }}
-                              >
-                                {`${Number(rating) || 0} trong ${appreciateList?.length
-                                  } lượt đánh giá`}
-                              </Typography>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignContent: "center",
-                                  justifyContent: "center",
-                                }}
-                              ></div>
-                            </div>
-                            : <Typography variant="h6">Bạn cần <Link to='/login'> đăng nhập </Link> để có thể xem và đánh giá</Typography>
-                          }
+                        <Typography
+                          variant="h6"
+                          component="div"
+                          sx={{
+                            fontWeight: "700",
+                            // transform: "translate(5px,5px)",
+                            fontSize: 15,
+                          }}
+                        >
+                          {`${Number(rating) || 0} trong ${
+                            appreciateList?.length
+                          } lượt đánh giá`}
+                        </Typography>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignContent: "center",
+                            justifyContent: "center",
+                          }}
+                        ></div>
+                      </div>
+                      : <Typography variant="h6">Bạn cần <Link to='/login'> đăng nhập </Link> để có thể xem và đánh giá</Typography>  
+                        }
                         </Item>
                         <Item
                           sx={{

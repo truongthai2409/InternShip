@@ -39,7 +39,7 @@ const PartnerInfo = () => {
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { status, universityList } = useSelector((state) => state.university);
 
-  const { error: errorMessage } = useSelector((state) => state.university);
+  const { error : errorMessage } = useSelector((state) => state.university);
   const typeSchoolList = [
     {
       id: 1,
@@ -310,7 +310,7 @@ const PartnerInfo = () => {
                     </div>
                   </div>
                   <div className="register__container__form--name">
-                    <CustomInput
+                  <CustomInput
                       label="Mô tả truờng"
                       id="descriptionSchool"
                       type="text"

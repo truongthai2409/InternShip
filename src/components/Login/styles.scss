@@ -17,23 +17,11 @@
             >button {
                 font-size: 14px;
                 text-transform: inherit;
-                font-family: $f-family ;
+                font-family: $f-family;
                 padding: 2px 14px;
                 background-color: $primary-color;
                 color: #FFFFFF;
             }
-            >button:hover {
-                transition: all 0.5s ease;
-                background-color: $primary-color-2;
-                color: $primary-color-1;
-                .custom-link {
-                  color: $primary-color-1;
-                  background-color: $primary-color-2;
-                }
-              }
         }
     }
-}
-#composition-button{
-    font-family: $f-family ;
 }

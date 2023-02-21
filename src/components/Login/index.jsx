@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AccountMenu from "../Home/AccountMenu";
-import MenuDropDown from "./components";
+import { MenuDropDown } from "./components";
 import "./styles.scss";
 
 export default function Login() {

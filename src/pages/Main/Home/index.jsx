@@ -174,7 +174,7 @@ const Home = (props) => {
       },
       { link: props.linkFilter },
     ];
-    // dispatch(jobFilters(dataFilter));
+    dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
     setJob(jobFilter);
@@ -191,9 +191,6 @@ const Home = (props) => {
       navigate("finduser");
     }
   }, [dispatch, navigate, props.userCandidate]);
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   return (
     <Grid
       className="wrapper"
@@ -262,6 +259,8 @@ const Home = (props) => {
                 </Grid>
               </Hidden>
             </div>
+            
+
           </Grid>
           <Hidden lgUp>
             <div className="HomePageMenu">

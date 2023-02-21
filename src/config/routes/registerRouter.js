@@ -3,7 +3,6 @@ import CandidateInfo from "src/pages/Register/CandidateInfo";
 import HRInfo from "src/pages/Register/HRInfo";
 import PartnerInfo from "src/pages/Register/PartnerInfo";
 
-
 const registerRouter = [
     {
         path: "/register",
@@ -22,6 +21,6 @@ const registerRouter = [
                 Component: PartnerInfo,
             },
         ]
-    },
+    }
 ]
 export default registerRouter

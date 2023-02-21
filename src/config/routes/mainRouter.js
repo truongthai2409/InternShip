@@ -12,7 +12,6 @@ import CandidateInformationCompany from "src/pages/Main/Candidate/InformationCom
 import CommingSoon from "src/pages/Main/Home/CommingSoon";
 import NotFound from "src/pages/NotFound";
 import DetailHome from "../../pages/Main/DetailHome";
-// import Rregister from "src\components\Login\components.jsx"
 const mainRouter = [
   {
     path: "/",
@@ -51,8 +50,8 @@ const mainRouter = [
         Component: TermsOfServices,
       },
       {
-        path: "regulation",
-        Component: Regulation,
+        path : "regulation",
+        Component : Regulation,
       },
       {
         path: "infomation_demand/:keywod",
