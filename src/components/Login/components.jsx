@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 
-export const MenuDropDown = () => {
+const MenuDropDown = () => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -107,3 +107,4 @@ export const MenuDropDown = () => {
     </>
   );
 };
+export default MenuDropDown;

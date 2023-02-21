@@ -7,6 +7,7 @@ import hrRouter from "./hrRouter";
 import partnerRouter from "./partnerRouter";
 import loginAdminRouter from "./loginAdminRouter";
 
+
 const publicRouter = [
   mainRouter,
   registerRouter,

@@ -1,6 +1,7 @@
 @use "../../../assets/styles/" as *;
 
 .profile-form__wrapper {
+  font-family: $f-family;
   background-color: #fff;
   border-radius: 1rem;
   display: flex;

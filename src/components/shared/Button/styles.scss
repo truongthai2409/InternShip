@@ -38,7 +38,13 @@
   }
 
   &:hover {
-    opacity: 0.9;
+    transition: all 0.5s ease;
+    background-color: $primary-color-2;
+    color: $primary-color-1;
+    .custom-link {
+      color: $primary-color-1;
+      background-color: $primary-color-2;
+    }
   }
 }
 

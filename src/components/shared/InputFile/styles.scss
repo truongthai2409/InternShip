@@ -46,6 +46,7 @@
   .custom-input__error {
     color: $color-red;
     font-size: $fs-13;
+    font-family: $f-family;
   }
 
   .field-requirment {
@@ -92,6 +93,7 @@
   opacity: 0;
   .custom-input__error {
     display: inline-block !important;
+    font-family: $f-family;
   }
 }
 

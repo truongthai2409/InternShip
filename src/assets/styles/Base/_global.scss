@@ -1,16 +1,20 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 a {
   text-decoration: none;
 }
+
 body,
 input,
 textarea,
 button {
-  font-family: "Roboto", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
