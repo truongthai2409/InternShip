@@ -1,13 +1,10 @@
 import { Divider, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const FooterComponents = ({ title, children }) => {
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+const FooterComponents = ({title, children}) => {
     return <div className='footer_components'>
         <Typography className='footer_title' variant='h3'>{title}</Typography>
-        <Divider />
+        <Divider/>
         <div className='footer_children'>
             {children}
         </div>

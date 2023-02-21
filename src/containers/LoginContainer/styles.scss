@@ -33,9 +33,9 @@
     font-weight: $fw-bold-1;
     text-transform: uppercase;
     margin: 40px 0;
-    padding: 0px 60px;
   }
   &__footer {
+    margin: 40px auto 20px;
     p {
       font-size: $fs-13;
       color: $color-black-0;
@@ -46,24 +46,5 @@
       color: $primary-color;
       text-decoration: underline;
     }
-  }
- 
-  .register-container__footerRegister-link{
-    margin-top: 20px;
-  }
-  .register-container__footerRegister-p{
-    border-top: 1px solid gray;
-    width: 100%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
-  .register-container__footerRegister{
-    font-family: $f-family !important;
-  }
-}
-.register-container{
-  &__footer{
-    margin:15px auto 30px;
-
   }
 }

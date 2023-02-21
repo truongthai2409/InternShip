@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.scss";
 
 const AddressComponent = () => {
-
   return (
     <div className="address__container-footer">
       <h2 className="heading-primary elementor-heading-title">Địa chỉ</h2>

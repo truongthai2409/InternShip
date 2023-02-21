@@ -135,7 +135,7 @@ const BaseInformationUniversity = ({
                     paddingRight: "25px",
                     fontWeight: "450",
                     fontSize: "14px",
-                    fontFamily: "$f-family",
+                    fontFamily: "Roboto",
                     fontStyle: "normal",
                   }}
                 ></div>
