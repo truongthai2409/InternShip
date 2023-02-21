@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import PaginationCustom from "src/components/shared/Pagination";
 import { pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 import CardHome from "../../Card/CardHome";
+import { Grid } from "@mui/material";
+
 import "./styles.scss";
 
 const ListCardJobHome = ({
@@ -24,9 +26,8 @@ const ListCardJobHome = ({
   };
 
   return (
-    <div style={{width:"60%"}}>
+    <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
       <div className="filter-panel-home__wrapper">
-        
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
@@ -91,20 +92,19 @@ const ListCardJobHome = ({
             Không tìm thấy công việc
           </div>
         )}
-        
       </div>
       {jobListHavePages?.totalPages > 1 ? (
-          <div className="home__pagination">
-            <PaginationCustom
-              page={page}
-              totalPages={jobListHavePages?.totalPages}
-              handleOnChange={handlePagination}
-            />
-          </div>
-        ) : (
-          ""
-        )}
-    </div>
+        <div className="home__pagination">
+          <PaginationCustom
+            page={page}
+            totalPages={jobListHavePages?.totalPages}
+            handleOnChange={handlePagination}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+    </Grid>
   );
 };
 export default ListCardJobHome;

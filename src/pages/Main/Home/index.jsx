@@ -1,6 +1,7 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Grid, Hidden } from "@mui/material";
 import { useEffect, useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import notfound from "src/assets/img/notfound.webp";
@@ -76,6 +77,7 @@ function reducer(state = initialState, action) {
 
 const Home = (props) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation("client");
   const { index, id, jobFilter, jobPage } = useSelector(
     (state) => state.filter
   );
@@ -243,7 +245,7 @@ const Home = (props) => {
               />
 
               <Hidden mdDown>
-                <Grid item xs={12} sm={12} md={6} lg={8} xl={7}>
+                <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className="containerDetailCard containerDetailCard-none">
                       {props.hr && <SearchHR />}
@@ -259,8 +261,6 @@ const Home = (props) => {
                 </Grid>
               </Hidden>
             </div>
-            
-
           </Grid>
           <Hidden lgUp>
             <div className="HomePageMenu">

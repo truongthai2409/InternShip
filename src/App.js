@@ -7,6 +7,7 @@ import "./App.css";
 import { publicRouter, privateRouter } from "./config/routes/index";
 import Loading from "./components/shared/Loading";
 import { getUserById } from "./store/slices/main/user/userSlice";
+import './config/i18n/i18n';
 
 function App() {
   // Nếu nguơời dùng lưu phiên đăng nhập vào localStorage. App.js sẽ dispatch lấy thông tin

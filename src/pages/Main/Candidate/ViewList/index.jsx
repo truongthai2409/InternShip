@@ -63,11 +63,12 @@ const CandidateViewList = () => {
         <>
           <div className="section__apply">
             <span>
-              Bạn đã quan tâm <span>{jobCareHavePage?.totalItems}</span> việc làm
+              Bạn đã quan tâm <span>{jobCareHavePage?.totalItems}</span> việc
+              làm
             </span>
           </div>
           <Grid className="wrapper" spacing={{ xs: 2 }} container>
-            <Grid item xs={12} sm={12} md={6} lg={4} xl={4}>
+            <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item xs={12}>
                   <ListCardJobHome
@@ -82,7 +83,7 @@ const CandidateViewList = () => {
               </Grid>
             </Grid>
             <Hidden mdDown>
-              <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
+              <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                 <div style={{ height: "90%" }}>
                   <DetailCard
                     logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
