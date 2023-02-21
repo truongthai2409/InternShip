@@ -137,7 +137,7 @@ const Detail = ({
           </div>
           <div>
             {!demandPartner ? (
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%" }} className="boxOpenSans">
                 <Box
                   sx={{
                     borderBottom: 1,
@@ -145,6 +145,7 @@ const Detail = ({
                     mt: 1,
                     fontSize: 3,
                   }}
+                  className="boxOpenSans"
                 >
                   <Tabs
                     value={value}
@@ -153,18 +154,21 @@ const Detail = ({
                     textColor="primary"
                     scrollButtons
                     sx={{}}
+                    className="boxOpenSans"
                   >
                     <Tab
                       label="Chi tiết"
                       {...a11yProps(0)}
                       textColor="inherit"
                       sx={{ fontSize: 12 }}
+                      className="boxOpenSans"
                     />
                     <Tab
                       label="Tổng quan công ty"
                       {...a11yProps(1)}
                       textColor="inherit"
                       sx={{ fontSize: 12 }}
+                      className="boxOpenSans"
                     />
                   </Tabs>
                 </Box>
@@ -182,7 +186,7 @@ const Detail = ({
                 </TabPanel>
               </Box>
             ) : (
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%" }} className="boxOpenSans">
                 <Box
                   sx={{
                     borderBottom: 1,
@@ -190,6 +194,7 @@ const Detail = ({
                     mt: 1,
                     fontSize: 3,
                   }}
+                  className="boxOpenSans"
                 >
                   <Tabs
                     value={value}
@@ -197,18 +202,21 @@ const Detail = ({
                     aria-label="basic tabs example"
                     textColor="primary"
                     scrollButtons
+                    className="boxOpenSans"
                   >
                     <Tab
                       label="Chi tiết"
                       {...a11yProps(0)}
                       textColor="inherit"
                       sx={{ fontSize: 12 }}
+                      className="boxOpenSans"
                     />
                     <Tab
                       label="Thông tin về trường"
                       {...a11yProps(1)}
                       textColor="inherit"
                       sx={{ fontSize: 12 }}
+                      className="boxOpenSans"
                     />
                   </Tabs>
                 </Box>
@@ -217,6 +225,7 @@ const Detail = ({
                     jobDetail={jobDetail}
                     rating={rating}
                   ></InformationUniversity>
+
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                   <BaseInformationUniversity

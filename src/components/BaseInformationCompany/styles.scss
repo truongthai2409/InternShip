@@ -3,7 +3,7 @@
 .base__information-candidate {
   .company-name {
     width: auto;
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -38,7 +38,7 @@
       height: fit-content;
       div {
         @include flex(center, null);
-        font-family: "Roboto";
+        font-family: $f-family;
         font-style: normal;
         font-weight: 400;
         font-size: 12px;
@@ -52,7 +52,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: "Roboto";
+        font-family: $f-family;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -66,7 +66,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: "Roboto";
+        font-family: $f-family;
         font-style: normal;
         font-weight: 400;
         font-size: 12px !important;
@@ -81,7 +81,7 @@
       h5 {
         display: flex;
         align-items: center;
-        font-family: "Roboto";
+        font-family: $f-family;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -95,7 +95,7 @@
 
 .intro__company {
   &-title {
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -111,7 +111,7 @@
   }
 
   &-detail {
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
