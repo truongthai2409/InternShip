@@ -21,16 +21,12 @@ const ListCardJobHome = ({
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
-    window.scrollTo(0, 0);
   };
 
-  useEffect(() => {
-    const filterPanel = document.querySelector(".filter-panel-home__wrapper");
-    filterPanel.scrollTop = 0;
-  }, [page]);
   return (
-    <>
+    <div style={{width:"60%"}}>
       <div className="filter-panel-home__wrapper">
+        
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
@@ -68,7 +64,7 @@ const ListCardJobHome = ({
                 job?.jobApp?.jobType || null,
                 job?.jobCare?.jobType || null,
                 job?.jobTypes || null,
-                job?.major || null
+                job?.major || null,
               ]}
               location={
                 job.locationjob?.district?.province?.name ||
@@ -95,25 +91,20 @@ const ListCardJobHome = ({
             Không tìm thấy công việc
           </div>
         )}
+        
       </div>
       {jobListHavePages?.totalPages > 1 ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <PaginationCustom
-            page={page}
-            totalPages={jobListHavePages?.totalPages}
-            handleOnChange={handlePagination}
-          />
-        </div>
-      ) : (
-        ""
-      )}
-    </>
+          <div className="home__pagination">
+            <PaginationCustom
+              page={page}
+              totalPages={jobListHavePages?.totalPages}
+              handleOnChange={handlePagination}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+    </div>
   );
 };
 export default ListCardJobHome;

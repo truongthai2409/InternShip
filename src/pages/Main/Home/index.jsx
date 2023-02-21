@@ -261,6 +261,8 @@ const Home = (props) => {
                 </Grid>
               </Hidden>
             </div>
+            
+
           </Grid>
           <Hidden lgUp>
             <div className="HomePageMenu">
