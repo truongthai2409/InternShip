@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import { getAllJobApply, getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
+import {
+  getAllJobApply,
+  getJobApplyListByCandidate,
+} from "src/store/slices/main/home/job/jobCandidateSlice";
 import Button from "../shared/Button";
 import "./styles.scss";
 
@@ -54,7 +57,7 @@ const InformationCompany = ({
             user: user,
             token: token.token,
             page: {
-              no:0,
+              no: 0,
               limit: 5,
             },
           };
@@ -180,7 +183,10 @@ const InformationCompany = ({
                 sx={{
                   fontSize: 14,
                   fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  transform: "translate(3px,3px)",
+                  flex: 1,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {jobDetail.jobType?.name}
@@ -196,7 +202,7 @@ const InformationCompany = ({
                 sx={{
                   fontSize: 14,
                   fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  transform: "translate(3px,3px)",
                   flex: 1,
                   overflow: "hidden",
                   textOverflow: "ellipsis",
@@ -271,9 +277,10 @@ const InformationCompany = ({
               <Typography variant="span">
                 <Typography
                   variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700"}}
+                  sx={{ fontSize: 18, fontWeight: "700" }}
                 >
-                  Thời hạn ứng tuyển:<br/>
+                  Thời hạn ứng tuyển:
+                  <br />
                 </Typography>
                 <Typography
                   variant="span"
@@ -293,7 +300,7 @@ const InformationCompany = ({
                 <WorkIcon />
               </Icon>
               <Typography
-                  variant="span"
+                variant="span"
                 component="div"
                 sx={{
                   fontSize: 17,
@@ -309,7 +316,7 @@ const InformationCompany = ({
                 <WorkIcon />
               </AddLocationIcon>
               <Typography
-                  variant="span"
+                variant="span"
                 component="div"
                 sx={{
                   fontSize: 14,
