@@ -3,7 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { Box } from "@mui/system";
 import "./styles.scss";
 
-export default function index({
+export default function SearchAutoComplete({
   data,
   avatarRender,
   nameRender,
@@ -36,7 +36,7 @@ export default function index({
         </Box>
       )}
       renderInput={(params) => (
-        <TextField {...register(id)} className="text-field" {...params} label={labelName} />
+        <TextField {...register(id)} className="text-field" {...params} label={labelName} required />
       )}
     />
   );

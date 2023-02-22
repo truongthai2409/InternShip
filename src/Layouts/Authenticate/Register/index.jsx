@@ -3,7 +3,8 @@ import RegisterContainer from "../../../containers/RegisterContainer/index";
 import "./styles.scss";
 import "./responsive.scss";
 import { Outlet } from "react-router-dom";
-import Footer from "src/components/Footer";
+// import Footer from "src/components/Footer";
+import Footer from "src/components/shared/Footer/Footer"
 import HeaderContainer from "src/components/HeaderContainer";
 
 export default function RegisterLayout() {
@@ -11,12 +12,15 @@ export default function RegisterLayout() {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className="register-layout">
-      <HeaderContainer />
-      <div className="register-container-wrapper">
-        <RegisterContainer Outlet={Outlet} />
+    <>
+      <div className="register-layout">
+        <HeaderContainer />
+        <div className="register-container-wrapper">
+          <RegisterContainer Outlet={Outlet} />
+        </div>
+        
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
