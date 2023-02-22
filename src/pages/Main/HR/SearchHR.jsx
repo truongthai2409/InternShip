@@ -11,7 +11,7 @@ import { changeFilterChange, majorFilterChange, nameFilterChange } from 'src/sto
 const SearchHR = () => {
     const { majorList } = useSelector(state => state.major)
     const [searchValue, setSearchValue] = useState("");
-    const [label,setlabel] = useState("")
+    const [label, setlabel] = useState("")
     const query = useQuery();
     const dispatch = useDispatch()
     useEffect(() => {
@@ -36,13 +36,13 @@ const SearchHR = () => {
             setlabel(value)
         }
     }
-    useEffect(()=>{
-        dispatch(getMajorList([1,20]))
-      },[dispatch])
+    useEffect(() => {
+        dispatch(getMajorList([1, 20]))
+    }, [dispatch])
     return (
         <div className="header__with-search onMobile onTablet">
-            <div style={{backgroundColor :  "#fff", height :  45}}>
-                    <h4 style={{color : "#000", padding: 12, textAlign : "center"}}>Tìm kiếm ứng viên</h4>
+            <div style={{ backgroundColor: "#fff", height: 45 }}>
+                <h4 style={{ color: "#000", padding: 12, textAlign: "center" }}>Tìm kiếm ứng viên</h4>
             </div>
             <form
                 className="header__with-search-search "
@@ -74,7 +74,7 @@ const SearchHR = () => {
                 </div>
                 <div className="header__with-search-button-search" onClick={search}>
 
-                    <Button name="Tìm kiếm" bwidth="125px" bheight="35px"></Button>
+                    <Button name="Tìm kiếm" bwidth="125px" bheight="35px" padding="20px 5px"></Button>
 
                 </div>
             </form>

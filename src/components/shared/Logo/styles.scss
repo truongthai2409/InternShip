@@ -1,7 +1,7 @@
 @use '../../../assets/styles/' as *;
 
 .logo {
-  font-family: $f-family-0;
+  font-family: $f-family;
   width: fit-content;
   display: flex;
   align-items: flex-end;
@@ -22,7 +22,7 @@
 
 @media (max-width: 740px) {
   .logo {
-    font-family: $f-family-0;
+    font-family: $f-family;
     width: fit-content;
     display: flex;
     align-items: flex-end;

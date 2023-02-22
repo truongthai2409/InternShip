@@ -97,7 +97,7 @@
           font-size: 13px;
 
           label {
-            font-family: 'Public Sans', sans-serif;
+            font-family: $f-family;
             font-size: 14px;
             font-weight: 700;
             color: #29303b;
@@ -107,7 +107,7 @@
           select {
             box-sizing: border-box;
             margin-top: 7px;
-            font-family: 'Public Sans', sans-serif;
+            font-family: $f-family;
             border: 1px solid $primary-color;
             border-radius: 5px;
             width: 100%;

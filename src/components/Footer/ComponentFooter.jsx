@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ComponentFooter = ({ header, tabContent, className }) => {
+
   return (
     <div className={`contact__container ${className && className}`}>
       <div>
@@ -20,7 +21,7 @@ const ComponentFooter = ({ header, tabContent, className }) => {
                 <div key={i} className="item">
                   <div className="list-header">
                     <div className="text-wrap">
-                      <Link to={content.link} target="_blank"  title="">
+                      <Link to={content.link} title="">
                         <div className="text">{content.content}</div>
                       </Link>
                     </div>
