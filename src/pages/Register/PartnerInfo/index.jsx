@@ -39,7 +39,7 @@ const PartnerInfo = () => {
   const { districtList, provinceList } = useSelector((state) => state.location);
   const { status, universityList } = useSelector((state) => state.university);
 
-  const { error : errorMessage } = useSelector((state) => state.university);
+  const { error: errorMessage } = useSelector((state) => state.university);
   const typeSchoolList = [
     {
       id: 1,
@@ -76,6 +76,7 @@ const PartnerInfo = () => {
   }, [dispatch, navigate, status]);
 
   const onSubmit = async (data) => {
+    console.log("submit");
     if (info) {
       const partnerData = {
         avatar: data.avatar || info.logo,
@@ -160,7 +161,7 @@ const PartnerInfo = () => {
     e.preventDefault();
     navigate(-1);
   };
-
+  console.log("uni", universityList);
   return (
     <Container
       title="Cộng Tác Viên"
@@ -311,7 +312,7 @@ const PartnerInfo = () => {
                     </div>
                   </div>
                   <div className="register__container__form--name">
-                  <CustomInput
+                    <CustomInput
                       label="Mô tả truờng"
                       id="descriptionSchool"
                       type="text"

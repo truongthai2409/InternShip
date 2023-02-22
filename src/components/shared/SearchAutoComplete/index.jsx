@@ -16,7 +16,7 @@ export default function SearchAutoComplete({
     <Autocomplete
       id="country-select-demo"
       sx={{ width: "100%" }}
-      options={data}
+      options={data ? data : []}
       autoHighlight
       getOptionLabel={nameRender}
       onChange={onChange}
@@ -36,7 +36,13 @@ export default function SearchAutoComplete({
         </Box>
       )}
       renderInput={(params) => (
-        <TextField {...register(id)} className="text-field" {...params} label={labelName} required />
+        <TextField
+          {...register(id)}
+          className="text-field"
+          {...params}
+          label={labelName}
+          required={true}
+        />
       )}
     />
   );

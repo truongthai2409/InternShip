@@ -3,7 +3,7 @@
 .base__information {
   .university-name {
     width: auto;
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 700;
     font-size: 25px;
@@ -61,7 +61,7 @@
 
 .intro__university {
   &-title {
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -77,7 +77,7 @@
   }
 
   &-detail {
-    font-family: "Roboto";
+    font-family: $f-family;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;

@@ -1,8 +1,7 @@
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../../shared/Button";
-import useQuery from "../../../hooks/useQuery";
 import SelectAreaHome from "../SelectAreaHome";
 import "./styles.scss";
 
@@ -17,11 +16,6 @@ function SearchResultHome({
   candidate_infomation,
 }) {
   const [searchValue, setSearchValue] = useState("");
-  const query = useQuery();
-  useEffect(() => {
-    const { name = "" } = query;
-    setSearchValue(name);
-  }, [query]);
 
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
@@ -66,9 +60,9 @@ function SearchResultHome({
         </div>
         <div className="header__with-search-button-search" onClick={search}>
           {candidate_infomation ? (
-            <Button name="Tìm kiếm" bwidth="123px" bheight="38px" />
+            <Button name="Tìm kiếm" bwidth="150px" bheight="38px" padding="20px 5px" background-color="gray" />
           ) : (
-            <Button name="Tìm kiếm" bwidth="125px" bheight="35px"></Button>
+            <Button name="Tìm kiếm" bwidth="150px" bheight="35px" padding="20px 5px" background-color="gray"></Button>
           )}
         </div>
       </form>

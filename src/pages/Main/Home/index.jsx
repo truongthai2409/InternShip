@@ -77,7 +77,7 @@ function reducer(state = initialState, action) {
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('client');
+  const { t } = useTranslation("client");
   const { index, id, jobFilter, jobPage } = useSelector(
     (state) => state.filter
   );
@@ -245,7 +245,7 @@ const Home = (props) => {
               />
 
               <Hidden mdDown>
-                <Grid item xs={12} sm={12} md={6} lg={8} xl={7}>
+                <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className="containerDetailCard containerDetailCard-none">
                       {props.hr && <SearchHR />}

@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import PaginationCustom from "src/components/shared/Pagination";
 import { pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
 import CardHome from "../../Card/CardHome";
+import { Grid } from "@mui/material";
+
 import "./styles.scss";
 
 const ListCardJobHome = ({
@@ -21,15 +23,10 @@ const ListCardJobHome = ({
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
-    window.scrollTo(0, 0);
   };
 
-  useEffect(() => {
-    const filterPanel = document.querySelector(".filter-panel-home__wrapper");
-    filterPanel.scrollTop = 0;
-  }, [page]);
   return (
-    <>
+    <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
       <div className="filter-panel-home__wrapper">
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
@@ -68,7 +65,7 @@ const ListCardJobHome = ({
                 job?.jobApp?.jobType || null,
                 job?.jobCare?.jobType || null,
                 job?.jobTypes || null,
-                job?.major || null
+                job?.major || null,
               ]}
               location={
                 job.locationjob?.district?.province?.name ||
@@ -97,13 +94,7 @@ const ListCardJobHome = ({
         )}
       </div>
       {jobListHavePages?.totalPages > 1 ? (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className="home__pagination">
           <PaginationCustom
             page={page}
             totalPages={jobListHavePages?.totalPages}
@@ -113,7 +104,7 @@ const ListCardJobHome = ({
       ) : (
         ""
       )}
-    </>
+    </Grid>
   );
 };
 export default ListCardJobHome;

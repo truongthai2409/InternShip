@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/shared/Button";
 import { updateRole } from "src/store/slices/main/user/userSlice";
 import { toast } from "react-toastify";
+import { MenuDropDown } from "../../components/Login/components"
 
 const LoginContainer = () => {
   const { role } = useSelector((state) => state.profile);
@@ -38,6 +39,10 @@ const LoginContainer = () => {
       <Login />
       <div className="register-container__footer">
         <Link to="/forgot-password">Quên mật khẩu?</Link>
+      </div>
+      <p className="register-container__footerRegister-p">Bạn chưa có tài khoản?</p>
+      <div className="register-container__footerRegister">
+        <MenuDropDown />
       </div>
     </div>
   );

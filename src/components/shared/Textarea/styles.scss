@@ -30,7 +30,7 @@
 
   .ql-editor {
     height: 150px !important;
-    font-family: "Roboto", sans-serif;
+    font-family: $f-family;
     border: 1px solid rgb(119, 119, 119);
     border-top: none;
     border-radius: 2px;
@@ -39,7 +39,7 @@
   }
 
   .ql-toolbar.ql-snow {
-    font-family: "Roboto", sans-serif;
+    font-family: $f-family;
     border: 1px solid rgb(119, 119, 119);
     border-radius: 2px;
     border-bottom-left-radius: 0px;
