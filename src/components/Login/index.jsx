@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import AccountMenu from "../Home/AccountMenu";
 import { MenuDropDown } from "./components";
 import "./styles.scss";
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
   const { user, role } = useSelector((state) => state.profile);
+  const {t} = useTranslation('client');
 
   if (role) {
     return (
@@ -41,7 +43,7 @@ export default function Login() {
   return (
     <div className="login--not-yet">
       <Link to="/login">
-        <span className="login__home-sign-in">Đăng nhập</span>
+        <span className="login__home-sign-in">{t('login')}</span>
       </Link>
       <MenuDropDown />
     </div>

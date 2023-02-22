@@ -18,8 +18,8 @@ i18n
     .use(initReactI18next)
     .init({
         resources: resources,
-        fallbackLng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'en' || localStorage.getItem('lang') === 'vi') ? localStorage.getItem('lang') : 'en',
-        lng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'en' || localStorage.getItem('lang') === 'vi') ? localStorage.getItem('lang') : 'en',
+        fallbackLng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'vi' || localStorage.getItem('lang') === 'en') ? localStorage.getItem('lang') : 'vi',
+        lng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'vi' || localStorage.getItem('lang') === 'en') ? localStorage.getItem('lang') : 'vi',
         debug: false,
         interpolation: {
             escapeValue: false,

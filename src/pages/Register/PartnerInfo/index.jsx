@@ -177,7 +177,7 @@ const PartnerInfo = () => {
           {!open ? (
             <div className="customfilter">
               <SearchAutoComplete
-                data={universityList}
+                data={universityList ? universityList : []}
                 avatarRender={(option) => `${API}${option?.avatar}`}
                 nameRender={(option) => option.name}
                 labelName="Chọn trường"
@@ -185,6 +185,7 @@ const PartnerInfo = () => {
                 id="registerPartner"
                 register={register}
               />
+              {console.log(register)}
             </div>
           ) : (
             ""

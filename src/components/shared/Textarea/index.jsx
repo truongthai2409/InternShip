@@ -1,5 +1,5 @@
 import "./styles.scss";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -17,6 +17,7 @@ const Textarea = ({
   isUpdate = false,
   subtitle,
 }) => {
+  const [inputVal, setInputVal] = useState(defaultValue);
   useEffect(() => {
     register(id);
   }, [id, register]);
@@ -37,6 +38,7 @@ const Textarea = ({
       setShowError1(false);
       setShowError2(false);
     }
+    setInputVal(content);
     setValue(id, content);
   };
   return (
@@ -64,7 +66,8 @@ const Textarea = ({
             theme="snow"
             onChange={handleOnChange}
             placeholder={placeholder}
-            value={defaultValue || ""}
+            // value={defaultValue || ""}
+            defaultValue={inputVal || ""}
           />
           {check ? null : (
             <p className="custom-textarea__error">

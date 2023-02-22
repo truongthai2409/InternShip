@@ -3,7 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { Box } from "@mui/system";
 import "./styles.scss";
 
-export default function index({
+export default function SearchAutoComplete({
   data,
   avatarRender,
   nameRender,
