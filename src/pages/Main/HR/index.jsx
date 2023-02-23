@@ -6,6 +6,7 @@ import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import Home from "../Home";
 
 const HR = (props) => {
+  console.log(1);
   const userCandidate = useSelector(userCandidateRemainingSelector);
   const { demandList, totalPagesofDemandList } = useSelector(
     (state) => state.demand
@@ -19,8 +20,8 @@ const HR = (props) => {
   }, [dispatch]);
   return (
     <Home
-      jobFilter={demandList}
-      jobPage={totalPagesofDemandList -1}
+      roleFilter={demandList}
+      jobPage={totalPagesofDemandList - 1}
       demandPartner={true}
       hr={true}
       userCandidate={userCandidate}

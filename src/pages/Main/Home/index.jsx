@@ -78,9 +78,10 @@ function reducer(state = initialState, action) {
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation("client");
-  const { index, id, jobFilter, jobPage } = useSelector(
+  const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
+  const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -179,9 +180,16 @@ const Home = (props) => {
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
-    setJob(jobFilter);
-    jobFilter && setJobDetail(jobFilter[index]);
-  }, [jobFilter, dispatch, index]);
+    if (roleFilter) {
+      setJob(roleFilter);
+      roleFilter && setJobDetail(roleFilter[0]);
+    } else {
+      setJob(jobFilter);
+      jobFilter && setJobDetail(jobFilter[index]);
+    }
+    // setJob(jobFilter);
+    // jobFilter && setJobDetail(jobFilter[index]);
+  }, [jobFilter, dispatch, index, roleFilter]);
 
   useEffect(() => {
     dispatch(getJobByCompany(id));
