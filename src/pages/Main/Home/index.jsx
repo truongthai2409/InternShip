@@ -256,7 +256,7 @@ const Home = (props) => {
                 <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className="containerDetailCard containerDetailCard-none">
-                      {props.hr && <SearchHR />}
+                      {/* {props.hr && <SearchHR />} */}
                       <DetailCard
                         logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                         jobDetail={jobDetail}
