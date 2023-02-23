@@ -4,13 +4,12 @@ import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
 import Home from "./Home";
 
 const Main = () => {
-    
-
+  console.log(2);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMajorList([1, 20]));
   }, [dispatch]);
-  
+
   return (
     <Home
       demandPartner={false}

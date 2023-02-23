@@ -40,16 +40,15 @@ const demandSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
-        if(payload.httpCode && payload.httpCode === 500) {
-          state.status = payload.message
+        if (payload.httpCode && payload.httpCode === 500) {
+          state.status = payload.message;
           toast.error("Đăng danh sách thực tập thất bại!");
           toast.error(`Lỗi: ${payload.message}`);
         } else {
-          state.status = "success"
+          state.status = "success";
           state.demandListUniversityActive.unshift(payload);
           toast.success("Đăng danh sách thực tập thành công!");
         }
-
       });
     builder
       .addCase(getDemandList.pending, (state, { payload }) => {
@@ -98,7 +97,6 @@ const demandSlice = createSlice({
 });
 
 export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
-
   let axiosConfig = {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -177,9 +175,7 @@ export const getAllDemandListByUniId = createAsyncThunk(
     };
     return await axios
       .get(
-        `${baseURL}/api/demand/filter-university/${uniId}?no=${
-          currentPages
-        }&limit=${limits}`,
+        `${baseURL}/api/demand/filter-university/${uniId}?no=${currentPages}&limit=${limits}`,
         axiosConfig
       )
       .then((response) => {
@@ -217,7 +213,7 @@ export const getDemandList = createAsyncThunk(
     return await axios
       .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`)
       .then((response) => {
-        return response.data
+        return response.data;
       })
       .catch((err) => {
         return err.response.data;

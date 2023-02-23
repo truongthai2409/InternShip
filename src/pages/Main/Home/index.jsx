@@ -78,9 +78,10 @@ function reducer(state = initialState, action) {
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation("client");
-  const { index, id, jobFilter, jobPage } = useSelector(
+  const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
+  const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -179,9 +180,16 @@ const Home = (props) => {
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
-    setJob(jobFilter);
-    jobFilter && setJobDetail(jobFilter[index]);
-  }, [jobFilter, dispatch, index]);
+    if (roleFilter) {
+      setJob(roleFilter);
+      roleFilter && setJobDetail(roleFilter[0]);
+    } else {
+      setJob(jobFilter);
+      jobFilter && setJobDetail(jobFilter[index]);
+    }
+    // setJob(jobFilter);
+    // jobFilter && setJobDetail(jobFilter[index]);
+  }, [jobFilter, dispatch, index, roleFilter]);
 
   useEffect(() => {
     dispatch(getJobByCompany(id));
@@ -248,7 +256,7 @@ const Home = (props) => {
                 <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className="containerDetailCard containerDetailCard-none">
-                      {props.hr && <SearchHR />}
+                      {/* {props.hr && <SearchHR />} */}
                       <DetailCard
                         logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                         jobDetail={jobDetail}
