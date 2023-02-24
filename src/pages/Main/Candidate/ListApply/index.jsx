@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailCard from "src/components/Card/DetailCard";
 import ListCardJobHome from "src/components/Home/ListCardJobHome";
 import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
- import { getJobByCompany } from "src/store/action/company/companyAction"; 
+ import { getJobByCompanyThunk } from "src/store/action/company/companyAction"; 
 import { TabTitle } from "src/utils/GeneralFunctions";
 
 const ListApply = () => {
@@ -39,7 +39,7 @@ const ListApply = () => {
   };
 
   useEffect(() => {
-    dispatch(getJobByCompany(id));
+    dispatch(getJobByCompanyThunk(id));
   }, [dispatch, id]);
   useEffect(() => {
     setJobs(jobApplyList);

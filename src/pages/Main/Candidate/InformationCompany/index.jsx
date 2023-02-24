@@ -5,7 +5,7 @@ import {
   getJobById,
   getJobList,
 } from "src/store/slices/main/home/job/jobSlice";
-import { getJobByCompany } from "src/store/action/company/companyAction";
+import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
 import "./styles.scss";
 import { TabTitle } from "src/utils/GeneralFunctions";
 import { getAppreciateByCompany } from "src/store/slices/main/candidate/appreciate/appreciateSlice";
@@ -26,7 +26,7 @@ const CandidateInformationCompany = () => {
 
   useEffect(() => {
     dispatch(getJobById(keyword));
-    dispatch(getJobByCompany(idCompany));
+    dispatch(getJobByCompanyThunk(idCompany));
   }, [dispatch, idCompany, keyword]);
   useEffect(() => {
     const values = {

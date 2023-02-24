@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobCareByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
 import { useState } from "react";
-import { getJobByCompany } from "src/store/action/company/companyAction";
+import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
 import { Hidden } from "@mui/material";
 
 const CandidateViewList = () => {
@@ -45,7 +45,7 @@ const CandidateViewList = () => {
     setJobDetail(jobCare && jobCare[index]?.jobCare);
   }, [index, jobCare]);
   useEffect(() => {
-    dispatch(getJobByCompany(id));
+    dispatch(getJobByCompanyThunk(id));
   }, [dispatch, id]);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
