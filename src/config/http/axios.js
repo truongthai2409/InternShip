@@ -4,7 +4,7 @@ import history from "../routes/history";
 // import { getToken } from "../../utils";
 
 // get token
-const token = JSON.parse(sessionStorage.getItem("userPresent")).token;
+const token = JSON.parse(sessionStorage.getItem("userPresent"))? JSON.parse(sessionStorage.getItem("userPresent")).token :"";
 
 const httpHandler = (baseURL) => {
   const axiosHttp = axios.create({
