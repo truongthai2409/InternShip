@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { getJobByCompany } from "src/store/action/company/companyAction";
+import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
 
 const baseURL = process.env.REACT_APP_API;
 
@@ -43,7 +43,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
       state.jobList = payload.contents;
     });
-    builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
+    builder.addCase(getJobByCompanyThunk.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
     });
     builder.addCase(

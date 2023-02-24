@@ -22,7 +22,7 @@ import ListCardJobHome from "../../../components/Home/ListCardJobHome";
 import SearchResultHome from "../../../components/Home/SearchResultHome";
 import SideBarHomeList from "../../../components/Home/SideBarHomeList";
 import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
-import { getJobByCompany } from "src/store/action/company/companyAction";
+import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
 import SearchHR from "../HR/SearchHR";
 import "./styles.scss";
 const initialState = {
@@ -192,7 +192,7 @@ const Home = (props) => {
   }, [jobFilter, dispatch, index, roleFilter]);
 
   useEffect(() => {
-    dispatch(getJobByCompany(id));
+    dispatch(getJobByCompanyThunk(id));
     dispatch(getJobPositionList());
   }, [dispatch, id]);
   const navigate = useNavigate();
