@@ -8,10 +8,13 @@ import {
   Popper,
 } from "@mui/material";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 
+
 export const MenuDropDown = () => {
+  const { t } = useTranslation('client')
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -47,7 +50,7 @@ export const MenuDropDown = () => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          Đăng ký
+          {t("registerTL")}
         </Button>
         <Popper
           open={open}

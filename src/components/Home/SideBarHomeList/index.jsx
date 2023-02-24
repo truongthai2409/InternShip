@@ -5,6 +5,7 @@ import ListCollapse from "../../shared/ListCollapse";
 import { useDispatch, useSelector } from "react-redux";
 import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
 import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
+import { useTranslation } from "react-i18next";
 
 const listWorkingFormat = [
   { name: "Fulltime", id: 1 },
@@ -13,6 +14,7 @@ const listWorkingFormat = [
 ];
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
+  const { t } = useTranslation('client')
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
@@ -58,14 +60,14 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ""}>
       <ListCollapse
-        title="Hình thức làm việc"
+        title={t("workTL")}
         list={listWorkingFormat}
         spacing={3}
         onChange={handleCheckType}
         checkedType={checkedType}
       />
       <ListCollapse
-        title="Vị trí làm việc"
+        title={t("jobPositionTL")}
         list={jobPosition}
         spacing={3}
         name="POSITIONJOBS"
@@ -73,7 +75,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         checkedType={checkedType}
       />
       <ListCollapse
-        title="Chuyên ngành"
+        title={t("majorTL")}
         list={majorList}
         spacing={3}
         name="MAJORJOBS"
