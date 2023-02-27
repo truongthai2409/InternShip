@@ -15,7 +15,7 @@ export default function RegisterContainer({ Outlet }) {
   const status = useSelector((state) => state.register.status);
   if (status === "success") {
     setTimeout(() => {
-      navigate("/login");
+      navigate("/login", { replace: true });
     }, 1000);
   }
 

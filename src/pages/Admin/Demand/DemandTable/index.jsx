@@ -98,7 +98,7 @@ const DemandTable = ({ searchValue }) => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          navigate(`/admin/Demand/${row.id}`);
+          navigate(`/admin/Demand/${row.id}`, { replace: true });
         };
         return (
           <>

@@ -205,7 +205,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
   };
   if (formStatus !== "repost") {
     if (status === "success") {
-      navigate("/hr/list");
+      navigate("/hr/list", { replace: true });
     }
   }
 

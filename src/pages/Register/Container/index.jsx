@@ -18,7 +18,7 @@ export default function Container({
   genderList,
 }) {
   TabTitle(`Đăng ký - ${title}`);
-  console.log("COntainer")
+  console.log("COntainer");
   return (
     <div className="register__container">
       <p className="title-requirement">

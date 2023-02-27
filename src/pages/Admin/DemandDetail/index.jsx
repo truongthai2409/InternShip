@@ -10,7 +10,7 @@ const DemandDetail = () => {
   const navigate = useNavigate()
 
   const handleBackClick = () => {
-    navigate(-1)
+    navigate(-1, { replace: true })
   }
 
   return (
