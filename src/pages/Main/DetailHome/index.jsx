@@ -36,7 +36,7 @@ const DetailHome = (props) => {
     dispatch(getJobById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {
-    navigate(-1);
+    navigate(-1,{ replace: true });
   };
   return (
     <div>

@@ -121,7 +121,7 @@ const BaseInformationCompany = ({
     );
   }
   const handleBackClick = () => {
-    navigate(-1);
+    navigate(-1, { replace: true });
   };
   const data = [];
   for (let i = 0; i < appreciateList?.length; i++) {

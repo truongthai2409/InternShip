@@ -225,7 +225,6 @@ const Detail = ({
                     jobDetail={jobDetail}
                     rating={rating}
                   ></InformationUniversity>
-
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                   <BaseInformationUniversity

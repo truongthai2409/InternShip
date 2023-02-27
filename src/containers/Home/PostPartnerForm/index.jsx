@@ -142,7 +142,7 @@ const PostPartnerForm = ({
       await dispatch(addDemand([demandData, user]))
     };
     if(status === "success" && !isUpdate) {
-      navigate("/partner/post-list")
+      navigate("/partner/post-list", { replace: true })
     }
   return (
     <>

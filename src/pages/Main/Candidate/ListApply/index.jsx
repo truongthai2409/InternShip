@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailCard from "src/components/Card/DetailCard";
 import ListCardJobHome from "src/components/Home/ListCardJobHome";
 import { getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
- import { getJobByCompanyThunk } from "src/store/action/company/companyAction"; 
+import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
 import { TabTitle } from "src/utils/GeneralFunctions";
 
 const ListApply = () => {
@@ -59,7 +59,8 @@ const ListApply = () => {
         </div>
         <div className="section__apply">
           <span>
-            Bạn đã ứng tuyển <span>{jobApplyListHavePage?.totalItems || 0}</span> việc làm
+            Bạn đã ứng tuyển{" "}
+            <span>{jobApplyListHavePage?.totalItems || 0}</span> việc làm
           </span>
         </div>
         <Grid className="wrapper" spacing={{ xs: 2 }} container>

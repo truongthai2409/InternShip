@@ -41,7 +41,7 @@ const hrRouter = [
       {
         path: "finduser",
         Component: HrFindUser,
-      }
+      },
     ],
   },
 ];

@@ -38,7 +38,7 @@ const LocationTable = () => {
       renderCell: params => {
         const { row } = params
         const handleOnClick = () => {
-          navigate(`/admin/major/${row.id}`)
+          navigate(`/admin/major/${row.id}`, { replace: true })
         }
         const deleteMajorr = async () => {
           // const res = await dispatch(deleteMajor(row.id))

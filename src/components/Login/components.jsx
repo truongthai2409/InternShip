@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 
 export const MenuDropDown = () => {
-  console.log("MenuDropDown")
+  console.log("MenuDropDown");
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

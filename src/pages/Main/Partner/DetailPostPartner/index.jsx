@@ -29,7 +29,7 @@ const DetailPostPartner = (props) => {
     dispatch(getDemandById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {
-    navigate(-1);
+    navigate(-1,{ replace: true });
   };
   return (
     <div>

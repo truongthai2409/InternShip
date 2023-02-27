@@ -75,13 +75,15 @@ function reducer(state = initialState, action) {
   }
 }
 
-const image_notFound = "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png"
+const image_notFound =
+  "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png";
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation("client");
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
+  // console.log(index)
   const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
@@ -113,6 +115,7 @@ const Home = (props) => {
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
+    console.log(value);
     const userPartner =
       JSON.parse(sessionStorage.getItem("userPresent")) ||
       JSON.parse(localStorage.getItem("userPresent"));
@@ -181,11 +184,11 @@ const Home = (props) => {
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
+    setJob(jobFilter);
     if (roleFilter) {
       setJob(roleFilter);
-      roleFilter && setJobDetail(roleFilter[0]);
+      roleFilter && setJobDetail(roleFilter[index]);
     } else {
-      setJob(jobFilter);
       jobFilter && setJobDetail(jobFilter[index]);
     }
   }, [jobFilter, dispatch, index, roleFilter]);
@@ -227,7 +230,12 @@ const Home = (props) => {
               </div>
             </Grid>
             <Grid item xs={12} style={{ textAlignLast: "center" }}>
-              <img src={image_notFound} alt="notfound" width={"20%"} height={"100%"} />
+              <img
+                src={image_notFound}
+                alt="notfound"
+                width={"20%"}
+                height={"100%"}
+              />
               <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>
             </Grid>
           </Grid>
