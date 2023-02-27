@@ -15,7 +15,7 @@ import { schema } from "./validate";
 
 const Login = () => {
   TabTitle("Login");
-
+  console.log("Login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
