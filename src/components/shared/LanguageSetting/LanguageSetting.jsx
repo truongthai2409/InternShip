@@ -40,9 +40,9 @@ function LanguageSetting({ type }) {
   }, [i18n.language]);
 
   return (
-    <div>
+    <div className="button-i18next">
       {type === "popover" && (
-        <div style={{ position: "absolute", top: "20px", right: "10px" }}>
+        <div style={{ position: "absolute", top: "20px", right: "5px" }}>
           <Button
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}

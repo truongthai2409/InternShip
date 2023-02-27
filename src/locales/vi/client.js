@@ -12,7 +12,7 @@ export const CLIENT_VI =
 
     loginTL: 'Đăng nhập',
     registerTL: "Đăng ký",
-    accountTL: "Tài khoản",
+    AccountTL: "Tài khoản",
     PasswordTL: "Mật khẩu",
     saveLoginTL: "Lưu đăng nhập",
     forgotPasswordTL: "Quên mật khẩu?",
@@ -33,7 +33,7 @@ export const CLIENT_VI =
     passwordFormatTL: "(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)",
     confirmPasswordTL: "Xác nhận mật khẩu.",
     passwordConfirmationFormatTL: "(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)",
-    GenderTL: "Giới tính",
+    genderTL: "Giới tính",
     pleaseSelectTL: "Vui lòng chọn...",
     lastNameTL: "Họ",
     firstNameTL: "Tên",

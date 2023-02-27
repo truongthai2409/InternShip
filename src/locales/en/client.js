@@ -32,7 +32,7 @@ export const CLIENT_EN =
     passwordFormatTL: "(Password must be between 6-32 characters, without accents or special characters, and must contain at least one uppercase letter, one lowercase letter, and one number.)",
     confirmPasswordTL: "Confirm password.",
     passwordConfirmationFormatTL: "(Password confirmation must match the password just entered)",
-    GenderTL: "Gender",
+    genderTL: "Gender",
     pleaseSelectTL: "Please select...",
     lastNameTL: "Last name",
     firstNameTL: "First name",

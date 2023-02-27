@@ -6,7 +6,7 @@ import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
 import Home from "../Home";
 
 const HR = (props) => {
-  console.log(1);
+  // console.log(props);
   const userCandidate = useSelector(userCandidateRemainingSelector);
   const { demandList, totalPagesofDemandList } = useSelector(
     (state) => state.demand

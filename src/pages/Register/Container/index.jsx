@@ -95,8 +95,8 @@ export default function Container({
           </CustomInput>
           <SelectCustom
             className="register__container__form--action"
-            label={t("GenderTL")}
-            placeholder={("pleaseSelectTL")}
+            label={t("genderTL")}
+            placeholder={t("pleaseSelectTL")}
             options={genderList}
             id="gender"
             register={register}

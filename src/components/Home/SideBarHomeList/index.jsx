@@ -59,7 +59,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ""}>
-      {console.log(majorList)}
+
       <ListCollapse
         title={t("workTL")}
         list={listWorkingFormat}

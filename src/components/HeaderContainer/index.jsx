@@ -27,14 +27,16 @@ export default function HeaderContainer() {
       }
     }
   };
-  
+
   return (
     <div className="container-header__hr header__hr config">
       <Logo />
       {renderLayout()}
-      <LanguageSetting/>
-      <div className="header__hr-icon">
-        <Login />
+      <div className="div-button-i18next">
+        <LanguageSetting />
+        <div className="header__hr-icon">
+          <Login />
+        </div>
       </div>
     </div>
   );
