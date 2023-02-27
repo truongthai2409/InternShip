@@ -8,7 +8,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import { useTranslation } from 'react-i18next';
 
 export default function ProfileContainer(props) {
-    const { t } = useTranslation('client')
+    const { t } = useTranslation('information')
 
     return (
         <div className="company-infor__wrapper">
