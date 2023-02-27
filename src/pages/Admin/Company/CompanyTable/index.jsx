@@ -112,7 +112,7 @@ const CompanyTable = ({ searchValue }) => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          navigate(`/admin/company/${row.id}`);
+          navigate(`/admin/company/${row.id}`, { replace: true });
         };
 
         const handleDelete = () => {

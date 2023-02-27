@@ -6,7 +6,6 @@ import UserInfo from "src/components/User/Profile/UserInfo";
 
 const BASEURL = process.env.REACT_APP_API;
 const Component = ({ profile }) => {
-
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = (event) => {
@@ -54,14 +53,15 @@ const Component = ({ profile }) => {
           >
             <div
               className="profile_children_handle"
-              style={{ padding: "0 2rem"}}
+              style={{ padding: "0 2rem" }}
             >
               <Tooltip title="Xem CV">
-                <RemoveRedEyeIcon />
+                <RemoveRedEyeIcon />  
               </Tooltip>
             </div>
-            <div className="profile_children_handle"
-              style={{padding : "0 2rem"}}
+            <div
+              className="profile_children_handle"
+              style={{ padding: "0 2rem" }}
             >
               <Tooltip title="Tải CV">
                 <CloudDownloadRoundedIcon />
@@ -97,12 +97,7 @@ const Component = ({ profile }) => {
         <div className="profile_info">
           <UserInfo name="Email" profile={profile?.user?.email} />
           <UserInfo name="Số Điện Thoại" profile={profile?.user?.phone} />
-          <UserInfo
-            name="Chuyên Nghành"
-            profile={
-              profile?.major?.name
-            }
-          />
+          <UserInfo name="Chuyên Nghành" profile={profile?.major?.name} />
           <UserInfo
             name="Giới Tính"
             profile={

@@ -10,3 +10,4 @@ export const getJobByCompanyThunk = createAsyncThunk(
     return res;
   }
 );
+

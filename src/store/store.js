@@ -14,9 +14,9 @@ import applySlice from "./slices/main/candidate/apply/applySlice";
 import infoCandidateSlice from "./slices/main/candidate/info/infoCandidateSlice";
 import appSlice from "src/app.slice";
 import demandSlice from "./slices/main/home/demand/demandSlice";
-import adminDemandSlice from "./slices/Admin/demand/adminDemandSlice"
+import adminDemandSlice from "./slices/Admin/demand/adminDemandSlice";
 import appreciateSlice from "./slices/main/candidate/appreciate/appreciateSlice";
-import globalSlices from "./slices/main/home/global/globalSlices"
+import globalSlices from "./slices/main/home/global/globalSlices";
 import filterSlices from "./slices/main/home/filter/filterSlices";
 import userCandidateSlice from "./slices/main/candidate/user/userCandidateSlice";
 import jobCandidateSlice from "./slices/main/home/job/jobCandidateSlice";
@@ -42,10 +42,10 @@ const store = configureStore({
     adminDemand: adminDemandSlice.reducer,
     appreciate: appreciateSlice.reducer,
     globalSlices: globalSlices.reducer,
-    filter : filterSlices.reducer,
-    userFilter : userCandidateSlice.reducer,
-    jobCandidateSlice : jobCandidateSlice.reducer,
-    profile : profileSlice.reducer
+    filter: filterSlices.reducer,
+    userFilter: userCandidateSlice.reducer,
+    jobCandidateSlice: jobCandidateSlice.reducer,
+    profile: profileSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

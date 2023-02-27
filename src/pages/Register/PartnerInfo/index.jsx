@@ -70,7 +70,7 @@ const PartnerInfo = () => {
     dispatch(getProvinceList());
     dispatch(getUniversityList([1, 200]));
     if (status === "success") {
-      navigate("/home");
+      navigate("/home",{ replace: true });
     }
     dispatch(updateStatusPartner("idle"));
   }, [dispatch, navigate, status]);
@@ -159,7 +159,7 @@ const PartnerInfo = () => {
 
   const handleBackClick = (e) => {
     e.preventDefault();
-    navigate(-1);
+    navigate(-1,{ replace: true });
   };
   console.log("uni", universityList);
   return (

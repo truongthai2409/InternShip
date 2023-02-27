@@ -22,7 +22,7 @@ const AdminAccountMenu = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("userPresent");
     sessionStorage.removeItem("userPresent");
-    navigate("/")
+    navigate("/", { replace: true })
     toast.warning("Bạn vừa đăng xuất", {
       position: "bottom-right",
       autoClose: 3000,

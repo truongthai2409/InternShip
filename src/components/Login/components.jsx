@@ -12,9 +12,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 
-
 export const MenuDropDown = () => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation("client");
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

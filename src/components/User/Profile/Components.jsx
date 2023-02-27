@@ -15,9 +15,16 @@ import Modal from "../../shared/Modal";
 import { schema } from "./dataCV";
 import UserInfo from "./UserInfo";
 import avatarDefault from "src/assets/img/avatar-default.png";
+import { Document, Page, pdfjs } from "react-pdf";
 import { useTranslation } from "react-i18next";
+
 const BASEURL = process.env.REACT_APP_API;
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
+  const [numPages, setNumPages] = useState(null);
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
   const dispatch = useDispatch();
   const {
     register,
@@ -142,7 +149,7 @@ const Components = ({ profile }) => {
                   </div>
                 </Tooltip>
                 <Modal
-                  modalTitle={"Thay đổi CV"}
+                  modalTitle={t("change_cv")}
                   open={opens}
                   setOpen={setOpens}
                   children={
@@ -167,10 +174,12 @@ const Components = ({ profile }) => {
                       >
                         {errors?.cv?.message}
                       </InputFile>
-                      <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>
+                      <Button onClick={handleSubmit(onSubmit)}>
+                        {t("change")}
+                      </Button>
                     </form>
                   }
-                  name="Thay Đổi CV"
+                  name={t("change_cv")}
                   iconClose={<SyncAltIcon />}
                 />
               </div>
@@ -186,24 +195,22 @@ const Components = ({ profile }) => {
                 </Tooltip>
                 <Modal
                   iconClose={true}
-                  modalTitle="Xem CV"
+                  modalTitle={t("view_cv")}
                   open={open}
                   setOpen={setOpen}
                   children={
-                    <div
-                      style={{
-                        width: "90vw",
-                        height: "90vh",
-                        padding: ".5rem",
-                      }}
-                    >
-                      <iframe
-                        src={`https://docs.google.com/gview?url=${profile.cv}&embedded=true`}
-                        width="100%"
-                        height="100%"
-                        frameborder="1"
-                        title="cv"
-                      ></iframe>
+                    <div>
+                      <Document
+                        file={profile.cv}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                      >
+                        {Array.from(new Array(numPages), (el, index) => (
+                          <Page
+                            key={`page_${index + 1}`}
+                            pageNumber={index + 1}
+                          />
+                        ))}
+                      </Document>
                     </div>
                   }
                 />

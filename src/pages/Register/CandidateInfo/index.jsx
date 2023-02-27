@@ -14,6 +14,7 @@ import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
 import Container from "../Container";
 import "./styles.scss";
 const CandidateInfo = () => {
+  console.log("CandidateInfo");
   TabTitle("Đăng ký - Ứng viên");
 
   const navigate = useNavigate();
@@ -36,9 +37,10 @@ const CandidateInfo = () => {
   });
   const handleBackClick = (e) => {
     e.preventDefault();
-    navigate(-1);
+    navigate(-1, { replace: true });
   };
   const onSubmit = async (data) => {
+    // console.log("Run")
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,
@@ -62,7 +64,7 @@ const CandidateInfo = () => {
     try {
       const res = await dispatch(registerCandidate(userData));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        return navigate("/login");
+        navigate("/login", { replace: true });
       }
     } catch (error) {
       toast.error(error);
