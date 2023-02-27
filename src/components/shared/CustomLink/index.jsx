@@ -12,7 +12,7 @@ const CustomLink = ({ children, to, ...props }) => {
       className={`custom-li ${match && "active"}`}
       style={{ cursor: "pointer" }}
       onClick={() => {
-        navigate(to);
+        navigate(to, { replace: true });
       }}
     >
       <Link className="custom-link" to={to} {...props}>

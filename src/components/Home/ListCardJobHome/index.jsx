@@ -8,6 +8,8 @@ import CardHome from "../../Card/CardHome";
 import { Grid } from "@mui/material";
 
 import "./styles.scss";
+const image_notFound =
+  "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png";
 
 const ListCardJobHome = ({
   jobList,
@@ -89,7 +91,13 @@ const ListCardJobHome = ({
           ))
         ) : (
           <div className="not_found" style={{ textAlignLast: "center" }}>
-            Không tìm thấy công việc
+            <img
+              src={image_notFound}
+              alt="notfound"
+              width={"20%"}
+              height={"100%"}
+            />
+            <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>
           </div>
         )}
       </div>

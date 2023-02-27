@@ -96,7 +96,7 @@ const UniversityTable = ({ searchValue }) => {
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          navigate(`/admin/university/${row.id}`);
+          navigate(`/admin/university/${row.id}`,{ replace: true });
         };
         const handleDelete = () => {
           dispatch(deleteUniversity([row.id, userSessionStorage?.token])).then(

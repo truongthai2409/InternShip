@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AccountMenu from "../Home/AccountMenu";
 import { MenuDropDown } from "./components";
 import "./styles.scss";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const { user, role } = useSelector((state) => state.profile);

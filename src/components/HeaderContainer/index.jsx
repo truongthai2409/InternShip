@@ -6,7 +6,7 @@ import HeaderWithPartner from "src/components/HeaderWithPartner";
 import Login from "../Login";
 import Logo from "../shared/Logo";
 import "./styles.scss";
-import LanguageSetting from './../shared/LanguageSetting/LanguageSetting';
+import LanguageSetting from "./../shared/LanguageSetting/LanguageSetting";
 
 export default function HeaderContainer() {
   const { role } = useSelector((state) => state.profile);

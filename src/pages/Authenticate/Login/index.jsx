@@ -64,7 +64,7 @@ const Login = () => {
             navigate(`/candidate`, { replace: true });
             break;
           default:
-            navigate("/");
+            navigate("/",{ replace: true });
         }
       }
     } catch (error) {

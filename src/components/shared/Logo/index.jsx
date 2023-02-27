@@ -45,7 +45,7 @@ const Logo = ({ id }) => {
           return navigate(`/`, { replace: true });
       }
     } else {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   };
 

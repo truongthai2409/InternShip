@@ -33,7 +33,7 @@ const HRInfo = () => {
   useEffect(() => {
     dispatch(getCompanyList([1, 20]));
     if (statusRegister === "successRegister") {
-      navigate("/home");
+      navigate("/home",{ replace: true });
       dispatch(updateStatusRegisterForHR("idleRegister"));
     }
   }, [statusRegister, dispatch]);
