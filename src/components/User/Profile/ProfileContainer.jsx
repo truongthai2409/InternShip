@@ -5,8 +5,10 @@ import LanguageIcon from "@mui/icons-material/Language";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { Divider } from "@mui/material";
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileContainer(props) {
+    const { t } = useTranslation('information')
 
     return (
         <div className="company-infor__wrapper">
@@ -14,7 +16,7 @@ export default function ProfileContainer(props) {
                 <div className="company-infor__col-1">
                     <img
                         className="company-infor__logo"
-                        alt="Ảnh của công ty"
+                        alt={t('companyPhotoTL')}
                         src="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
                     />
                     <p className="company-infor__name">{props.profile?.name}</p>
@@ -36,7 +38,7 @@ export default function ProfileContainer(props) {
                         <p className="company-infor__item">
                             <span>
                                 <PhoneIcon />
-                                Số điện thoại:
+                                {t('phoneNumberTL')}
                             </span>
                             {props.profile?.phone}
                         </p>
@@ -58,18 +60,18 @@ export default function ProfileContainer(props) {
                         {props.profile?.tax ? <p className="company-infor__item">
                             <span>
                                 <ConfirmationNumberIcon />
-                                Mã số thuế:
+                                {t('taxIDNumberTL')}
                             </span>
                             {props.profile?.tax}
                         </p> : <p className="company-infor__item">
-                        
-                            <span><DriveFileRenameOutlineIcon /> Tên viết tắt:</span>
+
+                            <span><DriveFileRenameOutlineIcon /> {t('abbreviatedNameTL')}</span>
 
                             {props.profile?.shortName}
                         </p>}
                     </div>
                     <p className="company-infor__des-company">
-                        <span>Mô tả :</span>
+                        <span>{t('DescriptionTL')}</span>
                         <br />
                         {props.profile?.description}
                     </p>

@@ -6,8 +6,10 @@ import Notification from "../../components/shared/Notification";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterContainer({ Outlet }) {
+  const { t } = useTranslation('login')
   const notification = useSelector((state) => state.notification);
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,16 +24,16 @@ export default function RegisterContainer({ Outlet }) {
   let title;
   switch (location.pathname) {
     case "/register/hr":
-      title = "Đăng ký tài khoản Nhà tuyển dụng";
+      title = t("registerforAnRecruiterAccountTL");
       break;
     case "/register/partner":
-      title = "Đăng ký tài khoản Cộng tác viên trường";
+      title = t("registerForaSchoolPartnerAccountTL");
       break;
     case "/register/candidate":
-      title = "Đăng ký tài khoản Ứng viên";
+      title = t("registerForaCandidateAccountTL");
       break;
     default:
-      title = "Đăng ký";
+      title = t("registerTL");
   }
 
   const roleID = useSelector((state) => state.register.user);
@@ -49,7 +51,7 @@ export default function RegisterContainer({ Outlet }) {
             transform: "translate(5px,5px)",
           }}
         >
-          Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
+          {t("doYouAlreadyHaveAnAccountTL")} <Link to="/login">{t("loginTL")}</Link>
         </Typography>
       </div>
       <Notification notifyAlert={notification} />

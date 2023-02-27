@@ -1,6 +1,7 @@
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Button from "../../shared/Button";
 import SelectAreaHome from "../SelectAreaHome";
 import "./styles.scss";
@@ -15,6 +16,8 @@ function SearchResultHome({
   mb,
   candidate_infomation,
 }) {
+  const { t } = useTranslation('search')
+
   const [searchValue, setSearchValue] = useState("");
 
   const onChangeSearch = (event) => {
@@ -45,7 +48,7 @@ function SearchResultHome({
             className="header__with-search-search-1"
             required
             id="none"
-            placeholder="Theo tên..."
+            placeholder={t("searchByNameTL")}
             value={searchValue}
             onChange={onChangeSearch}
             style={{
@@ -60,9 +63,9 @@ function SearchResultHome({
         </div>
         <div className="header__with-search-button-search" onClick={search}>
           {candidate_infomation ? (
-            <Button name="Tìm kiếm" bwidth="150px" bheight="38px" padding="20px 5px" background-color="gray" />
+            <Button name={t("searchTL")} bwidth="150px" bheight="38px" padding="20px 5px" background-color="gray" />
           ) : (
-            <Button name="Tìm kiếm" bwidth="150px" bheight="35px" padding="20px 5px" background-color="gray"></Button>
+            <Button name={t("searchTL")} bwidth="150px" bheight="35px" padding="20px 5px" background-color="gray"></Button>
           )}
         </div>
       </form>

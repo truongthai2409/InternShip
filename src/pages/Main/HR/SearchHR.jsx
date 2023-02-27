@@ -5,10 +5,13 @@ import useQuery from 'src/hooks/useQuery';
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import SearchAutoComplete from 'src/components/shared/SearchAutoComplete';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMajorList } from 'src/store/slices/Admin/major/majorSlice';
+// import { getMajorList } from 'src/store/slices/Admin/major/majorSlice';
+import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import { changeFilterChange, majorFilterChange, nameFilterChange } from 'src/store/slices/main/candidate/user/userCandidateSlice';
+import { useTranslation } from 'react-i18next';
 
 const SearchHR = () => {
+    const { t } = useTranslation('client')
     const { majorList } = useSelector(state => state.major)
     const [searchValue, setSearchValue] = useState("");
     const [label, setlabel] = useState("")
@@ -37,7 +40,7 @@ const SearchHR = () => {
         }
     }
     useEffect(() => {
-        dispatch(getMajorList([1, 20]))
+        dispatch(getMajorListThunk([1, 20]))
     }, [dispatch])
     return (
         <div className="header__with-search onMobile onTablet">
@@ -71,10 +74,11 @@ const SearchHR = () => {
                         onChange={(event, value) => handleLabel(value)}
                         register={(option) => option}
                     />
+                    {console.log(majorList)}
                 </div>
                 <div className="header__with-search-button-search" onClick={search}>
 
-                    <Button name="Tìm kiếm" bwidth="125px" bheight="35px" padding="20px 5px"></Button>
+                    <Button name={t("searchTL")} bwidth="125px" bheight="35px" padding="20px 5px"></Button>
 
                 </div>
             </form>
