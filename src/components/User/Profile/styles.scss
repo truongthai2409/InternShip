@@ -128,7 +128,6 @@
         .company-infor__row {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
 
           .company-infor__item {
             padding: 0.4rem 0;
@@ -138,6 +137,7 @@
             font-weight: 700;
             justify-content: space-between;
             align-items: center;
+            width: 30%;
 
             > span {
               font-weight: 500;
@@ -156,6 +156,7 @@
 
         .company-infor__des-company {
           font-size: 18px;
+          margin-top: 20px;
 
           > span {
             font-weight: 700;
@@ -329,4 +330,17 @@
       }
     }
   }
+}
+
+.profile_children_handle__item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #e5f7ed;
+  width: 100%;
+  color: #00b14f;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
 }

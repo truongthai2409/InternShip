@@ -1,29 +1,41 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { CLIENT_EN } from 'src/locales/translateEN';
-import { CLIENT_VI } from 'src/locales/translateVI';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { CLIENT_EN, USERINFO_EN } from "src/locales/translateEN";
+import { CLIENT_VI, USERINFO_VI } from "src/locales/translateVI";
 
 const resources = {
-    en: {
-        client: CLIENT_EN,
-    },
-    vi: {
-        client: CLIENT_VI,
-    }
-}
+  en: {
+    client: CLIENT_EN,
+    userInfo: USERINFO_EN,
+  },
+  vi: {
+    client: CLIENT_VI,
+    userInfo: USERINFO_VI,
+  },
+};
 
 i18n
-    .use(LanguageDetector)
-    .use(initReactI18next)
-    .init({
-        resources: resources,
-        fallbackLng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'vi' || localStorage.getItem('lang') === 'en') ? localStorage.getItem('lang') : 'vi',
-        lng: localStorage.getItem('lang') && (localStorage.getItem('lang') === 'vi' || localStorage.getItem('lang') === 'en') ? localStorage.getItem('lang') : 'vi',
-        debug: false,
-        interpolation: {
-            escapeValue: false,
-        },
-    });
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources: resources,
+    fallbackLng:
+      localStorage.getItem("lang") &&
+      (localStorage.getItem("lang") === "vi" ||
+        localStorage.getItem("lang") === "en")
+        ? localStorage.getItem("lang")
+        : "vi",
+    lng:
+      localStorage.getItem("lang") &&
+      (localStorage.getItem("lang") === "vi" ||
+        localStorage.getItem("lang") === "en")
+        ? localStorage.getItem("lang")
+        : "vi",
+    debug: false,
+    interpolation: {
+      escapeValue: false,
+    },
+  });
 
 export default i18n;

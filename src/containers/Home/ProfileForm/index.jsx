@@ -2,6 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/shared/Button";
 import CustomInput from "src/components/shared/CustomInput";
@@ -12,6 +13,7 @@ import "./styles.scss";
 import { genderList, schema } from "./validateForm";
 
 const ProfileForm = ({ profile: user }) => {
+  const { t } = useTranslation("userInfo");
   const {
     register,
     handleSubmit,
@@ -110,15 +112,15 @@ const ProfileForm = ({ profile: user }) => {
     <>
       <form className="profile-form__wrapper" autoComplete="off">
         <Typography variant="button" style={{ fontSize: 22 }}>
-          Thay đổi thông tin
+          {t("changePro")}
         </Typography>
         <div className="profile-form__content">
           <p className="title-requirement">
-            (<span className="field-requirment"> * </span>)Trường bắt buộc
+            (<span className="field-requirment"> * </span>){t("require")}
           </p>
           <div className="profile-form__content-item">
             <InputFile
-              label="Ảnh đại diện"
+              label={t("avt")}
               requirementField={false}
               id="avatar"
               format="image"
@@ -135,7 +137,7 @@ const ProfileForm = ({ profile: user }) => {
               register={register}
               setValue={setValue}
               id="lastName"
-              label="Họ"
+              label={t("lastname")}
               className="profile-form__input"
               radius="2px"
               height="45px"
@@ -147,7 +149,7 @@ const ProfileForm = ({ profile: user }) => {
               register={register}
               setValue={setValue}
               id="firstName"
-              label="Tên"
+              label={t("firstname")}
               className="profile-form__input"
               radius="2px"
               height="45px"
@@ -161,10 +163,10 @@ const ProfileForm = ({ profile: user }) => {
               setValue={setValue}
               id="gender"
               register={register}
-              label="Giới tính"
+              label={t("gender")}
               defaultValue={user?.user?.gender}
               options={genderList}
-              placeholder="Vui lòng chọn"
+              placeholder={t("placeholder")}
             >
               {errors.gender?.message}
             </SelectCustom>
@@ -173,7 +175,7 @@ const ProfileForm = ({ profile: user }) => {
               setValue={setValue}
               id="phone"
               type="text"
-              label="Số điện thoại"
+              label={t("phoneNum")}
               className="profile-form__input"
               radius="2px"
               height="45px"
@@ -185,7 +187,7 @@ const ProfileForm = ({ profile: user }) => {
         </div>
         <div className="profile-form__action">
           <Button
-            name="Lưu"
+            name={t("save")}
             bheight={44}
             onClick={handleSubmit(onSubmit)}
             fz="14px"
