@@ -16,7 +16,7 @@ function SearchResultHome({
   mb,
   candidate_infomation,
 }) {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('search')
 
   const [searchValue, setSearchValue] = useState("");
 

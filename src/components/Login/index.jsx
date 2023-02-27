@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const { user, role } = useSelector((state) => state.profile);
-  const { t } = useTranslation('client');
+  const { t } = useTranslation('login');
 
   if (role) {
     return (

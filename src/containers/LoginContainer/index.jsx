@@ -11,7 +11,7 @@ import { MenuDropDown } from "../../components/Login/components";
 import { useTranslation } from "react-i18next";
 
 const LoginContainer = () => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('login')
   const { role } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const handleLogout = () => {

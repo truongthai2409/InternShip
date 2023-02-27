@@ -13,7 +13,7 @@ import "./styles.scss";
 import { genderList, schema } from "./validateForm";
 
 const ProfileForm = ({ profile: user }) => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('information')
   const {
     register,
     handleSubmit,

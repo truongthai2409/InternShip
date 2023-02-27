@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 
 const LoginAdmin = () => {
   TabTitle("Login - Admin");
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('login')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(

@@ -18,7 +18,7 @@ export default function Container({
   errorMessage,
   genderList,
 }) {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('registerFrom')
   TabTitle(`${t("registerTL")} - ${title}`);
 
   return (

@@ -14,7 +14,7 @@ import "./styles.scss";
 
 
 export const MenuDropDown = () => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('login')
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 

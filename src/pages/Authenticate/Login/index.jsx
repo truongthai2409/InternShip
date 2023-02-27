@@ -16,7 +16,7 @@ import { schema } from "./validate";
 
 const Login = () => {
   TabTitle("Login");
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('login')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
@@ -64,7 +64,7 @@ const Login = () => {
             navigate(`/candidate`, { replace: true });
             break;
           default:
-            navigate("/",{ replace: true });
+            navigate("/", { replace: true });
         }
       }
     } catch (error) {

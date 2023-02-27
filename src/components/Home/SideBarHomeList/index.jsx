@@ -14,7 +14,7 @@ const listWorkingFormat = [
 ];
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('navbar')
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);

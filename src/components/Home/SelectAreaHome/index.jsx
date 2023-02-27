@@ -8,7 +8,7 @@ export default function SelectAreaHome({ onChange }) {
 
   const dispatch = useDispatch();
   const { provinceList } = useSelector((state) => state.location);
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('search')
   React.useEffect(() => {
     dispatch(getProvinceList());
   }, [dispatch]);

@@ -9,7 +9,7 @@ import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 export default function RegisterContainer({ Outlet }) {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation('login')
   const notification = useSelector((state) => state.notification);
   const navigate = useNavigate();
   const location = useLocation();
