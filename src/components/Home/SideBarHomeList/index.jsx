@@ -3,7 +3,7 @@ import "./styles.scss";
 import ListCollapse from "../../shared/ListCollapse";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
+import { getMajorListThunk } from "src/store/action/company/companyAction";
 import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
 import { useTranslation } from "react-i18next";
 
@@ -21,7 +21,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   const [checkedType, setCheckedType] = useState([]);
 
   useEffect(() => {
-    dispatch(getMajorList([1, 20]));
+    dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
   }, [dispatch]);
 
@@ -59,6 +59,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ""}>
+      {console.log(majorList)}
       <ListCollapse
         title={t("workTL")}
         list={listWorkingFormat}

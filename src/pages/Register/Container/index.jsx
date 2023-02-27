@@ -1,4 +1,5 @@
 import { Divider } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import ArrowButton from "src/components/shared/ArrowButton/index";
 import Button from "src/components/shared/Button";
 import CustomInput from "src/components/shared/CustomInput/index";
@@ -17,12 +18,13 @@ export default function Container({
   errorMessage,
   genderList,
 }) {
-  TabTitle(`Đăng ký - ${title}`);
+  const { t } = useTranslation('client')
+  TabTitle(`${t("registerTL")} - ${title}`);
 
   return (
     <div className="register__container">
       <p className="title-requirement">
-        (<span className="field-requirment"> * </span>)Trường bắt buộc
+        (<span className="field-requirment"> * </span>){t("requiredFieldTL")}
       </p>
       <form
         onSubmit={handleClick}
@@ -32,12 +34,12 @@ export default function Container({
       >
         <div className="register__container__form--name">
           <CustomInput
-            label="Tài khoản"
+            label={t("registerTL")}
             id="username"
             type="text"
-            placeholder="Tài khoản..."
+            placeholder={t("registerTL")}
             register={register}
-            subtitle="(Tên tài khoản ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt)"
+            subtitle={t("accountNamingFormatTL")}
           >
             {err.username?.message}
             {errorMessage?.Username}
@@ -49,52 +51,52 @@ export default function Container({
             type="email"
             placeholder="Email..."
             register={register}
-            subtitle="(Email có dạng abc@gmail.com, abc@yahoo.com,...)"
+            subtitle={t("mailingFormatTL")}
           >
             {err.email?.message}
             {errorMessage?.Email}
           </CustomInput>
           <CustomInput
             className="custom_req_can"
-            label="Số điện thoại"
+            label={t("phoneNumberTL")}
             id="phone"
             type="phone"
-            placeholder="Số điện thoại..."
+            placeholder={t("phoneNumberTL")}
             register={register}
-            subtitle="(Các đầu số 03, 05, 07, 08, 09 - ví dụ: 0981234567. Số có thể bắt đầu với +84, 84 - ví dụ: 84981234567)"
+            subtitle={t("phoneNumberFormatTL")}
           >
             {err.phone?.message}
           </CustomInput>
         </div>
         <div className="register__container__form--name">
           <CustomInput
-            label="Mật khẩu"
+            label={t("PasswordTL")}
             id="password"
             type="password"
-            placeholder="Mật khẩu..."
+            placeholder={t("PasswordTL")}
             register={register}
             visibility={true}
-            subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
+            subtitle={t("passwordFormatTL")}
           >
             {err.password?.message}
             {errorMessage?.Password}
             {"."}
           </CustomInput>
           <CustomInput
-            label="Xác nhận mật khẩu"
+            label={t("confirmPasswordTL")}
             id="confirmPassword"
             type="password"
-            placeholder="Xác nhận mật khẩu..."
+            placeholder={t("confirmPasswordTL")}
             register={register}
             visibility={true}
-            subtitle="(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)"
+            subtitle={t("passwordConfirmationFormatTL")}
           >
             {err.confirmPassword?.message}
           </CustomInput>
           <SelectCustom
             className="register__container__form--action"
-            label="Giới tính"
-            placeholder="Vui lòng chọn..."
+            label={t("GenderTL")}
+            placeholder={("pleaseSelectTL")}
             options={genderList}
             id="gender"
             register={register}
@@ -106,26 +108,26 @@ export default function Container({
         <Divider style={{ marginTop: "2rem" }} />
         <div className="register__container__form--name">
           <CustomInput
-            label="Họ"
+            label={t("lastNameTL")}
             id="lastName"
             type="text"
-            placeholder="Họ..."
+            placeholder={t("lastNameTL")}
             register={register}
           >
             {err.lastName?.message}
           </CustomInput>
           <CustomInput
-            label="Tên"
+            label={t("firstNameTL")}
             id="firstName"
             type="text"
-            placeholder="Tên..."
+            placeholder={t("firstNameTL")}
             register={register}
           >
             {err.firstName?.message}
           </CustomInput>
         </div>
         <InputFile
-          label="Ảnh đại diện"
+          label={t("avatarTL")}
           requirementField={false}
           id="avatar"
           format="image"
@@ -137,10 +139,10 @@ export default function Container({
         {children}
         <div className="register__container__btns">
           <div className="register__container__btns--item" onClick={onClick}>
-            <ArrowButton fontSize="16px" text="Trở lại" direction="left" />
+            <ArrowButton fontSize="16px" text={t("backTL")} direction="left" />
           </div>
           <div className="register__container__btns--item">
-            <Button name="ĐĂNG KÝ" onClick={handleClick} />
+            <Button name={t("registerTL")} onClick={handleClick} />
           </div>
         </div>
       </form>

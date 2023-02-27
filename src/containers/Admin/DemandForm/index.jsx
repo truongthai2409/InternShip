@@ -10,7 +10,7 @@ import CustomTextarea from '../../../components/shared/CustomTextarea'
 import Button from '../../../components/shared/Button'
 import Select from '../../../components/shared/Select'
 import { schema, renderControlAction } from './script.js'
-import { getMajorList } from '../../../store/slices/Admin/major/majorSlice'
+import { getMajorListThunk } from 'src/store/action/company/companyAction'
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } }
 
@@ -26,7 +26,7 @@ export default function DemandForm(props) {
   // const { demandId } = useParams()
 
   useEffect(() => {
-    dispatch(getMajorList())
+    dispatch(getMajorListThunk())
   }, [dispatch])
   const {
     register,

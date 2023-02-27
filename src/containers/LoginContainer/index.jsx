@@ -8,8 +8,10 @@ import Button from "src/components/shared/Button";
 import { updateRole } from "src/store/slices/main/user/userSlice";
 import { toast } from "react-toastify";
 import { MenuDropDown } from "../../components/Login/components";
+import { useTranslation } from "react-i18next";
 
 const LoginContainer = () => {
+  const { t } = useTranslation('client')
   const { role } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -35,13 +37,13 @@ const LoginContainer = () => {
   }
   return (
     <div className="login-container">
-      <h1 className="login-container__title">Đăng nhập</h1>
+      <h1 className="login-container__title">{t("loginTL")}</h1>
       <Login />
       <div className="register-container__footer">
-        <Link to="/forgot-password">Quên mật khẩu?</Link>
+        <Link to="/forgot-password">{t("forgotPasswordTL")}</Link>
       </div>
       <p className="register-container__footerRegister-p">
-        Bạn chưa có tài khoản?
+        {t("doNotHaveAnAccountTL")}
       </p>
       <div className="register-container__footerRegister">
         <MenuDropDown />

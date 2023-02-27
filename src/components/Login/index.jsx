@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Login() {
   const { user, role } = useSelector((state) => state.profile);
-  const {t} = useTranslation('client');
+  const { t } = useTranslation('client');
 
   if (role) {
     return (
@@ -43,7 +43,7 @@ export default function Login() {
   return (
     <div className="login--not-yet">
       <Link to="/login">
-        <span className="login__home-sign-in">{t('login')}</span>
+        <span className="login__home-sign-in">{t('loginTL')}</span>
       </Link>
       <MenuDropDown />
     </div>

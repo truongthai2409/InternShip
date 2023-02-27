@@ -9,7 +9,7 @@ import Button from "../../../components/shared/Button";
 import SelectCustom from "../../../components/shared/Select";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getMajorListThunk } from "src/store/action/company/companyAction";
 import {
   addJob,
   getJobPositionList,
@@ -62,7 +62,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
     jobDetail ? jobDetail.salaryMax === 0 && false : true
   );
   useEffect(() => {
-    dispatch(getMajorList([1, 20]));
+    dispatch(getMajorListThunk([1, 20]));
     dispatch(getProvinceList());
     dispatch(getJobPositionList());
   }, [dispatch]);
@@ -134,7 +134,7 @@ const PostJobForm = ({ formStatus, jobDetail, disabled = false, setOpen }) => {
           id: parseInt(data.jobType),
         },
         amount: parseInt(data.amount),
-        salaryMin: isNoSalary ? data.salaryMin :  0,
+        salaryMin: isNoSalary ? data.salaryMin : 0,
         salaryMax: isNoSalary ? data.salaryMax : 0,
         requirement: data.jobRequirement,
         otherInfo: data.benefits,

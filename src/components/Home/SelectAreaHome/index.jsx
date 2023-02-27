@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import SearchAutoComplete from 'src/components/shared/SearchAutoComplete';
 import { getProvinceList } from "../../../store/slices/location/locationSlice";
@@ -7,7 +8,7 @@ export default function SelectAreaHome({ onChange }) {
 
   const dispatch = useDispatch();
   const { provinceList } = useSelector((state) => state.location);
-
+  const { t } = useTranslation('client')
   React.useEffect(() => {
     dispatch(getProvinceList());
   }, [dispatch]);
@@ -25,7 +26,7 @@ export default function SelectAreaHome({ onChange }) {
         data={provinceList}
         avatarRender={null}
         nameRender={(option) => option.name}
-        labelName="Theo khu vực..."
+        labelName={t("searchByLocationTL")}
         onChange={(event, value) => handleLabel(value)}
         register={(option) => option}
       />

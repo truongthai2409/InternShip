@@ -11,8 +11,12 @@ import "./styles.scss";
 import DataTable from "../../../../components/shared/Table";
 import {
   deleteMajor,
-  getMajorList,
+  // getMajorList,
 } from "../../../../store/slices/Admin/major/majorSlice";
+import {
+  // deleteMajor,
+  getMajorListThunk,
+} from "src/store/action/company/companyAction";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const MajorTable = () => {
@@ -22,7 +26,7 @@ const MajorTable = () => {
   const { majorList } = useSelector((state) => state.major);
 
   useEffect(() => {
-    dispatch(getMajorList());
+    dispatch(getMajorListThunk());
   }, [dispatch]);
 
   const columns = [

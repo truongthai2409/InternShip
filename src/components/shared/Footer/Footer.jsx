@@ -20,7 +20,7 @@ function Footer() {
                         return renderData;
                     })
                 }
-                {
+                {/* {
                     <div>
                         <h1>{t('sectionData.ABOUT.title')}</h1>
                         <ul>
@@ -31,7 +31,7 @@ function Footer() {
                             ))}
                         </ul>
                     </div>
-                }
+                } */}
             </>
         )
     }

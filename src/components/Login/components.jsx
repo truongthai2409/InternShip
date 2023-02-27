@@ -81,7 +81,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Ứng viên
+                        {t("candidateTL")}
                       </MenuItem>
                     </Link>
                     <Link to="/register/hr">
@@ -89,7 +89,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Nhà tuyển dụng
+                        {t("recruiterTL")}
                       </MenuItem>
                     </Link>
                     <Link to="/register/partner">
@@ -97,7 +97,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Cộng tác viên
+                        {t("partnerTL")}
                       </MenuItem>
                     </Link>
                   </MenuList>

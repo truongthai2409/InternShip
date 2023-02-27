@@ -9,7 +9,8 @@ import DescriptionForm from "src/components/shared/DescriptionForm";
 import InputFile from "src/components/shared/InputFile";
 import SelectMulti from "src/components/shared/SelectMulti";
 import Textarea from "src/components/shared/Textarea";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+// import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getMajorListThunk } from "src/store/action/company/companyAction";
 import { getPartnerByUserID } from "src/store/slices/Admin/university/unversitySlice";
 import {
   addDemand,
@@ -57,7 +58,7 @@ const PostPartnerForm = ({
     JSON.parse(localStorage.getItem("userPresent"))?.ids;
 
   useEffect(() => {
-    dispatch(getMajorList([1, 20]));
+    dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
     dispatch(getDemandById(idDemand));
     dispatch(getPartnerByUserID(idUser));
@@ -139,11 +140,11 @@ const PostPartnerForm = ({
     const user =
       JSON.parse(sessionStorage.getItem("userPresent")) ||
       JSON.parse(localStorage.getItem("userPresent"));
-      await dispatch(addDemand([demandData, user]))
-    };
-    if(status === "success" && !isUpdate) {
-      navigate("/partner/post-list")
-    }
+    await dispatch(addDemand([demandData, user]))
+  };
+  if (status === "success" && !isUpdate) {
+    navigate("/partner/post-list")
+  }
   return (
     <>
       <div className="partner-post__container">
@@ -251,8 +252,8 @@ const PostPartnerForm = ({
                       ? formSample
                       : demandDetail?.desciption
                     : useSampleForm
-                    ? formSample
-                    : ""
+                      ? formSample
+                      : ""
                 }
                 register={register}
                 setValue={setValue}

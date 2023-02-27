@@ -7,7 +7,8 @@ import Collap from "src/components/Collaps/Collap";
 import InputFile from "src/components/shared/InputFile";
 import SearchAutoComplete from "src/components/shared/SearchAutoComplete";
 import SelectCustom from "src/components/shared/Select";
-import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+// import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
+import { getMajorListThunk } from "src/store/action/company/companyAction";
 import {
   addUniversity,
   getUniversityList,
@@ -66,7 +67,7 @@ const PartnerInfo = () => {
   });
 
   useEffect(() => {
-    dispatch(getMajorList([1, 20]));
+    dispatch(getMajorListThunk([1, 20]));
     dispatch(getProvinceList());
     dispatch(getUniversityList([1, 200]));
     if (status === "success") {

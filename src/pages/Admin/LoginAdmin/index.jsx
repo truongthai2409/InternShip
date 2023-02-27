@@ -16,10 +16,11 @@ import { stringify } from "query-string";
 import { Link } from "react-router-dom";
 
 import Logo from "../../../components/shared/Logo";
+import { useTranslation } from "react-i18next";
 
 const LoginAdmin = () => {
   TabTitle("Login - Admin");
-
+  const { t } = useTranslation('client')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(
@@ -87,15 +88,15 @@ const LoginAdmin = () => {
       <div className="logo-login-container">
         <Logo />
       </div>
-      <h1 className="login-container__title">Đăng nhập</h1>
+      <h1 className="login-container__title">{t("loginTL")}</h1>
 
       <div className="login-admin-form__container">
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <CustomInput
-            label="Tài khoản"
+            label={t("accountTL")}
             id="username"
             type="text"
-            placeholder="Tài khoản..."
+            placeholder={t("accountTL")}
             setValue={setValue}
             register={register}
             requirementField={false}
@@ -103,10 +104,10 @@ const LoginAdmin = () => {
             {errors.username?.message}
           </CustomInput>
           <CustomInput
-            label="Mật khẩu"
+            label={t("PasswordTL")}
             id="password"
             type="password"
-            placeholder="Mật khẩu..."
+            placeholder={t("PasswordTL")}
             setValue={setValue}
             register={register}
             visibility={true}
@@ -119,14 +120,14 @@ const LoginAdmin = () => {
               className="login-admin-form__save-pass"
               onChange={handleSaveLogin}
             >
-              <CustomCheckbox checked={isCheck} label="Lưu đăng nhập" />
+              <CustomCheckbox checked={isCheck} label={t("saveLoginTL")} />
             </div>
             <div className="login-admin-form__footer">
-              <Link to="/forgot-password">Quên mật khẩu?</Link>
+              <Link to="/forgot-password">{t("forgotPasswordTL")}</Link>
             </div>
           </div>
           <div className="login-admin-form__btn">
-            <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>
+            <Button name={t("loginTl")} onClick={handleSubmit(onSubmit)}></Button>
           </div>
         </form>
       </div>
