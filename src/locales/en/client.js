@@ -40,6 +40,13 @@ export const CLIENT_EN =
     backTL: "Back",
 
 
+    editInformation: "Edit information",
+    saveTL: "Save",
+    companyPhotoTL: "Company photo",
+    taxIDNumberTL: "Tax ID number:",
+    abbreviatedNameTL: "Abbreviated name:",
+    DescriptionTL: "Description:",
+
     workTL: "Work schedule",
     jobPositionTL: "Job Position",
     majorTL: "Major",

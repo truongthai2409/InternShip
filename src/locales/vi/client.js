@@ -40,6 +40,13 @@ export const CLIENT_VI =
     avatarTL: "Ảnh đại diện",
     backTL: "Trở lại",
 
+    editInformation: "Thay đổi thông tin",
+    saveTL: "Lưu",
+    companyPhotoTL: "Ảnh của công ty",
+    taxIDNumberTL: "Mã số thuế:",
+    abbreviatedNameTL: "Tên viết tắt:",
+    DescriptionTL: "Mô tả:",
+
     workTL: "Hình thức làm việc",
     jobPositionTL: "Vị trí làm việc",
     majorTL: "Chuyên ngành",
