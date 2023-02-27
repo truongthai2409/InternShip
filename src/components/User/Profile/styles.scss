@@ -124,7 +124,7 @@
       }
 
       .company-infor__profile {
-        padding : 0 1rem;
+        padding: 0 1rem;
         .company-infor__row {
           display: flex;
           flex-direction: column;
@@ -294,10 +294,10 @@
     }
     .profile_handle {
       display: flex;
-      // gap: 1.5rem;
       margin: 1rem 0;
       flex-direction: column;
       .profile_children_handle {
+        cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;

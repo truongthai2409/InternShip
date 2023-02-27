@@ -88,45 +88,6 @@ export const checkUser = createAsyncThunk(
   }
 );
 
-// export const registerUser = createAsyncThunk(
-//   "register/registerUser",
-//   async (data, role) => {
-//     let res;
-//     switch (role) {
-//       case "hr":
-
-//         res = await api
-//           .post(`${baseURL}/api/r2s/hr`, data.hrData, {
-//             headers: {
-//               "Content-Type": "multipart/form-data",
-//             },
-//           })
-//           .then((res) => {
-//             return res;
-//           })
-//           .catch((err) => {
-//             return err;
-//           });
-//         return res;
-//       case "candidate":
-//         res = await api
-//           .post(`${baseURL}/api/r2s/${role}`, data.userData, {
-//             headers: {
-//               "Content-Type": "multipart/form-data",
-//             },
-//           })
-//           .then((res) => {
-//             return res;
-//           })
-//           .catch((err) => {
-//             return err;
-//           });
-//         return res;
-//       default:
-//         break;
-//     }
-//   }
-// );
 
 export const registerHr = createAsyncThunk(
   "register/registerHr",

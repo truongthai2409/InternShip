@@ -15,8 +15,17 @@ import Modal from "../../shared/Modal";
 import { schema } from "./dataCV";
 import UserInfo from "./UserInfo";
 import avatarDefault from "src/assets/img/avatar-default.png";
+import { Document, Page, pdfjs } from "react-pdf";
+import { useTranslation } from "react-i18next";
+
 const BASEURL = process.env.REACT_APP_API;
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
+  const [numPages, setNumPages] = useState(null);
+  const {t} = useTranslation('profile');
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
   const dispatch = useDispatch();
   const {
     register,
@@ -128,14 +137,14 @@ const Components = ({ profile }) => {
               }}
             >
               <div className="profile_children_handle">
-                <Tooltip title="Thay Đổi CV">
+                <Tooltip title={t('change_cv')}>
                   <CachedRoundedIcon
                     className="icon-action"
                     onClick={() => handleClick(1)}
                   />
                 </Tooltip>
                 <Modal
-                  modalTitle={"Thay đổi CV"}
+                  modalTitle={t('change_cv')}
                   open={opens}
                   setOpen={setOpens}
                   children={
@@ -160,10 +169,10 @@ const Components = ({ profile }) => {
                       >
                         {errors?.cv?.message}
                       </InputFile>
-                      <Button onClick={handleSubmit(onSubmit)}>Thay Đổi</Button>
+                      <Button onClick={handleSubmit(onSubmit)}>{t('change')}</Button>
                     </form>
                   }
-                  name="Thay Đổi CV"
+                  name={t('change_cv')}
                   iconClose={<SyncAltIcon />}
                 />
               </div>
@@ -171,35 +180,33 @@ const Components = ({ profile }) => {
                 className="profile_children_handle"
                 style={{ padding: "0 2rem" }}
               >
-                <Tooltip title="Xem CV">
+                <Tooltip title={t('view_cv')}>
                   <RemoveRedEyeIcon onClick={() => handleClick(2)} />
                 </Tooltip>
                 <Modal
                   iconClose={true}
-                  modalTitle="Xem CV"
+                  modalTitle={t('view_cv')}
                   open={open}
                   setOpen={setOpen}
                   children={
-                    <div
-                      style={{
-                        width: "90vw",
-                        height: "90vh",
-                        padding: ".5rem",
-                      }}
-                    >
-                      <iframe
-                        src={`https://docs.google.com/gview?url=${profile.cv}&embedded=true`}
-                        width="100%"
-                        height="100%"
-                        frameborder="1"
-                        title="cv"
-                      ></iframe>
+                    <div>
+                      <Document
+                        file={profile.cv}
+                        onLoadSuccess={onDocumentLoadSuccess}
+                      >
+                        {Array.from(new Array(numPages), (el, index) => (
+                          <Page
+                            key={`page_${index + 1}`}
+                            pageNumber={index + 1}
+                          />
+                        ))}
+                      </Document>
                     </div>
                   }
                 />
               </div>
               <div className="profile_children_handle">
-                <Tooltip title="Tải CV">
+                <Tooltip title={t('download_cv')}>
                   <a
                     id="downloadLink"
                     href={`${profile?.cv}`}
@@ -228,7 +235,7 @@ const Components = ({ profile }) => {
                   display="block"
                   gutterBottom
                 >
-                  Tìm kiếm việc làm:
+                  {t('find_work')}
                 </Typography>
                 <Switch
                   checked={checkedFind}
@@ -249,7 +256,7 @@ const Components = ({ profile }) => {
                 display="block"
                 gutterBottom
               >
-                Nhận thông báo về email:
+                {t("receive_email")}
               </Typography>
               <Switch
                 sx={{
@@ -267,25 +274,25 @@ const Components = ({ profile }) => {
         <div className="profile_check"></div>
         <div className="profile_info">
           <UserInfo name="Email" profile={profile?.user?.email} />
-          <UserInfo name="Số Điện Thoại" profile={profile?.user?.phone} />
+          <UserInfo name={t('phone')} profile={profile?.user?.phone} />
           <UserInfo
-            name="Vai Trò "
+            name={t('role')}
             profile={
               profile?.user?.role?.name === "Role_Candidate"
-                ? "Ứng Viên"
+                ? t('candidate')
                 : profile?.user?.role?.name === "Role_HR"
-                ? "Nhà Tuyển Dụng"
-                : "Cộng Tác Viên"
+                ? t('hr')
+                : t('partner')
             }
           />
           <UserInfo
-            name="Giới Tính"
+            name={t('sex')}
             profile={
               profile?.user?.gender === 1
-                ? "Nữ"
+                ? t('woman')
                 : profile?.user?.gender === 0
-                ? "Nam"
-                : "Khác"
+                ? t('man')
+                : t('diff')
             }
           />
         </div>
