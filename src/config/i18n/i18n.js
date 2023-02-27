@@ -1,15 +1,17 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { CLIENT_EN } from 'src/locales/translateEN';
-import { CLIENT_VI } from 'src/locales/translateVI';
+import { CLIENT_EN,PROFILE_EN } from 'src/locales/translateEN';
+import { CLIENT_VI, PROFILE_VI } from 'src/locales/translateVI';
 
 const resources = {
     en: {
         client: CLIENT_EN,
+        profile:PROFILE_EN
     },
     vi: {
         client: CLIENT_VI,
+        profile: PROFILE_VI
     }
 }
 
