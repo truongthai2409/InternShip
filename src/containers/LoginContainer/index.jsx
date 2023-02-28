@@ -19,7 +19,7 @@ const LoginContainer = () => {
     localStorage.removeItem("userPresent");
     dispatch(updateRole());
     toast.warning("Bạn vừa đăng xuất", {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 3000,
       theme: "dark",
     });
@@ -38,14 +38,20 @@ const LoginContainer = () => {
   return (
     <div className="login-container">
       <h1 className="login-container__title">{t("loginTL")}</h1>
-      <Login />
-      <div className="register-container__footer">
+      {/* <div className="register-container__footer">
         <Link to="/forgot-password">{t("forgotPasswordTL")}</Link>
+      </div> */}
+      <Login />
+      <div className="loginWith">
+        <p className="loginWith-p">Or login with</p>
+        <button className="loginWith-button">
+          <Link to="/auth/social/google" className="loginWith-button__link"><i class="fa-brands fa-google-plus-g"></i> Google</Link>
+        </button>
       </div>
-      <p className="register-container__footerRegister-p">
-        {t("doNotHaveAnAccountTL")}
-      </p>
       <div className="register-container__footerRegister">
+        <p className="register-container__footerRegister-p">
+          {t("doNotHaveAnAccountTL")}
+        </p>
         <MenuDropDown />
       </div>
     </div>

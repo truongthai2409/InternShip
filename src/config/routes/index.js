@@ -6,12 +6,14 @@ import candidateRouter from "./candidateRouter";
 import hrRouter from "./hrRouter";
 import partnerRouter from "./partnerRouter";
 import loginAdminRouter from "./loginAdminRouter";
+import googleLogin from "./loginWithGoogle"
 
 const publicRouter = [
   mainRouter,
   registerRouter,
   loginRouter,
   loginAdminRouter,
+  googleLogin
 ];
 const privateRouter = [adminRouter, candidateRouter, hrRouter, partnerRouter];
 export { publicRouter, privateRouter };

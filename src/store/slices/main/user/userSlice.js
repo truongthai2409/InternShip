@@ -20,10 +20,10 @@ const profileSlice = createSlice({
       state.user = payload;
       state.role = payload?.user?.role?.name;
     });
-    builder.addCase(updateUser.fulfilled, (state, {payload}) => {
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
       toast.success("Chỉnh sửa thành công", {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 3000,
         theme: "colored",
       });

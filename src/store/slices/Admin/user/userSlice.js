@@ -39,21 +39,21 @@ const userSlice = createSlice({
       if (action.payload.httpCode === 400) {
         state.statusForgotPassword = "fail";
         toast.error("Mật khẩu cũ không đúng!", {
-          position: "bottom-right",
+          position: "top-right",
           autoClose: 3000,
           theme: "colored",
         });
       } else if (action.payload.httpCode === 500) {
         state.statusForgotPassword = "fail";
         toast.error("Đổi mật khẩu không thành công!", {
-          position: "bottom-right",
+          position: "top-right",
           autoClose: 3000,
           theme: "colored",
         });
       } else {
         state.statusForgotPassword = "success";
         toast.success("Đổi mật khẩu thành công!", {
-          position: "bottom-right",
+          position: "top-right",
           autoClose: 3000,
           theme: "colored",
         });
@@ -347,8 +347,7 @@ export const searchUser = createAsyncThunk("user/searchUser", async (args) => {
   };
   const res = await axios
     .get(
-      `${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${
-        args[2]
+      `${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]
       }`,
       header
     )

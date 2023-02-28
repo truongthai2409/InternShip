@@ -14,6 +14,9 @@ import { loginUser } from "../../../store/slices/main/login/loginSlice";
 import "./styles.scss";
 import { schema } from "./validate";
 
+import { Link } from "react-router-dom";
+
+
 const Login = () => {
   TabTitle("Login");
   const { t } = useTranslation('login')
@@ -104,10 +107,13 @@ const Login = () => {
           {errors.password?.message}
         </CustomInput>
         <div className="login-form__save-pass" onChange={handleSaveLogin}>
-          <CustomCheckbox checked={isCheck} label={t("saveLoginTL")} />
+          <CustomCheckbox checked={isCheck} className="checkSavelogin" label={t("saveLoginTL")} />
+          <Link to="/forgot-password" className="forgotPasswordLink">{t("forgotPasswordTL")}</Link>
         </div>
+        {/* <div className="register-container__footer">
+        </div> */}
         <div className="login-form__btn">
-          <Button name={t("loginTL")} onClick={handleSubmit(onSubmit)}></Button>
+          <Button onClick={handleSubmit(onSubmit)} className="login-from-button">{t("loginTL")}</Button>
         </div>
       </form>
     </div>

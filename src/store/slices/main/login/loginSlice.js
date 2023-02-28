@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../../../config/api/apiConfig";
 import { toast } from "react-toastify";
+// import { useTranslation } from "react-i18next";
 
 const baseURL = process.env.REACT_APP_API;
-
+// const { t } = useTranslation('notification')
 const loginSlice = createSlice({
+
   name: "login",
   initialState: {
     status: "idle",
@@ -19,7 +21,7 @@ const loginSlice = createSlice({
         if (action.payload?.token && action.payload?.role !== "Role_Admin") {
           state.status = "success";
           toast.success("Đăng nhập thành công", {
-            position: "bottom-right",
+            position: "top-right",
             autoClose: 2000,
             theme: "colored",
           });
@@ -33,7 +35,7 @@ const loginSlice = createSlice({
         } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {
-            position: "bottom-right",
+            position: "top-right",
             autoClose: 3000,
             theme: "colored",
           });
@@ -46,7 +48,7 @@ const loginSlice = createSlice({
         if (action.payload?.token && action.payload?.role === "Role_Admin") {
           state.status = "success";
           toast.success("Đăng nhập thành công", {
-            position: "bottom-right",
+            position: "top-right",
             autoClose: 3000,
             theme: "colored",
           });
@@ -60,7 +62,8 @@ const loginSlice = createSlice({
         } else {
           state.status = "fail";
           toast.error("Tài khoản hoặc mật khẩu không đúng!", {
-            position: "bottom-right",
+            position: "top-right",
+
             autoClose: 3000,
             theme: "colored",
           });
