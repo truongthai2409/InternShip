@@ -8,11 +8,13 @@ import {
   Popper,
 } from "@mui/material";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 
+
 export const MenuDropDown = () => {
-  console.log("MenuDropDown");
+  const { t } = useTranslation('login')
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -48,7 +50,7 @@ export const MenuDropDown = () => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          Đăng ký
+          {t("registerTL")}
         </Button>
         <Popper
           open={open}
@@ -79,7 +81,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Ứng viên
+                        {t("candidateTL")}
                       </MenuItem>
                     </Link>
                     <Link to="/register/hr">
@@ -87,7 +89,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Nhà tuyển dụng
+                        {t("recruiterTL")}
                       </MenuItem>
                     </Link>
                     <Link to="/register/partner">
@@ -95,7 +97,7 @@ export const MenuDropDown = () => {
                         sx={{ fontSize: "14px", color: "#212121" }}
                         onClick={handleClose}
                       >
-                        Cộng tác viên
+                        {t("partnerTL")}
                       </MenuItem>
                     </Link>
                   </MenuList>

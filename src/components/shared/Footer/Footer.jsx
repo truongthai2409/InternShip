@@ -1,5 +1,6 @@
 import "./styles.scss";
 import { FOOTER } from "src/config/constant/footer";
+import { useTranslation } from 'react-i18next';
 const { CONTACT, ABOUT, POLICY, MOBILE } = FOOTER;
 
 function Footer() {
