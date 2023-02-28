@@ -12,6 +12,6 @@ export const INFORMATION_EN =
 
     companyPhotoTL: "Company photo",
     taxIDNumberTL: "Tax ID number:",
-    abbreviatedNameTL: "Abbreviated name:",
+    abbreviatedNameTL: "Shortened name:",
     DescriptionTL: "Description:",
 }

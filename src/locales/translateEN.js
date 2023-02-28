@@ -6,6 +6,7 @@ import { INFORMATION_EN } from "./en/information";
 import { REGISTER_FROM_EN } from "./en/registerFrom";
 import { LOGIN_EN } from "./en/login";
 import { SEARCH_EN } from "./en/search";
+import { NOTIFICATION_EN } from "./en/notification";
 
 export {
     CLIENT_EN,
@@ -15,5 +16,6 @@ export {
     INFORMATION_EN,
     REGISTER_FROM_EN,
     LOGIN_EN,
-    SEARCH_EN
+    SEARCH_EN,
+    NOTIFICATION_EN
 }

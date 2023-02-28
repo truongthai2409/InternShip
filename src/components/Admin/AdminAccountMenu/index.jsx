@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { toast } from "react-toastify";
-import {Link, useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const AdminAccountMenu = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const AdminAccountMenu = () => {
     sessionStorage.removeItem("userPresent");
     navigate("/", { replace: true })
     toast.warning("Bạn vừa đăng xuất", {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 3000,
       theme: "dark",
     });
