@@ -7,12 +7,14 @@ import Null from "src/components/shared/Null";
 import PaginationCustom from "src/components/shared/Pagination";
 import "./reponsive.scss";
 const CandidateList = ({ idJob }) => {
+  // console.log(idJob)
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { listCandidatesApplied, totalPages } = useSelector(
     (state) => state.job
   );
 
+  console.log(listCandidatesApplied)
   const token = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
    JSON.parse(localStorage.getItem("userPresent"))?.token;
   useEffect(() => {

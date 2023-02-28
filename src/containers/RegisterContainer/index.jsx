@@ -4,20 +4,12 @@ import { useSelector } from "react-redux";
 
 import Notification from "../../components/shared/Notification";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 export default function RegisterContainer({ Outlet }) {
   const notification = useSelector((state) => state.notification);
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const status = useSelector((state) => state.register.status);
-  if (status === "success") {
-    setTimeout(() => {
-      navigate("/login", { replace: true });
-    }, 1000);
-  }
 
   let title;
   switch (location.pathname) {

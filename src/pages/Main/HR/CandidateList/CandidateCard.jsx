@@ -3,75 +3,43 @@ import "./styles.scss";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ButtonMark from "src/components/shared/ButtonMark";
-import { Modal } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { toast } from "react-toastify";
-const BASEURL = process.env.REACT_APP_API;
+import Modal from "src/components/shared/Modal"; 
+import { Document, Page, pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 export const CandidateCard = ({
   avatar = "https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg",
   candidate,
 }) => {
-  const [click, setClick] = useState(true);
   const [open, setOpen] = useState(false);
+  const [numPages, setNumPages] = useState(null);
   const [numberCV, setNumberCV] = useState([]);
   const viewProfileCV = (info) => {
     setOpen(!open);
     setNumberCV(info.cv);
   };
-
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
   const renderCV = () => {
     return (
       <Modal
         iconClose={true}
-        modalTitle="Xem CV Ứng Viên"
+        modalTitle={"View CV"}
         open={open}
         setOpen={setOpen}
         children={
-          <div style={{ width: "100%", height: "100%", padding: "2rem 4rem" }}>
-            <div
-              onClick={() => setOpen(!open)}
-              style={{
-                cursor: "pointer",
-                float: "right",
-                border: "1px solid #ccc",
-                padding: "4px 8px",
-                backgroundColor: "#fff",
-                outline: "none",
-                borderRadius: "5px",
-              }}
-            >
-              <CloseIcon />
-            </div>
-            {/* <embed
-              src={numberCV}
-              width="100%"
-              height="100%"
-              type="application/pdf"
-            ></embed> */}
-
-            <iframe
-              src={`https://docs.google.com/gview?url=${numberCV}&embedded=true`}
-              width="100%"
-              height="100%"
-              frameborder="1"
-              title="cv"
-            ></iframe>
+          <div>
+            <Document file={numberCV} onLoadSuccess={onDocumentLoadSuccess}>
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+              ))}
+            </Document>
           </div>
         }
       />
     );
   };
-  // const addFavorite = (e) => {
-  //   setClick(!click);
-  //   // eslint-disable-next-line no-lone-blocks
-  //   {
-  //     click
-  //       ? toast.success("Đã thêm ứng viên vào yêu thích")
-  //       : toast.warning("Xóa ứng viên khỏi yêu thích");
-  //   }
-  // };
   return (
     <>
       <div className="candidate-card__wrapper">
@@ -108,18 +76,6 @@ export const CandidateCard = ({
           <div style={{ display: "none" }}>
             <ButtonMark border="1px solid #DEDEDE" />
           </div>
-          {/* <div
-            onClick={() => addFavorite()}
-            style={{
-              border: "1px solid #DEDEDE",
-              padding: "8px",
-              borderRadius: "4px",
-              cursor: "pointer",
-              color: "#000",
-            }}
-          >
-            {click ? <BookmarkBorderIcon /> : <BookmarkIcon />}
-          </div> */}
         </div>
         <p className="candidate-card__infor-time">
           <AccessTimeIcon />
