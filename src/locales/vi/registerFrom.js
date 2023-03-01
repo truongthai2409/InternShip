@@ -21,4 +21,8 @@ export const REGISTER_FROM_VI =
     avatarTL: "Ảnh đại diện",
     backTL: "Trở lại",
 
+    registerforAnRecruiterAccountTL : "Đăng ký tài khoản nhà tuyển dụng",
+
+    registerForaSchoolPartnerAccountTL: "Đăng ký tài khoản cộng tác viên"
+
 }

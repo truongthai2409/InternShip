@@ -9,13 +9,13 @@ import { SEARCH_EN } from "./en/search";
 import { NOTIFICATION_EN } from "./en/notification";
 
 export {
-    CLIENT_EN,
-    PROFILE_EN,
-    NAVBAR_EN,
-    HEADER_FOOTER_EN,
-    INFORMATION_EN,
-    REGISTER_FROM_EN,
-    LOGIN_EN,
-    SEARCH_EN,
-    NOTIFICATION_EN
-}
+  CLIENT_EN,
+  PROFILE_EN,
+  NAVBAR_EN,
+  HEADER_FOOTER_EN,
+  INFORMATION_EN,
+  REGISTER_FROM_EN,
+  LOGIN_EN,
+  SEARCH_EN,
+  NOTIFICATION_EN,
+};

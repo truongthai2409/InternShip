@@ -9,13 +9,13 @@ import { SEARCH_VI } from "./vi/search";
 import { NOTIFICATION_VI } from "./vi/notification";
 
 export {
-    CLIENT_VI,
-    PROFILE_VI,
-    NAVBAR_VI,
-    HEADER_FOOTER_VI,
-    INFORMATION_VI,
-    REGISTER_FROM_VI,
-    LOGIN_VI,
-    SEARCH_VI,
-    NOTIFICATION_VI
-}
+  CLIENT_VI,
+  PROFILE_VI,
+  NAVBAR_VI,
+  HEADER_FOOTER_VI,
+  INFORMATION_VI,
+  REGISTER_FROM_VI,
+  LOGIN_VI,
+  SEARCH_VI,
+  NOTIFICATION_VI,
+};

@@ -15,7 +15,7 @@ import { getMajorListThunk } from "src/store/action/company/companyAction";
 import Container from "../Container";
 import "./styles.scss";
 const CandidateInfo = () => {
-  console.log("CandidateInfo");
+  // console.log("CandidateInfo");
   TabTitle("Đăng ký - Ứng viên");
 
   const navigate = useNavigate();
