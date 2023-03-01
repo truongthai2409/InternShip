@@ -105,14 +105,14 @@ const jobSlice = createSlice({
       if (payload.payload[1] === "repost") {
         state.jobListActived.unshift(payload.payload[0]);
         toast.success("Đăng tuyển công việc thành công!", {
-          position: "bottom-right",
+          position: "top-right",
           autoClose: 3000,
           theme: "colored",
         });
       }
       if (payload.payload[1] === "post") {
         toast.success("Đăng tuyển công việc thành công!", {
-          position: "bottom-right",
+          position: "top-right",
           autoClose: 3000,
           theme: "colored",
         });
@@ -127,14 +127,14 @@ const jobSlice = createSlice({
           });
           state.jobListDisabled.push(payload);
           toast.success("Đóng công việc thành công!", {
-            position: "bottom-right",
+            position: "top-right",
             autoClose: 3000,
             theme: "colored",
           });
           break;
         default:
           toast.error("Chỉnh sửa trạng thái công việc thất bại!", {
-            position: "bottom-right",
+            position: "top-right",
             autoClose: 3000,
             theme: "colored",
           });
@@ -148,7 +148,7 @@ const jobSlice = createSlice({
         return job;
       });
       toast.success("Chỉnh sửa công việc thành công!", {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 3000,
         theme: "colored",
       });
@@ -223,8 +223,7 @@ export const getActivedJobListByUserId = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1] - 1}&limit=${
-          args[2]
+        `${baseURL}/api/r2s/job/user/${args[0]}?no=${args[1] - 1}&limit=${args[2]
         }`
       )
       .then((response) => {
@@ -248,8 +247,7 @@ export const getDisabledJobListByUserId = createAsyncThunk(
   async (args) => {
     return axios
       .get(
-        `${baseURL}/api/r2s/job/user/disable/${args[0]}?no=${
-          args[1] - 1
+        `${baseURL}/api/r2s/job/user/disable/${args[0]}?no=${args[1] - 1
         }&limit=${args[2]}`
       )
       .then((response) => {
@@ -417,8 +415,7 @@ export const getListCandidateApplied = createAsyncThunk(
     };
     return axios
       .get(
-        `${baseURL}/api/r2s/job/candidate/${args[0]}?no=${args[1] - 1}&limit=${
-          args[3]
+        `${baseURL}/api/r2s/job/candidate/${args[0]}?no=${args[1] - 1}&limit=${args[3]
         }`,
         header
       )

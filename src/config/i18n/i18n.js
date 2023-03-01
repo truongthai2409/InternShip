@@ -9,7 +9,8 @@ import {
     INFORMATION_EN,
     REGISTER_FROM_EN,
     LOGIN_EN,
-    SEARCH_EN
+    SEARCH_EN,
+    NOTIFICATION_EN
 } from 'src/locales/translateEN';
 import {
     CLIENT_VI,
@@ -20,6 +21,7 @@ import {
     REGISTER_FROM_VI,
     LOGIN_VI,
     SEARCH_VI,
+    NOTIFICATION_VI
 } from 'src/locales/translateVI';
 
 const resources = {
@@ -31,7 +33,8 @@ const resources = {
         information: INFORMATION_EN,
         registerFrom: REGISTER_FROM_EN,
         login: LOGIN_EN,
-        search: SEARCH_EN
+        search: SEARCH_EN,
+        notification: NOTIFICATION_EN
     },
     vi: {
         client: CLIENT_VI,
@@ -41,7 +44,8 @@ const resources = {
         information: INFORMATION_VI,
         registerFrom: REGISTER_FROM_VI,
         login: LOGIN_VI,
-        search: SEARCH_VI
+        search: SEARCH_VI,
+        notification: NOTIFICATION_VI
     }
 }
 

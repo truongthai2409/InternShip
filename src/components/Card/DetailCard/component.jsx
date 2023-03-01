@@ -299,8 +299,8 @@ const Detail = ({
               </div>
             </div>
           </div>
-          <div>
-            <Box sx={{ width: "100%" }}>
+          <div >
+            <Box sx={{ width: "100%" }} className="scrollerDetailCard3">
               {demandPartner ? (
                 <InformationUniversity
                   jobDetail={jobDetailById}

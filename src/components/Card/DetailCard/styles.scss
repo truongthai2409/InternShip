@@ -5,7 +5,7 @@
   border-radius: 6px;
   border: 2px solid $primary-color;
   padding: $pd-2;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   height: 570px;
   width: 100%;
   font-family: $f-family !important;
@@ -94,7 +94,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 0px;
+    // margin: 10px 0px;
     font-family: $f-family !important;
     &-item {
       display: flex;
@@ -127,19 +127,23 @@
     }
   }
 }
-
-.detail__card::-webkit-scrollbar {
-  display: none;
+.scrollerDetailCard3{
+  overflow-y: scroll;
+  
+}
+.scrollerDetailCard3::-webkit-scrollbar {
+    // width: 10px;
+    height: 10px;
 }
 
-.MuiTabs-scroller {
-  & button.Mui-selected {
-    color: $primary-color !important;
-  }
-  & span.MuiTabs-indicator {
-    background-color: $primary-color !important;
-  }
-}
+// .MuiTabs-scroller {
+//   & button.Mui-selected {
+//     color: $primary-color !important;
+//   }
+//   & span.MuiTabs-indicator {
+//     background-color: $primary-color !important;
+//   }
+// }
 
 @media (min-width: 360px) and (max-width: 1200px) {
   .containerDetailCard-home {

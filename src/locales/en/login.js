@@ -4,6 +4,12 @@ export const LOGIN_EN =
     recruiterTL: "Recruiter",
     partnerTL: "Partner",
 
+    setUpAccount: "Set up account",
+    avatarTL: "Avatar",
+    loggedInWithTL: "Logged in with",
+    personalInformationTL: "Personal information",
+    forgotPasswordTL1: "Forgot password",
+    logOutTL: "Log out",
 
     loginTL: 'Login',
     registerTL: "Register",

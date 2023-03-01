@@ -4,6 +4,12 @@ export const LOGIN_VI =
     recruiterTL: "Nhà tuyển dụng",
     partnerTL: "Cộng tác viên",
 
+    setUpAccount: "Cài đặt tài khoản",
+    avatarTL: "Ảnh đại diện",
+    loggedInWithTL: "Đã đăng nhập với",
+    personalInformationTL: "Thông tin cá nhân",
+    forgotPasswordTL1: "Thay đổi mật khẩu",
+    logOutTL: "Đăng xuất",
 
     loginTL: 'Đăng nhập',
     registerTL: "Đăng ký",

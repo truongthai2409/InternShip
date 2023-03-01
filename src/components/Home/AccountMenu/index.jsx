@@ -17,6 +17,7 @@ import { updateRole } from "src/store/slices/main/user/userSlice";
 import { useTranslation } from "react-i18next";
 
 const AccountMenu = ({ linkImg }) => {
+  const { t } = useTranslation('login')
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const AccountMenu = ({ linkImg }) => {
     i18n.changeLanguage("vi");
     dispatch(updateRole());
     toast.warning("Bạn vừa đăng xuất", {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 3000,
       theme: "dark",
     });
@@ -46,7 +47,7 @@ const AccountMenu = ({ linkImg }) => {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Tooltip title="Cài đặt tài khoản">
+        <Tooltip title={t("setUpAccount")}>
           <IconButton
             onClick={handleClick}
             size="small"
@@ -56,7 +57,7 @@ const AccountMenu = ({ linkImg }) => {
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar sx={{ width: 45, height: 45, background: "transparent" }}>
-              <img src={linkImg} alt="Ảnh đại diện" className="avatar__image" />
+              <img src={linkImg} alt={t("avatarTL")} className="avatar__image" />
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -97,7 +98,7 @@ const AccountMenu = ({ linkImg }) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <h4 className="title-signed">
-          Đã đăng nhập với <span>{username}</span>
+          {t("loggedInWithTL")} <span>{username}</span>
         </h4>
         <Divider />
         <Link
@@ -110,7 +111,7 @@ const AccountMenu = ({ linkImg }) => {
           }}
         >
           <MenuItem>
-            <AccountBoxIcon className="profile-icon" /> Thông tin cá nhân
+            <AccountBoxIcon className="profile-icon" /> {t("personalInformationTL")}
           </MenuItem>
         </Link>
         <Link
@@ -124,7 +125,7 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <SettingsApplicationsSharpIcon className="profile-icon" />
-            Thay đổi mật khẩu
+            {t("forgotPasswordTL1")}
           </MenuItem>
         </Link>
         <Divider />
@@ -134,7 +135,7 @@ const AccountMenu = ({ linkImg }) => {
               fontSize="small"
               sx={{ marginRight: "16px", color: "#888" }}
             />
-            Đăng xuất
+            {t("logOutTL")}
           </MenuItem>
         </Link>
       </Menu>
