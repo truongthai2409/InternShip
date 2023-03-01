@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 .login-admin-container {
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@
       .img {
         position: absolute;
         bottom: 0;
-        transform: translate(5% ,-20%);
+        transform: translate(5%, -20%);
       }
     }
     .login-admin-right {

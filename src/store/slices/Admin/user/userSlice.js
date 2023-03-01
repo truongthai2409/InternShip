@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
-import notificationSlice from "../../notifications/notificationSlice";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import notificationSlice from '../../notifications/notificationSlice';
 const baseURL = process.env.REACT_APP_API;
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     userList: [],
     profile: {},
@@ -28,34 +28,34 @@ const userSlice = createSlice({
       if (payload.httpCode === 200) {
         state.statusForgotPassword = true;
         toast.success(
-          "Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !"
+          'Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !'
         );
       } else {
         state.statusForgotPassword = false;
-        toast.error("Không tìm thấy địa chỉ email !");
+        toast.error('Không tìm thấy địa chỉ email !');
       }
     });
     builder.addCase(changePassword.fulfilled, (state, action) => {
       if (action.payload.httpCode === 400) {
-        state.statusForgotPassword = "fail";
-        toast.error("Mật khẩu cũ không đúng!", {
-          position: "top-right",
+        state.statusForgotPassword = 'fail';
+        toast.error('Mật khẩu cũ không đúng!', {
+          position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
         });
       } else if (action.payload.httpCode === 500) {
-        state.statusForgotPassword = "fail";
-        toast.error("Đổi mật khẩu không thành công!", {
-          position: "top-right",
+        state.statusForgotPassword = 'fail';
+        toast.error('Đổi mật khẩu không thành công!', {
+          position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
         });
       } else {
-        state.statusForgotPassword = "success";
-        toast.success("Đổi mật khẩu thành công!", {
-          position: "top-right",
+        state.statusForgotPassword = 'success';
+        toast.success('Đổi mật khẩu thành công!', {
+          position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
         });
       }
     });
@@ -73,11 +73,11 @@ const userSlice = createSlice({
 });
 
 export const getUserList = createAsyncThunk(
-  "user/getUserList",
+  'user/getUserList',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[2],
+        Authorization: 'Bearer ' + args[2],
       },
     };
     return await axios
@@ -100,11 +100,11 @@ export const getUserList = createAsyncThunk(
  * args[1] : token
  */
 export const getUserById = createAsyncThunk(
-  "user/getUserById",
+  'user/getUserById',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
+        Authorization: 'Bearer ' + args[1],
       },
     };
     return await axios
@@ -125,16 +125,16 @@ export const getUserById = createAsyncThunk(
  * args[2] : role
  */
 export const getProfileByIdUser = createAsyncThunk(
-  "user/getProfileByIdUser",
+  'user/getProfileByIdUser',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
+        Authorization: 'Bearer ' + args[1],
       },
     };
 
     switch (args[2]) {
-      case "Role_HR":
+      case 'Role_HR':
         return await axios
           .get(`${baseURL}/api/r2s/hr/user/${args[0]}`, header)
           .then((response) => {
@@ -143,7 +143,7 @@ export const getProfileByIdUser = createAsyncThunk(
           .catch((error) => {
             return error.response.data;
           });
-      case "Role_Partner":
+      case 'Role_Partner':
         return await axios
           .get(`${baseURL}/api/r2s/partner/user/${args[0]}`, header)
           .then((response) => {
@@ -152,7 +152,7 @@ export const getProfileByIdUser = createAsyncThunk(
           .catch((error) => {
             return error.response.data;
           });
-      case "Role_Candidate":
+      case 'Role_Candidate':
         return await axios
           .get(`${baseURL}/api/r2s/candidate/user/${args[0]}`, header)
           .then((response) => {
@@ -173,15 +173,15 @@ export const getProfileByIdUser = createAsyncThunk(
  * args[1] : user in sesion Storage
  * args[2] : data
  */
-export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
+export const updateUser = createAsyncThunk('user/updateUser', async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[0].userStorage?.token,
-      "Content-Type": "multipart/form-data",
+      Authorization: 'Bearer ' + args[0].userStorage?.token,
+      'Content-Type': 'multipart/form-data',
     },
   };
   switch (args[0].role) {
-    case "Role_HR": {
+    case 'Role_HR': {
       return await axios
         .put(`${baseURL}/api/r2s/hr/${args[2]}`, args[1], header)
         .then((response) => {
@@ -191,7 +191,7 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
           return error.response.data;
         });
     }
-    case "Role_Candidate": {
+    case 'Role_Candidate': {
       return await axios
         .put(`${baseURL}/api/r2s/candidate`, args[1], header)
         .then((response) => {
@@ -201,7 +201,7 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
           return error.response.data;
         });
     }
-    case "Role_Partner": {
+    case 'Role_Partner': {
       return await axios
         .put(`${baseURL}/api/r2s/partner`, args[1], header)
         .then((response) => {
@@ -219,7 +219,7 @@ export const updateUser = createAsyncThunk("user/updateUser", async (args) => {
 
 // function use for feature forgot password
 export const forgotPassword = createAsyncThunk(
-  "user/forgotPassword",
+  'user/forgotPassword',
   async (emailUser) => {
     return await axios
       .get(`${baseURL}/api/user/forgotPassword/${emailUser}`)
@@ -233,12 +233,12 @@ export const forgotPassword = createAsyncThunk(
 );
 
 export const deleteUser = createAsyncThunk(
-  "user/deleteUser",
+  'user/deleteUser',
   async (args, thunkAPI) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     return axios
@@ -246,7 +246,7 @@ export const deleteUser = createAsyncThunk(
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
-            "Đã disabled người dùng thành công"
+            'Đã disabled người dùng thành công'
           )
         );
       })
@@ -257,12 +257,12 @@ export const deleteUser = createAsyncThunk(
 );
 
 export const verifyUser = createAsyncThunk(
-  "user/verifyUser",
+  'user/verifyUser',
   async (args, thunkAPI) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     return axios
@@ -270,7 +270,7 @@ export const verifyUser = createAsyncThunk(
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
-            "Đã verified người dùng thành công"
+            'Đã verified người dùng thành công'
           )
         );
       })
@@ -281,7 +281,7 @@ export const verifyUser = createAsyncThunk(
 );
 
 export const changePassword = createAsyncThunk(
-  "user/changePassword",
+  'user/changePassword',
   async (data) => {
     const { token, dataChangePassword } = data;
     return axios
@@ -299,11 +299,11 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-export const createUser = createAsyncThunk("user/createUser", async (args) => {
+export const createUser = createAsyncThunk('user/createUser', async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[1],
-      "Content-Type": "multipart/form-data",
+      Authorization: 'Bearer ' + args[1],
+      'Content-Type': 'multipart/form-data',
     },
   };
   const res = await axios
@@ -318,12 +318,12 @@ export const createUser = createAsyncThunk("user/createUser", async (args) => {
 });
 
 export const adminUpdateUser = createAsyncThunk(
-  "user/adminUpdateUser",
+  'user/adminUpdateUser',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     const res = await axios
@@ -338,16 +338,17 @@ export const adminUpdateUser = createAsyncThunk(
   }
 );
 
-export const searchUser = createAsyncThunk("user/searchUser", async (args) => {
+export const searchUser = createAsyncThunk('user/searchUser', async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[3],
-      "Content-Type": "multipart/form-data",
+      Authorization: 'Bearer ' + args[3],
+      'Content-Type': 'multipart/form-data',
     },
   };
   const res = await axios
     .get(
-      `${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${args[2]
+      `${baseURL}/api/user/search/${args[0]}?no=${args[1] - 1}&limit=${
+        args[2]
       }`,
       header
     )

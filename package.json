@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "history": "^5.3.0",
+    "husky": "^8.0.3",
     "i18next": "^22.4.10",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
@@ -51,7 +52,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "prettier --check ."
   },
   "eslintConfig": {
     "extends": [
@@ -70,5 +72,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": "8.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write ."
+    }
   }
 }

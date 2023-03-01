@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 #page-footer-wrapper {
   width: 100%;
@@ -180,11 +180,11 @@
 .footer_components {
   background-color: #fff;
   min-height: 70vh;
-  margin : 2rem 10vw;
+  margin: 2rem 10vw;
   .footer_title {
     text-align: center;
     padding: 1rem;
-    color: #00B074;
+    color: #00b074;
     font-weight: bold;
     font-size: 40px;
   }

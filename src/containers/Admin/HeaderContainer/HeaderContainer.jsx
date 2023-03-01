@@ -1,10 +1,10 @@
-import React from "react";
-import { Grid, IconButton, Tooltip } from "@mui/material";
+import React from 'react';
+import { Grid, IconButton, Tooltip } from '@mui/material';
 
-import AddIcon from "@mui/icons-material/Add";
+import AddIcon from '@mui/icons-material/Add';
 
-import "./styles.scss";
-import Search from "../../../components/shared/Search";
+import './styles.scss';
+import Search from '../../../components/shared/Search';
 
 const HeaderContainer = ({
   headerName,
@@ -17,15 +17,15 @@ const HeaderContainer = ({
   onSearch,
 }) => {
   return (
-    <div className="header-container">
+    <div className='header-container'>
       <Grid container spacing={2}>
-        <Grid item xs={12} className="header-container__title">
+        <Grid item xs={12} className='header-container__title'>
           <h1>{headerName}</h1>
-          <Tooltip title="Thêm">
+          <Tooltip title='Thêm'>
             <IconButton
               onClick={onClick}
-              className="header-container__add-button"
-              sx={{ width: "42px" }}
+              className='header-container__add-button'
+              sx={{ width: '42px' }}
             >
               <AddIcon />
             </IconButton>

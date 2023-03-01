@@ -1,20 +1,20 @@
-import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
-import PeopleIcon from "@mui/icons-material/People";
-import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
-import { Tooltip } from "@mui/material";
-import Rating from "@mui/material/Rating";
-import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded';
+import PeopleIcon from '@mui/icons-material/People';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import { Tooltip } from '@mui/material';
+import Rating from '@mui/material/Rating';
+import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   idFilterChange,
   indexFilterChange,
-} from "src/store/slices/main/home/filter/filterSlices";
-import { getAllJobCare } from "src/store/slices/main/home/job/jobCandidateSlice";
-import ButtonMark from "../../shared/ButtonMark";
-import TagName from "../../Home/TagName";
-import "./styles.scss";
+} from 'src/store/slices/main/home/filter/filterSlices';
+import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
+import ButtonMark from '../../shared/ButtonMark';
+import TagName from '../../Home/TagName';
+import './styles.scss';
 
 const CardHome = (props) => {
   // console.log(props)
@@ -32,8 +32,8 @@ const CardHome = (props) => {
   };
   useEffect(() => {
     const userStorage =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     const dispatchJobCAre = {
       user: user,
       token: userStorage?.token,
@@ -42,7 +42,7 @@ const CardHome = (props) => {
         limit: 1000,
       },
     };
-    user?.user?.role?.name === "Role_Candidate" &&
+    user?.user?.role?.name === 'Role_Candidate' &&
       dispatch(getAllJobCare(dispatchJobCAre));
   }, [dispatch, user]);
 
@@ -54,29 +54,29 @@ const CardHome = (props) => {
     <div
       onClick={handleClick}
       className={clsx(
-        "cardHome__container",
-        props.active === props.index ? "active" : ""
+        'cardHome__container',
+        props.active === props.index ? 'active' : ''
       )}
       style={{
-        paddingLeft: props.pdLeft ? props.pdLeft : "",
-        paddingRight: props.pdRight ? props.pdRight : "",
+        paddingLeft: props.pdLeft ? props.pdLeft : '',
+        paddingRight: props.pdRight ? props.pdRight : '',
       }}
     >
-      <div className="cardHome__col1" dataset={props.id}>
-        <div className="cardHome__aboutCompany">
+      <div className='cardHome__col1' dataset={props.id}>
+        <div className='cardHome__aboutCompany'>
           <img
-            className="cardHome__img"
-            src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
-            alt=""
+            className='cardHome__img'
+            src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
+            alt=''
           />
-          <div style={{ textAlign: "left" }}>
-            <Tooltip title={props.title} placement="top">
-              <h4 className="cardHome__title">{props.title}</h4>
+          <div style={{ textAlign: 'left' }}>
+            <Tooltip title={props.title} placement='top'>
+              <h4 className='cardHome__title'>{props.title}</h4>
             </Tooltip>
-            <p className="cardHome__nameCompany">{props.nameCompany}</p>
+            <p className='cardHome__nameCompany'>{props.nameCompany}</p>
           </div>
         </div>
-        <div className="cardHome__tagName">
+        <div className='cardHome__tagName'>
           {props?.tagName?.map((tag) =>
             tag?.length > 0 ? (
               tag?.map((item) => {
@@ -94,47 +94,47 @@ const CardHome = (props) => {
           )}
         </div>
         {props.demandPartner ? (
-          <div className="cardHome__amount-hr-apply">
-            <PeopleIcon sx={{ color: "#04bf8a !important" }} />
-            <span className="amount">Số lượng ứng viên: {props.amount}</span>
+          <div className='cardHome__amount-hr-apply'>
+            <PeopleIcon sx={{ color: '#04bf8a !important' }} />
+            <span className='amount'>Số lượng ứng viên: {props.amount}</span>
           </div>
         ) : (
           <Rating
-            name="read-only"
+            name='read-only'
             precision={0.5}
             readOnly
-            value={props.star ?? " "}
+            value={props.star ?? ' '}
           />
         )}
       </div>
 
-      <div className="cardHome__col2">
+      <div className='cardHome__col2'>
         {props.hiddent ? (
-          <div style={{ visibility: "hidden" }}>
+          <div style={{ visibility: 'hidden' }}>
             <ButtonMark
-              height="32px"
-              width="32px"
-              fontSize="18px"
+              height='32px'
+              width='32px'
+              fontSize='18px'
               jobId={props.id}
               isMark={false}
             />
           </div>
         ) : (
           <>
-            {user?.user?.role?.name?.includes("Role_Candidate") ? (
+            {user?.user?.role?.name?.includes('Role_Candidate') ? (
               <ButtonMark
-                height="32px"
-                width="32px"
-                fontSize="18px"
+                height='32px'
+                width='32px'
+                fontSize='18px'
                 jobId={props.id}
                 isMark={isMarkLength}
               />
             ) : (
-              <div style={{ visibility: "hidden" }}>
+              <div style={{ visibility: 'hidden' }}>
                 <ButtonMark
-                  height="32px"
-                  width="32px"
-                  fontSize="18px"
+                  height='32px'
+                  width='32px'
+                  fontSize='18px'
                   jobId={props.id}
                   isMark={false}
                 />
@@ -143,33 +143,33 @@ const CardHome = (props) => {
           </>
         )}
         {props.none__time ? (
-          <div className="cardHome__col2-End-1">
+          <div className='cardHome__col2-End-1'>
             <AddLocationAltRoundedIcon
               style={{ fontSize: `${props.fontSize + 2}px` }}
-              sx={{ color: "#04bf8a" }}
+              sx={{ color: '#04bf8a' }}
             />
 
             <p
               style={{
                 fontSize: `${props.fontSize}px`,
-                width: "max-content",
-                color: "#000",
+                width: 'max-content',
+                color: '#000',
               }}
             >
               {props.location}
             </p>
           </div>
         ) : (
-          <div className="cardHome__col2-End">
-            <div className="cardHome__col2-End-1">
+          <div className='cardHome__col2-End'>
+            <div className='cardHome__col2-End-1'>
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />
-              <p style={{ fontSize: `${props.fontSize}px`, color: "#000" }}>
+              <p style={{ fontSize: `${props.fontSize}px`, color: '#000' }}>
                 {props.location}
               </p>
             </div>
-            <div className="cardHome__col2-End-2">
+            <div className='cardHome__col2-End-2'>
               <WatchLaterOutlinedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />

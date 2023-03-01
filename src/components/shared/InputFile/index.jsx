@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { FileUpload, ImageUpload } from "./components";
-import "./styles.scss";
+import { useState } from 'react';
+import { FileUpload, ImageUpload } from './components';
+import './styles.scss';
 
 const InputFile = ({
   label,
   id,
-  format = "not image",
+  format = 'not image',
   children,
   register,
   unregister = null,
@@ -18,35 +18,35 @@ const InputFile = ({
   icon,
   top,
   setValue,
-  imageCurrent
+  imageCurrent,
 }) => {
   let accept;
   let text;
   switch (format) {
-    case "image":
-      accept = ".png, .jpg, .jpeg, .gif, .bmp";
-      text = "Hỗ trợ file .jpg .png và tối đa 512KB.";
+    case 'image':
+      accept = '.png, .jpg, .jpeg, .gif, .bmp';
+      text = 'Hỗ trợ file .jpg .png và tối đa 512KB.';
       break;
-    case "doc":
-      accept = ".docx";
-      text = "Chỉ hỗ trợ file .docx.";
+    case 'doc':
+      accept = '.docx';
+      text = 'Chỉ hỗ trợ file .docx.';
       break;
-    case "pdf":
-      accept = ".pdf";
-      text = "Chỉ hỗ trợ file .pdf.";
+    case 'pdf':
+      accept = '.pdf';
+      text = 'Chỉ hỗ trợ file .pdf.';
       break;
-    case "excel":
-      accept = ".xlsx";
-      text = "Chỉ hỗ trợ file .xlsx."
+    case 'excel':
+      accept = '.xlsx';
+      text = 'Chỉ hỗ trợ file .xlsx.';
       break;
     default: // all of file (except image)
-      accept = ".docx, .pdf, .xlsx";
-      text = "Chỉ hỗ trợ file .docx, .pdf, .xlsx.";
+      accept = '.docx, .pdf, .xlsx';
+      text = 'Chỉ hỗ trợ file .docx, .pdf, .xlsx.';
       break;
   }
 
-  const [imgSrc, setImgSrc] = useState("");
-  const [fileName, setFileName] = useState("");
+  const [imgSrc, setImgSrc] = useState('');
+  const [fileName, setFileName] = useState('');
 
   const handlePreviewFile = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -63,8 +63,10 @@ const InputFile = ({
 
   let component;
   switch (format) {
-    case "image":
-      component = <ImageUpload imageCurrent={imageCurrent} text={text} img={imgSrc} />;
+    case 'image':
+      component = (
+        <ImageUpload imageCurrent={imageCurrent} text={text} img={imgSrc} />
+      );
       break;
     default: //word or pdf or excel
       component = (
@@ -73,27 +75,27 @@ const InputFile = ({
   }
 
   return (
-    <div className={`custom-input ${className ? className : ""} `}>
-      <label htmlFor={id} className="custom-input__label">
+    <div className={`custom-input ${className ? className : ''} `}>
+      <label htmlFor={id} className='custom-input__label'>
         {label}
-        {requirementField && <span className="field-requirment">*</span>}
+        {requirementField && <span className='field-requirment'>*</span>}
         {component}
       </label>
-      {<p className="custom-input__error">{children}</p>}
+      {<p className='custom-input__error'>{children}</p>}
       <div
-        className={` ${"file-input"}
-          ${"custom-input__textfield"}
+        className={` ${'file-input'}
+          ${'custom-input__textfield'}
         `}
       >
         {icon}
         <input
           style={{
-            borderRadius: radius ? radius : "",
-            height: height ? height : "",
-            border: border ? border : "",
+            borderRadius: radius ? radius : '',
+            height: height ? height : '',
+            border: border ? border : '',
           }}
           id={id}
-          type="file"
+          type='file'
           name={id}
           {...register(id)}
           onChange={handlePreviewFile}

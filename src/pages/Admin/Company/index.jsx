@@ -1,70 +1,70 @@
-import React, { useState } from "react";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import { useDispatch } from 'react-redux';
 
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/shared/Modal";
-import CompanyForm from "../../../containers/Admin/CompanyForm";
-import CompanyTable from "./CompanyTable";
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer';
+import Modal from '../../../components/shared/Modal';
+import CompanyForm from '../../../containers/Admin/CompanyForm';
+import CompanyTable from './CompanyTable';
 import {
   getCompanyList,
   searchCompany,
-} from "src/store/slices/Admin/company/companySlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
+} from 'src/store/slices/Admin/company/companySlice';
+import { getProvinceList } from 'src/store/slices/location/locationSlice';
 
 const selectOptions = [
   {
-    value: "All",
-    name: "All",
+    value: 'All',
+    name: 'All',
   },
   {
-    value: "HR",
-    name: "HR",
+    value: 'HR',
+    name: 'HR',
   },
   {
-    value: "Candidate",
-    name: "Candidate",
+    value: 'Candidate',
+    name: 'Candidate',
   },
   {
-    value: "Partner",
-    name: "Partner",
+    value: 'Partner',
+    name: 'Partner',
   },
 ];
 
 export default function Company() {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () => {
     dispatch(searchCompany([searchValue, 1, 10, userSessionStorage?.token]));
   };
 
   const handleOpenModal = () => {
-    dispatch(getProvinceList())
+    dispatch(getProvinceList());
     setOpen(true);
   };
 
   return (
     <>
       <HeaderContainer
-        headerName="Quản lý công ty"
-        placeholder="Tìm kiếm công ty"
+        headerName='Quản lý công ty'
+        placeholder='Tìm kiếm công ty'
         onChange={(e) => setSearchValue(e.target.value)}
-        selectName="role"
+        selectName='role'
         selectOptions={selectOptions}
-        btnName=""
+        btnName=''
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
         onSearch={handleSearch}
       />
       <CompanyTable searchValue={searchValue} />
       <Modal
-        modalTitle="Thêm Công Ty"
+        modalTitle='Thêm Công Ty'
         open={open}
         setOpen={setOpen}
         iconClose={true}

@@ -1,4 +1,4 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 .detail__card {
   background-color: $color-white-0;
@@ -82,7 +82,7 @@
 
   .line::after {
     background-color: $color-gray-3;
-    content: "";
+    content: '';
     display: inline-block;
     height: 1px;
     position: relative;
@@ -127,13 +127,12 @@
     }
   }
 }
-.scrollerDetailCard3{
+.scrollerDetailCard3 {
   overflow-y: scroll;
-  
 }
 .scrollerDetailCard3::-webkit-scrollbar {
-    // width: 10px;
-    height: 10px;
+  // width: 10px;
+  height: 10px;
 }
 
 // .MuiTabs-scroller {
@@ -184,8 +183,8 @@
 }
 .tag-name__name {
   flex-wrap: wrap;
-  gap : 4px
+  gap: 4px;
 }
-.boxOpenSans{
+.boxOpenSans {
   font-family: $f-family !important;
 }

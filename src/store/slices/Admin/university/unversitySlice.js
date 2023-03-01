@@ -1,16 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
-import notificationSlice from "../../notifications/notificationSlice";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import notificationSlice from '../../notifications/notificationSlice';
 const baseURL = process.env.REACT_APP_API;
 
 const universitySlice = createSlice({
-  name: "university",
+  name: 'university',
   initialState: {
     universityList: [],
     universityDetail: {},
     error: [],
-    status: "idle",
+    status: 'idle',
     user: {},
     activeUser: {},
     totalPages: 0,
@@ -28,17 +28,17 @@ const universitySlice = createSlice({
       state.totalItems = payload.totalItems;
     });
     builder.addCase(addUniversity.pending, (state, { payload }) => {
-      state.status = "loading";
+      state.status = 'loading';
     });
     builder.addCase(addUniversity.fulfilled, (state, { payload }) => {
       if (payload.id) {
         state.user = payload;
-        state.status = "success";
-        toast.success("Bạn đã đăng ký tài khoản thành công!");
+        state.status = 'success';
+        toast.success('Bạn đã đăng ký tài khoản thành công!');
       } else {
-        state.status = "idle";
+        state.status = 'idle';
         state.error = payload;
-        toast.error("Đăng ký không thành công!");
+        toast.error('Đăng ký không thành công!');
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {
@@ -70,7 +70,7 @@ export default universitySlice;
  * @returns company list
  */
 export const getUniversityList = createAsyncThunk(
-  "university/getUniversityList",
+  'university/getUniversityList',
   async (args) => {
     return await axios
       .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
@@ -90,12 +90,12 @@ export const getUniversityList = createAsyncThunk(
  */
 
 export const addUniversity = createAsyncThunk(
-  "university/addUniversity",
+  'university/addUniversity',
   async (data) => {
     const res = await axios
       .post(`${baseURL}/api/r2s/partner/university/create`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {
@@ -114,7 +114,7 @@ export const addUniversity = createAsyncThunk(
  * @return company detail
  */
 export const getUniversityDetail = createAsyncThunk(
-  "university/getUniversityDetail",
+  'university/getUniversityDetail',
   async (uniId) => {
     return await axios
       .get(`${baseURL}/api/university/${uniId}`)
@@ -128,7 +128,7 @@ export const getUniversityDetail = createAsyncThunk(
 );
 
 export const getPartnerByUserID = createAsyncThunk(
-  "university/getPartnerByUserID",
+  'university/getPartnerByUserID',
   async (userId) => {
     return await axios
       .get(`${baseURL}/api/r2s/partner/user/${userId}`)
@@ -148,12 +148,12 @@ export const getPartnerByUserID = createAsyncThunk(
  * error => error.response.data
  */
 export const updateUniversityInfo = createAsyncThunk(
-  "university/updateUniversityInfo",
+  'university/updateUniversityInfo',
   async (args, thunkAPI) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     const { universityData, uniId } = args[0];
@@ -165,7 +165,7 @@ export const updateUniversityInfo = createAsyncThunk(
       )
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Cập nhật Trường thành công")
+          notificationSlice.actions.successMess('Cập nhật Trường thành công')
         );
       })
       .catch((error) => {
@@ -175,12 +175,12 @@ export const updateUniversityInfo = createAsyncThunk(
 );
 
 export const searchUniversity = createAsyncThunk(
-  "university/searchUniversity",
+  'university/searchUniversity',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[3],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[3],
+        'Content-Type': 'multipart/form-data',
       },
     };
     const res = await axios
@@ -201,25 +201,25 @@ export const searchUniversity = createAsyncThunk(
 );
 
 export const deleteUniversity = createAsyncThunk(
-  "university/deleteUniversity",
+  'university/deleteUniversity',
   async (args, thunkAPI) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     return await axios
       .delete(`${baseURL}/api/r2s/admin/university/${args[0]}`, header)
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Xóa trường học thành công.")
+          notificationSlice.actions.successMess('Xóa trường học thành công.')
         );
       })
       .catch((error) => {
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess(
-            "Xóa trường học không thành công."
+            'Xóa trường học không thành công.'
           )
         );
         return error.response.data;
@@ -228,12 +228,12 @@ export const deleteUniversity = createAsyncThunk(
 );
 
 export const updateUniversityStatus = createAsyncThunk(
-  "university/updateUniversityStatus",
+  'university/updateUniversityStatus',
   async (args, thunkAPI) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'application/json',
       },
     };
     const { university, uniId } = args[0];
@@ -245,7 +245,7 @@ export const updateUniversityStatus = createAsyncThunk(
       )
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Cập nhật Trường thành công")
+          notificationSlice.actions.successMess('Cập nhật Trường thành công')
         );
       })
       .catch((error) => {
@@ -255,27 +255,27 @@ export const updateUniversityStatus = createAsyncThunk(
 );
 
 export const addUniversityByAdmin = createAsyncThunk(
-  "university/addUniversityByAdmin",
+  'university/addUniversityByAdmin',
   async (args, thunkAPI) => {
     const { universityData } = args[0];
     const header = {
       headers: {
-        Authorization: "Bearer " + args[1],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[1],
+        'Content-Type': 'multipart/form-data',
       },
     };
     const res = await axios
       .post(`${baseURL}/api/r2s/admin/university`, universityData, header)
       .then((res) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Tạo mới Trường thành công")
+          notificationSlice.actions.successMess('Tạo mới Trường thành công')
         );
         return res.data;
       })
       .catch((error) => {
         console.log(error.response.data);
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Tạo mới Trường không thành công")
+          notificationSlice.actions.errorMess('Tạo mới Trường không thành công')
         );
         return error.response.data;
       });

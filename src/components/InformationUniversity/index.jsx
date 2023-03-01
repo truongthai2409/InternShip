@@ -1,36 +1,35 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // import Button from "../Button";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import { Icon } from "@mui/material";
-import moment from "moment";
-import { Typography } from "@mui/material";
-import "./styles.scss";
-import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import Button from "../shared/Button";
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import { Icon } from '@mui/material';
+import moment from 'moment';
+import { Typography } from '@mui/material';
+import './styles.scss';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import Button from '../shared/Button';
 
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail, detailJob = false }) => {
-
   const handleApplyDemandUni = async (e) => {};
 
   return (
     <div>
-      <div className="detail__card-3-partner">
-        <Typography variant="span">
+      <div className='detail__card-3-partner'>
+        <Typography variant='span'>
           <Typography
-            variant="span"
-            sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+            variant='span'
+            sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
           >
             Danh sách sinh viên:
           </Typography>
           <Typography
-            variant="body2"
+            variant='body2'
             gutterBottom
-            sx={{ fontSize: 17, fontWeight: "400" }}
+            sx={{ fontSize: 17, fontWeight: '400' }}
           >
             {detailJob ? (
               <div
@@ -43,32 +42,32 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
             )}
           </Typography>
         </Typography>
-        <div className="detail__card-3-item-partner">
-          <Typography variant="span">
-            <Typography variant="span" sx={{ fontSize: 16, fontWeight: "700" }}>
+        <div className='detail__card-3-item-partner'>
+          <Typography variant='span'>
+            <Typography variant='span' sx={{ fontSize: 16, fontWeight: '700' }}>
               Thời gian sinh viên có thể chờ:
             </Typography>
             <Typography
-              variant="body2"
+              variant='body2'
               gutterBottom
-              sx={{ fontSize: 16, fontWeight: "400" }}
+              sx={{ fontSize: 16, fontWeight: '400' }}
             >
-              {moment(jobDetail.createDate).format("DD/MM/YYYY")} -{" "}
-              {moment(jobDetail.end).format("DD/MM/YYYY")}
+              {moment(jobDetail.createDate).format('DD/MM/YYYY')} -{' '}
+              {moment(jobDetail.end).format('DD/MM/YYYY')}
             </Typography>
           </Typography>
 
-          <Typography variant="span">
+          <Typography variant='span'>
             <Typography
-              variant="div"
-              sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+              variant='div'
+              sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
             >
-              <div className="detail__card-list-students-link">
+              <div className='detail__card-list-students-link'>
                 <a
-                  className="list-students-file"
+                  className='list-students-file'
                   href={`${jobDetail?.students}`}
-                  target="_blank"
-                  rel="noreferrer"
+                  target='_blank'
+                  rel='noreferrer'
                   download
                 >
                   Tải danh sách sinh viên
@@ -78,54 +77,55 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
           </Typography>
         </div>
       </div>
-      <div className="line"></div>
-      <div className="detail__card-4">
-        <div className="detail__card-4-item" sx={{ display: "flex" }}>
-          <Icon className="detail__card-4-item-icon">
+      <div className='line'></div>
+      <div className='detail__card-4'>
+        <div className='detail__card-4-item' sx={{ display: 'flex' }}>
+          <Icon className='detail__card-4-item-icon'>
             <LocalPhoneIcon />
           </Icon>
           <Typography
-            variant="h6"
-            component="div"
+            variant='h6'
+            component='div'
             sx={{
               fontSize: 14,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
+              fontWeight: '400',
+              transform: 'translate(5px,5px)',
             }}
           >
-            {jobDetail?.universityDTO?.phone || "Không có"}
+            {jobDetail?.universityDTO?.phone || 'Không có'}
           </Typography>
         </div>
-        <div className="detail__card-4-item" sx={{ display: "flex" }}>
-          <Icon className="detail__card-4-item-icon">
+        <div className='detail__card-4-item' sx={{ display: 'flex' }}>
+          <Icon className='detail__card-4-item-icon'>
             <EmailOutlinedIcon />
           </Icon>
           <Typography
-            variant="h6"
-            component="div"
+            variant='h6'
+            component='div'
             sx={{
               fontSize: 14,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
+              fontWeight: '400',
+              transform: 'translate(5px,5px)',
             }}
           >
-            {jobDetail?.universityDTO?.email || "Không có"}
+            {jobDetail?.universityDTO?.email || 'Không có'}
           </Typography>
         </div>
-        <div className="detail__card-4-item">
-          <AddLocationIcon className="detail__card-4-item-icon"></AddLocationIcon>
+        <div className='detail__card-4-item'>
+          <AddLocationIcon className='detail__card-4-item-icon'></AddLocationIcon>
           <Typography
-            variant="h6"
-            component="div"
+            variant='h6'
+            component='div'
             sx={{
               fontSize: 14,
-              fontWeight: "400",
-              transform: "translate(5px,5px)",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              fontWeight: '400',
+              transform: 'translate(5px,5px)',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
-            {jobDetail?.universityDTO?.locations[0]?.district?.province?.name || "Không có"}
+            {jobDetail?.universityDTO?.locations[0]?.district?.province?.name ||
+              'Không có'}
           </Typography>
         </div>
       </div>

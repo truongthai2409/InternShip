@@ -1,22 +1,22 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { } from "src/components/shared/CustomInput/components";
-import InputFile from "src/components/shared/InputFile";
-import { registerCandidate } from "src/store/slices/main/register/registerSlice";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import { genderList, schema } from "./data";
-import SelectCustom from "../../../components/shared/Select";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import {} from 'src/components/shared/CustomInput/components';
+import InputFile from 'src/components/shared/InputFile';
+import { registerCandidate } from 'src/store/slices/main/register/registerSlice';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import { genderList, schema } from './data';
+import SelectCustom from '../../../components/shared/Select';
 // import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
-import { getMajorListThunk } from "src/store/action/company/companyAction";
-import Container from "../Container";
-import "./styles.scss";
+import { getMajorListThunk } from 'src/store/action/company/companyAction';
+import Container from '../Container';
+import './styles.scss';
 const CandidateInfo = () => {
   // console.log("CandidateInfo");
-  TabTitle("Đăng ký - Ứng viên");
+  TabTitle('Đăng ký - Ứng viên');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const CandidateInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "all",
+    mode: 'all',
     resolver: yupResolver(schema),
   });
   const handleBackClick = (e) => {
@@ -65,7 +65,7 @@ const CandidateInfo = () => {
     try {
       const res = await dispatch(registerCandidate(userData));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        navigate("/login", { replace: true });
+        navigate('/login', { replace: true });
       }
     } catch (error) {
       toast.error(error);
@@ -74,7 +74,7 @@ const CandidateInfo = () => {
 
   return (
     <Container
-      title="Ứng Viên"
+      title='Ứng Viên'
       onClick={handleBackClick}
       handleClick={handleSubmit(onSubmit)}
       err={errors}
@@ -85,19 +85,19 @@ const CandidateInfo = () => {
       children={
         <>
           <SelectCustom
-            label="Chuyên ngành"
-            placeholder="Vui lòng chọn..."
+            label='Chuyên ngành'
+            placeholder='Vui lòng chọn...'
             options={majorList}
-            id="major"
+            id='major'
             register={register}
           >
             {errors.major?.message}
           </SelectCustom>
           <InputFile
-            label="CV"
+            label='CV'
             requirementField={false}
-            id="cv"
-            format="pdf"
+            id='cv'
+            format='pdf'
             setValue={setValue}
             register={register}
           >

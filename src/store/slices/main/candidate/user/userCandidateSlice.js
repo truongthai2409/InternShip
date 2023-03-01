@@ -1,13 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 const baseURL = process.env.REACT_APP_API;
 
 const userCandidateSlice = createSlice({
-  name: "userFilter",
+  name: 'userFilter',
   initialState: {
     allUser: [],
-    majors: "",
-    names: "",
+    majors: '',
+    names: '',
     change: false,
   },
   reducers: {
@@ -29,14 +29,14 @@ const userCandidateSlice = createSlice({
 });
 
 export const getAllUserCandidate = createAsyncThunk(
-  "user/getAllUserCandidate",
+  'user/getAllUserCandidate',
   async () => {
     const user =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     return axios
       .get(`${baseURL}/api/r2s/admin/candidate?no=0&limit=1000`, {
-        headers: "Bearer " + user.token,
+        headers: 'Bearer ' + user.token,
       })
       .then((response) => {
         return response.data;

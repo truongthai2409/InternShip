@@ -1,23 +1,23 @@
-import RegisterLayout from "src/Layouts/Authenticate/Register";
-import CandidateInfo from "src/pages/Register/CandidateInfo";
-import HRInfo from "src/pages/Register/HRInfo";
-import PartnerInfo from "src/pages/Register/PartnerInfo";
+import RegisterLayout from 'src/Layouts/Authenticate/Register';
+import CandidateInfo from 'src/pages/Register/CandidateInfo';
+import HRInfo from 'src/pages/Register/HRInfo';
+import PartnerInfo from 'src/pages/Register/PartnerInfo';
 
 const registerRouter = [
   {
-    path: "/register",
+    path: '/register',
     element: <RegisterLayout />,
     children: [
       {
-        path: "candidate",
+        path: 'candidate',
         Component: CandidateInfo,
       },
       {
-        path: "hr",
+        path: 'hr',
         Component: HRInfo,
       },
       {
-        path: "partner",
+        path: 'partner',
         Component: PartnerInfo,
       },
     ],

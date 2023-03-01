@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .container {
   width: 100%;
@@ -39,7 +39,6 @@
   padding: 10px 18px;
   font-weight: 500;
   text-transform: uppercase;
-
 }
 
 @media (max-width: 740px) {

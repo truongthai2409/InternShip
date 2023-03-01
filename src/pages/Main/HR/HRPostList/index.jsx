@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
-import "./styles.scss";
-import "./responsive.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import './styles.scss';
+import './responsive.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getActivedJobListByUserId,
   getDisabledJobListByUserId,
-} from "../../../../store/slices/main/home/job/jobSlice";
-import { ListJob } from "./ListJob";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import Box from "@mui/material/Box";
-import PropTypes from "prop-types";
-import { Tab, Tabs } from "@mui/material";
-import PaginationCustom from "src/components/shared/Pagination";
-import StatisticUser from "src/components/User/StatisticUser";
+} from '../../../../store/slices/main/home/job/jobSlice';
+import { ListJob } from './ListJob';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
+import { Tab, Tabs } from '@mui/material';
+import PaginationCustom from 'src/components/shared/Pagination';
+import StatisticUser from 'src/components/User/StatisticUser';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -43,12 +43,12 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
 const HRPostList = (props) => {
-  TabTitle("Công việc đang tuyển | IT Internship JOBS");
+  TabTitle('Công việc đang tuyển | IT Internship JOBS');
   const [value, setValue] = useState(0);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
@@ -60,8 +60,8 @@ const HRPostList = (props) => {
 
   const handleChangePage = (e, value) => {
     window.scrollTo(0, 0);
-    const filterPanel = document.querySelector(".hrpost__list");
-    const filterPanels = document.querySelector(".filter-panel-home__wrapper");
+    const filterPanel = document.querySelector('.hrpost__list');
+    const filterPanels = document.querySelector('.filter-panel-home__wrapper');
     filterPanel.scrollTop = 0;
     filterPanels.scrollTop = 0;
     setPage(value);
@@ -77,102 +77,101 @@ const HRPostList = (props) => {
     totalPageDisable,
   } = useSelector((state) => state.job);
 
-
   const userPresent =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   useEffect(() => {
     dispatch(getActivedJobListByUserId([userPresent.ids, page, 5]));
     dispatch(getDisabledJobListByUserId([userPresent.ids, page, 5]));
   }, [page, dispatch, userPresent.ids]);
 
   return (
-    <div className="hr-post__wrapper">
-      <div className="hr-post-list__content">
-        <div className="hr-post-list__statistic">
+    <div className='hr-post__wrapper'>
+      <div className='hr-post-list__content'>
+        <div className='hr-post-list__statistic'>
           <StatisticUser
-            title="Điểm khả dụng"
+            title='Điểm khả dụng'
             firstObject={{
               score: totalItemActive + totalItemDisable,
-              description: "Lượt đăng tuyển",
+              description: 'Lượt đăng tuyển',
             }}
             secondObject={{
               score: jobListActived?.length,
-              description: "Lượt xem hồ sơ",
+              description: 'Lượt xem hồ sơ',
             }}
           />
           <StatisticUser
-            title="Trạng thái đăng tuyển"
+            title='Trạng thái đăng tuyển'
             firstObject={{
               score: totalItemActive,
-              description: "Đang đăng tuyển",
+              description: 'Đang đăng tuyển',
             }}
             secondObject={{
               score: totalItemDisable,
-              description: "Đã đóng",
+              description: 'Đã đóng',
             }}
           />
         </div>
 
-        <Box className="filter-panel-home__wrapper" sx={{}}>
-          <Box className="filter-panel-home__filterPanel" sx={{}}>
+        <Box className='filter-panel-home__wrapper' sx={{}}>
+          <Box className='filter-panel-home__filterPanel' sx={{}}>
             <Tabs
               value={value}
               onChange={handleChangeTab}
               sx={{
-                "& button": {
-                  fontSize: "14px !important",
-                  textTransform: "uppercase",
-                  color: "black !important",
-                  fontWeight: "700 !important",
-                  flexBasis: "50%",
+                '& button': {
+                  fontSize: '14px !important',
+                  textTransform: 'uppercase',
+                  color: 'black !important',
+                  fontWeight: '700 !important',
+                  flexBasis: '50%',
                 },
-                "& button.Mui-selected": {
-                  color: "#fff !important",
-                  background: "#04bf8a",
-                  borderRadius: "4px",
-                  "&#simple-tab-1": {
-                    backgroundColor: "#666 !important",
+                '& button.Mui-selected': {
+                  color: '#fff !important',
+                  background: '#04bf8a',
+                  borderRadius: '4px',
+                  '&#simple-tab-1': {
+                    backgroundColor: '#666 !important',
                   },
                 },
-                "& span.MuiTabs-indicator": {
-                  backgroundColor: "unset !important",
+                '& span.MuiTabs-indicator': {
+                  backgroundColor: 'unset !important',
                 },
               }}
             >
-              <Tab label="Đang đăng tuyển" {...a11yProps(0)} />
-              <Tab label="Đã đóng" {...a11yProps(1)} />
+              <Tab label='Đang đăng tuyển' {...a11yProps(0)} />
+              <Tab label='Đã đóng' {...a11yProps(1)} />
             </Tabs>
           </Box>
 
-          <TabPanel className="tabPanel" value={value} index={0}>
+          <TabPanel className='tabPanel' value={value} index={0}>
             <ListJob
               listJob={jobListActived?.filter((sp) =>
-                sp.status?.name?.includes("Active")
+                sp.status?.name?.includes('Active')
               )}
-              message="Không có công việc nào đang đăng tuyển."
+              message='Không có công việc nào đang đăng tuyển.'
               isDisabled={false}
             />
           </TabPanel>
-          <TabPanel className="tabPanel" value={value} index={1}>
+          <TabPanel className='tabPanel' value={value} index={1}>
             <ListJob
               listJob={jobListDisabled}
-              message="Không có công việc đã đóng."
+              message='Không có công việc đã đóng.'
               isDisabled={true}
             />
           </TabPanel>
         </Box>
       </div>
-      <div className="pagination__wrapper">
+      <div className='pagination__wrapper'>
         {totalPages > 1 ? (
           <PaginationCustom
-            className="pagination"
+            className='pagination'
             totalPages={value === 0 ? totalPageActive : totalPageDisable}
             handleOnChange={handleChangePage}
             page={page}
           />
         ) : (
-          ""
+          ''
         )}
       </div>
     </div>

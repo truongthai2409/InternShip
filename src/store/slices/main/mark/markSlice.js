@@ -1,12 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const baseURL = process.env.REACT_APP_API;
 
 const markJobSlice = createSlice({
-  name: "mark",
+  name: 'mark',
   initialState: {
-    status: "",
+    status: '',
     careListCandidate: [],
     careListOfPrivate: [],
     careListOfPrivateHavePages: [],
@@ -14,7 +14,7 @@ const markJobSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createMark.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = 'success';
       state.careListCandidate = [...state.careListCandidate, action.payload];
     });
     builder.addCase(getMark.fulfilled, (state, { payload }) => {
@@ -44,13 +44,13 @@ const markJobSlice = createSlice({
   },
 });
 
-export const getMark = createAsyncThunk("mark/getMark", async () => {
+export const getMark = createAsyncThunk('mark/getMark', async () => {
   const user =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const header = {
     headers: {
-      Authorization: "Bearer " + user.token,
+      Authorization: 'Bearer ' + user.token,
     },
   };
   return axios
@@ -64,11 +64,11 @@ export const getMark = createAsyncThunk("mark/getMark", async () => {
 });
 
 export const getMarkByUser = createAsyncThunk(
-  "mark/getMarkByUser",
+  'mark/getMarkByUser',
   async (data) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + data[1],
+        Authorization: 'Bearer ' + data[1],
       },
     };
     return await axios
@@ -86,7 +86,7 @@ export const getMarkByUser = createAsyncThunk(
 );
 
 export const getJobByNameAndLocation = createAsyncThunk(
-  "job/getJobByNameAndLocation",
+  'job/getJobByNameAndLocation',
   async (dataSearch) => {
     return axios
       .get(`${baseURL}/api/r2s/job/search`, {
@@ -102,15 +102,15 @@ export const getJobByNameAndLocation = createAsyncThunk(
 );
 
 export const getMarkByUserAndJob = createAsyncThunk(
-  "mark/getMarkByUserAndJob",
+  'mark/getMarkByUserAndJob',
   async (data) => {
     const user =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     const { userName, idJob, page } = data;
     const header = {
       headers: {
-        Authorization: "Bearer " + user.token,
+        Authorization: 'Bearer ' + user.token,
       },
     };
     return axios
@@ -130,7 +130,7 @@ export const getMarkByUserAndJob = createAsyncThunk(
   }
 );
 export const getJobCandidateCaredByNameAndLocation = createAsyncThunk(
-  "mark/getJobCandidateCaredByNameAndLocation",
+  'mark/getJobCandidateCaredByNameAndLocation',
   async (dataSearch) => {
     return axios
       .get(
@@ -148,10 +148,10 @@ export const getJobCandidateCaredByNameAndLocation = createAsyncThunk(
   }
 );
 
-export const createMark = createAsyncThunk("mark/createMark", async (data) => {
+export const createMark = createAsyncThunk('mark/createMark', async (data) => {
   const headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + data[1].token,
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + data[1].token,
   };
   const res = await axios
     .post(`${baseURL}/api/r2s/carelist`, data[0], {
@@ -166,13 +166,13 @@ export const createMark = createAsyncThunk("mark/createMark", async (data) => {
   return res;
 });
 
-export const deleteMark = createAsyncThunk("mark/deleteMark", async (data) => {
+export const deleteMark = createAsyncThunk('mark/deleteMark', async (data) => {
   const user =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const header = {
     headers: {
-      Authorization: "Bearer " + user.token,
+      Authorization: 'Bearer ' + user.token,
     },
   };
   const res = await axios

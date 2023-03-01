@@ -6,15 +6,14 @@ import {
   MenuList,
   Paper,
   Popper,
-} from "@mui/material";
-import { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import "./styles.scss";
-
+} from '@mui/material';
+import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import './styles.scss';
 
 export const MenuDropDown = () => {
-  const { t } = useTranslation('login')
+  const { t } = useTranslation('login');
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -31,32 +30,32 @@ export const MenuDropDown = () => {
   };
 
   function handleListKeyDown(event) {
-    if (event.key === "Tab") {
+    if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === "Escape") {
+    } else if (event.key === 'Escape') {
       setOpen(false);
     }
   }
 
   return (
     <>
-      <div className="menu-drop-down__wrapper">
+      <div className='menu-drop-down__wrapper'>
         <Button
           ref={anchorRef}
-          id="composition-button"
-          aria-controls={open ? "composition-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
+          id='composition-button'
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup='true'
           onClick={handleToggle}
         >
-          {t("registerTL")}
+          {t('registerTL')}
         </Button>
         <Popper
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement='bottom-start'
           transition
           disablePortal
         >
@@ -65,39 +64,39 @@ export const MenuDropDown = () => {
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
+                    id='composition-menu'
+                    aria-labelledby='composition-button'
                     onKeyDown={handleListKeyDown}
                   >
-                    <Link to="/register/candidate">
+                    <Link to='/register/candidate'>
                       <MenuItem
-                        sx={{ fontSize: "14px", color: "#212121" }}
+                        sx={{ fontSize: '14px', color: '#212121' }}
                         onClick={handleClose}
                       >
-                        {t("candidateTL")}
+                        {t('candidateTL')}
                       </MenuItem>
                     </Link>
-                    <Link to="/register/hr">
+                    <Link to='/register/hr'>
                       <MenuItem
-                        sx={{ fontSize: "14px", color: "#212121" }}
+                        sx={{ fontSize: '14px', color: '#212121' }}
                         onClick={handleClose}
                       >
-                        {t("recruiterTL")}
+                        {t('recruiterTL')}
                       </MenuItem>
                     </Link>
-                    <Link to="/register/partner">
+                    <Link to='/register/partner'>
                       <MenuItem
-                        sx={{ fontSize: "14px", color: "#212121" }}
+                        sx={{ fontSize: '14px', color: '#212121' }}
                         onClick={handleClose}
                       >
-                        {t("partnerTL")}
+                        {t('partnerTL')}
                       </MenuItem>
                     </Link>
                   </MenuList>

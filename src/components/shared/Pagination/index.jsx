@@ -1,17 +1,17 @@
-import { Pagination, Stack } from "@mui/material";
-import "./styles.scss";
+import { Pagination, Stack } from '@mui/material';
+import './styles.scss';
 
 const PaginationCustom = ({
   totalPages,
   page,
   handleOnChange,
-  variant = "text",
+  variant = 'text',
   shape,
   className,
 }) => {
   return (
     <Stack
-      className={`pagination__wrapper ${className ? className : ""}`}
+      className={`pagination__wrapper ${className ? className : ''}`}
       spacing={2}
     >
       <Pagination

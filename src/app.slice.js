@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const appSlice = createSlice({
-  name: "app",
+  name: 'app',
   initialState: {
     // status: 200,
     loading: 0,
@@ -9,15 +9,15 @@ const appSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        (action) => action.type.endsWith("/pending"),
+        (action) => action.type.endsWith('/pending'),
         (state) => {
           state.loading = state.loading + 15;
         }
       )
       .addMatcher(
         (action) =>
-          action.type.endsWith("/fulfilled") ||
-          action.type.endsWith("/rejected"),
+          action.type.endsWith('/fulfilled') ||
+          action.type.endsWith('/rejected'),
         (state, action) => {
           // state.status = action.payload.status;
           state.loading = state.loading - 15;

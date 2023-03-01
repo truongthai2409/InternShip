@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import * as React from "react";
-import LinearProgress from "@mui/material/LinearProgress";
+import { useSelector } from 'react-redux';
+import * as React from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Loading = () => {
   const loading = useSelector((state) => state.app.loading);
@@ -8,13 +8,13 @@ const Loading = () => {
     return (
       <LinearProgress
         sx={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           right: 0,
           left: 0,
           zIndex: 1000,
         }}
-        color="success"
+        color='success'
       />
     );
   }

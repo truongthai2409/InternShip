@@ -1,6 +1,6 @@
-import React from "react";
-import "./styles.scss";
-import { Link, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
+import React from 'react';
+import './styles.scss';
+import { Link, useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 
 const CustomLink = ({ children, to, ...props }) => {
   let resolved = useResolvedPath(to);
@@ -9,13 +9,13 @@ const CustomLink = ({ children, to, ...props }) => {
 
   return (
     <li
-      className={`custom-li ${match && "active"}`}
-      style={{ cursor: "pointer" }}
+      className={`custom-li ${match && 'active'}`}
+      style={{ cursor: 'pointer' }}
       onClick={() => {
         navigate(to, { replace: true });
       }}
     >
-      <Link className="custom-link" to={to} {...props}>
+      <Link className='custom-link' to={to} {...props}>
         {children}
       </Link>
       {/* {children} */}

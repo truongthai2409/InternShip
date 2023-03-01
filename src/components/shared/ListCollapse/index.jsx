@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import "./styles.scss";
-import CustomCheckbox from "../CustomCheckbox";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import React, { useEffect, useState } from 'react';
+import './styles.scss';
+import CustomCheckbox from '../CustomCheckbox';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const ListCollapse = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -21,41 +21,42 @@ const ListCollapse = (props) => {
   return (
     <List
       sx={{
-        width: "100%",
+        width: '100%',
         maxWidth: 360,
-        bgcolor: "background.paper",
-        borderRadius: "6px",
-        border: "1px solid #DEDEDE",
-        marginBottom: "20px",
+        bgcolor: 'background.paper',
+        borderRadius: '6px',
+        border: '1px solid #DEDEDE',
+        marginBottom: '20px',
       }}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
+      component='nav'
+      aria-labelledby='nested-list-subheader'
     >
-      <ListItemButton className="listButton" onClick={handleClick}>
+      <ListItemButton className='listButton' onClick={handleClick}>
         <ListItemText
-          className="listTitle"
+          className='listTitle'
           primary={`${props.title}`}
           sx={{
-            "& span": {
-              fontSize: "16px",
-              color: "#04bf8a",
-              fontWeight: "700",
+            '& span': {
+              fontSize: '16px',
+              color: '#04bf8a',
+              fontWeight: '700',
             },
           }}
         />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout='auto' unmountOnExit>
         {props.list?.length > 0
           ? props.list?.map((item, index) => (
-              <List key={item.id} component="div" disablePadding>
+              <List key={item.id} component='div' disablePadding>
                 <ListItemButton sx={{ pl: spacing }}>
-                  <ListItemIcon className="ListCollapWraper">
+                  <ListItemIcon className='ListCollapWraper'>
                     <CustomCheckbox
                       key={item.id}
                       label={item.name}
                       onChange={handleCheck}
-                      checked={props.checkedType?.map((items) => {
+                      checked={props.checkedType
+                        ?.map((items) => {
                           return items;
                         })
                         .includes(item.name)}
@@ -64,7 +65,7 @@ const ListCollapse = (props) => {
                 </ListItemButton>
               </List>
             ))
-          : ""}
+          : ''}
       </Collapse>
     </List>
   );
