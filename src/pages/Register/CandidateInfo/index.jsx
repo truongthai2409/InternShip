@@ -62,14 +62,15 @@ const CandidateInfo = () => {
       }),
     };
 
-    try {
-      const res = await dispatch(registerCandidate(userData));
-      if (res.payload.status === 200 || res.payload.status === 201) {
-        navigate('/login', { replace: true });
-      }
-    } catch (error) {
-      toast.error(error);
-    }
+    dispatch(registerCandidate(userData))
+      .then((res) => {
+        if (res.payload.status === 200 || res.payload.status === 201) {
+          navigate('/login');
+        }
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
   };
 
   return (
