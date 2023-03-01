@@ -80,5 +80,8 @@
     "hooks": {
       "pre-commit": "prettier --write ."
     }
+  },
+  "lint-staged": {
+    "*": "prettier --write"
   }
 }
