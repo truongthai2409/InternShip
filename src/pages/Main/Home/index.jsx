@@ -23,6 +23,7 @@ import SearchResultHome from "../../../components/Home/SearchResultHome";
 import SideBarHomeList from "../../../components/Home/SideBarHomeList";
 import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
 import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
+import { getDemandListThunk } from "src/store/action/hr/HrAction";
 import SearchHR from "../HR/SearchHR";
 import "./styles.scss";
 const initialState = {
@@ -83,6 +84,9 @@ const Home = (props) => {
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
+  const { user } = useSelector((state) => state.profile);
+  const userHR = user?.user?.role;
+
   // console.log(index)
   const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
@@ -90,7 +94,11 @@ const Home = (props) => {
   const [state, dispatcher] = useReducer(reducer, initialState);
 
   const listPositionWorkingFormat = jobPosition?.map((item) => {
-    return item.name;
+    if (userHR && userHR?.name === "Role_HR") {
+      return item.id;
+    } else {
+      return item.name;
+    }
   });
   const [valueLocation, setValueLocation] = useState("");
   const [jobs, setJob] = useState([]);
@@ -102,30 +110,40 @@ const Home = (props) => {
   ];
 
   const handleSearch = (value) => {
-    dispatch(nameFilterChange(value));
-    dispatch(indexFilterChange(0));
-    dispatcher({ type: "name", payload: value });
-    dispatcher({ type: "no", payload: 0 });
-    dispatcher({ type: "province", payload: valueLocation });
-    dispatch(changeFilterChange(false));
-    dispatch(pageFilterChange(1));
+    if (userHR && userHR?.name === "Role_HR") {
+      console.log(value, "Role ne");
+      dispatch(nameFilterChange(value));
+      dispatch(indexFilterChange(0));
+      dispatcher({ type: "name", payload: value });
+      dispatcher({ type: "no", payload: 0 });
+      dispatcher({ type: "province", payload: valueLocation });
+      getDemandListThunk(value);
+    } else {
+      dispatch(nameFilterChange(value));
+      dispatch(indexFilterChange(0));
+      dispatcher({ type: "name", payload: value });
+      dispatcher({ type: "no", payload: 0 });
+      dispatcher({ type: "province", payload: valueLocation });
+      dispatch(changeFilterChange(false));
+      dispatch(pageFilterChange(1));
+    }
   };
   const getValueLocationAndHandle = (value) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
+
   const getValuePageAndHandle = (value) => {
     console.log(value);
-    const userPartner =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
-    if (userPartner && userPartner.role === "Role_HR") {
+
+    if (userHR && userHR?.name === "Role_HR") {
       dispatch(indexFilterChange(0));
       window.scroll(0, 0);
       return dispatch(getDemandList({ currentPage: value, limit: 5 }));
     }
     dispatcher({ type: "no", payload: value - 1 });
     dispatch(indexFilterChange(0));
+    dispatch(getDemandListThunk({ no: value, limit: 5 }));
   };
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
@@ -136,13 +154,18 @@ const Home = (props) => {
     tempType = value.filter((sp) =>
       listWorkingFormat
         .map((items) => {
-          return items.name;
+          if (userHR && userHR?.name === "Role_HR") {
+            return items.id;
+          } else {
+            return items.name;
+          }
         })
         .includes(sp)
     );
     tempPosition = value.filter((items) =>
       listPositionWorkingFormat
         .map((item) => {
+          console.log(items, "position");
           return item;
         })
         .includes(items)
@@ -181,7 +204,13 @@ const Home = (props) => {
       },
       { link: props.linkFilter },
     ];
-    dispatch(jobFilters(dataFilter));
+    console.log(state, "stataeee");
+    console.log(dataFilter, "filter");
+    if (userHR && userHR?.name === "Role_HR") {
+      dispatch(jobFilters(dataFilter[0]));
+    } else {
+      dispatch(jobFilters(dataFilter));
+    }
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
     setJob(jobFilter);

@@ -41,7 +41,7 @@ export default function SearchAutoComplete({
           className="text-field"
           {...params}
           label={labelName}
-          required={true}
+          required
         />
       )}
     />

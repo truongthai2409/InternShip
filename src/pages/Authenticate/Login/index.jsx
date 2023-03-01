@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,7 +16,7 @@ import { schema } from "./validate";
 
 const Login = () => {
   TabTitle("Login");
-  console.log("Login");
+  const { t } = useTranslation('login')
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
@@ -63,7 +64,7 @@ const Login = () => {
             navigate(`/candidate`, { replace: true });
             break;
           default:
-            navigate("/",{ replace: true });
+            navigate("/", { replace: true });
         }
       }
     } catch (error) {
@@ -78,10 +79,10 @@ const Login = () => {
     <div className="login-form__container">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <CustomInput
-          label="Tài khoản"
+          label={t("AccountTL")}
           id="username"
           type="text"
-          placeholder="Tài khoản..."
+          placeholder={t("AccountTL")}
           setValue={setValue}
           register={register}
           requirementField={false}
@@ -90,10 +91,10 @@ const Login = () => {
           {errors.username?.message}
         </CustomInput>
         <CustomInput
-          label="Mật khẩu"
+          label={t("PasswordTL")}
           id="password"
           type="password"
-          placeholder="Mật khẩu..."
+          placeholder={t("PasswordTL")}
           setValue={setValue}
           register={register}
           visibility={true}
@@ -103,10 +104,10 @@ const Login = () => {
           {errors.password?.message}
         </CustomInput>
         <div className="login-form__save-pass" onChange={handleSaveLogin}>
-          <CustomCheckbox checked={isCheck} label="Lưu phiên đăng nhập" />
+          <CustomCheckbox checked={isCheck} label={t("saveLoginTL")} />
         </div>
         <div className="login-form__btn">
-          <Button name="ĐĂNG NHẬP" onClick={handleSubmit(onSubmit)}></Button>
+          <Button name={t("loginTL")} onClick={handleSubmit(onSubmit)}></Button>
         </div>
       </form>
     </div>

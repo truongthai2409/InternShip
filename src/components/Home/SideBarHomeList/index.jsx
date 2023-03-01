@@ -3,7 +3,7 @@ import "./styles.scss";
 import ListCollapse from "../../shared/ListCollapse";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
+import { getMajorListThunk } from "src/store/action/company/companyAction";
 import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
 import { useTranslation } from "react-i18next";
 
@@ -14,14 +14,17 @@ const listWorkingFormat = [
 ];
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
-  const { t } = useTranslation('client')
+  const { t } = useTranslation("navbar");
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
+  const { user } = useSelector((state) => state.profile);
   const [checkedType, setCheckedType] = useState([]);
 
+  const userHR = user?.user?.role;
+
   useEffect(() => {
-    dispatch(getMajorList([1, 20]));
+    dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
   }, [dispatch]);
 
@@ -34,17 +37,26 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
     }
     setCheckedType(updatedList);
     onChange && onChange(updatedList);
+    const typeIds = listWorkingFormat
+      .filter((item) => updatedList.includes(item.name))
+      .map((item) => item.id);
+    console.log(typeIds, "id");
   };
 
   const handleCheckPosition = (valueName, valueCheck) => {
     var updatedList = [...checkedType];
     if (valueCheck) {
+      console.log(updatedList, "chekc oef");
       updatedList = [...checkedType, valueName];
     } else {
       updatedList.splice(checkedType.indexOf(valueName), 1);
     }
     setCheckedType(updatedList);
     onChange && onChange(updatedList);
+    const positionIds = jobPosition
+      .filter((item) => updatedList.includes(item.name))
+      .map((item) => item.id);
+    console.log(positionIds, "id 2");
   };
 
   const handleCheckMajor = (valueName, valueCheck) => {
@@ -56,7 +68,13 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
     }
     setCheckedType(updatedList);
     onChange && onChange(updatedList);
+    const majorIds = majorList
+      .filter((item) => updatedList.includes(item.name))
+      .map((item) => item.id);
+    console.log(majorIds, "id 3 ");
   };
+
+  console.log(checkedType, "checked");
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ""}>
       <ListCollapse

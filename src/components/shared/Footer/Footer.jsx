@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const { CONTACT, ABOUT, POLICY, MOBILE } = FOOTER;
 
 function Footer() {
-  const { t } = useTranslation("client");
+  const { t } = useTranslation("headerFooter");
   const renderFooter = (sectionData) => {
     return (
       <>

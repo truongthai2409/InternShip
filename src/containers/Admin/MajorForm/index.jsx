@@ -11,9 +11,14 @@ import Button from "../../../components/shared/Button";
 import { schemaMajor, renderControlAction } from "./script.js";
 import {
   addMajor,
-  getMajorDetail,
+  // getMajorDetail,
   updateMajorInfo,
 } from "../../../store/slices/Admin/major/majorSlice";
+import {
+  // addMajor,
+  getMajorDetailThunk,
+  // updateMajorInfo,
+} from "src/store/action/company/companyAction";
 
 // const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -60,7 +65,7 @@ export default function MajorForm({ isAdd, setOpen }) {
    */
   useEffect(() => {
     if (!isAdd) {
-      dispatch(getMajorDetail(location.pathname.slice(7)));
+      dispatch(getMajorDetailThunk(location.pathname.slice(7)));
     }
   }, [isAdd]);
 
