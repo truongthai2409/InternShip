@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const BASEURL = process.env.REACT_APP_API;
 
 const filterSlices = createSlice({
-  name: "filter",
+  name: 'filter',
   initialState: {
     id: 1,
     index: 0,
@@ -32,7 +32,7 @@ const filterSlices = createSlice({
 });
 
 export const jobFilters = createAsyncThunk(
-  "filter/jobFilter",
+  'filter/jobFilter',
   async (dataFilter) => {
     return axios
       .get(`${BASEURL}${dataFilter[1].link}`, {

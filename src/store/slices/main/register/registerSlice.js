@@ -1,15 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
-import api from "src/config/api/apiConfig";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import api from 'src/config/api/apiConfig';
 
 const baseURL = process.env.REACT_APP_API;
 
 const registerSlice = createSlice({
-  name: "register",
+  name: 'register',
   initialState: {
-    status: "idle",
-    statusRegister: "idleRegister",
+    status: 'idle',
+    statusRegister: 'idleRegister',
     user: {},
     error: {},
   },
@@ -26,43 +26,43 @@ const registerSlice = createSlice({
     builder
       .addCase(checkUser.fulfilled, (state, action) => {
         if (action.payload?.username) {
-          state.status = "success step 2";
+          state.status = 'success step 2';
           state.user = action.payload;
           state.error = {};
         } else {
-          state.status = "fail";
+          state.status = 'fail';
           state.user = {};
           state.error = action.payload;
         }
       })
       .addCase(registerHr.pending, (state, action) => {
-        state.statusRegister = "loading";
+        state.statusRegister = 'loading';
       })
       .addCase(registerHr.fulfilled, (state, { payload }) => {
         if (payload?.id) {
           state.user = payload;
-          state.statusRegister = "successRegister";
+          state.statusRegister = 'successRegister';
           toast.success(
-            "Bạn đã đăng ký tài khoản thành công, vui lòng chờ xác thực!"
+            'Bạn đã đăng ký tài khoản thành công, vui lòng chờ xác thực!'
           );
         } else {
-          state.statusRegister = "idleRegister";
-          toast.error("Đăng ký tài khoản thất bại!");
+          state.statusRegister = 'idleRegister';
+          toast.error('Đăng ký tài khoản thất bại!');
           state.error = payload;
         }
       })
       .addCase(registerCandidate.pending, (state, action) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(registerCandidate.fulfilled, (state, action) => {
         if (action.payload?.id || action.payload?.status) {
           state.user = action.payload;
-          state.status = "success";
+          state.status = 'success';
           state.error = {};
-          toast.success("Bạn đã đăng ký tài khoản thành công!");
+          toast.success('Bạn đã đăng ký tài khoản thành công!');
         } else {
-          state.status = "fail";
-          toast.error("Đăng ký tài khoản thất bại!");
+          state.status = 'fail';
+          toast.error('Đăng ký tài khoản thất bại!');
           state.error = action.payload;
         }
       });
@@ -73,12 +73,12 @@ export const { updateStatusRegister, updateStatusRegisterForHR } =
 export default registerSlice;
 
 export const checkUser = createAsyncThunk(
-  "register/checkUser",
+  'register/checkUser',
   async (data) => {
     const res = await api
       .post(`${baseURL}/api/user`, data)
       .then((res) => {
-        sessionStorage.setItem("account", JSON.stringify(data));
+        sessionStorage.setItem('account', JSON.stringify(data));
         return res;
       })
       .catch((error) => {
@@ -88,14 +88,13 @@ export const checkUser = createAsyncThunk(
   }
 );
 
-
 export const registerHr = createAsyncThunk(
-  "register/registerHr",
+  'register/registerHr',
   async (data) => {
     const res = await api
       .post(`${baseURL}/api/r2s/hr`, data.hrData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {
@@ -109,12 +108,12 @@ export const registerHr = createAsyncThunk(
 );
 
 export const registerCandidate = createAsyncThunk(
-  "register/registerCandidate",
+  'register/registerCandidate',
   async (data) => {
     const res = await axios
       .post(`${baseURL}/api/r2s/candidate`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {

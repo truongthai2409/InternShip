@@ -1,14 +1,14 @@
-import "./styles.scss";
-import Switch from "@mui/material/Switch";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import './styles.scss';
+import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const SwitchButton = ({ label, setState, state, onClick }) => {
   const handleOnChange = () => {
     setState(!state);
   };
   return (
-    <FormGroup className="switch-btn__wrapper">
+    <FormGroup className='switch-btn__wrapper'>
       <FormControlLabel
         onChange={handleOnChange}
         onClick={onClick}

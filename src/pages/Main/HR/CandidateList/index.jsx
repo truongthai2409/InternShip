@@ -1,20 +1,23 @@
-import "./styles.scss";
-import { useEffect, useState } from "react";
-import CandidateCard from "./CandidateCard";
-import { getListCandidateApplied } from "src/store/slices/main/home/job/jobSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Null from "src/components/shared/Null";
-import PaginationCustom from "src/components/shared/Pagination";
-import "./reponsive.scss";
+import './styles.scss';
+import { useEffect, useState } from 'react';
+import CandidateCard from './CandidateCard';
+import { getListCandidateApplied } from 'src/store/slices/main/home/job/jobSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Null from 'src/components/shared/Null';
+import PaginationCustom from 'src/components/shared/Pagination';
+import './reponsive.scss';
 const CandidateList = ({ idJob }) => {
+  // console.log(idJob)
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { listCandidatesApplied, totalPages } = useSelector(
     (state) => state.job
   );
 
-  const token = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token;
+  console.log(listCandidatesApplied);
+  const token =
+    JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+    JSON.parse(localStorage.getItem('userPresent'))?.token;
   useEffect(() => {
     dispatch(getListCandidateApplied([idJob, page, token, 3]));
   }, [dispatch, idJob, page, token]);
@@ -25,7 +28,7 @@ const CandidateList = ({ idJob }) => {
   return (
     <div
       className={`${
-        listCandidatesApplied?.length === 0 && "null"
+        listCandidatesApplied?.length === 0 && 'null'
       } candidate-list__wrapper`}
     >
       {listCandidatesApplied?.length ? (
@@ -34,12 +37,12 @@ const CandidateList = ({ idJob }) => {
         })
       ) : (
         <Null
-          className="null_cadidate"
-          image="https://www.blumira.com/wp-content/uploads/2020/11/search.png"
-          text="Chưa có ứng viên nào đang ứng tuyển."
-          height="100px"
-          fs="10px"
-          fw="400"
+          className='null_cadidate'
+          image='https://www.blumira.com/wp-content/uploads/2020/11/search.png'
+          text='Chưa có ứng viên nào đang ứng tuyển.'
+          height='100px'
+          fs='10px'
+          fw='400'
         />
       )}
       {totalPages > 1 ? (
@@ -49,7 +52,7 @@ const CandidateList = ({ idJob }) => {
           hanldeOnChange={hanldeOnChange}
         />
       ) : (
-        ""
+        ''
       )}
     </div>
   );

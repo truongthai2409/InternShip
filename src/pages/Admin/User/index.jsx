@@ -1,44 +1,44 @@
-import React, { useState } from "react";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDispatch } from "react-redux";
-import "./styles.scss";
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/shared/Modal";
-import UserTable from "./UserTable";
-import UserForm from "../../../containers/Admin/UserForm";
-import { getUserList, searchUser } from "src/store/slices/Admin/user/userSlice";
+import React, { useState } from 'react';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import { useDispatch } from 'react-redux';
+import './styles.scss';
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer';
+import Modal from '../../../components/shared/Modal';
+import UserTable from './UserTable';
+import UserForm from '../../../containers/Admin/UserForm';
+import { getUserList, searchUser } from 'src/store/slices/Admin/user/userSlice';
 
 const selectOptions = [
   {
-    value: "All",
-    name: "All",
+    value: 'All',
+    name: 'All',
   },
   {
-    value: "HR",
-    name: "HR",
+    value: 'HR',
+    name: 'HR',
   },
   {
-    value: "Candidate",
-    name: "Candidate",
+    value: 'Candidate',
+    name: 'Candidate',
   },
   {
-    value: "Partner",
-    name: "Partner",
+    value: 'Partner',
+    name: 'Partner',
   },
 ];
 
 const User = () => {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [idRow, setIdRow] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [idRow, setIdRow] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = () => {
-    if (searchValue === "") {
+    if (searchValue === '') {
       dispatch(getUserList([1, 10, userSessionStorage?.token]));
     } else {
       dispatch(searchUser([searchValue, 1, 10, userSessionStorage?.token]));
@@ -53,12 +53,12 @@ const User = () => {
   return (
     <>
       <HeaderContainer
-        headerName="Quản lý tài khoản"
-        placeholder="Tìm kiếm người dùng..."
+        headerName='Quản lý tài khoản'
+        placeholder='Tìm kiếm người dùng...'
         onChange={(e) => setSearchValue(e.target.value)}
-        selectName="role"
+        selectName='role'
         selectOptions={selectOptions}
-        btnName="Thêm User"
+        btnName='Thêm User'
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenAddModal}
         searchValue={searchValue}
@@ -71,7 +71,7 @@ const User = () => {
         searchValue={searchValue}
       />
       <Modal
-        modalTitle={isUpdate ? "Chỉnh sửa tài khoản" : "Thêm tài khoản"}
+        modalTitle={isUpdate ? 'Chỉnh sửa tài khoản' : 'Thêm tài khoản'}
         open={open}
         setOpen={setOpen}
         iconClose={true}

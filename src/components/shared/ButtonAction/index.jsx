@@ -1,4 +1,4 @@
-import "./styles.scss";
+import './styles.scss';
 
 const ButtonAction = ({
   onClick,
@@ -8,18 +8,18 @@ const ButtonAction = ({
   borderRight,
   borderBottom,
   borderLeft,
-  amountDemands = "",
-  amountApplications = "",
+  amountDemands = '',
+  amountApplications = '',
   name,
   icon,
   fontSize,
-  color = "",
+  color = '',
   disabled = false,
   onMouseEnter,
 }) => {
   return (
     <div
-      className={`button-action__wrapper ${disabled ? "disabled" : ""}`}
+      className={`button-action__wrapper ${disabled ? 'disabled' : ''}`}
       style={{
         width: width,
         height: height,
@@ -34,13 +34,13 @@ const ButtonAction = ({
       <div
         onMouseEnter={onMouseEnter}
         onClick={onClick}
-        className="button-action__container"
+        className='button-action__container'
       >
         {icon}
-        <p className="button-action__name" style={{ fontSize: fontSize }}>
-          {amountApplications || amountDemands !== ""
+        <p className='button-action__name' style={{ fontSize: fontSize }}>
+          {amountApplications || amountDemands !== ''
             ? `${amountApplications}/${amountDemands} `
-            : ""}
+            : ''}
           {`${name}`}
         </p>
       </div>

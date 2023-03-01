@@ -1,15 +1,15 @@
-import moment from "moment";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import PaginationCustom from "src/components/shared/Pagination";
-import { pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
-import CardHome from "../../Card/CardHome";
-import { Grid } from "@mui/material";
+import moment from 'moment';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import PaginationCustom from 'src/components/shared/Pagination';
+import { pageFilterChange } from 'src/store/slices/main/home/filter/filterSlices';
+import CardHome from '../../Card/CardHome';
+import { Grid } from '@mui/material';
 
-import "./styles.scss";
+import './styles.scss';
 const image_notFound =
-  "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png";
+  'https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png';
 
 const ListCardJobHome = ({
   jobList,
@@ -29,7 +29,7 @@ const ListCardJobHome = ({
 
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
-      <div className="filter-panel-home__wrapper">
+      <div className='filter-panel-home__wrapper'>
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
@@ -79,30 +79,30 @@ const ListCardJobHome = ({
                 job.amount ||
                 job.jobApp?.amount ||
                 job.jobCare?.amount ||
-                "Không có"
+                'Không có'
               }
               demandPartner={true}
               time={[
-                moment(job.timeStartStr || job.createDate).format("DD/MM/YYYY"),
-                moment(job.timeEndStr || job.end).format("DD/MM/YYYY"),
+                moment(job.timeStartStr || job.createDate).format('DD/MM/YYYY'),
+                moment(job.timeEndStr || job.end).format('DD/MM/YYYY'),
               ]}
               locationPath={location.pathname}
             />
           ))
         ) : (
-          <div className="not_found" style={{ textAlignLast: "center" }}>
+          <div className='not_found' style={{ textAlignLast: 'center' }}>
             <img
               src={image_notFound}
-              alt="notfound"
-              width={"20%"}
-              height={"100%"}
+              alt='notfound'
+              width={'20%'}
+              height={'100%'}
             />
             <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>
           </div>
         )}
       </div>
       {jobListHavePages?.totalPages > 1 ? (
-        <div className="home__pagination">
+        <div className='home__pagination'>
           <PaginationCustom
             page={page}
             totalPages={jobListHavePages?.totalPages}
@@ -110,7 +110,7 @@ const ListCardJobHome = ({
           />
         </div>
       ) : (
-        ""
+        ''
       )}
     </Grid>
   );

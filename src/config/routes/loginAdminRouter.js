@@ -1,10 +1,10 @@
-import LoginAdminLayout from "src/Layouts/Authenticate/LoginAdmin"
+import LoginAdminLayout from 'src/Layouts/Authenticate/LoginAdmin';
 
 const loginAdminRouter = [
-    {
-        path: "/admin/login",
-        element: <LoginAdminLayout />,
-    }
-]
+  {
+    path: '/admin/login',
+    element: <LoginAdminLayout />,
+  },
+];
 
-export default loginAdminRouter
+export default loginAdminRouter;

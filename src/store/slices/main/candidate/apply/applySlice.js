@@ -1,18 +1,18 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import api from "src/config/api/apiConfig";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import api from 'src/config/api/apiConfig';
 
 const baseURL = process.env.REACT_APP_API;
 
 const applySlice = createSlice({
-  name: "apply_candidate",
+  name: 'apply_candidate',
   initialState: {
     applyList: [],
     applyListHavePage: [],
   },
   extraReducers: (builder) => {
     builder.addCase(addApply.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = 'success';
       // state.careListCandidate = action.payload;
     });
     builder.addCase(
@@ -37,7 +37,7 @@ const applySlice = createSlice({
 });
 
 export const getApplyListByIdCandidate = createAsyncThunk(
-  "apply_candidate/getApplyListByIdCandidate",
+  'apply_candidate/getApplyListByIdCandidate',
   async (data) => {
     return axios
       .get(`${baseURL}/api/applylist/candidate/${data.idCandidate}`, {
@@ -52,7 +52,7 @@ export const getApplyListByIdCandidate = createAsyncThunk(
   }
 );
 export const getJobCandidateAppliedByNameAndLocation = createAsyncThunk(
-  "apply_candidate/getJobCandidateAppliedByNameAndLocation",
+  'apply_candidate/getJobCandidateAppliedByNameAndLocation',
   async (dataSearch) => {
     return axios
       .get(
@@ -71,12 +71,12 @@ export const getJobCandidateAppliedByNameAndLocation = createAsyncThunk(
 );
 
 export const addApply = createAsyncThunk(
-  "apply_candidate/addApply",
+  'apply_candidate/addApply',
   async (data) => {
     const res = await axios
       .post(`${baseURL}/api/applylist`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {
@@ -90,7 +90,7 @@ export const addApply = createAsyncThunk(
 );
 
 export const deleteApply = createAsyncThunk(
-  "apply_candidate/deleteApply",
+  'apply_candidate/deleteApply',
   async (id) => {
     const res = await api
       .delete(`${baseURL}/api/applylist/${id}`)

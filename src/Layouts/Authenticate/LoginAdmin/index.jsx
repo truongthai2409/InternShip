@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from 'react'
-import LoginAdminContainer from "../../../containers/LoginAdminContainer";
-import "./styles.scss";
-import { useSelector } from "react-redux";
-import Modal from "../../../components/shared/Modal/index";
-import "./styles.scss";
+import React, { useEffect, useState } from 'react';
+import LoginAdminContainer from '../../../containers/LoginAdminContainer';
+import './styles.scss';
+import { useSelector } from 'react-redux';
+import Modal from '../../../components/shared/Modal/index';
+import './styles.scss';
 
 const LoginAdminLayout = () => {
   const { status } = useSelector((state) => state.register);
@@ -11,28 +11,21 @@ const LoginAdminLayout = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (status === "success") {
+    if (status === 'success') {
       setOpen(true);
     }
   }, [status]);
 
   return (
-    <div className="login-admin-layout">
-
-      <div className="login-admin-container-wrapper">
+    <div className='login-admin-layout'>
+      <div className='login-admin-container-wrapper'>
         <LoginAdminContainer />
-        <div className="login-container__modal">
-          <Modal
-            modalTitle="Thông báo"
-            open={open}
-            setOpen={setOpen}
-
-          />
+        <div className='login-container__modal'>
+          <Modal modalTitle='Thông báo' open={open} setOpen={setOpen} />
         </div>
       </div>
-
     </div>
   );
-}
+};
 
-export default LoginAdminLayout
+export default LoginAdminLayout;

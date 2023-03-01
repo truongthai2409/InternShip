@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const baseURL = process.env.REACT_APP_API;
 
 const infoCandidateSlice = createSlice({
-  name: "info_candidate",
+  name: 'info_candidate',
   initialState: {
     candidateInfoById: {},
     candidateInfoByUsername: {},
@@ -20,7 +20,7 @@ const infoCandidateSlice = createSlice({
 });
 
 export const getCandidateById = createAsyncThunk(
-  "info_candidate/getCandidateById",
+  'info_candidate/getCandidateById',
   async (id) => {
     return axios
       .get(`${baseURL}/api/r2s/admin/candidate/${id}?no=0&limit=20`)
@@ -34,16 +34,18 @@ export const getCandidateById = createAsyncThunk(
 );
 
 export const getCandidateByUserName = createAsyncThunk(
-  "info_candidate/getCandidateByUserName",
+  'info_candidate/getCandidateByUserName',
   async (name) => {
     const header = {
-      headers : {
-        Authorization: "Bearer " + name[1].token,
-      
-      }
-    }
+      headers: {
+        Authorization: 'Bearer ' + name[1].token,
+      },
+    };
     return axios
-      .get(`${baseURL}/api/applylist/candidate/user/${name[0]}?no=0&limit=20`,header)
+      .get(
+        `${baseURL}/api/applylist/candidate/user/${name[0]}?no=0&limit=20`,
+        header
+      )
       .then((response) => {
         return response.data;
       })

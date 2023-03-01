@@ -1,49 +1,48 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/shared/Modal";
-import UniversityTable from "./UniversityTable";
-import UniversityForm from "../../../containers/Admin/UniversityForm";
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer';
+import Modal from '../../../components/shared/Modal';
+import UniversityTable from './UniversityTable';
+import UniversityForm from '../../../containers/Admin/UniversityForm';
 import {
   getUniversityList,
   searchUniversity,
-} from "src/store/slices/Admin/university/unversitySlice";
-import { getProvinceList } from "src/store/slices/location/locationSlice";
+} from 'src/store/slices/Admin/university/unversitySlice';
+import { getProvinceList } from 'src/store/slices/location/locationSlice';
 
 const selectOptions = [
   {
-    value: "All",
-    name: "All",
+    value: 'All',
+    name: 'All',
   },
   {
-    value: "HR",
-    name: "HR",
+    value: 'HR',
+    name: 'HR',
   },
   {
-    value: "Candidate",
-    name: "Candidate",
+    value: 'Candidate',
+    name: 'Candidate',
   },
   {
-    value: "Partner",
-    name: "Partner",
+    value: 'Partner',
+    name: 'Partner',
   },
 ];
 
 export default function University() {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const [open, setOpen] = useState(false);
 
-
   const handleSearch = () => {
-    if (searchValue === "") {
+    if (searchValue === '') {
       dispatch(getUniversityList([1, 10]));
     } else {
       dispatch(
@@ -53,26 +52,26 @@ export default function University() {
   };
 
   const handleOpenModal = () => {
-    dispatch(getProvinceList())
+    dispatch(getProvinceList());
     setOpen(true);
   };
 
   return (
     <>
       <HeaderContainer
-        headerName="Quản lý trường học"
-        placeholder="Tìm kiếm trường"
+        headerName='Quản lý trường học'
+        placeholder='Tìm kiếm trường'
         onChange={(e) => setSearchValue(e.target.value)}
         onSearch={handleSearch}
         searchValue={searchValue}
-        selectName="position"
+        selectName='position'
         selectOptions={selectOptions}
-        btnName="Thêm Uni"
+        btnName='Thêm Uni'
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
       />
       <UniversityTable searchValue={searchValue} />
-      <Modal modalTitle="Thêm trường" open={open} setOpen={setOpen}>
+      <Modal modalTitle='Thêm trường' open={open} setOpen={setOpen}>
         <UniversityForm isAdd={true} />
       </Modal>
     </>

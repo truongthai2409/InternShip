@@ -1,41 +1,42 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 const baseURL = process.env.REACT_APP_API;
 
 const appreciateSlice = createSlice({
-  name: "appreciate",
+  name: 'appreciate',
   initialState: {
     appreciateList: [],
-    appreciateListHasvePage : []
+    appreciateListHasvePage: [],
   },
   extraReducers: (builder) => {
     builder.addCase(addAppreciate.fulfilled, (state, action) => {
-      state.status = "success";
+      state.status = 'success';
       state.appreciateList = [...state.appreciateList, action.payload];
     });
     builder
       .addCase(getAppreciateByCompany.fulfilled, (state, { payload }) => {
         state.appreciateList = payload?.contents;
-        state.appreciateListHasvePage = payload
+        state.appreciateListHasvePage = payload;
       })
       .addCase(updateAppreciate.fulfilled, (state, action) => {
         if (action.payload) {
-          state.status = "success";
+          state.status = 'success';
         } else {
-          state.status = "fail";
+          state.status = 'fail';
         }
       });
   },
 });
 
 export const getAppreciateByCompany = createAsyncThunk(
-  "appreciate/getAppreciateByCompany",
+  'appreciate/getAppreciateByCompany',
   async (args) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token;
+    const user =
+      JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+      JSON.parse(localStorage.getItem('userPresent'))?.token;
     const header = {
       headers: {
-        Authorization: "Bearer " + user,
+        Authorization: 'Bearer ' + user,
       },
     };
     return axios
@@ -53,17 +54,18 @@ export const getAppreciateByCompany = createAsyncThunk(
 );
 
 export const addAppreciate = createAsyncThunk(
-  "appreciate/addAppreciate",
+  'appreciate/addAppreciate',
   async (data) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token;
+    const user =
+      JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+      JSON.parse(localStorage.getItem('userPresent'))?.token;
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + user,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + user,
     };
     const res = await axios
       .post(`${baseURL}/api/r2s/rate`, data, {
-        headers : headers
+        headers: headers,
       })
       .then((res) => {
         return res;
@@ -76,13 +78,14 @@ export const addAppreciate = createAsyncThunk(
 );
 
 export const updateAppreciate = createAsyncThunk(
-  "appreciate/updateAppreciate",
+  'appreciate/updateAppreciate',
   async (data) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token;
+    const user =
+      JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+      JSON.parse(localStorage.getItem('userPresent'))?.token;
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + user,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + user,
     };
 
     const res = await axios
@@ -101,13 +104,14 @@ export const updateAppreciate = createAsyncThunk(
 );
 
 export const deleteAppreciate = createAsyncThunk(
-  "appreciate/deleteAppreciate",
+  'appreciate/deleteAppreciate',
   async (id) => {
-    const user = JSON.parse(sessionStorage.getItem("userPresent"))?.token ||
-   JSON.parse(localStorage.getItem("userPresent"))?.token;
+    const user =
+      JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+      JSON.parse(localStorage.getItem('userPresent'))?.token;
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + user,
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + user,
     };
 
     const res = await axios

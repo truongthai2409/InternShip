@@ -1,20 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-
-// slices contain global states of the project 
+// slices contain global states of the project
 const globalSlices = createSlice({
-  name: "globalSlices",
+  name: 'globalSlices',
   initialState: {
-    isRightAuth : "", 
+    isRightAuth: '',
   },
   reducers: {
     setISRigthAuth: (state, action) => {
       state.isRightAuth = action.payload;
     },
   },
-  extraReducers: (builder) => {
-
-  }
+  extraReducers: (builder) => {},
 });
 
 export const { setISRigthAuth } = globalSlices.actions;

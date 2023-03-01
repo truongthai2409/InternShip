@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import notificationSlice from "../../notifications/notificationSlice";
-import api from "../../../../config/api/apiConfig";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import notificationSlice from '../../notifications/notificationSlice';
+import api from '../../../../config/api/apiConfig';
 
 import {
   getMajorListThunk,
   getMajorDetailThunk,
-} from "src/store/action/company/companyAction.js"
+} from 'src/store/action/company/companyAction.js';
 
 const baseURL = process.env.REACT_APP_API;
 
 const majorSlice = createSlice({
-  name: "major",
+  name: 'major',
   initialState: {
     majorList: [],
     majorDetail: {},
@@ -74,13 +74,13 @@ export default majorSlice;
  */
 
 export const addMajor = createAsyncThunk(
-  "major/addMajor",
+  'major/addMajor',
   async (data, thunkAPI) => {
     return api
       .post(`${baseURL}/api/major`, data)
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Thêm chuyên ngành thành công")
+          notificationSlice.actions.successMess('Thêm chuyên ngành thành công')
         );
         data.reset();
         return response.data;
@@ -117,7 +117,7 @@ export const addMajor = createAsyncThunk(
  * error => error.response.data
  */
 export const updateMajorInfo = createAsyncThunk(
-  "major/updateMajorInfo",
+  'major/updateMajorInfo',
   async (updateData, thunkAPI) => {
     const { majorData, setIsEdit } = updateData;
     return axios
@@ -125,7 +125,7 @@ export const updateMajorInfo = createAsyncThunk(
       .then((response) => {
         thunkAPI.dispatch(
           notificationSlice.actions.successMess(
-            "Cập nhật chuyên ngành thành công"
+            'Cập nhật chuyên ngành thành công'
           )
         );
         if (setIsEdit) {
@@ -139,13 +139,13 @@ export const updateMajorInfo = createAsyncThunk(
 );
 
 export const deleteMajor = createAsyncThunk(
-  "major/deleteMajorInfo",
+  'major/deleteMajorInfo',
   async (data, thunkAPI) => {
     return axios
       .delete(`${baseURL}/api/major/${data}`)
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Xóa chuyên ngành thành công")
+          notificationSlice.actions.successMess('Xóa chuyên ngành thành công')
         );
       })
       .catch((error) => {

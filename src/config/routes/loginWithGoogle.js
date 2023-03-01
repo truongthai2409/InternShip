@@ -1,10 +1,9 @@
-import LoginWithGoogle from "src/containers/LoginContainer/loginWithGoogle"
-
+import LoginWithGoogle from 'src/containers/LoginContainer/loginWithGoogle';
 
 const WithGoogleLogin = [
-    {
-        path: "/auth/social/google",
-        element: <LoginWithGoogle />,
-    }
-]
-export default WithGoogleLogin
+  {
+    path: '/auth/social/google',
+    element: <LoginWithGoogle />,
+  },
+];
+export default WithGoogleLogin;

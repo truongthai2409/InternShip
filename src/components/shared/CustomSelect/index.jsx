@@ -1,5 +1,5 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 
 const CustomSelect = React.forwardRef(
   (
@@ -31,24 +31,24 @@ const CustomSelect = React.forwardRef(
 
     return (
       <>
-        <div className={`custom-select__wrapper ${className ? className : ""}`}>
-          <h1 className="custom-select__label">
+        <div className={`custom-select__wrapper ${className ? className : ''}`}>
+          <h1 className='custom-select__label'>
             {label}
-            {requirementField && <span className="field-requirment">*</span>}
+            {requirementField && <span className='field-requirment'>*</span>}
           </h1>
           <select
             id={id}
             name={id}
             {...register(id)}
-            className="select"
+            className='select'
             required
           >
-            <option hidden value="">
+            <option hidden value=''>
               {placeholder}
             </option>
             {renderSelectOption()}
           </select>
-          <p className="custom-input__error">{children}</p>
+          <p className='custom-input__error'>{children}</p>
         </div>
       </>
     );
