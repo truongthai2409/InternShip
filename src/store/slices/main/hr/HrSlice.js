@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
-import { getDemandListThunk } from "src/store/action/hr/HrAction";
+import { getDemandListThunk } from 'src/store/action/hr/HrAction';
 const HrSlice = createSlice({
-  name: "hrSearch",
+  name: 'hrSearch',
   initialState: {
     type: [],
-    order: "newest",
+    order: 'newest',
     position: [],
-    name: "",
+    name: '',
     province: {},
     major: [],
     no: 0,
