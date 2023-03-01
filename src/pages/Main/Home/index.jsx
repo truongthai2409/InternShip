@@ -83,7 +83,6 @@ const Home = (props) => {
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  // console.log(index)
   const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
@@ -230,13 +229,17 @@ const Home = (props) => {
               </div>
             </Grid>
             <Grid item xs={12} style={{ textAlignLast: 'center' }}>
-              <img
-                src={image_notFound}
-                alt='notfound'
-                width={'20%'}
-                height={'100%'}
-              />
-              <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>
+              <div>
+                <img
+                  src={image_notFound}
+                  alt='notfound'
+                  width={'20%'}
+                  height={'100%'}
+                />
+                <p>
+                  Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy
+                </p>
+              </div>
             </Grid>
           </Grid>
         </Grid>
