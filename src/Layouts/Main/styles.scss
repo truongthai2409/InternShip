@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .main__layout {
   background-color: $primary-color-1;
@@ -17,4 +17,7 @@
   &-body-outlet {
     padding-top: 70px;
   }
+}
+.Toastify__toast-container--top-right {
+  margin-top: 42px;
 }

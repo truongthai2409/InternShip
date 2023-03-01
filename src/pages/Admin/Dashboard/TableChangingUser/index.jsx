@@ -1,12 +1,12 @@
-import React from "react";
-import TableData from "./TableData"
-import "./styles.scss"
+import React from 'react';
+import TableData from './TableData';
+import './styles.scss';
 
 const TableChangingUser = () => {
   return (
-    <div className="table-container">
+    <div className='table-container'>
       <h3>LƯỢT THAY ĐỔI GẦN NHẤT</h3>
-      <TableData/>
+      <TableData />
     </div>
   );
 };

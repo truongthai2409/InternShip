@@ -1,74 +1,74 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Grid, Hidden } from "@mui/material";
-import { useEffect, useReducer, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import notfound from "src/assets/img/notfound.webp";
-import TemporaryDrawer from "src/components/shared/Drawer";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Grid, Hidden } from '@mui/material';
+import { useEffect, useReducer, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import notfound from 'src/assets/img/notfound.webp';
+import TemporaryDrawer from 'src/components/shared/Drawer';
 import {
   changeFilterChange,
   majorFilterChange,
   nameFilterChange,
-} from "src/store/slices/main/candidate/user/userCandidateSlice";
-import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
+} from 'src/store/slices/main/candidate/user/userCandidateSlice';
+import { getDemandList } from 'src/store/slices/main/home/demand/demandSlice';
 import {
   indexFilterChange,
   jobFilters,
   pageFilterChange,
-} from "src/store/slices/main/home/filter/filterSlices";
-import DetailCard from "../../../components/Card/DetailCard";
-import ListCardJobHome from "../../../components/Home/ListCardJobHome";
-import SearchResultHome from "../../../components/Home/SearchResultHome";
-import SideBarHomeList from "../../../components/Home/SideBarHomeList";
-import { getJobPositionList } from "../../../store/slices/main/home/job/jobSlice";
-import { getJobByCompanyThunk } from "src/store/action/company/companyAction";
-import { getDemandListThunk } from "src/store/action/hr/HrAction";
-import SearchHR from "../HR/SearchHR";
-import "./styles.scss";
+} from 'src/store/slices/main/home/filter/filterSlices';
+import DetailCard from '../../../components/Card/DetailCard';
+import ListCardJobHome from '../../../components/Home/ListCardJobHome';
+import SearchResultHome from '../../../components/Home/SearchResultHome';
+import SideBarHomeList from '../../../components/Home/SideBarHomeList';
+import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
+import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
+import { getDemandListThunk } from 'src/store/action/hr/HrAction';
+import SearchHR from '../HR/SearchHR';
+import './styles.scss';
 const initialState = {
   type: [],
   position: [],
   major: [],
   no: 0,
-  order: "newest",
-  name: "",
-  province: "",
+  order: 'newest',
+  name: '',
+  province: '',
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case "name":
+    case 'name':
       return { ...state, name: action.payload };
-    case "no":
+    case 'no':
       return { ...state, no: action.payload };
-    case "province":
+    case 'province':
       return { ...state, province: action.payload };
-    case "type":
+    case 'type':
       if (action.payload.length === 0) {
-        return { ...state, type: "" };
+        return { ...state, type: '' };
       }
       return { ...state, type: action.payload };
-    case "position":
+    case 'position':
       if (action.payload.length === 0) {
-        return { ...state, position: "" };
+        return { ...state, position: '' };
       }
       return { ...state, position: action.payload };
-    case "major":
+    case 'major':
       if (action.payload.length === 0) {
-        return { ...state, major: "" };
+        return { ...state, major: '' };
       }
       return { ...state, major: action.payload };
-    case "reset": {
+    case 'reset': {
       return {
         ...state,
         type: [],
         position: [],
         major: [],
         no: 0,
-        order: "oldest",
-        name: "",
-        province: "",
+        order: 'oldest',
+        name: '',
+        province: '',
       };
     }
     default:
@@ -77,10 +77,10 @@ function reducer(state = initialState, action) {
 }
 
 const image_notFound =
-  "https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png";
+  'https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png';
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation("client");
+  const { t } = useTranslation('client');
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
@@ -94,36 +94,36 @@ const Home = (props) => {
   const [state, dispatcher] = useReducer(reducer, initialState);
 
   const listPositionWorkingFormat = jobPosition?.map((item) => {
-    if (userHR && userHR?.name === "Role_HR") {
+    if (userHR && userHR?.name === 'Role_HR') {
       return item.id;
     } else {
       return item.name;
     }
   });
-  const [valueLocation, setValueLocation] = useState("");
+  const [valueLocation, setValueLocation] = useState('');
   const [jobs, setJob] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
   const listWorkingFormat = [
-    { name: "Fulltime", id: 1 },
-    { name: "Parttime", id: 2 },
-    { name: "Remote", id: 3 },
+    { name: 'Fulltime', id: 1 },
+    { name: 'Parttime', id: 2 },
+    { name: 'Remote', id: 3 },
   ];
 
   const handleSearch = (value) => {
-    if (userHR && userHR?.name === "Role_HR") {
-      console.log(value, "Role ne");
+    if (userHR && userHR?.name === 'Role_HR') {
+      console.log(value, 'Role ne');
       dispatch(nameFilterChange(value));
       dispatch(indexFilterChange(0));
-      dispatcher({ type: "name", payload: value });
-      dispatcher({ type: "no", payload: 0 });
-      dispatcher({ type: "province", payload: valueLocation });
+      dispatcher({ type: 'name', payload: value });
+      dispatcher({ type: 'no', payload: 0 });
+      dispatcher({ type: 'province', payload: valueLocation });
       getDemandListThunk(value);
     } else {
       dispatch(nameFilterChange(value));
       dispatch(indexFilterChange(0));
-      dispatcher({ type: "name", payload: value });
-      dispatcher({ type: "no", payload: 0 });
-      dispatcher({ type: "province", payload: valueLocation });
+      dispatcher({ type: 'name', payload: value });
+      dispatcher({ type: 'no', payload: 0 });
+      dispatcher({ type: 'province', payload: valueLocation });
       dispatch(changeFilterChange(false));
       dispatch(pageFilterChange(1));
     }
@@ -136,12 +136,12 @@ const Home = (props) => {
   const getValuePageAndHandle = (value) => {
     console.log(value);
 
-    if (userHR && userHR?.name === "Role_HR") {
+    if (userHR && userHR?.name === 'Role_HR') {
       dispatch(indexFilterChange(0));
       window.scroll(0, 0);
       return dispatch(getDemandList({ currentPage: value, limit: 5 }));
     }
-    dispatcher({ type: "no", payload: value - 1 });
+    dispatcher({ type: 'no', payload: value - 1 });
     dispatch(indexFilterChange(0));
     dispatch(getDemandListThunk({ no: value, limit: 5 }));
   };
@@ -154,7 +154,7 @@ const Home = (props) => {
     tempType = value.filter((sp) =>
       listWorkingFormat
         .map((items) => {
-          if (userHR && userHR?.name === "Role_HR") {
+          if (userHR && userHR?.name === 'Role_HR') {
             return items.id;
           } else {
             return items.name;
@@ -165,7 +165,7 @@ const Home = (props) => {
     tempPosition = value.filter((items) =>
       listPositionWorkingFormat
         .map((item) => {
-          console.log(items, "position");
+          console.log(items, 'position');
           return item;
         })
         .includes(items)
@@ -183,30 +183,30 @@ const Home = (props) => {
           })
           .includes(items)
     );
-    dispatcher({ type: "type", payload: tempType });
-    dispatcher({ type: "position", payload: tempPosition });
-    dispatcher({ type: "major", payload: tempMajor });
-    dispatcher({ type: "no", payload: 0 });
+    dispatcher({ type: 'type', payload: tempType });
+    dispatcher({ type: 'position', payload: tempPosition });
+    dispatcher({ type: 'major', payload: tempMajor });
+    dispatcher({ type: 'no', payload: 0 });
     dispatch(pageFilterChange(1));
   };
 
   useEffect(() => {
     const dataFilter = [
       {
-        type: state.type + "",
+        type: state.type + '',
         order: state.order,
-        position: state.position + "",
+        position: state.position + '',
         name: state.name,
         province: state.province,
-        major: state.major + "",
+        major: state.major + '',
         no: state.no,
         limit: 5,
       },
       { link: props.linkFilter },
     ];
-    console.log(state, "stataeee");
-    console.log(dataFilter, "filter");
-    if (userHR && userHR?.name === "Role_HR") {
+    console.log(state, 'stataeee');
+    console.log(dataFilter, 'filter');
+    if (userHR && userHR?.name === 'Role_HR') {
       dispatch(jobFilters(dataFilter[0]));
     } else {
       dispatch(jobFilters(dataFilter));
@@ -229,13 +229,13 @@ const Home = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (props.userCandidate) {
-      navigate("finduser");
+      navigate('finduser');
     }
   }, [dispatch, navigate, props.userCandidate]);
   return (
     <Grid
-      className="wrapper"
-      sx={{ padding: "1rem 2rem", position: "relative" }}
+      className='wrapper'
+      sx={{ padding: '1rem 2rem', position: 'relative' }}
       spacing={{ xs: 4 }}
       container
     >
@@ -251,19 +251,19 @@ const Home = (props) => {
         <Grid item xs={10}>
           <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12}>
-              <div className="none__res">
+              <div className='none__res'>
                 <SearchResultHome
                   onClick={handleSearch}
                   onChange={getValueLocationAndHandle}
                 />
               </div>
             </Grid>
-            <Grid item xs={12} style={{ textAlignLast: "center" }}>
+            <Grid item xs={12} style={{ textAlignLast: 'center' }}>
               <img
                 src={image_notFound}
-                alt="notfound"
-                width={"20%"}
-                height={"100%"}
+                alt='notfound'
+                width={'20%'}
+                height={'100%'}
               />
               <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>
             </Grid>
@@ -273,7 +273,7 @@ const Home = (props) => {
         <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
           <Grid container spacing={4}>
             <Grid item xs={12}>
-              <div className="none__res">
+              <div className='none__res'>
                 <SearchResultHome
                   onClick={handleSearch}
                   onChange={getValueLocationAndHandle}
@@ -281,7 +281,7 @@ const Home = (props) => {
               </div>
             </Grid>
 
-            <div className="home__container">
+            <div className='home__container'>
               <ListCardJobHome
                 jobList={jobs}
                 indexCardActive={index}
@@ -292,10 +292,10 @@ const Home = (props) => {
               <Hidden mdDown>
                 <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <div className="containerDetailCard containerDetailCard-none">
+                    <div className='containerDetailCard containerDetailCard-none'>
                       {/* {props.hr && <SearchHR />} */}
                       <DetailCard
-                        logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+                        logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
                         jobDetail={jobDetail}
                         jobList={jobs}
                         jobListCompany={jobListCompany}
@@ -308,7 +308,7 @@ const Home = (props) => {
             </div>
           </Grid>
           <Hidden lgUp>
-            <div className="HomePageMenu">
+            <div className='HomePageMenu'>
               <TemporaryDrawer
                 children={
                   <SideBarHomeList
@@ -316,7 +316,7 @@ const Home = (props) => {
                     slideBarHome__wrapper={true}
                   />
                 }
-                position="left"
+                position='left'
                 name={<AddCircleIcon />}
               />
             </div>

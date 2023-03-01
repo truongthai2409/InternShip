@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import Detail from "./component";
-import "./styles.scss";
+import PropTypes from 'prop-types';
+import Detail from './component';
+import './styles.scss';
 
 const DetailCard = ({
   jobDetail,

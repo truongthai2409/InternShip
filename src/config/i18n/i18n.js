@@ -1,6 +1,6 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import {
   CLIENT_EN,
   PROFILE_EN,
@@ -11,7 +11,8 @@ import {
   LOGIN_EN,
   SEARCH_EN,
   USERINFO_EN,
-} from "src/locales/translateEN";
+  NOTIFICATION_EN,
+} from 'src/locales/translateEN';
 import {
   CLIENT_VI,
   PROFILE_VI,
@@ -22,7 +23,8 @@ import {
   LOGIN_VI,
   SEARCH_VI,
   USERINFO_VI,
-} from "src/locales/translateVI";
+  NOTIFICATION_VI,
+} from 'src/locales/translateVI';
 
 const resources = {
   en: {
@@ -35,6 +37,7 @@ const resources = {
     login: LOGIN_EN,
     search: SEARCH_EN,
     userInfo: USERINFO_EN,
+    notification: NOTIFICATION_EN,
   },
   vi: {
     client: CLIENT_VI,
@@ -46,6 +49,7 @@ const resources = {
     login: LOGIN_VI,
     search: SEARCH_VI,
     userInfo: USERINFO_VI,
+    notification: NOTIFICATION_VI,
   },
 };
 
@@ -55,17 +59,17 @@ i18n
   .init({
     resources: resources,
     fallbackLng:
-      localStorage.getItem("lang") &&
-      (localStorage.getItem("lang") === "vi" ||
-        localStorage.getItem("lang") === "en")
-        ? localStorage.getItem("lang")
-        : "vi",
+      localStorage.getItem('lang') &&
+      (localStorage.getItem('lang') === 'vi' ||
+        localStorage.getItem('lang') === 'en')
+        ? localStorage.getItem('lang')
+        : 'vi',
     lng:
-      localStorage.getItem("lang") &&
-      (localStorage.getItem("lang") === "vi" ||
-        localStorage.getItem("lang") === "en")
-        ? localStorage.getItem("lang")
-        : "vi",
+      localStorage.getItem('lang') &&
+      (localStorage.getItem('lang') === 'vi' ||
+        localStorage.getItem('lang') === 'en')
+        ? localStorage.getItem('lang')
+        : 'vi',
     debug: false,
     interpolation: {
       escapeValue: false,

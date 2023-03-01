@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 const baseURL = process.env.REACT_APP_API;
 
 const profileSlice = createSlice({
-  name: "profile",
+  name: 'profile',
   initialState: {
     user: {},
-    role: "",
+    role: '',
   },
   reducers: {
     updateRole: (state) => {
-      state.role = "";
+      state.role = '';
       state.user = {};
     },
   },
@@ -20,12 +20,12 @@ const profileSlice = createSlice({
       state.user = payload;
       state.role = payload?.user?.role?.name;
     });
-    builder.addCase(updateUser.fulfilled, (state, {payload}) => {
+    builder.addCase(updateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
-      toast.success("Chỉnh sửa thành công", {
-        position: "bottom-right",
+      toast.success('Chỉnh sửa thành công', {
+        position: 'top-right',
         autoClose: 3000,
-        theme: "colored",
+        theme: 'colored',
       });
     });
   },
@@ -35,32 +35,32 @@ const profileSlice = createSlice({
  * args : sesionStorage or localStorage ( token: tokenJWT && ids : ID User)
  */
 export const getUserById = createAsyncThunk(
-  "profile/getUserById",
+  'profile/getUserById',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args.token,
+        Authorization: 'Bearer ' + args.token,
       },
     };
     //get Role in token
     // Token : XXX.YYY.ZZZ => XXX is header. YYY is payload. ZZZ is signature. func HASHTOKEN get role from YYY
     const HASHTOKEN = () => {
-      let base64Url = args.token.split(".")[1];
-      let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      let base64Url = args.token.split('.')[1];
+      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       let jsonPayload = decodeURIComponent(
         window
           .atob(base64)
-          .split("")
+          .split('')
           .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
           })
-          .join("")
+          .join('')
       );
 
       return JSON.parse(jsonPayload).roles[0].authority;
     };
     switch (HASHTOKEN()) {
-      case "Role_HR":
+      case 'Role_HR':
         return await axios
           .get(`${baseURL}/api/r2s/hr/user/${args.ids}`, header)
           .then((response) => {
@@ -69,7 +69,7 @@ export const getUserById = createAsyncThunk(
           .catch((error) => {
             return error.response.data;
           });
-      case "Role_Partner":
+      case 'Role_Partner':
         return await axios
           .get(`${baseURL}/api/r2s/partner/user/${args.ids}`, header)
           .then((response) => {
@@ -78,7 +78,7 @@ export const getUserById = createAsyncThunk(
           .catch((error) => {
             return error.response.data;
           });
-      case "Role_Candidate":
+      case 'Role_Candidate':
         return await axios
           .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
           .then((response) => {
@@ -93,17 +93,17 @@ export const getUserById = createAsyncThunk(
   }
 );
 export const updateUser = createAsyncThunk(
-  "profile/updateUser",
+  'profile/updateUser',
   async (args) => {
     console.log(args);
     const header = {
       headers: {
-        Authorization: "Bearer " + args[0].userStorage?.token,
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[0].userStorage?.token,
+        'Content-Type': 'multipart/form-data',
       },
     };
     switch (args[0].role) {
-      case "Role_HR": {
+      case 'Role_HR': {
         return await axios
           .put(`${baseURL}/api/r2s/hr/${args[2]}`, args[1], header)
           .then((response) => {
@@ -113,7 +113,7 @@ export const updateUser = createAsyncThunk(
             return error.response.data;
           });
       }
-      case "Role_Candidate": {
+      case 'Role_Candidate': {
         return await axios
           .put(`${baseURL}/api/r2s/candidate`, args[1], header)
           .then((response) => {
@@ -123,7 +123,7 @@ export const updateUser = createAsyncThunk(
             return error.response.data;
           });
       }
-      case "Role_Partner": {
+      case 'Role_Partner': {
         return await axios
           .put(`${baseURL}/api/r2s/partner`, args[1], header)
           .then((response) => {
@@ -135,7 +135,7 @@ export const updateUser = createAsyncThunk(
       }
 
       default:
-        console.log(args)
+        console.log(args);
         break;
     }
   }

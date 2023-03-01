@@ -1,23 +1,23 @@
-import { Box } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getJobList } from "../../../store/slices/main/home/job/jobSlice";
-import BaseInformationCompany from "../../BaseInformationCompany";
-import BaseInformationUniversity from "../../BaseInformationUniversity";
-import InformationCompany from "../../InformationComapny";
-import InformationUniversity from "../../InformationUniversity";
-import TagName from "../../Home/TagName";
+import { Box } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getJobList } from '../../../store/slices/main/home/job/jobSlice';
+import BaseInformationCompany from '../../BaseInformationCompany';
+import BaseInformationUniversity from '../../BaseInformationUniversity';
+import InformationCompany from '../../InformationComapny';
+import InformationUniversity from '../../InformationUniversity';
+import TagName from '../../Home/TagName';
 const API = process.env.REACT_APP_API;
 export function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -39,7 +39,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
@@ -68,14 +68,14 @@ const Detail = ({
   return (
     <div>
       {jobDetail && (
-        <div className="detail__card detail__card-ontablet containerDetailCard-home">
-          <div className="detail__card-1">
-            <div className="detail__card-intro">
+        <div className='detail__card detail__card-ontablet containerDetailCard-home'>
+          <div className='detail__card-1'>
+            <div className='detail__card-intro'>
               <img
-                className="detail__card__logo"
-                alt="detail-card-logo"
+                className='detail__card__logo'
+                alt='detail-card-logo'
                 src={
-                  role?.includes("Role_HR")
+                  role?.includes('Role_HR')
                     ? `${API}${jobDetail?.universityDTO?.avatar}`
                     : `${API}${jobDetail?.hr?.company?.logo}`
                 }
@@ -83,20 +83,20 @@ const Detail = ({
                   currentTarget.onerror = null;
                   currentTarget.onerror = undefined;
                   currentTarget.src =
-                    "https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg";
+                    'https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg';
                 }}
               />
               <div>
                 <h2>{jobDetail?.name}</h2>
-                <p className="name-company">
+                <p className='name-company'>
                   {jobDetail.hr?.company?.name ||
                     jobDetail?.universityDTO?.name}
                 </p>
               </div>
             </div>
-            <div className="detail__card-2">
-              <div className="tag-name">
-                <div className="tag-name__name">
+            <div className='detail__card-2'>
+              <div className='tag-name'>
+                <div className='tag-name__name'>
                   {jobDetail?.jobType?.length > 0 ? (
                     jobDetail?.jobType?.map((item) => {
                       return <TagName key={item.name} title={item.name} />;
@@ -137,38 +137,38 @@ const Detail = ({
           </div>
           <div>
             {!demandPartner ? (
-              <Box sx={{ width: "100%" }} className="boxOpenSans">
+              <Box sx={{ width: '100%' }} className='boxOpenSans'>
                 <Box
                   sx={{
                     borderBottom: 1,
-                    borderColor: "divider",
+                    borderColor: 'divider',
                     mt: 1,
                     fontSize: 3,
                   }}
-                  className="boxOpenSans"
+                  className='boxOpenSans'
                 >
                   <Tabs
                     value={value}
                     onChange={handleChange}
-                    aria-label="basic tabs example"
-                    textColor="primary"
+                    aria-label='basic tabs example'
+                    textColor='primary'
                     scrollButtons
                     sx={{}}
-                    className="boxOpenSans"
+                    className='boxOpenSans'
                   >
                     <Tab
-                      label="Chi tiết"
+                      label='Chi tiết'
                       {...a11yProps(0)}
-                      textColor="inherit"
+                      textColor='inherit'
                       sx={{ fontSize: 12 }}
-                      className="boxOpenSans"
+                      className='boxOpenSans'
                     />
                     <Tab
-                      label="Tổng quan công ty"
+                      label='Tổng quan công ty'
                       {...a11yProps(1)}
-                      textColor="inherit"
+                      textColor='inherit'
                       sx={{ fontSize: 12 }}
-                      className="boxOpenSans"
+                      className='boxOpenSans'
                     />
                   </Tabs>
                 </Box>
@@ -186,37 +186,37 @@ const Detail = ({
                 </TabPanel>
               </Box>
             ) : (
-              <Box sx={{ width: "100%" }} className="boxOpenSans">
+              <Box sx={{ width: '100%' }} className='boxOpenSans'>
                 <Box
                   sx={{
                     borderBottom: 1,
-                    borderColor: "divider",
+                    borderColor: 'divider',
                     mt: 1,
                     fontSize: 3,
                   }}
-                  className="boxOpenSans"
+                  className='boxOpenSans'
                 >
                   <Tabs
                     value={value}
                     onChange={handleChange}
-                    aria-label="basic tabs example"
-                    textColor="primary"
+                    aria-label='basic tabs example'
+                    textColor='primary'
                     scrollButtons
-                    className="boxOpenSans"
+                    className='boxOpenSans'
                   >
                     <Tab
-                      label="Chi tiết"
+                      label='Chi tiết'
                       {...a11yProps(0)}
-                      textColor="inherit"
+                      textColor='inherit'
                       sx={{ fontSize: 12 }}
-                      className="boxOpenSans"
+                      className='boxOpenSans'
                     />
                     <Tab
-                      label="Thông tin về trường"
+                      label='Thông tin về trường'
                       {...a11yProps(1)}
-                      textColor="inherit"
+                      textColor='inherit'
                       sx={{ fontSize: 12 }}
-                      className="boxOpenSans"
+                      className='boxOpenSans'
                     />
                   </Tabs>
                 </Box>
@@ -239,29 +239,29 @@ const Detail = ({
       )}
 
       {jobDetailById && jobDetailById !== {} && (
-        <div className="detail__card detail__card-ontablet containerDetailCard-home">
-          <div className="detail__card-1">
-            <div className="detail__card-intro">
+        <div className='detail__card detail__card-ontablet containerDetailCard-home'>
+          <div className='detail__card-1'>
+            <div className='detail__card-intro'>
               <img
-                className="detail__card__logo"
-                alt="detail-card-logo"
+                className='detail__card__logo'
+                alt='detail-card-logo'
                 src={
-                  role?.includes("Role_Partner")
+                  role?.includes('Role_Partner')
                     ? `${API}${jobDetailById?.universityDTO?.avatar}`
                     : `${API}${jobDetailById?.hr?.company?.logo}`
                 }
               />
               <div>
                 <h2>{jobDetailById?.name || jobDetailById?.name}</h2>
-                <p className="name-company">
+                <p className='name-company'>
                   {jobDetailById?.hr?.company?.name ||
                     jobDetailById?.universityDTO?.name}
                 </p>
               </div>
             </div>
-            <div className="detail__card-2">
-              <div className="tag-name">
-                <div className="tag-name__name">
+            <div className='detail__card-2'>
+              <div className='tag-name'>
+                <div className='tag-name__name'>
                   {jobDetailById?.jobType?.length > 0 ? (
                     jobDetailById?.jobType?.map((item) => {
                       return <TagName title={item.name} />;
@@ -300,7 +300,7 @@ const Detail = ({
             </div>
           </div>
           <div>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: '100%' }} className='scrollerDetailCard3'>
               {demandPartner ? (
                 <InformationUniversity
                   jobDetail={jobDetailById}

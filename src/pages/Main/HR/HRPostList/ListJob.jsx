@@ -1,6 +1,6 @@
-import CardPost from "src/components/Card/CardPost";
-import Null from "src/components/shared/Null";
-import "./styles.scss";
+import CardPost from 'src/components/Card/CardPost';
+import Null from 'src/components/shared/Null';
+import './styles.scss';
 
 const formatLocation = (location) => {
   return `${location?.address}, ${location?.district?.name},
@@ -9,7 +9,7 @@ const formatLocation = (location) => {
 
 export const ListJob = ({ listJob, message, isDisabled }) => {
   return (
-    <div className="hrpost__list">
+    <div className='hrpost__list'>
       {listJob && listJob?.length > 0 ? (
         isDisabled ? (
           listJob?.map((job) => (

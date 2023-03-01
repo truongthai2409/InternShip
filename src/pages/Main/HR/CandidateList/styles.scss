@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .candidate-list__wrapper {
   min-width: 550px;
@@ -95,7 +95,7 @@
       border: 1.5px solid #dedede;
       border-radius: 4px;
       // height: 3rem;e
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
 
       &:hover {
         background-color: #0000000a;

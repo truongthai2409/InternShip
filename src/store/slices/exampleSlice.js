@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchExample } from "../action/company/companyAction";
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchExample } from '../action/company/companyAction';
 
 const initialState = {
   value: [],
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const exampleSlice = createSlice({
-  name: "example",
+  name: 'example',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

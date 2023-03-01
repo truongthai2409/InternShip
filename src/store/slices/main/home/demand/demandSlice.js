@@ -1,16 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const baseURL = process.env.REACT_APP_API;
 
 const demandSlice = createSlice({
-  name: "demand",
+  name: 'demand',
   initialState: {
     demandList: [],
     demandListUniversity: [],
     demandListUniversityActive: [],
-    status: "idle",
+    status: 'idle',
     indexPartnerCardActive: 0,
     idPartnerCardActive: 0,
     demandDetail: {},
@@ -37,22 +37,22 @@ const demandSlice = createSlice({
     });
     builder
       .addCase(addDemand.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(addDemand.fulfilled, (state, { payload }) => {
         if (payload.httpCode && payload.httpCode === 500) {
           state.status = payload.message;
-          toast.error("Đăng danh sách thực tập thất bại!");
+          toast.error('Đăng danh sách thực tập thất bại!');
           toast.error(`Lỗi: ${payload.message}`);
         } else {
-          state.status = "success";
+          state.status = 'success';
           state.demandListUniversityActive.unshift(payload);
-          toast.success("Đăng danh sách thực tập thành công!");
+          toast.success('Đăng danh sách thực tập thành công!');
         }
       });
     builder
       .addCase(getDemandList.pending, (state, { payload }) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getDemandList.fulfilled, (state, { payload }) => {
         state.demandList = payload.contents;
@@ -60,7 +60,7 @@ const demandSlice = createSlice({
       });
     builder
       .addCase(getDemandByName.pending, (state, { payload }) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getDemandByName.fulfilled, (state, { payload }) => {
         state.demandList = payload.demandList;
@@ -72,14 +72,14 @@ const demandSlice = createSlice({
       });
     builder
       .addCase(getDemandById.pending, (state, { payload }) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getDemandById.fulfilled, (state, { payload }) => {
         state.demandDetail = payload;
       });
     builder
       .addCase(updateDemand.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(updateDemand.fulfilled, (state, { payload }) => {
         state.demandListUniversityActive = state.demandListUniversityActive.map(
@@ -90,18 +90,18 @@ const demandSlice = createSlice({
             return demand;
           }
         );
-        toast.success("Cập nhật danh sách thực tập thành công!");
+        toast.success('Cập nhật danh sách thực tập thành công!');
         state.closeEditDemand = true;
       });
   },
 });
 
-export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
+export const addDemand = createAsyncThunk('demand/addDemand', async (data) => {
   let axiosConfig = {
     headers: {
-      "Content-Type": "multipart/form-data",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: "Bearer " + data[1].token,
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Origin': '*',
+      Authorization: 'Bearer ' + data[1].token,
     },
   };
   return await axios
@@ -115,13 +115,13 @@ export const addDemand = createAsyncThunk("demand/addDemand", async (data) => {
 });
 
 export const updateDemand = createAsyncThunk(
-  "demand/updateDemand",
+  'demand/updateDemand',
   async (data) => {
     const { idDemand, demandData } = data;
     let axiosConfig = {
       headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return axios
@@ -140,12 +140,12 @@ export const updateDemand = createAsyncThunk(
 );
 
 export const getDemandListByUniId = createAsyncThunk(
-  "demand/getDemandListByUniId",
+  'demand/getDemandListByUniId',
   async ({ uniId, currentPage, limit }) => {
     let axiosConfig = {
       headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return await axios
@@ -165,12 +165,12 @@ export const getDemandListByUniId = createAsyncThunk(
 );
 
 export const getAllDemandListByUniId = createAsyncThunk(
-  "demand/getAllDemandListByUniId",
+  'demand/getAllDemandListByUniId',
   async ({ uniId, currentPages, limits }) => {
     let axiosConfig = {
       headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return await axios
@@ -188,12 +188,12 @@ export const getAllDemandListByUniId = createAsyncThunk(
 );
 
 export const getDemandById = createAsyncThunk(
-  "demand/getDemandById",
+  'demand/getDemandById',
   async (id) => {
     let axiosConfig = {
       headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return await axios
@@ -208,7 +208,7 @@ export const getDemandById = createAsyncThunk(
 );
 
 export const getDemandList = createAsyncThunk(
-  "demand/getDemandList",
+  'demand/getDemandList',
   async ({ currentPage, limit }) => {
     return await axios
       .get(`${baseURL}/api/demand?no=${currentPage - 1}&limit=${limit}`)
@@ -222,7 +222,7 @@ export const getDemandList = createAsyncThunk(
 );
 
 export const getDemandByName = createAsyncThunk(
-  "demand/getDemandByName",
+  'demand/getDemandByName',
   async (dataSearch) => {
     return await axios
       .get(`${baseURL}/api/r2s/partner/demand/search`, { params: dataSearch })

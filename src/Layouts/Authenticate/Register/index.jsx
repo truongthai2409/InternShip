@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import RegisterContainer from "../../../containers/RegisterContainer/index";
-import "./styles.scss";
-import "./responsive.scss";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from 'react';
+import RegisterContainer from '../../../containers/RegisterContainer/index';
+import './styles.scss';
+import './responsive.scss';
+import { Outlet } from 'react-router-dom';
 // import Footer from "src/components/Footer";
-import Footer from "src/components/shared/Footer/Footer";
-import HeaderContainer from "src/components/HeaderContainer";
+import Footer from 'src/components/shared/Footer/Footer';
+import HeaderContainer from 'src/components/HeaderContainer';
 
 export default function RegisterLayout() {
   useEffect(() => {
@@ -13,9 +13,9 @@ export default function RegisterLayout() {
   }, []);
   return (
     <>
-      <div className="register-layout">
+      <div className='register-layout'>
         <HeaderContainer />
-        <div className="register-container-wrapper">
+        <div className='register-container-wrapper'>
           <RegisterContainer Outlet={Outlet} />
         </div>
       </div>

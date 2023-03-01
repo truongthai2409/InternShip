@@ -1,13 +1,13 @@
-import Button from "../../shared/Button";
-import ButtonOutline from "../../shared/ButtonOutline";
-import CustomInput from "../../shared/CustomInput";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import "./styles.scss";
-import moment from "moment";
-import { useDispatch } from "react-redux";
-import { addJob } from "src/store/slices/main/home/job/jobSlice";
-import { schema } from "./validateForm";
+import Button from '../../shared/Button';
+import ButtonOutline from '../../shared/ButtonOutline';
+import CustomInput from '../../shared/CustomInput';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import './styles.scss';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { addJob } from 'src/store/slices/main/home/job/jobSlice';
+import { schema } from './validateForm';
 
 export const ConfirmDate = ({ jobDetail, setOpen, nameBtnYes, nameBtnNo }) => {
   const {
@@ -35,8 +35,8 @@ export const ConfirmDate = ({ jobDetail, setOpen, nameBtnYes, nameBtnNo }) => {
       salaryMax: jobDetail[0].salaryMax,
       requirement: jobDetail[0].requirement,
       otherInfo: jobDetail[0].otherInfo,
-      timeStartStr: moment(data.timeStart).format("YYYY-MM-DD"),
-      timeEndStr: moment(data.timeEnd).format("YYYY-MM-DD"),
+      timeStartStr: moment(data.timeStart).format('YYYY-MM-DD'),
+      timeEndStr: moment(data.timeEnd).format('YYYY-MM-DD'),
       jobposition: {
         id: jobDetail[0].jobposition?.id,
       },
@@ -58,42 +58,42 @@ export const ConfirmDate = ({ jobDetail, setOpen, nameBtnYes, nameBtnNo }) => {
   };
   return (
     <>
-      <div className="confirmation-date__wrapper">
-        <form action="" className="confirmation-date__form">
+      <div className='confirmation-date__wrapper'>
+        <form action='' className='confirmation-date__form'>
           <CustomInput
-            id="timeStart"
-            label="Ngày bắt đầu tuyển"
+            id='timeStart'
+            label='Ngày bắt đầu tuyển'
             register={register}
-            type="date"
+            type='date'
           >
             {errors.timeStart?.message}
           </CustomInput>
           <CustomInput
-            id="timeEnd"
-            label="Ngày hết hạn tuyển"
+            id='timeEnd'
+            label='Ngày hết hạn tuyển'
             register={register}
-            type="date"
+            type='date'
           >
             {errors.timeEnd?.message}
           </CustomInput>
         </form>
-        <div className="confirmation-date__btns">
+        <div className='confirmation-date__btns'>
           <Button
             onClick={handleSubmit(onSubmit)}
-            className="confirmation-date__btns--add-job"
+            className='confirmation-date__btns--add-job'
             name={nameBtnYes}
-            fz="14px"
-            outline="1.5px solid #DEDEDE"
+            fz='14px'
+            outline='1.5px solid #DEDEDE'
           />
           <ButtonOutline
-            className="confirmation-date__btns-cancel"
+            className='confirmation-date__btns-cancel'
             onClick={() => setOpen(false)}
             name={nameBtnNo}
-            bg="#F3F4F6"
-            color="#111111"
-            radius="4px"
-            fz="14px"
-            outline="1.5px solid #DEDEDE"
+            bg='#F3F4F6'
+            color='#111111'
+            radius='4px'
+            fz='14px'
+            outline='1.5px solid #DEDEDE'
           />
         </div>
       </div>

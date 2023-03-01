@@ -1,4 +1,4 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 .login-form {
   &__container {
@@ -11,9 +11,16 @@
   }
 
   &__save-pass {
+    display: flex;
     width: 100%;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: space-between;
+    // text-align: left;
+    align-items: center;
+    font-family: $f-family !important;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: oblique;
+    color: blue;
   }
 
   &__btn {
@@ -22,4 +29,15 @@
     justify-content: center;
     margin-top: 40px;
   }
+}
+.css-ahj2mt-MuiTypography-root {
+  font-family: $f-family !important;
+}
+.forgotPasswordLink {
+  text-decoration: underline !important;
+}
+
+.login-from-button {
+  height: 50px;
+  font-size: 16px;
 }

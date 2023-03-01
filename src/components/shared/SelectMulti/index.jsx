@@ -1,13 +1,13 @@
-import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
-import "./styles.scss";
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
+import './styles.scss';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -43,48 +43,48 @@ const SelectMulti = ({
     const {
       target: { value },
     } = event;
-    setPersonName(typeof value === "string" ? value.split(",") : value);
+    setPersonName(typeof value === 'string' ? value.split(',') : value);
   };
   React.useEffect(() => {
     arrDefault && setPersonName(arrDefault);
   }, [arrDefault]);
   return (
-    <div className={`select-form ${className ? className : ""}`}>
-      <h1 className="select-label">
+    <div className={`select-form ${className ? className : ''}`}>
+      <h1 className='select-label'>
         {label}
-        {requirementField && <span className="field-requirment">*</span>}
+        {requirementField && <span className='field-requirment'>*</span>}
       </h1>
       <FormControl
-        sx={{ width: "100%", border: "1px solid #04bf8a", marginTop: "-1px" }}
+        sx={{ width: '100%', border: '1px solid #04bf8a', marginTop: '-1px' }}
       >
         {personName.length > 0 ? (
-          ""
+          ''
         ) : (
           <InputLabel
-            id="demo-multiple-chip-label"
-            style={{ fontSize: 13, padding: "0 !important" }}
+            id='demo-multiple-chip-label'
+            style={{ fontSize: 13, padding: '0 !important' }}
           >
             {placeholder}
           </InputLabel>
         )}
         <Select
-          sx={{ padding: "6px 0 8xpx 0" }}
-          className="container_form_post"
-          labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
+          sx={{ padding: '6px 0 8xpx 0' }}
+          className='container_form_post'
+          labelId='demo-multiple-chip-label'
+          id='demo-multiple-chip'
           multiple
           value={personName}
           {...register(id)}
           onChange={handleChange}
           input={
             <OutlinedInput
-              sx={{ padding: "-4px 14px" }}
-              id="select-multiple-chip"
-              label="Chip"
+              sx={{ padding: '-4px 14px' }}
+              id='select-multiple-chip'
+              label='Chip'
             />
           }
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (
                 <Chip key={value.name} label={value.name} />
               ))}
@@ -103,7 +103,7 @@ const SelectMulti = ({
           ))}
         </Select>
       </FormControl>
-      <p className="select-error">{children}</p>
+      <p className='select-error'>{children}</p>
     </div>
   );
 };

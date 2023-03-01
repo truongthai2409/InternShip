@@ -1,4 +1,4 @@
-@use "../../../assets/styles" as *;
+@use '../../../assets/styles' as *;
 
 .login-layout {
   width: 100%;
@@ -21,7 +21,6 @@
 }
 
 @media only screen and (max-width: 46.1875em) {
-
   .login-container__modal {
     &--content {
       float: none;

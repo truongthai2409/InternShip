@@ -1,4 +1,4 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 .header__with-search-search {
   display: flex;
@@ -30,7 +30,7 @@
       border-radius: 2px;
       outline: none;
       width: 100%;
-      flex : 1;
+      flex: 1;
       // width: 100px;
       border-bottom: 1px solid $color-gray-2;
       font-size: 14px;
@@ -59,9 +59,6 @@
   .header__with-search-button-search {
     transform: translateX(-10px);
   }
-
-
-
 }
 
 @media (min-width: 1024px) and (max-width: 1070px) {
@@ -73,7 +70,7 @@
 
 //tablet
 @media (min-width: 740px) and (max-width: 1050px) {
-  .onTablet { 
+  .onTablet {
   }
   .header__with-search-search-1 {
   }

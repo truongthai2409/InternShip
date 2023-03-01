@@ -1,17 +1,17 @@
-import React, { Fragment, useEffect } from "react";
-import "./styles.scss";
-import Footer from "src/components/Footer";
-import HeaderContainer from "src/components/HeaderContainer";
-import CustomInput from "src/components/shared/CustomInput";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { schema } from "./validateForm.js";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment, useEffect } from 'react';
+import './styles.scss';
+import Footer from 'src/components/Footer';
+import HeaderContainer from 'src/components/HeaderContainer';
+import CustomInput from 'src/components/shared/CustomInput';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { schema } from './validateForm.js';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   forgotPassword,
   updateStatusForgotPassword,
-} from "src/store/slices/Admin/user/userSlice";
+} from 'src/store/slices/Admin/user/userSlice';
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (statusForgotPassword) {
-      navigate("/login",{ replace: true });
+      navigate('/login', { replace: true });
       dispatch(updateStatusForgotPassword(false));
     }
   }, [statusForgotPassword]);
@@ -37,19 +37,19 @@ const ForgotPassword = () => {
   return (
     <Fragment>
       <HeaderContainer />
-      <div className="forgotpassword__wrapper">
-        <div className="forgotpassword__modal">
+      <div className='forgotpassword__wrapper'>
+        <div className='forgotpassword__modal'>
           <h2>
             <strong>Quên mật khẩu</strong>
           </h2>
           <p>Xin vui lòng nhập địa chỉ email để lấy lại mật khẩu.</p>
-          <form action="">
+          <form action=''>
             <CustomInput
-              label="Nhập Email"
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Vui lòng nhập email..."
+              label='Nhập Email'
+              id='email'
+              name='email'
+              type='email'
+              placeholder='Vui lòng nhập email...'
               register={register}
               requirementField={true}
             >
@@ -57,12 +57,12 @@ const ForgotPassword = () => {
             </CustomInput>
             <button
               onClick={handleSubmit(onSubmit)}
-              className="forgotpassword__modal-btn"
+              className='forgotpassword__modal-btn'
             >
               Lấy lại mật khẩu
             </button>
           </form>
-          <Link to="/login" className="forgotpassword__modal-link">
+          <Link to='/login' className='forgotpassword__modal-link'>
             Quay về trang đăng nhập
           </Link>
         </div>

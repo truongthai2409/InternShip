@@ -1,19 +1,19 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getCompanyList } from "src/store/slices/Admin/company/companySlice";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import { genderList, schema } from "./data";
-import CustomInput from "../../../components/shared/CustomInput";
-import SelectCustom from "../../../components/shared/Select";
-import { registerHr } from "../../../store/slices/main/register/registerSlice";
-import Container from "../Container";
-import "./styles.scss";
-import { updateStatusRegisterForHR } from "src/store/slices/main/register/registerSlice";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getCompanyList } from 'src/store/slices/Admin/company/companySlice';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import { genderList, schema } from './data';
+import CustomInput from '../../../components/shared/CustomInput';
+import SelectCustom from '../../../components/shared/Select';
+import { registerHr } from '../../../store/slices/main/register/registerSlice';
+import Container from '../Container';
+import './styles.scss';
+import { updateStatusRegisterForHR } from 'src/store/slices/main/register/registerSlice';
 const HRInfo = () => {
-  TabTitle("Đăng ký - Nhà tuyển dụng");
+  TabTitle('Đăng ký - Nhà tuyển dụng');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);
@@ -26,15 +26,15 @@ const HRInfo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "all",
+    mode: 'all',
     resolver: yupResolver(schema),
   });
 
   useEffect(() => {
     dispatch(getCompanyList([1, 20]));
-    if (statusRegister === "successRegister") {
-      navigate("/home",{ replace: true });
-      dispatch(updateStatusRegisterForHR("idleRegister"));
+    if (statusRegister === 'successRegister') {
+      navigate('/home', { replace: true });
+      dispatch(updateStatusRegisterForHR('idleRegister'));
     }
   }, [statusRegister, dispatch]);
 
@@ -68,7 +68,7 @@ const HRInfo = () => {
 
   return (
     <Container
-      title="Nhà Tuyển Dụng"
+      title='Nhà Tuyển Dụng'
       onClick={handleBackClick}
       handleClick={handleSubmit(onSubmit)}
       err={errors}
@@ -77,22 +77,22 @@ const HRInfo = () => {
       register={register}
       setValue={setValue}
       children={
-        <div className="register__container__form--name">
+        <div className='register__container__form--name'>
           <SelectCustom
-            label="Công ty"
-            placeholder="Vui lòng chọn..."
+            label='Công ty'
+            placeholder='Vui lòng chọn...'
             options={companyList}
-            id="company"
+            id='company'
             register={register}
           >
             {errors.company?.message}
           </SelectCustom>
 
           <CustomInput
-            label="Vai trò tại công ty"
-            id="jobPosition"
-            type="text"
-            placeholder="Vị trí..."
+            label='Vai trò tại công ty'
+            id='jobPosition'
+            type='text'
+            placeholder='Vị trí...'
             register={register}
             requirementField={false}
           >

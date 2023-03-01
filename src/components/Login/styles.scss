@@ -1,36 +1,35 @@
-@use "../../assets/styles/index.scss" as *;
+@use '../../assets/styles/index.scss' as *;
 
 .login {
+  &--not-yet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 8px;
 
-    &--not-yet {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-right: 8px;
-
-        >a {
-            color: $text-color;
-            font-size: 14px;
-        }
-
-        .menu-drop-down__wrapper {
-            >button {
-                font-size: 14px;
-                text-transform: inherit;
-                font-family: $f-family;
-                padding: 2px 14px;
-                background-color: $primary-color;
-                color: #FFFFFF;
-            }
-            >button:hover {
-                transition: all 0.5s ease;
-                background-color: $primary-color-2;
-                color: $primary-color-1;
-                .custom-link {
-                  color: $primary-color-1;
-                  background-color: $primary-color-2;
-                }
-              }
-        }
+    > a {
+      color: $text-color;
+      font-size: 14px;
     }
+
+    .menu-drop-down__wrapper {
+      > button {
+        font-size: 14px;
+        text-transform: inherit;
+        font-family: $f-family;
+        padding: 2px 14px;
+        background-color: $primary-color;
+        color: #ffffff;
+      }
+      > button:hover {
+        transition: all 0.5s ease;
+        background-color: $primary-color-2;
+        color: $primary-color-1;
+        .custom-link {
+          color: $primary-color-1;
+          background-color: $primary-color-2;
+        }
+      }
+    }
+  }
 }
