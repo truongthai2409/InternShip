@@ -137,12 +137,12 @@ const Detail = ({
           </div>
           <div>
             {!demandPartner ? (
-              <Box sx={{ width: '100%' }} className='boxOpenSans  '>
+              <Box sx={{ width: '100%' }} className='boxOpenSans'>
                 <Box
                   sx={{
                     borderBottom: 1,
                     borderColor: 'divider',
-                    mt: 0,
+                    mt: 1,
                     fontSize: 3,
                   }}
                   className='boxOpenSans'
@@ -154,7 +154,7 @@ const Detail = ({
                     textColor='primary'
                     scrollButtons
                     sx={{}}
-                    className='boxOpenSans overwriteBox'
+                    className='boxOpenSans'
                   >
                     <Tab
                       label='Chi tiết'
@@ -299,8 +299,8 @@ const Detail = ({
               </div>
             </div>
           </div>
-          <div className='scrollCardInforCompany2'>
-            <Box sx={{ width: '100%' }}>
+          <div>
+            <Box sx={{ width: '100%' }} className='scrollerDetailCard3'>
               {demandPartner ? (
                 <InformationUniversity
                   jobDetail={jobDetailById}

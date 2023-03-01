@@ -97,7 +97,7 @@ const InformationCompany = ({
     <div>
       {jobDetail && (
         <>
-          <div className='detail__card-3 scrollCardInforCompany2'>
+          <div className='detail__card-3'>
             <Typography variant='span'>
               <Typography
                 variant='span'
@@ -185,7 +185,7 @@ const InformationCompany = ({
                   fontWeight: '400',
                   transform: 'translate(3px,3px)',
                   flex: 1,
-                  // overflow: "hidden",
+                  overflow: 'hidden',
                   textOverflow: 'ellipsis',
                 }}
               >
@@ -204,7 +204,7 @@ const InformationCompany = ({
                   fontWeight: '400',
                   transform: 'translate(3px,3px)',
                   flex: 1,
-                  // overflow: "hidden",
+                  overflow: 'hidden',
                   textOverflow: 'ellipsis',
                 }}
               >
@@ -228,7 +228,7 @@ const InformationCompany = ({
       )}
       {jobDetailById && (
         <>
-          <div className='detail__card-3 scrollCardInforCompany2'>
+          <div className='detail__card-3'>
             <Typography variant='span'>
               <Typography
                 variant='span'
