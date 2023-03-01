@@ -3,41 +3,41 @@ import React, {
   // useRef,
   useEffect,
   useCallback,
-} from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Avatar, Grid, Switch } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+} from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Avatar, Grid, Switch } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import "./styles.scss";
-import CustomInput from "../../../components/shared/CustomInput";
-import CustomTextarea from "../../../components/shared/CustomTextarea";
-import Button from "../../../components/shared/Button";
-import cameraLogo from "../../../assets/img/camera.png";
-import { schema, renderControlAction } from "./script.js";
+import './styles.scss';
+import CustomInput from '../../../components/shared/CustomInput';
+import CustomTextarea from '../../../components/shared/CustomTextarea';
+import Button from '../../../components/shared/Button';
+import cameraLogo from '../../../assets/img/camera.png';
+import { schema, renderControlAction } from './script.js';
 import {
   addUniversity,
   addUniversityByAdmin,
   getUniversityDetail,
   updateUniversityInfo,
-} from "../../../store/slices/Admin/university/unversitySlice";
-import MultiSelect from "../../../components/shared/MultiSelect";
-import CustomSelect from "src/components/shared/CustomSelect";
-import CustomSelectLocation from "src/components/shared/CustomSelectLocation";
+} from '../../../store/slices/Admin/university/unversitySlice';
+import MultiSelect from '../../../components/shared/MultiSelect';
+import CustomSelect from 'src/components/shared/CustomSelect';
+import CustomSelectLocation from 'src/components/shared/CustomSelectLocation';
 import {
   getDistrictList,
   getProvinceList,
-} from "src/store/slices/location/locationSlice";
+} from 'src/store/slices/location/locationSlice';
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const baseURL = process.env.REACT_APP_API;
 
 export default function UniversityForm(props) {
   const { isAdd } = props;
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
 
   const { universityDetail } = useSelector((state) => state.university);
   const { districtList, provinceList } = useSelector((state) => state.location);
@@ -69,29 +69,40 @@ export default function UniversityForm(props) {
     }
   }, [isAdd, dispatch, uniId]);
 
-
-   const getDistrict = useCallback((id) => {
-    dispatch(getDistrictList(id));
-  }, [dispatch])
+  const getDistrict = useCallback(
+    (id) => {
+      dispatch(getDistrictList(id));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (universityDetail) {
-      getDistrict(universityDetail?.locations?.[0]?.district?.province?.id)
+      getDistrict(universityDetail?.locations?.[0]?.district?.province?.id);
       if (!isAdd) {
         setImage(`${universityDetail.avatar}`);
       }
       // setValue("logo", isAdd ? "" : universityDetail.avatar);
-      setValue("name", isAdd ? "" : universityDetail.name);
-      setValue("description", isAdd ? "" : universityDetail.description);
-      setValue("email", isAdd ? "" : universityDetail.email);
-      setValue("phone", isAdd ? "" : universityDetail.phone);
-      setValue("shortName", isAdd ? "" : universityDetail.shortName);
-      setValue("website", isAdd ? "" : universityDetail.website);
-      setValue("type", isAdd ? "" : universityDetail.type?.id);
-      setValue("province", isAdd ? "" : universityDetail?.locations?.[0]?.district?.province?.id);
-      setValue("district", isAdd ? "" : universityDetail?.locations?.[0]?.district?.id);
-      setValue("address", isAdd ? "" : universityDetail?.locations?.[0]?.address);
-      setValue("note", isAdd ? "" : universityDetail?.locations?.[0]?.note);
+      setValue('name', isAdd ? '' : universityDetail.name);
+      setValue('description', isAdd ? '' : universityDetail.description);
+      setValue('email', isAdd ? '' : universityDetail.email);
+      setValue('phone', isAdd ? '' : universityDetail.phone);
+      setValue('shortName', isAdd ? '' : universityDetail.shortName);
+      setValue('website', isAdd ? '' : universityDetail.website);
+      setValue('type', isAdd ? '' : universityDetail.type?.id);
+      setValue(
+        'province',
+        isAdd ? '' : universityDetail?.locations?.[0]?.district?.province?.id
+      );
+      setValue(
+        'district',
+        isAdd ? '' : universityDetail?.locations?.[0]?.district?.id
+      );
+      setValue(
+        'address',
+        isAdd ? '' : universityDetail?.locations?.[0]?.address
+      );
+      setValue('note', isAdd ? '' : universityDetail?.locations?.[0]?.note);
     }
   }, [universityDetail, isAdd, getDistrict, setValue]);
 
@@ -166,47 +177,47 @@ export default function UniversityForm(props) {
   };
 
   const typeList = [
-    { name: "Đại học", id: 1 },
-    { name: "Cao đẳng", id: 2 },
-    { name: "Trung cấp", id: 3 },
+    { name: 'Đại học', id: 1 },
+    { name: 'Cao đẳng', id: 2 },
+    { name: 'Trung cấp', id: 3 },
   ];
-  
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      autoComplete="off"
-      className="university-form"
-      encType="multipart/form-data"
+      autoComplete='off'
+      className='university-form'
+      encType='multipart/form-data'
     >
-      <div className="university-form__container">
+      <div className='university-form__container'>
         <Grid container>
           <Grid item md={3}>
-            <div className="university-form__logo">
+            <div className='university-form__logo'>
               <Avatar
                 src={image}
-                alt="university-logo"
-                className="university-form__avatar"
+                alt='university-logo'
+                className='university-form__avatar'
               />
               <input
-                id="logo"
-                type="file"
-                name="logo"
-                {...register("logo")}
+                id='logo'
+                type='file'
+                name='logo'
+                {...register('logo')}
                 onChange={showPreviewImage}
               />
-              <p className="university-form__error">{errors.logo?.message}</p>
+              <p className='university-form__error'>{errors.logo?.message}</p>
 
               {!isAdd ? (
-                <div className="university-form__control">
+                <div className='university-form__control'>
                   <ul>{renderControlAction()}</ul>
-                  <div className="university-form__block">
+                  <div className='university-form__block'>
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
                   <button
-                    type="button"
+                    type='button'
                     onClick={handleOnClickEdit}
-                    className="university-form__button-edit"
+                    className='university-form__button-edit'
                   >
                     Sửa
                   </button>
@@ -217,12 +228,12 @@ export default function UniversityForm(props) {
           <Grid item md={9}>
             <Grid container>
               <Grid item md={6}>
-                <div className="university-form__input">
+                <div className='university-form__input'>
                   <CustomInput
-                    label="Tên trường"
-                    id="name"
-                    type="text"
-                    placeholder="Tên trường..."
+                    label='Tên trường'
+                    id='name'
+                    type='text'
+                    placeholder='Tên trường...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -230,10 +241,10 @@ export default function UniversityForm(props) {
                     {errors.name?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Email"
-                    id="email"
-                    type="email"
-                    placeholder="abc.xyz@gmail.co..."
+                    label='Email'
+                    id='email'
+                    type='email'
+                    placeholder='abc.xyz@gmail.co...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -241,10 +252,10 @@ export default function UniversityForm(props) {
                     {errors.email?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Số điện thoại"
-                    id="phone"
-                    type="tel"
-                    placeholder="Số điện thoại..."
+                    label='Số điện thoại'
+                    id='phone'
+                    type='tel'
+                    placeholder='Số điện thoại...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -252,10 +263,10 @@ export default function UniversityForm(props) {
                     {errors.phone?.message}
                   </CustomInput>
                   <CustomSelectLocation
-                    id="province"
-                    className="user-form__input-item"
-                    label="Tỉnh"
-                    placeholder="Chọn tỉnh..."
+                    id='province'
+                    className='user-form__input-item'
+                    label='Tỉnh'
+                    placeholder='Chọn tỉnh...'
                     register={register}
                     options={provinceList}
                     onChange={(id) => getDistrict(id)}
@@ -265,12 +276,12 @@ export default function UniversityForm(props) {
                 </div>
               </Grid>
               <Grid item md={6}>
-                <div className="university-form__input">
+                <div className='university-form__input'>
                   <CustomInput
-                    label="Website"
-                    id="website"
-                    type="text"
-                    placeholder="Website..."
+                    label='Website'
+                    id='website'
+                    type='text'
+                    placeholder='Website...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -278,10 +289,10 @@ export default function UniversityForm(props) {
                     {errors.website?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Tên viết tắt"
-                    id="shortName"
-                    type="text"
-                    placeholder="UTE..."
+                    label='Tên viết tắt'
+                    id='shortName'
+                    type='text'
+                    placeholder='UTE...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -289,20 +300,20 @@ export default function UniversityForm(props) {
                     {errors.tax?.message}
                   </CustomInput>
                   <CustomSelect
-                    id="type"
-                    className="user-form__input-item"
-                    label="Loại trường"
-                    placeholder="Chọn loại trường..."
+                    id='type'
+                    className='user-form__input-item'
+                    label='Loại trường'
+                    placeholder='Chọn loại trường...'
                     register={register}
                     options={typeList}
                   >
                     {errors.type?.message}
                   </CustomSelect>
                   <CustomSelect
-                    id="district"
-                    className="user-form__input-item"
-                    label="Quận/huyện"
-                    placeholder="Chọn quận/huyện..."
+                    id='district'
+                    className='user-form__input-item'
+                    label='Quận/huyện'
+                    placeholder='Chọn quận/huyện...'
                     register={register}
                     options={districtList}
                   >
@@ -311,12 +322,12 @@ export default function UniversityForm(props) {
                 </div>
               </Grid>
               <Grid item md={12}>
-                <div className="university-form__input">
+                <div className='university-form__input'>
                   <CustomInput
-                    label="Địa chỉ"
-                    id="address"
-                    type="text"
-                    placeholder="Địa chỉ..."
+                    label='Địa chỉ'
+                    id='address'
+                    type='text'
+                    placeholder='Địa chỉ...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -324,10 +335,10 @@ export default function UniversityForm(props) {
                     {errors.address?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Note"
-                    id="note"
-                    type="text"
-                    placeholder="Note..."
+                    label='Note'
+                    id='note'
+                    type='text'
+                    placeholder='Note...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -335,10 +346,10 @@ export default function UniversityForm(props) {
                     {errors.note?.message}
                   </CustomInput>
                   <CustomTextarea
-                    label="Mô tả trường"
-                    id="description"
-                    type="description"
-                    placeholder="Mô tả trường..."
+                    label='Mô tả trường'
+                    id='description'
+                    type='description'
+                    placeholder='Mô tả trường...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -352,14 +363,14 @@ export default function UniversityForm(props) {
         </Grid>
       </div>
       {isAdd ? (
-        <div className="university-form__submit">
-          <Button name="Thêm trường" onClick={handleSubmit(onSubmit)} />
+        <div className='university-form__submit'>
+          <Button name='Thêm trường' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
 
       {isEdit & !isAdd ? (
-        <div className="university-form__submit">
-          <Button name="Cập nhật" onClick={handleSubmit(onSubmit)} />
+        <div className='university-form__submit'>
+          <Button name='Cập nhật' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>

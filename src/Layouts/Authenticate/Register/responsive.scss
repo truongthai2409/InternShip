@@ -1,21 +1,20 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 @media only screen and (min-width: 740px) and (max-width: 1040px) {
-    .register-container {
-      width: 70% !important;
-    }
-  
-    .reg-candidate__form--name {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-  
-      & .custom-input {
-          margin-top: -5px;
-      }
-    }
+  .register-container {
+    width: 70% !important;
   }
 
+  .reg-candidate__form--name {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    & .custom-input {
+      margin-top: -5px;
+    }
+  }
+}
 
 @media only screen and (min-width: 500px) and (max-width: 740px) {
   .register-container {
@@ -29,7 +28,7 @@
     gap: 0;
 
     & .custom-input {
-        margin-top: -5px;
+      margin-top: -5px;
     }
   }
 }

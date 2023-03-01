@@ -1,9 +1,8 @@
-import * as React from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Paper } from "@mui/material";
-import "./styles.scss";
-import PaginationCustom from "../Pagination";
-
+import * as React from 'react';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Paper } from '@mui/material';
+import './styles.scss';
+import PaginationCustom from '../Pagination';
 
 const DataTable = ({
   rows,
@@ -13,8 +12,8 @@ const DataTable = ({
   handleOnChange,
 }) => {
   return (
-    <Paper className="data-table">
-      <div className="data-table_container">
+    <Paper className='data-table'>
+      <div className='data-table_container'>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -25,7 +24,7 @@ const DataTable = ({
           components={{ Toolbar: GridToolbar }}
           disableSelectionOnClick
           autoHeight
-          density="comfortable"
+          density='comfortable'
           headerHeight={43}
           rowHeight={60}
           // disableColumnFilter={true}
@@ -34,8 +33,8 @@ const DataTable = ({
           hideFooterPagination
         />
       </div>
-      <div className="data-table__pagination">
-        <p className="data-table__total-item">{`Tổng cộng: ${totalItems}`}</p>
+      <div className='data-table__pagination'>
+        <p className='data-table__total-item'>{`Tổng cộng: ${totalItems}`}</p>
         <PaginationCustom
           totalPages={totalPages}
           handleOnChange={handleOnChange}

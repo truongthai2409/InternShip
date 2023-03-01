@@ -1,25 +1,25 @@
-import * as React from 'react'
-import Autocomplete from '@mui/material/Autocomplete'
-import TextField from '@mui/material/TextField'
+import * as React from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 const MultiSelect = () => {
   return (
     <Autocomplete
       multiple
       limitTags={2}
-      id="multiple-limit-tags"
+      id='multiple-limit-tags'
       options={top100Films}
-      getOptionLabel={option => option.title}
+      getOptionLabel={(option) => option.title}
       defaultValue={[top100Films[13], top100Films[12], top100Films[11]]}
-      renderInput={params => (
-        <TextField {...params} label="limitTags" placeholder="Favorites..." />
+      renderInput={(params) => (
+        <TextField {...params} label='limitTags' placeholder='Favorites...' />
       )}
       //   sx={{ width: '500px' }}
     />
-  )
-}
+  );
+};
 
-export default MultiSelect
+export default MultiSelect;
 
 const top100Films = [
   { title: 'The Shawshank Redemption', year: 1994 },
@@ -31,23 +31,23 @@ const top100Films = [
   { title: 'Pulp Fiction', year: 1994 },
   {
     title: 'The Lord of the Rings: The Return of the King',
-    year: 2003
+    year: 2003,
   },
   { title: 'The Good, the Bad and the Ugly', year: 1966 },
   { title: 'Fight Club', year: 1999 },
   {
     title: 'The Lord of the Rings: The Fellowship of the Ring',
-    year: 2001
+    year: 2001,
   },
   {
     title: 'Star Wars: Episode V - The Empire Strikes Back',
-    year: 1980
+    year: 1980,
   },
   { title: 'Forrest Gump', year: 1994 },
   { title: 'Inception', year: 2010 },
   {
     title: 'The Lord of the Rings: The Two Towers',
-    year: 2002
+    year: 2002,
   },
   { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
   { title: 'Goodfellas', year: 1990 },
@@ -55,7 +55,7 @@ const top100Films = [
   { title: 'Seven Samurai', year: 1954 },
   {
     title: 'Star Wars: Episode IV - A New Hope',
-    year: 1977
+    year: 1977,
   },
   { title: 'City of God', year: 2002 },
   { title: 'Se7en', year: 1995 },
@@ -92,7 +92,7 @@ const top100Films = [
   {
     title:
       'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-    year: 1964
+    year: 1964,
   },
   { title: 'The Great Dictator', year: 1940 },
   { title: 'Cinema Paradiso', year: 1988 },
@@ -115,7 +115,7 @@ const top100Films = [
   { title: 'Vertigo', year: 1958 },
   {
     title: 'Star Wars: Episode VI - Return of the Jedi',
-    year: 1983
+    year: 1983,
   },
   { title: 'Reservoir Dogs', year: 1992 },
   { title: 'Braveheart', year: 1995 },
@@ -129,7 +129,7 @@ const top100Films = [
   { title: 'Double Indemnity', year: 1944 },
   {
     title: 'Eternal Sunshine of the Spotless Mind',
-    year: 2004
+    year: 2004,
   },
   { title: 'Amadeus', year: 1984 },
   { title: 'To Kill a Mockingbird', year: 1962 },
@@ -146,5 +146,5 @@ const top100Films = [
   { title: 'Inglourious Basterds', year: 2009 },
   { title: 'Snatch', year: 2000 },
   { title: '3 Idiots', year: 2009 },
-  { title: 'Monty Python and the Holy Grail', year: 1975 }
-]
+  { title: 'Monty Python and the Holy Grail', year: 1975 },
+];

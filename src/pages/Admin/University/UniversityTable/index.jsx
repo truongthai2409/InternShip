@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { IconButton, Tooltip } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { IconButton, Tooltip } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
-import DataTable from "../../../../components/shared/Table";
+import DataTable from '../../../../components/shared/Table';
 import {
   deleteUniversity,
   getUniversityList,
   searchUniversity,
   updateUniversityStatus,
-} from "../../../../store/slices/Admin/university/unversitySlice";
-import ProfileTable from "../../../../components/User/ProfileTable";
+} from '../../../../store/slices/Admin/university/unversitySlice';
+import ProfileTable from '../../../../components/User/ProfileTable';
 
 const UniversityTable = ({ searchValue }) => {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -27,7 +27,7 @@ const UniversityTable = ({ searchValue }) => {
     (state) => state.university
   );
   useEffect(() => {
-    if (searchValue === "") {
+    if (searchValue === '') {
       dispatch(getUniversityList([page, 10]));
     } else {
       dispatch(
@@ -37,23 +37,23 @@ const UniversityTable = ({ searchValue }) => {
   }, [page]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: 'id', headerName: 'ID', width: 70 },
     {
-      field: "name",
-      headerName: "Trường học",
+      field: 'name',
+      headerName: 'Trường học',
       flex: 1,
       renderCell: (params) => {
         const { row } = params;
         return <ProfileTable row={row} />;
       },
     },
-    { field: "shortName", headerName: "Tên viết tắt", width: 150 },
+    { field: 'shortName', headerName: 'Tên viết tắt', width: 150 },
 
     // { field: "majors", headerName: "Chuyên ngành", width: 130 },
-    { field: "createDate", headerName: "Ngày tạo", width: 150 },
+    { field: 'createDate', headerName: 'Ngày tạo', width: 150 },
     {
-      field: "status",
-      headerName: "Trạng thái",
+      field: 'status',
+      headerName: 'Trạng thái',
       width: 120,
       renderCell: (params) => {
         const { row } = params;
@@ -74,11 +74,11 @@ const UniversityTable = ({ searchValue }) => {
         };
         return (
           <select
-            name="status"
-            id="status"
+            name='status'
+            id='status'
             value={row.status.id}
             onChange={(e) => handleChangeStatus(e)}
-            className="company-table__select"
+            className='company-table__select'
           >
             <option value={2}>Not verified</option>
             <option value={1}>Active</option>
@@ -89,14 +89,14 @@ const UniversityTable = ({ searchValue }) => {
       },
     },
     {
-      field: "action",
-      headerName: "Tùy chọn",
+      field: 'action',
+      headerName: 'Tùy chọn',
       width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          navigate(`/admin/university/${row.id}`,{ replace: true });
+          navigate(`/admin/university/${row.id}`, { replace: true });
         };
         const handleDelete = () => {
           dispatch(deleteUniversity([row.id, userSessionStorage?.token])).then(
@@ -109,12 +109,12 @@ const UniversityTable = ({ searchValue }) => {
         };
         return (
           <>
-            <IconButton className="user-edit__button" onClick={handleClick}>
+            <IconButton className='user-edit__button' onClick={handleClick}>
               <VisibilityOutlinedIcon />
             </IconButton>
-            <Tooltip title="Xóa tài khoản">
+            <Tooltip title='Xóa tài khoản'>
               <IconButton
-                className="user-delete__button"
+                className='user-delete__button'
                 onClick={handleDelete}
               >
                 <DeleteForeverOutlinedIcon />
@@ -137,8 +137,8 @@ const UniversityTable = ({ searchValue }) => {
       email: universityList[i].email,
       // majors: universityList[i].majors,
       createDate: universityList[i].createDate
-        ? moment(universityList[i].createDate).format("DD/MM/YYYY")
-        : moment().format("DD/MM/YYYY"),
+        ? moment(universityList[i].createDate).format('DD/MM/YYYY')
+        : moment().format('DD/MM/YYYY'),
       status: universityList[i].status,
     });
   }

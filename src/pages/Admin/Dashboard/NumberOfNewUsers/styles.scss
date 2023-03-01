@@ -1,4 +1,4 @@
-@use "../../../../assets/styles/" as *;
+@use '../../../../assets/styles/' as *;
 
 .new-user-container {
   margin-top: 1rem;
@@ -30,13 +30,13 @@
         color: $color-gray-4;
         font-size: 12px;
         .up {
-            color: $primary-color-2;
+          color: $primary-color-2;
         }
         .down {
-            color: $color-red-0;
+          color: $color-red-0;
         }
         span {
-            font-size: 15px;
+          font-size: 15px;
         }
       }
     }

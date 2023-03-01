@@ -1,17 +1,16 @@
-import React from 'react'
-import { Snackbar, Alert } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import notificationSlice from '../../../store/slices/notifications/notificationSlice'
+import React from 'react';
+import { Snackbar, Alert } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import notificationSlice from '../../../store/slices/notifications/notificationSlice';
 
-const Notification = props => {
-  const { notifyAlert, ...other } = props
+const Notification = (props) => {
+  const { notifyAlert, ...other } = props;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleCloseNotification = () => {
-    dispatch(notificationSlice.actions.close())
-
-  }
+    dispatch(notificationSlice.actions.close());
+  };
 
   return (
     <Snackbar
@@ -24,7 +23,7 @@ const Notification = props => {
         {notifyAlert.message}
       </Alert>
     </Snackbar>
-  )
-}
+  );
+};
 
-export default Notification
+export default Notification;

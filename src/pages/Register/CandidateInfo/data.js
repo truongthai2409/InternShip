@@ -1,20 +1,20 @@
-import * as yup from "yup";
-import { containerSchema } from "../Container/data";
+import * as yup from 'yup';
+import { containerSchema } from '../Container/data';
 
-const CV_FORMATS = ["application/pdf"];
+const CV_FORMATS = ['application/pdf'];
 
 export const genderList = [
   {
     id: 0,
-    name: "Nam",
+    name: 'Nam',
   },
   {
     id: 1,
-    name: "Nữ",
+    name: 'Nữ',
   },
   {
     id: 2,
-    name: "Khác",
+    name: 'Khác',
   },
 ];
 
@@ -25,18 +25,18 @@ export const schema = containerSchema.shape({
     .max(7, '* Tối đa 7 kí tự.'),
   cv: yup
     .mixed()
-    .test("type", '* Chỉ hỗ trợ định dạng pdf', (value) => {
+    .test('type', '* Chỉ hỗ trợ định dạng pdf', (value) => {
       if (value?.type) {
         return CV_FORMATS.includes(value?.type);
       } else {
         return true;
       }
     })
-    .test("fileSize", '* Kích thước tối đa là 512Kb.', (value) => {
+    .test('fileSize', '* Kích thước tối đa là 512Kb.', (value) => {
       if (value?.size) {
         return value?.size <= 512 * 1024;
       } else {
         return true;
       }
     }),
-})
+});

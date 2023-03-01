@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { IconButton, Tooltip } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import React, { useEffect, useState } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {
   deleteUser,
   getUserList,
   searchUser,
   verifyUser,
-} from "src/store/slices/Admin/user/userSlice";
-import DataTable from "src/components/shared/Table";
-import IconEdit from "../../../../assets/img/icons8-write-24.png";
-import Confirmation from "src/components/Confirmation";
-import Modal from "src/components/shared/Modal";
-import verifiedIcon from "../../../../assets/img/verified-icon-16.jpg";
-import "./styles.scss";
+} from 'src/store/slices/Admin/user/userSlice';
+import DataTable from 'src/components/shared/Table';
+import IconEdit from '../../../../assets/img/icons8-write-24.png';
+import Confirmation from 'src/components/Confirmation';
+import Modal from 'src/components/shared/Modal';
+import verifiedIcon from '../../../../assets/img/verified-icon-16.jpg';
+import './styles.scss';
 
 const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [confirmation, setConfirmation] = useState({});
@@ -28,7 +28,7 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
     (state) => state.user
   );
   useEffect(() => {
-    if (searchValue === "") {
+    if (searchValue === '') {
       dispatch(getUserList([page, 10, userSessionStorage?.token]));
     } else {
       dispatch(searchUser([searchValue, page, 10, userSessionStorage?.token]));
@@ -36,16 +36,16 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   }, [page, onSearch, dispatch, userSessionStorage?.token, searchValue]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
-    { field: "username", headerName: "Tài khoản", width: 220 },
-    { field: "role", headerName: "Vai trò", width: 150 },
-    { field: "gender", headerName: "Giới tính", width: 100 },
-    { field: "phone", headerName: "Số điện thoại", width: 150 },
-    { field: "email", headerName: "Email", flex: 1 },
-    { field: "status", headerName: "Trạng thái", width: 150 },
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'username', headerName: 'Tài khoản', width: 220 },
+    { field: 'role', headerName: 'Vai trò', width: 150 },
+    { field: 'gender', headerName: 'Giới tính', width: 100 },
+    { field: 'phone', headerName: 'Số điện thoại', width: 150 },
+    { field: 'email', headerName: 'Email', flex: 1 },
+    { field: 'status', headerName: 'Trạng thái', width: 150 },
     {
-      field: "action",
-      headerName: "Tùy chọn",
+      field: 'action',
+      headerName: 'Tùy chọn',
       width: 150,
       sortable: false,
       renderCell: (params) => {
@@ -61,8 +61,8 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
         const handleVerifyUser = () => {
           setOpenConfirmation(true);
           setConfirmation({
-            text: "Xác minh tài khoản",
-            nameBtnYes: "Xác minh",
+            text: 'Xác minh tài khoản',
+            nameBtnYes: 'Xác minh',
             func: () => {
               dispatch(
                 verifyUser([row.username, userSessionStorage?.token])
@@ -73,7 +73,7 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
             },
             setOpen: setOpenConfirmation,
             image: verifiedIcon,
-            className: "verify",
+            className: 'verify',
           });
         };
 
@@ -85,22 +85,22 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
 
         return (
           <>
-            <Tooltip title="Chỉnh sửa">
+            <Tooltip title='Chỉnh sửa'>
               <IconButton onClick={() => handleOpenUpdateModal()}>
-                <img src={IconEdit} alt="" />
+                <img src={IconEdit} alt='' />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Xác minh tài khoản">
+            <Tooltip title='Xác minh tài khoản'>
               <IconButton
-                className="user-verify__button"
+                className='user-verify__button'
                 onClick={handleVerifyUser}
               >
                 <VerifiedUserIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Xóa tài khoản">
+            <Tooltip title='Xóa tài khoản'>
               <IconButton
-                className="user-delete__button"
+                className='user-delete__button'
                 onClick={handleDeleteUser}
               >
                 <DeleteForeverOutlinedIcon />
@@ -133,16 +133,16 @@ const UserTable = ({ setIdRow, setIsUpdate, setOpen, searchValue }) => {
   const handleRenderGender = (id) => {
     switch (id) {
       case 0:
-        return "Nam";
+        return 'Nam';
       case 1:
-        return "Nữ";
+        return 'Nữ';
       default:
-        return "Khác";
+        return 'Khác';
     }
   };
 
   const convertRoleName = (roleName) => {
-    const index = roleName.lastIndexOf("_");
+    const index = roleName.lastIndexOf('_');
     return roleName.substring(index + 1);
   };
 

@@ -1,12 +1,12 @@
-import * as yup from 'yup'
-import { Link } from 'react-router-dom'
+import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 
 // yup validation for company table
 export const schemaMajor = yup
   .object({
-    name: yup.string().required(' * Bạn phải nhập tên chuyên ngành.')
+    name: yup.string().required(' * Bạn phải nhập tên chuyên ngành.'),
   })
-  .required()
+  .required();
 
 // controll action
 const controlAction = [
@@ -15,17 +15,17 @@ const controlAction = [
   //   name: "Quản lý Major",
   //   to: "#",
   // },
-]
+];
 
 // render control action
 export const renderControlAction = () => {
-  return controlAction.map(item => {
+  return controlAction.map((item) => {
     return (
       <li key={item.id}>
-        <Link to={item.to} className="link">
+        <Link to={item.to} className='link'>
           {item.name}
         </Link>
       </li>
-    )
-  })
-}
+    );
+  });
+};

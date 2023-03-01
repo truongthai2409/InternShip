@@ -1,25 +1,24 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { getUserById } from "src/store/slices/main/user/userSlice";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import Button from "../../../components/shared/Button/index";
-import CustomCheckbox from "../../../components/shared/CustomCheckbox";
-import CustomInput from "../../../components/shared/CustomInput/index";
-import { loginUser } from "../../../store/slices/main/login/loginSlice";
-import "./styles.scss";
-import { schema } from "./validate";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getUserById } from 'src/store/slices/main/user/userSlice';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import Button from '../../../components/shared/Button/index';
+import CustomCheckbox from '../../../components/shared/CustomCheckbox';
+import CustomInput from '../../../components/shared/CustomInput/index';
+import { loginUser } from '../../../store/slices/main/login/loginSlice';
+import './styles.scss';
+import { schema } from './validate';
 
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  TabTitle("Login");
-  const { t } = useTranslation('login')
+  TabTitle('Login');
+  const { t } = useTranslation('login');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isCheck, setIsCheck] = useState(false);
@@ -29,7 +28,7 @@ const Login = () => {
     setValue,
     formState: { errors },
   } = useForm({
-    mode: "all",
+    mode: 'all',
     resolver: yupResolver(schema),
   });
 
@@ -48,7 +47,7 @@ const Login = () => {
         );
         if (isCheck) {
           localStorage.setItem(
-            "userPresent",
+            'userPresent',
             JSON.stringify({
               token: res.payload.token,
               ids: res.payload.idUser,
@@ -57,17 +56,17 @@ const Login = () => {
         }
         const role = res.payload.role;
         switch (role) {
-          case "Role_Partner":
+          case 'Role_Partner':
             navigate(`/partner`, { replace: true });
             break;
-          case "Role_HR":
+          case 'Role_HR':
             navigate(`/hr`, { replace: true });
             break;
-          case "Role_Candidate":
+          case 'Role_Candidate':
             navigate(`/candidate`, { replace: true });
             break;
           default:
-            navigate("/", { replace: true });
+            navigate('/', { replace: true });
         }
       }
     } catch (error) {
@@ -79,41 +78,52 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form__container">
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+    <div className='login-form__container'>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
         <CustomInput
-          label={t("AccountTL")}
-          id="username"
-          type="text"
-          placeholder={t("AccountTL")}
+          label={t('AccountTL')}
+          id='username'
+          type='text'
+          placeholder={t('AccountTL')}
           setValue={setValue}
           register={register}
           requirementField={false}
-          className={isCheck ? "bgcIsCheck" : ""}
+          className={isCheck ? 'bgcIsCheck' : ''}
         >
           {errors.username?.message}
         </CustomInput>
         <CustomInput
-          label={t("PasswordTL")}
-          id="password"
-          type="password"
-          placeholder={t("PasswordTL")}
+          label={t('PasswordTL')}
+          id='password'
+          type='password'
+          placeholder={t('PasswordTL')}
           setValue={setValue}
           register={register}
           visibility={true}
           requirementField={false}
-          className={isCheck ? "bgcIsCheck" : ""}
+          className={isCheck ? 'bgcIsCheck' : ''}
         >
           {errors.password?.message}
         </CustomInput>
-        <div className="login-form__save-pass" onChange={handleSaveLogin}>
-          <CustomCheckbox checked={isCheck} className="checkSavelogin" label={t("saveLoginTL")} />
-          <Link to="/forgot-password" className="forgotPasswordLink">{t("forgotPasswordTL")}</Link>
+        <div className='login-form__save-pass' onChange={handleSaveLogin}>
+          <CustomCheckbox
+            checked={isCheck}
+            className='checkSavelogin'
+            label={t('saveLoginTL')}
+          />
+          <Link to='/forgot-password' className='forgotPasswordLink'>
+            {t('forgotPasswordTL')}
+          </Link>
         </div>
         {/* <div className="register-container__footer">
         </div> */}
-        <div className="login-form__btn">
-          <Button onClick={handleSubmit(onSubmit)} className="login-from-button">{t("loginTL")}</Button>
+        <div className='login-form__btn'>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            className='login-from-button'
+          >
+            {t('loginTL')}
+          </Button>
         </div>
       </form>
     </div>

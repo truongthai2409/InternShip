@@ -1,19 +1,19 @@
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { IconButton } from "@mui/material";
-import Tooltip from "@mui/material/Tooltip";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { IconButton } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   addJobCare,
   deleteJobCare,
   getAllJobCare,
   getJobCareByCandidate,
-} from "src/store/slices/main/home/job/jobCandidateSlice";
-import { getMarkByUserAndJob } from "src/store/slices/main/mark/markSlice";
-import "./styles.scss";
+} from 'src/store/slices/main/home/job/jobCandidateSlice';
+import { getMarkByUserAndJob } from 'src/store/slices/main/mark/markSlice';
+import './styles.scss';
 
 const ButtonMark = (props) => {
   const location = useLocation();
@@ -25,10 +25,10 @@ const ButtonMark = (props) => {
   const { user } = useSelector((state) => state.profile);
 
   const handleClickMarkJob = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const userStorage =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     e.stopPropagation();
 
     const page = {
@@ -47,15 +47,15 @@ const ButtonMark = (props) => {
         jobCare: {
           id: props.jobId,
         },
-        note: "Đây là công việc ưa thích của mình",
+        note: 'Đây là công việc ưa thích của mình',
       };
 
       await dispatch(addJobCare([dataCareList, userStorage?.token]));
       await dispatch(getJobCareByCandidate(page));
       setMark(!mark);
-      toast.success("Đã lưu việc làm thành công");
+      toast.success('Đã lưu việc làm thành công');
     } else {
-      if (user?.user?.role?.name === "Role_Candidate") {
+      if (user?.user?.role?.name === 'Role_Candidate') {
         const dataByUserAndJob = {
           userName: user?.user?.username,
           idJob: Number(props.jobId),
@@ -88,8 +88,10 @@ const ButtonMark = (props) => {
               },
             };
             setMark(false);
-            toast.success("Đã hủy lưu việc làm ");
-            user?.user?.role?.name === "Role_Candidate" && dispatch(getAllJobCare(dispatchJobCare)) && dispatch(getJobCareByCandidate(page))
+            toast.success('Đã hủy lưu việc làm ');
+            user?.user?.role?.name === 'Role_Candidate' &&
+              dispatch(getAllJobCare(dispatchJobCare)) &&
+              dispatch(getJobCareByCandidate(page));
           });
         });
       }
@@ -97,44 +99,46 @@ const ButtonMark = (props) => {
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (user?.user?.role?.name !== "Role_Candiate") {
-      toast.error("Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc");
+    if (user?.user?.role?.name !== 'Role_Candiate') {
+      toast.error(
+        'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc'
+      );
       // await navigate("/login");
     }
   };
   return (
-    <Tooltip title="Lưu công việc">
+    <Tooltip title='Lưu công việc'>
       <IconButton
         style={{
-          border: props.border ? props.border : "1px solid #F1F1F1",
-          borderRadius: "4px",
+          border: props.border ? props.border : '1px solid #F1F1F1',
+          borderRadius: '4px',
           width: `${props.width}`,
           height: `${props.height}`,
         }}
-        aria-label="mark"
-        className="buttonMark__wrapper"
+        aria-label='mark'
+        className='buttonMark__wrapper'
         onClick={handleClickMarkJob}
       >
-        {pathUrl === "/candidate" ||
-        pathUrl.includes("information_company") ||
-        pathUrl === "/candidate/view-list-care" ? (
+        {pathUrl === '/candidate' ||
+        pathUrl.includes('information_company') ||
+        pathUrl === '/candidate/view-list-care' ? (
           props.isMark === false && mark === false ? (
             <BookmarkBorderIcon
               style={{ fontSize: `${props.fontSize}` }}
-              sx={{ color: "#04bf8a" }}
+              sx={{ color: '#04bf8a' }}
             />
           ) : (
             <BookmarkIcon
-              className="buttonMark__isChecking"
+              className='buttonMark__isChecking'
               style={{ fontSize: `${props.fontSize}` }}
-              sx={{ color: "#04bf8a" }}
+              sx={{ color: '#04bf8a' }}
             />
           )
         ) : (
           <BookmarkBorderIcon
             style={{ fontSize: `${props.fontSize}` }}
             onClick={handleLogin}
-            sx={{ color: "#04bf8a" }}
+            sx={{ color: '#04bf8a' }}
           />
         )}
       </IconButton>

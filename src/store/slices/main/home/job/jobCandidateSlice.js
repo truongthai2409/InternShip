@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const BASEURL = process.env.REACT_APP_API;
 
 const jobCandidateSlice = createSlice({
-  name: "jobCandidateSlice",
+  name: 'jobCandidateSlice',
   initialState: {
     jobApplyList: [],
     jobApplyListHavePage: [],
@@ -41,14 +41,14 @@ const jobCandidateSlice = createSlice({
 });
 
 export const getJobApplyListByCandidate = createAsyncThunk(
-  "jobCadidateSlice/getJobApplyListByCandidate",
+  'jobCadidateSlice/getJobApplyListByCandidate',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args?.token,
+        Authorization: 'Bearer ' + args?.token,
       },
     };
-    if (args.user.user.role.name.includes("Role_Candidate")) {
+    if (args.user.user.role.name.includes('Role_Candidate')) {
       return await axios
         .get(`${BASEURL}/api/r2s/candidate/user/${args.user.user.id}`, header)
         .then(async (response) => {
@@ -68,14 +68,14 @@ export const getJobApplyListByCandidate = createAsyncThunk(
   }
 );
 export const getJobCareByCandidate = createAsyncThunk(
-  "jobCadidateSlice/getJobCareByCandidate",
+  'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args.token,
+        Authorization: 'Bearer ' + args.token,
       },
     };
-    if (args.user.user.role.name.includes("Role_Candidate")) {
+    if (args.user.user.role.name.includes('Role_Candidate')) {
       return await axios
         .get(
           `${BASEURL}/api/r2s/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
@@ -91,13 +91,13 @@ export const getJobCareByCandidate = createAsyncThunk(
   }
 );
 export const addJobCare = createAsyncThunk(
-  "jobCadidateSlice/adddCareJob",
+  'jobCadidateSlice/adddCareJob',
   async (args) => {
     return await axios
       .post(`${BASEURL}/api/r2s/carelist`, args[0], {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + args[1],
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + args[1],
         },
       })
       .then((res) => {
@@ -109,11 +109,11 @@ export const addJobCare = createAsyncThunk(
   }
 );
 export const deleteJobCare = createAsyncThunk(
-  "jobCadidateSlice/deleteJobCare",
+  'jobCadidateSlice/deleteJobCare',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[0].token,
+        Authorization: 'Bearer ' + args[0].token,
       },
     };
     return await axios
@@ -127,11 +127,11 @@ export const deleteJobCare = createAsyncThunk(
   }
 );
 export const getAllJobCare = createAsyncThunk(
-  "jobCandidateSlice/getAllJobCare",
+  'jobCandidateSlice/getAllJobCare',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args.token,
+        Authorization: 'Bearer ' + args.token,
       },
     };
     return await axios
@@ -143,17 +143,17 @@ export const getAllJobCare = createAsyncThunk(
         return res.data;
       })
       .catch((err) => {
-        console.log("err 1000 Care", err);
+        console.log('err 1000 Care', err);
       });
   }
 );
 export const getAllJobApply = createAsyncThunk(
-  "jobCandidateSlice/getAllJobApply",
+  'jobCandidateSlice/getAllJobApply',
   async (args) => {
     console.log(args);
     const header = {
       headers: {
-        Authorization: "Bearer " + args.token,
+        Authorization: 'Bearer ' + args.token,
       },
     };
     return await axios

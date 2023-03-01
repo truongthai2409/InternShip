@@ -1,28 +1,28 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import CachedRoundedIcon from "@mui/icons-material/CachedRounded";
-import CloudDownloadRoundedIcon from "@mui/icons-material/CloudDownloadRounded";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import SyncAltIcon from "@mui/icons-material/SyncAlt";
-import { Divider, Switch, Tooltip, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { getAllUserCandidate } from "src/store/slices/main/candidate/user/userCandidateSlice";
-import { updateUser } from "src/store/slices/main/user/userSlice";
-import Button from "../../shared/Button";
-import InputFile from "../../shared/InputFile";
-import Modal from "../../shared/Modal";
-import { schema } from "./dataCV";
-import UserInfo from "./UserInfo";
-import avatarDefault from "src/assets/img/avatar-default.png";
-import { Document, Page, pdfjs } from "react-pdf";
-import { useTranslation } from "react-i18next";
+import { yupResolver } from '@hookform/resolvers/yup';
+import CachedRoundedIcon from '@mui/icons-material/CachedRounded';
+import CloudDownloadRoundedIcon from '@mui/icons-material/CloudDownloadRounded';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import SyncAltIcon from '@mui/icons-material/SyncAlt';
+import { Divider, Switch, Tooltip, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { getAllUserCandidate } from 'src/store/slices/main/candidate/user/userCandidateSlice';
+import { updateUser } from 'src/store/slices/main/user/userSlice';
+import Button from '../../shared/Button';
+import InputFile from '../../shared/InputFile';
+import Modal from '../../shared/Modal';
+import { schema } from './dataCV';
+import UserInfo from './UserInfo';
+import avatarDefault from 'src/assets/img/avatar-default.png';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { useTranslation } from 'react-i18next';
 
 const BASEURL = process.env.REACT_APP_API;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
   const [numPages, setNumPages] = useState(null);
-  const {t} = useTranslation('profile');
+  const { t } = useTranslation('profile');
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
@@ -63,8 +63,8 @@ const Components = ({ profile }) => {
 
   const onSubmit = async (data) => {
     const userSessionStorage =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
@@ -94,52 +94,52 @@ const Components = ({ profile }) => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);
   return (
-    <div className="profiles">
+    <div className='profiles'>
       <div
-        className="profile_header"
+        className='profile_header'
         style={{
           backgroundImage: `url(${
-            profile?.user?.avatar || "https://i.stack.imgur.com/SvWWN.png"
+            profile?.user?.avatar || 'https://i.stack.imgur.com/SvWWN.png'
           })`,
         }}
       >
         <img
-          style={{ width: 150, height: 150, borderRadius: "50%" }}
+          style={{ width: 150, height: 150, borderRadius: '50%' }}
           src={`${profile?.user?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
             currentTarget.src = `${avatarDefault}`;
           }}
-          alt="avatar"
+          alt='avatar'
         ></img>
       </div>
-      <div className="profile_footer">
-        <div style={{ textAlign: "center" }}>
-          <div className="profile_name">
-            <Typography variant="h6">
+      <div className='profile_footer'>
+        <div style={{ textAlign: 'center' }}>
+          <div className='profile_name'>
+            <Typography variant='h6'>
               {profile?.user?.lastName} {profile?.user?.firstName}
             </Typography>
           </div>
-          <div className="profile_username">
+          <div className='profile_username'>
             <h3>@{profile?.user?.username}</h3>
           </div>
           <Divider style={{ padding: 8 }} />
           {profile?.user?.role?.id === 3 ? (
             <div
-              className="profile_handle"
+              className='profile_handle'
               style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: "2rem",
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: '2rem',
                 marginTop: 8,
               }}
             >
-              <div className="profile_children_handle">
+              <div className='profile_children_handle'>
                 <Tooltip title={t('change_cv')}>
                   <CachedRoundedIcon
-                    className="icon-action"
+                    className='icon-action'
                     onClick={() => handleClick(1)}
                   />
                 </Tooltip>
@@ -153,23 +153,25 @@ const Components = ({ profile }) => {
                       style={{
                         width: 300,
                         height: 300,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                       }}
                     >
                       <InputFile
-                        label="CV"
+                        label='CV'
                         requirementField={false}
-                        id="cv"
-                        format="pdf"
+                        id='cv'
+                        format='pdf'
                         setValue={setValue}
                         register={register}
                       >
                         {errors?.cv?.message}
                       </InputFile>
-                      <Button onClick={handleSubmit(onSubmit)}>{t('change')}</Button>
+                      <Button onClick={handleSubmit(onSubmit)}>
+                        {t('change')}
+                      </Button>
                     </form>
                   }
                   name={t('change_cv')}
@@ -177,8 +179,8 @@ const Components = ({ profile }) => {
                 />
               </div>
               <div
-                className="profile_children_handle"
-                style={{ padding: "0 2rem" }}
+                className='profile_children_handle'
+                style={{ padding: '0 2rem' }}
               >
                 <Tooltip title={t('view_cv')}>
                   <RemoveRedEyeIcon onClick={() => handleClick(2)} />
@@ -205,16 +207,16 @@ const Components = ({ profile }) => {
                   }
                 />
               </div>
-              <div className="profile_children_handle">
+              <div className='profile_children_handle'>
                 <Tooltip title={t('download_cv')}>
                   <a
-                    id="downloadLink"
+                    id='downloadLink'
                     href={`${profile?.cv}`}
-                    target="_blank"
-                    type="application/octet-stream"
+                    target='_blank'
+                    type='application/octet-stream'
                     // download={`${profile?.cv}`}
                     download
-                    rel="noreferrer"
+                    rel='noreferrer'
                   >
                     <CloudDownloadRoundedIcon />
                   </a>
@@ -222,17 +224,17 @@ const Components = ({ profile }) => {
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
         <div>
           {profile?.user?.role?.id === 3 ? (
-            <div className="profile_click">
-              <div className="profile_check">
+            <div className='profile_click'>
+              <div className='profile_check'>
                 <Typography
                   sx={{ marginTop: 0.7 }}
-                  variant="overline"
-                  display="block"
+                  variant='overline'
+                  display='block'
                   gutterBottom
                 >
                   {t('find_work')}
@@ -240,23 +242,23 @@ const Components = ({ profile }) => {
                 <Switch
                   checked={checkedFind}
                   onChange={handleChangeFind}
-                  inputProps={{ "aria-label": "controlled" }}
+                  inputProps={{ 'aria-label': 'controlled' }}
                 />
               </div>
             </div>
           ) : (
-            ""
+            ''
           )}
 
-          <div className="profile_click">
-            <div className="profile_check">
+          <div className='profile_click'>
+            <div className='profile_check'>
               <Typography
                 sx={{ marginTop: 0.7 }}
-                variant="overline"
-                display="block"
+                variant='overline'
+                display='block'
                 gutterBottom
               >
-                {t("receive_email")}
+                {t('receive_email')}
               </Typography>
               <Switch
                 sx={{
@@ -264,23 +266,23 @@ const Components = ({ profile }) => {
                 }}
                 checked={checkedEmail}
                 onChange={handleCheckEmail}
-                inputProps={{ "aria-label": "controlled" }}
+                inputProps={{ 'aria-label': 'controlled' }}
               />
             </div>
           </div>
 
-          <div className="profile_check"></div>
+          <div className='profile_check'></div>
         </div>
-        <div className="profile_check"></div>
-        <div className="profile_info">
-          <UserInfo name="Email" profile={profile?.user?.email} />
+        <div className='profile_check'></div>
+        <div className='profile_info'>
+          <UserInfo name='Email' profile={profile?.user?.email} />
           <UserInfo name={t('phone')} profile={profile?.user?.phone} />
           <UserInfo
             name={t('role')}
             profile={
-              profile?.user?.role?.name === "Role_Candidate"
+              profile?.user?.role?.name === 'Role_Candidate'
                 ? t('candidate')
-                : profile?.user?.role?.name === "Role_HR"
+                : profile?.user?.role?.name === 'Role_HR'
                 ? t('hr')
                 : t('partner')
             }

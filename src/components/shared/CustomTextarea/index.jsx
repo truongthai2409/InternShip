@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./styles.scss";;
+import React, { useState } from 'react';
+import './styles.scss';
 
 const CustomTextarea = ({
   label,
@@ -12,21 +12,20 @@ const CustomTextarea = ({
   check = false,
   requirementField = true,
 }) => {
-
-  const [sampleFormActive, setSampleFormActive] = useState("")
+  const [sampleFormActive, setSampleFormActive] = useState('');
 
   return (
-    <div className="custom-textarea">
-      <label htmlFor={id} className="custom-textarea__label">
+    <div className='custom-textarea'>
+      <label htmlFor={id} className='custom-textarea__label'>
         {label}
-        {requirementField && <span className="field-requirment">*</span>}
+        {requirementField && <span className='field-requirment'>*</span>}
       </label>
       <div
-        style={{height:"150px"}}
+        style={{ height: '150px' }}
         className={
           check
-            ? "custom-input__textarea-disabled"
-            : "custom-textarea__textfield"
+            ? 'custom-input__textarea-disabled'
+            : 'custom-textarea__textfield'
         }
       >
         <textarea
@@ -40,14 +39,14 @@ const CustomTextarea = ({
           onChange={() => setSampleFormActive(contents)}
         />
         {check ? null : (
-          <p className="custom-textarea__error">
+          <p className='custom-textarea__error'>
             {children || (
               <span
                 style={{
-                  marginTop: "2px",
-                  fontSize: "12px",
-                  fontStyle: "italic",
-                  color: "#999",
+                  marginTop: '2px',
+                  fontSize: '12px',
+                  fontStyle: 'italic',
+                  color: '#999',
                 }}
               >
                 (Tối đa 1500 ký tự)

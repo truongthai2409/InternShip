@@ -1,20 +1,20 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getJobApplyListByCandidate,
   getJobCareByCandidate,
-} from "src/store/slices/main/home/job/jobCandidateSlice";
+} from 'src/store/slices/main/home/job/jobCandidateSlice';
 const Container = ({ children }) => {
   // Nếu nguời dừng có quyền Candidate . sau khi login sẽ đuợc components này xử lí. đem dispatch và lấy job quan tâm và job apply.
   // Các  component khác chỉ cần gọi và dùng. Không dípatch nữa. đây là component cha
 
-  const { user} = useSelector((state) => state.profile);
-  const { page : pageNo  } = useSelector((state) => state.filter);
+  const { user } = useSelector((state) => state.profile);
+  const { page: pageNo } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   useEffect(() => {
     const userStorage =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
     const page = {
       user: user,
       token: userStorage?.token,
@@ -24,7 +24,7 @@ const Container = ({ children }) => {
       },
     };
     user &&
-      user.user?.role?.name === "Role_Candidate" &&
+      user.user?.role?.name === 'Role_Candidate' &&
       userStorage &&
       dispatch(getJobApplyListByCandidate(page)) &&
       dispatch(getJobCareByCandidate(page));

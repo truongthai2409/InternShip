@@ -1,10 +1,10 @@
-@use "../../../assets/styles" as *;
+@use '../../../assets/styles' as *;
 
 .slideBarHome__wrapper {
   overflow-y: scroll;
   border-radius: 6px;
   font-family: $f-family !important;
-  
+
   .slideBarHome__container {
     width: 100%;
     background-color: $color-white-0;
@@ -16,11 +16,11 @@
     margin-bottom: 20px;
     border: 0.5px solid #dedede;
   }
-  
+
   .MuiList-root {
     padding: 0;
     margin-bottom: 10px;
-    
+
     span {
       font-size: 14px;
       display: flex;

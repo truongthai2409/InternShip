@@ -1,4 +1,4 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 .custom-input {
   margin: 20px 0;
@@ -84,7 +84,7 @@
   }
 }
 
-.fileSV-container > input[type="file"] {
+.fileSV-container > input[type='file'] {
   display: none;
 }
 

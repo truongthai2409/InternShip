@@ -1,78 +1,77 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../../../config/api/apiConfig";
-import { toast } from "react-toastify";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import api from '../../../../config/api/apiConfig';
+import { toast } from 'react-toastify';
 // import { useTranslation } from "react-i18next";
 
 const baseURL = process.env.REACT_APP_API;
 // const { t } = useTranslation('notification')
 const loginSlice = createSlice({
-
-  name: "login",
+  name: 'login',
   initialState: {
-    status: "idle",
+    status: 'idle',
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload?.token && action.payload?.role !== "Role_Admin") {
-          state.status = "success";
-          toast.success("Đăng nhập thành công", {
-            position: "top-right",
+        if (action.payload?.token && action.payload?.role !== 'Role_Admin') {
+          state.status = 'success';
+          toast.success('Đăng nhập thành công', {
+            position: 'top-right',
             autoClose: 2000,
-            theme: "colored",
+            theme: 'colored',
           });
           sessionStorage.setItem(
-            "userPresent",
+            'userPresent',
             JSON.stringify({
               token: action.payload.token,
               ids: action.payload.idUser,
             })
           );
         } else {
-          state.status = "fail";
-          toast.error("Tài khoản hoặc mật khẩu không đúng!", {
-            position: "top-right",
+          state.status = 'fail';
+          toast.error('Tài khoản hoặc mật khẩu không đúng!', {
+            position: 'top-right',
             autoClose: 3000,
-            theme: "colored",
+            theme: 'colored',
           });
         }
       })
       .addCase(loginAdmin.pending, (state, action) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(loginAdmin.fulfilled, (state, action) => {
-        if (action.payload?.token && action.payload?.role === "Role_Admin") {
-          state.status = "success";
-          toast.success("Đăng nhập thành công", {
-            position: "top-right",
+        if (action.payload?.token && action.payload?.role === 'Role_Admin') {
+          state.status = 'success';
+          toast.success('Đăng nhập thành công', {
+            position: 'top-right',
             autoClose: 3000,
-            theme: "colored",
+            theme: 'colored',
           });
           sessionStorage.setItem(
-            "userPresent",
+            'userPresent',
             JSON.stringify({
               token: action.payload.token,
               ids: action.payload.idUser,
             })
           );
         } else {
-          state.status = "fail";
-          toast.error("Tài khoản hoặc mật khẩu không đúng!", {
-            position: "top-right",
+          state.status = 'fail';
+          toast.error('Tài khoản hoặc mật khẩu không đúng!', {
+            position: 'top-right',
 
             autoClose: 3000,
-            theme: "colored",
+            theme: 'colored',
           });
         }
       });
   },
 });
 
-export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
+export const loginUser = createAsyncThunk('login/loginUser', async (data) => {
   const res = await api
     .post(`${baseURL}/api/signin`, data)
     .then((res) => {
@@ -84,7 +83,7 @@ export const loginUser = createAsyncThunk("login/loginUser", async (data) => {
   return res;
 });
 
-export const loginAdmin = createAsyncThunk("login/loginAdmin", async (data) => {
+export const loginAdmin = createAsyncThunk('login/loginAdmin', async (data) => {
   const res = await api
     .post(`${baseURL}/api/signin`, data)
     .then((res) => {

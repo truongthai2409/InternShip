@@ -1,44 +1,57 @@
-import AddCardIcon from "@mui/icons-material/AddCard";
-import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { indexFilterChange, pageFilterChange } from "src/store/slices/main/home/filter/filterSlices";
-import SearchResultHome from "../Home/SearchResultHome";
-import "./styles.scss";
+import AddCardIcon from '@mui/icons-material/AddCard';
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import {
+  indexFilterChange,
+  pageFilterChange,
+} from 'src/store/slices/main/home/filter/filterSlices';
+import SearchResultHome from '../Home/SearchResultHome';
+import './styles.scss';
 
 function HeaderWithPartner(props) {
-  const { t } = useTranslation('headerFooter')
-  const dispatch = useDispatch()
+  const { t } = useTranslation('headerFooter');
+  const dispatch = useDispatch();
   const handleClick = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
-    dispatch(indexFilterChange(0))
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    dispatch(indexFilterChange(0));
     dispatch(pageFilterChange(1));
-  }
+  };
   return (
     <>
-      <div className="header__partner">
-        <Link onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }) }} to="/partner/post" className="header__partner-post">
-          <AddCardIcon sx={{ color: "#04bf8a" }}></AddCardIcon>
-          <span className="header__partner-post-post">{t("postTL")}</span>
+      <div className='header__partner'>
+        <Link
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          }}
+          to='/partner/post'
+          className='header__partner-post'
+        >
+          <AddCardIcon sx={{ color: '#04bf8a' }}></AddCardIcon>
+          <span className='header__partner-post-post'>{t('postTL')}</span>
         </Link>
-        <Link onClick={() => handleClick()} to="/partner/post-list" className="header__partner-post">
+        <Link
+          onClick={() => handleClick()}
+          to='/partner/post-list'
+          className='header__partner-post'
+        >
           <FormatAlignJustifyIcon
-            sx={{ color: "#04bf8a" }}
+            sx={{ color: '#04bf8a' }}
           ></FormatAlignJustifyIcon>
-          <span className="header__partner-post-post">
-            {t("listOfInternshipProgramsTL")}
+          <span className='header__partner-post-post'>
+            {t('listOfInternshipProgramsTL')}
           </span>
         </Link>
       </div>
       {props.search ? (
         <SearchResultHome
-          bwidth="681px"
-          bheight="33px"
-          bwidthInput="fit-content"
-          bheightInput="fit-content"
-          mb="0"
+          bwidth='681px'
+          bheight='33px'
+          bwidthInput='fit-content'
+          bheightInput='fit-content'
+          mb='0'
           candidate_infomation={true}
         />
       ) : null}

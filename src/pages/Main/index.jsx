@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 // import { getMajorList } from "src/store/slices/Admin/major/majorSlice";
-import { getMajorListThunk } from "src/store/action/company/companyAction";
-import Home from "./Home";
+import { getMajorListThunk } from 'src/store/action/company/companyAction';
+import Home from './Home';
 
 const Main = () => {
   console.log(2);
@@ -14,8 +14,8 @@ const Main = () => {
   return (
     <Home
       demandPartner={false}
-      linkFilter="/api/r2s/job/filter"
-      nameSearch="công việc"
+      linkFilter='/api/r2s/job/filter'
+      nameSearch='công việc'
     ></Home>
   );
 };

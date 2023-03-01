@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Grid } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
-import "./styles.scss";
-import CustomInput from "../../../components/shared/CustomInput";
-import Button from "../../../components/shared/Button";
-import { schemaMajor, renderControlAction } from "./script.js";
+import './styles.scss';
+import CustomInput from '../../../components/shared/CustomInput';
+import Button from '../../../components/shared/Button';
+import { schemaMajor, renderControlAction } from './script.js';
 import {
   addMajor,
   // getMajorDetail,
   updateMajorInfo,
-} from "../../../store/slices/Admin/major/majorSlice";
+} from '../../../store/slices/Admin/major/majorSlice';
 import {
   // addMajor,
   getMajorDetailThunk,
   // updateMajorInfo,
-} from "src/store/action/company/companyAction";
+} from 'src/store/action/company/companyAction';
 
 // const label = { inputProps: { "aria-label": "Switch demo" } };
 
 export default function MajorForm({ isAdd, setOpen }) {
   const { majorDetail } = useSelector((state) => state.major);
   const [isEdit, setIsEdit] = useState(isAdd);
-  const [nameMajor, setNameMajor] = useState("");
+  const [nameMajor, setNameMajor] = useState('');
 
   const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ export default function MajorForm({ isAdd, setOpen }) {
    */
   useEffect(() => {
     if (majorDetail) {
-      setValue("name", isAdd ? "" : majorDetail.name);
+      setValue('name', isAdd ? '' : majorDetail.name);
     }
   }, [majorDetail]);
 
@@ -89,21 +89,21 @@ export default function MajorForm({ isAdd, setOpen }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      autoComplete="off"
-      className="major-form"
+      autoComplete='off'
+      className='major-form'
     >
-      <div className="major-form__container">
+      <div className='major-form__container'>
         <Grid container>
           <Grid item md={3}>
-            <div className="major-form__logo">
+            <div className='major-form__logo'>
               {/* <h3>major Name</h3> */}
               {!isAdd ? (
-                <div className="major-form__control">
+                <div className='major-form__control'>
                   <ul>{renderControlAction()}</ul>
                   <button
-                    type="button"
+                    type='button'
                     onClick={handleOnClickEdit}
-                    className="major-form__button-edit"
+                    className='major-form__button-edit'
                   >
                     Sửa
                   </button>
@@ -114,14 +114,14 @@ export default function MajorForm({ isAdd, setOpen }) {
           <Grid item md={9}>
             <Grid container>
               <Grid item md={6}>
-                <div className="university-form__input">
+                <div className='university-form__input'>
                   <CustomInput
-                    label="Tên Major"
-                    id="name"
-                    type="text"
-                    placeholder="Tên major..."
+                    label='Tên Major'
+                    id='name'
+                    type='text'
+                    placeholder='Tên major...'
                     register={register}
-                    defaultValue="name"
+                    defaultValue='name'
                     values={nameMajor}
                     check={!isEdit}
                   >
@@ -134,14 +134,14 @@ export default function MajorForm({ isAdd, setOpen }) {
         </Grid>
       </div>
       {isAdd ? (
-        <div className="university-form__submit">
-          <Button name="Thêm Major" onClick={handleSubmit(onSubmit)} />
+        <div className='university-form__submit'>
+          <Button name='Thêm Major' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
 
       {isEdit & !isAdd ? (
-        <div className="university-form__submit">
-          <Button name="Cập nhật" onClick={handleSubmit(onSubmit)} />
+        <div className='university-form__submit'>
+          <Button name='Cập nhật' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>

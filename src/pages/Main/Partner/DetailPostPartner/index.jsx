@@ -1,40 +1,40 @@
-import React from "react";
+import React from 'react';
 // import PropTypes from "prop-types";
-import DetailCard from "src/components/Card/DetailCard";
-import CardVisit from "src/components/Card/CardVisit";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Grid } from "@mui/material";
-import "./styles.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ArrowButton from "src/components/shared/ArrowButton";
-import { getDemandById } from "src/store/slices/main/home/demand/demandSlice";
+import DetailCard from 'src/components/Card/DetailCard';
+import CardVisit from 'src/components/Card/CardVisit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Grid } from '@mui/material';
+import './styles.scss';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ArrowButton from 'src/components/shared/ArrowButton';
+import { getDemandById } from 'src/store/slices/main/home/demand/demandSlice';
 
 const DetailPostPartner = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { keyword } = useParams()
+  const { keyword } = useParams();
 
   const { demandDetail, idJobActive } = useSelector((state) => state.demand);
 
   useEffect(() => {
     const dataSearch = {
-      name: "",
-      province: "",
+      name: '',
+      province: '',
       no: 0,
       limit: 10,
     };
     dispatch(getDemandById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {
-    navigate(-1,{ replace: true });
+    navigate(-1, { replace: true });
   };
   return (
     <div>
       <Grid
-        className="wrapper"
+        className='wrapper'
         container
         spacing={4}
         sx={{
@@ -44,27 +44,27 @@ const DetailPostPartner = (props) => {
         }}
       >
         <Grid item md={8} sm={12} xs={12}>
-          <div className="">
+          <div className=''>
             <DetailCard
-              logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+              logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
               jobDetailById={demandDetail}
               demandPartner={true}
             />
-            <div className=" hide-on-table">
-              <div className="" onClick={handleBackClick}>
-                <ArrowButton direction="left" text="Trở lại" />
+            <div className=' hide-on-table'>
+              <div className='' onClick={handleBackClick}>
+                <ArrowButton direction='left' text='Trở lại' />
               </div>
             </div>
           </div>
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           <CardVisit
-            logo="https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png"
+            logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
             jobDetailById={demandDetail}
           />
         </Grid>
-        <div className="config__arow-back hide-on-desktop ">
-          <Link to="/" className="config__arow-back">
+        <div className='config__arow-back hide-on-desktop '>
+          <Link to='/' className='config__arow-back'>
             <ArrowBackIcon></ArrowBackIcon>
             Trở lại
           </Link>

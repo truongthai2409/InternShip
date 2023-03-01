@@ -1,17 +1,17 @@
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import { FormControl } from "@mui/material";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-import LanguageIcon from "@mui/icons-material/Language";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import { PropTypes } from "prop-types";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { FormControl } from '@mui/material';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import LanguageIcon from '@mui/icons-material/Language';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import { PropTypes } from 'prop-types';
 
 function LanguageSetting({ type }) {
-  const [lang, setLang] = useState("vi");
-  const { t, i18n } = useTranslation("constant");
+  const [lang, setLang] = useState('vi');
+  const { t, i18n } = useTranslation('constant');
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -26,13 +26,13 @@ function LanguageSetting({ type }) {
   const handleItemClick = (lang) => {
     setAnchorEl(null);
     i18n.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
+    localStorage.setItem('lang', lang);
   };
 
   const languageOnChange = (event) => {
     i18n.changeLanguage(event.target.value);
     setLang(event.target.value);
-    localStorage.setItem("lang", event.target.value);
+    localStorage.setItem('lang', event.target.value);
   };
 
   useEffect(() => {
@@ -40,73 +40,73 @@ function LanguageSetting({ type }) {
   }, [i18n.language]);
 
   return (
-    <div className="button-i18next">
-      {type === "popover" && (
-        <div style={{ position: "absolute", top: "20px", right: "5px" }}>
+    <div className='button-i18next'>
+      {type === 'popover' && (
+        <div style={{ position: 'absolute', top: '20px', right: '5px' }}>
           <Button
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
+            id='basic-button'
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
           >
-            <LanguageIcon style={{ color: "black", fontSize: "25px" }} />
+            <LanguageIcon style={{ color: 'black', fontSize: '25px' }} />
           </Button>
           <Menu
-            id="basic-menu"
+            id='basic-menu'
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
             MenuListProps={{
-              "aria-labelledby": "lock-button",
-              role: "listbox",
+              'aria-labelledby': 'lock-button',
+              role: 'listbox',
             }}
           >
             <MenuItem
-              onClick={() => handleItemClick("vi")}
-              selected={i18n.language === "vi"}
-              value={"vi"}
-              key="lang-vi"
+              onClick={() => handleItemClick('vi')}
+              selected={i18n.language === 'vi'}
+              value={'vi'}
+              key='lang-vi'
             >
               <div
-                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+                style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
               >
                 <img
-                  src="https://img.icons8.com/color/48/null/vietnam-circular.png"
+                  src='https://img.icons8.com/color/48/null/vietnam-circular.png'
                   style={{
-                    width: "23px",
-                    height: "23px",
+                    width: '23px',
+                    height: '23px',
                     margin: 0,
                     border: 0,
                   }}
-                  alt="vn-flag"
+                  alt='vn-flag'
                 />
                 Tiếng Việt
               </div>
             </MenuItem>
             <MenuItem
-              onClick={() => handleItemClick("en")}
-              selected={i18n.language === "en"}
-              value={"en"}
-              key="lang-en"
+              onClick={() => handleItemClick('en')}
+              selected={i18n.language === 'en'}
+              value={'en'}
+              key='lang-en'
             >
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                  height: "auto",
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  height: 'auto',
                 }}
               >
                 <img
-                  src="https://img.icons8.com/color/48/null/usa-circular.png"
+                  src='https://img.icons8.com/color/48/null/usa-circular.png'
                   style={{
-                    width: "23px",
-                    height: "23px",
+                    width: '23px',
+                    height: '23px',
                     margin: 0,
                     border: 0,
                   }}
-                  alt="usa-flag"
+                  alt='usa-flag'
                 />
                 English
               </div>
@@ -114,59 +114,59 @@ function LanguageSetting({ type }) {
           </Menu>
         </div>
       )}
-      {type === "select" && (
+      {type === 'select' && (
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
           }}
         >
           {/* <p style={{fontSize: '14px'}}>{t('languageConstant.language')}</p> */}
-          <FormControl style={{ width: "140px" }} size="small">
+          <FormControl style={{ width: '140px' }} size='small'>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
               value={lang}
               onChange={languageOnChange}
-              style={{ fontSize: "14px" }}
+              style={{ fontSize: '14px' }}
             >
-              <MenuItem value={"vi"}>
+              <MenuItem value={'vi'}>
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "5px" }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
                 >
                   <img
-                    src="https://img.icons8.com/color/48/null/vietnam-circular.png"
+                    src='https://img.icons8.com/color/48/null/vietnam-circular.png'
                     style={{
-                      width: "23px",
-                      height: "23px",
+                      width: '23px',
+                      height: '23px',
                       margin: 0,
                       border: 0,
                     }}
-                    alt="vn-flag"
+                    alt='vn-flag'
                   />
                   Tiếng Việt
                 </div>
               </MenuItem>
-              <MenuItem value={"en"}>
+              <MenuItem value={'en'}>
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "5px",
-                    height: "auto",
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    height: 'auto',
                   }}
                 >
                   <img
-                    src="https://img.icons8.com/color/48/null/usa-circular.png"
+                    src='https://img.icons8.com/color/48/null/usa-circular.png'
                     style={{
-                      width: "23px",
-                      height: "23px",
+                      width: '23px',
+                      height: '23px',
                       margin: 0,
                       border: 0,
                     }}
-                    alt="usa-flag"
+                    alt='usa-flag'
                   />
                   English
                 </div>
@@ -184,7 +184,7 @@ LanguageSetting.propTypes = {
 };
 
 LanguageSetting.defaultProps = {
-  type: "select",
+  type: 'select',
 };
 
 export default LanguageSetting;
