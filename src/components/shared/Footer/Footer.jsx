@@ -23,7 +23,7 @@ function Footer() {
           ) : (
             <div className='render-description-none'>
               {item.hasOwnProperty('href') ? (
-                <Link key={`des-${index}`} to={item.href}>
+                <Link key={`link-${index}`} to={item.href}>
                   {t(item.description)}
                   <img
                     src={item.image}
@@ -32,7 +32,7 @@ function Footer() {
                   />
                 </Link>
               ) : (
-                <p key={`des-${index}`} className='render-description-none'>
+                <p key={`desc-${index}`} className='render-description-none'>
                   {t(item.description)}
                 </p>
               )}

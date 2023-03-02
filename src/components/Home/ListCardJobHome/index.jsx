@@ -40,7 +40,7 @@ const ListCardJobHome = ({
               id={job?.jobApp?.id || job?.jobCare?.id || job?.id}
               active={indexCardActive}
               index={index}
-              key={job.id}
+              key={job.id || index}
               title={
                 job?.name ? job.name : job.jobApp?.name || job.jobCare?.name
               }
