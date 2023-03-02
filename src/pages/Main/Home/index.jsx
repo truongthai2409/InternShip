@@ -315,7 +315,34 @@ const Home = (props) => {
               )}
             </>
           ) : (
-            <></>
+            <>
+              <Grid item xs={10}>
+                <Grid container spacing={{ xs: 1 }}>
+                  <Grid item xs={12}>
+                    <div className='none__res'>
+                      <SearchResultHome
+                        onClick={handleSearch}
+                        onChange={getValueLocationAndHandle}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                    <div>
+                      <img
+                        src={image_notFound}
+                        alt='notfound'
+                        width={'20%'}
+                        height={'100%'}
+                      />
+                      <p>
+                        Rất tiếc, hiện tại không có công việc phù hợp được tìm
+                        thấy
+                      </p>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </>
           )}
         </>
       ) : (
