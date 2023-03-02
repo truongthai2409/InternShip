@@ -11,19 +11,20 @@ function Footer() {
       <>
         <h2 className='render-title'>{t(sectionData.title)}</h2>
         {sectionData.content.map((item, index) => {
+          const uniqueKey = item.id || index;
           const renderData = item.hasOwnProperty('title') ? (
             <div className='render-container'>
-              <p key={`subTitle-${index}`} className='render-subTitle'>
+              <p key={`subTitle-${uniqueKey}`} className='render-subTitle'>
                 {t(item.title)}
               </p>
-              <p key={`des-${index}`} className='render-description-flex'>
+              <p key={`des-${uniqueKey}`} className='render-description-flex'>
                 {t(item.description)}
               </p>
             </div>
           ) : (
             <div className='render-description-none'>
               {item.hasOwnProperty('href') ? (
-                <Link key={`link-${index}`} to={item.href}>
+                <Link key={`link-${uniqueKey}`} to={item.href}>
                   {t(item.description)}
                   <img
                     src={item.image}
@@ -32,7 +33,10 @@ function Footer() {
                   />
                 </Link>
               ) : (
-                <p key={`desc-${index}`} className='render-description-none'>
+                <p
+                  key={`desc-${uniqueKey}`}
+                  className='render-description-none'
+                >
                   {t(item.description)}
                 </p>
               )}

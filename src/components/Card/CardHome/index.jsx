@@ -17,7 +17,6 @@ import TagName from '../../Home/TagName';
 import './styles.scss';
 
 const CardHome = (props) => {
-  // console.log(props, 'fjeo');
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -50,7 +49,6 @@ const CardHome = (props) => {
     let isMark = allJobCare.filter((job) => job?.jobCare?.id === props?.id);
     setIsMarkLength(isMark.length > 0 ? true : false);
   }, [allJobCare, props?.id]);
-  console.log(props.id, 'id');
   return (
     <div
       // key={props.id}
