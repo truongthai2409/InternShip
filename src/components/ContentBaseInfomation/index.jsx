@@ -8,6 +8,7 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import PaginationCustom from '../shared/Pagination';
 import { flexbox } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 const ContentBaseInformation = ({
   jobDetail,
@@ -18,6 +19,7 @@ const ContentBaseInformation = ({
   mgLeft,
   none__time,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const location = useLocation();
   const pathUrl = location.pathname;
 
@@ -30,7 +32,7 @@ const ContentBaseInformation = ({
             marginLeft: `${mgLeft ? mgLeft : ''}`,
           }}
         >
-          Việc làm đang tuyển
+          {t('jobVacanciesAvailableTL')}
         </h5>
         <Grid
           container
@@ -90,7 +92,7 @@ const ContentBaseInformation = ({
             ))
           ) : (
             <div style={{ padding: 16, fontWeight: 'bold' }}>
-              Không có việc làm đang tuyển
+              {t('noJobOpeningsAvailableTL')}
             </div>
           )}
         </Grid>
@@ -102,7 +104,11 @@ const ContentBaseInformation = ({
       {pathUrl !== `/information_company/${jobDetail?.hr?.company?.id}` ? (
         <div className='button-card'>
           <Link to={`/information_company/${jobDetail?.hr?.company?.id}`}>
-            <Button name='Xem thêm' bwidth='130px' bheight='40px'></Button>
+            <Button
+              name={t('viewMoreTL')}
+              bwidth='130px'
+              bheight='40px'
+            ></Button>
           </Link>
         </div>
       ) : null}
