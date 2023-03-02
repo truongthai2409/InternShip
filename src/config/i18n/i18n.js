@@ -10,6 +10,7 @@ import {
   REGISTER_FROM_EN,
   LOGIN_EN,
   SEARCH_EN,
+  USERINFO_EN,
   NOTIFICATION_EN,
   CARDINFORMATION_EN,
 } from 'src/locales/translateEN';
@@ -22,6 +23,7 @@ import {
   REGISTER_FROM_VI,
   LOGIN_VI,
   SEARCH_VI,
+  USERINFO_VI,
   NOTIFICATION_VI,
   CARDINFORMATION_VI,
 } from 'src/locales/translateVI';
@@ -36,6 +38,7 @@ const resources = {
     registerFrom: REGISTER_FROM_EN,
     login: LOGIN_EN,
     search: SEARCH_EN,
+    userInfo: USERINFO_EN,
     notification: NOTIFICATION_EN,
     cardInformation: CARDINFORMATION_EN,
   },
@@ -48,6 +51,7 @@ const resources = {
     registerFrom: REGISTER_FROM_VI,
     login: LOGIN_VI,
     search: SEARCH_VI,
+    userInfo: USERINFO_VI,
     notification: NOTIFICATION_VI,
     cardInformation: CARDINFORMATION_VI,
   },

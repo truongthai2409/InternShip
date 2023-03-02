@@ -1,21 +1,28 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchAutoComplete from 'src/components/shared/SearchAutoComplete';
 import { getProvinceList } from '../../../store/slices/location/locationSlice';
 import './styles.scss';
 export default function SelectAreaHome({ onChange }) {
+  const { role } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const { provinceList } = useSelector((state) => state.location);
   const { t } = useTranslation('search');
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(getProvinceList());
   }, [dispatch]);
   const handleLabel = (value) => {
+    console.log(value);
     if (value === null) {
       onChange && onChange('');
     } else {
-      onChange && onChange(value.name);
+      if (role == 'Role_HR') {
+        onChange && onChange(value.id);
+      } else {
+        onChange && onChange(value.name);
+      }
     }
   };
   return (

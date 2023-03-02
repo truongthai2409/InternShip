@@ -112,9 +112,9 @@ const InformationCompany = ({
                 gutterBottom
                 sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.description }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <Typography variant='span'>
@@ -129,9 +129,9 @@ const InformationCompany = ({
                 gutterBottom
                 sx={{ fontSize: 14, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <div className='detail__card-3-item'>
@@ -147,9 +147,9 @@ const InformationCompany = ({
                   gutterBottom
                   sx={{ fontWeight: '400', fontSize: '14px !important' }}
                 >
-                  <div
+                  <span
                     dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
-                  ></div>
+                  ></span>
                 </Typography>
               </Typography>
             </div>
@@ -247,11 +247,11 @@ const InformationCompany = ({
                 gutterBottom
                 sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{
                     __html: jobDetailById.description,
                   }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <div className='detail__card-3-item'>
@@ -270,11 +270,11 @@ const InformationCompany = ({
                     gutterBottom
                     sx={{ fontSize: 16, fontWeight: '400' }}
                   >
-                    <div
+                    <span
                       dangerouslySetInnerHTML={{
                         __html: jobDetailById.requirement,
                       }}
-                    ></div>
+                    ></span>
                   </Typography>
                 </Typography>
               )}
@@ -285,7 +285,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 18, fontWeight: '700' }}
                 >
-                  {t('applicationDeadlineTL')}
+                  <span>{t('applicationDeadlineTL')}</span>
                   <br />
                 </Typography>
                 <Typography
