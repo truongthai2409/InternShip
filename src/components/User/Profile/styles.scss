@@ -129,7 +129,6 @@
         .company-infor__row {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
 
           .company-infor__item {
             padding: 0.4rem 0;
@@ -139,7 +138,6 @@
             font-weight: 700;
             justify-content: start;
             align-items: center;
-            // border-bottom: 1px solid lightgrey;
 
             > span {
               font-weight: 500;
@@ -333,4 +331,17 @@
       }
     }
   }
+}
+
+.profile_children_handle__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #e5f7ed;
+  width: 100%;
+  color: #00b14f;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
 }

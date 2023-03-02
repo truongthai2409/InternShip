@@ -13,7 +13,7 @@ import './styles.scss';
 import { genderList, schema } from './validateForm';
 
 const ProfileForm = ({ profile: user }) => {
-  const { t } = useTranslation('information');
+  const { t } = useTranslation('userInfo');
   const {
     register,
     handleSubmit,
@@ -112,16 +112,15 @@ const ProfileForm = ({ profile: user }) => {
     <>
       <form className='profile-form__wrapper' autoComplete='off'>
         <Typography variant='button' style={{ fontSize: 22 }}>
-          {t('editInformation')}
+          {t('changePro')}
         </Typography>
         <div className='profile-form__content'>
           <p className='title-requirement'>
-            (<span className='field-requirment'> * </span>)
-            {t('requiredFieldTL')}
+            (<span className='field-requirment'> * </span>){t('require')}
           </p>
           <div className='profile-form__content-item'>
             <InputFile
-              label={t('avatarTL')}
+              label={t('avt')}
               requirementField={false}
               id='avatar'
               format='image'
@@ -138,7 +137,7 @@ const ProfileForm = ({ profile: user }) => {
               register={register}
               setValue={setValue}
               id='lastName'
-              label={t('lastNameTL')}
+              label={t('lastname')}
               className='profile-form__input'
               radius='2px'
               height='45px'
@@ -150,7 +149,7 @@ const ProfileForm = ({ profile: user }) => {
               register={register}
               setValue={setValue}
               id='firstName'
-              label={t('firstNameTL')}
+              label={t('firstname')}
               className='profile-form__input'
               radius='2px'
               height='45px'
@@ -164,10 +163,10 @@ const ProfileForm = ({ profile: user }) => {
               setValue={setValue}
               id='gender'
               register={register}
-              label={t('genderTL')}
+              label={t('gender')}
               defaultValue={user?.user?.gender}
               options={genderList}
-              placeholder={t('pleaseSelectTL')}
+              placeholder={t('placeholder')}
             >
               {errors.gender?.message}
             </SelectCustom>
@@ -176,7 +175,7 @@ const ProfileForm = ({ profile: user }) => {
               setValue={setValue}
               id='phone'
               type='text'
-              label={t('phoneNumberTL')}
+              label={t('phoneNum')}
               className='profile-form__input'
               radius='2px'
               height='45px'
@@ -188,7 +187,7 @@ const ProfileForm = ({ profile: user }) => {
         </div>
         <div className='profile-form__action'>
           <Button
-            name={t('saveTL')}
+            name={t('save')}
             bheight={44}
             onClick={handleSubmit(onSubmit)}
             fz='14px'

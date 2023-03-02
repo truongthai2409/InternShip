@@ -15,7 +15,6 @@ import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import Container from '../Container';
 import './styles.scss';
 const CandidateInfo = () => {
-  // console.log("CandidateInfo");
   TabTitle('Đăng ký - Ứng viên');
 
   const navigate = useNavigate();
@@ -41,7 +40,6 @@ const CandidateInfo = () => {
     navigate(-1, { replace: true });
   };
   const onSubmit = async (data) => {
-    // console.log("Run")
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,
