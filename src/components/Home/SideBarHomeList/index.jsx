@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 const listWorkingFormat = [
   { name: 'Fulltime', id: 1 },
@@ -15,6 +16,9 @@ const listWorkingFormat = [
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   const { t } = useTranslation('navbar');
+  const { role } = useSelector((state) => state.profile);
+  const location = useLocation();
+  const path = location.pathname;
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
@@ -59,13 +63,17 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
-      <ListCollapse
-        title={t('workTL')}
-        list={listWorkingFormat}
-        spacing={3}
-        onChange={handleCheckType}
-        checkedType={checkedType}
-      />
+      {role == 'Role_HR' && path == '/hr' ? (
+        <></>
+      ) : (
+        <ListCollapse
+          title={t('workTL')}
+          list={listWorkingFormat}
+          spacing={3}
+          onChange={handleCheckType}
+          checkedType={checkedType}
+        />
+      )}
       <ListCollapse
         title={t('jobPositionTL')}
         list={jobPosition}

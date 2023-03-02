@@ -80,6 +80,7 @@ const image_notFound =
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('client');
+  const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
@@ -89,8 +90,9 @@ const Home = (props) => {
   const [state, dispatcher] = useReducer(reducer, initialState);
 
   const listPositionWorkingFormat = jobPosition?.map((item) => {
-    return item.name;
+    return item;
   });
+  const { majorList } = useSelector((state) => state.major);
   const [valueLocation, setValueLocation] = useState('');
   const [jobs, setJob] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
@@ -114,7 +116,6 @@ const Home = (props) => {
     setValueLocation(value);
   };
   const getValuePageAndHandle = (value) => {
-    console.log(value);
     const userPartner =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
       JSON.parse(localStorage.getItem('userPresent'));
@@ -139,26 +140,39 @@ const Home = (props) => {
         })
         .includes(sp)
     );
-    tempPosition = value.filter((items) =>
-      listPositionWorkingFormat
-        .map((item) => {
-          return item;
-        })
-        .includes(items)
-    );
-    tempMajor = value.filter(
-      (items) =>
-        !listPositionWorkingFormat
-          .map((item) => {
-            return item;
-          })
-          .includes(items) &&
-        !listWorkingFormat
-          .map((item) => {
-            return item.name;
-          })
-          .includes(items)
-    );
+    if (role == 'Role_HR') {
+      value.map((item) => {
+        listPositionWorkingFormat.map((item_list) => {
+          if (item == item_list.name) {
+            tempPosition.push(item_list.id);
+          }
+        });
+      });
+
+      value.map((item) => {
+        majorList.map((item_list) => {
+          if (item == item_list.name) {
+            tempMajor.push(item_list.id);
+          }
+        });
+      });
+    } else {
+      value.map((item) => {
+        listPositionWorkingFormat.map((item_list) => {
+          if (item == item_list.name) {
+            tempPosition.push(item_list.name);
+          }
+        });
+      });
+
+      value.map((item) => {
+        majorList.map((item_list) => {
+          if (item == item_list.name) {
+            tempMajor.push(item_list.name);
+          }
+        });
+      });
+    }
     dispatcher({ type: 'type', payload: tempType });
     dispatcher({ type: 'position', payload: tempPosition });
     dispatcher({ type: 'major', payload: tempMajor });
@@ -184,12 +198,7 @@ const Home = (props) => {
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
     setJob(jobFilter);
-    if (roleFilter) {
-      setJob(roleFilter);
-      roleFilter && setJobDetail(roleFilter[index]);
-    } else {
-      jobFilter && setJobDetail(jobFilter[index]);
-    }
+    jobFilter && setJobDetail(jobFilter[index]);
   }, [jobFilter, dispatch, index, roleFilter]);
 
   useEffect(() => {
