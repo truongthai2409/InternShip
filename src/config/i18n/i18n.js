@@ -11,6 +11,7 @@ import {
   LOGIN_EN,
   SEARCH_EN,
   NOTIFICATION_EN,
+  CARDINFORMATION_EN,
 } from 'src/locales/translateEN';
 import {
   CLIENT_VI,
@@ -22,6 +23,7 @@ import {
   LOGIN_VI,
   SEARCH_VI,
   NOTIFICATION_VI,
+  CARDINFORMATION_VI,
 } from 'src/locales/translateVI';
 
 const resources = {
@@ -35,6 +37,7 @@ const resources = {
     login: LOGIN_EN,
     search: SEARCH_EN,
     notification: NOTIFICATION_EN,
+    cardInformation: CARDINFORMATION_EN,
   },
   vi: {
     client: CLIENT_VI,
@@ -46,6 +49,7 @@ const resources = {
     login: LOGIN_VI,
     search: SEARCH_VI,
     notification: NOTIFICATION_VI,
+    cardInformation: CARDINFORMATION_VI,
   },
 };
 

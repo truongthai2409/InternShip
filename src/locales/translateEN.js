@@ -7,6 +7,7 @@ import { REGISTER_FROM_EN } from './en/registerFrom';
 import { LOGIN_EN } from './en/login';
 import { SEARCH_EN } from './en/search';
 import { NOTIFICATION_EN } from './en/notification';
+import { CARDINFORMATION_EN } from './en/cardInformation';
 
 export {
   CLIENT_EN,
@@ -18,4 +19,5 @@ export {
   LOGIN_EN,
   SEARCH_EN,
   NOTIFICATION_EN,
+  CARDINFORMATION_EN,
 };
