@@ -4,7 +4,6 @@ import { useEffect, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import notfound from 'src/assets/img/notfound.webp';
 import TemporaryDrawer from 'src/components/shared/Drawer';
 import {
   changeFilterChange,
@@ -74,9 +73,8 @@ function reducer(state = initialState, action) {
       return { ...state };
   }
 }
+const image_notFound = require('src/assets/img/notfound.png');
 
-const image_notFound =
-  'https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png';
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('client');
@@ -88,7 +86,6 @@ const Home = (props) => {
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
-
   const listPositionWorkingFormat = jobPosition?.map((item) => {
     return item;
   });
@@ -248,7 +245,7 @@ const Home = (props) => {
                         <img
                           src={image_notFound}
                           alt='notfound'
-                          width={'20%'}
+                          width={'50%'}
                           height={'100%'}
                         />
                         <p>
@@ -331,7 +328,7 @@ const Home = (props) => {
                       <img
                         src={image_notFound}
                         alt='notfound'
-                        width={'20%'}
+                        width={'50%'}
                         height={'100%'}
                       />
                       <p>
@@ -363,7 +360,7 @@ const Home = (props) => {
                     <img
                       src={image_notFound}
                       alt='notfound'
-                      width={'20%'}
+                      width={'50%'}
                       height={'100%'}
                     />
                     <p>

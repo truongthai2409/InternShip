@@ -22,7 +22,6 @@ const BASEURL = process.env.REACT_APP_API;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
   const [numPages, setNumPages] = useState(null);
-  const { t } = useTranslation('profile');
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
@@ -37,12 +36,15 @@ const Components = ({ profile }) => {
   });
   const [opens, setOpens] = useState(false);
   const handleChange = (e) => {};
-  const [checkedFind, setCheckedFind] = React.useState(true);
-  const [checkedEmail, setCheckedEmail] = React.useState(false);
+  const [checkedFind, setCheckedFind] = useState(true);
+  const [checkedEmail, setCheckedEmail] = useState(false);
+  const [allowContact, setAllowContact] = useState(true);
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation('userInfo');
 
   const handleChangeFind = (event) => {
     setCheckedFind(event.target.checked);
+    setAllowContact(event.target.checked);
   };
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
@@ -132,16 +134,18 @@ const Components = ({ profile }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'center',
-                gap: '2rem',
                 marginTop: 8,
               }}
             >
               <div className='profile_children_handle'>
-                <Tooltip title={t('change_cv')}>
-                  <CachedRoundedIcon
-                    className='icon-action'
-                    onClick={() => handleClick(1)}
-                  />
+                <Tooltip title={t('changeCV')}>
+                  <div className='profile_children_handle__item'>
+                    <CachedRoundedIcon
+                      className='icon-action'
+                      onClick={() => handleClick(1)}
+                    />
+                    <span>{t('changeCV')}</span>
+                  </div>
                 </Tooltip>
                 <Modal
                   modalTitle={t('change_cv')}
@@ -182,8 +186,11 @@ const Components = ({ profile }) => {
                 className='profile_children_handle'
                 style={{ padding: '0 2rem' }}
               >
-                <Tooltip title={t('view_cv')}>
-                  <RemoveRedEyeIcon onClick={() => handleClick(2)} />
+                <Tooltip title={t('viewCV')}>
+                  <div className='profile_children_handle__item'>
+                    <RemoveRedEyeIcon onClick={() => handleClick(2)} />
+                    <span>{t('viewCV')}</span>
+                  </div>
                 </Tooltip>
                 <Modal
                   iconClose={true}
@@ -208,7 +215,7 @@ const Components = ({ profile }) => {
                 />
               </div>
               <div className='profile_children_handle'>
-                <Tooltip title={t('download_cv')}>
+                <Tooltip title={t('downloadCV')}>
                   <a
                     id='downloadLink'
                     href={`${profile?.cv}`}
@@ -217,8 +224,10 @@ const Components = ({ profile }) => {
                     // download={`${profile?.cv}`}
                     download
                     rel='noreferrer'
+                    className='profile_children_handle__item'
                   >
                     <CloudDownloadRoundedIcon />
+                    <span>{t('downloadCV')}</span>
                   </a>
                 </Tooltip>
               </div>
@@ -232,17 +241,29 @@ const Components = ({ profile }) => {
             <div className='profile_click'>
               <div className='profile_check'>
                 <Typography
-                  sx={{ marginTop: 0.7 }}
+                  sx={{
+                    marginTop: 0.7,
+                    color: allowContact ? '#00DA6F' : 'red',
+                  }}
                   variant='overline'
                   display='block'
                   gutterBottom
                 >
-                  {t('find_work')}
+                  {t('allowContact')}
                 </Typography>
                 <Switch
                   checked={checkedFind}
                   onChange={handleChangeFind}
                   inputProps={{ 'aria-label': 'controlled' }}
+                  color={allowContact ? 'success' : 'error'}
+                  sx={{
+                    '& .MuiSwitch-thumb': {
+                      backgroundColor: allowContact ? '#00DA6F' : 'red',
+                    },
+                    '& .MuiSwitch-track': {
+                      backgroundColor: allowContact ? '#00DA6F' : 'red',
+                    },
+                  }}
                 />
               </div>
             </div>
@@ -258,7 +279,7 @@ const Components = ({ profile }) => {
                 display='block'
                 gutterBottom
               >
-                {t('receive_email')}
+                {t('emailNoti')}
               </Typography>
               <Switch
                 sx={{
@@ -276,25 +297,25 @@ const Components = ({ profile }) => {
         <div className='profile_check'></div>
         <div className='profile_info'>
           <UserInfo name='Email' profile={profile?.user?.email} />
-          <UserInfo name={t('phone')} profile={profile?.user?.phone} />
+          <UserInfo name={t('phoneNum')} profile={profile?.user?.phone} />
           <UserInfo
             name={t('role')}
             profile={
               profile?.user?.role?.name === 'Role_Candidate'
                 ? t('candidate')
                 : profile?.user?.role?.name === 'Role_HR'
-                ? t('hr')
+                ? t('HR')
                 : t('partner')
             }
           />
           <UserInfo
-            name={t('sex')}
+            name={t('gender')}
             profile={
               profile?.user?.gender === 1
-                ? t('woman')
+                ? t('female')
                 : profile?.user?.gender === 0
-                ? t('man')
-                : t('diff')
+                ? t('male')
+                : t('other')
             }
           />
         </div>

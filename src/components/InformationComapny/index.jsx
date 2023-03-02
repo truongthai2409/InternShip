@@ -103,16 +103,16 @@ const InformationCompany = ({
                 variant='span'
                 sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                Mô tả công việc:
+                <span>Mô tả công việc:</span>
               </Typography>
               <Typography
                 variant='body2'
                 gutterBottom
                 sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.description }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <Typography variant='span'>
@@ -120,16 +120,16 @@ const InformationCompany = ({
                 variant='span'
                 sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                Yêu cầu công việc:
+                <span>Yêu cầu công việc:</span>
               </Typography>
               <Typography
                 variant='body2'
                 gutterBottom
                 sx={{ fontSize: 14, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <div className='detail__card-3-item'>
@@ -138,16 +138,16 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  Quyền lợi:
+                  <span>Quyền lợi:</span>
                 </Typography>
                 <Typography
                   variant='body2'
                   gutterBottom
                   sx={{ fontWeight: '400', fontSize: '14px !important' }}
                 >
-                  <div
+                  <span
                     dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
-                  ></div>
+                  ></span>
                 </Typography>
               </Typography>
             </div>
@@ -157,7 +157,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  Thời hạn ứng tuyển:
+                  <span>Thời hạn ứng tuyển:</span>
                 </Typography>
                 <Typography
                   variant='body2'
@@ -241,11 +241,11 @@ const InformationCompany = ({
                 gutterBottom
                 sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{
                     __html: jobDetailById.description,
                   }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
             <div className='detail__card-3-item'>
@@ -257,18 +257,18 @@ const InformationCompany = ({
                     variant='span'
                     sx={{ fontSize: 18, fontWeight: '700' }}
                   >
-                    Yêu cầu công việc:
+                    <span>Yêu cầu công việc:</span>
                   </Typography>
                   <Typography
                     variant='body2'
                     gutterBottom
                     sx={{ fontSize: 16, fontWeight: '400' }}
                   >
-                    <div
+                    <span
                       dangerouslySetInnerHTML={{
                         __html: jobDetailById.requirement,
                       }}
-                    ></div>
+                    ></span>
                   </Typography>
                 </Typography>
               )}
@@ -279,7 +279,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 18, fontWeight: '700' }}
                 >
-                  Thời hạn ứng tuyển:
+                  <span>Thời hạn ứng tuyển:</span>
                   <br />
                 </Typography>
                 <Typography

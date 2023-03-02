@@ -23,7 +23,6 @@ function SearchResultHome({
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
   };
-
   const search = (event) => {
     event.preventDefault();
     onClick && onClick(searchValue);

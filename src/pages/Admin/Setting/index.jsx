@@ -60,7 +60,7 @@ const Setting = () => {
         <CustomInput
           id='oldPassword'
           type='password'
-          label='Mật khẩu cũ'
+          label='Mật khẩu hiện hành'
           placeholder='Nhập mật khẩu...'
           visibility={true}
           register={register}

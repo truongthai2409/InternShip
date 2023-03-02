@@ -1,19 +1,16 @@
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+let GOOGLE = require('src/assets/img/google-icon.png');
 
 export const FOOTER = {
   CONTACT: {
-    title: 'Địa chỉ',
+    title: 'addressTL',
     content: [
       {
-        title: 'Trụ sở',
-        description:
-          'Lầu 8, Toà Nhà Pearl Plaza, 561A đường Điện Biên Phủ, Phường 25, Quận Bình Thạnh, Thành Phố Hồ Chí Minh',
+        title: 'headquartersTL',
+        description: 'addressHeadquartersTL',
       },
       {
-        title: 'Văn phòng',
-        description:
-          'A005 Tầng trệt Chung cư Linh Đông, 1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, Thành Phố Hồ Chí Minh',
+        title: 'officeTL',
+        description: 'addressOfficeTL',
       },
       {
         title: 'Hotline',
@@ -26,57 +23,53 @@ export const FOOTER = {
     ],
   },
   ABOUT: {
-    title: 'Về IT JOBS',
+    title: 'aboutItJOBSTL',
     content: [
       {
-        description: <Link to='/'>Trang chủ</Link>,
+        description: 'homeTL',
+        href: '/',
       },
       {
-        description: <Link to='/about-us'>Về chúng tôi</Link>,
+        description: 'aboutUsTL',
+        href: '/about-us',
       },
       {
-        description: <Link to='/help'>Câu hỏi thường gặp</Link>,
+        description: 'frequentlyAskedQuestionsTL',
+        href: '/help',
       },
     ],
   },
   POLICY: {
-    title: 'Chính sách',
+    title: 'policyTL',
     content: [
       {
-        description: <Link to='/privacy-policy'>Chính sách bảo mật</Link>,
+        description: 'privacyPolicyTL',
+        href: '/privacy-policy',
       },
       {
-        description: <Link to='/terms-of-services'>Điều khoản dịch vụ</Link>,
+        description: 'termsOfServiceTL',
+        href: '/terms-of-services',
       },
       {
-        description: <Link to='/regulation'>Quy chế</Link>,
+        description: 'regulationTL',
+        href: '/regulation',
       },
     ],
   },
   MOBILE: {
-    title: 'Ứng dụng di động',
+    title: 'mobileApplicationTL',
     content: [
       {
-        description: (
-          <Link to='/comming-soon'>
-            <img
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/2560px-Google_Play_Store_badge_EN.svg.png'
-              alt=''
-              style={{ width: '170px' }}
-            />
-          </Link>
-        ),
+        image: GOOGLE,
+        href: '/comming-soon',
+        alt: 'Google Play Store',
+        // description: "Google Play Store",
       },
       {
-        description: (
-          <Link to='/comming-soon'>
-            <img
-              src='https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png'
-              alt=''
-              style={{ width: '170px' }}
-            />
-          </Link>
-        ),
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/5/5d/Available_on_the_App_Store_%28black%29.png',
+        href: '/comming-soon',
+        alt: 'Google Play Store',
       },
     ],
   },

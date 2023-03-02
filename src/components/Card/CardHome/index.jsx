@@ -17,7 +17,6 @@ import TagName from '../../Home/TagName';
 import './styles.scss';
 
 const CardHome = (props) => {
-  // console.log(props)
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -52,6 +51,7 @@ const CardHome = (props) => {
   }, [allJobCare, props?.id]);
   return (
     <div
+      // key={props.id}
       onClick={handleClick}
       className={clsx(
         'cardHome__container',
@@ -77,19 +77,19 @@ const CardHome = (props) => {
           </div>
         </div>
         <div className='cardHome__tagName'>
-          {props?.tagName?.map((tag) =>
+          {props?.tagName?.map((tag, indexs) =>
             tag?.length > 0 ? (
-              tag?.map((item) => {
+              tag?.map((item, index) => {
                 return item?.length > 0 ? (
-                  item?.map((ite) => {
-                    return <TagName key={ite} title={ite?.name || null} />;
+                  item?.map((ite, idx) => {
+                    return <TagName key={idx} title={ite?.name || null} />;
                   })
                 ) : (
-                  <TagName key={item} title={item?.name || null} />
+                  <TagName key={index} title={item?.name || null} />
                 );
               })
             ) : (
-              <TagName key={tag} title={tag?.name || null} />
+              <TagName key={indexs} title={tag?.name || null} />
             )
           )}
         </div>

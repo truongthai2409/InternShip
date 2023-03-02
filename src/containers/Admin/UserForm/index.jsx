@@ -217,7 +217,7 @@ const UserForm = (props) => {
               <CustomInput
                 id='firstName'
                 className='user-form__input-item'
-                label='Họ'
+                label='Họ và tên lót'
                 type='text'
                 placeholder='Nguyễn Văn...'
                 register={register}
