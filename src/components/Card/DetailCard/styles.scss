@@ -9,6 +9,7 @@
   height: 570px;
   width: 100%;
   font-family: $f-family !important;
+  box-sizing: border-box;
 
   .detail__card-1 {
     display: flex;
