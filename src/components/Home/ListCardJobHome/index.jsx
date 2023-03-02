@@ -8,9 +8,7 @@ import CardHome from '../../Card/CardHome';
 import { Grid } from '@mui/material';
 
 import './styles.scss';
-const image_notFound =
-  'https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png';
-
+const image_notFound = require('src/assets/img/notfound.png');
 const ListCardJobHome = ({
   jobList,
   indexCardActive,
@@ -94,7 +92,7 @@ const ListCardJobHome = ({
             <img
               src={image_notFound}
               alt='notfound'
-              width={'20%'}
+              width={'50%'}
               height={'100%'}
             />
             <p>Rất tiếc, hiện tại không có công việc phù hợp được tìm thấy</p>

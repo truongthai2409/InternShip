@@ -259,9 +259,9 @@ const BaseInformationCompany = ({
                       <Grid item xs={8}>
                         <Item
                           sx={{
-                            marginTop: 3,
-                            marginBottom: 3,
-                            paddingBottom: 2.5,
+                            marginTop: 0,
+                            marginBottom: 0,
+                            paddingBottom: 1,
                           }}
                           elevation={0}
                         >
@@ -635,7 +635,7 @@ const BaseInformationCompany = ({
         </div>
       ) : (
         // trang home
-        <div>
+        <div className='scrollCardInforCompany'>
           <div>
             {jobDetail && (
               <div
@@ -771,8 +771,8 @@ const BaseInformationCompany = ({
                     <Grid item xs={12}>
                       <Item
                         sx={{
-                          marginTop: 3,
-                          marginBottom: 3,
+                          marginTop: 1,
+                          marginBottom: 1,
                           paddingBottom: 2.5,
                         }}
                         elevation={0}
@@ -780,7 +780,7 @@ const BaseInformationCompany = ({
                         <div className='intro__company'>
                           <h5
                             className='intro__company-title'
-                            style={{ marginLeft: '25px' }}
+                            style={{ marginLeft: '5px' }}
                           >
                             Giới thiệu về công ty
                           </h5>
@@ -806,8 +806,8 @@ const BaseInformationCompany = ({
                       </Item>
                       <Item
                         sx={{
-                          marginTop: 3,
-                          marginBottom: 3,
+                          marginTop: 0,
+                          marginBottom: 0,
                         }}
                         elevation={0}
                       >

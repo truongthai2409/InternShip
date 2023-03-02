@@ -34,7 +34,7 @@ export default function Container({
       >
         <div className='register__container__form--name'>
           <CustomInput
-            label={t('registerTL')}
+            label={t('AccountTL')}
             id='username'
             type='text'
             placeholder={t('registerTL')}

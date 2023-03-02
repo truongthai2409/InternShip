@@ -52,7 +52,6 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
       } else {
         updatedList.splice(checkedType.indexOf(valueId), 1);
       }
-      console.log(valueId, 'list updated');
       setCheckedType(updatedList);
       onChange && onChange(updatedList);
     } else {
@@ -75,7 +74,6 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
       } else {
         updatedList.splice(checkedType.indexOf(valueId), 1);
       }
-      console.log(valueId, 'list updated');
       setCheckedType(updatedList);
       onChange && onChange(updatedList);
     } else {
@@ -90,7 +88,6 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
     }
   };
 
-  console.log(checkedType, 'checked');
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
       {role == 'Role_HR' && path == '/hr' ? (

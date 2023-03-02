@@ -16,7 +16,7 @@ export const USERINFO_VI = {
   changePro: 'Thay đổi thông tin',
   require: 'Trường bắt buộc',
   avt: 'Ảnh đại diện',
-  lastname: 'Họ',
+  lastname: 'Họ và tên lót',
   firstname: 'Tên',
   placeholder: 'Vui lòng chọn',
   save: 'Lưu',

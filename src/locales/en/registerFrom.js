@@ -22,8 +22,9 @@ export const REGISTER_FROM_EN = {
   firstNameTL: 'First name',
   avatarTL: 'Avatar',
   backTL: 'Back',
-
+  doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
   registerforAnRecruiterAccountTL: 'Register for an Recruiter Account',
+  loginTL: 'Login',
 
   registerForaSchoolPartnerAccountTL: 'Register for a school partner account',
 

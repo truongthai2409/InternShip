@@ -77,7 +77,6 @@ const PartnerInfo = () => {
   }, [dispatch, navigate, status]);
 
   const onSubmit = async (data) => {
-    console.log('submit');
     if (info) {
       const partnerData = {
         avatar: data.avatar || info.logo,

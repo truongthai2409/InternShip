@@ -2,6 +2,7 @@ import './styles.scss';
 import { FOOTER } from 'src/config/constant/footer';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { version } from 'src/config/constant/version.js';
 const { CONTACT, ABOUT, POLICY, MOBILE } = FOOTER;
 
 function Footer() {
@@ -56,7 +57,7 @@ function Footer() {
         <div className='footer-mobile'>{renderFooter(MOBILE)}</div>
       </div>
       <p className='footer-copyright'>
-        Copyright © 2022 R2S. All Rights Reserved
+        Copyright © 2022 R2S. All Rights Reserved | Version: {version}
       </p>
     </div>
   );

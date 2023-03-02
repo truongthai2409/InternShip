@@ -50,7 +50,6 @@ const Components = ({ profile }) => {
     setCheckedEmail(event.target.checked);
   };
 
-  console.log('cheeee', allowContact);
   const handleClick = (number) => {
     switch (number) {
       case 1: {

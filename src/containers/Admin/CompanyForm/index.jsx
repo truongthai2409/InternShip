@@ -30,7 +30,6 @@ export default function CompanyForm(props) {
   const { isAdd } = props;
 
   const { companyDetail, error } = useSelector((state) => state.company);
-  console.log('companyDetail', companyDetail);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const {
     register,
@@ -104,7 +103,6 @@ export default function CompanyForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
-    console.log(data);
     const companyData = {
       company: JSON.stringify({
         name: data.name,

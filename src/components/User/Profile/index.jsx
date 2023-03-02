@@ -17,7 +17,7 @@ const Profile = () => {
         <Grid item xs={12} sm={12} md={12} lg={6} xl={4.5}>
           <Components profile={user} />
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={6.5} xl={8}>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={7.5}>
           <ProfileForm profile={user} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

@@ -19,11 +19,12 @@ export const REGISTER_FROM_VI = {
     '(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)',
   genderTL: 'Giới tính',
   pleaseSelectTL: 'Vui lòng chọn...',
-  lastNameTL: 'Họ',
+  lastNameTL: 'Họ và tên lót',
   firstNameTL: 'Tên',
   avatarTL: 'Ảnh đại diện',
   backTL: 'Trở lại',
-
+  doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
+  loginTL: 'Đăng nhập',
   registerforAnRecruiterAccountTL: 'Đăng ký tài khoản nhà tuyển dụng',
 
   registerForaSchoolPartnerAccountTL: 'Đăng ký tài khoản cộng tác viên',

@@ -58,9 +58,6 @@ const ListCollapse = (props) => {
                       onChange={handleCheck}
                       checked={props.checkedType
                         ?.map((items) => {
-                          {
-                            console.log(items, 'items');
-                          }
                           if (item.name === items || item.id === items) {
                             return item.name;
                           }

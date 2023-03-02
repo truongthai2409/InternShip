@@ -73,8 +73,8 @@ function reducer(state = initialState, action) {
   }
 }
 
-const image_notFound =
-  'https://images.glints.com/unsafe/1920x0/glints-dashboard.s3.amazonaws.com/images/jobs/empty-view.png';
+const image_notFound = require('src/assets/img/notfound.png');
+
 const Home = (props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('client');
@@ -140,9 +140,6 @@ const Home = (props) => {
     tempPosition = value.filter((items) =>
       listPositionWorkingFormat
         .map((item) => {
-          {
-            console.log(item, 'item');
-          }
           return item;
         })
         .includes(items)
@@ -181,7 +178,6 @@ const Home = (props) => {
       },
       { link: props.linkFilter },
     ];
-    console.log(dataFilter, 'dataFilter');
     dispatch(jobFilters(dataFilter));
   }, [state, props.linkFilter]);
   // pls check index in here right or wrong ???
@@ -234,7 +230,7 @@ const Home = (props) => {
                     <img
                       src={image_notFound}
                       alt='notfound'
-                      width={'20%'}
+                      width={'50%'}
                       height={'100%'}
                     />
                     <p>
@@ -316,7 +312,7 @@ const Home = (props) => {
                 <img
                   src={image_notFound}
                   alt='notfound'
-                  width={'20%'}
+                  width={'50%'}
                   height={'100%'}
                 />
                 <p>
