@@ -15,22 +15,19 @@ const listWorkingFormat = [
 ];
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
+  const { t } = useTranslation('navbar');
   const { role } = useSelector((state) => state.profile);
   const location = useLocation();
   const path = location.pathname;
-  const { t } = useTranslation('navbar');
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
   const { jobPosition } = useSelector((state) => state.job);
-  const { user } = useSelector((state) => state.profile);
   const [checkedType, setCheckedType] = useState([]);
-
-  const userHR = user?.user?.role;
 
   useEffect(() => {
     dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
-  }, []);
+  }, [dispatch]);
 
   const handleCheckType = (valueName, valueCheck) => {
     var updatedList = [...checkedType];
@@ -40,54 +37,30 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
       updatedList.splice(checkedType.indexOf(valueName), 1);
     }
     setCheckedType(updatedList);
-
     onChange && onChange(updatedList);
   };
 
-  const handleCheckPosition = (valueName, valueCheck, valueId) => {
-    if (role == 'Role_HR') {
-      var updatedList = [...checkedType];
-      if (valueCheck) {
-        updatedList = [...checkedType, valueId];
-      } else {
-        updatedList.splice(checkedType.indexOf(valueId), 1);
-      }
-      setCheckedType(updatedList);
-      onChange && onChange(updatedList);
+  const handleCheckPosition = (valueName, valueCheck) => {
+    var updatedList = [...checkedType];
+    if (valueCheck) {
+      updatedList = [...checkedType, valueName];
     } else {
-      var updatedList = [...checkedType];
-      if (valueCheck) {
-        updatedList = [...checkedType, valueName];
-      } else {
-        updatedList.splice(checkedType.indexOf(valueName), 1);
-      }
-      setCheckedType(updatedList);
-      onChange && onChange(updatedList);
+      updatedList.splice(checkedType.indexOf(valueName), 1);
     }
+    setCheckedType(updatedList);
+    onChange && onChange(updatedList);
   };
 
-  const handleCheckMajor = (valueName, valueCheck, valueId) => {
-    if (role == 'Role_HR') {
-      var updatedList = [...checkedType];
-      if (valueCheck) {
-        updatedList = [...checkedType, valueId];
-      } else {
-        updatedList.splice(checkedType.indexOf(valueId), 1);
-      }
-      setCheckedType(updatedList);
-      onChange && onChange(updatedList);
+  const handleCheckMajor = (valueName, valueCheck) => {
+    var updatedList = [...checkedType];
+    if (valueCheck) {
+      updatedList = [...checkedType, valueName];
     } else {
-      var updatedList = [...checkedType];
-      if (valueCheck) {
-        updatedList = [...checkedType, valueName];
-      } else {
-        updatedList.splice(checkedType.indexOf(valueName), 1);
-      }
-      setCheckedType(updatedList);
-      onChange && onChange(updatedList);
+      updatedList.splice(checkedType.indexOf(valueName), 1);
     }
+    setCheckedType(updatedList);
+    onChange && onChange(updatedList);
   };
-
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
       {role == 'Role_HR' && path == '/hr' ? (
