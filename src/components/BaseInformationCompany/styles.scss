@@ -204,3 +204,15 @@
     }
   }
 }
+.scrollCardInforCompany {
+  overflow-y: auto !important;
+  max-height: 40vh;
+}
+.scrollCardInforCompany::-webkit-scrollbar {
+  display: none;
+}
+
+.overwriteBox {
+  margin: 0px !important;
+  padding: 0px !important;
+}
