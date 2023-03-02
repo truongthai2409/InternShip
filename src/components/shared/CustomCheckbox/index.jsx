@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { Checkbox, FormControlLabel } from '@mui/material';
 
-const CustomCheckbox = ({ label, onChange, checked }) => {
-  const inputRef = React.useRef(null);
+const CustomCheckbox = ({ label, onChange, checked, id }) => {
+  const inputRef = useState(null);
   const handleChange = (e) => {
     const checkedName = e.target.name;
     const checkedValue = e.target.checked;
-    onChange && onChange(checkedName, checkedValue);
+    const checkId = id;
+    onChange && onChange(checkedName, checkedValue, checkId);
   };
 
   return (

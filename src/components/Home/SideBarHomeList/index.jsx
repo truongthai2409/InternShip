@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 const listWorkingFormat = [
   { name: 'Fulltime', id: 1 },
@@ -14,6 +15,9 @@ const listWorkingFormat = [
 ];
 
 const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
+  const { role } = useSelector((state) => state.profile);
+  const location = useLocation();
+  const path = location.pathname;
   const { t } = useTranslation('navbar');
   const dispatch = useDispatch();
   const { majorList } = useSelector((state) => state.major);
@@ -23,7 +27,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   useEffect(() => {
     dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
-  }, [dispatch]);
+  }, []);
 
   const handleCheckType = (valueName, valueCheck) => {
     var updatedList = [...checkedType];
@@ -33,18 +37,30 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
       updatedList.splice(checkedType.indexOf(valueName), 1);
     }
     setCheckedType(updatedList);
+
     onChange && onChange(updatedList);
   };
 
-  const handleCheckPosition = (valueName, valueCheck) => {
-    var updatedList = [...checkedType];
-    if (valueCheck) {
-      updatedList = [...checkedType, valueName];
+  const handleCheckPosition = (valueName, valueCheck, valueId) => {
+    if (role == 'Role_HR') {
+      var updatedList = [...checkedType];
+      if (valueCheck) {
+        updatedList = [...checkedType, valueId];
+      } else {
+        updatedList.splice(checkedType.indexOf(valueId), 1);
+      }
+      setCheckedType(updatedList);
+      onChange && onChange(updatedList);
     } else {
-      updatedList.splice(checkedType.indexOf(valueName), 1);
+      var updatedList = [...checkedType];
+      if (valueCheck) {
+        updatedList = [...checkedType, valueName];
+      } else {
+        updatedList.splice(checkedType.indexOf(valueName), 1);
+      }
+      setCheckedType(updatedList);
+      onChange && onChange(updatedList);
     }
-    setCheckedType(updatedList);
-    onChange && onChange(updatedList);
   };
 
   const handleCheckMajor = (valueName, valueCheck) => {
@@ -59,13 +75,17 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
-      <ListCollapse
-        title={t('workTL')}
-        list={listWorkingFormat}
-        spacing={3}
-        onChange={handleCheckType}
-        checkedType={checkedType}
-      />
+      {role == 'Role_HR' && path == '/hr' ? (
+        <></>
+      ) : (
+        <ListCollapse
+          title={t('workTL')}
+          list={listWorkingFormat}
+          spacing={3}
+          onChange={handleCheckType}
+          checkedType={checkedType}
+        />
+      )}
       <ListCollapse
         title={t('jobPositionTL')}
         list={jobPosition}

@@ -4,7 +4,6 @@ import { useEffect, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import notfound from 'src/assets/img/notfound.webp';
 import TemporaryDrawer from 'src/components/shared/Drawer';
 import {
   changeFilterChange,
@@ -23,7 +22,6 @@ import SearchResultHome from '../../../components/Home/SearchResultHome';
 import SideBarHomeList from '../../../components/Home/SideBarHomeList';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
-import SearchHR from '../HR/SearchHR';
 import './styles.scss';
 const initialState = {
   type: [],
@@ -182,14 +180,10 @@ const Home = (props) => {
     ];
     dispatch(jobFilters(dataFilter));
   }, [state, dispatch, props.linkFilter]);
+  // pls check index in here right or wrong ???
   useEffect(() => {
     setJob(jobFilter);
-    if (roleFilter) {
-      setJob(roleFilter);
-      roleFilter && setJobDetail(roleFilter[index]);
-    } else {
-      jobFilter && setJobDetail(jobFilter[index]);
-    }
+    jobFilter && setJobDetail(jobFilter[index]);
   }, [jobFilter, dispatch, index, roleFilter]);
 
   useEffect(() => {
@@ -202,6 +196,7 @@ const Home = (props) => {
       navigate('finduser');
     }
   }, [dispatch, navigate, props.userCandidate]);
+
   return (
     <Grid
       className='wrapper'
@@ -217,7 +212,91 @@ const Home = (props) => {
           />
         </Grid>
       </Hidden>
-      {jobs?.length === 0 ? (
+      {roleFilter && JSON.stringify(roleFilter) == JSON.stringify(jobFilter) ? (
+        <>
+          {jobs?.length === 0 ? (
+            <Grid item xs={10}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item xs={12}>
+                  <div className='none__res'>
+                    <SearchResultHome
+                      onClick={handleSearch}
+                      onChange={getValueLocationAndHandle}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                  <div>
+                    <img
+                      src={image_notFound}
+                      alt='notfound'
+                      width={'20%'}
+                      height={'100%'}
+                    />
+                    <p>
+                      Rất tiếc, hiện tại không có công việc phù hợp được tìm
+                      thấy
+                    </p>
+                  </div>
+                </Grid>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
+              <Grid container spacing={4}>
+                <Grid item xs={12}>
+                  <div className='none__res'>
+                    <SearchResultHome
+                      onClick={handleSearch}
+                      onChange={getValueLocationAndHandle}
+                    />
+                  </div>
+                </Grid>
+
+                <div className='home__container'>
+                  <ListCardJobHome
+                    jobList={jobs}
+                    indexCardActive={index}
+                    jobListHavePages={jobPage}
+                    onChange={getValuePageAndHandle}
+                  />
+
+                  <Hidden mdDown>
+                    <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                        <div className='containerDetailCard containerDetailCard-none'>
+                          {/* {props.hr && <SearchHR />} */}
+                          <DetailCard
+                            logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
+                            jobDetail={jobDetail}
+                            jobList={jobs}
+                            jobListCompany={jobListCompany}
+                            demandPartner={props.demandPartner}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Hidden>
+                </div>
+              </Grid>
+              <Hidden lgUp>
+                <div className='HomePageMenu'>
+                  <TemporaryDrawer
+                    children={
+                      <SideBarHomeList
+                        onChange={handleCheck}
+                        slideBarHome__wrapper={true}
+                      />
+                    }
+                    position='left'
+                    name={<AddCircleIcon />}
+                  />
+                </div>
+              </Hidden>
+            </Grid>
+          )}
+        </>
+      ) : (
         <Grid item xs={10}>
           <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12}>
@@ -242,59 +321,6 @@ const Home = (props) => {
               </div>
             </Grid>
           </Grid>
-        </Grid>
-      ) : (
-        <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
-          <Grid container spacing={4}>
-            <Grid item xs={12}>
-              <div className='none__res'>
-                <SearchResultHome
-                  onClick={handleSearch}
-                  onChange={getValueLocationAndHandle}
-                />
-              </div>
-            </Grid>
-
-            <div className='home__container'>
-              <ListCardJobHome
-                jobList={jobs}
-                indexCardActive={index}
-                jobListHavePages={jobPage}
-                onChange={getValuePageAndHandle}
-              />
-
-              <Hidden mdDown>
-                <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
-                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                    <div className='containerDetailCard containerDetailCard-none'>
-                      {/* {props.hr && <SearchHR />} */}
-                      <DetailCard
-                        logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-                        jobDetail={jobDetail}
-                        jobList={jobs}
-                        jobListCompany={jobListCompany}
-                        demandPartner={props.demandPartner}
-                      />
-                    </div>
-                  </Grid>
-                </Grid>
-              </Hidden>
-            </div>
-          </Grid>
-          <Hidden lgUp>
-            <div className='HomePageMenu'>
-              <TemporaryDrawer
-                children={
-                  <SideBarHomeList
-                    onChange={handleCheck}
-                    slideBarHome__wrapper={true}
-                  />
-                }
-                position='left'
-                name={<AddCircleIcon />}
-              />
-            </div>
-          </Hidden>
         </Grid>
       )}
     </Grid>
