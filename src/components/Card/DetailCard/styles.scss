@@ -9,6 +9,7 @@
   height: 570px;
   width: 100%;
   font-family: $f-family !important;
+  box-sizing: border-box;
 
   .detail__card-1 {
     display: flex;
@@ -35,8 +36,8 @@
         margin-right: 15px;
         width: 72px;
         height: 60px;
-        left: 30px;
-        top: 30px;
+        left: 10px;
+        top: 10px;
       }
     }
   }
@@ -44,7 +45,7 @@
   .detail__card-2 {
     display: flex;
     align-items: center;
-    margin: 14px 0px;
+    margin: 5px 0px;
     .tag-name {
       display: flex;
       &__name {
@@ -60,9 +61,9 @@
     font-family: $f-family;
     font-style: normal;
     font-size: 21px;
-
     &-item {
       font-size: 16px;
+      // overflow: "hidden" !important;
 
       &-name {
         font-family: $f-family;
@@ -115,34 +116,34 @@
 
   .detail__card-5 {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     font-family: $f-family !important;
     div {
       p {
         font-size: 13px;
-        margin-bottom: 8px;
+        margin-bottom: 0px;
         font-family: $f-family !important;
       }
     }
   }
 }
-.scrollerDetailCard3 {
-  overflow-y: scroll;
-}
-.scrollerDetailCard3::-webkit-scrollbar {
-  // width: 10px;
-  height: 10px;
-}
+// .scrollerDetailCard3{
+//   overflow-y: scroll !important;
 
-// .MuiTabs-scroller {
-//   & button.Mui-selected {
-//     color: $primary-color !important;
-//   }
-//   & span.MuiTabs-indicator {
-//     background-color: $primary-color !important;
-//   }
 // }
+// .scrollerDetailCard3::-webkit-scrollbar {
+//     display: none;
+// }
+
+.MuiTabs-scroller {
+  & button.Mui-selected {
+    color: $primary-color !important;
+  }
+  & span.MuiTabs-indicator {
+    background-color: $primary-color !important;
+  }
+}
 
 @media (min-width: 360px) and (max-width: 1200px) {
   .containerDetailCard-home {
@@ -187,4 +188,16 @@
 }
 .boxOpenSans {
   font-family: $f-family !important;
+}
+
+.scrollCardInforCompany2 {
+  overflow-y: auto !important;
+  max-height: 30vh !important;
+}
+.scrollCardInforCompany2::-webkit-scrollbar {
+  display: none;
+}
+.overwriteBox {
+  margin: 0px !important;
+  padding: 0px !important;
 }

@@ -49,7 +49,7 @@ const BaseInformationUniversity = ({
       <div>
         <div>
           {demandDetail && (
-            <div className='base__information'>
+            <div className='base__information  scrollCardInforCompany'>
               <div className='base__information-card'>
                 <img
                   className='img-logo'
