@@ -38,16 +38,16 @@ const LoginContainer = () => {
   return (
     <div className='login-container'>
       <h1 className='login-container__title'>{t('loginTL')}</h1>
-      {/* <div className="register-container__footer">
-        <Link to="/forgot-password">{t("forgotPasswordTL")}</Link>
-      </div> */}
       <Login />
       <div className='loginWith'>
         <p className='loginWith-p'>Or login with</p>
         <button className='loginWith-button'>
-          <Link to='/auth/social/google' className='loginWith-button__link'>
+          <a
+            href='http://localhost:8085/oauth2/authorization/google'
+            className='loginWith-button__link'
+          >
             <i class='fa-brands fa-google-plus-g'></i> Google
-          </Link>
+          </a>
         </button>
       </div>
       <div className='register-container__footerRegister'>

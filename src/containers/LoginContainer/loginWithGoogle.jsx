@@ -1,19 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getUserById } from 'src/store/slices/main/user/userSlice';
 
-const loginWithGoogle = () => {
+const LoginWithGoogle = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // console.log(window.location)
   const currentUrl = window.location.href
     ? window.location.href.split('?')[1]
     : '';
   const cutString = {
-    returnUrl: currentUrl.split('&')[0].split('=')[1],
-    username: currentUrl.split('&')[1].split('=')[1],
-    authKey: currentUrl.split('&')[2].split('=')[1],
+    token: currentUrl.split('&')[0].split('=')[1],
+    id: currentUrl.split('&')[5].split('=')[1],
   };
-  console.log(cutString);
-
-  // const [returnUrl, setReturnUrl] = useState()
+  useEffect(() => {
+    dispatch(
+      getUserById(
+        JSON.stringify({
+          role: 'Role_Candidate',
+          ids: cutString.id,
+          google: true,
+        })
+      )
+    )
+      .then((res) => {
+        localStorage.setItem(
+          'userPresent',
+          JSON.stringify({
+            token: cutString.token,
+            ids: cutString.id,
+            google: true,
+          })
+        );
+        // navigate(`/candidate`, { replace: true });
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return <div>loginWithGoogle</div>;
 };
 
-export default loginWithGoogle;
+export default LoginWithGoogle;

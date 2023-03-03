@@ -107,7 +107,13 @@ const ButtonMark = (props) => {
     }
   };
   return (
-    <Tooltip title='Lưu công việc'>
+    <Tooltip
+      title={
+        props.isMark === false && mark === false
+          ? 'Lưu công việc'
+          : 'Bỏ lưu công việc'
+      }
+    >
       <IconButton
         style={{
           border: props.border ? props.border : '1px solid #F1F1F1',
