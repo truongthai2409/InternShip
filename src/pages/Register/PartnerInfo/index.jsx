@@ -150,7 +150,11 @@ const PartnerInfo = () => {
   };
 
   const handleLabel = (number) => {
-    setInfo(number.id);
+    if (number === null) {
+      setInfo();
+    } else {
+      setInfo(number.id);
+    }
   };
 
   const handerClicker = () => {
@@ -176,18 +180,24 @@ const PartnerInfo = () => {
       children={
         <>
           {!open ? (
-            <div className='customfilter'>
-              <SearchAutoComplete
-                data={universityList ? universityList : []}
-                avatarRender={(option) => `${API}${option?.avatar}`}
-                nameRender={(option) => option.name}
-                labelName='Chọn trường'
-                onChange={(event, value) => handleLabel(value)}
-                id='registerPartner'
-                register={register}
-              />
-              {console.log(register)}
-            </div>
+            <>
+              <div className='customfilter'>
+                <SearchAutoComplete
+                  data={universityList ? universityList : []}
+                  avatarRender={(option) => `${API}${option?.avatar}`}
+                  nameRender={(option) => option.name}
+                  labelName='Chọn trường'
+                  onChange={(event, value) => handleLabel(value)}
+                  id='registerPartner'
+                  register={register}
+                />
+              </div>
+              {errors.address ? (
+                <p className='required_school'>* Bạn phải chọn trường.</p>
+              ) : (
+                <></>
+              )}
+            </>
           ) : (
             ''
           )}

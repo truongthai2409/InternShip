@@ -78,7 +78,6 @@ const SearchHR = () => {
             onChange={(event, value) => handleLabel(value)}
             register={(option) => option}
           />
-          {console.log(majorList)}
         </div>
         <div className='header__with-search-button-search' onClick={search}>
           <Button

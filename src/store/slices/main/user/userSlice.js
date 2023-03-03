@@ -42,8 +42,16 @@ export const getUserById = createAsyncThunk(
         Authorization: 'Bearer ' + args.token,
       },
     };
-    //get Role in token
-    // Token : XXX.YYY.ZZZ => XXX is header. YYY is payload. ZZZ is signature. func HASHTOKEN get role from YYY
+    // if (args.google === true){
+    //   return await axios
+    //       .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
+    //       .then((response) => {
+    //         return response.data;
+    //       })
+    //       .catch((error) => {
+    //         return error.response.data;
+    //       });
+    // }
     const HASHTOKEN = () => {
       let base64Url = args.token.split('.')[1];
       let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -79,6 +87,7 @@ export const getUserById = createAsyncThunk(
             return error.response.data;
           });
       case 'Role_Candidate':
+        console.log('Run');
         return await axios
           .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
           .then((response) => {
@@ -135,7 +144,6 @@ export const updateUser = createAsyncThunk(
       }
 
       default:
-        console.log(args);
         break;
     }
   }
