@@ -10,10 +10,12 @@ import './styles.scss';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import Button from '../shared/Button';
+import { useTranslation } from 'react-i18next';
 
 const baseURL = process.env.REACT_APP_API;
 
 const InformationUniversity = ({ jobDetail, detailJob = false }) => {
+  const { t } = useTranslation('cardInformation');
   const handleApplyDemandUni = async (e) => {};
 
   return (
@@ -24,7 +26,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
             variant='span'
             sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
           >
-            Danh sách sinh viên:
+            {t('listOfStudentsTL')}
           </Typography>
           <Typography
             variant='body2'
@@ -45,7 +47,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
         <div className='detail__card-3-item-partner'>
           <Typography variant='span'>
             <Typography variant='span' sx={{ fontSize: 16, fontWeight: '700' }}>
-              Thời gian sinh viên có thể chờ:
+              {t('estimatedWaitingTimeForStudentsTL')}
             </Typography>
             <Typography
               variant='body2'
@@ -70,7 +72,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
                   rel='noreferrer'
                   download
                 >
-                  Tải danh sách sinh viên
+                  {t('downloadListOfStudentsTL')}
                 </a>
               </div>
             </Typography>
@@ -92,7 +94,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               transform: 'translate(5px,5px)',
             }}
           >
-            {jobDetail?.universityDTO?.phone || 'Không có'}
+            {jobDetail?.universityDTO?.phone || `${t('notFoundTL')}`}
           </Typography>
         </div>
         <div className='detail__card-4-item' sx={{ display: 'flex' }}>
@@ -108,7 +110,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
               transform: 'translate(5px,5px)',
             }}
           >
-            {jobDetail?.universityDTO?.email || 'Không có'}
+            {jobDetail?.universityDTO?.email || `${t('notFoundTL')}`}
           </Typography>
         </div>
         <div className='detail__card-4-item'>
@@ -125,7 +127,7 @@ const InformationUniversity = ({ jobDetail, detailJob = false }) => {
             }}
           >
             {jobDetail?.universityDTO?.locations[0]?.district?.province?.name ||
-              'Không có'}
+              `${t('notFoundTL')}`}
           </Typography>
         </div>
       </div>

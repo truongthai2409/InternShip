@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import CardHome from '../Card/CardHome';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 const currentPage = 1;
 const limit = 5;
@@ -34,6 +35,7 @@ const BaseInformationUniversity = ({
   mgLeft,
   arrDemand,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const location = useLocation();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
@@ -61,7 +63,7 @@ const BaseInformationUniversity = ({
                     {demandDetail?.universityDTO?.name}
                   </h3>
                   <div className=''>
-                    <h5>Số điện thoại: </h5>
+                    <h5>{t('phoneNumberTL')} </h5>
                     <Typography
                       variant='h6'
                       component='div'
@@ -102,7 +104,7 @@ const BaseInformationUniversity = ({
                     </div>
 
                     <div className=' base__information-card-detail-location'>
-                      <h5 className=''>Địa điểm:</h5>
+                      <h5 className=''>{t('addressTL')} </h5>
                       <Typography
                         variant='h6'
                         component='div'
@@ -120,7 +122,7 @@ const BaseInformationUniversity = ({
               </div>
               <div className='intro__university'>
                 <h5 className='intro__university-title'>
-                  Giới thiệu về Trường
+                  {t('introductionToTheUniversityTL')}
                 </h5>
                 <div
                   dangerouslySetInnerHTML={{
@@ -153,7 +155,7 @@ const BaseInformationUniversity = ({
                         marginLeft: `${mgLeft ? mgLeft : ''}`,
                       }}
                     >
-                      Bài đăng của Partner
+                      {t('partnerIsPostTL')}
                     </h5>
                     <Grid
                       container
@@ -200,7 +202,7 @@ const BaseInformationUniversity = ({
                                 ]}
                                 majors={[job?.majors]}
                                 location={job.universityDTO?.name}
-                                amount={job.amount || 'Không có'}
+                                amount={job.amount || `${t('notFoundTL')}`}
                                 demandPartner={true}
                                 time={[
                                   moment(
@@ -238,7 +240,7 @@ const BaseInformationUniversity = ({
                     to={`/infomation_demand/${demandDetail?.universityDTO?.id}`}
                   >
                     <Button
-                      name='Xem thêm'
+                      name={t('viewMoreTL')}
                       bwidth='130px'
                       bheight='40px'
                     ></Button>

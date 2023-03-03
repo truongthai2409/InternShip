@@ -7,6 +7,8 @@ import { REGISTER_FROM_VI } from './vi/registerFrom';
 import { LOGIN_VI } from './vi/login';
 import { SEARCH_VI } from './vi/search';
 import { NOTIFICATION_VI } from './vi/notification';
+import { CARDINFORMATION_VI } from './vi/cardInformation';
+import { USERINFO_VI } from './vi/userInfo';
 
 export {
   CLIENT_VI,
@@ -17,5 +19,7 @@ export {
   REGISTER_FROM_VI,
   LOGIN_VI,
   SEARCH_VI,
+  USERINFO_VI,
   NOTIFICATION_VI,
+  CARDINFORMATION_VI,
 };

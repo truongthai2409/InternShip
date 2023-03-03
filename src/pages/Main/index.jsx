@@ -5,7 +5,6 @@ import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import Home from './Home';
 
 const Main = () => {
-  console.log(2);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMajorListThunk([1, 20]));

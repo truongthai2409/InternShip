@@ -10,10 +10,10 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const ListCollapse = (props) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const spacing = props.spacing;
-  const handleCheck = (valueName, valueCheck) => {
-    props.onChange && props.onChange(valueName, valueCheck);
+  const handleCheck = (valueName, valueCheck, valueId) => {
+    props.onChange && props.onChange(valueName, valueCheck, valueId);
   };
   const handleClick = () => {
     setOpen(!open);
@@ -48,16 +48,20 @@ const ListCollapse = (props) => {
       <Collapse in={open} timeout='auto' unmountOnExit>
         {props.list?.length > 0
           ? props.list?.map((item, index) => (
-              <List key={item.id} component='div' disablePadding>
+              <List key={index} component='div' disablePadding>
                 <ListItemButton sx={{ pl: spacing }}>
                   <ListItemIcon className='ListCollapWraper'>
                     <CustomCheckbox
+                      id={item.id}
                       key={item.id}
                       label={item.name}
                       onChange={handleCheck}
                       checked={props.checkedType
                         ?.map((items) => {
-                          return items;
+                          if (item.name === items || item.id === items) {
+                            return item.name;
+                          }
+                          // return items;
                         })
                         .includes(item.name)}
                     />
