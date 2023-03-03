@@ -11,7 +11,7 @@ const HrFindUser = () => {
 
   return (
     <div className='hr_find_user-container'>
-      {/* <SearchHR /> */}
+      <SearchHR />
       <div className='hr_find_user-user'>
         {userCandidate?.map((user) => {
           return <Component profile={user} />;
