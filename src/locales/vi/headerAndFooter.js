@@ -10,6 +10,7 @@ export const HEADER_FOOTER_VI = {
   // Header HR
   postAJobTL: 'Đăng tuyển',
   jobOpeningsTL: 'Công việc đang tuyển',
+  findCandidate: 'Tìm kiếm ứng viên',
 
   // Header Partner
   postTL: 'Đăng bài',
@@ -32,4 +33,5 @@ export const HEADER_FOOTER_VI = {
   termsOfServiceTL: 'Điều khoản dịch vụ',
   regulationTL: 'Quy chế',
   mobileApplicationTL: 'Ứng dụng di động',
+  taxCode: 'Mã số thuế',
 };

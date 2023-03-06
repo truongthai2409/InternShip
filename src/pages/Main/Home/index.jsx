@@ -22,7 +22,6 @@ import SearchResultHome from '../../../components/Home/SearchResultHome';
 import SideBarHomeList from '../../../components/Home/SideBarHomeList';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
-import SearchHR from '../HR/SearchHR';
 import './styles.scss';
 const initialState = {
   type: [],

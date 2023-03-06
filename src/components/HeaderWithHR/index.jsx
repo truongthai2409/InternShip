@@ -65,21 +65,21 @@ const HeaderWithHR = (props) => {
       </div>
       <div className='header__hr-item'>
         <PersonSearchIcon sx={{ color: '#04bf8a' }}></PersonSearchIcon>
-        <span>Tìm kiếm ứng viên</span>
+        <span>{t('findCandidate')}</span>
         <Select className='header__hr-dropmenu'>
           <Link
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
             }}
-            to='/hr/post'
+            to='/hr/finduser'
             className={
-              pathUrl === '/hr/post'
+              pathUrl === '/hr/finduser'
                 ? 'header__hr-post active'
                 : 'header__hr-post'
             }
           >
-            <AddCardIcon sx={{ color: '#04bf8a' }}></AddCardIcon>
-            <span className='header__hr-post-post'>{t('postAJobTL')}</span>
+            <PersonSearchIcon sx={{ color: '#04bf8a' }}></PersonSearchIcon>
+            <span className='header__hr-post-post'>{t('findCandidate')}</span>
           </Link>
           <Link
             onClick={() => handleClick()}
