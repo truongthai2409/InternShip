@@ -28,7 +28,7 @@ const userSlice = createSlice({
       if (payload.httpCode === 200) {
         state.statusForgotPassword = true;
         toast.success(
-          'Mật khẩu đã được tạo mới, vui lòng kiểm tra lại email !'
+          'Link xác thực mật khẩu đã được gửi về email, vui lòng kiểm tra email của bạn !'
         );
       } else {
         state.statusForgotPassword = false;
