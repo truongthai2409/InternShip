@@ -25,7 +25,7 @@ const ForgotPassword = () => {
 
   useEffect(() => {
     if (statusForgotPassword) {
-      navigate('/login', { replace: true });
+      navigate('/login');
       dispatch(updateStatusForgotPassword(false));
     }
   }, [statusForgotPassword]);
