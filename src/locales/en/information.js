@@ -5,10 +5,12 @@ export const INFORMATION_EN = {
   lastNameTL: 'Last name',
   firstNameTL: 'First name',
   genderTL: 'Gender',
-  phoneNumberTL: 'Phone number',
+  phoneNumberTL: 'Phone number:',
   saveTL: 'Save',
   companyPhotoTL: 'Company photo',
   taxIDNumberTL: 'Tax ID number:',
   abbreviatedNameTL: 'Shortened name:',
   DescriptionTL: 'Description:',
+  email: 'Email:',
+  website: 'Website:',
 };

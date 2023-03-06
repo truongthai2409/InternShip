@@ -17,7 +17,10 @@ import UserInfo from './UserInfo';
 import avatarDefault from 'src/assets/img/avatar-default.png';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
-
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import PersonIcon from '@mui/icons-material/Person';
+import WcIcon from '@mui/icons-material/Wc';
 const BASEURL = process.env.REACT_APP_API;
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
@@ -100,13 +103,11 @@ const Components = ({ profile }) => {
       <div
         className='profile_header'
         style={{
-          backgroundImage: `url(${
-            profile?.user?.avatar || 'https://i.stack.imgur.com/SvWWN.png'
-          })`,
+          backgroundColor: '#04bf8a',
         }}
       >
         <img
-          style={{ width: 150, height: 150, borderRadius: '50%' }}
+          style={{ width: '150px', height: '150px', borderRadius: '50%' }}
           src={`${profile?.user?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
@@ -296,9 +297,18 @@ const Components = ({ profile }) => {
         </div>
         <div className='profile_check'></div>
         <div className='profile_info'>
-          <UserInfo name='Email' profile={profile?.user?.email} />
-          <UserInfo name={t('phoneNum')} profile={profile?.user?.phone} />
           <UserInfo
+            icon={<EmailIcon />}
+            name={t('email')}
+            profile={profile?.user?.email}
+          />
+          <UserInfo
+            icon={<PhoneIcon />}
+            name={t('phoneNum')}
+            profile={profile?.user?.phone}
+          />
+          <UserInfo
+            icon={<PersonIcon />}
             name={t('role')}
             profile={
               profile?.user?.role?.name === 'Role_Candidate'
@@ -309,6 +319,7 @@ const Components = ({ profile }) => {
             }
           />
           <UserInfo
+            icon={<WcIcon />}
             name={t('gender')}
             profile={
               profile?.user?.gender === 1
