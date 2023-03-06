@@ -33,8 +33,10 @@ import { schema } from '../Appreciate/validate';
 import { getDemandListByUniId } from 'src/store/slices/main/home/demand/demandSlice';
 import HeaderBaseInformationCompany from '../HeaderBaseInformationCompany';
 import PaginationCustom from '../shared/Pagination';
+import { useTranslation } from 'react-i18next';
 
 function TabPanel(props) {
+  const { t } = useTranslation('cardInformation');
   const { children, value, index, ...other } = props;
 
   return (
@@ -88,6 +90,7 @@ const BaseInformationCompany = ({
   onChange,
   idCompany,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2);
@@ -138,7 +141,7 @@ const BaseInformationCompany = ({
       setOpen(true);
       reset();
     } else {
-      toast.error('Bạn cần đăng nhập để đánh giá công ty', {});
+      toast.error(t('youNeedToLogInToEvaluateTheCompanyTL'), {});
     }
   };
   const onSubmit = async (data) => {
@@ -165,7 +168,7 @@ const BaseInformationCompany = ({
       };
       await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success('Đã đăng đánh giá');
+        toast.success(t('reviewHasBeenSubmittedTL'));
       } else {
         toast.error(res.payload.message);
       }
@@ -236,13 +239,13 @@ const BaseInformationCompany = ({
                     onChange={handleChange}
                   >
                     <Tab
-                      label='Công Việc'
+                      label={t('jobTL')}
                       {...a11yProps(0)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}
                     />
                     <Tab
-                      label='Đánh giá'
+                      label={t('rateTL')}
                       {...a11yProps(1)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}
@@ -270,7 +273,7 @@ const BaseInformationCompany = ({
                               className='intro__company-title'
                               style={{ marginLeft: '25px' }}
                             >
-                              Giới thiệu về công ty
+                              {t('introductionAboutTheCompanyTL')}
                             </h5>
                             <div
                               dangerouslySetInnerHTML={{
@@ -338,9 +341,9 @@ const BaseInformationCompany = ({
                                     paddingBottom: 2.5,
                                   }}
                                 >
-                                  {`${Number(rating)} trong ${
+                                  {`${Number(rating)} ${t('inTL')} ${
                                     appreciateList?.length
-                                  } lượt đánh giá`}
+                                  }  ${t('reviewsTL')}`}
                                 </Typography>
                                 <div
                                   style={{
@@ -352,7 +355,7 @@ const BaseInformationCompany = ({
                                   {user.user && (
                                     <Button
                                       className='button-card'
-                                      name='Viết đánh giá'
+                                      name={t('writeaReviewTL')}
                                       bwidth='150px'
                                       bheight='40px'
                                       onClick={handleChangeAvaluate}
@@ -378,7 +381,7 @@ const BaseInformationCompany = ({
                                 transform: 'translate(-7px,0px)',
                               }}
                             >
-                              Đánh giá mới nhất
+                              {t('latestReviewsTL')}
                             </h5>
                             <div>
                               {topAppreciate
@@ -412,7 +415,7 @@ const BaseInformationCompany = ({
                                 index={1}
                               >
                                 <Button
-                                  name='Xem tất cả đánh giá'
+                                  name={t('viewAllReviewsTL')}
                                   bwidth='215px'
                                   bheight='40px'
                                   onClick={handleChangeLinkViewAvaluate}
@@ -460,9 +463,9 @@ const BaseInformationCompany = ({
                                   fontSize: 15,
                                 }}
                               >
-                                {`${Number(rating) || 0} trong ${
+                                {`${Number(rating) || 0}  ${t('inTL')} ${
                                   appreciateList?.length
-                                } lượt đánh giá`}
+                                } ${t('reviewsTL')}`}
                               </Typography>
                               <div
                                 style={{
@@ -474,8 +477,9 @@ const BaseInformationCompany = ({
                             </div>
                           ) : (
                             <Typography variant='h6'>
-                              Bạn cần <Link to='/login'> đăng nhập </Link> để có
-                              thể xem và đánh giá
+                              {t('youNeedTL')}{' '}
+                              <Link to='/login'> {t('loginTL')} </Link>
+                              {t('toBeAbleToViewAndRateTL')}
                             </Typography>
                           )}
                         </Item>
@@ -489,33 +493,33 @@ const BaseInformationCompany = ({
                         >
                           <div className='appreciate intro__company-title'>
                             <h4 style={{ marginTop: '0px', marginLeft: 0 }}>
-                              Đánh giá về công ty{' '}
+                              {t('companyReviewTL')}{' '}
                             </h4>
                             <Modal
-                              modalTitle='Viết đánh giá'
+                              modalTitle={t('writeaReviewTL')}
                               open={open}
                               setOpen={setOpen}
                               iconClose={true}
                               children={
                                 <div>
                                   <CustomInput
-                                    label='Nhập tiêu đề'
+                                    label={t('enterTitleTL')}
                                     id='title'
                                     type='text'
-                                    placeholder='Rất tuyệt...'
+                                    placeholder={t('greatTL')}
                                     register={register}
                                     requirementField={false}
                                     setValue={setValue}
                                     height='45px'
                                   />
                                   <Textarea
-                                    label='Viết đánh giá '
+                                    label={t('writeaReviewTL')}
                                     id='comment'
-                                    placeholder='Nhập vào đây...'
+                                    placeholder={t('enterhereTL')}
                                     register={register}
                                     setValue={setValue}
                                     check={true}
-                                    children='Bạn phải nhập trường này '
+                                    children={t('pleaseEnterThisFieldTL')}
                                   >
                                     {errors.comment?.message}
                                   </Textarea>
@@ -553,12 +557,12 @@ const BaseInformationCompany = ({
                                     )}
                                   </Box>
                                   <div onChange={handleCheck}>
-                                    <CustomCheckbox label='Ẩn danh' />
+                                    <CustomCheckbox label={t('anonymousTL')} />
                                   </div>
                                   <Button
                                     onClick={handleSubmit(onSubmit)}
                                     onChange={handleCheck}
-                                    name='Đăng đánh giá'
+                                    name={t('submitReviewTL')}
                                   />
                                 </div>
                               }
@@ -566,7 +570,7 @@ const BaseInformationCompany = ({
                             />
                             {user.user && (
                               <Button
-                                name='Viết đánh giá'
+                                name={t('writeaReviewTL')}
                                 bwidth='150px'
                                 bheight='40px'
                                 onClick={handleOpen}
@@ -606,7 +610,7 @@ const BaseInformationCompany = ({
                             className='demand-detail__back'
                             onClick={handleBackClick}
                           >
-                            <ArrowButton direction='left' text='Trở lại' />
+                            <ArrowButton direction='left' text={t('backTL')} />
                           </div>
                         </Item>
                       </Grid>
@@ -783,7 +787,7 @@ const BaseInformationCompany = ({
                             className='intro__company-title'
                             style={{ marginLeft: '5px' }}
                           >
-                            Giới thiệu về công ty
+                            {t('introductionAboutTheCompanyTL')}
                           </h5>
 
                           <div

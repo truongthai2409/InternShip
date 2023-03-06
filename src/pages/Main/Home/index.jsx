@@ -245,7 +245,7 @@ const Home = (props) => {
                           src={image_notFound}
                           alt='notfound'
                           width={'50%'}
-                          height={'100%'}
+                          height={'50%'}
                         />
                         <p>
                           Rất tiếc, hiện tại không có công việc phù hợp được tìm
@@ -328,7 +328,7 @@ const Home = (props) => {
                         src={image_notFound}
                         alt='notfound'
                         width={'50%'}
-                        height={'100%'}
+                        height={'50%'}
                       />
                       <p>
                         Rất tiếc, hiện tại không có công việc phù hợp được tìm

@@ -11,6 +11,7 @@ import BaseInformationUniversity from '../../BaseInformationUniversity';
 import InformationCompany from '../../InformationComapny';
 import InformationUniversity from '../../InformationUniversity';
 import TagName from '../../Home/TagName';
+import { useTranslation } from 'react-i18next';
 const API = process.env.REACT_APP_API;
 export function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,6 +55,7 @@ const Detail = ({
   rating,
   jobListCompany,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.profile);
@@ -157,14 +159,14 @@ const Detail = ({
                     className='boxOpenSans overwriteBox'
                   >
                     <Tab
-                      label='Chi tiết'
+                      label={t('DetailsTL')}
                       {...a11yProps(0)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}
                       className='boxOpenSans'
                     />
                     <Tab
-                      label='Tổng quan công ty'
+                      label={t('companyOverviewTL')}
                       {...a11yProps(1)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}
@@ -205,14 +207,14 @@ const Detail = ({
                     className='boxOpenSans'
                   >
                     <Tab
-                      label='Chi tiết'
+                      label={t('DetailsTL')}
                       {...a11yProps(0)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}
                       className='boxOpenSans'
                     />
                     <Tab
-                      label='Thông tin về trường'
+                      label={t('informationAboutTheUniversityTL')}
                       {...a11yProps(1)}
                       textColor='inherit'
                       sx={{ fontSize: 12 }}

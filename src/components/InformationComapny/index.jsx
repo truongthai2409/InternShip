@@ -4,6 +4,7 @@ import { Icon, Typography } from '@mui/material';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addApply } from 'src/store/slices/main/candidate/apply/applySlice';
@@ -20,6 +21,7 @@ const InformationCompany = ({
   rating,
   demandPartner = false,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const [check, setCheck] = useState(false);
   const { user } = useSelector((state) => state.profile);
   const { allJobApply } = useSelector((state) => state.jobCandidateSlice);
@@ -29,7 +31,7 @@ const InformationCompany = ({
     e.stopPropagation();
     if (user) {
       if (!user?.cv) {
-        toast.error('Bạn chưa có CV, vui lòng cập nhật');
+        toast.error(t('youDoNotHaveACVYetPleaseUpdateItTL'));
       } else {
         const applyData = {
           apply: JSON.stringify({
@@ -39,7 +41,7 @@ const InformationCompany = ({
             candidate: {
               id: user.id,
             },
-            referenceLetter: `Đơn ứng tuyển ${user?.user?.username}`,
+            referenceLetter: `${t('jobApplicationTL')} ${user?.user?.username}`,
           }),
           fileCV: user.cv,
         };
@@ -48,7 +50,7 @@ const InformationCompany = ({
           resApply.payload.status === 200 ||
           resApply.payload.status === 201
         ) {
-          toast.success('Đã nộp CV thành công');
+          toast.success(t('yourCVHasBeenSubmittedSuccessfullyTL'));
           setCheck(true);
           const token =
             JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -65,7 +67,7 @@ const InformationCompany = ({
         }
       }
     } else {
-      toast.error('Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển');
+      toast.error(t('youNeedToLogInAsaCandidateToApplyForThisPositionTL'));
     }
   };
   useEffect(() => {
@@ -103,7 +105,7 @@ const InformationCompany = ({
                 variant='span'
                 sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                <span>Mô tả công việc:</span>
+                {t('jobDescriptionTL')}
               </Typography>
               <Typography
                 variant='body2'
@@ -120,7 +122,7 @@ const InformationCompany = ({
                 variant='span'
                 sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                <span>Yêu cầu công việc:</span>
+                {t('jobRequirementsTL')}
               </Typography>
               <Typography
                 variant='body2'
@@ -138,7 +140,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  <span>Quyền lợi:</span>
+                  {t('benefitsTL')}
                 </Typography>
                 <Typography
                   variant='body2'
@@ -157,7 +159,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  <span>Thời hạn ứng tuyển:</span>
+                  {t('applicationDeadlineTL')}
                 </Typography>
                 <Typography
                   variant='body2'
@@ -215,7 +217,9 @@ const InformationCompany = ({
           {user?.user?.role?.name === 'Role_Candidate' ? (
             <div className='detail__card-5'>
               <Button
-                name={check ? 'Đã ứng tuyển' : 'Ứng tuyển'}
+                name={
+                  check ? `${t('applicationSubmittedTL')}` : `${t('applyTL')}`
+                }
                 onClick={handleAddJob}
                 disabled={check ? true : false}
                 bheight='35px'
@@ -234,7 +238,9 @@ const InformationCompany = ({
                 variant='span'
                 sx={{ fontSize: 18, color: 'black', fontWeight: '700' }}
               >
-                {demandPartner ? 'Danh sách sinh viên' : 'Mô tả công việc:'}
+                {demandPartner
+                  ? `${t('listOfStudentsTL')}`
+                  : `${t('jobDescriptionTL')}`}
               </Typography>
               <Typography
                 variant='body2'
@@ -257,7 +263,7 @@ const InformationCompany = ({
                     variant='span'
                     sx={{ fontSize: 18, fontWeight: '700' }}
                   >
-                    <span>Yêu cầu công việc:</span>
+                    {t('jobRequirementsTL')}
                   </Typography>
                   <Typography
                     variant='body2'
@@ -279,7 +285,7 @@ const InformationCompany = ({
                   variant='span'
                   sx={{ fontSize: 18, fontWeight: '700' }}
                 >
-                  <span>Thời hạn ứng tuyển:</span>
+                  <span>{t('applicationDeadlineTL')}</span>
                   <br />
                 </Typography>
                 <Typography

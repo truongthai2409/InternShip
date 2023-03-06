@@ -12,6 +12,7 @@ export default function SearchAutoComplete({
   register,
   id,
 }) {
+  console.log(data);
   return (
     <Autocomplete
       id='country-select-demo'
@@ -41,7 +42,8 @@ export default function SearchAutoComplete({
           className='text-field'
           {...params}
           label={labelName}
-          required
+          // required
+          variant='outlined'
         />
       )}
     />
