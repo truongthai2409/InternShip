@@ -63,7 +63,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
-      {role == 'Role_HR' && path == '/hr' ? (
+      {role == 'Role_HR' && (path == '/hr' || path == '/hr/finduser') ? (
         <></>
       ) : (
         <ListCollapse

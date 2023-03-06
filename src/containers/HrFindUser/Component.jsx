@@ -16,7 +16,7 @@ const Component = ({ profile }) => {
     <div className='profiles'>
       <div className='profile_header'>
         <img
-          style={{ width: 150, height: 150, borderRadius: '50%' }}
+          style={{ width: '150px', height: '150px', borderRadius: '50%' }}
           src={
             `${BASEURL}${profile?.user?.avatar}` ||
             'https://o.vdoc.vn/data/image/2022/08/25/avatar-cute-meo-con-than-chet.jpg'

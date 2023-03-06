@@ -5,10 +5,12 @@ export const INFORMATION_VI = {
   lastNameTL: 'Họ',
   firstNameTL: 'Tên',
   genderTL: 'Giới tính',
-  phoneNumberTL: 'Số điện thoại',
+  phoneNumberTL: 'Số điện thoại:',
   saveTL: 'Lưu',
   companyPhotoTL: 'Ảnh của công ty',
   taxIDNumberTL: 'Mã số thuế:',
   abbreviatedNameTL: 'Tên viết tắt:',
   DescriptionTL: 'Mô tả:',
+  email: 'Email:',
+  website: 'Website:',
 };

@@ -709,7 +709,7 @@ const BaseInformationCompany = ({
                           {jobDetail?.hr?.company.phone}
                         </Typography>
                       </div>
-                      <div className=''>
+                      <div className='detail-email'>
                         <h5>
                           <EmailIcon
                             sx={{
@@ -735,6 +735,7 @@ const BaseInformationCompany = ({
                           />
                           <a
                             href={jobDetail?.hr?.company.website}
+                            target='_blank'
                             className=' '
                           >
                             {jobDetail?.hr?.company.website}

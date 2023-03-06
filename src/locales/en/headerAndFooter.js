@@ -10,6 +10,7 @@ export const HEADER_FOOTER_EN = {
   // Header HR
   postAJobTL: 'Post a job',
   jobOpeningsTL: 'Job openings',
+  findCandidate: 'Find candidate',
 
   // Header Partner
   postTL: 'Post',
@@ -32,4 +33,5 @@ export const HEADER_FOOTER_EN = {
   termsOfServiceTL: 'Terms of Service',
   regulationTL: 'Regulation',
   mobileApplicationTL: 'Mobile application',
+  taxCode: 'Tax code',
 };

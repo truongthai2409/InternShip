@@ -278,7 +278,7 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    padding: 4rem 1rem 2rem 1rem;
+    padding: 5rem 1rem 2rem 1rem;
     .profile_click {
       display: flex;
       justify-content: space-around;
@@ -325,6 +325,13 @@
         width: 100%;
         justify-content: space-between;
         margin-bottom: 1rem;
+        &-title{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          gap: 3px;      
+        }
         .profile_content_name {
           font-weight: bold;
         }
