@@ -21,7 +21,7 @@ import filterSlices from './slices/main/home/filter/filterSlices';
 import userCandidateSlice from './slices/main/candidate/user/userCandidateSlice';
 import jobCandidateSlice from './slices/main/home/job/jobCandidateSlice';
 import profileSlice from './slices/main/user/userSlice';
-import HrSlice from './slices/main/hr/HrSlice';
+import getCandidateSlice from './slices/main/hr/getCandidateSlice';
 
 const store = configureStore({
   reducer: {
@@ -47,7 +47,7 @@ const store = configureStore({
     userFilter: userCandidateSlice.reducer,
     jobCandidateSlice: jobCandidateSlice.reducer,
     profile: profileSlice.reducer,
-    hrSearch: HrSlice.reducer,
+    candidateList: getCandidateSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
