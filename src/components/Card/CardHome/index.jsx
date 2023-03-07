@@ -15,8 +15,10 @@ import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice'
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
+import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
 
 const CardHome = (props) => {
+  const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -175,7 +177,9 @@ const CardHome = (props) => {
               />
               <p
                 style={{ fontSize: `${props.fontSize}px` }}
-              >{`${props.time[0]} - ${props.time[1]}`}</p>
+              >{`${changeDateLocale(props.time[0])} - ${changeDateLocale(
+                props.time[1]
+              )}`}</p>
             </div>
           </div>
         )}

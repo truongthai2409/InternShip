@@ -28,14 +28,18 @@ export default function ProfileContainer(props) {
             <p className='company-infor__item'>
               <span>
                 {' '}
-                <EmailIcon />
-                Email:
+                <EmailIcon sx={{ color: '#04BF8A' }} />
+                {t('email')}
               </span>
-              <p className='screen__max-width-375px'>{props.profile?.email}</p>
+              <p className='screen__max-width-375px'>
+                <a href={`mailto:${props.profile?.email}`}>
+                  {props.profile?.email}
+                </a>
+              </p>
             </p>
             <p className='company-infor__item'>
               <span>
-                <PhoneIcon />
+                <PhoneIcon sx={{ color: '#04BF8A' }} />
                 {t('phoneNumberTL')}
               </span>
               {props.profile?.phone}
@@ -44,8 +48,8 @@ export default function ProfileContainer(props) {
           <div className='company-infor__row'>
             <p className='company-infor__item'>
               <span>
-                <LanguageIcon />
-                Website:
+                <LanguageIcon sx={{ color: '#04BF8A' }} />
+                {t('website')}
               </span>
               <a
                 style={{ textDecoration: 'underline', color: 'blue' }}
@@ -59,7 +63,7 @@ export default function ProfileContainer(props) {
             {props.profile?.tax ? (
               <p className='company-infor__item'>
                 <span>
-                  <ConfirmationNumberIcon />
+                  <ConfirmationNumberIcon sx={{ color: '#04BF8A' }} />
                   {t('taxIDNumberTL')}
                 </span>
                 {props.profile?.tax}
@@ -67,7 +71,8 @@ export default function ProfileContainer(props) {
             ) : (
               <p className='company-infor__item'>
                 <span>
-                  <DriveFileRenameOutlineIcon /> {t('abbreviatedNameTL')}
+                  <DriveFileRenameOutlineIcon sx={{ color: '#04BF8A' }} />{' '}
+                  {t('abbreviatedNameTL')}
                 </span>
 
                 {props.profile?.shortName}

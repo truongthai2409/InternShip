@@ -20,6 +20,10 @@ export const FOOTER = {
         title: 'Email',
         description: 'tuyendung@r2s.com.vn',
       },
+      {
+        title: 'taxCode',
+        description: '0315827097',
+      },
     ],
   },
   ABOUT: {

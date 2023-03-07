@@ -76,11 +76,11 @@ const BaseInformationUniversity = ({
                       {demandDetail?.universityDTO?.phone}
                     </Typography>
                   </div>
-                  <div className=''>
+                  <div className='detail-email'>
                     <h5>
                       Email:
                       <a
-                        href={demandDetail?.universityDTO?.email}
+                        href={`mailto:${demandDetail?.universityDTO?.email}`}
                         className='fix-fontSize'
                       >
                         {demandDetail?.universityDTO?.email}
@@ -99,7 +99,12 @@ const BaseInformationUniversity = ({
                           transform: 'translate(5px,5px)',
                         }}
                       >
-                        {demandDetail?.universityDTO?.website}
+                        <a
+                          href={demandDetail?.universityDTO?.website}
+                          target='_blank'
+                        >
+                          {demandDetail?.universityDTO?.website}
+                        </a>
                       </Typography>
                     </div>
 
