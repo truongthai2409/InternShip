@@ -8,8 +8,8 @@ import { getDemandListByUniId } from 'src/store/slices/main/home/demand/demandSl
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import './styles.scss';
 const InfomationDemand = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("informationAboutTheUniversityTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('informationAboutTheUniversityTL')}`);
   const currentPage = 1;
   const limit = 20;
   const location = useLocation();

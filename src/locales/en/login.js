@@ -17,8 +17,8 @@ export const LOGIN_EN = {
   doNotHaveAnAccountTL: 'Do not have an account?',
   doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
 
-  youHaveJustLoggedOutTL: "You have just logged out.",
-  notificationTL: "Notification",
-  youHaveLoggedInTL: "You have logged in.",
-  orLoginWithTL: "Or login with",
+  youHaveJustLoggedOutTL: 'You have just logged out.',
+  notificationTL: 'Notification',
+  youHaveLoggedInTL: 'You have logged in.',
+  orLoginWithTL: 'Or login with',
 };

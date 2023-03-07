@@ -14,8 +14,8 @@ import './styles.scss';
 import { updateStatusRegisterForHR } from 'src/store/slices/main/register/registerSlice';
 import { useTranslation } from 'react-i18next';
 const HRInfo = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("registerHRTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('registerHRTL')}`);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);

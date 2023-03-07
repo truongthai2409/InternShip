@@ -32,8 +32,8 @@ const countryList = [
   },
 ];
 const PartnerInfo = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("registerPartnerTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('registerPartnerTL')}`);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = React.useState();
 

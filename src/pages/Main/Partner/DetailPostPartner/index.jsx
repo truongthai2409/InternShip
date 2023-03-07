@@ -13,8 +13,8 @@ import { getDemandById } from 'src/store/slices/main/home/demand/demandSlice';
 import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 const DetailPostPartner = (props) => {
-  const { t: t1 } = useTranslation('title')
-  TabTitle(`${t1("detailJobTL")}`);
+  const { t: t1 } = useTranslation('title');
+  TabTitle(`${t1('detailJobTL')}`);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

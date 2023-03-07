@@ -49,8 +49,8 @@ function a11yProps(index) {
 }
 
 const HRPostList = (props) => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("jobOpeningsITInternshipJobsTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('jobOpeningsITInternshipJobsTL')}`);
   const [value, setValue] = useState(0);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();

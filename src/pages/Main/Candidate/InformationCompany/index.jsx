@@ -13,8 +13,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const CandidateInformationCompany = () => {
-  const { t } = useTranslation('title')
-  TabTitle(t("companyInformationTL"));
+  const { t } = useTranslation('title');
+  TabTitle(t('companyInformationTL'));
   const location = useLocation();
   const idCompany = parseInt(
     location.pathname.replace('/information_company/', '')

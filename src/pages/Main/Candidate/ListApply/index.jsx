@@ -10,8 +10,8 @@ import { TabTitle } from 'src/utils/GeneralFunctions';
 import { useTranslation } from 'react-i18next';
 
 const ListApply = () => {
-  const { t } = useTranslation('title')
-  TabTitle(t("appliedJobTL"));
+  const { t } = useTranslation('title');
+  TabTitle(t('appliedJobTL'));
 
   const { user } = useSelector((state) => state.profile);
   const { jobApplyList, jobApplyListHavePage } = useSelector(

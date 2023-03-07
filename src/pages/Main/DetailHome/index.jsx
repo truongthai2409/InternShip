@@ -16,10 +16,9 @@ import ArrowButton from 'src/components/shared/ArrowButton';
 import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
-
 const DetailHome = (props) => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("detailJobTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('detailJobTL')}`);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

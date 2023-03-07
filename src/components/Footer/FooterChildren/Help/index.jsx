@@ -5,8 +5,8 @@ import './styles.scss';
 import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 const Help = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("frequentlyAskedQuestionsTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('frequentlyAskedQuestionsTL')}`);
   return (
     <FooterComponents
       title='Câu hỏi thường gặp'

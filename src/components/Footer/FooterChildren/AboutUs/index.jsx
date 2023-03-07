@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const AboutUS = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("aboutItJOBSTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('aboutItJOBSTL')}`);
   return (
     <FooterComponents
       title='Về IT Jobs'

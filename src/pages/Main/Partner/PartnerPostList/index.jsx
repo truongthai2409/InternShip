@@ -51,8 +51,8 @@ function a11yProps(index) {
 
 const limit = 5;
 const PartnerPostList = (props) => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("ListOfPostsITInternshipJobsTLTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('ListOfPostsITInternshipJobsTLTL')}`);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
 

@@ -4,8 +4,8 @@ import Main from '../..';
 import './styles.scss';
 
 const PartnerHome = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("homepageForPartnersITInternshipJobsTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('homepageForPartnersITInternshipJobsTL')}`);
 
   return <Main partner={true} />;
 };

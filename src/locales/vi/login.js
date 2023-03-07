@@ -17,11 +17,8 @@ export const LOGIN_VI = {
   doNotHaveAnAccountTL: 'Bạn chưa có tài khoản?',
   doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
 
-
-  youHaveJustLoggedOutTL: "Bạn vừa đăng xuất",
-  notificationTL: "Thông Báo",
-  youHaveLoggedInTL: "Bạn đã đăng nhập.",
-  orLoginWithTL: "Hoặc đăng nhập bằng",
-
-
+  youHaveJustLoggedOutTL: 'Bạn vừa đăng xuất',
+  notificationTL: 'Thông Báo',
+  youHaveLoggedInTL: 'Bạn đã đăng nhập.',
+  orLoginWithTL: 'Hoặc đăng nhập bằng',
 };

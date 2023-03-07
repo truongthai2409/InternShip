@@ -4,8 +4,8 @@ import PostPartnerForm from 'src/containers/Home/PostPartnerForm';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const PartnerPost = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("PostArticleITInternshipJobsTLTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('PostArticleITInternshipJobsTLTL')}`);
   return <PostPartnerForm />;
 };
 

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const TermsOfServices = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("termsOfServiceTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('termsOfServiceTL')}`);
   return (
     <FooterComponents
       title='Điều khoản dịch vụ'

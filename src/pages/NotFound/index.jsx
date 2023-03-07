@@ -7,8 +7,8 @@ import imgError403 from '../../assets/img/error-403.png';
 import './styles.scss';
 
 export default function NotFound() {
-  const { t } = useTranslation("title")
-  TabTitle(`${t("NotFoundTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('NotFoundTL')}`);
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1, { replace: true });

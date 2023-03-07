@@ -3,8 +3,8 @@ import { TabTitle } from 'src/utils/GeneralFunctions';
 import PostJobForm from '../../../../containers/Home/PostJobForm';
 
 const HRPost = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("postITInternshipJobsTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('postITInternshipJobsTL')}`);
   return <PostJobForm formStatus='post' />;
 };
 

@@ -12,8 +12,8 @@ import { Hidden } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const CandidateViewList = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("savedJobsTL")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('savedJobsTL')}`);
 
   const { user } = useSelector((state) => state.profile);
   const { jobCare, jobCareHavePage } = useSelector(

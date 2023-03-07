@@ -14,8 +14,8 @@ import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const Password = () => {
-  const { t } = useTranslation('title')
-  TabTitle(`${t("forgotPasswordTL1")}`);
+  const { t } = useTranslation('title');
+  TabTitle(`${t('forgotPasswordTL1')}`);
   const { statusForgotPassword } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ const Password = () => {
             placeholder='Nhập mật khẩu...'
             visibility={true}
             register={register}
-          // subtitle='Mật khẩu cũ phải đúng với mật khẩu đã đặt trước đó'
+            // subtitle='Mật khẩu cũ phải đúng với mật khẩu đã đặt trước đó'
           >
             {errors.oldPassword?.message}
           </CustomInput>
