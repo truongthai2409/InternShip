@@ -10,9 +10,11 @@ import './styles.scss';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import { getAppreciateByCompany } from 'src/store/slices/main/candidate/appreciate/appreciateSlice';
 import { useLocation, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const CandidateInformationCompany = () => {
-  TabTitle('Thông tin Công ty');
+  const { t } = useTranslation('title');
+  TabTitle(t('companyInformationTL'));
   const location = useLocation();
   const idCompany = parseInt(
     location.pathname.replace('/information_company/', '')

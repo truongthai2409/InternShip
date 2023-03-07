@@ -12,7 +12,7 @@ export default function SearchAutoComplete({
   register,
   id,
 }) {
-  console.log(data);
+  // console.log(data);
   return (
     <Autocomplete
       id='country-select-demo'
