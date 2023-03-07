@@ -1,7 +1,12 @@
 import React from 'react';
 import FooterComponents from '../../FooterComponents';
 import './styles.scss';
+import { useTranslation } from 'react-i18next';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+
 const Regulation = () => {
+  const { t } = useTranslation('title')
+  TabTitle(`${t("regulationTL")}`);
   return (
     <FooterComponents
       title='Quy chế'

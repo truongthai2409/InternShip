@@ -8,8 +8,10 @@ import Footer from 'src/components/shared/Footer/Footer';
 import HeaderContainer from '../../components/HeaderContainer';
 import './styles.scss';
 import Container from './Container';
+import { useTranslation } from 'react-i18next';
 const MainLayout = () => {
-  TabTitle('Trang chủ | IT Internship Jobs');
+  const { t } = useTranslation('title')
+  TabTitle(t("homeITInternshipJobsTL"));
   // Sau khi Login . Với role Candidate, Hr, Partner. Comnponent này sẽ đuợc chạ
   // đem thông tin trong localStorage hoặc sesionStorage dispatch lấy thông tin đầy đủ. Các component khác chỉ dùng. không dispatch
   const dispatch = useDispatch();

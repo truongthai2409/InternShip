@@ -12,8 +12,10 @@ import { registerHr } from '../../../store/slices/main/register/registerSlice';
 import Container from '../Container';
 import './styles.scss';
 import { updateStatusRegisterForHR } from 'src/store/slices/main/register/registerSlice';
+import { useTranslation } from 'react-i18next';
 const HRInfo = () => {
-  TabTitle('Đăng ký - Nhà tuyển dụng');
+  const { t } = useTranslation('title')
+  TabTitle(`${t("registerHRTL")}`);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { companyList } = useSelector((state) => state.company);

@@ -9,9 +9,11 @@ import { getJobCareByCandidate } from 'src/store/slices/main/home/job/jobCandida
 import { useState } from 'react';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import { Hidden } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const CandidateViewList = () => {
-  TabTitle('Công việc quan tâm');
+  const { t } = useTranslation('title')
+  TabTitle(`${t("savedJobsTL")}`);
 
   const { user } = useSelector((state) => state.profile);
   const { jobCare, jobCareHavePage } = useSelector(

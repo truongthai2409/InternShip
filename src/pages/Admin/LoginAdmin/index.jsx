@@ -19,7 +19,8 @@ import Logo from '../../../components/shared/Logo';
 import { useTranslation } from 'react-i18next';
 
 const LoginAdmin = () => {
-  TabTitle('Login - Admin');
+  const { t: t1 } = useTranslation('title')
+  TabTitle(`${t1("loginAdminTL")}`);
   const { t } = useTranslation('login');
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './styles.scss';
 import './responsive.scss';
 import Login from '../../pages/Authenticate/Login';
@@ -9,6 +9,8 @@ import { updateRole } from 'src/store/slices/main/user/userSlice';
 import { toast } from 'react-toastify';
 import { MenuDropDown } from '../../components/Login/components';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from "react-helmet";
+
 
 const LoginContainer = () => {
   const { t } = useTranslation('login');
@@ -18,7 +20,7 @@ const LoginContainer = () => {
     sessionStorage.removeItem('userPresent');
     localStorage.removeItem('userPresent');
     dispatch(updateRole());
-    toast.warning('Bạn vừa đăng xuất', {
+    toast.warning(t("youHaveJustLoggedOutTL"), {
       position: 'top-right',
       autoClose: 3000,
       theme: 'dark',
@@ -27,20 +29,23 @@ const LoginContainer = () => {
   if (role) {
     return (
       <div className='login-container'>
-        <h1 className='login-container__title'>Thông Báo</h1>
-        <span>Bạn đã đăng nhập.</span>
+        <h1 className='login-container__title'>{t("notificationTL")}</h1>
+        <span>{t("youHaveLoggedInTL")}</span>
         <div className='register-container__footer'>
-          <Button name={'Đăng xuất'} onClick={handleLogout} />
+          <Button name={t("logOutTL")} onClick={handleLogout} />
         </div>
       </div>
     );
   }
   return (
     <div className='login-container'>
+      <Helmet>
+        <title>{t("loginTL")}</title>
+      </Helmet>
       <h1 className='login-container__title'>{t('loginTL')}</h1>
       <Login />
       <div className='loginWith'>
-        <p className='loginWith-p'>Or login with</p>
+        <p className='loginWith-p'>{t("orLoginWithTL")}</p>
         <button className='loginWith-button'>
           <a
             href='http://localhost:8085/oauth2/authorization/google'

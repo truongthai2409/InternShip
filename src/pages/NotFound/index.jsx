@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from 'src/components/shared/Button';
 import { TabTitle } from 'src/utils/GeneralFunctions';
@@ -6,7 +7,8 @@ import imgError403 from '../../assets/img/error-403.png';
 import './styles.scss';
 
 export default function NotFound() {
-  TabTitle('NotFound');
+  const { t } = useTranslation("title")
+  TabTitle(`${t("NotFoundTL")}`);
   const navigate = useNavigate();
   const handleGoBack = () => {
     navigate(-1, { replace: true });

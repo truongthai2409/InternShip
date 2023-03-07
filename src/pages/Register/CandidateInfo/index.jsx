@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import {} from 'src/components/shared/CustomInput/components';
+import { } from 'src/components/shared/CustomInput/components';
 import InputFile from 'src/components/shared/InputFile';
 import { registerCandidate } from 'src/store/slices/main/register/registerSlice';
 import { TabTitle } from 'src/utils/GeneralFunctions';
@@ -14,8 +14,10 @@ import SelectCustom from '../../../components/shared/Select';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import Container from '../Container';
 import './styles.scss';
+import { useTranslation } from 'react-i18next';
 const CandidateInfo = () => {
-  TabTitle('Đăng ký - Ứng viên');
+  const { t } = useTranslation('title')
+  TabTitle(t("registerCandidateTL"));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

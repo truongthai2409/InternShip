@@ -13,6 +13,7 @@ import {
   USERINFO_EN,
   NOTIFICATION_EN,
   CARDINFORMATION_EN,
+  TITLE_EN,
 } from 'src/locales/translateEN';
 import {
   CLIENT_VI,
@@ -26,6 +27,7 @@ import {
   USERINFO_VI,
   NOTIFICATION_VI,
   CARDINFORMATION_VI,
+  TITLE_VI
 } from 'src/locales/translateVI';
 
 const resources = {
@@ -41,6 +43,7 @@ const resources = {
     userInfo: USERINFO_EN,
     notification: NOTIFICATION_EN,
     cardInformation: CARDINFORMATION_EN,
+    title: TITLE_EN
   },
   vi: {
     client: CLIENT_VI,
@@ -54,6 +57,7 @@ const resources = {
     userInfo: USERINFO_VI,
     notification: NOTIFICATION_VI,
     cardInformation: CARDINFORMATION_VI,
+    title: TITLE_VI,
   },
 };
 
@@ -64,14 +68,14 @@ i18n
     resources: resources,
     fallbackLng:
       localStorage.getItem('lang') &&
-      (localStorage.getItem('lang') === 'vi' ||
-        localStorage.getItem('lang') === 'en')
+        (localStorage.getItem('lang') === 'vi' ||
+          localStorage.getItem('lang') === 'en')
         ? localStorage.getItem('lang')
         : 'vi',
     lng:
       localStorage.getItem('lang') &&
-      (localStorage.getItem('lang') === 'vi' ||
-        localStorage.getItem('lang') === 'en')
+        (localStorage.getItem('lang') === 'vi' ||
+          localStorage.getItem('lang') === 'en')
         ? localStorage.getItem('lang')
         : 'vi',
     debug: false,

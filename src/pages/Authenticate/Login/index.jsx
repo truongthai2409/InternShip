@@ -17,7 +17,8 @@ import { schema } from './validate';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  TabTitle('Login');
+  const { t: t1 } = useTranslation('title');
+  TabTitle(`${t1("loginTL")}`);
   const { t } = useTranslation('login');
   const dispatch = useDispatch();
   const navigate = useNavigate();

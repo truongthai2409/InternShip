@@ -7,9 +7,12 @@ import Notification from '../../components/shared/Notification';
 import { Link, useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from "react-helmet";
 
 export default function RegisterContainer({ Outlet }) {
   const { t } = useTranslation('registerFrom');
+  const { ha } = useTranslation('title');
+  // const { a } = useTranslation('title');
   const notification = useSelector((state) => state.notification);
   const location = useLocation();
 

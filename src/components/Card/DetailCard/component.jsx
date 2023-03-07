@@ -12,6 +12,7 @@ import InformationCompany from '../../InformationComapny';
 import InformationUniversity from '../../InformationUniversity';
 import TagName from '../../Home/TagName';
 import { useTranslation } from 'react-i18next';
+// import { TabTitle } from 'src/utils/GeneralFunctions';
 const API = process.env.REACT_APP_API;
 export function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +56,8 @@ const Detail = ({
   rating,
   jobListCompany,
 }) => {
+  // const { t: t1 } = useTranslation('title')
+  // TabTitle(`${t1("detailTL")}`);
   const { t } = useTranslation('cardInformation');
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();

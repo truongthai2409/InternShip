@@ -7,8 +7,12 @@ import ProfileForm from 'src/containers/Home/ProfileForm';
 import ProfileContainer from './ProfileContainer';
 import './styles.scss';
 import './reponsive.scss';
+import { useTranslation } from 'react-i18next';
+import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const Profile = () => {
+  const { t } = useTranslation('title')
+  TabTitle(`${t("AccountInformationTL")}`);
   const { user, role } = useSelector((state) => state.profile);
 
   return (

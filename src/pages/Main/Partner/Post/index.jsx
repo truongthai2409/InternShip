@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PostPartnerForm from 'src/containers/Home/PostPartnerForm';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const PartnerPost = () => {
-  TabTitle('Đăng bài | IT Internship JOBS');
+  const { t } = useTranslation('title')
+  TabTitle(`${t("PostArticleITInternshipJobsTLTL")}`);
   return <PostPartnerForm />;
 };
 

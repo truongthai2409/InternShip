@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { Tab, Tabs } from '@mui/material';
 import PaginationCustom from 'src/components/shared/Pagination';
 import StatisticUser from 'src/components/User/StatisticUser';
+import { useTranslation } from 'react-i18next';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,7 +49,8 @@ function a11yProps(index) {
 }
 
 const HRPostList = (props) => {
-  TabTitle('Công việc đang tuyển | IT Internship JOBS');
+  const { t } = useTranslation('title')
+  TabTitle(`${t("jobOpeningsITInternshipJobsTL")}`);
   const [value, setValue] = useState(0);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();

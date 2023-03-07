@@ -7,9 +7,11 @@ import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import { TabTitle } from 'src/utils/GeneralFunctions';
+import { useTranslation } from 'react-i18next';
 
 const ListApply = () => {
-  TabTitle('Công việc ứng tuyển');
+  const { t } = useTranslation('title')
+  TabTitle(t("appliedJobTL"));
 
   const { user } = useSelector((state) => state.profile);
   const { jobApplyList, jobApplyListHavePage } = useSelector(

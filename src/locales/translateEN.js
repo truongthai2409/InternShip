@@ -9,6 +9,7 @@ import { SEARCH_EN } from './en/search';
 import { NOTIFICATION_EN } from './en/notification';
 import { CARDINFORMATION_EN } from './en/cardInformation';
 import { USERINFO_EN } from './en/userInfo';
+import { TITLE_EN } from './en/title';
 
 export {
   CLIENT_EN,
@@ -22,4 +23,5 @@ export {
   USERINFO_EN,
   NOTIFICATION_EN,
   CARDINFORMATION_EN,
+  TITLE_EN,
 };
