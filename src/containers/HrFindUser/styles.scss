@@ -1,7 +1,7 @@
 .hr_find_user-container {
   // max-width: 1536px;
   margin: 0 auto;
-  padding: 1rem 3rem;
+  padding: 1rem 15rem;
   min-height: 45.7vh;
   .hr_find_user-user {
     display: flex;
@@ -9,5 +9,16 @@
     padding: 1rem;
     flex-wrap: wrap;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hr_find_user-container {
+    padding: 1rem 1rem;
+  }
+}
+@media (max-width: 1250px) {
+  .hr_find_user-container {
+    padding: 1rem 1rem;
   }
 }
