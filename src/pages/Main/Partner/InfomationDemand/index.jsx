@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import HeaderBaseInformationCompany from 'src/components/HeaderBaseInformationCompany';
@@ -7,7 +8,8 @@ import { getDemandListByUniId } from 'src/store/slices/main/home/demand/demandSl
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import './styles.scss';
 const InfomationDemand = () => {
-  TabTitle('Thông tin truờng');
+  const { t } = useTranslation('title');
+  TabTitle(`${t('informationAboutTheUniversityTL')}`);
   const currentPage = 1;
   const limit = 20;
   const location = useLocation();

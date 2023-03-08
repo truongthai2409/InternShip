@@ -12,8 +12,13 @@ export const LOGIN_EN = {
   registerTL: 'Register',
   AccountTL: 'Account',
   PasswordTL: 'Password',
-  saveLoginTL: 'Save login',
+  saveLoginTL: 'Remember login information',
   forgotPasswordTL: 'Forgot password?',
   doNotHaveAnAccountTL: 'Do not have an account?',
   doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
+
+  youHaveJustLoggedOutTL: 'You have just logged out.',
+  notificationTL: 'Notification',
+  youHaveLoggedInTL: 'You have logged in.',
+  orLoginWithTL: 'Or login with',
 };

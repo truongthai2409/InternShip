@@ -14,6 +14,7 @@ import './styles.scss';
 
 import PaginationCustom from 'src/components/shared/Pagination';
 import StatisticUser from 'src/components/User/StatisticUser';
+import { useTranslation } from 'react-i18next';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,7 +51,8 @@ function a11yProps(index) {
 
 const limit = 5;
 const PartnerPostList = (props) => {
-  TabTitle('Danh sách bài đăng | IT Internship JOBS');
+  const { t } = useTranslation('title');
+  TabTitle(`${t('ListOfPostsITInternshipJobsTLTL')}`);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
 

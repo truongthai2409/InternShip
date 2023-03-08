@@ -6,7 +6,6 @@ import { getUserById } from 'src/store/slices/main/user/userSlice';
 const LoginWithGoogle = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // console.log(window.location)
   const currentUrl = window.location.href
     ? window.location.href.split('?')[1]
     : '';
@@ -33,7 +32,7 @@ const LoginWithGoogle = () => {
             google: true,
           })
         );
-        // navigate(`/candidate`, { replace: true });
+        navigate(`/candidate`, { replace: true });
       })
       .catch((err) => console.log(err));
   }, []);
