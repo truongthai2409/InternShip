@@ -1,44 +1,61 @@
 @use '../../../assets/styles/' as *;
+
 .wrapper {
-  margin-top: 4px !important;
-}
-.config__arow-back {
-  display: flex;
-  color: $primary-color;
-  margin-top: 16px;
-  :hover {
-    color: $color-black-light;
-  }
-}
-.hide-on-desktop {
-  display: none;
-}
-// responsive detail_home
-
-@media (min-width: 740px) and (max-width: 1024px) {
-  .config__arow-back-ontablet {
+  border: 2px solid #00b074;
+  border-radius: 6px;
+  margin-top: 36px;
+  padding: 45px 65px;
+  &__title {
     display: flex;
-    color: $primary-color;
-    margin-top: 16px;
-    :hover {
-      color: $color-black-light;
-    }
-  }
-  .hide-on-table {
-    display: none;
-  }
-}
+    justify-content: space-between;
+    align-items: center;
+    &__left {
+      .up {
+        margin-bottom: 15px;
+        img {
+          height: 100px;
+        }
+        display: flex;
+        .info {
+          margin-left: 25px;
+          h2 {
+            color: #00b074;
+            font-size: 20px;
+            margin-bottom: 7px;
+          }
+          .name {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            margin-bottom: 7px;
+          }
+          .city {
+            padding: 0px 0px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
 
-@media (max-width: 740px) {
-  .config__arow-back-ontablet {
-    display: flex;
-    color: $primary-color;
-    margin-top: 16px;
-    :hover {
-      color: $color-black-light;
+      .down {
+        display: flex;
+        gap: 10px;
+        p {
+          padding: 4px 7px;
+          color: #7d7d7d;
+          font-weight: 600;
+          font-size: 13px;
+          line-height: 18px;
+          background-color: #F3F9FC;
+          border-radius: 2px;
+          border: 1px solid #cee0e9;
+        }
+      }
     }
-  }
-  .hide-on-table {
-    display: none;
+    &__right {
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+    }
   }
 }

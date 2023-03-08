@@ -1,85 +1,59 @@
 import React from 'react';
-// import PropTypes from "prop-types";
-import DetailCard from '../../../components/Card/DetailCard';
-import CardVisit from '../../../components/Card/CardVisit';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Grid } from '@mui/material';
+import SearchResultHome from 'src/components/Home/SearchResultHome';
 import './styles.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getJobById,
-  getJobFilterByUser,
-} from '../../../store/slices/main/home/job/jobSlice';
-import ArrowButton from 'src/components/shared/ArrowButton';
-const DetailHome = (props) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Button from 'src/components/shared/Button';
 
-  const { keyword } = useParams();
-
-  const { jobDetailById } = useSelector((state) => state.job);
-
-  useEffect(() => {
-    const dataFilter = {
-      type: '',
-      order: 'oldest',
-      position: '',
-      name: '',
-      province: '',
-      major: '',
-      no: 0,
-      limit: 5,
-    };
-    dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobById(keyword));
-  }, [dispatch, keyword]);
-  const handleBackClick = () => {
-    navigate(-1, { replace: true });
-  };
+const DetailHome = () => {
   return (
-    <div>
-      <Grid
-        className='wrapper'
-        container
-        spacing={4}
-        sx={{
-          padding: 0,
-          paddingLeft: 3,
-          paddingRight: 3,
-        }}
-      >
-        <Grid item md={8} sm={12} xs={12}>
-          <div className=''>
-            <DetailCard
-              logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-              jobDetailById={jobDetailById}
-            />
-            <div className=' hide-on-table' style={{ padding: '0px 0 12px 0' }}>
-              <div className='' onClick={handleBackClick}>
-                <ArrowButton direction='left' text='Trở lại' />
+    <div className='detailJob'>
+      <SearchResultHome />
+      <div className='wrapper'>
+        <div className='wrapper__title'>
+          <div className='wrapper__title__left'>
+            <div className='up'>
+              <img
+                src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
+                alt=''
+              />
+              <div className='info'>
+                <h2>Thực tập Reactjs</h2>
+                <p className='name'>Công ty R2S</p>
+                <div className='city'>
+                  <LocationOnIcon sx={{ color: '#00b074' }} />
+                  <p>Hồ Chí Minh</p>
+                </div>
               </div>
             </div>
+            <div className='down'>
+              <p>Front end</p>
+              <p>Full time</p>
+              <p>Part time</p>
+              <p>Khoa học máy tính</p>
+            </div>
           </div>
-        </Grid>
-        <Grid item md={4} sm={12} xs={12}>
-          <CardVisit
-            logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-            jobDetailById={jobDetailById}
-          />
-        </Grid>
-        <div className='config__arow-back hide-on-desktop '>
-          <Link to='/' className='config__arow-back'>
-            <ArrowBackIcon></ArrowBackIcon>
-            Trở lại
-          </Link>
+          <div className='wrapper__title__right'>
+            <Button
+              name={'Ứng tuyển ngay'}
+              bwidth='211px'
+              bheight='46px'
+              padding='12px 32px'
+              bg='#00B074'
+            ></Button>
+            <Button
+              name={'Lưu tin'}
+              bwidth='211px'
+              bheight='46px'
+              padding='12px 32px'
+              bg='white'
+              color= '#7D7D7D'
+            ></Button>
+          </div>
         </div>
-      </Grid>
+        <div className='wrapper__detail'></div>
+      </div>
     </div>
   );
 };
-
-DetailHome.propTypes = {};
 
 export default DetailHome;
