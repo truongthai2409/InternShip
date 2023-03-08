@@ -6,47 +6,47 @@
     position: absolute;
     right: 30px;
     top: 20px;
-    .css-dngoy8-MuiSvgIcon-root{
+    .css-dngoy8-MuiSvgIcon-root {
       color: #7d7d7d !important;
     }
   }
-  &__item{
+  &__item {
     display: flex !important;
     flex-direction: column;
     flex-wrap: nowrap;
   }
-  &__image{
+  &__image {
     display: flex !important;
     flex-direction: row;
     align-items: center;
     gap: 20px;
   }
-  &__content{
+  &__content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
   }
-  &__tagname{
+  &__tagname {
     display: flex;
     margin-top: 12px;
     margin-bottom: 12px;
     flex-wrap: wrap;
     gap: 4px;
   }
-  &__date{
+  &__date {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 }
-.candidate-card{
-  &__fullname{
+.candidate-card {
+  &__fullname {
     font-size: $fs-20;
     font-weight: $fw-bold-1;
     color: $primary-color;
   }
-  &__location{
+  &__location {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -54,13 +54,13 @@
   }
 }
 
-.item{
+.item {
   margin-bottom: 10px;
 }
 .css-46bh2p-MuiCardContent-root:last-child {
   padding-bottom: 10px;
 }
-.css-46bh2p-MuiCardContent-root{
+.css-46bh2p-MuiCardContent-root {
   padding: 15px 30px !important;
 }
 
@@ -77,10 +77,10 @@
   right: 30px;
   top: 85px;
   cursor: pointer;
-  background: #ECF8EE;
+  background: #ecf8ee;
   border-radius: 6px;
 }
 
-.css-ypiqx9-MuiDialogContent-root{
+.css-ypiqx9-MuiDialogContent-root {
   padding: 0 !important;
 }
