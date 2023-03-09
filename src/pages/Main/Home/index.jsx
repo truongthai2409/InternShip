@@ -76,12 +76,10 @@ const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('client');
   const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -209,7 +207,6 @@ const Home = (props) => {
     }
   }, [dispatch, navigate, props.userCandidate]);
 
-  // console.log(jobs?.requirement);
   return (
     <Grid
       className='wrapper'
@@ -276,21 +273,6 @@ const Home = (props) => {
                           // onChange={getValuePageAndHandle}
                         />
                       </div>
-                      {/* <Hidden mdDown>
-                        <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
-                          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                            <div className='containerDetailCard containerDetailCard-none'>
-                              <DetailCard
-                                logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-                                jobDetail={jobDetail}
-                                jobList={jobs}
-                                jobListCompany={jobListCompany}
-                                demandPartner={props.demandPartner}
-                              />
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </Hidden> */}
                     </div>
                   </Grid>
                   <Hidden lgUp>
