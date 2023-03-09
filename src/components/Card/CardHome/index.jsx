@@ -64,7 +64,6 @@ const CardHome = (props) => {
         paddingRight: props.pdRight ? props.pdRight : '',
       }}
     >
-
       <div className='cardHome__col1' dataset={props.id}>
         <Link to={`detail_job/${props.id}`}>
           <div className='cardHome__aboutCompany'>
