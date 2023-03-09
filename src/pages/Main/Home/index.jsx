@@ -76,12 +76,10 @@ const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('client');
   const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const { roleFilter } = props;
   const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -208,7 +206,7 @@ const Home = (props) => {
     }
   }, [dispatch, navigate, props.userCandidate]);
 
-  console.log(jobs?.requirement);
+
   return (
     <Grid
       className='wrapper'

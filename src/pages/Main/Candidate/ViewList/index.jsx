@@ -56,7 +56,7 @@ const CandidateViewList = () => {
     <>
       <div className='apply__list--container'>
         <div className='header__apply'>
-          <h2 className='header__apply-title'>Công việc đã quan tâm</h2>
+          <h2 className='header__apply-title'>Danh sách việc làm đã lưu</h2>
           <p className='header__apply--des'>
             Xem lại danh sách những việc làm mà bạn đã lưu trước đó. Ứng tuyển
             ngay để không bỏ lỡ cơ hội nghề nghiệp dành cho bạn.
@@ -84,20 +84,6 @@ const CandidateViewList = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Hidden mdDown>
-              <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
-                <div style={{ height: '90%' }}>
-                  <DetailCard
-                    logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-                    jobDetail={jobDetail}
-                    jobList={jobs?.map((item) => {
-                      return item.jobCare;
-                    })}
-                    jobListCompany={jobListCompany}
-                  />
-                </div>
-              </Grid>
-            </Hidden>
           </Grid>
         </>
       </div>
