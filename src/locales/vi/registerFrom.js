@@ -24,7 +24,7 @@ export const REGISTER_FROM_VI = {
   avatarTL: 'Ảnh đại diện',
   backTL: 'Trở lại',
   doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
-  loginTL: 'Đăng nhập',
+  loginTL: 'Đăng nhập ngay',
   registerforAnRecruiterAccountTL: 'Đăng ký tài khoản nhà tuyển dụng',
 
   registerForaSchoolPartnerAccountTL: 'Đăng ký tài khoản cộng tác viên',

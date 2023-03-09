@@ -13,6 +13,8 @@ import SelectCustom from '../../../components/shared/Select';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import registerImg from 'src/assets/img/register-candidate.png';
 import Container from '../Container';
+import Grid from '@mui/material/Grid';
+
 import './styles.scss';
 import { useTranslation } from 'react-i18next';
 const CandidateInfo = () => {
@@ -74,44 +76,27 @@ const CandidateInfo = () => {
   };
 
   return (
-    <>
-      <div className='register-candidate'>
-        <img src={registerImg} />
-      </div>
-      <Container
-        title='Ứng Viên'
-        onClick={handleBackClick}
-        handleClick={handleSubmit(onSubmit)}
-        err={errors}
-        errorMessage={errorMessage}
-        genderList={genderList}
-        register={register}
-        setValue={setValue}
-        children={
-          <>
-            <SelectCustom
-              label='Chuyên ngành'
-              placeholder='Vui lòng chọn...'
-              options={majorList}
-              id='major'
-              register={register}
-            >
-              {errors.major?.message}
-            </SelectCustom>
-            <InputFile
-              label='CV'
-              requirementField={false}
-              id='cv'
-              format='pdf'
-              setValue={setValue}
-              register={register}
-            >
-              {errors.cv?.message}
-            </InputFile>
-          </>
-        }
-      />
-    </>
+    <Grid spacing={4} container>
+      <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+        <div className='register-candidate'>
+          <p style={{ fontSize: '30px', color: '#fff' }}>ĐĂNG KÝ ỨNG VIÊN</p>
+          <img src={registerImg} />
+        </div>
+      </Grid>
+      <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+        <Container
+          title='Ứng Viên'
+          onClick={handleBackClick}
+          handleClick={handleSubmit(onSubmit)}
+          err={errors}
+          errorMessage={errorMessage}
+          genderList={genderList}
+          register={register}
+          setValue={setValue}
+          children={<></>}
+        />
+      </Grid>
+    </Grid>
   );
 };
 export default CandidateInfo;
