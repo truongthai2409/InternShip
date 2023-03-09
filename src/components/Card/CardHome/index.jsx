@@ -175,11 +175,11 @@ const CardHome = (props) => {
               <WatchLaterOutlinedIcon
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />
-              <p
-                style={{ fontSize: `${props.fontSize}px` }}
-              >{`${changeDateLocale(props.time[0])} - ${changeDateLocale(
-                props.time[1]
-              )}`}</p>
+              <p style={{ fontSize: `${props.fontSize}px` }}>
+                {`${changeDateLocale(props.time[0])} - ${changeDateLocale(
+                  props.time[1]
+                )}`}
+              </p>
             </div>
           </div>
         )}

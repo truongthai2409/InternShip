@@ -1,6 +1,7 @@
 @use '../../../assets/styles' as *;
 
 .slideBarHome__wrapper {
+  width: 100%;
   overflow-y: scroll;
   border-radius: 6px;
   font-family: $f-family !important;

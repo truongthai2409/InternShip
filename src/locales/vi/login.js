@@ -5,7 +5,7 @@ export const LOGIN_VI = {
   setUpAccount: 'Cài đặt tài khoản',
   avatarTL: 'Ảnh đại diện',
   loggedInWithTL: 'Đã đăng nhập với',
-  personalInformationTL: 'Thông tin tài khoản',
+  AccountInformationTL: 'Thông tin tài khoản',
   forgotPasswordTL1: 'Thay đổi mật khẩu',
   logOutTL: 'Đăng xuất',
   loginTL: 'Đăng nhập',
