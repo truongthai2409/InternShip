@@ -5,7 +5,11 @@ import Button from 'src/components/shared/Button';
 import CustomInput from 'src/components/shared/CustomInput/index';
 import InputFile from 'src/components/shared/InputFile';
 import SelectCustom from 'src/components/shared/Select';
+import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { TabTitle } from 'src/utils/GeneralFunctions';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
 import './styles.scss';
 export default function Container({
   title,
@@ -23,9 +27,22 @@ export default function Container({
 
   return (
     <div className='register__container'>
+      <h1 className='register-container__title'>Đăng ký tài khoản {title}</h1>
       <p className='title-requirement'>
         (<span className='field-requirment'> * </span>){t('requiredFieldTL')}
       </p>
+      <div className='button-container'>
+        <Button className='button-container__google'>
+          <GoogleIcon />
+          {'TIẾP TỤC VỚI GOOGLE'}
+        </Button>
+        <Button className='button-container__facebook'>
+          <FacebookIcon />
+          {'TIẾP TỤC VỚI FACEBOOK'}
+        </Button>
+      </div>
+      <Divider style={{ marginTop: '2rem', color: '#CFD0D4' }}>HOẶC</Divider>
+
       <form
         onSubmit={handleClick}
         className='register__container__form'
@@ -34,17 +51,25 @@ export default function Container({
       >
         <div className='register__container__form--name'>
           <CustomInput
-            label={t('AccountTL')}
-            id='username'
+            label={t('lastNameTL')}
+            id='lastName'
             type='text'
-            placeholder={t('registerTL')}
+            placeholder={t('lastNameTL')}
             register={register}
-            subtitle={t('accountNamingFormatTL')}
           >
-            {err.username?.message}
-            {errorMessage?.Username}
-            {'.'}
+            {err.lastName?.message}
           </CustomInput>
+          <CustomInput
+            label={t('firstNameTL')}
+            id='firstName'
+            type='text'
+            placeholder={t('firstNameTL')}
+            register={register}
+          >
+            {err.firstName?.message}
+          </CustomInput>
+        </div>
+        <div className='register__container__form--name'>
           <CustomInput
             label='Email'
             id='email'
@@ -55,17 +80,6 @@ export default function Container({
           >
             {err.email?.message}
             {errorMessage?.Email}
-          </CustomInput>
-          <CustomInput
-            className='custom_req_can'
-            label={t('phoneNumberTL')}
-            id='phone'
-            type='phone'
-            placeholder={t('phoneNumberTL')}
-            register={register}
-            subtitle={t('phoneNumberFormatTL')}
-          >
-            {err.phone?.message}
           </CustomInput>
         </div>
         <div className='register__container__form--name'>
@@ -93,57 +107,54 @@ export default function Container({
           >
             {err.confirmPassword?.message}
           </CustomInput>
-          <SelectCustom
-            className='register__container__form--action'
-            label={t('genderTL')}
-            placeholder={t('pleaseSelectTL')}
-            options={genderList}
-            id='gender'
-            register={register}
-          >
-            {err.gender?.message}
-          </SelectCustom>
         </div>
-
-        <Divider style={{ marginTop: '2rem' }} />
         <div className='register__container__form--name'>
           <CustomInput
-            label={t('lastNameTL')}
-            id='lastName'
-            type='text'
-            placeholder={t('lastNameTL')}
+            className='custom_req_can'
+            label={t('phoneNumberTL')}
+            id='phone'
+            type='phone'
+            placeholder={t('phoneNumberTL')}
             register={register}
+            subtitle={t('phoneNumberFormatTL')}
           >
-            {err.lastName?.message}
-          </CustomInput>
-          <CustomInput
-            label={t('firstNameTL')}
-            id='firstName'
-            type='text'
-            placeholder={t('firstNameTL')}
-            register={register}
-          >
-            {err.firstName?.message}
+            {err.phone?.message}
           </CustomInput>
         </div>
-        <InputFile
-          label={t('avatarTL')}
-          requirementField={false}
-          id='avatar'
-          format='image'
-          setValue={setValue}
-          register={register}
-        >
-          {err.avatar?.message}
-        </InputFile>
+
         {children}
+        <div>
+          <p>
+            Bằng việc ấn vào nút “Đăng ký”, tôi đồng ý với{' '}
+            <span style={{ color: '#00B074' }}>Thỏa thuận sử dụng </span> và{' '}
+            <span style={{ color: '#00B074' }}>Quy định bảo mật </span>
+            của Jobsit.vn
+          </p>
+        </div>
         <div className='register__container__btns'>
-          <div className='register__container__btns--item' onClick={onClick}>
-            <ArrowButton fontSize='16px' text={t('backTL')} direction='left' />
-          </div>
           <div className='register__container__btns--item'>
-            <Button name={t('registerTL')} onClick={handleClick} />
+            <Button
+              name={t('registerTL')}
+              type='submit'
+              onClick={handleClick}
+            />
           </div>
+        </div>
+        <div className='register-container__footer'>
+          <Typography
+            variant='h6'
+            component='div'
+            sx={{
+              fontSize: 17,
+              fontWeight: '400',
+              transform: 'translate(5px,5px)',
+            }}
+          >
+            {t('doYouAlreadyHaveAnAccountTL')}{' '}
+            <Link to='/login' style={{ color: '#00B074', fontWeight: 'bold' }}>
+              {t('loginTL')}
+            </Link>
+          </Typography>
         </div>
       </form>
     </div>

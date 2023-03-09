@@ -9,6 +9,9 @@ import { updateRole } from 'src/store/slices/main/user/userSlice';
 import { toast } from 'react-toastify';
 import { MenuDropDown } from '../../components/Login/components';
 import { useTranslation } from 'react-i18next';
+import Divider from '@mui/material/Divider';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from '@mui/icons-material/Google';
 import { Helmet } from 'react-helmet';
 
 const LoginContainer = () => {
@@ -44,13 +47,23 @@ const LoginContainer = () => {
       <h1 className='login-container__title'>{t('loginTL')}</h1>
       <Login />
       <div className='loginWith'>
-        <p className='loginWith-p'>{t('orLoginWithTL')}</p>
-        <button className='loginWith-button'>
+        <Divider sx={{ margin: '20px 0', color: '#CFD0D4' }}>
+          {t('orLoginWithTL')}
+        </Divider>
+        <button className='loginWith-google'>
           <a
             href='http://localhost:8085/oauth2/authorization/google'
             className='loginWith-button__link'
           >
-            <i class='fa-brands fa-google-plus-g'></i> Google
+            <GoogleIcon /> Google
+          </a>
+        </button>
+        <button className='loginWith-facebook' style={{ marginTop: '20px' }}>
+          <a
+            href='http://localhost:8085/oauth2/authorization/google'
+            className='loginWith-button__link'
+          >
+            <FacebookIcon /> Facebook
           </a>
         </button>
       </div>

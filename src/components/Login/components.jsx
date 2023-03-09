@@ -49,7 +49,7 @@ export const MenuDropDown = () => {
           aria-haspopup='true'
           onClick={handleToggle}
         >
-          {t('registerTL')}
+          <span>{t('registerTL')}</span>
         </Button>
         <Popper
           open={open}
