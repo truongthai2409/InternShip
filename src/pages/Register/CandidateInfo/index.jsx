@@ -10,7 +10,6 @@ import { registerCandidate } from 'src/store/slices/main/register/registerSlice'
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import { genderList, schema } from './data';
 import SelectCustom from '../../../components/shared/Select';
-// import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import Container from '../Container';
 import './styles.scss';

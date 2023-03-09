@@ -244,8 +244,7 @@ const Home = (props) => {
                         <img
                           src={image_notFound}
                           alt='notfound'
-                          width={'50%'}
-                          height={'50%'}
+                          width={'25%'}
                         />
                         <p>
                           Rất tiếc, hiện tại không có công việc phù hợp được tìm
@@ -324,12 +323,7 @@ const Home = (props) => {
                   </Grid>
                   <Grid item xs={12} style={{ textAlignLast: 'center' }}>
                     <div>
-                      <img
-                        src={image_notFound}
-                        alt='notfound'
-                        width={'50%'}
-                        height={'50%'}
-                      />
+                      <img src={image_notFound} alt='notfound' width={'25%'} />
                       <p>
                         Rất tiếc, hiện tại không có công việc phù hợp được tìm
                         thấy
@@ -356,12 +350,7 @@ const Home = (props) => {
                 </Grid>
                 <Grid item xs={12} style={{ textAlignLast: 'center' }}>
                   <div>
-                    <img
-                      src={image_notFound}
-                      alt='notfound'
-                      width={'50%'}
-                      height={'100%'}
-                    />
+                    <img src={image_notFound} alt='notfound' width={'25%'} />
                     <p>
                       Rất tiếc, hiện tại không có công việc phù hợp được tìm
                       thấy

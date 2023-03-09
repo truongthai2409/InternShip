@@ -29,15 +29,12 @@ const Modal = ({
         className={`dialog ${className ? className : ''}`}
       >
         <DialogTitle className={`dialog-title dialog-title__${name}`}>
-          {iconClose && (
-            <img
-              onClick={handleClose}
-              className='dialog__icon'
-              alt=''
-              src='https://img.icons8.com/fluency/48/000000/close-window.png'
-            />
-          )}
           {modalTitle}
+          {iconClose && (
+            <p style={{ cursor: 'pointer' }} onClick={() => handleClose()}>
+              X
+            </p>
+          )}
         </DialogTitle>
         <DialogContent>{children}</DialogContent>
       </Dialog>
