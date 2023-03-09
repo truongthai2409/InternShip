@@ -12,6 +12,7 @@ import CandidateInformationCompany from 'src/pages/Main/Candidate/InformationCom
 import CommingSoon from 'src/pages/Main/Home/CommingSoon';
 import NotFound from 'src/pages/NotFound';
 import DetailHome from '../../pages/Main/DetailHome';
+import ResetPassword from 'src/pages/Authenticate/ResetPassword/ResetPassword';
 const mainRouter = [
   {
     path: '/',
@@ -66,6 +67,10 @@ const mainRouter = [
   {
     path: '/forgot-password',
     element: <ForgotPassword />,
+  },
+  {
+    path: '/api/user/edit',
+    element: <ResetPassword />,
   },
   {
     path: '/comming-soon',

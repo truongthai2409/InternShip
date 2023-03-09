@@ -2,6 +2,7 @@
 
 .dialog {
   background: none !important;
+
   h2 {
     font-family: $f-family;
     // font-size: $fs-40;
@@ -19,6 +20,12 @@
 
   .dialog-title {
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-default;
+    height: 55px;
+    color: white;
     .dialog__icon {
       cursor: pointer;
       position: absolute;
@@ -36,4 +43,8 @@
 
 .MuiBackdrop-root {
   background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: 730px !important;
 }

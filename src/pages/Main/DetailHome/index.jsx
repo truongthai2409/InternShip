@@ -1,91 +1,125 @@
-import React from 'react';
-// import PropTypes from "prop-types";
-import DetailCard from '../../../components/Card/DetailCard';
-import CardVisit from '../../../components/Card/CardVisit';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Grid } from '@mui/material';
+import React, { useState } from 'react';
+import SearchResultHome from 'src/components/Home/SearchResultHome';
 import './styles.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  getJobById,
-  getJobFilterByUser,
-} from '../../../store/slices/main/home/job/jobSlice';
-import ArrowButton from 'src/components/shared/ArrowButton';
-import { useTranslation } from 'react-i18next';
-import { TabTitle } from 'src/utils/GeneralFunctions';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Button from 'src/components/shared/Button';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import DetailInfo from './DetailInfo';
+import OverallCompany from './OverallCompany';
+import Modal from 'src/components/shared/Modal';
+import FormModal from './FormModal';
 
-const DetailHome = (props) => {
-  const { t } = useTranslation('title');
-  TabTitle(`${t('detailJobTL')}`);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+const DetailHome = () => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  const handleClick = () => {
+    setOpen(true);
+  };
 
-  const { keyword } = useParams();
-
-  const { jobDetailById } = useSelector((state) => state.job);
-
-  useEffect(() => {
-    const dataFilter = {
-      type: '',
-      order: 'oldest',
-      position: '',
-      name: '',
-      province: '',
-      major: '',
-      no: 0,
-      limit: 5,
-    };
-    dispatch(getJobFilterByUser(dataFilter));
-    dispatch(getJobById(keyword));
-  }, [dispatch, keyword]);
-  const handleBackClick = () => {
-    navigate(-1, { replace: true });
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
   return (
-    <div>
-      <Grid
-        className='wrapper'
-        container
-        spacing={4}
-        sx={{
-          padding: 0,
-          paddingLeft: 3,
-          paddingRight: 3,
-        }}
-      >
-        <Grid item md={8} sm={12} xs={12}>
-          <div className=''>
-            <DetailCard
-              logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-              jobDetailById={jobDetailById}
-            />
-            <div className=' hide-on-table' style={{ padding: '0px 0 12px 0' }}>
-              <div className='' onClick={handleBackClick}>
-                <ArrowButton direction='left' text='Trở lại' />
+    <div className='detailJob'>
+      <SearchResultHome />
+      <div className='wrapperDetail'>
+        <div className='wrapperDetail__title'>
+          <div className='wrapperDetail__title__left'>
+            <div className='up'>
+              <img
+                src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
+                alt=''
+              />
+              <div className='info'>
+                <h2>Thực tập Reactjs</h2>
+                <p className='name'>Công ty R2S</p>
+                <div className='city'>
+                  <LocationOnIcon sx={{ color: '#00b074' }} />
+                  <p>Hồ Chí Minh</p>
+                </div>
               </div>
             </div>
+            <div className='down'>
+              <p>Front end</p>
+              <p>Full time</p>
+              <p>Part time</p>
+              <p>Khoa học máy tính</p>
+            </div>
           </div>
-        </Grid>
-        <Grid item md={4} sm={12} xs={12}>
-          <CardVisit
-            logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-            jobDetailById={jobDetailById}
-          />
-        </Grid>
-        <div className='config__arow-back hide-on-desktop '>
-          <Link to='/' className='config__arow-back'>
-            <ArrowBackIcon></ArrowBackIcon>
-            Trở lại
-          </Link>
+          <div className='wrapperDetail__title__right'>
+            <Button
+              name={'Ứng tuyển ngay'}
+              bwidth='211px'
+              bheight='46px'
+              padding='12px 32px'
+              bg='#00B074'
+              fz='17px'
+              onClick={() => handleClick()}
+            ></Button>
+            <Button
+              name={'Lưu tin'}
+              bwidth='211px'
+              bheight='46px'
+              padding='12px 32px'
+              bg='white'
+              color='#7D7D7D'
+              fz='17px'
+            ></Button>
+          </div>
         </div>
-      </Grid>
+        <div className='wrapperDetail__detail'>
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label='basic tabs example'
+              >
+                <Tab label='Chi tiết' />
+                <Tab label='Tổng quan công ty' />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <DetailInfo />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <OverallCompany />
+            </TabPanel>
+          </Box>
+        </div>
+      </div>
+
+      <Modal
+        iconClose={true}
+        modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
+        open={open}
+        setOpen={setOpen}
+        children={<FormModal />}
+      />
     </div>
   );
 };
-
-DetailHome.propTypes = {};
 
 export default DetailHome;
