@@ -10,7 +10,7 @@ export const LOGIN_EN = {
   logOutTL: 'Log out',
   loginTL: 'Login',
   registerTL: 'Register',
-  AccountTL: 'Account',
+  AccountTL: 'Email',
   PasswordTL: 'Password',
   saveLoginTL: 'Remember login information',
   forgotPasswordTL: 'Forgot password?',
@@ -20,5 +20,5 @@ export const LOGIN_EN = {
   youHaveJustLoggedOutTL: 'You have just logged out.',
   notificationTL: 'Notification',
   youHaveLoggedInTL: 'You have logged in.',
-  orLoginWithTL: 'Or login with',
+  orLoginWithTL: 'OR',
 };

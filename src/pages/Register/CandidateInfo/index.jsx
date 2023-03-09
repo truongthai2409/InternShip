@@ -79,7 +79,7 @@ const CandidateInfo = () => {
   };
 
   return (
-    <Grid spacing={4} container>
+    <Grid container>
       <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
         <div className='register-candidate'>
           <p style={{ fontSize: '30px', color: '#fff' }}>ĐĂNG KÝ ỨNG VIÊN</p>
