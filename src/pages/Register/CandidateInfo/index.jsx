@@ -12,6 +12,7 @@ import { genderList, schema } from './data';
 import SelectCustom from '../../../components/shared/Select';
 // import { getMajorList } from "../../../store/slices/Admin/major/majorSlice";
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
+import registerImg from 'src/assets/img/register-candidate.png';
 import Container from '../Container';
 import './styles.scss';
 import { useTranslation } from 'react-i18next';
@@ -74,39 +75,44 @@ const CandidateInfo = () => {
   };
 
   return (
-    <Container
-      title='Ứng Viên'
-      onClick={handleBackClick}
-      handleClick={handleSubmit(onSubmit)}
-      err={errors}
-      errorMessage={errorMessage}
-      genderList={genderList}
-      register={register}
-      setValue={setValue}
-      children={
-        <>
-          <SelectCustom
-            label='Chuyên ngành'
-            placeholder='Vui lòng chọn...'
-            options={majorList}
-            id='major'
-            register={register}
-          >
-            {errors.major?.message}
-          </SelectCustom>
-          <InputFile
-            label='CV'
-            requirementField={false}
-            id='cv'
-            format='pdf'
-            setValue={setValue}
-            register={register}
-          >
-            {errors.cv?.message}
-          </InputFile>
-        </>
-      }
-    />
+    <>
+      <div className='register-candidate'>
+        <img src={registerImg} />
+      </div>
+      <Container
+        title='Ứng Viên'
+        onClick={handleBackClick}
+        handleClick={handleSubmit(onSubmit)}
+        err={errors}
+        errorMessage={errorMessage}
+        genderList={genderList}
+        register={register}
+        setValue={setValue}
+        children={
+          <>
+            <SelectCustom
+              label='Chuyên ngành'
+              placeholder='Vui lòng chọn...'
+              options={majorList}
+              id='major'
+              register={register}
+            >
+              {errors.major?.message}
+            </SelectCustom>
+            <InputFile
+              label='CV'
+              requirementField={false}
+              id='cv'
+              format='pdf'
+              setValue={setValue}
+              register={register}
+            >
+              {errors.cv?.message}
+            </InputFile>
+          </>
+        }
+      />
+    </>
   );
 };
 export default CandidateInfo;
