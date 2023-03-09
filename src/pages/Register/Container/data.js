@@ -27,7 +27,7 @@ export const containerSchema = yup.object().shape({
   //Container
   username: yup
     .string()
-    .required('* Bạn phải nhập tài khoản')
+    // .required('* Bạn phải nhập tài khoản')
     // .matches(/^[^\W_]/, "* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.")
     .test(
       '* Validate space',
@@ -99,7 +99,7 @@ export const containerSchema = yup.object().shape({
     .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
   gender: yup
     .string()
-    .required('* Bạn phải chọn giới tính.')
+    // .required('* Bạn phải chọn giới tính.')
     .max(7, '* Tối đa 7 ký tự.'),
   avatar: yup
     .mixed()

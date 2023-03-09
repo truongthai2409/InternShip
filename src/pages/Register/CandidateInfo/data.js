@@ -21,7 +21,7 @@ export const genderList = [
 export const schema = containerSchema.shape({
   major: yup
     .string()
-    .required('* Bạn phải chọn chuyên ngành.')
+    // .required('* Bạn phải chọn chuyên ngành.')
     .max(7, '* Tối đa 7 kí tự.'),
   cv: yup
     .mixed()

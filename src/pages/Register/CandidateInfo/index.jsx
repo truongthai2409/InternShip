@@ -11,7 +11,10 @@ import { TabTitle } from 'src/utils/GeneralFunctions';
 import { genderList, schema } from './data';
 import SelectCustom from '../../../components/shared/Select';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
+import registerImg from 'src/assets/img/register-candidate.png';
 import Container from '../Container';
+import Grid from '@mui/material/Grid';
+
 import './styles.scss';
 import { useTranslation } from 'react-i18next';
 const CandidateInfo = () => {
@@ -40,24 +43,26 @@ const CandidateInfo = () => {
     e.preventDefault();
     navigate(-1, { replace: true });
   };
+  console.log(errors, 'error');
   const onSubmit = async (data) => {
+    console.log('runnn');
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,
       candidate: JSON.stringify({
         createUser: {
-          username: data.username,
+          username: data.email,
           password: data.password,
           confirmPassword: data.confirmPassword,
-          gender: parseInt(data.gender),
+          // gender: parseInt(data.gender),
           lastName: data.lastName,
           firstName: data.firstName,
           phone: data.phone,
           email: data.email,
         },
-        major: {
-          id: parseInt(data.major),
-        },
+        // major: {
+        //   id: parseInt(data.major),
+        // },
       }),
     };
 
@@ -68,44 +73,32 @@ const CandidateInfo = () => {
         }
       })
       .catch((error) => {
+        console.log(error);
         toast.error(error);
       });
   };
 
   return (
-    <Container
-      title='Ứng Viên'
-      onClick={handleBackClick}
-      handleClick={handleSubmit(onSubmit)}
-      err={errors}
-      errorMessage={errorMessage}
-      genderList={genderList}
-      register={register}
-      setValue={setValue}
-      children={
-        <>
-          <SelectCustom
-            label='Chuyên ngành'
-            placeholder='Vui lòng chọn...'
-            options={majorList}
-            id='major'
-            register={register}
-          >
-            {errors.major?.message}
-          </SelectCustom>
-          <InputFile
-            label='CV'
-            requirementField={false}
-            id='cv'
-            format='pdf'
-            setValue={setValue}
-            register={register}
-          >
-            {errors.cv?.message}
-          </InputFile>
-        </>
-      }
-    />
+    <Grid spacing={4} container>
+      <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+        <div className='register-candidate'>
+          <p style={{ fontSize: '30px', color: '#fff' }}>ĐĂNG KÝ ỨNG VIÊN</p>
+          <img src={registerImg} />
+        </div>
+      </Grid>
+      <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+        <Container
+          title='Ứng Viên'
+          handleClick={handleSubmit(onSubmit)}
+          err={errors}
+          errorMessage={errorMessage}
+          genderList={genderList}
+          register={register}
+          setValue={setValue}
+          children={<></>}
+        />
+      </Grid>
+    </Grid>
   );
 };
 export default CandidateInfo;

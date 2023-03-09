@@ -2,6 +2,10 @@
 
 .register__container {
   width: 100%;
+  border: 1px solid #dedede;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 10px 10px 0px;
+  padding: 10px;
   &__form {
     width: 100%;
     &--name {
@@ -21,10 +25,13 @@
 
   &__btns {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    button {
+      width: 360px;
+    }
   }
 
   .reg-candidate__title-infor {
@@ -32,6 +39,27 @@
     font-weight: 700;
     text-transform: uppercase;
     margin-top: 40px;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    button {
+      width: 325px;
+    }
+    &__google {
+      gap: 6px;
+      background-color: #ea4335 !important;
+    }
+    &__facebook {
+      gap: 6px;
+      background-color: #375899 !important;
+    }
+  }
+  .register-container__footer {
+    margin: 20px auto 20px !important;
   }
 }
 .custom_req_can {

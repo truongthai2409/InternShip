@@ -11,8 +11,7 @@ import { Helmet } from 'react-helmet';
 
 export default function RegisterContainer({ Outlet }) {
   const { t } = useTranslation('registerFrom');
-  const { ha } = useTranslation('title');
-  // const { a } = useTranslation('title');
+
   const notification = useSelector((state) => state.notification);
   const location = useLocation();
 
@@ -34,22 +33,9 @@ export default function RegisterContainer({ Outlet }) {
   const roleID = useSelector((state) => state.register.user);
   return (
     <div className='register-container'>
-      <h1 className='register-container__title'>{title}</h1>
+      {/* <h1 className='register-container__title'>{title}</h1> */}
       <Outlet />
-      <div className='register-container__footer'>
-        <Typography
-          variant='h6'
-          component='div'
-          sx={{
-            fontSize: 17,
-            fontWeight: '400',
-            transform: 'translate(5px,5px)',
-          }}
-        >
-          {t('doYouAlreadyHaveAnAccountTL')}{' '}
-          <Link to='/login'>{t('loginTL')}</Link>
-        </Typography>
-      </div>
+
       <Notification notifyAlert={notification} />
     </div>
   );

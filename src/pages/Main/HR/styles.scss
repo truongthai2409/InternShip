@@ -84,3 +84,12 @@
 .css-ypiqx9-MuiDialogContent-root {
   padding: 0 !important;
 }
+.pagination {
+  display: flex;
+  align-items: center;
+}
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
