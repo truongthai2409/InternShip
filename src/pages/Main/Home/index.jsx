@@ -235,6 +235,7 @@ const Home = (props) => {
                         <SearchResultHome
                           onClick={handleSearch}
                           onChange={getValueLocationAndHandle}
+                          candidate_home_width='960px'
                         />
                       </div>
                     </Grid>
@@ -261,6 +262,7 @@ const Home = (props) => {
                         <SearchResultHome
                           onClick={handleSearch}
                           onChange={getValueLocationAndHandle}
+                          candidate_home_width='960px'
                         />
                       </div>
                     </Grid>
@@ -302,6 +304,7 @@ const Home = (props) => {
                       <SearchResultHome
                         onClick={handleSearch}
                         onChange={getValueLocationAndHandle}
+                        candidate_home_width='960px'
                       />
                     </div>
                   </Grid>
@@ -329,6 +332,7 @@ const Home = (props) => {
                     <SearchResultHome
                       onClick={handleSearch}
                       onChange={getValueLocationAndHandle}
+                      candidate_home_width='960px'
                     />
                   </div>
                 </Grid>
@@ -351,6 +355,7 @@ const Home = (props) => {
                     <SearchResultHome
                       onClick={handleSearch}
                       onChange={getValueLocationAndHandle}
+                      candidate_home_width='960px'
                     />
                   </div>
                 </Grid>
