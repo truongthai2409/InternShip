@@ -21,4 +21,5 @@ export const USERINFO_EN = {
   firstname: 'First name',
   placeholder: 'Please select...',
   save: 'Save',
+  change: 'Change',
 };
