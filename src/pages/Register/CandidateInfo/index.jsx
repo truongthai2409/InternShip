@@ -51,7 +51,7 @@ const CandidateInfo = () => {
       fileAvatar: data.avatar || null,
       candidate: JSON.stringify({
         createUser: {
-          // username: data.username,
+          username: data.email,
           password: data.password,
           confirmPassword: data.confirmPassword,
           // gender: parseInt(data.gender),
