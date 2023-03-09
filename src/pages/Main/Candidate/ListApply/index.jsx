@@ -79,18 +79,6 @@ const ListApply = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Hidden mdDown>
-            <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
-              <div style={{ height: '90%' }}>
-                <DetailCard
-                  logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
-                  jobDetail={jobDetail}
-                  jobList={jobs}
-                  jobListCompany={jobListCompany}
-                />
-              </div>
-            </Grid>
-          </Hidden>
         </Grid>
       </div>
     </>

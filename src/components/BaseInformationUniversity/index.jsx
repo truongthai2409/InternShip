@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import CardHome from '../Card/CardHome';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
 
 const currentPage = 1;
 const limit = 5;
@@ -35,6 +36,7 @@ const BaseInformationUniversity = ({
   mgLeft,
   arrDemand,
 }) => {
+  const { changeDateLocale } = dateTimeHelper;
   const { t } = useTranslation('cardInformation');
   const location = useLocation();
   const pathUrl = location.pathname;
@@ -211,6 +213,12 @@ const BaseInformationUniversity = ({
                                 amount={job.amount || `${t('notFoundTL')}`}
                                 demandPartner={true}
                                 time={[
+                                  // `${console.log(job.timeStartStr || job.createDate)}`
+                                  // `${console.log(job.timeEndStr || job.end)}`
+                                  // `${changeDateLocale(job.timeStartStr) || changeDateLocale(job.createDate)}`,
+                                  // `${changeDateLocale(job.timeEndStr) || changeDateLocale(job.end)}`,
+                                  // `${changeDateLocale(job.timeStartStr || job.createDate)}`
+                                  //   `${changeDateLocale(job.timeEndStr || job.end)}`
                                   moment(
                                     job.timeStartStr || job.createDate
                                   ).format('DD/MM/YYYY'),

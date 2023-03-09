@@ -1,7 +1,10 @@
 @use '../../../assets/styles/' as *;
 
-.filter-panel-home__wrapper {
+.body {
   width: 100%;
+}
+.filter-panel-home__wrapper {
+  width: 960px;
   height: 570px;
   margin-bottom: 12px;
   overflow-y: scroll;
