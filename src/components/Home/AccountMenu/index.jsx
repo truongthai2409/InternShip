@@ -116,7 +116,7 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <AccountBoxIcon className='profile-icon' />{' '}
-            {t('personalInformationTL')}
+            {t('AccountInformationTL')}
           </MenuItem>
         </Link>
         <Link
