@@ -19,7 +19,7 @@
   &__container {
     display: flex;
     margin: 0px;
-    padding-left: 32px;
+    padding-left: 43px;
     margin-right: 0px;
     gap: 32px;
     width: 100%;
@@ -31,4 +31,8 @@
 }
 .home__containerCard {
   width: 100%;
+  padding-top: 30px;
+}
+.none__res {
+  padding-left: 13px;
 }
