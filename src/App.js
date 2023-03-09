@@ -8,8 +8,11 @@ import { publicRouter, privateRouter } from './config/routes/index';
 import Loading from './components/shared/Loading';
 import { getUserById } from './store/slices/main/user/userSlice';
 import './config/i18n/i18n';
+import { useTranslation } from 'react-i18next';
+// import { Helmet } from "react-helmet";
 
 function App() {
+  // const { t } = useTranslation('title');
   // Nếu nguơời dùng lưu phiên đăng nhập vào localStorage. App.js sẽ dispatch lấy thông tin
   const { role } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -24,6 +27,9 @@ function App() {
   }, [dispatchUserIfSave]);
   return (
     <>
+      {/* <Helmet>
+        <title>{t("homeTL")}</title>
+      </Helmet> */}
       <Router>
         <Routes>
           {publicRouter.map((routers) => {

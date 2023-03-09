@@ -1,4 +1,4 @@
-import { internshipTransport } from "src/config/http/transport";
+import { internshipTransport } from 'src/config/http/transport';
 
 const authenticate = {
   resetPassword: (data) => {
@@ -6,7 +6,7 @@ const authenticate = {
 
     return internshipTransport.post(url, {
       token: data.token,
-      newPassword: data.newPassword
+      newPassword: data.newPassword,
     });
   },
 };

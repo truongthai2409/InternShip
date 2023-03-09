@@ -1,8 +1,12 @@
 import React from 'react';
 import FooterComponents from '../../FooterComponents';
 import './styles.scss';
+import { useTranslation } from 'react-i18next';
+import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation('title');
+  TabTitle(`${t('privacyPolicyTL')}`);
   return (
     <FooterComponents
       title='Chính sách bảo mật'

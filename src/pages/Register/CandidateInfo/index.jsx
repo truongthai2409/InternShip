@@ -13,8 +13,10 @@ import SelectCustom from '../../../components/shared/Select';
 import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import Container from '../Container';
 import './styles.scss';
+import { useTranslation } from 'react-i18next';
 const CandidateInfo = () => {
-  TabTitle('Đăng ký - Ứng viên');
+  const { t } = useTranslation('title');
+  TabTitle(t('registerCandidateTL'));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

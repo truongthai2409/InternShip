@@ -21,4 +21,5 @@ export const USERINFO_VI = {
   firstname: 'Tên',
   placeholder: 'Vui lòng chọn',
   save: 'Lưu',
+  change: 'Thay đổi',
 };

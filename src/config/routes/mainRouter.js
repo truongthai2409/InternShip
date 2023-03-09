@@ -69,8 +69,8 @@ const mainRouter = [
     element: <ForgotPassword />,
   },
   {
-    path:'/api/user/edit',
-    element: <ResetPassword/>
+    path: '/api/user/edit',
+    element: <ResetPassword />,
   },
   {
     path: '/comming-soon',

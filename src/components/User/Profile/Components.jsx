@@ -140,16 +140,16 @@ const Components = ({ profile }) => {
             >
               <div className='profile_children_handle'>
                 <Tooltip title={t('changeCV')}>
-                  <div className='profile_children_handle__item'>
-                    <CachedRoundedIcon
-                      className='icon-action'
-                      onClick={() => handleClick(1)}
-                    />
+                  <div
+                    className='profile_children_handle__item'
+                    onClick={() => handleClick(1)}
+                  >
+                    <CachedRoundedIcon className='icon-action' />
                     <span>{t('changeCV')}</span>
                   </div>
                 </Tooltip>
                 <Modal
-                  modalTitle={t('change_cv')}
+                  modalTitle={t('changeCV')}
                   open={opens}
                   setOpen={setOpens}
                   children={
@@ -179,7 +179,7 @@ const Components = ({ profile }) => {
                       </Button>
                     </form>
                   }
-                  name={t('change_cv')}
+                  name={t('changeCV')}
                   iconClose={<SyncAltIcon />}
                 />
               </div>
@@ -188,14 +188,17 @@ const Components = ({ profile }) => {
                 style={{ padding: '0 2rem' }}
               >
                 <Tooltip title={t('viewCV')}>
-                  <div className='profile_children_handle__item'>
-                    <RemoveRedEyeIcon onClick={() => handleClick(2)} />
+                  <div
+                    className='profile_children_handle__item'
+                    onClick={() => handleClick(2)}
+                  >
+                    <RemoveRedEyeIcon />
                     <span>{t('viewCV')}</span>
                   </div>
                 </Tooltip>
                 <Modal
                   iconClose={true}
-                  modalTitle={t('view_cv')}
+                  modalTitle={t('viewCV')}
                   open={open}
                   setOpen={setOpen}
                   children={

@@ -9,6 +9,7 @@ import { SEARCH_VI } from './vi/search';
 import { NOTIFICATION_VI } from './vi/notification';
 import { CARDINFORMATION_VI } from './vi/cardInformation';
 import { USERINFO_VI } from './vi/userInfo';
+import { TITLE_VI } from './vi/title';
 
 export {
   CLIENT_VI,
@@ -22,4 +23,5 @@ export {
   USERINFO_VI,
   NOTIFICATION_VI,
   CARDINFORMATION_VI,
+  TITLE_VI,
 };

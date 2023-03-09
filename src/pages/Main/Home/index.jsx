@@ -323,11 +323,7 @@ const Home = (props) => {
                   </Grid>
                   <Grid item xs={12} style={{ textAlignLast: 'center' }}>
                     <div>
-                      <img
-                        src={image_notFound}
-                        alt='notfound'
-                        width={'25%'}
-                      />
+                      <img src={image_notFound} alt='notfound' width={'25%'} />
                       <p>
                         Rất tiếc, hiện tại không có công việc phù hợp được tìm
                         thấy
@@ -354,11 +350,7 @@ const Home = (props) => {
                 </Grid>
                 <Grid item xs={12} style={{ textAlignLast: 'center' }}>
                   <div>
-                    <img
-                      src={image_notFound}
-                      alt='notfound'
-                      width={'25%'}
-                    />
+                    <img src={image_notFound} alt='notfound' width={'25%'} />
                     <p>
                       Rất tiếc, hiện tại không có công việc phù hợp được tìm
                       thấy

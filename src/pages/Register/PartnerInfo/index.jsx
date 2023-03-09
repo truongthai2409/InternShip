@@ -23,6 +23,7 @@ import { genderList, schema } from './data';
 import CustomInput from '../../../components/shared/CustomInput/index';
 import Container from '../Container';
 import './styles.scss';
+import { useTranslation } from 'react-i18next';
 const API = process.env.REACT_APP_API;
 const countryList = [
   {
@@ -31,7 +32,8 @@ const countryList = [
   },
 ];
 const PartnerInfo = () => {
-  TabTitle('Đăng ký - Cộng tác viên trường');
+  const { t } = useTranslation('title');
+  TabTitle(`${t('registerPartnerTL')}`);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = React.useState();
 

@@ -36,7 +36,7 @@ const LoginWithGoogle = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  return <></>
+  return <></>;
 };
 
 export default LoginWithGoogle;

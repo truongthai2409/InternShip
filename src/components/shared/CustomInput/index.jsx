@@ -21,6 +21,7 @@ const CustomInput = ({
   icon,
   setValue,
   subtitle,
+  width,
 }) => {
   const [isHide, setIsHide] = useState(false);
 
@@ -46,7 +47,10 @@ const CustomInput = ({
   };
 
   return (
-    <div className={`custom-input ${className ? className : ''} `}>
+    <div
+      className={`custom-input ${className ? className : ''} `}
+      style={{ width: width ? width : '100%' }}
+    >
       <label htmlFor={id} className='custom-input__label'>
         {label}
         {requirementField && <span className='field-requirment'>*</span>}

@@ -1,11 +1,15 @@
 import { internshipTransport } from 'src/config/http/transport';
 
 const getCandidateByHr = {
-  getCandidate: (no, limit, skills, province) => {
-    const url = `/api/r2s/candidates/job-status`;
-
+  getCandidate: (data) => {
+    const url = `/api/r2s/candidate/job-status`;
     return internshipTransport.get(url, {
-      params: { no, limit, province, skills },
+      params: {
+        limit: data[0],
+        no: data[1],
+        skills: data[2],
+        province: data[3],
+      },
     });
   },
 };
