@@ -75,6 +75,7 @@ function reducer(state = initialState, action) {
 const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
@@ -109,19 +110,19 @@ const Home = (props) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
-  const getValuePageAndHandle = (value) => {};
-  // const getValuePageAndHandle = (value) => {
-  //   const userPartner =
-  //     JSON.parse(sessionStorage.getItem('userPresent')) ||
-  //     JSON.parse(localStorage.getItem('userPresent'));
-  //   if (userPartner && userPartner.role === 'Role_HR') {
-  //     dispatch(indexFilterChange(0));
-  //     window.scroll(0, 0);
-  //     return dispatch(getDemandList({ currentPage: value, limit: 5 }));
-  //   }
-  //   dispatcher({ type: 'no', payload: value - 1 });
-  //   dispatch(indexFilterChange(0));
-  // };
+
+  const getValuePageAndHandle = (value) => {
+    const userPartner =
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
+    if (userPartner && userPartner.role === 'Role_HR') {
+      dispatch(indexFilterChange(0));
+      window.scroll(0, 0);
+      return dispatch(getDemandList({ currentPage: value, limit: 5 }));
+    }
+    dispatcher({ type: 'no', payload: value - 1 });
+    dispatch(indexFilterChange(0));
+  };
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
     dispatch(changeFilterChange(false));
@@ -270,7 +271,7 @@ const Home = (props) => {
                           jobList={jobs}
                           // indexCardActive={index}
                           jobListHavePages={jobPage}
-                          // onChange={getValuePageAndHandle}
+                          onChange={getValuePageAndHandle}
                         />
                       </div>
                     </div>
@@ -360,7 +361,7 @@ const Home = (props) => {
                       jobList={jobs}
                       // indexCardActive={index}
                       jobListHavePages={jobPage}
-                      // onChange={getValuePageAndHandle}
+                      onChange={getValuePageAndHandle}
                     />
                   </div>
 

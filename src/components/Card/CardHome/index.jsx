@@ -6,7 +6,7 @@ import Rating from '@mui/material/Rating';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   idFilterChange,
   indexFilterChange,
@@ -25,11 +25,11 @@ const CardHome = (props) => {
   const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const handleClick = () => {
-    if (window.innerWidth < 1199) {
-      navigate(`/detail_job/${props.id}`);
-    }
-    dispatch(indexFilterChange(props.index));
-    dispatch(idFilterChange(props.idCompany));
+    // if (window.innerWidth < 1199) {
+    navigate(`/detail_job/${props.id}`);
+    // }
+    // dispatch(indexFilterChange(props.index));
+    // dispatch(idFilterChange(props.idCompany));
   };
   useEffect(() => {
     const userStorage =
@@ -54,7 +54,7 @@ const CardHome = (props) => {
   return (
     <div
       // key={props.id}
-      onClick={handleClick}
+      // onClick={handleClick}
       className={clsx(
         'cardHome__container',
         props.active === props.index ? 'active' : ''
@@ -65,49 +65,51 @@ const CardHome = (props) => {
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
-        <div className='cardHome__aboutCompany'>
-          <img
-            className='cardHome__img'
-            src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
-            alt=''
-          />
-          <div style={{ textAlign: 'left' }}>
-            <Tooltip title={props.title} placement='top'>
-              <h4 className='cardHome__title'>{props.title}</h4>
-            </Tooltip>
-            <p className='cardHome__nameCompany'>{props.nameCompany}</p>
+        <Link to={`detail_job/${props.id}`}>
+          <div className='cardHome__aboutCompany'>
+            <img
+              className='cardHome__img'
+              src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
+              alt=''
+            />
+            <div style={{ textAlign: 'left' }}>
+              <Tooltip title={props.title} placement='top'>
+                <h4 className='cardHome__title'>{props.title}</h4>
+              </Tooltip>
+              <p className='cardHome__nameCompany'>{props.nameCompany}</p>
+            </div>
           </div>
-        </div>
-        <div className='cardHome__tagName'>
-          {props?.tagName?.map((tag, indexs) =>
-            tag?.length > 0 ? (
-              tag?.map((item, index) => {
-                return item?.length > 0 ? (
-                  item?.map((ite, idx) => {
-                    return <TagName key={idx} title={ite?.name || null} />;
-                  })
-                ) : (
-                  <TagName key={index} title={item?.name || null} />
-                );
-              })
-            ) : (
-              <TagName key={indexs} title={tag?.name || null} />
-            )
+          <div className='cardHome__tagName'>
+            {props?.tagName?.map((tag, indexs) =>
+              tag?.length > 0 ? (
+                tag?.map((item, index) => {
+                  return item?.length > 0 ? (
+                    item?.map((ite, idx) => {
+                      return <TagName key={idx} title={ite?.name || null} />;
+                    })
+                  ) : (
+                    <TagName key={index} title={item?.name || null} />
+                  );
+                })
+              ) : (
+                <TagName key={indexs} title={tag?.name || null} />
+              )
+            )}
+          </div>
+          {props.demandPartner ? (
+            <div className='cardHome__amount-hr-apply'>
+              <PeopleIcon sx={{ color: '#04bf8a !important' }} />
+              <span className='amount'>Số lượng ứng viên: {props.amount}</span>
+            </div>
+          ) : (
+            <Rating
+              name='read-only'
+              precision={0.5}
+              readOnly
+              value={props.star ?? ' '}
+            />
           )}
-        </div>
-        {props.demandPartner ? (
-          <div className='cardHome__amount-hr-apply'>
-            <PeopleIcon sx={{ color: '#04bf8a !important' }} />
-            <span className='amount'>Số lượng ứng viên: {props.amount}</span>
-          </div>
-        ) : (
-          <Rating
-            name='read-only'
-            precision={0.5}
-            readOnly
-            value={props.star ?? ' '}
-          />
-        )}
+        </Link>
       </div>
 
       <div className='cardHome__col2'>
