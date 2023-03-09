@@ -208,16 +208,16 @@ const Home = (props) => {
     }
   }, [dispatch, navigate, props.userCandidate]);
 
-  console.log(jobs?.requirement);
+  // console.log(jobs?.requirement);
   return (
     <Grid
       className='wrapper'
-      sx={{ padding: '1rem 2rem', position: 'relative' }}
+      sx={{ padding: '1rem 2rem 0rem 4rem', position: 'relative' }}
       spacing={{ xs: 4 }}
       container
     >
       <Hidden lgDown>
-        <Grid item xs={0} sm={0} md={0} lg={2} xl={2}>
+        <Grid item xs={3} sm={0} md={0} lg={1} xl={0}>
           <SideBarHomeList
             onChange={handleCheck}
             slideBarHome__wrapper={true}
@@ -229,7 +229,7 @@ const Home = (props) => {
           {jobs[0]?.universityDTO ? (
             <>
               {jobs?.length === 0 ? (
-                <Grid item xs={10}>
+                <Grid item xs={8}>
                   <Grid container spacing={{ xs: 1 }}>
                     <Grid item xs={12}>
                       <div className='none__res'>
@@ -268,18 +268,18 @@ const Home = (props) => {
                     </Grid>
 
                     <div className='home__container'>
-                      <ListCardJobHome
-                        jobList={jobs}
-                        indexCardActive={index}
-                        jobListHavePages={jobPage}
-                        onChange={getValuePageAndHandle}
-                      />
-
-                      <Hidden mdDown>
+                      <div className='home__containerCard'>
+                        <ListCardJobHome
+                          jobList={jobs}
+                          indexCardActive={index}
+                          jobListHavePages={jobPage}
+                          onChange={getValuePageAndHandle}
+                        />
+                      </div>
+                      {/* <Hidden mdDown>
                         <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                             <div className='containerDetailCard containerDetailCard-none'>
-                              {/* {props.hr && <SearchHR />} */}
                               <DetailCard
                                 logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
                                 jobDetail={jobDetail}
@@ -290,7 +290,7 @@ const Home = (props) => {
                             </div>
                           </Grid>
                         </Grid>
-                      </Hidden>
+                      </Hidden> */}
                     </div>
                   </Grid>
                   <Hidden lgUp>
@@ -312,7 +312,7 @@ const Home = (props) => {
             </>
           ) : (
             <>
-              <Grid item xs={10}>
+              <Grid item xs={8}>
                 <Grid container spacing={{ xs: 1 }}>
                   <Grid item xs={12}>
                     <div className='none__res'>
@@ -344,7 +344,7 @@ const Home = (props) => {
       ) : (
         <>
           {jobs?.length === 0 ? (
-            <Grid item xs={10}>
+            <Grid item xs={8}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item xs={12}>
                   <div className='none__res'>
@@ -383,18 +383,19 @@ const Home = (props) => {
                 </Grid>
 
                 <div className='home__container'>
-                  <ListCardJobHome
-                    jobList={jobs}
-                    indexCardActive={index}
-                    jobListHavePages={jobPage}
-                    onChange={getValuePageAndHandle}
-                  />
+                  <div className='home__containerCard'>
+                    <ListCardJobHome
+                      jobList={jobs}
+                      indexCardActive={index}
+                      jobListHavePages={jobPage}
+                      onChange={getValuePageAndHandle}
+                    />
+                  </div>
 
-                  <Hidden mdDown>
+                  {/* <Hidden mdDown>
                     <Grid item xs={12} sm={12} md={6} lg={5} xl={5}>
                       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                         <div className='containerDetailCard containerDetailCard-none'>
-                          {/* {props.hr && <SearchHR />} */}
                           <DetailCard
                             logo='https://r2s.edu.vn/wp-content/uploads/2021/05/r2s.com_.vn_-316x190.png'
                             jobDetail={jobDetail}
@@ -405,7 +406,7 @@ const Home = (props) => {
                         </div>
                       </Grid>
                     </Grid>
-                  </Hidden>
+                  </Hidden> */}
                 </div>
               </Grid>
               <Hidden lgUp>

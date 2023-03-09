@@ -18,10 +18,17 @@
 .home {
   &__container {
     display: flex;
-    margin: 32px;
+    margin: 0px;
+    padding-left: 32px;
     margin-right: 0px;
     gap: 32px;
     width: 100%;
     font-family: $f-family !important;
   }
+}
+.home__container {
+  display: flex;
+}
+.home__containerCard {
+  width: 100%;
 }

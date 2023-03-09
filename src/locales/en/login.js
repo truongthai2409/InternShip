@@ -5,7 +5,7 @@ export const LOGIN_EN = {
   setUpAccount: 'Set up account',
   avatarTL: 'Avatar',
   loggedInWithTL: 'Logged in with',
-  personalInformationTL: 'Personal information',
+  AccountInformationTL: 'Account information',
   forgotPasswordTL1: 'Forgot password',
   logOutTL: 'Log out',
   loginTL: 'Login',
