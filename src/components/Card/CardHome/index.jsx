@@ -7,10 +7,10 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  idFilterChange,
-  indexFilterChange,
-} from 'src/store/slices/main/home/filter/filterSlices';
+// import {
+//   idFilterChange,
+//   indexFilterChange,
+// } from 'src/store/slices/main/home/filter/filterSlices';
 import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
@@ -23,14 +23,14 @@ const CardHome = (props) => {
   const [isMarkLength, setIsMarkLength] = useState();
   const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
   const { user } = useSelector((state) => state.profile);
-  const navigate = useNavigate();
-  const handleClick = () => {
-    // if (window.innerWidth < 1199) {
-    navigate(`/detail_job/${props.id}`);
-    // }
-    // dispatch(indexFilterChange(props.index));
-    // dispatch(idFilterChange(props.idCompany));
-  };
+  // const navigate = useNavigate();
+  // const handleClick = () => {
+  //   if (window.innerWidth < 1199) {
+  //   navigate(`/detail_job/${props.id}`);
+  //   }
+  //   dispatch(indexFilterChange(props.index));
+  //   dispatch(idFilterChange(props.idCompany));
+  // };
   useEffect(() => {
     const userStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -64,6 +64,7 @@ const CardHome = (props) => {
         paddingRight: props.pdRight ? props.pdRight : '',
       }}
     >
+
       <div className='cardHome__col1' dataset={props.id}>
         <Link to={`detail_job/${props.id}`}>
           <div className='cardHome__aboutCompany'>

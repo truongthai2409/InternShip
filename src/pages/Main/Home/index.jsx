@@ -259,6 +259,7 @@ const Home = (props) => {
                   <Grid container spacing={4}>
                     <Grid item xs={12}>
                       <div className='none__res'>
+
                         <SearchResultHome
                           onClick={handleSearch}
                           onChange={getValueLocationAndHandle}
