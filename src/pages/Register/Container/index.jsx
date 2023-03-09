@@ -133,7 +133,11 @@ export default function Container({
         </div>
         <div className='register__container__btns'>
           <div className='register__container__btns--item'>
-            <Button name={t('registerTL')} onClick={handleClick} />
+            <Button
+              name={t('registerTL')}
+              type='submit'
+              onClick={handleClick}
+            />
           </div>
         </div>
         <div className='register-container__footer'>

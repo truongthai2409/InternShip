@@ -43,24 +43,26 @@ const CandidateInfo = () => {
     e.preventDefault();
     navigate(-1, { replace: true });
   };
+  console.log(errors, 'error');
   const onSubmit = async (data) => {
+    console.log('runnn');
     const userData = {
       fileCV: data.cv || null,
       fileAvatar: data.avatar || null,
       candidate: JSON.stringify({
         createUser: {
-          username: data.username,
+          // username: data.username,
           password: data.password,
           confirmPassword: data.confirmPassword,
-          gender: parseInt(data.gender),
+          // gender: parseInt(data.gender),
           lastName: data.lastName,
           firstName: data.firstName,
           phone: data.phone,
           email: data.email,
         },
-        major: {
-          id: parseInt(data.major),
-        },
+        // major: {
+        //   id: parseInt(data.major),
+        // },
       }),
     };
 
@@ -71,6 +73,7 @@ const CandidateInfo = () => {
         }
       })
       .catch((error) => {
+        console.log(error);
         toast.error(error);
       });
   };
@@ -86,7 +89,6 @@ const CandidateInfo = () => {
       <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
         <Container
           title='Ứng Viên'
-          onClick={handleBackClick}
           handleClick={handleSubmit(onSubmit)}
           err={errors}
           errorMessage={errorMessage}
