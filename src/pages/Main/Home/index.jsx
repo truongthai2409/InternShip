@@ -75,7 +75,7 @@ function reducer(state = initialState, action) {
 const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
-  console.log(props);
+  // console.log(props);
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
