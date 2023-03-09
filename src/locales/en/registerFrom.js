@@ -24,7 +24,7 @@ export const REGISTER_FROM_EN = {
   backTL: 'Back',
   doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
   registerforAnRecruiterAccountTL: 'Register for an Recruiter Account',
-  loginTL: 'Login',
+  loginTL: 'Login now',
 
   registerForaSchoolPartnerAccountTL: 'Register for a school partner account',
 

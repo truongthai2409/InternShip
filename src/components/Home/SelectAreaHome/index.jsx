@@ -14,7 +14,6 @@ export default function SelectAreaHome({ onChange }) {
     dispatch(getProvinceList());
   }, [dispatch]);
   const handleLabel = (value) => {
-    console.log(value);
     if (value === null) {
       onChange && onChange('');
     } else {

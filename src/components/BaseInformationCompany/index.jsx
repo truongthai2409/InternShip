@@ -740,6 +740,7 @@ const BaseInformationCompany = ({
                           <a
                             href={jobDetail?.hr?.company.website}
                             target='_blank'
+                            rel='noopener noreferrer'
                             className=' '
                           >
                             {jobDetail?.hr?.company.website}

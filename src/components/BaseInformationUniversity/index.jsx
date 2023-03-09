@@ -104,6 +104,7 @@ const BaseInformationUniversity = ({
                         <a
                           href={demandDetail?.universityDTO?.website}
                           target='_blank'
+                          rel='noopener noreferrer'
                         >
                           {demandDetail?.universityDTO?.website}
                         </a>

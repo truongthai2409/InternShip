@@ -148,6 +148,7 @@ const HeaderBaseInformationCompany = ({ jobDetail }) => {
                       jobDetail?.universityDTO?.website
                     }
                     target='_blank'
+                    rel='noopener noreferrer'
                     className=''
                     style={{}}
                   >
