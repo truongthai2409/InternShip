@@ -15,6 +15,7 @@ function SearchResultHome({
   bheightInput,
   mb,
   candidate_infomation,
+  candidate_home_width
 }) {
   const { t } = useTranslation('search');
 
@@ -29,7 +30,7 @@ function SearchResultHome({
   };
 
   return (
-    <div className='header__with-search onMobile onTablet'>
+    <div className='header__with-search onMobile onTablet' style={{width:candidate_home_width? candidate_home_width:''}}>
       <form
         className='header__with-search-search '
         style={{
