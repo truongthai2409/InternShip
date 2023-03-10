@@ -1,0 +1,11 @@
+@use '../../assets/styles/' as *;
+
+.verifyEmail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    margin-top: 50px;
+    border: 1px solid black;
+    padding: 68px 64px;
+}

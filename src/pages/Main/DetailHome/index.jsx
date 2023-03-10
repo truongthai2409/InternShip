@@ -11,6 +11,8 @@ import DetailInfo from './DetailInfo';
 import OverallCompany from './OverallCompany';
 import Modal from 'src/components/shared/Modal';
 import FormModal from './FormModal';
+import ModalNotify from './ModalNotify';
+import { useSelector } from 'react-redux';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -33,9 +35,16 @@ function TabPanel(props) {
 }
 const DetailHome = () => {
   const [open, setOpen] = useState(false);
+  const [openNotify, setOpenNotify] = useState(false);
   const [value, setValue] = useState(0);
+  const { user } = useSelector((state) => state.profile);
+  // console.log(user)
   const handleClick = () => {
-    setOpen(true);
+    if (Object.keys(user).length == 0) {
+      setOpenNotify(true);
+    } else {
+      setOpen(true);
+    }
   };
 
   const handleChange = (event, newValue) => {
@@ -117,6 +126,14 @@ const DetailHome = () => {
         open={open}
         setOpen={setOpen}
         children={<FormModal />}
+      />
+
+      <Modal
+        iconClose={true}
+        modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
+        open={openNotify}
+        setOpen={setOpenNotify}
+        children={<ModalNotify />}
       />
     </div>
   );

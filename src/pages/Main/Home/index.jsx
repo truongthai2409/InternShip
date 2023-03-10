@@ -23,6 +23,7 @@ import SideBarHomeList from '../../../components/Home/SideBarHomeList';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import './styles.scss';
+import VerifyEmail from 'src/components/VerifyEmail/VerifyEmail';
 const initialState = {
   type: [],
   position: [],
@@ -76,16 +77,20 @@ const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { role } = useSelector((state) => state.profile);
+  const { user } = useSelector((state) => state.profile);
+  const role = user.userDetailsDTO.role.name;
+  // here please check more
+  const verified_email =
+    user.userDetailsDTO.status.name == 'Not available' ? false : true;
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const { jobPosition, jobListCompany } = useSelector((state) => state.job);
+  // const { jobPosition, jobListCompany } = useSelector((state) => state.job);
 
-  const [state, dispatcher] = useReducer(reducer, initialState);
-  const listPositionWorkingFormat = jobPosition?.map((item) => {
-    return item;
-  });
+  // const [state, dispatcher] = useReducer(reducer, initialState);
+  // const listPositionWorkingFormat = jobPosition?.map((item) => {
+  //   return item;
+  // });
   const { majorList } = useSelector((state) => state.major);
   const [valueLocation, setValueLocation] = useState('');
   const [jobs, setJob] = useState([]);
@@ -97,136 +102,207 @@ const Home = (props) => {
   ];
 
   const handleSearch = (value) => {
-    dispatch(nameFilterChange(value));
-    dispatch(indexFilterChange(0));
-    dispatcher({ type: 'name', payload: value });
-    dispatcher({ type: 'no', payload: 0 });
-    dispatcher({ type: 'province', payload: valueLocation });
-    dispatch(changeFilterChange(false));
-    dispatch(pageFilterChange(1));
+    // dispatch(nameFilterChange(value));
+    // dispatch(indexFilterChange(0));
+    // dispatcher({ type: 'name', payload: value });
+    // dispatcher({ type: 'no', payload: 0 });
+    // dispatcher({ type: 'province', payload: valueLocation });
+    // dispatch(changeFilterChange(false));
+    // dispatch(pageFilterChange(1));
   };
   const getValueLocationAndHandle = (value) => {
-    dispatch(majorFilterChange(value));
-    setValueLocation(value);
+    // dispatch(majorFilterChange(value));
+    // setValueLocation(value);
   };
   // const getValuePageAndHandle = (value) => {};
   const getValuePageAndHandle = (value) => {
-    const userPartner =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    if (userPartner && userPartner.role === 'Role_HR') {  
-      dispatch(indexFilterChange(0));
-      window.scroll(0, 0);
-      return dispatch(getDemandList({ currentPage: value, limit: 5 }));
-    }
-    dispatcher({ type: 'no', payload: value - 1 });
-    dispatch(indexFilterChange(0));
+    // const userPartner =
+    //   JSON.parse(sessionStorage.getItem('userPresent')) ||
+    //   JSON.parse(localStorage.getItem('userPresent'));
+    // if (userPartner && userPartner.role === 'Role_HR') {
+    //   dispatch(indexFilterChange(0));
+    //   window.scroll(0, 0);
+    //   return dispatch(getDemandList({ currentPage: value, limit: 5 }));
+    // }
+    // dispatcher({ type: 'no', payload: value - 1 });
+    // dispatch(indexFilterChange(0));
   };
   const handleCheck = (value) => {
-    dispatch(indexFilterChange(0));
-    dispatch(changeFilterChange(false));
-    let tempType = [];
-    let tempPosition = [];
-    let tempMajor = [];
-    tempType = value.filter((sp) =>
-      listWorkingFormat
-        .map((items) => {
-          return items.name;
-        })
-        .includes(sp)
-    );
-    if (role == 'Role_HR') {
-      value.map((item) => {
-        listPositionWorkingFormat.map((item_list) => {
-          if (item == item_list.name) {
-            tempPosition.push(item_list.id);
-          }
-        });
-      });
-
-      value.map((item) => {
-        majorList.map((item_list) => {
-          if (item == item_list.name) {
-            tempMajor.push(item_list.id);
-          }
-        });
-      });
-    } else {
-      value.map((item) => {
-        listPositionWorkingFormat.map((item_list) => {
-          if (item == item_list.name) {
-            tempPosition.push(item_list.name);
-          }
-        });
-      });
-
-      value.map((item) => {
-        majorList.map((item_list) => {
-          if (item == item_list.name) {
-            tempMajor.push(item_list.name);
-          }
-        });
-      });
-    }
-    dispatcher({ type: 'type', payload: tempType });
-    dispatcher({ type: 'position', payload: tempPosition });
-    dispatcher({ type: 'major', payload: tempMajor });
-    dispatcher({ type: 'no', payload: 0 });
-    dispatch(pageFilterChange(1));
+    // dispatch(indexFilterChange(0));
+    // dispatch(changeFilterChange(false));
+    // let tempType = [];
+    // let tempPosition = [];
+    // let tempMajor = [];
+    // tempType = value.filter((sp) =>
+    //   listWorkingFormat
+    //     .map((items) => {
+    //       return items.name;
+    //     })
+    //     .includes(sp)
+    // );
+    // if (role == 'Role_HR') {
+    //   value.map((item) => {
+    //     listPositionWorkingFormat.map((item_list) => {
+    //       if (item == item_list.name) {
+    //         tempPosition.push(item_list.id);
+    //       }
+    //     });
+    //   });
+    //   value.map((item) => {
+    //     majorList.map((item_list) => {
+    //       if (item == item_list.name) {
+    //         tempMajor.push(item_list.id);
+    //       }
+    //     });
+    //   });
+    // } else {
+    //   value.map((item) => {
+    //     listPositionWorkingFormat.map((item_list) => {
+    //       if (item == item_list.name) {
+    //         tempPosition.push(item_list.name);
+    //       }
+    //     });
+    //   });
+    //   value.map((item) => {
+    //     majorList.map((item_list) => {
+    //       if (item == item_list.name) {
+    //         tempMajor.push(item_list.name);
+    //       }
+    //     });
+    //   });
+    // }
+    // dispatcher({ type: 'type', payload: tempType });
+    // dispatcher({ type: 'position', payload: tempPosition });
+    // dispatcher({ type: 'major', payload: tempMajor });
+    // dispatcher({ type: 'no', payload: 0 });
+    // dispatch(pageFilterChange(1));
   };
 
-  useEffect(() => {
-    const dataFilter = [
-      {
-        type: state.type + '',
-        order: state.order,
-        position: state.position + '',
-        name: state.name,
-        province: state.province,
-        major: state.major + '',
-        no: state.no,
-        limit: 5,
-      },
-      { link: props.linkFilter },
-    ];
-    dispatch(jobFilters(dataFilter));
-  }, [state, dispatch, props.linkFilter]);
-  useEffect(() => {
-    setJob(jobFilter);
-    jobFilter && setJobDetail(jobFilter[index]);
-  }, [jobFilter, dispatch, index]);
+  // useEffect(() => {
+  //   const dataFilter = [
+  //     {
+  //       type: state.type + '',
+  //       order: state.order,
+  //       position: state.position + '',
+  //       name: state.name,
+  //       province: state.province,
+  //       major: state.major + '',
+  //       no: state.no,
+  //       limit: 5,
+  //     },
+  //     { link: props.linkFilter },
+  //   ];
+  //   dispatch(jobFilters(dataFilter));
+  // }, [state, dispatch, props.linkFilter]);
+  // useEffect(() => {
+  //   setJob(jobFilter);
+  //   jobFilter && setJobDetail(jobFilter[index]);
+  // }, [jobFilter, dispatch, index]);
 
-  useEffect(() => {
-    dispatch(getJobByCompanyThunk(id));
-    dispatch(getJobPositionList());
-  }, [dispatch, id]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (props.userCandidate) {
-      navigate('finduser');
-    }
-  }, [dispatch, navigate, props.userCandidate]);
+  // useEffect(() => {
+  //   // dispatch(getJobByCompanyThunk(id));
+  //   dispatch(getJobPositionList());
+  // }, [dispatch, id]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (props.userCandidate) {
+  //     navigate('finduser');
+  //   }
+  // }, [dispatch, navigate, props.userCandidate]);
 
-  return (
-    <Grid
-      className='wrapper'
-      sx={{ padding: '0rem 0rem 0rem 0rem', position: 'relative' }}
-      spacing={{ xs: 3 }}
-      container
-    >
-      <Hidden lgDown>
-        <Grid item xs={4} sm={2} md={3} lg={3} xl={3}>
-          <SideBarHomeList
-            onChange={handleCheck}
-            slideBarHome__wrapper={true}
-          />
-        </Grid>
-      </Hidden>
-      {role === 'Role_HR' ? (
-        <>
-          {jobs[0]?.universityDTO ? (
-            <>
-              {jobs?.length === 0 ? (
+  if (verified_email == false) {
+    return <VerifyEmail/>
+  } 
+  else {
+    return (
+      <Grid
+        className='wrapper'
+        sx={{ padding: '0rem 0rem 0rem 0rem', position: 'relative' }}
+        spacing={{ xs: 3 }}
+        container
+      >
+        <Hidden lgDown>
+          <Grid item xs={4} sm={2} md={3} lg={3} xl={3}>
+            <SideBarHomeList
+              onChange={handleCheck}
+              slideBarHome__wrapper={true}
+            />
+          </Grid>
+        </Hidden>
+        {role === 'Role_HR' ? (
+          <>
+            {jobs[0]?.universityDTO ? (
+              <>
+                {jobs?.length === 0 ? (
+                  <Grid item xs={9}>
+                    <Grid container spacing={{ xs: 1 }}>
+                      <Grid item xs={12}>
+                        <div className='none__res'>
+                          <SearchResultHome
+                            onClick={handleSearch}
+                            onChange={getValueLocationAndHandle}
+                            candidate_home_width='960px'
+                          />
+                        </div>
+                      </Grid>
+                      <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                        <div>
+                          <img
+                            src={image_notFound}
+                            alt='notfound'
+                            width={'25%'}
+                          />
+                          <p>
+                            Rất tiếc, hiện tại không có công việc phù hợp được
+                            tìm thấy
+                          </p>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
+                    <Grid container spacing={4}>
+                      <Grid item xs={12}>
+                        <div className='none__res'>
+                          <SearchResultHome
+                            onClick={handleSearch}
+                            onChange={getValueLocationAndHandle}
+                            candidate_home_width='960px'
+                          />
+                        </div>
+                      </Grid>
+
+                      <div className='home__container'>
+                        <div className='home__containerCard'>
+                          <ListCardJobHome
+                            jobList={jobs}
+                            // indexCardActive={index}
+                            jobListHavePages={jobPage}
+                            onChange={getValuePageAndHandle}
+                          />
+                        </div>
+                      </div>
+                    </Grid>
+                    <Hidden lgUp>
+                      <div className='HomePageMenu'>
+                        <TemporaryDrawer
+                          children={
+                            <SideBarHomeList
+                              onChange={handleCheck}
+                              slideBarHome__wrapper={true}
+                            />
+                          }
+                          position='left'
+                          name={<AddCircleIcon />}
+                        />
+                      </div>
+                    </Hidden>
+                  </Grid>
+                )}
+              </>
+            ) : (
+              <>
                 <Grid item xs={9}>
                   <Grid container spacing={{ xs: 1 }}>
                     <Grid item xs={12}>
@@ -253,49 +329,12 @@ const Home = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-              ) : (
-                <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                      <div className='none__res'>
-                        <SearchResultHome
-                          onClick={handleSearch}
-                          onChange={getValueLocationAndHandle}
-                          candidate_home_width='960px'
-                        />
-                      </div>
-                    </Grid>
-
-                    <div className='home__container'>
-                      <div className='home__containerCard'>
-                        <ListCardJobHome
-                          jobList={jobs}
-                          // indexCardActive={index}
-                          jobListHavePages={jobPage}
-                          onChange={getValuePageAndHandle}
-                        />
-                      </div>
-                    </div>
-                  </Grid>
-                  <Hidden lgUp>
-                    <div className='HomePageMenu'>
-                      <TemporaryDrawer
-                        children={
-                          <SideBarHomeList
-                            onChange={handleCheck}
-                            slideBarHome__wrapper={true}
-                          />
-                        }
-                        position='left'
-                        name={<AddCircleIcon />}
-                      />
-                    </div>
-                  </Hidden>
-                </Grid>
-              )}
-            </>
-          ) : (
-            <>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {jobs?.length === 0 ? (
               <Grid item xs={9}>
                 <Grid container spacing={{ xs: 1 }}>
                   <Grid item xs={12}>
@@ -318,78 +357,51 @@ const Home = (props) => {
                   </Grid>
                 </Grid>
               </Grid>
-            </>
-          )}
-        </>
-      ) : (
-        <>
-          {jobs?.length === 0 ? (
-            <Grid item xs={9}>
-              <Grid container spacing={{ xs: 1 }}>
-                <Grid item xs={12}>
-                  <div className='none__res'>
-                    <SearchResultHome
-                      onClick={handleSearch}
-                      onChange={getValueLocationAndHandle}
-                      candidate_home_width='960px'
-                    />
-                  </div>
-                </Grid>
-                <Grid item xs={12} style={{ textAlignLast: 'center' }}>
-                  <div>
-                    <img src={image_notFound} alt='notfound' width={'25%'} />
-                    <p>
-                      Rất tiếc, hiện tại không có công việc phù hợp được tìm
-                      thấy
-                    </p>
-                  </div>
-                </Grid>
-              </Grid>
-            </Grid>
-          ) : (
-            <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
-              <Grid container spacing={4}>
-                <Grid item xs={12}>
-                  <div className='none__res'>
-                    <SearchResultHome
-                      onClick={handleSearch}
-                      onChange={getValueLocationAndHandle}
-                      candidate_home_width='960px'
-                    />
-                  </div>
-                </Grid>
-
-                <div className='home__container'>
-                  <div className='home__containerCard'>
-                    <ListCardJobHome
-                      jobList={jobs}
-                      // indexCardActive={index}
-                      jobListHavePages={jobPage}
-                      onChange={getValuePageAndHandle}
-                    />
-                  </div>
-                </div>
-              </Grid>
-              <Hidden lgUp>
-                <div className='HomePageMenu'>
-                  <TemporaryDrawer
-                    children={
-                      <SideBarHomeList
-                        onChange={handleCheck}
-                        slideBarHome__wrapper={true}
+            ) : (
+              <Grid item xs={12} sm={12} md={12} lg={9} xl={9}>
+                <Grid container spacing={4}>
+                  <Grid item xs={12}>
+                    <div className='none__res'>
+                      <SearchResultHome
+                        onClick={handleSearch}
+                        onChange={getValueLocationAndHandle}
+                        candidate_home_width='960px'
                       />
-                    }
-                    position='left'
-                    name={<AddCircleIcon />}
-                  />
-                </div>
-              </Hidden>
-            </Grid>
-          )}
-        </>
-      )}
-    </Grid>
-  );
+                    </div>
+                  </Grid>
+
+                  <div className='home__container'>
+                    <div className='home__containerCard'>
+                      <ListCardJobHome
+                        jobList={jobs}
+                        // indexCardActive={index}
+                        jobListHavePages={jobPage}
+                        onChange={getValuePageAndHandle}
+                      />
+                    </div>
+                  </div>
+                </Grid>
+                <Hidden lgUp>
+                  <div className='HomePageMenu'>
+                    <TemporaryDrawer
+                      children={
+                        <SideBarHomeList
+                          onChange={handleCheck}
+                          slideBarHome__wrapper={true}
+                        />
+                      }
+                      position='left'
+                      name={<AddCircleIcon />}
+                    />
+                  </div>
+                </Hidden>
+              </Grid>
+            )}
+          </>
+        )}
+      </Grid>
+    );
+  }
 };
 
 export default Home;

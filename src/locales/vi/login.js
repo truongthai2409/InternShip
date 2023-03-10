@@ -10,9 +10,9 @@ export const LOGIN_VI = {
   logOutTL: 'Đăng xuất',
   loginTL: 'Đăng nhập',
   registerTL: 'Đăng ký',
-  AccountTL: 'Tài khoản',
+  AccountTL: 'Email',
   PasswordTL: 'Mật khẩu',
-  saveLoginTL: 'Lưu thông tin đăng nhập',
+  saveLoginTL: 'Lưu phiên đăng nhập',
   forgotPasswordTL: 'Quên mật khẩu?',
   doNotHaveAnAccountTL: 'Bạn chưa có tài khoản?',
   doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
@@ -20,5 +20,5 @@ export const LOGIN_VI = {
   youHaveJustLoggedOutTL: 'Bạn vừa đăng xuất',
   notificationTL: 'Thông Báo',
   youHaveLoggedInTL: 'Bạn đã đăng nhập.',
-  orLoginWithTL: 'Hoặc đăng nhập bằng',
+  orLoginWithTL: 'HOẶC',
 };
