@@ -75,6 +75,7 @@ function reducer(state = initialState, action) {
 const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
+  // console.log(props);
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
@@ -109,12 +110,11 @@ const Home = (props) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
-  // const getValuePageAndHandle = (value) => {};
   const getValuePageAndHandle = (value) => {
     const userPartner =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
       JSON.parse(localStorage.getItem('userPresent'));
-    if (userPartner && userPartner.role === 'Role_HR') {  
+    if (userPartner && userPartner.role === 'Role_HR') {
       dispatch(indexFilterChange(0));
       window.scroll(0, 0);
       return dispatch(getDemandList({ currentPage: value, limit: 5 }));
