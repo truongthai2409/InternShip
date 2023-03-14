@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   .select-label {
     font-size: $fs-14;
     margin-bottom: 7px;
@@ -29,7 +28,6 @@
 
 .select-formControl {
   height: 45px !important;
-
   &:hover {
     box-shadow: $primary-color-1 0 3px 8px;
   }
@@ -50,7 +48,7 @@
 
 .select-form {
   > div {
-    border-color: rgb(119, 119, 119) !important;
+    border-color: $primary-color !important;
     > div {
       border-color: rgb(119, 119, 119) !important;
     }
@@ -62,7 +60,7 @@
       border-color: $primary-color;
     }
     .select-field {
-      border: 1px solid rgb(119, 119, 119);
+      border: 1px solid $primary-color !important;
       border-radius: 2px;
       border: 1px solid $primary-color;
 

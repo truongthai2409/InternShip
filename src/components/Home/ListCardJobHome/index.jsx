@@ -68,7 +68,8 @@ const ListCardJobHome = ({
               ]}
               location={
                 job?.locationDTO?.districtDTO?.provinceDTO?.name ||
-                job?.universityDTO?.locations[0]?.districtDTO?.provinceDTO?.name ||
+                job?.universityDTO?.locations[0]?.districtDTO?.provinceDTO
+                  ?.name ||
                 job?.jobApp?.locationDTO?.districtDTO?.provinceDTO?.name ||
                 job?.jobCare?.locationDTO?.districtDTO?.provinceDTO?.name
               }
@@ -80,7 +81,9 @@ const ListCardJobHome = ({
               }
               demandPartner={true}
               time={[
-                moment(job?.timeStartStr || job?.createDate).format('DD/MM/YYYY'),
+                moment(job?.timeStartStr || job?.createDate).format(
+                  'DD/MM/YYYY'
+                ),
                 moment(job?.timeEndStr || job?.end).format('DD/MM/YYYY'),
               ]}
               locationPath={location.pathname}

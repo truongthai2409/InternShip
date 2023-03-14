@@ -46,7 +46,7 @@ const ButtonMark = (props) => {
         },
         jobDTO: {
           id: props.jobId,
-        }
+        },
       };
 
       await dispatch(addJobCare([dataCareList, userStorage?.token]));

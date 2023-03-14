@@ -2,14 +2,13 @@
 
 .login-layout {
   width: 100%;
-  min-height: 100vh;
   height: max-content;
-  background-color: $primary-color;
+  background-color: $primary-color-background;
   text-align: center;
 }
 
 .login-container-wrapper {
-  padding: 110px 0px;
+  padding: 70px 0px;
   background-color: $primary-color-background;
 }
 

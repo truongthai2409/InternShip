@@ -15,6 +15,12 @@ export const genderList = [
   },
 ];
 
+export const listWorkingFormat = [
+  { name: 'Fulltime', id: 1 },
+  { name: 'Parttime', id: 2 },
+  { name: 'Remote', id: 3 },
+];
+
 const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
 
 const IMAGE_FORMATS = [
@@ -24,6 +30,7 @@ const IMAGE_FORMATS = [
   'image/png',
   'image/bmp',
 ];
+const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const PHONE_REGEX =
   /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{2,6}$/im;
@@ -59,7 +66,7 @@ export const schema = yup.object({
         }
       }
     )
-    .test('fileSize', '*Kích thước tối đa là 512Kb.', (value) => {
+    .test('fileSize', '*Kích thước tối đa là 512Kb', (value) => {
       if (value?.size) {
         return value?.size <= 512 * 1024;
       } else {
@@ -68,29 +75,52 @@ export const schema = yup.object({
     }),
   lastName: yup
     .string()
-    .required('* Bạn phải nhập họ.')
-    .min(2, '* Tối thiểu 2 ký tự.')
-    .test('* Validate Tên', '* Họ không hợp lệ.', (value) => {
+    .required('* Bạn phải nhập họ')
+    .min(2, '* Tối thiểu 2 ký tự')
+    .test('* Validate Tên', '* Họ không hợp lệ', (value) => {
       return uni.test(regexName(value));
     })
 
-    .max(32, '* Tối đa 32 ký tự.'),
+    .max(32, '* Tối đa 32 ký tự'),
   firstName: yup
     .string()
-    .required('* Bạn phải nhập tên.')
-    .min(2, '* Tối thiểu 2 ký tự.')
-    .test('* Validate Họ', '* Tên không hợp lệ.', (value) => {
+    .required('* Bạn phải nhập tên')
+    .min(2, '* Tối thiểu 2 ký tự')
+    .test('* Validate Họ', '* Tên không hợp lệ', (value) => {
       return uni.test(regexName(value));
     })
-    .max(32, '* Tối đa 32 ký tự.'),
+    .max(32, '* Tối đa 32 ký tự'),
+  email: yup
+    .string()
+    .required('* Bạn phải nhập email')
+    .min(6, ' * Tối thiểu 6 ký tự')
+    .max(64, ' * Tối đa 64 ký tự')
+    .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
   phone: yup
     .string()
-    .required('* Bạn phải nhập số điện thoại.')
-    .min(8, '* Tối thiểu 8 ký tự.')
-    .max(13, '* Tối đa 13 ký tự.')
-    .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng.'),
+    .required('* Bạn phải nhập số điện thoại')
+    .min(8, '* Tối thiểu 8 ký tự')
+    .max(13, '* Tối đa 13 ký tự')
+    .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng'),
   gender: yup
     .string()
-    .required('* Bạn phải chọn giới tính.')
-    .max(7, '* Tối đa 7 ký tự.'),
+    .required('* Bạn phải chọn giới tính')
+    .max(7, '* Tối đa 7 ký tự'),
+  province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố'),
+  district: yup.string().required(' * Bạn phải chọn quận/huyện'),
+  address: yup.string().required(' * Bạn phải nhập địa chỉ'),
+  desiredJob: yup.string().required(' * Bạn phải nhập công việc mong muốn'),
+  jobPosition: yup.string().required(' * Bạn phải chọn vị trí làm việc'),
+  major: yup.string().required(' * Bạn phải chọn chuyên ngành'),
+  jobType: yup
+    .array()
+    .nullable()
+    .test('file', ' * Bạn phải chọn hình thức làm việc', (value) => {
+      if (value && value.length >= 1) {
+        return value;
+      } else {
+        return false;
+      }
+    }),
+  workLocation: yup.string().required(' * Bạn phải chọn địa điểm làm việc'),
 });

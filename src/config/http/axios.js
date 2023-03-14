@@ -6,7 +6,7 @@ const token = JSON.parse(sessionStorage.getItem('userPresent'))
   ? JSON.parse(sessionStorage.getItem('userPresent')).token
   : '';
 
-  console.log(token);
+console.log(token);
 const httpHandler = (baseURL) => {
   const axiosHttp = axios.create({
     baseURL,

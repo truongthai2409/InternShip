@@ -12,7 +12,7 @@ export const schema = yup.object({
         return true;
       }
     })
-    .test('fileSize', '* Kích thước tối đa là 512Kb.', (value) => {
+    .test('fileSize', '* Kích thước tối đa là 512Kb', (value) => {
       if (value.size) {
         return value.size <= 512 * 1024;
       } else {

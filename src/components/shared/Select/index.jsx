@@ -11,6 +11,7 @@ export default function SelectCustom({
   children,
   defaultValue,
   setValue,
+  onChange,
   register = false,
   options = [],
   placeholder,
@@ -60,6 +61,7 @@ export default function SelectCustom({
             }
             // value={defaultValue}
             {...register(id)}
+            onChange={(e) => onChange(e.target.value)}
           >
             <MenuItem value={''}>
               <p className='select-placeholder'>{placeholder}</p>
