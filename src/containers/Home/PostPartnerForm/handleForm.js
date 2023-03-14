@@ -20,11 +20,11 @@ export const SAMPLEFORM = (name) => {
 // yup validate form post job form
 export const schema = yup
   .object({
-    jobName: yup.string().required(' * Bạn phải điền chức danh.'),
+    jobName: yup.string().required(' * Bạn phải điền chức danh'),
     jobPosition: yup
       .array()
       .nullable()
-      .test('file', ' * Bạn phải chọn vị trí công việc.', (value) => {
+      .test('file', ' * Bạn phải chọn vị trí công việc', (value) => {
         if (value && value.length >= 1) {
           return value;
         } else {
@@ -34,7 +34,7 @@ export const schema = yup
     major: yup
       .array()
       .nullable()
-      .test('file', ' * Bạn phải chọn chuyên ngành.', (value) => {
+      .test('file', ' * Bạn phải chọn chuyên ngành', (value) => {
         if (value && value.length >= 1) {
           return value;
         } else {
@@ -44,7 +44,7 @@ export const schema = yup
     jobType: yup
       .array()
       .nullable()
-      .test('file', ' * Bạn phải chọn hình thức làm việc.', (value) => {
+      .test('file', ' * Bạn phải chọn hình thức làm việc', (value) => {
         if (value && value.length >= 1) {
           return value;
         } else {
@@ -55,7 +55,7 @@ export const schema = yup
       .date()
       .nullable()
       .transform((curr, orig) => (orig === '' ? null : curr))
-      .required('* Bạn phải chọn ngày bắt đầu ứng tuyển.')
+      .required('* Bạn phải chọn ngày bắt đầu ứng tuyển')
       .min(
         `${date}`,
         ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`
@@ -64,21 +64,21 @@ export const schema = yup
       .date()
       .nullable()
       .transform((cur, ori) => (ori === '' ? null : cur))
-      .required('* Bạn phải chọn ngày kết thúc ứng tuyển.')
-      .min(`${tomorowFormat}`, '* Ngày hết hạn phải lớn hơn ngày bắt đầu.'),
-    jobDescription: yup.string().required(' * Bạn phải có thư giới thiệu.'),
-    // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc.'),
+      .required('* Bạn phải chọn ngày kết thúc ứng tuyển')
+      .min(`${tomorowFormat}`, '* Ngày hết hạn phải lớn hơn ngày bắt đầu'),
+    jobDescription: yup.string().required(' * Bạn phải có thư giới thiệu'),
+    // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc'),
     // otherInfo: yup.string(),
     amount: yup
       .number()
       .typeError(
-        ' * Số lượng ứng viên không được để trống hoặc không phải là số.'
+        ' * Số lượng ứng viên không được để trống hoặc không phải là số'
       )
       .min(1, ' * Số lượng ứng viên phải lớn hơn 0. ')
       .integer(' * Số lượng ứng viên phải là số nguyên. '),
     fileSV: yup
       .mixed()
-      .test('file', ' * Yêu cầu có danh sách sinh viên.', (value) => {
+      .test('file', ' * Yêu cầu có danh sách sinh viên', (value) => {
         if (value.name) {
           return value;
         } else {
@@ -87,7 +87,7 @@ export const schema = yup
       })
       .test(
         'fileSize',
-        ' * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb.',
+        ' * Danh sách sinh viên bạn chọn quá lớn. Kích thước tối đa là 512Kb',
         (value) => {
           if (value?.size) {
             return value && value?.size <= 512 * 1024;
@@ -96,7 +96,7 @@ export const schema = yup
           }
         }
       )
-      .test('type', ' * Chỉ hỗ trợ xlsx.', (value) => {
+      .test('type', ' * Chỉ hỗ trợ xlsx', (value) => {
         if (value?.type) {
           return value && fileSV_FORMATS.includes(value?.type);
         } else {

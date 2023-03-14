@@ -77,11 +77,12 @@ const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { role,user } = useSelector((state) => state.profile);
+  const { role, user } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const verifiedEmail = user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+  const verifiedEmail =
+    user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
   const { jobPosition } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -206,8 +207,8 @@ const Home = (props) => {
   //   }
   // }, [dispatch, navigate, props.userCandidate]);
 
-  if(verifiedEmail){
-    return <VerifyEmail/>
+  if (verifiedEmail) {
+    return <VerifyEmail />;
   }
   return (
     <Grid

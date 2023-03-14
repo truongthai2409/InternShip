@@ -12,8 +12,8 @@ const VerifyEmail = () => {
     const formData = {
       email: email,
     };
-    dispatch(verifyEmailThunk(formData)).then((res)=>{
-      toast.success("Email sent successfully");
+    dispatch(verifyEmailThunk(formData)).then((res) => {
+      toast.success('Email sent successfully');
     });
   };
   return (

@@ -25,23 +25,23 @@ const InputFile = ({
   switch (format) {
     case 'image':
       accept = '.png, .jpg, .jpeg, .gif, .bmp';
-      text = 'Hỗ trợ file .jpg .png và tối đa 512KB.';
+      text = 'Hỗ trợ file .jpg .png và tối đa 512KB';
       break;
     case 'doc':
       accept = '.docx';
-      text = 'Chỉ hỗ trợ file .docx.';
+      text = 'Chỉ hỗ trợ file .docx';
       break;
     case 'pdf':
       accept = '.pdf';
-      text = 'Chỉ hỗ trợ file .pdf.';
+      text = 'Chỉ hỗ trợ file .pdf';
       break;
     case 'excel':
       accept = '.xlsx';
-      text = 'Chỉ hỗ trợ file .xlsx.';
+      text = 'Chỉ hỗ trợ file .xlsx';
       break;
     default: // all of file (except image)
       accept = '.docx, .pdf, .xlsx';
-      text = 'Chỉ hỗ trợ file .docx, .pdf, .xlsx.';
+      text = 'Chỉ hỗ trợ file .docx, .pdf, .xlsx';
       break;
   }
 

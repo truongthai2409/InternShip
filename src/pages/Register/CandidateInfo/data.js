@@ -21,8 +21,8 @@ export const genderList = [
 export const schema = containerSchema.shape({
   major: yup
     .string()
-    // .required('* Bạn phải chọn chuyên ngành.')
-    .max(7, '* Tối đa 7 kí tự.'),
+    // .required('* Bạn phải chọn chuyên ngành')
+    .max(7, '* Tối đa 7 kí tự'),
   cv: yup
     .mixed()
     .test('type', '* Chỉ hỗ trợ định dạng pdf', (value) => {
@@ -32,7 +32,7 @@ export const schema = containerSchema.shape({
         return true;
       }
     })
-    .test('fileSize', '* Kích thước tối đa là 512Kb.', (value) => {
+    .test('fileSize', '* Kích thước tối đa là 512Kb', (value) => {
       if (value?.size) {
         return value?.size <= 512 * 1024;
       } else {

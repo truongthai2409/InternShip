@@ -10,22 +10,22 @@ export const schema = yup
     //   "Uploaded file is too bid!",
     //   (value) => !value || (value && value.size <= 1024 * 1024)
     // ),
-    name: yup.string().required(' * Bạn phải nhập tên công ty.'),
-    website: yup.string().required(' * Bạn phải nhập tên website công ty.'),
+    name: yup.string().required(' * Bạn phải nhập tên công ty'),
+    website: yup.string().required(' * Bạn phải nhập tên website công ty'),
     email: yup
-      .string(' * email không hợp lệ.')
+      .string(' * email không hợp lệ')
       // .email(" * Ban nhap email khong dung")
       .matches(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         ' * Email khong hop le'
       )
-      .required(' * Bạn phải nhập email công ty.'),
+      .required(' * Bạn phải nhập email công ty'),
     phone: yup
       .string()
-      .required(' * Bạn phải nhập số điện thoại.')
+      .required(' * Bạn phải nhập số điện thoại')
       .matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        ' * Số điện thoại không đúng.'
+        ' * Số điện thoại không đúng'
       ),
     // type: yup
     //   .array()
@@ -34,15 +34,15 @@ export const schema = yup
     //   .required(" * Bạn phải chọn Type của công ty"),
     tax: yup
       .string()
-      .required(' * Bạn phải nhập mã số thuế.')
+      .required(' * Bạn phải nhập mã số thuế')
       .matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-        ' * Mã số thuế không đúng.'
+        ' * Mã số thuế không đúng'
       ),
-    description: yup.string().required(' * Bạn phải nhập mô tả trường.'),
-    province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố.'),
-    district: yup.string().required(' * Bạn phải chọn quận/huyện.'),
-    address: yup.string().required(' * Bạn phải nhập địa chỉ.'),
+    description: yup.string().required(' * Bạn phải nhập mô tả trường'),
+    province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố'),
+    district: yup.string().required(' * Bạn phải chọn quận/huyện'),
+    address: yup.string().required(' * Bạn phải nhập địa chỉ'),
     note: yup.string().required('* Bạn phải nhập ghi chú'),
   })
   .required();

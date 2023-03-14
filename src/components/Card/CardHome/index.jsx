@@ -41,7 +41,7 @@ const CardHome = (props) => {
 
   useEffect(() => {
     let isMark = jobCare.filter((job) => {
-      return job?.jobDTO?.id === props?.id
+      return job?.jobDTO?.id === props?.id;
     });
     setIsMarkLength(isMark.length > 0 ? true : false);
   }, [jobCare, props?.id]);
@@ -154,7 +154,6 @@ const CardHome = (props) => {
         )}
         {props.none__time ? (
           <div className='cardHome__col2-End-1'>
-
             <div className='cardHome__amount-hr-apply'>
               <PeopleIcon sx={{ color: '#04bf8a !important' }} />
               <span className='amount'>Số lượng ứng viên: {props.amount}</span>
@@ -166,7 +165,11 @@ const CardHome = (props) => {
               <PeopleIcon style={{ fontSize: `${props.fontSize + 2}px` }} />
               <span
                 className='amount'
-                style={{ fontSize: `${props.fontSize}px`, color: '#000', marginLeft:'6px' }}
+                style={{
+                  fontSize: `${props.fontSize}px`,
+                  color: '#000',
+                  marginLeft: '6px',
+                }}
               >
                 Số lượng ứng viên: {props.amount}
               </span>
