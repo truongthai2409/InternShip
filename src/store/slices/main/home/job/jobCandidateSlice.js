@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import jobCandidate from 'src/store/api/job/jobCandidate';
 
+const { getJobCareByCandidate } = jobCandidate;
 const BASEURL = process.env.REACT_APP_API;
 
 const jobCandidateSlice = createSlice({
@@ -24,7 +26,7 @@ const jobCandidateSlice = createSlice({
         }
       }
     );
-    builder.addCase(getJobCareByCandidate.fulfilled, (state, { payload }) => {
+    builder.addCase(getJobCareByCandidateThunk.fulfilled, (state, { payload }) => {
       state.jobCare = payload.contents;
       state.jobCareHavePage = payload;
     });
@@ -67,26 +69,12 @@ export const getJobApplyListByCandidate = createAsyncThunk(
     }
   }
 );
-export const getJobCareByCandidate = createAsyncThunk(
+export const getJobCareByCandidateThunk = createAsyncThunk(
   'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
-    const header = {
-      headers: {
-        Authorization: 'Bearer ' + args.token,
-      },
-    };
-    if (args.user.user.role.name.includes('Role_Candidate')) {
-      return await axios
-        .get(
-          `${BASEURL}/api/r2s/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
-          header
-        )
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
+    if (args.user.userDetailsDTO.role.name.includes('Role_Candidate')) {
+      const res = await getJobCareByCandidate(args.user.id);
+      return res;
     }
   }
 );
@@ -94,7 +82,7 @@ export const addJobCare = createAsyncThunk(
   'jobCadidateSlice/adddCareJob',
   async (args) => {
     return await axios
-      .post(`${BASEURL}/api/r2s/carelist`, args[0], {
+      .post(`${BASEURL}/api/r2s/job-care`, args[0], {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + args[1],
@@ -150,7 +138,6 @@ export const getAllJobCare = createAsyncThunk(
 export const getAllJobApply = createAsyncThunk(
   'jobCandidateSlice/getAllJobApply',
   async (args) => {
-    console.log(args);
     const header = {
       headers: {
         Authorization: 'Bearer ' + args.token,

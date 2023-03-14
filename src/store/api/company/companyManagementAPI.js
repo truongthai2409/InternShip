@@ -16,6 +16,11 @@ const companyManagementAPI = {
 
     return internshipTransport.get(url);
   },
+
+  getDetailCompanyByid: (id) => {
+    const url = `/api/job/company/${id}`;
+    return internshipTransport.get(url);
+  },
 };
 
 export default companyManagementAPI;

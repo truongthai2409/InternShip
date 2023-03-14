@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getJobApplyListByCandidate,
-  getJobCareByCandidate,
+  getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
 const Container = ({ children }) => {
   // Nếu nguời dừng có quyền Candidate . sau khi login sẽ đuợc components này xử lí. đem dispatch và lấy job quan tâm và job apply.
@@ -24,10 +24,10 @@ const Container = ({ children }) => {
       },
     };
     user &&
-      user.user?.role?.name === 'Role_Candidate' &&
+      user.userDetailsDTO?.role?.name === 'Role_Candidate' &&
       userStorage &&
       dispatch(getJobApplyListByCandidate(page)) &&
-      dispatch(getJobCareByCandidate(page));
+      dispatch(getJobCareByCandidateThunk(page));
   }, [dispatch, pageNo, user]);
   return <>{children}</>;
 };

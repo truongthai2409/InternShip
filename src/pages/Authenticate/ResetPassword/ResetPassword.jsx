@@ -71,7 +71,6 @@ function ResetPassword() {
         toast.error(err);
       });
   };
-  // console.log(errors);
   return (
     <>
       <HeaderContainer />

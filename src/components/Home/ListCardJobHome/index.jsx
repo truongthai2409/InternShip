@@ -24,7 +24,6 @@ const ListCardJobHome = ({
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
   };
-
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
       <div className='filter-panel-home__wrapper'>
@@ -35,16 +34,16 @@ const ListCardJobHome = ({
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
-              id={job?.jobApp?.id || job?.jobCare?.id || job?.id}
+              id={job?.id || job?.jobCare?.id || job?.id}
               active={indexCardActive}
               index={index}
-              key={job.id || index}
+              key={job?.id || index}
               title={
-                job?.name ? job.name : job.jobApp?.name || job.jobCare?.name
+                job?.name ? job?.name : job?.jobApp?.name || job?.jobCare?.name
               }
               fontSize={10}
               nameCompany={
-                job?.hr?.company?.name ||
+                job?.hrDTO?.companyDTO?.name ||
                 job?.partner?.universityDTO.name ||
                 job?.jobApp?.company?.name ||
                 job?.jobApp?.hr?.company?.name ||
@@ -53,36 +52,36 @@ const ListCardJobHome = ({
               }
               idCompany={
                 job?.hr?.company?.id ||
-                job?.partner?.universityDTO.id ||
+                job?.partner?.universityDTO?.id ||
                 job?.jobApp?.hr?.company?.id
               }
               tagName={[
-                job?.jobposition || null,
+                job?.jobPositionDTO || null,
                 job?.position || null,
-                job?.jobApp?.jobposition || null,
-                job?.jobCare?.jobposition || null,
-                job?.jobType || null,
-                job?.jobApp?.jobType || null,
-                job?.jobCare?.jobType || null,
+                job?.jobApp?.jobPositionDTO || null,
+                job?.jobCare?.jobPositionDTO || null,
+                job?.jobTypeDTO || null,
+                job?.jobApp?.jobTypeDTO || null,
+                job?.jobCare?.jobTypeDTO || null,
                 job?.jobTypes || null,
-                job?.major || null,
+                job?.majorDTO || null,
               ]}
               location={
-                job.locationjob?.district?.province?.name ||
-                job?.universityDTO?.locations[0]?.district?.province?.name ||
-                job?.jobApp?.locationjob?.district?.province?.name ||
-                job?.jobCare?.locationjob?.district?.province?.name
+                job?.locationDTO?.districtDTO?.provinceDTO?.name ||
+                job?.universityDTO?.locations[0]?.districtDTO?.provinceDTO?.name ||
+                job?.jobApp?.locationDTO?.districtDTO?.provinceDTO?.name ||
+                job?.jobCare?.locationDTO?.districtDTO?.provinceDTO?.name
               }
               amount={
-                job.amount ||
-                job.jobApp?.amount ||
-                job.jobCare?.amount ||
+                job?.amount ||
+                job?.jobApp?.amount ||
+                job?.jobCare?.amount ||
                 'Không có'
               }
               demandPartner={true}
               time={[
-                moment(job.timeStartStr || job.createDate).format('DD/MM/YYYY'),
-                moment(job.timeEndStr || job.end).format('DD/MM/YYYY'),
+                moment(job?.timeStartStr || job?.createDate).format('DD/MM/YYYY'),
+                moment(job?.timeEndStr || job?.end).format('DD/MM/YYYY'),
               ]}
               locationPath={location.pathname}
             />

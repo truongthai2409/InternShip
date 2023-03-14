@@ -21,16 +21,8 @@ const CardHome = (props) => {
   const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
-  const { allJobCare } = useSelector((state) => state.jobCandidateSlice);
+  const { jobCare } = useSelector((state) => state.jobCandidateSlice);
   const { user } = useSelector((state) => state.profile);
-  // const navigate = useNavigate();
-  // const handleClick = () => {
-  //   if (window.innerWidth < 1199) {
-  //   navigate(`/detail_job/${props.id}`);
-  //   }
-  //   dispatch(indexFilterChange(props.index));
-  //   dispatch(idFilterChange(props.idCompany));
-  // };
   useEffect(() => {
     const userStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -48,9 +40,11 @@ const CardHome = (props) => {
   }, [dispatch, user]);
 
   useEffect(() => {
-    let isMark = allJobCare.filter((job) => job?.jobCare?.id === props?.id);
+    let isMark = jobCare.filter((job) => {
+      return job?.jobDTO?.id === props?.id
+    });
     setIsMarkLength(isMark.length > 0 ? true : false);
-  }, [allJobCare, props?.id]);
+  }, [jobCare, props?.id]);
   return (
     <div
       // key={props.id}
@@ -98,8 +92,20 @@ const CardHome = (props) => {
           </div>
           {props.demandPartner ? (
             <div className='cardHome__amount-hr-apply'>
-              <PeopleIcon sx={{ color: '#04bf8a !important' }} />
-              <span className='amount'>Số lượng ứng viên: {props.amount}</span>
+              <AddLocationAltRoundedIcon
+                style={{ fontSize: `13px` }}
+                sx={{ color: '#04bf8a' }}
+              />
+
+              <p
+                style={{
+                  fontSize: `13px`,
+                  width: 'max-content',
+                  color: '#000',
+                }}
+              >
+                {props.location}
+              </p>
             </div>
           ) : (
             <Rating
@@ -125,7 +131,7 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.user?.role?.name?.includes('Role_Candidate') ? (
+            {user?.userDetailsDTO?.role?.name?.includes('Role_Candidate') ? (
               <ButtonMark
                 height='32px'
                 width='32px'
@@ -148,30 +154,22 @@ const CardHome = (props) => {
         )}
         {props.none__time ? (
           <div className='cardHome__col2-End-1'>
-            <AddLocationAltRoundedIcon
-              style={{ fontSize: `${props.fontSize + 2}px` }}
-              sx={{ color: '#04bf8a' }}
-            />
 
-            <p
-              style={{
-                fontSize: `${props.fontSize}px`,
-                width: 'max-content',
-                color: '#000',
-              }}
-            >
-              {props.location}
-            </p>
+            <div className='cardHome__amount-hr-apply'>
+              <PeopleIcon sx={{ color: '#04bf8a !important' }} />
+              <span className='amount'>Số lượng ứng viên: {props.amount}</span>
+            </div>
           </div>
         ) : (
           <div className='cardHome__col2-End'>
             <div className='cardHome__col2-End-1'>
-              <AddLocationAltRoundedIcon
-                style={{ fontSize: `${props.fontSize + 2}px` }}
-              />
-              <p style={{ fontSize: `${props.fontSize}px`, color: '#000' }}>
-                {props.location}
-              </p>
+              <PeopleIcon style={{ fontSize: `${props.fontSize + 2}px` }} />
+              <span
+                className='amount'
+                style={{ fontSize: `${props.fontSize}px`, color: '#000', marginLeft:'6px' }}
+              >
+                Số lượng ứng viên: {props.amount}
+              </span>
             </div>
             <div className='cardHome__col2-End-2'>
               <WatchLaterOutlinedIcon
