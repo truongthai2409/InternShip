@@ -20,10 +20,9 @@ import DetailCard from '../../../components/Card/DetailCard';
 import ListCardJobHome from '../../../components/Home/ListCardJobHome';
 import SearchResultHome from '../../../components/Home/SearchResultHome';
 import SideBarHomeList from '../../../components/Home/SideBarHomeList';
-import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
-import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import './styles.scss';
 import VerifyEmail from 'src/components/VerifyEmail/VerifyEmail';
+import CircularProgress from '@mui/material/CircularProgress';
 const initialState = {
   type: [],
   position: [],
@@ -81,8 +80,7 @@ const Home = (props) => {
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const verifiedEmail =
-    user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+  const loading = useSelector((state) => state.app.loading);
   const { jobPosition } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
@@ -196,20 +194,6 @@ const Home = (props) => {
     setJob(jobFilter);
   }, [jobFilter, dispatch, index]);
 
-  // useEffect(() => {
-  //   dispatch(getJobByCompanyThunk(id));
-  //   dispatch(getJobPositionList());
-  // }, [dispatch, id]);
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (props.userCandidate) {
-  //     navigate('finduser');
-  //   }
-  // }, [dispatch, navigate, props.userCandidate]);
-
-  if (verifiedEmail) {
-    return <VerifyEmail />;
-  }
   return (
     <Grid
       className='wrapper'
@@ -241,19 +225,23 @@ const Home = (props) => {
                         />
                       </div>
                     </Grid>
-                    <Grid item xs={12} style={{ textAlignLast: 'center' }}>
-                      <div>
-                        <img
-                          src={image_notFound}
-                          alt='notfound'
-                          width={'25%'}
-                        />
-                        <p>
-                          Rất tiếc, hiện tại không có công việc phù hợp được tìm
-                          thấy
-                        </p>
-                      </div>
-                    </Grid>
+                    {loading ? (
+                      <CircularProgress />
+                    ) : (
+                      <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                        <div>
+                          <img
+                            src={image_notFound}
+                            alt='notfound'
+                            width={'25%'}
+                          />
+                          <p>
+                            Rất tiếc, hiện tại không có công việc phù hợp được
+                            tìm thấy
+                          </p>
+                        </div>
+                      </Grid>
+                    )}
                   </Grid>
                 </Grid>
               ) : (
@@ -273,7 +261,6 @@ const Home = (props) => {
                       <div className='home__containerCard'>
                         <ListCardJobHome
                           jobList={jobs}
-                          // indexCardActive={index}
                           jobListHavePages={jobPage}
                           onChange={getValuePageAndHandle}
                         />
@@ -310,15 +297,23 @@ const Home = (props) => {
                       />
                     </div>
                   </Grid>
-                  <Grid item xs={12} style={{ textAlignLast: 'center' }}>
-                    <div>
-                      <img src={image_notFound} alt='notfound' width={'25%'} />
-                      <p>
-                        Rất tiếc, hiện tại không có công việc phù hợp được tìm
-                        thấy
-                      </p>
-                    </div>
-                  </Grid>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                      <div>
+                        <img
+                          src={image_notFound}
+                          alt='notfound'
+                          width={'25%'}
+                        />
+                        <p>
+                          Rất tiếc, hiện tại không có công việc phù hợp được tìm
+                          thấy
+                        </p>
+                      </div>
+                    </Grid>
+                  )}
                 </Grid>
               </Grid>
             </>
@@ -338,15 +333,19 @@ const Home = (props) => {
                     />
                   </div>
                 </Grid>
-                <Grid item xs={12} style={{ textAlignLast: 'center' }}>
-                  <div>
-                    <img src={image_notFound} alt='notfound' width={'25%'} />
-                    <p>
-                      Rất tiếc, hiện tại không có công việc phù hợp được tìm
-                      thấy
-                    </p>
-                  </div>
-                </Grid>
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <Grid item xs={12} style={{ textAlignLast: 'center' }}>
+                    <div>
+                      <img src={image_notFound} alt='notfound' width={'25%'} />
+                      <p>
+                        Rất tiếc, hiện tại không có công việc phù hợp được tìm
+                        thấy
+                      </p>
+                    </div>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           ) : (
