@@ -72,7 +72,7 @@ const FormModal = () => {
         <div>
           <InputFile
             label='CV'
-            requirementField={false}
+            requirementField={true}
             id='cv'
             format='pdf'
             register={register}
@@ -86,6 +86,7 @@ const FormModal = () => {
           name='letter'
           placeholder='Thư giới thiệu..'
           register={register}
+          requirementField={false}
           //   width='310px'
         ></CustomInput>
 

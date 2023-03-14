@@ -15,6 +15,14 @@ import ModalNotify from './ModalNotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetailJobByIdThunk } from 'src/store/action/job/jobAction';
 import { getDetailCompanyByidThunk } from 'src/store/action/company/companyAction';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import {
+  addJobCare,
+  deleteJobCare,
+  getAllJobCare,
+  getJobCareByCandidateThunk,
+} from 'src/store/slices/main/home/job/jobCandidateSlice';
+import { toast } from 'react-toastify';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,6 +53,11 @@ const DetailHome = () => {
   const { user } = useSelector((state) => state.profile);
   const [detailJob, setDetailJob] = useState('');
   const [detailCompany, setDetailCompany] = useState('');
+  const { jobCare } = useSelector((state) => state.jobCandidateSlice);
+  const [isSave, setIsSave] = useState(false);
+  // id post saved
+  const [idSave, setIdSave] = useState('');
+
   const handleClick = () => {
     if (Object.keys(user).length == 0) {
       setOpenNotify(true);
@@ -59,6 +72,12 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    jobCare.map((item) => {
+      if (item?.jobDTO?.id == id) {
+        setIdSave(item.id);
+        setIsSave(true);
+      }
+    });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
@@ -72,7 +91,71 @@ const DetailHome = () => {
         }
       );
     });
-  }, []);
+  }, [jobCare]);
+
+  const handlePost = (e) => {
+    e.preventDefault();
+    const userStorage =
+      JSON.parse(sessionStorage.getItem('userPresent')) ||
+      JSON.parse(localStorage.getItem('userPresent'));
+    if (isSave == false) {
+      const page = {
+        user: user,
+        token: userStorage?.token,
+        page: {
+          no: 0,
+          limit: 5,
+        },
+      };
+
+      const dataCareList = {
+        candidateDTO: {
+          id: user?.id,
+        },
+        jobDTO: {
+          id: id,
+        },
+      };
+
+      dispatch(addJobCare([dataCareList, userStorage?.token])).then((res) => {
+        setIsSave(true);
+        dispatch(getJobCareByCandidateThunk(page));
+      });
+
+      toast.success('Đã lưu việc làm thành công');
+    } else {
+      if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
+        const delJobCare = {
+          id: idSave,
+          token: userStorage?.token,
+        };
+        dispatch(deleteJobCare([delJobCare])).then(() => {
+          const dispatchJobCare = {
+            user: user,
+            token: userStorage?.token,
+            page: {
+              no: 0,
+              limit: 1000,
+            },
+          };
+          const page = {
+            user: user,
+            token: userStorage?.token,
+            page: {
+              no: 0,
+              limit: 5,
+            },
+          };
+          setIsSave(false);
+          toast.success('Đã hủy lưu việc làm ');
+          user?.userDetailsDTO?.role?.name === 'Role_Candidate' &&
+            dispatch(getAllJobCare(dispatchJobCare)) &&
+            dispatch(getJobCareByCandidateThunk(page));
+        });
+      }
+    }
+  };
+
   return (
     <div className='detailJob'>
       <SearchResultHome />
@@ -109,7 +192,6 @@ const DetailHome = () => {
                 <div className='down'>
                   <p>{detailJob?.jobPosition}</p>
                   <p>{detailJob?.jobType}</p>
-                  {/* <p>Part time</p> */}
                   <p>{detailJob?.major}</p>
                 </div>
               </div>
@@ -124,13 +206,14 @@ const DetailHome = () => {
                   onClick={() => handleClick()}
                 ></Button>
                 <Button
-                  name={'Lưu tin'}
+                  name={isSave ? `Đã lưu` : 'Lưu tin'}
                   bwidth='211px'
                   bheight='46px'
                   padding='12px 32px'
                   bg='white'
-                  color='#7D7D7D'
+                  color={isSave ? '#00B074' : '#7D7D7D'}
                   fz='17px'
+                  onClick={(e) => handlePost(e)}
                 ></Button>
               </div>
             </div>
@@ -147,7 +230,12 @@ const DetailHome = () => {
                   </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
-                  <DetailInfo detail={detailJob} company={detailCompanyById} />
+                  <DetailInfo
+                    detail={detailJob}
+                    company={detailCompanyById}
+                    isSave={isSave}
+                    onHandle={(e) => handlePost(e)}
+                  />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                   <OverallCompany
