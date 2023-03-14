@@ -1,12 +1,6 @@
 import axios from 'axios';
 import history from '../routes/history';
 
-// get token
-const token = JSON.parse(sessionStorage.getItem('userPresent'))
-  ? JSON.parse(sessionStorage.getItem('userPresent')).token
-  : '';
-
-console.log(token);
 const httpHandler = (baseURL) => {
   const axiosHttp = axios.create({
     baseURL,
@@ -14,6 +8,9 @@ const httpHandler = (baseURL) => {
 
   axiosHttp.interceptors.request.use(
     async function intercept(config) {
+      const token =
+        JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
+        JSON.parse(localStorage.getItem('userPresent'))?.token;
       const interceptedConfig = config;
       interceptedConfig.headers['Authorization'] = 'Bearer ' + token;
       return interceptedConfig;
@@ -32,7 +29,7 @@ const httpHandler = (baseURL) => {
 
       switch (error.response.status) {
         case 403:
-          // history.push('/403');
+          history.push('/403');
           return Promise.reject(error);
         case 401:
           history.push('/');
