@@ -87,7 +87,6 @@ const SearchHR = () => {
     setSearchValue(name);
   }, [query]);
   const onChangeSearch = (event) => {
-    console.log('name: ' + event.target.value);
     setSearchValue(event.target.value);
   };
 
@@ -98,7 +97,6 @@ const SearchHR = () => {
     );
   };
   const handleCheck = (value) => {
-    console.log('runnn');
   };
   const handleLocation = (value) => {
     if (value === null) {
@@ -172,7 +170,6 @@ const SearchHR = () => {
               ></Button>
             </div>
           </form>
-          {console.log('length', candidateList.length)}
           {candidateList?.length === 0 ? (
             <div className='not-found'>
               <img

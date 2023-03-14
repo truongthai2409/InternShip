@@ -5,7 +5,7 @@ import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import './styles.scss';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobCareByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
+import { getJobCareByCandidateThunk } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { useState } from 'react';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import { Hidden } from '@mui/material';
@@ -20,7 +20,7 @@ const CandidateViewList = () => {
     (state) => state.jobCandidateSlice
   );
   const { index, id } = useSelector((state) => state.filter);
-  const { jobListCompany } = useSelector((state) => state.job);
+  // const { jobListCompany } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
@@ -39,7 +39,7 @@ const CandidateViewList = () => {
         limit: 5,
       },
     };
-    dispatch(getJobCareByCandidate(page));
+    dispatch(getJobCareByCandidateThunk(page));
   };
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const CandidateViewList = () => {
                 <Grid item xs={12}>
                   <ListCardJobHome
                     jobList={jobs?.map((item) => {
-                      return item.jobCare;
+                      return item.jobDTO;
                     })}
                     indexCardActive={index}
                     jobListHavePages={jobCareHavePage}

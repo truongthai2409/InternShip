@@ -79,7 +79,6 @@ const PartnerInfo = () => {
   }, [dispatch, navigate, status]);
 
   const onSubmit = async (data) => {
-    console.log('submit');
     if (info) {
       const partnerData = {
         avatar: data.avatar || info.logo,
@@ -168,7 +167,6 @@ const PartnerInfo = () => {
     e.preventDefault();
     navigate(-1, { replace: true });
   };
-  console.log('uni', universityList);
   return (
     <Container
       title='Cộng Tác Viên'

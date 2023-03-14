@@ -17,18 +17,14 @@ import Grid from '@mui/material/Grid';
 
 import './styles.scss';
 import { useTranslation } from 'react-i18next';
+import { verifyEmailThunk } from 'src/store/action/authenticate/authenticateAction';
 const CandidateInfo = () => {
   const { t } = useTranslation('title');
   TabTitle(t('registerCandidateTL'));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { majorList } = useSelector((state) => state.major);
   const errorMessage = useSelector((state) => state.register.error);
-
-  useEffect(() => {
-    dispatch(getMajorListThunk([1, 20]));
-  }, [dispatch]);
 
   const {
     register,
@@ -43,32 +39,34 @@ const CandidateInfo = () => {
     e.preventDefault();
     navigate(-1, { replace: true });
   };
-  console.log(errors, 'error');
   const onSubmit = async (data) => {
-    console.log('runnn');
     const userData = {
-      fileCV: data.cv || null,
-      fileAvatar: data.avatar || null,
       candidate: JSON.stringify({
-        createUser: {
+        userCreationDTO: {
           username: data.email,
           password: data.password,
           confirmPassword: data.confirmPassword,
-          // gender: parseInt(data.gender),
           lastName: data.lastName,
           firstName: data.firstName,
           phone: data.phone,
           email: data.email,
         },
-        // major: {
-        //   id: parseInt(data.major),
-        // },
       }),
     };
 
     dispatch(registerCandidate(userData))
       .then((res) => {
         if (res.payload.status === 200 || res.payload.status === 201) {
+          const formData = {
+            email: data.email,
+          };
+          dispatch(verifyEmailThunk(formData))
+            .then((res) => {
+              toast.success('Vui lòng kiểm tra email và xác thực tài khoản');
+            })
+            .catch((err) => {
+              toast.error('Email xác thực chưa được gửi về');
+            });
           navigate('/login');
         }
       })

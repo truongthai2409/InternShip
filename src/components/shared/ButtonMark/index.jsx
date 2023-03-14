@@ -10,7 +10,7 @@ import {
   addJobCare,
   deleteJobCare,
   getAllJobCare,
-  getJobCareByCandidate,
+  getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { getMarkByUserAndJob } from 'src/store/slices/main/mark/markSlice';
 import './styles.scss';
@@ -41,21 +41,20 @@ const ButtonMark = (props) => {
     };
     if (props.isMark === false) {
       const dataCareList = {
-        candidateCare: {
+        candidateDTO: {
           id: user?.id,
         },
-        jobCare: {
+        jobDTO: {
           id: props.jobId,
-        },
-        note: 'Đây là công việc ưa thích của mình',
+        }
       };
 
       await dispatch(addJobCare([dataCareList, userStorage?.token]));
-      await dispatch(getJobCareByCandidate(page));
+      await dispatch(getJobCareByCandidateThunk(page));
       setMark(!mark);
       toast.success('Đã lưu việc làm thành công');
     } else {
-      if (user?.user?.role?.name === 'Role_Candidate') {
+      if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
         const dataByUserAndJob = {
           userName: user?.user?.username,
           idJob: Number(props.jobId),
@@ -91,7 +90,7 @@ const ButtonMark = (props) => {
             toast.success('Đã hủy lưu việc làm ');
             user?.user?.role?.name === 'Role_Candidate' &&
               dispatch(getAllJobCare(dispatchJobCare)) &&
-              dispatch(getJobCareByCandidate(page));
+              dispatch(getJobCareByCandidateThunk(page));
           });
         });
       }
@@ -99,7 +98,7 @@ const ButtonMark = (props) => {
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (user?.user?.role?.name !== 'Role_Candiate') {
+    if (user?.userDetailsDTO?.role?.name !== 'Role_Candiate') {
       toast.error(
         'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc'
       );

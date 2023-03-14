@@ -23,6 +23,7 @@ import SideBarHomeList from '../../../components/Home/SideBarHomeList';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 import './styles.scss';
+import VerifyEmail from 'src/components/VerifyEmail/VerifyEmail';
 const initialState = {
   type: [],
   position: [],
@@ -76,11 +77,12 @@ const image_notFound = require('src/assets/img/notfound.png');
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const { role } = useSelector((state) => state.profile);
+  const { role,user } = useSelector((state) => state.profile);
   const { index, id, jobPage, jobFilter } = useSelector(
     (state) => state.filter
   );
-  const { jobPosition, jobListCompany } = useSelector((state) => state.job);
+  const verifiedEmail = user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+  const { jobPosition } = useSelector((state) => state.job);
 
   const [state, dispatcher] = useReducer(reducer, initialState);
   const listPositionWorkingFormat = jobPosition?.map((item) => {
@@ -89,7 +91,6 @@ const Home = (props) => {
   const { majorList } = useSelector((state) => state.major);
   const [valueLocation, setValueLocation] = useState('');
   const [jobs, setJob] = useState([]);
-  const [jobDetail, setJobDetail] = useState([]);
   const listWorkingFormat = [
     { name: 'Fulltime', id: 1 },
     { name: 'Parttime', id: 2 },
@@ -109,12 +110,11 @@ const Home = (props) => {
     dispatch(majorFilterChange(value));
     setValueLocation(value);
   };
-  // const getValuePageAndHandle = (value) => {};
   const getValuePageAndHandle = (value) => {
     const userPartner =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
       JSON.parse(localStorage.getItem('userPresent'));
-    if (userPartner && userPartner.role === 'Role_HR') {  
+    if (userPartner && userPartner.role === 'Role_HR') {
       dispatch(indexFilterChange(0));
       window.scroll(0, 0);
       return dispatch(getDemandList({ currentPage: value, limit: 5 }));
@@ -193,20 +193,22 @@ const Home = (props) => {
   }, [state, dispatch, props.linkFilter]);
   useEffect(() => {
     setJob(jobFilter);
-    jobFilter && setJobDetail(jobFilter[index]);
   }, [jobFilter, dispatch, index]);
 
-  useEffect(() => {
-    dispatch(getJobByCompanyThunk(id));
-    dispatch(getJobPositionList());
-  }, [dispatch, id]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (props.userCandidate) {
-      navigate('finduser');
-    }
-  }, [dispatch, navigate, props.userCandidate]);
+  // useEffect(() => {
+  //   dispatch(getJobByCompanyThunk(id));
+  //   dispatch(getJobPositionList());
+  // }, [dispatch, id]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (props.userCandidate) {
+  //     navigate('finduser');
+  //   }
+  // }, [dispatch, navigate, props.userCandidate]);
 
+  if(verifiedEmail){
+    return <VerifyEmail/>
+  }
   return (
     <Grid
       className='wrapper'
@@ -363,7 +365,7 @@ const Home = (props) => {
                   <div className='home__containerCard'>
                     <ListCardJobHome
                       jobList={jobs}
-                      // indexCardActive={index}
+                      indexCardActive={index}
                       jobListHavePages={jobPage}
                       onChange={getValuePageAndHandle}
                     />

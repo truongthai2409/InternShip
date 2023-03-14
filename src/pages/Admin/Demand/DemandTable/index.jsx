@@ -23,7 +23,6 @@ const DemandTable = ({ searchValue }) => {
   const { demandList, totalPages, totalItems } = useSelector(
     (state) => state.adminDemand
   );
-  console.log(demandList);
 
   useEffect(() => {
     if (searchValue === '') {
@@ -60,7 +59,6 @@ const DemandTable = ({ searchValue }) => {
       width: 120,
       renderCell: (params) => {
         const { row } = params;
-        // console.log(row)
         const handleChangeStatus = (e) => {
           const updateData = {
             university: JSON.stringify({

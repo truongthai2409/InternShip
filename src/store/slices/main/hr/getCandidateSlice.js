@@ -12,7 +12,6 @@ const getCandidateSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getCandidateThunk.fulfilled, (state, { payload }) => {
-      console.log(payload.contents, 'state');
       state.candidateList = payload.contents;
       state.totalPages = payload.totalPages;
       state.totalItems = payload.totalItems;
