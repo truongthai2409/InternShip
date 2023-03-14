@@ -17,7 +17,6 @@ import './styles.scss';
 
 const ButtonMark = (props) => {
   const location = useLocation();
-  const navigate = useNavigate();
   const pathUrl = location.pathname;
   const dispatch = useDispatch();
   const [mark, setMark] = useState(false);
@@ -49,49 +48,76 @@ const ButtonMark = (props) => {
         },
       };
 
-      await dispatch(addJobCare([dataCareList, userStorage?.token]));
-      await dispatch(getJobCareByCandidateThunk(page));
+      dispatch(addJobCare([dataCareList, userStorage?.token]));
+      dispatch(getJobCareByCandidateThunk(page));
       setMark(!mark);
       toast.success('Đã lưu việc làm thành công');
     } else {
       if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
-        const dataByUserAndJob = {
-          userName: user?.user?.username,
-          idJob: Number(props.jobId),
-          page: {
-            no: 0,
-            limit: 5,
-          },
-        };
+        // const dataByUserAndJob = {
+        //   userName: user?.user?.username,
+        //   idJob: Number(props.jobId),
+        //   page: {
+        //     no: 0,
+        //     limit: 5,
+        //   },
+        // };
 
-        await dispatch(getMarkByUserAndJob(dataByUserAndJob)).then((res) => {
-          const delJobCare = {
-            id: res.payload.id,
+        // await dispatch(getMarkByUserAndJob(dataByUserAndJob)).then((res) => {
+        //   const delJobCare = {
+        //     id: res.payload.id,
+        //     token: userStorage?.token,
+        //   };
+        //   dispatch(deleteJobCare([delJobCare])).then(() => {
+        //     const dispatchJobCare = {
+        //       user: user,
+        //       token: userStorage?.token,
+        //       page: {
+        //         no: 0,
+        //         limit: 1000,
+        //       },
+        //     };
+        //     const page = {
+        //       user: user,
+        //       token: userStorage?.token,
+        //       page: {
+        //         no: 0,
+        //         limit: 5,
+        //       },
+        //     };
+        //     setMark(false);
+        //     toast.success('Đã hủy lưu việc làm ');
+        //     user?.user?.role?.name === 'Role_Candidate' &&
+        //       dispatch(getAllJobCare(dispatchJobCare)) &&
+        //       dispatch(getJobCareByCandidateThunk(page));
+        //   });
+        // });
+        const delJobCare = {
+          id: props.idCare,
+          token: userStorage?.token,
+        };
+        dispatch(deleteJobCare([delJobCare])).then(() => {
+          const dispatchJobCare = {
+            user: user,
             token: userStorage?.token,
+            page: {
+              no: 0,
+              limit: 1000,
+            },
           };
-          dispatch(deleteJobCare([delJobCare])).then(() => {
-            const dispatchJobCare = {
-              user: user,
-              token: userStorage?.token,
-              page: {
-                no: 0,
-                limit: 1000,
-              },
-            };
-            const page = {
-              user: user,
-              token: userStorage?.token,
-              page: {
-                no: 0,
-                limit: 5,
-              },
-            };
-            setMark(false);
-            toast.success('Đã hủy lưu việc làm ');
-            user?.user?.role?.name === 'Role_Candidate' &&
-              dispatch(getAllJobCare(dispatchJobCare)) &&
-              dispatch(getJobCareByCandidateThunk(page));
-          });
+          const page = {
+            user: user,
+            token: userStorage?.token,
+            page: {
+              no: 0,
+              limit: 5,
+            },
+          };
+          setMark(false);
+          toast.success('Đã hủy lưu việc làm ');
+          user?.userDetailsDTO?.role?.name === 'Role_Candidate' &&
+            dispatch(getAllJobCare(dispatchJobCare)) &&
+            dispatch(getJobCareByCandidateThunk(page));
         });
       }
     }
@@ -102,7 +128,6 @@ const ButtonMark = (props) => {
       toast.error(
         'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc'
       );
-      // await navigate("/login");
     }
   };
   return (

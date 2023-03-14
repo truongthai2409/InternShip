@@ -108,7 +108,7 @@ export const deleteJobCare = createAsyncThunk(
       },
     };
     return await axios
-      .delete(`${BASEURL}/api/r2s/carelist/${args[0].id}`, header)
+      .delete(`${BASEURL}/api/r2s/job-care/${args[0].id}`, header)
       .then((res) => {
         return res.data;
       })
