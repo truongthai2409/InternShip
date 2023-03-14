@@ -89,13 +89,14 @@ const DetailInfo = (props) => {
               fz='17px'
             ></Button>
             <Button
-              name={'Lưu tin'}
+              name={props.isSave ? `Đã lưu` : 'Lưu tin'}
               bwidth='211px'
               bheight='46px'
               padding='12px 32px'
               bg='white'
-              color='#7D7D7D'
+              color={props.isSave ? '#00B074' : '#7D7D7D'}
               fz='17px'
+              onClick={(e) => props.onHandle(e)}
             ></Button>
           </div>
         </div>
