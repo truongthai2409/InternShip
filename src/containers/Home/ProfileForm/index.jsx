@@ -16,33 +16,16 @@ import { getDistrictList } from 'src/store/slices/location/locationSlice';
 import SelectMulti from 'src/components/shared/SelectMulti';
 import InputLabel from '@mui/material/InputLabel';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import Modal from 'src/components/shared/Modal';
-import SyncAltIcon from '@mui/icons-material/SyncAlt';
-import { Tooltip } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import './styles.scss';
 import { genderList, listWorkingFormat, schema } from './validateForm';
 import { getUniversityList } from 'src/store/slices/Admin/university/unversitySlice';
+import ProfileDetail from './ProfileDetail';
+import InfoJob from './InfoJob';
 
 const ProfileForm = ({ profile: user }) => {
   const { t } = useTranslation('userInfo');
   const [showInput, setShowInput] = useState(false);
-  const [opens, setOpens] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleClick = (number) => {
-    switch (number) {
-      case 1: {
-        return setOpens(!opens);
-      }
-      case 2: {
-        return setOpen(!open);
-      }
-      default:
-        break;
-    }
-  };
 
   const {
     register,
@@ -64,11 +47,17 @@ const ProfileForm = ({ profile: user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue('firstName', user?.user?.firstName || user?.userDTO?.firstName);
-    setValue('lastName', user?.user?.lastName || user?.userDTO?.lastName);
-    setValue('email', user?.user?.email || user?.userDTO?.email);
-    setValue('phone', user?.user?.phone || user?.userDTO?.phone);
-    setValue('gender', user?.user?.gender);
+    setValue(
+      'firstName',
+      user?.userDetailsDTO?.firstName || user?.userDTO?.firstName
+    );
+    setValue(
+      'lastName',
+      user?.userDetailsDTO?.lastName || user?.userDTO?.lastName
+    );
+    setValue('email', user?.userDetailsDTO?.email || user?.userDTO?.email);
+    setValue('phone', user?.userDetailsDTO?.phone || user?.userDTO?.phone);
+    setValue('gender', user?.userDetailsDTO?.gender);
     setValue('province', user?.provinceId);
     setValue('district', user?.districtId);
     setValue('address', user?.address);
@@ -86,6 +75,8 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
+    console.log('cv', data);
+
     const userPost = {
       userStorage,
       role,
@@ -158,6 +149,8 @@ const ProfileForm = ({ profile: user }) => {
 
   return (
     <>
+      <ProfileDetail />
+      <InfoJob />
       <form className='profile-form__wrapper' autoComplete='off'>
         <Typography paragraph={true} className='profile-form__header'>
           {t('changePro')}
@@ -209,7 +202,7 @@ const ProfileForm = ({ profile: user }) => {
             >
               {errors.email?.message}
             </CustomInput>
-            <>sadasdas</>
+            <>DOB</>
           </div>
           <div className='profile-form__content-item'>
             <CustomInput
@@ -380,59 +373,13 @@ const ProfileForm = ({ profile: user }) => {
             </SelectCustom>
           </div>
           <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
+            <InputFile
+              label='Upload your CV'
               setValue={setValue}
-              id='desiredJob'
-              label={t('desiredJob')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.desiredJob?.message}
-            </CustomInput>
-            <Tooltip title={t('changeCV')}>
-              <div
-                className='profile_children_handle__item'
-                onClick={() => handleClick(1)}
-              >
-                <CloudUploadIcon className='icon-action' />
-                <span>{t('changeCV')}</span>
-              </div>
-            </Tooltip>
-            <Modal
-              modalTitle={t('changeCV')}
-              open={opens}
-              setOpen={setOpens}
-              children={
-                <form
-                  style={{
-                    width: 300,
-                    height: 300,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <InputFile
-                    label='CV'
-                    requirementField={false}
-                    id='cv'
-                    format='pdf'
-                    setValue={setValue}
-                    register={register}
-                  >
-                    {errors?.cv?.message}
-                  </InputFile>
-                  <Button onClick={handleSubmit(onSubmit)}>
-                    {t('change')}
-                  </Button>
-                </form>
-              }
-              name={t('changeCV')}
-              iconClose={<SyncAltIcon />}
+              register={register}
+              id='CV'
+              requirementField={true}
+              accept='.docx, .pdf, .xlsx'
             />
           </div>
           <div className='profile-form__content-item'>

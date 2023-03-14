@@ -65,7 +65,7 @@ const Components = ({ profile }) => {
         break;
     }
   };
-
+  console.log(profile, 'profile');
   const onSubmit = async (data) => {
     const userSessionStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -73,12 +73,12 @@ const Components = ({ profile }) => {
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
-          id: parseInt(profile?.user?.id),
-          firstName: profile?.user?.firstName,
-          lastName: profile?.user?.lastName,
-          gender: parseInt(profile?.user?.gender),
-          phone: profile?.user?.phone,
-          email: profile?.user?.email,
+          id: parseInt(profile?.userDetailsDTO?.id),
+          firstName: profile?.userDetailsDTO?.firstName,
+          lastName: profile?.userDetailsDTO?.lastName,
+          gender: parseInt(profile?.userDetailsDTO?.gender),
+          phone: profile?.userDetailsDTO?.phone,
+          email: profile?.userDetailsDTO?.email,
         },
         major: {
           id: profile?.major?.id,
@@ -108,7 +108,7 @@ const Components = ({ profile }) => {
             borderRadius: '50%',
             border: '1px solid #00b074',
           }}
-          src={`${profile?.user?.avatar}`}
+          src={`${profile?.userDetailsDTO?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
@@ -117,7 +117,7 @@ const Components = ({ profile }) => {
           alt='avatar'
         ></img>
       </div>
-      <div className='profile-form__content-item'>
+      {/* <div className='profile-form__content-item'>
         <InputFile
           label={t('avatarTL')}
           requirementField={false}
@@ -131,7 +131,7 @@ const Components = ({ profile }) => {
           <button onClick={onSubmit}>Save</button>
           {errors.avatar?.message}
         </InputFile>
-      </div>
+      </div> */}
       <div className='profile_footer'>
         <div style={{ textAlign: 'center' }}>
           <div className='profile_name'>
@@ -139,7 +139,8 @@ const Components = ({ profile }) => {
               variant='h6'
               sx={{ color: '#00b074', fontSize: '25px', fontWeight: 'bold' }}
             >
-              {profile?.user?.lastName} {profile?.user?.firstName}
+              {profile?.userDetailsDTO?.lastName}{' '}
+              {profile?.userDetailsDTO?.firstName}
             </Typography>
           </div>
           <Divider style={{ margin: '40px 0' }} />

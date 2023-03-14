@@ -24,7 +24,7 @@ export default function Container({
 }) {
   const { t } = useTranslation('registerFrom');
   TabTitle(`${t('registerTL')} - ${title}`);
-
+  console.log(err, 'error');
   return (
     <div className='register__container'>
       <h1 className='register-container__title'>Đăng ký tài khoản {title}</h1>
@@ -33,15 +33,19 @@ export default function Container({
       </p>
       <div className='button-container'>
         <Button className='button-container__google'>
-          <GoogleIcon />
+          <GoogleIcon sx={{ fontSize: '13px' }} />
           {'TIẾP TỤC VỚI GOOGLE'}
         </Button>
         <Button className='button-container__facebook'>
-          <FacebookIcon />
+          <FacebookIcon sx={{ fontSize: '13px' }} />
           {'TIẾP TỤC VỚI FACEBOOK'}
         </Button>
       </div>
-      <Divider style={{ marginTop: '2rem', color: '#CFD0D4' }}>HOẶC</Divider>
+      <Divider
+        style={{ marginTop: '2rem', color: '#CFD0D4', fontSize: '14px' }}
+      >
+        HOẶC
+      </Divider>
 
       <form
         onSubmit={handleClick}
@@ -76,7 +80,7 @@ export default function Container({
             label='Email'
             id='email'
             type='email'
-            placeholder='Email...'
+            placeholder='Email'
             register={register}
             subtitle={t('mailingFormatTL')}
           >
@@ -97,7 +101,6 @@ export default function Container({
           >
             {err.password?.message}
             {errorMessage?.Password}
-            {'.'}
           </CustomInput>
           <CustomInput
             label={t('confirmPasswordTL')}
@@ -126,7 +129,7 @@ export default function Container({
         </div>
 
         {children}
-        <div>
+        <div className='register-container__footer'>
           <p>
             Bằng việc ấn vào nút “Đăng ký”, tôi đồng ý với{' '}
             <span style={{ color: '#00B074' }}>Thỏa thuận sử dụng </span> và{' '}
@@ -148,7 +151,7 @@ export default function Container({
             variant='h6'
             component='div'
             sx={{
-              fontSize: 17,
+              fontSize: 13,
               fontWeight: '400',
               transform: 'translate(5px,5px)',
             }}
