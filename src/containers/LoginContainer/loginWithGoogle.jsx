@@ -29,7 +29,13 @@ const LoginWithGoogle = () => {
           JSON.stringify({
             token: cutString.token,
             ids: cutString.id,
-            google: true,
+          })
+        );
+        sessionStorage.setItem(
+          'userPresent',
+          JSON.stringify({
+            token: cutString.token,
+            ids: cutString.id,
           })
         );
         navigate(`/candidate`, { replace: true });

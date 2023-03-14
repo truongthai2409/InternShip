@@ -23,6 +23,7 @@ const CardHome = (props) => {
   const [isMarkLength, setIsMarkLength] = useState();
   const { jobCare } = useSelector((state) => state.jobCandidateSlice);
   const { user } = useSelector((state) => state.profile);
+  const [idCareJob, setIdCareJob] = useState('');
   useEffect(() => {
     const userStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -39,16 +40,19 @@ const CardHome = (props) => {
       dispatch(getAllJobCare(dispatchJobCAre));
   }, [dispatch, user]);
 
-  useEffect(() => {
-    let isMark = jobCare.filter((job) => {
-      return job?.jobDTO?.id === props?.id;
-    });
-    setIsMarkLength(isMark.length > 0 ? true : false);
-  }, [jobCare, props?.id]);
+  useEffect(
+    () => {
+      let isMark = jobCare.filter((job) => {
+        return job?.jobDTO?.id === props?.id;
+      });
+      setIdCareJob(isMark[0]?.id);
+      setIsMarkLength(isMark.length > 0 ? true : false);
+    },
+    [jobCare, props?.id],
+    dispatch
+  );
   return (
     <div
-      // key={props.id}
-      // onClick={handleClick}
       className={clsx(
         'cardHome__container',
         props.active === props.index ? 'active' : ''
@@ -138,6 +142,7 @@ const CardHome = (props) => {
                 fontSize='18px'
                 jobId={props.id}
                 isMark={isMarkLength}
+                idCare={idCareJob}
               />
             ) : (
               <div style={{ visibility: 'hidden' }}>
