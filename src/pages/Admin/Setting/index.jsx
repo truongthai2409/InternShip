@@ -74,7 +74,7 @@ const Setting = () => {
           placeholder='Nhập mật khẩu...'
           visibility={true}
           register={register}
-          subtitle='(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)'
+          subtitle='(6-32 ký tự, chứa ít nhất 1 chữ hoa và 1 số)'
         >
           {errors.newPassword?.message}
         </CustomInput>

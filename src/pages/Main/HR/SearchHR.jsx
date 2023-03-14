@@ -61,9 +61,17 @@ const SearchHR = () => {
         setOpen={setOpen}
         children={
           <div>
-            <Document file={numberCV} onLoadSuccess={onDocumentLoadSuccess}>
+            <Document
+              file={numberCV}
+              onLoadSuccess={onDocumentLoadSuccess}
+              wrap={false}
+            >
               {Array.from(new Array(numPages), (el, index) => (
-                <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  wrap={false}
+                />
               ))}
             </Document>
           </div>

@@ -100,14 +100,14 @@ const Components = ({ profile }) => {
   }, [dispatch]);
   return (
     <div className='profiles'>
-      <div
-        className='profile_header'
-        style={{
-          backgroundColor: '#04bf8a',
-        }}
-      >
+      <div className='profile_header'>
         <img
-          style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+          style={{
+            width: '200px',
+            height: '200px',
+            borderRadius: '50%',
+            border: '1px solid #00b074',
+          }}
           src={`${profile?.user?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
@@ -120,15 +120,15 @@ const Components = ({ profile }) => {
       <div className='profile_footer'>
         <div style={{ textAlign: 'center' }}>
           <div className='profile_name'>
-            <Typography variant='h6'>
+            <Typography
+              variant='h6'
+              sx={{ color: '#00b074', fontSize: '25px', fontWeight: 'bold' }}
+            >
               {profile?.user?.lastName} {profile?.user?.firstName}
             </Typography>
           </div>
-          <div className='profile_username'>
-            <h3>@{profile?.user?.username}</h3>
-          </div>
-          <Divider style={{ padding: 8 }} />
-          {profile?.user?.role?.id === 3 ? (
+          <Divider style={{ margin: '40px 0' }} />
+          {/* {profile?.user?.role?.id === 3 ? (
             <div
               className='profile_handle'
               style={{
@@ -238,100 +238,72 @@ const Components = ({ profile }) => {
             </div>
           ) : (
             ''
-          )}
+          )} */}
         </div>
         <div>
           {profile?.user?.role?.id === 3 ? (
             <div className='profile_click'>
               <div className='profile_check'>
-                <Typography
-                  sx={{
-                    marginTop: 0.7,
-                    color: allowContact ? '#00DA6F' : 'red',
-                  }}
-                  variant='overline'
-                  display='block'
-                  gutterBottom
-                >
-                  {t('allowContact')}
-                </Typography>
-                <Switch
-                  checked={checkedFind}
-                  onChange={handleChangeFind}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                  color={allowContact ? 'success' : 'error'}
-                  sx={{
-                    '& .MuiSwitch-thumb': {
-                      backgroundColor: allowContact ? '#00DA6F' : 'red',
-                    },
-                    '& .MuiSwitch-track': {
-                      backgroundColor: allowContact ? '#00DA6F' : 'red',
-                    },
-                  }}
-                />
+                <div className='profile_check__items'>
+                  <Typography
+                    sx={{
+                      marginTop: 0.7,
+                      color: allowContact ? '#00b074' : 'red',
+                    }}
+                    variant='overline'
+                    display='block'
+                    gutterBottom
+                  >
+                    {t('allowContact')}
+                  </Typography>
+                  <Switch
+                    checked={checkedFind}
+                    onChange={handleChangeFind}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    color={allowContact ? 'success' : 'error'}
+                    sx={{
+                      '& .MuiSwitch-thumb': {
+                        backgroundColor: allowContact ? '#00b074' : 'red',
+                      },
+                      '& .MuiSwitch-track': {
+                        backgroundColor: allowContact ? '#00b074' : 'red',
+                      },
+                    }}
+                  />
+                </div>
+                <p style={{ fontSize: '12px', color: '#7d7d7d' }}>
+                  {t('allowContactContent')}
+                </p>
               </div>
             </div>
           ) : (
             ''
           )}
-
           <div className='profile_click'>
             <div className='profile_check'>
-              <Typography
-                sx={{ marginTop: 0.7 }}
-                variant='overline'
-                display='block'
-                gutterBottom
-              >
-                {t('emailNoti')}
-              </Typography>
-              <Switch
-                sx={{
-                  marginBottom: 1,
-                }}
-                checked={checkedEmail}
-                onChange={handleCheckEmail}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
+              <div className='profile_check__items'>
+                <Typography
+                  sx={{ marginTop: 0.7 }}
+                  variant='overline'
+                  display='block'
+                  gutterBottom
+                >
+                  {t('emailNoti')}
+                </Typography>
+                <Switch
+                  sx={{
+                    marginBottom: 1,
+                  }}
+                  checked={checkedEmail}
+                  onChange={handleCheckEmail}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                />
+              </div>
+              <p style={{ fontSize: '12px', color: '#7d7d7d' }}>
+                {t('allowContactContent')}
+              </p>
             </div>
           </div>
-
-          <div className='profile_check'></div>
-        </div>
-        <div className='profile_check'></div>
-        <div className='profile_info'>
-          <UserInfo
-            icon={<EmailIcon />}
-            name={t('email')}
-            profile={profile?.user?.email}
-          />
-          <UserInfo
-            icon={<PhoneIcon />}
-            name={t('phoneNum')}
-            profile={profile?.user?.phone}
-          />
-          <UserInfo
-            icon={<PersonIcon />}
-            name={t('role')}
-            profile={
-              profile?.user?.role?.name === 'Role_Candidate'
-                ? t('candidate')
-                : profile?.user?.role?.name === 'Role_HR'
-                ? t('HR')
-                : t('partner')
-            }
-          />
-          <UserInfo
-            icon={<WcIcon />}
-            name={t('gender')}
-            profile={
-              profile?.user?.gender === 1
-                ? t('female')
-                : profile?.user?.gender === 0
-                ? t('male')
-                : t('other')
-            }
-          />
         </div>
       </div>
     </div>

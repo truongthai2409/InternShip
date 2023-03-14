@@ -56,6 +56,7 @@ export default function Container({
             type='text'
             placeholder={t('lastNameTL')}
             register={register}
+            subtitle={t('lastName')}
           >
             {err.lastName?.message}
           </CustomInput>
@@ -65,6 +66,7 @@ export default function Container({
             type='text'
             placeholder={t('firstNameTL')}
             register={register}
+            subtitle={t('firstName')}
           >
             {err.firstName?.message}
           </CustomInput>
@@ -78,6 +80,7 @@ export default function Container({
             register={register}
             subtitle={t('mailingFormatTL')}
           >
+            {console.log(err.email?.message, 'eroo')}
             {err.email?.message}
             {errorMessage?.Email}
           </CustomInput>
