@@ -1,7 +1,7 @@
 import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import PlaylistAddCheckOutlinedIcon from '@mui/icons-material/PlaylistAddCheckOutlined';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import {
   indexFilterChange,
@@ -18,31 +18,41 @@ export default function HeaderWithCandidate() {
     dispatch(indexFilterChange(0));
     dispatch(pageFilterChange(1));
   };
+  const { user } = useSelector((state) => state.profile);
+  const verifiedEmail =
+    user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
   return (
     <div className='header__hr'>
-      <Link
-        to='/candidate/view-list-apply'
-        onClick={() => handleClick()}
-        className={`${
-          path === 'view-list-apply' ? 'active' : ''
-        } header__hr-post`}
-      >
-        <PlaylistAddCheckOutlinedIcon
-          fontSize='large'
-          style={{ color: '#00B074' }}
-        />
-        <span className='header__hr-post-post'>{t('appliedJobTL')}</span>
-      </Link>
-      <Link
-        to='/candidate/view-list-care'
-        onClick={() => handleClick()}
-        className={`${
-          path === 'view-list-care' ? 'active' : ''
-        } header__hr-post`}
-      >
-        <FormatAlignJustifyIcon style={{ color: '#00B074' }} />
-        <span className='header__hr-post-post'>{t('savedJobsTL')}</span>
-      </Link>
+      {verifiedEmail ? (
+        <></>
+      ) : (
+        <>
+          {' '}
+          <Link
+            to='/candidate/view-list-apply'
+            onClick={() => handleClick()}
+            className={`${
+              path === 'view-list-apply' ? 'active' : ''
+            } header__hr-post`}
+          >
+            <PlaylistAddCheckOutlinedIcon
+              fontSize='large'
+              style={{ color: '#00B074' }}
+            />
+            <span className='header__hr-post-post'>{t('appliedJobTL')}</span>
+          </Link>
+          <Link
+            to='/candidate/view-list-care'
+            onClick={() => handleClick()}
+            className={`${
+              path === 'view-list-care' ? 'active' : ''
+            } header__hr-post`}
+          >
+            <FormatAlignJustifyIcon style={{ color: '#00B074' }} />
+            <span className='header__hr-post-post'>{t('savedJobsTL')}</span>
+          </Link>
+        </>
+      )}
     </div>
   );
 }

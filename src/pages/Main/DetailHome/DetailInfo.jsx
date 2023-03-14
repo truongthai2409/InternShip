@@ -8,6 +8,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
+import { salaryHelpers } from 'src/helpers/salaryHelpers';
 
 const DetailInfo = (props) => {
   const title = [
@@ -30,9 +31,9 @@ const DetailInfo = (props) => {
     props.detail.jobPosition,
     props.detail.jobType,
     props.detail.amount,
-    props.detail.salaryMin + 'VND' + ' - ' + props.detail.salaryMax + 'VND',
-    dateTimeHelper.changeDateTimeLocale(props.detail.createdDate),
-    props.detail.endTime,
+    salaryHelpers.changeSalary(props.detail.salaryMin) + 'VND' + ' - ' + salaryHelpers.changeSalary(props.detail.salaryMax) + 'VND',
+    dateTimeHelper.changeDateLocale(props.detail.createdDate),
+    dateTimeHelper.changeDateLocale(props.detail.endTime),
   ];
   const myArray = Array.from({ length: 6 }, (_, i) => i + 1);
   return (

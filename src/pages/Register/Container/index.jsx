@@ -1,10 +1,7 @@
 import { Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import ArrowButton from 'src/components/shared/ArrowButton/index';
 import Button from 'src/components/shared/Button';
 import CustomInput from 'src/components/shared/CustomInput/index';
-import InputFile from 'src/components/shared/InputFile';
-import SelectCustom from 'src/components/shared/Select';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { TabTitle } from 'src/utils/GeneralFunctions';
