@@ -13,7 +13,7 @@ const authenticate = {
     const url = `/api/mail/activeUser/?email=${data.email}`;
 
     return internshipTransport.get(url, {
-      email: data.email
+      email: data.email,
     });
   },
 };

@@ -117,6 +117,21 @@ const Components = ({ profile }) => {
           alt='avatar'
         ></img>
       </div>
+      <div className='profile-form__content-item'>
+        <InputFile
+          label={t('avatarTL')}
+          requirementField={false}
+          id='avatar'
+          format='image'
+          radius='2px'
+          setValue={setValue}
+          register={register}
+          // imageCurrent={user?.user?.avatar}
+        >
+          <button onClick={onSubmit}>Save</button>
+          {errors.avatar?.message}
+        </InputFile>
+      </div>
       <div className='profile_footer'>
         <div style={{ textAlign: 'center' }}>
           <div className='profile_name'>

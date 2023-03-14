@@ -26,10 +26,13 @@ const jobCandidateSlice = createSlice({
         }
       }
     );
-    builder.addCase(getJobCareByCandidateThunk.fulfilled, (state, { payload }) => {
-      state.jobCare = payload.contents;
-      state.jobCareHavePage = payload;
-    });
+    builder.addCase(
+      getJobCareByCandidateThunk.fulfilled,
+      (state, { payload }) => {
+        state.jobCare = payload.contents;
+        state.jobCareHavePage = payload;
+      }
+    );
     builder.addCase(addJobCare.fulfilled, (state, action) => {
       state.jobCare = [...state.jobCare, action.payload];
     });

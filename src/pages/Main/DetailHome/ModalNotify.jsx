@@ -3,10 +3,10 @@ import Button from 'src/components/shared/Button';
 import { useNavigate } from 'react-router-dom';
 
 const ModalNotify = () => {
-    const navigate = useNavigate()
-    const handleClick = () =>{
-        navigate('/login');
-    }
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/login');
+  };
   return (
     <div className='modalNotify'>
       <h2>Bạn cần đăng nhập để ứng tuyển công việc này</h2>

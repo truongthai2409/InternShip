@@ -43,7 +43,6 @@ const ProfileForm = ({ profile: user }) => {
         break;
     }
   };
-  const handleChange = (e) => {};
 
   const {
     register,
@@ -282,6 +281,7 @@ const ProfileForm = ({ profile: user }) => {
               id='school'
               register={register}
               label={t('school')}
+              requirementField={false}
               options={universityList}
               placeholder={t('placeholder')}
             />
@@ -379,7 +379,19 @@ const ProfileForm = ({ profile: user }) => {
               {errors.workLocation?.message}
             </SelectCustom>
           </div>
-          <div className='profile_children_handle'>
+          <div className='profile-form__content-item'>
+            <CustomInput
+              register={register}
+              setValue={setValue}
+              id='desiredJob'
+              label={t('desiredJob')}
+              className='profile-form__input'
+              radius='2px'
+              height='45px'
+              border='1px solid #777777'
+            >
+              {errors.desiredJob?.message}
+            </CustomInput>
             <Tooltip title={t('changeCV')}>
               <div
                 className='profile_children_handle__item'
@@ -395,7 +407,6 @@ const ProfileForm = ({ profile: user }) => {
               setOpen={setOpens}
               children={
                 <form
-                  onChange={handleChange}
                   style={{
                     width: 300,
                     height: 300,

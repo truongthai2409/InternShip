@@ -96,8 +96,7 @@ const SearchHR = () => {
       getCandidateThunk([limit, currentPage, searchValue, valueLocation])
     );
   };
-  const handleCheck = (value) => {
-  };
+  const handleCheck = (value) => {};
   const handleLocation = (value) => {
     if (value === null) {
       setValueLocation('');
