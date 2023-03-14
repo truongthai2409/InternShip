@@ -23,18 +23,18 @@ const MainLayout = () => {
   //   () => user && dispatch(getUserById(user)),
   //   [ user]
   // );
-  const userDetail = useSelector((state)=>state.profile.user)
+  const userDetail = useSelector((state) => state.profile.user);
   const verifiedEmail =
-  userDetail?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+    userDetail?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
   useEffect(() => {
-    dispatch(getUserById(user))
+    dispatch(getUserById(user));
   }, []);
   return (
     <Container>
       <div className='main__layout'>
         <HeaderContainer />
         <div className='main__layout-body-outlet'>
-          {verifiedEmail ? <VerifyEmail/> : <Outlet />}
+          {verifiedEmail ? <VerifyEmail /> : <Outlet />}
         </div>
         <Footer />
       </div>

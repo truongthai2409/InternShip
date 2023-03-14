@@ -75,7 +75,6 @@ export const getJobApplyListByCandidate = createAsyncThunk(
 export const getJobCareByCandidateThunk = createAsyncThunk(
   'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
-    console.log(args)
     if (args.user.userDetailsDTO.role.name.includes('Role_Candidate')) {
       const res = await getJobCareByCandidate(args.user.id);
       return res;
@@ -134,9 +133,7 @@ export const getAllJobCare = createAsyncThunk(
       .then((res) => {
         return res.data;
       })
-      .catch((err) => {
-        console.log('err 1000 Care', err);
-      });
+      .catch((err) => {});
   }
 );
 export const getAllJobApply = createAsyncThunk(

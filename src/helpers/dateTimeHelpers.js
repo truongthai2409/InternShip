@@ -18,7 +18,6 @@ const changeTimeLocale = (time, timeStyle = DATE_TIME_STYLE.SHORT) => {
 const changeDateLocale = (date, dateStyle = DATE_TIME_STYLE.SHORT) => {
   const dateData = new Date(date);
   const locale = localStorage.getItem('lang');
-  console.log(locale)
   if (locale === 'en') {
     return dateData.toLocaleDateString('en-US');
   }

@@ -40,7 +40,7 @@ const LoginWithGoogle = () => {
         );
         navigate(`/candidate`, { replace: true });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, []);
   return <></>;
 };

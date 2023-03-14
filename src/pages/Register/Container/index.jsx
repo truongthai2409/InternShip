@@ -77,7 +77,6 @@ export default function Container({
             register={register}
             subtitle={t('mailingFormatTL')}
           >
-            {console.log(err.email?.message, 'eroo')}
             {err.email?.message}
             {errorMessage?.Email}
           </CustomInput>

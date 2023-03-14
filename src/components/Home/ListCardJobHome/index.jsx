@@ -24,7 +24,6 @@ const ListCardJobHome = ({
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
   };
-  console.log(jobList);
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
       <div className='filter-panel-home__wrapper'>
