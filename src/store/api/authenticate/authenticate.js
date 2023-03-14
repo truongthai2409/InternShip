@@ -9,6 +9,13 @@ const authenticate = {
       newPassword: data.newPassword,
     });
   },
+  verifyEmail: (data) => {
+    const url = `/api/mail/activeUser/?email=${data.email}`;
+
+    return internshipTransport.get(url, {
+      email: data.email
+    });
+  },
 };
 
 export default authenticate;

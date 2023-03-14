@@ -71,7 +71,6 @@ function ResetPassword() {
         toast.error(err);
       });
   };
-  // console.log(errors);
   return (
     <>
       <HeaderContainer />
@@ -82,7 +81,7 @@ function ResetPassword() {
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <CustomInput
-              label='Nhập mật khẩu mới'
+              label='Mật khẩu mới'
               id='password'
               type='password'
               name='password'
@@ -94,7 +93,7 @@ function ResetPassword() {
             </CustomInput>
 
             <CustomInput
-              label='Nhập lại mật khẩu'
+              label='Xác nhận mật khẩu mới'
               id='confirmPassword'
               type='password'
               name='confirmPassword'

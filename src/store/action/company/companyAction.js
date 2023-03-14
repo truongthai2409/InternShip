@@ -1,8 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import companyManagementAPI from 'src/store/api/company/companyManagementAPI';
 
-const { getJobByCompany, getMajorListAPI, getMajorDetailAPI } =
-  companyManagementAPI;
+const {
+  getJobByCompany,
+  getMajorListAPI,
+  getMajorDetailAPI,
+  getDetailCompanyByid,
+} = companyManagementAPI;
 
 export const getJobByCompanyThunk = createAsyncThunk(
   'company/getJobByCompanyThunk',
@@ -22,6 +26,14 @@ export const getMajorDetailThunk = createAsyncThunk(
   'major/getMajorDetail',
   async (args) => {
     const res = await getMajorDetailAPI(args);
+    return res;
+  }
+);
+
+export const getDetailCompanyByidThunk = createAsyncThunk(
+  'company/detail',
+  async (id) => {
+    const res = await getDetailCompanyByid(id);
     return res;
   }
 );
