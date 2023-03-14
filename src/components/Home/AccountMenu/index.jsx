@@ -107,7 +107,7 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.user?.role?.name
+          to={`/${user?.userDetailsDTO?.role?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/profile`}
           onClick={() => {
@@ -121,7 +121,7 @@ const AccountMenu = ({ linkImg }) => {
         </Link>
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.user?.role?.name
+          to={`/${user?.userDetailsDTO?.role?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/setting`}
           onClick={() => {

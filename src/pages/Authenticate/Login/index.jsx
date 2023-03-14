@@ -58,16 +58,16 @@ const Login = () => {
         const role = res.payload.role;
         switch (role) {
           case 'Role_Partner':
-            navigate(`/partner`, { replace: true });
+            navigate(`/partner`);
             break;
           case 'Role_HR':
-            navigate(`/hr`, { replace: true });
+            navigate(`/hr`);
             break;
           case 'Role_Candidate':
-            navigate(`/candidate`, { replace: true });
+            navigate(`/candidate`);
             break;
           default:
-            navigate('/', { replace: true });
+            navigate('/');
         }
       }
     } catch (error) {

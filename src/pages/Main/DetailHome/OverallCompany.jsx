@@ -2,31 +2,35 @@ import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import PictureInPictureAltOutlinedIcon from '@mui/icons-material/PictureInPictureAltOutlined';
-
-const OverallCompany = () => {
+import LanguageIcon from '@mui/icons-material/Language';
+import EmailIcon from '@mui/icons-material/Email';
+import GroupIcon from '@mui/icons-material/Group';
+const OverallCompany = (props) => {
+  const title = ['Website', 'Email', 'Quy mô'];
+  const icon = [<LanguageIcon />, <EmailIcon />, <GroupIcon />];
+  const name = [
+    props.company.hrDTO.companyDTO.website,
+    props.company.hrDTO.companyDTO.email,
+  ];
+  const myArray = Array.from({ length: 3 }, (_, i) => i + 1);
   return (
     <div className='detailInfoHome'>
       <div className='detailInfoHome__left'>
         <div className='detailInfoHome__left__info'>
-          <h2>Giới thiệu về công ty R2S</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-            neque aperiam, impedit possimus maxime, tempora rem ducimus earum
-            vitae sunt vel necessitatibus molestiae sapiente tenetur
-            reprehenderit debitis, ea non qui?
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
-            magnam velit, numquam repudiandae totam enim cumque quae. Aliquam
-            fuga adipisci placeat, nam velit perspiciatis exercitationem
-            incidunt voluptate eaque, repellendus iste!
-          </p>
+          <h2>Giới thiệu về {props?.detail?.companyDTO?.name}</h2>
+          {props.company?.description.split('\n').map((item) => {
+            return <p>{item}</p>;
+          })}
         </div>
         <div className='detailInfoHome__left__info'>
           <h2>Địa điểm làm việc</h2>
           <p className='location'>
             <LocationOnIcon />
-            <p>1164 đường Phạm Văn Đồng, P.Linh Đông, TP Thủ Đức, TPHCM</p>
+            <p>
+              {props?.company?.locationDTO?.address},{' '}
+              {props?.company?.locationDTO?.districtDTO?.name},{' '}
+              {props?.company?.locationDTO?.districtDTO?.provinceDTO?.name}
+            </p>
           </p>
         </div>
       </div>
@@ -37,48 +41,17 @@ const OverallCompany = () => {
             alt=''
           />
         </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
-        <div className='detailInfoHome__right__item'>
-          <PictureInPictureAltOutlinedIcon />
-          <div>
-            <p>Vị trí làm việc</p>
-            <p>Front end</p>
-          </div>
-        </div>
+        {myArray.map((item, index) => {
+          return (
+            <div className='detailInfoHome__right__item'>
+              {icon[index]}
+              <div>
+                <p>{title[index]}</p>
+                <p>{name[index]}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

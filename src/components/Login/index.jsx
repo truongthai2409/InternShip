@@ -26,13 +26,13 @@ export default function Login() {
         >
           <h4 className='name' style={{ fontSize: '14px' }}>
             {' '}
-            {user?.user?.lastName} {user?.user?.firstName}{' '}
+            {user?.userDetailsDTO?.lastName} {user?.userDetailsDTO?.firstName}{' '}
           </h4>
 
           <AccountMenu
             linkImg={
-              user?.user?.avatar
-                ? `${user?.user?.avatar}`
+              user?.userDetailsDTO?.avatar
+                ? `${user?.userDetailsDTO?.avatar}`
                 : 'https://as2.ftcdn.net/v2/jpg/03/49/49/79/1000_F_349497933_Ly4im8BDmHLaLzgyKg2f2yZOvJjBtlw5.jpg'
             }
           />
