@@ -26,6 +26,7 @@ import InfoJob from './InfoJob';
 const ProfileForm = ({ profile: user }) => {
   const { t } = useTranslation('userInfo');
   const [showInput, setShowInput] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   const {
     register,
@@ -66,7 +67,9 @@ const ProfileForm = ({ profile: user }) => {
   const handleEditClick = () => {
     setShowInput(!showInput);
   };
-
+  const handleEdit = () => {
+    setShowForm(!showForm);
+  };
   useEffect(() => {
     dispatch(getUniversityList([1, 20]));
   }, []);
@@ -149,280 +152,270 @@ const ProfileForm = ({ profile: user }) => {
 
   return (
     <>
-      <ProfileDetail />
-      <InfoJob />
-      <form className='profile-form__wrapper' autoComplete='off'>
-        <Typography paragraph={true} className='profile-form__header'>
-          {t('changePro')}
-          {showInput ? (
-            <IconButton onClick={handleEditClick}>
-              <EditIcon sx={{ color: '#fff' }} />
-            </IconButton>
-          ) : (
-            ''
-          )}
-        </Typography>
-        <div className='profile-form__content'>
-          <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='lastName'
-              label={t('lastname')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.lastName?.message}
-            </CustomInput>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='firstName'
-              label={t('firstname')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.firstName?.message}
-            </CustomInput>
-          </div>
-          <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='email'
-              label={t('email')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.email?.message}
-            </CustomInput>
-            <>DOB</>
-          </div>
-          <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='phone'
-              type='text'
-              label={t('phoneNum')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.phone?.message}
-            </CustomInput>
-            <SelectCustom
-              setValue={setValue}
-              id='gender'
-              register={register}
-              label={t('gender')}
-              defaultValue={user?.user?.gender}
-              options={genderList}
-              placeholder={t('placeholder')}
-            >
-              {errors.gender?.message}
-            </SelectCustom>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectCustom
-              setValue={setValue}
-              id='province'
-              register={register}
-              label={t('province')}
-              options={provinceList}
-              placeholder={t('placeholder')}
-              onChange={(id) => getDistrict(id)}
-            >
-              {errors.province?.message}
-            </SelectCustom>
-            <SelectCustom
-              setValue={setValue}
-              id='district'
-              register={register}
-              label={t('district')}
-              options={districtList}
-              placeholder={t('placeholder')}
-            >
-              {errors.district?.message}
-            </SelectCustom>
-          </div>
-          <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='address'
-              type='text'
-              label={t('address')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.address?.message}
-            </CustomInput>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectCustom
-              setValue={setValue}
-              id='school'
-              register={register}
-              label={t('school')}
-              requirementField={false}
-              options={universityList}
-              placeholder={t('placeholder')}
-            />
-          </div>
-        </div>
-        <div className='profile-form__action'>
-          <Button
-            name={t('update')}
-            bheight={44}
-            onClick={handleSubmit(onSubmit)}
-            fz='14px'
-            outline='1.5px solid #DEDEDE'
-            className='profile-form__action-btn'
-          />
-          <Button
-            name={t('cancel')}
-            bheight={44}
-            onClick={handleEditClick}
-            fz='14px'
-            outline='1.5px solid #DEDEDE'
-            className='profile-form__action-btn__cancel'
-          />
-        </div>
-      </form>
-      <form className='profile-form__wrapper job' autoComplete='off'>
-        <Typography paragraph={true} className='profile-form__header'>
-          {t('jobInformation')}
-          {showInput ? (
-            <IconButton onClick={handleEditClick}>
-              <EditIcon sx={{ color: '#fff' }} />
-            </IconButton>
-          ) : (
-            ''
-          )}
-        </Typography>
-        <div className='profile-form__content'>
-          <div className='profile-form__content-item'>
-            <CustomInput
-              register={register}
-              setValue={setValue}
-              id='desiredJob'
-              label={t('desiredJob')}
-              className='profile-form__input'
-              radius='2px'
-              height='45px'
-              border='1px solid #777777'
-            >
-              {errors.desiredJob?.message}
-            </CustomInput>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectCustom
-              setValue={setValue}
-              id='jobPosition'
-              register={register}
-              label={t('jobPosition')}
-              options={jobPosition}
-              placeholder={t('placeholder')}
-            >
-              {errors.jobPosition?.message}
-            </SelectCustom>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectCustom
-              setValue={setValue}
-              id='major'
-              register={register}
-              label={t('major')}
-              options={majorList}
-              placeholder={t('placeholder')}
-            >
-              {errors.major?.message}
-            </SelectCustom>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectMulti
-              id='jobType'
-              arrList={listWorkingFormat}
-              register={register}
-              placeholder={t('placeholder')}
-              label={t('jobType')}
-            >
-              {errors.jobType?.message}
-            </SelectMulti>
-          </div>
-          <div className='profile-form__content-item'>
-            <SelectCustom
-              setValue={setValue}
-              id='workLocation'
-              register={register}
-              label={t('workLocation')}
-              options={provinceList}
-              placeholder={t('placeholder')}
-            >
-              {errors.workLocation?.message}
-            </SelectCustom>
-          </div>
-          <div className='profile-form__content-item'>
-            <InputFile
-              label='Upload your CV'
-              setValue={setValue}
-              register={register}
-              id='CV'
-              requirementField={true}
-              accept='.docx, .pdf, .xlsx'
-            />
-          </div>
-          <div className='profile-form__content-item'>
-            <div>
-              <InputLabel
-                htmlFor='coverLetter'
-                sx={{
-                  fontSize: '15px',
-                  fontWeight: 'bold',
-                  color: '#000',
-                  marginBottom: '10px',
-                }}
+      {!showForm && <ProfileDetail setShowForm={setShowForm} />}
+      {showForm && (
+        <form className='profile-form__wrapper' autoComplete='off'>
+          <Typography paragraph={true} className='profile-form__header'>
+            {t('changePro')}
+          </Typography>
+          <div className='profile-form__content'>
+            <div className='profile-form__content-item'>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='lastName'
+                label={t('lastname')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
               >
-                {t('coverLetter')}
-              </InputLabel>
-              <TextareaAutosize
-                id='coverLetter'
-                style={{ width: '841px', height: '200px', padding: '20px' }}
-                placeholder={t('placeholderCover')}
-                {...register('coverLetter')}
+                {errors.lastName?.message}
+              </CustomInput>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='firstName'
+                label={t('firstname')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
+              >
+                {errors.firstName?.message}
+              </CustomInput>
+            </div>
+            <div className='profile-form__content-item'>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='email'
+                label={t('email')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
+              >
+                {errors.email?.message}
+              </CustomInput>
+              <>DOB</>
+            </div>
+            <div className='profile-form__content-item'>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='phone'
+                type='text'
+                label={t('phoneNum')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
+              >
+                {errors.phone?.message}
+              </CustomInput>
+              <SelectCustom
+                setValue={setValue}
+                id='gender'
+                register={register}
+                label={t('gender')}
+                defaultValue={user?.user?.gender}
+                options={genderList}
+                placeholder={t('placeholder')}
+              >
+                {errors.gender?.message}
+              </SelectCustom>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectCustom
+                setValue={setValue}
+                id='province'
+                register={register}
+                label={t('province')}
+                options={provinceList}
+                placeholder={t('placeholder')}
+                onChange={(id) => getDistrict(id)}
+              >
+                {errors.province?.message}
+              </SelectCustom>
+              <SelectCustom
+                setValue={setValue}
+                id='district'
+                register={register}
+                label={t('district')}
+                options={districtList}
+                placeholder={t('placeholder')}
+              >
+                {errors.district?.message}
+              </SelectCustom>
+            </div>
+            <div className='profile-form__content-item'>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='address'
+                type='text'
+                label={t('address')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
+              >
+                {errors.address?.message}
+              </CustomInput>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectCustom
+                setValue={setValue}
+                id='school'
+                register={register}
+                label={t('school')}
+                requirementField={false}
+                options={universityList}
+                placeholder={t('placeholder')}
               />
             </div>
           </div>
-        </div>
-        <div className='profile-form__action'>
-          <Button
-            name={t('update')}
-            bheight={44}
-            onClick={handleSubmit(onSubmit)}
-            fz='14px'
-            outline='1.5px solid #DEDEDE'
-            className='profile-form__action-btn'
-          />
-          <Button
-            name={t('cancel')}
-            bheight={44}
-            onClick={handleEditClick}
-            fz='14px'
-            outline='1.5px solid #DEDEDE'
-            className='profile-form__action-btn__cancel'
-          />
-        </div>
-      </form>
+          <div className='profile-form__action'>
+            <Button
+              name={t('update')}
+              bheight={44}
+              onClick={handleSubmit(onSubmit)}
+              fz='14px'
+              outline='1.5px solid #DEDEDE'
+              className='profile-form__action-btn'
+            />
+            <Button
+              name={t('cancel')}
+              bheight={44}
+              onClick={handleEdit}
+              fz='14px'
+              outline='1.5px solid #DEDEDE'
+              className='profile-form__action-btn__cancel'
+            />
+          </div>
+        </form>
+      )}
+      {!showInput && <InfoJob setShowInput={setShowInput} />}
+      {showInput && (
+        <form className='profile-form__wrapper job' autoComplete='off'>
+          <Typography paragraph={true} className='profile-form__header'>
+            {t('jobInformation')}
+          </Typography>
+          <div className='profile-form__content'>
+            <div className='profile-form__content-item'>
+              <CustomInput
+                register={register}
+                setValue={setValue}
+                id='desiredJob'
+                label={t('desiredJob')}
+                className='profile-form__input'
+                radius='2px'
+                height='45px'
+                border='1px solid #777777'
+              >
+                {errors.desiredJob?.message}
+              </CustomInput>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectCustom
+                setValue={setValue}
+                id='jobPosition'
+                register={register}
+                label={t('jobPosition')}
+                options={jobPosition}
+                placeholder={t('placeholder')}
+              >
+                {errors.jobPosition?.message}
+              </SelectCustom>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectCustom
+                setValue={setValue}
+                id='major'
+                register={register}
+                label={t('major')}
+                options={majorList}
+                placeholder={t('placeholder')}
+              >
+                {errors.major?.message}
+              </SelectCustom>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectMulti
+                id='jobType'
+                arrList={listWorkingFormat}
+                register={register}
+                placeholder={t('placeholder')}
+                label={t('jobType')}
+              >
+                {errors.jobType?.message}
+              </SelectMulti>
+            </div>
+            <div className='profile-form__content-item'>
+              <SelectCustom
+                setValue={setValue}
+                id='workLocation'
+                register={register}
+                label={t('workLocation')}
+                options={provinceList}
+                placeholder={t('placeholder')}
+              >
+                {errors.workLocation?.message}
+              </SelectCustom>
+            </div>
+            <div className='profile-form__content-item'>
+              <InputFile
+                label='CV đính kèm'
+                setValue={setValue}
+                register={register}
+                id='CV'
+                requirementField={true}
+                accept='.docx, .pdf, .xlsx'
+              />
+            </div>
+            <div className='profile-form__content-item'>
+              <div>
+                <InputLabel
+                  htmlFor='coverLetter'
+                  sx={{
+                    fontSize: '15px',
+                    fontWeight: 'bold',
+                    color: '#000',
+                    marginBottom: '10px',
+                  }}
+                >
+                  {t('coverLetter')}
+                </InputLabel>
+                <TextareaAutosize
+                  id='coverLetter'
+                  style={{ width: '841px', height: '200px', padding: '20px' }}
+                  placeholder={t('placeholderCover')}
+                  {...register('coverLetter')}
+                />
+              </div>
+            </div>
+          </div>
+          <div className='profile-form__action'>
+            <Button
+              name={t('update')}
+              bheight={44}
+              onClick={handleSubmit(onSubmit)}
+              fz='14px'
+              outline='1.5px solid #DEDEDE'
+              className='profile-form__action-btn'
+            />
+            <Button
+              name={t('cancel')}
+              bheight={44}
+              onClick={handleEditClick}
+              fz='14px'
+              outline='1.5px solid #DEDEDE'
+              className='profile-form__action-btn__cancel'
+            />
+          </div>
+        </form>
+      )}
     </>
   );
 };

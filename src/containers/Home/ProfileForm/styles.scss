@@ -9,6 +9,7 @@
   width: 100%;
   height: fit-content;
   border: 1px solid #ccc;
+  margin-bottom: 40px;
   .profile-form__header {
     width: 100%;
     height: 55px;
@@ -88,6 +89,7 @@
   width: 100%;
   height: fit-content;
   border: 1px solid #ccc;
+  margin-bottom: 40px;
   .profile-detail__header {
     width: 100%;
     height: 55px;
@@ -106,19 +108,19 @@
       margin-right: 30px;
     }
   }
-  .profile-detail{
+  .profile-detail {
     display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 20px;
     &-item {
-      margin: 0 30px; 
+      margin: 0 30px;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       width: 40%;
     }
-  } 
+  }
 }

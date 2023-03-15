@@ -5,7 +5,7 @@
   border: 1px solid #dedede;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 10px 10px 0px;
-  padding: 10px 40px;
+  padding: 40px 40px;
   &__form {
     width: 100%;
     &--name {
@@ -61,7 +61,7 @@
     }
   }
   .register-container__footer {
-    margin: 20px auto 20px !important;
+    margin: 10px auto 20px !important;
   }
 }
 .custom_req_can {

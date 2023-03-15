@@ -6,26 +6,20 @@ import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import './styles.scss';
 
-const ProfileDetail = () => {
+const ProfileDetail = (props) => {
   const { user } = useSelector((state) => state.profile);
   const { t } = useTranslation('userInfo');
 
-  const [showInput, setShowInput] = useState(true);
-
   const handleEditClick = () => {
-    setShowInput(!showInput);
+    props.setShowForm(true);
   };
   return (
     <div className='profile-detail__wrapper'>
       <Typography paragraph={true} className='profile-detail__header'>
         {t('changePro')}
-        {showInput ? (
-          <IconButton onClick={handleEditClick}>
-            <EditIcon sx={{ color: '#fff' }} />
-          </IconButton>
-        ) : (
-          ''
-        )}
+        <IconButton onClick={handleEditClick}>
+          <EditIcon sx={{ color: '#fff' }} />
+        </IconButton>
       </Typography>
 
       <div className='profile-detail'>
