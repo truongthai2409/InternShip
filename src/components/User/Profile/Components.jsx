@@ -53,19 +53,6 @@ const Components = ({ profile }) => {
     setCheckedEmail(event.target.checked);
   };
 
-  const handleClick = (number) => {
-    switch (number) {
-      case 1: {
-        return setOpens(!opens);
-      }
-      case 2: {
-        return setOpen(!open);
-      }
-      default:
-        break;
-    }
-  };
-  console.log(profile, 'profile');
   const onSubmit = async (data) => {
     const userSessionStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -98,6 +85,18 @@ const Components = ({ profile }) => {
   useEffect(() => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmitFile = (event) => {
+    event.preventDefault();
+    // do something with the file, such as upload it to a server
+    console.log('File uploaded:', file);
+  };
   return (
     <div className='profiles'>
       <div className='profile_header'>
@@ -117,22 +116,12 @@ const Components = ({ profile }) => {
           alt='avatar'
         ></img>
       </div>
-      {/* <div className='profile-form__content-item'>
-        <InputFile
-          label={t('avatarTL')}
-          requirementField={false}
-          id='avatar'
-          format='image'
-          radius='2px'
-          setValue={setValue}
-          register={register}
-          // imageCurrent={user?.user?.avatar}
-        >
-          <button onClick={onSubmit}>Save</button>
-          {errors.avatar?.message}
-        </InputFile>
-      </div> */}
       <div className='profile_footer'>
+        <form onSubmit={handleSubmitFile} className='upload-avatar'>
+          <label for='fileInput' class='custom-file-upload'></label>
+          <input type='file' id='fileInput' onChange={handleFileChange} />
+          {/* <button type='submit'>Upload</button> */}
+        </form>
         <div style={{ textAlign: 'center' }}>
           <div className='profile_name'>
             <Typography
@@ -257,7 +246,7 @@ const Components = ({ profile }) => {
           )} */}
         </div>
         <div>
-          {profile?.user?.role?.id === 3 ? (
+          {profile?.userDetailsDTO?.role?.id === 3 ? (
             <div className='profile_click'>
               <div className='profile_check'>
                 <div className='profile_check__items'>

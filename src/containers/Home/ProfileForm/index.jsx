@@ -169,6 +169,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
+                check={true}
               >
                 {errors.lastName?.message}
               </CustomInput>
@@ -181,6 +182,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
+                check={true}
               >
                 {errors.firstName?.message}
               </CustomInput>
@@ -195,6 +197,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
+                check={true}
               >
                 {errors.email?.message}
               </CustomInput>
@@ -211,6 +214,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
+                check={true}
               >
                 {errors.phone?.message}
               </CustomInput>
