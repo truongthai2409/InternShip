@@ -29,7 +29,7 @@ const httpHandler = (baseURL) => {
 
       switch (error.response.status) {
         case 403:
-          history.push('/403');
+          // history.push('/403');
           return Promise.reject(error);
         case 401:
           history.push('/');
