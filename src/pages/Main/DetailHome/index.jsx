@@ -197,16 +197,16 @@ const DetailHome = () => {
               </div>
               <div className='wrapperDetail__title__right'>
                 <Button
-                  name={'Ứng tuyển ngay'}
+                  name={'ỨNG TUYỂN NGAY'}
                   bwidth='211px'
                   bheight='46px'
-                  padding='12px 32px'
+                  padding='0px 0px'
                   bg='#00B074'
                   fz='17px'
                   onClick={() => handleClick()}
                 ></Button>
                 <Button
-                  name={isSave ? `Đã lưu` : 'Lưu tin'}
+                  name={isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
                   bwidth='211px'
                   bheight='46px'
                   padding='12px 32px'

@@ -31,7 +31,11 @@ const DetailInfo = (props) => {
     props.detail.jobPosition,
     props.detail.jobType,
     props.detail.amount,
-    salaryHelpers.changeSalary(props.detail.salaryMin) + 'VND' + ' - ' + salaryHelpers.changeSalary(props.detail.salaryMax) + 'VND',
+    salaryHelpers.changeSalary(props.detail.salaryMin) +
+      'VND' +
+      ' - ' +
+      salaryHelpers.changeSalary(props.detail.salaryMax) +
+      'VND',
     dateTimeHelper.changeDateLocale(props.detail.createdDate),
     dateTimeHelper.changeDateLocale(props.detail.endTime),
   ];
@@ -82,15 +86,15 @@ const DetailInfo = (props) => {
           </p>
           <div className='detailInfoHome__left__info__btn'>
             <Button
-              name={'Ứng tuyển ngay'}
+              name={'ỨNG TUYỂN NGAY'}
               bwidth='211px'
               bheight='46px'
-              padding='12px 32px'
+              padding='0px 0px'
               bg='#00B074'
               fz='17px'
             ></Button>
             <Button
-              name={props.isSave ? `Đã lưu` : 'Lưu tin'}
+              name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
               bwidth='211px'
               bheight='46px'
               padding='12px 32px'
