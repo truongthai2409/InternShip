@@ -8,6 +8,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
+import { salaryHelpers } from 'src/helpers/salaryHelpers';
 
 const DetailInfo = (props) => {
   const title = [
@@ -30,9 +31,13 @@ const DetailInfo = (props) => {
     props.detail.jobPosition,
     props.detail.jobType,
     props.detail.amount,
-    props.detail.salaryMin + 'VND' + ' - ' + props.detail.salaryMax + 'VND',
-    dateTimeHelper.changeDateTimeLocale(props.detail.createdDate),
-    props.detail.endTime,
+    salaryHelpers.changeSalary(props.detail.salaryMin) +
+      'VND' +
+      ' - ' +
+      salaryHelpers.changeSalary(props.detail.salaryMax) +
+      'VND',
+    dateTimeHelper.changeDateLocale(props.detail.createdDate),
+    dateTimeHelper.changeDateLocale(props.detail.endTime),
   ];
   const myArray = Array.from({ length: 6 }, (_, i) => i + 1);
   return (
@@ -81,15 +86,15 @@ const DetailInfo = (props) => {
           </p>
           <div className='detailInfoHome__left__info__btn'>
             <Button
-              name={'Ứng tuyển ngay'}
+              name={'ỨNG TUYỂN NGAY'}
               bwidth='211px'
               bheight='46px'
-              padding='12px 32px'
+              padding='0px 0px'
               bg='#00B074'
               fz='17px'
             ></Button>
             <Button
-              name={props.isSave ? `Đã lưu` : 'Lưu tin'}
+              name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
               bwidth='211px'
               bheight='46px'
               padding='12px 32px'

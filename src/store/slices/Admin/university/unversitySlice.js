@@ -273,7 +273,6 @@ export const addUniversityByAdmin = createAsyncThunk(
         return res.data;
       })
       .catch((error) => {
-        console.log(error.response.data);
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess('Tạo mới Trường không thành công')
         );

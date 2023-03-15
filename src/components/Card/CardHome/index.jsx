@@ -184,9 +184,7 @@ const CardHome = (props) => {
                 style={{ fontSize: `${props.fontSize + 2}px` }}
               />
               <p style={{ fontSize: `${props.fontSize}px` }}>
-                {`${changeDateLocale(props.time[0])} - ${changeDateLocale(
-                  props.time[1]
-                )}`}
+                {`${props.time[0]} - ${props.time[1]}`}
               </p>
             </div>
           </div>

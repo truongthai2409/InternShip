@@ -213,8 +213,6 @@ const BaseInformationUniversity = ({
                                 amount={job.amount || `${t('notFoundTL')}`}
                                 demandPartner={true}
                                 time={[
-                                  // `${console.log(job.timeStartStr || job.createDate)}`
-                                  // `${console.log(job.timeEndStr || job.end)}`
                                   // `${changeDateLocale(job.timeStartStr) || changeDateLocale(job.createDate)}`,
                                   // `${changeDateLocale(job.timeEndStr) || changeDateLocale(job.end)}`,
                                   // `${changeDateLocale(job.timeStartStr || job.createDate)}`

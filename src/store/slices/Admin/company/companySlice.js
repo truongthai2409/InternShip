@@ -88,7 +88,6 @@ export const addCompanyByAdmin = createAsyncThunk(
         },
       })
       .then((response) => {
-        // console.log("response", response);
         thunkAPI.dispatch(
           notificationSlice.actions.successMess('Thêm công ty thành công')
         );

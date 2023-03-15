@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { getUserById } from 'src/store/slices/main/user/userSlice';
 import { TabTitle } from 'src/utils/GeneralFunctions';
@@ -9,6 +9,7 @@ import HeaderContainer from '../../components/HeaderContainer';
 import './styles.scss';
 import Container from './Container';
 import { useTranslation } from 'react-i18next';
+import VerifyEmail from 'src/components/VerifyEmail/VerifyEmail';
 const MainLayout = () => {
   const { t } = useTranslation('title');
   TabTitle(t('homeITInternshipJobsTL'));
@@ -18,19 +19,22 @@ const MainLayout = () => {
   const user =
     JSON.parse(sessionStorage.getItem('userPresent')) ||
     JSON.parse(localStorage.getItem('userPresent'));
-  const renderUser = useCallback(
-    () => user && dispatch(getUserById(user)),
-    [dispatch, user]
-  );
+  // const renderUser = useCallback(
+  //   () => user && dispatch(getUserById(user)),
+  //   [ user]
+  // );
+  const userDetail = useSelector((state) => state.profile.user);
+  const verifiedEmail =
+    userDetail?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
   useEffect(() => {
-    renderUser();
-  }, [renderUser]);
+    dispatch(getUserById(user));
+  }, []);
   return (
     <Container>
       <div className='main__layout'>
         <HeaderContainer />
         <div className='main__layout-body-outlet'>
-          <Outlet />
+          {verifiedEmail ? <VerifyEmail /> : <Outlet />}
         </div>
         <Footer />
       </div>

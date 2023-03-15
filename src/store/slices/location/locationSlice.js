@@ -68,7 +68,6 @@ export const getDistrictList = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
         return error.response.data;
       });
   }

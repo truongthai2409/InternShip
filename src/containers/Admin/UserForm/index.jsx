@@ -85,9 +85,7 @@ const UserForm = (props) => {
       } else {
         toast.error('Tạo tài khoản thất bại');
       }
-    } catch (error) {
-      console.log('error', error);
-    }
+    } catch (error) {}
   };
 
   const onUpdate = async (data) => {

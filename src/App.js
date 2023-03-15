@@ -27,9 +27,6 @@ function App() {
   }, [dispatchUserIfSave]);
   return (
     <>
-      {/* <Helmet>
-        <title>{t("homeTL")}</title>
-      </Helmet> */}
       <Router>
         <Routes>
           {publicRouter.map((routers) => {
