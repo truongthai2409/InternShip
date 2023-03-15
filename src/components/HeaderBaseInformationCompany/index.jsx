@@ -7,9 +7,6 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { Typography } from '@mui/material';
 const baseURL = process.env.REACT_APP_API;
 const HeaderBaseInformationCompany = ({ jobDetail }) => {
-  //   const onClick = () => {
-  //     console.log(123)
-  //  }
   return (
     <div>
       <Box

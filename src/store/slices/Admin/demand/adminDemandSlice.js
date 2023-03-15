@@ -138,7 +138,6 @@ export const updateDemandStatus = createAsyncThunk(
         );
       })
       .catch((error) => {
-        console.log('error', error);
         return error.response.data;
       });
   }
