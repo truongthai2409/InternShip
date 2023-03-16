@@ -170,6 +170,7 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
+    console.log('🚀 ~ file: index.jsx:173 ~ onSubmitJobForm ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -188,11 +189,12 @@ const ProfileForm = ({ profile: user }) => {
             // birthday: data.birthday,
           },
           majors: {
-            id: data.major.id,
+            id: data.major,
           },
           jobTypes: {
             id: data.jobType.id,
           },
+          jobPositions: data.jobPositions,
         }),
         fileAvatar: user?.avatar,
         fileCV: data.cv,
