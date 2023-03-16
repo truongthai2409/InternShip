@@ -242,6 +242,7 @@ const DetailHome = () => {
                   <OverallCompany
                     detail={detailJob}
                     company={detailCompanyById}
+                    listJobOfCompany={detailCompany}
                   />
                 </TabPanel>
               </Box>
