@@ -72,6 +72,7 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('Run');
     jobCare.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIdSave(item.id);
@@ -79,7 +80,7 @@ const DetailHome = () => {
       }
     });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
-      console.log(res)
+      console.log(res);
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
         (data) => {
@@ -92,67 +93,71 @@ const DetailHome = () => {
         }
       );
     });
-  }, [jobCare]);
+  }, [jobCare, id]);
 
   const handlePost = (e) => {
-    e.preventDefault();
-    const userStorage =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    if (isSave == false) {
-      const page = {
-        user: user,
-        token: userStorage?.token,
-        page: {
-          no: 0,
-          limit: 5,
-        },
-      };
-
-      const dataCareList = {
-        candidateDTO: {
-          id: user?.id,
-        },
-        jobDTO: {
-          id: id,
-        },
-      };
-
-      dispatch(addJobCare([dataCareList, userStorage?.token])).then((res) => {
-        setIsSave(true);
-        dispatch(getJobCareByCandidateThunk(page));
-      });
-
-      toast.success('Đã lưu việc làm thành công');
+    if (Object.keys(user).length == 0) {
+      setOpenNotify(true);
     } else {
-      if (user?.role?.name === 'Role_Candidate') {
-        const delJobCare = {
-          id: idSave,
+      e.preventDefault();
+      const userStorage =
+        JSON.parse(sessionStorage.getItem('userPresent')) ||
+        JSON.parse(localStorage.getItem('userPresent'));
+      if (isSave == false) {
+        const page = {
+          user: user,
           token: userStorage?.token,
+          page: {
+            no: 0,
+            limit: 5,
+          },
         };
-        dispatch(deleteJobCare([delJobCare])).then(() => {
-          const dispatchJobCare = {
-            user: user,
-            token: userStorage?.token,
-            page: {
-              no: 0,
-              limit: 1000,
-            },
-          };
-          const page = {
-            user: user,
-            token: userStorage?.token,
-            page: {
-              no: 0,
-              limit: 5,
-            },
-          };
-          setIsSave(false);
-          toast.success('Đã hủy lưu việc làm ');
-          user?.role?.name === 'Role_Candidate' &&
-            dispatch(getAllJobCare(dispatchJobCare)) &&
-            dispatch(getJobCareByCandidateThunk(page));
+
+        const dataCareList = {
+          candidateDTO: {
+            id: user?.id,
+          },
+          jobDTO: {
+            id: id,
+          },
+        };
+
+        dispatch(addJobCare([dataCareList, userStorage?.token])).then((res) => {
+          setIsSave(true);
+          dispatch(getJobCareByCandidateThunk(page));
         });
+
+        toast.success('Đã lưu việc làm thành công');
+      } else {
+        if (user?.role?.name === 'Role_Candidate') {
+          const delJobCare = {
+            id: idSave,
+            token: userStorage?.token,
+          };
+          dispatch(deleteJobCare([delJobCare])).then(() => {
+            const dispatchJobCare = {
+              user: user,
+              token: userStorage?.token,
+              page: {
+                no: 0,
+                limit: 1000,
+              },
+            };
+            const page = {
+              user: user,
+              token: userStorage?.token,
+              page: {
+                no: 0,
+                limit: 5,
+              },
+            };
+            setIsSave(false);
+            toast.success('Đã hủy lưu việc làm ');
+            user?.role?.name === 'Role_Candidate' &&
+              dispatch(getAllJobCare(dispatchJobCare)) &&
+              dispatch(getJobCareByCandidateThunk(page));
+          });
+        }
       }
     }
   };

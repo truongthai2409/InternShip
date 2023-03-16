@@ -19,8 +19,7 @@ export default function HeaderWithCandidate() {
     dispatch(pageFilterChange(1));
   };
   const { user } = useSelector((state) => state.profile);
-  const verifiedEmail =
-    user?.status?.name === 'Not available' ? true : false;
+  const verifiedEmail = user?.status?.name === 'Not available' ? true : false;
   return (
     <div className='header__hr'>
       {verifiedEmail ? (

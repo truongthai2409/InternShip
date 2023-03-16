@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import PictureInPictureAltOutlinedIcon from '@mui/icons-material/PictureInPictureAltOutlined';
@@ -64,7 +64,7 @@ const OverallCompany = (props) => {
     province: '',
   };
   const [state, dispatcher] = useReducer(reducer, initialState);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const reload = true;
   const getValuePageAndHandle = (value) => {
     const userPartner =
@@ -134,7 +134,7 @@ const OverallCompany = (props) => {
           // indexCardActive={index}
           jobListHavePages={jobPage}
           onChange={getValuePageAndHandle}
-          reload = {reload}
+          reload={reload}
         />
       </div>
     </div>

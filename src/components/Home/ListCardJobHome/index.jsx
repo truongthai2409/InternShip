@@ -16,7 +16,8 @@ const ListCardJobHome = ({
   onChange,
   jobListHavePages,
   hiddent,
-  no
+  no,
+  reload,
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -26,9 +27,24 @@ const ListCardJobHome = ({
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
   };
+  const styleInline = reload
+    ? {
+        display: 'grid',
+        padding: '10px 20px',
+        border: '1px solid #F6F6F6',
+        height: 'inherit',
+        width: '100%',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 'calc(100% - 1200px)',
+        marginTop: '30px',
+        backgroundColor: '#F6F6F6',
+        boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.25)',
+        borderRadius: '5px',
+      }
+    : {};
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
-      <div className='filter-panel-home__wrapper'>
+      <div className='filter-panel-home__wrapper' style={styleInline}>
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
@@ -83,12 +99,11 @@ const ListCardJobHome = ({
               }
               demandPartner={true}
               time={[
-                moment(job?.startDate || job?.createDate).format(
-                  'DD/MM/YYYY'
-                ),
+                moment(job?.startDate || job?.createDate).format('DD/MM/YYYY'),
                 moment(job?.endDate || job?.end).format('DD/MM/YYYY'),
               ]}
-              // locationPath={location.pathname}
+              locationPath={location.pathname}
+              reload={reload}
             />
           ))
         ) : (
@@ -98,7 +113,7 @@ const ListCardJobHome = ({
           </div>
         )}
       </div>
-      {jobListHavePages?.totalPages > 1 ? (
+      {jobListHavePages?.totalPages > 1 && reload == false ? (
         <div className='home__pagination'>
           <PaginationCustom
             page={page}

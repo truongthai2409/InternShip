@@ -38,15 +38,15 @@ const HRInfo = () => {
       navigate('/home', { replace: true });
       dispatch(updateStatusRegisterForHR('idleRegister'));
     }
-  }, [statusRegister, dispatch,navigate]);
+  }, [statusRegister, dispatch, navigate]);
 
   const onSubmit = async (data) => {
     const hrData = {
       hr: JSON.stringify({
         user: {
-          username: data.username,
+          username: data.email,
           phone: data.phone,
-          gender: parseInt(data.gender),
+          // gender: parseInt(data.gender),
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,

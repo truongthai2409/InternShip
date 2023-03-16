@@ -364,7 +364,8 @@ const Home = (props) => {
                       indexCardActive={index}
                       jobListHavePages={jobPage}
                       onChange={getValuePageAndHandle}
-                      no = {state.no}
+                      no={state.no}
+                      reload={false}
                     />
                   </div>
                 </div>

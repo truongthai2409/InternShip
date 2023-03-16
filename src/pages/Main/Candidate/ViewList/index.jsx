@@ -18,7 +18,6 @@ const CandidateViewList = () => {
     (state) => state.jobCandidateSlice
   );
   const { index, id } = useSelector((state) => state.filter);
-  // const { jobListCompany } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
@@ -50,7 +49,7 @@ const CandidateViewList = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
-  console.log(jobs)
+  console.log(jobs);
   return (
     <>
       <div className='apply__list--container'>
@@ -79,6 +78,7 @@ const CandidateViewList = () => {
                     indexCardActive={index}
                     jobListHavePages={jobCareHavePage}
                     onChange={handleChange}
+                    reload={false}
                   />
                 </Grid>
               </Grid>

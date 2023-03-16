@@ -72,7 +72,7 @@ const CandidateInfo = () => {
       <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
         <div className='register-candidate'>
           <p style={{ fontSize: '30px', color: '#fff' }}>ĐĂNG KÝ ỨNG VIÊN</p>
-          <img src={registerImg} />
+          <img src={registerImg} className='register-candidate__image' />
         </div>
       </Grid>
       <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>

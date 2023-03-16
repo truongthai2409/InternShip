@@ -8,7 +8,7 @@ const profileSlice = createSlice({
   initialState: {
     user: {},
     role: '',
-    others:''
+    others: '',
   },
   reducers: {
     updateRole: (state) => {

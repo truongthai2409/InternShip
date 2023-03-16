@@ -11,10 +11,9 @@ import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice'
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
+import { useNavigate } from 'react-router-dom';
 
 const CardHome = (props) => {
-  // console.log(props)
-  // const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { jobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -39,7 +38,8 @@ const CardHome = (props) => {
   useEffect(
     () => {
       let isMark = jobCare.filter((job) => {
-        return job?.jobDT?.id === props?.id;
+        console.log(job, props);
+        return job?.jobDTO?.id == props?.id;
       });
       setIdCareJob(isMark[0]?.id);
       setIsMarkLength(isMark.length > 0 ? true : false);
@@ -47,6 +47,14 @@ const CardHome = (props) => {
     [jobCare, props?.id],
     dispatch
   );
+  const navigate = useNavigate();
+  const handleNext = () => {
+    if (props.reload && props.reload == true) {
+      window.open(`http://localhost:3000/detail_job/${props.id}`);
+    } else {
+      navigate(`/detail_job/${props.id}`);
+    }
+  };
   return (
     <div
       className={clsx(
@@ -56,10 +64,11 @@ const CardHome = (props) => {
       style={{
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
+        width: props.reload ? '600px' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
-        <Link to={`detail_job/${props.id}`}>
+        <div onClick={() => handleNext()}>
           <div className='cardHome__aboutCompany'>
             <img
               className='cardHome__img'
@@ -115,7 +124,7 @@ const CardHome = (props) => {
               value={props.star ?? ' '}
             />
           )}
-        </Link>
+        </div>
       </div>
 
       <div className='cardHome__col2'>
@@ -131,7 +140,8 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.role?.name?.includes('Role_Candidate') ? (
+            {user?.role?.name?.includes('Role_Candidate') &&
+            props.reload == false ? (
               <ButtonMark
                 height='32px'
                 width='32px'
