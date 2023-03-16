@@ -6,7 +6,7 @@ import './styles.scss';
 
 const VerifyEmail = () => {
   const { user } = useSelector((state) => state.profile);
-  const email = user.userDetailsDTO.email;
+  const email = user?.email;
   const dispatch = useDispatch();
   const handleSendEmail = () => {
     const formData = {

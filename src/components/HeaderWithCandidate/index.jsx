@@ -20,7 +20,7 @@ export default function HeaderWithCandidate() {
   };
   const { user } = useSelector((state) => state.profile);
   const verifiedEmail =
-    user?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+    user?.status?.name === 'Not available' ? true : false;
   return (
     <div className='header__hr'>
       {verifiedEmail ? (

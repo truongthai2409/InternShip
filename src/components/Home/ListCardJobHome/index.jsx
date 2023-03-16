@@ -24,14 +24,13 @@ const ListCardJobHome = ({
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
   };
-  console.log(jobList);
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
       <div className='filter-panel-home__wrapper'>
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
-              jobList={jobList}
+              // jobList={jobList}
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
@@ -52,7 +51,7 @@ const ListCardJobHome = ({
                 job?.universityDTO?.name
               }
               idCompany={
-                job?.hr?.company?.id ||
+                job?.hrDTO?.companyDTO?.id ||
                 job?.partner?.universityDTO?.id ||
                 job?.jobApp?.hr?.company?.id
               }
@@ -82,12 +81,12 @@ const ListCardJobHome = ({
               }
               demandPartner={true}
               time={[
-                moment(job?.timeStartStr || job?.createDate).format(
+                moment(job?.startDate || job?.createDate).format(
                   'DD/MM/YYYY'
                 ),
-                moment(job?.timeEndStr || job?.end).format('DD/MM/YYYY'),
+                moment(job?.endDate || job?.end).format('DD/MM/YYYY'),
               ]}
-              locationPath={location.pathname}
+              // locationPath={location.pathname}
             />
           ))
         ) : (

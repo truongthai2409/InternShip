@@ -18,7 +18,8 @@ import './styles.scss';
 import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
 
 const CardHome = (props) => {
-  const { changeDateLocale } = dateTimeHelper;
+  // console.log(props)
+  // const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { jobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -135,7 +136,7 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.userDetailsDTO?.role?.name?.includes('Role_Candidate') ? (
+            {user?.role?.name?.includes('Role_Candidate') ? (
               <ButtonMark
                 height='32px'
                 width='32px'

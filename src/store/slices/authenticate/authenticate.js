@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { getInformationCandidateByIdThunk } from 'src/store/action/authenticate/authenticateAction';
 
+// file nay hinh nhu khong su dung, code k co
 const authenticateSlice = createSlice({
   name: 'authenticate',
   initialState: {
@@ -19,8 +20,9 @@ const authenticateSlice = createSlice({
     builder.addCase(
       getInformationCandidateByIdThunk.fulfilled,
       (state, { payload }) => {
+        console.log(payload)
         state.user = payload;
-        state.role = state.userDetailsDTO.role.name;
+        state.role = state.role.name;
       }
     );
   },

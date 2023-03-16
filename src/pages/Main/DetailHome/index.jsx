@@ -79,6 +79,7 @@ const DetailHome = () => {
       }
     });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
+      console.log(res)
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
         (data) => {
@@ -124,7 +125,7 @@ const DetailHome = () => {
 
       toast.success('Đã lưu việc làm thành công');
     } else {
-      if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
+      if (user?.role?.name === 'Role_Candidate') {
         const delJobCare = {
           id: idSave,
           token: userStorage?.token,
@@ -148,7 +149,7 @@ const DetailHome = () => {
           };
           setIsSave(false);
           toast.success('Đã hủy lưu việc làm ');
-          user?.userDetailsDTO?.role?.name === 'Role_Candidate' &&
+          user?.role?.name === 'Role_Candidate' &&
             dispatch(getAllJobCare(dispatchJobCare)) &&
             dispatch(getJobCareByCandidateThunk(page));
         });
