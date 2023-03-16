@@ -37,7 +37,7 @@ const universitySlice = createSlice({
         toast.success('Bạn đã đăng ký tài khoản thành công!',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+         style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
         state.status = 'idle';
@@ -45,7 +45,7 @@ const universitySlice = createSlice({
         toast.error('Đăng ký không thành công!',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+         style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     });

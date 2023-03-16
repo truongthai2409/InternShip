@@ -45,7 +45,7 @@ const demandSlice = createSlice({
           toast.error('Đăng danh sách thực tập thất bại!',{
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
           toast.error(`Lỗi: ${payload.message}`);
         } else {
@@ -54,7 +54,7 @@ const demandSlice = createSlice({
           toast.success('Đăng danh sách thực tập thành công!',{
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
         }
       });
@@ -101,7 +101,7 @@ const demandSlice = createSlice({
         toast.success('Cập nhật danh sách thực tập thành công!',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
         state.closeEditDemand = true;
       });

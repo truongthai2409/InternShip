@@ -25,7 +25,7 @@ const LoginContainer = () => {
     toast.warning(t('youHaveJustLoggedOutTL'), {
       position: 'top-right',
       autoClose: 3000,
-      theme: 'dark',
+      style: { color: '#00B074', backgroundColor: '#DEF2ED' },
     });
   };
   if (role) {

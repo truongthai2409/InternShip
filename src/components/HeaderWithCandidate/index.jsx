@@ -45,10 +45,6 @@ export default function HeaderWithCandidate() {
               path === 'view-list-apply' ? 'active' : ''
             } header__hr-post`}
           >
-            {/* <PlaylistAddCheckOutlinedIcon
-              fontSize='large'
-              style={{ color: '#00B074' }}
-            /> */}
             <span className='header__hr-post-post'>{t('appliedJobTL')}</span>
           </Link>
           <Link

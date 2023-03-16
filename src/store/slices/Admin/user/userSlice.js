@@ -31,7 +31,7 @@ const userSlice = createSlice({
           'Link xác thực mật khẩu đã được gửi về email, vui lòng kiểm tra email của bạn !',{
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           }
         );
       } else {
@@ -39,7 +39,7 @@ const userSlice = createSlice({
         toast.error('Không tìm thấy địa chỉ email !',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     });

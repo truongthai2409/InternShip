@@ -38,7 +38,7 @@ const ListCardJobHome = ({
         gap: '20px',
         marginTop: '30px',
         backgroundColor: '#F6F6F6',
-        boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.25)',
+        boxShadow: '0px 2px 2px 2px rgba(0, 0, 0, 0.25)',
         borderRadius: '5px',
       }
     : {};
@@ -59,7 +59,7 @@ const ListCardJobHome = ({
               title={
                 job?.name ? job?.name : job?.jobApp?.name || job?.jobCare?.name
               }
-              fontSize={10}
+              fontSize={13}
               nameCompany={
                 job?.hrDTO?.companyDTO?.name ||
                 job?.partner?.universityDTO.name ||

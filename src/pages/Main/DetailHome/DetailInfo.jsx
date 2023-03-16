@@ -105,6 +105,7 @@ const DetailInfo = (props) => {
               onClick={(e) => props.onHandle(e)}
             ></Button>
           </div>
+          <p className='deadline'>Hạn nộp hồ sơ: {dateTimeHelper.changeDateLocale(props.detail.endTime)}</p>
         </div>
       </div>
       <div className='detailInfoHome__right'>

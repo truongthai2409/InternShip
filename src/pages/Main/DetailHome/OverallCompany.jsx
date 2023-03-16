@@ -129,6 +129,7 @@ const OverallCompany = (props) => {
       </div>
 
       <div className='detailInfo__listJob'>
+        <h2 className='detailInfo__listJob__title'>Việc làm khác đang tuyển</h2>
         <ListCardJobHome
           jobList={props.listJobOfCompany}
           // indexCardActive={index}

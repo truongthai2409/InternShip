@@ -93,7 +93,7 @@ const Appreciate = ({ appreciate, fontSize, idCompany }) => {
         toast.success('Đã đăng đánh giá', {
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
         toast.error(
@@ -101,7 +101,7 @@ const Appreciate = ({ appreciate, fontSize, idCompany }) => {
           {
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           }
         );
       }
@@ -116,7 +116,7 @@ const Appreciate = ({ appreciate, fontSize, idCompany }) => {
       toast.success('Đã xóa đánh giá ', {
         position: 'top-right',
         autoClose: 3000,
-        theme: 'dark',
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
       })
     );
     const values = {

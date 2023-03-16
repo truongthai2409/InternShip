@@ -65,7 +65,6 @@ const CardHome = (props) => {
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
         width: props.reload ? '100%' : '',
-        // gridColumn: props.reload ? '1/span 1' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
@@ -76,31 +75,12 @@ const CardHome = (props) => {
               src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
               alt=''
             />
-            <div style={{ textAlign: 'left' }}>
+            <div style={{ textAlign: 'left' }} className='cardHome__aboutCompany__right'>
               <Tooltip title={props.title} placement='top'>
                 <h4 className='cardHome__title'>{props.title}</h4>
               </Tooltip>
               <p className='cardHome__nameCompany'>{props.nameCompany}</p>
-            </div>
-          </div>
-          <div className='cardHome__tagName'>
-            {props?.tagName?.map((tag, indexs) =>
-              tag?.length > 0 ? (
-                tag?.map((item, index) => {
-                  return item?.length > 0 ? (
-                    item?.map((ite, idx) => {
-                      return <TagName key={idx} title={ite?.name || null} />;
-                    })
-                  ) : (
-                    <TagName key={index} title={item?.name || null} />
-                  );
-                })
-              ) : (
-                <TagName key={indexs} title={tag?.name || null} />
-              )
-            )}
-          </div>
-          {props.demandPartner ? (
+              {props.demandPartner ? (
             <div className='cardHome__amount-hr-apply'>
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `13px` }}
@@ -125,6 +105,26 @@ const CardHome = (props) => {
               value={props.star ?? ' '}
             />
           )}
+            </div>
+          </div>
+          <div className='cardHome__tagName'>
+            {props?.tagName?.map((tag, indexs) =>
+              tag?.length > 0 ? (
+                tag?.map((item, index) => {
+                  return item?.length > 0 ? (
+                    item?.map((ite, idx) => {
+                      return <TagName key={idx} title={ite?.name || null} />;
+                    })
+                  ) : (
+                    <TagName key={index} title={item?.name || null} />
+                  );
+                })
+              ) : (
+                <TagName key={indexs} title={tag?.name || null} />
+              )
+            )}
+          </div>
+         
         </div>
       </div>
 

@@ -66,7 +66,7 @@ function ResetPassword() {
           toast.success('Thay đổi mật khẩu thành công',{
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
           navigate('/login');
         }
@@ -75,7 +75,7 @@ function ResetPassword() {
         toast.error(err,{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       });
   };

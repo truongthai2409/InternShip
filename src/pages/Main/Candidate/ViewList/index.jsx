@@ -49,7 +49,6 @@ const CandidateViewList = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
-  console.log(jobs);
   return (
     <>
       <div className='apply__list--container'>

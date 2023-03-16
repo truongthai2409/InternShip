@@ -84,13 +84,13 @@ const UserForm = (props) => {
         toast.success('Tạo tài khoản thành công',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
         toast.error('Tạo tài khoản thất bại',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     } catch (error) {}
@@ -123,14 +123,14 @@ const UserForm = (props) => {
         toast.success('Chỉnh sửa tài khoản thành công',{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     } catch (error) {
       toast.error(error,{
         position: 'top-right',
         autoClose: 3000,
-        theme: 'dark',
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
       });
     }
   };

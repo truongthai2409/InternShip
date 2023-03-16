@@ -144,7 +144,7 @@ const BaseInformationCompany = ({
       toast.error(t('youNeedToLogInToEvaluateTheCompanyTL'), {
         position: 'top-right',
         autoClose: 3000,
-        theme: 'dark',
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
       });
     }
   };
@@ -175,13 +175,13 @@ const BaseInformationCompany = ({
         toast.success(t('reviewHasBeenSubmittedTL'), {
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
         toast.error(res.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     } catch (error) {

@@ -34,7 +34,7 @@ const InformationCompany = ({
         toast.error(t('youDoNotHaveACVYetPleaseUpdateItTL'),{
           position: 'top-right',
           autoClose: 3000,
-          theme: 'dark',
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
         const applyData = {
@@ -57,7 +57,7 @@ const InformationCompany = ({
           toast.success(t('yourCVHasBeenSubmittedSuccessfullyTL'),{
             position: 'top-right',
             autoClose: 3000,
-            theme: 'dark',
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
           setCheck(true);
           const token =
@@ -78,7 +78,7 @@ const InformationCompany = ({
       toast.error(t('youNeedToLogInAsaCandidateToApplyForThisPositionTL'),{
         position: 'top-right',
         autoClose: 3000,
-        theme: 'dark',
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
       });
     }
   };
