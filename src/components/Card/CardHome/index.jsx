@@ -6,19 +6,14 @@ import Rating from '@mui/material/Rating';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-// import {
-//   idFilterChange,
-//   indexFilterChange,
-// } from 'src/store/slices/main/home/filter/filterSlices';
+import { Link } from 'react-router-dom';
 import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
-import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
+import { useNavigate } from 'react-router-dom';
 
 const CardHome = (props) => {
-  const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { jobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -43,7 +38,8 @@ const CardHome = (props) => {
   useEffect(
     () => {
       let isMark = jobCare.filter((job) => {
-        return job?.jobDTO?.id === props?.id;
+        console.log(job, props);
+        return job?.jobDTO?.id == props?.id;
       });
       setIdCareJob(isMark[0]?.id);
       setIsMarkLength(isMark.length > 0 ? true : false);
@@ -51,6 +47,14 @@ const CardHome = (props) => {
     [jobCare, props?.id],
     dispatch
   );
+  const navigate = useNavigate();
+  const handleNext = () => {
+    if (props.reload && props.reload == true) {
+      window.open(`http://localhost:3000/detail_job/${props.id}`);
+    } else {
+      navigate(`/detail_job/${props.id}`);
+    }
+  };
   return (
     <div
       className={clsx(
@@ -60,41 +64,23 @@ const CardHome = (props) => {
       style={{
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
+        width: props.reload ? '100%' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
-        <Link to={`detail_job/${props.id}`}>
+        <div onClick={() => handleNext()}>
           <div className='cardHome__aboutCompany'>
             <img
               className='cardHome__img'
               src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
               alt=''
             />
-            <div style={{ textAlign: 'left' }}>
+            <div style={{ textAlign: 'left' }} className='cardHome__aboutCompany__right'>
               <Tooltip title={props.title} placement='top'>
                 <h4 className='cardHome__title'>{props.title}</h4>
               </Tooltip>
               <p className='cardHome__nameCompany'>{props.nameCompany}</p>
-            </div>
-          </div>
-          <div className='cardHome__tagName'>
-            {props?.tagName?.map((tag, indexs) =>
-              tag?.length > 0 ? (
-                tag?.map((item, index) => {
-                  return item?.length > 0 ? (
-                    item?.map((ite, idx) => {
-                      return <TagName key={idx} title={ite?.name || null} />;
-                    })
-                  ) : (
-                    <TagName key={index} title={item?.name || null} />
-                  );
-                })
-              ) : (
-                <TagName key={indexs} title={tag?.name || null} />
-              )
-            )}
-          </div>
-          {props.demandPartner ? (
+              {props.demandPartner ? (
             <div className='cardHome__amount-hr-apply'>
               <AddLocationAltRoundedIcon
                 style={{ fontSize: `13px` }}
@@ -119,7 +105,27 @@ const CardHome = (props) => {
               value={props.star ?? ' '}
             />
           )}
-        </Link>
+            </div>
+          </div>
+          <div className='cardHome__tagName'>
+            {props?.tagName?.map((tag, indexs) =>
+              tag?.length > 0 ? (
+                tag?.map((item, index) => {
+                  return item?.length > 0 ? (
+                    item?.map((ite, idx) => {
+                      return <TagName key={idx} title={ite?.name || null} />;
+                    })
+                  ) : (
+                    <TagName key={index} title={item?.name || null} />
+                  );
+                })
+              ) : (
+                <TagName key={indexs} title={tag?.name || null} />
+              )
+            )}
+          </div>
+         
+        </div>
       </div>
 
       <div className='cardHome__col2'>
@@ -135,7 +141,8 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.userDetailsDTO?.role?.name?.includes('Role_Candidate') ? (
+            {user?.role?.name?.includes('Role_Candidate') &&
+            props.reload == false ? (
               <ButtonMark
                 height='32px'
                 width='32px'

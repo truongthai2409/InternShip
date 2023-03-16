@@ -25,7 +25,7 @@ const MainLayout = () => {
   // );
   const userDetail = useSelector((state) => state.profile.user);
   const verifiedEmail =
-    userDetail?.userDetailsDTO?.status?.name === 'Not available' ? true : false;
+    userDetail?.status?.name === 'Not available' ? true : false;
   useEffect(() => {
     dispatch(getUserById(user));
   }, []);

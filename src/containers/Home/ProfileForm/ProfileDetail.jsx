@@ -25,43 +25,31 @@ const ProfileDetail = (props) => {
       <div className='profile-detail'>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Họ và tên lót</Typography>
-          <span>{user?.userDetailsDTO?.lastName}</span>
+          <span>{user?.lastName}</span>
         </div>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Tên</Typography>
-          <Typography>{user?.userDetailsDTO?.firstName}</Typography>
+          <Typography>{user?.firstName}</Typography>
         </div>
       </div>
       <div className='profile-detail'>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Email</Typography>
-          <span>{user?.userDetailsDTO?.email}</span>
+          <span>{user?.email}</span>
         </div>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Ngày sinh</Typography>
-          <span>
-            {user?.userDetailsDTO?.birthday
-              ? user?.userDetailsDTO?.birthday
-              : '(chưa có dữ liệu)'}
-          </span>
+          <span>{user?.birthday ? user?.birthday : '(chưa có dữ liệu)'}</span>
         </div>
       </div>
       <div className='profile-detail'>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Số điện thoại</Typography>
-          <span>
-            {user?.userDetailsDTO?.phone
-              ? user?.userDetailsDTO?.phone
-              : '(chưa có dữ liệu)'}
-          </span>
+          <span>{user?.phone ? user?.phone : '(chưa có dữ liệu)'}</span>
         </div>
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Giới tính</Typography>
-          <span>
-            {user?.userDetailsDTO?.gender
-              ? user?.userDetailsDTO?.gender
-              : '(chưa có dữ liệu)'}
-          </span>
+          <span>{user?.gender ? user?.gender : '(chưa có dữ liệu)'}</span>
         </div>
       </div>
       <div className='profile-detail'>

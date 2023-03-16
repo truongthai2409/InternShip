@@ -16,22 +16,39 @@ const ListCardJobHome = ({
   onChange,
   jobListHavePages,
   hiddent,
+  no,
+  reload,
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { page } = useSelector((state) => state.filter);
+  // const { page } = useSelector((state) => state.filter);
+  const page = no + 1;
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);
   };
-  console.log(jobList);
+  const styleInline = reload
+    ? {
+        display: 'grid',
+        padding: '10px 20px',
+        border: '1px solid #F6F6F6',
+        height: 'inherit',
+        width: '100%',
+        gridTemplateColumns: 'auto auto',
+        gap: '20px',
+        marginTop: '30px',
+        backgroundColor: '#F6F6F6',
+        boxShadow: '0px 2px 2px 2px rgba(0, 0, 0, 0.25)',
+        borderRadius: '5px',
+      }
+    : {};
   return (
     <Grid item xs={12} sm={12} md={6} lg={7} xl={7}>
-      <div className='filter-panel-home__wrapper'>
+      <div className='filter-panel-home__wrapper' style={styleInline}>
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
-              jobList={jobList}
+              // jobList={jobList}
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
@@ -42,7 +59,7 @@ const ListCardJobHome = ({
               title={
                 job?.name ? job?.name : job?.jobApp?.name || job?.jobCare?.name
               }
-              fontSize={10}
+              fontSize={13}
               nameCompany={
                 job?.hrDTO?.companyDTO?.name ||
                 job?.partner?.universityDTO.name ||
@@ -52,7 +69,7 @@ const ListCardJobHome = ({
                 job?.universityDTO?.name
               }
               idCompany={
-                job?.hr?.company?.id ||
+                job?.hrDTO?.companyDTO?.id ||
                 job?.partner?.universityDTO?.id ||
                 job?.jobApp?.hr?.company?.id
               }
@@ -82,12 +99,11 @@ const ListCardJobHome = ({
               }
               demandPartner={true}
               time={[
-                moment(job?.timeStartStr || job?.createDate).format(
-                  'DD/MM/YYYY'
-                ),
-                moment(job?.timeEndStr || job?.end).format('DD/MM/YYYY'),
+                moment(job?.startDate || job?.createDate).format('DD/MM/YYYY'),
+                moment(job?.endDate || job?.end).format('DD/MM/YYYY'),
               ]}
               locationPath={location.pathname}
+              reload={reload}
             />
           ))
         ) : (
@@ -97,7 +113,7 @@ const ListCardJobHome = ({
           </div>
         )}
       </div>
-      {jobListHavePages?.totalPages > 1 ? (
+      {jobListHavePages?.totalPages > 1 && reload == false ? (
         <div className='home__pagination'>
           <PaginationCustom
             page={page}
