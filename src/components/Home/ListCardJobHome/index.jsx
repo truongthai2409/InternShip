@@ -16,10 +16,12 @@ const ListCardJobHome = ({
   onChange,
   jobListHavePages,
   hiddent,
+  no
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { page } = useSelector((state) => state.filter);
+  // const { page } = useSelector((state) => state.filter);
+  const page = no + 1;
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));
     onChange && onChange(valuePage);

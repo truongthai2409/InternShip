@@ -1,16 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {} from 'src/components/shared/CustomInput/components';
-import InputFile from 'src/components/shared/InputFile';
 import { registerCandidate } from 'src/store/slices/main/register/registerSlice';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import { genderList, schema } from './data';
-import SelectCustom from '../../../components/shared/Select';
-import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import registerImg from 'src/assets/img/register-candidate.png';
 import Container from '../Container';
 import Grid from '@mui/material/Grid';
@@ -35,10 +31,6 @@ const CandidateInfo = () => {
     mode: 'all',
     resolver: yupResolver(schema),
   });
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1, { replace: true });
-  };
   const onSubmit = async (data) => {
     const userData = {
       candidate: JSON.stringify({

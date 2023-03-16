@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   addJobCare,
@@ -12,7 +12,6 @@ import {
   getAllJobCare,
   getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
-import { getMarkByUserAndJob } from 'src/store/slices/main/mark/markSlice';
 import './styles.scss';
 
 const ButtonMark = (props) => {
@@ -48,10 +47,12 @@ const ButtonMark = (props) => {
         },
       };
 
-      dispatch(addJobCare([dataCareList, userStorage?.token]));
-      dispatch(getJobCareByCandidateThunk(page));
-      setMark(!mark);
-      toast.success('Đã lưu việc làm thành công');
+      dispatch(addJobCare([dataCareList, userStorage?.token])).then(() => {
+        dispatch(getJobCareByCandidateThunk(page)).then(() => {
+          setMark(!mark);
+          toast.success('Đã lưu việc làm thành công');
+        });
+      });
     } else {
       if (user?.role?.name === 'Role_Candidate') {
         // const dataByUserAndJob = {
@@ -116,8 +117,12 @@ const ButtonMark = (props) => {
           setMark(false);
           toast.success('Đã hủy lưu việc làm ');
           user?.role?.name === 'Role_Candidate' &&
-            dispatch(getAllJobCare(dispatchJobCare)) &&
-            dispatch(getJobCareByCandidateThunk(page));
+            dispatch(getAllJobCare(dispatchJobCare)).then(() => {
+              dispatch(getJobCareByCandidateThunk(page)).then(() => {
+                setMark(false);
+                toast.success('Đã hủy lưu việc làm ');
+              });
+            });
         });
       }
     }

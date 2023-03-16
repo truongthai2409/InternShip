@@ -1,6 +1,5 @@
 import Grid from '@mui/material/Grid';
 import { TabTitle } from 'src/utils/GeneralFunctions';
-import DetailCard from 'src/components/Card/DetailCard';
 import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import './styles.scss';
 import { useEffect } from 'react';
@@ -8,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getJobCareByCandidateThunk } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { useState } from 'react';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
-import { Hidden } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const CandidateViewList = () => {
@@ -52,6 +50,7 @@ const CandidateViewList = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
+  console.log(jobs)
   return (
     <>
       <div className='apply__list--container'>

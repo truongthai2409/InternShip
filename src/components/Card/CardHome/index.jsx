@@ -6,16 +6,11 @@ import Rating from '@mui/material/Rating';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-// import {
-//   idFilterChange,
-//   indexFilterChange,
-// } from 'src/store/slices/main/home/filter/filterSlices';
+import { Link } from 'react-router-dom';
 import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
-import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
 
 const CardHome = (props) => {
   // console.log(props)
@@ -44,7 +39,7 @@ const CardHome = (props) => {
   useEffect(
     () => {
       let isMark = jobCare.filter((job) => {
-        return job?.jobDTO?.id === props?.id;
+        return job?.jobDT?.id === props?.id;
       });
       setIdCareJob(isMark[0]?.id);
       setIsMarkLength(isMark.length > 0 ? true : false);

@@ -20,15 +20,9 @@ const DetailPostPartner = (props) => {
 
   const { keyword } = useParams();
 
-  const { demandDetail, idJobActive } = useSelector((state) => state.demand);
+  const { demandDetail } = useSelector((state) => state.demand);
 
   useEffect(() => {
-    const dataSearch = {
-      name: '',
-      province: '',
-      no: 0,
-      limit: 10,
-    };
     dispatch(getDemandById(keyword));
   }, [dispatch, keyword]);
   const handleBackClick = () => {
