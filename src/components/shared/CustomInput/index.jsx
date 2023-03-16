@@ -79,7 +79,7 @@ const CustomInput = ({
           {...register(id)}
         />
         {!check && (
-          <p className='custom-input__error'>
+          <p className='custom-input__error' id={id}>
             {isErrorMessage(children) ? (
               <span
                 style={{

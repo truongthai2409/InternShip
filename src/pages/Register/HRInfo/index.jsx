@@ -39,14 +39,14 @@ const HRInfo = () => {
       dispatch(updateStatusRegisterForHR('idleRegister'));
     }
   }, [statusRegister, dispatch]);
-
+  console.log(errors, 'errorRegister');
   const onSubmit = async (data) => {
     const hrData = {
       hr: JSON.stringify({
         user: {
-          username: data.username,
+          username: data.email,
           phone: data.phone,
-          gender: parseInt(data.gender),
+          // gender: parseInt(data.gender),
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,

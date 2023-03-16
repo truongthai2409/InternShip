@@ -55,7 +55,7 @@ const LoginContainer = () => {
             href='http://localhost:8085/oauth2/authorization/google'
             className='loginWith-button__link'
           >
-            <GoogleIcon /> Google
+            <GoogleIcon sx={{ fontSize: '13px' }} /> ĐĂNG NHẬP VỚI GOOGLE
           </a>
         </button>
         <button className='loginWith-facebook' style={{ marginTop: '20px' }}>
@@ -63,7 +63,7 @@ const LoginContainer = () => {
             href='http://localhost:8085/oauth2/authorization/google'
             className='loginWith-button__link'
           >
-            <FacebookIcon /> Facebook
+            <FacebookIcon sx={{ fontSize: '13px' }} /> ĐĂNG NHẬP VỚI FACEBOOK
           </a>
         </button>
       </div>

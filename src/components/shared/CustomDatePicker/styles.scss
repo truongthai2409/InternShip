@@ -1,0 +1,32 @@
+@use '../../../assets/styles/' as *;
+
+.react-datepicker__input-container {
+  input {
+    font-family: $f-family;
+    border: 1px solid $primary-color;
+    border-radius: 2px;
+    width: 100%;
+    padding: 21px 12px;
+    // margin-top: 2px;
+    height: 45px;
+
+    &:hover {
+      border: 1px solid $primary-color !important;
+      box-shadow: $primary-color-1 0px 3px 8px;
+      &::placeholder {
+        color: $primary-color;
+      }
+    }
+
+    &:focus {
+      outline: $primary-color;
+      box-shadow: $primary-color-1 0px 3px 8px;
+      &::placeholder {
+        color: $primary-color;
+      }
+    }
+    &::placeholder {
+      font-family: $f-family;
+    }
+  }
+}
