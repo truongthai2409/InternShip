@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   addJobCare,
@@ -12,7 +12,6 @@ import {
   getAllJobCare,
   getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
-import { getMarkByUserAndJob } from 'src/store/slices/main/mark/markSlice';
 import './styles.scss';
 
 const ButtonMark = (props) => {
@@ -48,50 +47,18 @@ const ButtonMark = (props) => {
         },
       };
 
-      dispatch(addJobCare([dataCareList, userStorage?.token]));
-      dispatch(getJobCareByCandidateThunk(page));
-      setMark(!mark);
-      toast.success('Đã lưu việc làm thành công');
+      dispatch(addJobCare([dataCareList, userStorage?.token])).then(() => {
+        dispatch(getJobCareByCandidateThunk(page)).then(() => {
+          setMark(!mark);
+          toast.success('Đã lưu việc làm thành công', {
+            position: 'top-right',
+            autoClose: 3000,
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+          });
+        });
+      });
     } else {
-      if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
-        // const dataByUserAndJob = {
-        //   userName: user?.user?.username,
-        //   idJob: Number(props.jobId),
-        //   page: {
-        //     no: 0,
-        //     limit: 5,
-        //   },
-        // };
-
-        // await dispatch(getMarkByUserAndJob(dataByUserAndJob)).then((res) => {
-        //   const delJobCare = {
-        //     id: res.payload.id,
-        //     token: userStorage?.token,
-        //   };
-        //   dispatch(deleteJobCare([delJobCare])).then(() => {
-        //     const dispatchJobCare = {
-        //       user: user,
-        //       token: userStorage?.token,
-        //       page: {
-        //         no: 0,
-        //         limit: 1000,
-        //       },
-        //     };
-        //     const page = {
-        //       user: user,
-        //       token: userStorage?.token,
-        //       page: {
-        //         no: 0,
-        //         limit: 5,
-        //       },
-        //     };
-        //     setMark(false);
-        //     toast.success('Đã hủy lưu việc làm ');
-        //     user?.user?.role?.name === 'Role_Candidate' &&
-        //       dispatch(getAllJobCare(dispatchJobCare)) &&
-        //       dispatch(getJobCareByCandidateThunk(page));
-        //   });
-        // });
+      if (user?.role?.name === 'Role_Candidate') {
         const delJobCare = {
           id: props.idCare,
           token: userStorage?.token,
@@ -113,20 +80,31 @@ const ButtonMark = (props) => {
               limit: 5,
             },
           };
-          setMark(false);
-          toast.success('Đã hủy lưu việc làm ');
-          user?.userDetailsDTO?.role?.name === 'Role_Candidate' &&
-            dispatch(getAllJobCare(dispatchJobCare)) &&
-            dispatch(getJobCareByCandidateThunk(page));
+          user?.role?.name === 'Role_Candidate' &&
+            dispatch(getAllJobCare(dispatchJobCare)).then(() => {
+              dispatch(getJobCareByCandidateThunk(page)).then(() => {
+                setMark(false);
+                toast.success('Đã hủy lưu việc làm ', {
+                  position: 'top-right',
+                  autoClose: 3000,
+                  style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+                });
+              });
+            });
         });
       }
     }
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (user?.userDetailsDTO?.role?.name !== 'Role_Candiate') {
+    if (user?.role?.name !== 'Role_Candiate') {
       toast.error(
-        'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc'
+        'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc',
+        {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        }
       );
     }
   };

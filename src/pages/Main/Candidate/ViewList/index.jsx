@@ -1,6 +1,5 @@
 import Grid from '@mui/material/Grid';
 import { TabTitle } from 'src/utils/GeneralFunctions';
-import DetailCard from 'src/components/Card/DetailCard';
 import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import './styles.scss';
 import { useEffect } from 'react';
@@ -8,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getJobCareByCandidateThunk } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { useState } from 'react';
 import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
-import { Hidden } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 const CandidateViewList = () => {
@@ -20,7 +18,6 @@ const CandidateViewList = () => {
     (state) => state.jobCandidateSlice
   );
   const { index, id } = useSelector((state) => state.filter);
-  // const { jobListCompany } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
@@ -80,6 +77,7 @@ const CandidateViewList = () => {
                     indexCardActive={index}
                     jobListHavePages={jobCareHavePage}
                     onChange={handleChange}
+                    reload={false}
                   />
                 </Grid>
               </Grid>

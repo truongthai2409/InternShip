@@ -6,14 +6,18 @@ import './styles.scss';
 
 const VerifyEmail = () => {
   const { user } = useSelector((state) => state.profile);
-  const email = user.userDetailsDTO.email;
+  const email = user?.email;
   const dispatch = useDispatch();
   const handleSendEmail = () => {
     const formData = {
       email: email,
     };
     dispatch(verifyEmailThunk(formData)).then((res) => {
-      toast.success('Email sent successfully');
+      toast.success('Email sent successfully',{
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      });
     });
   };
   return (

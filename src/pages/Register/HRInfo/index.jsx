@@ -38,8 +38,8 @@ const HRInfo = () => {
       navigate('/home', { replace: true });
       dispatch(updateStatusRegisterForHR('idleRegister'));
     }
-  }, [statusRegister, dispatch]);
-  console.log(errors, 'errorRegister');
+  }, [statusRegister, dispatch, navigate]);
+
   const onSubmit = async (data) => {
     const hrData = {
       hr: JSON.stringify({

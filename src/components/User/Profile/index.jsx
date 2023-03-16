@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
 
 const Profile = () => {
+  // create const array geder => check id gender to have sex
   const { t } = useTranslation('title');
   TabTitle(`${t('AccountInformationTL')}`);
   const { user, role } = useSelector((state) => state.profile);

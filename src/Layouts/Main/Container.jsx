@@ -24,7 +24,7 @@ const Container = ({ children }) => {
       },
     };
     user &&
-      user.userDetailsDTO?.role?.name === 'Role_Candidate' &&
+      user?.role?.name === 'Role_Candidate' &&
       userStorage &&
       dispatch(getJobApplyListByCandidate(page)) &&
       dispatch(getJobCareByCandidateThunk(page));

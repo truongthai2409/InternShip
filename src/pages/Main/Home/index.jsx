@@ -1,9 +1,7 @@
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Grid, Hidden } from '@mui/material';
 import { useEffect, useReducer, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import TemporaryDrawer from 'src/components/shared/Drawer';
 import {
   changeFilterChange,
@@ -16,12 +14,10 @@ import {
   jobFilters,
   pageFilterChange,
 } from 'src/store/slices/main/home/filter/filterSlices';
-import DetailCard from '../../../components/Card/DetailCard';
 import ListCardJobHome from '../../../components/Home/ListCardJobHome';
 import SearchResultHome from '../../../components/Home/SearchResultHome';
 import SideBarHomeList from '../../../components/Home/SideBarHomeList';
 import './styles.scss';
-import VerifyEmail from 'src/components/VerifyEmail/VerifyEmail';
 import CircularProgress from '@mui/material/CircularProgress';
 const initialState = {
   type: [],
@@ -368,6 +364,8 @@ const Home = (props) => {
                       indexCardActive={index}
                       jobListHavePages={jobPage}
                       onChange={getValuePageAndHandle}
+                      no={state.no}
+                      reload={false}
                     />
                   </div>
                 </div>

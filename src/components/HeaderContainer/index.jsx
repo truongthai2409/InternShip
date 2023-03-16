@@ -30,8 +30,10 @@ export default function HeaderContainer() {
 
   return (
     <div className='container-header__hr header__hr config'>
-      <Logo />
-      {renderLayout()}
+      <div className='container__logo__with__layout'>
+        <Logo />
+        {renderLayout()}
+      </div>
       <div className='div-button-i18next'>
         <LanguageSetting />
         <div className='header__hr-icon'>

@@ -40,7 +40,7 @@ export const getApplyListByIdCandidate = createAsyncThunk(
   'apply_candidate/getApplyListByIdCandidate',
   async (data) => {
     return axios
-      .get(`${baseURL}/api/applylist/candidate/${data.idCandidate}`, {
+      .get(`${baseURL}/api/r2s/candidate-application/candidate/${data.idCandidate}`, {
         params: data.page,
       })
       .then((response) => {

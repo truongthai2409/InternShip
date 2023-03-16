@@ -18,7 +18,6 @@ const ListApply = () => {
     (state) => state.jobCandidateSlice
   );
   const { index, id } = useSelector((state) => state.filter);
-  const { jobListCompany } = useSelector((state) => state.job);
 
   const [jobs, setJobs] = useState([]);
   const [jobDetail, setJobDetail] = useState([]);
@@ -71,10 +70,13 @@ const ListApply = () => {
               <Grid item xs={12}>
                 <ListCardJobHome
                   hiddent={true}
-                  jobList={jobs}
+                  jobList={jobs?.map((item) => {
+                    return item.jobDTO;
+                  })}
                   indexCardActive={index}
                   jobListHavePages={jobApplyListHavePage}
                   onChange={handleChange}
+                  reload={false}
                 />
               </Grid>
             </Grid>

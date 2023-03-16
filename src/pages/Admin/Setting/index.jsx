@@ -61,7 +61,7 @@ const Setting = () => {
           id='oldPassword'
           type='password'
           label='Mật khẩu hiện hành'
-          placeholder='Nhập mật khẩu...'
+          placeholder='Nhập mật khẩu'
           visibility={true}
           register={register}
         >
@@ -71,7 +71,7 @@ const Setting = () => {
           id='newPassword'
           type='password'
           label='Mật khẩu mới'
-          placeholder='Nhập mật khẩu...'
+          placeholder='Nhập mật khẩu'
           visibility={true}
           register={register}
           subtitle='(6-32 ký tự, chứa ít nhất 1 chữ hoa và 1 số)'

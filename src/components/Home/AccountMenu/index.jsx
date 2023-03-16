@@ -37,10 +37,10 @@ const AccountMenu = ({ linkImg }) => {
     localStorage.removeItem('lang');
     i18n.changeLanguage('vi');
     dispatch(updateRole());
-    toast.warning('Bạn vừa đăng xuất', {
+    toast.info('Bạn vừa đăng xuất', {
       position: 'top-right',
       autoClose: 3000,
-      theme: 'dark',
+      style: { color: '#509AF8', backgroundColor: '#D7F1FD' },
     });
   };
 
@@ -107,7 +107,7 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.userDetailsDTO?.role?.name
+          to={`/${user?.role?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/profile`}
           onClick={() => {
@@ -121,7 +121,7 @@ const AccountMenu = ({ linkImg }) => {
         </Link>
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.userDetailsDTO?.role?.name
+          to={`/${user?.role?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/setting`}
           onClick={() => {
