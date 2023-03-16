@@ -207,7 +207,7 @@ const ProfileForm = ({ profile: user }) => {
                 {errors.email?.message}
               </CustomInput>
               <DatePickerWithLabel
-                label='Pick a date:'
+                label='Ngày sinh'
                 className={'profile-form__input custom-input'}
               />
             </div>
