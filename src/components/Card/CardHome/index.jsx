@@ -64,7 +64,8 @@ const CardHome = (props) => {
       style={{
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
-        width: props.reload ? '600px' : '',
+        width: props.reload ? '100%' : '',
+        // gridColumn: props.reload ? '1/span 1' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>

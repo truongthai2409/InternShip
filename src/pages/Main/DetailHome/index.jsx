@@ -127,7 +127,11 @@ const DetailHome = () => {
           dispatch(getJobCareByCandidateThunk(page));
         });
 
-        toast.success('Đã lưu việc làm thành công');
+        toast.success('Đã lưu việc làm thành công',{
+          position: 'top-right',
+          autoClose: 3000,
+          theme: 'dark',
+        });
       } else {
         if (user?.role?.name === 'Role_Candidate') {
           const delJobCare = {
@@ -152,7 +156,11 @@ const DetailHome = () => {
               },
             };
             setIsSave(false);
-            toast.success('Đã hủy lưu việc làm ');
+            toast.success('Đã hủy lưu việc làm ',{
+              position: 'top-right',
+              autoClose: 3000,
+              theme: 'dark',
+            });
             user?.role?.name === 'Role_Candidate' &&
               dispatch(getAllJobCare(dispatchJobCare)) &&
               dispatch(getJobCareByCandidateThunk(page));
@@ -241,6 +249,7 @@ const DetailHome = () => {
                     company={detailCompanyById}
                     isSave={isSave}
                     onHandle={(e) => handlePost(e)}
+                    onHandleApply = {(e)=>handleClick(e)}
                   />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -261,7 +270,7 @@ const DetailHome = () => {
         modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
         open={open}
         setOpen={setOpen}
-        children={<FormModal />}
+        children={<FormModal setOpen={setOpen}/>}
       />
 
       <Modal

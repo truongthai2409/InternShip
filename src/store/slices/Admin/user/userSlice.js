@@ -28,11 +28,19 @@ const userSlice = createSlice({
       if (payload.httpCode === 200) {
         state.statusForgotPassword = true;
         toast.success(
-          'Link xác thực mật khẩu đã được gửi về email, vui lòng kiểm tra email của bạn !'
+          'Link xác thực mật khẩu đã được gửi về email, vui lòng kiểm tra email của bạn !',{
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          }
         );
       } else {
         state.statusForgotPassword = false;
-        toast.error('Không tìm thấy địa chỉ email !');
+        toast.error('Không tìm thấy địa chỉ email !',{
+          position: 'top-right',
+          autoClose: 3000,
+          theme: 'dark',
+        });
       }
     });
     builder.addCase(changePassword.fulfilled, (state, action) => {

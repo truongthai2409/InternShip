@@ -50,7 +50,11 @@ const ButtonMark = (props) => {
       dispatch(addJobCare([dataCareList, userStorage?.token])).then(() => {
         dispatch(getJobCareByCandidateThunk(page)).then(() => {
           setMark(!mark);
-          toast.success('Đã lưu việc làm thành công');
+          toast.success('Đã lưu việc làm thành công',{
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          });
         });
       });
     } else {
@@ -114,13 +118,15 @@ const ButtonMark = (props) => {
               limit: 5,
             },
           };
-          setMark(false);
-          toast.success('Đã hủy lưu việc làm ');
           user?.role?.name === 'Role_Candidate' &&
             dispatch(getAllJobCare(dispatchJobCare)).then(() => {
               dispatch(getJobCareByCandidateThunk(page)).then(() => {
                 setMark(false);
-                toast.success('Đã hủy lưu việc làm ');
+                toast.success('Đã hủy lưu việc làm ',{
+                  position: 'top-right',
+                  autoClose: 3000,
+                  theme: 'dark',
+                });
               });
             });
         });
@@ -131,7 +137,11 @@ const ButtonMark = (props) => {
     e.stopPropagation();
     if (user?.role?.name !== 'Role_Candiate') {
       toast.error(
-        'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc'
+        'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc',{
+          position: 'top-right',
+          autoClose: 3000,
+          theme: 'dark',
+        }
       );
     }
   };

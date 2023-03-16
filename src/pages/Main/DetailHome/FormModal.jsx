@@ -1,17 +1,33 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import Button from 'src/components/shared/Button';
 import CustomInput from 'src/components/shared/CustomInput';
 import InputFile from 'src/components/shared/InputFile';
 
-const FormModal = () => {
+const FormModal = ({setOpen}) => {
+  const { user } = useSelector((state) => state.profile);
   const {
     register,
     handleSubmit,
     // formState: { errors },
-  } = useForm();
+    setValue
+  } = useForm({
+    defaultValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+    },
+  });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    // e.prevenDefault();
+  };
+  const handleClose = (e)=>{
+    e.preventDefault()
+    setOpen(false)
+  }
   return (
     <>
       <form className='formApply__modal'>
@@ -26,6 +42,7 @@ const FormModal = () => {
               register={register}
               height='40px'
               width='310px'
+              // check = {true}
             ></CustomInput>
 
             <CustomInput
@@ -105,6 +122,7 @@ const FormModal = () => {
             bg='white'
             color='#7D7D7D'
             fz='13px'
+            onClick={(e)=>handleClose(e)}
           ></Button>
         </div>
       </form>

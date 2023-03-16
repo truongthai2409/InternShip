@@ -129,6 +129,9 @@
       gap: 15px;
       align-items: center;
       border-bottom: 1px solid #dedede;
+      &:last-child {
+        border-bottom: none;
+      }
       svg {
         color: #00b074;
         font-size: 25px;

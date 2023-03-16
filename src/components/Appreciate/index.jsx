@@ -90,10 +90,19 @@ const Appreciate = ({ appreciate, fontSize, idCompany }) => {
       };
       await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200) {
-        toast.success('Đã đăng đánh giá');
+        toast.success('Đã đăng đánh giá', {
+          position: 'top-right',
+          autoClose: 3000,
+          theme: 'dark',
+        });
       } else {
         toast.error(
-          'Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại'
+          'Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại',
+          {
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          }
         );
       }
     } catch (error) {}
@@ -104,7 +113,11 @@ const Appreciate = ({ appreciate, fontSize, idCompany }) => {
   const handleDeleteAppreciate = async (e) => {
     e.stopPropagation();
     await dispatch(deleteAppreciate(appreciate.id)).then(
-      toast.success('Đã xóa đánh giá ')
+      toast.success('Đã xóa đánh giá ', {
+        position: 'top-right',
+        autoClose: 3000,
+        theme: 'dark',
+      })
     );
     const values = {
       idCompany: idCompany,

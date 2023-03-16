@@ -67,7 +67,11 @@ const LoginAdmin = () => {
         }
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error,{
+        position: 'top-right',
+        autoClose: 3000,
+        theme: 'dark',
+      });
     }
     if (isCheck) {
       const loginInfor = {

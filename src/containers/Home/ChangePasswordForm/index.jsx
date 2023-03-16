@@ -12,6 +12,7 @@ import {
 } from 'src/store/slices/Admin/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { TabTitle } from 'src/utils/GeneralFunctions';
+import { useNavigate } from 'react-router';
 
 const Password = () => {
   const { t } = useTranslation('title');
@@ -30,6 +31,8 @@ const Password = () => {
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
   });
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (statusForgotPassword === 'success') {
@@ -56,6 +59,7 @@ const Password = () => {
   const handleClear = (e) => {
     e.preventDefault();
     reset();
+    navigate('/candidate/profile')
   };
 
   return (
@@ -67,7 +71,7 @@ const Password = () => {
             id='oldPassword'
             type='password'
             label='Mật khẩu hiện tại'
-            placeholder='Nhập mật khẩu...'
+            placeholder='Nhập mật khẩu'
             visibility={true}
             register={register}
             subtitle='Nhập mật khẩu hiện tại'
@@ -78,7 +82,7 @@ const Password = () => {
             id='newPassword'
             type='password'
             label='Mật khẩu mới'
-            placeholder='Nhập mật khẩu...'
+            placeholder='Nhập mật khẩu'
             visibility={true}
             register={register}
             subtitle='6 - 32 ký tự, chứa ít nhất một và một số'
@@ -89,7 +93,7 @@ const Password = () => {
             id='confirmNewPassword'
             type='password'
             label='Nhập lại mật khẩu mới'
-            placeholder='Nhập mật khẩu...'
+            placeholder='Nhập mật khẩu'
             visibility={true}
             register={register}
             subtitle='Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập'

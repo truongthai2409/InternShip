@@ -63,12 +63,20 @@ function ResetPassword() {
     dispatch(resetPasswordThunk(formData))
       .then((res) => {
         if (res.payload.httpCode === 200 || res.payload.httpCode === 201) {
-          toast.success('Thay đổi mật khẩu thành công');
+          toast.success('Thay đổi mật khẩu thành công',{
+            position: 'top-right',
+            autoClose: 3000,
+            theme: 'dark',
+          });
           navigate('/login');
         }
       })
       .catch((err) => {
-        toast.error(err);
+        toast.error(err,{
+          position: 'top-right',
+          autoClose: 3000,
+          theme: 'dark',
+        });
       });
   };
   return (
@@ -85,7 +93,7 @@ function ResetPassword() {
               id='password'
               type='password'
               name='password'
-              placeholder='Vui lòng nhập mật khẩu mới...'
+              placeholder='Vui lòng nhập mật khẩu mới'
               register={register}
               visibility={true}
             >
@@ -97,7 +105,7 @@ function ResetPassword() {
               id='confirmPassword'
               type='password'
               name='confirmPassword'
-              placeholder='Vui lòng nhập lại mật khẩu ...'
+              placeholder='Vui lòng nhập lại mật khẩu '
               register={register}
               visibility={true}
             >

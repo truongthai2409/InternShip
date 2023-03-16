@@ -92,6 +92,7 @@ const DetailInfo = (props) => {
               padding='0px 0px'
               bg='#00B074'
               fz='17px'
+              onClick={(e)=>props.onHandleApply(e)}
             ></Button>
             <Button
               name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
