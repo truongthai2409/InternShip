@@ -72,6 +72,7 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('Run');
     jobCare.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIdSave(item.id);
@@ -91,7 +92,7 @@ const DetailHome = () => {
         }
       );
     });
-  }, [jobCare]);
+  }, [jobCare, id]);
 
   const handlePost = (e) => {
     e.preventDefault();
@@ -241,6 +242,7 @@ const DetailHome = () => {
                   <OverallCompany
                     detail={detailJob}
                     company={detailCompanyById}
+                    listJobOfCompany={detailCompany}
                   />
                 </TabPanel>
               </Box>

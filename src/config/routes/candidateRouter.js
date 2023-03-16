@@ -43,7 +43,7 @@ const candidateRouter = [
         Component: Password,
       },
       {
-        path: 'detail_job/:keyword',
+        path: 'detail_job/:id',
         Component: DetailHome,
       },
     ],

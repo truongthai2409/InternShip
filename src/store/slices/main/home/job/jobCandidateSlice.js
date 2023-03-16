@@ -75,7 +75,6 @@ export const getJobApplyListByCandidate = createAsyncThunk(
 export const getJobCareByCandidateThunk = createAsyncThunk(
   'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
-    console.log(args);
     if (args.user.userDetailsDTO.role.name.includes('Role_Candidate')) {
       const res = await getJobCareByCandidate(args.user.id);
       return res;

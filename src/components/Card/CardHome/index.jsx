@@ -7,18 +7,15 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-// import {
-//   idFilterChange,
-//   indexFilterChange,
-// } from 'src/store/slices/main/home/filter/filterSlices';
 import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
 import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
+// import { useHistory } from 'react-router-dom';
+import history from 'src/config/routes/history';
 
 const CardHome = (props) => {
-  const { changeDateLocale } = dateTimeHelper;
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
   const { jobCare } = useSelector((state) => state.jobCandidateSlice);
@@ -51,6 +48,14 @@ const CardHome = (props) => {
     [jobCare, props?.id],
     dispatch
   );
+  const navigate = useNavigate();
+  const handleNext = () => {
+    if (props.reload && props.reload == true) {
+      window.open(`http://localhost:3000/detail_job/${props.id}`);
+    } else {
+      navigate(`/detail_job/${props.id}`);
+    }
+  };
   return (
     <div
       className={clsx(
@@ -60,10 +65,11 @@ const CardHome = (props) => {
       style={{
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
+        width: props.reload ? '600px' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
-        <Link to={`detail_job/${props.id}`}>
+        <div onClick={() => handleNext()}>
           <div className='cardHome__aboutCompany'>
             <img
               className='cardHome__img'
@@ -119,7 +125,7 @@ const CardHome = (props) => {
               value={props.star ?? ' '}
             />
           )}
-        </Link>
+        </div>
       </div>
 
       <div className='cardHome__col2'>

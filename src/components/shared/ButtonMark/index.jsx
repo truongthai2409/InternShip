@@ -48,10 +48,11 @@ const ButtonMark = (props) => {
         },
       };
 
-      dispatch(addJobCare([dataCareList, userStorage?.token]));
-      dispatch(getJobCareByCandidateThunk(page));
-      setMark(!mark);
-      toast.success('Đã lưu việc làm thành công');
+      dispatch(addJobCare([dataCareList, userStorage?.token])).then((res) => {
+        dispatch(getJobCareByCandidateThunk(page));
+        setMark(!mark);
+        toast.success('Đã lưu việc làm thành công');
+      });
     } else {
       if (user?.userDetailsDTO?.role?.name === 'Role_Candidate') {
         // const dataByUserAndJob = {
