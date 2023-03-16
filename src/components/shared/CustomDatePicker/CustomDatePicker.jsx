@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles.scss';
 
-function DatePickerWithLabel({ label, className, requirementField = true }) {
-  const [selectedDate, setSelectedDate] = useState(null);
-
+function DatePickerWithLabel({
+  label,
+  className,
+  requirementField = true,
+  id,
+  register,
+  onChange,
+  selectedDate,
+  ...rest
+}) {
   return (
     <div className={className}>
-      <label htmlFor='datepicker' className='custom-input__label'>
+      <label htmlFor={id} className='custom-input__label'>
         {label}
         {requirementField && <span className='field-requirment'>*</span>}
       </label>
       <DatePicker
-        id='datepicker'
+        todayButton='Hôm nay'
+        // dateFormat={format}
         selected={selectedDate}
-        onChange={(date) => setSelectedDate(date)}
+        // onChange={(data) => console.log(data)}
+        onChange={onChange}
+        // {...register(id)}
+        {...rest}
       />
     </div>
   );

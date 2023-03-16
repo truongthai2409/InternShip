@@ -10,6 +10,7 @@ import { NOTIFICATION_EN } from './en/notification';
 import { CARDINFORMATION_EN } from './en/cardInformation';
 import { USERINFO_EN } from './en/userInfo';
 import { TITLE_EN } from './en/title';
+import { PAGINATION_EN } from './en/pagination';
 
 export {
   CLIENT_EN,
@@ -24,4 +25,5 @@ export {
   NOTIFICATION_EN,
   CARDINFORMATION_EN,
   TITLE_EN,
+  PAGINATION_EN,
 };

@@ -52,7 +52,6 @@ const Components = ({ profile }) => {
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
   };
-
   const onSubmit = async (data) => {
     const userSessionStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -107,7 +106,7 @@ const Components = ({ profile }) => {
             borderRadius: '50%',
             border: '1px solid #00b074',
           }}
-          src={`${profile?.userDetailsDTO?.avatar}`}
+          src={`${profile?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
@@ -128,8 +127,7 @@ const Components = ({ profile }) => {
               variant='h6'
               sx={{ color: '#00b074', fontSize: '25px', fontWeight: 'bold' }}
             >
-              {profile?.userDetailsDTO?.lastName}{' '}
-              {profile?.userDetailsDTO?.firstName}
+              {profile?.lastName} {profile?.firstName}
             </Typography>
           </div>
           <Divider style={{ margin: '40px 0' }} />
@@ -246,7 +244,7 @@ const Components = ({ profile }) => {
           )} */}
         </div>
         <div>
-          {profile?.userDetailsDTO?.role?.id === 3 ? (
+          {profile?.role?.id === 3 ? (
             <div className='profile_click'>
               <div className='profile_check'>
                 <div className='profile_check__items'>

@@ -26,7 +26,8 @@ export default function Container({
     <div className='register__container'>
       <h1 className='register-container__title'>Đăng ký tài khoản {title}</h1>
       <p className='title-requirement'>
-        (<span className='field-requirment'> * </span>){t('requiredFieldTL')}
+        (<span className='field-requirment'> * </span>)&nbsp;{' '}
+        {t('requiredFieldTL')}
       </p>
       <div className='button-container'>
         <Button className='button-container__google'>
