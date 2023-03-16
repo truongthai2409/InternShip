@@ -53,19 +53,6 @@ const Components = ({ profile }) => {
     setCheckedEmail(event.target.checked);
   };
 
-  const handleClick = (number) => {
-    switch (number) {
-      case 1: {
-        return setOpens(!opens);
-      }
-      case 2: {
-        return setOpen(!open);
-      }
-      default:
-        break;
-    }
-  };
-
   const onSubmit = async (data) => {
     const userSessionStorage =
       JSON.parse(sessionStorage.getItem('userPresent')) ||
@@ -73,12 +60,12 @@ const Components = ({ profile }) => {
     const profileData = {
       candidate: JSON.stringify({
         createUser: {
-          id: parseInt(profile?.user?.id),
-          firstName: profile?.user?.firstName,
-          lastName: profile?.user?.lastName,
-          gender: parseInt(profile?.user?.gender),
-          phone: profile?.user?.phone,
-          email: profile?.user?.email,
+          id: parseInt(profile?.userDetailsDTO?.id),
+          firstName: profile?.userDetailsDTO?.firstName,
+          lastName: profile?.userDetailsDTO?.lastName,
+          gender: parseInt(profile?.userDetailsDTO?.gender),
+          phone: profile?.userDetailsDTO?.phone,
+          email: profile?.userDetailsDTO?.email,
         },
         major: {
           id: profile?.major?.id,
@@ -98,6 +85,18 @@ const Components = ({ profile }) => {
   useEffect(() => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);
+
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmitFile = (event) => {
+    event.preventDefault();
+    // do something with the file, such as upload it to a server
+    console.log('File uploaded:', file);
+  };
   return (
     <div className='profiles'>
       <div className='profile_header'>
@@ -108,7 +107,7 @@ const Components = ({ profile }) => {
             borderRadius: '50%',
             border: '1px solid #00b074',
           }}
-          src={`${profile?.user?.avatar}`}
+          src={`${profile?.userDetailsDTO?.avatar}`}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.onerror = undefined;
@@ -117,29 +116,20 @@ const Components = ({ profile }) => {
           alt='avatar'
         ></img>
       </div>
-      <div className='profile-form__content-item'>
-        <InputFile
-          label={t('avatarTL')}
-          requirementField={false}
-          id='avatar'
-          format='image'
-          radius='2px'
-          setValue={setValue}
-          register={register}
-          // imageCurrent={user?.user?.avatar}
-        >
-          <button onClick={onSubmit}>Save</button>
-          {errors.avatar?.message}
-        </InputFile>
-      </div>
       <div className='profile_footer'>
+        <form onSubmit={handleSubmitFile} className='upload-avatar'>
+          <label for='fileInput' class='custom-file-upload'></label>
+          <input type='file' id='fileInput' onChange={handleFileChange} />
+          {/* <button type='submit'>Upload</button> */}
+        </form>
         <div style={{ textAlign: 'center' }}>
           <div className='profile_name'>
             <Typography
               variant='h6'
               sx={{ color: '#00b074', fontSize: '25px', fontWeight: 'bold' }}
             >
-              {profile?.user?.lastName} {profile?.user?.firstName}
+              {profile?.userDetailsDTO?.lastName}{' '}
+              {profile?.userDetailsDTO?.firstName}
             </Typography>
           </div>
           <Divider style={{ margin: '40px 0' }} />
@@ -256,7 +246,7 @@ const Components = ({ profile }) => {
           )} */}
         </div>
         <div>
-          {profile?.user?.role?.id === 3 ? (
+          {profile?.userDetailsDTO?.role?.id === 3 ? (
             <div className='profile_click'>
               <div className='profile_check'>
                 <div className='profile_check__items'>

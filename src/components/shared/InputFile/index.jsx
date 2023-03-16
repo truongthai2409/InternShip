@@ -100,6 +100,7 @@ const InputFile = ({
           {...register(id)}
           onChange={handlePreviewFile}
           accept={accept}
+          defaultValue={defaultValue}
         />
       </div>
     </div>

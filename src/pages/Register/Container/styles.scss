@@ -5,7 +5,7 @@
   border: 1px solid #dedede;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0px 10px 10px 0px;
-  padding: 10px 40px;
+  padding: 40px 40px;
   &__form {
     width: 100%;
     &--name {
@@ -47,21 +47,40 @@
     align-items: center;
     margin-top: 20px;
     button {
-      width: 300px;
+      width: 49%;
+      height: 40px;
     }
     &__google {
       gap: 6px;
+      font-size: $fs-13;
       background-color: #ea4335 !important;
+      font-weight: normal;
     }
     &__facebook {
       gap: 6px;
+      font-size: $fs-13;
       background-color: #375899 !important;
+      font-weight: normal;
     }
   }
   .register-container__footer {
-    margin: 20px auto 20px !important;
+    margin: 10px auto 20px !important;
   }
 }
 .custom_req_can {
   margin-top: -8px;
+}
+
+@media only screen and(max-width : 1278px) {
+  .button-container {
+    button {
+      width: 48% !important;
+      padding: 0 !important;
+    }
+  }
+  .register__container__btns {
+    button {
+      width: 270px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { Pagination, Stack } from '@mui/material';
+import { Pagination, PaginationItem, Stack, Tooltip } from '@mui/material';
 import './styles.scss';
 
 const PaginationCustom = ({
@@ -20,6 +20,23 @@ const PaginationCustom = ({
         count={totalPages}
         variant={variant}
         shape={shape}
+        renderItem={(item) => (
+          <Tooltip
+            title={
+              item.type === 'start-ellipsis'
+                ? 'Jump to first page'
+                : item.type === 'previous'
+                ? 'Go to previous page'
+                : item.type === 'next'
+                ? 'Go to next page'
+                : item.type === 'end-ellipsis'
+                ? 'Jump to last page'
+                : `Go to page ${item.page}`
+            }
+          >
+            <PaginationItem {...item} />
+          </Tooltip>
+        )}
       />
     </Stack>
   );
