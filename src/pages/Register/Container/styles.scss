@@ -47,17 +47,20 @@
     align-items: center;
     margin-top: 20px;
     button {
-      width: 300px;
+      width: 49%;
+      height: 40px;
     }
     &__google {
       gap: 6px;
       font-size: $fs-13;
       background-color: #ea4335 !important;
+      font-weight: normal;
     }
     &__facebook {
       gap: 6px;
       font-size: $fs-13;
       background-color: #375899 !important;
+      font-weight: normal;
     }
   }
   .register-container__footer {
@@ -66,4 +69,18 @@
 }
 .custom_req_can {
   margin-top: -8px;
+}
+
+@media only screen and(max-width : 1278px) {
+  .button-container {
+    button {
+      width: 48% !important;
+      padding: 0 !important;
+    }
+  }
+  .register__container__btns {
+    button {
+      width: 270px;
+    }
+  }
 }

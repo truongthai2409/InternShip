@@ -11,6 +11,9 @@ import SelectCustom from 'src/components/shared/Select';
 import { updateUser } from 'src/store/slices/main/user/userSlice';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 import { getDistrictList } from 'src/store/slices/location/locationSlice';
 import SelectMulti from 'src/components/shared/SelectMulti';
@@ -22,11 +25,13 @@ import { genderList, listWorkingFormat, schema } from './validateForm';
 import { getUniversityList } from 'src/store/slices/Admin/university/unversitySlice';
 import ProfileDetail from './ProfileDetail';
 import InfoJob from './InfoJob';
+import DatePickerWithLabel from 'src/components/shared/CustomDatePicker/CustomDatePicker';
 
 const ProfileForm = ({ profile: user }) => {
   const { t } = useTranslation('userInfo');
   const [showInput, setShowInput] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
 
   const {
     register,
@@ -201,7 +206,10 @@ const ProfileForm = ({ profile: user }) => {
               >
                 {errors.email?.message}
               </CustomInput>
-              <>DOB</>
+              <DatePickerWithLabel
+                label='Pick a date:'
+                className={'profile-form__input custom-input'}
+              />
             </div>
             <div className='profile-form__content-item'>
               <CustomInput
