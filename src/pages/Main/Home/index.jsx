@@ -259,6 +259,7 @@ const Home = (props) => {
                           jobList={jobs}
                           jobListHavePages={jobPage}
                           onChange={getValuePageAndHandle}
+                          viewCV = {false}
                         />
                       </div>
                     </div>
@@ -366,6 +367,7 @@ const Home = (props) => {
                       onChange={getValuePageAndHandle}
                       no={state.no}
                       reload={false}
+                      viewCV = {false}
                     />
                   </div>
                 </div>

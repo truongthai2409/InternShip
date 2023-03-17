@@ -53,16 +53,22 @@ const DetailHome = () => {
   const { user } = useSelector((state) => state.profile);
   const [detailJob, setDetailJob] = useState('');
   const [detailCompany, setDetailCompany] = useState('');
-  const { jobCare } = useSelector((state) => state.jobCandidateSlice);
+  const { jobCare, jobApplyList } = useSelector(
+    (state) => state.jobCandidateSlice
+  );
   const [isSave, setIsSave] = useState(false);
   // id post saved
   const [idSave, setIdSave] = useState('');
 
+  const [isApply, setIsApply] = useState(false);
+
   const handleClick = () => {
-    if (Object.keys(user).length == 0) {
-      setOpenNotify(true);
-    } else {
-      setOpen(true);
+    if (isApply == false) {
+      if (Object.keys(user).length == 0) {
+        setOpenNotify(true);
+      } else {
+        setOpen(true);
+      }
     }
   };
 
@@ -72,15 +78,18 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('Run');
     jobCare.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIdSave(item.id);
         setIsSave(true);
       }
     });
+    jobCare.map((item) => {
+      if (item?.jobDTO?.id == id) {
+        setIsApply(true);
+      }
+    });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
-      console.log(res);
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
         (data) => {
@@ -211,11 +220,11 @@ const DetailHome = () => {
               </div>
               <div className='wrapperDetail__title__right'>
                 <Button
-                  name={'ỨNG TUYỂN NGAY'}
+                  name={isApply ? 'ĐÃ ỨNG TUYỂN' : 'ỨNG TUYỂN NGAY'}
                   bwidth='211px'
                   bheight='46px'
                   padding='0px 0px'
-                  bg='#00B074'
+                  bg={isApply ? '#B0B0B0' : '#00B074'}
                   fz='17px'
                   onClick={() => handleClick()}
                 ></Button>
@@ -248,6 +257,7 @@ const DetailHome = () => {
                     detail={detailJob}
                     company={detailCompanyById}
                     isSave={isSave}
+                    isApply={isApply}
                     onHandle={(e) => handlePost(e)}
                     onHandleApply={(e) => handleClick(e)}
                   />
