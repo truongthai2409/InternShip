@@ -34,11 +34,19 @@ const universitySlice = createSlice({
       if (payload.id) {
         state.user = payload;
         state.status = 'success';
-        toast.success('Bạn đã đăng ký tài khoản thành công!');
+        toast.success('Bạn đã đăng ký tài khoản thành công!', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
         state.status = 'idle';
         state.error = payload;
-        toast.error('Đăng ký không thành công!');
+        toast.error('Đăng ký không thành công!', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       }
     });
     builder.addCase(getUniversityDetail.fulfilled, (state, { payload }) => {

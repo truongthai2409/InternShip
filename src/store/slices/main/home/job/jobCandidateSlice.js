@@ -53,22 +53,13 @@ export const getJobApplyListByCandidate = createAsyncThunk(
         Authorization: 'Bearer ' + args?.token,
       },
     };
-    if (args.user.user.role.name.includes('Role_Candidate')) {
-      return await axios
-        .get(`${BASEURL}/api/r2s/candidate/user/${args.user.user.id}`, header)
-        .then(async (response) => {
-          try {
-            const response_1 = await axios.get(
-              `${BASEURL}/api/applylist/candidate/${response.data.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`
-            );
-            return response_1.data;
-          } catch (error) {
-            return error.response.data;
-          }
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
+    console.log(args);
+    if (args.user.role.name.includes('Role_Candidate')) {
+      const res = await axios.get(
+        `${BASEURL}/api/r2s/candidate-application/candidate/${args.user.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`,
+        header
+      );
+      return res.data;
     }
   }
 );

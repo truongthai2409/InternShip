@@ -57,7 +57,7 @@
           line-height: 18px;
           background-color: #f3f9fc;
           border-radius: 2px;
-          border: 1px solid #cee0e9;
+          cursor: auto;
         }
       }
     }
@@ -79,7 +79,7 @@
   &__left {
     width: 65%;
     &__info {
-      margin-bottom: 45px;
+      margin-bottom: 15px;
       h2 {
         font-weight: 700;
         font-size: 16px;
@@ -129,6 +129,9 @@
       gap: 15px;
       align-items: center;
       border-bottom: 1px solid #dedede;
+      &:last-child {
+        border-bottom: none;
+      }
       svg {
         color: #00b074;
         font-size: 25px;
@@ -168,4 +171,20 @@
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
+}
+
+.deadline {
+  margin-top: 15px;
+}
+
+.detailInfo {
+  &__listJob {
+    margin-top: 30px;
+    &__title {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      color: #333333;
+    }
+  }
 }

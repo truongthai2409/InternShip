@@ -15,7 +15,6 @@ import ModalNotify from './ModalNotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetailJobByIdThunk } from 'src/store/action/job/jobAction';
 import { getDetailCompanyByidThunk } from 'src/store/action/company/companyAction';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import {
   addJobCare,
   deleteJobCare,
@@ -59,7 +58,7 @@ const DetailHome = () => {
   const [idSave, setIdSave] = useState('');
 
   const handleClick = () => {
-    if (Object.keys(user).length == 0) {
+    if (Object.keys(user).length === 0) {
       setOpenNotify(true);
     } else {
       setOpen(true);
@@ -127,7 +126,11 @@ const DetailHome = () => {
           dispatch(getJobCareByCandidateThunk(page));
         });
 
-        toast.success('Đã lưu việc làm thành công');
+        toast.success('Đã lưu việc làm thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
         if (user?.role?.name === 'Role_Candidate') {
           const delJobCare = {
@@ -152,7 +155,11 @@ const DetailHome = () => {
               },
             };
             setIsSave(false);
-            toast.success('Đã hủy lưu việc làm ');
+            toast.success('Đã hủy lưu việc làm ', {
+              position: 'top-right',
+              autoClose: 3000,
+              style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+            });
             user?.role?.name === 'Role_Candidate' &&
               dispatch(getAllJobCare(dispatchJobCare)) &&
               dispatch(getJobCareByCandidateThunk(page));
@@ -241,6 +248,7 @@ const DetailHome = () => {
                     company={detailCompanyById}
                     isSave={isSave}
                     onHandle={(e) => handlePost(e)}
+                    onHandleApply={(e) => handleClick(e)}
                   />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -261,7 +269,7 @@ const DetailHome = () => {
         modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
         open={open}
         setOpen={setOpen}
-        children={<FormModal />}
+        children={<FormModal setOpen={setOpen} jobId={id} />}
       />
 
       <Modal

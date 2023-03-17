@@ -54,16 +54,28 @@ const CandidateInfo = () => {
           };
           dispatch(verifyEmailThunk(formData))
             .then((res) => {
-              toast.success('Vui lòng kiểm tra email và xác thực tài khoản');
+              toast.success('Vui lòng kiểm tra email và xác thực tài khoản', {
+                position: 'top-right',
+                autoClose: 3000,
+                style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+              });
             })
             .catch((err) => {
-              toast.error('Email xác thực chưa được gửi về');
+              toast.error('Email xác thực chưa được gửi về', {
+                position: 'top-right',
+                autoClose: 3000,
+                style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+              });
             });
           navigate('/login');
         }
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error, {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       });
   };
 

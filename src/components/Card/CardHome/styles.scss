@@ -20,11 +20,18 @@
 
     .cardHome__aboutCompany {
       display: flex;
-
+      &__right {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        align-items: flex-start;
+      }
       .cardHome__img {
-        width: 50px;
-        height: 50px;
-        margin-right: 16px;
+        width: 90px;
+        height: 90px;
+        margin-right: 22px;
+        border: 1px solid rgba(125, 125, 125, 0.4);
+        border-radius: 8px;
       }
 
       .cardHome__title {
@@ -39,7 +46,7 @@
       }
 
       .cardHome__nameCompany {
-        font-size: 16px;
+        font-size: 13px;
         color: $color-black-0;
         font-weight: 500;
       }
@@ -65,7 +72,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      width: 110%;
+      width: 100%;
       color: $primary-color;
 
       div {

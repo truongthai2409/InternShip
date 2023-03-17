@@ -92,6 +92,7 @@ const DetailInfo = (props) => {
               padding='0px 0px'
               bg='#00B074'
               fz='17px'
+              onClick={(e) => props.onHandleApply(e)}
             ></Button>
             <Button
               name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
@@ -104,6 +105,10 @@ const DetailInfo = (props) => {
               onClick={(e) => props.onHandle(e)}
             ></Button>
           </div>
+          <p className='deadline'>
+            Hạn nộp hồ sơ:{' '}
+            {dateTimeHelper.changeDateLocale(props.detail.endTime)}
+          </p>
         </div>
       </div>
       <div className='detailInfoHome__right'>

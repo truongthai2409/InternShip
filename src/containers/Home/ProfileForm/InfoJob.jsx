@@ -7,7 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import './styles.scss';
 
 const InfoJob = (props) => {
-  const { user } = useSelector((state) => state.profile);
+  const { user, others } = useSelector((state) => state.profile);
   const { t } = useTranslation('userInfo');
 
   // const [showInput, setShowInput] = useState(true);
@@ -48,6 +48,14 @@ const InfoJob = (props) => {
         <div className='profile-detail-item'>
           <Typography variant='subtitle1'>Hình thức làm việc</Typography>
           <span>{user?.type ? user?.type : '(chưa có dữ liệu)'}</span>
+        </div>
+      </div>
+      <div className='profile-detail job-detail'>
+        <div className='profile-detail-item'>
+          <Typography variant='subtitle1'>Địa điểm làm việc</Typography>
+          <span>
+            {others?.provinceId ? others?.provinceId : '(chưa có dữ liệu)'}
+          </span>
         </div>
       </div>
       <div className='profile-detail job-detail'>

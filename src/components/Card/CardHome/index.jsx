@@ -64,7 +64,7 @@ const CardHome = (props) => {
       style={{
         paddingLeft: props.pdLeft ? props.pdLeft : '',
         paddingRight: props.pdRight ? props.pdRight : '',
-        width: props.reload ? '600px' : '',
+        width: props.reload ? '100%' : '',
       }}
     >
       <div className='cardHome__col1' dataset={props.id}>
@@ -75,11 +75,39 @@ const CardHome = (props) => {
               src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
               alt=''
             />
-            <div style={{ textAlign: 'left' }}>
+            <div
+              style={{ textAlign: 'left' }}
+              className='cardHome__aboutCompany__right'
+            >
               <Tooltip title={props.title} placement='top'>
                 <h4 className='cardHome__title'>{props.title}</h4>
               </Tooltip>
               <p className='cardHome__nameCompany'>{props.nameCompany}</p>
+              {props.demandPartner ? (
+                <div className='cardHome__amount-hr-apply'>
+                  <AddLocationAltRoundedIcon
+                    style={{ fontSize: `13px` }}
+                    sx={{ color: '#04bf8a' }}
+                  />
+
+                  <p
+                    style={{
+                      fontSize: `13px`,
+                      width: 'max-content',
+                      color: '#000',
+                    }}
+                  >
+                    {props.location}
+                  </p>
+                </div>
+              ) : (
+                <Rating
+                  name='read-only'
+                  precision={0.5}
+                  readOnly
+                  value={props.star ?? ' '}
+                />
+              )}
             </div>
           </div>
           <div className='cardHome__tagName'>
@@ -99,31 +127,6 @@ const CardHome = (props) => {
               )
             )}
           </div>
-          {props.demandPartner ? (
-            <div className='cardHome__amount-hr-apply'>
-              <AddLocationAltRoundedIcon
-                style={{ fontSize: `13px` }}
-                sx={{ color: '#04bf8a' }}
-              />
-
-              <p
-                style={{
-                  fontSize: `13px`,
-                  width: 'max-content',
-                  color: '#000',
-                }}
-              >
-                {props.location}
-              </p>
-            </div>
-          ) : (
-            <Rating
-              name='read-only'
-              precision={0.5}
-              readOnly
-              value={props.star ?? ' '}
-            />
-          )}
         </div>
       </div>
 

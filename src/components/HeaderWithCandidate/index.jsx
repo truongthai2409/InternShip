@@ -11,7 +11,9 @@ import './styles.scss';
 export default function HeaderWithCandidate() {
   const { t } = useTranslation('headerFooter');
   const location = useLocation();
-  const path = location.pathname.slice(11, 100);
+  const path =
+    location.pathname.split('/')[location.pathname.split('/').length - 1];
+  console.log(path);
   const dispatch = useDispatch();
   const handleClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -28,16 +30,21 @@ export default function HeaderWithCandidate() {
         <>
           {' '}
           <Link
+            to='/candidate'
+            onClick={() => handleClick()}
+            className={`${
+              path === 'candidate' ? 'active' : ''
+            } header__hr-post`}
+          >
+            <span className='header__hr-post-post'>Tìm công việc</span>
+          </Link>
+          <Link
             to='/candidate/view-list-apply'
             onClick={() => handleClick()}
             className={`${
               path === 'view-list-apply' ? 'active' : ''
             } header__hr-post`}
           >
-            <PlaylistAddCheckOutlinedIcon
-              fontSize='large'
-              style={{ color: '#00B074' }}
-            />
             <span className='header__hr-post-post'>{t('appliedJobTL')}</span>
           </Link>
           <Link
@@ -47,7 +54,7 @@ export default function HeaderWithCandidate() {
               path === 'view-list-care' ? 'active' : ''
             } header__hr-post`}
           >
-            <FormatAlignJustifyIcon style={{ color: '#00B074' }} />
+            {/* <FormatAlignJustifyIcon style={{ color: '#00B074' }} /> */}
             <span className='header__hr-post-post'>{t('savedJobsTL')}</span>
           </Link>
         </>

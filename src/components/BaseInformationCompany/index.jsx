@@ -141,7 +141,11 @@ const BaseInformationCompany = ({
       setOpen(true);
       reset();
     } else {
-      toast.error(t('youNeedToLogInToEvaluateTheCompanyTL'), {});
+      toast.error(t('youNeedToLogInToEvaluateTheCompanyTL'), {
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      });
     }
   };
   const onSubmit = async (data) => {
@@ -168,9 +172,17 @@ const BaseInformationCompany = ({
       };
       await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success(t('reviewHasBeenSubmittedTL'));
+        toast.success(t('reviewHasBeenSubmittedTL'), {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
-        toast.error(res.payload.message);
+        toast.error(res.payload.message, {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       }
     } catch (error) {
       if (error.status === 400) {

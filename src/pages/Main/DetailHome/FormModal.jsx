@@ -1,20 +1,56 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from 'src/components/shared/Button';
 import CustomInput from 'src/components/shared/CustomInput';
 import InputFile from 'src/components/shared/InputFile';
+import { applyJobThunk } from 'src/store/action/candidate/candidateAction';
 
-const FormModal = () => {
+const FormModal = ({ setOpen, jobId }) => {
+  const { user } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     // formState: { errors },
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+    },
+  });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    const formSubmit = {
+      apply: JSON.stringify({
+        jobDTO: { id: jobId },
+        candidateDTO: { id: user.id },
+        createDate: new Date().toISOString(),
+        referenceLetter: data.letter,
+        email: data.email,
+        phone: data.phone,
+        fullName: data.lastName + ' ' + data.firstName,
+      }),
+      fileCV: data.cv,
+    };
+
+    console.log(formSubmit);
+    dispatch(applyJobThunk(formSubmit));
+  };
+  const handleClose = (e) => {
+    e.preventDefault();
+    setOpen(false);
+  };
   return (
     <>
-      <form className='formApply__modal'>
+      <form
+        className='formApply__modal'
+        onSubmit={handleSubmit(onSubmit)}
+        encType='multipart/form-data'
+      >
         <div className='formApply__modal__input'>
           <div>
             <CustomInput
@@ -76,6 +112,7 @@ const FormModal = () => {
             id='cv'
             format='pdf'
             register={register}
+            setValue={setValue}
           ></InputFile>
         </div>
 
@@ -105,6 +142,7 @@ const FormModal = () => {
             bg='white'
             color='#7D7D7D'
             fz='13px'
+            onClick={(e) => handleClose(e)}
           ></Button>
         </div>
       </form>

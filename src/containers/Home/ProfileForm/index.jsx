@@ -56,16 +56,22 @@ const ProfileForm = ({ profile: user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue('firstName', user?.firstName || user?.userDTO?.firstName);
-    setValue('lastName', user?.lastName || user?.userDTO?.lastName);
-    setValue('email', user?.email || user?.userDTO?.email);
-    setValue('phone', user?.phone || user?.userDTO?.phone);
-    setValue('gender', user?.gender);
-    setValue('province', user?.provinceId);
-    setValue('district', user?.districtId);
-    setValue('address', user?.address);
+    setValue(
+      'firstName',
+      user?.userDetails?.firstName || user?.userDTO?.firstName
+    );
+    setValue(
+      'lastName',
+      user?.userDetails?.lastName || user?.userDTO?.lastName
+    );
+    setValue('email', user?.userDetails?.email || user?.userDTO?.email);
+    setValue('phone', user?.userDetails?.phone || user?.userDTO?.phone);
+    setValue('gender', user?.userDetails?.gender);
+    setValue('province', user?.location?.districtDTO?.provinceDTO?.name);
+    setValue('district', user?.location?.districtDTO?.name);
+    setValue('address', user?.location?.address);
   }, [user, setValue]);
-
+  console.log(user?.location?.districtDTO?.provinceDTO?.name, 'name');
   const handleEditClick = () => {
     setShowInput(!showInput);
     window.scrollTo({
@@ -130,14 +136,19 @@ const ProfileForm = ({ profile: user }) => {
               phone: user?.phone,
               email: user?.email,
               // birthday: data.birthday,
+              location: {
+                id: parseInt(data.province),
+                districtDTO: {
+                  id: parseInt(data.district),
+                  provinceDTO: { id: parseInt(data.province) },
+                },
+                address: data.address,
+              },
             },
-            major: {
-              id: user?.major?.id,
-            },
+            // university: data.school,
           }),
-          fileAvatar: data.avatar,
-          fileCV: data.cv,
-          location: data.address,
+          fileCV: user?.cv,
+          fileAvatar: user?.avatar,
         };
         console.log(profileData, 'profiledata');
         dispatch(updateUser([userPost, profileData])).then(
@@ -233,7 +244,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                check={true}
+                // check={true}
               >
                 {errors.lastName?.message}
               </CustomInput>
@@ -246,7 +257,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                check={true}
+                // check={true}
               >
                 {errors.firstName?.message}
               </CustomInput>
@@ -261,7 +272,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                check={true}
+                // check={true}
               >
                 {errors.email?.message}
               </CustomInput>

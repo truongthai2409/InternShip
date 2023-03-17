@@ -23,10 +23,10 @@ const AdminAccountMenu = () => {
     sessionStorage.removeItem('userPresent');
     sessionStorage.removeItem('userPresent');
     navigate('/', { replace: true });
-    toast.warning('Bạn vừa đăng xuất', {
+    toast.info('Bạn vừa đăng xuất', {
       position: 'top-right',
       autoClose: 3000,
-      theme: 'dark',
+      style: { color: '#509AF8', backgroundColor: '#D7F1FD' },
     });
   };
   return (

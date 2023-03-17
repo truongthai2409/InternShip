@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
+import { genderList } from './validateForm';
 import './styles.scss';
 
 const ProfileDetail = (props) => {
-  const { user } = useSelector((state) => state.profile);
+  const { others } = useSelector((state) => state.profile);
   const { t } = useTranslation('userInfo');
 
   const handleEditClick = () => {
@@ -27,13 +28,17 @@ const ProfileDetail = (props) => {
           <Typography className='profile-detail-label' variant='subtitle1'>
             Họ và tên lót
           </Typography>
-          <span className={'profile-detail-value'}>{user?.lastName}</span>
+          <span className={'profile-detail-value'}>
+            {others?.userDetails?.lastName}
+          </span>
         </div>
         <div className='profile-detail-item'>
           <Typography className='profile-detail-label' variant='subtitle1'>
             Tên
           </Typography>
-          <span className={'profile-detail-value'}>{user?.firstName}</span>
+          <span className={'profile-detail-value'}>
+            {others?.userDetails?.firstName}
+          </span>
         </div>
       </div>
       <div className='profile-detail'>
@@ -41,14 +46,18 @@ const ProfileDetail = (props) => {
           <Typography className='profile-detail-label' variant='subtitle1'>
             Email
           </Typography>
-          <span className={'profile-detail-value'}>{user?.email}</span>
+          <span className={'profile-detail-value'}>
+            {others?.userDetails?.email}
+          </span>
         </div>
         <div className='profile-detail-item'>
           <Typography className='profile-detail-label' variant='subtitle1'>
             Ngày sinh
           </Typography>
           <span className={'profile-detail-value'}>
-            {user?.birthday ? user?.birthday : '(chưa có dữ liệu)'}
+            {others?.userDetails?.birthday
+              ? others?.userDetails?.birthday
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
       </div>
@@ -58,7 +67,9 @@ const ProfileDetail = (props) => {
             Số điện thoại
           </Typography>
           <span className={'profile-detail-value'}>
-            {user?.phone ? user?.phone : '(chưa có dữ liệu)'}
+            {others?.userDetails?.phone
+              ? others?.userDetails?.phone
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
         <div className='profile-detail-item'>
@@ -66,7 +77,12 @@ const ProfileDetail = (props) => {
             Giới tính
           </Typography>
           <span className={'profile-detail-value'}>
-            {user?.gender ? user?.gender : '(chưa có dữ liệu)'}
+            {genderList.map((value) => {
+              if (value.id === others?.userDetails?.gender) {
+                const genderName = value.name;
+                return genderName ? genderName : '(chưa có dữ liệu)';
+              }
+            })}
           </span>
         </div>
       </div>
@@ -76,7 +92,9 @@ const ProfileDetail = (props) => {
             Tỉnh/ Thành phố
           </Typography>
           <span className='profile-detail-value'>
-            {user?.nameProvince ? user?.nameProvince : '(chưa có dữ liệu)'}
+            {others?.location?.districtDTO?.provinceDTO?.name
+              ? others?.location?.districtDTO?.provinceDTO?.name
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
         <div className='profile-detail-item'>
@@ -84,7 +102,9 @@ const ProfileDetail = (props) => {
             Quận/ Huyện
           </Typography>
           <span className='profile-detail-value'>
-            {user?.nameDistrict ? user?.nameDistrict : '(chưa có dữ liệu)'}
+            {others?.location?.districtDTO?.name
+              ? others?.location?.districtDTO?.name
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
       </div>
@@ -94,7 +114,9 @@ const ProfileDetail = (props) => {
             Địa chỉ
           </Typography>
           <span className={'profile-detail-value'}>
-            {user?.address ? user?.address : '(chưa có dữ liệu)'}
+            {others?.location?.address
+              ? others?.location?.address
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
       </div>
@@ -104,7 +126,7 @@ const ProfileDetail = (props) => {
             Trường học
           </Typography>
           <span className={'profile-detail-value'}>
-            {user?.school ? user?.school : '(chưa có dữ liệu)'}
+            {others?.school ? others?.school : '(chưa có dữ liệu)'}
           </span>
         </div>
       </div>
