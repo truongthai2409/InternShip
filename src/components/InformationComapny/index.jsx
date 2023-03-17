@@ -31,7 +31,7 @@ const InformationCompany = ({
     e.stopPropagation();
     if (user) {
       if (!user?.cv) {
-        toast.error(t('youDoNotHaveACVYetPleaseUpdateItTL'), {
+        toast.error(t('youDoNotHaveACVYetPleaseUpdateItTL'),{
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -54,7 +54,7 @@ const InformationCompany = ({
           resApply.payload.status === 200 ||
           resApply.payload.status === 201
         ) {
-          toast.success(t('yourCVHasBeenSubmittedSuccessfullyTL'), {
+          toast.success(t('yourCVHasBeenSubmittedSuccessfullyTL'),{
             position: 'top-right',
             autoClose: 3000,
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -75,7 +75,7 @@ const InformationCompany = ({
         }
       }
     } else {
-      toast.error(t('youNeedToLogInAsaCandidateToApplyForThisPositionTL'), {
+      toast.error(t('youNeedToLogInAsaCandidateToApplyForThisPositionTL'),{
         position: 'top-right',
         autoClose: 3000,
         style: { color: '#00B074', backgroundColor: '#DEF2ED' },

@@ -13,7 +13,7 @@ const VerifyEmail = () => {
       email: email,
     };
     dispatch(verifyEmailThunk(formData)).then((res) => {
-      toast.success('Email sent successfully', {
+      toast.success('Email sent successfully',{
         position: 'top-right',
         autoClose: 3000,
         style: { color: '#00B074', backgroundColor: '#DEF2ED' },
