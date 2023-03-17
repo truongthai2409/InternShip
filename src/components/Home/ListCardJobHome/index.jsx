@@ -23,7 +23,6 @@ const ListCardJobHome = ({
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  // const { page } = useSelector((state) => state.filter);
   const page = no + 1;
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));

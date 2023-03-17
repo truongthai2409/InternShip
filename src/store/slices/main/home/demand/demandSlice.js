@@ -42,7 +42,7 @@ const demandSlice = createSlice({
       .addCase(addDemand.fulfilled, (state, { payload }) => {
         if (payload.httpCode && payload.httpCode === 500) {
           state.status = payload.message;
-          toast.error('Đăng danh sách thực tập thất bại!',{
+          toast.error('Đăng danh sách thực tập thất bại!', {
             position: 'top-right',
             autoClose: 3000,
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -51,7 +51,7 @@ const demandSlice = createSlice({
         } else {
           state.status = 'success';
           state.demandListUniversityActive.unshift(payload);
-          toast.success('Đăng danh sách thực tập thành công!',{
+          toast.success('Đăng danh sách thực tập thành công!', {
             position: 'top-right',
             autoClose: 3000,
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -98,7 +98,7 @@ const demandSlice = createSlice({
             return demand;
           }
         );
-        toast.success('Cập nhật danh sách thực tập thành công!',{
+        toast.success('Cập nhật danh sách thực tập thành công!', {
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },

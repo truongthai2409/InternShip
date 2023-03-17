@@ -83,7 +83,6 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
-
     const userPost = {
       userStorage,
       role,

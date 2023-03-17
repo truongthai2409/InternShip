@@ -78,7 +78,7 @@ const CandidateViewList = () => {
                     jobListHavePages={jobCareHavePage}
                     onChange={handleChange}
                     reload={false}
-                    viewCV = {false}
+                    viewCV={false}
                   />
                 </Grid>
               </Grid>

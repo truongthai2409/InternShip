@@ -63,7 +63,7 @@ function ResetPassword() {
     dispatch(resetPasswordThunk(formData))
       .then((res) => {
         if (res.payload.httpCode === 200 || res.payload.httpCode === 201) {
-          toast.success('Thay đổi mật khẩu thành công',{
+          toast.success('Thay đổi mật khẩu thành công', {
             position: 'top-right',
             autoClose: 3000,
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -72,7 +72,7 @@ function ResetPassword() {
         }
       })
       .catch((err) => {
-        toast.error(err,{
+        toast.error(err, {
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },

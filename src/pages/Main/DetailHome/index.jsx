@@ -84,7 +84,7 @@ const DetailHome = () => {
         setIsSave(true);
       }
     });
-    jobCare.map((item) => {
+    jobApplyList.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIsApply(true);
       }

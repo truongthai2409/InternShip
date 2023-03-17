@@ -136,7 +136,7 @@ const OverallCompany = (props) => {
           jobListHavePages={jobPage}
           onChange={getValuePageAndHandle}
           reload={reload}
-          viewCV = {false}
+          viewCV={false}
         />
       </div>
     </div>
