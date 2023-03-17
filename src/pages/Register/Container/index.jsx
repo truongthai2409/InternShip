@@ -21,7 +21,6 @@ export default function Container({
 }) {
   const { t } = useTranslation('registerFrom');
   TabTitle(`${t('registerTL')} - ${title}`);
-  console.log(err, 'error');
   return (
     <div className='register__container'>
       <h1 className='register-container__title'>Đăng ký tài khoản {title}</h1>

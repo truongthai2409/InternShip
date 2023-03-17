@@ -53,7 +53,6 @@ export const getJobApplyListByCandidate = createAsyncThunk(
         Authorization: 'Bearer ' + args?.token,
       },
     };
-    console.log(args);
     if (args.user.role.name.includes('Role_Candidate')) {
       const res = await axios.get(
         `${BASEURL}/api/r2s/candidate-application/candidate/${args.user.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`,

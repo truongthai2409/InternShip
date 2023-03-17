@@ -104,6 +104,19 @@
 .cardHome__container:hover {
   border: 2px solid $primary-color;
 }
-// .cardHome__container.active {
-//   border: 2px solid $primary-color;
-// }
+
+.button_view_cv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  border: none;
+  padding: 7px 23px;
+  background-color: #ecf8ee;
+  color: #00b074;
+  font-size: 13px;
+  gap: 5px;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 100;
+}

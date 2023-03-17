@@ -94,7 +94,6 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
-    console.log('run please', { role, data });
     const userPost = {
       userStorage,
       role,
@@ -144,8 +143,8 @@ const ProfileForm = ({ profile: user }) => {
                 },
                 address: data.address,
               },
+              // university: data.school,
             },
-            // university: data.school,
           }),
           fileCV: user?.cv,
           fileAvatar: user?.avatar,
@@ -314,7 +313,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                check={true}
+                // check={true}
               >
                 {errors.phone?.message}
               </CustomInput>

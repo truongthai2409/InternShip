@@ -12,11 +12,17 @@ import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
 import { useNavigate } from 'react-router-dom';
+import FeedIcon from '@mui/icons-material/Feed';
+import { Document, Page, pdfjs } from 'react-pdf';
+import Modal from 'src/components/shared/Modal';
 
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const [isMarkLength, setIsMarkLength] = useState();
-  const { jobCare } = useSelector((state) => state.jobCandidateSlice);
+
+  const { jobCare, jobApplyList } = useSelector(
+    (state) => state.jobCandidateSlice
+  );
   const { user } = useSelector((state) => state.profile);
   const [idCareJob, setIdCareJob] = useState('');
   useEffect(() => {
@@ -38,7 +44,6 @@ const CardHome = (props) => {
   useEffect(
     () => {
       let isMark = jobCare.filter((job) => {
-        console.log(job, props);
         return job?.jobDTO?.id == props?.id;
       });
       setIdCareJob(isMark[0]?.id);
@@ -55,6 +60,47 @@ const CardHome = (props) => {
       navigate(`/detail_job/${props.id}`);
     }
   };
+  // open cv
+
+  const [open, setOpen] = useState(false);
+  const [numPages, setNumPages] = useState(null);
+  const [numberCV, setNumberCV] = useState([]);
+  const viewProfileCV = (info, e) => {
+    e.stopPropagation();
+    setOpen(!open);
+    setNumberCV(info.cv);
+  };
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+  const renderCV = () => {
+    return (
+      <Modal
+        iconClose={true}
+        modalTitle={'View CV'}
+        open={open}
+        setOpen={setOpen}
+        children={
+          <div>
+            <Document
+              file={numberCV}
+              onLoadSuccess={onDocumentLoadSuccess}
+              wrap={false}
+            >
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  wrap={false}
+                />
+              ))}
+            </Document>
+          </div>
+        }
+      />
+    );
+  };
+
   return (
     <div
       className={clsx(
@@ -110,23 +156,34 @@ const CardHome = (props) => {
               )}
             </div>
           </div>
-          <div className='cardHome__tagName'>
-            {props?.tagName?.map((tag, indexs) =>
-              tag?.length > 0 ? (
-                tag?.map((item, index) => {
-                  return item?.length > 0 ? (
-                    item?.map((ite, idx) => {
-                      return <TagName key={idx} title={ite?.name || null} />;
-                    })
-                  ) : (
-                    <TagName key={index} title={item?.name || null} />
-                  );
-                })
-              ) : (
-                <TagName key={indexs} title={tag?.name || null} />
-              )
-            )}
-          </div>
+          {props.viewCV ? (
+            <button
+              className='button_view_cv'
+              onClick={(e) => viewProfileCV(props, e)}
+            >
+              <FeedIcon />
+              <p>Xem cv</p>
+              {renderCV()}
+            </button>
+          ) : (
+            <div className='cardHome__tagName'>
+              {props?.tagName?.map((tag, indexs) =>
+                tag?.length > 0 ? (
+                  tag?.map((item, index) => {
+                    return item?.length > 0 ? (
+                      item?.map((ite, idx) => {
+                        return <TagName key={idx} title={ite?.name || null} />;
+                      })
+                    ) : (
+                      <TagName key={index} title={item?.name || null} />
+                    );
+                  })
+                ) : (
+                  <TagName key={indexs} title={tag?.name || null} />
+                )
+              )}
+            </div>
+          )}
         </div>
       </div>
 

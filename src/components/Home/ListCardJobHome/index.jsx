@@ -18,10 +18,11 @@ const ListCardJobHome = ({
   hiddent,
   no,
   reload,
+  viewCV,
+  cv,
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  // const { page } = useSelector((state) => state.filter);
   const page = no + 1;
   const handlePagination = (e, valuePage) => {
     dispatch(pageFilterChange(valuePage));
@@ -48,7 +49,8 @@ const ListCardJobHome = ({
         {jobList && jobList?.length > 0 ? (
           jobList.map((job, index) => (
             <CardHome
-              // jobList={jobList}
+              cv={cv ? cv[index] : null}
+              jobList={job}
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
@@ -104,6 +106,7 @@ const ListCardJobHome = ({
               ]}
               locationPath={location.pathname}
               reload={reload}
+              viewCV={viewCV}
             />
           ))
         ) : (

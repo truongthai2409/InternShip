@@ -86,11 +86,11 @@ const DetailInfo = (props) => {
           </p>
           <div className='detailInfoHome__left__info__btn'>
             <Button
-              name={'ỨNG TUYỂN NGAY'}
+              name={props.isApply ? 'ĐÃ ỨNG TUYỂN' : 'ỨNG TUYỂN NGAY'}
               bwidth='211px'
               bheight='46px'
               padding='0px 0px'
-              bg='#00B074'
+              bg={props.isApply ? '#B0B0B0' : '#00B074'}
               fz='17px'
               onClick={(e) => props.onHandleApply(e)}
             ></Button>

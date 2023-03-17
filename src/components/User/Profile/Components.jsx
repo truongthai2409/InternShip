@@ -94,7 +94,6 @@ const Components = ({ profile }) => {
   const handleSubmitFile = (event) => {
     event.preventDefault();
     // do something with the file, such as upload it to a server
-    console.log('File uploaded:', file);
   };
   return (
     <div className='profiles'>

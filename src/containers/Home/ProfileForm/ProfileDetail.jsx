@@ -9,6 +9,10 @@ import './styles.scss';
 
 const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
+  console.log(
+    '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
+    others?.location
+  );
   const { t } = useTranslation('userInfo');
 
   const handleEditClick = () => {
@@ -133,5 +137,4 @@ const ProfileDetail = (props) => {
     </div>
   );
 };
-
 export default ProfileDetail;

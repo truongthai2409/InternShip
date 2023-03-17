@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import Button from 'src/components/shared/Button';
 import CustomInput from 'src/components/shared/CustomInput';
 import InputFile from 'src/components/shared/InputFile';
 import { applyJobThunk } from 'src/store/action/candidate/candidateAction';
+import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
 
 const FormModal = ({ setOpen, jobId }) => {
   const { user } = useSelector((state) => state.profile);
@@ -28,17 +30,37 @@ const FormModal = ({ setOpen, jobId }) => {
       apply: JSON.stringify({
         jobDTO: { id: jobId },
         candidateDTO: { id: user.id },
-        createDate: new Date().toISOString(),
+        createdDate: new Date().toISOString(),
         referenceLetter: data.letter,
         email: data.email,
         phone: data.phone,
-        fullName: data.lastName + ' ' + data.firstName,
+        fullName: data.firstName + ' ' + data.lastName,
       }),
       fileCV: data.cv,
     };
 
-    console.log(formSubmit);
-    dispatch(applyJobThunk(formSubmit));
+    dispatch(applyJobThunk(formSubmit)).then((res) => {
+      toast.success('Nộp CV thành công', {
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      });
+      setOpen(false);
+      const userStorage =
+        JSON.parse(sessionStorage.getItem('userPresent')) ||
+        JSON.parse(localStorage.getItem('userPresent'));
+
+      const page = {
+        user: user,
+        token: userStorage?.token,
+        page: {
+          no: 0,
+          limit: 200,
+        },
+      };
+
+      dispatch(getJobApplyListByCandidate(page));
+    });
   };
   const handleClose = (e) => {
     e.preventDefault();
