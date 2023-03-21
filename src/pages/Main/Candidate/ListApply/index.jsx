@@ -73,10 +73,14 @@ const ListApply = () => {
                   jobList={jobs?.map((item) => {
                     return item.jobDTO;
                   })}
+                  cv={jobs?.map((item) => {
+                    return item.cv;
+                  })}
                   indexCardActive={index}
                   jobListHavePages={jobApplyListHavePage}
                   onChange={handleChange}
                   reload={false}
+                  viewCV={true}
                 />
               </Grid>
             </Grid>

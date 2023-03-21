@@ -118,7 +118,7 @@ const ButtonMark = (props) => {
     >
       <IconButton
         style={{
-          border: props.border ? props.border : '1px solid #F1F1F1',
+          border: props.isMark ? '1px solid #00b074' : '1px solid #F1F1F1',
           borderRadius: '4px',
           width: `${props.width}`,
           height: `${props.height}`,
@@ -138,8 +138,12 @@ const ButtonMark = (props) => {
           ) : (
             <BookmarkIcon
               className='buttonMark__isChecking'
-              style={{ fontSize: `${props.fontSize}` }}
+              style={{
+                fontSize: `${props.fontSize}`,
+                color: `${props.isMark ? '#00B074' : '#7D7D7D'}`,
+              }}
               sx={{ color: '#04bf8a' }}
+              // color={props.isMark ? '#7D7D7D' : '#00B074'}
             />
           )
         ) : (
