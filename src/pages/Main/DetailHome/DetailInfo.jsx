@@ -86,13 +86,13 @@ const DetailInfo = (props) => {
           </p>
           <div className='detailInfoHome__left__info__btn'>
             <Button
-              name={'ỨNG TUYỂN NGAY'}
+              name={props.isApply ? 'ĐÃ ỨNG TUYỂN' : 'ỨNG TUYỂN NGAY'}
               bwidth='211px'
               bheight='46px'
               padding='0px 0px'
-              bg='#00B074'
+              bg={props.isApply ? '#B0B0B0' : '#00B074'}
               fz='17px'
-              onClick={(e)=>props.onHandleApply(e)}
+              onClick={(e) => props.onHandleApply(e)}
             ></Button>
             <Button
               name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
@@ -105,7 +105,10 @@ const DetailInfo = (props) => {
               onClick={(e) => props.onHandle(e)}
             ></Button>
           </div>
-          <p className='deadline'>Hạn nộp hồ sơ: {dateTimeHelper.changeDateLocale(props.detail.endTime)}</p>
+          <p className='deadline'>
+            Hạn nộp hồ sơ:{' '}
+            {dateTimeHelper.changeDateLocale(props.detail.endTime)}
+          </p>
         </div>
       </div>
       <div className='detailInfoHome__right'>

@@ -20,15 +20,15 @@
 
     .cardHome__aboutCompany {
       display: flex;
-      &__right{
+      &__right {
         display: flex;
         flex-direction: column;
-        gap:7px;
+        gap: 6px;
         align-items: flex-start;
       }
       .cardHome__img {
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         margin-right: 22px;
         border: 1px solid rgba(125, 125, 125, 0.4);
         border-radius: 8px;
@@ -55,7 +55,6 @@
     .cardHome__tagName {
       display: flex;
       margin-top: 12px;
-      margin-bottom: 12px;
       flex-wrap: wrap;
       gap: 4px;
     }
@@ -104,6 +103,23 @@
 .cardHome__container:hover {
   border: 2px solid $primary-color;
 }
-// .cardHome__container.active {
-//   border: 2px solid $primary-color;
-// }
+
+.button_view_cv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  border: none;
+  padding: 7px 23px;
+  background-color: #ecf8ee;
+  color: #00b074;
+  font-size: 13px;
+  gap: 5px;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.cardHome__col2-End-1{
+  margin-bottom: 6px;
+}

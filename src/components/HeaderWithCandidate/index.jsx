@@ -13,7 +13,6 @@ export default function HeaderWithCandidate() {
   const location = useLocation();
   const path =
     location.pathname.split('/')[location.pathname.split('/').length - 1];
-  console.log(path);
   const dispatch = useDispatch();
   const handleClick = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

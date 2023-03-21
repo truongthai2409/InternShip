@@ -32,7 +32,7 @@ const Password = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (statusForgotPassword === 'success') {
@@ -59,7 +59,7 @@ const Password = () => {
   const handleClear = (e) => {
     e.preventDefault();
     reset();
-    navigate('/candidate/profile')
+    navigate('/candidate/profile');
   };
 
   return (
