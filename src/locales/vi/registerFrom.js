@@ -15,8 +15,10 @@ export const REGISTER_FROM_VI = {
   confirmPasswordTL: 'Xác nhận mật khẩu',
   passwordConfirmationFormatTL:
     'Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập',
-  genderTL: 'Giới tính',
+  gender: 'Giới tính',
   pleaseSelectTL: 'Vui lòng chọn...',
+  genderSub: 'Nhập giới tính',
+  positionSub: 'Nhập chức vụ của bạn tại công ty',
   lastNameTL: 'Họ và tên lót',
   lastName: 'Nhập họ và tên lót',
   firstNameTL: 'Tên',

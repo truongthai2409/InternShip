@@ -23,12 +23,12 @@
       &__right {
         display: flex;
         flex-direction: column;
-        gap: 7px;
+        gap: 6px;
         align-items: flex-start;
       }
       .cardHome__img {
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         margin-right: 22px;
         border: 1px solid rgba(125, 125, 125, 0.4);
         border-radius: 8px;
@@ -55,7 +55,6 @@
     .cardHome__tagName {
       display: flex;
       margin-top: 12px;
-      margin-bottom: 12px;
       flex-wrap: wrap;
       gap: 4px;
     }
@@ -119,4 +118,8 @@
   border-radius: 12px;
   cursor: pointer;
   z-index: 100;
+}
+
+.cardHome__col2-End-1 {
+  margin-bottom: 6px;
 }

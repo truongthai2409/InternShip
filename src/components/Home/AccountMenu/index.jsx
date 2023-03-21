@@ -116,7 +116,7 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <AccountBoxIcon className='profile-icon' />{' '}
-            {t('AccountInformationTL')}
+            <span>{t('AccountInformationTL')}</span>
           </MenuItem>
         </Link>
         <Link
@@ -130,7 +130,7 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <SettingsApplicationsSharpIcon className='profile-icon' />
-            {t('forgotPasswordTL1')}
+            <span>{t('forgotPasswordTL1')}</span>
           </MenuItem>
         </Link>
         <Divider />

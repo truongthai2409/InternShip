@@ -8,6 +8,7 @@ import { TabTitle } from 'src/utils/GeneralFunctions';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import './styles.scss';
+import SelectCustom from 'src/components/shared/Select';
 export default function Container({
   title,
   children,
@@ -23,7 +24,6 @@ export default function Container({
   TabTitle(`${t('registerTL')} - ${title}`);
   const location = useLocation();
   const path = location.pathname;
-  console.log('🚀 ~ file: index.jsx:26 ~ path:', path);
 
   return (
     <div className='register__container'>
@@ -106,6 +106,65 @@ export default function Container({
             <h4 className='register__container__form--title'>
               Thông tin liên hệ
             </h4>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label={t('lastNameTL')}
+                id='lastName'
+                type='text'
+                placeholder={t('lastNameTL')}
+                register={register}
+                subtitle={t('lastName')}
+              >
+                {err.lastName?.message}
+              </CustomInput>
+              <CustomInput
+                label={t('firstNameTL')}
+                id='firstName'
+                type='text'
+                placeholder={t('firstNameTL')}
+                register={register}
+                subtitle={t('firstName')}
+              >
+                {err.firstName?.message}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                className='custom_req_can'
+                label={t('phoneNumberTL')}
+                id='phone'
+                type='phone'
+                placeholder={t('phoneNumberTL')}
+                register={register}
+                subtitle={t('phoneNumberFormatTL')}
+              >
+                {err.phone?.message}
+              </CustomInput>
+              <SelectCustom
+                setValue={setValue}
+                id='gender'
+                register={register}
+                label={t('gender')}
+                options={genderList}
+                placeholder={t('pleaseSelectTL')}
+                requirementField={false}
+              >
+                {err.gender?.message}
+              </SelectCustom>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label='Chức vụ'
+                id='position'
+                type='text'
+                placeholder='Chức vụ'
+                register={register}
+                subtitle={t('positionSub')}
+              >
+                {err.email?.message}
+                {errorMessage?.Email}
+              </CustomInput>
+            </div>
           </>
         ) : (
           <>

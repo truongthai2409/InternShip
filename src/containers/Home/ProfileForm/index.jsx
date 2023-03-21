@@ -94,7 +94,6 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
-    console.log('🚀 ~ file: index.jsx:97 ~ onSubmit ~ data:', data);
     const userPost = {
       userStorage,
       role,

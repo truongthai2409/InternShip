@@ -13,6 +13,8 @@ import CommingSoon from 'src/pages/Main/Home/CommingSoon';
 import NotFound from 'src/pages/NotFound';
 import DetailHome from '../../pages/Main/DetailHome';
 import ResetPassword from 'src/pages/Authenticate/ResetPassword/ResetPassword';
+import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
+import AddJob from 'src/pages/Main/NewHR/AddJob/AddJob';
 const mainRouter = [
   {
     path: '/',
@@ -57,6 +59,14 @@ const mainRouter = [
       {
         path: 'infomation_demand/:keywod',
         Component: InfomationDemand,
+      },
+      {
+        path: 'demoHR',
+        Component: DemoHR,
+      },
+      {
+        path: 'demoHR/add',
+        Component: AddJob,
       },
     ],
   },

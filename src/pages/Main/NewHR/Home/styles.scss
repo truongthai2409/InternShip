@@ -1,0 +1,47 @@
+@use '../../../../assets//styles/' as *;
+
+.statistical {
+  //   display: flex;
+  width: 184px;
+  height: 96px;
+  background-color: #f1f1f1;
+  padding: 20px 20px;
+}
+
+.statistic_multiple {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  &__left {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.statistic_hr_table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.statistic_total {
+  padding: 20px 40px;
+  background-color: white;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  &__icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    svg {
+      color: $color-default;
+    }
+  }
+}
+
+.MuiDataGrid-columnHeaders {
+  background-color: #ecf8ee;
+}

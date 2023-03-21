@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,18 @@ import './styles.scss';
 import { updateStatusRegisterForHR } from 'src/store/slices/main/register/registerSlice';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
+import Collap from 'src/components/Collaps/Collap';
+import {
+  getDistrictList,
+  getProvinceList,
+} from 'src/store/slices/location/locationSlice';
+
+const countryList = [
+  {
+    id: 84,
+    name: 'Việt Nam',
+  },
+];
 const HRInfo = () => {
   const { t } = useTranslation('title');
   TabTitle(`${t('registerHRTL')}`);
@@ -24,6 +36,8 @@ const HRInfo = () => {
   const { companyList } = useSelector((state) => state.company);
   const { statusRegister } = useSelector((state) => state.register);
   const errorMessage = useSelector((state) => state.register.error);
+  const { districtList, provinceList } = useSelector((state) => state.location);
+  const [showForm, setShowForm] = useState('false');
 
   const {
     register,
@@ -42,7 +56,9 @@ const HRInfo = () => {
       dispatch(updateStatusRegisterForHR('idleRegister'));
     }
   }, [statusRegister, dispatch, navigate]);
-
+  const handleShowForm = () => {
+    setShowForm(!showForm);
+  };
   const onSubmit = async (data) => {
     const hrData = {
       hr: JSON.stringify({
@@ -66,11 +82,6 @@ const HRInfo = () => {
     dispatch(registerHr({ hrData, navigate }));
   };
 
-  const handleBackClick = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
-
   return (
     <Grid container>
       <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
@@ -84,34 +95,151 @@ const HRInfo = () => {
       <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
         <Container
           title='Nhà Tuyển Dụng'
-          onClick={handleBackClick}
           handleClick={handleSubmit(onSubmit)}
           err={errors}
           errorMessage={errorMessage}
           register={register}
           setValue={setValue}
           children={
-            <div className='register__container__form--name'>
-              <SelectCustom
-                label='Công ty'
-                placeholder='Vui lòng chọn...'
-                options={companyList}
-                id='company'
-                register={register}
-              >
-                {errors.company?.message}
-              </SelectCustom>
-              <CustomInput
-                label='Vai trò tại công ty'
-                id='jobPosition'
-                type='text'
-                placeholder='Vị trí...'
-                register={register}
-                requirementField={false}
-              >
-                {errors.jobPosition?.message}
-              </CustomInput>
-            </div>
+            <>
+              {!showForm ? (
+                <>
+                  <h4 className='register__container__form--title'>
+                    Thông tin công ty
+                  </h4>
+                  <div className='register__container__form--name'>
+                    <SelectCustom
+                      label='Công ty'
+                      placeholder='Vui lòng chọn...'
+                      options={companyList}
+                      id='company'
+                      register={register}
+                    >
+                      {errors.company?.message}
+                    </SelectCustom>
+                    <SelectCustom
+                      label='Công ty'
+                      placeholder='Vui lòng chọn...'
+                      options={companyList}
+                      id='company'
+                      register={register}
+                    >
+                      {errors.company?.message}
+                    </SelectCustom>
+                  </div>
+                </>
+              ) : (
+                ''
+              )}
+              <Collap
+                open={showForm}
+                handleClick={handleShowForm}
+                title='Chưa có công ty của bạn? Đăng kí ngay'
+                children={
+                  <>
+                    <h4 className='register__container__form--title'>
+                      Thông tin công ty
+                    </h4>
+                    <div className='register__container__form--name'>
+                      <CustomInput
+                        label={t('emailCompany')}
+                        id='emailCompany'
+                        type='email'
+                        placeholder='tuyendung@r2s.com.vn'
+                        register={register}
+                        subtitle={t('emailCompanySub')}
+                      >
+                        {errors.email?.message}
+                      </CustomInput>
+                      <CustomInput
+                        className='custom_req_can'
+                        label={t('phoneNumCompany')}
+                        id='phone'
+                        type='phone'
+                        register={register}
+                        subtitle={t('phoneNumCompanySub')}
+                      >
+                        {errors.phone?.message}
+                      </CustomInput>
+                    </div>
+                    <div className='register__container__form--name'>
+                      <CustomInput
+                        label={t('emailCompany')}
+                        id='emailCompany'
+                        type='email'
+                        placeholder='tuyendung@r2s.com.vn'
+                        register={register}
+                        subtitle={t('emailCompanySub')}
+                      >
+                        {errors.email?.message}
+                      </CustomInput>
+                      <CustomInput
+                        className='custom_req_can'
+                        label={t('phoneNumCompany')}
+                        id='phone'
+                        type='phone'
+                        register={register}
+                        subtitle={t('phoneNumCompanySub')}
+                      >
+                        {errors.phone?.message}
+                      </CustomInput>
+                    </div>
+                    <div className='row-3-col'>
+                      <div className={'university-register__select-location'}>
+                        <SelectCustom
+                          id='country'
+                          label='Quốc gia'
+                          placeholder='Vui lòng chọn...'
+                          options={countryList}
+                          register={register}
+                          requirementField={false}
+                        >
+                          {errors.country?.message}
+                        </SelectCustom>
+                      </div>
+                      <div className={'university-register__select-location'}>
+                        <SelectCustom
+                          id='province'
+                          label='Tỉnh/Thành phố'
+                          placeholder='Vui lòng chọn...'
+                          dispatch={dispatch}
+                          action={getDistrictList}
+                          options={provinceList}
+                          register={register}
+                          requirementField={false}
+                        >
+                          {errors.province?.message}
+                        </SelectCustom>
+                      </div>
+                      <div className={'university-register__select-location'}>
+                        <SelectCustom
+                          id='district'
+                          label='Quận/Huyện'
+                          placeholder='Vui lòng chọn...'
+                          options={districtList}
+                          register={register}
+                          requirementField={false}
+                        >
+                          {errors.district?.message}
+                        </SelectCustom>
+                      </div>
+                    </div>
+                    <div className='register__container__form--name'>
+                      <CustomInput
+                        label='Địa điểm làm việc'
+                        id='addressCompany'
+                        type='text'
+                        placeholder='1164 Phạm Văn Đồng...'
+                        register={register}
+                        requirementField={false}
+                      >
+                        {errors.address?.message}
+                      </CustomInput>
+                    </div>
+                  </>
+                }
+              />
+            </>
           }
         />
       </Grid>
