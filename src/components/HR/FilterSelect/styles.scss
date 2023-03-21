@@ -1,0 +1,6 @@
+@use '../../../assets/styles/' as *;
+
+.MuiFormControl-root {
+    margin: 0px !important;
+    border: 1px solid $color-default !important;
+}
