@@ -90,7 +90,7 @@ export const getUserById = createAsyncThunk(
           });
       case 'Role_Candidate':
         return await axios
-          .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
+          .get(`${baseURL}/api/candidate/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })

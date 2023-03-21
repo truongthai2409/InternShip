@@ -55,7 +55,7 @@ export const getJobApplyListByCandidate = createAsyncThunk(
     };
     if (args.user.role.name.includes('Role_Candidate')) {
       const res = await axios.get(
-        `${BASEURL}/api/r2s/candidate-application/candidate/${args.user.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`,
+        `${BASEURL}/api/candidate-application/candidate/${args.user.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`,
         header
       );
       return res.data;
@@ -75,7 +75,7 @@ export const addJobCare = createAsyncThunk(
   'jobCadidateSlice/adddCareJob',
   async (args) => {
     return await axios
-      .post(`${BASEURL}/api/r2s/job-care`, args[0], {
+      .post(`${BASEURL}/api/job-care`, args[0], {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + args[1],
@@ -98,7 +98,7 @@ export const deleteJobCare = createAsyncThunk(
       },
     };
     return await axios
-      .delete(`${BASEURL}/api/r2s/job-care/${args[0].id}`, header)
+      .delete(`${BASEURL}/api/job-care/${args[0].id}`, header)
       .then((res) => {
         return res.data;
       })
@@ -117,7 +117,7 @@ export const getAllJobCare = createAsyncThunk(
     };
     return await axios
       .get(
-        `${BASEURL}/api/r2s/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
+        `${BASEURL}/api/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
         header
       )
       .then((res) => {
@@ -135,7 +135,7 @@ export const getAllJobApply = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${BASEURL}/api/r2s/candidate/user/${args.user.user.id}`, header)
+      .get(`${BASEURL}/api/candidate/user/${args.user.user.id}`, header)
       .then(async (response) => {
         try {
           const response_1 = await axios.get(

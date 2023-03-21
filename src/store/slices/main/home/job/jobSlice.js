@@ -265,7 +265,7 @@ export const getJobPositionList = createAsyncThunk(
   'job/getJobPositionList',
   async () => {
     return axios
-      .get(`${baseURL}/api/r2s/job-position`)
+      .get(`${baseURL}/api/admin/job-position-general`)
       .then((response) => {
         return response.data;
       })
@@ -435,7 +435,7 @@ export const getJobFilterByUser = createAsyncThunk(
   'job/getJobFilterByUser',
   async (dataSearch) => {
     return axios
-      .get(`${baseURL}/api/r2s/job/filter`, {
+      .get(`${baseURL}/api/job/filter`, {
         params: dataSearch,
       })
       .then((response) => {
