@@ -1,33 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import CachedRoundedIcon from '@mui/icons-material/CachedRounded';
-import CloudDownloadRoundedIcon from '@mui/icons-material/CloudDownloadRounded';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import SyncAltIcon from '@mui/icons-material/SyncAlt';
-import { Divider, Switch, Tooltip, Typography } from '@mui/material';
+import { Divider, Switch, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { getAllUserCandidate } from 'src/store/slices/main/candidate/user/userCandidateSlice';
 import { updateUser } from 'src/store/slices/main/user/userSlice';
-import Button from '../../shared/Button';
-import InputFile from '../../shared/InputFile';
-import Modal from '../../shared/Modal';
 import { schema } from './dataCV';
 import UserInfo from './UserInfo';
 import avatarDefault from 'src/assets/img/avatar-default.png';
-import { Document, Page, pdfjs } from 'react-pdf';
 import { useTranslation } from 'react-i18next';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
-import PersonIcon from '@mui/icons-material/Person';
-import WcIcon from '@mui/icons-material/Wc';
+
 const BASEURL = process.env.REACT_APP_API;
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const Components = ({ profile }) => {
-  const [numPages, setNumPages] = useState(null);
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
+  console.log('🚀 ~ file: Components.jsx:15 ~ Components ~ profile:', profile);
   const dispatch = useDispatch();
   const {
     register,
@@ -38,16 +23,41 @@ const Components = ({ profile }) => {
     resolver: yupResolver(schema),
   });
   const [opens, setOpens] = useState(false);
-  const handleChange = (e) => {};
   const [checkedFind, setCheckedFind] = useState(true);
   const [checkedEmail, setCheckedEmail] = useState(false);
-  const [allowContact, setAllowContact] = useState(true);
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('userInfo');
 
   const handleChangeFind = (event) => {
     setCheckedFind(event.target.checked);
-    setAllowContact(event.target.checked);
+    if (event.target.checked) {
+      const userSessionStorage =
+        JSON.parse(sessionStorage.getItem('userPresent')) ||
+        JSON.parse(localStorage.getItem('userPresent'));
+      const profileData = {
+        candidate: JSON.stringify({
+          userCreationDTO: {
+            id: parseInt(profile?.id),
+            firstName: profile?.firstName,
+            lastName: profile?.lastName,
+            gender: parseInt(profile?.gender),
+            phone: profile?.phone,
+            email: profile?.email,
+            birthday: profile?.birthday.toLocaleDateString(),
+          },
+          major: {
+            id: profile?.major?.id,
+          },
+        }),
+        fileAvatar: profile?.avatar || null,
+        fileCV: profile?.cv,
+      };
+      const headerUser = {
+        token: userSessionStorage.token,
+        role: profile?.user?.role?.name,
+      };
+      dispatch(updateUser([headerUser, profileData]));
+    }
   };
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
@@ -85,16 +95,6 @@ const Components = ({ profile }) => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);
 
-  const [file, setFile] = useState(null);
-
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-
-  const handleSubmitFile = (event) => {
-    event.preventDefault();
-    // do something with the file, such as upload it to a server
-  };
   return (
     <div className='profiles'>
       <div className='profile_header'>
@@ -115,132 +115,20 @@ const Components = ({ profile }) => {
         ></img>
       </div>
       <div className='profile_footer'>
-        <form onSubmit={handleSubmitFile} className='upload-avatar'>
-          <label for='fileInput' class='custom-file-upload'></label>
-          <input type='file' id='fileInput' onChange={handleFileChange} />
-          {/* <button type='submit'>Upload</button> */}
-        </form>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginTop: 30 }}>
           <div className='profile_name'>
             <Typography
               variant='h6'
-              sx={{ color: '#00b074', fontSize: '25px', fontWeight: 'bold' }}
+              sx={{
+                color: '#00b074',
+                fontSize: '25px',
+                fontWeight: 'bold',
+              }}
             >
               {profile?.lastName} {profile?.firstName}
             </Typography>
           </div>
-          <Divider style={{ margin: '40px 0' }} />
-          {/* {profile?.user?.role?.id === 3 ? (
-            <div
-              className='profile_handle'
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                marginTop: 8,
-              }}
-            >
-              <div className='profile_children_handle'>
-                <Tooltip title={t('changeCV')}>
-                  <div
-                    className='profile_children_handle__item'
-                    onClick={() => handleClick(1)}
-                  >
-                    <CachedRoundedIcon className='icon-action' />
-                    <span>{t('changeCV')}</span>
-                  </div>
-                </Tooltip>
-                <Modal
-                  modalTitle={t('changeCV')}
-                  open={opens}
-                  setOpen={setOpens}
-                  children={
-                    <form
-                      onChange={handleChange}
-                      style={{
-                        width: 300,
-                        height: 300,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <InputFile
-                        label='CV'
-                        requirementField={false}
-                        id='cv'
-                        format='pdf'
-                        setValue={setValue}
-                        register={register}
-                      >
-                        {errors?.cv?.message}
-                      </InputFile>
-                      <Button onClick={handleSubmit(onSubmit)}>
-                        {t('change')}
-                      </Button>
-                    </form>
-                  }
-                  name={t('changeCV')}
-                  iconClose={<SyncAltIcon />}
-                />
-              </div>
-              <div
-                className='profile_children_handle'
-                style={{ padding: '0 2rem' }}
-              >
-                <Tooltip title={t('viewCV')}>
-                  <div
-                    className='profile_children_handle__item'
-                    onClick={() => handleClick(2)}
-                  >
-                    <RemoveRedEyeIcon />
-                    <span>{t('viewCV')}</span>
-                  </div>
-                </Tooltip>
-                <Modal
-                  iconClose={true}
-                  modalTitle={t('viewCV')}
-                  open={open}
-                  setOpen={setOpen}
-                  children={
-                    <div>
-                      <Document
-                        file={profile.cv}
-                        onLoadSuccess={onDocumentLoadSuccess}
-                      >
-                        {Array.from(new Array(numPages), (el, index) => (
-                          <Page
-                            key={`page_${index + 1}`}
-                            pageNumber={index + 1}
-                          />
-                        ))}
-                      </Document>
-                    </div>
-                  }
-                />
-              </div>
-              <div className='profile_children_handle'>
-                <Tooltip title={t('downloadCV')}>
-                  <a
-                    id='downloadLink'
-                    href={`${profile?.cv}`}
-                    target='_blank'
-                    type='application/octet-stream'
-                    // download={`${profile?.cv}`}
-                    download
-                    rel='noreferrer'
-                    className='profile_children_handle__item'
-                  >
-                    <CloudDownloadRoundedIcon />
-                    <span>{t('downloadCV')}</span>
-                  </a>
-                </Tooltip>
-              </div>
-            </div>
-          ) : (
-            ''
-          )} */}
+          <Divider style={{ margin: '40px 3rem' }} />
         </div>
         <div>
           {profile?.role?.id === 3 ? (
@@ -250,7 +138,7 @@ const Components = ({ profile }) => {
                   <Typography
                     sx={{
                       marginTop: 0.7,
-                      color: allowContact ? '#00b074' : 'red',
+                      color: checkedFind ? '#00b074' : 'red',
                     }}
                     variant='overline'
                     display='block'
@@ -262,18 +150,24 @@ const Components = ({ profile }) => {
                     checked={checkedFind}
                     onChange={handleChangeFind}
                     inputProps={{ 'aria-label': 'controlled' }}
-                    color={allowContact ? 'success' : 'error'}
+                    color={checkedFind ? 'success' : 'error'}
                     sx={{
                       '& .MuiSwitch-thumb': {
-                        backgroundColor: allowContact ? '#00b074' : 'red',
+                        backgroundColor: checkedFind ? '#00b074' : 'red',
                       },
                       '& .MuiSwitch-track': {
-                        backgroundColor: allowContact ? '#00b074' : 'red',
+                        backgroundColor: checkedFind ? '#00b074' : 'red',
                       },
                     }}
                   />
                 </div>
-                <p style={{ fontSize: '12px', color: '#7d7d7d' }}>
+                <p
+                  style={{
+                    fontSize: '12px',
+                    color: '#7d7d7d',
+                    fontStyle: 'italic',
+                  }}
+                >
                   {t('allowContactContent')}
                 </p>
               </div>
@@ -301,8 +195,15 @@ const Components = ({ profile }) => {
                   inputProps={{ 'aria-label': 'controlled' }}
                 />
               </div>
-              <p style={{ fontSize: '12px', color: '#7d7d7d' }}>
-                {t('allowContactContent')}
+              <p
+                style={{
+                  fontSize: '12px',
+                  color: '#7d7d7d',
+                  fontStyle: 'italic',
+                  marginTop: '-10px',
+                }}
+              >
+                {t('emailNotiContent')}
               </p>
             </div>
           </div>

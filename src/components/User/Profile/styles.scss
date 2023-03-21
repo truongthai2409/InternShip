@@ -288,24 +288,24 @@
         flex-direction: column;
         width: 100%;
         justify-content: space-between;
-        padding: 0 2rem;
+        padding: 0 3rem;
 
         &__items {
+          margin-top: 10px;
+          font-family: $f-family;
           span {
             text-transform: none !important;
-          }
-          .css-1vz169t-MuiTypography-root {
-            width: 320px;
             font-size: 16px !important;
             font-weight: 600;
             line-height: 1.5rem !important;
+            letter-spacing: 0 !important;
+          }
+          .css-1vz169t-MuiTypography-root {
+            width: 320px;
           }
           .css-10ipg47-MuiTypography-root {
             width: 320px;
             color: #00b074;
-            font-size: 16px !important;
-            font-weight: 600;
-            margin-top: 30px;
           }
           display: flex;
           flex-direction: row;

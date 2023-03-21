@@ -1,18 +1,18 @@
 import { IconButton, Typography } from '@mui/material';
 import React from 'react';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { genderList } from './validateForm';
+import moment from 'moment';
 import './styles.scss';
 
 const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
-  console.log(
-    '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
-    others?.location
-  );
+  // console.log(
+  //   '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
+  //   others?.location
+  // );
   const { t } = useTranslation('userInfo');
 
   const handleEditClick = () => {
@@ -26,7 +26,7 @@ const ProfileDetail = (props) => {
           <EditIcon sx={{ color: '#fff' }} />
         </IconButton>
       </Typography>
-
+      <div className='profile-detail__container'></div>
       <div className='profile-detail'>
         <div className='profile-detail-item'>
           <Typography className='profile-detail-label' variant='subtitle1'>
@@ -59,8 +59,8 @@ const ProfileDetail = (props) => {
             Ngày sinh
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetails?.birthday
-              ? others?.userDetails?.birthday
+            {moment(others?.userDetails?.birthday).format('DD/MM/YYYY')
+              ? moment(others?.userDetails?.birthday).format('DD/MM/YYYY')
               : '(chưa có dữ liệu)'}
           </span>
         </div>

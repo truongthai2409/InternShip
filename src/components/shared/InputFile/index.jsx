@@ -22,6 +22,7 @@ const InputFile = ({
 }) => {
   let accept;
   let text;
+  console.log(format, 'format');
   switch (format) {
     case 'image':
       accept = '.png, .jpg, .jpeg, .gif, .bmp';
@@ -39,9 +40,13 @@ const InputFile = ({
       accept = '.xlsx';
       text = 'Chỉ hỗ trợ file .xlsx';
       break;
+    case 'cv':
+      accept = '.pdf, .docx, .doc';
+      text = 'Hỗ trợ file .doc, .docx, .pdf và tối đa 512KB';
+      break;
     default: // all of file (except image)
       accept = '.docx, .pdf, .xlsx';
-      text = 'Chỉ hỗ trợ file .docx, .pdf, .xlsx';
+      text = 'Chỉ hỗ trợ file .docx, .pdf, .xlsx và tối đa 512KB';
       break;
   }
 

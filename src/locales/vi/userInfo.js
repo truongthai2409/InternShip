@@ -2,10 +2,10 @@ export const USERINFO_VI = {
   changeCV: 'Thay đổi CV',
   viewCV: 'Xem CV',
   downloadCV: 'Tải CV',
-  allowContact: 'Cho phép nhà tuyển dụng tìm kiếm hồ sơ trực tuyến của bạn:',
+  allowContact: 'Cho phép nhà tuyển dụng tìm kiếm hồ sơ trực tuyến của bạn',
   allowContactContent:
     'Cho phép nhà tuyển dụng chủ động tìm kiếm hồ sơ của bạn để có thêm nhiều cơ hội việc làm tốt từ IT Jobs.',
-  emailNoti: 'Nhận thông báo về email:',
+  emailNoti: 'Nhận thông báo về email',
   emailNotiContent:
     'Hãy bật thông báo để bạn không bỏ lỡ bất kỳ thông tin nào.',
   phoneNum: 'Số điện thoại',

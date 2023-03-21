@@ -66,6 +66,12 @@
   .register-container__footer {
     margin: 10px auto 20px !important;
   }
+
+  &__form--title {
+    text-align: left;
+    color: #00b074;
+    font-size: 16px;
+  }
 }
 .custom_req_can {
   margin-top: -8px;

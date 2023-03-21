@@ -19,11 +19,11 @@ const Profile = () => {
 
   return (
     <div className='profile__wrapper'>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12} lg={6} xl={4.5}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={4}>
           <Components profile={user} />
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={6} xl={7.5}>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={8}>
           <ProfileForm profile={user} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

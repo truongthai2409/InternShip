@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'src/components/shared/Button';
@@ -31,6 +31,7 @@ const ProfileForm = ({ profile: user }) => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm({
     mode: 'all',
@@ -45,7 +46,7 @@ const ProfileForm = ({ profile: user }) => {
     mode: 'all',
     resolver: yupResolver(schema2),
   });
-  const { role } = useSelector((state) => state.profile);
+  const { others, role } = useSelector((state) => state.profile);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { universityList } = useSelector((state) => state.university);
   const { jobPosition } = useSelector((state) => state.job);
@@ -71,7 +72,7 @@ const ProfileForm = ({ profile: user }) => {
     setValue('district', user?.location?.districtDTO?.name);
     setValue('address', user?.location?.address);
   }, [user, setValue]);
-  console.log(user?.location?.districtDTO?.provinceDTO?.name, 'name');
+
   const handleEditClick = () => {
     setShowInput(!showInput);
     window.scrollTo({
@@ -87,13 +88,13 @@ const ProfileForm = ({ profile: user }) => {
   }, []);
 
   const handleDateChange = (date) => {
-    console.log('🚀 ~ file: index.jsx:85 ~ handleDateChange ~ date:', date);
     setSelectedDate(date);
   };
   const getDistrict = (id) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
+    console.log('🚀 ~ file: index.jsx:97 ~ onSubmit ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -120,11 +121,6 @@ const ProfileForm = ({ profile: user }) => {
         break;
       }
       case 'Role_Candidate': {
-        console.log('run ne');
-        console.log('data', {
-          data,
-          user,
-        });
         const profileData = {
           candidate: JSON.stringify({
             userCreationDTO: {
@@ -134,7 +130,7 @@ const ProfileForm = ({ profile: user }) => {
               gender: parseInt(data.gender),
               phone: user?.phone,
               email: user?.email,
-              // birthday: data.birthday,
+              birthday: data.birthday,
               location: {
                 id: parseInt(data.province),
                 districtDTO: {
@@ -143,13 +139,12 @@ const ProfileForm = ({ profile: user }) => {
                 },
                 address: data.address,
               },
-              // university: data.school,
+              university: data.school,
             },
           }),
           fileCV: user?.cv,
-          fileAvatar: user?.avatar,
+          fileAvatar: data.avatar,
         };
-        console.log(profileData, 'profiledata');
         dispatch(updateUser([userPost, profileData])).then(
           setShowForm(!showForm)
         );
@@ -180,7 +175,6 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
-    console.log('🚀 ~ file: index.jsx:173 ~ onSubmitJobForm ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -196,30 +190,41 @@ const ProfileForm = ({ profile: user }) => {
             gender: parseInt(user?.gender),
             phone: user?.phone,
             email: user?.email,
-            // birthday: data.birthday,
+            birthday: user?.birthday,
+            location: {
+              id: parseInt(others?.location?.id),
+              districtDTO: {
+                id: parseInt(others?.location?.districtDTO?.id),
+                provinceDTO: {
+                  id: parseInt(others?.location?.districtDTO?.provinceDTO?.id),
+                },
+              },
+              address: others?.location?.address,
+            },
+            majors: [
+              {
+                id: data.major,
+              },
+            ],
+            jobTypes: [
+              {
+                id: data.jobType[0].id,
+              },
+            ],
+            jobPositions: [{ id: data.jobPosition }],
+            desiredJob: data.desiredJob,
+            province: { id: data.workLocation },
+            letter: data.coverLetter,
           },
-          majors: {
-            id: data.major,
-          },
-          jobTypes: {
-            id: data.jobType.id,
-          },
-          jobPositions: data.jobPositions,
         }),
         fileAvatar: user?.avatar,
         fileCV: data.cv,
-        location: user?.address,
-        desiredJob: data.desiredJob,
-        letter: data.coverLetter,
-        provinceId: data.workLocation,
       };
-      console.log(profileData, 'profiledata');
       dispatch(updateUser([userPost, profileData])).then(
         setShowInput(!showInput)
       );
     }
   };
-  console.log(errors, 'ererere');
   return (
     <>
       {!showForm && <ProfileDetail setShowForm={setShowForm} />}
@@ -233,6 +238,17 @@ const ProfileForm = ({ profile: user }) => {
             {t('changePro')}
           </Typography>
           <div className='profile-form__content'>
+            <InputFile
+              label='Ảnh đại diện'
+              requirementField={true}
+              id='avatar'
+              format='image'
+              className='avatar-input'
+              setValue={setValue}
+              register={register}
+            >
+              {errors.avatar?.message}
+            </InputFile>
             <div className='profile-form__content-item'>
               <CustomInput
                 register={register}
@@ -271,36 +287,30 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                // check={true}
+                check={true}
               >
                 {errors.email?.message}
               </CustomInput>
-              {/* <DatePickerWithLabel
-                // onChange={handleDateChange}
-                onChange={(date) => {
-                  console.log(date);
-                  setSelectedDate(date);
-                }}
-                selectedDate={selectedDate}
-                label='Ngày sinh'
-                className='profile-form__input custom-input'
+              <Controller
                 id='birthday'
-                dateFormat='dd/MM/yyyy'
-                {...register('birthday')}
-              /> */}
-              {/* <DatePicker
-                // selected={startDate}
-                format='dd/MM/yyyy'
-                selected={selectedDate}
-                label='Ngày sinh'
-                className='profile-form__input custom-input'
-                id='birthday'
-                register={register}
-                onChange={(date) => {
-                  console.log(date);
-                  setSelectedDate(date);
-                }}
-              /> */}
+                name='birthday'
+                control={control}
+                rules={{ required: true }}
+                style={{ width: '100%' }}
+                render={({ field }) => (
+                  <DatePickerWithLabel
+                    className='profile-form__input'
+                    label={'Ngày sinh'}
+                    onChange={(date) => {
+                      field.onChange(date);
+                      handleDateChange(date);
+                    }}
+                    // value={field.value}
+                    selectedDate={field.value}
+                    format='dd/MM/yyyy'
+                  />
+                )}
+              />
             </div>
             <div className='profile-form__content-item'>
               <CustomInput
@@ -478,7 +488,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 id='cv'
                 requirementField={true}
-                accept='.docx, .pdf, .xlsx'
+                format='cv'
               />
             </div>
             <div className='profile-form__content-item'>
@@ -496,7 +506,7 @@ const ProfileForm = ({ profile: user }) => {
                 </InputLabel>
                 <TextareaAutosize
                   id='coverLetter'
-                  style={{ width: '841px', height: '200px', padding: '20px' }}
+                  style={{ width: '100%', height: '200px', padding: '20px' }}
                   placeholder={t('placeholderCover')}
                   {...register2('coverLetter')}
                 />

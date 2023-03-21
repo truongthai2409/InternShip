@@ -73,7 +73,7 @@ const FormModal = ({ setOpen, jobId }) => {
         onSubmit={handleSubmit(onSubmit)}
         encType='multipart/form-data'
       >
-        <div className='formApply__modal__input'>
+        {/* <div className='formApply__modal__input'>
           <div>
             <CustomInput
               label='Tên'
@@ -96,7 +96,7 @@ const FormModal = ({ setOpen, jobId }) => {
               height='40px'
               width='310px'
             >
-              {/* {errors.confirmPassword?.message} */}
+              {errors.confirmPassword?.message}
             </CustomInput>
           </div>
 
@@ -111,7 +111,7 @@ const FormModal = ({ setOpen, jobId }) => {
               height='40px'
               width='310px'
             >
-              {/* {errors.confirmPassword?.message} */}
+              {errors.confirmPassword?.message}
             </CustomInput>
             <CustomInput
               label='Số điện thoại'
@@ -123,10 +123,10 @@ const FormModal = ({ setOpen, jobId }) => {
               height='40px'
               width='310px'
             >
-              {/* {errors.confirmPassword?.message} */}
+              {errors.confirmPassword?.message}
             </CustomInput>
           </div>
-        </div>
+        </div> */}
         <div>
           <InputFile
             label='CV'
@@ -146,7 +146,8 @@ const FormModal = ({ setOpen, jobId }) => {
           placeholder='Thư giới thiệu..'
           register={register}
           requirementField={false}
-          //   width='310px'
+          width='650px'
+          height='150px'
         ></CustomInput>
 
         <div className='formApply__modal__btn'>

@@ -10,9 +10,12 @@ import CustomInput from '../../../components/shared/CustomInput';
 import SelectCustom from '../../../components/shared/Select';
 import { registerHr } from '../../../store/slices/main/register/registerSlice';
 import Container from '../Container';
+import registerImg from 'src/assets/img/registerHr.png';
+
 import './styles.scss';
 import { updateStatusRegisterForHR } from 'src/store/slices/main/register/registerSlice';
 import { useTranslation } from 'react-i18next';
+import { Grid } from '@mui/material';
 const HRInfo = () => {
   const { t } = useTranslation('title');
   TabTitle(`${t('registerHRTL')}`);
@@ -69,40 +72,50 @@ const HRInfo = () => {
   };
 
   return (
-    <Container
-      title='Nhà Tuyển Dụng'
-      onClick={handleBackClick}
-      handleClick={handleSubmit(onSubmit)}
-      err={errors}
-      errorMessage={errorMessage}
-      genderList={genderList}
-      register={register}
-      setValue={setValue}
-      children={
-        <div className='register__container__form--name'>
-          <SelectCustom
-            label='Công ty'
-            placeholder='Vui lòng chọn...'
-            options={companyList}
-            id='company'
-            register={register}
-          >
-            {errors.company?.message}
-          </SelectCustom>
-
-          <CustomInput
-            label='Vai trò tại công ty'
-            id='jobPosition'
-            type='text'
-            placeholder='Vị trí...'
-            register={register}
-            requirementField={false}
-          >
-            {errors.jobPosition?.message}
-          </CustomInput>
+    <Grid container>
+      <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+        <div className='register-hr'>
+          <p style={{ fontSize: '30px', color: '#fff' }}>
+            ĐĂNG KÝ NHÀ TUYỂN DỤNG
+          </p>
+          <img src={registerImg} className='register-hr__image' />
         </div>
-      }
-    />
+      </Grid>
+      <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+        <Container
+          title='Nhà Tuyển Dụng'
+          onClick={handleBackClick}
+          handleClick={handleSubmit(onSubmit)}
+          err={errors}
+          errorMessage={errorMessage}
+          register={register}
+          setValue={setValue}
+          children={
+            <div className='register__container__form--name'>
+              <SelectCustom
+                label='Công ty'
+                placeholder='Vui lòng chọn...'
+                options={companyList}
+                id='company'
+                register={register}
+              >
+                {errors.company?.message}
+              </SelectCustom>
+              <CustomInput
+                label='Vai trò tại công ty'
+                id='jobPosition'
+                type='text'
+                placeholder='Vị trí...'
+                register={register}
+                requirementField={false}
+              >
+                {errors.jobPosition?.message}
+              </CustomInput>
+            </div>
+          }
+        />
+      </Grid>
+    </Grid>
   );
 };
 

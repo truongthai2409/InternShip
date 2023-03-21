@@ -11,6 +11,7 @@ function DatePickerWithLabel({
   register,
   onChange,
   selectedDate,
+  format,
   ...rest
 }) {
   return (
@@ -21,11 +22,9 @@ function DatePickerWithLabel({
       </label>
       <DatePicker
         todayButton='Hôm nay'
-        // dateFormat={format}
+        dateFormat={format}
         selected={selectedDate}
-        // onChange={(data) => console.log(data)}
         onChange={onChange}
-        // {...register(id)}
         {...rest}
       />
     </div>
