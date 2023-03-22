@@ -11,7 +11,7 @@ const candidate = {
     });
   },
   jobStatus: (data) => {
-    const url = `/api/r2s/job-status/`;
+    const url = `/api/candidate/job-status/`;
 
     return internshipTransport.put(url, data, {
       headers: {

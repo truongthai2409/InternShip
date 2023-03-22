@@ -22,7 +22,7 @@ const InputFile = ({
 }) => {
   let accept;
   let text;
-  console.log(format, 'format');
+  // console.log(format, 'format');
   switch (format) {
     case 'image':
       accept = '.png, .jpg, .jpeg, .gif, .bmp';

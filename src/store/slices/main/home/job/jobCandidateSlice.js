@@ -115,7 +115,7 @@ export const getAllJobCare = createAsyncThunk(
         Authorization: 'Bearer ' + args.token,
       },
     };
-    console.log(args)
+    // console.log(args)
     return await axios
       .get(
         `${BASEURL}/api/candidate/job-care/user/${args?.user?.username}?no=${args.page.no}&limit=${args.page.limit}`,

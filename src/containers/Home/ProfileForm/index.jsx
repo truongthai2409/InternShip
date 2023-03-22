@@ -48,7 +48,8 @@ const ProfileForm = ({ profile: user }) => {
     resolver: yupResolver(schema2),
   });
   const { others, role } = useSelector((state) => state.profile);
-  console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ others:', others);
+  // console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ role:', role);
+  // console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ others:', others);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { universityList } = useSelector((state) => state.university);
   const { jobPosition } = useSelector((state) => state.job);
@@ -65,7 +66,7 @@ const ProfileForm = ({ profile: user }) => {
     setValue('phone', user?.phone || user?.userDTO?.phone);
     setValue('gender', others?.userDetails?.gender);
 
-    setValue('address', others?.location?.address);
+    setValue('address', others?.locationDTO?.address);
     setValue2('desiredJob', others?.desiredJob);
 
     setValue2('coverLetter', others?.letter);
@@ -96,6 +97,7 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getDistrictList(id));
   };
   const onSubmit = (data) => {
+    console.log('🚀 ~ file: index.jsx:100 ~ onSubmit ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -146,6 +148,10 @@ const ProfileForm = ({ profile: user }) => {
           fileCV: user?.cv,
           fileAvatar: data.avatar,
         };
+        console.log(
+          '🚀 ~ file: index.jsx:151 ~ onSubmit ~ profileData:',
+          profileData
+        );
         dispatch(updateUser([userPost, profileData])).then(
           setShowForm(!showForm)
         );

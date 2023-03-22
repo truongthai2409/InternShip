@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
-  console.log('🚀 ~ file: Components.jsx:15 ~ Components ~ profile:', profile);
+  // console.log('🚀 ~ file: Components.jsx:15 ~ Components ~ profile:', profile);
   const dispatch = useDispatch();
   const {
     register,
@@ -131,7 +131,7 @@ const Components = ({ profile }) => {
           <Divider style={{ margin: '40px 3rem' }} />
         </div>
         <div>
-          {profile?.role?.id === 3 ? (
+          {profile?.roleDTO?.id === 3 ? (
             <div className='profile_click'>
               <div className='profile_check'>
                 <div className='profile_check__items'>

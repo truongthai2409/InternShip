@@ -66,7 +66,6 @@ const ButtonMark = (props) => {
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
-
     } else {
       if (user?.roleDTO?.name === 'Role_Candidate') {
         const delJobCare = {

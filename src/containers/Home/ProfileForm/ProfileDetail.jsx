@@ -11,7 +11,7 @@ const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
   // console.log(
   //   '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
-  //   others?.location
+  //   moment(others?.userDetailsDTO?.birthday).format('DD/MM/YYYY')
   // );
   const { t } = useTranslation('userInfo');
 
@@ -33,7 +33,7 @@ const ProfileDetail = (props) => {
             Họ và tên lót
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetails?.lastName}
+            {others?.userDetailsDTO?.lastName}
           </span>
         </div>
         <div className='profile-detail-item'>
@@ -41,7 +41,7 @@ const ProfileDetail = (props) => {
             Tên
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetails?.firstName}
+            {others?.userDetailsDTO?.firstName}
           </span>
         </div>
       </div>
@@ -51,7 +51,7 @@ const ProfileDetail = (props) => {
             Email
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetails?.email}
+            {others?.userDetailsDTO?.email}
           </span>
         </div>
         <div className='profile-detail-item'>
@@ -59,8 +59,8 @@ const ProfileDetail = (props) => {
             Ngày sinh
           </Typography>
           <span className={'profile-detail-value'}>
-            {moment(others?.userDetails?.birthday).format('DD/MM/YYYY')
-              ? moment(others?.userDetails?.birthday).format('DD/MM/YYYY')
+            {others?.userDetailsDTO?.birthday
+              ? others?.userDetailsDTO?.birthday
               : '(chưa có dữ liệu)'}
           </span>
         </div>
@@ -71,8 +71,8 @@ const ProfileDetail = (props) => {
             Số điện thoại
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetails?.phone
-              ? others?.userDetails?.phone
+            {others?.userDetailsDTO?.phone
+              ? others?.userDetailsDTO?.phone
               : '(chưa có dữ liệu)'}
           </span>
         </div>
@@ -82,7 +82,7 @@ const ProfileDetail = (props) => {
           </Typography>
           <span className={'profile-detail-value'}>
             {genderList.map((value) => {
-              if (value.id === others?.userDetails?.gender) {
+              if (value.id === others?.userDetailsDTO?.gender) {
                 const genderName = value.name;
                 return genderName ? genderName : '(chưa có dữ liệu)';
               }
@@ -96,8 +96,8 @@ const ProfileDetail = (props) => {
             Tỉnh/ Thành phố
           </Typography>
           <span className='profile-detail-value'>
-            {others?.location?.districtDTO?.provinceDTO?.name
-              ? others?.location?.districtDTO?.provinceDTO?.name
+            {others?.locationDTO?.districtDTO?.provinceDTO?.name
+              ? others?.locationDTO?.districtDTO?.provinceDTO?.name
               : '(chưa có dữ liệu)'}
           </span>
         </div>
@@ -106,8 +106,8 @@ const ProfileDetail = (props) => {
             Quận/ Huyện
           </Typography>
           <span className='profile-detail-value'>
-            {others?.location?.districtDTO?.name
-              ? others?.location?.districtDTO?.name
+            {others?.locationDTO?.districtDTO?.name
+              ? others?.locationDTO?.districtDTO?.name
               : '(chưa có dữ liệu)'}
           </span>
         </div>
@@ -118,8 +118,8 @@ const ProfileDetail = (props) => {
             Địa chỉ
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.location?.address
-              ? others?.location?.address
+            {others?.locationDTO?.address
+              ? others?.locationDTO?.address
               : '(chưa có dữ liệu)'}
           </span>
         </div>

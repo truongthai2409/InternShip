@@ -11,7 +11,7 @@ import './styles.scss';
 
 const InfoJob = (props) => {
   const { user, others } = useSelector((state) => state.profile);
-  console.log('🚀 ~ file: InfoJob.jsx:11 ~ InfoJob ~ others:', others);
+  // console.log('🚀 ~ file: InfoJob.jsx:11 ~ InfoJob ~ others:', others);
   const { t } = useTranslation('userInfo');
   const [open, setOpen] = useState(false);
   const [numPages, setNumPages] = useState(null);
@@ -79,7 +79,7 @@ const InfoJob = (props) => {
           </Typography>
           <span className='profile-detail-value'>
             {others &&
-              others?.jobPositions?.map((position) => {
+              others?.jobPositionSimpleDTOs?.map((position) => {
                 return (
                   <span>
                     {position.name ? position.name : '(chưa có dữ liệu)'}
@@ -95,7 +95,7 @@ const InfoJob = (props) => {
             Chuyên ngành
           </Typography>
           {others &&
-            others?.majors?.map((major) => {
+            others?.majorDTOs?.map((major) => {
               return (
                 <span className='profile-detail-value'>
                   {major.name ? major.name : '(chưa có dữ liệu)'}
@@ -110,7 +110,7 @@ const InfoJob = (props) => {
             Hình thức làm việc
           </Typography>
           {others &&
-            others?.jobTypes?.map((type) => {
+            others?.jobTypeDTOs?.map((type) => {
               return (
                 <span className='profile-detail-value'>
                   {type.name ? type.name : '(chưa có dữ liệu)'}
@@ -125,8 +125,8 @@ const InfoJob = (props) => {
             Địa điểm làm việc
           </Typography>
           <span className='profile-detail-value'>
-            {others?.province?.name
-              ? others?.province?.name
+            {others?.provinceDTO?.name
+              ? others?.provinceDTO?.name
               : '(chưa có dữ liệu)'}
           </span>
         </div>

@@ -77,7 +77,7 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log('Run');
+    // console.log('Run');
     jobCare.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIdSave(item.id);
@@ -90,7 +90,7 @@ const DetailHome = () => {
       }
     });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
-      console.log(res);
+      // console.log(res);
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
         (data) => {
