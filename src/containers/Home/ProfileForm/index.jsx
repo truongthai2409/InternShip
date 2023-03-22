@@ -15,6 +15,7 @@ import { updateUser } from 'src/store/slices/main/user/userSlice';
 import { getDistrictList } from 'src/store/slices/location/locationSlice';
 import { getUniversityList } from 'src/store/slices/Admin/university/unversitySlice';
 import { genderList, listWorkingFormat, schema, schema2 } from './validateForm';
+import moment from 'moment';
 import ProfileDetail from './ProfileDetail';
 import InfoJob from './InfoJob';
 import DatePicker from 'react-datepicker';
@@ -47,6 +48,7 @@ const ProfileForm = ({ profile: user }) => {
     resolver: yupResolver(schema2),
   });
   const { others, role } = useSelector((state) => state.profile);
+  console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ others:', others);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { universityList } = useSelector((state) => state.university);
   const { jobPosition } = useSelector((state) => state.job);
@@ -57,20 +59,16 @@ const ProfileForm = ({ profile: user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue(
-      'firstName',
-      user?.userDetails?.firstName || user?.userDTO?.firstName
-    );
-    setValue(
-      'lastName',
-      user?.userDetails?.lastName || user?.userDTO?.lastName
-    );
-    setValue('email', user?.userDetails?.email || user?.userDTO?.email);
-    setValue('phone', user?.userDetails?.phone || user?.userDTO?.phone);
-    setValue('gender', user?.userDetails?.gender);
-    setValue('province', user?.location?.districtDTO?.provinceDTO?.name);
-    setValue('district', user?.location?.districtDTO?.name);
-    setValue('address', user?.location?.address);
+    setValue('firstName', user?.firstName || user?.userDTO?.firstName);
+    setValue('lastName', user?.lastName || user?.userDTO?.lastName);
+    setValue('email', user?.email || user?.userDTO?.email);
+    setValue('phone', user?.phone || user?.userDTO?.phone);
+    setValue('gender', others?.userDetails?.gender);
+
+    setValue('address', others?.location?.address);
+    setValue2('desiredJob', others?.desiredJob);
+
+    setValue2('coverLetter', others?.letter);
   }, [user, setValue]);
 
   const handleEditClick = () => {
@@ -82,6 +80,10 @@ const ProfileForm = ({ profile: user }) => {
   };
   const handleEdit = () => {
     setShowForm(!showForm);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
   useEffect(() => {
     dispatch(getUniversityList([1, 20]));
@@ -505,7 +507,7 @@ const ProfileForm = ({ profile: user }) => {
                 </InputLabel>
                 <TextareaAutosize
                   id='coverLetter'
-                  style={{ width: '100%', height: '200px', padding: '20px' }}
+                  style={{ width: '900px', height: '200px', padding: '20px' }}
                   placeholder={t('placeholderCover')}
                   {...register2('coverLetter')}
                 />

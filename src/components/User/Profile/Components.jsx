@@ -23,7 +23,7 @@ const Components = ({ profile }) => {
     resolver: yupResolver(schema),
   });
   const [opens, setOpens] = useState(false);
-  const [checkedFind, setCheckedFind] = useState(true);
+  const [checkedFind, setCheckedFind] = useState(false);
   const [checkedEmail, setCheckedEmail] = useState(false);
   const [open, setOpen] = useState(false);
   const { t } = useTranslation('userInfo');
@@ -138,7 +138,6 @@ const Components = ({ profile }) => {
                   <Typography
                     sx={{
                       marginTop: 0.7,
-                      color: checkedFind ? '#00b074' : 'red',
                     }}
                     variant='overline'
                     display='block'
@@ -153,10 +152,10 @@ const Components = ({ profile }) => {
                     color={checkedFind ? 'success' : 'error'}
                     sx={{
                       '& .MuiSwitch-thumb': {
-                        backgroundColor: checkedFind ? '#00b074' : 'red',
+                        backgroundColor: checkedFind ? '#00b074' : '#fff',
                       },
                       '& .MuiSwitch-track': {
-                        backgroundColor: checkedFind ? '#00b074' : 'red',
+                        backgroundColor: checkedFind ? '#00b074' : '#7d7d7d',
                       },
                     }}
                   />
@@ -179,7 +178,9 @@ const Components = ({ profile }) => {
             <div className='profile_check'>
               <div className='profile_check__items'>
                 <Typography
-                  sx={{ marginTop: 0.7 }}
+                  sx={{
+                    marginTop: 0.7,
+                  }}
                   variant='overline'
                   display='block'
                   gutterBottom
@@ -189,7 +190,14 @@ const Components = ({ profile }) => {
                 <Switch
                   sx={{
                     marginBottom: 1,
+                    '& .MuiSwitch-thumb': {
+                      backgroundColor: checkedEmail ? '#00b074' : '#fff',
+                    },
+                    '& .MuiSwitch-track': {
+                      backgroundColor: checkedEmail ? '#00b074' : '#7d7d7d',
+                    },
                   }}
+                  color={checkedEmail ? 'success' : 'error'}
                   checked={checkedEmail}
                   onChange={handleCheckEmail}
                   inputProps={{ 'aria-label': 'controlled' }}

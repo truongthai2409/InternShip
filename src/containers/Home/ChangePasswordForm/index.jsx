@@ -71,7 +71,7 @@ const Password = () => {
             id='oldPassword'
             type='password'
             label='Mật khẩu hiện tại'
-            placeholder='Nhập mật khẩu'
+            placeholder='Nhập mật khẩu hiện tại'
             visibility={true}
             register={register}
             subtitle='Nhập mật khẩu hiện tại'
@@ -82,10 +82,10 @@ const Password = () => {
             id='newPassword'
             type='password'
             label='Mật khẩu mới'
-            placeholder='Nhập mật khẩu'
+            placeholder='Nhập mật khẩu mới'
             visibility={true}
             register={register}
-            subtitle='6 - 32 ký tự, chứa ít nhất một và một số'
+            subtitle='6 - 32 ký tự, chứa ít nhất một ký tự và một số'
           >
             {errors.newPassword?.message}
           </CustomInput>
@@ -93,10 +93,10 @@ const Password = () => {
             id='confirmNewPassword'
             type='password'
             label='Nhập lại mật khẩu mới'
-            placeholder='Nhập mật khẩu'
+            placeholder='Nhập lại mật khẩu mới'
             visibility={true}
             register={register}
-            subtitle='Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập'
+            subtitle='Xác nhận mật khẩu phải trùng với mật khẩu mới vừa nhập'
           >
             {errors.confirmNewPassword?.message}
           </CustomInput>

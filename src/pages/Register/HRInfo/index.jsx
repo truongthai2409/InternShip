@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCompanyList } from 'src/store/slices/Admin/company/companySlice';
 import { TabTitle } from 'src/utils/GeneralFunctions';
-import { genderList, schema } from './data';
+import { schema } from './data';
 import CustomInput from '../../../components/shared/CustomInput';
 import SelectCustom from '../../../components/shared/Select';
 import { registerHr } from '../../../store/slices/main/register/registerSlice';

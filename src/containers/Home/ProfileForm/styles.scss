@@ -138,7 +138,7 @@
     text-align: left; /* align text to the left */
     display: flex; /* add display flex */
     align-items: flex-start;
-    width: 65%;
+    width: 69%;
   }
   .profile-detail-item {
     display: flex; /* add display flex */
@@ -157,4 +157,7 @@
     border: 1px solid #00b074 !important;
     background-color: #f6f6f6;
   }
+}
+.image-upload {
+  border: 1px solid #00b074 !important;
 }
