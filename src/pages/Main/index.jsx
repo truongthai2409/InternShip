@@ -13,7 +13,7 @@ const Main = () => {
   return (
     <Home
       demandPartner={false}
-      linkFilter='/api/r2s/job/filter'
+      linkFilter='/api/job/filter'
       nameSearch='công việc'
     ></Home>
   );
