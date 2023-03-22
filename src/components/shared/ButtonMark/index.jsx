@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import {
   addJobCare,
   deleteJobCare,
-  getAllJobCare,
   getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import './styles.scss';
@@ -90,14 +89,12 @@ const ButtonMark = (props) => {
             },
           };
           user?.role?.name === 'Role_Candidate' &&
-            dispatch(getAllJobCare(dispatchJobCare)).then(() => {
-              dispatch(getJobCareByCandidateThunk(page)).then(() => {
-                setMark(false);
-                toast.success('Đã hủy lưu việc làm ', {
-                  position: 'top-right',
-                  autoClose: 3000,
-                  style: { color: '#00B074', backgroundColor: '#DEF2ED' },
-                });
+            dispatch(getJobCareByCandidateThunk(page)).then(() => {
+              setMark(false);
+              toast.success('Đã hủy lưu việc làm ', {
+                position: 'top-right',
+                autoClose: 3000,
+                style: { color: '#00B074', backgroundColor: '#DEF2ED' },
               });
             });
         });

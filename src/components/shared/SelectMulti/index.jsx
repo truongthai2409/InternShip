@@ -42,8 +42,10 @@ const SelectMulti = ({
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
-  const handleDelete = (itemToDelete) => {
-    setPersonName(personName.filter((item) => item !== itemToDelete));
+  const handleDelete = (chipToDelete) => () => {
+    setPersonName((chips) =>
+      chips.filter((chip) => chip.id !== chipToDelete.id)
+    );
   };
 
   const handleChange = (event) => {
@@ -92,12 +94,11 @@ const SelectMulti = ({
           }
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value, index) => (
+              {selected.map((value) => (
                 <Chip
-                  key={index}
+                  key={value.id}
                   label={value.name}
                   onDelete={() => handleDelete(value)}
-                  deleteIcon={<ClearIcon />}
                 />
               ))}
             </Box>

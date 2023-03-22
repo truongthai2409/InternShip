@@ -18,10 +18,18 @@ import { getDetailCompanyByidThunk } from 'src/store/action/company/companyActio
 import {
   addJobCare,
   deleteJobCare,
-  getAllJobCare,
   getJobCareByCandidateThunk,
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { toast } from 'react-toastify';
+import NearMeIcon from '@mui/icons-material/NearMe';
+
+const HeaderForm = ({ name }) => {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <NearMeIcon /> Nộp hồ sơ ứng tuyển {name}
+    </div>
+  );
+};
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,7 +85,6 @@ const DetailHome = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    // console.log('Run');
     jobCare.map((item) => {
       if (item?.jobDTO?.id == id) {
         setIdSave(item.id);
@@ -90,7 +97,6 @@ const DetailHome = () => {
       }
     });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
-      // console.log(res);
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
         (data) => {
@@ -172,7 +178,6 @@ const DetailHome = () => {
               style: { color: '#00B074', backgroundColor: '#DEF2ED' },
             });
             user?.role?.name === 'Role_Candidate' &&
-              dispatch(getAllJobCare(dispatchJobCare)) &&
               dispatch(getJobCareByCandidateThunk(page));
           });
         }
@@ -278,7 +283,7 @@ const DetailHome = () => {
 
       <Modal
         iconClose={true}
-        modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
+        modalTitle={<HeaderForm name={detailJob?.name} />}
         open={open}
         setOpen={setOpen}
         children={<FormModal setOpen={setOpen} jobId={id} />}
@@ -286,7 +291,7 @@ const DetailHome = () => {
 
       <Modal
         iconClose={true}
-        modalTitle={'Nộp hồ sơ ứng tuyển Thực tập Reactjs'}
+        modalTitle={`Nộp hồ sơ ứng tuyển ${detailJob?.name}`}
         open={openNotify}
         setOpen={setOpenNotify}
         children={<ModalNotify />}

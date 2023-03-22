@@ -8,10 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addApply } from 'src/store/slices/main/candidate/apply/applySlice';
-import {
-  getAllJobApply,
-  getJobApplyListByCandidate,
-} from 'src/store/slices/main/home/job/jobCandidateSlice';
+import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import Button from '../shared/Button';
 import './styles.scss';
 
@@ -82,21 +79,21 @@ const InformationCompany = ({
       });
     }
   };
-  useEffect(() => {
-    const userStorage =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    const dispatchJobApply = {
-      user: user,
-      token: userStorage?.token,
-      page: {
-        no: 0,
-        limit: 1000,
-      },
-    };
-    user?.user?.role?.name === 'Role_Candidate' &&
-      dispatch(getAllJobApply(dispatchJobApply));
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   const userStorage =
+  //     JSON.parse(sessionStorage.getItem('userPresent')) ||
+  //     JSON.parse(localStorage.getItem('userPresent'));
+  //   const dispatchJobApply = {
+  //     user: user,
+  //     token: userStorage?.token,
+  //     page: {
+  //       no: 0,
+  //       limit: 1000,
+  //     },
+  //   };
+  //   user?.user?.role?.name === 'Role_Candidate' &&
+  //     dispatch(getAllJobApply(dispatchJobApply));
+  // }, [dispatch, user]);
   useEffect(() => {
     setCheck(
       allJobApply

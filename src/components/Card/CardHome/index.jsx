@@ -6,8 +6,6 @@ import Rating from '@mui/material/Rating';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getAllJobCare } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import ButtonMark from '../../shared/ButtonMark';
 import TagName from '../../Home/TagName';
 import './styles.scss';
@@ -26,21 +24,6 @@ const CardHome = (props) => {
   const { user } = useSelector((state) => state.profile);
   console.log(user);
   const [idCareJob, setIdCareJob] = useState('');
-  useEffect(() => {
-    const userStorage =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    const dispatchJobCAre = {
-      user: user,
-      token: userStorage?.token,
-      page: {
-        no: 0,
-        limit: 1000,
-      },
-    };
-    user?.roleDTO?.name === 'Role_Candidate' &&
-      dispatch(getAllJobCare(dispatchJobCAre));
-  }, [dispatch, user]);
 
   useEffect(
     () => {

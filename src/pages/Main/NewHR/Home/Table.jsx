@@ -25,6 +25,7 @@ const Table = () => {
       location: 'HCM',
       deadline: '01/03/2023',
       personName: 'John',
+      idHR: '1',
       status: 'Open',
     },
     {
