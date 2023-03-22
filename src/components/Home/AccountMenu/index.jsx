@@ -107,7 +107,7 @@ const AccountMenu = ({ linkImg }) => {
         <Divider />
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.role?.name
+          to={`/${user?.roleDTO?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/profile`}
           onClick={() => {
@@ -116,12 +116,12 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <AccountBoxIcon className='profile-icon' />{' '}
-            {t('AccountInformationTL')}
+            <span>{t('AccountInformationTL')}</span>
           </MenuItem>
         </Link>
         <Link
           style={{ color: '#111111' }}
-          to={`/${user?.role?.name
+          to={`/${user?.roleDTO?.name
             ?.replace('Role_', '')
             ?.toLowerCase()}/setting`}
           onClick={() => {
@@ -130,7 +130,7 @@ const AccountMenu = ({ linkImg }) => {
         >
           <MenuItem>
             <SettingsApplicationsSharpIcon className='profile-icon' />
-            {t('forgotPasswordTL1')}
+            <span>{t('forgotPasswordTL1')}</span>
           </MenuItem>
         </Link>
         <Divider />

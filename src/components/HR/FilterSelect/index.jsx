@@ -14,7 +14,7 @@ const FilterSelect = (props) => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: '30%'}} size='small'>
+    <FormControl sx={{ m: 1, minWidth: '30%' }} size='small'>
       <InputLabel id='demo-select-small'>{label}</InputLabel>
       <Select
         labelId='demo-select-small'

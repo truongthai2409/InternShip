@@ -111,7 +111,7 @@ export const registerCandidate = createAsyncThunk(
   'register/registerCandidate',
   async (data) => {
     const res = await axios
-      .post(`${baseURL}/api/r2s/candidate`, data, {
+      .post(`${baseURL}/api/candidate`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

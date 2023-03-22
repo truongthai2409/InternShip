@@ -10,6 +10,15 @@ const candidate = {
       },
     });
   },
+  jobStatus: (data) => {
+    const url = `/api/candidate/job-status/`;
+
+    return internshipTransport.put(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
 };
 
 export default candidate;

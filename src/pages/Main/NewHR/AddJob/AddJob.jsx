@@ -1,6 +1,6 @@
 import React from 'react';
 import HrForm from './Form';
-import './styles.scss'
+import './styles.scss';
 
 const AddJob = () => {
   return (

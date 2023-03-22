@@ -81,13 +81,13 @@ const UserForm = (props) => {
       );
 
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success('Tạo tài khoản thành công',{
+        toast.success('Tạo tài khoản thành công', {
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
-        toast.error('Tạo tài khoản thất bại',{
+        toast.error('Tạo tài khoản thất bại', {
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
@@ -120,14 +120,14 @@ const UserForm = (props) => {
         adminUpdateUser([userData, userSessionStorage?.token])
       );
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success('Chỉnh sửa tài khoản thành công',{
+        toast.success('Chỉnh sửa tài khoản thành công', {
           position: 'top-right',
           autoClose: 3000,
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       }
     } catch (error) {
-      toast.error(error,{
+      toast.error(error, {
         position: 'top-right',
         autoClose: 3000,
         style: { color: '#00B074', backgroundColor: '#DEF2ED' },

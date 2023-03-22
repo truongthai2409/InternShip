@@ -10,6 +10,7 @@ import { NOTIFICATION_VI } from './vi/notification';
 import { CARDINFORMATION_VI } from './vi/cardInformation';
 import { USERINFO_VI } from './vi/userInfo';
 import { TITLE_VI } from './vi/title';
+import { PAGINATION_VI } from './vi/pagination';
 
 export {
   CLIENT_VI,
@@ -24,4 +25,5 @@ export {
   NOTIFICATION_VI,
   CARDINFORMATION_VI,
   TITLE_VI,
+  PAGINATION_VI,
 };

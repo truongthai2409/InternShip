@@ -128,7 +128,7 @@ const Table = () => {
       height: 70,
       renderCell: (params) => {
         const { row } = params;
-        console.log(row.stt);
+        // console.log(row.stt);
         return row.stt;
       },
     },

@@ -23,9 +23,9 @@ import {
 import { toast } from 'react-toastify';
 import NearMeIcon from '@mui/icons-material/NearMe';
 
-const HeaderForm = ({name}) => {
+const HeaderForm = ({ name }) => {
   return (
-    <div style={{display:'flex',alignItems:'center',gap:'10px'}}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <NearMeIcon /> Nộp hồ sơ ứng tuyển {name}
     </div>
   );

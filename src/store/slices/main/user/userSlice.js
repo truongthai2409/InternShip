@@ -46,7 +46,7 @@ export const getUserById = createAsyncThunk(
     };
     // if (args.google === true){
     //   return await axios
-    //       .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
+    //       .get(`${baseURL}/api/candidate/user/${args.ids}`, header)
     //       .then((response) => {
     //         return response.data;
     //       })
@@ -72,7 +72,7 @@ export const getUserById = createAsyncThunk(
     switch (HASHTOKEN()) {
       case 'Role_HR':
         return await axios
-          .get(`${baseURL}/api/r2s/hr/user/${args.ids}`, header)
+          .get(`${baseURL}/api/hr/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })
@@ -81,7 +81,7 @@ export const getUserById = createAsyncThunk(
           });
       case 'Role_Partner':
         return await axios
-          .get(`${baseURL}/api/r2s/partner/user/${args.ids}`, header)
+          .get(`${baseURL}/api/partner/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })
@@ -114,7 +114,7 @@ export const updateUser = createAsyncThunk(
     switch (args[0].role) {
       case 'Role_HR': {
         return await axios
-          .put(`${baseURL}/api/r2s/hr/${args[2]}`, args[1], header)
+          .put(`${baseURL}/api/hr/${args[2]}`, args[1], header)
           .then((response) => {
             return response.data;
           })
@@ -124,7 +124,7 @@ export const updateUser = createAsyncThunk(
       }
       case 'Role_Candidate': {
         return await axios
-          .put(`${baseURL}/api/r2s/candidate`, args[1], header)
+          .put(`${baseURL}/api/candidate`, args[1], header)
           .then((response) => {
             return response.data;
           })
@@ -134,7 +134,7 @@ export const updateUser = createAsyncThunk(
       }
       case 'Role_Partner': {
         return await axios
-          .put(`${baseURL}/api/r2s/partner`, args[1], header)
+          .put(`${baseURL}/api/partner`, args[1], header)
           .then((response) => {
             return response.data;
           })

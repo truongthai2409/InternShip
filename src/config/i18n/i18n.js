@@ -14,6 +14,7 @@ import {
   NOTIFICATION_EN,
   CARDINFORMATION_EN,
   TITLE_EN,
+  PAGINATION_EN,
 } from 'src/locales/translateEN';
 import {
   CLIENT_VI,
@@ -28,6 +29,7 @@ import {
   NOTIFICATION_VI,
   CARDINFORMATION_VI,
   TITLE_VI,
+  PAGINATION_VI,
 } from 'src/locales/translateVI';
 
 const resources = {
@@ -44,6 +46,7 @@ const resources = {
     notification: NOTIFICATION_EN,
     cardInformation: CARDINFORMATION_EN,
     title: TITLE_EN,
+    pagination: PAGINATION_EN,
   },
   vi: {
     client: CLIENT_VI,
@@ -58,6 +61,7 @@ const resources = {
     notification: NOTIFICATION_VI,
     cardInformation: CARDINFORMATION_VI,
     title: TITLE_VI,
+    pagination: PAGINATION_VI,
   },
 };
 

@@ -85,7 +85,7 @@ export const loginUser = createAsyncThunk('login/loginUser', async (data) => {
 
 export const loginAdmin = createAsyncThunk('login/loginAdmin', async (data) => {
   const res = await api
-    .post(`${baseURL}/api/signin`, data)
+    .post(`${baseURL}/api/login`, data)
     .then((res) => {
       return res;
     })
