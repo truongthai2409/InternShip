@@ -23,12 +23,13 @@ const Container = ({ children }) => {
         limit: 5,
       },
     };
+    // set important information to dont mutiple call (follow for role)
     user &&
-      user?.role?.name === 'Role_Candidate' &&
+      user?.roleDTO?.name === 'Role_Candidate' &&
       userStorage &&
       dispatch(getJobApplyListByCandidate(page)) &&
       dispatch(getJobCareByCandidateThunk(page));
-  }, [dispatch, pageNo, user]);
+  }, [pageNo, user]);
   return <>{children}</>;
 };
 

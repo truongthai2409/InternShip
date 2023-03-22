@@ -17,10 +17,8 @@ const CandidateViewList = () => {
   const { jobCare, jobCareHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
-  const { index, id } = useSelector((state) => state.filter);
 
   const [jobs, setJobs] = useState([]);
-  const [jobDetail, setJobDetail] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -41,11 +39,8 @@ const CandidateViewList = () => {
 
   useEffect(() => {
     setJobs(jobCare);
-    setJobDetail(jobCare && jobCare[index]?.jobCare);
-  }, [index, jobCare]);
-  useEffect(() => {
-    dispatch(getJobByCompanyThunk(id));
-  }, [dispatch, id]);
+  }, [jobCare]);
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
@@ -74,7 +69,6 @@ const CandidateViewList = () => {
                     jobList={jobs?.map((item) => {
                       return item.jobDTO;
                     })}
-                    indexCardActive={index}
                     jobListHavePages={jobCareHavePage}
                     onChange={handleChange}
                     reload={false}

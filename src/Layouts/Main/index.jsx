@@ -19,10 +19,6 @@ const MainLayout = () => {
   const user =
     JSON.parse(sessionStorage.getItem('userPresent')) ||
     JSON.parse(localStorage.getItem('userPresent'));
-  // const renderUser = useCallback(
-  //   () => user && dispatch(getUserById(user)),
-  //   [ user]
-  // );
   const userDetail = useSelector((state) => state.profile.user);
   const verifiedEmail =
     userDetail?.statusDTO?.name === 'Not available' ? true : false;

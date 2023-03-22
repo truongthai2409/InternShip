@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import jobCandidate from 'src/store/api/job/jobCandidate';
 
-const { getJobCareByCandidate } = jobCandidate;
+const { getJobCareByCandidate, getJobAppliedByCandidate } = jobCandidate;
 const BASEURL = process.env.REACT_APP_API;
 
 const jobCandidateSlice = createSlice({
@@ -12,8 +12,6 @@ const jobCandidateSlice = createSlice({
     jobApplyListHavePage: [],
     jobCare: [],
     jobCareHavePage: [],
-    allJobCare: [],
-    allJobApply: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -36,43 +34,29 @@ const jobCandidateSlice = createSlice({
     builder.addCase(addJobCare.fulfilled, (state, action) => {
       state.jobCare = [...state.jobCare, action.payload];
     });
-    builder.addCase(getAllJobCare.fulfilled, (state, { payload }) => {
-      state.allJobCare = payload.contents;
-    });
-    builder.addCase(getAllJobApply.fulfilled, (state, { payload }) => {
-      state.allJobApply = payload.contents;
-    });
   },
 });
 
 export const getJobApplyListByCandidate = createAsyncThunk(
   'jobCadidateSlice/getJobApplyListByCandidate',
   async (args) => {
-    const header = {
-      headers: {
-        Authorization: 'Bearer ' + args?.token,
-      },
-    };
-    if (args.user.role.name.includes('Role_Candidate')) {
-      const res = await axios.get(
-        `${BASEURL}/api/candidate-application/candidate/${args.user.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`,
-        header
-      );
-      return res.data;
+    if (args.user.roleDTO.name.includes('Role_Candidate')) {
+      const res = await getJobAppliedByCandidate(args.user.id);
+      return res;
     }
   }
 );
 export const getJobCareByCandidateThunk = createAsyncThunk(
   'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
-    if (args.user.role.name.includes('Role_Candidate')) {
-      const res = await getJobCareByCandidate(args.user.id);
+    if (args.user.roleDTO.name.includes('Role_Candidate')) {
+      const res = await getJobCareByCandidate(args.user.username);
       return res;
     }
   }
 );
 export const addJobCare = createAsyncThunk(
-  'jobCadidateSlice/adddCareJob',
+  'jobCadidateSlice/addCareJob',
   async (args) => {
     return await axios
       .post(`${BASEURL}/api/job-care`, args[0], {
@@ -101,51 +85,6 @@ export const deleteJobCare = createAsyncThunk(
       .delete(`${BASEURL}/api/job-care/${args[0].id}`, header)
       .then((res) => {
         return res.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
-export const getAllJobCare = createAsyncThunk(
-  'jobCandidateSlice/getAllJobCare',
-  async (args) => {
-    const header = {
-      headers: {
-        Authorization: 'Bearer ' + args.token,
-      },
-    };
-    console.log(args)
-    return await axios
-      .get(
-        `${BASEURL}/api/candidate/job-care/user/${args?.user?.username}?no=${args.page.no}&limit=${args.page.limit}`,
-        header
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {});
-  }
-);
-export const getAllJobApply = createAsyncThunk(
-  'jobCandidateSlice/getAllJobApply',
-  async (args) => {
-    const header = {
-      headers: {
-        Authorization: 'Bearer ' + args.token,
-      },
-    };
-    return await axios
-      .get(`${BASEURL}/api/candidate/user/${args.user.user.id}`, header)
-      .then(async (response) => {
-        try {
-          const response_1 = await axios.get(
-            `${BASEURL}/api/applylist/candidate/${response.data.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`
-          );
-          return response_1.data;
-        } catch (error) {
-          return error.response.data;
-        }
       })
       .catch((error) => {
         return error.response.data;
