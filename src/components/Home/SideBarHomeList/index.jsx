@@ -25,9 +25,8 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   const [checkedType, setCheckedType] = useState([]);
 
   useEffect(() => {
-    dispatch(getMajorListThunk([1, 20]));
     dispatch(getJobPositionList());
-  }, [dispatch]);
+  }, []);
 
   const handleCheckType = (valueName, valueCheck) => {
     var updatedList = [...checkedType];

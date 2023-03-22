@@ -8,7 +8,7 @@ const Main = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMajorListThunk([1, 20]));
-  }, [dispatch]);
+  }, []);
 
   return (
     <Home
