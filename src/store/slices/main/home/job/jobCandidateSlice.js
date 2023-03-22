@@ -115,9 +115,10 @@ export const getAllJobCare = createAsyncThunk(
         Authorization: 'Bearer ' + args.token,
       },
     };
+    console.log(args)
     return await axios
       .get(
-        `${BASEURL}/api/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
+        `${BASEURL}/api/candidate/job-care/user/${args?.user?.username}?no=${args.page.no}&limit=${args.page.limit}`,
         header
       )
       .then((res) => {
