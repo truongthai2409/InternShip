@@ -2,7 +2,7 @@ import { internshipTransport } from 'src/config/http/transport';
 
 const candidate = {
   applyJob: (data) => {
-    const url = `/api/r2s/candidate-application/`;
+    const url = `/api/candidate-application/`;
 
     return internshipTransport.post(url, data, {
       headers: {
