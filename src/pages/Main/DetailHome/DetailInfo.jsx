@@ -80,7 +80,7 @@ const DetailInfo = (props) => {
         </div>
         <div className='detailInfoHome__left__info'>
           <h2>Cách thức ứng tuyển</h2>
-          <p>
+          <p style={{marginTop:'15px'}}>
             Ứng viên nộp hồ sơ trực tuyến bằng cách bấm nút{' '}
             <span>ỨNG TUYỂN NGAY</span> dưới đây
           </p>
