@@ -19,8 +19,8 @@ const profileSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserById.fulfilled, (state, { payload }) => {
       state.others = payload;
-      state.user = payload?.userDetails;
-      state.role = payload?.userDetails?.role?.name;
+      state.user = payload?.userDetailsDTO;
+      state.role = payload?.userDetailsDTO?.roleDTO?.name;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
       state.user = payload;
@@ -90,7 +90,7 @@ export const getUserById = createAsyncThunk(
           });
       case 'Role_Candidate':
         return await axios
-          .get(`${baseURL}/api/r2s/candidate/user/${args.ids}`, header)
+          .get(`${baseURL}/api/candidate/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })

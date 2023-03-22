@@ -47,7 +47,10 @@ const ButtonMark = (props) => {
         },
       };
 
-      dispatch(addJobCare([dataCareList, userStorage?.token])).then(() => {
+      const res_ = await dispatch(
+        addJobCare([dataCareList, userStorage?.token])
+      );
+      if (res_.payload.status === 200 || res_.payload.status === 201) {
         dispatch(getJobCareByCandidateThunk(page)).then(() => {
           setMark(!mark);
           toast.success('Đã lưu việc làm thành công', {
@@ -56,9 +59,16 @@ const ButtonMark = (props) => {
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
         });
-      });
+      } else {
+        toast.error('Lưu không thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
+      }
+
     } else {
-      if (user?.role?.name === 'Role_Candidate') {
+      if (user?.roleDTO?.name === 'Role_Candidate') {
         const delJobCare = {
           id: props.idCare,
           token: userStorage?.token,

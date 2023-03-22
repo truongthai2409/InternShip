@@ -7,7 +7,7 @@ const companyManagementAPI = {
   },
 
   getMajorListAPI: (args) => {
-    const url = `/api/r2s/admin/major?no=${args[0] - 1}&limit=${args[1]}`;
+    const url = `/api/admin/major?no=${args[0] - 1}&limit=${args[1]}`;
 
     return internshipTransport.get(url);
   },

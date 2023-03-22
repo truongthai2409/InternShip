@@ -24,6 +24,7 @@ const CardHome = (props) => {
     (state) => state.jobCandidateSlice
   );
   const { user } = useSelector((state) => state.profile);
+  console.log(user)
   const [idCareJob, setIdCareJob] = useState('');
   useEffect(() => {
     const userStorage =
@@ -37,7 +38,7 @@ const CardHome = (props) => {
         limit: 1000,
       },
     };
-    user?.user?.role?.name === 'Role_Candidate' &&
+    user?.roleDTO?.name === 'Role_Candidate' &&
       dispatch(getAllJobCare(dispatchJobCAre));
   }, [dispatch, user]);
 
@@ -200,7 +201,7 @@ const CardHome = (props) => {
           </div>
         ) : (
           <>
-            {user?.role?.name?.includes('Role_Candidate') &&
+            {user?.roleDTO?.name?.includes('Role_Candidate') &&
             props.reload == false ? (
               <ButtonMark
                 height='32px'
