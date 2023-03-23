@@ -62,17 +62,6 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
   };
   return (
     <div className={slideBarHome__wrapper ? `slideBarHome__wrapper` : ''}>
-      {role == 'Role_HR' && (path == '/hr' || path == '/hr/finduser') ? (
-        <></>
-      ) : (
-        <ListCollapse
-          title={t('workTL')}
-          list={listWorkingFormat}
-          spacing={3}
-          onChange={handleCheckType}
-          checkedType={checkedType}
-        />
-      )}
       <ListCollapse
         title={t('jobPositionTL')}
         list={jobPosition}
@@ -89,6 +78,17 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         onChange={handleCheckMajor}
         checkedType={checkedType}
       />
+      {role == 'Role_HR' && (path == '/hr' || path == '/hr/finduser') ? (
+        <></>
+      ) : (
+        <ListCollapse
+          title={t('workTL')}
+          list={listWorkingFormat}
+          spacing={3}
+          onChange={handleCheckType}
+          checkedType={checkedType}
+        />
+      )}
     </div>
   );
 };

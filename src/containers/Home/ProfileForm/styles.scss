@@ -35,7 +35,7 @@
     .profile-form__content-item {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      // justify-content: center;
       align-items: center;
       gap: 1rem;
       margin-bottom: 15px;
@@ -49,10 +49,18 @@
       textarea {
         border: 1px solid $primary-color !important;
       }
+      textarea:focus {
+        outline: none;
+      }
+      .file-upload {
+        border: 1px solid #00b074;
+      }
     }
   }
 }
-
+.profile-form__input {
+  width: 100%;
+}
 .profile-form__action {
   width: 100%;
   display: flex;
@@ -108,20 +116,36 @@
       margin-right: 30px;
     }
   }
+
   .profile-detail {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
     width: 100%;
+  }
+  .job-detail {
+    display: flex !important;
+    .profile-detail-item {
+      width: 100% !important;
+    }
+  }
+  .profile-detail-label {
+    grid-column: 1;
+  }
+
+  .profile-detail-value {
+    grid-column: 2;
+    text-align: left; /* align text to the left */
+    display: flex; /* add display flex */
+    align-items: flex-start;
+    width: 69%;
+  }
+  .profile-detail-item {
+    display: flex; /* add display flex */
+    align-items: center; /* center vertically */
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
-    &-item {
-      margin: 0 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      width: 40%;
-    }
+    margin: 0px 10px 20px 30px;
   }
 }
 
@@ -133,4 +157,7 @@
     border: 1px solid #00b074 !important;
     background-color: #f6f6f6;
   }
+}
+.image-upload {
+  border: 1px solid #00b074 !important;
 }

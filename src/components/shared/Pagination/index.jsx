@@ -1,4 +1,5 @@
 import { Pagination, PaginationItem, Stack, Tooltip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import './styles.scss';
 
 const PaginationCustom = ({
@@ -9,6 +10,7 @@ const PaginationCustom = ({
   shape,
   className,
 }) => {
+  const { t } = useTranslation('pagination');
   return (
     <Stack
       className={`pagination__wrapper ${className ? className : ''}`}
@@ -24,14 +26,14 @@ const PaginationCustom = ({
           <Tooltip
             title={
               item.type === 'start-ellipsis'
-                ? 'Jump to first page'
+                ? t('firstPage')
                 : item.type === 'previous'
-                ? 'Go to previous page'
+                ? t('prePage')
                 : item.type === 'next'
-                ? 'Go to next page'
+                ? t('nextPage')
                 : item.type === 'end-ellipsis'
-                ? 'Jump to last page'
-                : `Go to page ${item.page}`
+                ? t('lastPage')
+                : `${t('goTo')} ${item.page}`
             }
           >
             <PaginationItem {...item} />

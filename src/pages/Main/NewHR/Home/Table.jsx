@@ -128,14 +128,13 @@ const Table = () => {
       height: 70,
       renderCell: (params) => {
         const { row } = params;
-        console.log(row.stt);
         return row.stt;
       },
     },
     {
       field: 'name',
       headerName: 'Tên tin đăng',
-      width: 340,
+      width: 360,
       height: 70,
       sortable: false,
       renderCell: (params) => {

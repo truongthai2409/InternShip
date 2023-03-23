@@ -1,5 +1,5 @@
 const changeSalary = (salary) => {
-  return salary.toLocaleString('en-US').replaceAll(',','.');
+  return salary.toLocaleString('en-US').replaceAll(',', '.');
 };
 
 export const salaryHelpers = {

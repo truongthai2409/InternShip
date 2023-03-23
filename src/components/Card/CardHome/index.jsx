@@ -22,7 +22,7 @@ const CardHome = (props) => {
     (state) => state.jobCandidateSlice
   );
   const { user } = useSelector((state) => state.profile);
-  console.log(user)
+  console.log(user);
   const [idCareJob, setIdCareJob] = useState('');
 
   useEffect(

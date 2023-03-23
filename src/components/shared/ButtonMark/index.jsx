@@ -49,6 +49,7 @@ const ButtonMark = (props) => {
       const res_ = await dispatch(
         addJobCare([dataCareList, userStorage?.token])
       );
+      // phần này nên tối ưu lại k nhất thiết phải call vì chỉ cần add thêm jobcare vào trong state là đc rồi
       if (res_.payload.status === 200 || res_.payload.status === 201) {
         dispatch(getJobCareByCandidateThunk(page)).then(() => {
           setMark(!mark);
@@ -72,14 +73,6 @@ const ButtonMark = (props) => {
           token: userStorage?.token,
         };
         dispatch(deleteJobCare([delJobCare])).then(() => {
-          const dispatchJobCare = {
-            user: user,
-            token: userStorage?.token,
-            page: {
-              no: 0,
-              limit: 1000,
-            },
-          };
           const page = {
             user: user,
             token: userStorage?.token,
@@ -88,9 +81,11 @@ const ButtonMark = (props) => {
               limit: 5,
             },
           };
-          user?.role?.name === 'Role_Candidate' &&
+          // riêng phần này thì lại nên giữ lại, vì nó sẽ ảnh hưởng đến việc phân trang. Tuỳ vào cách be và fe thảo luận thì
+          // sẽ tối ưu code phần này (việc phân trang của list job và care job đang không tối ưu nếu dữ liệu đủ lớn)
+          user?.roleDTO?.name === 'Role_Candidate' &&
             dispatch(getJobCareByCandidateThunk(page)).then(() => {
-              setMark(false);
+              setMark(!mark);
               toast.success('Đã hủy lưu việc làm ', {
                 position: 'top-right',
                 autoClose: 3000,
@@ -103,7 +98,7 @@ const ButtonMark = (props) => {
   };
   const handleLogin = async (e) => {
     e.stopPropagation();
-    if (user?.role?.name !== 'Role_Candiate') {
+    if (user?.roleDTO?.name !== 'Role_Candiate') {
       toast.error(
         'Bạn cần đăng nhập với vai trò ứng viên để đánh dấu công việc',
         {
