@@ -265,7 +265,7 @@ export const getJobPositionList = createAsyncThunk(
   'job/getJobPositionList',
   async () => {
     return axios
-      .get(`${baseURL}/api/admin/job-position-general`)
+      .get(`${baseURL}/api/job-position-general`)
       .then((response) => {
         return response.data;
       })
