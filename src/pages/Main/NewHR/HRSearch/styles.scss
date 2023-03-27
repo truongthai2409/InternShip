@@ -1,113 +1,113 @@
 @use '../../../../assets//styles/' as *;
 
-.wrapperDetail{
-    &__title{ 
-        margin-bottom: 20px;
-        .time{
-          display: flex;
-          gap: 10px;
-          align-items: center;
-        }
+.wrapperDetail {
+  &__title {
+    margin-bottom: 20px;
+    .time {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
-    &__detail {
-        &__title {
-            margin: 20px 0 20px 0 ;
-            font-size: 20px;
-            font-weight: bold;
-            color: $primary-color;
-        }
+  }
+  &__detail {
+    &__title {
+      margin: 20px 0 20px 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: $primary-color;
     }
+  }
 }
 .detailInfoCandidate {
-    display: flex;
-    padding: 0px;
-    gap: 20px;
-    &__left {
-      width: 65%;
-      &__info {
-        margin-bottom: 15px;
-        
-        h2 {
-          font-weight: 700;
-          font-size: 16px;
-          line-height: 22px;
-          color: #333333;
-        }
-        ul {
-          padding: 15px 20px;
-        }
-        .location {
-          display: flex;
-          gap: 5px;
-          svg {
-            color: #00b074;
-            font-size: 25px;
-          }
-          margin-top: 15px;
-        }
-        span {
-          color: #00b074;
-        }
-        &__btn {
-          margin-top: 20px;
-          display: flex;
-          gap: 20px;
-        }
+  display: flex;
+  padding: 0px;
+  gap: 20px;
+  &__left {
+    width: 65%;
+    &__info {
+      margin-bottom: 15px;
+
+      h2 {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        color: #333333;
       }
-    }
-    &__right {
-      &__img {
-        text-align: center;
-        margin-bottom: 20px;
+      ul {
+        padding: 15px 20px;
       }
-      img {
-        height: 100px;
-        text-align: center;
-      }
-      border: 1px solid #00b074;
-      border-radius: 8px;
-      width: 35%;
-      background-color: rgba(136, 212, 152, 0.16);
-      height: fit-content;
-      padding: 35px 45px;
-  
-      &__item {
-        margin-bottom: 20px;
+      .location {
         display: flex;
-        gap: 15px;
-        padding-bottom: 20px;
-        align-items: center;
-        border-bottom: 1px solid #dedede;
-        &:last-child {
-          border-bottom: none;
-          margin-bottom: 0;
-          padding: 0;
-        }
+        gap: 5px;
         svg {
           color: #00b074;
           font-size: 25px;
         }
-        div {
-          display: flex;
-          flex-direction: column;
-          p:nth-child(1) {
-            color: rgba(51, 51, 51, 0.7);
-          }
-          p:nth-child(2) {
-            color: #333333;
-          }
+        margin-top: 15px;
+      }
+      span {
+        color: #00b074;
+      }
+      &__btn {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+      }
+    }
+  }
+  &__right {
+    &__img {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    img {
+      height: 100px;
+      text-align: center;
+    }
+    border: 1px solid #00b074;
+    border-radius: 8px;
+    width: 35%;
+    background-color: rgba(136, 212, 152, 0.16);
+    height: fit-content;
+    padding: 35px 45px;
+
+    &__item {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      padding-bottom: 20px;
+      align-items: center;
+      border-bottom: 1px solid #dedede;
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding: 0;
+      }
+      svg {
+        color: #00b074;
+        font-size: 25px;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        p:nth-child(1) {
+          color: rgba(51, 51, 51, 0.7);
+        }
+        p:nth-child(2) {
+          color: #333333;
         }
       }
     }
   }
-  .view-CV {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    color: $primary-color;
-    width: 100px;
-    height: 30px;
-    cursor: pointer;
-    border-radius: 6px;
-  }
+}
+.view-CV {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: $primary-color;
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 6px;
+}
