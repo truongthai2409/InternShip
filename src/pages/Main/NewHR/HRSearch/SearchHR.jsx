@@ -5,7 +5,7 @@ import useQuery from 'src/hooks/useQuery';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import SearchAutoComplete from 'src/components/shared/SearchAutoComplete';
 import TemporaryDrawer from 'src/components/shared/Drawer';
-import SideBarHomeList from '../../../components/Home/SideBarHomeList';
+import SideBarHomeList from 'src/components/Home/SideBarHomeList';
 import SelectAreaHome from 'src/components/Home/SelectAreaHome';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { CardContent, Grid, Hidden } from '@mui/material';

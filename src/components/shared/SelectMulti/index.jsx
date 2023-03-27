@@ -44,7 +44,7 @@ const SelectMulti = ({
 
   const handleDelete = (chipToDelete) => () => {
     setPersonName((chips) =>
-      chips.filter((chip) => chip.id !== chipToDelete.id)
+      chips.filter((chip) => chip.name !== chipToDelete.name)
     );
   };
 

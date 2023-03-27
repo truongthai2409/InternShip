@@ -15,6 +15,8 @@ import DetailHome from '../../pages/Main/DetailHome';
 import ResetPassword from 'src/pages/Authenticate/ResetPassword/ResetPassword';
 import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
 import AddJob from 'src/pages/Main/NewHR/AddJob/AddJob';
+import HrFindUser from 'src/containers/HrFindUser';
+import DetailCandidate from 'src/pages/Main/NewHR/HRSearch/DetailCandidate';
 const mainRouter = [
   {
     path: '/',
@@ -67,6 +69,10 @@ const mainRouter = [
       {
         path: 'demoHR/add',
         Component: AddJob,
+      },
+      {
+        path: '/finduser',
+        Component: DetailCandidate,
       },
     ],
   },

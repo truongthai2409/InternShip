@@ -125,8 +125,8 @@ const InfoJob = (props) => {
             Địa điểm làm việc
           </Typography>
           <span className='profile-detail-value'>
-            {others?.provinceDTO?.name
-              ? others?.provinceDTO?.name
+            {others?.workProvinceDTO?.name
+              ? others?.workProvinceDTO?.name
               : '(chưa có dữ liệu)'}
           </span>
         </div>

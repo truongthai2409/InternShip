@@ -23,7 +23,8 @@ const profileSlice = createSlice({
       state.role = payload?.userDetailsDTO?.roleDTO?.name;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
+      state.others = payload;
+      state.user = payload?.userDetailsDTO;
       toast.success('Chỉnh sửa thành công', {
         position: 'top-right',
         autoClose: 3000,

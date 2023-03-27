@@ -47,7 +47,7 @@ const userSlice = createSlice({
     builder.addCase(changePassword.fulfilled, (state, action) => {
       if (action.payload.httpCode === 400) {
         state.statusForgotPassword = 'fail';
-        toast.error('Mật khẩu cũ không đúng!', {
+        toast.error('Mật khẩu hiện tại không đúng!', {
           position: 'top-right',
           autoClose: 3000,
           theme: 'colored',

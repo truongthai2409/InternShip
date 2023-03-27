@@ -81,7 +81,9 @@ export const getUniversityList = createAsyncThunk(
   'university/getUniversityList',
   async (args) => {
     return await axios
-      .get(`${baseURL}/api/university?no=${args[0] - 1}&limit=${args[1]}`)
+      .get(
+        `${baseURL}/api/university-general?no=${args[0] - 1}&limit=${args[1]}`
+      )
       .then((response) => {
         return response.data;
       })
