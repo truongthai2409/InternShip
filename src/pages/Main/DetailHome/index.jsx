@@ -98,7 +98,7 @@ const DetailHome = () => {
     });
     dispatch(getDetailJobByIdThunk(id)).then((res) => {
       setDetailJob(res?.payload);
-      dispatch(getDetailCompanyByidThunk(res?.payload?.companyDTO?.id)).then(
+      dispatch(getDetailCompanyByidThunk(res?.payload?.companyId)).then(
         (data) => {
           data?.payload.map((item) => {
             if (item.id == id) {
@@ -177,7 +177,7 @@ const DetailHome = () => {
               autoClose: 3000,
               style: { color: '#00B074', backgroundColor: '#DEF2ED' },
             });
-            user?.role?.name === 'Role_Candidate' &&
+            user?.roleDTO?.name === 'Role_Candidate' &&
               dispatch(getJobCareByCandidateThunk(page));
           });
         }
