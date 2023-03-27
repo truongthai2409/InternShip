@@ -18,7 +18,7 @@ const companyManagementAPI = {
   },
 
   getDetailCompanyByid: (id) => {
-    const url = `/api/job/company/${id}`;
+    const url = `/api/company/${id}`;
     return internshipTransport.get(url);
   },
 };
