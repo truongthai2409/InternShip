@@ -15,7 +15,6 @@ const Profile = () => {
   const { t } = useTranslation('title');
   TabTitle(`${t('AccountInformationTL')}`);
   const { user, role } = useSelector((state) => state.profile);
-  // console.log('🚀 ~ file: index.jsx:18 ~ Profile ~ user:', user);
 
   return (
     <div className='profile__wrapper'>

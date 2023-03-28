@@ -2,7 +2,7 @@ import { internshipTransport } from 'src/config/http/transport';
 
 const getCandidateByHr = {
   getCandidate: (data) => {
-    const url = `/api/r2s/candidate/job-status`;
+    const url = `/api/candidate/job-status`;
     return internshipTransport.get(url, {
       params: {
         limit: data[0],

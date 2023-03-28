@@ -100,11 +100,6 @@ const DetailHome = () => {
       setDetailJob(res?.payload);
       dispatch(getDetailCompanyByidThunk(res?.payload?.companyId)).then(
         (data) => {
-          data?.payload.map((item) => {
-            if (item.id == id) {
-              setDetailCompanyByid(item);
-            }
-          });
           setDetailCompany(data?.payload);
         }
       );
@@ -188,7 +183,7 @@ const DetailHome = () => {
   return (
     <div className='detailJob'>
       <SearchResultHome />
-      {detailJob == '' ? (
+      {detailJob == '' || detailCompany == '' ? (
         <></>
       ) : (
         <>
@@ -206,22 +201,19 @@ const DetailHome = () => {
                   />
                   <div className='info'>
                     <h2>{detailJob?.name}</h2>
-                    <p className='name'>{detailJob?.companyDTO.name}</p>
+                    <p className='name'>{detailCompany?.name}</p>
                     <div className='city'>
                       <LocationOnIcon sx={{ color: '#00b074' }} />
                       <p>
-                        {
-                          detailCompany[0]?.locationDTO?.districtDTO
-                            ?.provinceDTO?.name
-                        }
+                        {detailJob?.locationDTO?.districtDTO?.provinceDTO?.name}
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className='down'>
-                  <p>{detailJob?.jobPosition}</p>
-                  <p>{detailJob?.jobType}</p>
-                  <p>{detailJob?.major}</p>
+                  <p>{detailJob?.jobPositionDTO?.name}</p>
+                  <p>{detailJob?.jobTypeDTO?.name}</p>
+                  <p>{detailJob?.majorDTO?.name}</p>
                 </div>
               </div>
               <div className='wrapperDetail__title__right'>
@@ -261,7 +253,7 @@ const DetailHome = () => {
                 <TabPanel value={value} index={0}>
                   <DetailInfo
                     detail={detailJob}
-                    company={detailCompanyById}
+                    company={detailCompany}
                     isSave={isSave}
                     isApply={isApply}
                     onHandle={(e) => handlePost(e)}
@@ -271,8 +263,7 @@ const DetailHome = () => {
                 <TabPanel value={value} index={1}>
                   <OverallCompany
                     detail={detailJob}
-                    company={detailCompanyById}
-                    listJobOfCompany={detailCompany}
+                    company={detailCompany}
                   />
                 </TabPanel>
               </Box>

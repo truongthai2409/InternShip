@@ -4,15 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { genderList } from './validateForm';
-import moment from 'moment';
 import './styles.scss';
 
 const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
-  // console.log(
-  //   '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
-  //   moment(others?.userDetailsDTO?.birthday).format('DD/MM/YYYY')
-  // );
   const { t } = useTranslation('userInfo');
 
   const handleEditClick = () => {
@@ -130,7 +125,9 @@ const ProfileDetail = (props) => {
             Trường học
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.school ? others?.school : '(chưa có dữ liệu)'}
+            {others?.universityDTO?.name
+              ? others?.universityDTO?.name
+              : '(chưa có dữ liệu)'}
           </span>
         </div>
       </div>

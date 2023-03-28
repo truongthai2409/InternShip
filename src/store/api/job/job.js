@@ -6,6 +6,12 @@ const job = {
 
     return internshipTransport.get(url);
   },
+
+  getRelatedJobByCompanyId: (companyId) => {
+    const url = `/api/job/company/${companyId}`;
+
+    return internshipTransport.get(url);
+  },
 };
 
 export default job;

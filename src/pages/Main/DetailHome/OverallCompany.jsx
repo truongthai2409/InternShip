@@ -1,20 +1,16 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-import PictureInPictureAltOutlinedIcon from '@mui/icons-material/PictureInPictureAltOutlined';
 import LanguageIcon from '@mui/icons-material/Language';
 import EmailIcon from '@mui/icons-material/Email';
 import GroupIcon from '@mui/icons-material/Group';
-import CardHome from 'src/components/Card/CardHome';
-import moment from 'moment';
 import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import { useDispatch, useSelector } from 'react-redux';
 import { indexFilterChange } from 'src/store/slices/main/home/filter/filterSlices';
 import { getDemandList } from 'src/store/slices/main/home/demand/demandSlice';
+import { getRelatedJobByCompanyIdThunk } from 'src/store/action/job/jobAction';
 const OverallCompany = (props) => {
-  const { index, id, jobPage, jobFilter } = useSelector(
-    (state) => state.filter
-  );
+  const { jobPage } = useSelector((state) => state.filter);
   function reducer(state = initialState, action) {
     switch (action.type) {
       case 'name':
@@ -80,11 +76,15 @@ const OverallCompany = (props) => {
   };
   const title = ['Website', 'Email', 'Quy mô'];
   const icon = [<LanguageIcon />, <EmailIcon />, <GroupIcon />];
-  const name = [
-    props.company.hrDTO.companyDTO.website,
-    props.company.hrDTO.companyDTO.email,
-  ];
+  const name = [props.company.website, props.company.email];
   const myArray = Array.from({ length: 3 }, (_, i) => i + 1);
+
+  const [jobRelated, setJobRelated] = useState([]);
+  useEffect(() => {
+    dispatch(getRelatedJobByCompanyIdThunk(props.company.id)).then((res) => {
+      setJobRelated(res?.payload?.contents);
+    });
+  }, []);
   return (
     <div>
       <div className='detailInfoHome'>
@@ -100,9 +100,16 @@ const OverallCompany = (props) => {
             <p className='location'>
               <LocationOnIcon />
               <p>
-                {props?.company?.locationDTO?.address},{' '}
-                {props?.company?.locationDTO?.districtDTO?.name},{' '}
-                {props?.company?.locationDTO?.districtDTO?.provinceDTO?.name}
+                {props?.company?.companyLocationDTOs[0].locationDTO?.address},{' '}
+                {
+                  props?.company?.companyLocationDTOs[0].locationDTO
+                    ?.districtDTO?.name
+                }
+                ,{' '}
+                {
+                  props?.company?.companyLocationDTOs[0].locationDTO
+                    ?.districtDTO?.provinceDTO?.name
+                }
               </p>
             </p>
           </div>
@@ -131,8 +138,7 @@ const OverallCompany = (props) => {
       <div className='detailInfo__listJob'>
         <h2 className='detailInfo__listJob__title'>Việc làm khác đang tuyển</h2>
         <ListCardJobHome
-          jobList={props.listJobOfCompany}
-          // indexCardActive={index}
+          jobList={jobRelated}
           jobListHavePages={jobPage}
           onChange={getValuePageAndHandle}
           reload={reload}

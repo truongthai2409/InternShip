@@ -18,7 +18,6 @@ import { genderList, listWorkingFormat, schema, schema2 } from './validateForm';
 import moment from 'moment';
 import ProfileDetail from './ProfileDetail';
 import InfoJob from './InfoJob';
-import DatePicker from 'react-datepicker';
 import DatePickerWithLabel from 'src/components/shared/CustomDatePicker/CustomDatePicker';
 import './styles.scss';
 
@@ -27,6 +26,12 @@ const ProfileForm = ({ profile: user }) => {
   const [showInput, setShowInput] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { others, role } = useSelector((state) => state.profile);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleSelectChange = (selected) => {
+    setSelectedItems(selected);
+  };
 
   const {
     register,
@@ -37,6 +42,14 @@ const ProfileForm = ({ profile: user }) => {
   } = useForm({
     mode: 'all',
     resolver: yupResolver(schema),
+    defaultValues: {
+      lastName: user?.lastName,
+      firstName: user?.firstName,
+      email: user?.email,
+      phone: user?.phone,
+      gender: others?.userDetails?.gender,
+      address: others?.locationDTO?.address,
+    },
   });
   const {
     register: register2,
@@ -47,11 +60,9 @@ const ProfileForm = ({ profile: user }) => {
     mode: 'all',
     resolver: yupResolver(schema2),
   });
-  const { others, role } = useSelector((state) => state.profile);
-  // console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ role:', role);
-  // console.log('🚀 ~ file: index.jsx:51 ~ ProfileForm ~ others:', others);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const { universityList } = useSelector((state) => state.university);
+
   const { jobPosition } = useSelector((state) => state.job);
   const { majorList } = useSelector((state) => state.major);
   const userStorage =
@@ -93,11 +104,8 @@ const ProfileForm = ({ profile: user }) => {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  const getDistrict = (id) => {
-    dispatch(getDistrictList(id));
-  };
+
   const onSubmit = (data) => {
-    console.log('🚀 ~ file: index.jsx:100 ~ onSubmit ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -128,32 +136,36 @@ const ProfileForm = ({ profile: user }) => {
           candidate: JSON.stringify({
             userCreationDTO: {
               id: parseInt(user?.id),
-              firstName: user?.firstName,
-              lastName: user?.lastName,
+              firstName: data.firstName,
+              lastName: data.lastName,
               gender: parseInt(data.gender),
-              phone: user?.phone,
+              phone: data.phone,
               email: user?.email,
-              birthday: data.birthday,
-              location: {
-                id: parseInt(data.province),
-                districtDTO: {
-                  id: parseInt(data.district),
-                  provinceDTO: { id: parseInt(data.province) },
-                },
-                address: data.address,
-              },
-              university: data.school,
+              birthday: moment(data.birthday).format('DD-MM-yyyy'),
             },
+            locationDTO: {
+              districtDTO: {
+                id: parseInt(data.district),
+                provinceDTO: { id: parseInt(data.province) },
+              },
+              address: data.address,
+            },
+            jobPositionDTOs: [{ id: others.jobPositionSimpleDTOs[0].id }],
+            desiredJob: others?.desiredJob,
+            workProvinceDTO: { id: others.workProvinceDTO?.id },
+            letter: others?.letter,
+            universityDTO: { id: data.school },
           }),
           fileCV: user?.cv,
           fileAvatar: data.avatar,
         };
-        console.log(
-          '🚀 ~ file: index.jsx:151 ~ onSubmit ~ profileData:',
-          profileData
-        );
+
         dispatch(updateUser([userPost, profileData])).then(
-          setShowForm(!showForm)
+          setShowForm(!showForm),
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
         );
         break;
       }
@@ -198,37 +210,42 @@ const ProfileForm = ({ profile: user }) => {
             phone: user?.phone,
             email: user?.email,
             birthday: user?.birthday,
-            location: {
-              id: parseInt(others?.location?.id),
-              districtDTO: {
-                id: parseInt(others?.location?.districtDTO?.id),
-                provinceDTO: {
-                  id: parseInt(others?.location?.districtDTO?.provinceDTO?.id),
-                },
-              },
-              address: others?.location?.address,
-            },
-            majors: [
-              {
-                id: data.major,
-              },
-            ],
-            jobTypes: [
-              {
-                id: data.jobType[0].id,
-              },
-            ],
-            jobPositions: [{ id: data.jobPosition }],
-            desiredJob: data.desiredJob,
-            province: { id: data.workLocation },
-            letter: data.coverLetter,
           },
+          locationDTO: {
+            districtDTO: {
+              id: parseInt(others?.locationDTO?.districtDTO?.id),
+              provinceDTO: {
+                id: parseInt(others?.locationDTO?.districtDTO?.provinceDTO?.id),
+              },
+            },
+            address: others?.locationDTO?.address,
+          },
+          majorDTOs: [
+            {
+              id: data.major,
+            },
+          ],
+          jobTypeDTOs: [
+            {
+              id: data.jobType[0].id,
+            },
+          ],
+          jobPositionDTOs: [{ id: data.jobPosition }],
+          desiredJob: data.desiredJob,
+          workProvinceDTO: { id: data.workLocation },
+          letter: data.coverLetter,
+          universityDTO: { id: others?.universityDTO?.id },
         }),
         fileAvatar: user?.avatar,
         fileCV: data.cv,
       };
+
       dispatch(updateUser([userPost, profileData])).then(
-        setShowInput(!showInput)
+        setShowInput(!showInput),
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       );
     }
   };
@@ -314,7 +331,7 @@ const ProfileForm = ({ profile: user }) => {
                     }}
                     // value={field.value}
                     selectedDate={field.value}
-                    format='dd/MM/yyyy'
+                    format='dd-MM-yyyy'
                   />
                 )}
               />
@@ -354,7 +371,8 @@ const ProfileForm = ({ profile: user }) => {
                 label={t('province')}
                 options={provinceList}
                 placeholder={t('placeholder')}
-                onChange={(id) => getDistrict(id)}
+                dispatch={dispatch}
+                action={getDistrictList}
               >
                 {errors.province?.message}
               </SelectCustom>
@@ -472,6 +490,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 placeholder={t('placeholder')}
                 label={t('jobType')}
+                onChange={handleSelectChange}
               >
                 {errors2.jobType?.message}
               </SelectMulti>
@@ -499,7 +518,7 @@ const ProfileForm = ({ profile: user }) => {
               />
             </div>
             <div className='profile-form__content-item'>
-              <div>
+              <div style={{ width: '100%' }}>
                 <InputLabel
                   htmlFor='coverLetter'
                   sx={{
@@ -513,7 +532,15 @@ const ProfileForm = ({ profile: user }) => {
                 </InputLabel>
                 <TextareaAutosize
                   id='coverLetter'
-                  style={{ width: '900px', height: '200px', padding: '20px' }}
+                  rowsMax={1}
+                  maxRows={1}
+                  sx={{
+                    resize: 'none',
+                    '&::-webkit-resizer': {
+                      display: 'none',
+                    },
+                  }}
+                  style={{ width: '100%', height: '200px', padding: '20px' }}
                   placeholder={t('placeholderCover')}
                   {...register2('coverLetter')}
                 />

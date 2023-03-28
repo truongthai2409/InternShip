@@ -9,10 +9,10 @@ import { schema } from './dataCV';
 import UserInfo from './UserInfo';
 import avatarDefault from 'src/assets/img/avatar-default.png';
 import { useTranslation } from 'react-i18next';
+import { jobStatusThunk } from 'src/store/action/candidate/candidateAction';
 
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
-  // console.log('🚀 ~ file: Components.jsx:15 ~ Components ~ profile:', profile);
   const dispatch = useDispatch();
   const {
     register,
@@ -29,35 +29,9 @@ const Components = ({ profile }) => {
   const { t } = useTranslation('userInfo');
 
   const handleChangeFind = (event) => {
-    setCheckedFind(event.target.checked);
-    if (event.target.checked) {
-      const userSessionStorage =
-        JSON.parse(sessionStorage.getItem('userPresent')) ||
-        JSON.parse(localStorage.getItem('userPresent'));
-      const profileData = {
-        candidate: JSON.stringify({
-          userCreationDTO: {
-            id: parseInt(profile?.id),
-            firstName: profile?.firstName,
-            lastName: profile?.lastName,
-            gender: parseInt(profile?.gender),
-            phone: profile?.phone,
-            email: profile?.email,
-            birthday: profile?.birthday.toLocaleDateString(),
-          },
-          major: {
-            id: profile?.major?.id,
-          },
-        }),
-        fileAvatar: profile?.avatar || null,
-        fileCV: profile?.cv,
-      };
-      const headerUser = {
-        token: userSessionStorage.token,
-        role: profile?.user?.role?.name,
-      };
-      dispatch(updateUser([headerUser, profileData]));
-    }
+    const finded = event.target.checked;
+    setCheckedFind(finded);
+    dispatch(jobStatusThunk({ id: profile?.id, status: finded }));
   };
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
