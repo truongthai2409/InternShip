@@ -12,7 +12,7 @@ export const applyJobThunk = createAsyncThunk(
 );
 export const jobStatusThunk = createAsyncThunk(
   'candidate/jobStatus',
-  async (id, status) => {
+  async ({ id, status }) => {
     const res = await jobStatus(id, status);
     return res;
   }

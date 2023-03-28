@@ -80,10 +80,7 @@ const OverallCompany = (props) => {
   };
   const title = ['Website', 'Email', 'Quy mô'];
   const icon = [<LanguageIcon />, <EmailIcon />, <GroupIcon />];
-  const name = [
-    props.company.hrDTO.companyDTO.website,
-    props.company.hrDTO.companyDTO.email,
-  ];
+  const name = [props.company.website, props.company.email];
   const myArray = Array.from({ length: 3 }, (_, i) => i + 1);
   return (
     <div>
@@ -100,9 +97,16 @@ const OverallCompany = (props) => {
             <p className='location'>
               <LocationOnIcon />
               <p>
-                {props?.company?.locationDTO?.address},{' '}
-                {props?.company?.locationDTO?.districtDTO?.name},{' '}
-                {props?.company?.locationDTO?.districtDTO?.provinceDTO?.name}
+                {props?.company?.companyLocationDTOs[0].locationDTO?.address},{' '}
+                {
+                  props?.company?.companyLocationDTOs[0].locationDTO
+                    ?.districtDTO?.name
+                }
+                ,{' '}
+                {
+                  props?.company?.companyLocationDTOs[0].locationDTO
+                    ?.districtDTO?.provinceDTO?.name
+                }
               </p>
             </p>
           </div>

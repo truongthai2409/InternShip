@@ -28,8 +28,8 @@ const DetailInfo = (props) => {
     <ScheduleIcon />,
   ];
   const name = [
-    props.detail.jobPosition,
-    props.detail.jobType,
+    props.detail.jobPositionDTO?.name,
+    props.detail.jobTypeDTO?.name,
     props.detail.amount,
     salaryHelpers.changeSalary(props.detail.salaryMin) +
       'VND' +
@@ -37,7 +37,7 @@ const DetailInfo = (props) => {
       salaryHelpers.changeSalary(props.detail.salaryMax) +
       'VND',
     dateTimeHelper.changeDateLocale(props.detail.createdDate),
-    dateTimeHelper.changeDateLocale(props.detail.endTime),
+    dateTimeHelper.changeDateLocale(props.detail.endDate),
   ];
   const myArray = Array.from({ length: 6 }, (_, i) => i + 1);
   return (
@@ -72,9 +72,16 @@ const DetailInfo = (props) => {
           <p className='location'>
             <LocationOnIcon />
             <p>
-              {props?.company?.locationDTO?.address},{' '}
-              {props?.company?.locationDTO?.districtDTO?.name},{' '}
-              {props?.company?.locationDTO?.districtDTO?.provinceDTO?.name}
+              {props?.company?.companyLocationDTOs[0].locationDTO?.address},{' '}
+              {
+                props?.company?.companyLocationDTOs[0].locationDTO?.districtDTO
+                  ?.name
+              }
+              ,{' '}
+              {
+                props?.company?.companyLocationDTOs[0].locationDTO?.districtDTO
+                  ?.provinceDTO?.name
+              }
             </p>
           </p>
         </div>
@@ -107,7 +114,7 @@ const DetailInfo = (props) => {
           </div>
           <p className='deadline'>
             Hạn nộp hồ sơ:{' '}
-            {dateTimeHelper.changeDateLocale(props.detail.endTime)}
+            {dateTimeHelper.changeDateLocale(props.detail.endDate)}
           </p>
         </div>
       </div>

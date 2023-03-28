@@ -20,7 +20,6 @@ const authenticateSlice = createSlice({
     builder.addCase(
       getInformationCandidateByIdThunk.fulfilled,
       (state, { payload }) => {
-        // console.log(payload);
         state.user = payload;
         state.role = state.role.name;
       }

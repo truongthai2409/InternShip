@@ -4,15 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { genderList } from './validateForm';
-import moment from 'moment';
 import './styles.scss';
 
 const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
-  console.log(
-    '🚀 ~ file: ProfileDetail.jsx:12 ~ ProfileDetail ~ others:',
-    others
-  );
   const { t } = useTranslation('userInfo');
 
   const handleEditClick = () => {

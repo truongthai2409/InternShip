@@ -13,7 +13,6 @@ import { jobStatusThunk } from 'src/store/action/candidate/candidateAction';
 
 const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
-  console.log('🚀 ~ file: Components.jsx:15 ~ Components ~ profile:', profile);
   const dispatch = useDispatch();
   const {
     register,
@@ -32,12 +31,7 @@ const Components = ({ profile }) => {
   const handleChangeFind = (event) => {
     const finded = event.target.checked;
     setCheckedFind(finded);
-
-    console.log(
-      '🚀 ~ file: Components.jsx:38 ~ handleChangeFind ~ checkedFind:',
-      checkedFind.toString()
-    );
-    dispatch(jobStatusThunk(profile?.id, checkedFind.toString()));
+    dispatch(jobStatusThunk({ id: profile?.id, status: finded }));
   };
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);

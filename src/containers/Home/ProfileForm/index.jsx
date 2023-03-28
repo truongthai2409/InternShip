@@ -18,7 +18,6 @@ import { genderList, listWorkingFormat, schema, schema2 } from './validateForm';
 import moment from 'moment';
 import ProfileDetail from './ProfileDetail';
 import InfoJob from './InfoJob';
-import DatePicker from 'react-datepicker';
 import DatePickerWithLabel from 'src/components/shared/CustomDatePicker/CustomDatePicker';
 import './styles.scss';
 
@@ -27,7 +26,6 @@ const ProfileForm = ({ profile: user }) => {
   const [showInput, setShowInput] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selected, setSelected] = useState('');
   const { others, role } = useSelector((state) => state.profile);
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -103,15 +101,10 @@ const ProfileForm = ({ profile: user }) => {
     dispatch(getUniversityList([1, 20]));
   }, []);
 
-  const handleChange = (event) => {
-    setSelected(event.target.value);
-  };
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
-  const getDistrict = (id) => {
-    dispatch(getDistrictList(id));
-  };
+
   const onSubmit = (data) => {
     const userPost = {
       userStorage,
@@ -148,7 +141,7 @@ const ProfileForm = ({ profile: user }) => {
               gender: parseInt(data.gender),
               phone: data.phone,
               email: user?.email,
-              birthday: data.birthday,
+              birthday: moment(data.birthday).format('DD-MM-yyyy'),
             },
             locationDTO: {
               districtDTO: {
@@ -157,6 +150,10 @@ const ProfileForm = ({ profile: user }) => {
               },
               address: data.address,
             },
+            jobPositionDTOs: [{ id: others.jobPositionSimpleDTOs[0].id }],
+            desiredJob: others?.desiredJob,
+            workProvinceDTO: { id: others.workProvinceDTO?.id },
+            letter: others?.letter,
             universityDTO: { id: data.school },
           }),
           fileCV: user?.cv,
@@ -237,6 +234,7 @@ const ProfileForm = ({ profile: user }) => {
           desiredJob: data.desiredJob,
           workProvinceDTO: { id: data.workLocation },
           letter: data.coverLetter,
+          universityDTO: { id: others?.universityDTO?.id },
         }),
         fileAvatar: user?.avatar,
         fileCV: data.cv,
@@ -333,7 +331,7 @@ const ProfileForm = ({ profile: user }) => {
                     }}
                     // value={field.value}
                     selectedDate={field.value}
-                    format='dd/MM/yyyy'
+                    format='dd-MM-yyyy'
                   />
                 )}
               />
@@ -373,7 +371,8 @@ const ProfileForm = ({ profile: user }) => {
                 label={t('province')}
                 options={provinceList}
                 placeholder={t('placeholder')}
-                onChange={(id) => getDistrict(id)}
+                dispatch={dispatch}
+                action={getDistrictList}
               >
                 {errors.province?.message}
               </SelectCustom>

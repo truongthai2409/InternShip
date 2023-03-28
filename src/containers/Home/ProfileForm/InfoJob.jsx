@@ -11,7 +11,6 @@ import './styles.scss';
 
 const InfoJob = (props) => {
   const { user, others } = useSelector((state) => state.profile);
-  // console.log('🚀 ~ file: InfoJob.jsx:11 ~ InfoJob ~ others:', others);
   const { t } = useTranslation('userInfo');
   const [open, setOpen] = useState(false);
   const [numPages, setNumPages] = useState(null);
