@@ -231,7 +231,7 @@ export const forgotPassword = createAsyncThunk(
   'user/forgotPassword',
   async (emailUser) => {
     return await axios
-      .get(`${baseURL}/api/user/forgotPassword/${emailUser}`)
+      .get(`${baseURL}/api/user/forgot-password/${emailUser}`)
       .then((response) => {
         return response.data;
       })
@@ -294,7 +294,7 @@ export const changePassword = createAsyncThunk(
   async (data) => {
     const { token, dataChangePassword } = data;
     return axios
-      .put(`${baseURL}/api/user/changePassword`, dataChangePassword, {
+      .put(`${baseURL}/api/user/change-password`, dataChangePassword, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
