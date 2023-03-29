@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import authenticate from 'src/store/api/authenticate/authenticate';
-const { resetPassword, verifyEmail,activeAccount } = authenticate;
+const { resetPassword, verifyEmail, activeAccount } = authenticate;
 
 export const resetPasswordThunk = createAsyncThunk(
   'authenticate/resetPassword',

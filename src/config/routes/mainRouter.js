@@ -74,12 +74,11 @@ const mainRouter = [
       {
         path: 'active',
         Component: ActiveAccount,
-        
       },
       {
         path: '/finduser',
         Component: DetailCandidate,
-      }
+      },
     ],
   },
   {

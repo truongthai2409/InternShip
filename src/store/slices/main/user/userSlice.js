@@ -73,7 +73,7 @@ export const getUserById = createAsyncThunk(
     switch (HASHTOKEN()) {
       case 'Role_HR':
         return await axios
-          .get(`${baseURL}/api/hr/${args.ids}`, header)
+          .get(`${baseURL}/api/hr/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })

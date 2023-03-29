@@ -19,7 +19,7 @@ const DetailInfo = (props) => {
     'Ngày đăng tuyển',
     'Hạn nộp hồ sơ',
   ];
-  console.log(props)
+  console.log(props);
   const icon = [
     <PictureInPictureAltOutlinedIcon />,
     <BusinessCenterIcon />,

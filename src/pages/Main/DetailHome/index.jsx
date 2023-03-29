@@ -261,10 +261,7 @@ const DetailHome = () => {
                   />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                  <OverallCompany
-                    detail={detailJob}
-                    company={detailCompany}
-                  />
+                  <OverallCompany detail={detailJob} company={detailCompany} />
                 </TabPanel>
               </Box>
             </div>

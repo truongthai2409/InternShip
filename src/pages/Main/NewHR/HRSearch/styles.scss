@@ -111,3 +111,92 @@
   cursor: pointer;
   border-radius: 6px;
 }
+.card-container {
+  position: relative;
+  .button__mark {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    .css-dngoy8-MuiSvgIcon-root {
+      color: #7d7d7d !important;
+    }
+  }
+  &__item {
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    &_view-CV {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      color: $primary-color;
+      background-color: #ecf8ee;
+      width: 100px;
+      height: 30px;
+    }
+  }
+  &__image {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__tagname {
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+.candidate-card {
+  &__fullname {
+    font-size: $fs-20;
+    font-weight: $fw-bold-1;
+    color: $primary-color;
+  }
+  &__location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: $fs-16;
+  }
+}
+
+.item {
+  margin-bottom: 10px;
+}
+.css-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 10px;
+}
+.css-46bh2p-MuiCardContent-root {
+  padding: 15px 30px !important;
+}
+
+.css-ypiqx9-MuiDialogContent-root {
+  padding: 0 !important;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+}
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

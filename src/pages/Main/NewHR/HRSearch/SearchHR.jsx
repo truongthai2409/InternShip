@@ -182,6 +182,10 @@ const SearchHR = () => {
           ) : (
             <>
               {candidateList?.map((candidate, index) => {
+                console.log(
+                  '🚀 ~ file: SearchHR.jsx:185 ~ {candidateList?.map ~ candidate:',
+                  candidate
+                );
                 return (
                   <Box className='card-container' key={index}>
                     <div className='button__mark'>
@@ -202,7 +206,7 @@ const SearchHR = () => {
                         <div className='card-container__item'>
                           <div className='card-container__image'>
                             <img
-                              src={candidate.user.avatar}
+                              src={candidate.userDetailsDTO.avatar}
                               style={{
                                 width: '90px',
                                 height: '90px',
@@ -213,22 +217,25 @@ const SearchHR = () => {
                             />
                             <div className='candidate-card'>
                               <p className='candidate-card__fullname item'>
-                                {candidate.user.lastName}{' '}
-                                {candidate.user.firstName}
+                                {candidate.userDetailsDTO.lastName}{' '}
+                                {candidate.userDetailsDTO.firstName}
                               </p>
                               <p className='item' style={{ fontSize: '16px' }}>
-                                {candidate.major.name}
+                                {candidate.desiredJob}
                               </p>
                               <div className='candidate-card__location item'>
                                 <LocationOnIcon
                                   sx={{ color: '#04bf8a', fontSize: '16px' }}
                                 />
-                                {candidate.nameProvince}
+                                {
+                                  candidate?.locationDTO?.districtDTO
+                                    ?.provinceDTO?.name
+                                }
                               </div>
                             </div>
                           </div>
                           <div
-                            className='view-CV'
+                            className='card-container__item_view-CV'
                             onClick={() => viewProfileCV(candidate)}
                           >
                             <img src={iconCV} alt='xem CV' />
@@ -236,8 +243,10 @@ const SearchHR = () => {
                           </div>
                           <div className='card-container__content'>
                             <div className='card-container__tagname'>
-                              <TagName title={candidate.major.name} />
-                              <TagName title={candidate.skills} />
+                              <TagName title={candidate.majorDTOs[0].name} />
+                              <TagName
+                                title={candidate.jobPositionSimpleDTOs[0].name}
+                              />
                             </div>
                             <div className='card-container__date'>
                               <AccessTimeIcon

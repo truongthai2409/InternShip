@@ -22,6 +22,7 @@ import DatePickerWithLabel from 'src/components/shared/CustomDatePicker/CustomDa
 import './styles.scss';
 
 const ProfileForm = ({ profile: user }) => {
+  console.log('🚀 ~ file: index.jsx:25 ~ ProfileForm ~ user:', user);
   const { t } = useTranslation('userInfo');
   const [showInput, setShowInput] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -311,6 +312,7 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
+                defaultValue={user?.email}
                 check={true}
               >
                 {errors.email?.message}
@@ -356,7 +358,12 @@ const ProfileForm = ({ profile: user }) => {
                 id='gender'
                 register={register}
                 label={t('gender')}
-                defaultValue={user?.user?.gender}
+                defaultValue={genderList.map((value) => {
+                  if (value.id === user?.gender) {
+                    const genderName = value.name;
+                    return genderName ? genderName : '';
+                  }
+                })}
                 options={genderList}
                 placeholder={t('placeholder')}
               >
@@ -409,6 +416,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register}
                 label={t('school')}
                 requirementField={false}
+                defaultValue={others?.universityDTO?.id}
                 options={universityList}
                 placeholder={t('placeholder')}
               />
@@ -466,6 +474,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 label={t('jobPosition')}
                 options={jobPosition}
+                defaultValue={others.jobPositionSimpleDTOs[0].id}
                 placeholder={t('placeholder')}
               >
                 {errors2.jobPosition?.message}
@@ -478,6 +487,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 label={t('major')}
                 options={majorList}
+                defaultValue={others.majorDTOs[0].id}
                 placeholder={t('placeholder')}
               >
                 {errors2.major?.message}
@@ -491,6 +501,7 @@ const ProfileForm = ({ profile: user }) => {
                 placeholder={t('placeholder')}
                 label={t('jobType')}
                 onChange={handleSelectChange}
+                defaultValue={others.jobTypeDTOs[0].id}
               >
                 {errors2.jobType?.message}
               </SelectMulti>
@@ -502,6 +513,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 label={t('workLocation')}
                 options={provinceList}
+                defaultValue={others.workProvinceDTO.id}
                 placeholder={t('placeholder')}
               >
                 {errors2.workLocation?.message}
@@ -532,8 +544,6 @@ const ProfileForm = ({ profile: user }) => {
                 </InputLabel>
                 <TextareaAutosize
                   id='coverLetter'
-                  rowsMax={1}
-                  maxRows={1}
                   sx={{
                     resize: 'none',
                     '&::-webkit-resizer': {
