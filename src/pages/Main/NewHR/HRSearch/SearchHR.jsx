@@ -21,6 +21,8 @@ import TagName from 'src/components/Home/TagName';
 import PaginationCustom from 'src/components/shared/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCandidateThunk } from 'src/store/action/hr/getCandidateAction';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { useTranslation } from 'react-i18next';
 import iconCV from 'src/assets/img/view-file.svg';
@@ -182,83 +184,87 @@ const SearchHR = () => {
           ) : (
             <>
               {candidateList?.map((candidate, index) => {
-                console.log(
-                  '🚀 ~ file: SearchHR.jsx:185 ~ {candidateList?.map ~ candidate:',
-                  candidate
-                );
                 return (
-                  <Box className='card-container' key={index}>
-                    <div className='button__mark'>
-                      <ButtonMark
-                        height='32px'
-                        width='32px'
-                        fontSize='18px'
-                        isMark={false}
-                      />
-                    </div>
-                    <Card
-                      variant='outlined'
-                      sx={{
-                        margin: '10px 0',
-                      }}
-                    >
-                      <CardContent>
-                        <div className='card-container__item'>
-                          <div className='card-container__image'>
-                            <img
-                              src={candidate.userDetailsDTO.avatar}
-                              style={{
-                                width: '90px',
-                                height: '90px',
-                                borderRadius: '50%',
-                                objectFit: 'cover',
-                              }}
-                              alt='ảnh đại diện'
-                            />
-                            <div className='candidate-card'>
-                              <p className='candidate-card__fullname item'>
-                                {candidate.userDetailsDTO.lastName}{' '}
-                                {candidate.userDetailsDTO.firstName}
-                              </p>
-                              <p className='item' style={{ fontSize: '16px' }}>
-                                {candidate.desiredJob}
-                              </p>
-                              <div className='candidate-card__location item'>
-                                <LocationOnIcon
+                  <Link to='detailCandidate'>
+                    <Box className='card-container' key={index}>
+                      <div className='button__mark'>
+                        <ButtonMark
+                          height='32px'
+                          width='32px'
+                          fontSize='18px'
+                          isMark={false}
+                        />
+                      </div>
+                      <Card
+                        variant='outlined'
+                        sx={{
+                          margin: '10px 0',
+                        }}
+                      >
+                        <CardContent>
+                          <div className='card-container__item'>
+                            <div className='card-container__image'>
+                              <img
+                                src={candidate?.userDetailsDTO?.avatar}
+                                style={{
+                                  width: '90px',
+                                  height: '90px',
+                                  borderRadius: '50%',
+                                  objectFit: 'cover',
+                                }}
+                                alt='ảnh đại diện'
+                              />
+                              <div className='candidate-card'>
+                                <p className='candidate-card__fullname item'>
+                                  {candidate?.userDetailsDTO?.lastName}{' '}
+                                  {candidate?.userDetailsDTO?.firstName}
+                                </p>
+                                <p
+                                  className='item'
+                                  style={{ fontSize: '16px' }}
+                                >
+                                  {candidate?.desiredJob}
+                                </p>
+                                <div className='candidate-card__location item'>
+                                  <LocationOnIcon
+                                    sx={{ color: '#04bf8a', fontSize: '16px' }}
+                                  />
+                                  {
+                                    candidate?.locationDTO?.districtDTO
+                                      ?.provinceDTO?.name
+                                  }
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              className='card-container__item_view-CV'
+                              onClick={() => viewProfileCV(candidate)}
+                            >
+                              <img src={iconCV} alt='xem CV' />
+                              <span>Xem CV</span>
+                            </div>
+                            <div className='card-container__content'>
+                              <div className='card-container__tagname'>
+                                <TagName title={candidate?.majorDTOs[0].name} />
+                                <TagName
+                                  title={candidate?.jobPositionDTOs[0].name}
+                                />
+                              </div>
+                              <div className='card-container__date'>
+                                <AccessTimeIcon
                                   sx={{ color: '#04bf8a', fontSize: '16px' }}
                                 />
-                                {
-                                  candidate?.locationDTO?.districtDTO
-                                    ?.provinceDTO?.name
-                                }
+                                <span>
+                                  Cập nhật hồ sơ:{' '}
+                                  {candidate?.userDetailsDTO?.modifiedDate}
+                                </span>
                               </div>
                             </div>
                           </div>
-                          <div
-                            className='card-container__item_view-CV'
-                            onClick={() => viewProfileCV(candidate)}
-                          >
-                            <img src={iconCV} alt='xem CV' />
-                            <span>Xem CV</span>
-                          </div>
-                          <div className='card-container__content'>
-                            <div className='card-container__tagname'>
-                              <TagName title={candidate.majorDTOs[0].name} />
-                              <TagName
-                                title={candidate.jobPositionSimpleDTOs[0].name}
-                              />
-                            </div>
-                            <div className='card-container__date'>
-                              <AccessTimeIcon
-                                sx={{ color: '#04bf8a', fontSize: '16px' }}
-                              />
-                              <span>Cập nhật hồ sơ: 02/03/2023</span>
-                            </div>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Box>
+                        </CardContent>
+                      </Card>
+                    </Box>
+                  </Link>
                 );
               })}
             </>

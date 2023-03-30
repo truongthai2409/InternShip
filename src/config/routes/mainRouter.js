@@ -16,8 +16,6 @@ import ResetPassword from 'src/pages/Authenticate/ResetPassword/ResetPassword';
 import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
 import AddJob from 'src/pages/Main/NewHR/AddJob/AddJob';
 import ActiveAccount from 'src/pages/ActiveAccount/ActiveAccount';
-import HrFindUser from 'src/containers/HrFindUser';
-import DetailCandidate from 'src/pages/Main/NewHR/HRSearch/DetailCandidate';
 const mainRouter = [
   {
     path: '/',
@@ -74,10 +72,6 @@ const mainRouter = [
       {
         path: 'active',
         Component: ActiveAccount,
-      },
-      {
-        path: '/finduser',
-        Component: DetailCandidate,
       },
     ],
   },

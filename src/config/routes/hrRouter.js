@@ -5,6 +5,7 @@ import MainLayout from 'src/Layouts/Main';
 import CandidateList from 'src/pages/Main/HR/CandidateList';
 import CandidateManagement from 'src/pages/Main/HR/CandidateManagement/CandidateManagement';
 import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
+import DetailCandidate from 'src/pages/Main/NewHR/HRSearch/DetailCandidate';
 import HR from '../../pages/Main/HR';
 import HRPost from '../../pages/Main/HR/HRPost';
 import HRPostList from '../../pages/Main/HR/HRPostList';
@@ -42,6 +43,10 @@ const hrRouter = [
       {
         path: 'finduser',
         Component: HrFindUser,
+      },
+      {
+        path: 'finduser/detailCandidate',
+        Component: DetailCandidate,
       },
     ],
   },

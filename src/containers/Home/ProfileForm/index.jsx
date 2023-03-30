@@ -151,9 +151,7 @@ const ProfileForm = ({ profile: user }) => {
               },
               address: data.address,
             },
-            jobPositionDTOs: [{ id: others.jobPositionSimpleDTOs[0].id }],
             desiredJob: others?.desiredJob,
-            workProvinceDTO: { id: others.workProvinceDTO?.id },
             letter: others?.letter,
             universityDTO: { id: data.school },
           }),
@@ -195,7 +193,7 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
-    console.log('🚀 ~ file: index.jsx:198 ~ onSubmitJobForm ~ data:', data);
+    console.log('🚀 ~ file: index.jsx:198 ~ onSubmitJobForm ~ data:', data.cv);
     const userPost = {
       userStorage,
       role,
@@ -461,7 +459,7 @@ const ProfileForm = ({ profile: user }) => {
             <div className='profile-form__content-item'>
               <CustomInput
                 register={register2}
-                setValue={setValue}
+                setValue={setValue2}
                 id='desiredJob'
                 label={t('desiredJob')}
                 className='profile-form__input'
@@ -474,12 +472,12 @@ const ProfileForm = ({ profile: user }) => {
             </div>
             <div className='profile-form__content-item'>
               <SelectCustom
-                setValue={setValue}
+                setValue={setValue2}
                 id='jobPosition'
                 register={register2}
                 label={t('jobPosition')}
                 options={jobPosition}
-                defaultValue={others.jobPositionDTOs[0].id}
+                defaultValue={others?.jobPositionDTOs[0]?.id || ''}
                 placeholder={t('placeholder')}
               >
                 {errors2.jobPosition?.message}
@@ -487,12 +485,12 @@ const ProfileForm = ({ profile: user }) => {
             </div>
             <div className='profile-form__content-item'>
               <SelectCustom
-                setValue={setValue}
+                setValue={setValue2}
                 id='major'
                 register={register2}
                 label={t('major')}
                 options={majorList}
-                defaultValue={others.majorDTOs[0].id}
+                defaultValue={others?.majorDTOs[0]?.id || ''}
                 placeholder={t('placeholder')}
               >
                 {errors2.major?.message}
@@ -506,19 +504,19 @@ const ProfileForm = ({ profile: user }) => {
                 placeholder={t('placeholder')}
                 label={t('jobType')}
                 onChange={handleSelectChange}
-                defaultValue={others.jobTypeDTOs[0].id}
+                defaultValue={others?.jobTypeDTOs[0]?.id || ''}
               >
                 {errors2.jobType?.message}
               </SelectMulti>
             </div>
             <div className='profile-form__content-item'>
               <SelectCustom
-                setValue={setValue}
+                setValue={setValue2}
                 id='workLocation'
                 register={register2}
                 label={t('workLocation')}
                 options={provinceList}
-                defaultValue={others.workProvinceDTO.id}
+                defaultValue={others?.workProvinceDTO?.id || ''}
                 placeholder={t('placeholder')}
               >
                 {errors2.workLocation?.message}
@@ -527,11 +525,11 @@ const ProfileForm = ({ profile: user }) => {
             <div className='profile-form__content-item'>
               <InputFile
                 label='CV đính kèm'
-                setValue={setValue}
+                setValue={setValue2}
                 register={register2}
                 id='cv'
                 requirementField={true}
-                format='cv'
+                format='pdf'
               />
             </div>
             <div className='profile-form__content-item'>
