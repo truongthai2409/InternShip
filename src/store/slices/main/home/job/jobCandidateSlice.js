@@ -59,7 +59,7 @@ export const addJobCare = createAsyncThunk(
   'jobCadidateSlice/addCareJob',
   async (args) => {
     return await axios
-      .post(`${BASEURL}/api/candidate/job-care`, args[0], {
+      .post(`${BASEURL}/api/candidate-job-care`, args[0], {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + args[1],
@@ -82,7 +82,7 @@ export const deleteJobCare = createAsyncThunk(
       },
     };
     return await axios
-      .delete(`${BASEURL}/api/candidate/job-care/${args[0].id}`, header)
+      .delete(`${BASEURL}/api/candidate-job-care/${args[0].id}`, header)
       .then((res) => {
         return res.data;
       })

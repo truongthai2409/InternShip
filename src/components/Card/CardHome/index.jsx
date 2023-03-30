@@ -15,7 +15,10 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import Modal from 'src/components/shared/Modal';
 
 const CardHome = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
+  const currenUrl = window.location.href.split('/').slice(-1).pop();
+
   const [isMarkLength, setIsMarkLength] = useState();
 
   const { jobCare, jobApplyList } = useSelector(
@@ -229,12 +232,25 @@ const CardHome = (props) => {
               </span>
             </div>
             <div className='cardHome__col2-End-2'>
-              <WatchLaterOutlinedIcon
-                style={{ fontSize: `${props.fontSize + 2}px` }}
-              />
-              <p style={{ fontSize: `${props.fontSize}px` }}>
-                {`${props.time[0]} - ${props.time[1]}`}
-              </p>
+              {currenUrl === 'view-list-apply' ? (
+                <>
+                  <WatchLaterOutlinedIcon
+                    style={{ fontSize: `${props.fontSize + 2}px` }}
+                  />
+                  <p style={{ fontSize: `${props.fontSize}px` }}>
+                    {props.appliedDate}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <WatchLaterOutlinedIcon
+                    style={{ fontSize: `${props.fontSize + 2}px` }}
+                  />
+                  <p style={{ fontSize: `${props.fontSize}px` }}>
+                    {`${props.time[0]} - ${props.time[1]}`}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         )}

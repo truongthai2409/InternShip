@@ -4,8 +4,8 @@ export const HEADER_FOOTER_VI = {
   registerTL: 'Đăng ký',
 
   // Header Candidate
-  appliedJobTL: 'Công việc đã ứng tuyển',
-  savedJobsTL: 'Công việc đã quan tâm',
+  appliedJobTL: 'Việc làm đã ứng tuyển',
+  savedJobsTL: 'Việc làm đã lưu',
 
   // Header HR
   postAJobTL: 'Đăng tuyển',

@@ -9,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 const listWorkingFormat = [
-  { name: 'Fulltime', id: 1 },
-  { name: 'Parttime', id: 2 },
+  { name: 'Full time', id: 1 },
+  { name: 'Part time', id: 2 },
   { name: 'Remote', id: 3 },
 ];
 

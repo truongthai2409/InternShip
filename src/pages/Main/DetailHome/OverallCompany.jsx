@@ -10,6 +10,7 @@ import { indexFilterChange } from 'src/store/slices/main/home/filter/filterSlice
 import { getDemandList } from 'src/store/slices/main/home/demand/demandSlice';
 import { getRelatedJobByCompanyIdThunk } from 'src/store/action/job/jobAction';
 const OverallCompany = (props) => {
+  console.log(props);
   const { jobPage } = useSelector((state) => state.filter);
   function reducer(state = initialState, action) {
     switch (action.type) {
@@ -90,7 +91,7 @@ const OverallCompany = (props) => {
       <div className='detailInfoHome'>
         <div className='detailInfoHome__left'>
           <div className='detailInfoHome__left__info'>
-            <h2>Giới thiệu về {props?.detail?.companyDTO?.name}</h2>
+            <h2>Giới thiệu về {props?.company?.name}</h2>
             {props.company?.description.split('\n').map((item) => {
               return <p>{item}</p>;
             })}

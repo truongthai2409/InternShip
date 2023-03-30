@@ -49,6 +49,7 @@ const ListApply = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
+  console.log(jobs);
   return (
     <>
       <div className='apply__list--container'>
@@ -71,7 +72,7 @@ const ListApply = () => {
                 <ListCardJobHome
                   hiddent={true}
                   jobList={jobs?.map((item) => {
-                    return item.jobDTO;
+                    return item;
                   })}
                   cv={jobs?.map((item) => {
                     return item.cv;

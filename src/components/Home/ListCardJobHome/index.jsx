@@ -54,21 +54,23 @@ const ListCardJobHome = ({
               hiddent={hiddent}
               page={page}
               positionValue={positionValue}
-              id={job?.id || job?.jobCare?.id || job?.id}
+              id={job?.jobDTO?.id || job?.id || job?.jobCare?.id || job?.id}
               active={indexCardActive}
               index={index}
               key={job?.id || index}
               title={
-                job?.name ? job?.name : job?.jobApp?.name || job?.jobCare?.name
+                job?.name
+                  ? job?.name
+                  : job?.jobApp?.name || job?.jobCare?.name || job?.jobDTO?.name
               }
               fontSize={13}
               nameCompany={
-                job?.hrDTO?.companyDTO?.name ||
-                job?.partner?.universityDTO.name ||
-                job?.jobApp?.company?.name ||
-                job?.jobApp?.hr?.company?.name ||
-                job?.jobCare?.hr?.company?.name ||
-                job?.universityDTO?.name
+                job?.companyName || job?.jobDTO.companyName
+                // job?.partner?.universityDTO.name ||
+                // job?.jobApp?.company?.name ||
+                // job?.jobApp?.hr?.company?.name ||
+                // job?.jobCare?.hr?.company?.name ||
+                // job?.universityDTO?.name
               }
               idCompany={
                 job?.hrDTO?.companyDTO?.id ||
@@ -91,12 +93,14 @@ const ListCardJobHome = ({
                 job?.universityDTO?.locations[0]?.districtDTO?.provinceDTO
                   ?.name ||
                 job?.jobApp?.locationDTO?.districtDTO?.provinceDTO?.name ||
-                job?.jobCare?.locationDTO?.districtDTO?.provinceDTO?.name
+                job?.jobCare?.locationDTO?.districtDTO?.provinceDTO?.name ||
+                job?.jobDTO?.locationDTO?.districtDTO?.provinceDTO?.name
               }
               amount={
                 job?.amount ||
                 job?.jobApp?.amount ||
                 job?.jobCare?.amount ||
+                job?.jobDTO?.amount ||
                 'Không có'
               }
               demandPartner={true}
@@ -107,6 +111,7 @@ const ListCardJobHome = ({
               locationPath={location.pathname}
               reload={reload}
               viewCV={viewCV}
+              appliedDate={job.appliedDate}
             />
           ))
         ) : (
