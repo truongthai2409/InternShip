@@ -9,7 +9,7 @@ export default function Login() {
   const { user, role } = useSelector((state) => state.profile);
   const { t } = useTranslation('login');
 
-  if (role) {
+  if (role && user.statusDTO.name != 'Not available') {
     return (
       <div className='login--already'>
         <div

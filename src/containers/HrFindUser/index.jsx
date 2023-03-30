@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Component from './Component';
-import SearchHR from 'src/pages/Main/HR/SearchHR';
+import SearchHR from 'src/pages/Main/NewHR/HRSearch/SearchHR';
 
 import { userCandidateRemainingSelector } from 'src/store/slices/main/candidate/user/userCandidateRemaining';
 import './styles.scss';

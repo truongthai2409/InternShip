@@ -23,7 +23,8 @@ const profileSlice = createSlice({
       state.role = payload?.userDetailsDTO?.roleDTO?.name;
     });
     builder.addCase(updateUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
+      state.others = payload;
+      state.user = payload?.userDetailsDTO;
       toast.success('Chỉnh sửa thành công', {
         position: 'top-right',
         autoClose: 3000,
@@ -72,7 +73,7 @@ export const getUserById = createAsyncThunk(
     switch (HASHTOKEN()) {
       case 'Role_HR':
         return await axios
-          .get(`${baseURL}/api/hr/${args.ids}`, header)
+          .get(`${baseURL}/api/hr/user/${args.ids}`, header)
           .then((response) => {
             return response.data;
           })

@@ -10,14 +10,10 @@ const candidate = {
       },
     });
   },
-  jobStatus: (data) => {
-    const url = `/api/candidate/job-status/`;
+  jobStatus: (candidateId, status) => {
+    const url = `/api/candidate/job-status/${candidateId}?status=${status}`;
 
-    return internshipTransport.put(url, data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    return internshipTransport.put(url);
   },
 };
 

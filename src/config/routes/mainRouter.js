@@ -15,6 +15,7 @@ import DetailHome from '../../pages/Main/DetailHome';
 import ResetPassword from 'src/pages/Authenticate/ResetPassword/ResetPassword';
 import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
 import AddJob from 'src/pages/Main/NewHR/AddJob/AddJob';
+import ActiveAccount from 'src/pages/ActiveAccount/ActiveAccount';
 const mainRouter = [
   {
     path: '/',
@@ -67,6 +68,10 @@ const mainRouter = [
       {
         path: 'demoHR/add',
         Component: AddJob,
+      },
+      {
+        path: 'api/r2s/candidate/active',
+        Component: ActiveAccount,
       },
     ],
   },

@@ -39,6 +39,10 @@ export default function SelectCustom({
   const handleChangeLocation = (id) => {
     dispatch(action(id));
   };
+  const [selectedOption, setSelectedOption] = React.useState('');
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   return (
     <>
@@ -61,7 +65,7 @@ export default function SelectCustom({
             }
             // value={defaultValue}
             {...register(id)}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={handleChange}
           >
             <MenuItem value={''}>
               <p className='select-placeholder'>{placeholder}</p>

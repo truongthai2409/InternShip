@@ -8,7 +8,7 @@ import InputFile from 'src/components/shared/InputFile';
 import { applyJobThunk } from 'src/store/action/candidate/candidateAction';
 import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
 
-const FormModal = ({ setOpen, jobId }) => {
+const FormModal = ({ setOpen, jobId, setIsApply }) => {
   const { user } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const {
@@ -27,10 +27,10 @@ const FormModal = ({ setOpen, jobId }) => {
 
   const onSubmit = (data) => {
     const formSubmit = {
-      apply: JSON.stringify({
+      candidateApplication: JSON.stringify({
         jobDTO: { id: jobId },
+        // candidate id
         candidateDTO: { id: user.id },
-        createdDate: new Date().toISOString(),
         referenceLetter: data.letter,
         email: data.email,
         phone: data.phone,
@@ -40,6 +40,7 @@ const FormModal = ({ setOpen, jobId }) => {
     };
 
     dispatch(applyJobThunk(formSubmit)).then((res) => {
+      setIsApply(true);
       toast.success('Nộp CV thành công', {
         position: 'top-right',
         autoClose: 3000,

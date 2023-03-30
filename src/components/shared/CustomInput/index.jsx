@@ -22,6 +22,7 @@ const CustomInput = ({
   setValue,
   subtitle,
   width,
+  defaultValue,
 }) => {
   const [isHide, setIsHide] = useState(false);
 
@@ -31,8 +32,9 @@ const CustomInput = ({
 
   useEffect(() => {
     if (check) {
-      setValue(id, null);
+      setValue(id, defaultValue);
     }
+    console.log('🚀 ~ file: index.jsx:36 ~ useEffect ~ id:', id);
   }, [check]);
 
   const isErrorMessage = (children) => {
@@ -77,6 +79,7 @@ const CustomInput = ({
           placeholder={placeholder}
           disabled={check}
           {...register(id)}
+          defaultValue={defaultValue}
         />
         {!check && (
           <p className='custom-input__error' id={id}>
