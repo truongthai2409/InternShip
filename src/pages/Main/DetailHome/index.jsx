@@ -144,7 +144,7 @@ const DetailHome = () => {
           style: { color: '#00B074', backgroundColor: '#DEF2ED' },
         });
       } else {
-        if (user?.role?.name === 'Role_Candidate') {
+        if (user?.roleDTO?.name === 'Role_Candidate') {
           const delJobCare = {
             id: idSave,
             token: userStorage?.token,
@@ -274,7 +274,7 @@ const DetailHome = () => {
         modalTitle={<HeaderForm name={detailJob?.name} />}
         open={open}
         setOpen={setOpen}
-        children={<FormModal setOpen={setOpen} jobId={id} />}
+        children={<FormModal setOpen={setOpen} jobId={id} setIsApply = {setIsApply} />}
       />
 
       <Modal

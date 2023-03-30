@@ -35,7 +35,7 @@ export default function HeaderWithCandidate() {
               path === 'candidate' ? 'active' : ''
             } header__hr-post`}
           >
-            <span className='header__hr-post-post'>Tìm công việc</span>
+            <span className='header__hr-post-post'>Tìm việc làm</span>
           </Link>
           <Link
             to='/candidate/view-list-apply'

@@ -72,7 +72,7 @@ const mainRouter = [
         Component: AddJob,
       },
       {
-        path: 'active',
+        path: 'api/r2s/candidate/active',
         Component: ActiveAccount,
       },
       {

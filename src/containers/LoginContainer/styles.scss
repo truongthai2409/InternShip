@@ -20,7 +20,6 @@
     padding: 0 30px;
     &--line {
       flex: 1;
-      // width: 100px;
       height: 1px;
       background-color: $color-gray-7;
     }
@@ -35,21 +34,8 @@
     font-size: $fs-16;
     font-weight: $fw-bold-1;
     text-transform: uppercase;
-    margin: 20px 0;
+    margin: 5px 0;
   }
-  // &__footer {
-  //   margin: 40px auto 20px;
-  //   p {
-  //     font-size: $fs-13;
-  //     color: $color-black-0;
-  //     margin-top: 12px;
-  //   }
-  //   a {
-  //     font-size: $fs-13;
-  //     color: $primary-color;
-  //     text-decoration: underline;
-  //   }
-  // }
 }
 .register-container__footerRegister {
   padding-top: 30px;

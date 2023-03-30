@@ -151,7 +151,11 @@ const ProfileForm = ({ profile: user }) => {
               },
               address: data.address,
             },
-            jobPositionDTOs: [{ id: others.jobPositionSimpleDTOs[0].id }],
+            jobPositionDTOs: [
+              {
+                id: others.jobPositionDTOs[0]?.id,
+              },
+            ],
             desiredJob: others?.desiredJob,
             workProvinceDTO: { id: others.workProvinceDTO?.id },
             letter: others?.letter,
