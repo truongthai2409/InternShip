@@ -195,6 +195,7 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
+    console.log('🚀 ~ file: index.jsx:198 ~ onSubmitJobForm ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -240,6 +241,10 @@ const ProfileForm = ({ profile: user }) => {
         fileAvatar: user?.avatar,
         fileCV: data.cv,
       };
+      console.log(
+        '🚀 ~ file: index.jsx:244 ~ onSubmitJobForm ~ profileData:',
+        profileData
+      );
 
       dispatch(updateUser([userPost, profileData])).then(
         setShowInput(!showInput),
@@ -474,7 +479,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register2}
                 label={t('jobPosition')}
                 options={jobPosition}
-                defaultValue={others.jobPositionSimpleDTOs[0].id}
+                defaultValue={others.jobPositionDTOs[0].id}
                 placeholder={t('placeholder')}
               >
                 {errors2.jobPosition?.message}

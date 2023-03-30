@@ -11,6 +11,7 @@ import './styles.scss';
 
 const InfoJob = (props) => {
   const { user, others } = useSelector((state) => state.profile);
+  console.log('🚀 ~ file: InfoJob.jsx:14 ~ InfoJob ~ others:', others);
   const { t } = useTranslation('userInfo');
   const [open, setOpen] = useState(false);
   const [numPages, setNumPages] = useState(null);
@@ -78,7 +79,7 @@ const InfoJob = (props) => {
           </Typography>
           <span className='profile-detail-value'>
             {others &&
-              others?.jobPositionSimpleDTOs?.map((position) => {
+              others?.jobPositionDTOs?.map((position) => {
                 return (
                   <span>
                     {position.name ? position.name : '(chưa có dữ liệu)'}
