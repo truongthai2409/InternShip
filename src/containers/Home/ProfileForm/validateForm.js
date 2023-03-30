@@ -56,6 +56,7 @@ const regexName = (str) => {
 export const schema = yup.object({
   avatar: yup
     .mixed()
+    .required('* Bạn phải chọn hình ảnh')
     .test(
       'type',
       '* Chỉ hỗ trợ định dạng: jpeg, jpg, png, gif, bmp',
