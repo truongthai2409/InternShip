@@ -27,10 +27,10 @@ const FormModal = ({ setOpen, jobId }) => {
 
   const onSubmit = (data) => {
     const formSubmit = {
-      apply: JSON.stringify({
+      candidateApplication: JSON.stringify({
         jobDTO: { id: jobId },
+        // candidate id 
         candidateDTO: { id: user.id },
-        createdDate: new Date().toISOString(),
         referenceLetter: data.letter,
         email: data.email,
         phone: data.phone,
