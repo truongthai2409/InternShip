@@ -16,7 +16,7 @@ const TitleButton = () => {
 const DemoHR = () => {
   return (
     <div className='statistic_total'>
-      <h2>Thống kê tin</h2>
+      <h2 className='statistic_total-h2'>Thống kê tin</h2>
       <div className='statistic_multiple'>
         <div className='statistic_multiple__left'>
           <Statistical number={30} title={'Tổng số bài đăng'} />
@@ -33,7 +33,7 @@ const DemoHR = () => {
           className={'statistic_multiple__button'}
         ></Button>
       </div>      
-      <h2>Danh sách tuyển dụng</h2>
+      <h2 className='statistic_total-h2'>Danh sách tuyển dụng</h2>
       <Table />
     </div>
   );
