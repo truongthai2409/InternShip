@@ -74,60 +74,6 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
         onSubmit={handleSubmit(onSubmit)}
         encType='multipart/form-data'
       >
-        {/* <div className='formApply__modal__input'>
-          <div>
-            <CustomInput
-              label='Tên'
-              id='firstName'
-              type='text'
-              name='firstName'
-              placeholder='Tên của bạn...'
-              register={register}
-              height='40px'
-              width='310px'
-            ></CustomInput>
-
-            <CustomInput
-              label='Email'
-              id='email'
-              type='email'
-              name='email'
-              placeholder='Email của bạn'
-              register={register}
-              height='40px'
-              width='310px'
-            >
-              {errors.confirmPassword?.message}
-            </CustomInput>
-          </div>
-
-          <div>
-            <CustomInput
-              label='Họ và tên lót'
-              id='lastName'
-              type='text'
-              name='lastName'
-              placeholder='Họ và tên lót của bạn... '
-              register={register}
-              height='40px'
-              width='310px'
-            >
-              {errors.confirmPassword?.message}
-            </CustomInput>
-            <CustomInput
-              label='Số điện thoại'
-              id='phone'
-              type='phone'
-              name='phone'
-              placeholder='Vui lòng nhập số điện thoại của bạn ...'
-              register={register}
-              height='40px'
-              width='310px'
-            >
-              {errors.confirmPassword?.message}
-            </CustomInput>
-          </div>
-        </div> */}
         <div>
           <InputFile
             label='CV'

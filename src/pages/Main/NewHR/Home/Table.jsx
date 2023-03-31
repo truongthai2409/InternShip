@@ -5,12 +5,22 @@ import Action from './Action';
 
 const Name = ({ name, createdAt, updatedAt, location }) => {
   return (
-    <div>
+    <div className='tableHr__post'>
       <h2>{name}</h2>
       <p>Tạo lúc: {createdAt}</p>
       <p>Cập nhật lúc: {updatedAt}</p>
       <p>Địa điểm làm việc: {location}</p>
       <p>Xem danh sách ứng tuyển</p>
+    </div>
+  );
+};
+
+const Quantity = ({ applyNumber, viewNumber }) => {
+  return (
+    <div className='tableHr__quantity'>
+      <p className='tableHr__quantity-applyNumber'>{applyNumber}</p>
+      <p style={{height:'30px'}}>/</p>
+      <p className='tableHr__quantity-viewNumber'>{viewNumber}</p>
     </div>
   );
 };
@@ -27,6 +37,8 @@ const Table = () => {
       personName: 'John',
       idHR: '1',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '2',
@@ -37,6 +49,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '3',
@@ -47,6 +61,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '4',
@@ -57,6 +73,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '5',
@@ -67,6 +85,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '6',
@@ -77,6 +97,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '7',
@@ -87,6 +109,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '9',
@@ -97,6 +121,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '10',
@@ -107,6 +133,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '11',
@@ -117,6 +145,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
   ];
 
@@ -162,6 +192,14 @@ const Table = () => {
       width: 190,
       sortable: false,
       height: 70,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: (params) => {
+        const { row } = params;
+        return (
+          <Quantity applyNumber={row.applyNumber} viewNumber={row.viewNumber} />
+        );
+      },
     },
     {
       field: 'personName',
