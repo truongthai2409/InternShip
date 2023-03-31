@@ -14,7 +14,7 @@
 .header__hr {
   background-color: $primary-color-1;
   display: flex;
-
+  gap: 20px;
   &-item {
     display: flex;
     align-items: center;
@@ -39,9 +39,7 @@
   &-post {
     display: flex;
     align-items: center;
-    margin-right: 22px;
     color: black;
-    margin-bottom: 10px !important;
 
     &.active {
       color: $primary-color !important;
@@ -55,7 +53,6 @@
     }
     &-post {
       display: flex;
-      margin-left: 10px;
       font-size: $fs-14;
       align-items: center;
     }

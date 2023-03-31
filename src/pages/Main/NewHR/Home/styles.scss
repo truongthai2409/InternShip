@@ -48,6 +48,14 @@
 .MuiDataGrid-columnHeaders {
   background-color: #ecf8ee;
 }
+.css-imf0nl-MuiDataGrid-root
+  .MuiDataGrid-row:not(.MuiDataGrid-row--dynamicHeight)
+  > .MuiDataGrid-cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.css-imf0nl-MuiDataGrid-root .MuiDataGrid-columnHeader {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
 
 .tableHr {
   &__post {
