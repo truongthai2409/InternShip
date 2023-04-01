@@ -4,6 +4,7 @@ import './responsive.scss';
 import './styles.scss';
 import { useState } from 'react';
 import MenuDrop from './MenuDrop';
+import { useLocation } from 'react-router-dom';
 
 const HeaderWithHR = () => {
   const [manageMenu, setmanageMenu] = useState(null);
@@ -33,6 +34,9 @@ const HeaderWithHR = () => {
     setcandidateMenu(null);
   };
 
+  const location = useLocation();
+  const path =
+    location.pathname.split('/')[location.pathname.split('/').length - 1];
   return (
     <div className='header__hr'>
       <div className='header__hr-item'>
@@ -44,6 +48,11 @@ const HeaderWithHR = () => {
           aria-haspopup='true'
           aria-expanded={openManage ? 'true' : undefined}
           style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'hr' || path == 'addPost' || path == 'managePost'
+              ? 'active'
+              : ''
+          }`}
         >
           Quản lý việc làm
         </span>
@@ -57,6 +66,11 @@ const HeaderWithHR = () => {
           aria-haspopup='true'
           aria-expanded={openIntern ? 'true' : undefined}
           style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'searchInternship' || path == 'saveInternship'
+              ? 'active'
+              : ''
+          }`}
         >
           Tìm kiếm đợt thực tập
         </span>
@@ -70,6 +84,9 @@ const HeaderWithHR = () => {
           aria-haspopup='true'
           aria-expanded={openCandidate ? 'true' : undefined}
           style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'searchCandidate' || path == 'saveCandidate' ? 'active' : ''
+          }`}
         >
           Tìm kiếm ứng viên
         </span>

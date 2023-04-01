@@ -2,40 +2,63 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import AddCardIcon from '@mui/icons-material/AddCard';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import { Link } from 'react-router-dom';
 
 const MenuItemCustomize = ({ id, onClick }) => {
   if (id == 'manage-menu') {
     return (
       <>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Đăng tin tuyển dụng
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Quản lý bài đăng
-        </MenuItem>
+        <Link to='/hr/addPost'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <AddCardIcon sx={{ color: '#00B074' }} />
+            <p>Đăng tin tuyển dụng</p>
+          </MenuItem>
+        </Link>
+        <Link to='/hr/managePost'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <ListAltIcon sx={{ color: '#00B074' }} />
+            <p>Quản lý bài đăng</p>
+          </MenuItem>
+        </Link>
       </>
     );
   } else if (id == 'intern-menu') {
     return (
       <>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Tìm các đợt thực tập
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Đợt thực tập đã lưu
-        </MenuItem>
+        <Link to='/hr/searchInternship'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <AddCardIcon sx={{ color: '#00B074' }} />
+            <p>Tìm các đợt thực tập</p>
+          </MenuItem>
+        </Link>
+        <Link to='/hr/saveInternship'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <CardGiftcardIcon sx={{ color: '#00B074' }} />
+            <p>Đợt thực tập đã lưu</p>
+          </MenuItem>
+        </Link>
       </>
     );
-  }
-  else if (id == 'candidate-menu'){
+  } else if (id == 'candidate-menu') {
     return (
       <>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Tìm kiếm ứng viên
-        </MenuItem>
-        <MenuItem onClick={onClick}>
-          <Avatar /> Hồ sơ ứng viên đã lưu
-        </MenuItem>
+        <Link to='/hr/searchCandidate'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <PersonSearchIcon sx={{ color: '#00B074' }} />
+            <p>Tìm kiếm ứng viên</p>
+          </MenuItem>
+        </Link>
+        <Link to='/hr/saveCandidate'>
+          <MenuItem onClick={onClick} className='menu_item_customize'>
+            <SupervisedUserCircleIcon sx={{ color: '#00B074' }} />
+            <p>Hồ sơ ứng viên đã lưu</p>
+          </MenuItem>
+        </Link>
       </>
     );
   }
