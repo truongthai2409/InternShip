@@ -5,12 +5,22 @@ import Action from './Action';
 
 const Name = ({ name, createdAt, updatedAt, location }) => {
   return (
-    <div>
+    <div className='tableHr__post'>
       <h2>{name}</h2>
       <p>Tạo lúc: {createdAt}</p>
       <p>Cập nhật lúc: {updatedAt}</p>
       <p>Địa điểm làm việc: {location}</p>
       <p>Xem danh sách ứng tuyển</p>
+    </div>
+  );
+};
+
+const Quantity = ({ applyNumber, viewNumber }) => {
+  return (
+    <div className='tableHr__quantity'>
+      <p className='tableHr__quantity-applyNumber'>{applyNumber}</p>
+      <p style={{height:'30px'}}>/</p>
+      <p className='tableHr__quantity-viewNumber'>{viewNumber}</p>
     </div>
   );
 };
@@ -27,6 +37,8 @@ const Table = () => {
       personName: 'John',
       idHR: '1',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '2',
@@ -37,6 +49,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '3',
@@ -47,6 +61,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '4',
@@ -57,6 +73,8 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
     {
       id: '5',
@@ -67,57 +85,69 @@ const Table = () => {
       deadline: '01/03/2023',
       personName: 'John',
       status: 'Open',
+      applyNumber: 1,
+      viewNumber: 10,
     },
-    {
-      id: '6',
-      name: 'Thực tập sinh Reactjs6',
-      createdAt: '01/03/2023',
-      updatedAt: '01/03/2023',
-      location: 'HCM',
-      deadline: '01/03/2023',
-      personName: 'John',
-      status: 'Open',
-    },
-    {
-      id: '7',
-      name: 'Thực tập sinh Reactjs7',
-      createdAt: '01/03/2023',
-      updatedAt: '01/03/2023',
-      location: 'HCM',
-      deadline: '01/03/2023',
-      personName: 'John',
-      status: 'Open',
-    },
-    {
-      id: '9',
-      name: 'Thực tập sinh Reactjs8',
-      createdAt: '01/03/2023',
-      updatedAt: '01/03/2023',
-      location: 'HCM',
-      deadline: '01/03/2023',
-      personName: 'John',
-      status: 'Open',
-    },
-    {
-      id: '10',
-      name: 'Thực tập sinh Reactjs9',
-      createdAt: '01/03/2023',
-      updatedAt: '01/03/2023',
-      location: 'HCM',
-      deadline: '01/03/2023',
-      personName: 'John',
-      status: 'Open',
-    },
-    {
-      id: '11',
-      name: 'Thực tập sinh Reactjs10',
-      createdAt: '01/03/2023',
-      updatedAt: '01/03/2023',
-      location: 'HCM',
-      deadline: '01/03/2023',
-      personName: 'John',
-      status: 'Open',
-    },
+    // {
+    //   id: '6',
+    //   name: 'Thực tập sinh Reactjs6',
+    //   createdAt: '01/03/2023',
+    //   updatedAt: '01/03/2023',
+    //   location: 'HCM',
+    //   deadline: '01/03/2023',
+    //   personName: 'John',
+    //   status: 'Open',
+    //   applyNumber: 1,
+    //   viewNumber: 10,
+    // },
+    // {
+    //   id: '7',
+    //   name: 'Thực tập sinh Reactjs7',
+    //   createdAt: '01/03/2023',
+    //   updatedAt: '01/03/2023',
+    //   location: 'HCM',
+    //   deadline: '01/03/2023',
+    //   personName: 'John',
+    //   status: 'Open',
+    //   applyNumber: 1,
+    //   viewNumber: 10,
+    // },
+    // {
+    //   id: '9',
+    //   name: 'Thực tập sinh Reactjs8',
+    //   createdAt: '01/03/2023',
+    //   updatedAt: '01/03/2023',
+    //   location: 'HCM',
+    //   deadline: '01/03/2023',
+    //   personName: 'John',
+    //   status: 'Open',
+    //   applyNumber: 1,
+    //   viewNumber: 10,
+    // },
+    // {
+    //   id: '10',
+    //   name: 'Thực tập sinh Reactjs9',
+    //   createdAt: '01/03/2023',
+    //   updatedAt: '01/03/2023',
+    //   location: 'HCM',
+    //   deadline: '01/03/2023',
+    //   personName: 'John',
+    //   status: 'Open',
+    //   applyNumber: 1,
+    //   viewNumber: 10,
+    // },
+    // {
+    //   id: '11',
+    //   name: 'Thực tập sinh Reactjs10',
+    //   createdAt: '01/03/2023',
+    //   updatedAt: '01/03/2023',
+    //   location: 'HCM',
+    //   deadline: '01/03/2023',
+    //   personName: 'John',
+    //   status: 'Open',
+    //   applyNumber: 1,
+    //   viewNumber: 10,
+    // },
   ];
 
   const columns = [
@@ -153,7 +183,9 @@ const Table = () => {
       field: 'deadline',
       headerName: 'Hạn nộp',
       width: 130,
+      align: 'center',
       sortable: false,
+      headerAlign: 'center',
       height: 70,
     },
     {
@@ -162,6 +194,14 @@ const Table = () => {
       width: 190,
       sortable: false,
       height: 70,
+      align: 'center',
+      headerAlign: 'center',
+      renderCell: (params) => {
+        const { row } = params;
+        return (
+          <Quantity applyNumber={row.applyNumber} viewNumber={row.viewNumber} />
+        );
+      },
     },
     {
       field: 'personName',
@@ -169,12 +209,16 @@ const Table = () => {
       width: 160,
       sortable: false,
       height: 70,
+      headerAlign: 'center',
+      height: 70,
     },
     {
       field: 'status',
       headerName: 'Trạng thái',
       width: 130,
       sortable: false,
+      height: 70,
+      headerAlign: 'center',
       height: 70,
     },
     {
@@ -193,7 +237,8 @@ const Table = () => {
   ];
 
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    // cal 720 = 130*height(row) + height header
+    <Box sx={{ height: 720, width: '100%' }}>
       <DataGrid
         rows={list}
         columns={columns}
