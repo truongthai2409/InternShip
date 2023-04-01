@@ -1,152 +1,115 @@
-import AddCardIcon from '@mui/icons-material/AddCard';
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
-import Select from '@mui/material/Select';
-import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
-import PersonSearchIcon from '@mui/icons-material/PersonSearch';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  indexFilterChange,
-  pageFilterChange,
-} from 'src/store/slices/main/home/filter/filterSlices';
+
 import './responsive.scss';
 import './styles.scss';
+import { useState } from 'react';
+import MenuDrop from './MenuDrop';
+import { useLocation } from 'react-router-dom';
 
-const HeaderWithHR = (props) => {
-  const { t } = useTranslation('headerFooter');
-  const location = useLocation();
-  const pathUrl = location.pathname;
-  const dispatch = useDispatch();
-  const handleClick = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    dispatch(indexFilterChange(0));
-    dispatch(pageFilterChange(1));
+const HeaderWithHR = () => {
+  const [manageMenu, setmanageMenu] = useState(null);
+  const openManage = Boolean(manageMenu);
+  const handleClickManageMenu = (event) => {
+    setmanageMenu(event.currentTarget);
+  };
+  const handleCloseManageMenu = () => {
+    setmanageMenu(null);
   };
 
+  const [internMenu, setinternMenu] = useState(null);
+  const openIntern = Boolean(internMenu);
+  const handleClickInternMenu = (event) => {
+    setinternMenu(event.currentTarget);
+  };
+  const handleCloseInternMenu = () => {
+    setinternMenu(null);
+  };
+
+  const [candidateMenu, setcandidateMenu] = useState(null);
+  const openCandidate = Boolean(candidateMenu);
+  const handleClickCandidateMenu = (event) => {
+    setcandidateMenu(event.currentTarget);
+  };
+  const handleCloseCandidateMenu = () => {
+    setcandidateMenu(null);
+  };
+
+  const location = useLocation();
+  const path =
+    location.pathname.split('/')[location.pathname.split('/').length - 1];
   return (
     <div className='header__hr'>
       <div className='header__hr-item'>
-        <ManageAccountsIcon sx={{ color: '#04bf8a' }}></ManageAccountsIcon>
-        <span>Quản lý đối tác</span>
-        <Select className='header__hr-dropmenu'>
-          <Link
-            onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-            }}
-            to='/hr/post'
-            className={
-              pathUrl === '/hr/post'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <AddCardIcon sx={{ color: '#04bf8a' }}></AddCardIcon>
-            <span className='header__hr-post-post'>{t('postAJobTL')}</span>
-          </Link>
-          <Link
-            onClick={() => handleClick()}
-            to='/hr/list'
-            className={
-              pathUrl === '/hr/list'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <FormatAlignJustifyIcon
-              sx={{ color: '#04bf8a' }}
-            ></FormatAlignJustifyIcon>
-            <span className='header__hr-post-post'>{t('jobOpeningsTL')}</span>
-          </Link>
-        </Select>
+        <span
+          onClick={handleClickManageMenu}
+          size='small'
+          sx={{ ml: 2 }}
+          aria-controls={openManage ? 'manage-menu' : undefined}
+          aria-haspopup='true'
+          aria-expanded={openManage ? 'true' : undefined}
+          style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'hr' || path == 'addPost' || path == 'managePost'
+              ? 'active'
+              : ''
+          }`}
+        >
+          Quản lý việc làm
+        </span>
       </div>
       <div className='header__hr-item'>
-        <PersonSearchIcon sx={{ color: '#04bf8a' }}></PersonSearchIcon>
-        <span>{t('findCandidate')}</span>
-        <Select className='header__hr-dropmenu'>
-          <Link
-            onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-            }}
-            to='/hr/finduser'
-            className={
-              pathUrl === '/hr/finduser'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <PersonSearchIcon sx={{ color: '#04bf8a' }}></PersonSearchIcon>
-            <span className='header__hr-post-post'>{t('findCandidate')}</span>
-          </Link>
-          <Link
-            onClick={() => handleClick()}
-            to='/hr/list'
-            className={
-              pathUrl === '/hr/list'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <FormatAlignJustifyIcon
-              sx={{ color: '#04bf8a' }}
-            ></FormatAlignJustifyIcon>
-            <span className='header__hr-post-post'>{t('jobOpeningsTL')}</span>
-          </Link>
-        </Select>
+        <span
+          onClick={handleClickInternMenu}
+          size='small'
+          sx={{ ml: 2 }}
+          aria-controls={openIntern ? 'intern-menu' : undefined}
+          aria-haspopup='true'
+          aria-expanded={openIntern ? 'true' : undefined}
+          style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'searchInternship' || path == 'saveInternship'
+              ? 'active'
+              : ''
+          }`}
+        >
+          Tìm kiếm đợt thực tập
+        </span>
       </div>
       <div className='header__hr-item'>
-        <PlaylistAddCheckIcon sx={{ color: '#04bf8a' }}></PlaylistAddCheckIcon>
-        <span>Quản lý việc làm</span>
-        <Select className='header__hr-dropmenu'>
-          <Link
-            onClick={() => {
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-            }}
-            to='/hr/post'
-            className={
-              pathUrl === '/hr/post'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <AddCardIcon sx={{ color: '#04bf8a' }}></AddCardIcon>
-            <span className='header__hr-post-post'>{t('postAJobTL')}</span>
-          </Link>
-          <Link
-            onClick={() => handleClick()}
-            to='/hr/list'
-            className={
-              pathUrl === '/hr/list'
-                ? 'header__hr-post active'
-                : 'header__hr-post'
-            }
-          >
-            <FormatAlignJustifyIcon
-              sx={{ color: '#04bf8a' }}
-            ></FormatAlignJustifyIcon>
-            <span className='header__hr-post-post'>{t('jobOpeningsTL')}</span>
-          </Link>
-        </Select>
+        <span
+          onClick={handleClickCandidateMenu}
+          size='small'
+          sx={{ ml: 2 }}
+          aria-controls={openCandidate ? 'manage-menu' : undefined}
+          aria-haspopup='true'
+          aria-expanded={openCandidate ? 'true' : undefined}
+          style={{ cursor: 'pointer' }}
+          className={`${
+            path == 'searchCandidate' || path == 'saveCandidate' ? 'active' : ''
+          }`}
+        >
+          Tìm kiếm ứng viên
+        </span>
       </div>
 
-      {/* Version 2 . 🌹 Not Delete it*/}
-      {/* <Link
-      onClick={()=>{
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-      }}
-        to="candidatemanagement"
-        className={
-          pathUrl === "/hr/candidatemanagement"
-            ? "header__hr-post active"
-            : "header__hr-post"
-        }
-      >
-        <BookmarksIcon sx={{ color: "#04bf8a" }} />
-        <span className="header__hr-post-post">Ứng viên ưa thích</span>
-      </Link> */}
+      <MenuDrop
+        anchorEl={manageMenu}
+        open={openManage}
+        onClick={handleCloseManageMenu}
+        id='manage-menu'
+      />
+      <MenuDrop
+        anchorEl={internMenu}
+        open={openIntern}
+        onClick={handleCloseInternMenu}
+        id='intern-menu'
+      />
+      <MenuDrop
+        anchorEl={candidateMenu}
+        open={openCandidate}
+        onClick={handleCloseCandidateMenu}
+        id='candidate-menu'
+      />
     </div>
   );
 };

@@ -182,7 +182,7 @@ const DetailHome = () => {
 
   return (
     <div className='detailJob'>
-      <SearchResultHome />
+      {/* <SearchResultHome /> */}
       {detailJob == '' || detailCompany == '' ? (
         <></>
       ) : (
