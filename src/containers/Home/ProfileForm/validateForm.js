@@ -89,7 +89,7 @@ export const schema = yup.object({
     .max(32, 'Tối đa 32 kí tự'),
   phone: yup //
     .string()
-    // .required('* Bạn phải nhập số điện thoại')
+    .required('* Bạn phải nhập số điện thoại')
     .min(8, 'Tối thiểu 8 kí tự')
     .max(11, 'Tối đa 11 kí tự')
     .matches(PHONE_REGEX, 'Bạn đã nhập số điện thoại không đúng'),
@@ -108,11 +108,14 @@ export const schema = yup.object({
   district: yup.string().required(' * Bạn phải chọn quận/huyện'),
   address: yup.string().required(' * Bạn phải nhập địa chỉ'),
 
-  birthday: yup.date(),
+  birthday: yup.date().required(' * Bạn phải nhập ngày sinh'),
 });
 
 export const schema2 = yup.object({
-  desiredJob: yup.string().required(' * Bạn phải nhập công việc mong muốn'),
+  desiredJob: yup
+    .string()
+    .nullable()
+    .required(' * Bạn phải nhập công việc mong muốn'),
   jobPosition: yup.string().required(' * Bạn phải chọn vị trí làm việc'),
   major: yup.string().required(' * Bạn phải chọn chuyên ngành'),
   jobType: yup

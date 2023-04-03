@@ -15,6 +15,7 @@ import {
 } from 'src/store/slices/main/home/filter/filterSlices';
 import './responsive.scss';
 import './styles.scss';
+import { useState } from 'react';
 
 const HeaderWithHR = (props) => {
   const { t } = useTranslation('headerFooter');
@@ -66,7 +67,7 @@ const HeaderWithHR = (props) => {
       <div className='header__hr-item'>
         <PersonSearchIcon sx={{ color: '#04bf8a' }}></PersonSearchIcon>
         <span>{t('findCandidate')}</span>
-        <Select className='header__hr-dropmenu'>
+        <Select className={`header__hr-dropmenu`}>
           <Link
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
