@@ -14,12 +14,15 @@
 .header__hr {
   background-color: $primary-color-1;
   display: flex;
-
+  gap: 20px;
   &-item {
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 10px;
+    .active {
+      color: #00b074;
+    }
   }
 
   &.config {
@@ -39,9 +42,7 @@
   &-post {
     display: flex;
     align-items: center;
-    margin-right: 22px;
     color: black;
-    margin-bottom: 10px !important;
 
     &.active {
       color: $primary-color !important;
@@ -55,7 +56,6 @@
     }
     &-post {
       display: flex;
-      margin-left: 10px;
       font-size: $fs-14;
       align-items: center;
     }
@@ -85,4 +85,12 @@
 }
 .css-6hp17o-MuiList-root-MuiMenu-list {
   padding: 10px !important;
+}
+
+.menu_item_customize {
+  display: flex;
+  gap: 10px;
+  p {
+    color: black !important;
+  }
 }

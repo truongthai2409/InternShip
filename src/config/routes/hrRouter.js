@@ -2,13 +2,13 @@ import Profile from 'src/components/User/Profile';
 import Password from 'src/containers/Home/ChangePasswordForm';
 import HrFindUser from 'src/containers/HrFindUser';
 import MainLayout from 'src/Layouts/Main';
-import CandidateList from 'src/pages/Main/HR/CandidateList';
 import CandidateManagement from 'src/pages/Main/HR/CandidateManagement/CandidateManagement';
 import DemoHR from 'src/pages/Main/NewHR/Home/DemoHR';
 import DetailCandidate from 'src/pages/Main/NewHR/HRSearch/DetailCandidate';
-import HR from '../../pages/Main/HR';
-import HRPost from '../../pages/Main/HR/HRPost';
-import HRPostList from '../../pages/Main/HR/HRPostList';
+import AddJob from 'src/pages/Main/NewHR/AddJob/AddJob';
+import HRPost from 'src/pages/Main/HR/HRPost';
+import HRPostList from 'src/pages/Main/HR/HRPostList';
+import SearchHR from 'src/pages/Main/NewHR/HRSearch/SearchHR';
 const hrRouter = [
   {
     role: 'Role_HR',
@@ -24,11 +24,11 @@ const hrRouter = [
         Component: Profile,
       },
       {
-        path: 'post',
-        Component: HRPost,
+        path: 'addPost',
+        Component: AddJob,
       },
       {
-        path: 'list',
+        path: 'managePost',
         Component: HRPostList,
       },
       {
@@ -36,16 +36,11 @@ const hrRouter = [
         Component: Password,
       },
       {
-        // Version 2 🌹
-        path: 'candidatemanagement',
-        Component: CandidateManagement,
+        path: 'searchCandidate',
+        Component: SearchHR,
       },
       {
-        path: 'finduser',
-        Component: HrFindUser,
-      },
-      {
-        path: 'finduser/detailCandidate',
+        path: 'searchCandidate/detailCandidate/:keyword',
         Component: DetailCandidate,
       },
     ],
