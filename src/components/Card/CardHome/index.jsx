@@ -15,9 +15,9 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import Modal from 'src/components/shared/Modal';
 
 const CardHome = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
   const currenUrl = window.location.href.split('/').slice(-1).pop();
+  const domain = window.location.href.split('/')[0]
 
   const [isMarkLength, setIsMarkLength] = useState();
 
@@ -41,7 +41,7 @@ const CardHome = (props) => {
   const navigate = useNavigate();
   const handleNext = () => {
     if (props.reload && props.reload == true) {
-      window.open(`http://localhost:3000/detail_job/${props.id}`);
+      window.open(`${domain}/detail_job/${props.id}`);
     } else {
       navigate(`/detail_job/${props.id}`);
     }

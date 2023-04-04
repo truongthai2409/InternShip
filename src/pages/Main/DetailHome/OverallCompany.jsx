@@ -83,7 +83,7 @@ const OverallCompany = (props) => {
   const [jobRelated, setJobRelated] = useState([]);
   useEffect(() => {
     dispatch(getRelatedJobByCompanyIdThunk(props.company.id)).then((res) => {
-      setJobRelated(res?.payload?.contents);
+      setJobRelated(res?.payload);
     });
   }, []);
   return (
