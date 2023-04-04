@@ -250,15 +250,15 @@ const DetailHome = () => {
                     <Tab label='Tổng quan công ty' />
                   </Tabs>
                 </Box>
-                <TabPanel value={value} index={0}>
-                    <DetailInfo
-                      detail={detailJob}
-                      company={detailCompany}
-                      isSave={isSave}
-                      isApply={isApply}
-                      onHandle={(e) => handlePost(e)}
-                      onHandleApply={(e) => handleClick(e)}
-                    />
+                <TabPanel value={value} index={0} sx={{padding:'0px 24px'}}>
+                  <DetailInfo
+                    detail={detailJob}
+                    company={detailCompany}
+                    isSave={isSave}
+                    isApply={isApply}
+                    onHandle={(e) => handlePost(e)}
+                    onHandleApply={(e) => handleClick(e)}
+                  />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                   <OverallCompany detail={detailJob} company={detailCompany} />
