@@ -8,7 +8,7 @@ const job = {
   },
 
   getRelatedJobByCompanyId: (companyId) => {
-    const url = `/api/job/company/${companyId}`;
+    const url = `/api/job/active/company/${companyId}`;
 
     return internshipTransport.get(url);
   },
