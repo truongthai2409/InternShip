@@ -78,7 +78,7 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
         onChange={handleCheckMajor}
         checkedType={checkedType}
       />
-      {role == 'Role_HR' && (path == '/hr' || path == '/hr/finduser') ? (
+      {role == 'Role_HR' && (path == '/hr' || path == '/hr/searchCandidate') ? (
         <></>
       ) : (
         <ListCollapse

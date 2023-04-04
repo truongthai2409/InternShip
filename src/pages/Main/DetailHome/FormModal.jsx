@@ -93,7 +93,7 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
           placeholder='Thư giới thiệu..'
           register={register}
           requirementField={false}
-          width='650px'
+          width='600px'
           height='150px'
         ></CustomInput>
 

@@ -30,7 +30,7 @@ import './styles.scss';
 const limit = 5;
 const image_notFound = require('src/assets/img/notfound.png');
 
-const SearchHR = () => {
+const SearchHR = (props) => {
   const { t } = useTranslation('search');
   TabTitle(t('searchCandidate'));
   const { candidateList, totalPages, currentPage } = useSelector(
@@ -95,7 +95,15 @@ const SearchHR = () => {
   const search = (event) => {
     event.preventDefault();
     dispatch(
-      getCandidateThunk([limit, currentPage, searchValue, valueLocation])
+      getCandidateThunk([
+        currentPage,
+        limit,
+        searchValue,
+        valueLocation,
+        '',
+        '',
+        '',
+      ])
     );
   };
   const handleCheck = (value) => {};
@@ -107,7 +115,17 @@ const SearchHR = () => {
     }
   };
   useEffect(() => {
-    dispatch(getCandidateThunk([limit, currentPage]));
+    dispatch(
+      getCandidateThunk([
+        currentPage,
+        limit,
+        searchValue,
+        valueLocation,
+        '',
+        '',
+        '',
+      ])
+    );
   }, []);
 
   return (
@@ -184,8 +202,12 @@ const SearchHR = () => {
           ) : (
             <>
               {candidateList?.map((candidate, index) => {
+                console.log(
+                  '🚀 ~ file: SearchHR.jsx:205 ~ {candidateList?.map ~ candidate:',
+                  candidate
+                );
                 return (
-                  <Link to='detailCandidate'>
+                  <Link to={`detailCandidate/${props?.candidate?.id}`}>
                     <Box className='card-container' key={index}>
                       <div className='button__mark'>
                         <ButtonMark
@@ -245,9 +267,11 @@ const SearchHR = () => {
                             </div>
                             <div className='card-container__content'>
                               <div className='card-container__tagname'>
-                                <TagName title={candidate?.majorDTOs[0].name} />
                                 <TagName
-                                  title={candidate?.jobPositionDTOs[0].name}
+                                  title={candidate?.majorDTOs[0]?.name}
+                                />
+                                <TagName
+                                  title={candidate?.jobPositionDTOs[0]?.name}
                                 />
                               </div>
                               <div className='card-container__date'>

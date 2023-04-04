@@ -24,7 +24,7 @@ const DemoHR = () => {
           <Statistical number={30} title={'Tổng số bài đăng'} />
         </div>
         <Button
-          name={<TitleButton/>}
+          name={<TitleButton />}
           bwidth='270px'
           bheight='46px'
           padding='0px 0px'
@@ -32,7 +32,7 @@ const DemoHR = () => {
           fz='17px'
           className={'statistic_multiple__button'}
         ></Button>
-      </div>      
+      </div>
       <h2 className='statistic_total-h2'>Danh sách tuyển dụng</h2>
       <Table />
     </div>
