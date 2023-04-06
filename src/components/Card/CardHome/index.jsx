@@ -17,7 +17,7 @@ import Modal from 'src/components/shared/Modal';
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const currenUrl = window.location.href.split('/').slice(-1).pop();
-  const domain = window.location.href.split('/')[0]
+  const domain = window.location.href.split('/')[0];
 
   const [isMarkLength, setIsMarkLength] = useState();
 

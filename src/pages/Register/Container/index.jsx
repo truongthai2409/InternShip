@@ -32,7 +32,7 @@ export default function Container({
         (<span className='field-requirment'> * </span>)&nbsp;{' '}
         {t('requiredFieldTL')}
       </p>
-      {path == '/register/candidate' ? (
+      {path === '/register/candidate' ? (
         <>
           <div className='button-container'>
             <Button className='button-container__google'>
@@ -60,7 +60,7 @@ export default function Container({
         autoComplete='off'
         encType='multipart/form-data'
       >
-        {path == '/register/hr' ? (
+        {path === '/register/hr' ? (
           <>
             <h4 className='register__container__form--title'>
               Thông tin tài khoản

@@ -17,10 +17,7 @@ import { updateStatusRegisterForHR } from 'src/store/slices/main/register/regist
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
 import Collap from 'src/components/Collaps/Collap';
-import {
-  getDistrictList,
-  getProvinceList,
-} from 'src/store/slices/location/locationSlice';
+import { getDistrictList } from 'src/store/slices/location/locationSlice';
 
 const countryList = [
   {
