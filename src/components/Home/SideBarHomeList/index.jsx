@@ -38,7 +38,6 @@ const SideBarHomeList = ({ onChange, slideBarHome__wrapper = false }) => {
     setCheckedType(updatedList);
     onChange && onChange(updatedList);
   };
-
   const handleCheckPosition = (valueName, valueCheck) => {
     var updatedList = [...checkedType];
     if (valueCheck) {

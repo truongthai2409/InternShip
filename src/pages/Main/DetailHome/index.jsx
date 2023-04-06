@@ -250,7 +250,7 @@ const DetailHome = () => {
                     <Tab label='Tổng quan công ty' />
                   </Tabs>
                 </Box>
-                <TabPanel value={value} index={0} sx={{padding:'0px 24px'}}>
+                <TabPanel value={value} index={0} sx={{ padding: '0px 24px' }}>
                   <DetailInfo
                     detail={detailJob}
                     company={detailCompany}

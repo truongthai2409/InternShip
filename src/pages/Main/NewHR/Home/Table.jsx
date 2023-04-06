@@ -19,7 +19,7 @@ const Quantity = ({ applyNumber, viewNumber }) => {
   return (
     <div className='tableHr__quantity'>
       <p className='tableHr__quantity-applyNumber'>{applyNumber}</p>
-      <p style={{height:'30px'}}>/</p>
+      <p style={{ height: '30px' }}>/</p>
       <p className='tableHr__quantity-viewNumber'>{viewNumber}</p>
     </div>
   );

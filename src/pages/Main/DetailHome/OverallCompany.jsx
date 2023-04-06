@@ -128,7 +128,20 @@ const OverallCompany = (props) => {
                 {icon[index]}
                 <div>
                   <p>{title[index]}</p>
-                  <p>{name[index]}</p>
+                  {index == 0 ? (
+                    <a href={name[index]} style={{ color: 'black' }}>
+                      {name[index]}
+                    </a>
+                  ) : index == 1 ? (
+                    <a
+                      href={`mailto:${name[index]}`}
+                      style={{ color: 'black' }}
+                    >
+                      {name[index]}
+                    </a>
+                  ) : (
+                    <p>{name[index]}</p>
+                  )}
                 </div>
               </div>
             );
