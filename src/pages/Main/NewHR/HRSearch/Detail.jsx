@@ -51,33 +51,7 @@ const DetailInfoCandidate = (props) => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-  const renderCV = () => {
-    return (
-      <Modal
-        iconClose={true}
-        modalTitle={'View CV'}
-        open={open}
-        setOpen={setOpen}
-        children={
-          <div>
-            <Document
-              file={numberCV}
-              onLoadSuccess={onDocumentLoadSuccess}
-              wrap={false}
-            >
-              {Array.from(new Array(numPages), (el, index) => (
-                <Page
-                  key={`page_${index + 1}`}
-                  pageNumber={index + 1}
-                  wrap={false}
-                />
-              ))}
-            </Document>
-          </div>
-        }
-      />
-    );
-  };
+
   return (
     <div className='detailInfoCandidate'>
       <div className='detailInfoCandidate__left'>
