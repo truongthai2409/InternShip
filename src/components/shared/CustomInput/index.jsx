@@ -23,6 +23,7 @@ const CustomInput = ({
   subtitle,
   width,
   defaultValue,
+  checkNumber = false,
 }) => {
   const [isHide, setIsHide] = useState(false);
 
@@ -34,7 +35,6 @@ const CustomInput = ({
     if (check) {
       setValue(id, defaultValue);
     }
-    console.log('🚀 ~ file: index.jsx:36 ~ useEffect ~ id:', id);
   }, [check]);
 
   const isErrorMessage = (children) => {
@@ -74,7 +74,16 @@ const CustomInput = ({
             height: height ? height : '',
             border: border ? border : '',
           }}
-          type={type === 'password' ? (isHide ? 'text' : 'password') : type}
+          type={
+            checkNumber
+              ? 'tel'
+              : type === 'password'
+              ? isHide
+                ? 'text'
+                : 'password'
+              : type
+          }
+          pattern={checkNumber ? '[0-9]{10}' : ''}
           id={id}
           placeholder={placeholder}
           disabled={check}

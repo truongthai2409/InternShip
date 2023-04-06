@@ -10,7 +10,6 @@ import { indexFilterChange } from 'src/store/slices/main/home/filter/filterSlice
 import { getDemandList } from 'src/store/slices/main/home/demand/demandSlice';
 import { getRelatedJobByCompanyIdThunk } from 'src/store/action/job/jobAction';
 const OverallCompany = (props) => {
-  console.log(props);
   const { jobPage } = useSelector((state) => state.filter);
   function reducer(state = initialState, action) {
     switch (action.type) {

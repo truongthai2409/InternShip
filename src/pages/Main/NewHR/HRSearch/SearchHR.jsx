@@ -202,10 +202,6 @@ const SearchHR = (props) => {
           ) : (
             <>
               {candidateList?.map((candidate, index) => {
-                console.log(
-                  '🚀 ~ file: SearchHR.jsx:205 ~ {candidateList?.map ~ candidate:',
-                  candidate
-                );
                 return (
                   <Link to={`detailCandidate/${props?.candidate?.id}`}>
                     <Box className='card-container' key={index}>
