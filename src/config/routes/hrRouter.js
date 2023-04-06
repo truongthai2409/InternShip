@@ -36,8 +36,12 @@ const hrRouter = [
         Component: Password,
       },
       {
-        path: 'searchInternship',
+        path: 'searchCandidate',
         Component: SearchHR,
+      },
+      {
+        path: 'searchCandidate/detailCandidate/:keyword',
+        Component: DetailCandidate,
       },
     ],
   },

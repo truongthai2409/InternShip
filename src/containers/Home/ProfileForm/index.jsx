@@ -338,7 +338,9 @@ const ProfileForm = ({ profile: user }) => {
                     format='dd-MM-yyyy'
                   />
                 )}
-              />
+              >
+                {errors.birthday?.message}
+              </Controller>
             </div>
             <div className='profile-form__content-item'>
               <CustomInput
