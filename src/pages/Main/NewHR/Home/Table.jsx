@@ -210,7 +210,6 @@ const Table = () => {
       sortable: false,
       height: 70,
       headerAlign: 'center',
-      height: 70,
     },
     {
       field: 'status',
@@ -219,7 +218,6 @@ const Table = () => {
       sortable: false,
       height: 70,
       headerAlign: 'center',
-      height: 70,
     },
     {
       field: 'action',
