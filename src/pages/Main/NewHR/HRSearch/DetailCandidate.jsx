@@ -1,5 +1,5 @@
-import { Box, Tab, Tabs, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import React, { useState } from 'react';
 import SearchResultHome from 'src/components/Home/SearchResultHome';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Button from 'src/components/shared/Button';
