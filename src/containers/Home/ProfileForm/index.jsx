@@ -192,7 +192,6 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
-    console.log('🚀 ~ file: index.jsx:198 ~ onSubmitJobForm ~ data:', data.cv);
     const userPost = {
       userStorage,
       role,
@@ -238,10 +237,6 @@ const ProfileForm = ({ profile: user }) => {
         fileAvatar: user?.avatar,
         fileCV: data.cv,
       };
-      console.log(
-        '🚀 ~ file: index.jsx:244 ~ onSubmitJobForm ~ profileData:',
-        profileData
-      );
 
       dispatch(updateUser([userPost, profileData])).then(
         setShowInput(!showInput),
@@ -336,6 +331,7 @@ const ProfileForm = ({ profile: user }) => {
                     // value={field.value}
                     selectedDate={field.value}
                     format='dd-MM-yyyy'
+                    defaultValue={user?.birthday}
                   />
                 )}
               >
@@ -362,12 +358,7 @@ const ProfileForm = ({ profile: user }) => {
                 id='gender'
                 register={register}
                 label={t('gender')}
-                defaultValue={genderList.map((value) => {
-                  if (value.id === user?.gender) {
-                    const genderName = value.name;
-                    return genderName ? genderName : '';
-                  }
-                })}
+                defaultValue={user?.gender}
                 options={genderList}
                 placeholder={t('placeholder')}
               >
@@ -382,6 +373,7 @@ const ProfileForm = ({ profile: user }) => {
                 label={t('province')}
                 options={provinceList}
                 placeholder={t('placeholder')}
+                defaultValue={others?.locationDTO?.districtDTO?.provinceDTO?.id}
                 dispatch={dispatch}
                 action={getDistrictList}
               >
@@ -393,6 +385,7 @@ const ProfileForm = ({ profile: user }) => {
                 register={register}
                 label={t('district')}
                 options={districtList}
+                defaultValue={others?.locationDTO?.districtDTO?.id}
                 placeholder={t('placeholder')}
               >
                 {errors.district?.message}
@@ -505,7 +498,7 @@ const ProfileForm = ({ profile: user }) => {
                 placeholder={t('placeholder')}
                 label={t('jobType')}
                 onChange={handleSelectChange}
-                defaultValue={others?.jobTypeDTOs[0]?.id || ''}
+                arrDefault={others?.jobTypeDTOs || ''}
               >
                 {errors2.jobType?.message}
               </SelectMulti>

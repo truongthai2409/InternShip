@@ -2,7 +2,6 @@ import { internshipTransport } from 'src/config/http/transport';
 
 const getCandidateByHr = {
   getCandidate: (data) => {
-    console.log('🚀 ~ file: getCandidate.js:15 ~ data:', data);
     const url = `/api/candidate/job-status?no=${data[0]}&limit=${data[1]}`;
     return internshipTransport.post(url, {
       desiredJob: data[2],

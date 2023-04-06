@@ -237,6 +237,7 @@ export default function Container({
                 placeholder={t('phoneNumberTL')}
                 register={register}
                 subtitle={t('phoneNumberFormatTL')}
+                checkNumber={true}
               >
                 {err.phone?.message}
               </CustomInput>

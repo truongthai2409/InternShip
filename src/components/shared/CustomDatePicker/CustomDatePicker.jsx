@@ -12,6 +12,7 @@ function DatePickerWithLabel({
   onChange,
   selectedDate,
   format,
+  defaultValue,
   ...rest
 }) {
   return (
@@ -24,6 +25,7 @@ function DatePickerWithLabel({
         todayButton='Hôm nay'
         dateFormat={format}
         selected={selectedDate}
+        defaultValue={defaultValue}
         onChange={onChange}
         {...rest}
       />
