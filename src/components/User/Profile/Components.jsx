@@ -1,70 +1,44 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Divider, Switch, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { getAllUserCandidate } from 'src/store/slices/main/candidate/user/userCandidateSlice';
-import { updateUser } from 'src/store/slices/main/user/userSlice';
-import { schema } from './dataCV';
-import UserInfo from './UserInfo';
+
 import avatarDefault from 'src/assets/img/avatar-default.png';
 import { useTranslation } from 'react-i18next';
 import { jobStatusThunk } from 'src/store/action/candidate/candidateAction';
 
-const BASEURL = process.env.REACT_APP_API;
 const Components = ({ profile }) => {
   const dispatch = useDispatch();
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-  const [opens, setOpens] = useState(false);
-  const [checkedFind, setCheckedFind] = useState(false);
+
+  const [checkedFind, setCheckedFind] = useState(
+    localStorage.getItem('checkedFind') === 'true'
+  );
+
   const [checkedEmail, setCheckedEmail] = useState(false);
-  const [open, setOpen] = useState(false);
   const { t } = useTranslation('userInfo');
 
   const handleChangeFind = (event) => {
     const finded = event.target.checked;
     setCheckedFind(finded);
-    dispatch(jobStatusThunk({ id: profile?.id, status: finded }));
+    dispatch(jobStatusThunk({ id: profile?.id, status: finded })).then(
+      (res) => {
+        setCheckedFind(res.payload.jobStatus);
+        localStorage.setItem('checkedFind', res.payload.jobStatus);
+      }
+    );
   };
+
   const handleCheckEmail = (event) => {
     setCheckedEmail(event.target.checked);
   };
-  const onSubmit = async (data) => {
-    const userSessionStorage =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    const profileData = {
-      candidate: JSON.stringify({
-        createUser: {
-          id: parseInt(profile?.userDetailsDTO?.id),
-          firstName: profile?.userDetailsDTO?.firstName,
-          lastName: profile?.userDetailsDTO?.lastName,
-          gender: parseInt(profile?.userDetailsDTO?.gender),
-          phone: profile?.userDetailsDTO?.phone,
-          email: profile?.userDetailsDTO?.email,
-        },
-        major: {
-          id: profile?.major?.id,
-        },
-      }),
-      fileAvatar: profile?.user?.avatar || null,
-      fileCV: data.cv,
-    };
-    const headerUser = {
-      token: userSessionStorage.token,
-      role: profile?.user?.role?.name,
-    };
-    await dispatch(updateUser([headerUser, profileData])).then(() => {
-      setOpens(!opens);
-    });
-  };
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem('checkedFind');
+    if (storedValue !== null) {
+      setCheckedFind(JSON.parse(storedValue));
+    }
+  }, []);
+
   useEffect(() => {
     dispatch(getAllUserCandidate());
   }, [dispatch]);

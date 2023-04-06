@@ -43,59 +43,58 @@ export const containerSchema = yup.object().shape({
     .max(32, '* Tối đa 32 ký tự'),
   email: yup
     .string()
-    .required('* Bạn phải nhập email')
-    .min(6, ' * Tối thiểu 6 ký tự')
-    .max(64, ' * Tối đa 64 ký tự')
-    .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
+    .required('* Vui lòng nhập địa chỉ email')
+    .min(6, '* Vui lòng nhập tối thiểu 6 ký tự')
+    .max(64, '* Vui lòng nhập tối đa 256 ký tự')
+    .matches(EMAIL_REGEX, '* Địa chỉ email không đúng'),
   password: yup
     .string()
-    .required('* Bạn phải nhập mật khẩu')
+    .required('* Vui lòng nhập mật khẩu')
     .matches(/^[^\W_]/, '* Yêu cầu một chữ cái không dấu hoặc số đứng đầu')
-    .matches(
-      /[a-zA-Z0-9.\_$@*!]$/,
-      '* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
-    )
-    .matches(
-      /[a-zA-Z0-9\w]*$/,
-      '* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
-    )
+    // .matches(
+    //   /[a-zA-Z0-9.\_$@*!]$/,
+    //   '* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
+    // )
+    // .matches(
+    //   /[a-zA-Z0-9\w]*$/,
+    //   '* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
+    // )
     .matches(
       /^(?!.*?[._]{2})/,
       '* Không được phép lặp lại 2 lần ký tự đặc biệt'
     )
-    .min(6, '* Tối thiểu 6 ký tự')
-    .matches(/[^\W_]$/, '* Không đúng định dạng')
-    .matches(/[A-Z]/, '* Ít nhất 1 chữ in hoa')
-    .matches(/[0-9]/, '* Ít nhất 1 số')
-    .max(32, '* Tối đa 32 ký tự'),
+    .min(6, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự')
+    .matches(/[^\W_]$/, '* Không được chứa khoảng trắng')
+    .matches(/[A-Z]/, '* Vui lòng nhập ít nhất 1 chữ in hoa')
+    .matches(/[0-9]/, '* Vui lòng nhập ít nhất 1 số')
+    .max(32, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự'),
   confirmPassword: yup
     .string()
-    .required('* Bạn phải nhập lại mật khẩu')
-    .min(6, '* Tối thiểu 6 ký tự')
-    .max(32, '* Tối đa 32 ký tự')
+    .required('* Vui lòng xác nhận lại mật khẩu')
+    .min(6, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự')
+    .max(32, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự')
     .oneOf([yup.ref('password'), null], '* Mật khẩu chưa khớp'),
   lastName: yup
     .string()
-    .required('* Bạn phải nhập họ')
-    .min(2, '* Tối thiểu 2 ký tự')
+    .required('* Vui lòng nhập họ và tên lót')
+    .min(2, '* Họ và tên lót phải có độ dài từ 2 đến 32 ký tự')
+    .max(32, '* Họ và tên lót phải có độ dài từ 2 đến 32 ký tự')
     .test('* Validate Tên', '* Họ không hợp lệ', (value) => {
       return uni.test(regexName(value));
-    })
-
-    .max(32, '* Tối đa 32 ký tự'),
+    }),
   firstName: yup
     .string()
-    .required('* Bạn phải nhập tên')
-    .min(2, '* Tối thiểu 2 ký tự')
+    .required('* Vui lòng nhập tên')
+    .min(2, '* Tên phải có độ dài từ 2 đến 32 ký tự')
+    .max(32, '* Tên phải có độ dài từ 2 đến 32 ký tự')
     .test('* Validate Họ', '* Tên không hợp lệ', (value) => {
       return uni.test(regexName(value));
-    })
-    .max(32, '* Tối đa 32 ký tự'),
+    }),
   phone: yup
     .string()
-    .required('* Bạn phải nhập số điện thoại')
-    .min(8, '* Tối thiểu 8 ký tự')
-    .max(13, '* Tối đa 13 ký tự')
+    .required('* Vui lòng nhập số điện thoại')
+    .min(8, '* Số điện thoại phải có độ dài từ 8 đến 13 ký tự')
+    .max(13, '* Số điện thoại phải có độ dài từ 8 đến 13 ký tự')
     .matches(PHONE_REGEX, '* Bạn đã nhập số điện thoại không đúng'),
   gender: yup
     .string()
