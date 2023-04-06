@@ -22,7 +22,6 @@ import DatePickerWithLabel from 'src/components/shared/CustomDatePicker/CustomDa
 import './styles.scss';
 
 const ProfileForm = ({ profile: user }) => {
-  console.log('🚀 ~ file: index.jsx:25 ~ ProfileForm ~ user:', user);
   const { t } = useTranslation('userInfo');
   const [showInput, setShowInput] = useState(false);
   const [showForm, setShowForm] = useState(false);

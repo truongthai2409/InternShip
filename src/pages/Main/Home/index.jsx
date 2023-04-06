@@ -118,18 +118,19 @@ const Home = (props) => {
     dispatch(indexFilterChange(0));
   };
   const handleCheck = (value) => {
+    console.log(value);
     dispatch(indexFilterChange(0));
     dispatch(changeFilterChange(false));
     let tempType = [];
     let tempPosition = [];
     let tempMajor = [];
     tempType = value.filter((sp) =>
-      listWorkingFormat
-        .map((items) => {
-          return items.name;
-        })
-        .includes(sp)
+      listWorkingFormat.map((items) => {
+        return items.name;
+      })
     );
+
+    console.log(tempType);
     if (role == 'Role_HR') {
       value.map((item) => {
         listPositionWorkingFormat.map((item_list) => {

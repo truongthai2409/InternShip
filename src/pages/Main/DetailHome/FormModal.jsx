@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -7,24 +7,23 @@ import CustomInput from 'src/components/shared/CustomInput';
 import InputFile from 'src/components/shared/InputFile';
 import { applyJobThunk } from 'src/store/action/candidate/candidateAction';
 import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schema } from './schema';
 
 const FormModal = ({ setOpen, jobId, setIsApply }) => {
-  const { user } = useSelector((state) => state.profile);
+  const { user, others } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
     setValue,
   } = useForm({
-    defaultValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone,
-    },
+    mode: 'all',
+    resolver: yupResolver(schema),
   });
-
+  console.log(errors);
   const onSubmit = (data) => {
     const formSubmit = {
       candidateApplication: JSON.stringify({
@@ -32,13 +31,9 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
         // candidate id
         candidateDTO: { id: user.id },
         referenceLetter: data.letter,
-        email: data.email,
-        phone: data.phone,
-        fullName: data.firstName + ' ' + data.lastName,
       }),
       fileCV: data.cv,
     };
-
     dispatch(applyJobThunk(formSubmit)).then((res) => {
       setIsApply(true);
       toast.success('Nộp CV thành công', {
@@ -82,7 +77,9 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
             format='pdf'
             register={register}
             setValue={setValue}
-          ></InputFile>
+          >
+            {errors.cv?.message}
+          </InputFile>
         </div>
 
         <CustomInput
