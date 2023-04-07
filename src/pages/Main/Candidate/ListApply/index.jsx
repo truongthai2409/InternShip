@@ -1,11 +1,9 @@
-import { Hidden } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import DetailCard from 'src/components/Card/DetailCard';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 import ListCardJobHome from 'src/components/Home/ListCardJobHome';
-import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
-import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
+
 import { TabTitle } from 'src/utils/GeneralFunctions';
 import { useTranslation } from 'react-i18next';
 
@@ -13,39 +11,10 @@ const ListApply = () => {
   const { t } = useTranslation('title');
   TabTitle(t('appliedJobTL'));
 
-  const { user } = useSelector((state) => state.profile);
   const { jobApplyList, jobApplyListHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
-  const { index, id } = useSelector((state) => state.filter);
 
-  const [jobs, setJobs] = useState([]);
-  const [jobDetail, setJobDetail] = useState([]);
-
-  const dispatch = useDispatch();
-
-  const handleChange = (value) => {
-    const token =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    const page = {
-      user: user,
-      token: token.token,
-      page: {
-        no: value - 1,
-        limit: 5,
-      },
-    };
-    dispatch(getJobApplyListByCandidate(page));
-  };
-
-  useEffect(() => {
-    dispatch(getJobByCompanyThunk(id));
-  }, [dispatch, id]);
-  useEffect(() => {
-    setJobs(jobApplyList);
-    setJobDetail((jobApplyList && jobApplyList[index]?.jobApp) || []);
-  }, [index, jobApplyList]);
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
@@ -70,15 +39,13 @@ const ListApply = () => {
               <Grid item xs={12}>
                 <ListCardJobHome
                   hiddent={true}
-                  jobList={jobs?.map((item) => {
+                  jobList={jobApplyList?.map((item) => {
                     return item;
                   })}
-                  cv={jobs?.map((item) => {
+                  cv={jobApplyList?.map((item) => {
                     return item.cv;
                   })}
-                  indexCardActive={index}
                   jobListHavePages={jobApplyListHavePage}
-                  onChange={handleChange}
                   reload={false}
                   viewCV={true}
                 />

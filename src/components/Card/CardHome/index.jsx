@@ -99,7 +99,11 @@ const CardHome = (props) => {
         width: props.reload ? '100%' : '',
       }}
     >
-      <div className='cardHome__col1' dataset={props.id}>
+      <div
+        className='cardHome__col1'
+        dataset={props.id}
+        style={{ flexBasis: props.reload ? '65%' : '80%' }}
+      >
         <div onClick={() => handleNext()}>
           <div className='cardHome__aboutCompany'>
             <img
@@ -147,7 +151,7 @@ const CardHome = (props) => {
               className='button_view_cv'
               onClick={(e) => viewProfileCV(props, e)}
             >
-              <FeedIcon />
+              <FeedIcon sx={{ fontSize: '13px' }} />
               <p>Xem cv</p>
               {renderCV()}
             </button>
@@ -253,7 +257,7 @@ const CardHome = (props) => {
                   <p style={{ fontSize: `${props.fontSize}px` }}>
                     {/* please help me write function datetime to handle this */}
                     {/* because i dont have any time so i fix this by my way */}
-                    {props.appliedDate.split(' ')[1]}
+                    {props.appliedDate.split(' ')[1].substring(0, 5)}
                   </p>
                 </div>
               ) : (
