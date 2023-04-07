@@ -228,6 +228,7 @@ const DetailHome = () => {
                   fz='17px'
                   borderColor={isApply ? '#B0B0B0' : null}
                   onClick={() => handleClick()}
+                  disabled={isApply ? 'disabled' : ''}
                   cursorValue={isApply ? 'mouse' : 'pointer'}
                 ></Button>
                 <Button

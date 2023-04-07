@@ -192,6 +192,7 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
+    console.log('🚀 ~ file: index.jsx:195 ~ onSubmitJobForm ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -223,11 +224,7 @@ const ProfileForm = ({ profile: user }) => {
               id: data.major,
             },
           ],
-          jobTypeDTOs: [
-            {
-              id: data.jobType[0].id,
-            },
-          ],
+          jobTypeDTOs: data.jobType.map(({ id }) => ({ id })),
           jobPositionDTOs: [{ id: data.jobPosition }],
           desiredJob: data.desiredJob,
           workProvinceDTO: { id: data.workLocation },

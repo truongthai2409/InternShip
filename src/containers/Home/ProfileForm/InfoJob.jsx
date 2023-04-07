@@ -7,6 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Modal from 'src/components/shared/Modal';
 import { Document, Page, pdfjs } from 'react-pdf';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import Grid from '@mui/material/Grid';
 import './styles.scss';
 
 const InfoJob = (props) => {
@@ -61,86 +62,105 @@ const InfoJob = (props) => {
         </IconButton>
       </Typography>
 
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Công việc mong muốn
           </Typography>
-          <span className='profile-detail-value'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
             {others?.desiredJob ? others?.desiredJob : '(chưa có dữ liệu)'}
           </span>
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Vị trí làm việc
           </Typography>
-          <span className='profile-detail-value'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
             {others &&
-              others?.jobPositionDTOs?.map((position) => {
+              others?.jobPositionDTOs?.map((position, index) => {
                 return (
                   <span>
                     {position.name ? position.name : '(chưa có dữ liệu)'}
+                    {index !== others.jobPositionDTOs.length - 1 && '/ '}
                   </span>
                 );
               })}
           </span>
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Chuyên ngành
           </Typography>
-          {others &&
-            others?.majorDTOs?.map((major) => {
-              return (
-                <span className='profile-detail-value'>
-                  {major.name ? major.name : '(chưa có dữ liệu)'}
-                </span>
-              );
-            })}
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
+            {others &&
+              others?.majorDTOs?.map((major, index) => {
+                return (
+                  <span className='job-detail-value'>
+                    {major.name ? major.name : '(chưa có dữ liệu)'}
+                    {index !== others.majorDTOs.length - 1 && '/ '}
+                  </span>
+                );
+              })}
+          </span>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Hình thức làm việc
           </Typography>
-          {others &&
-            others?.jobTypeDTOs?.map((type) => {
-              return (
-                <span className='profile-detail-value'>
-                  {type.name ? type.name : '(chưa có dữ liệu)'}
-                </span>
-              );
-            })}
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
+            {others &&
+              others?.jobTypeDTOs?.map((type, index) => {
+                return (
+                  <span key={type.id} className='job-detail-value'>
+                    {type.name ? type.name : '(chưa có dữ liệu)'}
+                    {index !== others.jobTypeDTOs.length - 1 && '/ '}
+                  </span>
+                );
+              })}
+          </span>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Địa điểm làm việc
           </Typography>
-          <span className='profile-detail-value'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
             {others?.workProvinceDTO?.name
               ? others?.workProvinceDTO?.name
               : '(chưa có dữ liệu)'}
           </span>
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             CV đính kèm
           </Typography>
+        </Grid>
+        <Grid item xs={9}>
           <span
-            className='profile-detail-value'
+            className='job-detail-value'
             onClick={() => viewProfileCV(others)}
             style={{
               cursor: 'pointer',
-              color: '#00B074',
+              color: others?.originalNameCV ? '#00B074' : '',
               display: 'flex',
               alignItems: 'center',
             }}
@@ -159,18 +179,20 @@ const InfoJob = (props) => {
               (Click để xem)
             </span>
           </span>
-        </div>
-      </div>
-      <div className='profile-detail job-detail'>
-        <div className='profile-detail-item'>
-          <Typography className='profile-detail-label' variant='subtitle1'>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} className={'job-detail-item '}>
+        <Grid item xs={3}>
+          <Typography className='job-detail-label' variant='subtitle1'>
             Thư xin việc
           </Typography>
-          <span className='profile-detail-value'>
+        </Grid>
+        <Grid item xs={9}>
+          <span className='job-detail-value'>
             {others?.letter ? others?.letter : '(chưa có dữ liệu)'}
           </span>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
       {renderCV()}
     </div>
   );

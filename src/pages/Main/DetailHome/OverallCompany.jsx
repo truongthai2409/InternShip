@@ -128,7 +128,11 @@ const OverallCompany = (props) => {
                 <div>
                   <p>{title[index]}</p>
                   {index == 0 ? (
-                    <a href={name[index]} style={{ color: 'black' }}>
+                    <a
+                      href={name[index]}
+                      style={{ color: 'black' }}
+                      target='_blank'
+                    >
                       {name[index]}
                     </a>
                   ) : index == 1 ? (
