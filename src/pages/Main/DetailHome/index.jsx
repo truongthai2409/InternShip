@@ -22,6 +22,8 @@ import {
 } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { toast } from 'react-toastify';
 import NearMeIcon from '@mui/icons-material/NearMe';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import TitleButton from 'src/components/shared/TitleButtonWithIcon';
 
 const HeaderForm = ({ name }) => {
   return (
@@ -226,9 +228,22 @@ const DetailHome = () => {
                   fz='17px'
                   borderColor={isApply ? '#B0B0B0' : null}
                   onClick={() => handleClick()}
+                  cursorValue={isApply ? 'mouse' : 'pointer'}
                 ></Button>
                 <Button
-                  name={isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
+                  name={
+                    isSave ? (
+                      <TitleButton
+                        icon={<BookmarkBorderIcon />}
+                        name={'ĐÃ LƯU'}
+                      ></TitleButton>
+                    ) : (
+                      <TitleButton
+                        icon={<BookmarkBorderIcon />}
+                        name={'LƯU TIN'}
+                      ></TitleButton>
+                    )
+                  }
                   bwidth='211px'
                   bheight='46px'
                   padding='12px 32px'

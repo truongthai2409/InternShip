@@ -9,6 +9,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { dateTimeHelper } from 'src/helpers/dateTimeHelpers';
 import { salaryHelpers } from 'src/helpers/salaryHelpers';
+import TitleButton from 'src/components/shared/TitleButtonWithIcon';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 const DetailInfo = (props) => {
   const title = [
@@ -102,9 +104,22 @@ const DetailInfo = (props) => {
               fz='17px'
               onClick={(e) => props.onHandleApply(e)}
               borderColor={props.isApply ? '#B0B0B0' : null}
+              cursorValue={props.isApply ? 'mouse' : 'pointer'}
             ></Button>
             <Button
-              name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
+              name={
+                props.isSave ? (
+                  <TitleButton
+                    icon={<BookmarkBorderIcon />}
+                    name={'ĐÃ LƯU'}
+                  ></TitleButton>
+                ) : (
+                  <TitleButton
+                    icon={<BookmarkBorderIcon />}
+                    name={'LƯU TIN'}
+                  ></TitleButton>
+                )
+              }
               bwidth='211px'
               bheight='46px'
               padding='12px 32px'
