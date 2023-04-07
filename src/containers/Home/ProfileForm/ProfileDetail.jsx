@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { genderList } from './validateForm';
 import './styles.scss';
+import moment from 'moment';
 
 const ProfileDetail = (props) => {
   const { others } = useSelector((state) => state.profile);
@@ -54,8 +55,12 @@ const ProfileDetail = (props) => {
             Ngày sinh
           </Typography>
           <span className={'profile-detail-value'}>
-            {others?.userDetailsDTO?.birthday
-              ? others?.userDetailsDTO?.birthday
+            {moment(others?.userDetailsDTO?.birthday, 'DD-MM-YYYY').format(
+              'DD/MM/YYYY'
+            )
+              ? moment(others?.userDetailsDTO?.birthday, 'DD-MM-YYYY').format(
+                  'DD/MM/YYYY'
+                )
               : '(chưa có dữ liệu)'}
           </span>
         </div>
