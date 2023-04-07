@@ -22,7 +22,7 @@ export const schema = yup.object({
     .test('required', '* You need to provide a file', (file) => {
       console.log(file);
       // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
-      if (file?.length > 0) return true;
+      if (file?.size > 0) return true;
       return false;
     })
     .test('fileSize', 'The file is too large', (file) => {
