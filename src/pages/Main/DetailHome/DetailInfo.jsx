@@ -101,6 +101,7 @@ const DetailInfo = (props) => {
               bg={props.isApply ? '#B0B0B0' : '#00B074'}
               fz='17px'
               onClick={(e) => props.onHandleApply(e)}
+              borderColor={props.isApply ? '#B0B0B0' : null}
             ></Button>
             <Button
               name={props.isSave ? `ĐÃ LƯU` : 'LƯU TIN'}
@@ -125,7 +126,7 @@ const DetailInfo = (props) => {
             <div className='detailInfoHome__right__item'>
               {icon[index]}
               <div>
-                <p>{title[index]}</p>
+                <p style={{ fontWeight: '500' }}>{title[index]}</p>
                 <p>{name[index]}</p>
               </div>
             </div>
