@@ -219,28 +219,43 @@ const CardHome = (props) => {
         ) : (
           <div className='cardHome__col2-End'>
             <div className='cardHome__col2-End-1'>
-              <PeopleIcon style={{ fontSize: `${props.fontSize + 2}px` }} />
-              <span
-                className='amount'
-                style={{
-                  fontSize: `${props.fontSize}px`,
-                  color: '#000',
-                  marginLeft: '6px',
-                }}
-              >
-                Số lượng ứng viên: {props.amount}
-              </span>
+              {currenUrl === 'view-list-apply' ? (
+                <></>
+              ) : (
+                <>
+                  <PeopleIcon style={{ fontSize: `${props.fontSize + 2}px` }} />
+                  <span
+                    className='amount'
+                    style={{
+                      fontSize: `${props.fontSize}px`,
+                      color: '#000',
+                      marginLeft: '6px',
+                    }}
+                  >
+                    Số lượng ứng viên: {props.amount}
+                  </span>
+                </>
+              )}
             </div>
             <div className='cardHome__col2-End-2'>
               {currenUrl === 'view-list-apply' ? (
-                <>
-                  <WatchLaterOutlinedIcon
-                    style={{ fontSize: `${props.fontSize + 2}px` }}
-                  />
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <div>
+                    <WatchLaterOutlinedIcon
+                      style={{ fontSize: `${props.fontSize + 2}px` }}
+                    />
+                    <p style={{ fontSize: `${props.fontSize}px` }}>
+                      {/* please help me write function datetime to handle this */}
+                      {/* because i dont have any time so i fix this by my way */}
+                      {props.appliedDate.split(' ')[0].replace(/-/g, '/')}
+                    </p>
+                  </div>
                   <p style={{ fontSize: `${props.fontSize}px` }}>
-                    {props.appliedDate}
+                    {/* please help me write function datetime to handle this */}
+                    {/* because i dont have any time so i fix this by my way */}
+                    {props.appliedDate.split(' ')[1]}
                   </p>
-                </>
+                </div>
               ) : (
                 <>
                   <WatchLaterOutlinedIcon

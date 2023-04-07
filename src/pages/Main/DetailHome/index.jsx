@@ -224,6 +224,7 @@ const DetailHome = () => {
                   padding='0px 0px'
                   bg={isApply ? '#B0B0B0' : '#00B074'}
                   fz='17px'
+                  borderColor={isApply ? '#B0B0B0' : null}
                   onClick={() => handleClick()}
                 ></Button>
                 <Button
