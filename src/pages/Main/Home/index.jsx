@@ -87,8 +87,8 @@ const Home = (props) => {
   const [valueLocation, setValueLocation] = useState('');
   const [jobs, setJob] = useState([]);
   const listWorkingFormat = [
-    { name: 'Fulltime', id: 1 },
-    { name: 'Parttime', id: 2 },
+    { name: 'Full time', id: 1 },
+    { name: 'Part time', id: 2 },
     { name: 'Remote', id: 3 },
   ];
 
@@ -118,19 +118,19 @@ const Home = (props) => {
     dispatch(indexFilterChange(0));
   };
   const handleCheck = (value) => {
-    console.log(value);
     dispatch(indexFilterChange(0));
     dispatch(changeFilterChange(false));
     let tempType = [];
     let tempPosition = [];
     let tempMajor = [];
-    tempType = value.filter((sp) =>
+    value.map((sp) =>
       listWorkingFormat.map((items) => {
-        return items.name;
+        if (items.name == sp) {
+          tempType.push(items.name);
+        }
       })
     );
 
-    console.log(tempType);
     if (role == 'Role_HR') {
       value.map((item) => {
         listPositionWorkingFormat.map((item_list) => {
