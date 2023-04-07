@@ -14,6 +14,7 @@ import SettingsApplicationsSharpIcon from '@mui/icons-material/SettingsApplicati
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateRole } from 'src/store/slices/main/user/userSlice';
+import { clearJobApply } from 'src/store/slices/main/home/job/jobCandidateSlice';
 import { useTranslation } from 'react-i18next';
 
 const AccountMenu = ({ linkImg }) => {
@@ -36,6 +37,7 @@ const AccountMenu = ({ linkImg }) => {
     localStorage.removeItem('userPresent');
     localStorage.removeItem('lang');
     i18n.changeLanguage('vi');
+    dispatch(clearJobApply());
     dispatch(updateRole());
     toast.info('Bạn vừa đăng xuất', {
       position: 'top-right',

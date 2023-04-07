@@ -13,7 +13,12 @@ const jobCandidateSlice = createSlice({
     jobCare: [],
     jobCareHavePage: [],
   },
-  reducers: {},
+  reducers: {
+    clearJobApply: (state) => {
+      state.jobApplyList = [];
+      state.jobCare = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getJobApplyListByCandidate.fulfilled,
@@ -91,4 +96,5 @@ export const deleteJobCare = createAsyncThunk(
       });
   }
 );
+export const { clearJobApply } = jobCandidateSlice.actions;
 export default jobCandidateSlice;
