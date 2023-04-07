@@ -119,32 +119,30 @@ const ButtonMark = (props) => {
     >
       <IconButton
         style={{
-          border: props.isMark ? '1px solid #00b074' : '1px solid #F1F1F1',
           borderRadius: '4px',
           width: `${props.width}`,
           height: `${props.height}`,
+        }}
+        sx={{
+          border: `${props.isMark ? '1px solid #04bf8a' : '1px solid #7d7d7d'}`,
         }}
         aria-label='mark'
         className='buttonMark__wrapper'
         onClick={handleClickMarkJob}
       >
-        {pathUrl === '/candidate' ||
-        pathUrl.includes('information_company') ||
-        pathUrl === '/candidate/view-list-care' ? (
-          props.isMark === false && mark === false ? (
+        {pathUrl === '/candidate' || pathUrl === '/candidate/view-list-care' ? (
+          props.isMark === false ? (
             <BookmarkBorderIcon
               style={{ fontSize: `${props.fontSize}` }}
-              sx={{ color: '#04bf8a' }}
+              sx={{ color: '#7D7D7D' }}
             />
           ) : (
             <BookmarkIcon
               className='buttonMark__isChecking'
               style={{
                 fontSize: `${props.fontSize}`,
-                color: `${props.isMark ? '#00B074' : '#7D7D7D'}`,
+                color: `${props.isMark ? '#00B074' : '#04bf8a'}`,
               }}
-              sx={{ color: '#04bf8a' }}
-              // color={props.isMark ? '#7D7D7D' : '#00B074'}
             />
           )
         ) : (

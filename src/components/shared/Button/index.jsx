@@ -16,6 +16,7 @@ const Button = ({
   color,
   disabled,
   padding,
+  borderColor
 }) => {
   return (
     <>
@@ -32,7 +33,7 @@ const Button = ({
           backgroundColor: bg ? bg : '',
           color: color,
           padding: padding ? padding : '',
-          // border: '1px solid black'
+          border: borderColor ? `1px solid ${borderColor}` : '1px solid #00b074'
         }}
         type='submit'
       >
