@@ -123,10 +123,16 @@
     grid-gap: 1rem;
     width: 100%;
   }
-  .job-detail {
-    display: flex !important;
-    .profile-detail-item {
-      width: 100% !important;
+  .job-detail-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 20px 30px;
+    gap: 20px;
+    .MuiGrid-item {
+      padding: 0;
     }
   }
   .profile-detail-label {

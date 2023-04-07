@@ -19,7 +19,7 @@ export const schema = yup.object({
   //   })
   cv: yup
     .mixed()
-    .test('required', '* You need to provide a file', (file) => {
+    .test('required', '* Vui lòng cập nhật CV', (file) => {
       // return file && file.size <-- u can use this if you don't want to allow empty files to be uploaded;
       if (file?.size > 0) return true;
       return false;
