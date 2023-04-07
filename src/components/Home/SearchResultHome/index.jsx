@@ -22,13 +22,13 @@ function SearchResultHome({
   const [searchValue, setSearchValue] = useState('');
 
   const onChangeSearch = (event) => {
+    console.log(event);
     setSearchValue(event.target.value);
   };
   const search = (event) => {
     event.preventDefault();
     onClick && onClick(searchValue);
   };
-
   return (
     <div
       className='header__with-search onMobile onTablet'

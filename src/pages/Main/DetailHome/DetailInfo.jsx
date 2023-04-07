@@ -22,7 +22,7 @@ const DetailInfo = (props) => {
     'Hạn nộp hồ sơ',
   ];
   const icon = [
-    <PictureInPictureAltOutlinedIcon />,
+    <PictureInPictureAltOutlinedIcon sx={{ fontSize: 'max-height' }} />,
     <BusinessCenterIcon />,
     <PersonIcon />,
     <PaidIcon />,
@@ -127,6 +127,7 @@ const DetailInfo = (props) => {
               color={props.isSave ? '#00B074' : '#7D7D7D'}
               fz='17px'
               onClick={(e) => props.onHandle(e)}
+              borderColor={props.isSave ? '#00B074' : '#7D7D7D'}
             ></Button>
           </div>
           <p className='deadline'>

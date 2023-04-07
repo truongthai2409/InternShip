@@ -23,7 +23,6 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
     mode: 'all',
     resolver: yupResolver(schema),
   });
-  console.log(errors);
   const onSubmit = (data) => {
     const formSubmit = {
       candidateApplication: JSON.stringify({

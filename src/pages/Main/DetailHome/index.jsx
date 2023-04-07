@@ -252,6 +252,7 @@ const DetailHome = () => {
                   color={isSave ? '#00B074' : '#7D7D7D'}
                   fz='17px'
                   onClick={(e) => handlePost(e)}
+                  borderColor={isSave ? '#00B074' : '#7D7D7D'}
                 ></Button>
               </div>
             </div>

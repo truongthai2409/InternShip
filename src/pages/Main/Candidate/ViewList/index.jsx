@@ -3,43 +3,17 @@ import { TabTitle } from 'src/utils/GeneralFunctions';
 import ListCardJobHome from 'src/components/Home/ListCardJobHome';
 import './styles.scss';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getJobCareByCandidateThunk } from 'src/store/slices/main/home/job/jobCandidateSlice';
-import { useState } from 'react';
-import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
+import { useSelector } from 'react-redux';
+
 import { useTranslation } from 'react-i18next';
 
 const CandidateViewList = () => {
   const { t } = useTranslation('title');
   TabTitle(`${t('savedJobsTL')}`);
 
-  const { user } = useSelector((state) => state.profile);
   const { jobCare, jobCareHavePage } = useSelector(
     (state) => state.jobCandidateSlice
   );
-
-  const [jobs, setJobs] = useState([]);
-
-  const dispatch = useDispatch();
-
-  const handleChange = (value) => {
-    const token =
-      JSON.parse(sessionStorage.getItem('userPresent')) ||
-      JSON.parse(localStorage.getItem('userPresent'));
-    const page = {
-      user: user,
-      token: token.token,
-      page: {
-        no: value - 1,
-        limit: 5,
-      },
-    };
-    dispatch(getJobCareByCandidateThunk(page));
-  };
-
-  useEffect(() => {
-    setJobs(jobCare);
-  }, [jobCare]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -66,11 +40,10 @@ const CandidateViewList = () => {
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item xs={12}>
                   <ListCardJobHome
-                    jobList={jobs?.map((item) => {
+                    jobList={jobCare?.map((item) => {
                       return item.jobDTO;
                     })}
                     jobListHavePages={jobCareHavePage}
-                    onChange={handleChange}
                     reload={false}
                     viewCV={false}
                   />
