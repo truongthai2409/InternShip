@@ -43,12 +43,12 @@ const ProfileForm = ({ profile: user }) => {
     mode: 'all',
     resolver: yupResolver(schema),
     defaultValues: {
-      lastName: user?.lastName,
-      firstName: user?.firstName,
-      email: user?.email,
-      phone: user?.phone,
-      gender: others?.userDetails?.gender,
-      address: others?.locationDTO?.address,
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      email: user?.email || '',
+      phone: user?.phone || '',
+      gender: others?.userDetails?.gender || '',
+      address: others?.locationDTO?.address || '',
     },
   });
   const {
@@ -192,7 +192,6 @@ const ProfileForm = ({ profile: user }) => {
   };
 
   const onSubmitJobForm = (data) => {
-    console.log('🚀 ~ file: index.jsx:195 ~ onSubmitJobForm ~ data:', data);
     const userPost = {
       userStorage,
       role,
@@ -328,7 +327,9 @@ const ProfileForm = ({ profile: user }) => {
                     // value={field.value}
                     selectedDate={field.value}
                     format='dd-MM-yyyy'
-                    defaultValue={user?.birthday}
+                    // defaultValue={
+                    //   user.birthday ? new Date(user.birthday) : null
+                    // }
                   />
                 )}
               >
@@ -371,6 +372,7 @@ const ProfileForm = ({ profile: user }) => {
                 options={provinceList}
                 placeholder={t('placeholder')}
                 defaultValue={others?.locationDTO?.districtDTO?.provinceDTO?.id}
+                idProvince={others?.locationDTO?.districtDTO?.provinceDTO?.id}
                 dispatch={dispatch}
                 action={getDistrictList}
               >
@@ -383,6 +385,7 @@ const ProfileForm = ({ profile: user }) => {
                 label={t('district')}
                 options={districtList}
                 defaultValue={others?.locationDTO?.districtDTO?.id}
+                // idProvince={others?.locationDTO?.districtDTO?.provinceDTO?.id}
                 placeholder={t('placeholder')}
               >
                 {errors.district?.message}

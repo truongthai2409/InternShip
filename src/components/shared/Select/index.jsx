@@ -18,6 +18,7 @@ export default function SelectCustom({
   requirementField = true,
   dispatch = () => {},
   action = () => {},
+  idProvince,
 }) {
   const renderSelectOption = () => {
     return options.map((item) => {
@@ -36,13 +37,16 @@ export default function SelectCustom({
   };
 
   // handle change district
-  const handleChangeLocation = (id) => {
-    dispatch(action(id));
+  const handleChangeLocation = (idProvince) => {
+    dispatch(action(idProvince));
   };
   const [selectedOption, setSelectedOption] = React.useState('');
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  React.useEffect(() => {
+    dispatch(action(idProvince));
+  }, [idProvince]);
 
   return (
     <>
