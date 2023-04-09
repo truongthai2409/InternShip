@@ -127,9 +127,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 10px 20px 50px;
+    align-items: flex-start;
+    margin: 0 0 20px 30px;
     gap: 20px;
     .MuiGrid-item {
       padding: 0;

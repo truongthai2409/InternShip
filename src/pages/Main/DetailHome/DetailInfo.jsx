@@ -104,6 +104,7 @@ const DetailInfo = (props) => {
               fz='17px'
               onClick={(e) => props.onHandleApply(e)}
               borderColor={props.isApply ? '#B0B0B0' : null}
+              disabled={props.isApply ? 'disabled' : ''}
               cursorValue={props.isApply ? 'mouse' : 'pointer'}
             ></Button>
             <Button

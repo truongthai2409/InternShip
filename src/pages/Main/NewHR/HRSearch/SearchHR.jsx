@@ -95,15 +95,7 @@ const SearchHR = (props) => {
   const search = (event) => {
     event.preventDefault();
     dispatch(
-      getCandidateThunk([
-        currentPage,
-        limit,
-        searchValue,
-        valueLocation,
-        '',
-        '',
-        '',
-      ])
+      getCandidateThunk([0, limit, searchValue, valueLocation, '', '', ''])
     );
   };
   const handleCheck = (value) => {};

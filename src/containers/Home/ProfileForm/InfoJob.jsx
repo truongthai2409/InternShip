@@ -68,7 +68,7 @@ const InfoJob = (props) => {
             Công việc mong muốn
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others?.desiredJob ? others?.desiredJob : '(chưa có dữ liệu)'}
           </span>
@@ -80,7 +80,7 @@ const InfoJob = (props) => {
             Vị trí làm việc
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others &&
               others?.jobPositionDTOs?.map((position, index) => {
@@ -100,7 +100,7 @@ const InfoJob = (props) => {
             Chuyên ngành
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others &&
               others?.majorDTOs?.map((major, index) => {
@@ -120,7 +120,7 @@ const InfoJob = (props) => {
             Hình thức làm việc
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others &&
               others?.jobTypeDTOs?.map((type, index) => {
@@ -140,7 +140,7 @@ const InfoJob = (props) => {
             Địa điểm làm việc
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others?.workProvinceDTO?.name
               ? others?.workProvinceDTO?.name
@@ -154,7 +154,7 @@ const InfoJob = (props) => {
             CV đính kèm
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span
             className='job-detail-value'
             onClick={() => viewProfileCV(others)}
@@ -165,7 +165,11 @@ const InfoJob = (props) => {
               alignItems: 'center',
             }}
           >
-            <AttachFileIcon sx={{ fontSize: 16 }} />
+            {others?.originalNameCV ? (
+              <AttachFileIcon sx={{ fontSize: 16 }} />
+            ) : (
+              ''
+            )}
             {others?.originalNameCV
               ? others?.originalNameCV
               : '(chưa có dữ liệu)'}{' '}
@@ -176,7 +180,7 @@ const InfoJob = (props) => {
                 fontSize: 12,
               }}
             >
-              (Click để xem)
+              {others?.originalNameCV ? 'Click để xem' : ''}
             </span>
           </span>
         </Grid>
@@ -187,7 +191,7 @@ const InfoJob = (props) => {
             Thư xin việc
           </Typography>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <span className='job-detail-value'>
             {others?.letter ? others?.letter : '(chưa có dữ liệu)'}
           </span>
