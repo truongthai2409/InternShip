@@ -1,4 +1,4 @@
-@use "../../assets/styles/" as *;
+@use '../../assets/styles/' as *;
 
 .demand__partner {
   margin-top: 12px;
@@ -12,7 +12,7 @@
     }
 
     &-name-job {
-      font-family: "Roboto";
+      font-family: $f-family;
       font-style: normal;
       font-weight: 700;
       font-size: 16px;

@@ -1,10 +1,9 @@
-import LoginLayout from "src/Layouts/Login"
-
+import LoginLayout from 'src/Layouts/Authenticate/Login';
 
 const loginRouter = [
-    {
-        path: "/login",
-        element: <LoginLayout />,
-    }
-]
-export default loginRouter
+  {
+    path: '/login',
+    element: <LoginLayout />,
+  },
+];
+export default loginRouter;

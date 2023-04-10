@@ -1,0 +1,47 @@
+@use '../../../assets/styles/' as *;
+
+.login-form {
+  &__container {
+    width: 100%;
+    .bgcIsCheck {
+      input {
+        background-color: #04bf8a5b;
+      }
+    }
+  }
+
+  &__save-pass {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    // text-align: left;
+    align-items: center;
+    font-family: $f-family !important;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: oblique;
+    color: blue;
+  }
+
+  &__btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    button {
+      font-size: 13px;
+      width: 100%;
+    }
+  }
+}
+.css-ahj2mt-MuiTypography-root {
+  font-family: $f-family !important;
+}
+.forgotPasswordLink {
+  text-decoration: underline !important;
+}
+
+.login-from-button {
+  height: 40px;
+  font-size: 16px;
+}

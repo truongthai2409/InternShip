@@ -1,0 +1,17 @@
+@use '../../../assets/styles' as *;
+
+.listButton {
+  svg {
+    color: $primary-color;
+  }
+}
+.ListCollapWraper {
+  width: 100%;
+  > label {
+    width: 100%;
+  }
+}
+
+.listTitle span {
+  font-family: $f-family !important;
+}

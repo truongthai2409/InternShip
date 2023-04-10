@@ -1,36 +1,35 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Avatar, Grid, Switch } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Avatar, Grid, Switch } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import CustomTextarea from "../../../components/CustomTextarea";
-import CustomSelect from "../../../components/CustomSelect";
-import Button from "../../../components/Button";
-import cameraLogo from "../../../assets/img/camera.png";
-import { schema, renderControlAction } from "./script.js";
+import './styles.scss';
+import CustomInput from '../../../components/shared/CustomInput';
+import CustomTextarea from '../../../components/shared/CustomTextarea';
+import CustomSelect from '../../../components/shared/CustomSelect';
+import Button from '../../../components/shared/Button';
+import cameraLogo from '../../../assets/img/camera.png';
+import { schema, renderControlAction } from './script.js';
 import {
   addCompanyByAdmin,
   getCompanyDetail,
   updateCompanyInfo,
-} from "../../../store/slices/Admin/company/companySlice";
+} from '../../../store/slices/Admin/company/companySlice';
 import {
   getProvinceList,
   getDistrictList,
-} from "../../../store/slices/location/locationSlice";
-import CustomSelectLocation from "src/components/CustomSelectLocation";
+} from '../../../store/slices/location/locationSlice';
+import CustomSelectLocation from 'src/components/shared/CustomSelectLocation';
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const baseURL = process.env.REACT_APP_API;
 
 export default function CompanyForm(props) {
   const { isAdd } = props;
 
   const { companyDetail, error } = useSelector((state) => state.company);
-  console.log("companyDetail", companyDetail);
   const { provinceList, districtList } = useSelector((state) => state.location);
   const {
     register,
@@ -71,22 +70,22 @@ export default function CompanyForm(props) {
     if (!isAdd) {
       setImage(`${baseURL}${companyDetail.logo}`);
     }
-    setValue("name", isAdd ? "" : companyDetail.name);
-    setValue("description", isAdd ? "" : companyDetail.description);
-    setValue("website", isAdd ? "" : companyDetail.website);
-    setValue("email", isAdd ? "" : companyDetail.email);
-    setValue("phone", isAdd ? "" : companyDetail.phone);
-    setValue("tax", isAdd ? "" : companyDetail.tax);
+    setValue('name', isAdd ? '' : companyDetail.name);
+    setValue('description', isAdd ? '' : companyDetail.description);
+    setValue('website', isAdd ? '' : companyDetail.website);
+    setValue('email', isAdd ? '' : companyDetail.email);
+    setValue('phone', isAdd ? '' : companyDetail.phone);
+    setValue('tax', isAdd ? '' : companyDetail.tax);
     setValue(
-      "province",
-      isAdd ? "" : companyDetail?.locations?.[0]?.district?.province?.id
+      'province',
+      isAdd ? '' : companyDetail?.locations?.[0]?.district?.province?.id
     );
     setValue(
-      "district",
-      isAdd ? "" : companyDetail?.locations?.[0]?.district?.id
+      'district',
+      isAdd ? '' : companyDetail?.locations?.[0]?.district?.id
     );
-    setValue("address", isAdd ? "" : companyDetail?.locations?.[0]?.address);
-    setValue("note", isAdd ? "" : companyDetail?.locations?.[0]?.note);
+    setValue('address', isAdd ? '' : companyDetail?.locations?.[0]?.address);
+    setValue('note', isAdd ? '' : companyDetail?.locations?.[0]?.note);
   }, [companyDetail, isAdd, setValue]);
 
   // show preview image
@@ -104,7 +103,6 @@ export default function CompanyForm(props) {
 
   // handle Submit form
   const onSubmit = (data) => {
-    console.log(data)
     const companyData = {
       company: JSON.stringify({
         name: data.name,
@@ -161,40 +159,40 @@ export default function CompanyForm(props) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       // autoComplete="off"
-      className="company-form"
+      className='company-form'
     >
-      <div className="company-form__container">
+      <div className='company-form__container'>
         <Grid container>
           <Grid item md={3}>
-            <div className="company-form__logo">
+            <div className='company-form__logo'>
               <Avatar
                 src={image}
                 // variant="rounded"
-                alt="company-logo"
-                className="company-form__avatar"
+                alt='company-logo'
+                className='company-form__avatar'
                 // onClick={() => fileInput.current.click()}
               />
               {/* <h3>Company Name</h3> */}
               <input
-                id="logo"
-                type="file"
-                name="logo"
-                {...register("logo")}
+                id='logo'
+                type='file'
+                name='logo'
+                {...register('logo')}
                 onChange={showPreviewImage}
                 // ref={fileInput}
               />
-              <p className="company-form__error">{errors.logo?.message}</p>
+              <p className='company-form__error'>{errors.logo?.message}</p>
 
               {!isAdd ? (
-                <div className="company-form__control">
+                <div className='company-form__control'>
                   <ul>{renderControlAction()}</ul>
-                  <div className="company-form__block">
+                  <div className='company-form__block'>
                     <p>Khóa tài khoản</p>
                     <Switch {...label} defaultChecked />
                   </div>
                   <button
-                    type="button"
-                    className="company-form__button-edit"
+                    type='button'
+                    className='company-form__button-edit'
                     onClick={handleOnClickEdit}
                   >
                     Sửa
@@ -206,12 +204,12 @@ export default function CompanyForm(props) {
           <Grid item md={9}>
             <Grid container>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className='company-form__input'>
                   <CustomInput
-                    label="Tên công ty"
-                    id="name"
-                    type="text"
-                    placeholder="Tên công ty..."
+                    label='Tên công ty'
+                    id='name'
+                    type='text'
+                    placeholder='Tên công ty...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -220,10 +218,10 @@ export default function CompanyForm(props) {
                     {error?.Name}
                   </CustomInput>
                   <CustomInput
-                    label="Email"
-                    id="email"
-                    type="email"
-                    placeholder="email..."
+                    label='Email'
+                    id='email'
+                    type='email'
+                    placeholder='email...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -232,10 +230,10 @@ export default function CompanyForm(props) {
                     {errors.email?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Số điện thoại"
-                    id="phone"
-                    type="tel"
-                    placeholder="Số điện thoại..."
+                    label='Số điện thoại'
+                    id='phone'
+                    type='tel'
+                    placeholder='Số điện thoại...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -243,10 +241,10 @@ export default function CompanyForm(props) {
                     {errors.phone?.message}
                   </CustomInput>
                   <CustomInput
-                    label="Website"
-                    id="website"
-                    type="text"
-                    placeholder="Website..."
+                    label='Website'
+                    id='website'
+                    type='text'
+                    placeholder='Website...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -257,12 +255,12 @@ export default function CompanyForm(props) {
                 </div>
               </Grid>
               <Grid item md={6}>
-                <div className="company-form__input">
+                <div className='company-form__input'>
                   <CustomInput
-                    label="Mã số thuế"
-                    id="tax"
-                    type="text"
-                    placeholder="Mã số thuế..."
+                    label='Mã số thuế'
+                    id='tax'
+                    type='text'
+                    placeholder='Mã số thuế...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -271,10 +269,10 @@ export default function CompanyForm(props) {
                   </CustomInput>
 
                   <CustomSelectLocation
-                    id="province"
-                    className="user-form__input-item"
-                    label="Tỉnh"
-                    placeholder="Chọn tỉnh..."
+                    id='province'
+                    className='user-form__input-item'
+                    label='Tỉnh'
+                    placeholder='Chọn tỉnh...'
                     options={provinceList}
                     register={register}
                     onChange={(id) => getDistrict(id)}
@@ -282,20 +280,20 @@ export default function CompanyForm(props) {
                     {errors.province?.message}
                   </CustomSelectLocation>
                   <CustomSelect
-                    id="district"
-                    className="user-form__input-item"
-                    label="Quận/Huyện"
-                    placeholder="Chọn quận/huyện..."
+                    id='district'
+                    className='user-form__input-item'
+                    label='Quận/Huyện'
+                    placeholder='Chọn quận/huyện...'
                     register={register}
                     options={districtList}
                   >
                     {errors.district?.message}
                   </CustomSelect>
                   <CustomInput
-                    label="Địa chỉ"
-                    id="address"
-                    type="text"
-                    placeholder="Địa chỉ..."
+                    label='Địa chỉ'
+                    id='address'
+                    type='text'
+                    placeholder='Địa chỉ...'
                     setValue={setValue}
                     register={register}
                     check={!isEdit}
@@ -306,12 +304,12 @@ export default function CompanyForm(props) {
               </Grid>
               <Grid container item md={12}>
                 <Grid item md={6}>
-                  <div className="company-form__input">
+                  <div className='company-form__input'>
                     <CustomTextarea
-                      label="Mô tả công ty"
-                      id="description"
-                      type="description"
-                      placeholder="Mô tả công ty..."
+                      label='Mô tả công ty'
+                      id='description'
+                      type='description'
+                      placeholder='Mô tả công ty...'
                       register={register}
                       check={!isEdit}
                     >
@@ -320,12 +318,12 @@ export default function CompanyForm(props) {
                   </div>
                 </Grid>
                 <Grid item md={6}>
-                  <div className="company-form__input">
+                  <div className='company-form__input'>
                     <CustomTextarea
-                      label="Note"
-                      id="note"
-                      type="text"
-                      placeholder="Note..."
+                      label='Note'
+                      id='note'
+                      type='text'
+                      placeholder='Note...'
                       setValue={setValue}
                       register={register}
                       check={!isEdit}
@@ -340,14 +338,14 @@ export default function CompanyForm(props) {
         </Grid>
       </div>
       {isAdd ? (
-        <div className="company-form__submit">
-          <Button name="Thêm công ty" onClick={handleSubmit(onSubmit)} />
+        <div className='company-form__submit'>
+          <Button name='Thêm công ty' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
 
       {isEdit & !isAdd ? (
-        <div className="company-form__submit">
-          <Button name="Cập nhật" onClick={handleSubmit(onSubmit)} />
+        <div className='company-form__submit'>
+          <Button name='Cập nhật' onClick={handleSubmit(onSubmit)} />
         </div>
       ) : null}
     </form>

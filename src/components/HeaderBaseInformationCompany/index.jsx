@@ -1,30 +1,27 @@
-import { Box } from "@mui/system";
-import React from "react";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import EmailIcon from "@mui/icons-material/Email";
-import LanguageIcon from "@mui/icons-material/Language";
-import { Typography } from "@mui/material";
-const baseURL = process.env.REACT_APP_API
-const HeaderBaseInformationCompany = ({jobDetail }) => {
-//   const onClick = () => {
-//     console.log(123)
-//  }
- return (
+import { Box } from '@mui/system';
+import React from 'react';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import EmailIcon from '@mui/icons-material/Email';
+import LanguageIcon from '@mui/icons-material/Language';
+import { Typography } from '@mui/material';
+const baseURL = process.env.REACT_APP_API;
+const HeaderBaseInformationCompany = ({ jobDetail }) => {
+  return (
     <div>
       <Box
         sx={{
-          border: "1px solid #DEDEDE",
+          border: '1px solid #DEDEDE',
         }}
         elevation={0}
         PaperProps={{
           elevation: 0,
         }}
       >
-        <div className="base__information-card">
+        <div className='base__information-card'>
           <div
             style={{
-              marginRight: "16px",
+              marginRight: '16px',
             }}
           >
             <Box
@@ -32,66 +29,69 @@ const HeaderBaseInformationCompany = ({jobDetail }) => {
               sx={{
                 width: 135,
                 height: 120,
-                backgroundColor: "white",
-                border: "1px solid #DEDEDE",
-                borderRadius: "6px",
-                marginRight: "20px",
-                marginTop: "16px",
-                marginLeft: "28px",
+                backgroundColor: 'white',
+                border: '1px solid #DEDEDE',
+                borderRadius: '6px',
+                marginRight: '20px',
+                marginTop: '16px',
+                marginLeft: '28px',
               }}
             >
               <img
-                className="img-logo"
-                alt=""
+                className='img-logo'
+                alt=''
                 src={`${baseURL}/${jobDetail?.universityDTO?.avatar}`}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
                   currentTarget.onerror = undefined;
                   currentTarget.src =
-                  "https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                    'https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png';
                 }}
               />
             </Box>
           </div>
 
-          <div className="base__information-card-detail">
-            <h3 className="company-name">{jobDetail?.hr?.company.name || jobDetail?.universityDTO?.name}</h3>
+          <div className='base__information-card-detail'>
+            <h3 className='company-name'>
+              {jobDetail?.hr?.company.name || jobDetail?.universityDTO?.name}
+            </h3>
             <div
-            className="company_info"
+              className='company_info'
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
               <div
                 style={{
-                  display: "block",
-                  marginRight: "20px",
+                  display: 'block',
+                  marginRight: '20px',
                 }}
               >
                 <div
-                  className=""
+                  className=''
                   style={{
-                    marginBottom: "10px",
+                    marginBottom: '10px',
                   }}
                 >
                   <PhoneInTalkIcon
                     sx={{
                       fontSize: 18,
-                      color: "#04bf8a",
+                      color: '#04bf8a',
                     }}
                   />
                   <Typography
-                    variant="h6"
-                    component="div"
+                    variant='h6'
+                    component='div'
                     sx={{
-                      transform: "translate(5px,0px)",
+                      transform: 'translate(5px,0px)',
                     }}
                   >
-                    {jobDetail?.hr?.company?.phone || jobDetail?.universityDTO?.phone}
+                    {jobDetail?.hr?.company?.phone ||
+                      jobDetail?.universityDTO?.phone}
                   </Typography>
                 </div>
-                <div className="">
+                <div className=''>
                   <h5
                     style={
                       {
@@ -102,21 +102,25 @@ const HeaderBaseInformationCompany = ({jobDetail }) => {
                     <EmailIcon
                       sx={{
                         fontSize: 18,
-                        color: "#04bf8a",
+                        color: '#04bf8a',
                       }}
                     />
                     <a
-                      href={`mailto:${jobDetail?.hr?.company.email}` || `mailto:${jobDetail?.universityDTO?.email}`}
-                      className=" "
+                      href={
+                        `mailto:${jobDetail?.hr?.company.email}` ||
+                        `mailto:${jobDetail?.universityDTO?.email}`
+                      }
+                      className=' '
                     >
-                      {jobDetail?.hr?.company.email || jobDetail?.universityDTO?.email}
+                      {jobDetail?.hr?.company.email ||
+                        jobDetail?.universityDTO?.email}
                     </a>
                   </h5>
                 </div>
               </div>
 
               <div
-                className="detail-website"
+                className='detail-website'
                 style={
                   {
                     // height: "58px",
@@ -124,50 +128,53 @@ const HeaderBaseInformationCompany = ({jobDetail }) => {
                 }
               >
                 <h5
-                  className=""
+                  className=''
                   style={{
-                    marginBottom: "10px",
+                    marginBottom: '10px',
                   }}
                 >
                   <LanguageIcon
                     sx={{
                       fontSize: 18,
-                      color: "#04bf8a",
+                      color: '#04bf8a',
                     }}
                   />
                   <a
-                    href={jobDetail?.hr?.company.website || jobDetail?.universityDTO?.website}
-                    className=""
+                    href={
+                      jobDetail?.hr?.company.website ||
+                      jobDetail?.universityDTO?.website
+                    }
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className=''
                     style={{}}
                   >
-                    {jobDetail?.hr?.company.website || jobDetail?.universityDTO?.website}
+                    {jobDetail?.hr?.company.website ||
+                      jobDetail?.universityDTO?.website}
                   </a>
                 </h5>
 
                 <div
-                  className=" base__information-card-detail-location-candidate"
-                  style={
-                    {
-                    }
-                  }
+                  className=' base__information-card-detail-location-candidate'
+                  style={{}}
                 >
                   <LocationOnIcon
                     sx={{
                       fontSize: 18,
-                      color: "#04bf8a",
+                      color: '#04bf8a',
                     }}
                   />
                   <Typography
-                    variant="h6"
-                    component="div"
+                    variant='h6'
+                    component='div'
                     sx={{
                       fontSize: 16,
-                      fontWeight: "400",
-                      transform: "translate(5px,0px)",
+                      fontWeight: '400',
+                      transform: 'translate(5px,0px)',
                     }}
                   >
                     {`${jobDetail?.locationjob?.address} ${jobDetail?.locationjob?.district.province.name}` ||
-                     `${jobDetail?.universityDTO?.locations?.[0]?.address} ${jobDetail?.universityDTO?.locations?.[0]?.district?.name} ${jobDetail?.universityDTO?.locations?.[0]?.province?.name}` }
+                      `${jobDetail?.universityDTO?.locations?.[0]?.address} ${jobDetail?.universityDTO?.locations?.[0]?.district?.name} ${jobDetail?.universityDTO?.locations?.[0]?.province?.name}`}
                   </Typography>
                 </div>
               </div>

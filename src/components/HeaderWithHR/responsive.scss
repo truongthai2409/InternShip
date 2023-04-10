@@ -1,4 +1,6 @@
 //mobile
+@use '../../assets/styles/' as *;
+
 @media screen and (max-width: 519px) {
   .header__hr-post,
   .responsive__header-search,
@@ -9,7 +11,7 @@
     display: flex;
   }
   .search__icon {
-    font-family: "Roboto", sans-serif;
+    font-family: $f-family;
     display: flex !important;
     align-items: center;
   }

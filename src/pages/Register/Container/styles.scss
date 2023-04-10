@@ -1,16 +1,23 @@
-@use "../../../assets/styles/index.scss" as *;
+@use '../../../assets/styles/index.scss' as *;
 
 .register__container {
   width: 100%;
+  border: 1px solid #dedede;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 10px 10px 0px;
+  padding: 40px 40px;
   &__form {
     width: 100%;
     &--name {
       width: 100%;
       display: flex;
       align-items: baseline;
-      gap: 1rem
+      gap: 1rem;
+      .custom-input {
+        margin-top: 0;
+      }
     }
-    
+
     > .select-form {
       margin-bottom: 20px;
     }
@@ -21,10 +28,13 @@
 
   &__btns {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    button {
+      width: 360px;
+    }
   }
 
   .reg-candidate__title-infor {
@@ -33,7 +43,57 @@
     text-transform: uppercase;
     margin-top: 40px;
   }
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    button {
+      width: 49%;
+      height: 40px;
+    }
+    &__google {
+      gap: 6px;
+      font-size: $fs-13;
+      background-color: #ea4335 !important;
+      font-weight: normal;
+    }
+    &__facebook {
+      gap: 6px;
+      font-size: $fs-13;
+      background-color: #375899 !important;
+      font-weight: normal;
+    }
+  }
+  .register-container__footer {
+    margin: 10px auto 20px !important;
+  }
+
+  &__form--title {
+    text-align: left;
+    color: #00b074;
+    font-size: 16px;
+    margin: 30px 0 20px 0;
+  }
+}
+.row-3-col {
+  margin: 0 0 20px 0 !important;
 }
 .custom_req_can {
   margin-top: -8px;
+}
+
+@media only screen and(max-width : 1278px) {
+  .button-container {
+    button {
+      width: 48% !important;
+      padding: 0 !important;
+    }
+  }
+  .register__container__btns {
+    button {
+      width: 270px;
+    }
+  }
 }

@@ -1,15 +1,16 @@
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-import WorkIcon from "@mui/icons-material/Work";
-import { Icon, Typography } from "@mui/material";
-import moment from "moment";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { addApply } from "src/store/slices/main/candidate/apply/applySlice";
-import { getAllJobApply, getJobApplyListByCandidate } from "src/store/slices/main/home/job/jobCandidateSlice";
-import Button from "../Button";
-import "./styles.scss";
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import WorkIcon from '@mui/icons-material/Work';
+import { Icon, Typography } from '@mui/material';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { addApply } from 'src/store/slices/main/candidate/apply/applySlice';
+import { getJobApplyListByCandidate } from 'src/store/slices/main/home/job/jobCandidateSlice';
+import Button from '../shared/Button';
+import './styles.scss';
 
 const InformationCompany = ({
   jobDetail,
@@ -17,6 +18,7 @@ const InformationCompany = ({
   rating,
   demandPartner = false,
 }) => {
+  const { t } = useTranslation('cardInformation');
   const [check, setCheck] = useState(false);
   const { user } = useSelector((state) => state.profile);
   const { allJobApply } = useSelector((state) => state.jobCandidateSlice);
@@ -26,7 +28,11 @@ const InformationCompany = ({
     e.stopPropagation();
     if (user) {
       if (!user?.cv) {
-        toast.error("Bạn chưa có CV, vui lòng cập nhật");
+        toast.error(t('youDoNotHaveACVYetPleaseUpdateItTL'), {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
         const applyData = {
           apply: JSON.stringify({
@@ -36,7 +42,7 @@ const InformationCompany = ({
             candidate: {
               id: user.id,
             },
-            referenceLetter: `Đơn ứng tuyển ${user?.user?.username}`,
+            referenceLetter: `${t('jobApplicationTL')} ${user?.user?.username}`,
           }),
           fileCV: user.cv,
         };
@@ -45,16 +51,20 @@ const InformationCompany = ({
           resApply.payload.status === 200 ||
           resApply.payload.status === 201
         ) {
-          toast.success("Đã nộp CV thành công");
+          toast.success(t('yourCVHasBeenSubmittedSuccessfullyTL'), {
+            position: 'top-right',
+            autoClose: 3000,
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+          });
           setCheck(true);
           const token =
-            JSON.parse(sessionStorage.getItem("userPresent")) ||
-            JSON.parse(localStorage.getItem("userPresent"));
+            JSON.parse(sessionStorage.getItem('userPresent')) ||
+            JSON.parse(localStorage.getItem('userPresent'));
           const page = {
             user: user,
             token: token.token,
             page: {
-              no:0,
+              no: 0,
               limit: 5,
             },
           };
@@ -62,24 +72,28 @@ const InformationCompany = ({
         }
       }
     } else {
-      toast.error("Bạn cần đăng nhập với vai trò ứng viên để ứng tuyển");
+      toast.error(t('youNeedToLogInAsaCandidateToApplyForThisPositionTL'), {
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      });
     }
   };
-  useEffect(() => {
-    const userStorage =
-      JSON.parse(sessionStorage.getItem("userPresent")) ||
-      JSON.parse(localStorage.getItem("userPresent"));
-    const dispatchJobApply = {
-      user: user,
-      token: userStorage?.token,
-      page: {
-        no: 0,
-        limit: 1000,
-      },
-    };
-    user?.user?.role?.name === "Role_Candidate" &&
-      dispatch(getAllJobApply(dispatchJobApply));
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   const userStorage =
+  //     JSON.parse(sessionStorage.getItem('userPresent')) ||
+  //     JSON.parse(localStorage.getItem('userPresent'));
+  //   const dispatchJobApply = {
+  //     user: user,
+  //     token: userStorage?.token,
+  //     page: {
+  //       no: 0,
+  //       limit: 1000,
+  //     },
+  //   };
+  //   user?.user?.role?.name === 'Role_Candidate' &&
+  //     dispatch(getAllJobApply(dispatchJobApply));
+  // }, [dispatch, user]);
   useEffect(() => {
     setCheck(
       allJobApply
@@ -94,229 +108,237 @@ const InformationCompany = ({
     <div>
       {jobDetail && (
         <>
-          <div className="detail__card-3">
-            <Typography variant="span">
+          <div className='detail__card-3 scrollCardInforCompany2'>
+            <Typography variant='span'>
               <Typography
-                variant="span"
-                sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+                variant='span'
+                sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                Mô tả công việc:
+                {t('jobDescriptionTL')}
               </Typography>
               <Typography
-                variant="body2"
+                variant='body2'
                 gutterBottom
-                sx={{ fontSize: 16, fontWeight: "400" }}
+                sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.description }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
-            <Typography variant="span">
+            <Typography variant='span'>
               <Typography
-                variant="span"
-                sx={{ fontSize: 16, color: "black", fontWeight: "700" }}
+                variant='span'
+                sx={{ fontSize: 16, color: 'black', fontWeight: '700' }}
               >
-                Yêu cầu công việc:
+                {t('jobRequirementsTL')}
               </Typography>
               <Typography
-                variant="body2"
+                variant='body2'
                 gutterBottom
-                sx={{ fontSize: 14, fontWeight: "400" }}
+                sx={{ fontSize: 14, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{ __html: jobDetail.requirement }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
-            <div className="detail__card-3-item">
-              <Typography variant="span">
+            <div className='detail__card-3-item'>
+              <Typography variant='span'>
                 <Typography
-                  variant="span"
-                  sx={{ fontSize: 16, fontWeight: "700" }}
+                  variant='span'
+                  sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  Quyền lợi:
+                  {t('benefitsTL')}
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant='body2'
                   gutterBottom
-                  sx={{ fontWeight: "400", fontSize: "14px !important" }}
+                  sx={{ fontWeight: '400', fontSize: '14px !important' }}
                 >
-                  <div
+                  <span
                     dangerouslySetInnerHTML={{ __html: jobDetail.otherInfo }}
-                  ></div>
+                  ></span>
                 </Typography>
               </Typography>
             </div>
-            <div className="detail__card-3-item">
-              <Typography variant="span">
+            <div className='detail__card-3-item'>
+              <Typography variant='span'>
                 <Typography
-                  variant="span"
-                  sx={{ fontSize: 16, fontWeight: "700" }}
+                  variant='span'
+                  sx={{ fontSize: 16, fontWeight: '700' }}
                 >
-                  Thời hạn ứng tuyển:
+                  {t('applicationDeadlineTL')}
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant='body2'
                   gutterBottom
-                  className="time-line"
-                  sx={{ fontSize: "14px !important", fontWeight: "400" }}
+                  className='time-line'
+                  sx={{ fontSize: '14px !important', fontWeight: '400' }}
                 >
-                  {moment(jobDetail.timeStartStr).format("DD/MM/YYYY")} -{" "}
-                  {moment(jobDetail.timeEndStr).format("DD/MM/YYYY")}
+                  {moment(jobDetail.timeStartStr).format('DD/MM/YYYY')} -{' '}
+                  {moment(jobDetail.timeEndStr).format('DD/MM/YYYY')}
                 </Typography>
               </Typography>
             </div>
           </div>
-          <div className="line"></div>
-          <div className="detail__card-4">
-            <div className="detail__card-4-item" sx={{ display: "flex" }}>
-              <Icon className="detail__card-4-item-icon">
+          <div className='line'></div>
+          <div className='detail__card-4'>
+            <div className='detail__card-4-item' sx={{ display: 'flex' }}>
+              <Icon className='detail__card-4-item-icon'>
                 <WorkIcon />
               </Icon>
               <Typography
-                variant="h6"
-                component="div"
+                variant='h6'
+                component='div'
                 sx={{
                   fontSize: 14,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  fontWeight: '400',
+                  transform: 'translate(3px,3px)',
+                  flex: 1,
+                  // overflow: "hidden",
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {jobDetail.jobType?.name}
               </Typography>
             </div>
-            <div className="detail__card-4-item">
-              <AddLocationIcon className="detail__card-4-item-icon">
+            <div className='detail__card-4-item'>
+              <AddLocationIcon className='detail__card-4-item-icon'>
                 <WorkIcon />
               </AddLocationIcon>
               <Typography
-                variant="h6"
-                component="div"
+                variant='h6'
+                component='div'
                 sx={{
                   fontSize: 14,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  fontWeight: '400',
+                  transform: 'translate(3px,3px)',
                   flex: 1,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
+                  // overflow: "hidden",
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {`${jobDetail.locationjob?.address}, ${jobDetail.locationjob?.district?.name}, ${jobDetail.locationjob?.district?.province?.name}`}
               </Typography>
             </div>
           </div>
-          {user?.user?.role?.name === "Role_Candidate" ? (
-            <div className="detail__card-5">
+          {user?.user?.role?.name === 'Role_Candidate' ? (
+            <div className='detail__card-5'>
               <Button
-                name={check ? "Đã ứng tuyển" : "Ứng tuyển"}
+                name={
+                  check ? `${t('applicationSubmittedTL')}` : `${t('applyTL')}`
+                }
                 onClick={handleAddJob}
                 disabled={check ? true : false}
-                bheight="35px"
+                bheight='35px'
               ></Button>
             </div>
           ) : (
-            ""
+            ''
           )}
         </>
       )}
       {jobDetailById && (
         <>
-          <div className="detail__card-3">
-            <Typography variant="span">
+          <div className='detail__card-3 scrollCardInforCompany2'>
+            <Typography variant='span'>
               <Typography
-                variant="span"
-                sx={{ fontSize: 18, color: "black", fontWeight: "700" }}
+                variant='span'
+                sx={{ fontSize: 18, color: 'black', fontWeight: '700' }}
               >
-                {demandPartner ? "Danh sách sinh viên" : "Mô tả công việc:"}
+                {demandPartner
+                  ? `${t('listOfStudentsTL')}`
+                  : `${t('jobDescriptionTL')}`}
               </Typography>
               <Typography
-                variant="body2"
+                variant='body2'
                 gutterBottom
-                sx={{ fontSize: 16, fontWeight: "400" }}
+                sx={{ fontSize: 16, fontWeight: '400' }}
               >
-                <div
+                <span
                   dangerouslySetInnerHTML={{
                     __html: jobDetailById.description,
                   }}
-                ></div>
+                ></span>
               </Typography>
             </Typography>
-            <div className="detail__card-3-item">
+            <div className='detail__card-3-item'>
               {demandPartner ? (
                 <></>
               ) : (
-                <Typography variant="span">
+                <Typography variant='span'>
                   <Typography
-                    variant="span"
-                    sx={{ fontSize: 18, fontWeight: "700" }}
+                    variant='span'
+                    sx={{ fontSize: 18, fontWeight: '700' }}
                   >
-                    Yêu cầu công việc:
+                    {t('jobRequirementsTL')}
                   </Typography>
                   <Typography
-                    variant="body2"
+                    variant='body2'
                     gutterBottom
-                    sx={{ fontSize: 16, fontWeight: "400" }}
+                    sx={{ fontSize: 16, fontWeight: '400' }}
                   >
-                    <div
+                    <span
                       dangerouslySetInnerHTML={{
                         __html: jobDetailById.requirement,
                       }}
-                    ></div>
+                    ></span>
                   </Typography>
                 </Typography>
               )}
             </div>
-            <div className="detail__card-3-item">
-              <Typography variant="span">
+            <div className='detail__card-3-item'>
+              <Typography variant='span'>
                 <Typography
-                  variant="span"
-                  sx={{ fontSize: 18, fontWeight: "700"}}
+                  variant='span'
+                  sx={{ fontSize: 18, fontWeight: '700' }}
                 >
-                  Thời hạn ứng tuyển:<br/>
+                  <span>{t('applicationDeadlineTL')}</span>
+                  <br />
                 </Typography>
                 <Typography
-                  variant="span"
+                  variant='span'
                   gutterBottom
-                  sx={{ fontSize: 17, fontWeight: "400" }}
+                  sx={{ fontSize: 17, fontWeight: '400' }}
                 >
-                  {moment(jobDetailById.timeStartStr).format("DD/MM/YYYY")} -{" "}
-                  {moment(jobDetailById.timeEndStr).format("DD/MM/YYYY")}
+                  {moment(jobDetailById.timeStartStr).format('DD/MM/YYYY')} -{' '}
+                  {moment(jobDetailById.timeEndStr).format('DD/MM/YYYY')}
                 </Typography>
               </Typography>
             </div>
           </div>
-          <div className="line"></div>
-          <div className="detail__card-4">
-            <div className="detail__card-4-item" sx={{ display: "flex" }}>
-              <Icon className="detail__card-4-item-icon">
+          <div className='line'></div>
+          <div className='detail__card-4'>
+            <div className='detail__card-4-item' sx={{ display: 'flex' }}>
+              <Icon className='detail__card-4-item-icon'>
                 <WorkIcon />
               </Icon>
               <Typography
-                  variant="span"
-                component="div"
+                variant='span'
+                component='div'
                 sx={{
                   fontSize: 17,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
+                  fontWeight: '400',
+                  transform: 'translate(5px,5px)',
                 }}
               >
                 {jobDetailById.jobType?.name}
               </Typography>
             </div>
-            <div className="detail__card-4-item">
-              <AddLocationIcon className="detail__card-4-item-icon">
+            <div className='detail__card-4-item'>
+              <AddLocationIcon className='detail__card-4-item-icon'>
                 <WorkIcon />
               </AddLocationIcon>
               <Typography
-                  variant="span"
-                component="div"
+                variant='span'
+                component='div'
                 sx={{
                   fontSize: 14,
-                  fontWeight: "400",
-                  transform: "translate(5px,5px)",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
+                  fontWeight: '400',
+                  transform: 'translate(5px,5px)',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
                 }}
               >
                 {`${jobDetailById.locationjob?.address} ${jobDetailById.locationjob?.district?.name}`}

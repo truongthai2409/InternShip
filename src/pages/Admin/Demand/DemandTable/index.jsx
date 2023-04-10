@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 // import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { IconButton, Tooltip } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import DataTable from "../../../../components/Table";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { IconButton, Tooltip } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import DataTable from '../../../../components/shared/Table';
 import {
   getAdminListDemand,
   searchDemand,
   updateDemandStatus,
-} from "src/store/slices/Admin/demand/adminDemandSlice";
+} from 'src/store/slices/Admin/demand/adminDemandSlice';
 
 const DemandTable = ({ searchValue }) => {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,10 +23,9 @@ const DemandTable = ({ searchValue }) => {
   const { demandList, totalPages, totalItems } = useSelector(
     (state) => state.adminDemand
   );
-  console.log(demandList)
 
   useEffect(() => {
-    if (searchValue === "") {
+    if (searchValue === '') {
       dispatch(getAdminListDemand([page, 10]));
     } else {
       dispatch(
@@ -36,10 +35,10 @@ const DemandTable = ({ searchValue }) => {
   }, [page]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70 },
+    { field: 'id', headerName: 'ID', width: 70 },
     {
-      field: "name",
-      headerName: "Tiêu đề bài đăng",
+      field: 'name',
+      headerName: 'Tiêu đề bài đăng',
       flex: 1,
       renderCell: (params) => {
         const { row } = params;
@@ -50,17 +49,16 @@ const DemandTable = ({ searchValue }) => {
         );
       },
     },
-    { field: "partner", headerName: "Cộng tác viên", width: 150 },
-    { field: "major", headerName: "Chuyên ngành", width: 250 },
-    { field: "createDate", headerName: "Ngày tạo", width: 150 },
-    { field: "students", headerName: "Danh sách sinh viên", width: 150 },
+    { field: 'partner', headerName: 'Cộng tác viên', width: 150 },
+    { field: 'major', headerName: 'Chuyên ngành', width: 250 },
+    { field: 'createDate', headerName: 'Ngày tạo', width: 150 },
+    { field: 'students', headerName: 'Danh sách sinh viên', width: 150 },
     {
-      field: "status",
-      headerName: "Trạng thái",
+      field: 'status',
+      headerName: 'Trạng thái',
       width: 120,
       renderCell: (params) => {
         const { row } = params;
-        // console.log(row)
         const handleChangeStatus = (e) => {
           const updateData = {
             university: JSON.stringify({
@@ -68,11 +66,13 @@ const DemandTable = ({ searchValue }) => {
                 id: parseInt(e.target.value),
               },
             }),
-          uniId: row.id,
-        };
-        dispatch(updateDemandStatus([updateData, userSessionStorage?.token])).then(() => {
-          dispatch(getAdminListDemand([page, 10, userSessionStorage?.token]))
-        })
+            uniId: row.id,
+          };
+          dispatch(
+            updateDemandStatus([updateData, userSessionStorage?.token])
+          ).then(() => {
+            dispatch(getAdminListDemand([page, 10, userSessionStorage?.token]));
+          });
         };
         return (
           <select
@@ -80,7 +80,7 @@ const DemandTable = ({ searchValue }) => {
             id={row.status}
             value={row.status || 0}
             onChange={(e) => handleChangeStatus(e)}
-            className="company-table__select"
+            className='company-table__select'
           >
             <option value={0}>Not verified</option>
             <option value={1}>Active</option>
@@ -91,21 +91,21 @@ const DemandTable = ({ searchValue }) => {
       },
     },
     {
-      field: "action",
-      headerName: "Tùy chọn",
+      field: 'action',
+      headerName: 'Tùy chọn',
       width: 150,
       sortable: false,
       renderCell: (params) => {
         const { row } = params;
         const handleClick = () => {
-          navigate(`/admin/Demand/${row.id}`);
+          navigate(`/admin/Demand/${row.id}`, { replace: true });
         };
         return (
           <>
-            <IconButton className="user-edit__button" onClick={handleClick}>
+            <IconButton className='user-edit__button' onClick={handleClick}>
               <VisibilityOutlinedIcon />
             </IconButton>
-            <IconButton className="user-delete__button">
+            <IconButton className='user-delete__button'>
               <DeleteForeverOutlinedIcon />
             </IconButton>
           </>

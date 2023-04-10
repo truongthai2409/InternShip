@@ -1,4 +1,4 @@
-@use "../../../assets/styles/" as *;
+@use '../../../assets/styles/' as *;
 
 .reg-partner {
   width: 100%;
@@ -106,4 +106,9 @@
     align-items: stretch;
     gap: 12px;
   }
+}
+
+.required_school {
+  text-align: left;
+  color: red;
 }

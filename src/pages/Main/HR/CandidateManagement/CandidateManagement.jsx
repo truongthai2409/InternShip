@@ -1,11 +1,11 @@
-import React from "react";
-import "./CandidateManagement.scss";
-import CandidateInfo from "./CandidateInfo";
+import React from 'react';
+import './CandidateManagement.scss';
+import CandidateInfo from './CandidateInfo';
 
 export default function CandidateManagement() {
   // 🌹 Version 2  */
   return (
-    <div className="CandidateManagement_Container">
+    <div className='CandidateManagement_Container'>
       {/* <CandidateInfo
         image="https://cdn.tgdd.vn/Files/2020/12/29/1316941/cach-cai-hinh-nen-doi-theo-ngay-dem-tren-iphone-d-1.jpg"
         name="Bùi Anh Thư"

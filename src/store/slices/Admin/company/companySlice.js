@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import notificationSlice from "../../notifications/notificationSlice";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import notificationSlice from '../../notifications/notificationSlice';
 
 const baseURL = process.env.REACT_APP_API;
 
 const companySlice = createSlice({
-  name: "company",
+  name: 'company',
   initialState: {
     companyList: [],
     companyDetail: {},
@@ -50,16 +50,19 @@ export default companySlice;
  * @returns company list
  */
 export const getCompanyList = createAsyncThunk(
-  "company/getCompanyList",
+  'company/getCompanyList',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[2],
-        "Content-Type": "multipart/form-data",
+        Authorization: 'Bearer ' + args[2],
+        'Content-Type': 'multipart/form-data',
       },
     };
     return await axios
-      .get(`${baseURL}/api/r2s/company?no=${args[0] - 1}&limit=${args[1]}`, header)
+      .get(
+        `${baseURL}/api/r2s/company?no=${args[0] - 1}&limit=${args[1]}`,
+        header
+      )
       .then((response) => {
         return response.data;
       })
@@ -76,25 +79,24 @@ export const getCompanyList = createAsyncThunk(
  */
 
 export const addCompanyByAdmin = createAsyncThunk(
-  "company/addCompanyByAdmin",
+  'company/addCompanyByAdmin',
   async (data, thunkAPI) => {
     return axios
       .post(`${baseURL}/api/company`, data, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
-        console.log("response", response);
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Thêm công ty thành công")
+          notificationSlice.actions.successMess('Thêm công ty thành công')
         );
-        
+
         return response.data;
       })
       .catch((error) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Thêm công ty không thành công")
+          notificationSlice.actions.errorMess('Thêm công ty không thành công')
         );
         return error.response.data;
       });
@@ -107,7 +109,7 @@ export const addCompanyByAdmin = createAsyncThunk(
  * @return company detail
  */
 export const getCompanyDetail = createAsyncThunk(
-  "company/getCompanyDetail",
+  'company/getCompanyDetail',
   async (comId) => {
     return await axios
       .get(`${baseURL}/api/company/${comId}`)
@@ -127,18 +129,18 @@ export const getCompanyDetail = createAsyncThunk(
  * error => error.response.data
  */
 export const updateCompanyInfo = createAsyncThunk(
-  "company/updateCompanyInfo",
+  'company/updateCompanyInfo',
   async (updateData, thunkAPI) => {
     const { companyData, setIsEdit, comid } = updateData;
     return axios
       .put(`${baseURL}/api/company/${comid}`, companyData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Cập nhật công ty thành công")
+          notificationSlice.actions.successMess('Cập nhật công ty thành công')
         );
         if (setIsEdit) {
           setIsEdit(false);
@@ -147,7 +149,7 @@ export const updateCompanyInfo = createAsyncThunk(
       .catch((error) => {
         thunkAPI.dispatch(
           notificationSlice.actions.errorMess(
-            "Cập nhật công ty Không thành công"
+            'Cập nhật công ty Không thành công'
           )
         );
         return error.response.data;
@@ -156,39 +158,47 @@ export const updateCompanyInfo = createAsyncThunk(
 );
 
 export const deleteCompany = createAsyncThunk(
-  "company/deleteCompany",
+  'company/deleteCompany',
   async (id, thunkAPI) => {
     return await axios
       .delete(`${baseURL}/api/company/${id}`)
       .then((response) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.successMess("Xóa công ty thành công.")
+          notificationSlice.actions.successMess('Xóa công ty thành công.')
         );
         return response.data;
       })
       .catch((error) => {
         thunkAPI.dispatch(
-          notificationSlice.actions.errorMess("Xóa công ty không thành công.")
+          notificationSlice.actions.errorMess('Xóa công ty không thành công.')
         );
         return error.response.data;
       });
   }
 );
 
-export const searchCompany = createAsyncThunk("company/searchCompany", async (args) => {
-  const header = {
-    headers: {
-      Authorization: "Bearer " + args[3],
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  const res = await axios
-    .get(`${baseURL}/api/r2s/admin/company/search?name=${args[0]}&no=${args[1] - 1}&limit=${args[2]}`, header)
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err.response.data;
-    });
-  return res;
-})
+export const searchCompany = createAsyncThunk(
+  'company/searchCompany',
+  async (args) => {
+    const header = {
+      headers: {
+        Authorization: 'Bearer ' + args[3],
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    const res = await axios
+      .get(
+        `${baseURL}/api/r2s/admin/company/search?name=${args[0]}&no=${
+          args[1] - 1
+        }&limit=${args[2]}`,
+        header
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response.data;
+      });
+    return res;
+  }
+);

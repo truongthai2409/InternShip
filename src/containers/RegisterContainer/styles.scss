@@ -4,7 +4,7 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   @include formContainer(60%);
   &__title {
-    font-size: $fs-16;
+    font-size: 16px;
     font-weight: $fw-bold-1;
     text-transform: uppercase;
     margin: 0;
@@ -14,9 +14,6 @@
     p {
       font-size: $fs-13;
       color: $color-black-0;
-      a {
-        color: $primary-color;
-      }
     }
   }
 }

@@ -1,40 +1,40 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import StarIcon from "@mui/icons-material/Star";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import { IconButton, Tooltip } from "@mui/material";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { yupResolver } from '@hookform/resolvers/yup';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import StarIcon from '@mui/icons-material/Star';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import { IconButton, Tooltip } from '@mui/material';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import {
   deleteAppreciate,
   getAppreciateByCompany,
   updateAppreciate,
-} from "src/store/slices/main/candidate/appreciate/appreciateSlice";
-import ButtonCustom from "../Button";
-import CustomCheckbox from "../CustomCheckbox";
-import CustomInput from "../CustomInput";
-import Modal from "../Modal";
-import Textarea from "../Textarea";
-import "./styles.scss";
-import { schema } from "./validate";
+} from 'src/store/slices/main/candidate/appreciate/appreciateSlice';
+import ButtonCustom from '../shared/Button';
+import CustomCheckbox from '../shared/CustomCheckbox';
+import CustomInput from '../shared/CustomInput';
+import Modal from '../shared/Modal';
+import Textarea from '../shared/Textarea';
+import './styles.scss';
+import { schema } from './validate';
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1.2),
 }));
 
-const Appreciate = ({ appreciate, fontSize , idCompany}) => {
+const Appreciate = ({ appreciate, fontSize, idCompany }) => {
   const value = appreciate?.score;
-  const nameUser = "Ẩn danh";
+  const nameUser = 'Ẩn danh';
   var checked = false;
   const { user } = useSelector((state) => state.profile);
   const [open, setOpen] = useState(false);
@@ -48,15 +48,20 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const { jobDetail } = useSelector((state) => state.job);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue("title", appreciate?.title);
-    setValue("comment", appreciate?.comment);
-    setValue("size-medium", appreciate?.score);
-    setValue("isCheck", appreciate?.hide);
-  }, [appreciate?.comment, appreciate?.hide, appreciate?.score, appreciate?.title, setValue]);
+    setValue('title', appreciate?.title);
+    setValue('comment', appreciate?.comment);
+    setValue('size-medium', appreciate?.score);
+    setValue('isCheck', appreciate?.hide);
+  }, [
+    appreciate?.comment,
+    appreciate?.hide,
+    appreciate?.score,
+    appreciate?.title,
+    setValue,
+  ]);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -85,22 +90,22 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
       };
       await dispatch(getAppreciateByCompany(values));
       if (res.payload.status === 200) {
-        toast.success("Đã đăng đánh giá");
+        toast.success('Đã đăng đánh giá', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
         toast.error(
-          "Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại"
+          'Có lỗi hoặc bạn đã từng đăng đánh giá, vui lòng kiểm tra lại',
+          {
+            position: 'top-right',
+            autoClose: 3000,
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+          }
         );
       }
-    } catch (error) {
-      // if (error.status === 400) {
-      //   for (const key in error.data) {
-      //     setError(key, {
-      //       type: "server",
-      //       message: error.data[key],
-      //     });
-      //   }
-      // }
-    }
+    } catch (error) {}
 
     reset();
     setOpen(false);
@@ -108,7 +113,11 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
   const handleDeleteAppreciate = async (e) => {
     e.stopPropagation();
     await dispatch(deleteAppreciate(appreciate.id)).then(
-      toast.success("Đã xóa đánh giá ")
+      toast.success('Đã xóa đánh giá ', {
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      })
     );
     const values = {
       idCompany: idCompany,
@@ -124,7 +133,7 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: '100%',
         mb: 1,
         borderRadius: 10,
       }}
@@ -135,63 +144,63 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
           sx={{}}
           className={
             user && appreciate?.user?.username === user?.user?.username
-              ? "appreciate__active"
-              : ""
+              ? 'appreciate__active'
+              : ''
           }
         >
-          <div className="appreciate" style={{}}>
-            <div className="fix_display">
+          <div className='appreciate' style={{}}>
+            <div className='fix_display'>
               <img
-                className=""
-                alt=""
-                src="https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png"
+                className=''
+                alt=''
+                src='https://r2s.com.vn/wp-content/uploads/2020/04/r2s.com_.vn_.png'
                 style={{}}
               />
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "start",
-                  flexDirection: "column",
+                  display: 'flex',
+                  alignItems: 'start',
+                  flexDirection: 'column',
                 }}
               >
                 <div>
                   <div>
                     <div
                       style={{
-                        display: "flex",
-                        alignItems: "center",
+                        display: 'flex',
+                        alignItems: 'center',
                       }}
                     >
                       <div
                         style={{
-                          marginRight: "10px",
+                          marginRight: '10px',
                         }}
                       >
                         <Typography
-                          variant="subtitle2"
-                          component="div"
+                          variant='subtitle2'
+                          component='div'
                           sx={{ fontSize: 16 }}
                         >
                           {(appreciate?.hide === true && nameUser) ||
                             appreciate?.user?.username ||
-                            "Ẩn danh"}
+                            'Ẩn danh'}
                         </Typography>
                       </div>
                       <div
                         style={{
                           // marginBottom: 10,
-                          transform: "translate(0px,4px)",
+                          transform: 'translate(0px,4px)',
                         }}
                       >
                         <Rating
-                          name="text-feedback"
+                          name='text-feedback'
                           value={value}
                           readOnly
                           precision={0.5}
                           emptyIcon={
                             <StarIcon
                               style={{ opacity: 0.55 }}
-                              fontSize="inherit"
+                              fontSize='inherit'
                             />
                           }
                           sx={{ fontSize: 18 }}
@@ -203,10 +212,10 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
                       sx={{
                         fontSize: 16,
                         // transform: "translate(0,-10px)",
-                        display: "flex",
-                        wordBreak: "break-word",
-                        textAlign: "initial",
-                        fontWeight: "400",
+                        display: 'flex',
+                        wordBreak: 'break-word',
+                        textAlign: 'initial',
+                        fontWeight: '400',
                       }}
                     >
                       {/* {`${appreciate?.comment?.slice(
@@ -223,30 +232,30 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "start",
+                    display: 'flex',
+                    alignItems: 'start',
                   }}
                 >
-                  <Tooltip title="Thích đánh giá">
+                  <Tooltip title='Thích đánh giá'>
                     <IconButton
                       style={{
-                        borderRadius: "4px",
+                        borderRadius: '4px',
                       }}
-                      aria-label="like"
-                      className="buttonMark__wrapper"
+                      aria-label='like'
+                      className='buttonMark__wrapper'
                       onClick={handleClickLike}
                     >
                       {like === false ? (
                         <ThumbUpOutlinedIcon
-                          fontSize="small"
-                          className="buttonMark__isChecking"
-                          style={{ fontSize: "17px" }}
+                          fontSize='small'
+                          className='buttonMark__isChecking'
+                          style={{ fontSize: '17px' }}
                         />
                       ) : (
                         <ThumbUpIcon
-                          fontSize="small"
-                          className="buttonMark__isChecking"
-                          style={{ fontSize: "17px" }}
+                          fontSize='small'
+                          className='buttonMark__isChecking'
+                          style={{ fontSize: '17px' }}
                         />
                       )}
                     </IconButton>
@@ -256,33 +265,33 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
             </div>
             <div
               style={{
-                fontSize: fontSize ? fontSize : "",
+                fontSize: fontSize ? fontSize : '',
               }}
             >
               <h6>{appreciate?.createDate}</h6>
-              <div className="">
+              <div className=''>
                 <div
-                  className=""
+                  className=''
                   style={{
-                    marginTop: "25px",
+                    marginTop: '25px',
                   }}
                 >
                   {appreciate?.user?.username === user?.user?.username && (
-                    <div className="">
+                    <div className=''>
                       <div>
-                        {" "}
-                        <Tooltip title="Chỉnh sửa" onClick={handleOpen}>
+                        {' '}
+                        <Tooltip title='Chỉnh sửa' onClick={handleOpen}>
                           <IconButton>
                             <EditOutlinedIcon
-                              sx={{ fontSize: "20px", color: "#04bf8a" }}
+                              sx={{ fontSize: '20px', color: '#04bf8a' }}
                             />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title="Xóa" onClick={handleDeleteAppreciate}>
+                        <Tooltip title='Xóa' onClick={handleDeleteAppreciate}>
                           <IconButton>
                             <DeleteIcon
-                              color=""
-                              sx={{ fontSize: "20px", color: "#04bf8a" }}
+                              color=''
+                              sx={{ fontSize: '20px', color: '#04bf8a' }}
                             />
                           </IconButton>
                         </Tooltip>
@@ -296,55 +305,55 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
         </Item>
         <Modal
           iconClose={true}
-          modalTitle="Sửa đánh giá "
+          modalTitle='Sửa đánh giá '
           open={open}
           setOpen={setOpen}
           children={
             <div>
               <CustomInput
-                label="Sửa tiêu đề "
-                id="title"
-                type="text"
-                placeholder="Rất tuyệt..."
+                label='Sửa tiêu đề '
+                id='title'
+                type='text'
+                placeholder='Rất tuyệt...'
                 register={register}
                 requirementField={false}
                 setValue={setValue}
-                height="50px"
-                border="1px solid black"
+                height='50px'
+                border='1px solid black'
               />
               <Textarea
-                label="Sửa đánh giá "
-                id="comment"
-                placeholder="Nhập vào đây..."
+                label='Sửa đánh giá '
+                id='comment'
+                placeholder='Nhập vào đây...'
                 register={register}
                 defaultValue={appreciate?.comment}
                 setValue={setValue}
                 check={true}
-                hover="1px solid green"
+                hover='1px solid green'
               >
                 {errors.comment?.message}
               </Textarea>
               <Box
                 sx={{
                   width: 200,
-                  display: "flex",
-                  alignItems: "center",
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
                 <Rating
-                  name="size-medium"
+                  name='size-medium'
                   defaultValue={valueRating}
                   precision={0.5}
                   onChange={(event, newValue) => {
                     setValueRating(newValue);
                   }}
                   sx={{
-                    fontSize: "20px",
-                    color: "yellow",
+                    fontSize: '20px',
+                    color: 'yellow',
                   }}
-                  size="large"
+                  size='large'
                   emptyIcon={
-                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    <StarIcon style={{ opacity: 0.55 }} fontSize='inherit' />
                   }
                 />
                 {valueRating !== null && (
@@ -354,15 +363,15 @@ const Appreciate = ({ appreciate, fontSize , idCompany}) => {
                 )}
               </Box>
               <div onChange={handleCheck}>
-                <CustomCheckbox key="1" label="Ẩn danh" />
+                <CustomCheckbox key='1' label='Ẩn danh' />
               </div>
               <ButtonCustom
                 onClick={handleSubmit(onSubmit)}
-                name="Đăng đánh giá"
+                name='Đăng đánh giá'
               />
             </div>
           }
-          name="list-candidate"
+          name='list-candidate'
         />
       </Stack>
     </Box>

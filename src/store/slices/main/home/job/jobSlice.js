@@ -1,11 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+import { getJobByCompanyThunk } from 'src/store/action/company/companyAction';
 
 const baseURL = process.env.REACT_APP_API;
 
 const jobSlice = createSlice({
-  name: "job",
+  name: 'job',
   initialState: {
     jobList: [],
     jobListCompany: [],
@@ -19,8 +21,8 @@ const jobSlice = createSlice({
     idJobActive: 0,
     jobDetail: {},
     jobPosition: [],
-    status: "fail",
-    error: "",
+    status: 'fail',
+    error: '',
     listCandidatesApplied: [],
     totalPages: 0,
     totalPageActive: 0,
@@ -41,7 +43,7 @@ const jobSlice = createSlice({
     builder.addCase(getJobList.fulfilled, (state, { payload }) => {
       state.jobList = payload.contents;
     });
-    builder.addCase(getJobByCompany.fulfilled, (state, { payload }) => {
+    builder.addCase(getJobByCompanyThunk.fulfilled, (state, { payload }) => {
       state.jobListCompany = payload;
     });
     builder.addCase(
@@ -51,7 +53,7 @@ const jobSlice = createSlice({
           state.error = 404;
         } else {
           state.jobListActived = payload.contents;
-          state.status = "fail";
+          state.status = 'fail';
           state.totalPages = payload.totalPages;
           state.totalPageActive = payload.totalPages;
           state.totalItemActive = payload.totalItems;
@@ -65,7 +67,7 @@ const jobSlice = createSlice({
           state.error = 404;
         } else {
           state.jobListDisabled = payload.contents;
-          state.status = "fail";
+          state.status = 'fail';
           state.totalPages = payload.totalPages;
           state.totalPageDisable = payload.totalPages;
           state.totalItemDisable = payload.totalItems;
@@ -100,21 +102,21 @@ const jobSlice = createSlice({
       state.jobDetail = payload?.contents;
     });
     builder.addCase(addJob.fulfilled, (state, payload) => {
-      if (payload.payload[1] === "repost") {
+      if (payload.payload[1] === 'repost') {
         state.jobListActived.unshift(payload.payload[0]);
-        toast.success("Đăng tuyển công việc thành công!", {
-          position: "bottom-right",
+        toast.success('Đăng tuyển công việc thành công!', {
+          position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
         });
       }
-      if (payload.payload[1] === "post") {
-        toast.success("Đăng tuyển công việc thành công!", {
-          position: "bottom-right",
+      if (payload.payload[1] === 'post') {
+        toast.success('Đăng tuyển công việc thành công!', {
+          position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
         });
-        state.status = "success";
+        state.status = 'success';
       }
     });
     builder.addCase(updateStatusJob.fulfilled, (state, { payload }) => {
@@ -124,17 +126,17 @@ const jobSlice = createSlice({
             return job.id !== payload.id;
           });
           state.jobListDisabled.push(payload);
-          toast.success("Đóng công việc thành công!", {
-            position: "bottom-right",
+          toast.success('Đóng công việc thành công!', {
+            position: 'top-right',
             autoClose: 3000,
-            theme: "colored",
+            theme: 'colored',
           });
           break;
         default:
-          toast.error("Chỉnh sửa trạng thái công việc thất bại!", {
-            position: "bottom-right",
+          toast.error('Chỉnh sửa trạng thái công việc thất bại!', {
+            position: 'top-right',
             autoClose: 3000,
-            theme: "colored",
+            theme: 'colored',
           });
       }
     });
@@ -145,10 +147,10 @@ const jobSlice = createSlice({
         }
         return job;
       });
-      toast.success("Chỉnh sửa công việc thành công!", {
-        position: "bottom-right",
+      toast.success('Chỉnh sửa công việc thành công!', {
+        position: 'top-right',
         autoClose: 3000,
-        theme: "colored",
+        theme: 'colored',
       });
     });
     builder.addCase(getListCandidateApplied.fulfilled, (state, { payload }) => {
@@ -158,7 +160,7 @@ const jobSlice = createSlice({
     });
   },
 });
-export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
+export const getJobList = createAsyncThunk('job/getJobList', async (args) => {
   return axios
     .get(`${baseURL}/api/r2s/job?no=${args[0] - 1}&limit=${args[1]}`)
     .then((response) => {
@@ -169,7 +171,7 @@ export const getJobList = createAsyncThunk("job/getJobList", async (args) => {
     });
 });
 
-export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
+export const getJobById = createAsyncThunk('job/getJobById', async (jobId) => {
   return axios
     .get(`${baseURL}/api/r2s/job/${jobId}`)
     .then((response) => {
@@ -181,7 +183,7 @@ export const getJobById = createAsyncThunk("job/getJobById", async (jobId) => {
 });
 
 export const getJobByName = createAsyncThunk(
-  "job/getJobByName",
+  'job/getJobByName',
   async (jobName) => {
     return axios
       .get(`${baseURL}/api/r2s/job/search?name=${jobName}`)
@@ -194,7 +196,7 @@ export const getJobByName = createAsyncThunk(
   }
 );
 export const getJobByNameAndLocation = createAsyncThunk(
-  "job/getJobByNameAndLocation",
+  'job/getJobByNameAndLocation',
   async (dataSearch) => {
     return axios
       .get(`${baseURL}/api/r2s/job/search`, {
@@ -217,7 +219,7 @@ export const getJobByNameAndLocation = createAsyncThunk(
  * args[2] : amount of job in each time get
  */
 export const getActivedJobListByUserId = createAsyncThunk(
-  "job/getJobListByUser",
+  'job/getJobListByUser',
   async (args) => {
     return axios
       .get(
@@ -242,7 +244,7 @@ export const getActivedJobListByUserId = createAsyncThunk(
  * args[2] : amount of job in each time get
  */
 export const getDisabledJobListByUserId = createAsyncThunk(
-  "job/getDisabledJobListByUserId",
+  'job/getDisabledJobListByUserId',
   async (args) => {
     return axios
       .get(
@@ -260,10 +262,10 @@ export const getDisabledJobListByUserId = createAsyncThunk(
 );
 
 export const getJobPositionList = createAsyncThunk(
-  "job/getJobPositionList",
+  'job/getJobPositionList',
   async () => {
     return axios
-      .get(`${baseURL}/api/r2s/JobPosition`)
+      .get(`${baseURL}/api/job-position-general`)
       .then((response) => {
         return response.data;
       })
@@ -279,11 +281,11 @@ export const getJobPositionList = createAsyncThunk(
  * args[0] : data of job
  * args[1] : status of form
  */
-export const addJob = createAsyncThunk("job/addJob", async (args) => {
+export const addJob = createAsyncThunk('job/addJob', async (args) => {
   let axiosConfig = {
     headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   };
   return axios
@@ -296,19 +298,27 @@ export const addJob = createAsyncThunk("job/addJob", async (args) => {
     });
 });
 
-export const getJobByCompany = createAsyncThunk(
-  "job/getJobByCompany",
-  async (companyId) => {
-    return axios
-      .get(`${baseURL}/api/job/company/${companyId}`)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+// export const getJobByCompany = createAsyncThunk(
+//   "job/getJobByCompany",
+//   async (companyId) => {
+//     return axios
+//       .get(`${baseURL}/api/job/company/${companyId}`)
+//       .then((response) => {
+//         return response.data;
+//       })
+//       .catch((error) => {
+//         return error.response.data;
+//       });
+//   }
+// );
+
+// export const getJobByCompany = createAsyncThunk(
+//   "job/getJobByCompany",
+//   async (companyId) => {
+//     const res = await getCompanyDetailAPI(companyId);
+//     return res.data;
+//   }
+// );
 
 // function use for update ?status of job by id job
 /**
@@ -319,16 +329,16 @@ export const getJobByCompany = createAsyncThunk(
  * args[3] : role
  */
 export const updateStatusJob = createAsyncThunk(
-  "job/updateStatusJob",
+  'job/updateStatusJob',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[2],
+        Authorization: 'Bearer ' + args[2],
       },
     };
 
     switch (args[3]) {
-      case "Role_HR": {
+      case 'Role_HR': {
         const data = {
           status: {
             id: args[1].status.id,
@@ -343,7 +353,7 @@ export const updateStatusJob = createAsyncThunk(
             return error.response.data;
           });
       }
-      case "Role_Partner": {
+      case 'Role_Partner': {
         const data = {
           id: args[0],
           status: {
@@ -372,10 +382,10 @@ export const updateStatusJob = createAsyncThunk(
  * args[1] : infor of job
  * args[2] : token
  */
-export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
+export const updateJob = createAsyncThunk('job/updateJob', async (args) => {
   const header = {
     headers: {
-      Authorization: "Bearer " + args[2],
+      Authorization: 'Bearer ' + args[2],
     },
   };
   const res = await axios
@@ -398,11 +408,11 @@ export const updateJob = createAsyncThunk("job/updateJob", async (args) => {
  * args[3] : amount of candidates in each time get
  */
 export const getListCandidateApplied = createAsyncThunk(
-  "job/getListCandidateApply",
+  'job/getListCandidateApply',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[2],
+        Authorization: 'Bearer ' + args[2],
       },
     };
     return axios
@@ -422,10 +432,10 @@ export const getListCandidateApplied = createAsyncThunk(
 );
 
 export const getJobFilterByUser = createAsyncThunk(
-  "job/getJobFilterByUser",
+  'job/getJobFilterByUser',
   async (dataSearch) => {
     return axios
-      .get(`${baseURL}/api/r2s/job/filter`, {
+      .get(`${baseURL}/api/job/filter`, {
         params: dataSearch,
       })
       .then((response) => {

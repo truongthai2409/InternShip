@@ -1,65 +1,41 @@
-import React from "react";
-import "./styles.scss";
-import { useSelector } from "react-redux";
+import React from 'react';
+import './styles.scss';
+import { useSelector } from 'react-redux';
 
-import Logo from "../../components/Logo/index";
-import Notification from "../../components/Notification";
-import {
-  userSelector,
-  statusSelector,
-} from "../../store/selectors/main/registerSelectors";
+import Notification from '../../components/shared/Notification';
 
-import { notificationSelector } from "../../store/selectors/notificationSelectors";
-
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Link, useLocation } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 export default function RegisterContainer({ Outlet }) {
-  const notification = useSelector(notificationSelector);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { t } = useTranslation('registerFrom');
 
-  const status = useSelector(statusSelector);
-  if (status === "success") {
-    setTimeout(() => {
-      navigate("/login");
-    }, 1000);
-  }
+  const notification = useSelector((state) => state.notification);
+  const location = useLocation();
 
   let title;
   switch (location.pathname) {
-    case "/register/hr":
-      title = "Đăng ký tài khoản Nhà tuyển dụng";
+    case '/register/hr':
+      title = t('registerforAnRecruiterAccountTL');
       break;
-    case "/register/partner":
-      title = "Đăng ký tài khoản Cộng tác viên trường";
+    case '/register/partner':
+      title = t('registerForaSchoolPartnerAccountTL');
       break;
-    case "/register/candidate":
-      title = "Đăng ký tài khoản Ứng viên";
+    case '/register/candidate':
+      title = t('registerForaCandidateAccountTL');
       break;
     default:
-      title = "Đăng ký";
+      title = t('registerTL');
   }
 
-  const roleID = useSelector(userSelector)?.role?.id;
+  const roleID = useSelector((state) => state.register.user);
   return (
-    <div className="register-container">
-     
-      <h1 className="register-container__title">{title}</h1>
+    <div className='register-container'>
+      {/* <h1 className='register-container__title'>{title}</h1> */}
       <Outlet />
-      <div className="register-container__footer">
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            fontSize: 17,
-            fontWeight: "400",
-            transform: "translate(5px,5px)",
-          }}
-        >
-          Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
-        </Typography>
-      </div>
+
       <Notification notifyAlert={notification} />
     </div>
   );

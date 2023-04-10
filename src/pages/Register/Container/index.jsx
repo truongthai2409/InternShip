@@ -1,11 +1,14 @@
-import { Divider } from "@mui/material";
-import ArrowButton from "src/components/ArrowButton/index";
-import Button from "src/components/Button";
-import CustomInput from "src/components/CustomInput/index";
-import InputFile from "src/components/InputFile";
-import SelectCustom from "src/components/Select";
-import { TabTitle } from "src/utils/GeneralFunctions";
-import "./styles.scss";
+import { Divider } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import Button from 'src/components/shared/Button';
+import CustomInput from 'src/components/shared/CustomInput/index';
+import { Typography } from '@mui/material';
+import { Link, useLocation } from 'react-router-dom';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import GoogleIcon from '@mui/icons-material/Google';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import './styles.scss';
+import SelectCustom from 'src/components/shared/Select';
 export default function Container({
   title,
   children,
@@ -17,131 +20,264 @@ export default function Container({
   errorMessage,
   genderList,
 }) {
-  TabTitle(`Đăng ký - ${title}`);
+  const { t } = useTranslation('registerFrom');
+  TabTitle(`${t('registerTL')} - ${title}`);
+  const location = useLocation();
+  const path = location.pathname;
 
   return (
-    <div className="register__container">
-      <p className="title-requirement">
-        (<span className="field-requirment"> * </span>)Trường bắt buộc
+    <div className='register__container'>
+      <h1 className='register-container__title'>Đăng ký tài khoản {title}</h1>
+      <p className='title-requirement'>
+        (<span className='field-requirment'> * </span>)&nbsp;{' '}
+        {t('requiredFieldTL')}
       </p>
+      {path === '/register/candidate' ? (
+        <>
+          <div className='button-container'>
+            <Button className='button-container__google'>
+              <GoogleIcon sx={{ fontSize: '13px' }} />
+              {'TIẾP TỤC VỚI GOOGLE'}
+            </Button>
+            <Button className='button-container__facebook'>
+              <FacebookIcon sx={{ fontSize: '13px' }} />
+              {'TIẾP TỤC VỚI FACEBOOK'}
+            </Button>
+          </div>
+          <Divider
+            style={{ marginTop: '2rem', color: '#CFD0D4', fontSize: '14px' }}
+          >
+            HOẶC
+          </Divider>
+        </>
+      ) : (
+        ''
+      )}
+
       <form
         onSubmit={handleClick}
-        className="register__container__form"
-        autoComplete="off"
-        encType="multipart/form-data"
+        className='register__container__form'
+        autoComplete='off'
+        encType='multipart/form-data'
       >
-        <div className="register__container__form--name">
-          <CustomInput
-            label="Tài khoản"
-            id="username"
-            type="text"
-            placeholder="Tài khoản..."
-            register={register}
-            subtitle="(Tên tài khoản ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt)"
-          >
-            {err.username?.message}
-            {errorMessage?.Username}
-            {"."}
-          </CustomInput>
-          <CustomInput
-            label="Email"
-            id="email"
-            type="email"
-            placeholder="Email..."
-            register={register}
-            subtitle="(Email có dạng abc@gmail.com, abc@yahoo.com,...)"
-          >
-            {err.email?.message}
-            {errorMessage?.Email}
-          </CustomInput>
-          <CustomInput
-            className="custom_req_can"
-            label="Số điện thoại"
-            id="phone"
-            type="phone"
-            placeholder="Số điện thoại..."
-            register={register}
-            subtitle="(Các đầu số 03, 05, 07, 08, 09 - ví dụ: 0981234567. Số có thể bắt đầu với +84, 84 - ví dụ: 84981234567)"
-          >
-            {err.phone?.message}
-          </CustomInput>
-        </div>
-        <div className="register__container__form--name">
-          <CustomInput
-            label="Mật khẩu"
-            id="password"
-            type="password"
-            placeholder="Mật khẩu..."
-            register={register}
-            visibility={true}
-            subtitle="(Mật khẩu ít nhất 6 - 32 ký tự, không dấu và ký tự đặc biệt, phải đồng thời chứa chữ hoa, chữ thường và số)"
-          >
-            {err.password?.message}
-            {errorMessage?.Password}
-            {"."}
-          </CustomInput>
-          <CustomInput
-            label="Xác nhận mật khẩu"
-            id="confirmPassword"
-            type="password"
-            placeholder="Xác nhận mật khẩu..."
-            register={register}
-            visibility={true}
-            subtitle="(Xác nhận mật khẩu phải trùng với mật khẩu vừa nhập)"
-          >
-            {err.confirmPassword?.message}
-          </CustomInput>
-          <SelectCustom
-            className="register__container__form--action"
-            label="Giới tính"
-            placeholder="Vui lòng chọn..."
-            options={genderList}
-            id="gender"
-            register={register}
-          >
-            {err.gender?.message}
-          </SelectCustom>
-        </div>
+        {path === '/register/hr' ? (
+          <>
+            <h4 className='register__container__form--title'>
+              Thông tin tài khoản
+            </h4>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label='Email'
+                id='email'
+                type='email'
+                placeholder='Email'
+                register={register}
+                subtitle={t('mailingFormatTL')}
+              >
+                {err.email?.message}
+                {errorMessage?.Email}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label={t('PasswordTL')}
+                id='password'
+                type='password'
+                placeholder={t('PasswordTL')}
+                register={register}
+                visibility={true}
+                subtitle={t('passwordFormatTL')}
+              >
+                {err.password?.message}
+                {errorMessage?.Password}
+              </CustomInput>
+              <CustomInput
+                label={t('confirmPasswordTL')}
+                id='confirmPassword'
+                type='password'
+                placeholder={t('confirmPasswordTL')}
+                register={register}
+                visibility={true}
+                subtitle={t('passwordConfirmationFormatTL')}
+              >
+                {err.confirmPassword?.message}
+              </CustomInput>
+            </div>
+            <h4 className='register__container__form--title'>
+              Thông tin liên hệ
+            </h4>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label={t('lastNameTL')}
+                id='lastName'
+                type='text'
+                placeholder={t('lastNameTL')}
+                register={register}
+                subtitle={t('lastName')}
+              >
+                {err.lastName?.message}
+              </CustomInput>
+              <CustomInput
+                label={t('firstNameTL')}
+                id='firstName'
+                type='text'
+                placeholder={t('firstNameTL')}
+                register={register}
+                subtitle={t('firstName')}
+              >
+                {err.firstName?.message}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                className='custom_req_can'
+                label={t('phoneNumberTL')}
+                id='phone'
+                type='phone'
+                placeholder={t('phoneNumberTL')}
+                register={register}
+                subtitle={t('phoneNumberFormatTL')}
+              >
+                {err.phone?.message}
+              </CustomInput>
+              <SelectCustom
+                setValue={setValue}
+                id='gender'
+                register={register}
+                label={t('gender')}
+                options={genderList}
+                placeholder={t('pleaseSelectTL')}
+                requirementField={false}
+              >
+                {err.gender?.message}
+              </SelectCustom>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label='Chức vụ'
+                id='position'
+                type='text'
+                placeholder='Chức vụ'
+                register={register}
+                subtitle={t('positionSub')}
+              >
+                {err.email?.message}
+                {errorMessage?.Email}
+              </CustomInput>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label={t('lastNameTL')}
+                id='lastName'
+                type='text'
+                placeholder={t('lastNameTL')}
+                register={register}
+                subtitle={t('lastName')}
+              >
+                {err.lastName?.message}
+              </CustomInput>
+              <CustomInput
+                label={t('firstNameTL')}
+                id='firstName'
+                type='text'
+                placeholder={t('firstNameTL')}
+                register={register}
+                subtitle={t('firstName')}
+              >
+                {err.firstName?.message}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label='Email'
+                id='email'
+                type='email'
+                placeholder='Email'
+                register={register}
+                subtitle={t('mailingFormatTL')}
+              >
+                {err.email?.message}
+                {errorMessage?.Email}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                label={t('PasswordTL')}
+                id='password'
+                type='password'
+                placeholder={t('PasswordTL')}
+                register={register}
+                visibility={true}
+                subtitle={t('passwordFormatTL')}
+              >
+                {err.password?.message}
+                {errorMessage?.Password}
+              </CustomInput>
+              <CustomInput
+                label={t('confirmPasswordTL')}
+                id='confirmPassword'
+                type='password'
+                placeholder={t('confirmPasswordTL')}
+                register={register}
+                visibility={true}
+                subtitle={t('passwordConfirmationFormatTL')}
+              >
+                {err.confirmPassword?.message}
+              </CustomInput>
+            </div>
+            <div className='register__container__form--name'>
+              <CustomInput
+                className='custom_req_can'
+                label={t('phoneNumberTL')}
+                id='phone'
+                type='phone'
+                placeholder={t('phoneNumberTL')}
+                register={register}
+                subtitle={t('phoneNumberFormatTL')}
+                checkNumber={true}
+              >
+                {err.phone?.message}
+              </CustomInput>
+            </div>
+          </>
+        )}
 
-        <Divider style={{ marginTop: "2rem" }} />
-        <div className="register__container__form--name">
-          <CustomInput
-            label="Họ"
-            id="lastName"
-            type="text"
-            placeholder="Họ..."
-            register={register}
-          >
-            {err.lastName?.message}
-          </CustomInput>
-          <CustomInput
-            label="Tên"
-            id="firstName"
-            type="text"
-            placeholder="Tên..."
-            register={register}
-          >
-            {err.firstName?.message}
-          </CustomInput>
-        </div>
-        <InputFile
-          label="Ảnh đại diện"
-          requirementField={false}
-          id="avatar"
-          format="image"
-          setValue={setValue}
-          register={register}
-        >
-          {err.avatar?.message}
-        </InputFile>
         {children}
-        <div className="register__container__btns">
-          <div className="register__container__btns--item" onClick={onClick}>
-            <ArrowButton fontSize="16px" text="Trở lại" direction="left" />
+        <div className='register-container__footer'>
+          <p>
+            Bằng việc ấn vào nút “Đăng ký”, tôi đồng ý với{' '}
+            <span style={{ color: '#00B074' }}>Thỏa thuận sử dụng </span> và{' '}
+            <span style={{ color: '#00B074' }}>Quy định bảo mật </span>
+            của Jobsit.vn
+          </p>
+        </div>
+        <div className='register__container__btns'>
+          <div className='register__container__btns--item'>
+            <Button
+              name={t('registerTL')}
+              type='submit'
+              onClick={handleClick}
+            />
           </div>
-          <div className="register__container__btns--item">
-            <Button name="ĐĂNG KÝ" onClick={handleClick} />
-          </div>
+        </div>
+        <div className='register-container__footer'>
+          <Typography
+            variant='h6'
+            component='div'
+            sx={{
+              fontSize: 13,
+              fontWeight: '400',
+              transform: 'translate(5px,5px)',
+            }}
+          >
+            {t('doYouAlreadyHaveAnAccountTL')}{' '}
+            <Link to='/login' style={{ color: '#00B074', fontWeight: 'bold' }}>
+              {t('loginTL')}
+            </Link>
+          </Typography>
         </div>
       </form>
     </div>

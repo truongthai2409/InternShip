@@ -1,0 +1,204 @@
+@use '../../../assets/styles/' as *;
+
+.detail__card {
+  background-color: $color-white-0;
+  border-radius: 6px;
+  border: 2px solid $primary-color;
+  padding: $pd-2;
+  // overflow-y: scroll;
+  height: 570px;
+  width: 100%;
+  font-family: $f-family !important;
+  box-sizing: border-box;
+
+  .detail__card-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    .detail__card-intro {
+      display: flex;
+      align-items: center;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        h2 {
+          font-size: 20px;
+        }
+        .name-company {
+          font-size: 12px;
+          font-family: $f-family !important;
+        }
+      }
+      .detail__card__logo {
+        margin-right: 15px;
+        width: 72px;
+        height: 60px;
+        left: 10px;
+        top: 10px;
+      }
+    }
+  }
+
+  .detail__card-2 {
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+    .tag-name {
+      display: flex;
+      &__name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: $f-family !important;
+      }
+    }
+  }
+
+  .detail__card-3 {
+    font-family: $f-family;
+    font-style: normal;
+    font-size: 21px;
+    &-item {
+      font-size: 16px;
+      // overflow: "hidden" !important;
+
+      &-name {
+        font-family: $f-family;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+        padding-bottom: 20px;
+        font-family: $f-family !important;
+      }
+
+      p {
+        font-size: 16px;
+        font-family: $f-family !important;
+      }
+    }
+  }
+
+  .line::after {
+    background-color: $color-gray-3;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 100%;
+  }
+
+  .detail__card-4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // margin: 10px 0px;
+    font-family: $f-family !important;
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-icon {
+        color: $primary-color;
+      }
+      &-info {
+        margin-left: 12px;
+        font-size: 15px;
+        font-weight: 500;
+        font-family: $f-family !important;
+      }
+    }
+  }
+
+  .detail__card-5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-family: $f-family !important;
+    div {
+      p {
+        font-size: 13px;
+        margin-bottom: 0px;
+        font-family: $f-family !important;
+      }
+    }
+  }
+}
+// .scrollerDetailCard3{
+//   overflow-y: scroll !important;
+
+// }
+// .scrollerDetailCard3::-webkit-scrollbar {
+//     display: none;
+// }
+
+.MuiTabs-scroller {
+  & button.Mui-selected {
+    color: $primary-color !important;
+  }
+  & span.MuiTabs-indicator {
+    background-color: $primary-color !important;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 1200px) {
+  .containerDetailCard-home {
+  }
+}
+
+@media (min-width: 740px) and (max-width: 1024px) {
+  .detail__card-ontablet {
+    background-color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 20px;
+    overflow-y: hidden;
+    height: fit-content;
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 740px) {
+  .detail__card-ontablet {
+    background-color: #fff;
+    border-radius: 6px;
+    border: none;
+    padding: 20px;
+    overflow-y: hidden;
+    height: fit-content;
+    margin-bottom: 15px;
+  }
+  .button__candidate-onMobile {
+    display: none !important;
+  }
+  .detail__card .detail__card-4 {
+    display: block !important;
+    &-item {
+      justify-content: flex-start !important;
+    }
+  }
+}
+.tag-name__name {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.boxOpenSans {
+  font-family: $f-family !important;
+}
+
+.scrollCardInforCompany2 {
+  overflow-y: auto !important;
+  max-height: 30vh !important;
+}
+.scrollCardInforCompany2::-webkit-scrollbar {
+  display: none;
+}
+.overwriteBox {
+  margin: 0px !important;
+  padding: 0px !important;
+}

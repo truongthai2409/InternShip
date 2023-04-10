@@ -1,26 +1,26 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import "./styles.scss";
-import CustomInput from "../../../components/CustomInput";
-import Button from "../../../components/Button";
-import { genderList, schema } from "./data";
-import InputFile from "src/components/InputFile";
-import CustomSelect from "src/components/CustomSelect";
-import { useDispatch, useSelector } from "react-redux";
+import './styles.scss';
+import CustomInput from '../../../components/shared/CustomInput';
+import Button from '../../../components/shared/Button';
+import { genderList, schema } from './data';
+import InputFile from 'src/components/shared/InputFile';
+import CustomSelect from 'src/components/shared/CustomSelect';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   adminUpdateUser,
   createUser,
   getUserById,
   updateUser,
-} from "src/store/slices/Admin/user/userSlice";
-import { toast } from "react-toastify";
+} from 'src/store/slices/Admin/user/userSlice';
+import { toast } from 'react-toastify';
 
 const UserForm = (props) => {
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
   const { isUpdate, idRow } = props;
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -38,21 +38,21 @@ const UserForm = (props) => {
   }, [dispatch, idRow, userSessionStorage?.token]);
 
   useEffect(() => {
-    setValue("isUpdate", isUpdate);
+    setValue('isUpdate', isUpdate);
   }, [isUpdate, setValue]);
 
   useEffect(() => {
-    setValue("isUpdate", isUpdate);
+    setValue('isUpdate', isUpdate);
   });
   useEffect(() => {
     if (isUpdate) {
-      setValue("username", user?.username);
-      setValue("email", user?.email);
-      setValue("firstName", user?.firstName);
-      setValue("lastName", user?.lastName);
-      setValue("phone", user?.phone);
-      setValue("gender", user?.gender);
-      setValue("role", user?.role?.id);
+      setValue('username', user?.username);
+      setValue('email', user?.email);
+      setValue('firstName', user?.firstName);
+      setValue('lastName', user?.lastName);
+      setValue('phone', user?.phone);
+      setValue('gender', user?.gender);
+      setValue('role', user?.role?.id);
     }
   }, [isUpdate, setValue, user]);
 
@@ -81,13 +81,19 @@ const UserForm = (props) => {
       );
 
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success("Tạo tài khoản thành công");
+        toast.success('Tạo tài khoản thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       } else {
-        toast.error("Tạo tài khoản thất bại");
+        toast.error('Tạo tài khoản thất bại', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       }
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   };
 
   const onUpdate = async (data) => {
@@ -114,84 +120,92 @@ const UserForm = (props) => {
         adminUpdateUser([userData, userSessionStorage?.token])
       );
       if (res.payload.status === 200 || res.payload.status === 201) {
-        toast.success("Chỉnh sửa tài khoản thành công");
+        toast.success('Chỉnh sửa tài khoản thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error, {
+        position: 'top-right',
+        autoClose: 3000,
+        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+      });
     }
   };
 
   const roleList = [
-    { name: "Nhà tuyển dụng", id: 1 },
-    { name: "Admin", id: 2 },
-    { name: "Ứng viên", id: 3 },
-    { name: "Cộng tác viên", id: 4 },
+    { name: 'Nhà tuyển dụng', id: 1 },
+    { name: 'Admin', id: 2 },
+    { name: 'Ứng viên', id: 3 },
+    { name: 'Cộng tác viên', id: 4 },
   ];
 
   return (
     <>
       <form
         // onSubmit={handleSubmit(onSubmit)}
-        autoComplete="off"
-        className="user-form"
+        autoComplete='off'
+        className='user-form'
       >
-        <div className="user-form__wrapper">
-          <div className="user-form__avatar">
+        <div className='user-form__wrapper'>
+          <div className='user-form__avatar'>
             <InputFile
-              label="Ảnh đại diện"
+              label='Ảnh đại diện'
               requirementField={false}
-              id="avatar"
-              format="image"
-              className="avatar-input"
+              id='avatar'
+              format='image'
+              className='avatar-input'
               setValue={setValue}
               register={register}
             >
               {errors.avatar?.message}
             </InputFile>
           </div>
-          <div className="user-form__input-infor">
-            <div className="row">
+          <div className='user-form__input-infor'>
+            <div className='row'>
               <CustomInput
-                id="username"
-                label="Tên tài khoản"
-                className="user-form__input-item"
-                type="text"
-                placeholder="Abcdef..."
+                id='username'
+                label='Tên tài khoản'
+                className='user-form__input-item'
+                type='text'
+                placeholder='Abcdef...'
                 register={register}
               >
                 {errors.username?.message}
               </CustomInput>
               <CustomInput
-                id="email"
-                className="user-form__input-item"
-                label="Email"
-                type="email"
-                placeholder="abc@gmail.com..."
+                id='email'
+                className='user-form__input-item'
+                label='Email'
+                type='email'
+                placeholder='abc@gmail.com...'
                 register={register}
               >
                 {errors.email?.message}
               </CustomInput>
             </div>
             {!isUpdate ? (
-              <div className="row">
+              <div className='row'>
                 <CustomInput
-                  id="password"
-                  className="user-form__input-item"
-                  label="Mật khẩu"
-                  type="password"
+                  id='password'
+                  className='user-form__input-item'
+                  label='Mật khẩu'
+                  type='password'
                   visibility={true}
-                  placeholder="Abc123..."
+                  placeholder='Abc123...'
                   register={register}
                 >
                   {errors.password?.message}
                 </CustomInput>
                 <CustomInput
-                  id="confirmPassword"
-                  className="user-form__input-item"
-                  label="Xác nhận mật khẩu"
-                  type="password"
+                  id='confirmPassword'
+                  className='user-form__input-item'
+                  label='Xác nhận mật khẩu'
+                  type='password'
                   visibility={true}
-                  placeholder="Abc123..."
+                  placeholder='Abc123...'
                   register={register}
                 >
                   {errors.confirmPassword?.message}
@@ -200,69 +214,69 @@ const UserForm = (props) => {
             ) : (
               <>
                 <input
-                  id="password"
-                  type="hidden"
-                  {...register("password")}
+                  id='password'
+                  type='hidden'
+                  {...register('password')}
                   disabled
                 />
                 <input
-                  id="confirmPassword"
-                  type="hidden"
-                  {...register("confirmPassword")}
+                  id='confirmPassword'
+                  type='hidden'
+                  {...register('confirmPassword')}
                   disabled
                 />
               </>
             )}
-            <div className="row">
+            <div className='row'>
               <CustomInput
-                id="firstName"
-                className="user-form__input-item"
-                label="Họ"
-                type="text"
-                placeholder="Nguyễn Văn..."
+                id='firstName'
+                className='user-form__input-item'
+                label='Họ và tên lót'
+                type='text'
+                placeholder='Nguyễn Văn...'
                 register={register}
               >
                 {errors.firstName?.message}
               </CustomInput>
               <CustomInput
-                id="lastName"
-                className="user-form__input-item"
-                label="Tên"
-                type="text"
-                placeholder="An..."
+                id='lastName'
+                className='user-form__input-item'
+                label='Tên'
+                type='text'
+                placeholder='An...'
                 register={register}
               >
                 {errors.lastName?.message}
               </CustomInput>
             </div>
-            <div className="row">
+            <div className='row'>
               <CustomInput
-                id="phone"
-                className="user-form__input-item"
-                label="Số điện thoại"
-                type="tel"
-                placeholder="0964xxx473..."
+                id='phone'
+                className='user-form__input-item'
+                label='Số điện thoại'
+                type='tel'
+                placeholder='0964xxx473...'
                 register={register}
               >
                 {errors.phone?.message}
               </CustomInput>
               <CustomSelect
-                id="gender"
-                className="user-form__input-item"
-                label="Giới tính"
-                placeholder="Chọn giới tính..."
+                id='gender'
+                className='user-form__input-item'
+                label='Giới tính'
+                placeholder='Chọn giới tính...'
                 register={register}
                 options={genderList}
               >
                 {errors.gender?.message}
               </CustomSelect>
             </div>
-            <div className="row">
+            <div className='row'>
               <CustomSelect
-                id="role"
-                className="user-form__input-item"
-                label="Vai trò"
-                placeholder="Chọn vai trò..."
+                id='role'
+                className='user-form__input-item'
+                label='Vai trò'
+                placeholder='Chọn vai trò...'
                 register={register}
                 options={roleList}
               >
@@ -271,11 +285,11 @@ const UserForm = (props) => {
             </div>
           </div>
         </div>
-        <div className="user-form__submit">
+        <div className='user-form__submit'>
           {!isUpdate ? (
-            <Button name="Thêm người dùng" onClick={handleSubmit(onSubmit)} />
+            <Button name='Thêm người dùng' onClick={handleSubmit(onSubmit)} />
           ) : (
-            <Button name="Lưu" onClick={handleSubmit(onUpdate)} />
+            <Button name='Lưu' onClick={handleSubmit(onUpdate)} />
           )}
         </div>
       </form>

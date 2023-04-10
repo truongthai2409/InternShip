@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { useDispatch } from "react-redux";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import { useDispatch } from 'react-redux';
 
-import HeaderContainer from "../../../containers/Admin/HeaderContainer/HeaderContainer";
-import Modal from "../../../components/Modal";
-import DemandTable from "./DemandTable";
-import DemandForm from "../../../containers/Admin/DemandForm";
-import { searchDemand } from "src/store/slices/Admin/demand/adminDemandSlice";
+import HeaderContainer from '../../../containers/Admin/HeaderContainer/HeaderContainer';
+import Modal from '../../../components/shared/Modal';
+import DemandTable from './DemandTable';
+import DemandForm from '../../../containers/Admin/DemandForm';
+import { searchDemand } from 'src/store/slices/Admin/demand/adminDemandSlice';
 
 export default function Demand() {
   const [open, setOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const userSessionStorage =
-    JSON.parse(sessionStorage.getItem("userPresent")) ||
-    JSON.parse(localStorage.getItem("userPresent"));
+    JSON.parse(sessionStorage.getItem('userPresent')) ||
+    JSON.parse(localStorage.getItem('userPresent'));
 
   const dispatch = useDispatch();
 
@@ -29,17 +29,17 @@ export default function Demand() {
   return (
     <>
       <HeaderContainer
-        headerName="Quản lý nhu cầu tìm việc"
-        placeholder="Tìm kiếm nhu cầu..."
+        headerName='Quản lý nhu cầu tìm việc'
+        placeholder='Tìm kiếm nhu cầu...'
         // selectName="position"
-        btnName="Thêm bài đăng"
+        btnName='Thêm bài đăng'
         BtnIcon={AddOutlinedIcon}
         onClick={handleOpenModal}
         onSearch={handleSearch}
         onChange={(e) => setSearchValue(e.target.value)}
       />
       <DemandTable searchValue={searchValue} />
-      <Modal modalTitle="Thêm bài đăng" open={open} setOpen={setOpen}>
+      <Modal modalTitle='Thêm bài đăng' open={open} setOpen={setOpen}>
         <DemandForm isAdd={true} />
       </Modal>
     </>

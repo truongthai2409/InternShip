@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userCandidateRemainingSelector } from "src/store/slices/main/candidate/user/userCandidateRemaining";
-import { getAllUserCandidate } from "src/store/slices/main/candidate/user/userCandidateSlice";
-import { getDemandList } from "src/store/slices/main/home/demand/demandSlice";
-import Home from "../Home";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userCandidateRemainingSelector } from 'src/store/slices/main/candidate/user/userCandidateRemaining';
+import { getAllUserCandidate } from 'src/store/slices/main/candidate/user/userCandidateSlice';
+import { getDemandList } from 'src/store/slices/main/home/demand/demandSlice';
+import Home from '../Home';
 
 const HR = (props) => {
   const userCandidate = useSelector(userCandidateRemainingSelector);
@@ -19,13 +19,13 @@ const HR = (props) => {
   }, [dispatch]);
   return (
     <Home
-      jobFilter={demandList}
-      jobPage={totalPagesofDemandList -1}
+      roleFilter={demandList}
+      jobPage={totalPagesofDemandList - 1}
       demandPartner={true}
       hr={true}
       userCandidate={userCandidate}
-      linkFilter="/api/demand"
-      nameSearch="bài đăng của truờng"
+      linkFilter='/api/demand'
+      nameSearch='bài đăng của truờng'
     />
   );
 };

@@ -1,4 +1,4 @@
-@use "../../assets/styles/index.scss" as *;
+@use '../../assets/styles/index.scss' as *;
 
 .not-found {
   &__wrapper {
@@ -22,19 +22,19 @@
     .title {
       font-size: 40px;
       color: #000000a6;
-      font-family: cursive;
+      font-family: $f-family;
     }
 
     .description {
-        font-size: 16px;
-        color: #666;
-        font-weight: 500;
-        font-family: monospace;
-        margin-bottom: 36px;
+      font-size: 16px;
+      color: #666;
+      font-weight: 500;
+      font-family: $f-family;
+      margin-bottom: 36px;
     }
 
     .btn-back {
-        text-align: center;
+      text-align: center;
     }
   }
 }

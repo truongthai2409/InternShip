@@ -1,19 +1,24 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import jobCandidate from 'src/store/api/job/jobCandidate';
 
+const { getJobCareByCandidate, getJobAppliedByCandidate } = jobCandidate;
 const BASEURL = process.env.REACT_APP_API;
 
 const jobCandidateSlice = createSlice({
-  name: "jobCandidateSlice",
+  name: 'jobCandidateSlice',
   initialState: {
     jobApplyList: [],
     jobApplyListHavePage: [],
     jobCare: [],
     jobCareHavePage: [],
-    allJobCare: [],
-    allJobApply: [],
   },
-  reducers: {},
+  reducers: {
+    clearJobApply: (state) => {
+      state.jobApplyList = [];
+      state.jobCare = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getJobApplyListByCandidate.fulfilled,
@@ -24,80 +29,45 @@ const jobCandidateSlice = createSlice({
         }
       }
     );
-    builder.addCase(getJobCareByCandidate.fulfilled, (state, { payload }) => {
-      state.jobCare = payload.contents;
-      state.jobCareHavePage = payload;
-    });
+    builder.addCase(
+      getJobCareByCandidateThunk.fulfilled,
+      (state, { payload }) => {
+        state.jobCare = payload.contents;
+        state.jobCareHavePage = payload;
+      }
+    );
     builder.addCase(addJobCare.fulfilled, (state, action) => {
       state.jobCare = [...state.jobCare, action.payload];
-    });
-    builder.addCase(getAllJobCare.fulfilled, (state, { payload }) => {
-      state.allJobCare = payload.contents;
-    });
-    builder.addCase(getAllJobApply.fulfilled, (state, { payload }) => {
-      state.allJobApply = payload.contents;
     });
   },
 });
 
 export const getJobApplyListByCandidate = createAsyncThunk(
-  "jobCadidateSlice/getJobApplyListByCandidate",
+  'jobCadidateSlice/getJobApplyListByCandidate',
   async (args) => {
-    const header = {
-      headers: {
-        Authorization: "Bearer " + args?.token,
-      },
-    };
-    if (args.user.user.role.name.includes("Role_Candidate")) {
-      return await axios
-        .get(`${BASEURL}/api/r2s/candidate/user/${args.user.user.id}`, header)
-        .then(async (response) => {
-          try {
-            const response_1 = await axios.get(
-              `${BASEURL}/api/applylist/candidate/${response.data.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`
-            );
-            return response_1.data;
-          } catch (error) {
-            return error.response.data;
-          }
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
+    if (args.user.roleDTO.name.includes('Role_Candidate')) {
+      const res = await getJobAppliedByCandidate(args.user.id);
+      return res;
     }
   }
 );
-export const getJobCareByCandidate = createAsyncThunk(
-  "jobCadidateSlice/getJobCareByCandidate",
+export const getJobCareByCandidateThunk = createAsyncThunk(
+  'jobCadidateSlice/getJobCareByCandidate',
   async (args) => {
-    const header = {
-      headers: {
-        Authorization: "Bearer " + args.token,
-      },
-    };
-    if (args.user.user.role.name.includes("Role_Candidate")) {
-      return await axios
-        .get(
-          `${BASEURL}/api/r2s/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
-          header
-        )
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          return error.response.data;
-        });
+    if (args.user.roleDTO.name.includes('Role_Candidate')) {
+      const res = await getJobCareByCandidate(args.user.username);
+      return res;
     }
   }
 );
 export const addJobCare = createAsyncThunk(
-  "jobCadidateSlice/adddCareJob",
+  'jobCadidateSlice/addCareJob',
   async (args) => {
     return await axios
-      .post(`${BASEURL}/api/r2s/carelist`, args[0], {
+      .post(`${BASEURL}/api/candidate-job-care`, args[0], {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + args[1],
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + args[1],
         },
       })
       .then((res) => {
@@ -109,15 +79,15 @@ export const addJobCare = createAsyncThunk(
   }
 );
 export const deleteJobCare = createAsyncThunk(
-  "jobCadidateSlice/deleteJobCare",
+  'jobCadidateSlice/deleteJobCare',
   async (args) => {
     const header = {
       headers: {
-        Authorization: "Bearer " + args[0].token,
+        Authorization: 'Bearer ' + args[0].token,
       },
     };
     return await axios
-      .delete(`${BASEURL}/api/r2s/carelist/${args[0].id}`, header)
+      .delete(`${BASEURL}/api/candidate-job-care/${args[0].id}`, header)
       .then((res) => {
         return res.data;
       })
@@ -126,51 +96,5 @@ export const deleteJobCare = createAsyncThunk(
       });
   }
 );
-export const getAllJobCare = createAsyncThunk(
-  "jobCandidateSlice/getAllJobCare",
-  async (args) => {
-    const header = {
-      headers: {
-        Authorization: "Bearer " + args.token,
-      },
-    };
-    return await axios
-      .get(
-        `${BASEURL}/api/r2s/carelist/user/${args.user.user.username}?no=${args.page.no}&limit=${args.page.limit}`,
-        header
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log("err 1000 Care", err);
-      });
-  }
-);
-export const getAllJobApply = createAsyncThunk(
-  "jobCandidateSlice/getAllJobApply",
-  async (args) => {
-    console.log(args);
-    const header = {
-      headers: {
-        Authorization: "Bearer " + args.token,
-      },
-    };
-    return await axios
-      .get(`${BASEURL}/api/r2s/candidate/user/${args.user.user.id}`, header)
-      .then(async (response) => {
-        try {
-          const response_1 = await axios.get(
-            `${BASEURL}/api/applylist/candidate/${response.data.id}?no=${args?.page?.no}&limit=${args?.page?.limit}`
-          );
-          return response_1.data;
-        } catch (error) {
-          return error.response.data;
-        }
-      })
-      .catch((error) => {
-        return error.response.data;
-      });
-  }
-);
+export const { clearJobApply } = jobCandidateSlice.actions;
 export default jobCandidateSlice;

@@ -1,4 +1,4 @@
-@use "../../../assets/styles/index.scss" as *;
+@use '../../../assets/styles/index.scss' as *;
 
 .post-job-form {
   min-width: 60vw;
@@ -20,7 +20,7 @@
     margin-bottom: 200px;
 
     .custom-input .custom-input__textfield input {
-      font-family: "Roboto", sans-serif;
+      font-family: $f-family;
       border: 1px solid rgb(119, 119, 119);
       border-radius: 2px;
       width: 100%;
@@ -36,7 +36,7 @@
     }
 
     .custom-input .custom-input__textfield-disabled input {
-      font-family: "Roboto", sans-serif;
+      font-family: $f-family;
       border: 1px solid $primary-color;
       border-radius: 2px;
       width: 100%;
@@ -48,7 +48,7 @@
     }
 
     .custom-input .custom-input__textfield textarea {
-      font-family: "Roboto", sans-serif;
+      font-family: $f-family;
       border: 1px solid $primary-color !important;
       border-radius: 2px;
       width: 100%;
@@ -147,7 +147,7 @@
       margin-bottom: 35px;
 
       textarea {
-        font-family: "Roboto", sans-serif;
+        font-family: $f-family;
         border: 1px solid $primary-color;
         border-radius: 2px;
         height: 150px;
@@ -202,7 +202,7 @@ input#title {
 }
 
 label {
-  font-family: "Roboto", sans-serif;
+  font-family: $f-family;
   font-size: 14px;
   font-weight: 700;
   color: #29303b;
@@ -213,11 +213,11 @@ label {
 }
 
 .title-requirement {
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   font-weight: 400;
   text-align: right;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 .field-requirment {

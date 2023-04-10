@@ -1,8 +1,15 @@
-import { TabTitle } from "src/utils/GeneralFunctions";
-import Main from "../..";
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { TabTitle } from 'src/utils/GeneralFunctions';
+import Main from '../..';
 
 const CandidateHome = () => {
-  TabTitle("Trang chủ");
+  const { t } = useTranslation('title');
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  TabTitle(t('homeTL'));
   return (
     <div>
       <Main />
