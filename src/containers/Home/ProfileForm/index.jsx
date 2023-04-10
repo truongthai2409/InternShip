@@ -51,6 +51,7 @@ const ProfileForm = ({ profile: user }) => {
       address: others?.locationDTO?.address || '',
     },
   });
+  console.log('🚀 ~ file: index.jsx:42 ~ ProfileForm ~ errors:', errors);
   const {
     register: register2,
     handleSubmit: handleSubmit2,
@@ -326,7 +327,7 @@ const ProfileForm = ({ profile: user }) => {
                     }}
                     // value={field.value}
                     selectedDate={field.value}
-                    format='dd-MM-yyyy'
+                    format='dd/MM/yyyy'
                     // defaultValue={
                     //   user.birthday ? new Date(user.birthday) : null
                     // }

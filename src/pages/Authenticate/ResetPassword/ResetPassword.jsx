@@ -16,25 +16,25 @@ function ResetPassword() {
   const schema = yup.object().shape({
     password: yup
       .string()
-      .required('* Bạn phải nhập mật khẩu')
-      .matches(/^[^\W_]/, '* Yêu cầu một chữ cái không dấu hoặc số đứng đầu.')
-      .matches(
-        /[a-zA-Z0-9.\_$@*!]$/,
-        '* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .'
-      )
-      .matches(
-        /[a-zA-Z0-9\w]*$/,
-        '* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm .'
-      )
+      .required('* Vui lòng nhập mật khẩu')
+      .matches(/^[^\W_]/, '* Yêu cầu một chữ cái không dấu hoặc số đứng đầu')
+      // .matches(
+      //   /[a-zA-Z0-9.\_$@*!]$/,
+      //   '* Không được chứa khoảng trắng và ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
+      // )
+      // .matches(
+      //   /[a-zA-Z0-9\w]*$/,
+      //   '* Không được chứa ký tự đặc biệt ngoại trừ gạch dưới, gạch ngang và dấu chấm '
+      // )
       .matches(
         /^(?!.*?[._]{2})/,
-        '* Không được phép lặp lại 2 lần ký tự đặc biệt.'
+        '* Không được phép lặp lại 2 lần ký tự đặc biệt'
       )
-      .min(6, '* Tối thiểu 6 ký tự.')
-      .matches(/[^\W_]$/, '* Không đúng định dạng.')
-      .matches(/[A-Z]/, '* Ít nhất 1 chữ in hoa.')
-      .matches(/[0-9]/, '* Ít nhất 1 số.')
-      .max(32, '* Tối đa 32 ký tự.'),
+      .min(6, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự')
+      .matches(/^\S+$/, '* Vui lòng không được nhập khoảng trắng')
+      .matches(/[A-Z]/, '* Vui lòng nhập ít nhất 1 chữ in hoa')
+      .matches(/[0-9]/, '* Vui lòng nhập ít nhất 1 số')
+      .max(32, '* Mật khẩu phải có độ dài từ 6 đến 32 ký tự'),
     confirmPassword: yup
       .string()
       .required('* Bạn phải nhập lại mật khẩu.')
