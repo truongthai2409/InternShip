@@ -1,6 +1,5 @@
 import moment from 'moment';
 import * as yup from 'yup';
-import { mixed } from 'yup/lib/locale';
 
 const dateNow = moment(Date.now()).format('MM-DD-YYYY');
 

@@ -21,6 +21,9 @@ export default function SelectCustom({
   idProvince,
 }) {
   const renderSelectOption = () => {
+    if (!Array.isArray(options)) {
+      return null;
+    }
     return options.map((item) => {
       return (
         <MenuItem
@@ -37,8 +40,8 @@ export default function SelectCustom({
   };
 
   // handle change district
-  const handleChangeLocation = (idProvince) => {
-    dispatch(action(idProvince));
+  const handleChangeLocation = (id) => {
+    dispatch(action(id));
   };
   const [selectedOption, setSelectedOption] = React.useState('');
   const handleChange = (event) => {
