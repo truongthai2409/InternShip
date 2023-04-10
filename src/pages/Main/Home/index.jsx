@@ -178,7 +178,7 @@ const Home = (props) => {
         order: state.order,
         position: state.position + '',
         name: state.name,
-        province: state.province,
+        provinceId: state.province,
         major: state.major + '',
         no: state.no,
         limit: 5,

@@ -347,7 +347,6 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                // check={true}
               >
                 {errors.phone?.message}
               </CustomInput>
@@ -372,7 +371,9 @@ const ProfileForm = ({ profile: user }) => {
                 options={provinceList}
                 placeholder={t('placeholder')}
                 defaultValue={others?.locationDTO?.districtDTO?.provinceDTO?.id}
-                idProvince={others?.locationDTO?.districtDTO?.provinceDTO?.id}
+                idProvince={
+                  others?.locationDTO?.districtDTO?.provinceDTO?.id || ''
+                }
                 dispatch={dispatch}
                 action={getDistrictList}
               >
@@ -498,7 +499,7 @@ const ProfileForm = ({ profile: user }) => {
                 placeholder={t('placeholder')}
                 label={t('jobType')}
                 onChange={handleSelectChange}
-                arrDefault={others?.jobTypeDTOs || ''}
+                arrDefault={others?.jobTypeDTOs || null}
               >
                 {errors2.jobType?.message}
               </SelectMulti>

@@ -17,12 +17,10 @@ import Button from '../../../components/shared/Button';
 import cameraLogo from '../../../assets/img/camera.png';
 import { schema, renderControlAction } from './script.js';
 import {
-  addUniversity,
   addUniversityByAdmin,
   getUniversityDetail,
   updateUniversityInfo,
 } from '../../../store/slices/Admin/university/unversitySlice';
-import MultiSelect from '../../../components/shared/MultiSelect';
 import CustomSelect from 'src/components/shared/CustomSelect';
 import CustomSelectLocation from 'src/components/shared/CustomSelectLocation';
 import {
@@ -31,7 +29,6 @@ import {
 } from 'src/store/slices/location/locationSlice';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
-const baseURL = process.env.REACT_APP_API;
 
 export default function UniversityForm(props) {
   const { isAdd } = props;
@@ -52,7 +49,6 @@ export default function UniversityForm(props) {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
   } = useForm({
     resolver: yupResolver(schema),

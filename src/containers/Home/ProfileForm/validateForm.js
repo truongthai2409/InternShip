@@ -16,12 +16,10 @@ export const genderList = [
 ];
 
 export const listWorkingFormat = [
-  { name: 'Fulltime', id: 1 },
-  { name: 'Parttime', id: 2 },
-  { name: 'Remote', id: 3 },
+  { id: 1, name: 'Full time' },
+  { id: 2, name: 'Part time' },
+  { id: 3, name: 'Remote' },
 ];
-
-const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
 
 const IMAGE_FORMATS = [
   'image/jpg',

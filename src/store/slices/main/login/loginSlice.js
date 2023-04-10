@@ -21,8 +21,8 @@ const loginSlice = createSlice({
           state.status = 'success';
           toast.success('Đăng nhập thành công', {
             position: 'top-right',
-            autoClose: 2000,
-            theme: 'colored',
+            autoClose: 3000,
+            style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
           sessionStorage.setItem(
             'userPresent',
