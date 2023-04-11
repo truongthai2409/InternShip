@@ -76,7 +76,7 @@ const ProfileForm = ({ profile: user }) => {
     setValue('lastName', user?.lastName || user?.userDTO?.lastName);
     setValue('email', user?.email || user?.userDTO?.email);
     setValue('phone', user?.phone || user?.userDTO?.phone);
-    setValue('gender', others?.userDetails?.gender);
+    setValue('gender', user?.gender);
 
     setValue('address', others?.locationDTO?.address);
     setValue2('desiredJob', others?.desiredJob);

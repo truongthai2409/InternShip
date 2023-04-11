@@ -51,7 +51,7 @@ const regexName = (str) => {
   str = str.replace(/Đ/g, 'D');
   return str;
 };
-const allowedValues = genderList.map((option) => option.name);
+const allowedValues = genderList.map((option) => option.id);
 export const schema = yup.object({
   avatar: yup
     .mixed()
@@ -99,10 +99,7 @@ export const schema = yup.object({
     .min(6, ' * Tối thiểu 6 ký tự')
     .max(64, ' * Tối đa 64 ký tự')
     .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
-  gender: yup
-    .string()
-    .required('* Bạn phải chọn giới tính')
-    .oneOf(allowedValues, '* Vui lòng chọn giới tính'),
+  gender: yup.string().required('* Vui lòng chọn giới tính'),
   province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố'),
   district: yup.string().required(' * Bạn phải chọn quận/huyện'),
   address: yup.string().required(' * Bạn phải nhập địa chỉ'),
