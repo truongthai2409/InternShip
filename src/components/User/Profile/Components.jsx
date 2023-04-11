@@ -86,6 +86,8 @@ const Components = ({ profile }) => {
                   <Typography
                     sx={{
                       marginTop: 0.7,
+                      width: '320px',
+                      color: '#00b074',
                     }}
                     variant='overline'
                     display='block'
@@ -128,6 +130,8 @@ const Components = ({ profile }) => {
                 <Typography
                   sx={{
                     marginTop: 0.7,
+                    width: '320px',
+                    color: '#00b074',
                   }}
                   variant='overline'
                   display='block'
