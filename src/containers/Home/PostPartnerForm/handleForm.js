@@ -55,17 +55,18 @@ export const schema = yup
       .date()
       .nullable()
       .transform((curr, orig) => (orig === '' ? null : curr))
-      .required('* Bạn phải chọn ngày bắt đầu ứng tuyển')
-      .min(
-        `${date}`,
-        ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`
-      ),
+      .required('* Bạn phải chọn ngày bắt đầu ứng tuyển'),
+    // .min(
+    //   new Date(),
+    //   // `${date}`,
+    //   ` * Bạn không thể chọn ngày bắt đầu tuyển sau ngày ${dateNow}`
+    // ),
     timeEnd: yup
       .date()
       .nullable()
       .transform((cur, ori) => (ori === '' ? null : cur))
-      .required('* Bạn phải chọn ngày kết thúc ứng tuyển')
-      .min(`${tomorowFormat}`, '* Ngày hết hạn phải lớn hơn ngày bắt đầu'),
+      .required('* Bạn phải chọn ngày kết thúc ứng tuyển'),
+    // .min(`${tomorowFormat}`, '* Ngày hết hạn phải lớn hơn ngày bắt đầu'),
     jobDescription: yup.string().required(' * Bạn phải có thư giới thiệu'),
     // jobRequirement: yup.string().required(' * Bạn phải nhập mô tả công việc'),
     // otherInfo: yup.string(),

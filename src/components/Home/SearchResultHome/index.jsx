@@ -22,7 +22,6 @@ function SearchResultHome({
   const [searchValue, setSearchValue] = useState('');
 
   const onChangeSearch = (event) => {
-    console.log(event);
     setSearchValue(event.target.value);
   };
   const search = (event) => {

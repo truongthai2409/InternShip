@@ -117,6 +117,7 @@ const Home = (props) => {
     dispatcher({ type: 'no', payload: value - 1 });
     dispatch(indexFilterChange(0));
   };
+
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
     dispatch(changeFilterChange(false));

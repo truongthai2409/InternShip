@@ -48,32 +48,19 @@ const SelectMulti = ({
   };
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    if (!arrList.length || !value.length) {
-      setPersonName([]);
-      return;
-    }
+    // get lastest item
+    console.log(event.target.value);
 
-    const selectedValue = event.target.value.slice(-1).pop();
-    const selectedId = selectedValue.id;
-
-    // Check if an item with the same ID is already selected
-    const existingItem = personName.find((item) => item.id === selectedId);
-
-    // If an item with the same ID is already selected, remove it
-    if (existingItem) {
-      const updatedArray = personName.filter((p) => p.id !== selectedId);
-      setPersonName(updatedArray);
-    } else {
-      // Otherwise, add the new item to the array
+    const selectedValue = arrList.find(
+      (item) => item.name === event.target.value.slice(-1).pop().name
+    );
+    if (!personName.some((item) => item.id === selectedValue.id)) {
       setPersonName([...personName, selectedValue]);
+    } else {
+      const updatedArray = personName.filter((p) => p.id !== selectedValue.id);
+      setPersonName(updatedArray);
     }
   };
-  React.useEffect(() => {
-    if (arrDefault) {
-      setPersonName(arrDefault);
-    }
-  }, [arrDefault]);
   React.useEffect(() => {
     arrDefault != null && setPersonName(arrDefault);
   }, []);
