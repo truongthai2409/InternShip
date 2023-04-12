@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './styles.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from './validate';
 import CustomInput from 'src/components/shared/CustomInput';
 import Button from 'src/components/shared/Button';
-import {
-  changePassword,
-  updateStatusForgotPassword,
-} from 'src/store/slices/Admin/user/userSlice';
+import { changePasswordThunk } from 'src/store/action/authenticate/authenticateAction';
 
 const Setting = () => {
-  const { statusForgotPassword } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const {
@@ -20,19 +16,11 @@ const Setting = () => {
     formState: { errors },
     reset,
     register,
-    setValue,
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-    if (statusForgotPassword === 'success') {
-      dispatch(updateStatusForgotPassword('fail'));
-      reset();
-    }
-  }, [statusForgotPassword]);
 
   const onSubmit = async (data) => {
     const dataSubmit = {
@@ -40,14 +28,7 @@ const Setting = () => {
       newPassword: data.newPassword,
     };
 
-    dispatch(
-      changePassword({
-        dataChangePassword: dataSubmit,
-        token:
-          JSON.parse(sessionStorage.getItem('userPresent'))?.token ||
-          JSON.parse(localStorage.getItem('userPresent'))?.token,
-      })
-    );
+    dispatch(changePasswordThunk(dataSubmit));
   };
   const handleClear = (e) => {
     e.preventDefault();

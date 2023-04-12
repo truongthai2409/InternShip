@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import authenticate from 'src/store/api/authenticate/authenticate';
-const { resetPassword, verifyEmail, activeAccount } = authenticate;
+const { resetPassword, verifyEmail, activeAccount, changePassword } =
+  authenticate;
 
 export const resetPasswordThunk = createAsyncThunk(
   'authenticate/resetPassword',
@@ -22,6 +23,14 @@ export const activeAccountThunk = createAsyncThunk(
   'authenticate/activeAccount',
   async (data) => {
     const res = await activeAccount(data);
+    return res;
+  }
+);
+
+export const changePasswordThunk = createAsyncThunk(
+  'authenticate/changePassword',
+  async (data) => {
+    const res = await changePassword(data);
     return res;
   }
 );

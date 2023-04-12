@@ -49,7 +49,6 @@ const SelectMulti = ({
 
   const handleChange = (event) => {
     // get lastest item
-    console.log(event.target.value);
 
     const selectedValue = arrList.find(
       (item) => item.name === event.target.value.slice(-1).pop().name

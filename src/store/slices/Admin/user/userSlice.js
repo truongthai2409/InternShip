@@ -44,30 +44,6 @@ const userSlice = createSlice({
         });
       }
     });
-    builder.addCase(changePassword.fulfilled, (state, action) => {
-      if (action.payload.httpCode === 400) {
-        state.statusForgotPassword = 'fail';
-        toast.error('Mật khẩu hiện tại không đúng!', {
-          position: 'top-right',
-          autoClose: 3000,
-          theme: 'colored',
-        });
-      } else if (action.payload.httpCode === 500) {
-        state.statusForgotPassword = 'fail';
-        toast.error('Đổi mật khẩu không thành công!', {
-          position: 'top-right',
-          autoClose: 3000,
-          theme: 'colored',
-        });
-      } else {
-        state.statusForgotPassword = 'success';
-        toast.success('Đổi mật khẩu thành công!', {
-          position: 'top-right',
-          autoClose: 3000,
-          theme: 'colored',
-        });
-      }
-    });
     builder.addCase(searchUser.fulfilled, (state, { payload }) => {
       state.userList = payload.data.contents;
       state.totalPages = payload.data.totalPages;
@@ -285,25 +261,6 @@ export const verifyUser = createAsyncThunk(
       })
       .catch((error) => {
         return thunkAPI.rejectWithValue(error);
-      });
-  }
-);
-
-export const changePassword = createAsyncThunk(
-  'user/changePassword',
-  async (data) => {
-    const { token, dataChangePassword } = data;
-    return axios
-      .put(`${baseURL}/api/user/change-password`, dataChangePassword, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((error) => {
-        return error.response.data;
       });
   }
 );
