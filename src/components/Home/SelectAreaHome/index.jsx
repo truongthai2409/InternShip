@@ -18,11 +18,6 @@ export default function SelectAreaHome({ onChange }) {
       onChange && onChange('');
     } else {
       onChange && onChange(value.id);
-      // if (role == 'Role_HR') {
-      //   onChange && onChange(value.id);
-      // } else {
-      //   onChange && onChange(value.name);
-      // }
     }
   };
   return (

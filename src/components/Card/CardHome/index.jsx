@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import FeedIcon from '@mui/icons-material/Feed';
 import { Document, Page, pdfjs } from 'react-pdf';
 import Modal from 'src/components/shared/Modal';
-
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 const CardHome = (props) => {
   const dispatch = useDispatch();
   const currenUrl = window.location.href.split('/').slice(-1).pop();
@@ -59,6 +59,10 @@ const CardHome = (props) => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+  const handleDownloadCv = () => {
+    window.open(props.cv);
+    setOpen(true);
+  };
   const renderCV = () => {
     return (
       <Modal
@@ -73,13 +77,25 @@ const CardHome = (props) => {
               onLoadSuccess={onDocumentLoadSuccess}
               wrap={false}
             >
+              
               {Array.from(new Array(numPages), (el, index) => (
                 <Page
                   key={`page_${index + 1}`}
                   pageNumber={index + 1}
-                  wrap={false}
+                  wrap={true}
                 />
               ))}
+              <DownloadForOfflineIcon
+                style={{
+                  position: 'absolute',
+                  top: '92%',
+                  left: '87%',
+                  color: '#00b074',
+                  fontSize: '40px',
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleDownloadCv()}
+              />
             </Document>
           </div>
         }
@@ -251,14 +267,15 @@ const CardHome = (props) => {
                     <p style={{ fontSize: `${props.fontSize}px` }}>
                       {/* please help me write function datetime to handle this */}
                       {/* because i dont have any time so i fix this by my way */}
+                      {props.appliedDate.split(' ')[1].substring(0, 5)}
+                    </p>
+
+                    <p style={{ fontSize: `${props.fontSize}px` }}>
+                      {/* please help me write function datetime to handle this */}
+                      {/* because i dont have any time so i fix this by my way */}
                       {props.appliedDate.split(' ')[0].replace(/-/g, '/')}
                     </p>
                   </div>
-                  <p style={{ fontSize: `${props.fontSize}px` }}>
-                    {/* please help me write function datetime to handle this */}
-                    {/* because i dont have any time so i fix this by my way */}
-                    {props.appliedDate.split(' ')[1].substring(0, 5)}
-                  </p>
                 </div>
               ) : (
                 <>

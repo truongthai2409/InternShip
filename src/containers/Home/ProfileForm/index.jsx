@@ -317,22 +317,23 @@ const ProfileForm = ({ profile: user }) => {
                 control={control}
                 rules={{ required: true }}
                 style={{ width: '100%' }}
-                render={({ field }) => (
-                  <DatePickerWithLabel
-                    className='profile-form__input'
-                    label={'Ngày sinh'}
-                    onChange={(date) => {
-                      field.onChange(date);
-                      handleDateChange(date);
-                    }}
-                    // value={field.value}
-                    selectedDate={field.value}
-                    format='dd/MM/yyyy'
-                    // defaultValue={
-                    //   user.birthday ? new Date(user.birthday) : null
-                    // }
-                  />
-                )}
+                render={({ field }) => {
+                  console.log(typeof(user.birthday));
+                  return (
+                    <DatePickerWithLabel
+                      className='profile-form__input'
+                      label={'Ngày sinh'}
+                      onChange={(date) => {
+                        field.onChange(date);
+                        handleDateChange(date);
+                      }}
+                      selectedDate={
+                        field.value || (new Date(user.birthday))
+                      }
+                      format='dd/MM/yyyy'
+                    />
+                  );
+                }}
               >
                 {errors.birthday?.message}
               </Controller>
