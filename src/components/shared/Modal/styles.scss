@@ -1,0 +1,50 @@
+@use '../../../assets/styles/' as *;
+
+.dialog {
+  background: none !important;
+
+  h2 {
+    font-family: $f-family;
+    // font-size: $fs-40;
+    font-weight: 600;
+    // border-bottom: 1px solid $color-gray-2;
+  }
+
+  .form__container {
+    width: 100%;
+  }
+
+  .hr-post__container {
+    margin-bottom: 0 !important;
+  }
+
+  .dialog-title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-default;
+    height: 55px;
+    color: white;
+    .dialog__icon {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.dialog-title__profile {
+  font-size: $fs-30 !important;
+}
+
+.MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: 730px !important;
+}

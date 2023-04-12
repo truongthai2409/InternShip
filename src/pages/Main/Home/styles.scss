@@ -1,0 +1,38 @@
+@use '../../../assets/styles/' as *;
+
+.HomePageMenu {
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  > div > button > svg {
+    font-size: 2.5rem;
+    font-family: $f-family !important;
+  }
+}
+
+.pagination_home {
+  display: flex;
+  justify-content: center;
+}
+
+.home {
+  &__container {
+    display: flex;
+    margin: 0px;
+    padding-left: 43px;
+    margin-right: 0px;
+    gap: 32px;
+    width: 100%;
+    font-family: $f-family !important;
+  }
+}
+.home__container {
+  display: flex;
+}
+.home__containerCard {
+  width: 100%;
+  padding-top: 30px;
+}
+.none__res {
+  padding-left: 13px;
+}

@@ -1,0 +1,204 @@
+@use '../../../assets/styles/' as *;
+
+.wrapperDetail {
+  border: 2px solid #00b074;
+  border-radius: 6px;
+  margin-top: 36px;
+  padding: 45px 65px;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__left {
+      .up {
+        margin-bottom: 15px;
+        img {
+          height: 100px;
+          width: 100px;
+          border: 1px solid rgba(125, 125, 125, 0.41);
+          border-radius: 4px;
+        }
+        display: flex;
+        .info {
+          margin-left: 25px;
+          h2 {
+            color: #00b074;
+            font-size: 20px;
+            margin-bottom: 7px;
+          }
+          .name {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            margin-bottom: 7px;
+          }
+          .city {
+            padding: 0px 0px;
+            display: flex;
+            align-items: center;
+            svg {
+              margin-left: -5px;
+            }
+            p {
+              font-style: normal;
+              font-weight: 300;
+              font-size: 16px;
+              color: #2b3940;
+            }
+          }
+        }
+      }
+
+      .down {
+        display: flex;
+        gap: 10px;
+        p {
+          padding: 4px 7px;
+          color: #7d7d7d;
+          font-weight: 600;
+          font-size: 13px;
+          line-height: 18px;
+          background-color: #f3f9fc;
+          border-radius: 2px;
+          cursor: auto;
+        }
+      }
+    }
+    &__right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  &__detail {
+    margin-top: 35px;
+  }
+}
+
+.detailInfoHome {
+  display: flex;
+  padding: 0px;
+  gap: 20px;
+  &__left {
+    width: 65%;
+    &__info {
+      margin-bottom: 15px;
+      h2 {
+        margin-bottom: 15px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        color: #333333;
+      }
+      ul {
+        padding: 0px 20px;
+      }
+      .location {
+        display: flex;
+        gap: 5px;
+        svg {
+          color: #00b074;
+          font-size: 25px;
+        }
+        margin-top: 15px;
+      }
+      span {
+        color: #00b074;
+      }
+      &__btn {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+      }
+    }
+  }
+  &__right {
+    &__img {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    img {
+      height: 100px;
+      text-align: center;
+      border: 1px solid rgba(125, 125, 125, 0.41);
+      border-radius: 4px;
+    }
+    border: 1px solid #00b074;
+    border-radius: 8px;
+    width: 35%;
+    background-color: rgba(136, 212, 152, 0.16);
+    height: fit-content;
+    padding: 35px 45px;
+
+    &__item {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      border-bottom: 1px solid #dedede;
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding: 0;
+      }
+      svg {
+        color: #00b074;
+        font-size: 35px;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        p:nth-child(1) {
+          color: rgba(51, 51, 51, 0.7);
+        }
+        p:nth-child(2) {
+          color: #333333;
+        }
+      }
+    }
+  }
+}
+
+.formApply__modal {
+  padding: 0px 40px;
+  &__input {
+    display: flex;
+    gap: 30px;
+  }
+  &__btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+    gap: 15px;
+  }
+}
+
+.modalNotify {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.deadline {
+  margin-top: 15px;
+}
+
+.detailInfo {
+  &__listJob {
+    margin-top: 30px;
+    &__title {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      color: #333333;
+    }
+  }
+}
+
+.css-19kzrtu {
+  padding: 24px 0px !important;
+}

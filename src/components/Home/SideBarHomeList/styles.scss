@@ -1,0 +1,43 @@
+@use '../../../assets/styles' as *;
+
+.slideBarHome__wrapper {
+  // width: 240px;
+  overflow-y: scroll;
+  border-radius: 6px;
+  font-family: $f-family !important;
+
+  .slideBarHome__container {
+    width: 100%;
+    background-color: $color-white-0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 18px;
+    margin-bottom: 20px;
+    border: 0.5px solid #dedede;
+  }
+
+  .MuiList-root {
+    padding: 0;
+    margin-bottom: 10px;
+
+    span {
+      font-size: 14px;
+      display: flex;
+    }
+    .MuiListItemButton-root {
+      width: 100%;
+    }
+  }
+}
+
+.slideBarHome__wrapper::-webkit-scrollbar {
+  display: none;
+}
+@media only screen and (min-width: 300px) and (max-width: 1199px) {
+  .slideBarHome__wrapper {
+    padding: 1rem;
+    font-family: $f-family !important;
+  }
+}
