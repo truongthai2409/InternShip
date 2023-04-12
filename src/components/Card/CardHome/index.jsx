@@ -77,7 +77,6 @@ const CardHome = (props) => {
               onLoadSuccess={onDocumentLoadSuccess}
               wrap={false}
             >
-              
               {Array.from(new Array(numPages), (el, index) => (
                 <Page
                   key={`page_${index + 1}`}

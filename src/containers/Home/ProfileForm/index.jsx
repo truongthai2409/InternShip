@@ -51,7 +51,6 @@ const ProfileForm = ({ profile: user }) => {
       address: others?.locationDTO?.address || '',
     },
   });
-  console.log('🚀 ~ file: index.jsx:42 ~ ProfileForm ~ errors:', errors);
   const {
     register: register2,
     handleSubmit: handleSubmit2,
@@ -318,7 +317,6 @@ const ProfileForm = ({ profile: user }) => {
                 rules={{ required: true }}
                 style={{ width: '100%' }}
                 render={({ field }) => {
-                  console.log(typeof(user.birthday));
                   return (
                     <DatePickerWithLabel
                       className='profile-form__input'
@@ -327,9 +325,7 @@ const ProfileForm = ({ profile: user }) => {
                         field.onChange(date);
                         handleDateChange(date);
                       }}
-                      selectedDate={
-                        field.value || (new Date(user.birthday))
-                      }
+                      selectedDate={field.value || new Date(user.birthday)}
                       format='dd/MM/yyyy'
                     />
                   );

@@ -21,6 +21,15 @@ const authenticate = {
 
     return internshipTransport.get(url);
   },
+  // user change account password
+  changePassword: (data) => {
+    const url = `/api/user/change-password`;
+
+    return internshipTransport.put(url, {
+      newPassword: data.newPassword,
+      oldPassword: data.oldPassword,
+    });
+  },
 };
 
 export default authenticate;

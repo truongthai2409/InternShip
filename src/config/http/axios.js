@@ -1,5 +1,4 @@
 import axios from 'axios';
-import history from '../routes/history';
 
 const httpHandler = (baseURL) => {
   const axiosHttp = axios.create({
@@ -25,14 +24,10 @@ const httpHandler = (baseURL) => {
       return response.data;
     },
     function interceptError(error) {
-      // const originalRequest = error.config;
-
       switch (error.response.status) {
         case 403:
-          // history.push('/403');
           return Promise.reject(error);
         case 401:
-          history.push('/');
           return Promise.reject(error);
         default:
           return Promise.reject(error);
