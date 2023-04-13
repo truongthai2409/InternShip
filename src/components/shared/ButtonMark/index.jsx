@@ -19,7 +19,7 @@ const ButtonMark = (props) => {
   const dispatch = useDispatch();
   const [mark, setMark] = useState(false);
 
-  const { user } = useSelector((state) => state.profile);
+  const { user, others } = useSelector((state) => state.profile);
 
   const handleClickMarkJob = async (e) => {
     e.preventDefault();
@@ -38,8 +38,9 @@ const ButtonMark = (props) => {
     };
     if (props.isMark === false) {
       const dataCareList = {
+        // need id candidate not id user
         candidateDTO: {
-          id: user?.id,
+          id: others?.id,
         },
         jobDTO: {
           id: props.jobId,
