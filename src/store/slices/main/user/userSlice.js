@@ -6,9 +6,9 @@ const baseURL = process.env.REACT_APP_API;
 const profileSlice = createSlice({
   name: 'profile',
   initialState: {
-    user: {},
+    user: {}, // id user
     role: '',
-    others: '',
+    others: '', // id candidate
   },
   reducers: {
     updateRole: (state) => {

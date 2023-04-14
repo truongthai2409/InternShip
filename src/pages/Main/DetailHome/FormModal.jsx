@@ -28,7 +28,7 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
       candidateApplication: JSON.stringify({
         jobDTO: { id: jobId },
         // candidate id
-        candidateDTO: { id: user.id },
+        candidateDTO: { id: others.id },
         referenceLetter: data.letter,
       }),
       fileCV: data.cv,
