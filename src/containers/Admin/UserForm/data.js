@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import moment from 'moment';
 
 const IMAGE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 const CV_FORMATS = ['application/pdf'];

@@ -3,7 +3,6 @@ import './styles.scss';
 import ListCollapse from '../../shared/ListCollapse';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getMajorListThunk } from 'src/store/action/company/companyAction';
 import { getJobPositionList } from '../../../store/slices/main/home/job/jobSlice';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';

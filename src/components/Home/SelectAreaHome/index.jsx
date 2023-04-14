@@ -17,11 +17,7 @@ export default function SelectAreaHome({ onChange }) {
     if (value === null) {
       onChange && onChange('');
     } else {
-      if (role == 'Role_HR') {
-        onChange && onChange(value.id);
-      } else {
-        onChange && onChange(value.name);
-      }
+      onChange && onChange(value.id);
     }
   };
   return (

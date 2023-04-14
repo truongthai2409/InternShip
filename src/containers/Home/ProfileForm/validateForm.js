@@ -16,12 +16,10 @@ export const genderList = [
 ];
 
 export const listWorkingFormat = [
-  { name: 'Fulltime', id: 1 },
-  { name: 'Parttime', id: 2 },
-  { name: 'Remote', id: 3 },
+  { id: 1, name: 'Full time' },
+  { id: 2, name: 'Part time' },
+  { id: 3, name: 'Remote' },
 ];
-
-const uni = /^([a-zA-Z]+\s)*[a-zA-Z]+$/;
 
 const IMAGE_FORMATS = [
   'image/jpg',
@@ -53,6 +51,7 @@ const regexName = (str) => {
   str = str.replace(/Đ/g, 'D');
   return str;
 };
+const allowedValues = genderList.map((option) => option.id);
 export const schema = yup.object({
   avatar: yup
     .mixed()
@@ -100,10 +99,7 @@ export const schema = yup.object({
     .min(6, ' * Tối thiểu 6 ký tự')
     .max(64, ' * Tối đa 64 ký tự')
     .matches(EMAIL_REGEX, '* Bạn đã nhập email không đúng định dạng'),
-  gender: yup
-    .string()
-    .required('* Bạn phải chọn giới tính')
-    .max(7, '* Tối đa 7 ký tự'),
+  gender: yup.string().required('* Vui lòng chọn giới tính'),
   province: yup.string().required(' * Bạn phải chọn tỉnh/thành phố'),
   district: yup.string().required(' * Bạn phải chọn quận/huyện'),
   address: yup.string().required(' * Bạn phải nhập địa chỉ'),

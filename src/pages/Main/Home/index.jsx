@@ -117,6 +117,7 @@ const Home = (props) => {
     dispatcher({ type: 'no', payload: value - 1 });
     dispatch(indexFilterChange(0));
   };
+
   const handleCheck = (value) => {
     dispatch(indexFilterChange(0));
     dispatch(changeFilterChange(false));
@@ -178,7 +179,7 @@ const Home = (props) => {
         order: state.order,
         position: state.position + '',
         name: state.name,
-        province: state.province,
+        provinceId: state.province,
         major: state.major + '',
         no: state.no,
         limit: 5,

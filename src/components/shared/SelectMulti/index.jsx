@@ -7,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import ClearIcon from '@mui/icons-material/Clear';
 
 import './styles.scss';
 const ITEM_HEIGHT = 48;
@@ -23,7 +22,9 @@ const MenuProps = {
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      personName.findIndex(
+        (item) => item.id === name.id && item.name === name.name
+      ) != -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -42,21 +43,26 @@ const SelectMulti = ({
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
-  const handleDelete = (chipToDelete) => () => {
-    setPersonName((chips) =>
-      chips.filter((chip) => chip.name !== chipToDelete.name)
-    );
+  const handleDelete = (id) => {
+    setPersonName(personName.filter((item) => item.id !== id));
   };
 
   const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
+    // get lastest item
+
+    const selectedValue = arrList.find(
+      (item) => item.name === event.target.value.slice(-1).pop().name
+    );
+    if (!personName.some((item) => item.id === selectedValue.id)) {
+      setPersonName([...personName, selectedValue]);
+    } else {
+      const updatedArray = personName.filter((p) => p.id !== selectedValue.id);
+      setPersonName(updatedArray);
+    }
   };
   React.useEffect(() => {
-    arrDefault && setPersonName(arrDefault);
-  }, [arrDefault]);
+    arrDefault != null && setPersonName(arrDefault);
+  }, []);
   return (
     <div className={`select-form ${className ? className : ''}`}>
       <h1 className='select-label'>
@@ -98,20 +104,20 @@ const SelectMulti = ({
                 <Chip
                   key={value.id}
                   label={value.name}
-                  onDelete={() => handleDelete(value)}
+                  onDelete={() => handleDelete(value.id)}
                 />
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {arrList.map((name, idx) => (
+          {arrList.map((item, idx) => (
             <MenuItem
               key={idx}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              value={item}
+              // style={getStyles(name, personName, theme)}
             >
-              {name.name}
+              {item.name}
             </MenuItem>
           ))}
         </Select>

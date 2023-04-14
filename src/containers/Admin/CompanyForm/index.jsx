@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Avatar, Grid, Switch } from '@mui/material';
@@ -36,7 +36,6 @@ export default function CompanyForm(props) {
     handleSubmit,
     formState: { errors },
     setValue,
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });

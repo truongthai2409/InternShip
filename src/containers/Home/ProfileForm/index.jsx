@@ -75,7 +75,7 @@ const ProfileForm = ({ profile: user }) => {
     setValue('lastName', user?.lastName || user?.userDTO?.lastName);
     setValue('email', user?.email || user?.userDTO?.email);
     setValue('phone', user?.phone || user?.userDTO?.phone);
-    setValue('gender', others?.userDetails?.gender);
+    setValue('gender', user?.gender);
 
     setValue('address', others?.locationDTO?.address);
     setValue2('desiredJob', others?.desiredJob);
@@ -316,22 +316,20 @@ const ProfileForm = ({ profile: user }) => {
                 control={control}
                 rules={{ required: true }}
                 style={{ width: '100%' }}
-                render={({ field }) => (
-                  <DatePickerWithLabel
-                    className='profile-form__input'
-                    label={'Ngày sinh'}
-                    onChange={(date) => {
-                      field.onChange(date);
-                      handleDateChange(date);
-                    }}
-                    // value={field.value}
-                    selectedDate={field.value}
-                    format='dd-MM-yyyy'
-                    // defaultValue={
-                    //   user.birthday ? new Date(user.birthday) : null
-                    // }
-                  />
-                )}
+                render={({ field }) => {
+                  return (
+                    <DatePickerWithLabel
+                      className='profile-form__input'
+                      label={'Ngày sinh'}
+                      onChange={(date) => {
+                        field.onChange(date);
+                        handleDateChange(date);
+                      }}
+                      selectedDate={field.value || new Date(user.birthday)}
+                      format='dd/MM/yyyy'
+                    />
+                  );
+                }}
               >
                 {errors.birthday?.message}
               </Controller>
@@ -347,7 +345,6 @@ const ProfileForm = ({ profile: user }) => {
                 radius='2px'
                 height='45px'
                 border='1px solid #777777'
-                // check={true}
               >
                 {errors.phone?.message}
               </CustomInput>
@@ -372,7 +369,9 @@ const ProfileForm = ({ profile: user }) => {
                 options={provinceList}
                 placeholder={t('placeholder')}
                 defaultValue={others?.locationDTO?.districtDTO?.provinceDTO?.id}
-                idProvince={others?.locationDTO?.districtDTO?.provinceDTO?.id}
+                idProvince={
+                  others?.locationDTO?.districtDTO?.provinceDTO?.id || ''
+                }
                 dispatch={dispatch}
                 action={getDistrictList}
               >
@@ -498,7 +497,7 @@ const ProfileForm = ({ profile: user }) => {
                 placeholder={t('placeholder')}
                 label={t('jobType')}
                 onChange={handleSelectChange}
-                arrDefault={others?.jobTypeDTOs || ''}
+                arrDefault={others?.jobTypeDTOs || null}
               >
                 {errors2.jobType?.message}
               </SelectMulti>

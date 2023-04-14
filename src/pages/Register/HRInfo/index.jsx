@@ -86,7 +86,11 @@ const HRInfo = () => {
           <p style={{ fontSize: '30px', color: '#fff' }}>
             ĐĂNG KÝ NHÀ TUYỂN DỤNG
           </p>
-          <img src={registerImg} className='register-hr__image' />
+          <img
+            src={registerImg}
+            alt='rigisterImage'
+            className='register-hr__image'
+          />
         </div>
       </Grid>
       <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
