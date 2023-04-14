@@ -117,15 +117,6 @@ const DetailHome = () => {
         JSON.parse(sessionStorage.getItem('userPresent')) ||
         JSON.parse(localStorage.getItem('userPresent'));
       if (isSave == false) {
-        const page = {
-          user: user,
-          token: userStorage?.token,
-          page: {
-            no: 0,
-            limit: 5,
-          },
-        };
-
         const dataCareList = {
           candidateDTO: {
             id: user?.id,
@@ -137,7 +128,7 @@ const DetailHome = () => {
 
         dispatch(addJobCare([dataCareList, userStorage?.token])).then((res) => {
           setIsSave(true);
-          dispatch(getJobCareByCandidateThunk(page));
+          dispatch(getJobCareByCandidateThunk(user.username));
         });
 
         toast.success('Đã lưu việc làm thành công', {
@@ -152,22 +143,6 @@ const DetailHome = () => {
             token: userStorage?.token,
           };
           dispatch(deleteJobCare([delJobCare])).then(() => {
-            const dispatchJobCare = {
-              user: user,
-              token: userStorage?.token,
-              page: {
-                no: 0,
-                limit: 1000,
-              },
-            };
-            const page = {
-              user: user,
-              token: userStorage?.token,
-              page: {
-                no: 0,
-                limit: 5,
-              },
-            };
             setIsSave(false);
             toast.success('Đã hủy lưu việc làm ', {
               position: 'top-right',
@@ -175,7 +150,7 @@ const DetailHome = () => {
               style: { color: '#00B074', backgroundColor: '#DEF2ED' },
             });
             user?.roleDTO?.name === 'Role_Candidate' &&
-              dispatch(getJobCareByCandidateThunk(page));
+              dispatch(getJobCareByCandidateThunk(user.username));
           });
         }
       }
