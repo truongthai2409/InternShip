@@ -15,12 +15,11 @@ import './styles.scss';
 const InformationCompany = ({
   jobDetail,
   jobDetailById,
-  rating,
   demandPartner = false,
 }) => {
   const { t } = useTranslation('cardInformation');
   const [check, setCheck] = useState(false);
-  const { user } = useSelector((state) => state.profile);
+  const { user, others } = useSelector((state) => state.profile);
   const { allJobApply } = useSelector((state) => state.jobCandidateSlice);
 
   const dispatch = useDispatch();
@@ -57,18 +56,7 @@ const InformationCompany = ({
             style: { color: '#00B074', backgroundColor: '#DEF2ED' },
           });
           setCheck(true);
-          const token =
-            JSON.parse(sessionStorage.getItem('userPresent')) ||
-            JSON.parse(localStorage.getItem('userPresent'));
-          const page = {
-            user: user,
-            token: token.token,
-            page: {
-              no: 0,
-              limit: 5,
-            },
-          };
-          dispatch(getJobApplyListByCandidate(page));
+          dispatch(getJobApplyListByCandidate(others.id));
         }
       }
     } else {
@@ -79,21 +67,6 @@ const InformationCompany = ({
       });
     }
   };
-  // useEffect(() => {
-  //   const userStorage =
-  //     JSON.parse(sessionStorage.getItem('userPresent')) ||
-  //     JSON.parse(localStorage.getItem('userPresent'));
-  //   const dispatchJobApply = {
-  //     user: user,
-  //     token: userStorage?.token,
-  //     page: {
-  //       no: 0,
-  //       limit: 1000,
-  //     },
-  //   };
-  //   user?.user?.role?.name === 'Role_Candidate' &&
-  //     dispatch(getAllJobApply(dispatchJobApply));
-  // }, [dispatch, user]);
   useEffect(() => {
     setCheck(
       allJobApply
