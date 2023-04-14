@@ -83,7 +83,7 @@ const CustomInput = ({
                 : 'password'
               : type
           }
-          pattern={checkNumber ? '[0-9]{10}' : ''}
+          pattern={checkNumber ? '[0-9]{10}' : '(.*)'}
           id={id}
           placeholder={placeholder}
           disabled={check}
