@@ -52,7 +52,7 @@ const ButtonMark = (props) => {
       );
       // phần này nên tối ưu lại k nhất thiết phải call vì chỉ cần add thêm jobcare vào trong state là đc rồi
       if (res_.payload.status === 200 || res_.payload.status === 201) {
-        dispatch(getJobCareByCandidateThunk(page)).then(() => {
+        dispatch(getJobCareByCandidateThunk(user.username)).then(() => {
           setMark(!mark);
           toast.success('Đã lưu việc làm thành công', {
             position: 'top-right',
@@ -74,18 +74,10 @@ const ButtonMark = (props) => {
           token: userStorage?.token,
         };
         dispatch(deleteJobCare([delJobCare])).then(() => {
-          const page = {
-            user: user,
-            token: userStorage?.token,
-            page: {
-              no: 0,
-              limit: 5,
-            },
-          };
           // riêng phần này thì lại nên giữ lại, vì nó sẽ ảnh hưởng đến việc phân trang. Tuỳ vào cách be và fe thảo luận thì
           // sẽ tối ưu code phần này (việc phân trang của list job và care job đang không tối ưu nếu dữ liệu đủ lớn)
           user?.roleDTO?.name === 'Role_Candidate' &&
-            dispatch(getJobCareByCandidateThunk(page)).then(() => {
+            dispatch(getJobCareByCandidateThunk(user.username)).then(() => {
               setMark(!mark);
               toast.success('Đã hủy lưu việc làm ', {
                 position: 'top-right',

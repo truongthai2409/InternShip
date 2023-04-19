@@ -28,33 +28,30 @@ const FormModal = ({ setOpen, jobId, setIsApply }) => {
       candidateApplication: JSON.stringify({
         jobDTO: { id: jobId },
         // candidate id
-        candidateDTO: { id: user.id },
+        candidateDTO: { id: others.id },
         referenceLetter: data.letter,
       }),
       fileCV: data.cv,
     };
     dispatch(applyJobThunk(formSubmit)).then((res) => {
-      setIsApply(true);
-      toast.success('Nộp CV thành công', {
-        position: 'top-right',
-        autoClose: 3000,
-        style: { color: '#00B074', backgroundColor: '#DEF2ED' },
-      });
+      if (res?.error) {
+        setIsApply(false);
+        toast.error('Nộp CV không thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
+      } else {
+        setIsApply(true);
+        toast.success('Nộp CV thành công', {
+          position: 'top-right',
+          autoClose: 3000,
+          style: { color: '#00B074', backgroundColor: '#DEF2ED' },
+        });
+      }
       setOpen(false);
-      const userStorage =
-        JSON.parse(sessionStorage.getItem('userPresent')) ||
-        JSON.parse(localStorage.getItem('userPresent'));
 
-      const page = {
-        user: user,
-        token: userStorage?.token,
-        page: {
-          no: 0,
-          limit: 200,
-        },
-      };
-
-      dispatch(getJobApplyListByCandidate(page));
+      dispatch(getJobApplyListByCandidate(others.id));
     });
   };
   const handleClose = (e) => {

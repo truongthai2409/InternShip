@@ -44,20 +44,16 @@ const jobCandidateSlice = createSlice({
 
 export const getJobApplyListByCandidate = createAsyncThunk(
   'jobCadidateSlice/getJobApplyListByCandidate',
-  async (args) => {
-    if (args.user.roleDTO.name.includes('Role_Candidate')) {
-      const res = await getJobAppliedByCandidate(args.user.id);
-      return res;
-    }
+  async (idCandidate) => {
+    const res = await getJobAppliedByCandidate(idCandidate);
+    return res;
   }
 );
 export const getJobCareByCandidateThunk = createAsyncThunk(
   'jobCadidateSlice/getJobCareByCandidate',
-  async (args) => {
-    if (args.user.roleDTO.name.includes('Role_Candidate')) {
-      const res = await getJobCareByCandidate(args.user.username);
-      return res;
-    }
+  async (username) => {
+    const res = await getJobCareByCandidate(username);
+    return res;
   }
 );
 export const addJobCare = createAsyncThunk(
