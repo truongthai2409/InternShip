@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import authenticate from 'src/store/api/authenticate/authenticate';
-const { resetPassword, verifyEmail, activeAccount, changePassword } =
-  authenticate;
+const {
+  resetPassword,
+  verifyEmail,
+  activeAccount,
+  changePassword,
+  registerNewHr,
+} = authenticate;
 
 export const resetPasswordThunk = createAsyncThunk(
   'authenticate/resetPassword',
@@ -31,6 +36,13 @@ export const changePasswordThunk = createAsyncThunk(
   'authenticate/changePassword',
   async (data) => {
     const res = await changePassword(data);
+    return res;
+  }
+);
+export const registerNewHrThunk = createAsyncThunk(
+  'authenticate/registerNewHr',
+  async (data) => {
+    const res = await registerNewHr(data);
     return res;
   }
 );

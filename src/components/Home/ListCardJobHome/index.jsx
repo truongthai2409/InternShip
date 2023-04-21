@@ -65,7 +65,7 @@ const ListCardJobHome = ({
               }
               fontSize={13}
               nameCompany={
-                job?.companyName || job?.jobDTO.companyName
+                job?.companyName || job?.jobDTO?.companyName
                 // job?.partner?.universityDTO.name ||
                 // job?.jobApp?.company?.name ||
                 // job?.jobApp?.hr?.company?.name ||

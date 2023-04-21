@@ -1,0 +1,61 @@
+@use '../../../assets/styles' as *;
+.register-hr-user {
+  .resister-hr-account-info {
+    .register-text {
+      background: white;
+      color: $color-black-3;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .accounthr-info {
+      color: $color-default;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 20px;
+      display: flex;
+    }
+    .register-hr-password {
+      display: flex;
+      .register-password {
+        width: 50%;
+        margin-right: 7px;
+      }
+      .register-cfpassword {
+        width: 50%;
+        margin-left: 7px;
+      }
+    }
+  }
+  .hr-user-info {
+    &-text {
+      color: $color-default;
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 20px;
+      display: flex;
+    }
+    &-name {
+      display: flex;
+      &-first {
+        margin-right: 7px;
+        width: 50%;
+      }
+      &-last {
+        margin-left: 7px;
+        width: 50%;
+      }
+    }
+    &-individual {
+      display: flex;
+      &-phone {
+        margin-right: 7px;
+        width: 50%;
+      }
+      &-gender {
+        margin-left: 7px;
+        width: 50%;
+        padding: 22px 0 0 0;
+      }
+    }
+  }
+}

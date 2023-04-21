@@ -1,0 +1,37 @@
+.name-and-tax-companyhr {
+  display: flex;
+  &-name {
+    width: 60%;
+    padding-right: 7px;
+  }
+  &-tax {
+    width: 40%;
+    padding-left: 7px;
+  }
+}
+.email-and-number-phone-companyhr {
+  display: flex;
+  &-email {
+    width: 60%;
+    padding-right: 7px;
+  }
+  &-phone {
+    width: 40%;
+    padding-left: 7px;
+  }
+}
+.location-companyhr {
+  display: flex;
+  &-country {
+    width: 33%;
+    padding-right: 7px;
+  }
+  &-province {
+    width: 33%;
+    padding: 0 7px;
+  }
+  &-district {
+    width: 33%;
+    padding-left: 7px;
+  }
+}

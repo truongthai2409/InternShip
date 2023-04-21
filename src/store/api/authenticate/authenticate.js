@@ -30,6 +30,25 @@ const authenticate = {
       oldPassword: data.oldPassword,
     });
   },
+  registerNewHr: (data) => {
+    const url = `/api/hr`;
+
+    return internshipTransport.post(url, {
+      userCreationDTO: {
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        lastName: data.lastName,
+        firstName: data.firstName,
+        gender: data.gender,
+        phone: data.phone,
+        email: data.email,
+      },
+      position: data.position,
+      companyDTO: {
+        id: 1,
+      },
+    });
+  },
 };
 
 export default authenticate;

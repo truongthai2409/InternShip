@@ -12,14 +12,18 @@ export default function Collap({ children, title, open, handleClick }) {
         <ListItemText
           center={true}
           primary={
-            <span style={{ fontSize: 13 }}>
+            <span style={{ fontSize: 13, color: 'black' }}>
               <span>{titleParts[0]}</span>
               <span>{titleParts[1]}</span>
               <span style={{ color: '#00B074' }}>{coloredPart}</span>
             </span>
           }
         />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        {open ? (
+          <ExpandLess style={{ color: 'black' }} />
+        ) : (
+          <ExpandMore style={{ color: 'black' }} />
+        )}
       </ListItemButton>
       <Collapse in={open} timeout='auto' unmountOnExit>
         <List component='div' disablePadding>
