@@ -4,6 +4,7 @@ import AccountMenu from '../Home/AccountMenu';
 import { MenuDropDown } from './components';
 import './styles.scss';
 import { useTranslation } from 'react-i18next';
+import { MenuDropDownLogin } from './componentsLogin';
 
 export default function Login() {
   const { user, role } = useSelector((state) => state.profile);
@@ -42,9 +43,10 @@ export default function Login() {
   }
   return (
     <div className='login--not-yet'>
-      <Link to='/login'>
+      {/* <Link to='/login'>
         <span className='login__home-sign-in'>{t('loginTL')}</span>
-      </Link>
+      </Link> */}
+      <MenuDropDownLogin />
       <MenuDropDown />
     </div>
   );

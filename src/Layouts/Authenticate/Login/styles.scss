@@ -11,7 +11,11 @@
   padding: 70px 0px;
   background-color: $primary-color-background;
 }
-
+.login-container-hrwrapper {
+  height: 120vh;
+  padding: 120px 0px 0px;
+  background-color: $primary-color-background;
+}
 .login-container__modal {
   &--content {
     float: right;

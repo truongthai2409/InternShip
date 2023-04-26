@@ -95,7 +95,7 @@ const Login = () => {
           requirementField={false}
           className={isCheck ? 'bgcIsCheck' : ''}
         >
-          {errors.username?.message}
+          {t(errors.username?.message)}
         </CustomInput>
         <CustomInput
           label={t('PasswordTL')}
@@ -108,7 +108,7 @@ const Login = () => {
           requirementField={false}
           className={isCheck ? 'bgcIsCheck' : ''}
         >
-          {errors.password?.message}
+          {t(errors.password?.message)}
         </CustomInput>
         <div className='login-form__save-pass' onChange={handleSaveLogin}>
           <CustomCheckbox
@@ -120,8 +120,7 @@ const Login = () => {
             {t('forgotPasswordTL')}
           </Link>
         </div>
-        {/* <div className="register-container__footer">
-        </div> */}
+        <div className='register-container__footer'></div>
         <div className='login-form__btn'>
           <Button
             onClick={handleSubmit(onSubmit)}

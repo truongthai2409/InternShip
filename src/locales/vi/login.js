@@ -2,6 +2,7 @@ export const LOGIN_VI = {
   candidateTL: 'Ứng viên',
   recruiterTL: 'Nhà tuyển dụng',
   partnerTL: 'Cộng tác viên',
+  recruiterPartnerTL: 'Nhà tuyển dụng/Cộng tác viên',
   setUpAccount: 'Cài đặt tài khoản',
   avatarTL: 'Ảnh đại diện',
   loggedInWithTL: 'Đã đăng nhập với',
@@ -16,6 +17,8 @@ export const LOGIN_VI = {
   forgotPasswordTL: 'Quên mật khẩu?',
   doNotHaveAnAccountTL: 'Bạn chưa có tài khoản?',
   doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
+  mustEnterAnAccountTL: '* Bạn phải nhập tài khoản',
+  mustEnterAnPasswordTL: '* Bạn phải nhập mật khẩu',
 
   youHaveJustLoggedOutTL: 'Bạn vừa đăng xuất',
   notificationTL: 'Thông Báo',

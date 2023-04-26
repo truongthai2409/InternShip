@@ -10,11 +10,9 @@ import { toast } from 'react-toastify';
 import { MenuDropDown } from '../../components/Login/components';
 import { useTranslation } from 'react-i18next';
 import Divider from '@mui/material/Divider';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import GoogleIcon from '@mui/icons-material/Google';
 import { Helmet } from 'react-helmet';
 
-const LoginContainer = () => {
+const LoginHrContainer = () => {
   const { t } = useTranslation('login');
   const { role } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -46,30 +44,11 @@ const LoginContainer = () => {
       </Helmet>
       <h1 className='login-container__title'>{t('loginTL')}</h1>
       <div>
-        <h2 className='login-container__description'>{t('candidateTL')}</h2>
+        <h2 className='login-container__description'>
+          {t('recruiterTL')}/ {t('partnerTL')}
+        </h2>
       </div>
       <Login />
-      <div className='loginWith'>
-        <Divider sx={{ margin: '20px 0', color: '#CFD0D4' }}>
-          {t('orLoginWithTL')}
-        </Divider>
-        <button className='loginWith-google'>
-          <a
-            href='http://localhost:8085/oauth2/authorization/google'
-            className='loginWith-button__link'
-          >
-            <GoogleIcon sx={{ fontSize: '13px' }} /> ĐĂNG NHẬP VỚI GOOGLE
-          </a>
-        </button>
-        <button className='loginWith-facebook' style={{ marginTop: '20px' }}>
-          <a
-            href='http://localhost:8085/oauth2/authorization/google'
-            className='loginWith-button__link'
-          >
-            <FacebookIcon sx={{ fontSize: '13px' }} /> ĐĂNG NHẬP VỚI FACEBOOK
-          </a>
-        </button>
-      </div>
       <div className='register-container__footerRegister'>
         <p className='register-container__footerRegister-p'>
           {t('doNotHaveAnAccountTL')}
@@ -80,4 +59,4 @@ const LoginContainer = () => {
   );
 };
 
-export default LoginContainer;
+export default LoginHrContainer;

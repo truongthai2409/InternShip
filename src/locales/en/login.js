@@ -2,6 +2,7 @@ export const LOGIN_EN = {
   candidateTL: 'Candidate',
   recruiterTL: 'Recruiter',
   partnerTL: 'Partner',
+  recruiterPartnerTL: 'Recruiter/Partner',
   setUpAccount: 'Set up account',
   avatarTL: 'Avatar',
   loggedInWithTL: 'Logged in with',
@@ -16,6 +17,8 @@ export const LOGIN_EN = {
   forgotPasswordTL: 'Forgot password?',
   doNotHaveAnAccountTL: 'Do not have an account?',
   doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
+  mustEnterAnAccountTL: '* Do must enter an account',
+  mustEnterAnPasswordTL: '* Do must enter an password',
 
   youHaveJustLoggedOutTL: 'You have just logged out.',
   notificationTL: 'Notification',

@@ -9,7 +9,7 @@
 .login-container {
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   @include formContainer(480px);
-
+  // @include formContainer()
   .custom-input {
     margin: 20px 0 10px 0 !important;
   }
@@ -31,10 +31,21 @@
     }
   }
   &__title {
-    font-size: $fs-16;
+    font-size: $fs-18;
     font-weight: $fw-bold-1;
     text-transform: uppercase;
     margin: 5px 0;
+  }
+  &__description {
+    display: block;
+    font-size: $fs-11;
+    font-weight: $fw-bold-1;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin: 10px 0px 0px;
+    background-color: $primary-color;
+    border-radius: 5px;
+    color: $color-white-0;
   }
 }
 .register-container__footerRegister {
@@ -43,6 +54,7 @@
   button {
     color: #00b074 !important;
     font-size: $fs-13;
+    text-transform: capitalize;
   }
 }
 .register-container__footerRegister-p {
