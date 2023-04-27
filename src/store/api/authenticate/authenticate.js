@@ -33,21 +33,29 @@ const authenticate = {
   registerNewHr: (data) => {
     const url = `/api/hr`;
 
-    return internshipTransport.post(url, {
-      userCreationDTO: {
-        password: data.password,
-        confirmPassword: data.confirmPassword,
-        lastName: data.lastName,
-        firstName: data.firstName,
-        gender: data.gender,
-        phone: data.phone,
-        email: data.email,
-      },
-      position: data.position,
-      companyDTO: {
-        id: 1,
-      },
-    });
+    return internshipTransport.post(
+      url,
+      data
+      //    {
+      //   userCreationDTO: {
+      //     password: data.password,
+      //     confirmPassword: data.confirmPassword,
+      //     lastName: data.lastName,
+      //     firstName: data.firstName,
+      //     gender: data.gender,
+      //     phone: data.phone,
+      //     email: data.email,
+      //   },
+      //   position: data.position,
+      //   companyDTO: {
+      //     id: Number(data.companyDTOName)        ,
+      //   },
+      // }
+    );
+  },
+  getAllCompanyDetail: () => {
+    const url = `/api/company`;
+    return internshipTransport.get(url);
   },
 };
 

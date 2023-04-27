@@ -13,6 +13,8 @@ const CustomSelect = React.forwardRef(
       children,
       placeholder,
       requirementField = true,
+      handleOnChange = false,
+      subtitle,
     },
     ref
   ) => {
@@ -26,6 +28,16 @@ const CustomSelect = React.forwardRef(
             </option>
           );
         });
+      }
+    };
+    const isErrorMessage = (children) => {
+      if (typeof children === 'object') {
+        return (
+          (children[0] === undefined || children[1] !== undefined) &&
+          (children[0] !== undefined || children[1] === undefined)
+        );
+      } else {
+        return children === undefined;
       }
     };
 
@@ -42,13 +54,42 @@ const CustomSelect = React.forwardRef(
             {...register(id)}
             className='select'
             required
+            onChange={(e) => handleOnChange && handleOnChange(e.target.value)}
           >
             <option hidden value=''>
               {placeholder}
             </option>
             {renderSelectOption()}
           </select>
-          <p className='custom-input__error'>{children}</p>
+          <p className='custom-input__error'>
+            {isErrorMessage(children) ? (
+              <span
+                style={{
+                  marginTop: '2px',
+                  fontSize: '12px',
+                  fontStyle: 'italic',
+                  color: '#999',
+                  display: 'flex',
+                  textAlign: 'left',
+                }}
+              >
+                {subtitle}
+              </span>
+            ) : (
+              <span
+                style={{
+                  marginTop: '2px',
+                  fontSize: '13px',
+                  color: '#ff5c58',
+                  display: 'flex',
+                  textAlign: 'left',
+                }}
+              >
+                {children}
+              </span>
+              // children
+            )}
+          </p>
         </div>
       </>
     );

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import CustomInput from 'src/components/shared/CustomInput';
-
 import './styles.scss';
+import './responsive.scss';
 import SelectCustom from 'src/components/shared/Select';
 
 export default function NewHR({ errors, register }) {

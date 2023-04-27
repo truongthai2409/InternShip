@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import * as yup from 'yup';
 import { containerSchema } from '../Container/data';
 

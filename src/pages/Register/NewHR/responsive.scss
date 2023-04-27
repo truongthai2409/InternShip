@@ -1,0 +1,70 @@
+@use '../../../assets/styles' as *;
+.register-hr-user {
+  .resister-hr-account-info {
+    .register-text {
+    }
+    .accounthr-info {
+    }
+    .register-hr-password {
+      @media (max-width: 1280px) {
+        flex-direction: column;
+      }
+      .register-password {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+      .register-cfpassword {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .hr-user-info {
+    &-text {
+    }
+    &-name {
+      @media (max-width: 1280px) {
+        flex-direction: column;
+      }
+      &-first {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+      &-last {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+    &-individual {
+      @media (max-width: 1280px) {
+        flex-direction: column;
+      }
+      &-phone {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+      &-gender {
+        @media (max-width: 1280px) {
+          width: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

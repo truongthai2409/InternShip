@@ -1,0 +1,32 @@
+@use '../../../assets/styles' as *;
+
+.registerhr-container {
+  .registerhr-left-item {
+    @media (max-width: 800px) {
+      display: none;
+    }
+    .registerhr-text {
+    }
+    .resgisterhr-image {
+      @media (max-width: 1366px) {
+        margin-top: 70%;
+      }
+      @media (max-width: 1280px) {
+        margin-top: 120%;
+      }
+    }
+  }
+  .registerhr-right-item {
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+    .company-info-text {
+    }
+    .term-and-policy {
+    }
+    .bnt-submit-registerhr {
+      &-item {
+      }
+    }
+  }
+}

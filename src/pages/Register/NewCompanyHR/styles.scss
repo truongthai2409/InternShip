@@ -1,3 +1,15 @@
+.companyDTO-info {
+  display: flex;
+  margin: 10px 0 70px 0;
+  &-name {
+    width: 60%;
+    padding-right: 7px;
+  }
+  &-tax {
+    width: 40%;
+    padding-left: 7px;
+  }
+}
 .name-and-tax-companyhr {
   display: flex;
   &-name {
@@ -22,6 +34,7 @@
 }
 .location-companyhr {
   display: flex;
+  margin: 0 0 56px 0;
   &-country {
     width: 33%;
     padding-right: 7px;

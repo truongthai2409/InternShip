@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import { getMajorList } from "src/store/slices/Admin/major/majorSlice";

@@ -7,33 +7,57 @@ import { registerNewHrThunk } from 'src/store/action/authenticate/authenticateAc
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import './styles.scss';
+import './responsive.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import NewHR from 'src/pages/Register/NewHR';
 import NewCompanyHR from 'src/pages/Register/NewCompanyHR';
-import { schema } from './validate';
+import { SchemaNotShowForm } from './validateNotShowForm';
+import { SchemaShowForm } from './validateShowForm';
 import registerImg from 'src/assets/img/registerHr.png';
-
+import { useNavigate } from 'react-router-dom';
 export default function NewRegister() {
   const { t } = useTranslation('title');
   TabTitle(`${t('registerHRTL')}`);
   const dispatch = useDispatch();
-  const [showForm, setShowForm] = useState(true);
-
+  const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
     reset,
     register,
+    setValue,
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(showForm ? SchemaShowForm() : SchemaNotShowForm()),
   });
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const onSubmit = async (data) => {
-    dispatch(registerNewHrThunk(data)).then((res) => {
+    console.log(data);
+    const dataRegister = {
+      userCreationDTO: {
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        lastName: data.lastName,
+        firstName: data.firstName,
+        gender: data.gender,
+        phone: data.phone,
+        email: data.email,
+      },
+      position: data.position,
+      companyDTO: {
+        id: data.companyDTOName,
+        name: data.companyDTONameNew,
+        email: data.companyDTOEmail,
+        tax: data.companyDTOTaxNew,
+        phone: data.companyDTOPhone,
+      },
+    };
+    console.log(dataRegister);
+    dispatch(registerNewHrThunk(dataRegister)).then((res) => {
       if (res.error) {
         toast.error('Đăng ký không thành công!', {
           position: 'top-right',
@@ -47,6 +71,7 @@ export default function NewRegister() {
           theme: 'colored',
         });
         reset();
+        navigate('/login');
       }
     });
   };
@@ -56,7 +81,6 @@ export default function NewRegister() {
   };
   return (
     <div className='registerhr-container'>
-      {console.log('oke a cong')}
       <div className='registerhr-left-item'>
         <div className='registerhr-text'>ĐĂNG KÝ NHÀ TUYỂN DỤNG</div>
         <img
@@ -68,11 +92,14 @@ export default function NewRegister() {
       <div className='registerhr-right-item'>
         <NewHR errors={errors} register={register} />
         <div className='company-info-text'>Thông tin công ty</div>
+        {console.log(errors)}
         <NewCompanyHR
           errors={errors}
           register={register}
           handleShowForm={handleShowForm}
           showForm={showForm}
+          setValue={setValue}
+          reset={reset}
         />
         <div className='term-and-policy'>
           <p>

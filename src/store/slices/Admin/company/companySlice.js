@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import authenticate from 'src/store/api/authenticate/authenticate';
 import axios from 'axios';
 import notificationSlice from '../../notifications/notificationSlice';
-
+const { getAllCompanyDetail } = authenticate;
 const baseURL = process.env.REACT_APP_API;
 
 const companySlice = createSlice({
@@ -26,6 +27,9 @@ const companySlice = createSlice({
     });
     builder.addCase(getCompanyDetail.fulfilled, (state, { payload }) => {
       state.companyDetail = payload;
+    });
+    builder.addCase(getAllCompany.fulfilled, (state, { payload }) => {
+      state.companyList = payload?.contents;
     });
     builder.addCase(updateCompanyInfo.fulfilled, (state, { payload }) => {
       if (!payload?.data) {
@@ -119,6 +123,14 @@ export const getCompanyDetail = createAsyncThunk(
       .catch((error) => {
         return error.response.data;
       });
+  }
+);
+
+export const getAllCompany = createAsyncThunk(
+  'company/getAllCompany',
+  async () => {
+    const res = await getAllCompanyDetail();
+    return res;
   }
 );
 
