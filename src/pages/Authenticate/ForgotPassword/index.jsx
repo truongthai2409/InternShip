@@ -62,7 +62,7 @@ const ForgotPassword = () => {
               Lấy lại mật khẩu
             </button>
           </form>
-          <Link to='/login' className='forgotpassword__modal-link'>
+          <Link to='/login/candidate' className='forgotpassword__modal-link'>
             Quay về trang đăng nhập
           </Link>
         </div>

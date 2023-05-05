@@ -83,7 +83,16 @@
 .custom_req_can {
   margin-top: -8px;
 }
-
+@media screen and (min-width: 320px) and (max-width: 1023px) {
+  .register__container {
+    .button-container {
+      display: none;
+    }
+    .description{
+      display: none;
+    }
+  }
+}
 @media only screen and(max-width : 1278px) {
   .button-container {
     button {
@@ -92,8 +101,10 @@
     }
   }
   .register__container__btns {
+    background-color: $color-default;
+    border-radius: 8px;
     button {
-      width: 270px;
+      width: 100%;
     }
   }
 }

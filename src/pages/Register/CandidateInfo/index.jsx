@@ -67,7 +67,7 @@ const CandidateInfo = () => {
                 style: { color: '#00B074', backgroundColor: '#DEF2ED' },
               });
             });
-          navigate('/login');
+          navigate('/login/candidate');
         }
       })
       .catch((error) => {
@@ -81,7 +81,7 @@ const CandidateInfo = () => {
 
   return (
     <Grid container>
-      <Grid item xs={5} sm={5} md={5} lg={5} xl={5}>
+      <Grid item xs={0} sm={0} md={5} lg={5} xl={5}>
         <div className='register-candidate'>
           <p style={{ fontSize: '30px', color: '#fff' }}>ĐĂNG KÝ ỨNG VIÊN</p>
           <img
@@ -91,7 +91,7 @@ const CandidateInfo = () => {
           />
         </div>
       </Grid>
-      <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
+      <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
         <Container
           title='Ứng Viên'
           handleClick={handleSubmit(onSubmit)}

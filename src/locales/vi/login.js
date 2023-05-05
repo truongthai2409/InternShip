@@ -19,6 +19,8 @@ export const LOGIN_VI = {
   doYouAlreadyHaveAnAccountTL: 'Bạn đã có tài khoản?',
   mustEnterAnAccountTL: '* Bạn phải nhập tài khoản',
   mustEnterAnPasswordTL: '* Bạn phải nhập mật khẩu',
+  loginWithGoogle: 'Đăng nhập với Google',
+  loginWithFacebook: 'Đăng nhập với Facebook',
 
   youHaveJustLoggedOutTL: 'Bạn vừa đăng xuất',
   notificationTL: 'Thông Báo',

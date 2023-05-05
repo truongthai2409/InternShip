@@ -19,6 +19,8 @@ export const LOGIN_EN = {
   doYouAlreadyHaveAnAccountTL: 'Do you already have an account?',
   mustEnterAnAccountTL: '* Do must enter an account',
   mustEnterAnPasswordTL: '* Do must enter an password',
+  loginWithGoogle: 'Sign In with Google',
+  loginWithFacebook: 'Sign In with Facebook',
 
   youHaveJustLoggedOutTL: 'You have just logged out.',
   notificationTL: 'Notification',

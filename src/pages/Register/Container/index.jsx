@@ -44,7 +44,7 @@ export default function Container({
               {'TIẾP TỤC VỚI FACEBOOK'}
             </Button>
           </div>
-          <Divider
+          <Divider className='description'
             style={{ marginTop: '2rem', color: '#CFD0D4', fontSize: '14px' }}
           >
             HOẶC
@@ -274,7 +274,7 @@ export default function Container({
             }}
           >
             {t('doYouAlreadyHaveAnAccountTL')}{' '}
-            <Link to='/login' style={{ color: '#00B074', fontWeight: 'bold' }}>
+            <Link to='/login/candidate' style={{ color: '#00B074', fontWeight: 'bold' }}>
               {t('loginTL')}
             </Link>
           </Typography>
